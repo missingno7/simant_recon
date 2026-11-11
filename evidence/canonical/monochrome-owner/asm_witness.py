@@ -131,10 +131,10 @@ receipt = {
     "original_S01": {"load_linear": CODE_BASE, "size": len(CODE),
                      "sha256": hashlib.sha256(CODE).hexdigest()},
     "canonical_input_pins": [pin(ROOT / p) for p in (
-        "src/program.json", "src/S01/m328E.asm", "src/S15/m384C.c",
-        "src/S12/m384C.c", "src/S04/m35F5.c", "src/data/d3D57.c",
-        "src/root/m205F.c", "src/root/m15F8.c", "src/S20/m39F1.c",
-        "src/root/m20E8.c", "src/root/m2505.c")],
+        "src/program.json", "src/platform/video/mono_minimap.asm", "src/startup/game_session.c",
+        "src/ui/map_window.c", "src/ui/minimap.c", "src/simulation/tables.c",
+        "src/platform/video/driver_select.c", "src/startup/main.c", "src/startup/dos_config.c",
+        "src/window/lifecycle.c", "src/window/object_geometry.c")],
     "implementation_pins": [pin(p) for p in (
         Path(__file__), ROOT / "tools/exe.py", Path(uc.__file__), Path(xr.__file__))],
     "unicorn_version": uc.__version__,

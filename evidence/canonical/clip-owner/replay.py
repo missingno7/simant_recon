@@ -100,16 +100,16 @@ HELPER_FACTS = {
 
 # Complete non-1E57 references to the copied list owners and pointer.
 EXPECTED_FOREIGN_CLIP_POINTER_REFERENCES = {
-    "src/root/m1B73.asm": ["lea di, _g_5AAC", "pop word ptr _g_5AAC", "pop word ptr _g_5AAE"],
-    "src/root/m1C62.c": ["g_5AAC = 0 ;", "g_5AAC = 0 ;"],
-    "src/S10/m35F5.c": ["saved = g_5AAC ;", "g_5AAC = 0 ;", "g_5AAC = saved ;"],
+    "src/platform/input_timer.asm": ["lea di, _g_5AAC", "pop word ptr _g_5AAC", "pop word ptr _g_5AAE"],
+    "src/window/alerts.c": ["g_5AAC = 0 ;", "g_5AAC = 0 ;"],
+    "src/window/menu_tracking.c": ["saved = g_5AAC ;", "g_5AAC = 0 ;", "g_5AAC = saved ;"],
 }
 
 
 # Read-only users: clip iteration and first-record emptiness tests.
-CLIP_POINTER_READERS = ("src/root/m1D8E.c", "src/root/m21FA.c", "src/S00/m31AD.asm",
-                        "src/S01/m3126.asm", "src/S02/m3126.asm", "src/S03/m3126.asm",
-                        "src/S22/m39C7.c")
+CLIP_POINTER_READERS = ("src/graphics/clip_rects.c", "src/window/drawing.c", "src/platform/video/planar_raster.asm",
+                        "src/platform/video/mono_raster.asm", "src/platform/video/vga8_raster.asm", "src/platform/video/tandy_raster.asm",
+                        "src/ui/yellow_commands.c")
 POINTER_STORE = re.compile(r"g_5AAC \[ [^\]]+ \] =[^=]|g_5AAC\s*=[^=]|g_5AAC\s*(?:\+\+|--|[-+]=)"
                            r"|^(?!cmp |push |test )\w+ (?:d?word ptr )?_g_5AA[CE]\b")
 
@@ -170,7 +170,7 @@ def statement_census(texts: dict[str, str], name: str) -> dict[str, list[str]]:
     """Every foreign statement/instruction naming ``name`` outside root:1E57."""
     found: dict[str, list[str]] = {}
     for path, text in sorted(texts.items()):
-        if path == "src/root/m1E57.c":
+        if path == "src/graphics/clip_regions.c":
             continue
         if path.endswith(".asm"):
             for line in text.splitlines():
@@ -195,8 +195,8 @@ def static_facts(texts: dict[str, str], program: dict) -> dict:
                      "count": RECORDS, "element_size": RECORD_BYTES}]
         assert provider["storage_contract"]["communals"] == expected
         assert normalized(texts[provider["source"]]).endswith(OWNER_DECLARATION)
-    clip = texts["src/root/m1E57.c"]
-    helper = texts["src/root/m1D8E.c"]
+    clip = texts["src/graphics/clip_regions.c"]
+    helper = texts["src/graphics/clip_rects.c"]
     definitions = {}
     for group, source in ((DESTINATION_WRITERS, clip), (SOURCE_LIST_PRODUCERS, clip),
                           (HELPER_FACTS, helper)):
@@ -215,28 +215,28 @@ def static_facts(texts: dict[str, str], program: dict) -> dict:
     assert "fd_50F6_3C14" not in body
 
     rows = census(texts, "fd_50F6_3C14")
-    writers = sorted({row[2] for row in rows if row[0] == "src/root/m1E57.c"} - {"<file scope>"})
+    writers = sorted({row[2] for row in rows if row[0] == "src/graphics/clip_regions.c"} - {"<file scope>"})
     assert writers == sorted(DESTINATION_WRITERS), writers
     files = {row[0] for row in rows}
-    allowed = {"src/root/m1E57.c"} | ({provider["source"]} if provider else set())
+    allowed = {"src/graphics/clip_regions.c"} | ({provider["source"]} if provider else set())
     assert files == allowed, files
 
     handle_rows = census(texts, "fd_50F6_3B60")
-    assert {r[0] for r in handle_rows} == {"src/root/m1E57.c", "src/state/window-clip-handles.c"}
-    handle_writers = sorted({r[2] for r in handle_rows if r[0] == "src/root/m1E57.c"} - {"<file scope>"})
+    assert {r[0] for r in handle_rows} == {"src/graphics/clip_regions.c", "src/graphics/state/window_clip_handles.c"}
+    handle_writers = sorted({r[2] for r in handle_rows if r[0] == "src/graphics/clip_regions.c"} - {"<file scope>"})
     assert handle_writers == ["clip_SetWin", "f_1E57_0239", "f_1E57_038E"], handle_writers
     # Only f_1E57_038E stores list handles, and only after its overflow checks.
     stores = re.findall(r"fd_50F6_3B60 \[ [^\]]+ \] = f_171C_1A9E", normalized(clip))
     assert len(stores) == 2 and all(s in body_038E for s in stores)
     stack_rows = census(texts, "fd_50F6_3B5C")
-    assert {r[0] for r in stack_rows} == {"src/root/m1E57.c", "src/state/ui-resource-scalars.c"}
-    assert sorted({r[2] for r in stack_rows if r[0] == "src/root/m1E57.c"} - {"<file scope>"}) == ["clip_Pop", "clip_Push"]
+    assert {r[0] for r in stack_rows} == {"src/graphics/clip_regions.c", "src/unresolved/state/ui_resource_scalars.c"}
+    assert sorted({r[2] for r in stack_rows if r[0] == "src/graphics/clip_regions.c"} - {"<file scope>"}) == ["clip_Pop", "clip_Push"]
     out_rows = census(texts, "g_574A")
-    assert {r[0] for r in out_rows} == {"src/root/m1E57.c"}
+    assert {r[0] for r in out_rows} == {"src/graphics/clip_regions.c"}
 
     foreign = statement_census(texts, "g_5AAC")
     assert set(foreign) == set(EXPECTED_FOREIGN_CLIP_POINTER_REFERENCES) | \
-        set(CLIP_POINTER_READERS) | {"src/state/clip-pointer.c"}, sorted(foreign)
+        set(CLIP_POINTER_READERS) | {"src/graphics/state/clip_pointer.c"}, sorted(foreign)
     for path, expected in EXPECTED_FOREIGN_CLIP_POINTER_REFERENCES.items():
         for needle in expected:
             assert any(needle in item for item in foreign[path]), (path, needle)
@@ -246,14 +246,14 @@ def static_facts(texts: dict[str, str], program: dict) -> dict:
             assert all(item in ("mov ax, word ptr _g_5AAE", "lds si, dword ptr _g_5AAC")
                        for item in foreign[reader]), reader
     # The cursor callback temporarily selects the one-record screen list.
-    cursor = [" ".join(l.split(";", 1)[0].split()) for l in texts["src/root/m1B73.asm"].splitlines()]
+    cursor = [" ".join(l.split(";", 1)[0].split()) for l in texts["src/platform/input_timer.asm"].splitlines()]
     at = cursor.index("lea di, _g_5AAC")
     assert cursor[at + 1:at + 9] == [
         "push word ptr [di]", "push word ptr [di+2]", "push word ptr _fd_55B3_3DE6",
         "push word ptr _fd_55B3_3DE8", "mov cx, DGROUP", "mov word ptr [di+2], cx",
         "mov cx, offset DGROUP:_g_5A9C", "mov word ptr [di], cx"]
     # The one assembly list walk only compares and advances SI until it restores DS.
-    lines = [" ".join(l.split(";", 1)[0].split()) for l in texts["src/S00/m31AD.asm"].splitlines()]
+    lines = [" ".join(l.split(";", 1)[0].split()) for l in texts["src/platform/video/planar_raster.asm"].splitlines()]
     start = lines.index("lds si, dword ptr _g_5AAC")
     walk = lines[start + 1:start + 1 + lines[start + 1:].index("pop ds")]
     assert all(not re.match(r"(?!cmp |test )\w+ (?:d?word |byte )?(?:ptr )?\[si", l) for l in walk)
@@ -262,20 +262,20 @@ def static_facts(texts: dict[str, str], program: dict) -> dict:
     assert not re.search(r"clip -> \w+ (?:=[^=]|\+\+|--)|\* clip =[^=]", helper_body)
 
     callers = [row for row in census(texts, "f_1E57_08F5")
-               if row[0] != "src/root/m1E57.c" and row[2] != "<file scope>"]
-    assert [(r[0], r[2]) for r in callers] == [("src/root/m0250.c", "f_0250_5058")]
-    caller = function_text(texts["src/root/m0250.c"], "f_0250_5058")
+               if row[0] != "src/graphics/clip_regions.c" and row[2] != "<file scope>"]
+    assert [(r[0], r[2]) for r in callers] == [("src/ui/edit_view.c", "f_0250_5058")]
+    caller = function_text(texts["src/ui/edit_view.c"], "f_0250_5058")
     for needle in ("struct Rect rects [ 3 ] ;", "rects [ 2 ] . top = 0x8000 ;",
                    "f_1E57_08F5 ( rects ) ;"):
         assert needle in caller
     definitions["f_0250_5058"] = sha(caller.encode())
 
-    guard = normalized(texts["src/root/m1C62.c"])
+    guard = normalized(texts["src/window/alerts.c"])
     assert "static int g_54F8 = 0 ;" in guard
     guard_rows = census(texts, "g_54F8")
-    assert {r[0] for r in guard_rows} == {"src/root/m1C62.c"}
+    assert {r[0] for r in guard_rows} == {"src/window/alerts.c"}
     assert {r[2] for r in guard_rows} == {"<file scope>", "Punt"}
-    punt = function_text(texts["src/root/m1C62.c"], "Punt")
+    punt = function_text(texts["src/window/alerts.c"], "Punt")
     assert "if ( g_54F8 == 0 ) { g_54F8 = 1 ;" in punt
     definitions["Punt"] = sha(punt.encode())
 
@@ -286,10 +286,10 @@ def static_facts(texts: dict[str, str], program: dict) -> dict:
         "destination_writers": sorted(DESTINATION_WRITERS),
         "source_list_owners": {"window_clip_handles": handle_writers,
                                "clip_stack": ["clip_Pop", "clip_Push"],
-                               "active_clip_output": ["src/root/m1E57.c"]},
+                               "active_clip_output": ["src/graphics/clip_regions.c"]},
         "foreign_clip_pointer_writers": {k: v for k, v in sorted(foreign.items())
                                          if k in EXPECTED_FOREIGN_CLIP_POINTER_REFERENCES},
-        "include_list_callers": [["src/root/m0250.c", "f_0250_5058", 2]],
+        "include_list_callers": [["src/ui/edit_view.c", "f_0250_5058", 2]],
     }
 
 

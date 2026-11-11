@@ -88,9 +88,9 @@
       "id": "menu-table-cross-owner-layout",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
       "sources": [
-        "src/root/m1FD2.c",
-        "src/S10/m35F5.c",
-        "src/S17/m384C.c"
+        "src/window/menu_helpers.c",
+        "src/window/menu_tracking.c",
+        "src/window/menu_setup.c"
       ],
       "historical_intersections": [
         {
@@ -140,7 +140,7 @@
     {
       "id": "database-open-minus-one-record",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
-      "source": "src/root/m1A28.c",
+      "source": "src/resources/database_files.c",
       "normal_owner": "fd_50F6_3958[4]",
       "historical_failure_address": "50F6:38DC",
       "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A bounded graphics-index failure executes the real 25-slot callback reset and the genuine empty callback, then reaches the uninitialized zero-height raster loop; its first glyph visits all 65536 DGROUP offsets before cleanup. This removes the hypothetical null-callback-return premise for that failure prefix, but proves neither eventual continuation nor an actual minus-one/fifth-record access. No global fatal-state invariance or noreturn waiver follows. An isolated unchanged-original guard1/four-occupied witness now reaches the real minus-one record copy before any DOS call. This confirms the conditional contract, not ordinary-game reachability.",
@@ -155,7 +155,7 @@
     {
       "id": "database-handle-plus-four",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
-      "source": "src/root/m1A53.c",
+      "source": "src/resources/database_objects.c",
       "normal_owner": "db_handles[4]",
       "historical_failure_address": "50F6:3B58",
       "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate.",
@@ -170,7 +170,7 @@
       "id": "icon-handle-computed-alias-and-activation",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
       "sources": [
-        "src/root/m208F.c"
+        "src/window/text_bitmap_helpers.c"
       ],
       "owner": "fd_50F6_46D2 minimum four-byte mutable Handle slot",
       "reason": "Original pointer-chain reads, unchanged complete consumer TU and real RTLink/CRT controls authorize only the slot view and initial null representation. There is no known nominal game producer or observed ordinary incoming consumer edge. Computed writers/readers, indirect or control-corrupted activation and original physical aliases are not globally excluded. Independent placement does not preserve them. No deadness, permanent zero or safe null dereference follows from slot ownership.",
@@ -184,7 +184,7 @@
       "id": "icon-handle-cell-and-payload-lifetime",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
       "sources": [
-        "src/root/m208F.c"
+        "src/window/text_bitmap_helpers.c"
       ],
       "mandatory_if": "Either icon helper reaches its pointer-load branch",
       "reason": "The slot must designate a live four-byte far-pointer cell with a live byte payload covering the selected n and all renderer row accesses, or the corresponding activation must be independently excluded. The minimum slot provider creates neither referent. Producer/resource/allocator/lock/unhook identity, n bounds and payload capacity remain unproved.",
@@ -198,13 +198,13 @@
       "id": "sound-selector-out-of-range-layout",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
       "sources": [
-        "src/S20/m39F1.c",
-        "src/S15/m384C.c",
-        "src/root/m15F8.c",
-        "src/root/m00DF.c",
-        "src/root/m277E.c",
-        "src/root/m293A.c",
-        "src/root/m2815.c"
+        "src/startup/dos_config.c",
+        "src/startup/game_session.c",
+        "src/startup/main.c",
+        "src/sound/game_interface.c",
+        "src/sound/device_channels.c",
+        "src/sound/device_probe.c",
+        "src/sound/opl2_voices.c"
       ],
       "reason": "The command-line parser accepts /s9, but detector/setup/cleanup tables have only nine entries (0..8). If the sound DB open returns, detector index 9 reads the adjacent same-TU saved-state pointer and calls its source-owned data as code. Return and effects are unproved. Conditional later setup/cleanup overreads include cross-TU data adjacency. Complete saved-state storage does not resolve this executable/layout dependency; no clamp, extra slot or padding is introduced.",
       "closure_class": "SUPPORTED_DOMAIN",
@@ -245,8 +245,8 @@
       "id": "map-viewport-grid-layout",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
       "sources": [
-        "src/root/m0250.c",
-        "src/S26/m39C7.c"
+        "src/ui/edit_view.c",
+        "src/window/move_resize.c"
       ],
       "declared_grid": "fd_50F6_15C4[30][40]",
       "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout.",
@@ -260,9 +260,9 @@
       "id": "ctype-out-of-range-index-layout",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
       "sources": [
-        "src/S23/m39C7.c",
-        "src/S10/m35F5.c",
-        "src/root/m1C62.c"
+        "src/ui/info_cards.c",
+        "src/window/menu_tracking.c",
+        "src/window/alerts.c"
       ],
       "consumer": "(_ctype + 1)[signed character or keyboard code]",
       "original_ctype_offset": 31262,
@@ -286,7 +286,7 @@
     {
       "id": "graphics-computed-copy-layout",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
-      "source": "src/root/m1E57.c",
+      "source": "src/graphics/clip_regions.c",
       "reason": "Clip list generation writes a 2048-byte heap temporary before each overflow check, so counts of 256 or more overrun that temporary before the Punt diagnostic. Original synthetic 31-window geometry generates 256 disjoint rectangles and writes the sentinel at displacement 2050 before C097; the adjacent 29-window control completes with 225 rectangles. The fixed destination 50F6:3C14 is now source-owned for every pre-Punt prefix; only a returning Punt copies beyond it (original guard-1 control: 2056 bytes). Shipped geometry reachability of such counts, the heap-adjacency effect of the pre-check overrun and returning-Punt continuation remain unresolved.",
       "closure_class": "SUPPORTED_DOMAIN",
       "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
@@ -300,7 +300,7 @@
     {
       "id": "filename-selector-local-capacity",
       "status": "RESOLVED_SUPPORTED_DOMAIN",
-      "source": "src/S09/m35F5.c",
+      "source": "src/ui/save_load.c",
       "reason": "LoadGame and SaveGame(0) pass an uninitialized char name[100]; FileSelect concatenates path + name into buf[80] and copies it back before clearing it. No admitted proof or premise guarantees a terminator with P+len(S)+1 <= 80: intact caller frames give zeros only at name+103/104. Observed strings are 0..15 bytes on every ordinary chain and differ between builds (pointer values, different last writers) with matching visible behaviour. Longer residue would overrun buf[80] and the copy-back would reach the caller's fd/ok/saved BP/return address. Separately, the inherited L=66 separator append exceeds path[67]/lastDir[67] and the declined-overwrite retry exceeds buf[80] from L=33; directory lengths <= 32 and valid 8.3 names bound those filesystem parts.",
       "closure_class": "SUPPORTED_DOMAIN",
       "closure_basis": "Prove an all-history terminator bound for the incoming uninitialized name (both builds, including interrupt, driver and overlay-manager writers) or preserve the observed behaviour; filesystem parts additionally need explicit directory-length/8.3 premises. No clamp, initialization or resize.",

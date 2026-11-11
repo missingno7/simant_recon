@@ -23,7 +23,7 @@
     {
       "function": "GetDis",
       "definition": {
-        "source": "src/root/m0BE8.c",
+        "source": "src/simulation/food_water_counts.c",
         "return_type": "signed int",
         "line": 465,
         "static": false,
@@ -38,7 +38,7 @@
       ],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_14CC",
           "line": 843,
           "declared_return": "unsigned int",
@@ -47,7 +47,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "MoveSpider",
           "line": 110,
           "declared_return": "unsigned int",
@@ -56,7 +56,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "SFoundAnt",
           "line": 449,
           "declared_return": "unsigned int",
@@ -65,7 +65,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "SFoundAnt",
           "line": 451,
           "declared_return": "unsigned int",
@@ -74,7 +74,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "SFoundAnt",
           "line": 460,
           "declared_return": "unsigned int",
@@ -83,7 +83,7 @@
           ]
         },
         {
-          "source": "src/root/m0DEF.c",
+          "source": "src/simulation/red_initiator.c",
           "caller": "f_0DEF_031F",
           "line": 159,
           "declared_return": "signed short",
@@ -92,7 +92,7 @@
           ]
         },
         {
-          "source": "src/root/m0DEF.c",
+          "source": "src/simulation/red_initiator.c",
           "caller": "f_0DEF_031F",
           "line": 167,
           "declared_return": "signed short",
@@ -101,7 +101,7 @@
           ]
         },
         {
-          "source": "src/root/m10F7.c",
+          "source": "src/simulation/life_tiles.c",
           "caller": "DoLifeExchange",
           "line": 597,
           "declared_return": "unsigned int",
@@ -110,7 +110,7 @@
           ]
         },
         {
-          "source": "src/root/m10F7.c",
+          "source": "src/simulation/life_tiles.c",
           "caller": "PickupMyFood",
           "line": 1138,
           "declared_return": "unsigned int",
@@ -119,7 +119,7 @@
           ]
         },
         {
-          "source": "src/root/m10F7.c",
+          "source": "src/simulation/life_tiles.c",
           "caller": "IsItYellow",
           "line": 1298,
           "declared_return": "unsigned int",
@@ -143,7 +143,7 @@
     {
       "function": "MakeBalloon",
       "definition": {
-        "source": "src/root/m1629.c",
+        "source": "src/graphics/balloons.c",
         "return_type": "char * *",
         "line": 50,
         "static": false,
@@ -160,7 +160,7 @@
       ],
       "calls": [
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawSimKid",
           "line": 321,
           "declared_return": "signed int",
@@ -184,7 +184,7 @@
     {
       "function": "SRand128",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 137,
         "static": false,
@@ -197,7 +197,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "SimKidInside",
           "line": 702,
           "declared_return": "signed short",
@@ -206,7 +206,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "AddFood",
           "line": 677,
           "declared_return": "signed short",
@@ -215,7 +215,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0AB0",
           "line": 466,
           "declared_return": "signed short",
@@ -224,7 +224,7 @@
           ]
         },
         {
-          "source": "src/S25/m3BA4.c",
+          "source": "src/simulation/yellow_ant.c",
           "caller": "DoAntSimY",
           "line": 278,
           "declared_return": "signed short",
@@ -233,7 +233,7 @@
           ]
         },
         {
-          "source": "src/root/m0093.c",
+          "source": "src/simulation/random.c",
           "caller": "SeedRRand",
           "line": 93,
           "declared_return": "signed short",
@@ -242,7 +242,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "SimQueenR",
           "line": 478,
           "declared_return": "signed short",
@@ -251,7 +251,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GstrR",
           "line": 230,
           "declared_return": "signed short",
@@ -275,7 +275,7 @@
     {
       "function": "SRand16",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 134,
         "static": false,
@@ -288,7 +288,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_14CC",
           "line": 814,
           "declared_return": "signed short",
@@ -297,7 +297,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_14CC",
           "line": 836,
           "declared_return": "signed short",
@@ -306,7 +306,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_14CC",
           "line": 867,
           "declared_return": "signed short",
@@ -315,7 +315,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 261,
           "declared_return": "signed short",
@@ -324,7 +324,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 288,
           "declared_return": "signed short",
@@ -333,7 +333,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "InitYelloAnt",
           "line": 540,
           "declared_return": "signed short",
@@ -342,7 +342,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "InitYelloAnt",
           "line": 540,
           "declared_return": "signed short",
@@ -351,7 +351,7 @@
           ]
         },
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawSwarm",
           "line": 654,
           "declared_return": "signed short",
@@ -360,7 +360,7 @@
           ]
         },
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawSwarm",
           "line": 655,
           "declared_return": "signed short",
@@ -369,7 +369,7 @@
           ]
         },
         {
-          "source": "src/S18/m384C.c",
+          "source": "src/simulation/map_patches.c",
           "caller": "MakeYardPatch",
           "line": 405,
           "declared_return": "signed short",
@@ -378,7 +378,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0746",
           "line": 312,
           "declared_return": "signed short",
@@ -387,7 +387,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoNestingB",
           "line": 710,
           "declared_return": "signed short",
@@ -396,7 +396,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoFoodInB",
           "line": 796,
           "declared_return": "signed short",
@@ -405,7 +405,7 @@
           ]
         },
         {
-          "source": "src/root/m015B.c",
+          "source": "src/ui/view_commands.c",
           "caller": "SubtractFood",
           "line": 82,
           "declared_return": "signed short",
@@ -414,7 +414,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoRepoFly",
           "line": 486,
           "declared_return": "signed short",
@@ -423,7 +423,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoForageAnt",
           "line": 943,
           "declared_return": "signed short",
@@ -432,7 +432,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoFightA",
           "line": 1143,
           "declared_return": "signed short",
@@ -441,7 +441,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DeadAntHere",
           "line": 1166,
           "declared_return": "signed short",
@@ -450,7 +450,7 @@
           ]
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "PickupFoodA",
           "line": 302,
           "declared_return": "signed short",
@@ -459,7 +459,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestFightR",
           "line": 357,
           "declared_return": "signed short",
@@ -468,7 +468,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoFoodInR",
           "line": 718,
           "declared_return": "signed short",
@@ -477,7 +477,7 @@
           ]
         },
         {
-          "source": "src/root/m10F7.c",
+          "source": "src/simulation/life_tiles.c",
           "caller": "PickupMyRock",
           "line": 967,
           "declared_return": "signed short",
@@ -501,7 +501,7 @@
     {
       "function": "SRand2",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 131,
         "static": false,
@@ -514,7 +514,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_11FF",
           "line": 776,
           "declared_return": "signed short",
@@ -523,7 +523,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_11FF",
           "line": 782,
           "declared_return": "signed short",
@@ -532,7 +532,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_1803",
           "line": 898,
           "declared_return": "signed short",
@@ -541,7 +541,7 @@
           ]
         },
         {
-          "source": "src/S07/m35F5.c",
+          "source": "src/ui/cheats.c",
           "caller": "CheatKeys",
           "line": 158,
           "declared_return": "signed short",
@@ -550,7 +550,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 249,
           "declared_return": "signed short",
@@ -559,7 +559,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 266,
           "declared_return": "signed short",
@@ -568,7 +568,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 276,
           "declared_return": "signed short",
@@ -577,7 +577,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 293,
           "declared_return": "signed short",
@@ -586,7 +586,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "PlaceBlackQueen",
           "line": 573,
           "declared_return": "signed short",
@@ -595,7 +595,7 @@
           ]
         },
         {
-          "source": "src/S14/m384C.c",
+          "source": "src/ui/scenario_dialogs.c",
           "caller": "EndGameDialog",
           "line": 557,
           "declared_return": "signed short",
@@ -604,7 +604,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_1C81",
           "line": 984,
           "declared_return": "signed short",
@@ -613,7 +613,7 @@
           ]
         },
         {
-          "source": "src/S25/m3BA4.c",
+          "source": "src/simulation/yellow_ant.c",
           "caller": "o25_3BA4_0999",
           "line": 348,
           "declared_return": "signed short",
@@ -622,7 +622,7 @@
           ]
         },
         {
-          "source": "src/S25/m3BA4.c",
+          "source": "src/simulation/yellow_ant.c",
           "caller": "o25_3BA4_0999",
           "line": 352,
           "declared_return": "signed short",
@@ -631,7 +631,7 @@
           ]
         },
         {
-          "source": "src/root/m0093.c",
+          "source": "src/simulation/random.c",
           "caller": "SGSRand",
           "line": 58,
           "declared_return": "signed short",
@@ -640,7 +640,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawSpider",
           "line": 1367,
           "declared_return": "signed short",
@@ -649,7 +649,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1972,
           "declared_return": "signed short",
@@ -658,7 +658,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1981,
           "declared_return": "signed short",
@@ -667,7 +667,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2044,
           "declared_return": "signed short",
@@ -676,7 +676,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoRepoLoit",
           "line": 438,
           "declared_return": "signed short",
@@ -685,7 +685,7 @@
           ]
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "GetExitDirB",
           "line": 497,
           "declared_return": "signed short",
@@ -694,7 +694,7 @@
           ]
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "GetExitDirR",
           "line": 529,
           "declared_return": "signed short",
@@ -703,7 +703,7 @@
           ]
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "GetEnterDirB",
           "line": 576,
           "declared_return": "signed short",
@@ -712,7 +712,7 @@
           ]
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "GetEnterDirR",
           "line": 612,
           "declared_return": "signed short",
@@ -721,7 +721,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "MoveSpider",
           "line": 170,
           "declared_return": "signed short",
@@ -730,7 +730,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "MoveSpider",
           "line": 333,
           "declared_return": "signed short",
@@ -739,7 +739,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "MoveSpider",
           "line": 339,
           "declared_return": "signed short",
@@ -748,7 +748,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "GetOutR",
           "line": 878,
           "declared_return": "signed short",
@@ -757,7 +757,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNestDir",
           "line": 561,
           "declared_return": "signed short",
@@ -781,7 +781,7 @@
     {
       "function": "SRand256",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 138,
         "static": false,
@@ -794,7 +794,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "AddFood",
           "line": 684,
           "declared_return": "signed short",
@@ -803,7 +803,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_006D",
           "line": 85,
           "declared_return": "signed short",
@@ -812,7 +812,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoAntSimA",
           "line": 293,
           "declared_return": "signed short",
@@ -821,7 +821,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "MoveSpider",
           "line": 334,
           "declared_return": "signed short",
@@ -830,7 +830,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestAntR",
           "line": 136,
           "declared_return": "signed short",
@@ -854,7 +854,7 @@
     {
       "function": "SRand32",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 135,
         "static": false,
@@ -867,7 +867,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_02B9",
           "line": 350,
           "declared_return": "signed short",
@@ -876,7 +876,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_006D",
           "line": 85,
           "declared_return": "signed short",
@@ -885,7 +885,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0677",
           "line": 281,
           "declared_return": "signed short",
@@ -894,7 +894,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawSpider",
           "line": 1379,
           "declared_return": "signed short",
@@ -903,7 +903,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1971,
           "declared_return": "signed short",
@@ -912,7 +912,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1980,
           "declared_return": "signed short",
@@ -921,7 +921,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2003,
           "declared_return": "signed short",
@@ -930,7 +930,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2023,
           "declared_return": "signed short",
@@ -939,7 +939,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoAntSimA",
           "line": 300,
           "declared_return": "signed short",
@@ -948,7 +948,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoRepoFly",
           "line": 477,
           "declared_return": "signed short",
@@ -957,7 +957,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoForageAnt",
           "line": 904,
           "declared_return": "signed short",
@@ -966,7 +966,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestAntR",
           "line": 136,
           "declared_return": "signed short",
@@ -975,7 +975,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoRandR",
           "line": 340,
           "declared_return": "signed short",
@@ -984,7 +984,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GstrR",
           "line": 230,
           "declared_return": "signed short",
@@ -1008,7 +1008,7 @@
     {
       "function": "SRand4",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 132,
         "static": false,
@@ -1021,7 +1021,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "SimKidInside",
           "line": 714,
           "declared_return": "signed short",
@@ -1030,7 +1030,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_1803",
           "line": 926,
           "declared_return": "signed short",
@@ -1039,7 +1039,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_1CEA",
           "line": 1050,
           "declared_return": "signed short",
@@ -1048,7 +1048,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_1CEA",
           "line": 1054,
           "declared_return": "signed short",
@@ -1057,7 +1057,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_1CEA",
           "line": 1056,
           "declared_return": "signed short",
@@ -1066,7 +1066,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 220,
           "declared_return": "signed short",
@@ -1075,7 +1075,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 221,
           "declared_return": "signed short",
@@ -1084,7 +1084,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "PlaceBlackQueen",
           "line": 568,
           "declared_return": "signed short",
@@ -1093,7 +1093,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "PlaceRedQueen",
           "line": 608,
           "declared_return": "signed short",
@@ -1102,7 +1102,7 @@
           ]
         },
         {
-          "source": "src/S18/m384C.c",
+          "source": "src/simulation/map_patches.c",
           "caller": "MakeYardPatch",
           "line": 407,
           "declared_return": "signed short",
@@ -1111,7 +1111,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoDigInB",
           "line": 886,
           "declared_return": "signed short",
@@ -1120,7 +1120,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2004,
           "declared_return": "signed short",
@@ -1129,7 +1129,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2024,
           "declared_return": "signed short",
@@ -1138,7 +1138,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoRestAnt",
           "line": 430,
           "declared_return": "signed short",
@@ -1147,7 +1147,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoToAlarm",
           "line": 804,
           "declared_return": "signed short",
@@ -1156,7 +1156,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DeadAntHere",
           "line": 1171,
           "declared_return": "signed short",
@@ -1165,7 +1165,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DeadAntHere",
           "line": 1173,
           "declared_return": "signed short",
@@ -1174,7 +1174,7 @@
           ]
         },
         {
-          "source": "src/root/m0AD9.c",
+          "source": "src/simulation/yard_creatures.c",
           "caller": "DoSow",
           "line": 101,
           "declared_return": "signed short",
@@ -1183,7 +1183,7 @@
           ]
         },
         {
-          "source": "src/root/m0AD9.c",
+          "source": "src/simulation/yard_creatures.c",
           "caller": "DoSow",
           "line": 103,
           "declared_return": "signed short",
@@ -1192,7 +1192,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "MoveSpider",
           "line": 330,
           "declared_return": "signed short",
@@ -1201,7 +1201,7 @@
           ]
         },
         {
-          "source": "src/root/m0CDB.c",
+          "source": "src/simulation/spider.c",
           "caller": "SpiderScan",
           "line": 499,
           "declared_return": "signed short",
@@ -1210,7 +1210,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestingR",
           "line": 617,
           "declared_return": "signed short",
@@ -1219,7 +1219,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestingR",
           "line": 625,
           "declared_return": "signed short",
@@ -1228,7 +1228,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestingR",
           "line": 628,
           "declared_return": "signed short",
@@ -1237,7 +1237,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestingR",
           "line": 641,
           "declared_return": "signed short",
@@ -1246,7 +1246,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoDigInR",
           "line": 799,
           "declared_return": "signed short",
@@ -1255,7 +1255,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNestDir",
           "line": 569,
           "declared_return": "signed short",
@@ -1264,7 +1264,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNestDir",
           "line": 572,
           "declared_return": "signed short",
@@ -1288,7 +1288,7 @@
     {
       "function": "SRand64",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 136,
         "static": false,
@@ -1301,7 +1301,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "SimKidInside",
           "line": 703,
           "declared_return": "signed short",
@@ -1310,7 +1310,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_11FF",
           "line": 788,
           "declared_return": "signed short",
@@ -1319,7 +1319,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_14CC",
           "line": 832,
           "declared_return": "signed short",
@@ -1328,7 +1328,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 254,
           "declared_return": "signed short",
@@ -1337,7 +1337,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 281,
           "declared_return": "signed short",
@@ -1346,7 +1346,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "AddFood",
           "line": 678,
           "declared_return": "signed short",
@@ -1355,7 +1355,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0AB0",
           "line": 433,
           "declared_return": "signed short",
@@ -1364,7 +1364,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoDigInB",
           "line": 884,
           "declared_return": "signed short",
@@ -1373,7 +1373,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoDigOutB",
           "line": 936,
           "declared_return": "signed short",
@@ -1382,7 +1382,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawSpider",
           "line": 1366,
           "declared_return": "signed short",
@@ -1391,7 +1391,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2043,
           "declared_return": "signed short",
@@ -1400,7 +1400,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "SimQueenR",
           "line": 447,
           "declared_return": "signed short",
@@ -1409,7 +1409,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoDigInR",
           "line": 797,
           "declared_return": "signed short",
@@ -1418,7 +1418,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoDigOutR",
           "line": 854,
           "declared_return": "signed short",
@@ -1442,7 +1442,7 @@
     {
       "function": "SRand8",
       "definition": {
-        "source": "src/root/m0093.c",
+        "source": "src/simulation/random.c",
         "return_type": "signed short",
         "line": 133,
         "static": false,
@@ -1455,7 +1455,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_1E54",
           "line": 1189,
           "declared_return": "signed short",
@@ -1464,7 +1464,7 @@
           ]
         },
         {
-          "source": "src/S06/m35F5.c",
+          "source": "src/simulation/yard.c",
           "caller": "o06_35F5_1E54",
           "line": 1198,
           "declared_return": "signed short",
@@ -1473,7 +1473,7 @@
           ]
         },
         {
-          "source": "src/S07/m35F5.c",
+          "source": "src/ui/cheats.c",
           "caller": "CheatKeys",
           "line": 108,
           "declared_return": "signed short",
@@ -1482,7 +1482,7 @@
           ]
         },
         {
-          "source": "src/S07/m35F5.c",
+          "source": "src/ui/cheats.c",
           "caller": "CheatKeys",
           "line": 108,
           "declared_return": "signed short",
@@ -1491,7 +1491,7 @@
           ]
         },
         {
-          "source": "src/S07/m35F5.c",
+          "source": "src/ui/cheats.c",
           "caller": "CheatKeys",
           "line": 112,
           "declared_return": "signed short",
@@ -1500,7 +1500,7 @@
           ]
         },
         {
-          "source": "src/S07/m35F5.c",
+          "source": "src/ui/cheats.c",
           "caller": "CheatKeys",
           "line": 112,
           "declared_return": "signed short",
@@ -1509,7 +1509,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 263,
           "declared_return": "signed short",
@@ -1518,7 +1518,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 265,
           "declared_return": "signed short",
@@ -1527,7 +1527,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 267,
           "declared_return": "signed short",
@@ -1536,7 +1536,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 269,
           "declared_return": "signed short",
@@ -1545,7 +1545,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 290,
           "declared_return": "signed short",
@@ -1554,7 +1554,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 292,
           "declared_return": "signed short",
@@ -1563,7 +1563,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 294,
           "declared_return": "signed short",
@@ -1572,7 +1572,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "RandWorld",
           "line": 296,
           "declared_return": "signed short",
@@ -1581,7 +1581,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "InitYelloAnt",
           "line": 541,
           "declared_return": "signed short",
@@ -1590,7 +1590,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "InitYelloAnt",
           "line": 541,
           "declared_return": "signed short",
@@ -1599,7 +1599,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "AddFood",
           "line": 682,
           "declared_return": "signed short",
@@ -1608,7 +1608,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "AddBlackAnts",
           "line": 738,
           "declared_return": "signed short",
@@ -1617,7 +1617,7 @@
           ]
         },
         {
-          "source": "src/S08/m35F5.c",
+          "source": "src/simulation/world_generation.c",
           "caller": "AddRedAnts",
           "line": 774,
           "declared_return": "signed short",
@@ -1626,7 +1626,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0460",
           "line": 231,
           "declared_return": "signed short",
@@ -1635,7 +1635,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0460",
           "line": 235,
           "declared_return": "signed short",
@@ -1644,7 +1644,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0677",
           "line": 287,
           "declared_return": "signed short",
@@ -1653,7 +1653,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_06E2",
           "line": 300,
           "declared_return": "signed short",
@@ -1662,7 +1662,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_0DAF",
           "line": 535,
           "declared_return": "signed short",
@@ -1671,7 +1671,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoNestingB",
           "line": 687,
           "declared_return": "signed short",
@@ -1680,7 +1680,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoNestingB",
           "line": 693,
           "declared_return": "signed short",
@@ -1689,7 +1689,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoNestingB",
           "line": 696,
           "declared_return": "signed short",
@@ -1698,7 +1698,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoNestingB",
           "line": 717,
           "declared_return": "signed short",
@@ -1707,7 +1707,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoNestingB",
           "line": 722,
           "declared_return": "signed short",
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_13EF",
           "line": 738,
           "declared_return": "signed short",
@@ -1725,7 +1725,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_14A8",
           "line": 755,
           "declared_return": "signed short",
@@ -1734,7 +1734,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_154F",
           "line": 771,
           "declared_return": "signed short",
@@ -1743,7 +1743,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "DoDigInB",
           "line": 846,
           "declared_return": "signed short",
@@ -1752,7 +1752,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_1BBB",
           "line": 953,
           "declared_return": "signed short",
@@ -1761,7 +1761,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_1C81",
           "line": 973,
           "declared_return": "signed short",
@@ -1770,7 +1770,7 @@
           ]
         },
         {
-          "source": "src/S25/m39C7.c",
+          "source": "src/simulation/black_nest.c",
           "caller": "o25_39C7_1C81",
           "line": 991,
           "declared_return": "signed short",
@@ -1779,7 +1779,7 @@
           ]
         },
         {
-          "source": "src/S25/m3BA4.c",
+          "source": "src/simulation/yellow_ant.c",
           "caller": "o25_3BA4_0999",
           "line": 363,
           "declared_return": "signed short",
@@ -1788,7 +1788,7 @@
           ]
         },
         {
-          "source": "src/S25/m3BA4.c",
+          "source": "src/simulation/yellow_ant.c",
           "caller": "o25_3BA4_0C01",
           "line": 416,
           "declared_return": "signed short",
@@ -1797,7 +1797,7 @@
           ]
         },
         {
-          "source": "src/S25/m3BA4.c",
+          "source": "src/simulation/yellow_ant.c",
           "caller": "ExitNest",
           "line": 560,
           "declared_return": "signed short",
@@ -1806,7 +1806,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoRandAntA",
           "line": 566,
           "declared_return": "signed short",
@@ -1815,7 +1815,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoDigOutAntA",
           "line": 665,
           "declared_return": "signed short",
@@ -1824,7 +1824,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoDigOutAntA",
           "line": 676,
           "declared_return": "signed short",
@@ -1833,7 +1833,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoForageAnt",
           "line": 921,
           "declared_return": "signed short",
@@ -1842,7 +1842,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "DoRecruitAnt",
           "line": 1015,
           "declared_return": "signed short",
@@ -1851,7 +1851,7 @@
           ]
         },
         {
-          "source": "src/root/m0894.c",
+          "source": "src/simulation/surface_ants.c",
           "caller": "RandTurn",
           "line": 1193,
           "declared_return": "signed short",
@@ -1860,7 +1860,7 @@
           ]
         },
         {
-          "source": "src/root/m0AD9.c",
+          "source": "src/simulation/yard_creatures.c",
           "caller": "DoAntLions",
           "line": 200,
           "declared_return": "signed short",
@@ -1869,7 +1869,7 @@
           ]
         },
         {
-          "source": "src/root/m0AD9.c",
+          "source": "src/simulation/yard_creatures.c",
           "caller": "DoAntLions",
           "line": 229,
           "declared_return": "signed short",
@@ -1878,7 +1878,7 @@
           ]
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "PickupFoodB",
           "line": 390,
           "declared_return": "signed short",
@@ -1887,7 +1887,7 @@
           ]
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "PickupFoodR",
           "line": 408,
           "declared_return": "signed short",
@@ -1896,7 +1896,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "RaidOutR",
           "line": 295,
           "declared_return": "signed short",
@@ -1905,7 +1905,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "RaidOutR",
           "line": 299,
           "declared_return": "signed short",
@@ -1914,7 +1914,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoRandR",
           "line": 346,
           "declared_return": "signed short",
@@ -1923,7 +1923,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "SimEggR",
           "line": 428,
           "declared_return": "signed short",
@@ -1932,7 +1932,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "QueenMoveR",
           "line": 498,
           "declared_return": "signed short",
@@ -1941,7 +1941,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestingR",
           "line": 626,
           "declared_return": "signed short",
@@ -1950,7 +1950,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestingR",
           "line": 644,
           "declared_return": "signed short",
@@ -1959,7 +1959,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoNestingR",
           "line": 648,
           "declared_return": "signed short",
@@ -1968,7 +1968,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "TryEatFoodR",
           "line": 660,
           "declared_return": "signed short",
@@ -1977,7 +1977,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "EatFoodR",
           "line": 677,
           "declared_return": "signed short",
@@ -1986,7 +1986,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "StealFoodR",
           "line": 693,
           "declared_return": "signed short",
@@ -1995,7 +1995,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoDigInR",
           "line": 761,
           "declared_return": "signed short",
@@ -2004,7 +2004,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoDigInR",
           "line": 805,
           "declared_return": "signed short",
@@ -2013,7 +2013,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "DoDigInR",
           "line": 805,
           "declared_return": "signed short",
@@ -2022,7 +2022,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "GetOutR",
           "line": 867,
           "declared_return": "signed short",
@@ -2031,7 +2031,7 @@
           ]
         },
         {
-          "source": "src/root/m0F3F.c",
+          "source": "src/simulation/red_nest.c",
           "caller": "GetOutR",
           "line": 885,
           "declared_return": "signed short",
@@ -2040,7 +2040,7 @@
           ]
         },
         {
-          "source": "src/root/m10F7.c",
+          "source": "src/simulation/life_tiles.c",
           "caller": "PickupMyRock",
           "line": 974,
           "declared_return": "signed short",
@@ -2049,7 +2049,7 @@
           ]
         },
         {
-          "source": "src/root/m10F7.c",
+          "source": "src/simulation/life_tiles.c",
           "caller": "PickupMyFood",
           "line": 1145,
           "declared_return": "signed short",
@@ -2058,7 +2058,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNewModeB",
           "line": 444,
           "declared_return": "signed short",
@@ -2067,7 +2067,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNewModeB",
           "line": 446,
           "declared_return": "signed short",
@@ -2076,7 +2076,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNewModeR",
           "line": 457,
           "declared_return": "signed short",
@@ -2085,7 +2085,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNewModeR",
           "line": 459,
           "declared_return": "signed short",
@@ -2094,7 +2094,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetForageDir",
           "line": 500,
           "declared_return": "signed short",
@@ -2103,7 +2103,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetForageDir",
           "line": 519,
           "declared_return": "signed short",
@@ -2112,7 +2112,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNestDir",
           "line": 572,
           "declared_return": "signed short",
@@ -2121,7 +2121,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetNestDir",
           "line": 575,
           "declared_return": "signed short",
@@ -2130,7 +2130,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetAlarmDir",
           "line": 602,
           "declared_return": "signed short",
@@ -2139,7 +2139,7 @@
           ]
         },
         {
-          "source": "src/root/m1383.c",
+          "source": "src/simulation/strategy.c",
           "caller": "GetRandDir",
           "line": 611,
           "declared_return": "signed short",
@@ -2148,7 +2148,7 @@
           ]
         },
         {
-          "source": "src/root/m14EE.c",
+          "source": "src/simulation/digging.c",
           "caller": "DigTileB",
           "line": 240,
           "declared_return": "signed short",
@@ -2157,7 +2157,7 @@
           ]
         },
         {
-          "source": "src/root/m14EE.c",
+          "source": "src/simulation/digging.c",
           "caller": "DigTileR",
           "line": 264,
           "declared_return": "signed short",
@@ -2166,7 +2166,7 @@
           ]
         },
         {
-          "source": "src/root/m14EE.c",
+          "source": "src/simulation/digging.c",
           "caller": "DigTileThemB",
           "line": 292,
           "declared_return": "signed short",
@@ -2175,7 +2175,7 @@
           ]
         },
         {
-          "source": "src/root/m14EE.c",
+          "source": "src/simulation/digging.c",
           "caller": "DigTileThemR",
           "line": 326,
           "declared_return": "signed short",
@@ -2184,7 +2184,7 @@
           ]
         },
         {
-          "source": "src/root/m14EE.c",
+          "source": "src/simulation/digging.c",
           "caller": "SmoothEdgesB",
           "line": 380,
           "declared_return": "signed short",
@@ -2193,7 +2193,7 @@
           ]
         },
         {
-          "source": "src/root/m14EE.c",
+          "source": "src/simulation/digging.c",
           "caller": "SmoothEdgesR",
           "line": 433,
           "declared_return": "signed short",
@@ -2217,7 +2217,7 @@
     {
       "function": "ch_CreateTable",
       "definition": {
-        "source": "src/root/m1A96.c",
+        "source": "src/resources/object_cache.c",
         "return_type": "struct:None * *",
         "line": 50,
         "static": false,
@@ -2232,7 +2232,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m1A53.c",
+          "source": "src/resources/database_objects.c",
           "caller": "db_SetDataBase",
           "line": 50,
           "declared_return": "void *",
@@ -2256,7 +2256,7 @@
     {
       "function": "db_LoadObject",
       "definition": {
-        "source": "src/root/m1A53.c",
+        "source": "src/resources/database_objects.c",
         "return_type": "char *",
         "line": 80,
         "static": false,
@@ -2273,7 +2273,7 @@
       ],
       "calls": [
         {
-          "source": "src/S14/m384C.c",
+          "source": "src/ui/scenario_dialogs.c",
           "caller": "CustomerIDDialog",
           "line": 632,
           "declared_return": "char * *",
@@ -2282,7 +2282,7 @@
           ]
         },
         {
-          "source": "src/S14/m384C.c",
+          "source": "src/ui/scenario_dialogs.c",
           "caller": "CustomerIDDialog",
           "line": 633,
           "declared_return": "char * *",
@@ -2291,7 +2291,7 @@
           ]
         },
         {
-          "source": "src/S15/m384C.c",
+          "source": "src/startup/game_session.c",
           "caller": "LoadMonoPats",
           "line": 46,
           "declared_return": "char * *",
@@ -2300,7 +2300,7 @@
           ]
         },
         {
-          "source": "src/S15/m384C.c",
+          "source": "src/startup/game_session.c",
           "caller": "LoadMonoPats",
           "line": 55,
           "declared_return": "char * *",
@@ -2309,7 +2309,7 @@
           ]
         },
         {
-          "source": "src/S17/m384C.c",
+          "source": "src/window/menu_setup.c",
           "caller": "o17_384C_0039",
           "line": 49,
           "declared_return": "signed int * *",
@@ -2318,7 +2318,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0008",
           "line": 42,
           "declared_return": "char * *",
@@ -2327,7 +2327,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0008",
           "line": 43,
           "declared_return": "char * *",
@@ -2336,7 +2336,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0069",
           "line": 56,
           "declared_return": "char * *",
@@ -2345,7 +2345,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0069",
           "line": 58,
           "declared_return": "char * *",
@@ -2354,7 +2354,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_00FF",
           "line": 70,
           "declared_return": "char * *",
@@ -2363,7 +2363,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_00FF",
           "line": 71,
           "declared_return": "char * *",
@@ -2372,7 +2372,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0160",
           "line": 78,
           "declared_return": "char * *",
@@ -2381,7 +2381,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0160",
           "line": 79,
           "declared_return": "char * *",
@@ -2390,7 +2390,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_01C1",
           "line": 90,
           "declared_return": "char * *",
@@ -2399,7 +2399,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0212",
           "line": 107,
           "declared_return": "char * *",
@@ -2408,7 +2408,7 @@
           ]
         },
         {
-          "source": "src/S20/m39C7.c",
+          "source": "src/platform/video/font_setup.c",
           "caller": "o20_39C7_0212",
           "line": 109,
           "declared_return": "char * *",
@@ -2417,7 +2417,7 @@
           ]
         },
         {
-          "source": "src/root/m075B.c",
+          "source": "src/resources/game_strings.c",
           "caller": "initStuff",
           "line": 28,
           "declared_return": "char * *",
@@ -2426,7 +2426,7 @@
           ]
         },
         {
-          "source": "src/root/m075B.c",
+          "source": "src/resources/game_strings.c",
           "caller": "LoadStringAnt",
           "line": 105,
           "declared_return": "char * *",
@@ -2435,7 +2435,7 @@
           ]
         },
         {
-          "source": "src/root/m1B28.c",
+          "source": "src/platform/cursor_shapes.c",
           "caller": "f_1B28_0006",
           "line": 27,
           "declared_return": "char * *",
@@ -2444,7 +2444,7 @@
           ]
         },
         {
-          "source": "src/root/m1B28.c",
+          "source": "src/platform/cursor_shapes.c",
           "caller": "f_1B28_0006",
           "line": 28,
           "declared_return": "char * *",
@@ -2453,7 +2453,7 @@
           ]
         },
         {
-          "source": "src/root/m1B28.c",
+          "source": "src/platform/cursor_shapes.c",
           "caller": "f_1B28_0129",
           "line": 85,
           "declared_return": "char * *",
@@ -2462,7 +2462,7 @@
           ]
         },
         {
-          "source": "src/root/m1B28.c",
+          "source": "src/platform/cursor_shapes.c",
           "caller": "f_1B28_0129",
           "line": 86,
           "declared_return": "char * *",
@@ -2471,7 +2471,7 @@
           ]
         },
         {
-          "source": "src/root/m1B28.c",
+          "source": "src/platform/cursor_shapes.c",
           "caller": "f_1B28_01CB",
           "line": 105,
           "declared_return": "char * *",
@@ -2480,7 +2480,7 @@
           ]
         },
         {
-          "source": "src/root/m1B28.c",
+          "source": "src/platform/cursor_shapes.c",
           "caller": "f_1B28_01CB",
           "line": 106,
           "declared_return": "char * *",
@@ -2489,7 +2489,7 @@
           ]
         },
         {
-          "source": "src/root/m20E8.c",
+          "source": "src/window/lifecycle.c",
           "caller": "win_LoadAllWindows",
           "line": 108,
           "declared_return": "char * *",
@@ -2498,7 +2498,7 @@
           ]
         },
         {
-          "source": "src/root/m20E8.c",
+          "source": "src/window/lifecycle.c",
           "caller": "win_LoadAllWindows",
           "line": 115,
           "declared_return": "char * *",
@@ -2507,7 +2507,7 @@
           ]
         },
         {
-          "source": "src/root/m20E8.c",
+          "source": "src/window/lifecycle.c",
           "caller": "win_LoadAllWindows",
           "line": 125,
           "declared_return": "char * *",
@@ -2516,7 +2516,7 @@
           ]
         },
         {
-          "source": "src/root/m20E8.c",
+          "source": "src/window/lifecycle.c",
           "caller": "win_LoadAllWindows",
           "line": 128,
           "declared_return": "char * *",
@@ -2525,7 +2525,7 @@
           ]
         },
         {
-          "source": "src/root/m22BF.c",
+          "source": "src/window/object_attributes.c",
           "caller": "win_SetPalette",
           "line": 443,
           "declared_return": "char * *",
@@ -2549,7 +2549,7 @@
     {
       "function": "f_00F8_02EF",
       "definition": {
-        "source": "src/root/m00F8.c",
+        "source": "src/ui/view_dialog_helpers.c",
         "return_type": "void",
         "line": 176,
         "static": false,
@@ -2562,7 +2562,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/root/m075B.c",
+          "source": "src/resources/game_strings.c",
           "caller": "initStuff",
           "line": 38,
           "declared_return": "signed short",
@@ -2581,7 +2581,7 @@
     {
       "function": "f_171C_0A5C",
       "definition": {
-        "source": "src/root/m171C.c",
+        "source": "src/memory/ralloc.c",
         "return_type": "char * *",
         "line": 418,
         "static": false,
@@ -2596,7 +2596,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "caller": "f_171C_125C",
           "line": 679,
           "declared_return": "char * *",
@@ -2620,7 +2620,7 @@
     {
       "function": "f_171C_0EEA",
       "definition": {
-        "source": "src/root/m171C.c",
+        "source": "src/memory/ralloc.c",
         "return_type": "struct:None *",
         "line": 555,
         "static": false,
@@ -2635,7 +2635,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "caller": "f_171C_125C",
           "line": 676,
           "declared_return": "struct:None *",
@@ -2644,7 +2644,7 @@
           ]
         },
         {
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "caller": "f_171C_18A6",
           "line": 849,
           "declared_return": "struct:None *",
@@ -2668,7 +2668,7 @@
     {
       "function": "f_171C_13CA",
       "definition": {
-        "source": "src/root/m171C.c",
+        "source": "src/memory/ralloc.c",
         "return_type": "char * *",
         "line": 694,
         "static": false,
@@ -2683,7 +2683,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m1986.c",
+          "source": "src/resources/database_index.c",
           "caller": "OpenIndex",
           "line": 59,
           "declared_return": "void * *",
@@ -2692,7 +2692,7 @@
           ]
         },
         {
-          "source": "src/root/m19A9.c",
+          "source": "src/resources/database_records.c",
           "caller": "DBRecall",
           "line": 95,
           "declared_return": "char *",
@@ -2701,7 +2701,7 @@
           ]
         },
         {
-          "source": "src/root/m19A9.c",
+          "source": "src/resources/database_records.c",
           "caller": "DBRecall",
           "line": 98,
           "declared_return": "char *",
@@ -2710,7 +2710,7 @@
           ]
         },
         {
-          "source": "src/root/m19A9.c",
+          "source": "src/resources/database_records.c",
           "caller": "DBRecall",
           "line": 108,
           "declared_return": "char *",
@@ -2719,7 +2719,7 @@
           ]
         },
         {
-          "source": "src/root/m19A9.c",
+          "source": "src/resources/database_records.c",
           "caller": "DBRecall",
           "line": 109,
           "declared_return": "char *",
@@ -2728,7 +2728,7 @@
           ]
         },
         {
-          "source": "src/root/m19A9.c",
+          "source": "src/resources/database_records.c",
           "caller": "DBRecall",
           "line": 125,
           "declared_return": "char *",
@@ -2737,7 +2737,7 @@
           ]
         },
         {
-          "source": "src/root/m19DC.c",
+          "source": "src/resources/database_ems.c",
           "caller": "f_19DC_001A",
           "line": 69,
           "declared_return": "struct:None * *",
@@ -2746,7 +2746,7 @@
           ]
         },
         {
-          "source": "src/root/m1A96.c",
+          "source": "src/resources/object_cache.c",
           "caller": "ch_CreateTable",
           "line": 58,
           "declared_return": "void *",
@@ -2770,7 +2770,7 @@
     {
       "function": "f_171C_14BE",
       "definition": {
-        "source": "src/root/m171C.c",
+        "source": "src/memory/ralloc.c",
         "return_type": "signed int",
         "line": 718,
         "static": false,
@@ -2785,7 +2785,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m1A96.c",
+          "source": "src/resources/object_cache.c",
           "caller": "ch_DumpOldest",
           "line": 235,
           "declared_return": "unsigned int",
@@ -2809,7 +2809,7 @@
     {
       "function": "f_171C_1A9E",
       "definition": {
-        "source": "src/root/m171C.c",
+        "source": "src/memory/ralloc.c",
         "return_type": "char * *",
         "line": 864,
         "static": false,
@@ -2824,7 +2824,7 @@
       ],
       "calls": [
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "Mini_DrawMapI",
           "line": 261,
           "declared_return": "char *",
@@ -2833,7 +2833,7 @@
           ]
         },
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "Mini_DrawMapI",
           "line": 262,
           "declared_return": "char *",
@@ -2857,7 +2857,7 @@
     {
       "function": "f_171C_1C1C",
       "definition": {
-        "source": "src/root/m171C.c",
+        "source": "src/memory/ralloc.c",
         "return_type": "signed int",
         "line": 905,
         "static": false,
@@ -2872,7 +2872,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m284A.c",
+          "source": "src/sound/midi_player.c",
           "caller": "f_284A_0013",
           "line": 61,
           "declared_return": "signed short",
@@ -2896,7 +2896,7 @@
     {
       "function": "f_1A53_00BA",
       "definition": {
-        "source": "src/root/m1A53.c",
+        "source": "src/resources/database_objects.c",
         "return_type": "char *",
         "line": 60,
         "static": false,
@@ -2911,7 +2911,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m0000.c",
+          "source": "src/sound/resource_loading.c",
           "caller": "f_0000_0090",
           "line": 64,
           "declared_return": "char * *",
@@ -2920,7 +2920,7 @@
           ]
         },
         {
-          "source": "src/root/m0000.c",
+          "source": "src/sound/resource_loading.c",
           "caller": "f_0000_0193",
           "line": 129,
           "declared_return": "char * *",
@@ -2929,7 +2929,7 @@
           ]
         },
         {
-          "source": "src/root/m0000.c",
+          "source": "src/sound/resource_loading.c",
           "caller": "f_0000_0193",
           "line": 139,
           "declared_return": "char * *",
@@ -2938,7 +2938,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "f_0250_0256",
           "line": 151,
           "declared_return": "char * *",
@@ -2947,7 +2947,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "f_0250_0256",
           "line": 156,
           "declared_return": "char * *",
@@ -2956,7 +2956,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "f_0250_0643",
           "line": 282,
           "declared_return": "char * *",
@@ -2965,7 +2965,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "f_0250_0643",
           "line": 289,
           "declared_return": "char * *",
@@ -2989,7 +2989,7 @@
     {
       "function": "f_1A53_00F0",
       "definition": {
-        "source": "src/root/m1A53.c",
+        "source": "src/resources/database_objects.c",
         "return_type": "char *",
         "line": 70,
         "static": false,
@@ -3004,7 +3004,7 @@
       ],
       "calls": [
         {
-          "source": "src/S15/m384C.c",
+          "source": "src/startup/game_session.c",
           "caller": "o15_384C_0239",
           "line": 197,
           "declared_return": "char * *",
@@ -3013,7 +3013,7 @@
           ]
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "LoadTiles",
           "line": 211,
           "declared_return": "char * *",
@@ -3022,7 +3022,7 @@
           ]
         },
         {
-          "source": "src/root/m20E8.c",
+          "source": "src/window/lifecycle.c",
           "caller": "win_LoadWindow",
           "line": 43,
           "declared_return": "char * *",
@@ -3031,7 +3031,7 @@
           ]
         },
         {
-          "source": "src/root/m2662.c",
+          "source": "src/graphics/anim.c",
           "caller": "hanim_RenderAnimSet",
           "line": 494,
           "declared_return": "char * *",
@@ -3040,7 +3040,7 @@
           ]
         },
         {
-          "source": "src/root/m2662.c",
+          "source": "src/graphics/anim.c",
           "caller": "f_2662_1120",
           "line": 549,
           "declared_return": "char * *",
@@ -3064,7 +3064,7 @@
     {
       "function": "f_1CE2_000C",
       "definition": {
-        "source": "src/root/m1CE2.c",
+        "source": "src/graphics/screen_rects.c",
         "return_type": "char *",
         "line": 12,
         "static": false,
@@ -3079,7 +3079,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_02FF",
           "line": 186,
           "declared_return": "struct:Rect *",
@@ -3088,7 +3088,7 @@
           ]
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_05FD",
           "line": 354,
           "declared_return": "struct:Rect *",
@@ -3097,7 +3097,7 @@
           ]
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_0663",
           "line": 388,
           "declared_return": "struct:Rect *",
@@ -3116,7 +3116,7 @@
     {
       "function": "f_24AB_0002",
       "definition": {
-        "source": "src/root/m24AB.c",
+        "source": "src/graphics/font_output.c",
         "return_type": "char * *",
         "line": 37,
         "static": false,
@@ -3131,7 +3131,7 @@
       ],
       "calls": [
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawAnimYardMessage",
           "line": 599,
           "declared_return": "signed int",
@@ -3155,7 +3155,7 @@
     {
       "function": "font_MakeImage",
       "definition": {
-        "source": "src/root/m25E7.c",
+        "source": "src/graphics/font_resources.c",
         "return_type": "struct:Bitmap *",
         "line": 186,
         "static": false,
@@ -3170,7 +3170,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m1629.c",
+          "source": "src/graphics/balloons.c",
           "caller": "MakeBalloon",
           "line": 106,
           "declared_return": "char *",
@@ -3194,7 +3194,7 @@
     {
       "function": "font_ReadFont",
       "definition": {
-        "source": "src/root/m25E7.c",
+        "source": "src/graphics/font_resources.c",
         "return_type": "struct:Font *",
         "line": 58,
         "static": false,
@@ -3212,7 +3212,7 @@
       ],
       "calls": [
         {
-          "source": "src/root/m24AB.c",
+          "source": "src/graphics/font_output.c",
           "caller": "font_InitFonts",
           "line": 194,
           "declared_return": "void *",
@@ -3221,7 +3221,7 @@
           ]
         },
         {
-          "source": "src/root/m24AB.c",
+          "source": "src/graphics/font_output.c",
           "caller": "font_InitFonts",
           "line": 195,
           "declared_return": "void *",
@@ -3230,7 +3230,7 @@
           ]
         },
         {
-          "source": "src/root/m24AB.c",
+          "source": "src/graphics/font_output.c",
           "caller": "font_InitFonts",
           "line": 196,
           "declared_return": "void *",
@@ -3239,7 +3239,7 @@
           ]
         },
         {
-          "source": "src/root/m24AB.c",
+          "source": "src/graphics/font_output.c",
           "caller": "font_InitFonts",
           "line": 197,
           "declared_return": "void *",
@@ -3263,7 +3263,7 @@
     {
       "function": "malloc",
       "definition": {
-        "source": "src/root/m171C.c",
+        "source": "src/memory/ralloc.c",
         "return_type": "void *",
         "line": 1058,
         "static": false,
@@ -3278,7 +3278,7 @@
       ],
       "calls": [
         {
-          "source": "src/S10/m35F5.c",
+          "source": "src/window/menu_tracking.c",
           "caller": "o10_35F5_0384",
           "line": 204,
           "declared_return": "char *",
@@ -3287,7 +3287,7 @@
           ]
         },
         {
-          "source": "src/root/m1629.c",
+          "source": "src/graphics/balloons.c",
           "caller": "MakeBalloon",
           "line": 67,
           "declared_return": "char *",
@@ -3296,7 +3296,7 @@
           ]
         },
         {
-          "source": "src/root/m259D.c",
+          "source": "src/window/pictures.c",
           "caller": "win_DrawBitMap",
           "line": 80,
           "declared_return": "char *",
@@ -3305,7 +3305,7 @@
           ]
         },
         {
-          "source": "src/root/m259D.c",
+          "source": "src/window/pictures.c",
           "caller": "win_DrawBitMap",
           "line": 90,
           "declared_return": "char *",
@@ -3329,7 +3329,7 @@
     {
       "function": "myButton",
       "definition": {
-        "source": "src/root/m00F8.c",
+        "source": "src/ui/view_dialog_helpers.c",
         "return_type": "void",
         "line": 153,
         "static": false,
@@ -3342,7 +3342,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "MapAreaEvent",
           "line": 219,
           "declared_return": "signed short",
@@ -3351,7 +3351,7 @@
           ]
         },
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "OpenMiniMapWin",
           "line": 323,
           "declared_return": "signed short",
@@ -3360,7 +3360,7 @@
           ]
         },
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "OpenMiniMapWin",
           "line": 324,
           "declared_return": "signed short",
@@ -3369,7 +3369,7 @@
           ]
         },
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "OpenMiniMapWin",
           "line": 355,
           "declared_return": "signed short",
@@ -3378,7 +3378,7 @@
           ]
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "processEdit",
           "line": 109,
           "declared_return": "signed short",
@@ -3387,7 +3387,7 @@
           ]
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "processEdit",
           "line": 116,
           "declared_return": "signed short",
@@ -3396,7 +3396,7 @@
           ]
         },
         {
-          "source": "src/S22/m3BBD.c",
+          "source": "src/ui/experiment_tools.c",
           "caller": "processExp",
           "line": 52,
           "declared_return": "signed short",
@@ -3417,7 +3417,7 @@
     {
       "function": "o25_3BA4_19AD",
       "definition": {
-        "source": "src/S25/m3BA4.c",
+        "source": "src/simulation/yellow_ant.c",
         "return_type": "signed short",
         "line": 775,
         "static": false,
@@ -3430,7 +3430,7 @@
       "canonical_return_expressions": [],
       "calls": [
         {
-          "source": "src/S25/m3BA4.c",
+          "source": "src/simulation/yellow_ant.c",
           "caller": "o25_3BA4_1A0D",
           "line": 790,
           "declared_return": "signed short",
@@ -3454,7 +3454,7 @@
     {
       "function": "win_ObjAddr",
       "definition": {
-        "source": "src/root/m2505.c",
+        "source": "src/window/object_geometry.c",
         "return_type": "char *",
         "line": 168,
         "static": false,
@@ -3469,7 +3469,7 @@
       ],
       "calls": [
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_0000",
           "line": 99,
           "declared_return": "struct:Obj *",
@@ -3478,7 +3478,7 @@
           ]
         },
         {
-          "source": "src/root/m20E8.c",
+          "source": "src/window/lifecycle.c",
           "caller": "f_20E8_0903",
           "line": 402,
           "declared_return": "signed short *",
@@ -3502,7 +3502,7 @@
     {
       "function": "win_WinAddr",
       "definition": {
-        "source": "src/root/m2505.c",
+        "source": "src/window/object_geometry.c",
         "return_type": "char *",
         "line": 182,
         "static": false,
@@ -3517,7 +3517,7 @@
       ],
       "calls": [
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_0000",
           "line": 94,
           "declared_return": "struct:Win *",
@@ -3526,7 +3526,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_022F",
           "line": 167,
           "declared_return": "struct:Win *",
@@ -3535,7 +3535,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_040F",
           "line": 239,
           "declared_return": "struct:Win *",
@@ -3544,7 +3544,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_040F",
           "line": 276,
           "declared_return": "struct:Win *",
@@ -3553,7 +3553,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_0671",
           "line": 308,
           "declared_return": "struct:Win *",
@@ -3577,7 +3577,7 @@
     {
       "function": "win_WinRectAddr",
       "definition": {
-        "source": "src/root/m2505.c",
+        "source": "src/window/object_geometry.c",
         "return_type": "char *",
         "line": 151,
         "static": false,
@@ -3592,7 +3592,7 @@
       ],
       "calls": [
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_0000",
           "line": 118,
           "declared_return": "struct:Rect *",
@@ -3601,7 +3601,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_022F",
           "line": 166,
           "declared_return": "struct:Rect *",
@@ -3610,7 +3610,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_040F",
           "line": 237,
           "declared_return": "struct:Rect *",
@@ -3619,7 +3619,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_040F",
           "line": 275,
           "declared_return": "struct:Rect *",
@@ -3628,7 +3628,7 @@
           ]
         },
         {
-          "source": "src/S26/m39C7.c",
+          "source": "src/window/move_resize.c",
           "caller": "o26_39C7_0671",
           "line": 351,
           "declared_return": "struct:Rect *",
@@ -3656,283 +3656,283 @@
       "dos_return": "DX:AX CS-private clock dword; native explicit uint32 result. Signed/unsigned caller declarations consume the same bits.",
       "calls": [
         {
-          "source": "src/S09/m36EE.c",
+          "source": "src/window/text_entry.c",
           "caller": "o09_36EE_0092",
           "line": 107,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S09/m36EE.c",
+          "source": "src/window/text_entry.c",
           "caller": "o09_36EE_0092",
           "line": 108,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S12/m384C.c",
+          "source": "src/ui/map_window.c",
           "caller": "o12_384C_0B76",
           "line": 558,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "o13_384C_01E5",
           "line": 162,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S16/m384C.c",
+          "source": "src/ui/intro_credits.c",
           "caller": "AboutDialog",
           "line": 164,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/S16/m384C.c",
+          "source": "src/ui/intro_credits.c",
           "caller": "AboutDialog",
           "line": 183,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/S20/m39F1.c",
+          "source": "src/startup/dos_config.c",
           "caller": "IBMInitStuff",
           "line": 168,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "processEdit",
           "line": 89,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "processEdit",
           "line": 90,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "YellowBirth",
           "line": 387,
           "declared_return": "signed int"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "YellowBirth",
           "line": 389,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0093.c",
+          "source": "src/simulation/random.c",
           "caller": "SeedSRand",
           "line": 84,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m0093.c",
+          "source": "src/simulation/random.c",
           "caller": "SeedRRand",
           "line": 94,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "myDelay",
           "line": 145,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "MacTickCount",
           "line": 161,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "DialogWaitInit",
           "line": 188,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "DialogClearWait",
           "line": 194,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "f_0250_13A6",
           "line": 1068,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawSpider",
           "line": 1365,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawSpider",
           "line": 1366,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawSpider",
           "line": 1379,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1970,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1971,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1979,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 1980,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2002,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2003,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2022,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2023,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2042,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawCurBalloons",
           "line": 2043,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "TryAntTheme",
           "line": 623,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m0BE8.c",
+          "source": "src/simulation/food_water_counts.c",
           "caller": "TryAntTheme",
           "line": 624,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m15D9.c",
+          "source": "src/ui/ribbon_messages.c",
           "caller": "EditMessage",
           "line": 53,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m15D9.c",
+          "source": "src/ui/ribbon_messages.c",
           "caller": "EditMessage",
           "line": 61,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_00D5",
           "line": 162,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "WaitedEnough",
           "line": 365,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "WaitedEnough",
           "line": 365,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "WaitedEnough",
           "line": 370,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m1F80.c",
+          "source": "src/graphics/text_layout.c",
           "caller": "f_1F80_0081",
           "line": 60,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m1F80.c",
+          "source": "src/graphics/text_layout.c",
           "caller": "f_1F80_0081",
           "line": 61,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "ButtonHeldInit",
           "line": 317,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "ButtonHeld",
           "line": 325,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "ButtonHeld",
           "line": 327,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m208F.c",
+          "source": "src/window/text_bitmap_helpers.c",
           "caller": "f_208F_04D0",
           "line": 253,
           "declared_return": "unsigned int"
         },
         {
-          "source": "src/root/m218D.c",
+          "source": "src/window/events.c",
           "caller": "f_218D_000C",
           "line": 68,
           "declared_return": "signed int"
         },
         {
-          "source": "src/root/m218D.c",
+          "source": "src/window/events.c",
           "caller": "f_218D_000C",
           "line": 79,
           "declared_return": "signed int"
@@ -3950,13 +3950,13 @@
       "dos_return": "AX argument byte-swap via XCHG AH,AL; native explicit uint16 result.",
       "calls": [
         {
-          "source": "src/root/m0000.c",
+          "source": "src/sound/resource_loading.c",
           "caller": "f_0000_0193",
           "line": 133,
           "declared_return": "unsigned short"
         },
         {
-          "source": "src/root/m0000.c",
+          "source": "src/sound/resource_loading.c",
           "caller": "f_0000_0193",
           "line": 135,
           "declared_return": "unsigned short"
@@ -3977,19 +3977,19 @@
       "dos_return": "AX=DX EMS handle after INT67; native unsupported EMS allocation aborts, no returning native result in supported no-EMS domain.",
       "calls": [
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "f_0250_012D",
           "line": 102,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "caller": "f_171C_0034",
           "line": 137,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m19DC.c",
+          "source": "src/resources/database_ems.c",
           "caller": "f_19DC_001A",
           "line": 66,
           "declared_return": "signed short"
@@ -4012,19 +4012,19 @@
       "dos_return": "Inactive/no-device branch AX=0 from f_195A_023A. Already-active test branches to epilogue without writing AX: incoming AX residue. Native no-EMS boundary returns 0; enabled/reentry path is explicit excluded-domain debt.",
       "calls": [
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "f_0250_012D",
           "line": 95,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "caller": "f_171C_0034",
           "line": 131,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m19DC.c",
+          "source": "src/resources/database_ems.c",
           "caller": "f_19DC_001A",
           "line": 55,
           "declared_return": "signed short"
@@ -4047,13 +4047,13 @@
       "dos_return": "AX initialized local emitted-byte count [BP-2]; native explicit count.",
       "calls": [
         {
-          "source": "src/root/m19A9.c",
+          "source": "src/resources/database_records.c",
           "caller": "DBRecall",
           "line": 113,
           "declared_return": "unsigned short"
         },
         {
-          "source": "src/root/m1CE2.c",
+          "source": "src/graphics/screen_rects.c",
           "caller": "GPutPacked",
           "line": 290,
           "declared_return": "unsigned short"
@@ -4076,151 +4076,151 @@
       "dos_return": "AX=CX color after low-nibble mapping; native explicit word.",
       "calls": [
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "Mini_DrawMapI",
           "line": 289,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S04/m35F5.c",
+          "source": "src/ui/minimap.c",
           "caller": "Mini_DrawMapI",
           "line": 291,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S12/m384C.c",
+          "source": "src/ui/map_window.c",
           "caller": "o12_384C_0B76",
           "line": 553,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S12/m384C.c",
+          "source": "src/ui/map_window.c",
           "caller": "o12_384C_0B76",
           "line": 555,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawSimColonies",
           "line": 797,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawSimColonies",
           "line": 797,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawColonyBars",
           "line": 828,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S13/m384C.c",
+          "source": "src/ui/yard_window.c",
           "caller": "DrawColonyBars",
           "line": 847,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S20/m39F1.c",
+          "source": "src/startup/dos_config.c",
           "caller": "IBMInitStuff",
           "line": 162,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "DoLaserFire",
           "line": 217,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "DoLaserFire",
           "line": 218,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "DoLaserFire",
           "line": 219,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "DoLaserFire",
           "line": 230,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "DoLaserFire",
           "line": 231,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "DoLaserFire",
           "line": 232,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S24/m39C7.c",
+          "source": "src/ui/history_window.c",
           "caller": "ProcHistoryEvent",
           "line": 54,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S24/m39C7.c",
+          "source": "src/ui/history_window.c",
           "caller": "win_DrawHistoryWindow",
           "line": 179,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawEditGraphs",
           "line": 1169,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawPalps",
           "line": 1468,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawPalps",
           "line": 1470,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0250.c",
+          "source": "src/ui/edit_view.c",
           "caller": "DrawLegs",
           "line": 1580,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0798.c",
+          "source": "src/ui/colony_controls.c",
           "caller": "DrawControlLevels",
           "line": 447,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0798.c",
+          "source": "src/ui/colony_controls.c",
           "caller": "DrawControlLevels",
           "line": 449,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0798.c",
+          "source": "src/ui/colony_controls.c",
           "caller": "DrawControlLevels",
           "line": 449,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m0798.c",
+          "source": "src/ui/colony_controls.c",
           "caller": "DrawControlLevels",
           "line": 455,
           "declared_return": "signed short"
@@ -4243,37 +4243,37 @@
       "dos_return": "AX queue structure first word; native explicit word.",
       "calls": [
         {
-          "source": "src/S10/m35F5.c",
+          "source": "src/window/menu_tracking.c",
           "caller": "o10_35F5_0384",
           "line": 286,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_00D5",
           "line": 181,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_0415",
           "line": 316,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_080D",
           "line": 440,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m218D.c",
+          "source": "src/window/events.c",
           "caller": "f_218D_02D5",
           "line": 146,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m218D.c",
+          "source": "src/window/events.c",
           "caller": "win_FlushEvents",
           "line": 217,
           "declared_return": "signed short"
@@ -4290,85 +4290,85 @@
       "dos_return": "AX=(scan byte XOR 80h), AH zero; native explicit word.",
       "calls": [
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 129,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 131,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 133,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 137,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 141,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 145,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 147,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 149,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 151,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0246",
           "line": 178,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "f_00F8_01BE",
           "line": 112,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "StillDown",
           "line": 303,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "StillDown",
           "line": 303,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "StillDown",
           "line": 305,
           "declared_return": "signed short"
@@ -4391,7 +4391,7 @@
       "dos_return": "AX=0 or hotbox field; native explicit word.",
       "calls": [
         {
-          "source": "src/root/m218D.c",
+          "source": "src/window/events.c",
           "caller": "f_218D_023A",
           "line": 120,
           "declared_return": "signed short"
@@ -4414,7 +4414,7 @@
       "dos_return": "AX=0/1 lookup status; native explicit word.",
       "calls": [
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_04B3",
           "line": 269,
           "declared_return": "signed short"
@@ -4437,7 +4437,7 @@
       "dos_return": "AX BIOS modifier flags AND 10h; native explicit word.",
       "calls": [
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "f_00F8_01BE",
           "line": 116,
           "declared_return": "signed short"
@@ -4458,121 +4458,121 @@
       "dos_return": "AX pending/BIOS keyboard word, zero if absent; native explicit word.",
       "calls": [
         {
-          "source": "src/S05/m3663.c",
+          "source": "src/ui/experiment_menu.c",
           "caller": "DoExpMenu",
           "line": 89,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S09/m35F5.c",
+          "source": "src/ui/save_load.c",
           "caller": "o09_35F5_03C6",
           "line": 427,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S09/m36EE.c",
+          "source": "src/window/text_entry.c",
           "caller": "o09_36EE_0092",
           "line": 101,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S10/m35F5.c",
+          "source": "src/window/menu_tracking.c",
           "caller": "o10_35F5_01C3",
           "line": 121,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S10/m35F5.c",
+          "source": "src/window/menu_tracking.c",
           "caller": "o10_35F5_0384",
           "line": 303,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S14/m384C.c",
+          "source": "src/ui/scenario_dialogs.c",
           "caller": "CustomerIDDialog",
           "line": 641,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S15/m384C.c",
+          "source": "src/startup/game_session.c",
           "caller": "o15_384C_0239",
           "line": 210,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0000",
           "line": 156,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S22/m39C7.c",
+          "source": "src/ui/yellow_commands.c",
           "caller": "YellowDialog",
           "line": 842,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "f_00F8_01BE",
           "line": 112,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "f_00F8_040F",
           "line": 263,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "DialogAbort",
           "line": 369,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "DialogAbortOrCont",
           "line": 381,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_00D5",
           "line": 167,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_0415",
           "line": 305,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_0737",
           "line": 376,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_082E",
           "line": 449,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_084F",
           "line": 460,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m208F.c",
+          "source": "src/window/text_bitmap_helpers.c",
           "caller": "f_208F_04EE",
           "line": 265,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m208F.c",
+          "source": "src/window/text_bitmap_helpers.c",
           "caller": "f_208F_056A",
           "line": 294,
           "declared_return": "signed short"
@@ -4595,31 +4595,31 @@
       "dos_return": "AX sign-extended BIOS character via CBW or zero-extended pending queue byte. Native explicit int16; char-declared callers intentionally consume AL only.",
       "calls": [
         {
-          "source": "src/S09/m36EE.c",
+          "source": "src/window/text_entry.c",
           "caller": "o09_36EE_0092",
           "line": 121,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S09/m36EE.c",
+          "source": "src/window/text_entry.c",
           "caller": "o09_36EE_0092",
           "line": 122,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S10/m35F5.c",
+          "source": "src/window/menu_tracking.c",
           "caller": "o10_35F5_01C3",
           "line": 123,
           "declared_return": "char"
         },
         {
-          "source": "src/S10/m35F5.c",
+          "source": "src/window/menu_tracking.c",
           "caller": "o10_35F5_01C3",
           "line": 125,
           "declared_return": "char"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_00D5",
           "line": 168,
           "declared_return": "signed short"
@@ -4642,79 +4642,79 @@
       "dos_return": "AX first keyboard result, or second result with AH=8 for extended key; native explicit word.",
       "calls": [
         {
-          "source": "src/S05/m3663.c",
+          "source": "src/ui/experiment_menu.c",
           "caller": "DoExpMenu",
           "line": 90,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S09/m35F5.c",
+          "source": "src/ui/save_load.c",
           "caller": "o09_35F5_03C6",
           "line": 428,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S10/m35F5.c",
+          "source": "src/window/menu_tracking.c",
           "caller": "o10_35F5_0384",
           "line": 304,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S15/m384C.c",
+          "source": "src/startup/game_session.c",
           "caller": "o15_384C_0239",
           "line": 211,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S19/m384C.c",
+          "source": "src/ui/game_events.c",
           "caller": "o19_384C_0246",
           "line": 176,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "f_00F8_040F",
           "line": 263,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "DialogAbort",
           "line": 369,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m00F8.c",
+          "source": "src/ui/view_dialog_helpers.c",
           "caller": "DialogAbortOrCont",
           "line": 382,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1C62.c",
+          "source": "src/window/alerts.c",
           "caller": "f_1C62_0415",
           "line": 305,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_082E",
           "line": 450,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m1FD2.c",
+          "source": "src/window/menu_helpers.c",
           "caller": "f_1FD2_084F",
           "line": 460,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m208F.c",
+          "source": "src/window/text_bitmap_helpers.c",
           "caller": "f_208F_04EE",
           "line": 266,
           "declared_return": "signed short"
         },
         {
-          "source": "src/root/m208F.c",
+          "source": "src/window/text_bitmap_helpers.c",
           "caller": "f_208F_056A",
           "line": 295,
           "declared_return": "signed short"
@@ -4735,7 +4735,7 @@
       "dos_return": "AX near matched-name pointer offset or 0. Only consumed C observer compares ==0 for stack-owned ff.name (13-byte directory field), not arbitrary pointers. Native predicate preserves zero/nonzero in that bounded nonwrapping stack domain; no numerical pointer-word or general-pointer equality claim.",
       "calls": [
         {
-          "source": "src/S09/m35F5.c",
+          "source": "src/ui/save_load.c",
           "caller": "o09_35F5_03C6",
           "line": 389,
           "declared_return": "signed short"
@@ -4758,19 +4758,19 @@
       "dos_return": "AX carry-derived success 0/1; native explicit word; file/CWD divergence belongs to R2.",
       "calls": [
         {
-          "source": "src/S09/m35F5.c",
+          "source": "src/ui/save_load.c",
           "caller": "o09_35F5_03C6",
           "line": 302,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S09/m35F5.c",
+          "source": "src/ui/save_load.c",
           "caller": "o09_35F5_03C6",
           "line": 334,
           "declared_return": "signed short"
         },
         {
-          "source": "src/S09/m35F5.c",
+          "source": "src/ui/save_load.c",
           "caller": "o09_35F5_03C6",
           "line": 339,
           "declared_return": "signed short"
@@ -4793,13 +4793,13 @@
       "dos_return": "DX:AX found far character address or null; native explicit pointer.",
       "calls": [
         {
-          "source": "src/root/m23E6.c",
+          "source": "src/window/lists_sliders.c",
           "caller": "PrevListLine",
           "line": 395,
           "declared_return": "char *"
         },
         {
-          "source": "src/root/m23E6.c",
+          "source": "src/window/lists_sliders.c",
           "caller": "PrevListLine",
           "line": 406,
           "declared_return": "char *"
@@ -4822,7 +4822,7 @@
       "dos_return": "AX final f_29BF_014B chip base or 0, helper assigns AX on each terminal path. Native unavailable alternate sound provider aborts; outside default mode6 domain.",
       "calls": [
         {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "caller": "f_293A_015E",
           "line": 128,
           "declared_return": "signed short"
@@ -4875,7 +4875,7 @@
       "dos_return": "AX video descriptor stored [DI]; native configured virtual adapter result 0305h. Adapter selection is platform contract, no residue.",
       "calls": [
         {
-          "source": "src/root/m205F.c",
+          "source": "src/platform/video/driver_select.c",
           "caller": "f_205F_0004",
           "line": 93,
           "declared_return": "signed short"
@@ -4898,7 +4898,7 @@
       "dos_return": "AX=0/1 Tandy signature; native unsupported adapter aborts, outside configured mode8 domain.",
       "calls": [
         {
-          "source": "src/root/m205F.c",
+          "source": "src/platform/video/driver_select.c",
           "caller": "f_205F_0004",
           "line": 105,
           "declared_return": "signed short"
@@ -4920,7 +4920,7 @@
   "nonvoid_incomplete_definitions": [
     {
       "kind": "native",
-      "source": "src/S10/m35F5.c",
+      "source": "src/window/menu_tracking.c",
       "name": "o10_35F5_01C3",
       "return_type": "signed short",
       "line": 98,
@@ -4930,7 +4930,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/S10/m35F5.c",
+      "source": "src/window/menu_tracking.c",
       "name": "o10_35F5_01C3",
       "return_type": "signed short",
       "line": 96,
@@ -4940,7 +4940,7 @@
     },
     {
       "kind": "native",
-      "source": "src/S15/m384C.c",
+      "source": "src/startup/game_session.c",
       "name": "MenuQuit",
       "return_type": "signed short",
       "line": 119,
@@ -4950,7 +4950,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/S15/m384C.c",
+      "source": "src/startup/game_session.c",
       "name": "MenuQuit",
       "return_type": "signed short",
       "line": 125,
@@ -4960,7 +4960,7 @@
     },
     {
       "kind": "native",
-      "source": "src/S19/m384C.c",
+      "source": "src/ui/game_events.c",
       "name": "o19_384C_0000",
       "return_type": "signed short",
       "line": 73,
@@ -4970,7 +4970,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/S19/m384C.c",
+      "source": "src/ui/game_events.c",
       "name": "o19_384C_0000",
       "return_type": "signed short",
       "line": 61,
@@ -4980,7 +4980,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/S25/m3BA4.c",
+      "source": "src/simulation/yellow_ant.c",
       "name": "o25_3BA4_19AD",
       "return_type": "signed short",
       "line": 775,
@@ -4990,7 +4990,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand2",
       "return_type": "signed short",
       "line": 131,
@@ -5000,7 +5000,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand4",
       "return_type": "signed short",
       "line": 132,
@@ -5010,7 +5010,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand8",
       "return_type": "signed short",
       "line": 133,
@@ -5020,7 +5020,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand16",
       "return_type": "signed short",
       "line": 134,
@@ -5030,7 +5030,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand32",
       "return_type": "signed short",
       "line": 135,
@@ -5040,7 +5040,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand64",
       "return_type": "signed short",
       "line": 136,
@@ -5050,7 +5050,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand128",
       "return_type": "signed short",
       "line": 137,
@@ -5060,7 +5060,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "name": "SRand256",
       "return_type": "signed short",
       "line": 138,
@@ -5070,7 +5070,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m171C.c",
+      "source": "src/memory/ralloc.c",
       "name": "f_171C_0A5C",
       "return_type": "char * *",
       "line": 427,
@@ -5080,7 +5080,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m171C.c",
+      "source": "src/memory/ralloc.c",
       "name": "f_171C_0EEA",
       "return_type": "struct:None *",
       "line": 564,
@@ -5090,7 +5090,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m171C.c",
+      "source": "src/memory/ralloc.c",
       "name": "f_171C_0A5C",
       "return_type": "char * *",
       "line": 418,
@@ -5100,7 +5100,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m171C.c",
+      "source": "src/memory/ralloc.c",
       "name": "f_171C_0EEA",
       "return_type": "struct:None *",
       "line": 555,
@@ -5110,7 +5110,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m19DC.c",
+      "source": "src/resources/database_ems.c",
       "name": "f_19DC_02FB",
       "return_type": "signed short",
       "line": 158,
@@ -5120,7 +5120,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m19DC.c",
+      "source": "src/resources/database_ems.c",
       "name": "f_19DC_02FB",
       "return_type": "signed short",
       "line": 154,
@@ -5130,7 +5130,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m22BF.c",
+      "source": "src/window/object_attributes.c",
       "name": "win_SetPalette",
       "return_type": "signed short",
       "line": 463,
@@ -5140,7 +5140,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m22BF.c",
+      "source": "src/window/object_attributes.c",
       "name": "win_SetPalette",
       "return_type": "signed short",
       "line": 435,
@@ -5150,7 +5150,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m23E6.c",
+      "source": "src/window/lists_sliders.c",
       "name": "f_23E6_07A2",
       "return_type": "signed short",
       "line": 349,
@@ -5160,7 +5160,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m23E6.c",
+      "source": "src/window/lists_sliders.c",
       "name": "PrevListLine",
       "return_type": "signed short",
       "line": 378,
@@ -5170,7 +5170,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m23E6.c",
+      "source": "src/window/lists_sliders.c",
       "name": "f_23E6_07A2",
       "return_type": "signed short",
       "line": 347,
@@ -5180,7 +5180,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m23E6.c",
+      "source": "src/window/lists_sliders.c",
       "name": "PrevListLine",
       "return_type": "signed short",
       "line": 376,
@@ -5190,7 +5190,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m277D.c",
+      "source": "src/platform/debug_stubs.c",
       "name": "WinPrintf",
       "return_type": "signed short",
       "line": 13,
@@ -5200,7 +5200,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m277D.c",
+      "source": "src/platform/debug_stubs.c",
       "name": "WinPrintf",
       "return_type": "signed short",
       "line": 9,
@@ -5212,7 +5212,7 @@
   "indirect_calls": [
     {
       "kind": "canonical",
-      "source": "src/S20/m39F1.c",
+      "source": "src/startup/dos_config.c",
       "caller": "IBMInitStuff",
       "line": 117,
       "expression": "isdigit(v)",
@@ -5222,7 +5222,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/S20/m39F1.c",
+      "source": "src/startup/dos_config.c",
       "caller": "ReadWord",
       "line": 189,
       "expression": "isspace(c)",
@@ -5232,7 +5232,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/S20/m39F1.c",
+      "source": "src/startup/dos_config.c",
       "caller": "ReadWord",
       "line": 193,
       "expression": "isspace(c)",
@@ -5242,7 +5242,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/S20/m39F1.c",
+      "source": "src/startup/dos_config.c",
       "caller": "ReadConfig",
       "line": 255,
       "expression": "isdigit(lang)",
@@ -5252,7 +5252,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m00BA.c",
+      "source": "src/startup/application_windows.c",
       "caller": "f_00BA_0002",
       "line": 67,
       "expression": "read(fd_50F6_10D0, f_171C_1B84(h), 0x100)",
@@ -5262,7 +5262,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m1A96.c",
+      "source": "src/resources/object_cache.c",
       "caller": "ch_LookUpId",
       "line": 127,
       "expression": "(*g_3B7E)(object, type)",
@@ -5273,7 +5273,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m1A96.c",
+      "source": "src/resources/object_cache.c",
       "caller": "ch_LookUpId",
       "line": 122,
       "expression": "(*g_3B7E)(object, type)",
@@ -5284,7 +5284,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m1CE2.c",
+      "source": "src/graphics/screen_rects.c",
       "caller": "GSaveRect",
       "line": 175,
       "expression": "((int16_t (*)()) driver_callback_table[6])(x, r->top, r->right, r->bottom)",
@@ -5294,7 +5294,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m1CE2.c",
+      "source": "src/graphics/screen_rects.c",
       "caller": "GPutPacked",
       "line": 269,
       "expression": "size(0, 0, hdr.width, 1)",
@@ -5305,7 +5305,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m1CE2.c",
+      "source": "src/graphics/screen_rects.c",
       "caller": "GPutPacked",
       "line": 274,
       "expression": "size(x, 0, right, 1)",
@@ -5316,7 +5316,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m1CE2.c",
+      "source": "src/graphics/screen_rects.c",
       "caller": "GSaveRect",
       "line": 174,
       "expression": "g_9140(x, r->top, r->right, r->bottom)",
@@ -5327,7 +5327,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m1CE2.c",
+      "source": "src/graphics/screen_rects.c",
       "caller": "GPutPacked",
       "line": 272,
       "expression": "size(0, 0, hdr.width, 1)",
@@ -5338,7 +5338,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m1CE2.c",
+      "source": "src/graphics/screen_rects.c",
       "caller": "GPutPacked",
       "line": 277,
       "expression": "size(x, 0, right, 1)",
@@ -5349,7 +5349,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m259D.c",
+      "source": "src/window/pictures.c",
       "caller": "win_DrawBitMap",
       "line": 82,
       "expression": "(*((uint16_t (*)()) driver_callback_table[6]))(x & (~1), y, x1, y1)",
@@ -5359,7 +5359,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m259D.c",
+      "source": "src/window/pictures.c",
       "caller": "win_DrawBitMap",
       "line": 90,
       "expression": "(*((uint16_t (*)()) driver_callback_table[6]))(x & (~7), y, x1, y1)",
@@ -5369,7 +5369,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m259D.c",
+      "source": "src/window/pictures.c",
       "caller": "win_DrawBitMap",
       "line": 80,
       "expression": "(*g_9140)(x & (~1), y, x1, y1)",
@@ -5380,7 +5380,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m259D.c",
+      "source": "src/window/pictures.c",
       "caller": "win_DrawBitMap",
       "line": 88,
       "expression": "(*g_9140)(x & (~7), y, x1, y1)",
@@ -5391,7 +5391,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m277E.c",
+      "source": "src/sound/device_channels.c",
       "caller": "f_277E_0000",
       "line": 59,
       "expression": "fd_55B3_74DA[mode]()",
@@ -5412,7 +5412,7 @@
       ],
       "target_definitions": {
         "f_293A_0029": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 41,
           "static": false,
@@ -5420,7 +5420,7 @@
           "bare_return": false
         },
         "f_293A_002D": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 46,
           "static": false,
@@ -5428,7 +5428,7 @@
           "bare_return": false
         },
         "f_293A_0059": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 56,
           "static": false,
@@ -5436,7 +5436,7 @@
           "bare_return": false
         },
         "f_293A_0087": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 78,
           "static": false,
@@ -5444,7 +5444,7 @@
           "bare_return": false
         },
         "f_293A_015E": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 119,
           "static": false,
@@ -5452,7 +5452,7 @@
           "bare_return": false
         },
         "f_293A_0121": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 101,
           "static": false,
@@ -5460,7 +5460,7 @@
           "bare_return": false
         },
         "f_293A_017C": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 129,
           "static": false,
@@ -5468,7 +5468,7 @@
           "bare_return": false
         },
         "f_293A_017F": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 136,
           "static": false,
@@ -5479,7 +5479,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m277E.c",
+      "source": "src/sound/device_channels.c",
       "caller": "f_277E_0000",
       "line": 63,
       "expression": "fd_55B3_74DA[mode]()",
@@ -5500,7 +5500,7 @@
       ],
       "target_definitions": {
         "f_293A_0029": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 35,
           "static": false,
@@ -5508,7 +5508,7 @@
           "bare_return": false
         },
         "f_293A_002D": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 40,
           "static": false,
@@ -5516,7 +5516,7 @@
           "bare_return": false
         },
         "f_293A_0059": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 54,
           "static": false,
@@ -5524,7 +5524,7 @@
           "bare_return": false
         },
         "f_293A_0087": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 83,
           "static": false,
@@ -5532,7 +5532,7 @@
           "bare_return": false
         },
         "f_293A_015E": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 124,
           "static": false,
@@ -5540,7 +5540,7 @@
           "bare_return": false
         },
         "f_293A_0121": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 106,
           "static": false,
@@ -5548,7 +5548,7 @@
           "bare_return": false
         },
         "f_293A_017C": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 134,
           "static": false,
@@ -5556,7 +5556,7 @@
           "bare_return": false
         },
         "f_293A_017F": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 141,
           "static": false,
@@ -5567,7 +5567,7 @@
     },
     {
       "kind": "native",
-      "source": "src/root/m293A.c",
+      "source": "src/sound/device_probe.c",
       "caller": "f_293A_0006",
       "line": 33,
       "expression": "fd_55B3_74DA[i]()",
@@ -5588,7 +5588,7 @@
       ],
       "target_definitions": {
         "f_293A_0029": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 41,
           "static": false,
@@ -5596,7 +5596,7 @@
           "bare_return": false
         },
         "f_293A_002D": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 46,
           "static": false,
@@ -5604,7 +5604,7 @@
           "bare_return": false
         },
         "f_293A_0059": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 56,
           "static": false,
@@ -5612,7 +5612,7 @@
           "bare_return": false
         },
         "f_293A_0087": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 78,
           "static": false,
@@ -5620,7 +5620,7 @@
           "bare_return": false
         },
         "f_293A_015E": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 119,
           "static": false,
@@ -5628,7 +5628,7 @@
           "bare_return": false
         },
         "f_293A_0121": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 101,
           "static": false,
@@ -5636,7 +5636,7 @@
           "bare_return": false
         },
         "f_293A_017C": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 129,
           "static": false,
@@ -5644,7 +5644,7 @@
           "bare_return": false
         },
         "f_293A_017F": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 136,
           "static": false,
@@ -5655,7 +5655,7 @@
     },
     {
       "kind": "canonical",
-      "source": "src/root/m293A.c",
+      "source": "src/sound/device_probe.c",
       "caller": "f_293A_0006",
       "line": 27,
       "expression": "fd_55B3_74DA[i]()",
@@ -5676,7 +5676,7 @@
       ],
       "target_definitions": {
         "f_293A_0029": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 35,
           "static": false,
@@ -5684,7 +5684,7 @@
           "bare_return": false
         },
         "f_293A_002D": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 40,
           "static": false,
@@ -5692,7 +5692,7 @@
           "bare_return": false
         },
         "f_293A_0059": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 54,
           "static": false,
@@ -5700,7 +5700,7 @@
           "bare_return": false
         },
         "f_293A_0087": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 83,
           "static": false,
@@ -5708,7 +5708,7 @@
           "bare_return": false
         },
         "f_293A_015E": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 124,
           "static": false,
@@ -5716,7 +5716,7 @@
           "bare_return": false
         },
         "f_293A_0121": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 106,
           "static": false,
@@ -5724,7 +5724,7 @@
           "bare_return": false
         },
         "f_293A_017C": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 134,
           "static": false,
@@ -5732,7 +5732,7 @@
           "bare_return": false
         },
         "f_293A_017F": {
-          "source": "src/root/m293A.c",
+          "source": "src/sound/device_probe.c",
           "return_type": "signed short",
           "line": 141,
           "static": false,

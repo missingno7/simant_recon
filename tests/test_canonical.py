@@ -30,9 +30,9 @@ class CanonicalProgram(unittest.TestCase):
             return result, params
 
         expected = signature('int far lookup(int id, struct Rect far *out) { return 0; }', 'lookup')
-        owner = (ROOT / 'src/root/m1FD2.c').read_text()
+        owner = (ROOT / 'src/window/menu_helpers.c').read_text()
         self.assertEqual(signature(owner, 'f_1FD2_04B3'), expected)
-        caller = (ROOT / 'src/S26/m39C7.c').read_text()
+        caller = (ROOT / 'src/window/move_resize.c').read_text()
         prototype = re.search(r'extern int far f_1FD2_04B3\([^;]+\);', caller).group(0)
         self.assertEqual(signature(prototype[:-1] + ' { return 0; }', 'f_1FD2_04B3'), expected)
         old = 'void far lookup(int id, int offset, int segment) { }'

@@ -4,7 +4,7 @@ The canonical filename import remains unresolved. A DOS 8.3 directory name
 alone does not ensure that `FileSelect`'s `path[67]` stays in bounds.
 
 The source-built fixture links the unchanged complete canonical Goldman module
-`src/root/m1F66.asm`, MSC 6.00AX helper code, pinned stock CRT libraries and real
+`src/platform/file_helpers.asm`, MSC 6.00AX helper code, pinned stock CRT libraries and real
 RTLink 4.00. It runs under the pinned DOSBox-X. It contains no original executable
 bytes and does not run the game. Every source, runtime library, historical tool
 and runner is checked through the existing pinned toolchain machinery; its

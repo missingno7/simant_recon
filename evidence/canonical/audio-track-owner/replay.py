@@ -140,7 +140,7 @@ def run(root: Path, out: Path) -> dict:
 
     compiler.WORK = out / "compiler"
     paths = [root / p for p in (
-        "src/root/m284A.c", "src/program.json", "layout/manifest.json", "layout/toolchain.json",
+        "src/sound/midi_player.c", "src/program.json", "layout/manifest.json", "layout/toolchain.json",
         "layout/functions.json", "layout/symbols.json", "layout/oracle.lock.json",
         "assets/SIMANT.EXE",
         "tools/compiler.py", "tools/omf.py", "tools/match.py", "tools/functions.py",
@@ -155,7 +155,7 @@ def run(root: Path, out: Path) -> dict:
     current = next(m for m in program["modules"] if m["key"] == MODULE)
     semantic = next(s for s in program["semantics"] if s["function"] == SEMANTIC)
     strict = json.loads((root / semantic["receipt"]).read_text())
-    if record["source"] != "src/root/m284A.c" or current["source"] != record["source"]:
+    if record["source"] != "src/sound/midi_player.c" or current["source"] != record["source"]:
         raise ValueError("the current canonical module source changed")
     if any(current[key] != record[key] for key in ("profile", "flags")):
         raise ValueError("canonical and historical profile/flags disagree")

@@ -304,7 +304,7 @@ observes them, or to ground an owner independently.
 
 Established so far: no relocation or immediate addresses any residual; the only
 symbol-indexed site overlapping [60B0,60BE) is the small-font fold table
-(`[bx+_g_5FBE]`, `src/root/m1FBD.asm`), and display mode 8 never installs the
+(`[bx+_g_5FBE]`, `src/graphics/bitmap_text.asm`), and display mode 8 never installs the
 small font, so it is out of domain (kept as a control for other modes); the
 `g_610C[g_5A97]` selector alias is excluded in mode 8; hot-box queue insertions
 come only from `g_6004`/`g_6016`/`g_603A`; the 17 indirect dispatch edges are

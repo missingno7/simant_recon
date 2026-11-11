@@ -1,6 +1,6 @@
 # LZSS private-state frames
 
-Canonical `src/root/m1B05.asm` now declares SS:DGROUP for the region in which DS
+Canonical `src/resources/lzss.asm` now declares SS:DGROUP for the region in which DS
 holds input or ring-buffer segments, then restores the assembler assumptions
 when the saved DS is popped. The directive supplies linker framing; actual SS
 comes from the accepted CRT and preserved caller/interrupt stack relationships.

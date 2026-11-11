@@ -12,12 +12,12 @@ also selects different integer types on the two targets.
 
 Two current anchors illustrate the remaining scope:
 
-- `FindIndex`, canonical `src/root/m1986.c:87`, generated
+- `FindIndex`, canonical `src/resources/database_index.c:87`, generated
   `build/portable-checkpoint/root_1986.c:75`: `mid = (fd_50F6_3956 + top) / 2;`.
   Native addition precedes division in 32-bit `int`. Shipped counts 120/271/449
   provide no overflow witness. ISO C signed overflow is undefined; this receipt
   does not assume a universal DOS signed-wrap contract.
-- `GetTriLatDist`, canonical `src/root/m0798.c:477`, generated
+- `GetTriLatDist`, canonical `src/ui/colony_controls.c:477`, generated
   `build/portable-checkpoint/root_0798.c:481`: `(unsigned)dy > triHeight - 2`
   becomes `(uint16_t)dy > triHeight - 2`. `triHeight` is unsigned in the canonical
   declaration. DOS subtracts in unsigned 16-bit arithmetic; native promotes to

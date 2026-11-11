@@ -20,7 +20,7 @@ if not __debug__: raise RuntimeError('proof checks require Python without -O')
 
 TARGETS = set('win_SetColorNum win_SetColorFromObj win_SetColorFromObjNum win_DrawButtonBorder win_RectFill win_RectFillOutline win_DrawObjectI win_DrawObject win_DrawWindow f_23E6_0392 f_23E6_066C win_DrawElevator f_23E6_06F1 f_23E6_07A2 PrevListLine win_ProcSliderEvent f_23E6_0A53 f_22BF_094F f_22BF_0555 win_ObjAddr f_2505_033C f_2505_0006 win_WinAddr win_WinRectAddr RepointObjects win_LoadWindow win_LockWin win_LockWinHigh win_UnlockWin'.split()) | set(r.PALETTE_CALL_NAMES)
 DATA = set('win_colors fd_50F6_46E2 colorEntry win_handles g_9230 win_numOfColors fd_50F6_47D6'.split())
-REVIEWED = ['src/root/m20E8.c','src/root/m21FA.c','src/root/m22BF.c','src/root/m23E6.c','src/root/m2505.c','src/root/m23AE.c','src/root/m218D.c','src/root/m259D.c','src/S26/m39C7.c','src/root/m171C.c','src/root/m1A53.c','src/root/m1E57.c','src/root/m1D8E.c','src/root/m1FD2.c','src/S09/m35F5.c']
+REVIEWED = ['src/window/lifecycle.c','src/window/drawing.c','src/window/object_attributes.c','src/window/lists_sliders.c','src/window/object_geometry.c','src/window/locking.c','src/window/events.c','src/window/pictures.c','src/window/move_resize.c','src/memory/ralloc.c','src/resources/database_objects.c','src/graphics/clip_regions.c','src/graphics/clip_rects.c','src/window/menu_helpers.c','src/ui/save_load.c']
 SELECTED_FACTS = ROOT/'evidence/canonical/shipped-resource-domain/facts.json'
 REVIEWED = sorted(set(REVIEWED) | set(json.loads(SELECTED_FACTS.read_text())['source_sha256']))
 sha = lambda data: hashlib.sha256(data).hexdigest()
@@ -85,10 +85,10 @@ def census(texts):
     declarations = {n: [] for n in sorted(TARGETS)}
     data = {n: [] for n in sorted(DATA)}
     for rel, text in sorted(texts.items()):
-        if rel=='src/state/window-palette.c':
+        if rel=='src/window/state/palette.c':
             if normalized(text)!=normalized('char far win_colors[16][6];'): raise Reject('palette owner must be the reviewed data-only declaration')
             continue
-        if rel=='src/state/window-handles.c':
+        if rel=='src/window/state/handles.c':
             if normalized(text)!=normalized('char far * far * near win_handles[34];'): raise Reject('handle owner must be the reviewed data-only declaration')
             continue
         if rel.endswith('.asm'):
@@ -241,11 +241,11 @@ def negative_controls(texts,pins):
         try: validate_sources(changed,pins)
         except Reject: result.append(name)
         else: raise Reject('negative source control accepted: '+name)
-    changed=dict(texts); changed['src/root/m22BF.c']=changed['src/root/m22BF.c'].replace('[0x26] = color','[0x27] = color')
+    changed=dict(texts); changed['src/window/object_attributes.c']=changed['src/window/object_attributes.c'].replace('[0x26] = color','[0x27] = color')
     try: validate_sources(changed,pins)
     except Reject: result.append('selected_field_writer')
     else: raise Reject('selected writer accepted')
-    changed=dict(texts); changed['src/state/window-palette.c']='char far win_colors[16][6]; void far rogue(void) { win_colors[0][0]=1; }'
+    changed=dict(texts); changed['src/window/state/palette.c']='char far win_colors[16][6]; void far rogue(void) { win_colors[0][0]=1; }'
     try: validate_sources(changed,pins)
     except Reject: result.append('rogue_state_owner_function')
     else: raise Reject('rogue palette state owner accepted')

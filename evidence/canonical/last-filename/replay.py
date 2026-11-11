@@ -67,12 +67,12 @@ def collect(program_override=None, source_overrides=None) -> dict:
                     if t.kind not in {"ws", "nl", "cmt"}) == \
            "char far fd_50F6_3862 [ 100 ] ;"
 
-    load = significant_function("src/S09/m35F5.c", "LoadGame")
-    save = significant_function("src/S09/m35F5.c", "o09_35F5_0188")
-    select = significant_function("src/S09/m35F5.c", "o09_35F5_03C6")
-    extension = significant_function("src/S09/m35F5.c", "o09_35F5_0D2B")
+    load = significant_function("src/ui/save_load.c", "LoadGame")
+    save = significant_function("src/ui/save_load.c", "o09_35F5_0188")
+    select = significant_function("src/ui/save_load.c", "o09_35F5_03C6")
+    extension = significant_function("src/ui/save_load.c", "o09_35F5_0D2B")
     assert "char name [ 100 ]" in load and "char name [ 100 ]" in save
-    whole_s09 = " ".join(t.text for t in csrc.tokenize(texts["src/S09/m35F5.c"])
+    whole_s09 = " ".join(t.text for t in csrc.tokenize(texts["src/ui/save_load.c"])
                          if t.kind not in {"ws", "nl", "cmt"})
     assert "char path [ 67 ]" in select and "static char lastDir [ 67 ]" in whole_s09
     assert load.count("_fstrcpy ( fd_50F6_3862 , name )") == 1
@@ -88,7 +88,7 @@ def collect(program_override=None, source_overrides=None) -> dict:
     assert "after-slash=66 requires=67 fits67=1" in boundary["run_log"]
     assert "after-slash=68 requires=69 fits67=0" in boundary["run_log"]
     census = source_census(texts)
-    assert {row[0] for row in census} == {"src/S09/m35F5.c", "src/state/last-filename.c"}
+    assert {row[0] for row in census} == {"src/ui/save_load.c", "src/ui/state/last_filename.c"}
 
     return {
         "schema": "simant-last-filename-domain-v1",

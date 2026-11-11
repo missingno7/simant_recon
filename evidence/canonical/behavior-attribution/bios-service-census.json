@@ -24,7 +24,7 @@
   "items": [
     {
       "id": "int10-font-8x8",
-      "source": "src/S00/m31AD.asm:_o00_31AD_166A; INT 10h AX=1130h BH=03",
+      "source": "src/platform/video/planar_raster.asm:_o00_31AD_166A; INT 10h AX=1130h BH=03",
       "oracle": {
         "pointer": "C000:01E9 (physical C01E9)",
         "dimensions": "256 glyphs x 8 rows",
@@ -38,7 +38,7 @@
     },
     {
       "id": "int10-font-8x14",
-      "source": "src/S00/m31AD.asm:_o00_31AD_168C; INT 10h AX=1130h BH=02",
+      "source": "src/platform/video/planar_raster.asm:_o00_31AD_168C; INT 10h AX=1130h BH=02",
       "oracle": {
         "pointer": "C000:09E9 (physical C09E9)",
         "dimensions": "8x14, 256 glyphs, 3584 bytes",
@@ -61,7 +61,7 @@
     },
     {
       "id": "bda-lpt1-base",
-      "source": "src/root/m277E.c BIOS sound-device probe; 0040:0008",
+      "source": "src/sound/device_channels.c BIOS sound-device probe; 0040:0008",
       "oracle": {
         "value": "0x0378",
         "meaning": "LPT1 base I/O port"
@@ -74,7 +74,7 @@
     },
     {
       "id": "bda-equipment-word",
-      "source": "src/S09/m35F5.c:o09_35F5_03C6; byte read at 0040:0410",
+      "source": "src/ui/save_load.c:o09_35F5_03C6; byte read at 0040:0410",
       "oracle": {
         "word": "0x4467",
         "read_byte": "0x67",
@@ -98,7 +98,7 @@
     },
     {
       "id": "bda-keyboard-flags",
-      "source": "src/root/m1B73.asm; src/root/m1F58.asm; src/root/m015B.c; src/S12/m384C.c; 0040:0417",
+      "source": "src/platform/input_timer.asm; src/platform/bios_helpers.asm; src/ui/view_commands.c; src/ui/map_window.c; 0040:0417",
       "oracle": {
         "startup_value": "0x20 (NumLock set)"
       },
@@ -123,7 +123,7 @@
     },
     {
       "id": "bda-video-mode-and-columns",
-      "source": "src/root/m1B4E.asm; src/S01/m3126.asm; BDA 0040:0449 and 0040:044A",
+      "source": "src/platform/video/bios_bitmap.asm; src/platform/video/mono_raster.asm; BDA 0040:0449 and 0040:044A",
       "oracle": {
         "mode": "0x12",
         "columns": "80",
@@ -147,7 +147,7 @@
     },
     {
       "id": "bda-bios-ticks",
-      "source": "src/root/m0093.c; src/root/m1F58.asm; src/root/m1B73.asm; BDA 0040:046C and INT 1Ah",
+      "source": "src/simulation/random.c; src/platform/bios_helpers.asm; src/platform/input_timer.asm; BDA 0040:046C and INT 1Ah",
       "oracle": {
         "at_4944_143_ms": "0x000C00A1 (786593)",
         "at_14_s": "786759"
@@ -168,14 +168,14 @@
     },
     {
       "id": "vga-dac-defaults",
-      "source": "src/root/m1B4E.asm uses INT 10h AX=1002h and AX=1012h palette writes; source scan found no DAC readback at ports 3C6h-3C9h",
+      "source": "src/platform/video/bios_bitmap.asm uses INT 10h AX=1002h and AX=1012h palette writes; source scan found no DAC readback at ports 3C6h-3C9h",
       "oracle": "DOSBox-X mode-set BIOS initializes its DAC; the source subsequently writes its palette entries.",
       "native": "SDL palette host applies the canonical palette writes to the VGA logical palette; no DAC register-read service is exposed.",
       "status": "DEFAULTS_NOT_READ_BY_SOURCE"
     },
     {
       "id": "tandy-and-vendor-rom-probes",
-      "source": "src/root/m194D.asm; src/root/m277E.c; src/root/m293A.c",
+      "source": "src/platform/memory_helpers.asm; src/sound/device_channels.c; src/sound/device_probe.c",
       "oracle": "DOSBox-X source includes the Tandy/BIOS signature, INT 1Ah/15h and CMOS probe services; these are outside the selected VGA/Sound Mode 6 path.",
       "native": "The VGA adapter service returns descriptor 0x0305; unsupported Tandy and legacy BIOS probes fail closed in platform services.",
       "status": "UNOBSERVABLE_IN_SUPPORTED_PROFILE",
@@ -183,7 +183,7 @@
     },
     {
       "id": "mouse-driver-type-version",
-      "source": "src/root/m1B73.asm:_f_1B73_0046; INT 33h AX=24h",
+      "source": "src/platform/input_timer.asm:_f_1B73_0046; INT 33h AX=24h",
       "oracle": {
         "bx_version": "0x0700",
         "ch_type": "4"

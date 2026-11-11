@@ -33,8 +33,8 @@ aliases, and exceptional continuations remain outside this result.
 
 ## Cursor sample invariant
 
-The F084 resize branch in `src/root/m218D.c:167-169` calls resize synchronously
-with a null event. `src/S26/m39C7.c:299-361` looks up F084, reads its center,
+The F084 resize branch in `src/window/events.c:167-169` calls resize synchronously
+with a null event. `src/window/move_resize.c:299-361` looks up F084, reads its center,
 warps once to that start, sets `pt=start`, then samples shared X and Y separately
 inside `ButtonHeld()`. It does not dispatch application events. The first delta
 is zero. Separate reads are sufficient because the bound is per-axis.

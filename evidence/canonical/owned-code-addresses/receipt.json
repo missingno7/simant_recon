@@ -9,7 +9,7 @@
     {
       "module": "S00:31AD",
       "canonical_source": {
-        "path": "src/S00/m31AD.asm",
+        "path": "src/platform/video/planar_raster.asm",
         "sha256": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
         "size": 84117
       },
@@ -69,7 +69,7 @@
     {
       "module": "S01:3126",
       "canonical_source": {
-        "path": "src/S01/m3126.asm",
+        "path": "src/platform/video/mono_raster.asm",
         "sha256": "6136f2dab5aa8a2b2f9608f5ef2ae4287d04ceeaf5510ed6bd7310fb54fdeaba",
         "size": 46177
       },
@@ -97,7 +97,7 @@
     {
       "module": "S02:3126",
       "canonical_source": {
-        "path": "src/S02/m3126.asm",
+        "path": "src/platform/video/vga8_raster.asm",
         "sha256": "5393ee21872be740e8386676db36bff54a9539e89a61bcbe47fdc0b80755fe8d",
         "size": 20567
       },
@@ -141,7 +141,7 @@
     {
       "module": "S03:3126",
       "canonical_source": {
-        "path": "src/S03/m3126.asm",
+        "path": "src/platform/video/tandy_raster.asm",
         "sha256": "7c5bacf108c4dd5f747cee0905cd3e119818cf4f854600f4b21153ed03b716ea",
         "size": 37132
       },
@@ -199,7 +199,7 @@
     {
       "module": "S03:3258",
       "canonical_source": {
-        "path": "src/S03/m3258.asm",
+        "path": "src/platform/video/tandy_sprites.asm",
         "sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
         "size": 40733
       },
@@ -248,7 +248,7 @@
   "unchanged_concatenated_peer": {
     "module": "S00:31AD@2AB4",
     "canonical_source": {
-      "path": "src/S00/m31AD_2AB4.asm",
+      "path": "src/platform/video/planar_mode_blits.asm",
       "sha256": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
       "size": 40338
     },
@@ -29762,7 +29762,7 @@
   "input_and_output_pins": [
     {
       "path": "evidence/canonical/owned-code-addresses/replay.py",
-      "sha256": "d60b63b7ae2f6378b9222b2a4852734126b20d8c7f706c72e0a7e5339e5f8863",
+      "sha256": "a7436387faf013576bf2d090f58cb7dbd8e1f56767f11909e5a31edac2279878",
       "size": 31860
     },
     {
@@ -29781,7 +29781,7 @@
       "size": 39241
     },
     {
-      "path": "src/root/m1D8E.c",
+      "path": "src/graphics/clip_rects.c",
       "sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
       "size": 10996
     },

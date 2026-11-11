@@ -94,7 +94,7 @@ def main():
         oracle_sha256=image.sha256, original_function="f_218D_000C", actual=actual, contrast=contrast,
         model_boundaries=["object lookup/lock", "TickCount", "clip push/pop/reset", "selection primitive", "five-tick wait"],
         inputs={p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in
-            ("src/root/m218D.c", "src/root/m22BF.c", "assets/HCEGANT.DAT", "assets/HCEGANT.NDX", "tools/behavior.py")},
+            ("src/window/events.c", "src/window/object_attributes.c", "assets/HCEGANT.DAT", "assets/HCEGANT.NDX", "tools/behavior.py")},
         scope="Original event body runs with the actual shipped object; one-bit altered object is a negative premise contrast. No full-game or indirect-call exclusion.")
     (out / "palette.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))

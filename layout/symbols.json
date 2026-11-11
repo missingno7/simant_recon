@@ -303,6 +303,19 @@
     }
    ]
   },
+  "BoundEditPosition": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3884,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_0F2C",
+     "why": "Win16 symbol _BoundEditPosition, reviewed 2026-11-11: Switch anchor: same MapPlane switch cases0/1 -> width0x80, default ->0x40, with all y coordinates bounded to0x40 and negative coordinates clamped to zero.; TU/dataflow anchor: follows the paired edit-window callback, precedes named CenterEdit, and is called at the end of DOS win_EditChanged; Win inlines the same computation at the end of its win_EditChanged while also retaining this out-of-line en"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "BoundPointToTri": {
    "unit": "root",
    "seg": 1944,
@@ -446,6 +459,19 @@
      "why": "xver HIGH features-v1: constant 0x2724; constant 0x2726; constant 0x2728"
     }
    ]
+  },
+  "CheckMyBestDirs": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 6282,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_3BA4_188A",
+     "why": "Win16 symbol _CheckMyBestDirs, reviewed 2026-11-11: TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member11 _CheckMyBestDirs.; Independent body/callee anchor: calls confirmed GetMyBestDirs once then repeatedly from successive Dx"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "CheckNestFightB": {
    "unit": "S25",
@@ -773,6 +799,45 @@
      "why": "MAPSYM GR_MODULE order MakeBalloon, ConvertMonoMaskToTandy, ConvertMonoMaskToColor = DOS 1629:000C, 0463, 0531 (0531 xver HIGH); called only by MakeBalloon next to ConvertMonoMaskToColor"
     }
    ]
+  },
+  "ConvertMonoToTandy": {
+   "unit": "root",
+   "seg": 9466,
+   "off": 41,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_24FA_0029",
+     "why": "Win16 symbol _ConvertMonoToTandy, reviewed 2026-11-11: TU anchor: second of the same four-role reverse-search / pixel-expansion / named invert / INT3 module in DOS m24FA.asm and Win SIMTWO F774..F85B. The final named invert independently anchors this run.; Argument/layout anchor: destination far pointer, source far pointer, width,height; each row emits ceil(width/2) bytes by extracting successive2-bit groups through a four-entry CS lookup table, with "
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CopyChar": {
+   "unit": "root",
+   "seg": 5785,
+   "off": 0,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1699_0000",
+     "why": "Win16 symbol _CopyChar, reviewed 2026-11-11: Confirmed caller anchor: named MakeBalloon calls this entry at the corresponding glyph, repeated-fill, or buffer-swap position with the corresponding far pointers and scalar arguments.; Distinct algorithm/TU anchor: DOS m1699.asm and Win CopyText assembly preserve CopyChar then CopyCharRep and later exchange; copies one source byte per row for exactly16 rows, advancing destination by bitmap_width/"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CopyCharRep": {
+   "unit": "root",
+   "seg": 5785,
+   "off": 80,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1699_0050",
+     "why": "Win16 symbol _CopyCharRep, reviewed 2026-11-11: Confirmed caller anchor: named MakeBalloon calls this entry at the corresponding glyph, repeated-fill, or buffer-swap position with the corresponding far pointers and scalar arguments.; Distinct algorithm/TU anchor: DOS m1699.asm and Win CopyText assembly preserve CopyChar then CopyCharRep and later exchange; same16-row glyph layout but repeats each source row byte count times using the extra coun"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "CopyRootName": {
    "unit": "root",
@@ -1220,6 +1285,19 @@
     }
    ]
   },
+  "DoCalcTile": {
+   "unit": "root",
+   "seg": 592,
+   "off": 4120,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_1018",
+     "why": "Win16 symbol _DoCalcTile, reviewed 2026-11-11: Switch/data anchor: DOS root0250:1018 and Win _TEXT4A6B select MapPlane0/1 surface,2 black,3 red; surface ELayerMode0..4 selects PherMapA/BN/BT/RN/RT with half-resolution indexing, then derives separate ground/life tile results. DOS accepts editor-relative coordinates and adds MapPnt, Win accepts absolute coordinates.; Rare resource constant anchor: same life markers0xFF/0xFE choose MeBase+MeType+"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "DoDefendNest": {
    "unit": "root",
    "seg": 2196,
@@ -1560,6 +1638,19 @@
      "why": "Win16 SIMTWO_MODULE run 3EF8..5A02 (InitSow..PillFoodTile, 19 members, between EndMigrate and InitSimVars) aligns 1:1 with DOS module 0AD9 (19 functions); xver DoAntLions (pos 6, LOW) agrees; call graph agrees (InitPillar->InitSow, DoPillar->DoSow, AddRandAntLion->AddAntLion, DoAntLions->SetAntLion/KillAntLion/FindInAList, DoPillar->pillar helpers)"
     }
    ]
+  },
+  "DoPreLoadInits": {
+   "unit": "S09",
+   "seg": 13813,
+   "off": 3450,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o09_35F5_0D7A",
+     "why": "Win16 symbol _DoPreLoadInits, reviewed 2026-11-11: Caller/dataflow anchor: DOS named LoadGame invokes S09:0D7A after opening and before reading the save-record array; Win retains this helper in the same load unit (Win source tu_antedit_9248), although optimized caller code can inline it.; Distinct state/constant anchor: exact sequence JustXfered=1, LastThemeTime=0, TimeTemp=300, EditMsgDelay=0, then named RandYard(). The300 value, four state write"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "DoRandAntA": {
    "unit": "root",
@@ -2060,6 +2151,32 @@
     }
    ]
   },
+  "DrawMapFoot": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 4481,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o12_384C_1181",
+     "why": "Win16 symbol _DrawMapFoot, reviewed 2026-11-11: TU anchor: immediately follows the now anchored map-window callback in DOS S12 m384C.c; spider then foot order matches Win3:D10E/D226.; Distinct resource/state anchor: FootHere gate, FootX/FootY scaling, bitmap BoyDir+0x4B0; BoyHere3/4 adds mower bitmap0x4BA+(direction parity); invalidates eight cached rows starting FootY, writes0xFF, sets newMapForce=1. Win renders into mapBuf and invalidates HWN"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "DrawMapSpider": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 4261,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o12_384C_10A5",
+     "why": "Win16 symbol _DrawMapSpider, reviewed 2026-11-11: TU anchor: immediately follows the now anchored map-window callback in DOS S12 m384C.c; spider then foot order matches Win3:D10E/D226.; Distinct resource/state anchor: three scalar arguments x,y,kind; selects bitmap kind+0x44C, then invalidates five cached map rows beginning y-2 by writing0xFF, clipped to rows0..63. Win renders into mapBuf and invalidates HWND regions; DOS renders directly and sup"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "DrawMiniMapCursor": {
    "unit": "S04",
    "seg": 13813,
@@ -2494,6 +2611,19 @@
     }
    ]
   },
+  "EndMigrate": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 9418,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o06_35F5_24CA",
+     "why": "Win16 symbol _EndMigrate, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member24, _EndMigrate at Win16 7:3E6C.; Requires a selected valid source, applies the same screen-to-patch transform, validates destination, transfers half of source YMapPopB to d"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "EndTargetMode": {
    "unit": "root",
    "seg": 4343,
@@ -2879,6 +3009,45 @@
     }
    ]
   },
+  "FinishDiagStep": {
+   "unit": "root",
+   "seg": 74,
+   "off": 685,
+   "grounding": "reviewed: far function after f_004A_0253 (xor ax,ax; call __aFchkstk; switch on fd_50F6_032E), called push cs/call near by 010A/0172/01E9/0253; worker rootF",
+   "history": [
+    {
+     "was": "f_004A_02AD",
+     "why": "Win16 symbol _FinishDiagStep, reviewed 2026-11-11: TU anchor: final three entries of the same complete eight-direction plus three-finisher module, matching Win 7676/774E/77C6 in order.; Switch/state anchor: MapPlane cases 1/2/3 update AMapPnt/BMapPnt/RMapPnt both x and y using EditColumns/2 and/or EditRows/2 plus MapPnt; tail calls UpdateEdit then the empty drawing hook. This distinguishes the complete family."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "FinishHorzStep": {
+   "unit": "root",
+   "seg": 74,
+   "off": 907,
+   "grounding": "reviewed: far function (chkstk, switch on fd_50F6_032E, x only), called push cs/call near by 000A/0052; worker rootF",
+   "history": [
+    {
+     "was": "f_004A_038B",
+     "why": "Win16 symbol _FinishHorzStep, reviewed 2026-11-11: TU anchor: final three entries of the same complete eight-direction plus three-finisher module, matching Win 7676/774E/77C6 in order.; Switch/state anchor: MapPlane cases 1/2/3 update AMapPnt/BMapPnt/RMapPnt x only using EditColumns/2 and/or EditRows/2 plus MapPnt; tail calls UpdateEdit then the empty drawing hook. This distinguishes the complete family."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "FinishVertStep": {
+   "unit": "root",
+   "seg": 74,
+   "off": 1038,
+   "grounding": "reviewed: far function (chkstk, switch on fd_50F6_032E, y only), called push cs/call near by 008A/00D2; ends at 0491 (LINK fill 00); worker rootF",
+   "history": [
+    {
+     "was": "f_004A_040E",
+     "why": "Win16 symbol _FinishVertStep, reviewed 2026-11-11: TU anchor: final three entries of the same complete eight-direction plus three-finisher module, matching Win 7676/774E/77C6 in order.; Switch/state anchor: MapPlane cases 1/2/3 update AMapPnt/BMapPnt/RMapPnt y only using EditColumns/2 and/or EditRows/2 plus MapPnt; tail calls UpdateEdit then the empty drawing hook. This distinguishes the complete family."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "FixExitMapB": {
    "unit": "root",
    "seg": 5358,
@@ -2905,6 +3074,45 @@
    ],
    "name_kind": "recovered"
   },
+  "FlipHandleWords": {
+   "unit": "root",
+   "seg": 580,
+   "off": 34,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0244_0022",
+     "why": "Win16 symbol _FlipHandleWords, reviewed 2026-11-11: Caller/dataflow anchor: named initStuff loads resource1000/type9, checks failure, calls this helper, then accesses FracSineTab and proceeds to initSimWindows/OverlayOutsideTiles in both versions.; Algorithm/TU anchor: second entry after BlockMove before the Barrier0x50/0x90 setter pair; visits allocation_size/2 words and swaps each word high/low byte. DOS uses RallocSize and direct handle derefere"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "FlipLong": {
+   "unit": "root",
+   "seg": 6489,
+   "off": 12,
+   "grounding": "reviewed: unreferenced far function at 0x1959C (dword byte swap) following f_1959_0002; module ends at 0x195AB, LINK fill 00 before 195A",
+   "history": [
+    {
+     "was": "f_1959_000C",
+     "why": "Win16 symbol _FlipLong, reviewed 2026-11-11: Whole-module anchor: DOS m1959.asm contains exactly the word-then-long byte-order helper pair, in the same order as Win _TEXT7356/7360; these are explicit game assembly helpers, not imported CRT symbols.; Interface/data-transform anchor: 32-bit argument: reverse bytes within each word and exchange high/low word roles, return DX:AX. The family is distinguished by word versus long input/result and a"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "FlipWord": {
+   "unit": "root",
+   "seg": 6489,
+   "off": 2,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1959_0002",
+     "why": "Win16 symbol _FlipWord, reviewed 2026-11-11: Whole-module anchor: DOS m1959.asm contains exactly the word-then-long byte-order helper pair, in the same order as Win _TEXT7356/7360; these are explicit game assembly helpers, not imported CRT symbols.; Interface/data-transform anchor: 16-bit argument: swap its two bytes, return in AX. The family is distinguished by word versus long input/result and actual byte permutation. Word helper is used w"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "FlipWords": {
    "unit": "S23",
    "seg": 14791,
@@ -2917,6 +3125,19 @@
     }
    ]
   },
+  "FloodNestB": {
+   "unit": "root",
+   "seg": 5358,
+   "off": 3654,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_14EE_0E46",
+     "why": "Win16 symbol _FloodNestB, reviewed 2026-11-11: Whole-TU anchor: final member of DOS m14EE.c after the preceding16 digging/smoothing members of the17-member module DigMyNewHole,CreateNewHole,DigMyTile,MakeNewHoleB,CanBeHouseHole,MakeNewHoleR,HoleBorder,DigTileB/R,DigTileThemB/R,SmoothEdgesB,RIsItDirt,SmoothEdgesR,FixExitMapB/R; Win SIMONE16AE..29DA preserves the complete order, ending FloodNestB immediately after named FixExitMapR.; Distinct ti"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "FloorTiles": {
    "unit": "S18",
    "seg": 14412,
@@ -2928,6 +3149,32 @@
      "why": "Win16 SIMONE_MODULE run 3100..45AC (MakeMap..AddRock3, 23 members, between ClearListR and InitSpider) aligns 1:1 in order and count with DOS section S18 frame 384C (23 functions); anchored member MakeYardPatch (0C13): body identical to Win16 MakeYardPatch (TERRAINset/0x3e8 tile set, 128x64 SRand16 fill, AddRocks, InitAntLions(SRand4()+1), InitPillar = registered DOS names, 20/30/100/128 SRand1(0x7d)/SRand1(0x3d) placement passes with tiles 0x20-0x23, (SRand1(2)+0x12)<<1, 0x28, 0x51); call graph agrees (MakeMap->MakeYardPatch/MakeHousePatch(x*16+y>0x25), MakeKitchenWall->MakeOutletV(0x24,2),(0x54,2)+DROPdir=2, FloorTiles DROPdir=0, MakeOutletV/H->TileFrame1+MakePlugV/H, AddRocks->AddRock5 x6/AddRock3 x6 with SRand1(122/58),(124/60)); equal-size pairs TileFrame1/2, MakeOutletV/H, CarpetFloorL/R match on both sides"
     }
    ]
+  },
+  "FollowBoyDir": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 6671,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_1A0F",
+     "why": "Win16 symbol _FollowBoyDir, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member14, _FollowBoyDir at Win16 7:316E.; Computes DogPx-BoyPx and DogPy-BoyPy and absolute distances; a co-located mowing boy triggers bark(1,0x7F). At distances<2 returns YardCy"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "FollowCatDir": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 6847,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_1ABF",
+     "why": "Win16 symbol _FollowCatDir, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member15, _FollowCatDir at Win16 7:32A6.; Returns1 for DogPx<5,3 for DogPx>8,0 for DogPy>0, otherwise YardCycle&3. Win16 FollowCatDir preserves these thresholds/return codes; unli"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "FoodFall": {
    "unit": "root",
@@ -3001,6 +3248,32 @@
     }
    ]
   },
+  "GBoxFill": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 5801,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)",
+   "history": [
+    {
+     "was": "o00_31AD_16A9",
+     "why": "Win16 symbol _GBoxFill, reviewed 2026-11-11: src/platform/video/planar_raster.asm:3173 (o00_31AD_16A9); original-dos.json#S00:31AD:16A9; Win16 evidence/disassembly/cards.jsonl 2:19E6 _GBoxFill; original-win16.json#_GBoxFill"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GBoxFillOutline": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 19,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1CE2_0013",
+     "why": "Win16 symbol _GBoxFillOutline, reviewed 2026-11-11: src/graphics/screen_rects.c:21 (f_1CE2_0013); original-dos.json#root:1CE2:0013; Win16 evidence/disassembly/cards.jsonl 2:0B18 _GBoxFillOutline; original-win16.json#_GBoxFillOutline"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "GBoxOutline": {
    "unit": "root",
    "seg": 7394,
@@ -3010,6 +3283,153 @@
     {
      "was": "f_1CE2_01F8",
      "why": "Win16 symbol _GBoxOutline, reviewed 2026-11-11: Confirmed caller drawHistGraph calls 1CE2:01F8 at the Win16 GBoxOutline slot with five scalar coordinates/thickness arguments; it is separate from the rectangle-pointer wrapper 044D/GRectOutline.; Geometry/control anchor: nonzero thickness draws top,bottom,left,right strips with the current foreground colour; each strip uses the same inset corner formulas in DOS and Win16 wf_GBoxOutline-26008b9ec1"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GCheckerBox": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 331,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1CE2_014B",
+     "why": "Win16 symbol _GCheckerBox, reviewed 2026-11-11: src/graphics/screen_rects.c:64 (f_1CE2_014B); original-dos.json#root:1CE2:014B; Win16 evidence/disassembly/cards.jsonl 2:0C10 _GCheckerBox; original-win16.json#_GCheckerBox"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GImgSize": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 4603,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o00_31AD_11FB",
+     "why": "Win16 symbol _GImgSize, reviewed 2026-11-11: src/platform/video/planar_raster.asm:2579 (o00_31AD_11FB); original-dos.json#S00:31AD:11FB; Win16 evidence/disassembly/cards.jsonl 2:3DD6 _GImgSize; original-win16.json#_GImgSize"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GInvBox": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 892,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)",
+   "history": [
+    {
+     "was": "o00_31AD_037C",
+     "why": "Win16 symbol _GInvBox, reviewed 2026-11-11: src/platform/video/planar_raster.asm:546 (o00_31AD_037C); original-dos.json#S00:31AD:037C; Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GInvOutline": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 811,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1CE2_032B",
+     "why": "Win16 symbol _GInvOutline, reviewed 2026-11-11: src/graphics/screen_rects.c:114 (f_1CE2_032B); original-dos.json#root:1CE2:032B; Win16 evidence/disassembly/cards.jsonl 2:0D8A _GInvOutline; original-win16.json#_GInvOutline"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GLine": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 5260,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)",
+   "history": [
+    {
+     "was": "o00_31AD_148C",
+     "why": "Win16 symbol _GLine, reviewed 2026-11-11: src/platform/video/planar_raster.asm:2910 (o00_31AD_148C); original-dos.json#S00:31AD:148C; Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GMixedFill": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 2385,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1CE2_0951",
+     "why": "Win16 symbol _GMixedFill, reviewed 2026-11-11: src/graphics/screen_rects.c:319 (f_1CE2_0951); original-dos.json#root:1CE2:0951; Win16 evidence/disassembly/cards.jsonl 2:131C _GMixedFill; original-win16.json#_GMixedFill"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GMixedFillBox": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 2460,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1CE2_099C",
+     "why": "Win16 symbol _GMixedFillBox, reviewed 2026-11-11: src/graphics/screen_rects.c:334 (f_1CE2_099C); original-dos.json#root:1CE2:099C; Win16 evidence/disassembly/cards.jsonl 2:139E _GMixedFillBox; original-win16.json#_GMixedFillBox"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GPatBox": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 290,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)",
+   "history": [
+    {
+     "was": "o00_31AD_0122",
+     "why": "Win16 symbol _GPatBox, reviewed 2026-11-11: src/platform/video/planar_raster.asm:247 (o00_31AD_0122); original-dos.json#S00:31AD:0122; Win16 evidence/disassembly/cards.jsonl 2:1AB2 _GPatBox; original-win16.json#_GPatBox"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GPicSize": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 1314,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o00_3126_0D92",
+     "why": "re-framed: address lies in S00 module frame 31AD (segment starts at 31AD4, all its relocations carry frame 31AD); genuine-assembly driver object (worker ovlA)"
+    },
+    {
+     "was": "o00_31AD_0522",
+     "why": "Win16 symbol _GPicSize, reviewed 2026-11-11: src/platform/video/planar_raster.asm:751 (o00_31AD_0522); original-dos.json#S00:31AD:0522; Win16 evidence/disassembly/cards.jsonl 2:3DB2 _GPicSize; original-win16.json#_GPicSize"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GPutImg": {
+   "unit": "root",
+   "seg": 6990,
+   "off": 94,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1B4E_005E",
+     "why": "Win16 symbol _GPutImg, reviewed 2026-11-11: src/platform/video/bios_bitmap.asm:162 (f_1B4E_005E); original-dos.json#root:1B4E:005E; Win16 evidence/disassembly/cards.jsonl 2:3D02 _GPutImg; original-win16.json#_GPutImg"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GPutImgS": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 4614,
+   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)",
+   "history": [
+    {
+     "was": "o00_31AD_1206",
+     "why": "Win16 symbol _GPutImgS, reviewed 2026-11-11: src/platform/video/planar_raster.asm:2588 (o00_31AD_1206); original-dos.json#S00:31AD:1206; Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS"
     }
    ],
    "name_kind": "recovered"
@@ -3026,6 +3446,32 @@
     }
    ]
   },
+  "GPutPic": {
+   "unit": "root",
+   "seg": 6990,
+   "off": 59,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1B4E_003B",
+     "why": "Win16 symbol _GPutPic, reviewed 2026-11-11: src/platform/video/bios_bitmap.asm:143 (f_1B4E_003B); original-dos.json#root:1B4E:003B; Win16 evidence/disassembly/cards.jsonl 2:3C9A _GPutPic; original-win16.json#_GPutPic"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GPutPicS": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 3321,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "o00_31AD_0CF9",
+     "why": "Win16 symbol _GPutPicS, reviewed 2026-11-11: src/platform/video/planar_raster.asm:1908 (o00_31AD_0CF9); original-dos.json#S00:31AD:0CF9; Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "GPutStr": {
    "unit": "root",
    "seg": 8125,
@@ -3039,6 +3485,19 @@
    ],
    "name_kind": "recovered"
   },
+  "GRectChecker": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 292,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "f_1CE2_0124",
+     "why": "Win16 symbol _GRectChecker, reviewed 2026-11-11: src/graphics/screen_rects.c:59 (f_1CE2_0124); original-dos.json#root:1CE2:0124; Win16 evidence/disassembly/cards.jsonl 2:0BE0 _GRectChecker; original-win16.json#_GRectChecker"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "GRectFill": {
    "unit": "root",
    "seg": 7394,
@@ -3048,6 +3507,19 @@
     {
      "was": "f_1CE2_046D",
      "why": "Win16 symbol _GRectFill, reviewed 2026-11-11: Confirmed callers win_DrawBitMapAtObj, win_DrawBitMapAtObjNum, win_DrawHBar and win_DrawVBar use 1CE2:046D at their GRectFill positions; DrawColonyBars and DrawEditGraphs agree independently.; Argument-expansion/body anchor: 046D takes (Rect*,colour) and sends left,top,right,bottom,colour to the fill-box driver; Win16 GRectFill expands the same Rect fields into GBoxFill (2:0F98 GRectFill.c). This "
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GRectFillOutline": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 1165,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1CE2_048D",
+     "why": "Win16 symbol _GRectFillOutline, reviewed 2026-11-11: src/graphics/screen_rects.c:155 (f_1CE2_048D); original-dos.json#root:1CE2:048D; Win16 evidence/disassembly/cards.jsonl 2:0FC6 _GRectFillOutline; original-win16.json#_GRectFillOutline"
     }
    ],
    "name_kind": "recovered"
@@ -3103,6 +3575,19 @@
    ],
    "name_kind": "recovered"
   },
+  "GRectPartialOutline": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 632,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_1CE2_0278",
+     "why": "Win16 symbol _GRectPartialOutline, reviewed 2026-11-11: src/graphics/screen_rects.c:98 (f_1CE2_0278); original-dos.json#root:1CE2:0278; Win16 evidence/disassembly/cards.jsonl 2:0CC2 _GRectPartialOutline; original-win16.json#_GRectPartialOutline"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "GSaveRect": {
    "unit": "root",
    "seg": 7394,
@@ -3114,6 +3599,32 @@
      "why": "DOS-1: own allocation tag 'GSaveRect' (tag = name convention calibrated on GPutPacked, clip_Push)"
     }
    ]
+  },
+  "GSetAttrib": {
+   "unit": "S00",
+   "seg": 12717,
+   "off": 5721,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o00_31AD_1659",
+     "why": "Win16 symbol _GSetAttrib, reviewed 2026-11-11: src/platform/video/planar_raster.asm:3135 (o00_31AD_1659); original-dos.json#S00:31AD:1659; Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GTextBox": {
+   "unit": "root",
+   "seg": 7394,
+   "off": 119,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1CE2_0077",
+     "why": "Win16 symbol _GTextBox, reviewed 2026-11-11: src/graphics/screen_rects.c:39 (f_1CE2_0077); original-dos.json#root:1CE2:0077; Win16 evidence/disassembly/cards.jsonl 2:0BBC _GTextBox; original-win16.json#_GTextBox"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "GenerateTutorial": {
    "unit": "S08",
@@ -3321,6 +3832,32 @@
    ],
    "name_kind": "recovered"
   },
+  "GetMowDir": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 2407,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_0967",
+     "why": "Win16 symbol _GetMowDir, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member6, _GetMowDir at Win16 7:1F5C.; Scans four kid directions3 down to0, bounds-checks proposed yard coordinates and consumes an unmowed GrassMap bit; fallback x>10->0,y>14->1,y"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GetMyBestDir": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 6669,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_3BA4_1A0D",
+     "why": "Win16 symbol _GetMyBestDir, reviewed 2026-11-11: TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member14 _GetMyBestDir.; Independent state-machine anchor: MeCrazyCnt<0 first uses GetMyBestDirs; direction-2 AND counter-2 start"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "GetMyBestDirs": {
    "unit": "S25",
    "seg": 15268,
@@ -3347,6 +3884,32 @@
    ],
    "name_kind": "recovered"
   },
+  "GetMyDis": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 5035,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o25_3BA4_13AB",
+     "why": "Win16 symbol _GetMyDis, reviewed 2026-11-11: TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member8 _GetMyDis.; Independent call/body anchor: both consist of GetDis calls routed by source/target planes: same plane uses di"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GetMyNextRandDirs": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 6453,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_3BA4_1935",
+     "why": "Win16 symbol _GetMyNextRandDirs, reviewed 2026-11-11: TU/member anchor: the15-member DOS S25:3BA4 run DoAntMoveY through GetMyDir matches Win16 SIMANT1 6:75F4..91DD in original order. Already named AnimYellowFight,AnimYellowInsane,YellowFight,EnterNest,ExitNest,GetMyBestDirs,GetMyRandDirs and GetMyDir independently bracket member12 _GetMyNextRandDirs.; Independent caller-body anchor: CheckMyBestDirs tests whether the straight best-direction path yiel"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "GetMyRandDirs": {
    "unit": "S25",
    "seg": 15268,
@@ -3356,6 +3919,19 @@
     {
      "was": "o25_3BA4_1686",
      "why": "Win16 symbol _GetMyRandDirs, reviewed 2026-11-11: Confirmed-callee sequence: GetDis -> TileCanBeMovedOn -> GetDir twice in the uncommitted-turn branches -> GetDis -> GetDir, matching Win16 GetMyRandDirs original card 6:8928..8B3F.; Rotational-search/argument anchor: two leading far output pointers (rot,dir), followed by plane,x,y,a,b; builds an eight-byte allowed-neighbour array excluding the previous Me tile, scans clockwise/counterclockwise, se"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GetNearbyPatches": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 8980,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_2314",
+     "why": "Win16 symbol _GetNearbyPatches, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member21, _GetNearbyPatches at Win16 7:3CE4.; Scans six PatchX/PatchY offsets, bounds0<=x<12/0<=y<16, adds3 for a nonzero black patch and subtracts3 for a nonzero red patch. Win16"
     }
    ],
    "name_kind": "recovered"
@@ -3781,6 +4357,19 @@
     {
      "was": "f_00BA_0002",
      "why": "Win16 symbol _InitApplicationWindows, reviewed 2026-11-11: Confirmed-callee order: win_LoadAllWindows -> repeated win_SetWinDrawHook -> InitMapFunctions, matching InitApplicationWindows1:5464. Confirmed IBMInitStuff invokes it immediately after InitApplicationStuff and before the second SetMenuEntries call in both versions.; Independent hook-table argument anchor: registrations agree for windows0x000(edit),0x100(map),0x1500(history),0x1200(mode),0x1300(ca"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "InitGrassMap": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 2655,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_0A5F",
+     "why": "Win16 symbol _InitGrassMap, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member9, _InitGrassMap at Win16 7:2096.; Writes the first three GrassMap words0 and the next nine words-1. Win16 InitGrassMap initializes the same12-word bit map with the same3+9 "
     }
    ],
    "name_kind": "recovered"
@@ -4242,6 +4831,19 @@
     }
    ]
   },
+  "IsValidYard": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 2610,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_0A32",
+     "why": "Win16 symbol _IsValidYard, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member8, _IsValidYard at Win16 7:2072.; Pure two-coordinate boolean requiring x>=0,y>=0,x<=11,y<=15 on the12x16 yard. Win16 recovered IsValidYard has the identical coordinate orde"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "IsYellowAnt": {
    "unit": "root",
    "seg": 4343,
@@ -4534,6 +5136,19 @@
     }
    ]
   },
+  "MaintainSwarm": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 7581,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_1D9D",
+     "why": "Win16 symbol _MaintainSwarm, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member19, _MaintainSwarm at Win16 7:3580.; Applies the same formula separately to B and R swarm counts: positive n>=4 loses n>>2 else loses1; floor by QueenStorage for that colony"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "MakeAPill": {
    "unit": "root",
    "seg": 2777,
@@ -4557,6 +5172,19 @@
      "why": "MAPSYM GR_MODULE unit MakeBalloon, ConvertMonoMaskToTandy, ConvertMonoMaskToColor aligns 1:1 with the 3 functions of DOS module 1629; anchor ConvertMonoMaskToColor (xver HIGH, strings 'Balloon Size=%d, %d', 'clrbln'); MakeBalloon: xver MEDIUM string 'balloon', DOS string 'BAD font in MakeBaloon'"
     }
    ]
+  },
+  "MakeBark": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 6920,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_1B08",
+     "why": "Win16 symbol _MakeBark, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member16, _MakeBark at Win16 7:32EA.; Requires MapMode0,YardMode<2,MacTickCount()>DogBarkDelay; kind0/2 plays sound0x17,kind1 sound0x15,kind3 sound0x16 at caller level. Updates de"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "MakeBlkQueen": {
    "unit": "S08",
@@ -4886,6 +5514,19 @@
    ],
    "name_kind": "recovered"
   },
+  "MemRChr": {
+   "unit": "root",
+   "seg": 9466,
+   "off": 4,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_24FA_0004",
+     "why": "Win16 symbol _MemRChr, reviewed 2026-11-11: TU anchor: DOS m24FA.asm preserves reverse-byte-search, mono-to-Tandy expansion, named invert and final INT3 entry in that order; Win SIMTWO F774/F7CF/F846/F85B preserves the same complete four-role run, including already named invert. The gap before Win F7CF is not another symbol boundary.; Interface/algorithm anchor: takes a far end pointer, search byte and count; scans backwards, restores forwa"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "MenuQuit": {
    "unit": "S15",
    "seg": 14412,
@@ -4959,6 +5600,19 @@
    ],
    "name_kind": "recovered"
   },
+  "MowerFall": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 7402,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_1CEA",
+     "why": "Win16 symbol _MowerFall, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member18, _MowerFall at Win16 7:34DA.; Original Win16 callee sequence SRand4,SRand4,KillSpider,SRand4,YellowDeath matches DOS mowing-kill helper: unless tutorial, clears yard A-li"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "MysteryButton": {
    "unit": "root",
    "seg": 347,
@@ -4982,6 +5636,19 @@
      "why": "names4 review (CONFIRMED): call order DoScenario, LoadGame, EndLifeTransferMode, EndTargetMode, SetDefaultWindPrompt, SetEditWinTitle, RandYard, win_Open, SetDefaultWindows, SetMapPlane, ..., CenterEdit, UpdateEdit as Win16; shared callers ProcMenu, EndGameDialog (+ main = WINMAIN)"
     }
    ]
+  },
+  "NotMowed": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 2551,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_09F7",
+     "why": "Win16 symbol _NotMowed, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member7, _NotMowed at Win16 7:203E.; Tests GrassMap[first coordinate] against1<<second coordinate; if set subtracts that mask and returns1, else0. Win16 NotMowed preserves this te"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "OpenCasteWindow": {
    "unit": "root",
@@ -5102,6 +5769,32 @@
      "why": "Win16 SIMANT_MODULE unit InitTriVars..initControls (MAPSYM B324..CC84, 20 members) aligns in order with the 18 functions of DOS root:0798 once the two Windows-only callbacks win_CasteControlChanged/win_ModeControlChanged are removed; InitTriVars body identical to Win16 recovered InitTriVars (win_GetObjRect, width/2, height, (half<<8)/height, 6 tri points); call graph agrees (OpenCaste->UpdateCaste+win_Open, ProcCaste->DrawCaste, ProcMode->DrawMode, Draw*->SetTriLatPoint, ProcCaste/initControls->cvtLevels2IdealCaste); ProcCasteEvent/ProcModeEvent xver unique constants 0x1303/0x1203; DrawControlLevels xver MEDIUM (%-ld%%)"
     }
    ]
+  },
+  "OverlayInsideTiles": {
+   "unit": "root",
+   "seg": 580,
+   "off": 186,
+   "grounding": "reviewed: unreferenced twin of f_0244_00A7 right after it (xor ax,ax; call __aFchkstk; Barrier = 90h; retf), module 0244 ends at 024CD (LINK fill 00, module 0250 at 0250E)",
+   "history": [
+    {
+     "was": "f_0244_00BA",
+     "why": "Win16 symbol _OverlayInsideTiles, reviewed 2026-11-11: TU anchor: DOS m0244.c consists of named BlockMove, word-swap helper, outside setter, inside setter; Win SIMTWO has the same four-member run BlockMove7850, FlipHandleWords7860, OverlayOutsideTiles78B2, OverlayInsideTiles78BE.; Distinct state anchor: writes Barrier=0x90 and nothing else; outside and inside cannot be swapped because their constants differ."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "OverlayOutsideTiles": {
+   "unit": "root",
+   "seg": 580,
+   "off": 167,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_0244_00A7",
+     "why": "Win16 symbol _OverlayOutsideTiles, reviewed 2026-11-11: TU anchor: DOS m0244.c consists of named BlockMove, word-swap helper, outside setter, inside setter; Win SIMTWO has the same four-member run BlockMove7850, FlipHandleWords7860, OverlayOutsideTiles78B2, OverlayInsideTiles78BE.; Distinct state anchor: writes Barrier=0x50 and nothing else; outside and inside cannot be swapped because their constants differ."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "OverlayTileSet": {
    "unit": "root",
@@ -5897,6 +6590,19 @@
     }
    ]
   },
+  "Reproduce": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 9089,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_2381",
+     "why": "Win16 symbol _Reproduce, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member22, _Reproduce at Win16 7:3D4C.; Two ordered SGSRand(4) calls offset the supplied x,y, clamp to0..11/0..15, reject unchanged cell, then increment selected YMapPopB/R and its"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "ResetYellowVars": {
    "unit": "S22",
    "seg": 14791,
@@ -6161,6 +6867,19 @@
      "why": "xver CONFIRMED (evidence/cross_version/decisions.json: RNG translation unit)"
     }
    ]
+  },
+  "SendBoyMsg": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 458,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_01CA",
+     "why": "Win16 symbol _SendBoyMsg, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member3, _SendBoyMsg at Win16 7:15AE.; For message<=22, stores BoyMsgCnt=MacTickCount()+300, BoyMessOn=1 and BoyMsgOffset=message. DOS SimKidInside calls this message setter; Win1"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "SetAlarmDropState": {
    "unit": "S22",
@@ -6636,6 +7355,19 @@
     }
    ]
   },
+  "SimKidOutside": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 697,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_02B9",
+     "why": "Win16 symbol _SimKidOutside, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member5, _SimKidOutside at Win16 7:169C.; Independent confirmed caller DoSimYard selects this no-argument branch when NodeNum>=0x26; the other branch is already confirmed SimKidIn"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "SimQueenA": {
    "unit": "root",
    "seg": 2196,
@@ -6672,6 +7404,19 @@
      "why": "Win16 MAPSYM member list of the matching unit aligns 1:1 in order and count with the DOS module (already-named members fall at their positions); bodies near-identical (worker simA)"
     }
    ]
+  },
+  "SimRain": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 524,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o06_35F5_020C",
+     "why": "Win16 symbol _SimRain, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member4, _SimRain at Win16 7:15EA.; TERRAINset!=1; when dry, GlobalKey0xA8 bypasses RRand(32)/RRand(128) gates; starts RainCnt=SRand1(150)+150, calls InitWater and sets boy messag"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "SkipWords": {
    "unit": "S20",
@@ -6816,6 +7561,19 @@
      "why": "names5 bonus pair CONFIRMED: (d) unit alignment: DOS root:10F7 (57 fns 000E..2894) = Win16 SIMONE_MODULE #112 _IsValidLocation..#168 _IsValidB (57 entries, 1:1, no insertions/deletions); independently anchored members IsYellowAnt!(003A/#113), GetMap!(0850/#129), SetMyLife!(0A44/#134), SetMyHealth!(1DD3/#151) sit at identical positions (their xver HIGH comes from external callers: DoDigInB/processEdit, 4 external callers, EditToolsMenu, CheatKeys); this entry @0BB1 <-> _StartLifeTransfer #140; (e) body identical to Win16 card 6744 with mode 0xa (excludes TargetAnt 0xb); (c-weak) caller YellowCommand == Win16 caller _YellowCommand"
     }
    ]
+  },
+  "StartMigrate": {
+   "unit": "S06",
+   "seg": 13813,
+   "off": 9267,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o06_35F5_2433",
+     "why": "Win16 symbol _StartMigrate, reviewed 2026-11-11: Independent TU/member anchor: DOS S06:35F5 and Win16 SIMTWO7:1378..3EF7 preserve the same24 functions in order, anchored by named InitSimYard,DoSimYard,SimKidInside,SimBird,SimCat,SimDog,FootFall and SimColonies. This is member23, _StartMigrate at Win16 7:3DF2.; Converts screen point to patch y=(y-0x42)/10,x=(x+y-0xEE)/28; stores selected source and invalidates source x=-1 when outside12x16 or no "
+    }
+   ],
+   "name_kind": "recovered"
   },
   "StayInR": {
    "unit": "root",
@@ -7133,6 +7891,84 @@
     }
    ]
   },
+  "Unpack": {
+   "unit": "root",
+   "seg": 6917,
+   "off": 70,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1B05_0046",
+     "why": "Win16 symbol _Unpack, reviewed 2026-11-11: Confirmed caller positions: DBRecall, GPutPacked and gr_BitMapSize call0046 at Win16 Unpack's output-producing slots after the corresponding input initializer, passing destination pointer and requested output count and consuming bytes-produced.; Independent LZSS state-machine anchor:4096-byte ring masked0xFFF, flag-marker byte0xFF, literal/back-reference token branches, high-nibble offset plus low"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "UnpackFileClose": {
+   "unit": "root",
+   "seg": 6917,
+   "off": 554,
+   "grounding": "reviewed: genuine-assembly module 1B05: close proc (push [3D00]; call _close; pop ax; retf) after 01C7, module ends 1B285 (fill, 1B28 at 1B286)",
+   "history": [
+    {
+     "was": "f_1B05_022A",
+     "why": "Win16 symbol _UnpackFileClose, reviewed 2026-11-11: Six-member TU anchor:022A is the final FileClose entry after the verified FileOpen/FileRead members, matching Win16 UnpackFileClose7:A84C.; Independent state/runtime anchor: closes the single descriptor stored by its own FileOpen, with no caller-supplied descriptor, output buffer or object handle. Win16 FileClose uses the same module-owned unpack handle; this differentiates it from generic CRT clo"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "UnpackFileOpen": {
+   "unit": "root",
+   "seg": 6917,
+   "off": 398,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1B05_018E",
+     "why": "Win16 symbol _UnpackFileOpen, reviewed 2026-11-11: Six-member TU anchor:018E occupies FileOpen between SetBuf and FileRead in the decoder run independently oriented by DBRecall/GPutPacked/gr_BitMapSize's Init/Unpack calls.; Independent runtime/control contract:open(path,0x8000), save descriptor, return0 when fd<=0; otherwise initialize UnpackInit(configuredBuffer,0) and return1. Win16 UnpackFileOpen7:A7B0 has the same binary-open flag, success thr"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "UnpackFileRead": {
+   "unit": "root",
+   "seg": 6917,
+   "off": 455,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1B05_01C7",
+     "why": "Win16 symbol _UnpackFileRead, reviewed 2026-11-11: Six-member TU anchor:01C7 lies after FileOpen and before FileClose, matching Win16 UnpackFileRead7:A7E9 in the run oriented independently by Init/Unpack callers.; Independent runtime/loop anchor: when compressed input is exhausted read(handle,configuredBuffer,capacity), stop on read<=0; call Unpack(dest+done,requested-done), accumulate produced bytes and refill until requested output is complete. "
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "UnpackInit": {
+   "unit": "root",
+   "seg": 6917,
+   "off": 8,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1B05_0008",
+     "why": "Win16 symbol _UnpackInit, reviewed 2026-11-11: Confirmed caller positions: DBRecall, GPutPacked and gr_BitMapSize each call1B05:0008 to initialize compressed input before1B05:0046 decodes it, matching Win16 UnpackInit/Unpack. Both pass compressed far pointer and signed input length.; Independent decoder constants/state: fills0xFEE ring bytes with spaces0x20, sets ring position0xFEE and flag/resume state0, and converts negative input length to0"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "UnpackSetBuf": {
+   "unit": "root",
+   "seg": 6917,
+   "off": 376,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "f_1B05_0178",
+     "why": "Win16 symbol _UnpackSetBuf, reviewed 2026-11-11: Preserved TU run: DOS0008,0046,0178,018E,01C7,022A = Win16 UnpackInit7:A62A,UnpackA668,UnpackSetBufA79A,UnpackFileOpenA7B0,UnpackFileReadA7E9,UnpackFileCloseA84C in the same six-member order; the first two are independently fixed by three named callers.; Independent state/argument anchor:0178 takes a far read-buffer pointer and word capacity, stores both pointer words and capacity without decoding"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "UpdateCasteWindow": {
    "unit": "root",
    "seg": 1944,
@@ -7150,6 +7986,19 @@
      "why": "names4 review (CONFIRMED): SetMapPlane order SetMapPlaneLocation, CenterEdit, ..., UpdateEdit and NewGame tail CenterEdit, UpdateEdit as Win16; shared callers SetMapPlaneLocation, SetMapPlane, MapAreaEvent, OpenMiniMapWin, ReDrawMapEdit, processEdit"
     }
    ]
+  },
+  "UpdateEditWindow": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3782,
+   "grounding": "reviewed: gap between f_0250_0E9D..0EC6 and f_0250_0ED2: chkstk + push cs; call 0E9D; retf",
+   "history": [
+    {
+     "was": "f_0250_0EC6",
+     "why": "Win16 symbol _UpdateEditWindow, reviewed 2026-11-11: TU anchor: immediately after named UpdateEdit and before DrawEdit/window-draw/BoundEditPosition in both editor runs (Win1496,14EE,14F0,15B4).; Call/argument anchor: exact no-argument UpdateEdit-only wrapper, with no extra graphics or event work; distinguished from the other DOS UpdateEdit callers by that complete body and run position."
+    }
+   ],
+   "name_kind": "recovered"
   },
   "UpdateEverything": {
    "unit": "root",
@@ -7222,6 +8071,79 @@
      "why": "xver HIGH: 8 anchored callers agree with Win16 _WinPrintf callers; body is compiled-out debug formatter (evidence/cross_version/decisions.json)"
     }
    ]
+  },
+  "WindowsMono_MakeTable2x2a": {
+   "unit": "S01",
+   "seg": 12942,
+   "off": 300,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "o01_328E_012C",
+     "why": "Win16 symbol _WindowsMono_MakeTable2x2a, reviewed 2026-11-11: TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.; Distinct layout/constant anchor: 32 output byte columns; two rows0/0x20, four source pixels merged with masks0xC0/0x30/0x0C/0x03. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WindowsMono_MakeTable2x2b": {
+   "unit": "S01",
+   "seg": 12942,
+   "off": 469,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "o01_328E_01D5",
+     "why": "Win16 symbol _WindowsMono_MakeTable2x2b, reviewed 2026-11-11: TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.; Distinct layout/constant anchor: 16 output byte columns; two rows0/0x10, four source pixels merged with masks0xC0/0x30/0x0C/0x03. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WindowsMono_MakeTable4x4a": {
+   "unit": "S01",
+   "seg": 12942,
+   "off": 10,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o01_3126_168A",
+     "why": "re-framed: S12:384C InitMapFunctions (0103..011C) stores far pointers 328E:000A and 328E:009D: the code frame is 328E (like o01_328E_012C)"
+    },
+    {
+     "was": "o01_328E_000A",
+     "why": "Win16 symbol _WindowsMono_MakeTable4x4a, reviewed 2026-11-11: TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.; Distinct layout/constant anchor: 64 output byte columns; four rows at offsets0/0x40/0x80/0xC0, alternately mask0xF0/0x0F. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/2x2 are "
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WindowsMono_MakeTable4x4b": {
+   "unit": "S01",
+   "seg": 12942,
+   "off": 157,
+   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
+   "history": [
+    {
+     "was": "o01_3126_171D",
+     "why": "re-framed: S12:384C InitMapFunctions stores far pointer 328E:009D: code frame 328E"
+    },
+    {
+     "was": "o01_328E_009D",
+     "why": "Win16 symbol _WindowsMono_MakeTable4x4b, reviewed 2026-11-11: TU/family anchor: DOS S01 m328E.asm has exactly these four entries in the same 4x4a,4x4b,2x2a,2x2b order as Win _TEXT442C..45DB. This is game table-generation assembly, not compiler runtime.; Distinct layout/constant anchor: 32 output byte columns; four rows at offsets0/0x20/0x40/0x60, alternately mask0xF0/0x0F. All use source-byte*8 plus phase&7 to index a shared dither table. a/b and4x4/2x2 are "
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "Windows_MakeTable1x1": {
+   "unit": "S03",
+   "seg": 12883,
+   "off": 47,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "o03_3253_002F",
+     "why": "Win16 symbol _Windows_MakeTable1x1, reviewed 2026-11-11: Confirmed caller/argument anchor: Mini_MakeTable color/packed-pixel branch supplies source,destination,count to DOS S03:3253:002F and Win _Windows_MakeTable1x1, distinguished from the two mono branches.; Algorithm/constant anchor: consumes two input color bytes per output byte; first translates through a high-nibble table, second through adjacent table+0x10, ORs them, and iterates count/2. Game bi"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "XFlipLong": {
    "unit": "S23",
@@ -7877,6 +8799,19 @@
     }
    ]
   },
+  "exchange": {
+   "unit": "root",
+   "seg": 5785,
+   "off": 426,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_1699_01AA",
+     "why": "Win16 symbol _exchange, reviewed 2026-11-11: Confirmed caller anchor: named MakeBalloon calls this entry at the corresponding glyph, repeated-fill, or buffer-swap position with the corresponding far pointers and scalar arguments.; Distinct algorithm/TU anchor: DOS m1699.asm and Win CopyText assembly preserve CopyChar then CopyCharRep and later exchange; exchanges exactly count bytes between two far buffers, writing each displaced destination"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "f_0000_0000": {
    "unit": "root",
    "seg": 0,
@@ -7924,72 +8859,6 @@
    "seg": 0,
    "off": 1135,
    "grounding": "inventory:far_call"
-  },
-  "f_004A_000A": {
-   "unit": "root",
-   "seg": 74,
-   "off": 10,
-   "grounding": "reviewed: far code pointer in section 27 data at 5736C; descent extent"
-  },
-  "f_004A_0052": {
-   "unit": "root",
-   "seg": 74,
-   "off": 82,
-   "grounding": "reviewed: far code pointer in section 27 data at 5737C; descent extent"
-  },
-  "f_004A_008A": {
-   "unit": "root",
-   "seg": 74,
-   "off": 138,
-   "grounding": "reviewed: far code pointer in section 27 data at 57374; descent extent"
-  },
-  "f_004A_00D2": {
-   "unit": "root",
-   "seg": 74,
-   "off": 210,
-   "grounding": "reviewed: far code pointer in section 27 data at 57364; descent extent"
-  },
-  "f_004A_010A": {
-   "unit": "root",
-   "seg": 74,
-   "off": 266,
-   "grounding": "reviewed: far code pointer in section 27 data at 57368; descent extent"
-  },
-  "f_004A_0172": {
-   "unit": "root",
-   "seg": 74,
-   "off": 370,
-   "grounding": "reviewed: far code pointer in section 27 data at 57370; descent extent"
-  },
-  "f_004A_01E9": {
-   "unit": "root",
-   "seg": 74,
-   "off": 489,
-   "grounding": "reviewed: far code pointer in section 27 data at 57378; descent extent"
-  },
-  "f_004A_0253": {
-   "unit": "root",
-   "seg": 74,
-   "off": 595,
-   "grounding": "reviewed: far code pointer in section 27 data at 57380; descent extent"
-  },
-  "f_004A_02AD": {
-   "unit": "root",
-   "seg": 74,
-   "off": 685,
-   "grounding": "reviewed: far function after f_004A_0253 (xor ax,ax; call __aFchkstk; switch on fd_50F6_032E), called push cs/call near by 010A/0172/01E9/0253; worker rootF"
-  },
-  "f_004A_038B": {
-   "unit": "root",
-   "seg": 74,
-   "off": 907,
-   "grounding": "reviewed: far function (chkstk, switch on fd_50F6_032E, x only), called push cs/call near by 000A/0052; worker rootF"
-  },
-  "f_004A_040E": {
-   "unit": "root",
-   "seg": 74,
-   "off": 1038,
-   "grounding": "reviewed: far function (chkstk, switch on fd_50F6_032E, y only), called push cs/call near by 008A/00D2; ends at 0491 (LINK fill 00); worker rootF"
   },
   "f_0093_0002": {
    "unit": "root",
@@ -8132,7 +9001,7 @@
    "history": [
     {
      "convention": "cdecl -> pascal",
-     "why": "gatefix migration: src/root/m00DE.c defines it 'void far pascal f_00DE_000A(int code)' (claim exact: pascal ret 2 / upper-case public F_00DE_000A); src/S15/m384C.c calls it through the same pascal declaration"
+     "why": "gatefix migration: src/unresolved/m00de.c defines it 'void far pascal f_00DE_000A(int code)' (claim exact: pascal ret 2 / upper-case public F_00DE_000A); src/startup/game_session.c calls it through the same pascal declaration"
     }
    ]
   },
@@ -8574,24 +9443,6 @@
    "off": 0,
    "alias_of": "BlockMove"
   },
-  "f_0244_0022": {
-   "unit": "root",
-   "seg": 580,
-   "off": 34,
-   "grounding": "inventory:far_call"
-  },
-  "f_0244_00A7": {
-   "unit": "root",
-   "seg": 580,
-   "off": 167,
-   "grounding": "inventory:far_call"
-  },
-  "f_0244_00BA": {
-   "unit": "root",
-   "seg": 580,
-   "off": 186,
-   "grounding": "reviewed: unreferenced twin of f_0244_00A7 right after it (xor ax,ax; call __aFchkstk; Barrier = 90h; retf), module 0244 ends at 024CD (LINK fill 00, module 0250 at 0250E)"
-  },
   "f_0250_000E": {
    "unit": "root",
    "seg": 592,
@@ -8706,12 +9557,6 @@
    "off": 3344,
    "grounding": "inventory:far_call,push_cs_call"
   },
-  "f_0250_0E15": {
-   "unit": "root",
-   "seg": 592,
-   "off": 3605,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
   "f_0250_0E70": {
    "unit": "root",
    "seg": 592,
@@ -8736,41 +9581,17 @@
    "off": 3741,
    "alias_of": "UpdateEdit"
   },
-  "f_0250_0EC6": {
-   "unit": "root",
-   "seg": 592,
-   "off": 3782,
-   "grounding": "reviewed: gap between f_0250_0E9D..0EC6 and f_0250_0ED2: chkstk + push cs; call 0E9D; retf"
-  },
   "f_0250_0ED2": {
    "unit": "root",
    "seg": 592,
    "off": 3794,
    "grounding": "inventory:far_call"
   },
-  "f_0250_0EDA": {
-   "unit": "root",
-   "seg": 592,
-   "off": 3802,
-   "grounding": "inventory:vector"
-  },
-  "f_0250_0F2C": {
-   "unit": "root",
-   "seg": 592,
-   "off": 3884,
-   "grounding": "inventory:push_cs_call"
-  },
   "f_0250_0FC4": {
    "unit": "root",
    "seg": 592,
    "off": 4036,
    "alias_of": "CenterEdit"
-  },
-  "f_0250_1018": {
-   "unit": "root",
-   "seg": 592,
-   "off": 4120,
-   "grounding": "inventory:push_cs_call"
   },
   "f_0250_129E": {
    "unit": "root",
@@ -10512,12 +11333,6 @@
    "off": 2906,
    "alias_of": "SmoothEdgesR"
   },
-  "f_14EE_0E46": {
-   "unit": "root",
-   "seg": 5358,
-   "off": 3654,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
   "f_15D9_0006": {
    "unit": "root",
    "seg": 5593,
@@ -10559,24 +11374,6 @@
    "seg": 5673,
    "off": 1329,
    "alias_of": "ConvertMonoMaskToColor"
-  },
-  "f_1699_0000": {
-   "unit": "root",
-   "seg": 5785,
-   "off": 0,
-   "grounding": "inventory:far_call"
-  },
-  "f_1699_0050": {
-   "unit": "root",
-   "seg": 5785,
-   "off": 80,
-   "grounding": "inventory:far_call"
-  },
-  "f_1699_01AA": {
-   "unit": "root",
-   "seg": 5785,
-   "off": 426,
-   "grounding": "inventory:far_call"
   },
   "f_16B5_0008": {
    "unit": "root",
@@ -10913,18 +11710,6 @@
    "seg": 6477,
    "off": 143,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "f_1959_0002": {
-   "unit": "root",
-   "seg": 6489,
-   "off": 2,
-   "grounding": "inventory:far_call"
-  },
-  "f_1959_000C": {
-   "unit": "root",
-   "seg": 6489,
-   "off": 12,
-   "grounding": "reviewed: unreferenced far function at 0x1959C (dword byte swap) following f_1959_0002; module ends at 0x195AB, LINK fill 00 before 195A"
   },
   "f_195A_000C": {
    "unit": "root",
@@ -11436,42 +12221,6 @@
    "off": 1753,
    "alias_of": "ch_SetCacheHooks"
   },
-  "f_1B05_0008": {
-   "unit": "root",
-   "seg": 6917,
-   "off": 8,
-   "grounding": "inventory:far_call"
-  },
-  "f_1B05_0046": {
-   "unit": "root",
-   "seg": 6917,
-   "off": 70,
-   "grounding": "inventory:far_call"
-  },
-  "f_1B05_0178": {
-   "unit": "root",
-   "seg": 6917,
-   "off": 376,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "f_1B05_018E": {
-   "unit": "root",
-   "seg": 6917,
-   "off": 398,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "f_1B05_01C7": {
-   "unit": "root",
-   "seg": 6917,
-   "off": 455,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "f_1B05_022A": {
-   "unit": "root",
-   "seg": 6917,
-   "off": 554,
-   "grounding": "reviewed: genuine-assembly module 1B05: close proc (push [3D00]; call _close; pop ax; retf) after 01C7, module ends 1B285 (fill, 1B28 at 1B286)"
-  },
   "f_1B28_0006": {
    "unit": "root",
    "seg": 6952,
@@ -11518,18 +12267,6 @@
    "unit": "root",
    "seg": 6990,
    "off": 37,
-   "grounding": "inventory:far_call"
-  },
-  "f_1B4E_003B": {
-   "unit": "root",
-   "seg": 6990,
-   "off": 59,
-   "grounding": "inventory:far_call"
-  },
-  "f_1B4E_005E": {
-   "unit": "root",
-   "seg": 6990,
-   "off": 94,
    "grounding": "inventory:far_call"
   },
   "f_1B4E_0081": {
@@ -11994,22 +12731,10 @@
    "off": 12,
    "grounding": "inventory:far_call"
   },
-  "f_1CE2_0013": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 19,
-   "grounding": "inventory:far_call"
-  },
   "f_1CE2_0043": {
    "unit": "root",
    "seg": 7394,
    "off": 67,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "f_1CE2_0077": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 119,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
   "f_1CE2_00D5": {
@@ -12024,18 +12749,6 @@
    "off": 260,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
-  "f_1CE2_0124": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 292,
-   "grounding": "inventory:push_cs_call"
-  },
-  "f_1CE2_014B": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 331,
-   "grounding": "inventory:push_cs_call"
-  },
   "f_1CE2_016C": {
    "unit": "root",
    "seg": 7394,
@@ -12048,18 +12761,6 @@
    "off": 451,
    "grounding": "inventory:far_call"
   },
-  "f_1CE2_0278": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 632,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_1CE2_032B": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 811,
-   "grounding": "inventory:push_cs_call"
-  },
   "f_1CE2_039B": {
    "unit": "root",
    "seg": 7394,
@@ -12071,12 +12772,6 @@
    "seg": 7394,
    "off": 1040,
    "alias_of": "GRectInvOutline"
-  },
-  "f_1CE2_048D": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 1165,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
   "f_1CE2_04C9": {
    "unit": "root",
@@ -12113,18 +12808,6 @@
    "seg": 7394,
    "off": 1531,
    "alias_of": "GPutPacked"
-  },
-  "f_1CE2_0951": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 2385,
-   "grounding": "inventory:far_call"
-  },
-  "f_1CE2_099C": {
-   "unit": "root",
-   "seg": 7394,
-   "off": 2460,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
   "f_1D8E_0002": {
    "unit": "root",
@@ -12712,18 +13395,6 @@
    "unit": "root",
    "seg": 8335,
    "off": 91,
-   "grounding": "inventory:far_call"
-  },
-  "f_208F_0093": {
-   "unit": "root",
-   "seg": 8335,
-   "off": 147,
-   "grounding": "inventory:far_call"
-  },
-  "f_208F_011F": {
-   "unit": "root",
-   "seg": 8335,
-   "off": 287,
    "grounding": "inventory:far_call"
   },
   "f_208F_01ED": {
@@ -13546,24 +14217,6 @@
    "off": 2,
    "grounding": "inventory:far_call"
   },
-  "f_24AB_030B": {
-   "unit": "root",
-   "seg": 9387,
-   "off": 779,
-   "grounding": "inventory:far_call,push_cs_call"
-  },
-  "f_24AB_0329": {
-   "unit": "root",
-   "seg": 9387,
-   "off": 809,
-   "grounding": "inventory:far_call"
-  },
-  "f_24AB_0367": {
-   "unit": "root",
-   "seg": 9387,
-   "off": 871,
-   "grounding": "inventory:far_call"
-  },
   "f_24AB_040C": {
    "unit": "root",
    "seg": 9387,
@@ -13581,18 +14234,6 @@
    "seg": 9387,
    "off": 1149,
    "alias_of": "font_InitFonts"
-  },
-  "f_24FA_0004": {
-   "unit": "root",
-   "seg": 9466,
-   "off": 4,
-   "grounding": "inventory:far_call"
-  },
-  "f_24FA_0029": {
-   "unit": "root",
-   "seg": 9466,
-   "off": 41,
-   "grounding": "inventory:far_call"
   },
   "f_24FA_00B5": {
    "unit": "root",
@@ -13647,12 +14288,6 @@
    "seg": 9477,
    "off": 727,
    "alias_of": "win_ObjAddr"
-  },
-  "f_2505_033C": {
-   "unit": "root",
-   "seg": 9477,
-   "off": 828,
-   "grounding": "reviewed: unreferenced fastcall wrapper between win_ObjAddr and win_WinAddr: sub al,al; add ax,dx; push cs; call 02D7 (win_ObjAddr); retf"
   },
   "f_2505_0345": {
    "unit": "root",
@@ -14368,7 +15003,7 @@
    "history": [
     {
      "was": "f_293A_022A",
-     "why": "re-framed: linear 295CA is the word-aligned start of module 295C (the next function f_295C_0015 starts at odd 295D5, so no module boundary can be there); body sets DGROUP 7502, the first word of module 295C's _DATA (MIDI volume used by f_295C_01EC); compiles exactly as the first function of src/root/m295C.c (worker rootE)"
+     "why": "re-framed: linear 295CA is the word-aligned start of module 295C (the next function f_295C_0015 starts at odd 295D5, so no module boundary can be there); body sets DGROUP 7502, the first word of module 295C's _DATA (MIDI volume used by f_295C_01EC); compiles exactly as the first function of src/sound/midi_voices.c (worker rootE)"
     }
    ]
   },
@@ -14618,6 +15253,19 @@
    "off": 47,
    "grounding": "reviewed: memory-hook thunk: EA far jump to 171C:15A2 (relocated, frame 2CFB); ten 5-byte entries tile 2CFB:0002-0033 after crt0dat EMULATOR_TEXT (2CFB:0000-0001); 2CFB:0002/0007/002F are called far by 19A9/19DC; registered as jt_171C_15A2"
   },
+  "font_CharWidth": {
+   "unit": "root",
+   "seg": 9387,
+   "off": 871,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_24AB_0367",
+     "why": "Win16 symbol _font_CharWidth, reviewed 2026-11-11: Confirmed caller positions: DrawCastePopUp, win_GetStyleTextHeight, win_PrintStyleTextInRect and win_PrintTextInRect all use 24AB:0367 where Win16 calls font_CharWidth, accumulating a width for the current text character rather than for a whole string.; Algorithm/callee anchor: null current font returns default fontWidth; otherwise call the already paired _font_CharWidth(character,currentFont). Th"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "font_DumpFont": {
    "unit": "root",
    "seg": 9703,
@@ -14629,6 +15277,19 @@
      "why": "MAPSYM SIMTWO_MODULE unit font_ReadFont, font_DumpFont, _font_StringWidth, _font_CharWidth, _font_FontHeight, _font_LineHeight, font_MakeImage aligns 1:1 with DOS module 25E7 functions 007A..04BE; anchor font_ReadFont (xver CONFIRMED); body frees the three font tables and the font record"
     }
    ]
+  },
+  "font_FontHeight": {
+   "unit": "root",
+   "seg": 9387,
+   "off": 779,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_24AB_030B",
+     "why": "Win16 symbol _font_FontHeight, reviewed 2026-11-11: Confirmed caller positions: PictureDialog, win_GetStyleTextHeight and win_PrintStyleTextInRect use 24AB:030B at Win16 font_FontHeight slots; win_StringSize places its no-argument return into y/height after the string-width query.; Algorithm/callee anchor: both return default fontHeight when the current font pointer is null and otherwise call the already paired _font_FontHeight(currentFont); unlike"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "font_InitFonts": {
    "unit": "root",
@@ -14692,6 +15353,19 @@
    ],
    "name_kind": "recovered"
   },
+  "font_StringWidth": {
+   "unit": "root",
+   "seg": 9387,
+   "off": 809,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_24AB_0329",
+     "why": "Win16 symbol _font_StringWidth, reviewed 2026-11-11: Confirmed callers MakeBalloon, PictureDialog, gr_JustifyStrInRect and win_StringSize put 24AB:0329 in the font_StringWidth slot; win_StringSize assigns its return to x/width before obtaining height from 030B.; Algorithm/callee anchor: both wrappers return strlen(text)*defaultFontWidth if the current font is null, otherwise call the already paired lower-level _font_StringWidth(text,currentFont). Th"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "fracCOS": {
    "unit": "S08",
    "seg": 13813,
@@ -14728,6 +15402,110 @@
     }
    ]
   },
+  "goStepDown": {
+   "unit": "root",
+   "seg": 74,
+   "off": 138,
+   "grounding": "reviewed: far code pointer in section 27 data at 57374; descent extent",
+   "history": [
+    {
+     "was": "f_004A_008A",
+     "why": "Win16 symbol _goStepDown, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: y += step, cap at vertical maximum; step==1 invokes the down scroll hook. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail "
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "goStepLeft": {
+   "unit": "root",
+   "seg": 74,
+   "off": 82,
+   "grounding": "reviewed: far code pointer in section 27 data at 5737C; descent extent",
+   "history": [
+    {
+     "was": "f_004A_0052",
+     "why": "Win16 symbol _goStepLeft, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: x -= step, floor at zero; step==1 invokes the left scroll hook. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the cor"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "goStepNE": {
+   "unit": "root",
+   "seg": 74,
+   "off": 266,
+   "grounding": "reviewed: far code pointer in section 27 data at 57368; descent extent",
+   "history": [
+    {
+     "was": "f_004A_010A",
+     "why": "Win16 symbol _goStepNE, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: decrement y and increment x independently, clamp each; set moved if either axis succeeds. DOS delegates the A/B/R MapPlane switch and UpdateEdi"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "goStepNW": {
+   "unit": "root",
+   "seg": 74,
+   "off": 595,
+   "grounding": "reviewed: far code pointer in section 27 data at 57380; descent extent",
+   "history": [
+    {
+     "was": "f_004A_0253",
+     "why": "Win16 symbol _goStepNW, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: decrement both y and x, floor independently. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish h"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "goStepRight": {
+   "unit": "root",
+   "seg": 74,
+   "off": 10,
+   "grounding": "reviewed: far code pointer in section 27 data at 5736C; descent extent",
+   "history": [
+    {
+     "was": "f_004A_000A",
+     "why": "Win16 symbol _goStepRight, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: x += step, cap at hScrollMax; moved=1 only on the non-clamped path; step==1 invokes the right scroll hook. DOS delegates the A/B/R MapPlane swi"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "goStepSE": {
+   "unit": "root",
+   "seg": 74,
+   "off": 370,
+   "grounding": "reviewed: far code pointer in section 27 data at 57370; descent extent",
+   "history": [
+    {
+     "was": "f_004A_0172",
+     "why": "Win16 symbol _goStepSE, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: increment both y and x, clamp independently. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Finish h"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "goStepSW": {
+   "unit": "root",
+   "seg": 74,
+   "off": 489,
+   "grounding": "reviewed: far code pointer in section 27 data at 57378; descent extent",
+   "history": [
+    {
+     "was": "f_004A_01E9",
+     "why": "Win16 symbol _goStepSW, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: increment y and decrement x, clamp independently. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corresponding Fin"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "goStepUp": {
+   "unit": "root",
+   "seg": 74,
+   "off": 210,
+   "grounding": "reviewed: far code pointer in section 27 data at 57364; descent extent",
+   "history": [
+    {
+     "was": "f_004A_00D2",
+     "why": "Win16 symbol _goStepUp, reviewed 2026-11-11: TU anchor: DOS m004A.c preserves all eight directional entries in Win SIMTWO 6EFE..754E order, followed by the three Finish*Step functions. Directions are distinguished by signed x/y updates, not size or machine-code similarity.; State/control-flow anchor: y -= step, floor at zero; step==1 invokes the up scroll hook. DOS delegates the A/B/R MapPlane switch and UpdateEdit/DrawEdit tail to the corre"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "gr_BitMapSize": {
    "unit": "root",
    "seg": 8335,
@@ -14737,6 +15515,32 @@
     {
      "was": "f_208F_0419",
      "why": "Win16 symbol _gr_BitMapSize, reviewed 2026-09-30: 7 shared named callers (IBMInitStuff, PictureDialog, hanim_AddAnimObject, hanim_SetObjectPos, initControls, win_AutoSize, win_DrawYardWindow); callee order db_LoadObject, lock, unpack-init, unpack, unlock, db_ReleaseObject as Win16"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "gr_CenterStrInRect": {
+   "unit": "root",
+   "seg": 8335,
+   "off": 147,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_208F_0093",
+     "why": "Win16 symbol _gr_CenterStrInRect, reviewed 2026-11-11: src/window/text_bitmap_helpers.c:58 (f_208F_0093); original-dos.json#root:208F:0093; Win16 evidence/disassembly/cards.jsonl 2:48F0 _gr_CenterStrInRect; original-win16.json#_gr_CenterStrInRect"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "gr_CenterStrInRectClear": {
+   "unit": "root",
+   "seg": 8335,
+   "off": 287,
+   "grounding": "inventory:far_call",
+   "history": [
+    {
+     "was": "f_208F_011F",
+     "why": "Win16 symbol _gr_CenterStrInRectClear, reviewed 2026-11-11: src/window/text_bitmap_helpers.c:79 (f_208F_011F); original-dos.json#root:208F:011F; Win16 evidence/disassembly/cards.jsonl 2:4816 _gr_CenterStrInRectClear; original-win16.json#_gr_CenterStrInRectClear"
     }
    ],
    "name_kind": "recovered"
@@ -15035,7 +15839,7 @@
    "history": [
     {
      "was": "f_171C_1C0A",
-     "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
+     "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/memory/ralloc.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
     }
    ],
    "name_kind": "recovered"
@@ -15266,7 +16070,7 @@
    "unit": "S00",
    "seg": 12717,
    "off": 1314,
-   "alias_of": "o00_31AD_0522"
+   "alias_of": "GPicSize"
   },
   "o00_3126_0DC0": {
    "unit": "S00",
@@ -15310,12 +16114,6 @@
     }
    ]
   },
-  "o00_31AD_0122": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 290,
-   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)"
-  },
   "o00_31AD_013A": {
    "unit": "S00",
    "seg": 12717,
@@ -15328,12 +16126,6 @@
     }
    ]
   },
-  "o00_31AD_037C": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 892,
-   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)"
-  },
   "o00_31AD_0394": {
    "unit": "S00",
    "seg": 12717,
@@ -15342,18 +16134,6 @@
    "history": [
     {
      "was": "o00_3126_0C04",
-     "why": "re-framed: address lies in S00 module frame 31AD (segment starts at 31AD4, all its relocations carry frame 31AD); genuine-assembly driver object (worker ovlA)"
-    }
-   ]
-  },
-  "o00_31AD_0522": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 1314,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
-   "history": [
-    {
-     "was": "o00_3126_0D92",
      "why": "re-framed: address lies in S00 module frame 31AD (segment starts at 31AD4, all its relocations carry frame 31AD); genuine-assembly driver object (worker ovlA)"
     }
    ]
@@ -15430,12 +16210,6 @@
     }
    ]
   },
-  "o00_31AD_0CF9": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 3321,
-   "grounding": "inventory:far_call"
-  },
   "o00_31AD_0D06": {
    "unit": "S00",
    "seg": 12717,
@@ -15465,18 +16239,6 @@
    "seg": 12717,
    "off": 4364,
    "grounding": "inventory:near_call"
-  },
-  "o00_31AD_11FB": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 4603,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "o00_31AD_1206": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 4614,
-   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)"
   },
   "o00_31AD_1213": {
    "unit": "S00",
@@ -15508,22 +16270,10 @@
    "off": 5249,
    "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)"
   },
-  "o00_31AD_148C": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 5260,
-   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)"
-  },
   "o00_31AD_1499": {
    "unit": "S00",
    "seg": 12717,
    "off": 5273,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "o00_31AD_1659": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 5721,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
   "o00_31AD_166A": {
@@ -15536,12 +16286,6 @@
    "unit": "S00",
    "seg": 12717,
    "off": 5772,
-   "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)"
-  },
-  "o00_31AD_16A9": {
-   "unit": "S00",
-   "seg": 12717,
-   "off": 5801,
    "grounding": "reviewed: entry of the display-driver dispatch table / far-called proc; genuine-assembly module S00B1.asm: proc extent up to the next public (worker ovlA)"
   },
   "o00_31AD_16E4": {
@@ -15914,49 +16658,13 @@
    "unit": "S01",
    "seg": 12942,
    "off": 10,
-   "alias_of": "o01_328E_000A"
+   "alias_of": "WindowsMono_MakeTable4x4a"
   },
   "o01_3126_171D": {
    "unit": "S01",
    "seg": 12942,
    "off": 157,
-   "alias_of": "o01_328E_009D"
-  },
-  "o01_328E_000A": {
-   "unit": "S01",
-   "seg": 12942,
-   "off": 10,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
-   "history": [
-    {
-     "was": "o01_3126_168A",
-     "why": "re-framed: S12:384C InitMapFunctions (0103..011C) stores far pointers 328E:000A and 328E:009D: the code frame is 328E (like o01_328E_012C)"
-    }
-   ]
-  },
-  "o01_328E_009D": {
-   "unit": "S01",
-   "seg": 12942,
-   "off": 157,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)",
-   "history": [
-    {
-     "was": "o01_3126_171D",
-     "why": "re-framed: S12:384C InitMapFunctions stores far pointer 328E:009D: code frame 328E"
-    }
-   ]
-  },
-  "o01_328E_012C": {
-   "unit": "S01",
-   "seg": 12942,
-   "off": 300,
-   "grounding": "inventory:far_call"
-  },
-  "o01_328E_01D5": {
-   "unit": "S01",
-   "seg": 12942,
-   "off": 469,
-   "grounding": "inventory:far_call"
+   "alias_of": "WindowsMono_MakeTable4x4b"
   },
   "o01_32B5_000E": {
    "unit": "S01",
@@ -16360,12 +17068,6 @@
     }
    ]
   },
-  "o03_3253_002F": {
-   "unit": "S03",
-   "seg": 12883,
-   "off": 47,
-   "grounding": "inventory:far_call"
-  },
   "o03_3258_040C": {
    "unit": "S03",
    "seg": 12888,
@@ -16504,113 +17206,17 @@
    "off": 4,
    "alias_of": "DoExpMenu"
   },
-  "o06_35F5_01CA": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 458,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_020C": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 524,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_02B9": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 697,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_0967": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 2407,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_09F7": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 2551,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_0A32": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 2610,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_0A5F": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 2655,
-   "grounding": "inventory:push_cs_call"
-  },
   "o06_35F5_0A90": {
    "unit": "S06",
    "seg": 13813,
    "off": 2704,
    "alias_of": "SimKidInside"
   },
-  "o06_35F5_1A0F": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 6671,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_1ABF": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 6847,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_1B08": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 6920,
-   "grounding": "inventory:push_cs_call"
-  },
   "o06_35F5_1BB3": {
    "unit": "S06",
    "seg": 13813,
    "off": 7091,
    "alias_of": "FootFall"
-  },
-  "o06_35F5_1CEA": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 7402,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_1D9D": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 7581,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_2314": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 8980,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_2381": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 9089,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o06_35F5_2433": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 9267,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "o06_35F5_24CA": {
-   "unit": "S06",
-   "seg": 13813,
-   "off": 9418,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
   "o07_35F5_0000": {
    "unit": "S07",
@@ -16742,12 +17348,6 @@
    "unit": "S09",
    "seg": 13813,
    "off": 3371,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o09_35F5_0D7A": {
-   "unit": "S09",
-   "seg": 13813,
-   "off": 3450,
    "grounding": "inventory:push_cs_call"
   },
   "o09_36EE_000A": {
@@ -16904,24 +17504,6 @@
    "unit": "S12",
    "seg": 14412,
    "off": 2934,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o12_384C_1035": {
-   "unit": "S12",
-   "seg": 14412,
-   "off": 4149,
-   "grounding": "inventory:vector"
-  },
-  "o12_384C_10A5": {
-   "unit": "S12",
-   "seg": 14412,
-   "off": 4261,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o12_384C_1181": {
-   "unit": "S12",
-   "seg": 14412,
-   "off": 4481,
    "grounding": "inventory:push_cs_call"
   },
   "o13_384C_0000": {
@@ -17926,34 +18508,10 @@
    "off": 4430,
    "alias_of": "ExitNest"
   },
-  "o25_3BA4_13AB": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 5035,
-   "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
-  },
-  "o25_3BA4_188A": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 6282,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o25_3BA4_1935": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 6453,
-   "grounding": "inventory:push_cs_call"
-  },
   "o25_3BA4_19AD": {
    "unit": "S25",
    "seg": 15268,
    "off": 6573,
-   "grounding": "inventory:push_cs_call"
-  },
-  "o25_3BA4_1A0D": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 6669,
    "grounding": "inventory:push_cs_call"
   },
   "o26_39C7_0000": {
@@ -18165,6 +18723,19 @@
     }
    ]
   },
+  "win_DrawEditWindow": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3802,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "f_0250_0EDA",
+     "why": "Win16 symbol _win_DrawEditWindow, reviewed 2026-11-11: Independent confirmed-caller registration: DOS InitApplicationWindows registers root0250:0EDA for window0 with win_SetWinDrawHook; Win registers win_DrawEditWindow for the same window0 in the otherwise matched seven-hook sequence.; Callback/TU anchor: following DrawEdit and preceding BoundEditPosition in the paired editor run; receives flags and gates repaint on flags&2 in both versions."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "win_DrawElevator": {
    "unit": "root",
    "seg": 9190,
@@ -18212,6 +18783,19 @@
      "why": "Win16 MAPSYM _TEXT run _XFlipLong.._ProcInfoEvent (9 members) aligns 1:1 with DOS S23:39C7 (9 functions, same order); DisplayCard is xver HIGH at position 6; xver win_DrawInfoWindow/win_PrintStyleTextInRect/PopUpInfoWindow (MEDIUM) agree positionally; XFlipLong/FlipWords/win_DrawInfoWindow/OpenInfoWindow Win16 exact bodies match"
     }
    ]
+  },
+  "win_DrawMapWindow": {
+   "unit": "S12",
+   "seg": 14412,
+   "off": 4149,
+   "grounding": "inventory:vector",
+   "history": [
+    {
+     "was": "o12_384C_1035",
+     "why": "Win16 symbol _win_DrawMapWindow, reviewed 2026-11-11: Independent confirmed-caller registration anchor: DOS and Win named InitApplicationWindows pass DOS S12:1035 / Win3:CE46 to win_SetWinDrawHook(0x100,...), after editor0 and before history0x1500/mode0x1200/caste0x1300/yard0x1900/info0x500 hooks. This establishes the callback boundary, not the larger immediate renderer S12:0B76.; Control-flow/TU anchor: flags&2 gates repaint and MapMode==0 routes to"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "win_DrawModeWindow": {
    "unit": "root",
@@ -18314,6 +18898,19 @@
      "why": "Win16 ANTEDIT MAPSYM yard unit ProcYardEvent..YardArea aligns with DOS S13:384C (24 functions, ribbon handler absent); window draw callback with flag bits 1/2/4 like the other win_Draw*Window members, draws yard objects 0x1902/0x1914/0x1915"
     }
    ]
+  },
+  "win_EditChanged": {
+   "unit": "root",
+   "seg": 592,
+   "off": 3605,
+   "grounding": "inventory:far_call,push_cs_call",
+   "history": [
+    {
+     "was": "f_0250_0E15",
+     "why": "Win16 symbol _win_EditChanged, reviewed 2026-11-11: TU/callback anchor: DOS m0250.c places this entry immediately before named OpenEditWindow, ForceUpdateEdit, DoEditUpdateDraw, UpdateEdit, UpdateEditWindow, DrawEdit, window-draw callback and BoundEditPosition, matching the Win ANTEDIT 0C62..15B4 editor run.; Geometry/state anchor: win_GetObjRect(4) obtains editTileRect; computes tile columns/rows, invalidates tile deltas, then clamps MapPnt to a M"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "win_Events": {
    "unit": "root",
@@ -19135,6 +19732,19 @@
      "why": "window worker: Win16 win_* function with the same structure/strings (report 2026-09-30)"
     }
    ]
+  },
+  "win_WinObjAddr": {
+   "unit": "root",
+   "seg": 9477,
+   "off": 828,
+   "grounding": "reviewed: unreferenced fastcall wrapper between win_ObjAddr and win_WinAddr: sub al,al; add ax,dx; push cs; call 02D7 (win_ObjAddr); retf",
+   "history": [
+    {
+     "was": "f_2505_033C",
+     "why": "Win16 symbol _win_WinObjAddr, reviewed 2026-11-11: TU anchor: DOS2505:033C sits immediately between named win_ObjAddr and win_WinAddr, exactly as Win7:C376 between C32E andC3CE.; Argument/dataflow anchor: takes windowPart,objectPart and resolves (windowPart&0xFF00)+objectPart through win_ObjAddr; Win inlines the object-count bounds check, same diagnostic \"Attempt to get obj address outsize window\", and indexed pointer fetch. DOS wrapper delegates "
+    }
+   ],
+   "name_kind": "recovered"
   },
   "win_WinRectAddr": {
    "unit": "root",

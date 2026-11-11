@@ -163,7 +163,7 @@ def main():
         'tools/behavior_suites/dialog.py','tools/behavior_suites/render_small.py',
         'tools/canonical_behavior.py','tests/test_memory_fixture_contract.py',
         'evidence/canonical/viewport-layout/resize_probe.py']
-    inputs = [pin(ROOT / p) for p in changed + ['src/root/m171C.c','src/program.json',
+    inputs = [pin(ROOT / p) for p in changed + ['src/memory/ralloc.c','src/program.json',
         'layout/manifest.json','assets/SIMANT.EXE','layout/oracle.lock.json',
         'tools/behavior.py','tools/behavior_ledger.py']]
     inputs.append(pin(Path(__file__).resolve()))

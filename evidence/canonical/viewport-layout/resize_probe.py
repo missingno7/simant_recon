@@ -227,11 +227,11 @@ def main():
             "separate_source_owner":"fd_50F6_1F26.x (spider image width)",
             "before":"34127856","after":observed,
             "scope":"Conditional function-entry state produced by the out-of-domain resize contrasts; no shipped UI reachability claim."})
-    inputs=["src/program.json","src/S26/m39C7.c","src/root/m0250.c","src/root/m00BA.c","src/root/m20E8.c",
-            "src/root/m23AE.c","src/root/m2505.c","src/root/m218D.c","src/root/m1FD2.c","src/root/m1B73.asm",
-            "src/root/m208F.c","src/root/m22BF.c","src/root/m00F8.c","src/S09/m35F5.c",
-            "src/S00/m31AD.asm","src/S00/m31AD_2AB4.asm","src/state/remaining-misc-storage.c",
-            "src/state/remaining-ui-state.c","src/state/remaining-window-state.c","src/state/window-initialized-views.c",
+    inputs=["src/program.json","src/window/move_resize.c","src/ui/edit_view.c","src/startup/application_windows.c","src/window/lifecycle.c",
+            "src/window/locking.c","src/window/object_geometry.c","src/window/events.c","src/window/menu_helpers.c","src/platform/input_timer.asm",
+            "src/window/text_bitmap_helpers.c","src/window/object_attributes.c","src/ui/view_dialog_helpers.c","src/ui/save_load.c",
+            "src/platform/video/planar_raster.asm","src/platform/video/planar_mode_blits.asm","src/unresolved/state/remaining_misc_storage.c",
+            "src/unresolved/state/remaining_ui_state.c","src/unresolved/state/remaining_window_state.c","src/window/state/hooks_offsets.c",
             "tools/behavior.py","tools/compiler.py","tools/modctx.py","tools/match.py",
             "layout/toolchain.json","layout/oracle.lock.json","assets/HCEGANT.DAT","assets/HCEGANT.NDX",
             "assets/SHARED.DAT","assets/SHARED.NDX"]

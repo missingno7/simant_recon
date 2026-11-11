@@ -246,7 +246,7 @@ def collect() -> dict:
     assert " ".join(t.text for t in csrc.tokenize(source)
                     if t.kind not in {"ws", "nl", "cmt"}) == \
            "struct Sample ; struct Sample far * far fd_50F6_0150 [ 39 ] ;"
-    enqueue = significant_function("src/root/m0000.c", "f_0000_0149")
+    enqueue = significant_function("src/sound/resource_loading.c", "f_0000_0149")
     assert "if ( g_181C > 38 ) Punt" in enqueue
     assert enqueue.index("if ( g_181C > 38 )") < enqueue.index("fd_50F6_0150 [ g_181C ++ ] = s")
     census = source_census(texts)

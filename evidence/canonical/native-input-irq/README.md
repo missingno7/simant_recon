@@ -1,6 +1,6 @@
 # Canonical keyboard and mouse interrupt contract
 
-Authority: `src/root/m1B73.asm` at 44de644, SHA-256
+Authority: `src/platform/input_timer.asm` at 44de644, SHA-256
 `eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3`.
 Line references below refer to that unchanged file. `W` and `H` mean g_3DB2
 and g_3DB4, x/y mean g_9122/g_9124. Arithmetic and shifts have 8086 word/byte
@@ -46,7 +46,7 @@ DOS execution. No whole-program or cycle/interleaving equality is asserted.
   AX (nominal down80h/up0). It does not query physical BIOS/SDL state. Native
   retains the logo fix: service host input before reading this canonical table.
   0EEE, lines2047–2054, returns only BDA17 ScrollLock bit10h. The source BIOS
-  poll in `src/root/m1F58.asm:68–84` clears NumLock when g_53BD is enabled.
+  poll in `src/platform/bios_helpers.asm:68–84` clears NumLock when g_53BD is enabled.
 
 The ordinary hook does not maintain BIOS modifiers itself: oldIRQ09/BIOS owns
 BDA17 (bits01/02 right/leftShift,04 Ctrl,08 Alt; lock bits in the high nibble).
@@ -208,7 +208,7 @@ index equal to read index, and otherwise increments count and writes exactly:
 
 Only after a successful enqueue, ifAX.AH&0Ah is nonzero, shift_state bit7 is
 cleared. Full-ring rejection changes none of the ring, slot or latch fields.
-The source capacity7 leaves six usable slots (`src/root/m1FD2.c:50–52`).
+The source capacity7 leaves six usable slots (`src/window/menu_helpers.c:50–52`).
 Dequeue032E (lines588–623) decrements count if available, advances read index
 modulo capacity and copies all8 words without clearing the source slot; empty
 dequeue returns-1. The record type is Event16 bytes, distinct from hot-box /

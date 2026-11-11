@@ -59,7 +59,7 @@ def c_body(source, name):
 
 
 def static_order():
-    body = c_body(ROOT / 'src/root/m205F.c', 'f_205F_0004')
+    body = c_body(ROOT / 'src/platform/video/driver_select.c', 'f_205F_0004')
     reset = body.index('f_1B4E_0025();')
     database = body.index('db_SetDataBase(path);')
     cursor = body.index('f_1B28_0006();')
@@ -68,7 +68,7 @@ def static_order():
     assert reset < database < cursor < first_driver < font
     # Reset is the first call; preceding material consists only of local declarations.
     assert '(' not in body[:reset]
-    raster_source = (ROOT / 'src/root/m1FBD.asm').read_text(encoding='latin1')
+    raster_source = (ROOT / 'src/graphics/bitmap_text.asm').read_text(encoding='latin1')
     assert 'L0093:\n\tmovsb\n\tadd di, dx\n\tloop L0093\n\tmov di, ax' in raster_source
     return {'order': ['real callback reset', 'database open', 'cursor setup',
                       'video driver setup', 'font callback'],

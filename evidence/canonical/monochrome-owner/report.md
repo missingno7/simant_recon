@@ -15,7 +15,7 @@ Every S01 source index is a zero-extended byte from LODSB. The pattern read form
 | 328E:012C | 128 | 0..1 | y at BP+0E |
 | 328E:01D5 | 64 | 0..1 | y at BP+0E |
 
-`src/S12/m384C.c:o12_384C_03D0` passes `(src,dst,width,y)`. Its original argument pushes are S12:03EB..041C. `src/S04/m35F5.c:Mini_MakeTable` passes `(src,dst,y)` directly to the two miniature routines at S04:04B0..04D5. These distinct frames explain why the main 000A caller's selector is zero despite its generic assembly accepting a masked argument.
+`src/ui/map_window.c:o12_384C_03D0` passes `(src,dst,width,y)`. Its original argument pushes are S12:03EB..041C. `src/ui/minimap.c:Mini_MakeTable` passes `(src,dst,y)` directly to the two miniature routines at S04:04B0..04D5. These distinct frames explain why the main 000A caller's selector is zero despite its generic assembly accepting a masked argument.
 
 The in-bounds mapping table `fd_3D57_054E[208]` has maximum72 and yields72 at indices94,95,102. Visible other monochrome tables have smaller maxima: 04CE=29,061E=40,0656=49. These are static table facts, without a complete proof of raw map/life input bounds or reachability.
 

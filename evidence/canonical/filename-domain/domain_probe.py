@@ -23,7 +23,7 @@ sys.dont_write_bytecode = True
 import canonical
 import csrc
 
-SOURCE = "src/S09/m35F5.c"
+SOURCE = "src/ui/save_load.c"
 PREMISES = {"incoming_name_max_strlen": 46, "max_directory_chars": 32, "max_leaf_chars": 12,
             "max_listed_entries": 199}
 

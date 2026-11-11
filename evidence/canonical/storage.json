@@ -5,7 +5,7 @@
   "providers": [
     {
       "module": "source-owned:clip-rect-buffer",
-      "canonical_source": "src/state/clip-rect-buffer.c",
+      "canonical_source": "src/graphics/state/clip_buffer.c",
       "DOS_compile": {
         "basename": "CLIPRECT",
         "profile": "msc600ax",
@@ -53,7 +53,7 @@
     },
     {
       "module": "source-owned:last-filename",
-      "canonical_source": "src/state/last-filename.c",
+      "canonical_source": "src/ui/state/last_filename.c",
       "DOS_compile": {
         "basename": "LASTFILE",
         "profile": "msc600ax",
@@ -101,7 +101,7 @@
     },
     {
       "module": "source-owned:sample-free-list",
-      "canonical_source": "src/state/sample-free-list.c",
+      "canonical_source": "src/sound/state/sample_free_list.c",
       "DOS_compile": {
         "basename": "SAMPLEFR",
         "profile": "msc600ax",
@@ -149,7 +149,7 @@
     },
     {
       "module": "source-owned:mono-pattern-vga-linkage",
-      "canonical_source": "src/state/mono-pattern-vga-linkage.c",
+      "canonical_source": "src/graphics/state/mono_pattern_link.c",
       "DOS_compile": {
         "basename": "MONOVGA",
         "profile": "msc600ax",
@@ -195,7 +195,7 @@
     },
     {
       "module": "source-owned:spider-image",
-      "canonical_source": "src/state/spider-image.c",
+      "canonical_source": "src/ui/state/spider_image.c",
       "DOS_compile": {
         "basename": "SPIDERIM",
         "profile": "msc600ax",
@@ -242,7 +242,7 @@
     },
     {
       "module": "source-owned:driver-callback-table",
-      "canonical_source": "src/state/driver-callback-table.c",
+      "canonical_source": "src/platform/video/state/driver_callbacks.c",
       "DOS_compile": {
         "basename": "CBOWNER",
         "profile": "msc600ax",
@@ -283,7 +283,7 @@
     },
     {
       "module": "source-owned:mouse-words",
-      "canonical_source": "src/state/mouse-words.c",
+      "canonical_source": "src/window/state/mouse_buttons.c",
       "DOS_compile": {
         "basename": "MSOWNER",
         "profile": "msc600ax",
@@ -347,7 +347,7 @@
     },
     {
       "module": "source-owned:memory-state",
-      "canonical_source": "src/state/memory-state.c",
+      "canonical_source": "src/memory/state/ralloc_blocks.c",
       "DOS_compile": {
         "basename": "MMOWNER",
         "profile": "msc600ax",
@@ -435,7 +435,7 @@
     },
     {
       "module": "source-owned:render-scalars",
-      "canonical_source": "src/state/render-scalars.c",
+      "canonical_source": "src/ui/state/map_draw_work.c",
       "DOS_compile": {
         "basename": "RSOWNER",
         "profile": "msc600ax",
@@ -512,7 +512,7 @@
     },
     {
       "module": "source-owned:memory-far-state",
-      "canonical_source": "src/state/memory-far-state.c",
+      "canonical_source": "src/memory/state/allocator_cache.c",
       "DOS_compile": {
         "basename": "MFOWNER",
         "profile": "msc600ax",
@@ -611,7 +611,7 @@
     },
     {
       "module": "source-owned:mono-pattern-prefix",
-      "canonical_source": "src/state/mono-pattern-prefix.c",
+      "canonical_source": "src/graphics/state/mono_pattern_prefix.c",
       "DOS_compile": {
         "basename": "MPOWNER",
         "profile": "msc600ax",
@@ -652,7 +652,7 @@
     },
     {
       "module": "source-owned:clip-pointer",
-      "canonical_source": "src/state/clip-pointer.c",
+      "canonical_source": "src/graphics/state/clip_pointer.c",
       "DOS_compile": {
         "basename": "CPOWNER",
         "profile": "msc600ax",
@@ -693,7 +693,7 @@
     },
     {
       "module": "source-owned:yard-scalars",
-      "canonical_source": "src/state/yard-scalars.c",
+      "canonical_source": "src/simulation/state/yard_game_state.c",
       "DOS_compile": {
         "basename": "YDOWNER",
         "profile": "msc600ax",
@@ -834,7 +834,7 @@
     },
     {
       "module": "source-owned:database-index-state",
-      "canonical_source": "src/state/database-index-state.c",
+      "canonical_source": "src/resources/state/index_search.c",
       "DOS_compile": {
         "basename": "DIOWNER",
         "profile": "msc600ax",
@@ -891,7 +891,7 @@
     },
     {
       "module": "source-owned:spider-counters",
-      "canonical_source": "src/state/spider-counters.c",
+      "canonical_source": "src/simulation/state/spider_counters.c",
       "DOS_compile": {
         "basename": "SPIDATA",
         "profile": "msc600ax",
@@ -1018,7 +1018,7 @@
     },
     {
       "module": "source-owned:lion-sow-pillar",
-      "canonical_source": "src/state/lion-sow-pillar.c",
+      "canonical_source": "src/simulation/state/yard_creature_lists.c",
       "DOS_compile": {
         "basename": "LIOWNER",
         "profile": "msc600ax",
@@ -1215,7 +1215,7 @@
     },
     {
       "module": "source-owned:spider-controls",
-      "canonical_source": "src/state/spider-controls.c",
+      "canonical_source": "src/simulation/state/spider_targets.c",
       "DOS_compile": {
         "basename": "SPICTRL",
         "profile": "msc600ax",
@@ -1328,7 +1328,7 @@
     },
     {
       "module": "source-owned:point-state",
-      "canonical_source": "src/state/point-state.c",
+      "canonical_source": "src/ui/state/view_origins.c",
       "DOS_compile": {
         "basename": "PTOWNER",
         "profile": "msc600ax",
@@ -1427,7 +1427,7 @@
     },
     {
       "module": "source-owned:database-record-state",
-      "canonical_source": "src/state/database-record-state.c",
+      "canonical_source": "src/resources/state/open_databases.c",
       "DOS_compile": {
         "basename": "DBRECOWN",
         "profile": "msc600ax",
@@ -1484,7 +1484,7 @@
     },
     {
       "module": "source-owned:graphics-formulas",
-      "canonical_source": "src/state/graphics-formulas.c",
+      "canonical_source": "src/graphics/state/pixel_masks.c",
       "DOS_compile": {
         "basename": "GFXOWNER",
         "profile": "msc600ax",
@@ -1618,7 +1618,7 @@
     },
     {
       "module": "source-owned:g2108-color-translation",
-      "canonical_source": "src/state/g2108-color-translation.c",
+      "canonical_source": "src/platform/video/state/color_translation.c",
       "DOS_compile": {
         "basename": "G210808",
         "profile": "msc600ax",
@@ -1671,7 +1671,7 @@
     },
     {
       "module": "source-owned:ant-list-counts",
-      "canonical_source": "src/state/ant-list-counts.c",
+      "canonical_source": "src/simulation/state/list_counts.c",
       "DOS_compile": {
         "basename": "ALCOUNT",
         "profile": "msc600ax",
@@ -1742,7 +1742,7 @@
     },
     {
       "module": "source-owned:colony-simulation-words",
-      "canonical_source": "src/state/colony-simulation-words.c",
+      "canonical_source": "src/simulation/state/yard_creature_flags.c",
       "DOS_compile": {
         "basename": "COLWORD",
         "profile": "msc600ax",
@@ -1883,7 +1883,7 @@
     },
     {
       "module": "source-owned:player-locations",
-      "canonical_source": "src/state/player-locations.c",
+      "canonical_source": "src/simulation/state/ant_locations.c",
       "DOS_compile": {
         "basename": "PLOCOWN",
         "profile": "msc600ax",
@@ -1996,7 +1996,7 @@
     },
     {
       "module": "source-owned:ant-counters-timer",
-      "canonical_source": "src/state/ant-counters-timer.c",
+      "canonical_source": "src/simulation/state/ant_counts_timer.c",
       "DOS_compile": {
         "basename": "ANTCTR",
         "profile": "msc600ax",
@@ -2067,7 +2067,7 @@
     },
     {
       "module": "source-owned:language-string-list-pointers",
-      "canonical_source": "src/state/language-string-list-pointers.c",
+      "canonical_source": "src/resources/state/string_lists.c",
       "DOS_compile": {
         "basename": "LANGPTR",
         "profile": "msc600ax",
@@ -2166,7 +2166,7 @@
     },
     {
       "module": "source-owned:dead-ant-coordinate-rings",
-      "canonical_source": "src/state/dead-ant-coordinate-rings.c",
+      "canonical_source": "src/simulation/state/dead_ant_positions.c",
       "DOS_compile": {
         "basename": "DEADXY",
         "profile": "msc600ax",
@@ -2223,7 +2223,7 @@
     },
     {
       "module": "source-owned:ant-player-state",
-      "canonical_source": "src/state/ant-player-state.c",
+      "canonical_source": "src/simulation/state/player_colony.c",
       "DOS_compile": {
         "basename": "ANTSTATE",
         "profile": "msc600ax",
@@ -2336,7 +2336,7 @@
     },
     {
       "module": "source-owned:display-mode-selector",
-      "canonical_source": "src/state/display-mode-selector.c",
+      "canonical_source": "src/platform/video/state/display_mode.c",
       "DOS_compile": {
         "basename": "MODEOWN",
         "profile": "msc600ax",
@@ -2377,7 +2377,7 @@
     },
     {
       "module": "source-owned:ant-ui-control-state",
-      "canonical_source": "src/state/ant-ui-control-state.c",
+      "canonical_source": "src/ui/state/colony_controls.c",
       "DOS_compile": {
         "basename": "ANTCTRL",
         "profile": "msc600ax",
@@ -2574,7 +2574,7 @@
     },
     {
       "module": "source-owned:ui-resource-scalars",
-      "canonical_source": "src/state/ui-resource-scalars.c",
+      "canonical_source": "src/unresolved/state/ui_resource_scalars.c",
       "DOS_compile": {
         "basename": "UIRESOWN",
         "profile": "msc600ax",
@@ -2687,7 +2687,7 @@
     },
     {
       "module": "source-owned:terrain-state-words",
-      "canonical_source": "src/state/terrain-state-words.c",
+      "canonical_source": "src/simulation/state/terrain_selection.c",
       "DOS_compile": {
         "basename": "TERRNOWN",
         "profile": "msc600ax",
@@ -2744,7 +2744,7 @@
     },
     {
       "module": "source-owned:swarm-serialized-buffers",
-      "canonical_source": "src/state/swarm-serialized-buffers.c",
+      "canonical_source": "src/simulation/state/swarm_buffers.c",
       "DOS_compile": {
         "basename": "SWARMOWN",
         "profile": "msc600ax",
@@ -2829,7 +2829,7 @@
     },
     {
       "module": "source-owned:population-work-arrays",
-      "canonical_source": "src/state/population-work-arrays.c",
+      "canonical_source": "src/simulation/state/caste_counts.c",
       "DOS_compile": {
         "basename": "POPWORK",
         "profile": "msc600ax",
@@ -2886,7 +2886,7 @@
     },
     {
       "module": "source-owned:saved-sound-state",
-      "canonical_source": "src/state/saved-sound-state.c",
+      "canonical_source": "src/sound/state/saved_driver_state.c",
       "DOS_compile": {
         "basename": "SNDSTATE",
         "profile": "msc600ax",
@@ -2929,7 +2929,7 @@
     },
     {
       "module": "source-owned:control-flag-words",
-      "canonical_source": "src/state/control-flag-words.c",
+      "canonical_source": "src/ui/state/control_flags.c",
       "DOS_compile": {
         "basename": "CTRLFLAG",
         "profile": "msc600ax",
@@ -3000,7 +3000,7 @@
     },
     {
       "module": "source-owned:count-ants-transition-word",
-      "canonical_source": "src/state/count-ants-transition-word.c",
+      "canonical_source": "src/simulation/state/transfer_flag.c",
       "DOS_compile": {
         "basename": "ANTLATCH",
         "profile": "msc600ax",
@@ -3043,7 +3043,7 @@
     },
     {
       "module": "source-owned:sound-control-words",
-      "canonical_source": "src/state/sound-control-words.c",
+      "canonical_source": "src/sound/state/device_controls.c",
       "DOS_compile": {
         "basename": "SNDCTRL",
         "profile": "msc600ax",
@@ -3156,7 +3156,7 @@
     },
     {
       "module": "source-owned:sound-record-arrays",
-      "canonical_source": "src/state/sound-record-arrays.c",
+      "canonical_source": "src/sound/state/voices_channels.c",
       "DOS_compile": {
         "basename": "SNDRECS",
         "profile": "msc600ax",
@@ -3213,7 +3213,7 @@
     },
     {
       "module": "source-owned:ant-movement-words",
-      "canonical_source": "src/state/ant-movement-words.c",
+      "canonical_source": "src/simulation/state/yellow_movement.c",
       "DOS_compile": {
         "basename": "ANTMOVE",
         "profile": "msc600ax",
@@ -3466,7 +3466,7 @@
     },
     {
       "module": "source-owned:world-output-state",
-      "canonical_source": "src/state/world-output-state.c",
+      "canonical_source": "src/simulation/state/world_totals.c",
       "DOS_compile": {
         "basename": "WORLDOUT",
         "profile": "msc600ax",
@@ -3719,7 +3719,7 @@
     },
     {
       "module": "source-owned:history-scalar-state",
-      "canonical_source": "src/state/history-scalar-state.c",
+      "canonical_source": "src/simulation/state/history_counters.c",
       "DOS_compile": {
         "basename": "HISTOTAL",
         "profile": "msc600ax",
@@ -3916,7 +3916,7 @@
     },
     {
       "module": "source-owned:ant-class-histogram",
-      "canonical_source": "src/state/ant-class-histogram.c",
+      "canonical_source": "src/simulation/state/caste_histogram.c",
       "DOS_compile": {
         "basename": "ANTCOUNT",
         "profile": "msc600ax",
@@ -3959,7 +3959,7 @@
     },
     {
       "module": "source-owned:event-records",
-      "canonical_source": "src/state/event-records.c",
+      "canonical_source": "src/window/state/event_records.c",
       "DOS_compile": {
         "basename": "EVRECS",
         "profile": "msc600ax",
@@ -4016,7 +4016,7 @@
     },
     {
       "module": "source-owned:remaining-preparestrings-string-pointers",
-      "canonical_source": "src/state/remaining-preparestrings-string-pointers.c",
+      "canonical_source": "src/resources/state/message_string_lists.c",
       "DOS_compile": {
         "basename": "STRREST",
         "profile": "msc600ax",
@@ -4227,7 +4227,7 @@
     },
     {
       "module": "source-owned:yard-init-state",
-      "canonical_source": "src/state/yard-init-state.c",
+      "canonical_source": "src/simulation/state/yard_initialization.c",
       "DOS_compile": {
         "basename": "YARDISCL",
         "profile": "msc600ax",
@@ -4606,7 +4606,7 @@
     },
     {
       "module": "source-owned:yard-animation-arrays",
-      "canonical_source": "src/state/yard-animation-arrays.c",
+      "canonical_source": "src/ui/state/yard_animation.c",
       "DOS_compile": {
         "basename": "YARDARR",
         "profile": "msc600ax",
@@ -4691,7 +4691,7 @@
     },
     {
       "module": "source-owned:balloon-deadline-timers",
-      "canonical_source": "src/state/balloon-deadline-timers.c",
+      "canonical_source": "src/ui/state/balloon_deadlines.c",
       "DOS_compile": {
         "basename": "BLNTMR",
         "profile": "msc600ax",
@@ -4776,7 +4776,7 @@
     },
     {
       "module": "source-owned:experiment-anchor",
-      "canonical_source": "src/state/experiment-anchor.c",
+      "canonical_source": "src/ui/state/experiment_anchor.c",
       "DOS_compile": {
         "basename": "EXPANCH",
         "profile": "msc600ax",
@@ -4819,7 +4819,7 @@
     },
     {
       "module": "source-owned:window-clip-handles",
-      "canonical_source": "src/state/window-clip-handles.c",
+      "canonical_source": "src/graphics/state/window_clip_handles.c",
       "DOS_compile": {
         "basename": "WCLIPH",
         "profile": "msc600ax",
@@ -4862,7 +4862,7 @@
     },
     {
       "module": "source-owned:remaining-history-words",
-      "canonical_source": "src/state/remaining-history-words.c",
+      "canonical_source": "src/unresolved/state/remaining_history_words.c",
       "DOS_compile": {
         "basename": "HISTSC25",
         "profile": "msc600ax",
@@ -5143,7 +5143,7 @@
     },
     {
       "module": "source-owned:mode-population-vectors",
-      "canonical_source": "src/state/mode-population-vectors.c",
+      "canonical_source": "src/simulation/state/mode_counts.c",
       "DOS_compile": {
         "basename": "MPVOWNR",
         "profile": "msc600ax",
@@ -5228,7 +5228,7 @@
     },
     {
       "module": "source-owned:floor-task-words",
-      "canonical_source": "src/state/floor-task-words.c",
+      "canonical_source": "src/simulation/state/terrain_task.c",
       "DOS_compile": {
         "basename": "FLRTSK",
         "profile": "msc600ax",
@@ -5285,7 +5285,7 @@
     },
     {
       "module": "source-owned:ui-geometry-state",
-      "canonical_source": "src/state/ui-geometry-state.c",
+      "canonical_source": "src/ui/state/view_geometry.c",
       "DOS_compile": {
         "basename": "UIGEO",
         "profile": "msc600ax",
@@ -5370,7 +5370,7 @@
     },
     {
       "module": "source-owned:remaining-world-state",
-      "canonical_source": "src/state/remaining-world-state.c",
+      "canonical_source": "src/unresolved/state/remaining_world_state.c",
       "DOS_compile": {
         "basename": "WRLDSC25",
         "profile": "msc600ax",
@@ -5637,7 +5637,7 @@
     },
     {
       "module": "source-owned:remaining-ant-state",
-      "canonical_source": "src/state/remaining-ant-state.c",
+      "canonical_source": "src/unresolved/state/remaining_ant_state.c",
       "DOS_compile": {
         "basename": "ANTSCL25",
         "profile": "msc600ax",
@@ -5918,7 +5918,7 @@
     },
     {
       "module": "source-owned:remaining-ui-state",
-      "canonical_source": "src/state/remaining-ui-state.c",
+      "canonical_source": "src/unresolved/state/remaining_ui_state.c",
       "DOS_compile": {
         "basename": "UISTTE26",
         "profile": "msc600ax",
@@ -6227,7 +6227,7 @@
     },
     {
       "module": "source-owned:remaining-window-state",
-      "canonical_source": "src/state/remaining-window-state.c",
+      "canonical_source": "src/unresolved/state/remaining_window_state.c",
       "DOS_compile": {
         "basename": "WINSC26",
         "profile": "msc600ax",
@@ -6662,7 +6662,7 @@
     },
     {
       "module": "source-owned:remaining-scalar-tail",
-      "canonical_source": "src/state/remaining-scalar-tail.c",
+      "canonical_source": "src/unresolved/state/remaining_scalar_tail.c",
       "DOS_compile": {
         "basename": "SCALTL26",
         "profile": "msc600ax",
@@ -6957,7 +6957,7 @@
     },
     {
       "module": "source-owned:balloon-buffer-tables",
-      "canonical_source": "src/state/balloon-buffer-tables.c",
+      "canonical_source": "src/ui/state/balloon_buffers.c",
       "DOS_compile": {
         "basename": "BLNTAB26",
         "profile": "msc600ax",
@@ -7042,7 +7042,7 @@
     },
     {
       "module": "source-owned:render-delay-word",
-      "canonical_source": "src/state/render-delay-word.c",
+      "canonical_source": "src/window/state/draw_delay.c",
       "DOS_compile": {
         "basename": "DELAYW27",
         "profile": "msc600ax",
@@ -7085,7 +7085,7 @@
     },
     {
       "module": "source-owned:window-ralloc-handles",
-      "canonical_source": "src/state/window-ralloc-handles.c",
+      "canonical_source": "src/ui/state/map_image_handles.c",
       "DOS_compile": {
         "basename": "WINHD27",
         "profile": "msc600ax",
@@ -7142,7 +7142,7 @@
     },
     {
       "module": "source-owned:remaining-sound-storage",
-      "canonical_source": "src/state/remaining-sound-storage.c",
+      "canonical_source": "src/unresolved/state/remaining_sound_storage.c",
       "DOS_compile": {
         "basename": "SNDST27",
         "profile": "msc600ax",
@@ -7297,7 +7297,7 @@
     },
     {
       "module": "source-owned:remaining-misc-storage",
-      "canonical_source": "src/state/remaining-misc-storage.c",
+      "canonical_source": "src/unresolved/state/remaining_misc_storage.c",
       "DOS_compile": {
         "basename": "MISCST27",
         "profile": "msc600ax",
@@ -7452,7 +7452,7 @@
     },
     {
       "module": "source-owned:screen-clip-list",
-      "canonical_source": "src/state/screen-clip-list.c",
+      "canonical_source": "src/graphics/state/screen_clip.c",
       "DOS_compile": {
         "basename": "SCRLIST",
         "profile": "msc600ax",
@@ -7505,7 +7505,7 @@
     },
     {
       "module": "source-owned:remaining-far-state-words",
-      "canonical_source": "src/state/remaining-far-state-words.c",
+      "canonical_source": "src/unresolved/state/remaining_far_state_words.c",
       "DOS_compile": {
         "basename": "FARW29",
         "profile": "msc600ax",
@@ -7604,7 +7604,7 @@
     },
     {
       "module": "source-owned:window-initialized-views",
-      "canonical_source": "src/state/window-initialized-views.c",
+      "canonical_source": "src/window/state/hooks_offsets.c",
       "DOS_compile": {
         "basename": "WINVW36",
         "profile": "msc600ax",
@@ -7661,7 +7661,7 @@
     },
     {
       "module": "source-owned:critical-selector-byte",
-      "canonical_source": "src/state/critical-selector-byte.c",
+      "canonical_source": "src/platform/state/critical_error_selector.c",
       "DOS_compile": {
         "basename": "CRITBY36",
         "profile": "msc600ax",
@@ -7702,7 +7702,7 @@
     },
     {
       "module": "source-owned:icon-handle-cell-view",
-      "canonical_source": "src/state/icon-handle-cell-view.c",
+      "canonical_source": "src/window/state/icon_handle.c",
       "DOS_compile": {
         "basename": "ICONV4",
         "profile": "msc600ax",
@@ -7746,7 +7746,7 @@
     },
     {
       "module": "source-owned:audio-track-state",
-      "canonical_source": "src/state/audio-track-state.c",
+      "canonical_source": "src/sound/state/midi_tracks.c",
       "DOS_compile": {
         "profile": "msc600ax",
         "flags": [
@@ -7790,7 +7790,7 @@
     },
     {
       "module": "source-owned:menu-title-state",
-      "canonical_source": "src/state/menu-title-state.c",
+      "canonical_source": "src/window/state/menu_titles.c",
       "DOS_compile": {
         "basename": "MTITLE",
         "profile": "msc600ax",
@@ -7851,7 +7851,7 @@
     },
     {
       "module": "source-owned:window-palette",
-      "canonical_source": "src/state/window-palette.c",
+      "canonical_source": "src/window/state/palette.c",
       "DOS_compile": {
         "basename": "WPALET",
         "profile": "msc600ax",
@@ -7898,7 +7898,7 @@
     },
     {
       "module": "source-owned:window-handles",
-      "canonical_source": "src/state/window-handles.c",
+      "canonical_source": "src/window/state/handles.c",
       "DOS_compile": {
         "basename": "WHANDLE",
         "profile": "msc600ax",
@@ -7945,7 +7945,7 @@
   "in_module_binding_commons": [
     {
       "module": "S08:35F5",
-      "canonical_source": "src/S08/m35F5.c",
+      "canonical_source": "src/simulation/world_generation.c",
       "communals": [
         {
           "C_declaration": "int far HealthB;",
@@ -8161,7 +8161,7 @@
     },
     {
       "module": "S22:39C7",
-      "canonical_source": "src/S22/m39C7.c",
+      "canonical_source": "src/ui/yellow_commands.c",
       "communals": [
         {
           "C_declaration": "int far fd_50F6_0A8E;",
@@ -8178,36 +8178,36 @@
             2702
           ],
           "registered_address_source": "layout/symbols.json exact registered source name",
-          "source_extent_anchor": "src/S22/m39C7.c:59 `extern int far fd_50F6_0A8E;`; src/S22/m39C7.c:311 `fd_50F6_0A8E = 0;`; SaveRec src/S09/m35F5.c:1081 is size=2,count=1.",
+          "source_extent_anchor": "src/ui/yellow_commands.c:59 `extern int far fd_50F6_0A8E;`; src/ui/yellow_commands.c:311 `fd_50F6_0A8E = 0;`; SaveRec src/ui/save_load.c:1081 is size=2,count=1.",
           "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
           "views": {
             "behavioral_int_far_declarations": [
               {
-                "file": "src/root/m0CDB.c",
+                "file": "src/simulation/spider.c",
                 "line": 54,
                 "source": "extern int far fd_50F6_0A8E;"
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 59,
                 "source": "extern int far fd_50F6_0A8E;"
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 11,
                 "source": "extern int far fd_50F6_0A8E;"
               }
             ],
             "S09_byte_array_address_only_declarations": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 780,
                 "source": "extern unsigned char far fd_50F6_0A8E[];"
               }
             ],
             "direct_reads": [
               {
-                "file": "src/root/m0CDB.c",
+                "file": "src/simulation/spider.c",
                 "line": 124,
                 "source": "if (fd_50F6_0A8E && d > 2) {",
                 "access_modes": [
@@ -8215,7 +8215,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 99,
                 "source": "if (fd_50F6_0A8E >= 3) {",
                 "access_modes": [
@@ -8223,7 +8223,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 119,
                 "source": "if (fd_50F6_0A8E == 1 && fd_50F6_0AF8 == fd_50F6_048C) {",
                 "access_modes": [
@@ -8231,7 +8231,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 214,
                 "source": "&& fd_50F6_0AE8 == fd_50F6_048A && fd_50F6_0A8E == 0)",
                 "access_modes": [
@@ -8239,7 +8239,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 221,
                 "source": "} else if (fd_50F6_0A8E == 3) {",
                 "access_modes": [
@@ -8247,7 +8247,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 225,
                 "source": "} else if (fd_50F6_0A8E == 4) {",
                 "access_modes": [
@@ -8255,7 +8255,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 473,
                 "source": "if (fd_50F6_0A8E == 3 && fd_50F6_048C == fd_50F6_08DA && fd_50F6_07C0 == index)",
                 "access_modes": [
@@ -8263,7 +8263,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 625,
                 "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
                 "access_modes": [
@@ -8271,7 +8271,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 665,
                 "source": "flag = (fd_50F6_0A8E == 2) ? 1 : 0;",
                 "access_modes": [
@@ -8281,7 +8281,7 @@
             ],
             "direct_writes": [
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 122,
                 "source": "fd_50F6_0A8E = ((fd_50F6_04E2 ^ life) & 0x80) ? 3 : 4;",
                 "access_modes": [
@@ -8289,7 +8289,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 140,
                 "source": "fd_50F6_0A8E = shift;",
                 "access_modes": [
@@ -8297,7 +8297,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 148,
                 "source": "fd_50F6_0A8E = 2;",
                 "access_modes": [
@@ -8305,7 +8305,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 150,
                 "source": "fd_50F6_0A8E = 1;",
                 "access_modes": [
@@ -8313,7 +8313,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 152,
                 "source": "fd_50F6_0A8E = 2;",
                 "access_modes": [
@@ -8321,7 +8321,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 154,
                 "source": "fd_50F6_0A8E = 0;",
                 "access_modes": [
@@ -8329,7 +8329,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 259,
                 "source": "fd_50F6_0A8E = mode;",
                 "access_modes": [
@@ -8337,7 +8337,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 286,
                 "source": "fd_50F6_0A8E = mode;",
                 "access_modes": [
@@ -8345,7 +8345,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 311,
                 "source": "fd_50F6_0A8E = 0;",
                 "access_modes": [
@@ -8355,7 +8355,7 @@
             ],
             "pointer_escapes": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 1081,
                 "source": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
                 "access_modes": [
@@ -8364,7 +8364,7 @@
               }
             ],
             "SaveRec": {
-              "file": "src/S09/m35F5.c",
+              "file": "src/ui/save_load.c",
               "line": 1081,
               "table_index_1based": 188,
               "record": "{ 2, 1, (void far *)&fd_50F6_0A8E },",
@@ -8407,41 +8407,41 @@
             2720
           ],
           "registered_address_source": "layout/symbols.json exact registered source name",
-          "source_extent_anchor": "src/S22/m39C7.c:65 `extern int far fd_50F6_0AA0;`; src/S22/m39C7.c:312 `fd_50F6_0AA0 = 0;`; SaveRec src/S09/m35F5.c:1101 is size=2,count=1.",
+          "source_extent_anchor": "src/ui/yellow_commands.c:65 `extern int far fd_50F6_0AA0;`; src/ui/yellow_commands.c:312 `fd_50F6_0AA0 = 0;`; SaveRec src/ui/save_load.c:1101 is size=2,count=1.",
           "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
           "views": {
             "behavioral_int_far_declarations": [
               {
-                "file": "src/root/m0E2E.c",
+                "file": "src/simulation/tutorial.c",
                 "line": 290,
                 "source": "extern int far fd_50F6_0AA0;"
               },
               {
-                "file": "src/root/m15F8.c",
+                "file": "src/startup/main.c",
                 "line": 47,
                 "source": "extern int far fd_50F6_0AA0;"
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 65,
                 "source": "extern int far fd_50F6_0AA0;"
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 10,
                 "source": "extern int far fd_50F6_0AA0;"
               }
             ],
             "S09_byte_array_address_only_declarations": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 796,
                 "source": "extern unsigned char far fd_50F6_0AA0[];"
               }
             ],
             "direct_reads": [
               {
-                "file": "src/root/m0E2E.c",
+                "file": "src/simulation/tutorial.c",
                 "line": 311,
                 "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
                 "access_modes": [
@@ -8449,7 +8449,7 @@
                 ]
               },
               {
-                "file": "src/root/m0E2E.c",
+                "file": "src/simulation/tutorial.c",
                 "line": 315,
                 "source": "if (fd_50F6_0224 > fd_50F6_0204 && fd_50F6_0AA0 == 0)",
                 "access_modes": [
@@ -8457,7 +8457,7 @@
                 ]
               },
               {
-                "file": "src/root/m15F8.c",
+                "file": "src/startup/main.c",
                 "line": 113,
                 "source": "if (fd_50F6_047E == 0 || (fd_50F6_0AA0 != 0 && fd_50F6_105E < 10)) {",
                 "access_modes": [
@@ -8465,7 +8465,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 942,
                 "source": "if (fd_50F6_0AA0)",
                 "access_modes": [
@@ -8473,7 +8473,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 96,
                 "source": "if (fd_50F6_0AA0 == 0)",
                 "access_modes": [
@@ -8483,7 +8483,7 @@
             ],
             "direct_writes": [
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 131,
                 "source": "fd_50F6_0AA0 = 1;",
                 "access_modes": [
@@ -8491,7 +8491,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 157,
                 "source": "fd_50F6_0AA0 = 1;",
                 "access_modes": [
@@ -8499,7 +8499,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 312,
                 "source": "fd_50F6_0AA0 = 0;",
                 "access_modes": [
@@ -8509,7 +8509,7 @@
             ],
             "pointer_escapes": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 1101,
                 "source": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
                 "access_modes": [
@@ -8518,7 +8518,7 @@
               }
             ],
             "SaveRec": {
-              "file": "src/S09/m35F5.c",
+              "file": "src/ui/save_load.c",
               "line": 1101,
               "table_index_1based": 208,
               "record": "{ 2, 1, (void far *)&fd_50F6_0AA0 },",
@@ -8561,36 +8561,36 @@
             2846
           ],
           "registered_address_source": "layout/symbols.json exact registered source name",
-          "source_extent_anchor": "src/S22/m39C7.c:296 `extern int far fd_50F6_0B1E;`; src/S22/m39C7.c:313 `fd_50F6_0B1E = 0;`; SaveRec src/S09/m35F5.c:1087 is size=2,count=1.",
+          "source_extent_anchor": "src/ui/yellow_commands.c:296 `extern int far fd_50F6_0B1E;`; src/ui/yellow_commands.c:313 `fd_50F6_0B1E = 0;`; SaveRec src/ui/save_load.c:1087 is size=2,count=1.",
           "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
           "views": {
             "behavioral_int_far_declarations": [
               {
-                "file": "src/root/m0E2E.c",
+                "file": "src/simulation/tutorial.c",
                 "line": 292,
                 "source": "extern int far fd_50F6_0B1E;"
               },
               {
-                "file": "src/root/m10F7.c",
+                "file": "src/simulation/life_tiles.c",
                 "line": 52,
                 "source": "extern int far fd_50F6_0B1E;"
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 296,
                 "source": "extern int far fd_50F6_0B1E;"
               }
             ],
             "S09_byte_array_address_only_declarations": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 785,
                 "source": "extern unsigned char far fd_50F6_0B1E[];"
               }
             ],
             "direct_reads": [
               {
-                "file": "src/root/m0E2E.c",
+                "file": "src/simulation/tutorial.c",
                 "line": 325,
                 "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
                 "access_modes": [
@@ -8598,7 +8598,7 @@
                 ]
               },
               {
-                "file": "src/root/m0E2E.c",
+                "file": "src/simulation/tutorial.c",
                 "line": 391,
                 "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_0B1E == 0 && f_00F8_02BE() > fd_50F6_0204)",
                 "access_modes": [
@@ -8606,7 +8606,7 @@
                 ]
               },
               {
-                "file": "src/root/m0E2E.c",
+                "file": "src/simulation/tutorial.c",
                 "line": 395,
                 "source": "if (MeLocY + MeLocX != fd_50F6_1074 && fd_50F6_104E != 0 && fd_50F6_0B1E == 0)",
                 "access_modes": [
@@ -8614,7 +8614,7 @@
                 ]
               },
               {
-                "file": "src/root/m10F7.c",
+                "file": "src/simulation/life_tiles.c",
                 "line": 1139,
                 "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
                 "access_modes": [
@@ -8624,7 +8624,7 @@
             ],
             "direct_writes": [
               {
-                "file": "src/root/m10F7.c",
+                "file": "src/simulation/life_tiles.c",
                 "line": 1138,
                 "source": "fd_50F6_0B1E = GetDis(x, y, fd_3D57_02AC[0], fd_3D57_02AC[1]);",
                 "access_modes": [
@@ -8632,7 +8632,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 313,
                 "source": "fd_50F6_0B1E = 0;",
                 "access_modes": [
@@ -8642,7 +8642,7 @@
             ],
             "pointer_escapes": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 1087,
                 "source": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
                 "access_modes": [
@@ -8651,7 +8651,7 @@
               }
             ],
             "SaveRec": {
-              "file": "src/S09/m35F5.c",
+              "file": "src/ui/save_load.c",
               "line": 1087,
               "table_index_1based": 194,
               "record": "{ 2, 1, (void far *)&fd_50F6_0B1E },",
@@ -8694,24 +8694,24 @@
             3128
           ],
           "registered_address_source": "layout/symbols.json exact registered source name",
-          "source_extent_anchor": "src/S22/m39C7.c:297 `extern int far fd_50F6_0C38;`; src/S22/m39C7.c:314 `fd_50F6_0C38 = 0;`; SaveRec src/S09/m35F5.c:1104 is size=2,count=1.",
+          "source_extent_anchor": "src/ui/yellow_commands.c:297 `extern int far fd_50F6_0C38;`; src/ui/yellow_commands.c:314 `fd_50F6_0C38 = 0;`; SaveRec src/ui/save_load.c:1104 is size=2,count=1.",
           "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
           "views": {
             "behavioral_int_far_declarations": [
               {
-                "file": "src/root/m10F7.c",
+                "file": "src/simulation/life_tiles.c",
                 "line": 53,
                 "source": "extern int far fd_50F6_0C38;"
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 297,
                 "source": "extern int far fd_50F6_0C38;"
               }
             ],
             "S09_byte_array_address_only_declarations": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 798,
                 "source": "extern unsigned char far fd_50F6_0C38[];"
               }
@@ -8719,7 +8719,7 @@
             "direct_reads": [],
             "direct_writes": [
               {
-                "file": "src/root/m10F7.c",
+                "file": "src/simulation/life_tiles.c",
                 "line": 1139,
                 "source": "fd_50F6_0C38 = fd_50F6_0B1E + 1;",
                 "access_modes": [
@@ -8727,7 +8727,7 @@
                 ]
               },
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 314,
                 "source": "fd_50F6_0C38 = 0;",
                 "access_modes": [
@@ -8737,7 +8737,7 @@
             ],
             "pointer_escapes": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 1104,
                 "source": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
                 "access_modes": [
@@ -8746,7 +8746,7 @@
               }
             ],
             "SaveRec": {
-              "file": "src/S09/m35F5.c",
+              "file": "src/ui/save_load.c",
               "line": 1104,
               "table_index_1based": 211,
               "record": "{ 2, 1, (void far *)&fd_50F6_0C38 },",
@@ -8789,31 +8789,31 @@
             3134
           ],
           "registered_address_source": "layout/symbols.json exact registered source name",
-          "source_extent_anchor": "src/S22/m39C7.c:298 `extern int far fd_50F6_0C3E;`; src/S22/m39C7.c:315 `fd_50F6_0C3E = 0;`; SaveRec src/S09/m35F5.c:1107 is size=2,count=1.",
+          "source_extent_anchor": "src/ui/yellow_commands.c:298 `extern int far fd_50F6_0C3E;`; src/ui/yellow_commands.c:315 `fd_50F6_0C3E = 0;`; SaveRec src/ui/save_load.c:1107 is size=2,count=1.",
           "initialization": "natural tentative int far definition with no initializer; zero fill confirmed by pinned MSC startup and both RTLink fixtures",
           "views": {
             "behavioral_int_far_declarations": [
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 298,
                 "source": "extern int far fd_50F6_0C3E;"
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 39,
                 "source": "extern int far fd_50F6_0C3E;"
               }
             ],
             "S09_byte_array_address_only_declarations": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 801,
                 "source": "extern unsigned char far fd_50F6_0C3E[];"
               }
             ],
             "direct_reads": [
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 145,
                 "source": "fd_50F6_0C3E++;",
                 "access_modes": [
@@ -8822,7 +8822,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 161,
                 "source": "if (fd_50F6_0C3E & 1) {",
                 "access_modes": [
@@ -8832,7 +8832,7 @@
             ],
             "direct_writes": [
               {
-                "file": "src/S22/m39C7.c",
+                "file": "src/ui/yellow_commands.c",
                 "line": 315,
                 "source": "fd_50F6_0C3E = 0;",
                 "access_modes": [
@@ -8840,7 +8840,7 @@
                 ]
               },
               {
-                "file": "src/S25/m3BA4.c",
+                "file": "src/simulation/yellow_ant.c",
                 "line": 145,
                 "source": "fd_50F6_0C3E++;",
                 "access_modes": [
@@ -8851,7 +8851,7 @@
             ],
             "pointer_escapes": [
               {
-                "file": "src/S09/m35F5.c",
+                "file": "src/ui/save_load.c",
                 "line": 1107,
                 "source": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
                 "access_modes": [
@@ -8860,7 +8860,7 @@
               }
             ],
             "SaveRec": {
-              "file": "src/S09/m35F5.c",
+              "file": "src/ui/save_load.c",
               "line": 1107,
               "table_index_1based": 214,
               "record": "{ 2, 1, (void far *)&fd_50F6_0C3E },",
@@ -8895,7 +8895,7 @@
     },
     {
       "module": "S24:39C7",
-      "canonical_source": "src/S24/m39C7.c",
+      "canonical_source": "src/ui/history_window.c",
       "communals": [
         {
           "C_declaration": "int far fd_50F6_0516[64];",
@@ -9064,7 +9064,7 @@
     },
     {
       "module": "root:0AD9",
-      "canonical_source": "src/root/m0AD9.c",
+      "canonical_source": "src/simulation/yard_creatures.c",
       "communals": [
         {
           "C_declaration": "int far AntsEatenByLions;",
@@ -9113,7 +9113,7 @@
     },
     {
       "module": "root:0BE8",
-      "canonical_source": "src/root/m0BE8.c",
+      "canonical_source": "src/simulation/food_water_counts.c",
       "communals": [
         {
           "C_declaration": "int far BpopT;",
@@ -9189,7 +9189,7 @@
     },
     {
       "module": "root:1FD2",
-      "canonical_source": "src/root/m1FD2.c",
+      "canonical_source": "src/window/menu_helpers.c",
       "communals": [
         {
           "C_declaration": "struct Event near input_queue[7];",
@@ -9206,8 +9206,8 @@
   "existing_initialized_authorities": [
     {
       "module": "data:3D57",
-      "canonical_source": "src/data/d3D57.c",
-      "historical_source_ref": "src/data/d3D57.c",
+      "canonical_source": "src/simulation/tables.c",
+      "historical_source_ref": "src/simulation/tables.c",
       "placements": {
         "UNIT7_DATA": {
           "seg": 15703,
@@ -9219,8 +9219,8 @@
     },
     {
       "module": "data:3E1D",
-      "canonical_source": "src/data/d3E1D.c",
-      "historical_source_ref": "src/data/d3E1D.c",
+      "canonical_source": "src/simulation/maps_lists.c",
+      "historical_source_ref": "src/simulation/maps_lists.c",
       "placements": {
         "UNIT7_DATA": {
           "seg": 15901,
@@ -9237,8 +9237,8 @@
     },
     {
       "module": "data:55B3@0042",
-      "canonical_source": "src/data/d55B3_0042.c",
-      "historical_source_ref": "src/data/d55B3_0042.c",
+      "canonical_source": "src/startup/version.c",
+      "historical_source_ref": "src/startup/version.c",
       "placements": {
         "_DATA": {
           "seg": 21939,
@@ -9250,8 +9250,8 @@
     },
     {
       "module": "data:55B3@0064",
-      "canonical_source": "src/data/d55B3_0064.c",
-      "historical_source_ref": "src/data/d55B3_0064.c",
+      "canonical_source": "src/sound/theme_song.c",
+      "historical_source_ref": "src/sound/theme_song.c",
       "placements": {
         "_DATA": {
           "seg": 21939,
@@ -9263,8 +9263,8 @@
     },
     {
       "module": "data:55B3@00B8",
-      "canonical_source": "src/data/d55B3_00B8.c",
-      "historical_source_ref": "src/data/d55B3_00B8.c",
+      "canonical_source": "src/sound/instruments.c",
+      "historical_source_ref": "src/sound/instruments.c",
       "placements": {
         "_DATA": {
           "seg": 21939,
@@ -9278,7 +9278,7 @@
   "initializer_authority_notes": [
     {
       "owner": "g_2108",
-      "authority_ref": "src/S03/m3126.asm",
+      "authority_ref": "src/platform/video/tandy_raster.asm",
       "rule": "The accepted g_2216 literal translation establishes initial values. g_2108 is separately mutable and must remain a separate owner; equal initial values do not prove aliases."
     },
     {
@@ -9303,32 +9303,32 @@
     },
     "references": [
       {
-        "path": "src/S03/m3126.asm",
+        "path": "src/platform/video/tandy_raster.asm",
         "sha256": "b0b9d296f23b4f8a5b4706008b21b6ad96429636da11bf22ddb2126ee362f2ff",
         "sha256_scope": "admitted_worktree_bytes"
       },
       {
-        "path": "src/data/d3D57.c",
+        "path": "src/simulation/tables.c",
         "sha256": "983251ad55176050efcdea33c62f0a34a93686474b0de4b2bdde6c6c808716f5",
         "sha256_scope": "admitted_worktree_bytes"
       },
       {
-        "path": "src/data/d3E1D.c",
+        "path": "src/simulation/maps_lists.c",
         "sha256": "ab35eb29d30ac1bcf6390bf8a979c5d018f43f4cae45f9f0d9a1f00200611d05",
         "sha256_scope": "admitted_worktree_bytes"
       },
       {
-        "path": "src/data/d55B3_0042.c",
+        "path": "src/startup/version.c",
         "sha256": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
         "sha256_scope": "admitted_worktree_bytes"
       },
       {
-        "path": "src/data/d55B3_0064.c",
+        "path": "src/sound/theme_song.c",
         "sha256": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
         "sha256_scope": "admitted_worktree_bytes"
       },
       {
-        "path": "src/data/d55B3_00B8.c",
+        "path": "src/sound/instruments.c",
         "sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
         "sha256_scope": "admitted_worktree_bytes"
       },

@@ -38,67 +38,67 @@
     "all_canonical_source_pin_index_sha256": "69e4140432b521773b8f08473cee18de758b0bc1af8f8c8e8bd864c28e18a2cc",
     "reviewed_source_pins": [
       {
-        "path": "src/S09/m35F5.c",
+        "path": "src/ui/save_load.c",
         "size": 42150,
         "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
       },
       {
-        "path": "src/S15/m384C.c",
+        "path": "src/startup/game_session.c",
         "size": 9120,
         "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172"
       },
       {
-        "path": "src/S20/m39F1.c",
+        "path": "src/startup/dos_config.c",
         "size": 6620,
         "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "size": 7304,
         "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a"
       },
       {
-        "path": "src/root/m15F8.c",
+        "path": "src/startup/main.c",
         "size": 4897,
         "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a"
       },
       {
-        "path": "src/root/m1986.c",
+        "path": "src/resources/database_index.c",
         "size": 2874,
         "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff"
       },
       {
-        "path": "src/root/m19A9.c",
+        "path": "src/resources/database_records.c",
         "size": 4870,
         "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523"
       },
       {
-        "path": "src/root/m1A28.c",
+        "path": "src/resources/database_files.c",
         "size": 3200,
         "sha256": "5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740"
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "size": 5159,
         "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698"
       },
       {
-        "path": "src/root/m1A96.c",
+        "path": "src/resources/object_cache.c",
         "size": 6836,
         "sha256": "c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa"
       },
       {
-        "path": "src/root/m1B28.c",
+        "path": "src/platform/cursor_shapes.c",
         "size": 2422,
         "sha256": "9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343"
       },
       {
-        "path": "src/root/m205F.c",
+        "path": "src/platform/video/driver_select.c",
         "size": 6015,
         "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6"
       },
       {
-        "path": "src/state/database-record-state.c",
+        "path": "src/resources/state/open_databases.c",
         "size": 1295,
         "sha256": "6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a"
       }
@@ -107,7 +107,7 @@
       "uses": {
         "main": [
           {
-            "path": "src/root/m15F8.c",
+            "path": "src/startup/main.c",
             "line": 64,
             "column": 6,
             "kind": "definition"
@@ -115,59 +115,59 @@
         ],
         "db_SetDataBase": [
           {
-            "path": "src/S20/m39F1.c",
+            "path": "src/startup/dos_config.c",
             "line": 32,
             "column": 16,
             "kind": "prototype"
           },
           {
-            "path": "src/S20/m39F1.c",
+            "path": "src/startup/dos_config.c",
             "line": 138,
             "column": 9,
             "caller": "IBMInitStuff",
             "kind": "direct-call"
           },
           {
-            "path": "src/S20/m39F1.c",
+            "path": "src/startup/dos_config.c",
             "line": 140,
             "column": 5,
             "caller": "IBMInitStuff",
             "kind": "direct-call"
           },
           {
-            "path": "src/S20/m39F1.c",
+            "path": "src/startup/dos_config.c",
             "line": 144,
             "column": 9,
             "caller": "IBMInitStuff",
             "kind": "direct-call"
           },
           {
-            "path": "src/root/m15F8.c",
+            "path": "src/startup/main.c",
             "line": 30,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m15F8.c",
+            "path": "src/startup/main.c",
             "line": 93,
             "column": 5,
             "caller": "main",
             "kind": "direct-call"
           },
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 42,
             "column": 9,
             "kind": "definition"
           },
           {
-            "path": "src/root/m205F.c",
+            "path": "src/platform/video/driver_select.c",
             "line": 33,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m205F.c",
+            "path": "src/platform/video/driver_select.c",
             "line": 154,
             "column": 5,
             "caller": "f_205F_0004",
@@ -176,19 +176,19 @@
         ],
         "IBMInitStuff": [
           {
-            "path": "src/S20/m39F1.c",
+            "path": "src/startup/dos_config.c",
             "line": 61,
             "column": 10,
             "kind": "definition"
           },
           {
-            "path": "src/root/m15F8.c",
+            "path": "src/startup/main.c",
             "line": 29,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m15F8.c",
+            "path": "src/startup/main.c",
             "line": 92,
             "column": 5,
             "caller": "main",
@@ -197,20 +197,20 @@
         ],
         "f_205F_0004": [
           {
-            "path": "src/S20/m39F1.c",
+            "path": "src/startup/dos_config.c",
             "line": 34,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/S20/m39F1.c",
+            "path": "src/startup/dos_config.c",
             "line": 146,
             "column": 5,
             "caller": "IBMInitStuff",
             "kind": "direct-call"
           },
           {
-            "path": "src/root/m205F.c",
+            "path": "src/platform/video/driver_select.c",
             "line": 83,
             "column": 10,
             "kind": "definition"
@@ -218,19 +218,19 @@
         ],
         "OpenDB": [
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 45,
             "column": 9,
             "kind": "definition"
           },
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 11,
             "column": 16,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 51,
             "column": 35,
             "caller": "db_SetDataBase",
@@ -239,20 +239,20 @@
         ],
         "GetFreeHandle": [
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 41,
             "column": 9,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 50,
             "column": 10,
             "caller": "OpenDB",
             "kind": "direct-call"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 100,
             "column": 9,
             "kind": "definition"
@@ -260,7 +260,7 @@
         ],
         "db_CloseDataBase": [
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 159,
             "column": 10,
             "kind": "definition"
@@ -268,19 +268,19 @@
         ],
         "CloseDB": [
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 74,
             "column": 10,
             "kind": "definition"
           },
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 23,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 163,
             "column": 9,
             "caller": "db_CloseDataBase",
@@ -289,19 +289,19 @@
         ],
         "OpenIndex": [
           {
-            "path": "src/root/m1986.c",
+            "path": "src/resources/database_index.c",
             "line": 46,
             "column": 10,
             "kind": "definition"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 35,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 64,
             "column": 9,
             "caller": "OpenDB",
@@ -310,19 +310,19 @@
         ],
         "CreateIndex": [
           {
-            "path": "src/root/m1986.c",
+            "path": "src/resources/database_index.c",
             "line": 66,
             "column": 10,
             "kind": "definition"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 36,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 60,
             "column": 9,
             "caller": "OpenDB",
@@ -331,19 +331,19 @@
         ],
         "CloseIndex": [
           {
-            "path": "src/root/m1986.c",
+            "path": "src/resources/database_index.c",
             "line": 70,
             "column": 10,
             "kind": "definition"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 37,
             "column": 17,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m1A28.c",
+            "path": "src/resources/database_files.c",
             "line": 84,
             "column": 5,
             "caller": "CloseDB",
@@ -352,19 +352,19 @@
         ],
         "DBRecall": [
           {
-            "path": "src/root/m19A9.c",
+            "path": "src/resources/database_records.c",
             "line": 71,
             "column": 16,
             "kind": "definition"
           },
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 16,
             "column": 23,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m1A53.c",
+            "path": "src/resources/database_objects.c",
             "line": 92,
             "column": 27,
             "caller": "db_LoadObject",
@@ -373,19 +373,19 @@
         ],
         "FindIndex": [
           {
-            "path": "src/root/m1986.c",
+            "path": "src/resources/database_index.c",
             "line": 77,
             "column": 22,
             "kind": "definition"
           },
           {
-            "path": "src/root/m19A9.c",
+            "path": "src/resources/database_records.c",
             "line": 40,
             "column": 29,
             "kind": "prototype"
           },
           {
-            "path": "src/root/m19A9.c",
+            "path": "src/resources/database_records.c",
             "line": 84,
             "column": 13,
             "caller": "DBRecall",
@@ -434,12 +434,12 @@
       },
       "database_chain_calls_in_loops": [
         {
-          "path": "src/root/m1A53.c",
+          "path": "src/resources/database_objects.c",
           "function": "db_LoadObject",
           "target": "DBRecall"
         },
         {
-          "path": "src/root/m1A53.c",
+          "path": "src/resources/database_objects.c",
           "function": "db_CloseDataBase",
           "target": "CloseDB"
         }
@@ -450,67 +450,67 @@
     "counter_source_initializer": "db_numOfHandles = 0",
     "all_canonical_db_numOfHandles_uses": [
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 28,
         "column": 5
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 47,
         "column": 9
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 51,
         "column": 16
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 52,
         "column": 25
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 86,
         "column": 9
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 91,
         "column": 25
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 109,
         "column": 9
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 123,
         "column": 9
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 142,
         "column": 13
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 154,
         "column": 9
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 161,
         "column": 12
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 162,
         "column": 11
       },
       {
-        "path": "src/root/m1A53.c",
+        "path": "src/resources/database_objects.c",
         "line": 163,
         "column": 28
       }
@@ -549,7 +549,7 @@
       "function": "GetFreeHandle",
       "value": 1
     },
-    "owner": "src/root/m1A28.c",
+    "owner": "src/resources/database_files.c",
     "source_reference_lines": [
       39,
       104,
@@ -586,14 +586,14 @@
   },
   "storage_consumer_census": {
     "db_handles": [
-      "src/root/m1A53.c",
-      "src/state/database-record-state.c"
+      "src/resources/database_objects.c",
+      "src/resources/state/open_databases.c"
     ],
     "fd_50F6_3958": [
-      "src/root/m1986.c",
-      "src/root/m19A9.c",
-      "src/root/m1A28.c",
-      "src/state/database-record-state.c"
+      "src/resources/database_index.c",
+      "src/resources/database_records.c",
+      "src/resources/database_files.c",
+      "src/resources/state/open_databases.c"
     ]
   },
   "save_load_destinations": {
@@ -866,7 +866,7 @@
   "implementation": {
     "path": "evidence/canonical/database-domain/replay.py",
     "size": 41227,
-    "sha256": "35f165b9aa5a98d7893aecd0e57c644bde2a6441adab943c7eed14c9422d0346"
+    "sha256": "b09dfbd0d108a2880917511fbc9c6afa264c242eaaf57a42da7a6aad7307dab7"
   },
   "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
   "nonclaims": [

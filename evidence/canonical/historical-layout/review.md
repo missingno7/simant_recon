@@ -31,7 +31,7 @@ added to canonical source.
 
 * No relocation or immediate operand addresses any of the ranges.
 * The only symbol-indexed site overlapping `[60B0,60BE)` is the small-font fold
-  table (`[bx+_g_5FBE]`, `src/root/m1FBD.asm`); display mode 8 never installs
+  table (`[bx+_g_5FBE]`, `src/graphics/bitmap_text.asm`); display mode 8 never installs
   the small font, so this is outside the supported domain.
 * The `g_610C[g_5A97]` selector alias is excluded in mode 8; hot-box queue
   insertions come only from `g_6004`/`g_6016`/`g_603A`; the 17 registered

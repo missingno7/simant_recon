@@ -33,7 +33,7 @@ def find_root() -> Path:
     for candidate in Path(__file__).resolve().parents:
         if (candidate / "layout" / "toolchain.json").is_file() and (candidate / "src" / "root" / "m208F.c").is_file():
             return candidate
-    raise RuntimeError("Cannot locate repository root via layout/toolchain.json and src/root/m208F.c")
+    raise RuntimeError("Cannot locate repository root via layout/toolchain.json and src/window/text_bitmap_helpers.c")
 
 
 ROOT = find_root()
@@ -170,7 +170,7 @@ def module_source_context(manifest: dict, source_raw: bytes, source_text: str) -
     row = manifest.get("modules", {}).get(MODULE_KEY)
     if row is None:
         raise ValueError(f"Current manifest has no {MODULE_KEY} row")
-    if row.get("source") != "src/root/m208F.c" or row.get("source_sha256") != sha(source_raw):
+    if row.get("source") != "src/window/text_bitmap_helpers.c" or row.get("source_sha256") != sha(source_raw):
         raise ValueError("Current whole m208F source does not match its current manifest source pin")
     if row.get("extent", {}).get("end", 0) - row.get("extent", {}).get("start", 0) != 1415:
         raise ValueError("Current m208F extent is not the reviewed 1,415-byte span")
@@ -650,7 +650,7 @@ def slot_inventory_context(program: dict, source_raw: bytes, source_text: str) -
     if len(rows) != 1:
         raise ValueError("Current program inventory must contain exactly one canonical icon Handle slot TU")
     row = rows[0]
-    if row.get("source") != "src/state/icon-handle-cell-view.c" or row.get("source_sha256") != sha(source_raw):
+    if row.get("source") != "src/window/state/icon_handle.c" or row.get("source_sha256") != sha(source_raw):
         raise ValueError("Canonical slot TU does not match its current program inventory source pin")
     if re.sub(r"/\*.*?\*/|//[^\n]*", "", source_text, flags=re.S).strip() != "char far * far * far fd_50F6_46D2;":
         raise ValueError("Canonical storage TU is not exactly the admitted single four-byte Handle slot")

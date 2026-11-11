@@ -1,40 +1,40 @@
 {
   "schema": "viewport-input-domain-facts-v2",
   "source_pins": {
-    "src/S00/m31AD.asm": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
-    "src/S00/m31AD_2AB4.asm": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
-    "src/S09/m35F5.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
-    "src/S10/m35F5.c": "e68eeb865aedf6ff9e2f72ec9fa3f3ab620ed0dd788ec967c59cf6f8f92fdf99",
-    "src/S16/m384C.c": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
-    "src/S17/m384C.c": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
-    "src/S20/m39F1.c": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
-    "src/S26/m39C7.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
-    "src/root/m00BA.c": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
-    "src/root/m00F8.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
-    "src/root/m015B.c": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
-    "src/root/m0250.c": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
-    "src/root/m15F8.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
-    "src/root/m1B73.asm": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
-    "src/root/m1CE2.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
-    "src/root/m1FD2.c": "fd800b1dd5270dab48c61ea53b3fbfbb1d38b4c593542852a2d212993be1841c",
-    "src/root/m205F.c": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
-    "src/root/m20E8.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
-    "src/root/m218D.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
-    "src/root/m22BF.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
-    "src/root/m23AE.c": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
-    "src/root/m2505.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
-    "src/state/mouse-words.c": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
-    "src/state/screen-clip-list.c": "7933eb61262e3684eb44ee2f5220598e8eb6e4d5f1ff0841837e2831d0264b96"
+    "src/platform/video/planar_raster.asm": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
+    "src/platform/video/planar_mode_blits.asm": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
+    "src/ui/save_load.c": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
+    "src/window/menu_tracking.c": "e68eeb865aedf6ff9e2f72ec9fa3f3ab620ed0dd788ec967c59cf6f8f92fdf99",
+    "src/ui/intro_credits.c": "9e3f4c34c560ca4d93346a43bf383f4e6cc3549ec6878b6194c974164d49a540",
+    "src/window/menu_setup.c": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
+    "src/startup/dos_config.c": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
+    "src/window/move_resize.c": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
+    "src/startup/application_windows.c": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
+    "src/ui/view_dialog_helpers.c": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
+    "src/ui/view_commands.c": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f",
+    "src/ui/edit_view.c": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
+    "src/startup/main.c": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
+    "src/platform/input_timer.asm": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+    "src/graphics/screen_rects.c": "e5c2cb4b8dbe7af6d263072002a49e012b290c1082f0fc877b479728b75bacd3",
+    "src/window/menu_helpers.c": "fd800b1dd5270dab48c61ea53b3fbfbb1d38b4c593542852a2d212993be1841c",
+    "src/platform/video/driver_select.c": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
+    "src/window/lifecycle.c": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
+    "src/window/events.c": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
+    "src/window/object_attributes.c": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
+    "src/window/locking.c": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
+    "src/window/object_geometry.c": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
+    "src/window/state/mouse_buttons.c": "64335f44c5f3104ffb8fc81d26fc8bc7aaf5e0e1d126bb8d79c02a6cc5802d32",
+    "src/graphics/state/screen_clip.c": "7933eb61262e3684eb44ee2f5220598e8eb6e4d5f1ff0841837e2831d0264b96"
   },
   "source_census": {
     "g_432A_writers": [
       {
-        "path": "src/S20/m39F1.c",
+        "path": "src/startup/dos_config.c",
         "line": 80,
         "text": "g_432A = 1;"
       },
       {
-        "path": "src/S20/m39F1.c",
+        "path": "src/startup/dos_config.c",
         "line": 123,
         "text": "g_432A = 1;"
       }
@@ -46,42 +46,42 @@
     "g_9122_writers": [
       {
         "global": "g_9122",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 306,
         "owner": "_f_1B73_0046",
         "text": "mov word ptr _g_9122, ax"
       },
       {
         "global": "g_9122",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 751,
         "owner": "_f_1B73_0445",
         "text": "mov word ptr _g_9122, cx"
       },
       {
         "global": "g_9122",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 947,
         "owner": "_f_1B73_051F",
         "text": "mov word ptr _g_9122, ax"
       },
       {
         "global": "g_9122",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1336,
         "owner": "_f_1B73_0747",
         "text": "mov word ptr _g_9122, bx"
       },
       {
         "global": "g_9122",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1347,
         "owner": "_f_1B73_0747",
         "text": "mov word ptr _g_9122, ax"
       },
       {
         "global": "g_9122",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1360,
         "owner": "_f_1B73_0747",
         "text": "mov word ptr _g_9122, ax"
@@ -90,42 +90,42 @@
     "g_9124_writers": [
       {
         "global": "g_9124",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 309,
         "owner": "_f_1B73_0046",
         "text": "mov word ptr _g_9124, ax"
       },
       {
         "global": "g_9124",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 752,
         "owner": "_f_1B73_0445",
         "text": "mov word ptr _g_9124, dx"
       },
       {
         "global": "g_9124",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 961,
         "owner": "_f_1B73_051F",
         "text": "mov word ptr _g_9124, ax"
       },
       {
         "global": "g_9124",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1333,
         "owner": "_f_1B73_0747",
         "text": "mov word ptr _g_9124, bx"
       },
       {
         "global": "g_9124",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1371,
         "owner": "_f_1B73_0747",
         "text": "mov word ptr _g_9124, ax"
       },
       {
         "global": "g_9124",
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1384,
         "owner": "_f_1B73_0747",
         "text": "mov word ptr _g_9124, ax"
@@ -133,341 +133,341 @@
     ],
     "g_9122_mentions": [
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 214,
         "text": "extern int near g_9122;"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 263,
         "text": "if (pt.x != g_9122 || pt.y != g_9124) {"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 335,
         "text": "if (pt.x != g_9122 || pt.y != g_9124) {"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 102,
         "text": "extern int near g_9122;"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 118,
         "text": "if (g_9122 <= 1)"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 120,
         "text": "else if (g_3DB2 - 4 <= g_9122)"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 41,
         "text": "extrn\t_g_9122:byte"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 306,
         "text": "mov word ptr _g_9122, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 326,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 701,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 751,
         "text": "mov word ptr _g_9122, cx"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 802,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 936,
         "text": "add ax, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 947,
         "text": "mov word ptr _g_9122, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1336,
         "text": "mov word ptr _g_9122, bx"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1342,
         "text": "mov bx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1347,
         "text": "mov word ptr _g_9122, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1356,
         "text": "cmp bx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1360,
         "text": "mov word ptr _g_9122, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1431,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1458,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1687,
         "text": "mov bx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1712,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1812,
         "text": "mov cx, word ptr es:_g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1870,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1950,
         "text": "mov cx, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1993,
         "text": "mov di, word ptr _g_9122"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 272,
         "text": "extern int near g_9122;"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 277,
         "text": "pt->x = g_9122;"
       },
       {
-        "path": "src/state/mouse-words.c",
+        "path": "src/window/state/mouse_buttons.c",
         "line": 7,
         "text": "int near g_9122;"
       }
     ],
     "g_9124_mentions": [
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 215,
         "text": "extern int near g_9124;"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 263,
         "text": "if (pt.x != g_9122 || pt.y != g_9124) {"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 335,
         "text": "if (pt.x != g_9122 || pt.y != g_9124) {"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 104,
         "text": "extern int near g_9124;"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 122,
         "text": "if (g_9124 < 1)"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 124,
         "text": "else if (g_3DB4 - 4 <= g_9124)"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 42,
         "text": "extrn\t_g_9124:byte"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 309,
         "text": "mov word ptr _g_9124, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 327,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 702,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 752,
         "text": "mov word ptr _g_9124, dx"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 803,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 950,
         "text": "add ax, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 961,
         "text": "mov word ptr _g_9124, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1333,
         "text": "mov word ptr _g_9124, bx"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1366,
         "text": "mov bx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1371,
         "text": "mov word ptr _g_9124, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1380,
         "text": "cmp bx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1384,
         "text": "mov word ptr _g_9124, ax"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1432,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1459,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1692,
         "text": "mov bx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1713,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1813,
         "text": "mov dx, word ptr es:_g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1871,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1951,
         "text": "mov dx, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1998,
         "text": "mov si, word ptr _g_9124"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 273,
         "text": "extern int near g_9124;"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 278,
         "text": "pt->y = g_9124;"
       },
       {
-        "path": "src/state/mouse-words.c",
+        "path": "src/window/state/mouse_buttons.c",
         "line": 8,
         "text": "int near g_9124;"
       }
     ],
     "warp_09E9_callers": [
       {
-        "path": "src/S10/m35F5.c",
+        "path": "src/window/menu_tracking.c",
         "line": 145,
         "first_arg": null,
         "text": "f_1B73_09E9(fd_50F6_46A8[m] + g_3DDE * 3, g_3DDC / 2);"
       },
       {
-        "path": "src/S10/m35F5.c",
+        "path": "src/window/menu_tracking.c",
         "line": 378,
         "first_arg": null,
         "text": "f_1B73_09E9(g_3DDE * 4 + x, g_3DDC / 2 + g_3DDC * k + r.top);"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 253,
         "first_arg": null,
         "text": "f_1B73_09E9(start.x, start.y);"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 325,
         "first_arg": null,
         "text": "f_1B73_09E9(start.x, start.y);"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1792,
         "first_arg": null,
         "text": "call far ptr _f_1B73_09E9"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 429,
         "first_arg": null,
         "text": "f_1B73_09E9(x, 1);"
@@ -475,19 +475,19 @@
     ],
     "warp_0C80_callers": [
       {
-        "path": "src/S10/m35F5.c",
+        "path": "src/window/menu_tracking.c",
         "line": 425,
         "first_arg": null,
         "text": "f_1B73_0C80(i + base);"
       },
       {
-        "path": "src/root/m218D.c",
+        "path": "src/window/events.c",
         "line": 305,
         "first_arg": null,
         "text": "f_1B73_0C80(found);"
       },
       {
-        "path": "src/root/m218D.c",
+        "path": "src/window/events.c",
         "line": 332,
         "first_arg": null,
         "text": "f_1B73_0C80(cur);"
@@ -495,31 +495,31 @@
     ],
     "keyboard_09F7_replay_callers": [
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 310,
         "first_arg": null,
         "text": "call near ptr _f_1B73_09F7"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 962,
         "first_arg": null,
         "text": "call near ptr _f_1B73_09F7"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1191,
         "first_arg": null,
         "text": "call near ptr _f_1B73_09F7"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1385,
         "first_arg": null,
         "text": "call near ptr _f_1B73_09F7"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1416,
         "first_arg": null,
         "text": "call near ptr _f_1B73_09F7"
@@ -527,7 +527,7 @@
     ],
     "modal_resize_callers": [
       {
-        "path": "src/root/m218D.c",
+        "path": "src/window/events.c",
         "line": 168,
         "first_arg": "0",
         "text": "o26_39C7_0671(0L);"
@@ -535,26 +535,26 @@
     ],
     "f_20E8_0903_references": [
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 390,
         "text": "void _fastcall f_20E8_0903(int obj, int far *rect)"
       }
     ],
     "win_Swap_callers": [
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 294,
         "first_arg": "0x1900",
         "text": "win_Swap(0x1900, 0x100);"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 306,
         "first_arg": "0x100",
         "text": "win_Swap(0x100, 0x1900);"
       },
       {
-        "path": "src/root/m015B.c",
+        "path": "src/ui/view_commands.c",
         "line": 185,
         "first_arg": "0x100",
         "text": "win_Swap(0x100, 0x1900);"
@@ -562,25 +562,25 @@
     ],
     "f_22BF_00DD_callers": [
       {
-        "path": "src/S09/m35F5.c",
+        "path": "src/ui/save_load.c",
         "line": 320,
         "first_arg": "0x1602",
         "text": "f_22BF_00DD(0x1602, &r2);"
       },
       {
-        "path": "src/S09/m35F5.c",
+        "path": "src/ui/save_load.c",
         "line": 519,
         "first_arg": "0x1602",
         "text": "f_22BF_00DD(0x1602, &r);"
       },
       {
-        "path": "src/S16/m384C.c",
+        "path": "src/ui/intro_credits.c",
         "line": 85,
         "first_arg": "0x1a01",
         "text": "f_22BF_00DD(0x1a01, &bounds);"
       },
       {
-        "path": "src/S16/m384C.c",
+        "path": "src/ui/intro_credits.c",
         "line": 120,
         "first_arg": "0x1a01",
         "text": "f_22BF_00DD(0x1a01, &saved);"
@@ -588,19 +588,19 @@
     ],
     "win_LoadWindow_callers": [
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 136,
         "first_arg": null,
         "text": "win_LoadWindow(i << 8);"
       },
       {
-        "path": "src/root/m23AE.c",
+        "path": "src/window/locking.c",
         "line": 58,
         "first_arg": null,
         "text": "win_LoadWindow(win);"
       },
       {
-        "path": "src/root/m23AE.c",
+        "path": "src/window/locking.c",
         "line": 74,
         "first_arg": null,
         "text": "win_LoadWindow(win);"
@@ -608,7 +608,7 @@
     ],
     "win_LoadAllWindows_callers": [
       {
-        "path": "src/root/m00BA.c",
+        "path": "src/startup/application_windows.c",
         "line": 48,
         "first_arg": null,
         "text": "win_LoadAllWindows();"
@@ -616,300 +616,300 @@
     ],
     "win_offsets_references": [
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 217,
         "text": "extern struct Rect far win_offsets[];"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 277,
         "text": "win_offsets[win >> 8] = *(struct Rect far *)&w->objs[0]->x;"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 33,
         "text": "extern struct Rect far win_offsets[];"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 51,
         "text": "if (win_offsets[(char)(win >> 8)].left != (int)0x8000)"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 52,
         "text": "*(struct Rect far *)(obj + 8) = win_offsets[(char)(win >> 8)];"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 54,
         "text": "win_offsets[(char)(win >> 8)] = *(struct Rect far *)(obj + 8);"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 107,
         "text": "for (i = 0; i < 45; i++) win_offsets[i] = g_635C;"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 110,
         "text": "_fmemcpy(win_offsets, f_171C_1B84(h), 0x140);"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 237,
         "text": "win_offsets[win >> 8] = *(struct Rect far *)origin;"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 279,
         "text": "*(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8) = win_offsets[(char)(win >> 8)];"
       },
       {
-        "path": "src/root/m23AE.c",
+        "path": "src/window/locking.c",
         "line": 126,
         "text": "extern struct Rect far win_offsets[];"
       },
       {
-        "path": "src/root/m23AE.c",
+        "path": "src/window/locking.c",
         "line": 173,
         "text": "win_offsets[n] = *(struct Rect far *)((char far *)w->objs[0] + 8);"
       },
       {
-        "path": "src/state/window-initialized-views.c",
+        "path": "src/window/state/hooks_offsets.c",
         "line": 3,
         "text": "struct Rect far win_offsets[45];"
       }
     ],
     "fd_50F6_393C_mentions": [
       {
-        "path": "src/S16/m384C.c",
+        "path": "src/ui/intro_credits.c",
         "line": 45,
         "text": "extern struct Rect far fd_50F6_393C;"
       },
       {
-        "path": "src/S16/m384C.c",
+        "path": "src/ui/intro_credits.c",
         "line": 84,
         "text": "bounds.top = fd_50F6_393C.bottom + 3;"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 61,
         "text": "extern struct Rect far fd_50F6_393C;"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 107,
         "text": "r.top = fd_50F6_393C.bottom;"
       },
       {
-        "path": "src/S26/m39C7.c",
+        "path": "src/window/move_resize.c",
         "line": 182,
         "text": "if (r->top > fd_50F6_393C.bottom && r->bottom - r->top >= w->minHeight)"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 368,
         "text": "extern struct Rect far fd_50F6_393C;"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 388,
         "text": "fd_50F6_393C = *f_1CE2_000C();"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 389,
         "text": "fd_50F6_393C.bottom = g_3DDC + fd_50F6_393C.top + 3;"
       },
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 392,
         "text": "f_1CE2_046D(&fd_50F6_393C, g_3DE2 | g_3DE4);"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 203,
         "text": "extern struct Rect far fd_50F6_393C;"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 230,
         "text": "else if (r.top <= fd_50F6_393C.bottom)"
       },
       {
-        "path": "src/root/m20E8.c",
+        "path": "src/window/lifecycle.c",
         "line": 231,
         "text": "dy = fd_50F6_393C.bottom - r.top;"
       },
       {
-        "path": "src/state/remaining-window-state.c",
+        "path": "src/unresolved/state/remaining_window_state.c",
         "line": 30,
         "text": "struct Rect far fd_50F6_393C;"
       }
     ],
     "g_5A9C_mentions": [
       {
-        "path": "src/S17/m384C.c",
+        "path": "src/window/menu_setup.c",
         "line": 16,
         "text": "extern struct Rect far g_5A9C;"
       },
       {
-        "path": "src/S17/m384C.c",
+        "path": "src/window/menu_setup.c",
         "line": 26,
         "text": "f_1FD2_03EB(&g_5A9C, 0xff00);"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 358,
         "text": "extern struct Rect far g_5A9C;"
       },
       {
-        "path": "src/root/m00F8.c",
+        "path": "src/ui/view_dialog_helpers.c",
         "line": 362,
         "text": "f_21FA_0AD2(&g_5A9C);"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 49,
         "text": "extrn\t_g_5A9C:byte"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 361,
         "text": "mov cx, offset DGROUP:_g_5A9C"
       },
       {
-        "path": "src/root/m1CE2.c",
+        "path": "src/graphics/screen_rects.c",
         "line": 10,
         "text": "extern char far g_5A9C[];"
       },
       {
-        "path": "src/root/m1CE2.c",
+        "path": "src/graphics/screen_rects.c",
         "line": 14,
         "text": "return g_5A9C;"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 16,
         "text": "extern struct Rect far g_5A9C;"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 17,
         "text": "char far *g_574E = (char far *)&g_5A9C;"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 165,
         "text": "g_5AAC = &g_5A9C;"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 184,
         "text": "g_5AAC = &g_5A9C;"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 250,
         "text": "*list = g_5A9C;"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 382,
         "text": "g_5AAC = &g_5A9C;"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 500,
         "text": "if (r->top >= g_5A9C.top && r->bottom <= g_5A9C.bottom &&"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 501,
         "text": "r->left >= g_5A9C.left && r->right <= g_5A9C.right)"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "line": 513,
         "text": "f_1D8E_003F(r, &g_5A9C, fd_50F6_3C14, 0L);"
       },
       {
-        "path": "src/root/m205F.c",
+        "path": "src/platform/video/driver_select.c",
         "line": 61,
         "text": "extern struct Rect far g_5A9C;"
       },
       {
-        "path": "src/root/m205F.c",
+        "path": "src/platform/video/driver_select.c",
         "line": 210,
         "text": "g_5A9C.right = g_3DB2;"
       },
       {
-        "path": "src/root/m205F.c",
+        "path": "src/platform/video/driver_select.c",
         "line": 211,
         "text": "g_5A9C.bottom = g_3DB4;"
       },
       {
-        "path": "src/root/m218D.c",
+        "path": "src/window/events.c",
         "line": 96,
         "text": "extern char g_5A9C[];"
       },
       {
-        "path": "src/root/m218D.c",
+        "path": "src/window/events.c",
         "line": 102,
         "text": "f_1E57_0A9C(g_5A9C);"
       },
       {
-        "path": "src/state/screen-clip-list.c",
+        "path": "src/graphics/state/screen_clip.c",
         "line": 4,
         "text": "struct Rect near g_5A9C[2] = {"
       }
     ],
     "g_5FFA_mentions": [
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 38,
         "text": "extrn\t_g_5FFA:byte"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 777,
         "text": "call word ptr _g_5FFA"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1534,
         "text": "mov word ptr _g_5FFA, ax"
       }
     ],
     "g_4DA5_hot_box_mentions": [
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 97,
         "text": "_g_4DA5\t\tdw\t0"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 338,
         "text": "mov word ptr _g_4DA5, bx"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 370,
         "text": "mov bx, word ptr _g_4DA5"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 796,
         "text": "mov bx, word ptr _g_4DA5"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 813,
         "text": "mov word ptr _g_4DA5, bx"
       },
       {
-        "path": "src/root/m1B73.asm",
+        "path": "src/platform/input_timer.asm",
         "line": 1944,
         "text": "mov ax, word ptr _g_4DA5"
       }
@@ -917,158 +917,158 @@
     "descriptor_binding_mentions": {
       "g_6004": [
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 53,
           "text": "struct Timer g_6004 = { { 0, 0, 100, 100 }, f_1B73_030F, 1, 1, 1, 0, 10 };"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 233,
           "text": "g_6004.r.left = r->left;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 234,
           "text": "g_6004.r.top = r->top;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 235,
           "text": "g_6004.r.right = r->right;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 236,
           "text": "g_6004.r.bottom = r->bottom;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 237,
           "text": "g_6004.ticks = ticks;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 239,
           "text": "f_1B73_0B00(&g_6004, fd_5071_03C4);"
         }
       ],
       "g_6016": [
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 54,
           "text": "struct Timer g_6016 = { { 0, 0, 100, 100 }, f_1B73_0D4B, 1, 1, 1, 0, -1 };"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 201,
           "text": "g_6016.r.left = r->left;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 202,
           "text": "g_6016.r.top = r->top;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 203,
           "text": "g_6016.r.right = r->right;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 204,
           "text": "g_6016.r.bottom = r->bottom;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 205,
           "text": "g_6016.ticks = ticks;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 206,
           "text": "g_6016.fn = fn;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 207,
           "text": "f_1B73_0B00(&g_6016, fd_5071_0728);"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 219,
           "text": "g_6016.r.left = r->left;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 220,
           "text": "g_6016.r.top = r->top;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 221,
           "text": "g_6016.r.right = r->right;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 222,
           "text": "g_6016.r.bottom = r->bottom;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 223,
           "text": "g_6016.ticks = ticks;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 224,
           "text": "g_6016.fn = fn;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 226,
           "text": "f_1B73_0AC3(&g_6016, fd_5071_0728);"
         }
       ],
       "g_6028": [
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 55,
           "text": "struct Timer g_6028 = { { 0, 0, 100, 100 }, f_1B73_0D4B, 1, 1, 1, 0, -1 };"
         }
       ],
       "g_603A": [
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 56,
           "text": "struct Timer g_603A = { { 0, 0, 0x27f, 0x10 }, f_1B73_030F, 0, 0, 0, 0, 0x1f };"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 251,
           "text": "g_603A.r.left = r->left;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 252,
           "text": "g_603A.r.top = r->top;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 253,
           "text": "g_603A.r.right = r->right;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 254,
           "text": "g_603A.r.bottom = r->bottom;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 255,
           "text": "g_603A.ticks = ticks;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 257,
           "text": "f_1B73_0B00(&g_603A, fd_5071_0060);"
         }
@@ -1077,329 +1077,329 @@
     "menu_state_mentions": {
       "g_9130": [
         {
-          "path": "src/S00/m31AD.asm",
+          "path": "src/platform/video/planar_raster.asm",
           "line": 58,
           "text": "extrn\t_g_9130:byte"
         },
         {
-          "path": "src/S00/m31AD.asm",
+          "path": "src/platform/video/planar_raster.asm",
           "line": 3719,
           "text": "lea bx, _g_9130"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 84,
           "text": "extern void (far * near g_9130)(void);"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 103,
           "text": "(*g_9130)();"
         },
         {
-          "path": "src/S19/m384C.c",
+          "path": "src/ui/game_events.c",
           "line": 52,
           "text": "extern void (far * near g_9130)(void);"
         },
         {
-          "path": "src/S19/m384C.c",
+          "path": "src/ui/game_events.c",
           "line": 122,
           "text": "(*g_9130)();"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 367,
           "text": "extern void (far * near g_9130)(void);"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 387,
           "text": "g_9130();"
         },
         {
-          "path": "src/root/m205F.c",
+          "path": "src/platform/video/driver_select.c",
           "line": 59,
           "text": "extern void (far * near g_9130)(void);"
         },
         {
-          "path": "src/root/m205F.c",
+          "path": "src/platform/video/driver_select.c",
           "line": 209,
           "text": "(*g_9130)();"
         },
         {
-          "path": "src/root/m24AB.c",
+          "path": "src/graphics/font_output.c",
           "line": 89,
           "text": "extern void (far * near g_9130)(void);"
         },
         {
-          "path": "src/root/m24AB.c",
+          "path": "src/graphics/font_output.c",
           "line": 100,
           "text": "(*g_9130)();"
         },
         {
-          "path": "src/root/m24AB.c",
+          "path": "src/graphics/font_output.c",
           "line": 105,
           "text": "(*g_9130)();"
         }
       ],
       "g_3DDC": [
         {
-          "path": "src/S00/m31AD.asm",
+          "path": "src/platform/video/planar_raster.asm",
           "line": 34,
           "text": "extrn\t_g_3DDC:byte"
         },
         {
-          "path": "src/S00/m31AD.asm",
+          "path": "src/platform/video/planar_raster.asm",
           "line": 3153,
           "text": "mov byte ptr _g_3DDC, 8"
         },
         {
-          "path": "src/S00/m31AD.asm",
+          "path": "src/platform/video/planar_raster.asm",
           "line": 3167,
           "text": "mov byte ptr _g_3DDC, 0Eh"
         },
         {
-          "path": "src/S00/m31AD.asm",
+          "path": "src/platform/video/planar_raster.asm",
           "line": 3705,
           "text": "mov byte ptr _g_3DDC, 6"
         },
         {
-          "path": "src/S01/m3126.asm",
+          "path": "src/platform/video/mono_raster.asm",
           "line": 31,
           "text": "extrn\t_g_3DDC:byte"
         },
         {
-          "path": "src/S01/m3126.asm",
+          "path": "src/platform/video/mono_raster.asm",
           "line": 342,
           "text": "mov byte ptr _g_3DDC, 8"
         },
         {
-          "path": "src/S01/m3126.asm",
+          "path": "src/platform/video/mono_raster.asm",
           "line": 351,
           "text": "mov byte ptr _g_3DDC, 0Eh"
         },
         {
-          "path": "src/S02/m3126.asm",
+          "path": "src/platform/video/vga8_raster.asm",
           "line": 24,
           "text": "extrn\t_g_3DDC:byte"
         },
         {
-          "path": "src/S02/m3126.asm",
+          "path": "src/platform/video/vga8_raster.asm",
           "line": 174,
           "text": "mov byte ptr _g_3DDC, 6"
         },
         {
-          "path": "src/S02/m3126.asm",
+          "path": "src/platform/video/vga8_raster.asm",
           "line": 184,
           "text": "mov byte ptr _g_3DDC, 8"
         },
         {
-          "path": "src/S03/m3126.asm",
+          "path": "src/platform/video/tandy_raster.asm",
           "line": 25,
           "text": "extrn\t_g_3DDC:byte"
         },
         {
-          "path": "src/S03/m3126.asm",
+          "path": "src/platform/video/tandy_raster.asm",
           "line": 161,
           "text": "mov byte ptr _g_3DDC, 2"
         },
         {
-          "path": "src/S03/m3126.asm",
+          "path": "src/platform/video/tandy_raster.asm",
           "line": 217,
           "text": "mov byte ptr _g_3DDC, 6"
         },
         {
-          "path": "src/S03/m3126.asm",
+          "path": "src/platform/video/tandy_raster.asm",
           "line": 227,
           "text": "mov byte ptr _g_3DDC, 8"
         },
         {
-          "path": "src/S09/m36EE.c",
+          "path": "src/window/text_entry.c",
           "line": 4,
           "text": "extern char near g_3DDC;"
         },
         {
-          "path": "src/S09/m36EE.c",
+          "path": "src/window/text_entry.c",
           "line": 24,
           "text": "row = g_3DDC * (row & 0xff) + (char)(row >> 8) * g_3DDC / 14,"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 33,
           "text": "extern char near g_3DDC;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 50,
           "text": "r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 51,
           "text": "r.bottom = y + g_3DDC - 1;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 70,
           "text": "r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 71,
           "text": "r.bottom = y + g_3DDC * len - 1;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 79,
           "text": "y += g_3DDC;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 145,
           "text": "f_1B73_09E9(fd_50F6_46A8[m] + g_3DDE * 3, g_3DDC / 2);"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 222,
           "text": "r.top = g_3DDC * (1 - i) + pt.y - 3;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 227,
           "text": "r.top = g_3DDC + 1;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 235,
           "text": "if (g_3DDC + 5 > r.top)"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 236,
           "text": "r.top = g_3DDC + 5;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 237,
           "text": "r.bottom = g_3DDC * i + r.top + 6;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 261,
           "text": "for (i = 0; i < nItems; i++, j += g_3DDC) {"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 297,
           "text": "k = (pt.y - r.top) / g_3DDC;"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 366,
           "text": "f_1FD2_0008(x, g_3DDC * cur + r.top, 1, buf + (maxLen + 1) * cur);"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 373,
           "text": "f_1FD2_0008(x, g_3DDC * k + r.top, 0, buf + (maxLen + 1) * k);"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 378,
           "text": "f_1B73_09E9(g_3DDE * 4 + x, g_3DDC / 2 + g_3DDC * k + r.top);"
         },
         {
-          "path": "src/S17/m384C.c",
+          "path": "src/window/menu_setup.c",
           "line": 86,
           "text": "extern char near g_3DDC;"
         },
         {
-          "path": "src/S17/m384C.c",
+          "path": "src/window/menu_setup.c",
           "line": 94,
           "text": "r.bottom = g_3DDC + 1;"
         },
         {
-          "path": "src/root/m1B4E.asm",
+          "path": "src/platform/video/bios_bitmap.asm",
           "line": 13,
           "text": "public\t_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _g_3DDE, _g_3DE0, _g_3DE1, _g_3DE2"
         },
         {
-          "path": "src/root/m1B4E.asm",
+          "path": "src/platform/video/bios_bitmap.asm",
           "line": 37,
           "text": "_g_3DDC\t\tdw\t0"
         },
         {
-          "path": "src/root/m1B4E.asm",
+          "path": "src/platform/video/bios_bitmap.asm",
           "line": 187,
           "text": "push word ptr _g_3DDC"
         },
         {
-          "path": "src/root/m1B4E.asm",
+          "path": "src/platform/video/bios_bitmap.asm",
           "line": 258,
           "text": "push word ptr _g_3DDC"
         },
         {
-          "path": "src/root/m1CE2.c",
+          "path": "src/graphics/screen_rects.c",
           "line": 28,
           "text": "extern char near g_3DDC;"
         },
         {
-          "path": "src/root/m1CE2.c",
+          "path": "src/graphics/screen_rects.c",
           "line": 34,
           "text": "f_1CE2_01F8(x, y, g_3DDE + x, g_3DDC + y, width);"
         },
         {
-          "path": "src/root/m1CE2.c",
+          "path": "src/graphics/screen_rects.c",
           "line": 37,
           "text": "#define CELLY(v) (((v) & 0xff) * g_3DDC + (char)((v) >> 8) * g_3DDC / 14)"
         },
         {
-          "path": "src/root/m1CE2.c",
+          "path": "src/graphics/screen_rects.c",
           "line": 46,
           "text": "f_1CE2_01F8(left << 3, g_3DDC * top, right << 3, g_3DDC * (bottom + 1), width);"
         },
         {
-          "path": "src/root/m1FBD.asm",
+          "path": "src/graphics/bitmap_text.asm",
           "line": 11,
           "text": "extrn\t_g_3DDC:byte"
         },
         {
-          "path": "src/root/m1FBD.asm",
+          "path": "src/graphics/bitmap_text.asm",
           "line": 54,
           "text": "mov bl, byte ptr _g_3DDC"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 369,
           "text": "extern char near g_3DDC;"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 389,
           "text": "fd_50F6_393C.bottom = g_3DDC + fd_50F6_393C.top + 3;"
         },
         {
-          "path": "src/root/m21FA.c",
+          "path": "src/window/drawing.c",
           "line": 58,
           "text": "extern char near g_3DDC;"
         },
         {
-          "path": "src/root/m21FA.c",
+          "path": "src/window/drawing.c",
           "line": 96,
           "text": "(*g_9134)(g_3DA0, r.top, rect->right, r.top + g_3DDC, g_3DE2);"
         },
         {
-          "path": "src/root/m21FA.c",
+          "path": "src/window/drawing.c",
           "line": 97,
           "text": "(*g_9134)(rect->left, r.top, x, r.top + g_3DDC, g_3DE2);"
         },
         {
-          "path": "src/root/m24AB.c",
+          "path": "src/graphics/font_output.c",
           "line": 118,
           "text": "extern char near g_3DDC;"
         },
         {
-          "path": "src/root/m24AB.c",
+          "path": "src/graphics/font_output.c",
           "line": 124,
           "text": "return g_3DDC;"
         }
@@ -1408,145 +1408,145 @@
     "callback_reference_mentions": {
       "f_1B73_030F": [
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 164,
           "text": "extern void far f_1B73_030F();"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 388,
           "text": "f_1B73_030F((curMenu << 4) + cur - 0x2ff, 0, 0, 0);"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 400,
           "text": "f_1B73_030F(ev.code, ev.xE, ev.h, ev.v, 0);"
         },
         {
-          "path": "src/S10/m35F5.c",
+          "path": "src/window/menu_tracking.c",
           "line": 404,
           "text": "f_1B73_030F((curMenu - 0x30) << 4, 0, 0, 0);"
         },
         {
-          "path": "src/S19/m384C.c",
+          "path": "src/ui/game_events.c",
           "line": 168,
           "text": "extern void far f_1B73_030F();"
         },
         {
-          "path": "src/S19/m384C.c",
+          "path": "src/ui/game_events.c",
           "line": 198,
           "text": "f_1B73_030F(g_2CBE[i].cmd, 0, 0, 0);"
         },
         {
-          "path": "src/S19/m384C.c",
+          "path": "src/ui/game_events.c",
           "line": 262,
           "text": "f_1B73_030F(cmd, 0, 0, 0, 0);"
         },
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 177,
           "text": "public\t_f_1B73_030F"
         },
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 568,
           "text": "_f_1B73_030F\tproc\tfar"
         },
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 580,
           "text": "_f_1B73_030F\tendp"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 42,
           "text": "extern void far f_1B73_030F();"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 53,
           "text": "struct Timer g_6004 = { { 0, 0, 100, 100 }, f_1B73_030F, 1, 1, 1, 0, 10 };"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 56,
           "text": "struct Timer g_603A = { { 0, 0, 0x27f, 0x10 }, f_1B73_030F, 0, 0, 0, 0, 0x1f };"
         }
       ],
       "f_1B73_0D4B": [
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1887,
           "text": "public\t_f_1B73_0D4B"
         },
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1888,
           "text": "_f_1B73_0D4B\tlabel\tfar"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 43,
           "text": "extern void far f_1B73_0D4B();"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 54,
           "text": "struct Timer g_6016 = { { 0, 0, 100, 100 }, f_1B73_0D4B, 1, 1, 1, 0, -1 };"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 55,
           "text": "struct Timer g_6028 = { { 0, 0, 100, 100 }, f_1B73_0D4B, 1, 1, 1, 0, -1 };"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 186,
           "text": "f_1FD2_032F(f_1CE2_000C(), f_1B73_0D4B, 100);"
         }
       ],
       "f_1B73_09FF": [
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 195,
           "text": "public\t_f_1B73_09FF"
         },
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1425,
           "text": "call near ptr _f_1B73_09FF"
         },
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1435,
           "text": "_f_1B73_09FF\tproc\tnear"
         },
         {
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1451,
           "text": "_f_1B73_09FF\tendp"
         }
       ],
       "f_1FD2_032F": [
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 182,
           "text": "void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks);"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 186,
           "text": "f_1FD2_032F(f_1CE2_000C(), f_1B73_0D4B, 100);"
         },
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 199,
           "text": "void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks)"
         }
       ],
       "f_1FD2_0390": [
         {
-          "path": "src/root/m1FD2.c",
+          "path": "src/window/menu_helpers.c",
           "line": 217,
           "text": "void far f_1FD2_0390(struct Rect far *r, void (far *fn)(), int ticks)"
         }
@@ -1554,7 +1554,7 @@
     },
     "generic_cursor_callback_callers": [
       {
-        "path": "src/root/m1FD2.c",
+        "path": "src/window/menu_helpers.c",
         "line": 186,
         "first_arg": null,
         "text": "f_1FD2_032F(f_1CE2_000C(), f_1B73_0D4B, 100);"
@@ -4683,42 +4683,42 @@
       "g_9122": [
         {
           "global": "g_9122",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 306,
           "owner": "_f_1B73_0046",
           "text": "mov word ptr _g_9122, ax"
         },
         {
           "global": "g_9122",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 751,
           "owner": "_f_1B73_0445",
           "text": "mov word ptr _g_9122, cx"
         },
         {
           "global": "g_9122",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 947,
           "owner": "_f_1B73_051F",
           "text": "mov word ptr _g_9122, ax"
         },
         {
           "global": "g_9122",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1336,
           "owner": "_f_1B73_0747",
           "text": "mov word ptr _g_9122, bx"
         },
         {
           "global": "g_9122",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1347,
           "owner": "_f_1B73_0747",
           "text": "mov word ptr _g_9122, ax"
         },
         {
           "global": "g_9122",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1360,
           "owner": "_f_1B73_0747",
           "text": "mov word ptr _g_9122, ax"
@@ -4727,42 +4727,42 @@
       "g_9124": [
         {
           "global": "g_9124",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 309,
           "owner": "_f_1B73_0046",
           "text": "mov word ptr _g_9124, ax"
         },
         {
           "global": "g_9124",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 752,
           "owner": "_f_1B73_0445",
           "text": "mov word ptr _g_9124, dx"
         },
         {
           "global": "g_9124",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 961,
           "owner": "_f_1B73_051F",
           "text": "mov word ptr _g_9124, ax"
         },
         {
           "global": "g_9124",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1333,
           "owner": "_f_1B73_0747",
           "text": "mov word ptr _g_9124, bx"
         },
         {
           "global": "g_9124",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1371,
           "owner": "_f_1B73_0747",
           "text": "mov word ptr _g_9124, ax"
         },
         {
           "global": "g_9124",
-          "path": "src/root/m1B73.asm",
+          "path": "src/platform/input_timer.asm",
           "line": 1384,
           "owner": "_f_1B73_0747",
           "text": "mov word ptr _g_9124, ax"
@@ -4865,7 +4865,7 @@
       "uniqueness_scope": "nominal valid stack/resource flow; foreign API activation, corrupted descriptors, computed aliases, and exceptional continuations excluded"
     },
     "menu_bottom": {
-      "writer": "src/root/m1FD2.c:f_1FD2_0663",
+      "writer": "src/window/menu_helpers.c:f_1FD2_0663",
       "screen_rect": "f_1CE2_000C returns g_5A9C; initialized screen top is 0; profile-8 display setup updates right/bottom only",
       "font_binding": "menu redraw calls g_9130; supported VGA font-height premise is g_3DDC=14 (the retained 8x14 VGA primitive sets byte 0x0e)",
       "formula": "fd_50F6_393C.bottom = top + g_3DDC + 3 = 0 + 14 + 3 = 17",

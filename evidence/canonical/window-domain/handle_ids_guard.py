@@ -140,7 +140,7 @@ def check():
                base['source_map'] == SPEC['function_sources'] and base['pin_files'] == SPEC['pinned_source_files'] and
                base['pin_hashes'] == SPEC['pinned_source_sha256'] and not base['parse_errors'])
 
-    main_src = 'src/root/m15F8.c'
+    main_src = 'src/startup/main.c'
     bare = collect({'src/new-callback.c': 'void (*escape)(void) = f_2505_033C;'})
     asm_path = sorted(ASSEMBLY)[0]
     uppercase = collect({asm_path: ASSEMBLY[asm_path] + '\n call WIN_LOCKWIN\n'})

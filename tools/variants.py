@@ -31,7 +31,7 @@ order pending (partial module), . mismatch, S claimed name inside SCAFFOLD, - no
 Examples (Git Bash: ``export MSYS_NO_PATHCONV=1``):
 
     python tools/variants.py build/workers/me/a.c build/workers/me/b.c --module root:218D
-    python tools/variants.py --base src/root/m218D.c --spec build/workers/me/v.py --show f_218D_0656
+    python tools/variants.py --base src/window/events.c --spec build/workers/me/v.py --show f_218D_0656
     python tools/variants.py --base draft.c --spec v.json --module "S25;3BA4" --jobs 8
 
 Many variants: a DIR argument stands for every ``*.c``/``*.asm`` file in it (sorted), and

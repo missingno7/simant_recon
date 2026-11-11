@@ -117,9 +117,9 @@ def collect():
     assert vga["config"]["ReadConfig_g_5A97"] == 8
     texts, program, _ = icon.inventory()
 
-    main = definition("src/root/m15F8.c", "main")
-    init = definition("src/S12/m384C.c", "InitMapFunctions")
-    mini = definition("src/S04/m35F5.c", "Mini_MakeTable")
+    main = definition("src/startup/main.c", "main")
+    init = definition("src/ui/map_window.c", "InitMapFunctions")
+    mini = definition("src/ui/minimap.c", "Mini_MakeTable")
     assert "if ( g_5A97 & 1 ) LoadMonoPats ( ) ;" in main
     assert "case 8 : fd_50F6_3856 = 4 ; fd_50F6_3858 = 4 ; fd_50F6_38B8 = o00_3126_0000 ; fd_50F6_38BC = o00_3126_0137 ;" in init
     assert "case 8 : if ( fd_50F6_3854 == 0x40 ) o00_3126_06A3 ( src , dst ) ; else o00_3126_04D8 ( src , dst ) ;" in mini
@@ -130,7 +130,7 @@ def collect():
     modules = {item["key"]: item for item in program["modules"]}
     provider = modules["source-owned:mono-pattern-vga-linkage"]
     contract = provider["storage_contract"]
-    assert provider["source"] == "src/state/mono-pattern-vga-linkage.c"
+    assert provider["source"] == "src/graphics/state/mono_pattern_link.c"
     assert contract["communals"] == [{"name": "_g_8ED8", "kind": "near", "length": 1}]
 
     controls = [mini_control(8), mini_control(7)]

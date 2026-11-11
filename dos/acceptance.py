@@ -26,7 +26,7 @@ from dos import build, diagnostic
 
 def save_schema():
     """(index, offset, bytes, element size, name) from the canonical SaveRec table."""
-    text = (ROOT / "src/S09/m35F5.c").read_text(encoding="latin1")
+    text = (ROOT / "src/ui/save_load.c").read_text(encoding="latin1")
     start = re.search(r"struct SaveRec far fd_4E4B_0000\[\d+\] = \{", text).start()
     body = text[start:text.index("};", start)]
     rows, offset = [], 0

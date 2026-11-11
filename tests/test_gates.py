@@ -104,8 +104,8 @@ class ModuleKeys(unittest.TestCase):
         self.assertEqual(modules.parse_key("S00:31AD"), ("S00", 0x31AD, None))
         self.assertEqual(modules.parse_key("S00;31AD@2AB4"), ("S00", 0x31AD, 0x2AB4))  # MSYS-mangled
         self.assertEqual(modules.module_key("S00", 0x31AD, 0x2AB4), "S00:31AD@2AB4")
-        self.assertEqual(modules.module_source("S00", 0x31AD, 0x2AB4, "asm"), "src/S00/m31AD_2AB4.asm")
-        self.assertEqual(modules.module_source("root", 0x93, None, "c"), "src/root/m0093.c")
+        self.assertEqual(modules.module_source("S00", 0x31AD, 0x2AB4, "asm"), "src/platform/video/planar_mode_blits.asm")
+        self.assertEqual(modules.module_source("root", 0x93, None, "c"), "src/simulation/random.c")
         with self.assertRaises(SystemExit):
             modules.parse_key("S00:31AD@0000")
 

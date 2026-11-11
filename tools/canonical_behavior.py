@@ -86,7 +86,7 @@ def balloon_queue_cases():
 def domains(count, seed, full):
     """Target -> iterable factory, retaining the reviewed original helper tier."""
     return {
-        'f_0250_1018': lambda: render_small.map_cell_cases('f_0250_1018', count, seed),
+        'DoCalcTile': lambda: render_small.map_cell_cases('DoCalcTile', count, seed),
         'f_0250_129E': lambda: render_small.map_cell_cases('f_0250_129E', count, seed),
         'DrawBalloons': lambda: itertools.chain(render_small.balloon_cases(count, seed), balloon_queue_cases()),
         'SpiderScan': lambda: spider_nest.make_cases('SpiderScan', random_count=count,
@@ -126,7 +126,7 @@ def domains(count, seed, full):
 
 
 MUTATIONS = {
-    'f_0250_1018': ('if (v > 0x10)', 'if (v >= 0x10)'),
+    'DoCalcTile': ('if (v > 0x10)', 'if (v >= 0x10)'),
     'f_0250_129E': ('if (g_9126)\n            f_0250_0721', 'if (!g_9126)\n            f_0250_0721'),
     'DrawBalloons': ('wpix = g_19BE * wt;', 'wpix = g_19BE * wt + 1;'),
     'SpiderScan': ('DeadAntHere(x, y, life & 0x80);', '/* negative control: omit corpse */;'),
@@ -141,7 +141,7 @@ MUTATIONS = {
     'win_UnlockWin': ('if (--g_8DA6[n] == 0) {', 'if (--g_8DA6[n] == 1) {'),
     'f_23E6_0000': ('s++;\n        n++;', 's++;\n        n += 2;'),
     'win_GetVal': ('return r[kind];', 'return r[kind] ^ 1;'),
-    'win_DrawBitMap': ('f_1B4E_003B(x, y, (char far *)pic + 8);', 'f_1B4E_003B(x, y, (char far *)pic + 9);'),
+    'win_DrawBitMap': ('GPutPic(x, y, (char far *)pic + 8);', 'GPutPic(x, y, (char far *)pic + 9);'),
     'f_2815_0165': ('f_283E_000A(voice + 0xa0, g_6924[note % 12]);',
                    'f_283E_000A(voice + 0xa1, g_6924[note % 12]);'),
     'f_284A_0138': ('return SONG(off) << 8 | SONG(off + 1);', 'return SONG(off + 1) << 8 | SONG(off);'),

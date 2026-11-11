@@ -10,7 +10,7 @@ f_00F8_01BE <- dos_game_main`, with replay_next 814 and outer loop 4, and
 does not reach its 20-second smoke deadline. Samples inside f_0250_13A6,
 f_0250_5058 and DrawEditGraphs exclude a blocked SDL/audio thread.
 
-Canonical `src/root/m00F8.c:f_00F8_01BE` reads ISR-owned `g_9122/g_9124`
+Canonical `src/ui/view_dialog_helpers.c:f_00F8_01BE` reads ISR-owned `g_9122/g_9124`
 and calls `f_1B73_0EEE` each iteration. Exact canonical `m1B73.asm:0445`
 writes the pointer state independently of foreground code. In DOS, input and
 timer IRQs arrive while this loop executes. Native keyboard-flag queries

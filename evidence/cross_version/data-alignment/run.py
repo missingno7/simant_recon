@@ -33,6 +33,7 @@ import capstone
 import binary
 import alignment
 import reporting
+import data_kinds
 
 PACKAGE = Path(__file__).resolve().parent
 ROOT = PACKAGE.parents[2]
@@ -41,18 +42,20 @@ DOS_FUNCTIONS = ROOT / 'layout/functions.json'
 DOS_SYMBOLS = ROOT / 'layout/symbols.json'
 DECISIONS = ROOT / 'evidence/cross_version/decisions.json'
 
-# Publication scope: newer reviewed function pairs are a separate experiment,
-# not a silent enlargement of the calibration population. Undated established
-# pairs and identical registered code names retain the original selection rule.
-PAIR_REVIEW_CUTOFF = '2026-09-30'
-PAIR_COHORT_SHA256 = 'cda84e364037eb48d413d305f9fad1648afec2157b50d38ff09d9fc601c151a5'
+# Current publication includes all function reviews dated 2026-11-11.
+# The digest makes a later cohort change explicit rather than silently changing
+# the population behind the published calibration and reference counts.
+PAIR_REVIEW_CUTOFF = '2026-11-11'
+PAIR_COHORT_SHA256 = '1bb46b8ad41a303ee7d6dbd65a375869ee153653f8927e109e360a999758fea4'
 DOS_SHA256 = 'aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11'
 WIN16_SHA256 = '538fed3f0fd60a6528a5e5b20990361ac4d274c58266a81e71c24f751612589d'
 
 
 def write_json(path, value):
     """Write one generated receipt; callers supply a validated output directory."""
-    path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8')
+    # Git stores this package with LF endings. Explicit LF also makes byte-level
+    # reproduction stable after checkout on Windows and on other hosts.
+    path.write_text(json.dumps(value, indent=2) + '\n', encoding='utf-8', newline='\n')
 
 
 def main():
@@ -84,15 +87,21 @@ def main():
     functions = json.loads(read(DOS_FUNCTIONS))
     decisions = json.loads(read(DECISIONS))
     data = binary.Data(dos_raw, win_raw, inventory, symbols)
+    data.functions = functions['functions']
+    data_kinds.check_transfers(data)
     print('Regenerating Win16 disassembly and control-flow tables...', flush=True)
     data.cards = binary.function_cards(win_raw, data.ne, inventory)
     data.pairs = binary.function_pairs(functions, symbols, decisions, data.cards, PAIR_REVIEW_CUTOFF)
     cohort_hash = hashlib.sha256(json.dumps(data.pairs, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     if cohort_hash != PAIR_COHORT_SHA256:
-        parser.error('function-pair cohort changed; review the correspondence scope explicitly')
+        parser.error(f'function-pair cohort changed: {len(data.pairs)} pairs, digest {cohort_hash}; review scope explicitly')
     print(f'Function-pair cohort: {len(data.pairs)}; review cutoff {PAIR_REVIEW_CUTOFF}', flush=True)
     references, statistics = binary.extract_references(data, functions, data.pairs, data.cards)
     tables = alignment.discover_tables(data)
+    print('Following whole stored values and Windows import uses...', flush=True)
+    flows = data_kinds.collect_value_flows(data)
+    platform_objects = data_kinds.platform_observations(data)
+    data.platform_objects = platform_objects
     output.mkdir(parents=True)
     write_json(output / 'inputs.json', {
         'files': inputs, 'python': platform.python_version(), 'capstone': capstone.__version__,
@@ -103,6 +112,8 @@ def main():
     write_json(output / 'references.json', references)
     write_json(output / 'extraction-statistics.json', statistics)
     write_json(output / 'tables.json', tables)
+    write_json(output / 'value-flows.json', flows)
+    write_json(output / 'windows-import-uses.json', platform_objects)
 
     documents = {}
     calibration = []
@@ -121,20 +132,34 @@ def main():
         stages.append(('terminal-gaps', doc))
         doc = alignment.terminal_usage(data, doc, references)
         stages.append(('terminal-usage', doc))
+        doc = data_kinds.add_value_flows(data, doc, flows, references)
+        stages.append(('value-flows', doc))
+        doc = data_kinds.add_interior_contents(data, doc, references)
+        doc = data_kinds.add_text_tables(data, doc, references)
+        saved = {k:v for k,v in doc.items() if k in ('rejected','flow_conflicts')}
+        doc = alignment.add_layout(data, doc, references)
+        doc.update(saved)
+        stages.append(('interior-contents', doc))
+        doc = data_kinds.add_layout_contents(data, doc, references)
+        stages.append(('layout-contents', doc))
+        doc = data_kinds.add_indexed_order(data, doc, references, tables, blind)
+        stages.append(('indexed-order', doc))
         for name, stage in stages:
             write_json(output / (name + suffix + '.json'), stage)
             calibration.append({'stage': name + suffix, **alignment.calibrate(stage['matches'], data)})
         documents[blind] = doc
 
     rows, summary, sizes, rejected = reporting.prepare(data, documents[False], documents[True], references)
+    coverage = reporting.coverage(data, rows, references, platform_objects)
     for name, value in [('matches.json', rows), ('object-sizes.json', sizes),
-                        ('rejected.json', rejected), ('summary.json', summary), ('calibration.json', calibration)]:
+                        ('rejected.json', rejected), ('coverage.json', coverage),
+                        ('summary.json', summary), ('calibration.json', calibration)]:
         write_json(output / name, value)
 
     # Published files are comparison targets, never seeds or inference inputs.
     comparisons = {}
     byte_comparisons = {}
-    for name in ('matches.json', 'object-sizes.json', 'rejected.json'):
+    for name in ('matches.json', 'object-sizes.json', 'rejected.json', 'coverage.json'):
         comparisons[name] = json.loads((output / name).read_text(encoding='utf-8')) == json.loads((PACKAGE / name).read_text(encoding='utf-8'))
         byte_comparisons[name] = (output / name).read_bytes() == (PACKAGE / name).read_bytes()
     elapsed = time.perf_counter() - started
@@ -148,6 +173,7 @@ def main():
     print(f"Published rows: {'EQUAL' if comparisons['matches.json'] else 'DIFFERENT'} ({len(rows)} rows)")
     print('Object sizes:', 'EQUAL' if comparisons['object-sizes.json'] else 'DIFFERENT')
     print('Rejections:', 'EQUAL' if comparisons['rejected.json'] else 'DIFFERENT')
+    print('Coverage:', 'EQUAL' if comparisons['coverage.json'] else 'DIFFERENT')
     print('Published artifacts byte-for-byte:', 'EQUAL' if all(byte_comparisons.values()) else 'DIFFERENT')
     print(f'Wall time: {elapsed:.3f} seconds')
     c = summary['published_blind_calibration']

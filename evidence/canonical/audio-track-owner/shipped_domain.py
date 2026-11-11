@@ -263,10 +263,10 @@ def song_call_sites(song_ids: set[int]) -> tuple[list[dict], list[dict]]:
                     raise ValueError(f"unclassified song call argument {rel}: {expr}")
                 ids = dynamic_domains[expr]
                 evidence = {
-                    "SRand1(5) + 0x4e27": "src/root/m0093.c:SRand1 returns the unsigned division remainder, 0..range-1",
-                    "SRand2() + 0x2713": "src/root/m0093.c:SRand2 masks the generated word with 1",
-                    "fd_50F6_0228 + 0x2713": "src/S08/m35F5.c:RandYard resets state to 0; src/root/m0BE8.c:TryAntTheme increments and wraps values >2 to 0",
-                    "song": "src/S16/m384C.c:DrawSimPayoff initializes 0x4e23 and increments only while <0x4e25",
+                    "SRand1(5) + 0x4e27": "src/simulation/random.c:SRand1 returns the unsigned division remainder, 0..range-1",
+                    "SRand2() + 0x2713": "src/simulation/random.c:SRand2 masks the generated word with 1",
+                    "fd_50F6_0228 + 0x2713": "src/simulation/world_generation.c:RandYard resets state to 0; src/simulation/food_water_counts.c:TryAntTheme increments and wraps values >2 to 0",
+                    "song": "src/ui/intro_credits.c:DrawSimPayoff initializes 0x4e23 and increments only while <0x4e25",
                 }[expr]
             missing = [value for value in ids if value not in song_ids]
             if missing:
@@ -383,11 +383,11 @@ def main() -> None:
             raise AssertionError(f"asset no longer matches layout/oracle.lock.json: {name}")
     source_pins = {}
     for name in sorted(set(caller_source_hashes) | {
-            "src/root/m284A.c", "src/root/m0000.c", "src/root/m00DF.c",
-            "src/root/m1A53.c", "src/root/m1959.asm", "src/root/m0093.c",
-            "src/S20/m39F1.c", "src/root/m277E.c", "src/root/m293A.c",
-            "src/root/m15F8.c", "src/root/m0BE8.c", "src/S08/m35F5.c",
-            "src/S16/m384C.c"}):
+            "src/sound/midi_player.c", "src/sound/resource_loading.c", "src/sound/game_interface.c",
+            "src/resources/database_objects.c", "src/platform/byte_order.asm", "src/simulation/random.c",
+            "src/startup/dos_config.c", "src/sound/device_channels.c", "src/sound/device_probe.c",
+            "src/startup/main.c", "src/simulation/food_water_counts.c", "src/simulation/world_generation.c",
+            "src/ui/intro_credits.c"}):
         path = ROOT / name
         source_pins[name] = {"sha256": sha(path), "size": path.stat().st_size}
     result = {

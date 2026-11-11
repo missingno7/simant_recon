@@ -36,27 +36,27 @@ from tools import compiler
 from tools.omf import OmfReader
 
 MODULES = {
-    'M00': {'key': 'S00:31AD', 'source': 'src/S00/m31AD.asm', 'segment': 'S00B_TEXT',
+    'M00': {'key': 'S00:31AD', 'source': 'src/platform/video/planar_raster.asm', 'segment': 'S00B_TEXT',
             'first_public': '_o00_31AD_0004', 'first_offset': 0, 'historical_origin': 4,
             'callbacks': [('o00_31AD_0004', '1Ch', '_o00_31AD_001C'),
                           ('o00_31AD_0122', '13Ah', '_o00_31AD_013A'),
                           ('o00_31AD_037C', '394h', '_o00_31AD_0394'),
                           ('o00_31AD_16A9', '16C1h', 'L16C1'),
                           ('o00_31AD_16E4', '16FCh', '_o00_31AD_16FC')]},
-    'M01': {'key': 'S01:3126', 'source': 'src/S01/m3126.asm', 'segment': 'S01A_TEXT',
+    'M01': {'key': 'S01:3126', 'source': 'src/platform/video/mono_raster.asm', 'segment': 'S01A_TEXT',
             'first_public': '_o01_3126_0000', 'first_offset': 0, 'historical_origin': 0,
             'callbacks': [('o01_3126_024C', '264h', 'L0264')]},
-    'M02': {'key': 'S02:3126', 'source': 'src/S02/m3126.asm', 'segment': 'S02A_TEXT',
+    'M02': {'key': 'S02:3126', 'source': 'src/platform/video/vga8_raster.asm', 'segment': 'S02A_TEXT',
             'first_public': '_o02_3126_0000', 'first_offset': 0, 'historical_origin': 0,
             'callbacks': [('o02_3126_0096', '0AEh', '_o02_3126_00AE'),
                           ('o02_3126_0185', '19Dh', '_o02_3126_019D'),
                           ('o02_3126_027C', '294h', 'L0294')]},
-    'M03': {'key': 'S03:3126', 'source': 'src/S03/m3126.asm', 'segment': 'S03A_TEXT',
+    'M03': {'key': 'S03:3126', 'source': 'src/platform/video/tandy_raster.asm', 'segment': 'S03A_TEXT',
             'first_public': '_o03_3126_0140', 'first_offset': 320, 'historical_origin': 0,
             'callbacks': [('o03_3126_01F8', '210h', '_o03_3126_0210'),
                           ('o03_3126_03C2', '3DAh', '_o03_3126_03DA'),
                           ('o03_3126_059C', '5B4h', 'L05B4')]},
-    'M3C': {'key': 'S03:3258', 'source': 'src/S03/m3258.asm', 'segment': 'S03C_TEXT',
+    'M3C': {'key': 'S03:3258', 'source': 'src/platform/video/tandy_sprites.asm', 'segment': 'S03C_TEXT',
             'first_public': '_o03_3258_040C', 'first_offset': 1024, 'historical_origin': 12,
             'callbacks': []},
 }
@@ -67,7 +67,7 @@ LEA_REVERSIONS = {
             ('bx', 'xlat_tabs+256', 'ds:[10Ch]', 2),
             ('bx', 'xlat_tabs+768', 'ds:[30Ch]', 2)],
 }
-PEER = {'key': 'S00:31AD@2AB4', 'source': 'src/S00/m31AD_2AB4.asm',
+PEER = {'key': 'S00:31AD@2AB4', 'source': 'src/platform/video/planar_mode_blits.asm',
         'segment': 'S00B_TEXT', 'first_public': '_o00_31AD_2AB4'}
 
 def select_output(argument):
@@ -498,7 +498,7 @@ def main(argv=None):
               'cases': results, 'fixture_pair_comparisons': pair_comparisons, 'all_required_checks_pass': True,
               'input_and_output_pins': [pin(Path(__file__)), pin(ROOT / 'tools/compiler.py'),
                                         pin(ROOT / 'tools/omf.py'), pin(ROOT / 'layout/toolchain.json'),
-                                        pin(ROOT / 'src/root/m1D8E.c'),
+                                        pin(ROOT / 'src/graphics/clip_rects.c'),
                                         pin(provenance_path)] + toolpins +
                                       [pin(p) for p in sorted((OUT / 'sources').glob('*.asm'))] +
                                       [pin(p) for p in sorted((OUT / 'objects').glob('*.OBJ'))]}

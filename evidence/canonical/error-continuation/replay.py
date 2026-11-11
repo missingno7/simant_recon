@@ -22,8 +22,8 @@ import functions
 
 IMAGE = exe.load()
 SOURCE_PINS = {
-    'src/root/m1C62.c': '3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36',
-    'src/root/m1A28.c': '5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740',
+    'src/window/alerts.c': '3acba3b8e221d554b0ec7b2e26870389682ae9db629ca882b9e95d22adfc4d36',
+    'src/resources/database_files.c': '5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740',
 }
 ORACLE_PIN = 'aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11'
 DATA = 0x55B30

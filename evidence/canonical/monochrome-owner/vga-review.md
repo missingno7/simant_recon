@@ -36,7 +36,7 @@ covered by the one-byte provider.
 
 ## Source contract and limits
 
-`src/state/mono-pattern-vga-linkage.c` compiles under the pinned MSC 6.00AX
+`src/graphics/state/mono_pattern_link.c` compiles under the pinned MSC 6.00AX
 large-model profile to one one-byte near COMDEF and no code, initialized bytes,
 publics, fixups, imports or live segments. Static duration is sufficient because
 no supported access occurs. The provider changes no game algorithm or supported

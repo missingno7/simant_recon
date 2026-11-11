@@ -55,58 +55,58 @@ EXPECTED_CALLERS = {
 }
 
 EXPECTED_DECLARATIONS = {
-    "main": {("src/root/m15F8.c", "definition")},
+    "main": {("src/startup/main.c", "definition")},
     "db_SetDataBase": {
-        ("src/S20/m39F1.c", "prototype"),
-        ("src/root/m15F8.c", "prototype"),
-        ("src/root/m205F.c", "prototype"),
-        ("src/root/m1A53.c", "definition"),
+        ("src/startup/dos_config.c", "prototype"),
+        ("src/startup/main.c", "prototype"),
+        ("src/platform/video/driver_select.c", "prototype"),
+        ("src/resources/database_objects.c", "definition"),
     },
     "IBMInitStuff": {
-        ("src/root/m15F8.c", "prototype"),
-        ("src/S20/m39F1.c", "definition"),
+        ("src/startup/main.c", "prototype"),
+        ("src/startup/dos_config.c", "definition"),
     },
     "f_205F_0004": {
-        ("src/S20/m39F1.c", "prototype"),
-        ("src/root/m205F.c", "definition"),
+        ("src/startup/dos_config.c", "prototype"),
+        ("src/platform/video/driver_select.c", "definition"),
     },
     "OpenDB": {
-        ("src/root/m1A53.c", "prototype"),
-        ("src/root/m1A28.c", "definition"),
+        ("src/resources/database_objects.c", "prototype"),
+        ("src/resources/database_files.c", "definition"),
     },
     "GetFreeHandle": {
-        ("src/root/m1A28.c", "prototype"),
-        ("src/root/m1A28.c", "definition"),
+        ("src/resources/database_files.c", "prototype"),
+        ("src/resources/database_files.c", "definition"),
     },
-    "db_CloseDataBase": {("src/root/m1A53.c", "definition")},
-    "CloseDB": {("src/root/m1A53.c", "prototype"), ("src/root/m1A28.c", "definition")},
-    "OpenIndex": {("src/root/m1A28.c", "prototype"), ("src/root/m1986.c", "definition")},
-    "CreateIndex": {("src/root/m1A28.c", "prototype"), ("src/root/m1986.c", "definition")},
-    "CloseIndex": {("src/root/m1A28.c", "prototype"), ("src/root/m1986.c", "definition")},
-    "DBRecall": {("src/root/m1A53.c", "prototype"), ("src/root/m19A9.c", "definition")},
-    "FindIndex": {("src/root/m19A9.c", "prototype"), ("src/root/m1986.c", "definition")},
+    "db_CloseDataBase": {("src/resources/database_objects.c", "definition")},
+    "CloseDB": {("src/resources/database_objects.c", "prototype"), ("src/resources/database_files.c", "definition")},
+    "OpenIndex": {("src/resources/database_files.c", "prototype"), ("src/resources/database_index.c", "definition")},
+    "CreateIndex": {("src/resources/database_files.c", "prototype"), ("src/resources/database_index.c", "definition")},
+    "CloseIndex": {("src/resources/database_files.c", "prototype"), ("src/resources/database_index.c", "definition")},
+    "DBRecall": {("src/resources/database_objects.c", "prototype"), ("src/resources/database_records.c", "definition")},
+    "FindIndex": {("src/resources/database_records.c", "prototype"), ("src/resources/database_index.c", "definition")},
 }
 
 SOURCE_PINS = {
-    'src/root/m00F8.c': '4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a',
-    'src/root/m1A96.c': 'c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa',
-    'src/S15/m384C.c': '7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172',
-    'src/S20/m39F1.c': '547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3',
-    'src/root/m15F8.c': 'd6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a',
-    'src/root/m205F.c': '225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6',
-    'src/root/m1A53.c': '6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698',
-    'src/root/m1A28.c': '5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740',
-    'src/root/m1986.c': '47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff',
-    'src/root/m19A9.c': '552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523',
-    'src/root/m1B28.c': '9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343',
-    'src/S09/m35F5.c': '028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a',
-    'src/state/database-record-state.c': '6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a',
+    'src/ui/view_dialog_helpers.c': '4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a',
+    'src/resources/object_cache.c': 'c57124b9d75ea77eb30158c09a71550862cf7081ceed625a2550a26a262bfdfa',
+    'src/startup/game_session.c': '7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172',
+    'src/startup/dos_config.c': '547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3',
+    'src/startup/main.c': 'd6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a',
+    'src/platform/video/driver_select.c': '225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6',
+    'src/resources/database_objects.c': '6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698',
+    'src/resources/database_files.c': '5db49039ef64717680153a4b9445554b58ab2abf8a3c3fd9d67e6573af58a740',
+    'src/resources/database_index.c': '47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff',
+    'src/resources/database_records.c': '552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523',
+    'src/platform/cursor_shapes.c': '9e1c31226eae71d8ab1cc1e2de68bfd7840ba678b02dd72a4ba7757e25543343',
+    'src/ui/save_load.c': '028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a',
+    'src/resources/state/open_databases.c': '6af09ce9166c8af6114e95a374c791e9d01056c3209de0d6cd1b5006401c022a',
 }
 
 DATA_USERS = {
-    'db_handles': {'src/root/m1A53.c', 'src/state/database-record-state.c'},
-    'fd_50F6_3958': {'src/root/m1A28.c', 'src/root/m1986.c', 'src/root/m19A9.c',
-                    'src/state/database-record-state.c'},
+    'db_handles': {'src/resources/database_objects.c', 'src/resources/state/open_databases.c'},
+    'fd_50F6_3958': {'src/resources/database_files.c', 'src/resources/database_index.c', 'src/resources/database_records.c',
+                    'src/resources/state/open_databases.c'},
 }
 
 
@@ -238,8 +238,8 @@ def scan_identifiers(source_texts: dict[str, str]) -> dict:
         if got_decls != want_decls:
             raise Reject(f"declarations for {name}: got {dict(got_decls)}, expected {dict(want_decls)}")
     expected_loops = [
-        {'path': 'src/root/m1A53.c', 'function': 'db_LoadObject', 'target': 'DBRecall'},
-        {'path': 'src/root/m1A53.c', 'function': 'db_CloseDataBase', 'target': 'CloseDB'},
+        {'path': 'src/resources/database_objects.c', 'function': 'db_LoadObject', 'target': 'DBRecall'},
+        {'path': 'src/resources/database_objects.c', 'function': 'db_CloseDataBase', 'target': 'CloseDB'},
     ]
     if loop_calls != expected_loops:
         raise Reject(f"database-chain loop set changed: {loop_calls}")
@@ -315,7 +315,7 @@ def c_function(text: str, name: str):
 
 
 def counter_and_owner_proof(source_texts: dict[str, str]) -> dict:
-    path = "src/root/m1A53.c"
+    path = "src/resources/database_objects.c"
     text = source_texts[path]
     set_fn = c_function(text, "db_SetDataBase")
     close_fn = c_function(text, "db_CloseDataBase")
@@ -364,7 +364,7 @@ def counter_and_owner_proof(source_texts: dict[str, str]) -> dict:
     if not re.search(r"\bint\s+db_numOfHandles\s*=\s*0\s*;", text):
         raise Reject("explicit source initialization of db_numOfHandles to zero missing")
 
-    state_path = "src/state/database-record-state.c"
+    state_path = "src/resources/state/open_databases.c"
     state_text = source_texts[state_path]
     if not re.search(r"\bOpenDBRec\s+far\s+fd_50F6_3958\s*\[\s*4\s*\]\s*;", state_text):
         raise Reject("source-owned four-record array declaration changed")
@@ -383,7 +383,7 @@ def counter_and_owner_proof(source_texts: dict[str, str]) -> dict:
     if communals.get("_fd_50F6_3958", {}).get("count") != 4 or communals.get("_db_handles", {}).get("count") != 4:
         raise Reject("source-owned storage contract no longer says both arrays have four elements")
 
-    free_text = source_texts["src/root/m1A28.c"]
+    free_text = source_texts["src/resources/database_files.c"]
     if not re.search(r"static\s+int\s+s_394E\s*=\s*0\s*;", free_text):
         raise Reject("GetFreeHandle first-use flag lost its zero initializer")
     free_fn = c_function(free_text, "GetFreeHandle")
@@ -491,7 +491,7 @@ def negative_controls(baseline_texts: dict[str, str]) -> list[dict]:
     results = []
     # Source control: inject two calls so the otherwise default VGA launch would make
     # five opens. This is an in-memory variant and does not touch canonical source.
-    main_path = "src/root/m15F8.c"
+    main_path = "src/startup/main.c"
     source = baseline_texts[main_path]
     needle = '    db_SetDataBase("sound");'
     if source.count(needle) != 1:
@@ -552,7 +552,7 @@ def storage_use_census(texts):
 
 
 def first_flag_proof(texts):
-    owner = 'src/root/m1A28.c'
+    owner = 'src/resources/database_files.c'
     references = []
     for rel, text in texts.items():
         if rel.endswith('.asm'):
@@ -622,7 +622,7 @@ def save_table_proof(texts, raw=None):
         raw = machine.read(start, 308 * 8)
     if len(raw) != 308 * 8:
         raise Reject('save table extent changed')
-    initializer = texts['src/S09/m35F5.c'].split(
+    initializer = texts['src/ui/save_load.c'].split(
         'struct SaveRec far fd_4E4B_0000[308] = {', 1)[1].split('};', 1)[0]
     descriptors = re.findall(r'\{\s*(\d+),\s*(\d+),\s*\(void far \*\)(?:&(\w+)|\((\w+)\s*\+\s*(\d+)\))\s*\}', initializer)
     if len(descriptors) != 307 or not initializer.rstrip().endswith('{ 0, 0, 0 }'):
@@ -720,7 +720,7 @@ def additional_negative_controls(texts):
         else:
             raise Reject('negative control unexpectedly accepted: ' + label)
     variant = dict(texts)
-    variant['src/root/m15F8.c'] = variant['src/root/m15F8.c'].replace(
+    variant['src/startup/main.c'] = variant['src/startup/main.c'].replace(
         'db_SetDataBase("sound");', 'while (1) { db_SetDataBase("sound"); }')
     try:
         scan_identifiers(variant)
@@ -729,7 +729,7 @@ def additional_negative_controls(texts):
     else:
         raise Reject('loop acquisition negative control unexpectedly accepted')
     variant = dict(texts)
-    variant['src/root/m1A53.c'] = variant['src/root/m1A53.c'].replace(
+    variant['src/resources/database_objects.c'] = variant['src/resources/database_objects.c'].replace(
         'handle = db_handles[db_numOfHandles++];',
         'handle = db_handles[db_numOfHandles++]; db_numOfHandles = 0;')
     try:
@@ -739,7 +739,7 @@ def additional_negative_controls(texts):
     else:
         raise Reject('counter reset negative control unexpectedly accepted')
     variant = dict(texts)
-    variant['src/root/m1A28.c'] = variant['src/root/m1A28.c'].replace(
+    variant['src/resources/database_files.c'] = variant['src/resources/database_files.c'].replace(
         's_394E = 1;', 's_394E = 1; s_394E = 0;')
     try:
         first_flag_proof(variant)

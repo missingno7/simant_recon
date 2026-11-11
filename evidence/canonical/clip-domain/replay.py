@@ -24,8 +24,8 @@ if not __debug__:
 
 ORACLE_PIN = 'aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11'
 SOURCE_PINS = {
-    'src/root/m1E57.c': '1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084',
-    'src/root/m1D8E.c': 'afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556',
+    'src/graphics/clip_regions.c': '1723a5acc2719d00d79e4a63dd923a1a8c3ec4a5b1a9a8711cbfb85e36570084',
+    'src/graphics/clip_rects.c': 'afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556',
 }
 
 BASE = 0x70000

@@ -65,8 +65,8 @@ runs = [run("four-word-1212", 4, 0x1212), run("four-word-abcd", 4, 0xABCD),
 assert runs[0]["event_v"] != runs[1]["event_v"]
 assert runs[2]["event_hex"] == runs[3]["event_hex"]
 pins = {rel: hashlib.sha256((ROOT / rel).read_bytes()).hexdigest() for rel in
-        ("src/root/m1B73.asm", "src/S10/m35F5.c", "src/S19/m384C.c",
-         "src/S04/m35F5.c", "src/root/m218D.c", "tools/behavior.py")}
+        ("src/platform/input_timer.asm", "src/window/menu_tracking.c", "src/ui/game_events.c",
+         "src/ui/minimap.c", "src/window/events.c", "tools/behavior.py")}
 print(json.dumps({
     "schema": "simant-original-event-omitted-word-contrast-v1",
     "status": "PASS_COUNTEREXAMPLE_TO_ZERO_NORMALIZATION",

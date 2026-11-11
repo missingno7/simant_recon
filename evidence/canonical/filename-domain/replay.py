@@ -27,7 +27,7 @@ OUT.mkdir(parents=True)
 compiler.WORK = OUT/'cc'
 inputs = {}
 for name, source, profile, flags in [('PROBE', HERE/'fixture.c', 'msc600ax', ['/AL','/Os','/Gs']),
-                                     ('GOLDMAN', ROOT/'src/root/m1F66.asm', 'masm510', ['/Mx'])]:
+                                     ('GOLDMAN', ROOT/'src/platform/file_helpers.asm', 'masm510', ['/Mx'])]:
     inputs[str(source.relative_to(ROOT))] = hashlib.sha256(source.read_bytes()).hexdigest()
     fn = compiler.assemble if profile.startswith('masm') else compiler.compile_c
     result = fn(source.read_text(), profile, flags, basename=name, keep=True)

@@ -4,7 +4,7 @@
 
 The evidence supports retiring `ctype-out-of-range-index-layout` and the
 overlapping `dgroup_79f0` debt for the pinned supported DOS domain. Nine of the
-11 ctype sites cannot read bytes 79F0..79FD in that domain. `src/root/m1C62.c:170`
+11 ctype sites cannot read bytes 79F0..79FD in that domain. `src/window/alerts.c:170`
 does perform a real signed-prefix read during the successful-save timed alert,
 but every negative `c` and `c-32` misses the only switch labels (10, 13, 67).
 The value read therefore has no effect on DOS functional state for any contents

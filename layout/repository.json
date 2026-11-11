@@ -449,8 +449,8 @@
       ],
       "builder_site": "portable/build.py:137",
       "consumers": [
-        "src/root/m15F8.c",
-        "src/S15/m384C.c"
+        "src/startup/main.c",
+        "src/startup/game_session.c"
       ],
       "reason": "Adapts signals and five real INSTALL.EXE opens to native DOS I/O while preserving the closed descriptor slot; retires the physical INT 13h reset loop through a host policy.",
       "blocker": "No separate startup blocker is recorded. The BIOS reset operation is intentionally retired and must remain an explicit host policy.",
@@ -466,7 +466,7 @@
       ],
       "builder_site": "portable/build.py:138",
       "consumers": [
-        "src/root/m0093.c"
+        "src/simulation/random.c"
       ],
       "reason": "The source seed recurrence/order stays in the canonical TU; DOS CRT rand/srand, BIOS tick and physical 0x46c0 access become platform calls.",
       "blocker": "Seed/tick provider remains a physical platform dependency; verify behavior through the existing bounded RNG receipts before any provider change.",
@@ -481,7 +481,7 @@
       ],
       "builder_site": "portable/build.py:139-142",
       "consumers": [
-        "src/root/m0250.c"
+        "src/ui/edit_view.c"
       ],
       "reason": "Maps a same-address Pnt/data alias to the canonical pixel owner and adjusts pointer prototypes/casts for the byte-oriented native algorithm projection.",
       "blocker": "Owner extent remains a canonical source fact; no new state allocation is created by the adapter.",
@@ -498,7 +498,7 @@
       ],
       "builder_site": "portable/build.py:143-149",
       "consumers": [
-        "src/root/m1FD2.c"
+        "src/window/menu_helpers.c"
       ],
       "reason": "Lifts Rect/Timer declarations to shared native types, widens the pointer-bearing descriptor, and maps historical queue aliases to selectors over the native representation.",
       "blocker": "The actual queue capacities/owners remain governed by canonical state and current native preview limits.",
@@ -513,7 +513,7 @@
       ],
       "builder_site": "portable/build.py:113-116",
       "consumers": [
-        "src/root/m1FD2.c"
+        "src/window/menu_helpers.c"
       ],
       "reason": "Derives the native Event field widths from the canonical declaration and emits a pointer-widened Timer descriptor view.",
       "blocker": "The header is generated from a brittle Event regex and fixed descriptor shape; keep fail-closed checks until a source-backed type parser or checked-in generated projection is proven equivalent.",
@@ -532,12 +532,12 @@
       ],
       "builder_site": "portable/build.py:152-156",
       "consumers": [
-        "src/root/m284A.c",
-        "src/root/m29F0.c",
-        "src/root/m277E.c",
-        "src/root/m29D6.c",
-        "src/root/m293A.c",
-        "src/root/m290D.c"
+        "src/sound/midi_player.c",
+        "src/platform/port_io.c",
+        "src/sound/device_channels.c",
+        "src/sound/psg_voices.c",
+        "src/sound/device_probe.c",
+        "src/sound/sample_voices.c"
       ],
       "reason": "ISA device services and readable canonical ASM ISR projection; original C sound algorithms and sampled-channel commits remain canonical. Option adjacency is realized by the generic semantic span storage pass.",
       "blocker": "Several provider leaves are deliberately unprovided and audio mode/backend support remains a platform contract; do not replace them with success-shaped stubs.",
@@ -552,16 +552,16 @@
       ],
       "builder_site": "portable/build.py:152-157",
       "consumers": [
-        "src/root/m0000.c",
-        "src/root/m277E.c",
-        "src/root/m2815.c",
-        "src/root/m284A.c",
-        "src/root/m290D.c",
-        "src/root/m293A.c",
-        "src/root/m295C.c",
-        "src/root/m29D6.c",
-        "src/root/m29F0.c",
-        "src/data/d55B3_00B8.c"
+        "src/sound/resource_loading.c",
+        "src/sound/device_channels.c",
+        "src/sound/opl2_voices.c",
+        "src/sound/midi_player.c",
+        "src/sound/sample_voices.c",
+        "src/sound/device_probe.c",
+        "src/sound/midi_voices.c",
+        "src/sound/psg_voices.c",
+        "src/platform/port_io.c",
+        "src/sound/instruments.c"
       ],
       "reason": "Projects shared native audio record/pointer types over canonical C/ASM storage and removes repeated incompatible extern/struct spellings; it introduces no owner allocation.",
       "blocker": "Shared pointer-width record projections remain required for the native ABI; deferred scalar extern handling is intentional.",
@@ -576,8 +576,8 @@
       ],
       "builder_site": "portable/build.py:158",
       "consumers": [
-        "src/S10/m35F5.c",
-        "src/S19/m384C.c"
+        "src/window/menu_tracking.c",
+        "src/ui/game_events.c"
       ],
       "reason": "Four-word calls are renamed to a helper that supplies zero for the fifth Event.v field, which the adapter says current consumers do not observe; five-word calls pass every value.",
       "blocker": "This value normalization is not listed as its own portable preview limitation. The raw Event.v state can differ if another observer/caller reads it.",
@@ -591,8 +591,8 @@
       ],
       "builder_site": "portable/build.py:159",
       "consumers": [
-        "src/S19/m384C.c",
-        "src/root/m218D.c"
+        "src/ui/game_events.c",
+        "src/window/events.c"
       ],
       "reason": "Adds unsigned-word casts so 16-bit event-code bit patterns survive native integer promotions; labels and branch bodies are unchanged.",
       "blocker": "Covered by the native scalar expression-lowering scope limit; this local pass does not close the general integer-promotion blocker.",
@@ -608,8 +608,8 @@
       ],
       "builder_site": "portable/build.py:160-161",
       "consumers": [
-        "src/S10/m35F5.c",
-        "src/S17/m384C.c"
+        "src/window/menu_tracking.c",
+        "src/window/menu_setup.c"
       ],
       "reason": "Replaces the serialized far-pointer table with a native Handle/table view and removes the DOS offset-relocation traversal because host pointers are already relocated.",
       "blocker": "Invalid native object views, OOM policy, zoom savedRect behavior, and unsupported resource domains remain open under the S26/window preview limitation; pointer owners also depend on unresolved storage.",
@@ -624,7 +624,7 @@
       ],
       "builder_site": "portable/build.py:162-164",
       "consumers": [
-        "src/S09/m35F5.c"
+        "src/ui/save_load.c"
       ],
       "reason": "Deletes the BIOS equipment-byte read and original rule that maps drive B to A on a one-floppy system. This exception covers physical BIOS drive policy only; host path/drive resolution is handled by virtual C:.",
       "blocker": "Virtual C: closes host drive/path leakage. SDL3 has no physical BIOS floppy equipment byte or floppy topology; callers that choose physical B remain outside the supported native domain. The live limitation is native-drive-device-policy in portable/platform.json.",
@@ -642,7 +642,7 @@
       ],
       "builder_site": "portable/build.py:165",
       "consumers": [
-        "src/root/m23E6.c"
+        "src/window/lists_sliders.c"
       ],
       "reason": "Maps 20 source text Handle field accesses to a typed native sidecar accessor; ordinary list algorithms remain in the canonical TU.",
       "blocker": "Window resource/object-domain limits remain covered by the platform.json window exception.",
@@ -656,7 +656,7 @@
       ],
       "builder_site": "portable/build.py:166",
       "consumers": [
-        "src/root/m1A96.c"
+        "src/resources/object_cache.c"
       ],
       "reason": "Changes allocation/clear extents from hard-coded DOS pointer slots to offsetof/sizeof of the native CacheEntry layout; lookup/eviction code stays canonical.",
       "blocker": "Only the reviewed two-bank layout is admitted; keep the exact anchor until the shared type owns both source and native sizes.",
@@ -671,7 +671,7 @@
       ],
       "builder_site": "portable/build.py:167",
       "consumers": [
-        "src/S26/m39C7.c"
+        "src/window/move_resize.c"
       ],
       "reason": "Redirects four object-table reads through a native registry and adds NULL/range guards before obtaining the object pointer.",
       "blocker": "portable/platform.json explicitly states invalid NULL views remain faultable and native OOM/zoom savedRect policies are unresolved outside the reviewed shipped-resource domain.",
@@ -685,7 +685,7 @@
       ],
       "builder_site": "portable/build.py:168",
       "consumers": [
-        "src/root/m1E57.c"
+        "src/graphics/clip_regions.c"
       ],
       "reason": "Sizes two native Handle slots with sizeof instead of an 8-byte DOS constant while leaving clip Push/Pop order intact.",
       "blocker": "The clip payload buffer itself remains an unproved storage import and is dynamically reserved by a separate temporary exception.",
@@ -701,12 +701,12 @@
       ],
       "builder_site": "portable/build.py:169",
       "consumers": [
-        "src/root/m15F8.c",
-        "src/root/m1A28.c",
-        "src/root/m1C62.c",
-        "src/S09/m35F5.c",
-        "src/S20/m39F1.c",
-        "src/S23/m39C7.c"
+        "src/startup/main.c",
+        "src/resources/database_files.c",
+        "src/window/alerts.c",
+        "src/ui/save_load.c",
+        "src/startup/dos_config.c",
+        "src/ui/info_cards.c"
       ],
       "reason": "Routes DOS CRT tables/error strings/hard-error registration through explicit native CRT policy and preserves source-width declarations.",
       "blocker": "The adapter describes ASCII lowercase semantics and retired INT 24 delivery; confirm supported character/error domains before claiming full CRT equivalence.",
@@ -720,7 +720,7 @@
       ],
       "builder_site": "portable/build.py:170",
       "consumers": [
-        "src/root/m1986.c"
+        "src/resources/database_index.c"
       ],
       "reason": "Adds a native early return before canonical index[count] predicate access.",
       "blocker": "This is explicitly documented in portable/platform.json and evidence/canonical/native-findindex-boundary/: a neighboring allocation header can satisfy the original predicate in a bounded original execution. Natural reachability and heap-history equivalence remain unproved.",
@@ -736,10 +736,10 @@
       ],
       "builder_site": "portable/build.py:171-172",
       "consumers": [
-        "src/root/m25E7.c",
-        "src/root/m24AB.c",
-        "src/S13/m384C.c",
-        "src/root/m1629.c"
+        "src/graphics/font_resources.c",
+        "src/graphics/font_output.c",
+        "src/ui/yard_window.c",
+        "src/graphics/balloons.c"
       ],
       "reason": "Shares the native Font/Bitmap type, widens pointer fields, and sizes the runtime FontHeader allocation from the converted type.",
       "blocker": "portable/platform.json caps the admitted bitmap group at 1280 source-owned bytes; larger output is unsupported without source storage proof.",
@@ -754,9 +754,9 @@
       ],
       "builder_site": "portable/build.py:172",
       "consumers": [
-        "src/root/m1A53.c",
-        "src/root/m24AB.c",
-        "src/root/m1629.c"
+        "src/resources/database_objects.c",
+        "src/graphics/font_output.c",
+        "src/graphics/balloons.c"
       ],
       "reason": "Shares canonical database/font declarations and widens font pointer views. Window handles use ordinary canonical declarations; no native table owner remains.",
       "blocker": "No independent storage capacity or lifetime is supplied by this declaration conversion.",
@@ -773,12 +773,12 @@
       ],
       "builder_site": "portable/build.py:173-175",
       "consumers": [
-        "src/root/m2505.c",
-        "src/root/m20E8.c",
-        "src/root/m23AE.c",
-        "src/root/m22BF.c",
-        "src/root/m21FA.c",
-        "src/root/m218D.c",
+        "src/window/object_geometry.c",
+        "src/window/lifecycle.c",
+        "src/window/locking.c",
+        "src/window/object_attributes.c",
+        "src/window/drawing.c",
+        "src/window/events.c",
         "all canonical C TUs with shared window globals"
       ],
       "reason": "Window registry conversion retains fixed-capacity validation and added failure behavior. Shared globals and loader width/callback/Rect conversions are mechanical; the palette uses canonical storage directly.",
@@ -823,7 +823,7 @@
         "portable/build.py:99-105",
         "portable/build.py:178",
         "src/program.json",
-        "src/root/m2CFB.asm"
+        "src/memory/hook_thunks.asm"
       ],
       "builder_site": "portable/build.py:99-105,178",
       "consumers": [
@@ -872,7 +872,7 @@
       ],
       "builder_site": "portable/build.py:184",
       "consumers": [
-        "src/root/m075B.c"
+        "src/resources/game_strings.c"
       ],
       "reason": "Changes one DOS 4-byte far-pointer-table allocation formula to sizeof the native pointer element; data parsing/order is unchanged.",
       "blocker": "One shape-pinned case only; no generic allocation-size pass is established.",
@@ -956,7 +956,7 @@
       ],
       "builder_site": "portable/build.py:195",
       "consumers": [
-        "src/root/m208F.c"
+        "src/window/text_bitmap_helpers.c"
       ],
       "reason": "Redirects the canonical ASM countdown word to a native BIOS-clock-backed countdown service; tick decrement and wait behavior are documented in the adapter.",
       "blocker": "The clock service defines the native tick and wait policy; preserve it as a platform boundary and test its supported event/presentation behavior separately.",
@@ -971,7 +971,7 @@
       ],
       "builder_site": "portable/build.py:196",
       "consumers": [
-        "src/root/m00F8.c"
+        "src/ui/view_dialog_helpers.c"
       ],
       "reason": "Adapts a one-callback DOS cache hook API to the native two-callback prototype by supplying a null release callback; removes an unused entry argument from a native call.",
       "blocker": "This assumes the null release callback is the correct native policy for the original one-callback callsite.",
@@ -987,8 +987,8 @@
       ],
       "builder_site": "portable/build.py:197",
       "consumers": [
-        "src/root/m20E8.c",
-        "src/root/m22BF.c",
+        "src/window/lifecycle.c",
+        "src/window/object_attributes.c",
         "all canonical C TUs calling win_Open, win_DoProxMenu, or win_Swap"
       ],
       "reason": "One combined pass now owns win_Open, win_DoProxMenu, and win_Swap rewriting. It replaces unsafe reads from caller stack words with explicit supplied counts/slots and native registry validation.",
@@ -1003,10 +1003,10 @@
       ],
       "builder_site": "portable/build.py:198",
       "consumers": [
-        "src/S15/m384C.c",
-        "src/root/m20E8.c",
-        "src/root/m22BF.c",
-        "src/S26/m39C7.c"
+        "src/startup/game_session.c",
+        "src/window/lifecycle.c",
+        "src/window/object_attributes.c",
+        "src/window/move_resize.c"
       ],
       "reason": "Makes the two source-proven AX=0 fastcall window arguments explicit at the native callsites after the word lowering pass.",
       "blocker": "The evidence is callsite/resource-context specific; platform.json still leaves zoom savedRect behavior unsupported outside the reviewed shipped-resource domain.",
@@ -1022,11 +1022,11 @@
       ],
       "builder_site": "portable/build.py:201-214",
       "consumers": [
-        "src/root/m1986.c",
-        "src/root/m19A9.c",
-        "src/root/m1A28.c",
-        "src/state/database-record-state.c",
-        "src/state/database-index-state.c"
+        "src/resources/database_index.c",
+        "src/resources/database_records.c",
+        "src/resources/database_files.c",
+        "src/resources/state/open_databases.c",
+        "src/resources/state/index_search.c"
       ],
       "reason": "Uses native runtime pointer-bearing structures while retaining wire record byte widths; database owner pointers are widened only in native views.",
       "blocker": "Do not infer record extents, unproved storage imports, or whole database runtime equivalence from the type header alone.",
@@ -1037,8 +1037,8 @@
       "class": "GENERIC_LOWERING",
       "paths": [
         "portable/build.py:205-214",
-        "src/state/database-record-state.c",
-        "src/state/database-index-state.c"
+        "src/resources/state/open_databases.c",
+        "src/resources/state/index_search.c"
       ],
       "builder_site": "portable/build.py:205-214",
       "consumers": [
@@ -1074,7 +1074,7 @@
       ],
       "builder_site": "portable/build.py:226-228,252",
       "consumers": [
-        "src/root/m171C.c"
+        "src/memory/ralloc.c"
       ],
       "reason": "The native build does not compile the canonical physical DOS heap TU; native allocation/EMS providers implement the platform boundary while canonical source remains DOS authority.",
       "blocker": "portable/platform.json explicitly leaves full heap-history equivalence, shared metadata, paragraph copying, flags/counters, 16-bit limits, physical/EMS layout and failure policy open.",
@@ -1092,13 +1092,13 @@
       ],
       "builder_site": "portable/build.py:232-249",
       "consumers": [
-        "src/root/m1B73.asm",
-        "src/root/m1B4E.asm",
-        "src/root/m28BC.asm",
-        "src/S02/m3126.asm",
-        "src/root/m195A.asm",
-        "src/root/m2650.asm",
-        "src/root/m1FBD.asm",
+        "src/platform/input_timer.asm",
+        "src/platform/video/bios_bitmap.asm",
+        "src/sound/sample_timer.asm",
+        "src/platform/video/vga8_raster.asm",
+        "src/memory/ems.asm",
+        "src/graphics/glyph_blit.asm",
+        "src/graphics/bitmap_text.asm",
         "other canonical ASM TUs represented by readable algorithm/platform projections"
       ],
       "reason": "Extracts values/fixup facts only from symbolic canonical ASM directives and emits native data/algorithm projections where the host compiler cannot assemble DOS instructions.",
@@ -1120,7 +1120,7 @@
       ],
       "builder_site": "portable/build.py:platform service inventory",
       "consumers": [
-        "src/root/m1B73.asm",
+        "src/platform/input_timer.asm",
         "canonical input queue and native SDL/BIOS boundary"
       ],
       "reason": "Readable projection of canonical 0747 and INT08 cursor instructions and shared 0445 mouse callback over canonical state; retires table-write-only scan handling and the duplicate warp callback path.",
@@ -1173,7 +1173,7 @@
       ],
       "builder_site": "portable/build.py:semantic_spans.Contracts/extract/emit",
       "consumers": [
-        "src/S09/m35F5.c SaveRec block reads/writes",
+        "src/ui/save_load.c SaveRec block reads/writes",
         "all canonical consumers declared in portable/semantic-spans.json"
       ],
       "reason": "Canonical MAP positions and declaration/COMDEF extents define complete storage groups; canonical owner names are exported offset aliases. Every member has offset/size assertions; undeclared SaveRec/literal crossings and stale consumer censuses fail the build.",

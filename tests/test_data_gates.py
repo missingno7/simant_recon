@@ -62,7 +62,7 @@ class DataModule(unittest.TestCase):
     def test_keys(self):
         self.assertEqual(modules.parse_key("data:3D57"), ("data", 0x3D57, None))
         self.assertEqual(modules.parse_key("data;3E1D"), ("data", 0x3E1D, None))    # MSYS-mangled
-        self.assertEqual(modules.module_source("data", 0x3D57, None, "c"), "src/data/d3D57.c")
+        self.assertEqual(modules.module_source("data", 0x3D57, None, "c"), "src/simulation/tables.c")
         with self.assertRaises(SystemExit):
             modules.parse_key("data:3D57@0010")
 
@@ -171,7 +171,7 @@ class DataPointers(unittest.TestCase):
 
     def test_same_section_overlay_proc(self):
         pl = {"seg": 0x55B3, "off": 0x2098, "size": 4}
-        o = asm_obj(OVERLAY_ASM.format(target="_o00_31AD_1659"))
+        o = asm_obj(OVERLAY_ASM.format(target="_GSetAttrib"))
         self.assertTrue(modules.verify_data_segment(o, "_DATA", pl, unit="S00")["exact"])
         wrong = asm_obj(OVERLAY_ASM.format(target="_o00_31AD_166A"))
         self.assertFalse(modules.verify_data_segment(wrong, "_DATA", pl, unit="S00")["exact"])

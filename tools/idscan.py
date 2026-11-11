@@ -30,7 +30,7 @@ at which it is exact.  Variant sources and results.json go to build/scratch/help
 Examples (Git Bash: ``export MSYS_NO_PATHCONV=1``):
 
     python tools/idscan.py build/workers/me/m2505.c --module root:2505
-    python tools/idscan.py src/root/m1383.c --top --max 20 --funcs GetNestDir
+    python tools/idscan.py src/simulation/strategy.c --top --max 20 --funcs GetNestDir
     python tools/idscan.py draft.c --before o12_384C_0B76 --kind typedef --jobs 8
 """
 from __future__ import annotations

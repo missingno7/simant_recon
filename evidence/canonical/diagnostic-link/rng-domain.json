@@ -4,31 +4,31 @@
   "conclusion": "Fresh games are intentionally randomized. Identical host replay keys/timestamps do not establish matching game-clock samples, live RNG state or generated worlds. Equal explicit per-yard seeds support a controlled world comparison only with equal generation parameters, resources and relevant prestate; arbitrary screenshots need not match.",
   "source_pins": [
     {
-      "path": "src/root/m0093.c",
+      "path": "src/simulation/random.c",
       "sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af"
     },
     {
-      "path": "src/root/m075B.c",
+      "path": "src/resources/game_strings.c",
       "sha256": "2826d3b81cf0bcbf67b8453c255ec29bfeb3e381f67028eecb3aa1ef1cf83f56"
     },
     {
-      "path": "src/root/m1B73.asm",
+      "path": "src/platform/input_timer.asm",
       "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3"
     },
     {
-      "path": "src/S08/m35F5.c",
+      "path": "src/simulation/world_generation.c",
       "sha256": "f950e7c22b112adef492d745164e80755669e2e9218052d4b9b48e5c8a22adc6"
     },
     {
-      "path": "src/S18/m384C.c",
+      "path": "src/simulation/map_patches.c",
       "sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3"
     },
     {
-      "path": "src/S09/m35F5.c",
+      "path": "src/ui/save_load.c",
       "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
     },
     {
-      "path": "src/root/m015B.c",
+      "path": "src/ui/view_commands.c",
       "sha256": "67f5c32deda5a49ab56243d50fba33647db7897c850706378fe2a8488277fa8f"
     }
   ],

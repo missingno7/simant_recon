@@ -44,31 +44,31 @@ import resources_probe  # noqa: E402
 SCHEMA = "viewport-input-domain-facts-v2"
 _UNICORN_KEEPALIVE = []
 RELEVANT = (
-    "src/root/m1B73.asm",
-    "src/S20/m39F1.c",
-    "src/root/m15F8.c",
-    "src/S17/m384C.c",
-    "src/root/m218D.c",
-    "src/root/m00BA.c",
-    "src/root/m205F.c",
-    "src/S26/m39C7.c",
-    "src/root/m1FD2.c",
-    "src/root/m1CE2.c",
-    "src/root/m2505.c",
-    "src/root/m20E8.c",
-    "src/root/m23AE.c",
-    "src/root/m22BF.c",
-    "src/root/m00F8.c",
-    "src/root/m015B.c",
-    "src/root/m205F.c",
-    "src/S09/m35F5.c",
-    "src/S10/m35F5.c",
-    "src/S16/m384C.c",
-    "src/root/m0250.c",
-    "src/state/screen-clip-list.c",
-    "src/state/mouse-words.c",
-    "src/S00/m31AD.asm",
-    "src/S00/m31AD_2AB4.asm",
+    "src/platform/input_timer.asm",
+    "src/startup/dos_config.c",
+    "src/startup/main.c",
+    "src/window/menu_setup.c",
+    "src/window/events.c",
+    "src/startup/application_windows.c",
+    "src/platform/video/driver_select.c",
+    "src/window/move_resize.c",
+    "src/window/menu_helpers.c",
+    "src/graphics/screen_rects.c",
+    "src/window/object_geometry.c",
+    "src/window/lifecycle.c",
+    "src/window/locking.c",
+    "src/window/object_attributes.c",
+    "src/ui/view_dialog_helpers.c",
+    "src/ui/view_commands.c",
+    "src/platform/video/driver_select.c",
+    "src/ui/save_load.c",
+    "src/window/menu_tracking.c",
+    "src/ui/intro_credits.c",
+    "src/ui/edit_view.c",
+    "src/graphics/state/screen_clip.c",
+    "src/window/state/mouse_buttons.c",
+    "src/platform/video/planar_raster.asm",
+    "src/platform/video/planar_mode_blits.asm",
 )
 MOUSE_FUNCTIONS = (
     "f_1B73_0046", "f_1B73_03EE", "f_1B73_0445", "f_1B73_051F",
@@ -376,7 +376,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
     pins = inventory_pins(RELEVANT, overrides)
     source_bytes = all_sources(overrides)
     source_text = {path: raw.decode("latin1") for path, raw in source_bytes.items()}
-    asm = source_text["src/root/m1B73.asm"]
+    asm = source_text["src/platform/input_timer.asm"]
     mickey_init = asm_procedure(asm, "_f_1B73_0046")
     mickey_decl = re.search(r"(?im)^\s*mickey_mode\s+db\s+0\b", asm)
     absolute_handler = asm_procedure(asm, "_f_1B73_0445")
@@ -431,7 +431,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
 
     # g_432A starts cleared and the only source assignments are /b and BUG=MSMOUSE.
     flag_decl = re.search(r"(?im)^\s*_g_432A\s+db\s+0\b", asm)
-    s20 = source_text["src/S20/m39F1.c"]
+    s20 = source_text["src/startup/dos_config.c"]
     initstuff = c_function(s20, "IBMInitStuff")
     writers_432a = []
     for rel, raw in sorted(source_bytes.items()):
@@ -439,22 +439,22 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         for line_no, line in enumerate(text.splitlines(), 1):
             if re.search(r"\bg_432A\s*(?:=|\+=|-=|\+\+|--)", line):
                 writers_432a.append({"path": rel, "line": line_no, "text": line.strip()})
-    if not flag_decl or len(writers_432a) != 2 or any(row["path"] != "src/S20/m39F1.c" for row in writers_432a):
+    if not flag_decl or len(writers_432a) != 2 or any(row["path"] != "src/startup/dos_config.c" for row in writers_432a):
         raise AssertionError("g_432A initialization/write census changed")
     if ("for (i = 1; i < argc; i++)" not in initstuff or "case 'b':" not in initstuff
         or "g_432A = 1;" not in initstuff or 'getenv("BUG")' not in initstuff
         or '"MSMOUSE"' not in initstuff or "stricmp" not in initstuff):
         raise AssertionError("IBMInitStuff no longer identifies the /b and BUG=MSMOUSE setters")
-    main = source_text["src/root/m15F8.c"]
-    startup = source_text["src/S17/m384C.c"]
+    main = source_text["src/startup/main.c"]
+    startup = source_text["src/window/menu_setup.c"]
     if main.find("IBMInitStuff(argc, argv);") < 0 or initstuff.find('getenv("BUG")') > initstuff.find("o17_384C_0000();"):
         raise AssertionError("startup order no longer sets the input domain before mouse init")
     if "f_1B73_0046();" not in c_function(startup, "o17_384C_0000"):
         raise AssertionError("mouse mode init is not reached through the startup mouse setup")
 
     # Prove the blocking resize loop's sample source and exclude in-loop warps/event dispatch.
-    resize = c_function(source_text["src/S26/m39C7.c"], "o26_39C7_0671")
-    dispatcher = c_function(source_text["src/root/m218D.c"], "f_218D_02D5")
+    resize = c_function(source_text["src/window/move_resize.c"], "o26_39C7_0671")
+    dispatcher = c_function(source_text["src/window/events.c"], "f_218D_02D5")
     loop = c_block(resize, "while (ButtonHeld())")
     for fragment in ("f_1FD2_04B3(0xf084, &icon)", "if (ev == 0)",
                      "f_2505_0382(&start, &icon)", "f_1B73_09E9(start.x, start.y)",
@@ -468,23 +468,23 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         raise AssertionError("F084 dispatcher no longer enters resize with a null event")
     resize_callers = c_call_sites(source_bytes, "o26_39C7_0671")
     if {(r["path"], r["line"], r["first_arg"]) for r in resize_callers} != {
-        ("src/root/m218D.c", 168, "0")
+        ("src/window/events.c", 168, "0")
     }:
         raise AssertionError("modal resize caller census changed")
     if "f_1fd2_04d0(&pt)" not in norm(loop) or not re.search(r"pt\.y\s*!=\s*g_9124", loop):
         raise AssertionError("resize loop no longer samples the shared cursor position")
-    held = c_function(source_text["src/root/m1FD2.c"], "ButtonHeld")
-    still = c_function(source_text["src/root/m1FD2.c"], "StillDown")
+    held = c_function(source_text["src/window/menu_helpers.c"], "ButtonHeld")
+    still = c_function(source_text["src/window/menu_helpers.c"], "StillDown")
     if "g_9124" in held or "g_9124" in still:
         raise AssertionError("held-button polling gained a cursor-position writer")
 
     # Guard the menu top used by the geometry constraint, including its font premise.
-    menu_source = source_text["src/root/m1FD2.c"]
+    menu_source = source_text["src/window/menu_helpers.c"]
     menu_draw = c_function(menu_source, "f_1FD2_0663")
-    screen_rect_api = c_function(source_text["src/root/m1CE2.c"], "f_1CE2_000C")
-    screen_init = source_text["src/state/screen-clip-list.c"]
-    display_init = c_function(source_text["src/root/m205F.c"], "f_205F_0004")
-    vga_font = asm_procedure(source_text["src/S00/m31AD.asm"], "_o00_31AD_168C")
+    screen_rect_api = c_function(source_text["src/graphics/screen_rects.c"], "f_1CE2_000C")
+    screen_init = source_text["src/graphics/state/screen_clip.c"]
+    display_init = c_function(source_text["src/platform/video/driver_select.c"], "f_205F_0004")
+    vga_font = asm_procedure(source_text["src/platform/video/planar_raster.asm"], "_o00_31AD_168C")
     if ("g_9130()" not in norm(menu_draw)
         or "fd_50f6_393c = *f_1ce2_000c()" not in norm(menu_draw)
         or "fd_50f6_393c.bottom = g_3ddc + fd_50f6_393c.top + 3" not in norm(menu_draw)
@@ -516,7 +516,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         "_f_1B73_0046", "_f_1B73_0445", "_f_1B73_051F", "_f_1B73_0747",
     }
     for name, rows in writes.items():
-        if any(row["owner"] not in allowed_writers or row["path"] != "src/root/m1B73.asm" for row in rows):
+        if any(row["owner"] not in allowed_writers or row["path"] != "src/platform/input_timer.asm" for row in rows):
             raise AssertionError(f"unexpected source writer of {name}")
         if {row["owner"] for row in rows} != allowed_writers:
             raise AssertionError(f"cursor-position writer census for {name} is incomplete")
@@ -549,25 +549,25 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
     warp_calls = call_sites(source_bytes, "f_1B73_09E9")
     center_calls = call_sites(source_bytes, "f_1B73_0C80")
     expected_warps = {
-        ("src/root/m1FD2.c", 429), ("src/S10/m35F5.c", 145),
-        ("src/S10/m35F5.c", 378), ("src/S26/m39C7.c", 253),
-        ("src/S26/m39C7.c", 325), ("src/root/m1B73.asm", 1792),
+        ("src/window/menu_helpers.c", 429), ("src/window/menu_tracking.c", 145),
+        ("src/window/menu_tracking.c", 378), ("src/window/move_resize.c", 253),
+        ("src/window/move_resize.c", 325), ("src/platform/input_timer.asm", 1792),
     }
     if {(r["path"], r["line"]) for r in warp_calls} != expected_warps:
         raise AssertionError("09E9 caller census changed")
-    expected_centers = {("src/root/m218D.c", 305), ("src/root/m218D.c", 332), ("src/S10/m35F5.c", 425)}
+    expected_centers = {("src/window/events.c", 305), ("src/window/events.c", 332), ("src/window/menu_tracking.c", 425)}
     if {(r["path"], r["line"]) for r in center_calls} != expected_centers:
         raise AssertionError("0C80 caller census changed")
     kbd_warps = call_sites(source_bytes, "f_1B73_09F7")
     if {(r["path"], r["line"]) for r in kbd_warps} != {
-        ("src/root/m1B73.asm", 310), ("src/root/m1B73.asm", 962),
-        ("src/root/m1B73.asm", 1191), ("src/root/m1B73.asm", 1385),
-        ("src/root/m1B73.asm", 1416),
+        ("src/platform/input_timer.asm", 310), ("src/platform/input_timer.asm", 962),
+        ("src/platform/input_timer.asm", 1191), ("src/platform/input_timer.asm", 1385),
+        ("src/platform/input_timer.asm", 1416),
     }:
         raise AssertionError("keyboard _09F7 warp/copy caller census changed")
 
     # The callback installed for mouse dispatch only enqueues; cursor callbacks only draw.
-    m1fd2 = source_text["src/root/m1FD2.c"]
+    m1fd2 = source_text["src/window/menu_helpers.c"]
     descriptor_rows = {
         "g_6004": "struct timer g_6004 = { { 0, 0, 100, 100 }, f_1b73_030f",
         "g_6016": "struct timer g_6016 = { { 0, 0, 100, 100 }, f_1b73_0d4b",
@@ -591,7 +591,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         or "g_6016.fn = fn" not in norm(generic_register)
         or "f_1b73_09ff" in norm(generic_setup)):
         raise AssertionError("generic cursor descriptor is not bound to its draw callback")
-    if {(row["path"], row["line"]) for row in callback_callers} != {("src/root/m1FD2.c", 186)} or dormant_callers:
+    if {(row["path"], row["line"]) for row in callback_callers} != {("src/window/menu_helpers.c", 186)} or dormant_callers:
         raise AssertionError("generic cursor callback caller/reference census changed")
     for fragment in ("call far ptr _f_1b73_036e", "retf"):
         if fragment not in norm(enqueue_adapter):
@@ -622,29 +622,29 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         raise AssertionError("video drawing callback path acquired a raw cursor warp")
 
     f20_refs = comments_and_sites(source_bytes, "f_20E8_0903")
-    if len(f20_refs) != 1 or f20_refs[0]["path"] != "src/root/m20E8.c" or "void _fastcall f_20E8_0903" not in f20_refs[0]["text"]:
+    if len(f20_refs) != 1 or f20_refs[0]["path"] != "src/window/lifecycle.c" or "void _fastcall f_20E8_0903" not in f20_refs[0]["text"]:
         raise AssertionError("f_20E8_0903 now has a reference/call/address-taking site")
 
     swaps = c_call_sites(source_bytes, "win_Swap")
-    expected_swaps = {("src/root/m00F8.c", 294, "0x1900"),
-                      ("src/root/m00F8.c", 306, "0x100"),
-                      ("src/root/m015B.c", 185, "0x100")}
+    expected_swaps = {("src/ui/view_dialog_helpers.c", 294, "0x1900"),
+                      ("src/ui/view_dialog_helpers.c", 306, "0x100"),
+                      ("src/ui/view_commands.c", 185, "0x100")}
     if {(r["path"], r["line"], r["first_arg"]) for r in swaps} != expected_swaps:
         raise AssertionError("win_Swap caller census changed")
     rect_setters = c_call_sites(source_bytes, "f_22BF_00DD")
-    expected_rect_setters = {("src/S09/m35F5.c", 320, "0x1602"),
-                             ("src/S09/m35F5.c", 519, "0x1602"),
-                             ("src/S16/m384C.c", 85, "0x1a01"),
-                             ("src/S16/m384C.c", 120, "0x1a01")}
+    expected_rect_setters = {("src/ui/save_load.c", 320, "0x1602"),
+                             ("src/ui/save_load.c", 519, "0x1602"),
+                             ("src/ui/intro_credits.c", 85, "0x1a01"),
+                             ("src/ui/intro_credits.c", 120, "0x1a01")}
     if {(r["path"], r["line"], r["first_arg"]) for r in rect_setters} != expected_rect_setters:
         raise AssertionError("direct object-rectangle setter caller census changed")
     load_window_calls = c_call_sites(source_bytes, "win_LoadWindow")
     if {(r["path"], r["line"]) for r in load_window_calls} != {
-        ("src/root/m20E8.c", 136), ("src/root/m23AE.c", 58), ("src/root/m23AE.c", 74)
+        ("src/window/lifecycle.c", 136), ("src/window/locking.c", 58), ("src/window/locking.c", 74)
     }:
         raise AssertionError("demand-load/reload caller census changed")
     load_all_calls = c_call_sites(source_bytes, "win_LoadAllWindows")
-    if {(r["path"], r["line"]) for r in load_all_calls} != {("src/root/m00BA.c", 48)}:
+    if {(r["path"], r["line"]) for r in load_all_calls} != {("src/startup/application_windows.c", 48)}:
         raise AssertionError("initial all-window load caller census changed")
     offset_mentions = comments_and_sites(source_bytes, "win_offsets")
 
@@ -670,8 +670,8 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
     if struct.unpack_from("<2h", icon_bitmap, 8) != (16, 16):
         raise AssertionError("HCEGANT resize bitmap is not 16 by 16")
 
-    recalc = c_function(source_text["src/root/m2505.c"], "win_Recalc")
-    object_axis = c_function(source_text["src/root/m2505.c"], "f_2505_03B9")
+    recalc = c_function(source_text["src/window/object_geometry.c"], "win_Recalc")
+    object_axis = c_function(source_text["src/window/object_geometry.c"], "f_2505_03B9")
     if ("f_2505_03b9(k, win, obj)" not in norm(recalc)
         or "((int far *)(obj + 0x18))[axis]" not in norm(object_axis)
         or "((int far *)(obj + 0x10))[axis]" not in norm(object_axis)
@@ -679,10 +679,10 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         raise AssertionError("object-4 mode/reference geometry is no longer derived by win_Recalc")
 
     # Verify source control regeneration and all root-0 geometry/offset routes.
-    control_builder = c_function(source_text["src/root/m2505.c"], "f_2505_06B9")
-    control_center = c_function(source_text["src/root/m2505.c"], "f_2505_0382")
-    control_add = c_function(source_text["src/root/m2505.c"], "f_2505_0831")
-    control_remove = c_function(source_text["src/root/m2505.c"], "f_2505_08EA")
+    control_builder = c_function(source_text["src/window/object_geometry.c"], "f_2505_06B9")
+    control_center = c_function(source_text["src/window/object_geometry.c"], "f_2505_0382")
+    control_add = c_function(source_text["src/window/object_geometry.c"], "f_2505_0831")
+    control_remove = c_function(source_text["src/window/object_geometry.c"], "f_2505_08EA")
     if ("0xf084" not in norm(control_builder) or "0x70" not in norm(control_builder)
         or "m = (*((char far * far *)(w + 0x2c)))[0x28]" not in norm(control_builder)):
         raise AssertionError("root resize control is not regenerated from bitmap 70")
@@ -695,19 +695,19 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         raise AssertionError("F084 center calculation changed")
     if "f_2505_06b9(1," not in norm(control_add) or "f_2505_06b9(0," not in norm(control_remove):
         raise AssertionError("root control add/remove paths no longer rebuild F084")
-    geometry_s26 = source_text["src/S26/m39C7.c"]
+    geometry_s26 = source_text["src/window/move_resize.c"]
     for fname in ("o26_39C7_040F", "o26_39C7_0671", "o26_39C7_0000"):
         body = c_function(geometry_s26, fname)
         if "f_2505_08ea(" not in norm(body) or "f_2505_0831(" not in norm(body):
             raise AssertionError(f"{fname} no longer refreshes active controls after geometry work")
-    winopen = c_function(source_text["src/root/m20E8.c"], "win_Open")
+    winopen = c_function(source_text["src/window/lifecycle.c"], "win_Open")
     if "f_2505_0831(" not in norm(winopen):
         raise AssertionError("window open no longer installs controls")
     if not (norm(winopen).find("win_recalc(win)") >= 0
             and norm(winopen).rfind("win_recalc(win)") < norm(winopen).find("f_2505_0831(win)")):
         raise AssertionError("window open no longer recalculates geometry before installing F084")
-    close = c_function(source_text["src/root/m20E8.c"], "win_Close")
-    send_back = c_function(source_text["src/root/m20E8.c"], "f_20E8_0776")
+    close = c_function(source_text["src/window/lifecycle.c"], "win_Close")
+    send_back = c_function(source_text["src/window/lifecycle.c"], "f_20E8_0776")
     stack_order = {
         "open": ["f_2505_08ea(g_5702[0])", "f_2505_0831(win)"],
         "close": ["f_2505_08ea(win)", "f_2505_0831(g_5702[0])"],
@@ -720,7 +720,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         positions = [text.find(fragment) for fragment in sequence]
         if any(pos < 0 for pos in positions) or positions != sorted(positions):
             raise AssertionError(f"active F084 stack transition {label} no longer removes then installs top controls")
-    lookup = c_function(source_text["src/root/m1FD2.c"], "f_1FD2_04B3")
+    lookup = c_function(source_text["src/window/menu_helpers.c"], "f_1FD2_04B3")
     lookup_asm = asm_procedure(asm, "_f_1B73_0C42")
     tag_find = asm_procedure(asm, "_f_1B73_0A89")
     if ("f_1b73_0c42(id, fd_5071_03c4, out)" not in norm(lookup)
@@ -730,9 +730,9 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         raise AssertionError("F084 lookup no longer uses the first matching fixed-tag descriptor")
     move = c_function(geometry_s26, "o26_39C7_040F")
     zoom = c_function(geometry_s26, "o26_39C7_0000")
-    load_window = c_function(source_text["src/root/m20E8.c"], "win_LoadWindow")
-    load_all = c_function(source_text["src/root/m20E8.c"], "win_LoadAllWindows")
-    unlock = c_function(source_text["src/root/m23AE.c"], "win_UnlockWin")
+    load_window = c_function(source_text["src/window/lifecycle.c"], "win_LoadWindow")
+    load_all = c_function(source_text["src/window/lifecycle.c"], "win_LoadAllWindows")
+    unlock = c_function(source_text["src/window/locking.c"], "win_UnlockWin")
     if ("o->width" in move or "o->height" in move
         or "win_offsets[win >> 8]" not in move):
         raise AssertionError("move path no longer preserves size/persists root origin")
@@ -748,7 +748,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         or "if (*(int far *)(w + 0x1c) & 0x1000)" not in winopen
         or "(*h)->flags & 0x800" not in unlock):
         raise AssertionError("root open/close/unload offset gates changed")
-    save_table = c_block(source_text["src/S09/m35F5.c"], "struct SaveRec far fd_4E4B_0000[308]")
+    save_table = c_block(source_text["src/ui/save_load.c"], "struct SaveRec far fd_4E4B_0000[308]")
     if any(token in save_table for token in ("win_offsets", "fd_50F6_10DE", "fd_50F6_10E0",
                                               "fd_50F6_110C", "fd_50F6_1114", "fd_50F6_15C4")):
         raise AssertionError("SaveRec table gained a viewport/window-offset field")
@@ -758,7 +758,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         or "win_handles[(char)(win >> 8)] = h" not in norm(load_window)
         or "repointobjects(win)" not in norm(load_window)):
         raise AssertionError("window reload no longer uses the retained movable type-1 handle path")
-    demand_load = c_function(source_text["src/root/m23AE.c"], "f_23AE_0069")
+    demand_load = c_function(source_text["src/window/locking.c"], "f_23AE_0069")
     if "win_loadwindow(win)" not in norm(demand_load) or "win_handles[n] == 0" not in norm(demand_load):
         raise AssertionError("demand reload no longer routes through win_LoadWindow before active open")
 
@@ -770,7 +770,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
         raise AssertionError("resize/move/zoom width, menu-top, or grid constraints changed")
 
     # Check row/column arithmetic from source and apply the reviewed conditional bound.
-    cache = source_text["src/root/m0250.c"]
+    cache = source_text["src/ui/edit_view.c"]
     viewport = c_function(cache, "f_0250_0E15")
     if ("fd_50f6_10e0 = (fd_50f6_110c.right - fd_50f6_110c.left) / g_19be" not in norm(viewport)
         or "fd_50f6_10de = (fd_50f6_110c.bottom - fd_50f6_110c.top) / g_19c0 + 1" not in norm(viewport)):
@@ -984,7 +984,7 @@ def collect(overrides: dict[str, bytes | str] | None = None, *, run_negative: bo
                 "uniqueness_scope": "nominal valid stack/resource flow; foreign API activation, corrupted descriptors, computed aliases, and exceptional continuations excluded",
             },
             "menu_bottom": {
-                "writer": "src/root/m1FD2.c:f_1FD2_0663",
+                "writer": "src/window/menu_helpers.c:f_1FD2_0663",
                 "screen_rect": "f_1CE2_000C returns g_5A9C; initialized screen top is 0; profile-8 display setup updates right/bottom only",
                 "font_binding": "menu redraw calls g_9130; supported VGA font-height premise is g_3DDC=14 (the retained 8x14 VGA primitive sets byte 0x0e)",
                 "formula": "fd_50F6_393C.bottom = top + g_3DDC + 3 = 0 + 14 + 3 = 17",

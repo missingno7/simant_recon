@@ -24,9 +24,9 @@ def census(overrides=None):
         return False
     asm={rel:hashlib.sha256(text.encode()).hexdigest() for rel,text in texts.items() if rel.endswith('.asm') and relevant(rel,text)}
     ctexts={rel:t for rel,t in texts.items() if rel.endswith('.c')}
-    bindings=[line for line in ctexts['src/root/m1FD2.c'].splitlines() if line.startswith(('struct Timer g_6004 =','struct Timer g_603A ='))]
+    bindings=[line for line in ctexts['src/window/menu_helpers.c'].splitlines() if line.startswith(('struct Timer g_6004 =','struct Timer g_603A ='))]
     assert len(bindings)==2 and all('f_1B73_030F' in line for line in bindings)
-    for line in bindings:ctexts['src/root/m1FD2.c']=ctexts['src/root/m1FD2.c'].replace(line,line.replace('f_1B73_030F','0'))
+    for line in bindings:ctexts['src/window/menu_helpers.c']=ctexts['src/window/menu_helpers.c'].replace(line,line.replace('f_1B73_030F','0'))
     result=p.census(ctexts)
     result['reviewed_descriptor_callback_bindings']=bindings
     result['asm_source_pins']=asm

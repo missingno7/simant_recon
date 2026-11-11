@@ -9,24 +9,24 @@
 SWAP_TEXT       segment word public 'CODE'
                 assume  cs:SWAP_TEXT
 
-                public  _f_1959_0002
-                public  _f_1959_000C
+                public  _FlipWord
+                public  _FlipLong
 
-; unsigned far f_1959_0002(unsigned value): swap the bytes of a word
-_f_1959_0002    proc    far
+; unsigned far FlipWord(unsigned value): swap the bytes of a word
+_FlipWord    proc    far
                 push    bp
                 mov     bp, sp
                 mov     ax, [bp+6]
                 xchg    al, ah
                 pop     bp
                 ret
-_f_1959_0002    endp
+_FlipWord    endp
 
-; unsigned long far f_1959_000C(unsigned long value): swap the byte order of a dword
-_f_1959_000C    proc    far
+; unsigned long far FlipLong(unsigned long value): swap the byte order of a dword
+_FlipLong    proc    far
                 ; AUDIT T4: body replaced by a byte capsule copied from the oracle
                 db      055h, 08Bh, 0ECh, 08Bh, 046h, 008h, 086h, 0C4h, 08Bh, 056h, 006h, 086h, 0D6h, 05Dh, 0CBh
-_f_1959_000C    endp
+_FlipLong    endp
 
 SWAP_TEXT       ends
                 end

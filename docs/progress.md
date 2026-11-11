@@ -6,10 +6,10 @@ Validation: **PASS** (2026-11-11)
 |---|---:|
 | known_functions | 1,730 |
 | known_game_functions | 1,640 |
-| exact_c_functions | 1,256 |
-| exact_c_bytes | 244,437 |
+| exact_c_functions | 1,257 |
+| exact_c_bytes | 244,718 |
 | historical_exact_source_rebuilt_function_count | 0 |
-| behavior_exact_confirmed_functions | 17 |
+| behavior_exact_confirmed_functions | 16 |
 | canonical_translation_units | 200 |
 | canonical_storage_units | 73 |
 | exact_asm_bytes | 50,441 |
@@ -18,7 +18,7 @@ Validation: **PASS** (2026-11-11)
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,713 |
+| owned_functions | 1,714 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,001 |
 | data_bytes_accepted | 113,838 |
@@ -32,17 +32,17 @@ Validation: **PASS** (2026-11-11)
 | far_bss_sizes_consistent_bytes | 2,912 |
 | far_bss_sizes_unverified_bytes | 14,928 |
 | game_code_span_bytes | 304,798 |
-| unresolved_code_bytes | 8,439 |
+| unresolved_code_bytes | 8,158 |
 | unresolved_data_bytes | 175 |
 | scaffold_functions | 0 |
 | exact_translation_units | 97 |
 | complete_tus_relocation_order_proven | 95 |
 | claims_within_group_order_pending | 19 |
-| inplace_draft_functions | 17 |
-| claims_exact_steered | 28 |
+| inplace_draft_functions | 16 |
+| claims_exact_steered | 27 |
 | exact_c_bytes_in_complete_tus | 153,413 |
-| exact_c_bytes_in_partial_modules | 91,024 |
-| exact_c_bytes_steered | 15,828 |
+| exact_c_bytes_in_partial_modules | 91,305 |
+| exact_c_bytes_steered | 15,436 |
 | exact_c_bytes_layout_inferred | 20,867 |
 | exact_c_bytes_within_group_pending | 12,335 |
 | claims_layout_inferred | 24 |
@@ -52,7 +52,7 @@ Validation: **PASS** (2026-11-11)
 | data_bytes_opaque_unmarked | 6,333 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `54e02a74c0e231ea5ec891b8fa553ede16cfc04ecda43b3624875ce79c4aea1a`
+Manifest: `26c15b18b628415b7bb6d9f06b30656504df345a6028775a3a90571416b7d9a0`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 
@@ -60,4 +60,4 @@ Modules with data placements only (never counted as recovered code): data:3D57, 
 
 Whole executable: FUNCTIONAL_SOURCE_BUILD (dos/build.py links the canonical source; the original image layout is not reproduced; see docs/dos-closure.md)
 
-Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2432/2464, S05 2508/2512, S06 9583/9584, S07 1174/1184, S08 5053/5056, S09 5225/5232, S10 2731/2736, S11 870/880, S12 4773/4992, S13 5790/6064, S14 4653/4656, S15 1025/1360, S16 1763/1776, S17 443/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 2905/4368, S24 1803/1808, S25 13780/14592, S26 2236/2240
+Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2432/2464, S05 2508/2512, S06 9583/9584, S07 1174/1184, S08 5053/5056, S09 5225/5232, S10 2731/2736, S11 870/880, S12 4773/4992, S13 5790/6064, S14 4653/4656, S15 1025/1360, S16 1763/1776, S17 443/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 2905/4368, S24 1803/1808, S25 14061/14592, S26 2236/2240

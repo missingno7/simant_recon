@@ -64,8 +64,8 @@ def _source_and_allocator_facts(owner_module, source_overrides: dict[str, str] |
                                 owner_facts: dict) -> dict:
     function_text = owner_module.function_text
     normalize = owner_module.normalized
-    clip = _source("src/root/m1E57.c", source_overrides)
-    helper = _source("src/root/m1D8E.c", source_overrides)
+    clip = _source("src/graphics/clip_regions.c", source_overrides)
+    helper = _source("src/graphics/clip_rects.c", source_overrides)
 
     window_body = function_text(clip, "f_1E57_038E")
     for diagnostic, effect in (
@@ -124,7 +124,7 @@ def _source_and_allocator_facts(owner_module, source_overrides: dict[str, str] |
     if not (maximum_records == 1275 and end_exclusive == 10204 and end_exclusive < 0x10000):
         raise AssertionError("finite nonwrapping 5M envelope changed")
 
-    mem = _source("src/root/m171C.c", source_overrides)
+    mem = _source("src/memory/ralloc.c", source_overrides)
     alloc = function_text(mem, "f_171C_07BE")
     payload = function_text(mem, "f_171C_125C")
     indexed = function_text(mem, "f_171C_1A9E")
@@ -261,7 +261,7 @@ def _source_and_allocator_facts(owner_module, source_overrides: dict[str, str] |
             "protected_addresses_within_loaded_process": True,
         },
         "allocator_source_token_sha256": {
-            "src/root/m171C.c": _sha(mem.encode("latin1"))
+            "src/memory/ralloc.c": _sha(mem.encode("latin1"))
         },
     }
 
@@ -468,7 +468,7 @@ def check_source_overrides(source_overrides: dict[str, str]) -> dict:
     owner_module = _load("clip_package_mutation_clip_owner",
                          ROOT / "evidence/canonical/clip-owner/replay.py")
     owner_overrides = {path: value.encode("latin1") for path, value in source_overrides.items()}
-    m0250 = _source("src/root/m0250.c", owner_overrides)
+    m0250 = _source("src/ui/edit_view.c", owner_overrides)
     tokens = [token.text for token in owner_module.csrc.tokenize(m0250)
               if token.kind == "id" and token.text == "f_1E57_08F5"]
     caller = re.search(r"void\s+far\s+f_0250_5058\s*\(\s*void\s*\)\s*\{([^{}]*)\}",

@@ -26,7 +26,7 @@ def collect():
     if isinstance(node,csrc.Call) and isinstance(node.f,csrc.Id) and node.f.name in ('SetExpTool','win_DoProxMenu','_win_SetProxItem','DoExpMenu'):
      calls.append({'source':path.relative_to(ROOT).as_posix(),'function':fn.name,
        'callee':node.f.name,'arguments':[text[x.s:x.e] for x in node.args]})
- text=(ROOT/'src/S09/m35F5.c').read_text()
+ text=(ROOT/'src/ui/save_load.c').read_text()
  table=text[text.index('struct SaveRec far fd_4E4B_0000[308] ='):]
  records=[]
  for match in re.finditer(r'\{\s*(\d+)\s*,\s*(\d+)\s*,\s*\(void far \*\)\s*([^}]+)\}',table):

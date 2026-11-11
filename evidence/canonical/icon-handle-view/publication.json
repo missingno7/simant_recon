@@ -18421,5 +18421,1213 @@
       "note": "Lexical identifier rename; semantic review unchanged.",
       "prior_receipt_sha256": "56d2e37b71f1aac98fa7c4e9033a60caef56366f42150cd84941e75f844d6f42"
     }
+  ],
+  "moved": [
+    {
+      "operations": [
+        {
+          "module": "S00:3126",
+          "path": "src/platform/video/planar_minimap.asm",
+          "kind": "descriptive",
+          "why": "Builds the small map pixel tables used by the planar display driver. It also defines dither and palette data and the driver dispatch table."
+        },
+        {
+          "module": "S00:31AD",
+          "path": "src/platform/video/planar_raster.asm",
+          "kind": "descriptive",
+          "why": "Implements planar screen drawing, copying and raster operations for the EGA/VGA display path. Its assembly programs the graphics controller and selects raster loops by modifying instructions."
+        },
+        {
+          "module": "S00:31AD@2AB4",
+          "path": "src/platform/video/planar_mode_blits.asm",
+          "kind": "descriptive",
+          "why": "Sets up planar display modes and performs masked planar tile blits through a scratch buffer. It is the second object in frame 31AD and remains a separate file from the main raster routines."
+        },
+        {
+          "module": "S00:35A6",
+          "path": "src/platform/video/planar_sprites.asm",
+          "kind": "descriptive",
+          "why": "Blits masked sprite images into planar buffers and tests rectangles. The window bitmap layer calls these entries through the display callbacks."
+        },
+        {
+          "module": "S01:3126",
+          "path": "src/platform/video/mono_raster.asm",
+          "kind": "descriptive",
+          "why": "Supplies screen, bitmap and raster operations for the monochrome display paths. Mode setup includes Hercules CRTC programming and the shared monochrome driver dispatch table."
+        },
+        {
+          "module": "S01:328E",
+          "path": "src/platform/video/mono_minimap.asm",
+          "kind": "descriptive",
+          "why": "Builds monochrome small map representations. Its four assembly entries belong to the same display family as the monochrome screen driver."
+        },
+        {
+          "module": "S01:32B5",
+          "path": "src/platform/video/mono_sprites.asm",
+          "kind": "descriptive",
+          "why": "Blits masked monochrome sprites and tests rectangles. The driver selector installs these functions for every odd numbered monochrome display mode."
+        },
+        {
+          "module": "S02:3126",
+          "path": "src/platform/video/vga8_raster.asm",
+          "kind": "descriptive",
+          "why": "Implements the screen and bitmap operations for the 256 colour display path. Its entries include raster operations and a driver dispatch table."
+        },
+        {
+          "module": "S03:3126",
+          "path": "src/platform/video/tandy_raster.asm",
+          "kind": "descriptive",
+          "why": "Implements Tandy screen drawing, bitmap copying and raster operations. It contains a 320 byte line buffer in its code segment as well as palette and bank tables."
+        },
+        {
+          "module": "S03:3253",
+          "path": "src/platform/video/tandy_minimap.asm",
+          "kind": "descriptive",
+          "why": "Translates small map pixels into packed colour nibbles for the Tandy path. The two functions use adjacent high and low nibble colour tables."
+        },
+        {
+          "module": "S03:3258",
+          "path": "src/platform/video/tandy_sprites.asm",
+          "kind": "descriptive",
+          "why": "Blits colour translated sprites and tiles for the Tandy display path. Four tables in its code segment supply pixel translation and transparency masks."
+        },
+        {
+          "module": "S04:35F5",
+          "path": "src/ui/minimap.c",
+          "kind": "descriptive",
+          "why": "Handles the map tools menu and the small map window. It creates the map image table, draws the view and maintains its cursor."
+        },
+        {
+          "module": "S05:35F5",
+          "path": "src/ui/editor_menus.c",
+          "kind": "descriptive",
+          "why": "Handles scent, editing, ant and magnification menus. These menus select tools and change yellow ant health or black colony warning settings."
+        },
+        {
+          "module": "S05:3663",
+          "path": "src/ui/experiment_menu.c",
+          "kind": "descriptive",
+          "why": "Implements the experiment tool menu. Its single function tracks submenu state and returns the selected editing tool."
+        },
+        {
+          "module": "S06:35F5",
+          "path": "src/simulation/yard.c",
+          "kind": "descriptive",
+          "why": "Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also advances yard colonies and swarms."
+        },
+        {
+          "module": "S07:35F5",
+          "path": "src/ui/cheats.c",
+          "kind": "descriptive",
+          "why": "Handles cheat key commands. The handler changes game state and reports the selected cheat number."
+        },
+        {
+          "module": "S08:35F5",
+          "path": "src/simulation/world_generation.c",
+          "kind": "descriptive",
+          "why": "Initializes simulation variables and generates the yard, maps, nests and starting ants. It also constructs the tutorial starting world."
+        },
+        {
+          "module": "S09:35F5",
+          "path": "src/ui/save_load.c",
+          "kind": "descriptive",
+          "why": "Reads and writes saved games and presents the DOS file selector. It contains the 307 record save schema and the initializations needed after loading."
+        },
+        {
+          "module": "S09:36EE",
+          "path": "src/window/text_entry.c",
+          "kind": "descriptive",
+          "why": "Draws and edits a text entry field. It converts character cell positions into pixels and handles acceptance or cancellation."
+        },
+        {
+          "module": "S10:35F5",
+          "path": "src/window/menu_tracking.c",
+          "kind": "descriptive",
+          "why": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length."
+        },
+        {
+          "module": "S11:35F5",
+          "path": "src/ui/game_menu.c",
+          "kind": "descriptive",
+          "why": "Updates game menu entries and handles menu commands. It also manages pause state and the Pause or Unpause label."
+        },
+        {
+          "module": "S12:384C",
+          "path": "src/ui/map_window.c",
+          "kind": "descriptive",
+          "why": "Handles map window events, view setup and map image generation. It draws map data and keeps the view cursor aligned with the selected location."
+        },
+        {
+          "module": "S13:384C",
+          "path": "src/ui/yard_window.c",
+          "kind": "descriptive",
+          "why": "Handles yard window events and renders the yard. It draws animated people, animals, weather, swarms and colony population bars."
+        },
+        {
+          "module": "S14:384C",
+          "path": "src/ui/scenario_dialogs.c",
+          "kind": "descriptive",
+          "why": "Displays scenario, score, end game, help and picture dialogs. The file also computes the score and draws caste and spider popups."
+        },
+        {
+          "module": "S15:384C",
+          "path": "src/startup/game_session.c",
+          "kind": "descriptive",
+          "why": "Starts a new game and restores default windows, and handles quit and fatal exit paths. It also loads monochrome patterns and checks the demo expiry date."
+        },
+        {
+          "module": "S16:384C",
+          "path": "src/ui/intro_credits.c",
+          "kind": "descriptive",
+          "why": "Displays the intro, credits and simulation payoff animation. The three entries manage these presentation sequences and their resources."
+        },
+        {
+          "module": "S17:384C",
+          "path": "src/window/menu_setup.c",
+          "kind": "descriptive",
+          "why": "Initializes menu bar data and fixes up its pointers. It calculates item rectangles and applies menu colours before drawing."
+        },
+        {
+          "module": "S18:384C",
+          "path": "src/simulation/map_patches.c",
+          "kind": "descriptive",
+          "why": "Builds house and yard patches from map cells. It lays out floors, household fixtures, rocks and yard terrain."
+        },
+        {
+          "module": "S19:384C",
+          "path": "src/ui/game_events.c",
+          "kind": "descriptive",
+          "why": "Runs the main game event dispatcher and keyboard command handling. The same file provides a debug memory report."
+        },
+        {
+          "module": "S20:39C7",
+          "path": "src/platform/video/font_setup.c",
+          "kind": "descriptive",
+          "why": "Loads the fonts required by the display modes and provides empty driver hooks. The graphics selector chooses these setup functions along with the raster driver."
+        },
+        {
+          "module": "S20:39F1",
+          "path": "src/startup/dos_config.c",
+          "kind": "descriptive",
+          "why": "Initializes DOS specific application resources and reads configuration words. It chooses language and database resources and rejects invalid display mode settings."
+        },
+        {
+          "module": "S21:39C7",
+          "path": "src/platform/video/adapter_probe.asm",
+          "kind": "descriptive",
+          "why": "Probes video adapters and identifies the active display subsystem. It checks BIOS services, CRTC ports and the Tandy ROM signature."
+        },
+        {
+          "module": "S22:39C7",
+          "path": "src/ui/yellow_commands.c",
+          "kind": "descriptive",
+          "why": "Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals, dialogs, alarm drops and special interactions such as laser fire."
+        },
+        {
+          "module": "S22:3BBD",
+          "path": "src/ui/experiment_tools.c",
+          "kind": "descriptive",
+          "why": "Applies experiment mode map editing tools. It digs and fills terrain, adds ants and food, changes scent, and connects or smooths walls."
+        },
+        {
+          "module": "S23:39C7",
+          "path": "src/ui/info_cards.c",
+          "kind": "descriptive",
+          "why": "Displays the information window and card resources with styled text. It also contains byte order conversion helpers used when reading those resources."
+        },
+        {
+          "module": "S24:39C7",
+          "path": "src/ui/history_window.c",
+          "kind": "descriptive",
+          "why": "Displays the history window and handles its controls. It clears, updates and plots the recorded history graphs."
+        },
+        {
+          "module": "S25:39C7",
+          "path": "src/simulation/black_nest.c",
+          "kind": "descriptive",
+          "why": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment."
+        },
+        {
+          "module": "S25:3BA4",
+          "path": "src/simulation/yellow_ant.c",
+          "kind": "descriptive",
+          "why": "Advances the player yellow ant and chooses its movement directions. It handles nest exit, fighting and fight animation."
+        },
+        {
+          "module": "S26:39C7",
+          "path": "src/window/move_resize.c",
+          "kind": "descriptive",
+          "why": "Tracks window zooming, dragging and resizing. It constrains the resulting rectangles to the screen and uses the resize icon."
+        },
+        {
+          "module": "data:3D57",
+          "path": "src/simulation/tables.c",
+          "kind": "descriptive",
+          "why": "Defines initialized direction, caste, mode and display lookup tables together with initial game state. The same file includes yard and creature defaults and history references, so its contents span several simulation and rendering tasks."
+        },
+        {
+          "module": "data:3E1D",
+          "path": "src/simulation/maps_lists.c",
+          "kind": "descriptive",
+          "why": "Defines the large colony maps, life and pheromone arrays and ant lists, along with a saved game header string. The compiler emits two far data segments from this one file."
+        },
+        {
+          "module": "data:55B3@0042",
+          "path": "src/startup/version.c",
+          "kind": "descriptive",
+          "why": "Defines the DOS release version string. It is the data contribution immediately after the runtime BEGDATA region."
+        },
+        {
+          "module": "data:55B3@0064",
+          "path": "src/sound/theme_song.c",
+          "kind": "descriptive",
+          "why": "Defines the theme song descriptor and its program and bank mapping. It also carries the pointer to the separate version string and the unused MIDI filename text."
+        },
+        {
+          "module": "data:55B3@00B8",
+          "path": "src/sound/instruments.c",
+          "kind": "descriptive",
+          "why": "Defines sound effect instruments, sample descriptors, FM patches and MIDI mappings. The device tables select which representation each sound backend uses."
+        },
+        {
+          "module": "root:0000",
+          "path": "src/sound/resource_loading.c",
+          "kind": "descriptive",
+          "why": "Loads song resources and decompresses sampled sounds through a database hook. It also manages the sample free list and releases sound resources."
+        },
+        {
+          "module": "root:004A",
+          "path": "src/ui/map_scrolling.c",
+          "kind": "descriptive",
+          "why": "Scrolls the map view and clamps its origin to the view limits. It remembers the centre separately for each map plane."
+        },
+        {
+          "module": "root:0093",
+          "path": "src/simulation/random.c",
+          "kind": "descriptive",
+          "why": "Provides the simulation random number generators and seed management. It combines an LFSR with the C runtime generator and timing based seeding."
+        },
+        {
+          "module": "root:00BA",
+          "path": "src/startup/application_windows.c",
+          "kind": "descriptive",
+          "why": "Initializes application windows and installs drawing and control hooks. It loads saved window headers and handles window closure or control changes."
+        },
+        {
+          "module": "root:00DE",
+          "path": "src/unresolved/m00de.c",
+          "kind": "descriptive",
+          "why": "Contains one empty far Pascal entry taking an integer. A caller passes one before exiting, but the original purpose of the hook is not established."
+        },
+        {
+          "module": "root:00DF",
+          "path": "src/sound/game_interface.c",
+          "kind": "descriptive",
+          "why": "Provides the game facing sound and song interface. It initializes the sound driver shell and forwards start, reverse, completion and control requests."
+        },
+        {
+          "module": "root:00F8",
+          "path": "src/ui/view_dialog_helpers.c",
+          "kind": "descriptive",
+          "why": "Collects small map and yard window hooks, coordinate conversions and visibility checks. It also supplies dialog waiting, abort and timing helpers."
+        },
+        {
+          "module": "root:015B",
+          "path": "src/ui/view_commands.c",
+          "kind": "descriptive",
+          "why": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands."
+        },
+        {
+          "module": "root:0244",
+          "path": "src/platform/block_helpers.c",
+          "kind": "descriptive",
+          "why": "Contains BlockMove, a debug byte swap dump and barrier level setters. These unrelated small helpers remain together because they share one original code module."
+        },
+        {
+          "module": "root:0250",
+          "path": "src/ui/edit_view.c",
+          "kind": "descriptive",
+          "why": "Draws and updates the detailed ant view, including tiles, the spider, speech balloons and graphs. It also contains tile loading, EMS tile cache setup and editor event handling."
+        },
+        {
+          "module": "root:075B",
+          "path": "src/resources/game_strings.c",
+          "kind": "descriptive",
+          "why": "Loads startup resources and prepares game string lists. It provides the resource string lookup used by the interface and simulation messages."
+        },
+        {
+          "module": "root:078E",
+          "path": "src/memory/pointers.c",
+          "kind": "descriptive",
+          "why": "Allocates and frees pointer style storage using memory manager handles. It dereferences the master pointer and rejects allocations that exceed its pointer size limit."
+        },
+        {
+          "module": "root:0798",
+          "path": "src/ui/colony_controls.c",
+          "kind": "descriptive",
+          "why": "Implements caste and activity mode control windows with triangular controls. It maps pointer positions into control levels and draws the resulting production settings."
+        },
+        {
+          "module": "root:0894",
+          "path": "src/simulation/surface_ants.c",
+          "kind": "descriptive",
+          "why": "Runs the main ant simulation and the surface ant list. It advances scent, feeding, reproduction, foraging, recruitment, combat and nest transitions."
+        },
+        {
+          "module": "root:0AD9",
+          "path": "src/simulation/yard_creatures.c",
+          "kind": "descriptive",
+          "why": "Simulates sowing, ant lions and the pill bug. It maintains creature lists, movement and the pill bug tile map."
+        },
+        {
+          "module": "root:0BE8",
+          "path": "src/simulation/food_water_counts.c",
+          "kind": "descriptive",
+          "why": "Updates ant counts, water, food and eggs. It also supplies direction, distance and nest entrance helpers used throughout the simulation."
+        },
+        {
+          "module": "root:0CDB",
+          "path": "src/simulation/spider.c",
+          "kind": "descriptive",
+          "why": "Initializes and advances the spider and scans for prey. It tracks targets, queen hunting and spider death."
+        },
+        {
+          "module": "root:0DEF",
+          "path": "src/simulation/red_initiator.c",
+          "kind": "descriptive",
+          "why": "Creates and advances the red colony initiator ant. It selects new tasks and the best directions for that ant."
+        },
+        {
+          "module": "root:0E2E",
+          "path": "src/simulation/tutorial.c",
+          "kind": "descriptive",
+          "why": "Runs tutorial lessons and advice feedback. It selects the next lesson and delivers the corresponding instructions."
+        },
+        {
+          "module": "root:0EC1",
+          "path": "src/simulation/ant_lists.c",
+          "kind": "descriptive",
+          "why": "Maintains surface, black nest and red nest ant lists. It compacts, searches, adds and removes entries and handles drowning or hole exits."
+        },
+        {
+          "module": "root:0F3F",
+          "path": "src/simulation/red_nest.c",
+          "kind": "descriptive",
+          "why": "Advances ants in the red colony nest. It handles nest movement, fights, food, eggs, the queen, tail following and digging."
+        },
+        {
+          "module": "root:10F7",
+          "path": "src/simulation/life_tiles.c",
+          "kind": "descriptive",
+          "why": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives."
+        },
+        {
+          "module": "root:1383",
+          "path": "src/simulation/strategy.c",
+          "kind": "descriptive",
+          "why": "Selects colony strategy, caste production and ant activity modes. It recruits ants and chooses movement directions for foraging, defence, alarms and nest return."
+        },
+        {
+          "module": "root:1496",
+          "path": "src/simulation/pheromones.c",
+          "kind": "descriptive",
+          "why": "Updates colony scent and alarm maps. It fills nest holes in the scent representation, smooths alarms and decays pheromone levels."
+        },
+        {
+          "module": "root:14EE",
+          "path": "src/simulation/digging.c",
+          "kind": "descriptive",
+          "why": "Creates nest entrances and digs or smooths tunnels. It updates both colony maps and fixes their exit maps after terrain changes."
+        },
+        {
+          "module": "root:15D9",
+          "path": "src/ui/ribbon_messages.c",
+          "kind": "descriptive",
+          "why": "Draws centred ribbon text and sets game messages. It forwards the selected message to the ribbon or yard display with its duration."
+        },
+        {
+          "module": "root:15F8",
+          "path": "src/startup/main.c",
+          "kind": "descriptive",
+          "why": "Contains main and the main game loop. It processes command line options, checks configuration and resources, initializes the game and performs shutdown."
+        },
+        {
+          "module": "root:1629",
+          "path": "src/graphics/balloons.c",
+          "kind": "descriptive",
+          "why": "Constructs speech balloon images from text. It converts their monochrome masks into the colour formats required by the display modes."
+        },
+        {
+          "module": "root:1699",
+          "path": "src/graphics/balloon_masks.asm",
+          "kind": "descriptive",
+          "why": "Fills balloon bitmap rows and moves text into their masks. It also converts masks for the Tandy representation."
+        },
+        {
+          "module": "root:16B5",
+          "path": "src/graphics/lines.asm",
+          "kind": "descriptive",
+          "why": "Draws clipped lines using Bresenham stepping. It dispatches to bitmap plot routines for each display format."
+        },
+        {
+          "module": "root:171C",
+          "path": "src/memory/ralloc.c",
+          "kind": "descriptive",
+          "why": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics."
+        },
+        {
+          "module": "root:194D",
+          "path": "src/platform/memory_helpers.asm",
+          "kind": "descriptive",
+          "why": "Copies large blocks while stepping through segment paragraphs. The same assembly file also probes Tandy video memory and computes a checksum using 386 instructions."
+        },
+        {
+          "module": "root:1959",
+          "path": "src/platform/byte_order.asm",
+          "kind": "descriptive",
+          "why": "Swaps the byte order of a word or a double word. Both routines use small assembly entry points."
+        },
+        {
+          "module": "root:195A",
+          "path": "src/memory/ems.asm",
+          "kind": "descriptive",
+          "why": "Wraps LIM EMS services for allocating, mapping and naming expanded memory pages. It detects the memory manager and establishes the page frame."
+        },
+        {
+          "module": "root:1986",
+          "path": "src/resources/database_index.c",
+          "kind": "descriptive",
+          "why": "Opens and searches database index files. Create and write-side index operations are empty in the read-only DOS game."
+        },
+        {
+          "module": "root:19A9",
+          "path": "src/resources/database_records.c",
+          "kind": "descriptive",
+          "why": "Reads database records and decompresses their contents when required. Add, delete and pack operations reject writes in this read-only build."
+        },
+        {
+          "module": "root:19DC",
+          "path": "src/resources/database_ems.c",
+          "kind": "descriptive",
+          "why": "Reads database files through an EMS page cache. It tracks cached pages and validates handles before returning record data."
+        },
+        {
+          "module": "root:1A28",
+          "path": "src/resources/database_files.c",
+          "kind": "descriptive",
+          "why": "Opens and closes the database data files and manages file handles. It also formats DOS file errors for the application."
+        },
+        {
+          "module": "root:1A53",
+          "path": "src/resources/database_objects.c",
+          "kind": "descriptive",
+          "why": "Provides the database object loading and lifetime API. It selects databases and connects object handles to the cache, including purge, release and unhook operations."
+        },
+        {
+          "module": "root:1A96",
+          "path": "src/resources/object_cache.c",
+          "kind": "descriptive",
+          "why": "Maintains the resource object cache lookup table. It adds, finds, removes and ages entries and invokes cache hooks."
+        },
+        {
+          "module": "root:1B05",
+          "path": "src/resources/lzss.asm",
+          "kind": "descriptive",
+          "why": "Decompresses LZSS data from memory or a file. Its decoder preserves state between calls and uses a 4096 byte sliding window."
+        },
+        {
+          "module": "root:1B28",
+          "path": "src/platform/cursor_shapes.c",
+          "kind": "descriptive",
+          "why": "Loads mouse cursor pictures and masks from the resource database. It installs or changes the selected cursor shape."
+        },
+        {
+          "module": "root:1B4E",
+          "path": "src/platform/video/bios_bitmap.asm",
+          "kind": "descriptive",
+          "why": "Provides video BIOS operations and low level bitmap and text entry points. It includes palette and pen colour handling and accented character folding for the small font."
+        },
+        {
+          "module": "root:1B73",
+          "path": "src/platform/input_timer.asm",
+          "kind": "descriptive",
+          "why": "Implements DOS mouse, keyboard and timer services. It owns the input queues, hot boxes, cursor save buffer and interrupt handlers."
+        },
+        {
+          "module": "root:1C62",
+          "path": "src/window/alerts.c",
+          "kind": "descriptive",
+          "why": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs."
+        },
+        {
+          "module": "root:1CE2",
+          "path": "src/graphics/screen_rects.c",
+          "kind": "descriptive",
+          "why": "Draws screen rectangles, outlines and frames using character cell coordinates. It saves and restores rectangles and draws packed pictures."
+        },
+        {
+          "module": "root:1D8E",
+          "path": "src/graphics/clip_rects.c",
+          "kind": "descriptive",
+          "why": "Clips rectangle drawing operations against the current rectangle list. It decomposes the visible intersections before calling the drawing operations."
+        },
+        {
+          "module": "root:1E57",
+          "path": "src/graphics/clip_regions.c",
+          "kind": "descriptive",
+          "why": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack."
+        },
+        {
+          "module": "root:1F58",
+          "path": "src/platform/bios_helpers.asm",
+          "kind": "descriptive",
+          "why": "Reads BIOS ticks and keyboard state and installs a Ctrl-Break hook. The same module contains a byte swapping copy helper."
+        },
+        {
+          "module": "root:1F66",
+          "path": "src/platform/file_helpers.asm",
+          "kind": "descriptive",
+          "why": "Matches wildcard filenames and queries directories and drives. It also contains checksum and register test helpers from the library identified by its copyright string."
+        },
+        {
+          "module": "root:1F80",
+          "path": "src/graphics/text_layout.c",
+          "kind": "descriptive",
+          "why": "Measures and centres text blocks. It also includes delay and fatal text helpers in the same module."
+        },
+        {
+          "module": "root:1FAA",
+          "path": "src/graphics/trapezoid.c",
+          "kind": "descriptive",
+          "why": "Fills a quadrilateral one scanline at a time. Its edges advance using 16.16 fixed point arithmetic."
+        },
+        {
+          "module": "root:1FBD",
+          "path": "src/graphics/bitmap_text.asm",
+          "kind": "descriptive",
+          "why": "Draws a string with the bitmap font. It folds accented characters and supports underlining."
+        },
+        {
+          "module": "root:1FD2",
+          "path": "src/window/menu_helpers.c",
+          "kind": "descriptive",
+          "why": "Provides menu bar and menu item state helpers. It also contains timers, mouse position and button tracking functions used by the interface."
+        },
+        {
+          "module": "root:205F",
+          "path": "src/platform/video/driver_select.c",
+          "kind": "descriptive",
+          "why": "Identifies the graphics adapter and selects its display and resource drivers. It installs the screen and sprite callback tables for the chosen mode."
+        },
+        {
+          "module": "root:208F",
+          "path": "src/window/text_bitmap_helpers.c",
+          "kind": "descriptive",
+          "why": "Provides window object text and bitmap helpers and resource loading. The file also includes delays and display format sizing helpers."
+        },
+        {
+          "module": "root:20E8",
+          "path": "src/window/lifecycle.c",
+          "kind": "descriptive",
+          "why": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation."
+        },
+        {
+          "module": "root:218D",
+          "path": "src/window/events.c",
+          "kind": "descriptive",
+          "why": "Fetches and dispatches window events. It handles proximity events, queues and event flushing."
+        },
+        {
+          "module": "root:21FA",
+          "path": "src/window/drawing.c",
+          "kind": "descriptive",
+          "why": "Draws window frames, titles and objects. It includes colour selection, string justification and button border helpers."
+        },
+        {
+          "module": "root:22BF",
+          "path": "src/window/object_attributes.c",
+          "kind": "descriptive",
+          "why": "Updates window object selection, visibility, formatting and bitmaps. It also draws object text, bars and proximity menus."
+        },
+        {
+          "module": "root:23AE",
+          "path": "src/window/locking.c",
+          "kind": "descriptive",
+          "why": "Locks and unlocks window resources through nested access. It checks window numbers, discarded handles and lock depth."
+        },
+        {
+          "module": "root:23E6",
+          "path": "src/window/lists_sliders.c",
+          "kind": "descriptive",
+          "why": "Implements list box and slider window objects. It calculates elevator geometry, draws controls and handles list movement and slider events."
+        },
+        {
+          "module": "root:24AB",
+          "path": "src/graphics/font_output.c",
+          "kind": "descriptive",
+          "why": "Selects the current font and prints strings with it. It initializes the display fonts and manages their output buffer."
+        },
+        {
+          "module": "root:24FA",
+          "path": "src/graphics/pixel_helpers.asm",
+          "kind": "descriptive",
+          "why": "Searches bytes, expands packed two bit pixels and inverts bytes. It also contains a breakpoint stub."
+        },
+        {
+          "module": "root:2505",
+          "path": "src/window/object_geometry.c",
+          "kind": "descriptive",
+          "why": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values."
+        },
+        {
+          "module": "root:259D",
+          "path": "src/window/pictures.c",
+          "kind": "descriptive",
+          "why": "Draws bitmap resources at window objects. It also prints text inside a rectangle and handles picture buffer formats."
+        },
+        {
+          "module": "root:25E7",
+          "path": "src/graphics/font_resources.c",
+          "kind": "descriptive",
+          "why": "Loads Macintosh format bitmap fonts and converts their byte order for DOS. It measures strings and glyphs and builds text images."
+        },
+        {
+          "module": "root:2650",
+          "path": "src/graphics/glyph_blit.asm",
+          "kind": "descriptive",
+          "why": "Blits bit aligned glyphs between far bitmaps using OR operations. It also clears the destination byte buffer."
+        },
+        {
+          "module": "root:2662",
+          "path": "src/graphics/anim.c",
+          "kind": "recovered",
+          "why": "Manages animation object sets, their positions, priorities and backing buffers. It composites changed objects and restores obscured screen regions."
+        },
+        {
+          "module": "root:277D",
+          "path": "src/platform/debug_stubs.c",
+          "kind": "descriptive",
+          "why": "Contains six empty debug entry points in the DOS release. WinPrintf has a named Win16 counterpart; the other stub identities remain uncertain."
+        },
+        {
+          "module": "root:277E",
+          "path": "src/sound/device_channels.c",
+          "kind": "descriptive",
+          "why": "Selects sound devices and builds their channel tables. It initializes and dispatches the voice backends used by the sound driver."
+        },
+        {
+          "module": "root:2815",
+          "path": "src/sound/opl2_voices.c",
+          "kind": "descriptive",
+          "why": "Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume data into chip register writes."
+        },
+        {
+          "module": "root:283E",
+          "path": "src/sound/opl2_registers.asm",
+          "kind": "descriptive",
+          "why": "Writes and resets AdLib OPL2 registers. It includes the status port delays and PIT based reset wait."
+        },
+        {
+          "module": "root:284A",
+          "path": "src/sound/midi_player.c",
+          "kind": "descriptive",
+          "why": "Loads and advances MIDI songs and their tracks. It decodes timed events and sends notes through the sound driver channel layer."
+        },
+        {
+          "module": "root:28BC",
+          "path": "src/sound/sample_timer.asm",
+          "kind": "descriptive",
+          "why": "Mixes sampled sound channels in the timer interrupt and sends the result to the selected output device. It also schedules the MIDI sequencer on a private stack and chains the old timer vector."
+        },
+        {
+          "module": "root:290D",
+          "path": "src/sound/sample_voices.c",
+          "kind": "descriptive",
+          "why": "Starts and controls digitized sound voices. It tracks sample playback position and channel state for the interrupt mixer."
+        },
+        {
+          "module": "root:293A",
+          "path": "src/sound/device_probe.c",
+          "kind": "descriptive",
+          "why": "Probes available sound devices. It performs port tests and selects the hardware capabilities reported to the sound layer."
+        },
+        {
+          "module": "root:295C",
+          "path": "src/sound/midi_voices.c",
+          "kind": "descriptive",
+          "why": "Allocates MIDI voices and maps instruments to channels. It sends melodic and percussion events through the MPU-401 output interface."
+        },
+        {
+          "module": "root:29B8",
+          "path": "src/sound/dsp_probe.c",
+          "kind": "descriptive",
+          "why": "Resets and probes the sound card DSP. It waits for the device acknowledgement and reports whether the probe succeeded."
+        },
+        {
+          "module": "root:29BF",
+          "path": "src/sound/chip_registers.asm",
+          "kind": "descriptive",
+          "why": "Probes and writes a sound chip through index and data port pairs. It keeps register shadows and checks writes by reading back the result."
+        },
+        {
+          "module": "root:29D6",
+          "path": "src/sound/psg_voices.c",
+          "kind": "descriptive",
+          "why": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module."
+        },
+        {
+          "module": "root:29F0",
+          "path": "src/platform/port_io.c",
+          "kind": "descriptive",
+          "why": "Provides byte port input and output helpers. It also wraps interrupt flag save, disable and restore operations using MSC inline assembly."
+        },
+        {
+          "module": "root:2CFB",
+          "path": "src/memory/hook_thunks.asm",
+          "kind": "descriptive",
+          "why": "Provides ten far jump entries into the memory manager. The database reader calls these hook addresses instead of the underlying allocation functions."
+        },
+        {
+          "module": "source-owned:ant-class-histogram",
+          "path": "src/simulation/state/caste_histogram.c",
+          "kind": "descriptive",
+          "why": "Defines the 32 entry scratch histogram updated by CountAnts. It supplies working storage for class counting rather than an independently established historical data object."
+        },
+        {
+          "module": "source-owned:ant-counters-timer",
+          "path": "src/simulation/state/ant_counts_timer.c",
+          "kind": "descriptive",
+          "why": "Defines the two eaten ant counters and one long timer used by balloon drawing. The counter and display timer storage remain bundled in this modern file."
+        },
+        {
+          "module": "source-owned:ant-list-counts",
+          "path": "src/simulation/state/list_counts.c",
+          "kind": "descriptive",
+          "why": "Defines the current lengths of the surface, black nest and red nest ant lists. The simulation and load initialization routines update these three counts."
+        },
+        {
+          "module": "source-owned:ant-movement-words",
+          "path": "src/simulation/state/yellow_movement.c",
+          "kind": "descriptive",
+          "why": "Defines yellow ant direction, scent, appearance and target state. It also stores the previous position, movement goal and alarm or fight flags."
+        },
+        {
+          "module": "source-owned:ant-player-state",
+          "path": "src/simulation/state/player_colony.c",
+          "kind": "descriptive",
+          "why": "Defines six player and colony state words. They cover fuzzy location, yellow ant health, automatic mode, black colony strategy and the red digging count."
+        },
+        {
+          "module": "source-owned:ant-ui-control-state",
+          "path": "src/ui/state/colony_controls.c",
+          "kind": "descriptive",
+          "why": "Defines mode and caste control levels and triangle geometry. The control window initializer and drawing handlers use the dimensions, points and knob size."
+        },
+        {
+          "module": "source-owned:audio-track-state",
+          "path": "src/sound/state/midi_tracks.c",
+          "kind": "descriptive",
+          "why": "Defines MIDI track scheduler flags and deadlines. Its ten track capacity is a functional choice for the shipped resource domain."
+        },
+        {
+          "module": "source-owned:balloon-buffer-tables",
+          "path": "src/ui/state/balloon_buffers.c",
+          "kind": "descriptive",
+          "why": "Defines six message balloon buffers and their positions and attributes. AddMsgBalloon fills these tables for later rendering."
+        },
+        {
+          "module": "source-owned:balloon-deadline-timers",
+          "path": "src/ui/state/balloon_deadlines.c",
+          "kind": "descriptive",
+          "why": "Defines four long deadlines checked while drawing current speech balloons. The display code compares them with TickCount to manage message timing."
+        },
+        {
+          "module": "source-owned:clip-pointer",
+          "path": "src/graphics/state/clip_pointer.c",
+          "kind": "descriptive",
+          "why": "Defines the near pointer to the active clipping rectangle list. Drawing and dialog code temporarily replace or traverse this list."
+        },
+        {
+          "module": "source-owned:clip-rect-buffer",
+          "path": "src/graphics/state/clip_buffer.c",
+          "kind": "descriptive",
+          "why": "Defines the functional rectangle buffer used by window clipping. clip_SetWin selects and fills this working storage."
+        },
+        {
+          "module": "source-owned:colony-simulation-words",
+          "path": "src/simulation/state/yard_creature_flags.c",
+          "kind": "descriptive",
+          "why": "Defines cat, rain and foot state together with the two colony totals. Yard simulation, drawing and save loading share these eight scalar objects."
+        },
+        {
+          "module": "source-owned:control-flag-words",
+          "path": "src/ui/state/control_flags.c",
+          "kind": "descriptive",
+          "why": "Defines percentage display and the mode and caste button state words. initControls initializes the flags used by the colony control windows."
+        },
+        {
+          "module": "source-owned:count-ants-transition-word",
+          "path": "src/simulation/state/transfer_flag.c",
+          "kind": "descriptive",
+          "why": "Defines the persistent patch transfer flag. Patch transfer, new game and load initialization code update this state."
+        },
+        {
+          "module": "source-owned:critical-selector-byte",
+          "path": "src/platform/state/critical_error_selector.c",
+          "kind": "descriptive",
+          "why": "Defines the signed byte consulted by the DOS critical error handler. Its computed alias and larger historical storage view remain unresolved."
+        },
+        {
+          "module": "source-owned:database-index-state",
+          "path": "src/resources/state/index_search.c",
+          "kind": "descriptive",
+          "why": "Defines the current database index entry pointer and its index state word. FindIndex updates these objects while searching resource keys."
+        },
+        {
+          "module": "source-owned:database-record-state",
+          "path": "src/resources/state/open_databases.c",
+          "kind": "descriptive",
+          "why": "Defines the four functional open database records and handle slots. The records share typed views of index data, file handles and record headers."
+        },
+        {
+          "module": "source-owned:dead-ant-coordinate-rings",
+          "path": "src/simulation/state/dead_ant_positions.c",
+          "kind": "descriptive",
+          "why": "Defines the paired dead ant coordinate arrays. DeadAntHere uses these positions while the save loader restores their state."
+        },
+        {
+          "module": "source-owned:display-mode-selector",
+          "path": "src/platform/video/state/display_mode.c",
+          "kind": "descriptive",
+          "why": "Defines the current DOS display mode selector. The driver selector sets it and drawing code uses it to choose pixel and font formats."
+        },
+        {
+          "module": "source-owned:driver-callback-table",
+          "path": "src/platform/video/state/driver_callbacks.c",
+          "kind": "descriptive",
+          "why": "Defines the functional near table of far callback pointers used for display driver dispatch. The assembly screen and raster entry points are selected through this table."
+        },
+        {
+          "module": "source-owned:event-records",
+          "path": "src/window/state/event_records.c",
+          "kind": "descriptive",
+          "why": "Defines two event records for the window input layer. The event conversion helper fills their message, position and modifier fields."
+        },
+        {
+          "module": "source-owned:experiment-anchor",
+          "path": "src/ui/state/experiment_anchor.c",
+          "kind": "descriptive",
+          "why": "Defines the coordinate pair used by experiment editing. processExp reads and updates the pair while applying a tool gesture."
+        },
+        {
+          "module": "source-owned:floor-task-words",
+          "path": "src/simulation/state/terrain_task.c",
+          "kind": "descriptive",
+          "why": "Defines the house floor direction and current ant task index words. The terrain builder and several ant simulation routines use them independently."
+        },
+        {
+          "module": "source-owned:g2108-color-translation",
+          "path": "src/platform/video/state/color_translation.c",
+          "kind": "descriptive",
+          "why": "Defines a sixteen entry colour translation table for the functional graphics build. Its values are derived from the accepted Tandy driver palette literals."
+        },
+        {
+          "module": "source-owned:graphics-formulas",
+          "path": "src/graphics/state/pixel_masks.c",
+          "kind": "descriptive",
+          "why": "Defines bit phase and tail masks for monochrome and packed pixel operations. The values are expressed as formulas derived from the consumer indexing rules."
+        },
+        {
+          "module": "source-owned:history-scalar-state",
+          "path": "src/simulation/state/history_counters.c",
+          "kind": "descriptive",
+          "why": "Defines history position, colony outcome counters and overall score. It also stores ant deaths and black colony egg totals used by scoring and history displays."
+        },
+        {
+          "module": "source-owned:icon-handle-cell-view",
+          "path": "src/window/state/icon_handle.c",
+          "kind": "descriptive",
+          "why": "Defines the handle cell used by the window icon helper. The source keeps this as a single handle view."
+        },
+        {
+          "module": "source-owned:language-string-list-pointers",
+          "path": "src/resources/state/string_lists.c",
+          "kind": "descriptive",
+          "why": "Defines advice, history and other prepared string list pointers. PrepareStrings binds them to resources and the interface uses them for titles, scores and advice."
+        },
+        {
+          "module": "source-owned:last-filename",
+          "path": "src/ui/state/last_filename.c",
+          "kind": "descriptive",
+          "why": "Defines the saved file selector filename pointer. The load and save file selection path uses it to retain the last chosen name."
+        },
+        {
+          "module": "source-owned:lion-sow-pillar",
+          "path": "src/simulation/state/yard_creature_lists.c",
+          "kind": "descriptive",
+          "why": "Defines ant lion list fields, pill bug map state and sowing positions. The corresponding creature initialization and movement routines share these arrays and scalars."
+        },
+        {
+          "module": "source-owned:memory-far-state",
+          "path": "src/memory/state/allocator_cache.c",
+          "kind": "descriptive",
+          "why": "Defines far pointer and counter storage used by the allocator and EMS database cache. The fields remain independent objects in this mixed modern bundle."
+        },
+        {
+          "module": "source-owned:memory-state",
+          "path": "src/memory/state/ralloc_blocks.c",
+          "kind": "descriptive",
+          "why": "Defines the Ralloc manager counters and near pointers to its block lists. The Block type records the header view used by the allocator."
+        },
+        {
+          "module": "source-owned:menu-title-state",
+          "path": "src/window/state/menu_titles.c",
+          "kind": "descriptive",
+          "why": "Defines the two menu title geometry arrays. Menu initialization and tracking use the five functional title slots."
+        },
+        {
+          "module": "source-owned:mode-population-vectors",
+          "path": "src/simulation/state/mode_counts.c",
+          "kind": "descriptive",
+          "why": "Defines black and red colony mode population vectors and additional mode work counts. The simulation clears and tallies these arrays before strategy and control drawing use them."
+        },
+        {
+          "module": "source-owned:mono-pattern-prefix",
+          "path": "src/graphics/state/mono_pattern_prefix.c",
+          "kind": "descriptive",
+          "why": "Defines the twenty four byte leading view of monochrome pattern storage. LoadMonoPats fills this registered prefix."
+        },
+        {
+          "module": "source-owned:mono-pattern-vga-linkage",
+          "path": "src/graphics/state/mono_pattern_link.c",
+          "kind": "descriptive",
+          "why": "Defines a minimal monochrome pattern linkage symbol for the supported VGA build. The current functional domain performs no data access through it."
+        },
+        {
+          "module": "source-owned:mouse-words",
+          "path": "src/window/state/mouse_buttons.c",
+          "kind": "descriptive",
+          "why": "Defines mouse position and button tracking words used by the interface. GetMousePos, StillDown and window resizing consume these values."
+        },
+        {
+          "module": "source-owned:player-locations",
+          "path": "src/simulation/state/ant_locations.c",
+          "kind": "descriptive",
+          "why": "Defines yellow ant and red initiator positions and planes. Commands and movement use the two location triples."
+        },
+        {
+          "module": "source-owned:point-state",
+          "path": "src/ui/state/view_origins.c",
+          "kind": "descriptive",
+          "why": "Defines the active map origin and the remembered surface, nest and yard view origins. The scroll and world setup routines use signed coordinate pairs."
+        },
+        {
+          "module": "source-owned:population-work-arrays",
+          "path": "src/simulation/state/caste_counts.c",
+          "kind": "descriptive",
+          "why": "Defines the black and red colony caste population work vectors. The simulation, caste display and saved game code read these independently saved arrays."
+        },
+        {
+          "module": "source-owned:remaining-ant-state",
+          "path": "src/unresolved/state/remaining_ant_state.c",
+          "kind": "descriptive",
+          "why": "Bundles balloon points and planes, yellow ant modes, game time and several opaque words. The consumers span rendering, editing and simulation without a sufficiently established common file purpose."
+        },
+        {
+          "module": "source-owned:remaining-far-state-words",
+          "path": "src/unresolved/state/remaining_far_state_words.c",
+          "kind": "descriptive",
+          "why": "Bundles view row and column counts with three address named words. Their uses span startup, yard simulation and view bounds."
+        },
+        {
+          "module": "source-owned:remaining-history-words",
+          "path": "src/unresolved/state/remaining_history_words.c",
+          "kind": "descriptive",
+          "why": "Bundles game type, balloon counts, spider and rebirth coordinates and scroll limits. Despite the current filename, it is not confined to history storage."
+        },
+        {
+          "module": "source-owned:remaining-misc-storage",
+          "path": "src/unresolved/state/remaining_misc_storage.c",
+          "kind": "descriptive",
+          "why": "Bundles yard and balloon positions with pointers, a byte buffer and a tile invalidation array. The file crosses several unrelated functional roles."
+        },
+        {
+          "module": "source-owned:remaining-preparestrings-string-pointers",
+          "path": "src/resources/state/message_string_lists.c",
+          "kind": "descriptive",
+          "why": "Defines prepared string list pointers for balloon messages, window prompts, menus and the boy. PrepareStrings initializes each list before those interface routines use it."
+        },
+        {
+          "module": "source-owned:remaining-scalar-tail",
+          "path": "src/unresolved/state/remaining_scalar_tail.c",
+          "kind": "descriptive",
+          "why": "Bundles player, spider, dog, swarm and balloon state words with a long timer. Several fields remain address named and no coherent historical grouping is established."
+        },
+        {
+          "module": "source-owned:remaining-sound-storage",
+          "path": "src/unresolved/state/remaining_sound_storage.c",
+          "kind": "descriptive",
+          "why": "Bundles MIDI scheduler state with font pointers, an animation object pointer and a window geometry point. The current sound label does not describe the whole file."
+        },
+        {
+          "module": "source-owned:remaining-ui-state",
+          "path": "src/unresolved/state/remaining_ui_state.c",
+          "kind": "descriptive",
+          "why": "Bundles balloon, tutorial, bird, strategy and tile view state. Several resource handles and dimensions are still identified only by address."
+        },
+        {
+          "module": "source-owned:remaining-window-state",
+          "path": "src/unresolved/state/remaining_window_state.c",
+          "kind": "descriptive",
+          "why": "Bundles tile drawing state, display callbacks, colony control resources, map cursor geometry and dialog handles. Its address named fields cover more than the generic window library."
+        },
+        {
+          "module": "source-owned:remaining-world-state",
+          "path": "src/unresolved/state/remaining_world_state.c",
+          "kind": "descriptive",
+          "why": "Bundles tutorial and music timing, animal state, pause flags, view state and the dead ant ring index. Several fields are still address named."
+        },
+        {
+          "module": "source-owned:render-delay-word",
+          "path": "src/window/state/draw_delay.c",
+          "kind": "descriptive",
+          "why": "Defines the delay word used by a window helper that waits for a deadline or keypress. One function sets the delay and another tests it against the elapsed tick count."
+        },
+        {
+          "module": "source-owned:render-scalars",
+          "path": "src/ui/state/map_draw_work.c",
+          "kind": "descriptive",
+          "why": "Defines two small map drawing words and two detailed view rendering values. The mini map renderer and tile drawing helper use these independent scalars."
+        },
+        {
+          "module": "source-owned:sample-free-list",
+          "path": "src/sound/state/sample_free_list.c",
+          "kind": "descriptive",
+          "why": "Defines the array of sample pointers managed by the sound resource free list. The resource loader adds and releases entries through this table."
+        },
+        {
+          "module": "source-owned:saved-sound-state",
+          "path": "src/sound/state/saved_driver_state.c",
+          "kind": "descriptive",
+          "why": "Defines the seven word sound driver state saved by the game. Sound initialization and the resource layer read this array."
+        },
+        {
+          "module": "source-owned:screen-clip-list",
+          "path": "src/graphics/state/screen_clip.c",
+          "kind": "descriptive",
+          "why": "Defines the functional full screen clip rectangle followed by its terminator. Drawing setup uses this as a clipping list."
+        },
+        {
+          "module": "source-owned:sound-control-words",
+          "path": "src/sound/state/device_controls.c",
+          "kind": "descriptive",
+          "why": "Defines sound device selection and channel control words. The common sound layer and device backends read or update these six values."
+        },
+        {
+          "module": "source-owned:sound-record-arrays",
+          "path": "src/sound/state/voices_channels.c",
+          "kind": "descriptive",
+          "why": "Defines the functional voice and channel record arrays. Sound loading, backend selection and MIDI allocation share their fields."
+        },
+        {
+          "module": "source-owned:spider-controls",
+          "path": "src/simulation/state/spider_targets.c",
+          "kind": "descriptive",
+          "why": "Defines spider mode, user coordinates and target state. Spider commands and hunting logic update these six control words."
+        },
+        {
+          "module": "source-owned:spider-counters",
+          "path": "src/simulation/state/spider_counters.c",
+          "kind": "descriptive",
+          "why": "Defines spider feeding, corpse, cycle and reaction counters. Initialization and prey handling update them while drawing reads the animation state."
+        },
+        {
+          "module": "source-owned:spider-image",
+          "path": "src/ui/state/spider_image.c",
+          "kind": "descriptive",
+          "why": "Defines the functional spider composition bitmap for the supported VGA view. The object contains dimensions followed by the pixel buffer."
+        },
+        {
+          "module": "source-owned:swarm-serialized-buffers",
+          "path": "src/simulation/state/swarm_buffers.c",
+          "kind": "descriptive",
+          "why": "Defines four persistent swarm byte buffers. Yard swarm code and the saved game schema use the fifty byte views."
+        },
+        {
+          "module": "source-owned:terrain-state-words",
+          "path": "src/simulation/state/terrain_selection.c",
+          "kind": "descriptive",
+          "why": "Defines the selected barrier and terrain set words. Tile loading, terrain generation and editing read these values."
+        },
+        {
+          "module": "source-owned:ui-geometry-state",
+          "path": "src/ui/state/view_geometry.c",
+          "kind": "descriptive",
+          "why": "Defines editor and map view rectangles together with the text bitmap view used for yard messages. The consumers use these geometry objects independently."
+        },
+        {
+          "module": "source-owned:ui-resource-scalars",
+          "path": "src/unresolved/state/ui_resource_scalars.c",
+          "kind": "descriptive",
+          "why": "Bundles window resource counts, an EMS cache pointer, a sprite callback and a clip stack handle. The contents cross the window, database and graphics interfaces."
+        },
+        {
+          "module": "source-owned:window-clip-handles",
+          "path": "src/graphics/state/window_clip_handles.c",
+          "kind": "descriptive",
+          "why": "Defines the per-window clip list handles. clip_SetWin uses the functional forty five entry array."
+        },
+        {
+          "module": "source-owned:window-handles",
+          "path": "src/window/state/handles.c",
+          "kind": "descriptive",
+          "why": "Defines the window master handle array used by the shipped interface. Loading, locking and bitmap assignment resolve window storage through these handles."
+        },
+        {
+          "module": "source-owned:window-initialized-views",
+          "path": "src/window/state/hooks_offsets.c",
+          "kind": "descriptive",
+          "why": "Defines per-window draw hooks and rectangle offsets. Window loading initializes them and drawing, unlocking and resizing use their entries."
+        },
+        {
+          "module": "source-owned:window-palette",
+          "path": "src/window/state/palette.c",
+          "kind": "descriptive",
+          "why": "Defines the functional window colour records. Window loading and drawing select colours from the sixteen record palette."
+        },
+        {
+          "module": "source-owned:window-ralloc-handles",
+          "path": "src/ui/state/map_image_handles.c",
+          "kind": "descriptive",
+          "why": "Defines two handles used for generated map images. The mini map and map renderers lock their buffers through these values."
+        },
+        {
+          "module": "source-owned:world-output-state",
+          "path": "src/simulation/state/world_totals.c",
+          "kind": "descriptive",
+          "why": "Defines world food, water, queen and digging totals together with colony outcome flags. The same bundle includes the editor message delay value."
+        },
+        {
+          "module": "source-owned:yard-animation-arrays",
+          "path": "src/ui/state/yard_animation.c",
+          "kind": "descriptive",
+          "why": "Defines arrays used for yard animation and drawing. The yard update and Draw_SimYard routines index these work tables."
+        },
+        {
+          "module": "source-owned:yard-init-state",
+          "path": "src/simulation/state/yard_initialization.c",
+          "kind": "descriptive",
+          "why": "Defines the scalar state initialized by InitSimYard. It includes boy, bird, dog and foot positions, animation values and counters alongside address named fields."
+        },
+        {
+          "module": "source-owned:yard-scalars",
+          "path": "src/simulation/state/yard_game_state.c",
+          "kind": "descriptive",
+          "why": "Defines yard mode, current game tool, colony setup and outcome state. RandYard initializes the words and the yard simulation updates them during play."
+        }
+      ],
+      "note": "Source path move; bytes unchanged.",
+      "prior_receipt_sha256": "c7408e68b3d7bb594de1c46a876aa48b1d392a3ebf6786ea4d0b31ac9a7aca6b"
+    }
   ]
 }

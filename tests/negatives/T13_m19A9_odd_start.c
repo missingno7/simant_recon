@@ -40,8 +40,8 @@ extern void far f_19DC_02D9(int file, void far *buffer, unsigned long count);
 extern void far f_19DC_02FB(int file, long offset, void far *buffer, long count);
 extern char far * far mem_Lock(char far *handle);
 extern void far mem_Unlock(char far *handle);
-extern void far f_1B05_0008(char far *packed, int length);
-extern unsigned int far f_1B05_0046(char far *dest, unsigned int length);
+extern void far UnpackInit(char far *packed, int length);
+extern unsigned int far Unpack(char far *dest, unsigned int length);
 extern char far * far f_2CFB_0002(unsigned long size, int flags, char far *name);
 extern void far f_2CFB_0007(char far *handle);
 extern void far f_2CFB_002F(char far *handle, int type);
@@ -119,8 +119,8 @@ char far * far DBRecall(int db, int object, int type, int far *size)
             handle = f_2CFB_0002((unsigned long)length + 2, 0, name);
             dest = mem_Lock(destHandle);
             f_19DC_02D9(file, p = mem_Lock(handle), (unsigned long)length - 2);
-            f_1B05_0008(p, length - 2);
-            if (f_1B05_0046(dest, unpacked) != unpacked) {
+            UnpackInit(p, length - 2);
+            if (Unpack(dest, unpacked) != unpacked) {
                 printf("\a\aDBRecall Unpack error!!! - object=%d, type=%d", object, type);
                 WinPrintf("\a\aDBRecall Unpack error!!! - object=%d, type=%d", object, type);
             }

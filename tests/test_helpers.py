@@ -101,7 +101,7 @@ class SlotsS25(unittest.TestCase):
     original only by the frame slots of tx and tattr."""
 
     def test_tx_tattr_swap(self):
-        s = src("src/S25/m3BA4.c")
+        s = src("src/simulation/yellow_ant.c")
         stand = "void far DoAntMoveY(void)\n{\n    volatile int t;"
         if stand not in s or "#endif\n/* SCAFFOLD END */" not in s:
             self.skipTest("S25 DoAntMoveY stand-in/draft layout changed")
@@ -115,7 +115,7 @@ class SlotsS25(unittest.TestCase):
         self.assertIn("non-BP differences: 0", out)
 
     def test_exact_function_maps_to_itself(self):
-        code, out = run_main(slots.main, ["DoAntSimY", str(ROOT / "src/S25/m3BA4.c")])
+        code, out = run_main(slots.main, ["DoAntSimY", str(ROOT / "src/simulation/yellow_ant.c")])
         self.assertEqual(code, 0, out)
         self.assertNotIn("MOVED", out)
         self.assertNotIn("swap", out)
@@ -196,7 +196,7 @@ class Variants218D(unittest.TestCase):
     """218D:0656: 'cur = start = f()' is exact, 'start = cur = f()' is not (codegen-rules)."""
 
     def test_one_line_fix(self):
-        base = ROOT / "src/root/m218D.c"
+        base = ROOT / "src/window/events.c"
         if "    cur = start = f_218D_052F();" not in base.read_text(encoding="latin1"):
             self.skipTest("m218D.c changed")
         spec = write("v218D.json", json.dumps({

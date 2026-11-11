@@ -333,6 +333,11 @@ def selected_unit_tests(rel, text, needles):
     """Select methods directly affected, or their module when a shared fixture changes."""
     if not rel.startswith('tests/') or not rel.endswith('.py'):
         return []
+    # Tests of the working DOS build and the port are outside the reconstruction gate
+    # (tools/validate.py UPPER_LAYER_TESTS); the upper layers may be stale.
+    import validate
+    if rel.removeprefix('tests/').removesuffix('.py') in validate.UPPER_LAYER_TESTS:
+        return []
     tree = ast.parse(text, filename=rel)
     lines = text.splitlines(keepends=True)
     methods = []

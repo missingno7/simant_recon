@@ -4,7 +4,7 @@
   "source_mappings": [
     {
       "module": "S00:3126",
-      "canonical_path": "src/S00/m3126.asm",
+      "canonical_path": "src/platform/video/planar_minimap.asm",
       "effective_path": "build/source-only-dos-v36/sources/U000.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -12,7 +12,7 @@
     },
     {
       "module": "S00:31AD",
-      "canonical_path": "src/S00/m31AD.asm",
+      "canonical_path": "src/platform/video/planar_raster.asm",
       "effective_path": "build/source-only-dos-v36/sources/U001.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -20,7 +20,7 @@
     },
     {
       "module": "S00:31AD@2AB4",
-      "canonical_path": "src/S00/m31AD_2AB4.asm",
+      "canonical_path": "src/platform/video/planar_mode_blits.asm",
       "effective_path": "build/source-only-dos-v36/sources/U002.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -28,7 +28,7 @@
     },
     {
       "module": "S00:35A6",
-      "canonical_path": "src/S00/m35A6.asm",
+      "canonical_path": "src/platform/video/planar_sprites.asm",
       "effective_path": "build/source-only-dos-v36/sources/U003.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -36,7 +36,7 @@
     },
     {
       "module": "S01:3126",
-      "canonical_path": "src/S01/m3126.asm",
+      "canonical_path": "src/platform/video/mono_raster.asm",
       "effective_path": "build/source-only-dos-v36/sources/U004.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -44,7 +44,7 @@
     },
     {
       "module": "S01:328E",
-      "canonical_path": "src/S01/m328E.asm",
+      "canonical_path": "src/platform/video/mono_minimap.asm",
       "effective_path": "build/source-only-dos-v36/sources/U005.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -52,7 +52,7 @@
     },
     {
       "module": "S01:32B5",
-      "canonical_path": "src/S01/m32B5.asm",
+      "canonical_path": "src/platform/video/mono_sprites.asm",
       "effective_path": "build/source-only-dos-v36/sources/U006.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -60,7 +60,7 @@
     },
     {
       "module": "S02:3126",
-      "canonical_path": "src/S02/m3126.asm",
+      "canonical_path": "src/platform/video/vga8_raster.asm",
       "effective_path": "build/source-only-dos-v36/sources/U007.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -68,7 +68,7 @@
     },
     {
       "module": "S03:3126",
-      "canonical_path": "src/S03/m3126.asm",
+      "canonical_path": "src/platform/video/tandy_raster.asm",
       "effective_path": "build/source-only-dos-v36/sources/U008.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -76,7 +76,7 @@
     },
     {
       "module": "S03:3253",
-      "canonical_path": "src/S03/m3253.asm",
+      "canonical_path": "src/platform/video/tandy_minimap.asm",
       "effective_path": "build/source-only-dos-v36/sources/U009.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -84,7 +84,7 @@
     },
     {
       "module": "S03:3258",
-      "canonical_path": "src/S03/m3258.asm",
+      "canonical_path": "src/platform/video/tandy_sprites.asm",
       "effective_path": "build/source-only-dos-v36/sources/U010.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -92,7 +92,7 @@
     },
     {
       "module": "S04:35F5",
-      "canonical_path": "src/S04/m35F5.c",
+      "canonical_path": "src/ui/minimap.c",
       "effective_path": "build/source-only-dos-v36/sources/U011.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -100,7 +100,7 @@
     },
     {
       "module": "S05:35F5",
-      "canonical_path": "src/S05/m35F5.c",
+      "canonical_path": "src/ui/editor_menus.c",
       "effective_path": "build/source-only-dos-v36/sources/U012.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -108,7 +108,7 @@
     },
     {
       "module": "S05:3663",
-      "canonical_path": "src/S05/m3663.c",
+      "canonical_path": "src/ui/experiment_menu.c",
       "effective_path": "build/source-only-dos-v36/sources/U013.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -116,7 +116,7 @@
     },
     {
       "module": "S06:35F5",
-      "canonical_path": "src/S06/m35F5.c",
+      "canonical_path": "src/simulation/yard.c",
       "effective_path": "build/source-only-dos-v36/sources/U014.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -124,7 +124,7 @@
     },
     {
       "module": "S07:35F5",
-      "canonical_path": "src/S07/m35F5.c",
+      "canonical_path": "src/ui/cheats.c",
       "effective_path": "build/source-only-dos-v36/sources/U015.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -132,7 +132,7 @@
     },
     {
       "module": "S08:35F5",
-      "canonical_path": "src/S08/m35F5.c",
+      "canonical_path": "src/simulation/world_generation.c",
       "effective_path": "build/source-only-dos-v36/sources/U016.c",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -140,7 +140,7 @@
     },
     {
       "module": "S09:35F5",
-      "canonical_path": "src/S09/m35F5.c",
+      "canonical_path": "src/ui/save_load.c",
       "effective_path": "build/source-only-dos-v36/sources/U017.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -148,7 +148,7 @@
     },
     {
       "module": "S09:36EE",
-      "canonical_path": "src/S09/m36EE.c",
+      "canonical_path": "src/window/text_entry.c",
       "effective_path": "build/source-only-dos-v36/sources/U018.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -156,7 +156,7 @@
     },
     {
       "module": "S10:35F5",
-      "canonical_path": "src/S10/m35F5.c",
+      "canonical_path": "src/window/menu_tracking.c",
       "effective_path": "build/source-only-dos-v36/sources/U019.c",
       "reviewed_bodies": [
         "o10_35F5_0384"
@@ -166,7 +166,7 @@
     },
     {
       "module": "S11:35F5",
-      "canonical_path": "src/S11/m35F5.c",
+      "canonical_path": "src/ui/game_menu.c",
       "effective_path": "build/source-only-dos-v36/sources/U020.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -174,7 +174,7 @@
     },
     {
       "module": "S12:384C",
-      "canonical_path": "src/S12/m384C.c",
+      "canonical_path": "src/ui/map_window.c",
       "effective_path": "build/source-only-dos-v36/sources/U021.c",
       "reviewed_bodies": [
         "DrawMapCursor"
@@ -184,7 +184,7 @@
     },
     {
       "module": "S13:384C",
-      "canonical_path": "src/S13/m384C.c",
+      "canonical_path": "src/ui/yard_window.c",
       "effective_path": "build/source-only-dos-v36/sources/U022.c",
       "reviewed_bodies": [
         "InvertPatch"
@@ -194,7 +194,7 @@
     },
     {
       "module": "S14:384C",
-      "canonical_path": "src/S14/m384C.c",
+      "canonical_path": "src/ui/scenario_dialogs.c",
       "effective_path": "build/source-only-dos-v36/sources/U023.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -202,7 +202,7 @@
     },
     {
       "module": "S15:384C",
-      "canonical_path": "src/S15/m384C.c",
+      "canonical_path": "src/startup/game_session.c",
       "effective_path": "build/source-only-dos-v36/sources/U024.c",
       "reviewed_bodies": [
         "o15_384C_0239"
@@ -212,7 +212,7 @@
     },
     {
       "module": "S16:384C",
-      "canonical_path": "src/S16/m384C.c",
+      "canonical_path": "src/ui/intro_credits.c",
       "effective_path": "build/source-only-dos-v36/sources/U025.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -220,7 +220,7 @@
     },
     {
       "module": "S17:384C",
-      "canonical_path": "src/S17/m384C.c",
+      "canonical_path": "src/window/menu_setup.c",
       "effective_path": "build/source-only-dos-v36/sources/U026.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -228,7 +228,7 @@
     },
     {
       "module": "S18:384C",
-      "canonical_path": "src/S18/m384C.c",
+      "canonical_path": "src/simulation/map_patches.c",
       "effective_path": "build/source-only-dos-v36/sources/U027.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -236,7 +236,7 @@
     },
     {
       "module": "S19:384C",
-      "canonical_path": "src/S19/m384C.c",
+      "canonical_path": "src/ui/game_events.c",
       "effective_path": "build/source-only-dos-v36/sources/U028.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -244,7 +244,7 @@
     },
     {
       "module": "S20:39C7",
-      "canonical_path": "src/S20/m39C7.c",
+      "canonical_path": "src/platform/video/font_setup.c",
       "effective_path": "build/source-only-dos-v36/sources/U029.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -252,7 +252,7 @@
     },
     {
       "module": "S20:39F1",
-      "canonical_path": "src/S20/m39F1.c",
+      "canonical_path": "src/startup/dos_config.c",
       "effective_path": "build/source-only-dos-v36/sources/U030.c",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -260,7 +260,7 @@
     },
     {
       "module": "S21:39C7",
-      "canonical_path": "src/S21/m39C7.asm",
+      "canonical_path": "src/platform/video/adapter_probe.asm",
       "effective_path": "build/source-only-dos-v36/sources/U031.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -268,7 +268,7 @@
     },
     {
       "module": "S22:39C7",
-      "canonical_path": "src/S22/m39C7.c",
+      "canonical_path": "src/ui/yellow_commands.c",
       "effective_path": "build/source-only-dos-v36/sources/U032.c",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -276,7 +276,7 @@
     },
     {
       "module": "S22:3BBD",
-      "canonical_path": "src/S22/m3BBD.c",
+      "canonical_path": "src/ui/experiment_tools.c",
       "effective_path": "build/source-only-dos-v36/sources/U033.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -284,7 +284,7 @@
     },
     {
       "module": "S23:39C7",
-      "canonical_path": "src/S23/m39C7.c",
+      "canonical_path": "src/ui/info_cards.c",
       "effective_path": "build/source-only-dos-v36/sources/U034.c",
       "reviewed_bodies": [
         "DisplayCard",
@@ -295,7 +295,7 @@
     },
     {
       "module": "S24:39C7",
-      "canonical_path": "src/S24/m39C7.c",
+      "canonical_path": "src/ui/history_window.c",
       "effective_path": "build/source-only-dos-v36/sources/U035.c",
       "reviewed_bodies": [
         "drawHistGraph"
@@ -305,7 +305,7 @@
     },
     {
       "module": "S25:39C7",
-      "canonical_path": "src/S25/m39C7.c",
+      "canonical_path": "src/simulation/black_nest.c",
       "effective_path": "build/source-only-dos-v36/sources/U036.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -313,7 +313,7 @@
     },
     {
       "module": "S25:3BA4",
-      "canonical_path": "src/S25/m3BA4.c",
+      "canonical_path": "src/simulation/yellow_ant.c",
       "effective_path": "build/source-only-dos-v36/sources/U037.c",
       "reviewed_bodies": [
         "o25_3BA4_1035",
@@ -324,7 +324,7 @@
     },
     {
       "module": "S26:39C7",
-      "canonical_path": "src/S26/m39C7.c",
+      "canonical_path": "src/window/move_resize.c",
       "effective_path": "build/source-only-dos-v36/sources/U038.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -332,7 +332,7 @@
     },
     {
       "module": "data:3D57",
-      "canonical_path": "src/data/d3D57.c",
+      "canonical_path": "src/simulation/tables.c",
       "effective_path": "build/source-only-dos-v36/sources/U039.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -340,7 +340,7 @@
     },
     {
       "module": "data:3E1D",
-      "canonical_path": "src/data/d3E1D.c",
+      "canonical_path": "src/simulation/maps_lists.c",
       "effective_path": "build/source-only-dos-v36/sources/U040.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -348,7 +348,7 @@
     },
     {
       "module": "data:55B3@0042",
-      "canonical_path": "src/data/d55B3_0042.c",
+      "canonical_path": "src/startup/version.c",
       "effective_path": "build/source-only-dos-v36/sources/U041.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -356,7 +356,7 @@
     },
     {
       "module": "data:55B3@0064",
-      "canonical_path": "src/data/d55B3_0064.c",
+      "canonical_path": "src/sound/theme_song.c",
       "effective_path": "build/source-only-dos-v36/sources/U042.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -364,7 +364,7 @@
     },
     {
       "module": "data:55B3@00B8",
-      "canonical_path": "src/data/d55B3_00B8.c",
+      "canonical_path": "src/sound/instruments.c",
       "effective_path": "build/source-only-dos-v36/sources/U043.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -372,7 +372,7 @@
     },
     {
       "module": "root:0000",
-      "canonical_path": "src/root/m0000.c",
+      "canonical_path": "src/sound/resource_loading.c",
       "effective_path": "build/source-only-dos-v36/sources/U044.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -380,7 +380,7 @@
     },
     {
       "module": "root:004A",
-      "canonical_path": "src/root/m004A.c",
+      "canonical_path": "src/ui/map_scrolling.c",
       "effective_path": "build/source-only-dos-v36/sources/U045.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -388,7 +388,7 @@
     },
     {
       "module": "root:0093",
-      "canonical_path": "src/root/m0093.c",
+      "canonical_path": "src/simulation/random.c",
       "effective_path": "build/source-only-dos-v36/sources/U046.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -396,7 +396,7 @@
     },
     {
       "module": "root:00BA",
-      "canonical_path": "src/root/m00BA.c",
+      "canonical_path": "src/startup/application_windows.c",
       "effective_path": "build/source-only-dos-v36/sources/U047.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -404,7 +404,7 @@
     },
     {
       "module": "root:00DE",
-      "canonical_path": "src/root/m00DE.c",
+      "canonical_path": "src/unresolved/m00de.c",
       "effective_path": "build/source-only-dos-v36/sources/U048.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -412,7 +412,7 @@
     },
     {
       "module": "root:00DF",
-      "canonical_path": "src/root/m00DF.c",
+      "canonical_path": "src/sound/game_interface.c",
       "effective_path": "build/source-only-dos-v36/sources/U049.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -420,7 +420,7 @@
     },
     {
       "module": "root:00F8",
-      "canonical_path": "src/root/m00F8.c",
+      "canonical_path": "src/ui/view_dialog_helpers.c",
       "effective_path": "build/source-only-dos-v36/sources/U050.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -428,7 +428,7 @@
     },
     {
       "module": "root:015B",
-      "canonical_path": "src/root/m015B.c",
+      "canonical_path": "src/ui/view_commands.c",
       "effective_path": "build/source-only-dos-v36/sources/U051.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -436,7 +436,7 @@
     },
     {
       "module": "root:0244",
-      "canonical_path": "src/root/m0244.c",
+      "canonical_path": "src/platform/block_helpers.c",
       "effective_path": "build/source-only-dos-v36/sources/U052.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -444,7 +444,7 @@
     },
     {
       "module": "root:0250",
-      "canonical_path": "src/root/m0250.c",
+      "canonical_path": "src/ui/edit_view.c",
       "effective_path": "build/source-only-dos-v36/sources/U053.c",
       "reviewed_bodies": [
         "DrawBalloons",
@@ -456,7 +456,7 @@
     },
     {
       "module": "root:075B",
-      "canonical_path": "src/root/m075B.c",
+      "canonical_path": "src/resources/game_strings.c",
       "effective_path": "build/source-only-dos-v36/sources/U054.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -464,7 +464,7 @@
     },
     {
       "module": "root:078E",
-      "canonical_path": "src/root/m078E.c",
+      "canonical_path": "src/memory/pointers.c",
       "effective_path": "build/source-only-dos-v36/sources/U055.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -472,7 +472,7 @@
     },
     {
       "module": "root:0798",
-      "canonical_path": "src/root/m0798.c",
+      "canonical_path": "src/ui/colony_controls.c",
       "effective_path": "build/source-only-dos-v36/sources/U056.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -480,7 +480,7 @@
     },
     {
       "module": "root:0894",
-      "canonical_path": "src/root/m0894.c",
+      "canonical_path": "src/simulation/surface_ants.c",
       "effective_path": "build/source-only-dos-v36/sources/U057.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -488,7 +488,7 @@
     },
     {
       "module": "root:0AD9",
-      "canonical_path": "src/root/m0AD9.c",
+      "canonical_path": "src/simulation/yard_creatures.c",
       "effective_path": "build/source-only-dos-v36/sources/U058.c",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -496,7 +496,7 @@
     },
     {
       "module": "root:0BE8",
-      "canonical_path": "src/root/m0BE8.c",
+      "canonical_path": "src/simulation/food_water_counts.c",
       "effective_path": "build/source-only-dos-v36/sources/U059.c",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -504,7 +504,7 @@
     },
     {
       "module": "root:0CDB",
-      "canonical_path": "src/root/m0CDB.c",
+      "canonical_path": "src/simulation/spider.c",
       "effective_path": "build/source-only-dos-v36/sources/U060.c",
       "reviewed_bodies": [
         "SpiderScan"
@@ -514,7 +514,7 @@
     },
     {
       "module": "root:0DEF",
-      "canonical_path": "src/root/m0DEF.c",
+      "canonical_path": "src/simulation/red_initiator.c",
       "effective_path": "build/source-only-dos-v36/sources/U061.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -522,7 +522,7 @@
     },
     {
       "module": "root:0E2E",
-      "canonical_path": "src/root/m0E2E.c",
+      "canonical_path": "src/simulation/tutorial.c",
       "effective_path": "build/source-only-dos-v36/sources/U062.c",
       "reviewed_bodies": [
         "LessonDone"
@@ -532,7 +532,7 @@
     },
     {
       "module": "root:0EC1",
-      "canonical_path": "src/root/m0EC1.c",
+      "canonical_path": "src/simulation/ant_lists.c",
       "effective_path": "build/source-only-dos-v36/sources/U063.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -540,7 +540,7 @@
     },
     {
       "module": "root:0F3F",
-      "canonical_path": "src/root/m0F3F.c",
+      "canonical_path": "src/simulation/red_nest.c",
       "effective_path": "build/source-only-dos-v36/sources/U064.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -548,7 +548,7 @@
     },
     {
       "module": "root:10F7",
-      "canonical_path": "src/root/m10F7.c",
+      "canonical_path": "src/simulation/life_tiles.c",
       "effective_path": "build/source-only-dos-v36/sources/U065.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -556,7 +556,7 @@
     },
     {
       "module": "root:1383",
-      "canonical_path": "src/root/m1383.c",
+      "canonical_path": "src/simulation/strategy.c",
       "effective_path": "build/source-only-dos-v36/sources/U066.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -564,7 +564,7 @@
     },
     {
       "module": "root:1496",
-      "canonical_path": "src/root/m1496.c",
+      "canonical_path": "src/simulation/pheromones.c",
       "effective_path": "build/source-only-dos-v36/sources/U067.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -572,7 +572,7 @@
     },
     {
       "module": "root:14EE",
-      "canonical_path": "src/root/m14EE.c",
+      "canonical_path": "src/simulation/digging.c",
       "effective_path": "build/source-only-dos-v36/sources/U068.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -580,7 +580,7 @@
     },
     {
       "module": "root:15D9",
-      "canonical_path": "src/root/m15D9.c",
+      "canonical_path": "src/ui/ribbon_messages.c",
       "effective_path": "build/source-only-dos-v36/sources/U069.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -588,7 +588,7 @@
     },
     {
       "module": "root:15F8",
-      "canonical_path": "src/root/m15F8.c",
+      "canonical_path": "src/startup/main.c",
       "effective_path": "build/source-only-dos-v36/sources/U070.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -596,7 +596,7 @@
     },
     {
       "module": "root:1629",
-      "canonical_path": "src/root/m1629.c",
+      "canonical_path": "src/graphics/balloons.c",
       "effective_path": "build/source-only-dos-v36/sources/U071.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -604,7 +604,7 @@
     },
     {
       "module": "root:1699",
-      "canonical_path": "src/root/m1699.asm",
+      "canonical_path": "src/graphics/balloon_masks.asm",
       "effective_path": "build/source-only-dos-v36/sources/U072.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -612,7 +612,7 @@
     },
     {
       "module": "root:16B5",
-      "canonical_path": "src/root/m16B5.asm",
+      "canonical_path": "src/graphics/lines.asm",
       "effective_path": "build/source-only-dos-v36/sources/U073.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -620,7 +620,7 @@
     },
     {
       "module": "root:171C",
-      "canonical_path": "src/root/m171C.c",
+      "canonical_path": "src/memory/ralloc.c",
       "effective_path": "build/source-only-dos-v36/sources/U074.c",
       "reviewed_bodies": [
         "f_171C_09CC",
@@ -633,7 +633,7 @@
     },
     {
       "module": "root:194D",
-      "canonical_path": "src/root/m194D.asm",
+      "canonical_path": "src/platform/memory_helpers.asm",
       "effective_path": "build/source-only-dos-v36/sources/U075.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -641,7 +641,7 @@
     },
     {
       "module": "root:1959",
-      "canonical_path": "src/root/m1959.asm",
+      "canonical_path": "src/platform/byte_order.asm",
       "effective_path": "build/source-only-dos-v36/sources/U076.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -649,7 +649,7 @@
     },
     {
       "module": "root:195A",
-      "canonical_path": "src/root/m195A.asm",
+      "canonical_path": "src/memory/ems.asm",
       "effective_path": "build/source-only-dos-v36/sources/U077.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -657,7 +657,7 @@
     },
     {
       "module": "root:1986",
-      "canonical_path": "src/root/m1986.c",
+      "canonical_path": "src/resources/database_index.c",
       "effective_path": "build/source-only-dos-v36/sources/U078.c",
       "reviewed_bodies": [
         "FindIndex"
@@ -667,7 +667,7 @@
     },
     {
       "module": "root:19A9",
-      "canonical_path": "src/root/m19A9.c",
+      "canonical_path": "src/resources/database_records.c",
       "effective_path": "build/source-only-dos-v36/sources/U079.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -675,7 +675,7 @@
     },
     {
       "module": "root:19DC",
-      "canonical_path": "src/root/m19DC.c",
+      "canonical_path": "src/resources/database_ems.c",
       "effective_path": "build/source-only-dos-v36/sources/U080.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -683,7 +683,7 @@
     },
     {
       "module": "root:1A28",
-      "canonical_path": "src/root/m1A28.c",
+      "canonical_path": "src/resources/database_files.c",
       "effective_path": "build/source-only-dos-v36/sources/U081.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -691,7 +691,7 @@
     },
     {
       "module": "root:1A53",
-      "canonical_path": "src/root/m1A53.c",
+      "canonical_path": "src/resources/database_objects.c",
       "effective_path": "build/source-only-dos-v36/sources/U082.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -699,7 +699,7 @@
     },
     {
       "module": "root:1A96",
-      "canonical_path": "src/root/m1A96.c",
+      "canonical_path": "src/resources/object_cache.c",
       "effective_path": "build/source-only-dos-v36/sources/U083.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -707,7 +707,7 @@
     },
     {
       "module": "root:1B05",
-      "canonical_path": "src/root/m1B05.asm",
+      "canonical_path": "src/resources/lzss.asm",
       "effective_path": "build/source-only-dos-v36/sources/U084.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -715,7 +715,7 @@
     },
     {
       "module": "root:1B28",
-      "canonical_path": "src/root/m1B28.c",
+      "canonical_path": "src/platform/cursor_shapes.c",
       "effective_path": "build/source-only-dos-v36/sources/U085.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -723,7 +723,7 @@
     },
     {
       "module": "root:1B4E",
-      "canonical_path": "src/root/m1B4E.asm",
+      "canonical_path": "src/platform/video/bios_bitmap.asm",
       "effective_path": "build/source-only-dos-v36/sources/U086.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -731,7 +731,7 @@
     },
     {
       "module": "root:1B73",
-      "canonical_path": "src/root/m1B73.asm",
+      "canonical_path": "src/platform/input_timer.asm",
       "effective_path": "build/source-only-dos-v36/sources/U087.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -739,7 +739,7 @@
     },
     {
       "module": "root:1C62",
-      "canonical_path": "src/root/m1C62.c",
+      "canonical_path": "src/window/alerts.c",
       "effective_path": "build/source-only-dos-v36/sources/U088.c",
       "reviewed_bodies": [
         "f_1C62_0415"
@@ -749,7 +749,7 @@
     },
     {
       "module": "root:1CE2",
-      "canonical_path": "src/root/m1CE2.c",
+      "canonical_path": "src/graphics/screen_rects.c",
       "effective_path": "build/source-only-dos-v36/sources/U089.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -757,7 +757,7 @@
     },
     {
       "module": "root:1D8E",
-      "canonical_path": "src/root/m1D8E.c",
+      "canonical_path": "src/graphics/clip_rects.c",
       "effective_path": "build/source-only-dos-v36/sources/U090.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -765,7 +765,7 @@
     },
     {
       "module": "root:1E57",
-      "canonical_path": "src/root/m1E57.c",
+      "canonical_path": "src/graphics/clip_regions.c",
       "effective_path": "build/source-only-dos-v36/sources/U091.c",
       "reviewed_bodies": [
         "f_1E57_038E"
@@ -775,7 +775,7 @@
     },
     {
       "module": "root:1F58",
-      "canonical_path": "src/root/m1F58.asm",
+      "canonical_path": "src/platform/bios_helpers.asm",
       "effective_path": "build/source-only-dos-v36/sources/U092.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -783,7 +783,7 @@
     },
     {
       "module": "root:1F66",
-      "canonical_path": "src/root/m1F66.asm",
+      "canonical_path": "src/platform/file_helpers.asm",
       "effective_path": "build/source-only-dos-v36/sources/U093.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -791,7 +791,7 @@
     },
     {
       "module": "root:1F80",
-      "canonical_path": "src/root/m1F80.c",
+      "canonical_path": "src/graphics/text_layout.c",
       "effective_path": "build/source-only-dos-v36/sources/U094.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -799,7 +799,7 @@
     },
     {
       "module": "root:1FAA",
-      "canonical_path": "src/root/m1FAA.c",
+      "canonical_path": "src/graphics/trapezoid.c",
       "effective_path": "build/source-only-dos-v36/sources/U095.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -807,7 +807,7 @@
     },
     {
       "module": "root:1FBD",
-      "canonical_path": "src/root/m1FBD.asm",
+      "canonical_path": "src/graphics/bitmap_text.asm",
       "effective_path": "build/source-only-dos-v36/sources/U096.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -815,7 +815,7 @@
     },
     {
       "module": "root:1FD2",
-      "canonical_path": "src/root/m1FD2.c",
+      "canonical_path": "src/window/menu_helpers.c",
       "effective_path": "build/source-only-dos-v36/sources/U097.c",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -823,7 +823,7 @@
     },
     {
       "module": "root:205F",
-      "canonical_path": "src/root/m205F.c",
+      "canonical_path": "src/platform/video/driver_select.c",
       "effective_path": "build/source-only-dos-v36/sources/U098.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -831,7 +831,7 @@
     },
     {
       "module": "root:208F",
-      "canonical_path": "src/root/m208F.c",
+      "canonical_path": "src/window/text_bitmap_helpers.c",
       "effective_path": "build/source-only-dos-v36/sources/U099.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -839,7 +839,7 @@
     },
     {
       "module": "root:20E8",
-      "canonical_path": "src/root/m20E8.c",
+      "canonical_path": "src/window/lifecycle.c",
       "effective_path": "build/source-only-dos-v36/sources/U100.c",
       "reviewed_bodies": [
         "f_20E8_0903"
@@ -849,7 +849,7 @@
     },
     {
       "module": "root:218D",
-      "canonical_path": "src/root/m218D.c",
+      "canonical_path": "src/window/events.c",
       "effective_path": "build/source-only-dos-v36/sources/U101.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -857,7 +857,7 @@
     },
     {
       "module": "root:21FA",
-      "canonical_path": "src/root/m21FA.c",
+      "canonical_path": "src/window/drawing.c",
       "effective_path": "build/source-only-dos-v36/sources/U102.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -865,7 +865,7 @@
     },
     {
       "module": "root:22BF",
-      "canonical_path": "src/root/m22BF.c",
+      "canonical_path": "src/window/object_attributes.c",
       "effective_path": "build/source-only-dos-v36/sources/U103.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -873,7 +873,7 @@
     },
     {
       "module": "root:23AE",
-      "canonical_path": "src/root/m23AE.c",
+      "canonical_path": "src/window/locking.c",
       "effective_path": "build/source-only-dos-v36/sources/U104.c",
       "reviewed_bodies": [
         "win_UnlockWin"
@@ -883,7 +883,7 @@
     },
     {
       "module": "root:23E6",
-      "canonical_path": "src/root/m23E6.c",
+      "canonical_path": "src/window/lists_sliders.c",
       "effective_path": "build/source-only-dos-v36/sources/U105.c",
       "reviewed_bodies": [
         "f_23E6_0000"
@@ -893,7 +893,7 @@
     },
     {
       "module": "root:24AB",
-      "canonical_path": "src/root/m24AB.c",
+      "canonical_path": "src/graphics/font_output.c",
       "effective_path": "build/source-only-dos-v36/sources/U106.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -901,7 +901,7 @@
     },
     {
       "module": "root:24FA",
-      "canonical_path": "src/root/m24FA.asm",
+      "canonical_path": "src/graphics/pixel_helpers.asm",
       "effective_path": "build/source-only-dos-v36/sources/U107.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -909,7 +909,7 @@
     },
     {
       "module": "root:2505",
-      "canonical_path": "src/root/m2505.c",
+      "canonical_path": "src/window/object_geometry.c",
       "effective_path": "build/source-only-dos-v36/sources/U108.c",
       "reviewed_bodies": [
         "f_2505_0453"
@@ -919,7 +919,7 @@
     },
     {
       "module": "root:259D",
-      "canonical_path": "src/root/m259D.c",
+      "canonical_path": "src/window/pictures.c",
       "effective_path": "build/source-only-dos-v36/sources/U109.c",
       "reviewed_bodies": [
         "win_DrawBitMap"
@@ -929,7 +929,7 @@
     },
     {
       "module": "root:25E7",
-      "canonical_path": "src/root/m25E7.c",
+      "canonical_path": "src/graphics/font_resources.c",
       "effective_path": "build/source-only-dos-v36/sources/U110.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -937,7 +937,7 @@
     },
     {
       "module": "root:2650",
-      "canonical_path": "src/root/m2650.asm",
+      "canonical_path": "src/graphics/glyph_blit.asm",
       "effective_path": "build/source-only-dos-v36/sources/U111.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -945,7 +945,7 @@
     },
     {
       "module": "root:2662",
-      "canonical_path": "src/root/m2662.c",
+      "canonical_path": "src/graphics/anim.c",
       "effective_path": "build/source-only-dos-v36/sources/U112.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -953,7 +953,7 @@
     },
     {
       "module": "root:277D",
-      "canonical_path": "src/root/m277D.c",
+      "canonical_path": "src/platform/debug_stubs.c",
       "effective_path": "build/source-only-dos-v36/sources/U113.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -961,7 +961,7 @@
     },
     {
       "module": "root:277E",
-      "canonical_path": "src/root/m277E.c",
+      "canonical_path": "src/sound/device_channels.c",
       "effective_path": "build/source-only-dos-v36/sources/U114.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -969,7 +969,7 @@
     },
     {
       "module": "root:2815",
-      "canonical_path": "src/root/m2815.c",
+      "canonical_path": "src/sound/opl2_voices.c",
       "effective_path": "build/source-only-dos-v36/sources/U115.c",
       "reviewed_bodies": [
         "f_2815_0165"
@@ -979,7 +979,7 @@
     },
     {
       "module": "root:283E",
-      "canonical_path": "src/root/m283E.asm",
+      "canonical_path": "src/sound/opl2_registers.asm",
       "effective_path": "build/source-only-dos-v36/sources/U116.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -987,7 +987,7 @@
     },
     {
       "module": "root:284A",
-      "canonical_path": "src/root/m284A.c",
+      "canonical_path": "src/sound/midi_player.c",
       "effective_path": "build/source-only-dos-v36/sources/U117.c",
       "reviewed_bodies": [
         "f_284A_0138"
@@ -997,7 +997,7 @@
     },
     {
       "module": "root:28BC",
-      "canonical_path": "src/root/m28BC.asm",
+      "canonical_path": "src/sound/sample_timer.asm",
       "effective_path": "build/source-only-dos-v36/sources/U118.asm",
       "reviewed_bodies": [],
       "bindings_admitted": true,
@@ -1005,7 +1005,7 @@
     },
     {
       "module": "root:290D",
-      "canonical_path": "src/root/m290D.c",
+      "canonical_path": "src/sound/sample_voices.c",
       "effective_path": "build/source-only-dos-v36/sources/U119.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -1013,7 +1013,7 @@
     },
     {
       "module": "root:293A",
-      "canonical_path": "src/root/m293A.c",
+      "canonical_path": "src/sound/device_probe.c",
       "effective_path": "build/source-only-dos-v36/sources/U120.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -1021,7 +1021,7 @@
     },
     {
       "module": "root:295C",
-      "canonical_path": "src/root/m295C.c",
+      "canonical_path": "src/sound/midi_voices.c",
       "effective_path": "build/source-only-dos-v36/sources/U121.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -1029,7 +1029,7 @@
     },
     {
       "module": "root:29B8",
-      "canonical_path": "src/root/m29B8.c",
+      "canonical_path": "src/sound/dsp_probe.c",
       "effective_path": "build/source-only-dos-v36/sources/U122.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -1037,7 +1037,7 @@
     },
     {
       "module": "root:29BF",
-      "canonical_path": "src/root/m29BF.asm",
+      "canonical_path": "src/sound/chip_registers.asm",
       "effective_path": "build/source-only-dos-v36/sources/U123.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -1045,7 +1045,7 @@
     },
     {
       "module": "root:29D6",
-      "canonical_path": "src/root/m29D6.c",
+      "canonical_path": "src/sound/psg_voices.c",
       "effective_path": "build/source-only-dos-v36/sources/U124.c",
       "reviewed_bodies": [
         "f_29D6_000A"
@@ -1055,7 +1055,7 @@
     },
     {
       "module": "root:29F0",
-      "canonical_path": "src/root/m29F0.c",
+      "canonical_path": "src/platform/port_io.c",
       "effective_path": "build/source-only-dos-v36/sources/U125.c",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -1063,7 +1063,7 @@
     },
     {
       "module": "root:2CFB",
-      "canonical_path": "src/root/m2CFB.asm",
+      "canonical_path": "src/memory/hook_thunks.asm",
       "effective_path": "build/source-only-dos-v36/sources/U126.asm",
       "reviewed_bodies": [],
       "bindings_admitted": false,
@@ -1073,7 +1073,7 @@
   "storage_mappings": [
     {
       "module": "source-owned:driver-callback-table",
-      "canonical_path": "src/state/driver-callback-table.c",
+      "canonical_path": "src/platform/video/state/driver_callbacks.c",
       "accepted_source": "work/source-only-dos/providers/callback-table.c",
       "effective_path": "build/source-only-dos-v36/sources/CBOWNER.c",
       "publics": [],
@@ -1088,7 +1088,7 @@
     },
     {
       "module": "source-owned:mouse-words",
-      "canonical_path": "src/state/mouse-words.c",
+      "canonical_path": "src/window/state/mouse_buttons.c",
       "accepted_source": "work/source-only-dos/providers/mouse-words.c",
       "effective_path": "build/source-only-dos-v36/sources/MSOWNER.c",
       "publics": [],
@@ -1113,7 +1113,7 @@
     },
     {
       "module": "source-owned:memory-state",
-      "canonical_path": "src/state/memory-state.c",
+      "canonical_path": "src/memory/state/ralloc_blocks.c",
       "accepted_source": "work/source-only-dos/providers/memory-state.c",
       "effective_path": "build/source-only-dos-v36/sources/MMOWNER.c",
       "publics": [],
@@ -1148,7 +1148,7 @@
     },
     {
       "module": "source-owned:render-scalars",
-      "canonical_path": "src/state/render-scalars.c",
+      "canonical_path": "src/ui/state/map_draw_work.c",
       "accepted_source": "work/source-only-dos/providers/render-scalars.c",
       "effective_path": "build/source-only-dos-v36/sources/RSOWNER.c",
       "publics": [],
@@ -1178,7 +1178,7 @@
     },
     {
       "module": "source-owned:memory-far-state",
-      "canonical_path": "src/state/memory-far-state.c",
+      "canonical_path": "src/memory/state/allocator_cache.c",
       "accepted_source": "work/source-only-dos/providers/memory-far-state.c",
       "effective_path": "build/source-only-dos-v36/sources/MFOWNER.c",
       "publics": [],
@@ -1223,7 +1223,7 @@
     },
     {
       "module": "source-owned:mono-pattern-prefix",
-      "canonical_path": "src/state/mono-pattern-prefix.c",
+      "canonical_path": "src/graphics/state/mono_pattern_prefix.c",
       "accepted_source": "work/source-only-dos/providers/mono-pattern-prefix.c",
       "effective_path": "build/source-only-dos-v36/sources/MPOWNER.c",
       "publics": [],
@@ -1238,7 +1238,7 @@
     },
     {
       "module": "source-owned:clip-pointer",
-      "canonical_path": "src/state/clip-pointer.c",
+      "canonical_path": "src/graphics/state/clip_pointer.c",
       "accepted_source": "work/source-only-dos/providers/clip-pointer.c",
       "effective_path": "build/source-only-dos-v36/sources/CPOWNER.c",
       "publics": [],
@@ -1253,7 +1253,7 @@
     },
     {
       "module": "source-owned:yard-scalars",
-      "canonical_path": "src/state/yard-scalars.c",
+      "canonical_path": "src/simulation/state/yard_game_state.c",
       "accepted_source": "work/source-only-dos/providers/yard-scalars.c",
       "effective_path": "build/source-only-dos-v36/sources/YDOWNER.c",
       "publics": [],
@@ -1319,7 +1319,7 @@
     },
     {
       "module": "source-owned:database-index-state",
-      "canonical_path": "src/state/database-index-state.c",
+      "canonical_path": "src/resources/state/index_search.c",
       "accepted_source": "work/source-only-dos/providers/database-index-state.c",
       "effective_path": "build/source-only-dos-v36/sources/DIOWNER.c",
       "publics": [],
@@ -1343,7 +1343,7 @@
     },
     {
       "module": "source-owned:spider-counters",
-      "canonical_path": "src/state/spider-counters.c",
+      "canonical_path": "src/simulation/state/spider_counters.c",
       "accepted_source": "work/source-only-dos/providers/spider-counters.c",
       "effective_path": "build/source-only-dos-v36/sources/SPIDATA.c",
       "publics": [],
@@ -1402,7 +1402,7 @@
     },
     {
       "module": "source-owned:lion-sow-pillar",
-      "canonical_path": "src/state/lion-sow-pillar.c",
+      "canonical_path": "src/simulation/state/yard_creature_lists.c",
       "accepted_source": "work/source-only-dos/providers/lion-data.c",
       "effective_path": "build/source-only-dos-v36/sources/LIOWNER.c",
       "publics": [],
@@ -1496,7 +1496,7 @@
     },
     {
       "module": "source-owned:spider-controls",
-      "canonical_path": "src/state/spider-controls.c",
+      "canonical_path": "src/simulation/state/spider_targets.c",
       "accepted_source": "work/source-only-dos/providers/spider-controls.c",
       "effective_path": "build/source-only-dos-v36/sources/SPICTRL.c",
       "publics": [],
@@ -1548,7 +1548,7 @@
     },
     {
       "module": "source-owned:point-state",
-      "canonical_path": "src/state/point-state.c",
+      "canonical_path": "src/ui/state/view_origins.c",
       "accepted_source": "work/source-only-dos/providers/point-state.c",
       "effective_path": "build/source-only-dos-v36/sources/PTOWNER.c",
       "publics": [],
@@ -1593,7 +1593,7 @@
     },
     {
       "module": "source-owned:database-record-state",
-      "canonical_path": "src/state/database-record-state.c",
+      "canonical_path": "src/resources/state/open_databases.c",
       "accepted_source": "work/source-only-dos/providers/database-record-state.c",
       "effective_path": "build/source-only-dos-v36/sources/DBRECOWN.c",
       "publics": [],
@@ -1617,7 +1617,7 @@
     },
     {
       "module": "source-owned:graphics-formulas",
-      "canonical_path": "src/state/graphics-formulas.c",
+      "canonical_path": "src/graphics/state/pixel_masks.c",
       "accepted_source": "work/source-only-dos/providers/graphics-formulas.c",
       "effective_path": "build/source-only-dos-v36/sources/GFXOWNER.c",
       "publics": [
@@ -1642,7 +1642,7 @@
     },
     {
       "module": "source-owned:g2108-color-translation",
-      "canonical_path": "src/state/g2108-color-translation.c",
+      "canonical_path": "src/platform/video/state/color_translation.c",
       "accepted_source": "work/source-only-dos/providers/color-translation.c",
       "effective_path": "build/source-only-dos-v36/sources/G210808.c",
       "publics": [
@@ -1657,7 +1657,7 @@
     },
     {
       "module": "source-owned:ant-list-counts",
-      "canonical_path": "src/state/ant-list-counts.c",
+      "canonical_path": "src/simulation/state/list_counts.c",
       "accepted_source": "work/source-only-dos/providers/ant-list-counts.c",
       "effective_path": "build/source-only-dos-v36/sources/ALCOUNT.c",
       "publics": [],
@@ -1688,7 +1688,7 @@
     },
     {
       "module": "source-owned:colony-simulation-words",
-      "canonical_path": "src/state/colony-simulation-words.c",
+      "canonical_path": "src/simulation/state/yard_creature_flags.c",
       "accepted_source": "work/source-only-dos/providers/colony-simulation-words.c",
       "effective_path": "build/source-only-dos-v36/sources/COLWORD.c",
       "publics": [],
@@ -1754,7 +1754,7 @@
     },
     {
       "module": "source-owned:player-locations",
-      "canonical_path": "src/state/player-locations.c",
+      "canonical_path": "src/simulation/state/ant_locations.c",
       "accepted_source": "work/source-only-dos/providers/player-location-words.c",
       "effective_path": "build/source-only-dos-v36/sources/PLOCOWN.c",
       "publics": [],
@@ -1806,7 +1806,7 @@
     },
     {
       "module": "source-owned:ant-counters-timer",
-      "canonical_path": "src/state/ant-counters-timer.c",
+      "canonical_path": "src/simulation/state/ant_counts_timer.c",
       "accepted_source": "work/source-only-dos/providers/ant-counters-timer.c",
       "effective_path": "build/source-only-dos-v36/sources/ANTCTR.c",
       "publics": [],
@@ -1837,7 +1837,7 @@
     },
     {
       "module": "source-owned:language-string-list-pointers",
-      "canonical_path": "src/state/language-string-list-pointers.c",
+      "canonical_path": "src/resources/state/string_lists.c",
       "accepted_source": "work/source-only-dos/providers/language-string-list-pointers.c",
       "effective_path": "build/source-only-dos-v36/sources/LANGPTR.c",
       "publics": [],
@@ -1882,7 +1882,7 @@
     },
     {
       "module": "source-owned:dead-ant-coordinate-rings",
-      "canonical_path": "src/state/dead-ant-coordinate-rings.c",
+      "canonical_path": "src/simulation/state/dead_ant_positions.c",
       "accepted_source": "work/source-only-dos/providers/dead-ant-coordinate-rings.c",
       "effective_path": "build/source-only-dos-v36/sources/DEADXY.c",
       "publics": [],
@@ -1906,7 +1906,7 @@
     },
     {
       "module": "source-owned:ant-player-state",
-      "canonical_path": "src/state/ant-player-state.c",
+      "canonical_path": "src/simulation/state/player_colony.c",
       "accepted_source": "work/source-only-dos/providers/ant-player-state-words.c",
       "effective_path": "build/source-only-dos-v36/sources/ANTSTATE.c",
       "publics": [],
@@ -1958,7 +1958,7 @@
     },
     {
       "module": "source-owned:display-mode-selector",
-      "canonical_path": "src/state/display-mode-selector.c",
+      "canonical_path": "src/platform/video/state/display_mode.c",
       "accepted_source": "work/source-only-dos/providers/display-mode-selector.c",
       "effective_path": "build/source-only-dos-v36/sources/MODEOWN.c",
       "publics": [],
@@ -1973,7 +1973,7 @@
     },
     {
       "module": "source-owned:ant-ui-control-state",
-      "canonical_path": "src/state/ant-ui-control-state.c",
+      "canonical_path": "src/ui/state/colony_controls.c",
       "accepted_source": "work/source-only-dos/providers/ant-ui-control-state.c",
       "effective_path": "build/source-only-dos-v36/sources/ANTCTRL.c",
       "publics": [],
@@ -2067,7 +2067,7 @@
     },
     {
       "module": "source-owned:ui-resource-scalars",
-      "canonical_path": "src/state/ui-resource-scalars.c",
+      "canonical_path": "src/unresolved/state/ui_resource_scalars.c",
       "accepted_source": "work/source-only-dos/providers/ui-resource-state.c",
       "effective_path": "build/source-only-dos-v36/sources/UIRESOWN.c",
       "publics": [],
@@ -2119,7 +2119,7 @@
     },
     {
       "module": "source-owned:terrain-state-words",
-      "canonical_path": "src/state/terrain-state-words.c",
+      "canonical_path": "src/simulation/state/terrain_selection.c",
       "accepted_source": "work/source-only-dos/providers/terrain-state.c",
       "effective_path": "build/source-only-dos-v36/sources/TERRNOWN.c",
       "publics": [],
@@ -2143,7 +2143,7 @@
     },
     {
       "module": "source-owned:swarm-serialized-buffers",
-      "canonical_path": "src/state/swarm-serialized-buffers.c",
+      "canonical_path": "src/simulation/state/swarm_buffers.c",
       "accepted_source": "work/source-only-dos/providers/swarm-serialized-buffers.c",
       "effective_path": "build/source-only-dos-v36/sources/SWARMOWN.c",
       "publics": [],
@@ -2181,7 +2181,7 @@
     },
     {
       "module": "source-owned:population-work-arrays",
-      "canonical_path": "src/state/population-work-arrays.c",
+      "canonical_path": "src/simulation/state/caste_counts.c",
       "accepted_source": "work/source-only-dos/providers/population-work-arrays.c",
       "effective_path": "build/source-only-dos-v36/sources/POPWORK.c",
       "publics": [],
@@ -2205,7 +2205,7 @@
     },
     {
       "module": "source-owned:saved-sound-state",
-      "canonical_path": "src/state/saved-sound-state.c",
+      "canonical_path": "src/sound/state/saved_driver_state.c",
       "accepted_source": "work/source-only-dos/saved-sound-state-v19/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/SNDSTATE.c",
       "publics": [],
@@ -2222,7 +2222,7 @@
     },
     {
       "module": "source-owned:control-flag-words",
-      "canonical_path": "src/state/control-flag-words.c",
+      "canonical_path": "src/ui/state/control_flags.c",
       "accepted_source": "work/source-only-dos/control-flag-words-v18/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/CTRLFLAG.c",
       "publics": [],
@@ -2253,7 +2253,7 @@
     },
     {
       "module": "source-owned:count-ants-transition-word",
-      "canonical_path": "src/state/count-ants-transition-word.c",
+      "canonical_path": "src/simulation/state/transfer_flag.c",
       "accepted_source": "work/source-only-dos/count-ants-transition-word-v19/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/ANTLATCH.c",
       "publics": [],
@@ -2270,7 +2270,7 @@
     },
     {
       "module": "source-owned:sound-control-words",
-      "canonical_path": "src/state/sound-control-words.c",
+      "canonical_path": "src/sound/state/device_controls.c",
       "accepted_source": "work/source-only-dos/sound-control-words-v20/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/SNDCTRL.c",
       "publics": [],
@@ -2322,7 +2322,7 @@
     },
     {
       "module": "source-owned:sound-record-arrays",
-      "canonical_path": "src/state/sound-record-arrays.c",
+      "canonical_path": "src/sound/state/voices_channels.c",
       "accepted_source": "work/source-only-dos/sound-record-arrays-v21/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/SNDRECS.c",
       "publics": [],
@@ -2346,7 +2346,7 @@
     },
     {
       "module": "source-owned:ant-movement-words",
-      "canonical_path": "src/state/ant-movement-words.c",
+      "canonical_path": "src/simulation/state/yellow_movement.c",
       "accepted_source": "work/source-only-dos/ant-movement-words-v21/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/ANTMOVE.c",
       "publics": [],
@@ -2468,7 +2468,7 @@
     },
     {
       "module": "source-owned:world-output-state",
-      "canonical_path": "src/state/world-output-state.c",
+      "canonical_path": "src/simulation/state/world_totals.c",
       "accepted_source": "work/source-only-dos/world-output-state-v21/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/WORLDOUT.c",
       "publics": [],
@@ -2590,7 +2590,7 @@
     },
     {
       "module": "source-owned:history-scalar-state",
-      "canonical_path": "src/state/history-scalar-state.c",
+      "canonical_path": "src/simulation/state/history_counters.c",
       "accepted_source": "work/source-only-dos/history-scalar-state-v21/provider.c",
       "effective_path": "build/source-only-dos-v36/sources/HISTOTAL.c",
       "publics": [],
@@ -2684,7 +2684,7 @@
     },
     {
       "module": "source-owned:ant-class-histogram",
-      "canonical_path": "src/state/ant-class-histogram.c",
+      "canonical_path": "src/simulation/state/caste_histogram.c",
       "accepted_source": "work/source-only-dos/providers/ant-class-histogram.c",
       "effective_path": "build/source-only-dos-v36/sources/ANTCOUNT.c",
       "publics": [],
@@ -2701,7 +2701,7 @@
     },
     {
       "module": "source-owned:event-records",
-      "canonical_path": "src/state/event-records.c",
+      "canonical_path": "src/window/state/event_records.c",
       "accepted_source": "work/source-only-dos/providers/event-records.c",
       "effective_path": "build/source-only-dos-v36/sources/EVRECS.c",
       "publics": [],
@@ -2725,7 +2725,7 @@
     },
     {
       "module": "source-owned:remaining-preparestrings-string-pointers",
-      "canonical_path": "src/state/remaining-preparestrings-string-pointers.c",
+      "canonical_path": "src/resources/state/message_string_lists.c",
       "accepted_source": "work/source-only-dos/providers/remaining-preparestrings-string-pointers.c",
       "effective_path": "build/source-only-dos-v36/sources/STRREST.c",
       "publics": [],
@@ -2826,7 +2826,7 @@
     },
     {
       "module": "source-owned:yard-init-state",
-      "canonical_path": "src/state/yard-init-state.c",
+      "canonical_path": "src/simulation/state/yard_initialization.c",
       "accepted_source": "work/source-only-dos/providers/yard-init-state.c",
       "effective_path": "build/source-only-dos-v36/sources/YARDISCL.c",
       "publics": [],
@@ -3011,7 +3011,7 @@
     },
     {
       "module": "source-owned:yard-animation-arrays",
-      "canonical_path": "src/state/yard-animation-arrays.c",
+      "canonical_path": "src/ui/state/yard_animation.c",
       "accepted_source": "work/source-only-dos/providers/yard-animation-arrays.c",
       "effective_path": "build/source-only-dos-v36/sources/YARDARR.c",
       "publics": [],
@@ -3049,7 +3049,7 @@
     },
     {
       "module": "source-owned:balloon-deadline-timers",
-      "canonical_path": "src/state/balloon-deadline-timers.c",
+      "canonical_path": "src/ui/state/balloon_deadlines.c",
       "accepted_source": "work/source-only-dos/providers/balloon-deadline-timers.c",
       "effective_path": "build/source-only-dos-v36/sources/BLNTMR.c",
       "publics": [],
@@ -3087,7 +3087,7 @@
     },
     {
       "module": "source-owned:experiment-anchor",
-      "canonical_path": "src/state/experiment-anchor.c",
+      "canonical_path": "src/ui/state/experiment_anchor.c",
       "accepted_source": "work/source-only-dos/providers/experiment-anchor.c",
       "effective_path": "build/source-only-dos-v36/sources/EXPANCH.c",
       "publics": [],
@@ -3104,7 +3104,7 @@
     },
     {
       "module": "source-owned:window-clip-handles",
-      "canonical_path": "src/state/window-clip-handles.c",
+      "canonical_path": "src/graphics/state/window_clip_handles.c",
       "accepted_source": "work/source-only-dos/providers/window-clip-handles.c",
       "effective_path": "build/source-only-dos-v36/sources/WCLIPH.c",
       "publics": [],
@@ -3121,7 +3121,7 @@
     },
     {
       "module": "source-owned:remaining-history-words",
-      "canonical_path": "src/state/remaining-history-words.c",
+      "canonical_path": "src/unresolved/state/remaining_history_words.c",
       "accepted_source": "work/source-only-dos/providers/remaining-history-words.c",
       "effective_path": "build/source-only-dos-v36/sources/HISTSC25.c",
       "publics": [],
@@ -3257,7 +3257,7 @@
     },
     {
       "module": "source-owned:mode-population-vectors",
-      "canonical_path": "src/state/mode-population-vectors.c",
+      "canonical_path": "src/simulation/state/mode_counts.c",
       "accepted_source": "work/source-only-dos/providers/mode-population-vectors.c",
       "effective_path": "build/source-only-dos-v36/sources/MPVOWNR.c",
       "publics": [],
@@ -3295,7 +3295,7 @@
     },
     {
       "module": "source-owned:floor-task-words",
-      "canonical_path": "src/state/floor-task-words.c",
+      "canonical_path": "src/simulation/state/terrain_task.c",
       "accepted_source": "work/source-only-dos/providers/floor-task-words.c",
       "effective_path": "build/source-only-dos-v36/sources/FLRTSK.c",
       "publics": [],
@@ -3319,7 +3319,7 @@
     },
     {
       "module": "source-owned:ui-geometry-state",
-      "canonical_path": "src/state/ui-geometry-state.c",
+      "canonical_path": "src/ui/state/view_geometry.c",
       "accepted_source": "work/source-only-dos/providers/ui-geometry-state.c",
       "effective_path": "build/source-only-dos-v36/sources/UIGEO.c",
       "publics": [],
@@ -3357,7 +3357,7 @@
     },
     {
       "module": "source-owned:remaining-world-state",
-      "canonical_path": "src/state/remaining-world-state.c",
+      "canonical_path": "src/unresolved/state/remaining_world_state.c",
       "accepted_source": "work/source-only-dos/providers/remaining-world-state.c",
       "effective_path": "build/source-only-dos-v36/sources/WRLDSC25.c",
       "publics": [],
@@ -3486,7 +3486,7 @@
     },
     {
       "module": "source-owned:remaining-ant-state",
-      "canonical_path": "src/state/remaining-ant-state.c",
+      "canonical_path": "src/unresolved/state/remaining_ant_state.c",
       "accepted_source": "work/source-only-dos/providers/remaining-ant-state.c",
       "effective_path": "build/source-only-dos-v36/sources/ANTSCL25.c",
       "publics": [],
@@ -3622,7 +3622,7 @@
     },
     {
       "module": "source-owned:remaining-ui-state",
-      "canonical_path": "src/state/remaining-ui-state.c",
+      "canonical_path": "src/unresolved/state/remaining_ui_state.c",
       "accepted_source": "work/source-only-dos/providers/remaining-ui-state.c",
       "effective_path": "build/source-only-dos-v36/sources/UISTTE26.c",
       "publics": [],
@@ -3772,7 +3772,7 @@
     },
     {
       "module": "source-owned:remaining-window-state",
-      "canonical_path": "src/state/remaining-window-state.c",
+      "canonical_path": "src/unresolved/state/remaining_window_state.c",
       "accepted_source": "work/source-only-dos/providers/remaining-window-state.c",
       "effective_path": "build/source-only-dos-v36/sources/WINSC26.c",
       "publics": [],
@@ -3985,7 +3985,7 @@
     },
     {
       "module": "source-owned:remaining-scalar-tail",
-      "canonical_path": "src/state/remaining-scalar-tail.c",
+      "canonical_path": "src/unresolved/state/remaining_scalar_tail.c",
       "accepted_source": "work/source-only-dos/providers/remaining-scalar-tail.c",
       "effective_path": "build/source-only-dos-v36/sources/SCALTL26.c",
       "publics": [],
@@ -4128,7 +4128,7 @@
     },
     {
       "module": "source-owned:balloon-buffer-tables",
-      "canonical_path": "src/state/balloon-buffer-tables.c",
+      "canonical_path": "src/ui/state/balloon_buffers.c",
       "accepted_source": "work/source-only-dos/providers/balloon-buffer-tables.c",
       "effective_path": "build/source-only-dos-v36/sources/BLNTAB26.c",
       "publics": [],
@@ -4166,7 +4166,7 @@
     },
     {
       "module": "source-owned:render-delay-word",
-      "canonical_path": "src/state/render-delay-word.c",
+      "canonical_path": "src/window/state/draw_delay.c",
       "accepted_source": "work/source-only-dos/providers/render-delay-word.c",
       "effective_path": "build/source-only-dos-v36/sources/DELAYW27.c",
       "publics": [],
@@ -4183,7 +4183,7 @@
     },
     {
       "module": "source-owned:window-ralloc-handles",
-      "canonical_path": "src/state/window-ralloc-handles.c",
+      "canonical_path": "src/ui/state/map_image_handles.c",
       "accepted_source": "work/source-only-dos/providers/window-ralloc-handles.c",
       "effective_path": "build/source-only-dos-v36/sources/WINHD27.c",
       "publics": [],
@@ -4207,7 +4207,7 @@
     },
     {
       "module": "source-owned:remaining-sound-storage",
-      "canonical_path": "src/state/remaining-sound-storage.c",
+      "canonical_path": "src/unresolved/state/remaining_sound_storage.c",
       "accepted_source": "work/source-only-dos/providers/remaining-sound-storage.c",
       "effective_path": "build/source-only-dos-v36/sources/SNDST27.c",
       "publics": [],
@@ -4280,7 +4280,7 @@
     },
     {
       "module": "source-owned:remaining-misc-storage",
-      "canonical_path": "src/state/remaining-misc-storage.c",
+      "canonical_path": "src/unresolved/state/remaining_misc_storage.c",
       "accepted_source": "work/source-only-dos/providers/remaining-misc-storage.c",
       "effective_path": "build/source-only-dos-v36/sources/MISCST27.c",
       "publics": [],
@@ -4353,7 +4353,7 @@
     },
     {
       "module": "source-owned:screen-clip-list",
-      "canonical_path": "src/state/screen-clip-list.c",
+      "canonical_path": "src/graphics/state/screen_clip.c",
       "accepted_source": "work/source-only-dos/providers/screen-clip-list.c",
       "effective_path": "build/source-only-dos-v36/sources/SCRLIST.c",
       "publics": [
@@ -4368,7 +4368,7 @@
     },
     {
       "module": "source-owned:remaining-far-state-words",
-      "canonical_path": "src/state/remaining-far-state-words.c",
+      "canonical_path": "src/unresolved/state/remaining_far_state_words.c",
       "accepted_source": "work/source-only-dos/providers/remaining-far-state-words.c",
       "effective_path": "build/source-only-dos-v36/sources/FARW29.c",
       "publics": [],
@@ -4413,7 +4413,7 @@
     },
     {
       "module": "source-owned:window-initialized-views",
-      "canonical_path": "src/state/window-initialized-views.c",
+      "canonical_path": "src/window/state/hooks_offsets.c",
       "accepted_source": "work/source-only-dos/providers/window-initialized-views-v36.c",
       "effective_path": "build/source-only-dos-v36/sources/WINVW36.c",
       "publics": [],
@@ -4437,7 +4437,7 @@
     },
     {
       "module": "source-owned:critical-selector-byte",
-      "canonical_path": "src/state/critical-selector-byte.c",
+      "canonical_path": "src/platform/state/critical_error_selector.c",
       "accepted_source": "work/source-only-dos/providers/critical-selector-byte-v36.c",
       "effective_path": "build/source-only-dos-v36/sources/CRITBY36.c",
       "publics": [],

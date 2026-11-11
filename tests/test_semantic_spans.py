@@ -18,7 +18,7 @@ class SemanticSpansTests(unittest.TestCase):
         scratch=ROOT/'build/scratch';scratch.mkdir(parents=True,exist_ok=True)
         cls.out=Path(tempfile.mkdtemp(prefix='semantic-spans-',dir=scratch))
         cls.contract=semantic_spans.Contracts(ROOT,cls.texts)
-        cls.contract.extract('src/data/d3D57.c',scalar.convert(cls.texts['src/data/d3D57.c']))
+        cls.contract.extract('src/simulation/tables.c',scalar.convert(cls.texts['src/simulation/tables.c']))
         cls.source,cls.receipt=cls.contract.emit(cls.out)
         cls.cc='C:/msys64/mingw64/bin/gcc.exe'
 
@@ -27,10 +27,10 @@ class SemanticSpansTests(unittest.TestCase):
         retire(cls.out,ROOT)
 
     def test_complete_saverec_census(self):
-        self.assertEqual(len(semantic_spans.save_records(self.texts['src/S09/m35F5.c'])),307)
+        self.assertEqual(len(semantic_spans.save_records(self.texts['src/ui/save_load.c'])),307)
         self.assertEqual([r['record'] for r in self.contract.cross_records],[28,100])
         self.assertEqual(len(self.contract.cross_accesses),33)
-        self.assertEqual(sum(r['file']!='src/root/m00DF.c' for r in self.contract.cross_accesses),29)
+        self.assertEqual(sum(r['file']!='src/sound/game_interface.c' for r in self.contract.cross_accesses),29)
 
     def test_removing_either_span_fails_independent_census(self):
         for span in self.document['spans']:
@@ -50,19 +50,19 @@ class SemanticSpansTests(unittest.TestCase):
 
     def test_new_consumer_must_be_declared(self):
         texts=dict(self.texts)
-        texts['src/root/m00DF.c']+='\nint span_probe(void) { return OptionStates[5]; }\n'
+        texts['src/sound/game_interface.c']+='\nint span_probe(void) { return OptionStates[5]; }\n'
         doc=copy.deepcopy(self.document)
         for fact in doc['owner_layout'].values():
-            if fact['source']=='src/root/m00DF.c':
+            if fact['source']=='src/sound/game_interface.c':
                 fact['source_sha256']=hashlib.sha256(texts[fact['source']].encode('latin1')).hexdigest()
         with self.assertRaisesRegex(ValueError,'consumer appears outside declared span'):
             semantic_spans.Contracts(ROOT,texts,doc)
 
     def test_missing_native_storage_cannot_be_emitted(self):
         contract=semantic_spans.Contracts(ROOT,self.texts)
-        text=scalar.convert(self.texts['src/data/d3D57.c'])
+        text=scalar.convert(self.texts['src/simulation/tables.c'])
         text=text.replace('fd_3D57_07AA','removed_option_owner')
-        contract.extract('src/data/d3D57.c',text)
+        contract.extract('src/simulation/tables.c',text)
         with self.assertRaisesRegex(ValueError,'storage missing'):
             contract.emit(self.out)
 
@@ -93,7 +93,7 @@ class SemanticSpansTests(unittest.TestCase):
         # This vector is independently observed in both DOS executables, not
         # inferred from whichever native storage arrangement is under test.
         words=[0,1,1,1,1,0]
-        siblings=[r for r in self.contract.cross_accesses if r['file']!='src/root/m00DF.c']
+        siblings=[r for r in self.contract.cross_accesses if r['file']!='src/sound/game_interface.c']
         self.assertEqual(len(siblings),29)
         checks='\n'.join(f'if (OptionStates[{r["index"]}] != {words[r["index"]]}) return {30+i};' for i,r in enumerate(self.contract.cross_accesses))
         driver='''#include <stdint.h>

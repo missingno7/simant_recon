@@ -46,109 +46,109 @@
   ],
   "source_anchors": [
     {
-      "path": "src/root/m1986.c",
+      "path": "src/resources/database_index.c",
       "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
       "line": 58,
       "source": "size = fd_50F6_3958[db].indexHeader.count << 3;"
     },
     {
-      "path": "src/root/m1986.c",
+      "path": "src/resources/database_index.c",
       "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
       "line": 62,
       "source": "read(fd, index, size);"
     },
     {
-      "path": "src/root/m1986.c",
+      "path": "src/resources/database_index.c",
       "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
       "line": 95,
       "source": "if (fd_50F6_3952->id == id && fd_50F6_3952->kind == kind)"
     },
     {
-      "path": "src/root/m171C.c",
+      "path": "src/memory/ralloc.c",
       "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
       "line": 682,
       "source": "paras = ((unsigned)size + 15) >> 4;"
     },
     {
-      "path": "src/root/m171C.c",
+      "path": "src/memory/ralloc.c",
       "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
       "line": 321,
       "source": "if (b->paras - 2 > paras) {"
     },
     {
-      "path": "src/root/m171C.c",
+      "path": "src/memory/ralloc.c",
       "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
       "line": 24,
       "source": "long size;                  /* +02 requested size in bytes */"
     },
     {
-      "path": "src/root/m171C.c",
+      "path": "src/memory/ralloc.c",
       "sha256": "71e6ff43fa21eaaa83aea5263bd9403e0f4a3a2d7120fd80955c0409f7a77052",
       "line": 25,
       "source": "unsigned paras;             /* +06 size in paragraphs incl. header */"
     },
     {
-      "path": "src/root/m19A9.c",
+      "path": "src/resources/database_records.c",
       "sha256": "552ca373a3a3721885915acd0a95e2126b8405b0c555f02d1833381331cda523",
       "line": 84,
       "source": "entry = FindIndex(db, object, type);"
     },
     {
-      "path": "src/root/m1A53.c",
+      "path": "src/resources/database_objects.c",
       "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
       "line": 91,
       "source": "for (i = 0; i < db_numOfHandles; i++) {"
     },
     {
-      "path": "src/root/m1A53.c",
+      "path": "src/resources/database_objects.c",
       "sha256": "6bb066ea34c3721c90956a5b7e8849cb3c5916628a842c2684a8c0137154b698",
       "line": 92,
       "source": "if ((handle = DBRecall(db_handles[i], object, kind, &size)) != 0L) {"
     },
     {
-      "path": "src/S20/m39F1.c",
+      "path": "src/startup/dos_config.c",
       "sha256": "547996c143a5f2a0833e585732e5a22ebaa65b350b5392f847f64419c45a35f3",
       "line": 140,
       "source": "db_SetDataBase(\"shared\");"
     },
     {
-      "path": "src/root/m205F.c",
+      "path": "src/platform/video/driver_select.c",
       "sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
       "line": 154,
       "source": "db_SetDataBase(path);"
     },
     {
-      "path": "src/root/m15F8.c",
+      "path": "src/startup/main.c",
       "sha256": "d6d4daddab943ee3436ca0e9c8dbc866a9d67659f7448f3c307f858abe06b70a",
       "line": 93,
       "source": "db_SetDataBase(\"sound\");"
     },
     {
-      "path": "src/S14/m384C.c",
+      "path": "src/ui/scenario_dialogs.c",
       "sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
       "line": 521,
       "source": "f_00DF_00B1(0x271a, 0x7e);"
     },
     {
-      "path": "src/root/m00DF.c",
+      "path": "src/sound/game_interface.c",
       "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
       "line": 46,
       "source": "f_284A_0013(song);"
     },
     {
-      "path": "src/root/m284A.c",
+      "path": "src/sound/midi_player.c",
       "sha256": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100",
       "line": 52,
       "source": "if (f_0000_0193(fd_55B3_00B4, number) == -1) {"
     },
     {
-      "path": "src/root/m0000.c",
+      "path": "src/sound/resource_loading.c",
       "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
       "line": 129,
       "source": "h = f_1A53_00BA(number, 0x12);"
     },
     {
-      "path": "src/S15/m384C.c",
+      "path": "src/startup/game_session.c",
       "sha256": "7ed6c428f141619affc175e550142bdd8810b217fa0564dd32099d00e22f9172",
       "line": 46,
       "source": "h = db_LoadObject(0x2710, 0x16);"

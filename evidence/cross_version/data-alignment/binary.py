@@ -75,12 +75,45 @@ def parse_ne(raw):
     n = struct.unpack_from('<I', raw, 60)[0]
     if raw[n:n+2] != b'NE':
         raise ValueError('Win16 input is not NE')
-    count = struct.unpack_from('<H',raw,n+28)[0]
+    segment_count = struct.unpack_from('<H',raw,n+28)[0]
     table = n+struct.unpack_from('<H',raw,n+34)[0]
     shift = struct.unpack_from('<H',raw,n+50)[0]
     widths = {0:1, 2:2, 3:4, 5:2, 11:6, 13:4}
-    result = {'segments': []}
-    for i in range(count):
+    imports = n + struct.unpack_from('<H',raw,n+42)[0]
+    module_table = n + struct.unpack_from('<H',raw,n+40)[0]
+    module_count = struct.unpack_from('<H',raw,n+30)[0]
+    def import_string(offset):
+        at=imports+offset
+        return raw[at+1:at+1+raw[at]].decode('ascii')
+    modules=[import_string(struct.unpack_from('<H',raw,module_table+2*i)[0]) for i in range(module_count)]
+    # Movable internal call fixups name entry ordinals rather than raw offsets.
+    # Resolve them for call-role evidence without treating them as data fixups.
+    entries = {}
+    pos = n + struct.unpack_from('<H', raw, n + 4)[0]
+    entry_end = pos + struct.unpack_from('<H', raw, n + 6)[0]
+    ordinal = 1
+    while pos < entry_end:
+        count = raw[pos]
+        pos += 1
+        if not count:
+            break
+        bundle = raw[pos]
+        pos += 1
+        for _ in range(count):
+            if bundle:
+                pos += 1
+                if bundle == 255:
+                    pos += 2
+                    segment = raw[pos]
+                    pos += 1
+                else:
+                    segment = bundle
+                offset = struct.unpack_from('<H', raw, pos)[0]
+                pos += 2
+                entries[ordinal] = dict(segment=segment, offset=offset)
+            ordinal += 1
+    result = {'segments': [], 'entries': entries}
+    for i in range(segment_count):
         sector,size,flags,alloc = struct.unpack_from('<4H',raw,table+8*i)
         start = sector<<shift
         logical = size or 65536
@@ -99,6 +132,11 @@ def parse_ne(raw):
                 target = {'kind':'other'}
                 if rf&3==0 and t1&255!=255:
                     target = {'kind':'internal','segment':t1&255,'offset':t2}
+                elif rf&3==0 and t1&255==255:
+                    target = dict(kind='entry', ordinal=t2, **entries.get(t2, {}))
+                elif rf&3 in (1,2):
+                    target = dict(kind='import', module=modules[t1-1],
+                                  symbol=t2 if rf&3==1 else import_string(t2))
                 sites = []
                 site = source
                 while True:

@@ -225,7 +225,7 @@ def map_cell_cases(target, random_count=500, seed=0x1018):
             for view in (0, 1, 2, 3, 4, 5, 0xffff):
                 cases.append(_mapdata_case(f"directed/p{plane}/l{life:02x}/v{view:04x}", target, 3, 4, plane, view, 0x42, life,
                                            cache=-2 if life == 0xff else -1, topflag=(life & 1)))
-    if target == "f_0250_1018":
+    if target == "DoCalcTile":
         for pher in (0x0f, 0x10, 0x11):
             cases.append(_mapdata_case(f"pheromone-boundary/{pher:02x}", target, 3, 4, 0, 0, 0x42, 1, pher=pher))
     if target == "f_0250_129E":
@@ -595,8 +595,8 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
         "db_LoadObject": b.Callback(2, _bitmap_load),
         "db_ReleaseObject": b.Callback(2, _release_resource),
         "GPutPacked": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=True)),
-        "f_1B4E_003B": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=False)),
-        "f_1B4E_005E": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=False)),
+        "GPutPic": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=False)),
+        "GPutImg": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=False)),
         # These callbacks are used as the documented g_9140/g_9148 function
         # pointer services only in type-3 contracts added below.
         "f_0250_0721": b.Callback(4, _screen_size),

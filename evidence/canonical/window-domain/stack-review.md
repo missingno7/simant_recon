@@ -8,6 +8,6 @@ Models are explicit: clip rebuild/diagnostics no-op; far memcpy exact-copy; draw
 
 Permanent controls are `stack_probe.py`, `stack-facts.json`, and `tests/test_window_stack.py`. Run `python evidence/canonical/window-domain/stack_probe.py` or `python -m unittest discover -s tests -p test_window_stack.py -v`. Source and alias changes in the reviewed subgraph require fresh review; unrelated storage owners do not invalidate it.
 
-The handle admission adds the natural data-only `src/state/window-handles.c`
+The handle admission adds the natural data-only `src/window/state/handles.c`
 declaration to the source pins. All previous source hashes, aliases and Open-root
 calls remain unchanged; the stack bound and original controls are unchanged.

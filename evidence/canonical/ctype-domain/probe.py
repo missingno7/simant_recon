@@ -24,17 +24,17 @@ import canonical
 import csrc
 
 SITE_KEYS = {
-    ("src/S09/m35F5.c", 429): ("o09_35F5_03C6", "isalnum"),
-    ("src/S10/m35F5.c", 305): ("o10_35F5_0384", "islower"),
-    ("src/S10/m35F5.c", 325): ("o10_35F5_0384", "isalpha"),
-    ("src/S10/m35F5.c", 351): ("o10_35F5_0384", "islower"),
-    ("src/S20/m39F1.c", 117): ("IBMInitStuff", "isdigit"),
-    ("src/S20/m39F1.c", 189): ("ReadWord", "isspace"),
-    ("src/S20/m39F1.c", 193): ("ReadWord", "isspace"),
-    ("src/S20/m39F1.c", 255): ("ReadConfig", "isdigit"),
-    ("src/S23/m39C7.c", 201): ("win_PrintStyleTextInRect", "direct"),
-    ("src/root/m1C62.c", 170): ("f_1C62_00D5", "direct"),
-    ("src/root/m1C62.c", 306): ("f_1C62_0415", "direct"),
+    ("src/ui/save_load.c", 429): ("o09_35F5_03C6", "isalnum"),
+    ("src/window/menu_tracking.c", 305): ("o10_35F5_0384", "islower"),
+    ("src/window/menu_tracking.c", 325): ("o10_35F5_0384", "isalpha"),
+    ("src/window/menu_tracking.c", 351): ("o10_35F5_0384", "islower"),
+    ("src/startup/dos_config.c", 117): ("IBMInitStuff", "isdigit"),
+    ("src/startup/dos_config.c", 189): ("ReadWord", "isspace"),
+    ("src/startup/dos_config.c", 193): ("ReadWord", "isspace"),
+    ("src/startup/dos_config.c", 255): ("ReadConfig", "isdigit"),
+    ("src/ui/info_cards.c", 201): ("win_PrintStyleTextInRect", "direct"),
+    ("src/window/alerts.c", 170): ("f_1C62_00D5", "direct"),
+    ("src/window/alerts.c", 306): ("f_1C62_0415", "direct"),
 }
 CTYPE_STANDARD = {
     "isalpha", "isupper", "islower", "isdigit", "isxdigit", "isspace",
@@ -476,17 +476,17 @@ def check_unobservable_switch(text: str):
 
 def verify_source_assumptions(texts):
     # Guard and producer checks are deliberately statement-shaped token checks.
-    for path in ("src/S09/m35F5.c", "src/S10/m35F5.c"):
+    for path in ("src/ui/save_load.c", "src/window/menu_tracking.c"):
         if not re.search(r"(?im)^\s*#\s*include\s*[<\"]ctype\.h[>\"]", texts[path]):
             raise ValueError("MSC ctype.h macro user lost its pinned include: " + path)
-    if re.search(r"(?im)^\s*#\s*include\s*[<\"]ctype\.h[>\"]", texts["src/S20/m39F1.c"]):
+    if re.search(r"(?im)^\s*#\s*include\s*[<\"]ctype\.h[>\"]", texts["src/startup/dos_config.c"]):
         raise ValueError("S20 runtime ctype calls unexpectedly became header macros")
-    s09, f09, f09text = _function_text(texts, "src/S09/m35F5.c", "o09_35F5_03C6")
+    s09, f09, f09text = _function_text(texts, "src/ui/save_load.c", "o09_35F5_03C6")
     if not contains_tokens(f09text, "!( key & 0x800 ) && isalnum ( key )"):
         raise ValueError("S09 key guard before isalnum changed")
     if not contains_tokens(f09text, "key = f_1F58_0090 ( )"):
         raise ValueError("S09 isalnum key is no longer the BIOS key result")
-    s10, f10, f10text = _function_text(texts, "src/S10/m35F5.c", "o10_35F5_0384")
+    s10, f10, f10text = _function_text(texts, "src/window/menu_tracking.c", "o10_35F5_0384")
     if not contains_tokens(f10text, "!( key & 0x800 ) && islower ( key )"):
         raise ValueError("S10 lower-key guard before islower changed")
     if not contains_tokens(f10text, "if ( key & 0x800 ) goto flush"):
@@ -502,17 +502,17 @@ def verify_source_assumptions(texts):
         raise ValueError("S10 key producer changed")
     if not contains_tokens(f10text, "int far o10_35F5_0384 ( char far * sel , char far * far * items )"):
         raise ValueError("S10 items parameter type changed")
-    s10caller = csrc.Source(texts["src/S10/m35F5.c"]).function("o10_35F5_01C3")
-    if not contains_tokens(texts["src/S10/m35F5.c"][s10caller.head_s:s10caller.body.e],
+    s10caller = csrc.Source(texts["src/window/menu_tracking.c"]).function("o10_35F5_01C3")
+    if not contains_tokens(texts["src/window/menu_tracking.c"][s10caller.head_s:s10caller.body.e],
                            "o10_35F5_0384 ( & sel , fd_55B3_6054 [ m + 1 ] )"):
         raise ValueError("S10 keyboard-menu caller no longer supplies the loaded item list")
 
-    shared_startup = csrc.Source(texts["src/S20/m39F1.c"]).function("IBMInitStuff")
-    shared_startup_text = texts["src/S20/m39F1.c"][shared_startup.head_s:shared_startup.body.e]
+    shared_startup = csrc.Source(texts["src/startup/dos_config.c"]).function("IBMInitStuff")
+    shared_startup_text = texts["src/startup/dos_config.c"][shared_startup.head_s:shared_startup.body.e]
     if not contains_tokens(shared_startup_text, 'db_SetDataBase ( "shared" )'):
         raise ValueError("S10 menu resource database producer changed")
-    menu_loader = csrc.Source(texts["src/S17/m384C.c"]).function("o17_384C_0039")
-    menu_loader_text = texts["src/S17/m384C.c"][menu_loader.head_s:menu_loader.body.e]
+    menu_loader = csrc.Source(texts["src/window/menu_setup.c"]).function("o17_384C_0039")
+    menu_loader_text = texts["src/window/menu_setup.c"][menu_loader.head_s:menu_loader.body.e]
     if not contains_tokens(menu_loader_text, "db_LoadObject ( id , 6 )") or \
        not contains_tokens(menu_loader_text, "fd_55B3_6054 = * h"):
         raise ValueError("S10 SHARED kind-6 menu loader producer changed")
@@ -520,20 +520,20 @@ def verify_source_assumptions(texts):
             "if ( g_3DB2 != 320 || ! o17_384C_0039 ( 1 ) ) if ( ! o17_384C_0039 ( 0 ) ) Punt"):
         raise ValueError("S10 kind-6 menu ID 1 fallback to ID 0 changed")
 
-    s20, f20, f20text = _function_text(texts, "src/S20/m39F1.c", "IBMInitStuff")
+    s20, f20, f20text = _function_text(texts, "src/startup/dos_config.c", "IBMInitStuff")
     if not contains_tokens(f20text, "v = argv [ i ] [ 2 ]"):
         raise ValueError("S20 /s argv-byte producer changed")
     if not contains_tokens(f20text, "if ( isdigit ( v ) )"):
         raise ValueError("S20 /s ctype call changed")
-    readword = csrc.Source(texts["src/S20/m39F1.c"]).function("ReadWord")
-    readword_text = texts["src/S20/m39F1.c"][readword.head_s:readword.body.e]
+    readword = csrc.Source(texts["src/startup/dos_config.c"]).function("ReadWord")
+    readword_text = texts["src/startup/dos_config.c"][readword.head_s:readword.body.e]
     if readword_text.count("isspace(c)") != 2 or not contains_tokens(readword_text, "char c"):
         raise ValueError("S20 ReadWord byte producer/calls changed")
-    config = csrc.Source(texts["src/S20/m39F1.c"]).function("ReadConfig")
-    config_text = texts["src/S20/m39F1.c"][config.head_s:config.body.e]
+    config = csrc.Source(texts["src/startup/dos_config.c"]).function("ReadConfig")
+    config_text = texts["src/startup/dos_config.c"][config.head_s:config.body.e]
     if not contains_tokens(config_text, "open ( fd_55B3_1CE4 , 0 )"):
         raise ValueError("S20 fixed SIMANT.CFG producer changed")
-    root_startup = texts["src/root/m15F8.c"]
+    root_startup = texts["src/startup/main.c"]
     root_startup_tokens = sig_tokens(root_startup)
     if not contains_tokens(root_startup, '"simant.cfg"'):
         raise ValueError("S20 configuration filename initializer changed")
@@ -560,7 +560,7 @@ def verify_source_assumptions(texts):
        not contains_tokens(config_text, "SkipWords ( fd , 2 ) ; read ( fd , & lang , 1 )"):
         raise ValueError("S20 config stream positions changed")
 
-    renderer, frender, renderer_text = _function_text(texts, "src/S23/m39C7.c", "win_PrintStyleTextInRect")
+    renderer, frender, renderer_text = _function_text(texts, "src/ui/info_cards.c", "win_PrintStyleTextInRect")
     if not contains_tokens(renderer_text, "if ( record && styles [ styleIdx - 1 ] . face == 0x100 )"):
         raise ValueError("S23 face-0100 record guard changed")
     if not contains_tokens(renderer_text, "( _ctype + 1 ) [ buf [ start ] ] & 2"):
@@ -588,8 +588,8 @@ def verify_source_assumptions(texts):
     for spelling, message in renderer_requirements:
         if not contains_tokens(renderer_text, spelling):
             raise ValueError(message)
-    displaycard = csrc.Source(texts["src/S23/m39C7.c"]).function("DisplayCard")
-    display_text = texts["src/S23/m39C7.c"][displaycard.head_s:displaycard.body.e]
+    displaycard = csrc.Source(texts["src/ui/info_cards.c"]).function("DisplayCard")
+    display_text = texts["src/ui/info_cards.c"][displaycard.head_s:displaycard.body.e]
     for spelling in ("f_1A53_00F0 ( card , 0x11 , 1 )",
                      "f_1A53_00F0 ( rez , 10 , 1 )",
                      "f_1A53_00F0 ( rez , 0x15 , 1 )",
@@ -598,42 +598,42 @@ def verify_source_assumptions(texts):
                      "while ( * q < ' ' && off < tlen - 4 )"):
         if not contains_tokens(display_text, spelling):
             raise ValueError("S23 DisplayCard resource/cleanup producer changed: " + spelling)
-    popup = [f for f in csrc.Source(texts["src/S23/m39C7.c"]).functions()]
+    popup = [f for f in csrc.Source(texts["src/ui/info_cards.c"]).functions()]
     call_args = []
     for fn in popup:
         for node in csrc.walk(fn.body):
             if isinstance(node, csrc.Call) and isinstance(node.f, csrc.Id) and node.f.name == "win_PrintStyleTextInRect":
-                args = [norm(texts["src/S23/m39C7.c"][a.s:a.e]) for a in node.args]
+                args = [norm(texts["src/ui/info_cards.c"][a.s:a.e]) for a in node.args]
                 call_args.append([fn.name, args])
     if sorted((x[0], x[1][-1]) for x in call_args) != sorted([
             ("DisplayCard", "1"), ("PopUpInfoWindow", "0")]):
         raise ValueError("S23 style-renderer caller/record set changed")
 
-    root, froot, root_text = _function_text(texts, "src/root/m1C62.c", "f_1C62_00D5")
+    root, froot, root_text = _function_text(texts, "src/window/alerts.c", "f_1C62_00D5")
     lemma = check_unobservable_switch(root_text)
     if not contains_tokens(root_text,
             "if ( f_1F58_0038 ( ) ) { if ( ( c = f_1F58_005A ( ) ) == 0 ) f_1F58_005A ( ) ; switch"):
         raise ValueError("m1C62:170 keyboard input reaches switch without the reviewed branch shape")
-    wrapper = csrc.Source(texts["src/root/m1C62.c"]).function("f_1C62_00C0")
-    wrapper_text = texts["src/root/m1C62.c"][wrapper.head_s:wrapper.body.e]
+    wrapper = csrc.Source(texts["src/window/alerts.c"]).function("f_1C62_00C0")
+    wrapper_text = texts["src/window/alerts.c"][wrapper.head_s:wrapper.body.e]
     if not contains_tokens(wrapper_text, "f_1C62_00D5 ( msg , 1 )"):
         raise ValueError("m1C62 timed alert wrapper changed")
-    savefn = csrc.Source(texts["src/S09/m35F5.c"]).function("o09_35F5_0188")
-    save_text = texts["src/S09/m35F5.c"][savefn.head_s:savefn.body.e]
+    savefn = csrc.Source(texts["src/ui/save_load.c"]).function("o09_35F5_0188")
+    save_text = texts["src/ui/save_load.c"][savefn.head_s:savefn.body.e]
     if not contains_tokens(save_text, 'sprintf ( msg , "%s\\nSaved correctly" , name )') or \
        not contains_tokens(save_text, "f_1C62_00C0 ( msg )"):
         raise ValueError("successful-save alert producer changed")
-    root_choice = csrc.Source(texts["src/root/m1C62.c"]).function("f_1C62_0415")
-    choice_text = texts["src/root/m1C62.c"][root_choice.head_s:root_choice.body.e]
+    root_choice = csrc.Source(texts["src/window/alerts.c"]).function("f_1C62_0415")
+    choice_text = texts["src/window/alerts.c"][root_choice.head_s:root_choice.body.e]
     if not contains_tokens(choice_text, "( c = f_1F58_0090 ( ) ) > 0"):
         raise ValueError("root choice-key positive guard changed")
     expected_calls = {
-        "ReadConfig": [("src/S20/m39F1.c", "IBMInitStuff", 1)],
-        "SkipWords": [("src/S20/m39F1.c", "ReadConfig", 2)],
-        "ReadWord": [("src/S20/m39F1.c", "SkipWords", 1)],
-        "DisplayCard": [("src/S23/m39C7.c", "win_DrawInfoWindow", 1)],
-        "o10_35F5_0384": [("src/S10/m35F5.c", "o10_35F5_01C3", 1)],
-        "o17_384C_0039": [("src/S20/m39F1.c", "IBMInitStuff", 2)],
+        "ReadConfig": [("src/startup/dos_config.c", "IBMInitStuff", 1)],
+        "SkipWords": [("src/startup/dos_config.c", "ReadConfig", 2)],
+        "ReadWord": [("src/startup/dos_config.c", "SkipWords", 1)],
+        "DisplayCard": [("src/ui/info_cards.c", "win_DrawInfoWindow", 1)],
+        "o10_35F5_0384": [("src/window/menu_tracking.c", "o10_35F5_01C3", 1)],
+        "o17_384C_0039": [("src/startup/dos_config.c", "IBMInitStuff", 2)],
     }
     call_graph = {target: [] for target in expected_calls}
     for path, source in sorted(texts.items()):
@@ -665,7 +665,7 @@ def verify_source_assumptions(texts):
         "symbols_sha256": sha(symbols_raw),
     }
     renderer_contract = {
-        "source": "src/S23/m39C7.c:179-267",
+        "source": "src/ui/info_cards.c:179-267",
         "transition": "one styleIdx++ in one if per loop iteration, before text[pos] is consumed",
         "rewind": "end=brk; if end<start then start=end; pos=end; styleIdx is not rewound",
         "brk_at_bytes": ["20", "28", "5B", "7B"],
@@ -990,10 +990,10 @@ def original_disassembly(site_rows):
     wrapper_info, wrapper_ins = fn_instructions("f_1F58_0090")
     if not any(i.mnemonic in {"lcall", "call"} and "0x5a" in i.op_str.lower() for i in wrapper_ins):
         raise ValueError("original keyboard wrapper no longer calls f_1F58_005A")
-    for key in ("src/S09/m35F5.c:429", "src/S10/m35F5.c:305", "src/S10/m35F5.c:325"):
+    for key in ("src/ui/save_load.c:429", "src/window/menu_tracking.c:305", "src/window/menu_tracking.c:325"):
         site_anchors[key]["keyboard_conversion"] = "f_1F58_005A INT16+CBW; f_1F58_0090 propagates result"
-    site_anchors["src/root/m1C62.c:170"]["keyboard_conversion"] = "f_1F58_005A INT16+CBW; c is assigned from this return"
-    site_anchors["src/root/m1C62.c:306"]["keyboard_conversion"] = "f_1F58_005A INT16+CBW via f_1F58_0090; source c>0 guard"
+    site_anchors["src/window/alerts.c:170"]["keyboard_conversion"] = "f_1F58_005A INT16+CBW; c is assigned from this return"
+    site_anchors["src/window/alerts.c:306"]["keyboard_conversion"] = "f_1F58_005A INT16+CBW via f_1F58_0090; source c>0 guard"
     # v is a long: original code sign-extends argv[i][2] to DX:AX before the runtime call.
     ibm_info = by_function["IBMInitStuff"]
     ibm_code = machine.read(ibm_info["unit"], ibm_info["segment"] * 16 + ibm_info["offset"], ibm_info["size"])
@@ -1002,10 +1002,10 @@ def original_disassembly(site_rows):
             ibm_ins.get(0x41) and ibm_ins[0x41].mnemonic == "cwde" and
             ibm_ins.get(0x42) and ibm_ins[0x42].mnemonic == "cdq"):
         raise ValueError("original /s argument is not sign-extended into long v")
-    site_anchors["src/S20/m39F1.c:117"]["argv_byte_load_cwde_cdq"] = [0x3D, 0x41, 0x42]
-    for key, name, load_address in (("src/S20/m39F1.c:189", "ReadWord", 0x3FF),
-                                    ("src/S20/m39F1.c:193", "ReadWord", 0x433),
-                                    ("src/S20/m39F1.c:255", "ReadConfig", 0x569)):
+    site_anchors["src/startup/dos_config.c:117"]["argv_byte_load_cwde_cdq"] = [0x3D, 0x41, 0x42]
+    for key, name, load_address in (("src/startup/dos_config.c:189", "ReadWord", 0x3FF),
+                                    ("src/startup/dos_config.c:193", "ReadWord", 0x433),
+                                    ("src/startup/dos_config.c:255", "ReadConfig", 0x569)):
         info = by_function[name]
         code = machine.read(info["unit"], info["segment"] * 16 + info["offset"], info["size"])
         instructions = {i.address: i for i in md.disasm(code, info["offset"])}
@@ -1014,7 +1014,7 @@ def original_disassembly(site_rows):
             raise ValueError("original config/local char lacks byte-load CWDE: " + key)
         site_anchors[key]["byte_load_cwde"] = [load_address, load_address + 3]
     # S10's final table site indexes a signed resource byte loaded from AL then widened by CWDE.
-    s10_anchor = site_anchors["src/S10/m35F5.c:351"]
+    s10_anchor = site_anchors["src/window/menu_tracking.c:351"]
     s10_cwde = s10_anchor["nearest_preceding_cwde"]
     if s10_cwde is None or s10_anchor["original_index_instruction"] - s10_cwde > 8:
         raise ValueError("original menu mnemonic byte is not sign-extended before ctype")
@@ -1022,7 +1022,7 @@ def original_disassembly(site_rows):
     for name in ("o09_35F5_03C6", "o10_35F5_0384"):
         if not by_function[name]["bit_0800_test_addresses"]:
             raise ValueError("original key high-bit guard test missing: " + name)
-    for key in ("src/S09/m35F5.c:429", "src/S10/m35F5.c:305", "src/S10/m35F5.c:325"):
+    for key in ("src/ui/save_load.c:429", "src/window/menu_tracking.c:305", "src/window/menu_tracking.c:325"):
         anchor = site_anchors[key]
         guards = by_function[anchor["compiled_function"]]["bit_0800_test_addresses"]
         if not any(g < anchor["original_index_instruction"] for g in guards):
@@ -1034,7 +1034,7 @@ def original_disassembly(site_rows):
     if not (choice_reads and choice_ins.get(0x5EF) and choice_ins[0x5EF].mnemonic == "jle" and
             choice_ins.get(0x5F1) and "0x7a1f" in choice_ins[0x5F1].op_str.lower()):
         raise ValueError("original root choice positive branch missing before ctype")
-    site_anchors["src/root/m1C62.c:306"]["original_positive_guard_branch"] = 0x5EF
+    site_anchors["src/window/alerts.c:306"]["original_positive_guard_branch"] = 0x5EF
     # The common CRT lookup is the implementation reached by S20's non-macro calls.
     common = machine.read("root", 0x29F4 * 16 + 0x2959, 56)
     common_ins = list(md.disasm(common, 0x2959))
@@ -1069,26 +1069,26 @@ def ctype_macro_facts_cached():
 
 def _site_semantics(census, resources):
     semantics = {
-        ("src/S09/m35F5.c", 429): ("BIOS INT16 key; guard rejects key&0x800", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "guard"),
-        ("src/S10/m35F5.c", 305): ("BIOS INT16 key; guard rejects key&0x800", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "guard"),
-        ("src/S10/m35F5.c", 325): ("BIOS INT16 key; high-key branch goes to flush", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "guard"),
-        ("src/S10/m35F5.c", 351): ("SHARED kind 6 ID 0 menu mnemonic items[k][1]", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "resource enumeration"),
-        ("src/S20/m39F1.c", 117): ("DOS PSP command tail -> pinned MSC stdargv -> argv[i][2]", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "supported launch arguments are []"),
-        ("src/S20/m39F1.c", 189): ("ReadConfig -> SkipWords -> ReadWord -> SIMANT.CFG stream", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "configuration byte enumeration"),
-        ("src/S20/m39F1.c", 193): ("ReadConfig -> SkipWords -> ReadWord -> SIMANT.CFG stream", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "configuration byte enumeration"),
-        ("src/S20/m39F1.c", 255): ("SIMANT.CFG final language byte", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "configuration byte enumeration"),
-        ("src/S23/m39C7.c", 201): ("DisplayCard SHARED kind17 -> kind10 text + kind21 style", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "conservative rewind-expanded face-0100 spans contain no high bytes"),
-        ("src/root/m1C62.c", 170): ("BIOS INT16 byte -> CBW in f_1F58_005A", "REACHABLE", list(range(0xD1, 0xDF)), "switch outcome unobservable for negative c"),
-        ("src/root/m1C62.c", 306): ("BIOS INT16 byte -> f_1F58_0090; c>0 guard", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "positive guard excludes signed high bytes"),
+        ("src/ui/save_load.c", 429): ("BIOS INT16 key; guard rejects key&0x800", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "guard"),
+        ("src/window/menu_tracking.c", 305): ("BIOS INT16 key; guard rejects key&0x800", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "guard"),
+        ("src/window/menu_tracking.c", 325): ("BIOS INT16 key; high-key branch goes to flush", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "guard"),
+        ("src/window/menu_tracking.c", 351): ("SHARED kind 6 ID 0 menu mnemonic items[k][1]", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "resource enumeration"),
+        ("src/startup/dos_config.c", 117): ("DOS PSP command tail -> pinned MSC stdargv -> argv[i][2]", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "supported launch arguments are []"),
+        ("src/startup/dos_config.c", 189): ("ReadConfig -> SkipWords -> ReadWord -> SIMANT.CFG stream", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "configuration byte enumeration"),
+        ("src/startup/dos_config.c", 193): ("ReadConfig -> SkipWords -> ReadWord -> SIMANT.CFG stream", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "configuration byte enumeration"),
+        ("src/startup/dos_config.c", 255): ("SIMANT.CFG final language byte", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "configuration byte enumeration"),
+        ("src/ui/info_cards.c", 201): ("DisplayCard SHARED kind17 -> kind10 text + kind21 style", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "conservative rewind-expanded face-0100 spans contain no high bytes"),
+        ("src/window/alerts.c", 170): ("BIOS INT16 byte -> CBW in f_1F58_005A", "REACHABLE", list(range(0xD1, 0xDF)), "switch outcome unobservable for negative c"),
+        ("src/window/alerts.c", 306): ("BIOS INT16 byte -> f_1F58_0090; c>0 guard", "UNREACHABLE-IN-SHIPPED-DOMAIN", [], "positive guard excludes signed high bytes"),
     }
     out = []
-    external_control_bytes = {("src/S20/m39F1.c", 117): list(range(0xD1, 0xDF))}
+    external_control_bytes = {("src/startup/dos_config.c", 117): list(range(0xD1, 0xDF))}
     for row in census:
         key = (row["source"], row["line"])
         producer, conclusion, actual, basis = semantics[key]
         actual_offsets = [f"{0x791F + b:04X}" for b in actual]
         external_bytes = external_control_bytes.get(key, [])
-        any_prefix_bytes = list(range(0x80, 0xFF)) if key == ("src/root/m1C62.c", 170) else []
+        any_prefix_bytes = list(range(0x80, 0xFF)) if key == ("src/window/alerts.c", 170) else []
         out.append({k: row[k] for k in ("source", "line", "function", "kind", "callee", "index_expression")} | {
             "potential_prefix_input_bytes": "0x80..0xFE; 0xFF indexes _ctype[0]",
             "potential_prefix_offsets": "DGROUP:799F..7A1D",
@@ -1214,24 +1214,24 @@ def collect(program_override=None, source_overrides=None) -> dict:
     if resources["SIMANT_CFG"]["high_byte_counts"]:
         raise ValueError("pinned SIMANT.CFG contains high bytes")
     facts_sites = _site_semantics(census, resources)
-    asm_path = ROOT / "src/root/m1F58.asm"
+    asm_path = ROOT / "src/platform/bios_helpers.asm"
     keyboard_asm = asm_path.read_text(encoding="latin1")
     # Check the named assembler procedure and the actual original instructions separately.
     if "_f_1F58_005A\tproc\tfar" not in keyboard_asm or "\tcbw\n\tretf" not in keyboard_asm.lower():
         raise ValueError("canonical BIOS byte reader lacks CBW source")
     orig = original_disassembly(census)
     sign_proofs = {
-        ("src/S09/m35F5.c", 429): "yes: signed BIOS byte is returned via f_1F58_005A CBW before integer key use",
-        ("src/S10/m35F5.c", 305): "yes: signed BIOS byte is returned via f_1F58_005A CBW before integer key use",
-        ("src/S10/m35F5.c", 325): "yes: signed BIOS byte is returned via f_1F58_005A CBW before integer key use",
-        ("src/S10/m35F5.c", 351): "yes: signed menu char is loaded from AL and CWDE-promoted before table read",
-        ("src/S20/m39F1.c", 117): "yes: argv byte is CWDE/CDQ-extended into long v before _isdigit",
-        ("src/S20/m39F1.c", 189): "yes: signed local char is loaded into AL then CWDE before _isspace",
-        ("src/S20/m39F1.c", 193): "yes: signed local char is loaded into AL then CWDE before _isspace",
-        ("src/S20/m39F1.c", 255): "yes: signed local char is loaded into AL then CWDE before _isdigit",
-        ("src/S23/m39C7.c", 201): "yes: signed text char is loaded into AL then CWDE before the direct lookup",
-        ("src/root/m1C62.c", 170): "yes: keyboard byte is CBW-extended by f_1F58_005A into int c",
-        ("src/root/m1C62.c", 306): "yes: keyboard byte is CBW-extended by f_1F58_005A via f_1F58_0090",
+        ("src/ui/save_load.c", 429): "yes: signed BIOS byte is returned via f_1F58_005A CBW before integer key use",
+        ("src/window/menu_tracking.c", 305): "yes: signed BIOS byte is returned via f_1F58_005A CBW before integer key use",
+        ("src/window/menu_tracking.c", 325): "yes: signed BIOS byte is returned via f_1F58_005A CBW before integer key use",
+        ("src/window/menu_tracking.c", 351): "yes: signed menu char is loaded from AL and CWDE-promoted before table read",
+        ("src/startup/dos_config.c", 117): "yes: argv byte is CWDE/CDQ-extended into long v before _isdigit",
+        ("src/startup/dos_config.c", 189): "yes: signed local char is loaded into AL then CWDE before _isspace",
+        ("src/startup/dos_config.c", 193): "yes: signed local char is loaded into AL then CWDE before _isspace",
+        ("src/startup/dos_config.c", 255): "yes: signed local char is loaded into AL then CWDE before _isdigit",
+        ("src/ui/info_cards.c", 201): "yes: signed text char is loaded into AL then CWDE before the direct lookup",
+        ("src/window/alerts.c", 170): "yes: keyboard byte is CBW-extended by f_1F58_005A into int c",
+        ("src/window/alerts.c", 306): "yes: keyboard byte is CBW-extended by f_1F58_005A via f_1F58_0090",
     }
     for row in facts_sites:
         key = f"{row['source']}:{row['line']}"
@@ -1245,7 +1245,7 @@ def collect(program_override=None, source_overrides=None) -> dict:
                       if row["dgroup_79f0_bytes_reaching_read_in_supported_domain"]]
     external_hits = [f"{row['source']}:{row['line']}" for row in facts_sites
                      if row["outside_domain_negative_control_bytes"]]
-    if supported_hits != ["src/root/m1C62.c:170"] or external_hits != ["src/S20/m39F1.c:117"]:
+    if supported_hits != ["src/window/alerts.c:170"] or external_hits != ["src/startup/dos_config.c:117"]:
         raise ValueError("dgroup_79f0 source read inventory changed")
     source_audit["dgroup_79f0_source_observations"] = {
         "supported_domain_source_site": supported_hits,
@@ -1291,7 +1291,7 @@ def collect(program_override=None, source_overrides=None) -> dict:
         "resources": resources,
         "input_domains": {
             "supported_launch_arguments": [],
-            "startup_slash_s": {"site": "src/S20/m39F1.c:117", "outside_supported_domain": True,
+            "startup_slash_s": {"site": "src/startup/dos_config.c:117", "outside_supported_domain": True,
                 "negative_control": "At a DOS prompt launch `SIMANT /s` followed immediately by Alt+209. MSC stdargv reads PSP:81h, skips only CR/NUL, blanks and tabs as delimiters, and copies D1 with LODSB/STOSB into argv[1][2]; _isdigit receives -47 and would read 79F0. This is not in launch arguments [].",
                 "stdargv_source": str(stdargv_path).replace("\\", "/"),
                 "stdargv_sha256": sha(stdargv_raw),

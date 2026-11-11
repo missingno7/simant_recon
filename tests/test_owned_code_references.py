@@ -48,9 +48,9 @@ class OwnedCodeReferences(unittest.TestCase):
     def test_callback_literals_match_history_but_fail_far_pointer_contract(self):
         recipes = {
             'S00:31AD': [('_o00_31AD_0004', '_o00_31AD_001C', '1Ch'),
-                         ('_o00_31AD_0122', '_o00_31AD_013A', '13Ah'),
-                         ('_o00_31AD_037C', '_o00_31AD_0394', '394h'),
-                         ('_o00_31AD_16A9', 'L16C1', '16C1h'),
+                         ('_GPatBox', '_o00_31AD_013A', '13Ah'),
+                         ('_GInvBox', '_o00_31AD_0394', '394h'),
+                         ('_GBoxFill', 'L16C1', '16C1h'),
                          ('_o00_31AD_16E4', '_o00_31AD_16FC', '16FCh')],
             'S01:3126': [('_o01_3126_024C', 'L0264', '264h')],
             'S02:3126': [('_o02_3126_0096', '_o02_3126_00AE', '0AEh'),

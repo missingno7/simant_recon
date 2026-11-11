@@ -49,7 +49,7 @@
       },
       {
         "path": "layout/functions.json",
-        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+        "sha256": "f28c7de3f74334c001f3b5a5a43342af4222de3e83dca2159896f42da3a11d48"
       },
       {
         "path": "layout/oracle.lock.json",
@@ -116,11 +116,11 @@
         "sha256": "a62ea183a3a6d41e95759cafd331770512334e6460729dc1f438378730ca3271"
       },
       {
-        "path": "src/root/m1FAA.c",
+        "path": "src/graphics/trapezoid.c",
         "sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66"
       },
       {
-        "path": "src/root/m1E57.c",
+        "path": "src/graphics/clip_regions.c",
         "sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3"
       },
       {
@@ -132,11 +132,11 @@
         "sha256": "0f5dd5b0a211945a97782cfccdb9bb31b0dfd07fcde5df4d4f9486b487eb0125"
       },
       {
-        "path": "src/root/m171C.c",
+        "path": "src/memory/ralloc.c",
         "sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e"
       },
       {
-        "path": "src/root/m22BF.c",
+        "path": "src/window/object_attributes.c",
         "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0"
       },
       {
@@ -172,7 +172,7 @@
         "sha256": "bb2bc1aa0bc1c0c82a148ed099f8fb3388456acb462572ad16699856da326465"
       },
       {
-        "path": "src/root/m1B4E.asm",
+        "path": "src/platform/video/bios_bitmap.asm",
         "sha256": "a32d75d2d4ea36980b659d26e9ddd86bcde65d9e250ebac4cdc29c0e847c67a2"
       }
     ],
@@ -358,189 +358,189 @@
           "claim_id": "root:22BF:09B0",
           "name": "win_IsWinOpen",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m22BF.c",
+          "source": "src/window/object_attributes.c",
           "source_sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
-          "source_anchor": "src/root/m22BF.c:483-499",
+          "source_anchor": "src/window/object_attributes.c:483-499",
           "composition_role": "Tests selected window handle/open state; a stale invalid handle is cleared. Uses exact handle lock/unlock helpers."
         },
         {
           "claim_id": "root:1E57:0009",
           "name": "f_1E57_0009",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m1E57.c",
+          "source": "src/graphics/clip_regions.c",
           "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
-          "source_anchor": "src/root/m1E57.c:34-43",
+          "source_anchor": "src/graphics/clip_regions.c:34-43",
           "composition_role": "Disposes the previously popped clip handle when present; clears saved clip handle and active pointer."
         },
         {
           "claim_id": "root:1E57:0174",
           "name": "clip_SetWin",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m1E57.c",
+          "source": "src/graphics/clip_regions.c",
           "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
-          "source_anchor": "src/root/m1E57.c:120-140",
+          "source_anchor": "src/graphics/clip_regions.c:120-140",
           "composition_role": "Masks window id, queries open status, locks selected per-window clip list, copies sentinel-terminated list to the fixed active buffer, unlocks; otherwise active pointer is null."
         },
         {
           "claim_id": "root:1E57:0DAA",
           "name": "clip_Push",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m1E57.c",
+          "source": "src/graphics/clip_regions.c",
           "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
-          "source_anchor": "src/root/m1E57.c:446-470",
+          "source_anchor": "src/graphics/clip_regions.c:446-470",
           "composition_role": "Copies active sentinel-terminated list and prior pointer into a stack node; updates clip stack head and depth."
         },
         {
           "claim_id": "root:1E57:0EB9",
           "name": "clip_Pop",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m1E57.c",
+          "source": "src/graphics/clip_regions.c",
           "source_sha256": "812e8ec90bcf25c56adf073e753bf72f8f6a3bc108055e112c43f894e9d8d0c3",
-          "source_anchor": "src/root/m1E57.c:473-495",
+          "source_anchor": "src/graphics/clip_regions.c:473-495",
           "composition_role": "Restores previous stack head; restores prior clip presence and contents by copying the saved list into the shared active buffer (it does not restore the old pointer identity); decrements depth and leaves popped allocation pending for next cleanup."
         },
         {
           "claim_id": "root:171C:1A9E",
           "name": "f_171C_1A9E",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:868-874",
+          "source_anchor": "src/memory/ralloc.c:868-874",
           "composition_role": "Clip node handle allocation wrapper; delegates to exact paragraph allocator and rebases handle."
         },
         {
           "claim_id": "root:171C:125C",
           "name": "f_171C_125C",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:665-695",
+          "source_anchor": "src/memory/ralloc.c:665-695",
           "composition_role": "Allocates storage and a handle, initializes lock count and header/name/size metadata."
         },
         {
           "claim_id": "root:171C:0EEA",
           "name": "f_171C_0EEA",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:559-580",
+          "source_anchor": "src/memory/ralloc.c:559-580",
           "composition_role": "Exact free-block search/pressure path; can call separately behavior-registered f_171C_0CF4 when compaction is needed; dependency evidence is pinned separately."
         },
         {
           "claim_id": "root:171C:0BE2",
           "name": "f_171C_0BE2",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:475-505",
+          "source_anchor": "src/memory/ralloc.c:475-505",
           "composition_role": "Exact discard-selection fallback from f_171C_0EEA; may free an unlocked discardable block and update handle/header state."
         },
         {
           "claim_id": "root:171C:11F2",
           "name": "f_171C_11F2",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:642-657",
+          "source_anchor": "src/memory/ralloc.c:642-657",
           "composition_role": "Exact sorted free-list insertion helper used by f_171C_0160."
         },
         {
           "claim_id": "root:171C:0A5C",
           "name": "f_171C_0A5C",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:425-443",
+          "source_anchor": "src/memory/ralloc.c:425-443",
           "composition_role": "Exact handle allocation used by f_171C_125C."
         },
         {
           "claim_id": "root:171C:068C",
           "name": "f_171C_068C",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:312-363",
+          "source_anchor": "src/memory/ralloc.c:312-363",
           "composition_role": "Exact block metadata initialization used by f_171C_125C."
         },
         {
           "claim_id": "root:171C:1B84",
           "name": "f_171C_1B84",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:888-896",
+          "source_anchor": "src/memory/ralloc.c:888-896",
           "composition_role": "Locks a handle and returns its far data pointer (or null)."
         },
         {
           "claim_id": "root:171C:1FC2",
           "name": "f_171C_1FC2",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:1002-1011",
+          "source_anchor": "src/memory/ralloc.c:1002-1011",
           "composition_role": "Checks handle/type/depth, updates age, increments lock."
         },
         {
           "claim_id": "root:171C:1BBA",
           "name": "f_171C_1BBA",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:898-902",
+          "source_anchor": "src/memory/ralloc.c:898-902",
           "composition_role": "Checks and delegates to exact unlock."
         },
         {
           "claim_id": "root:171C:2086",
           "name": "f_171C_2086",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:1014-1020",
+          "source_anchor": "src/memory/ralloc.c:1014-1020",
           "composition_role": "Validates handle range, decrements lock and returns rebased handle."
         },
         {
           "claim_id": "root:171C:1C0A",
           "name": "f_171C_1C0A",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:904-907",
+          "source_anchor": "src/memory/ralloc.c:904-907",
           "composition_role": "Disposal wrapper used for popped clip-node cleanup."
         },
         {
           "claim_id": "root:171C:13E4",
           "name": "f_171C_13E4",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:703-720",
+          "source_anchor": "src/memory/ralloc.c:703-720",
           "composition_role": "Exact free path rejects locked handles, clears lock and delegates block/handle release."
         },
         {
           "claim_id": "root:171C:1246",
           "name": "f_171C_1246",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:659-663",
+          "source_anchor": "src/memory/ralloc.c:659-663",
           "composition_role": "Exact handle release used by f_171C_13E4."
         },
         {
           "claim_id": "root:171C:0160",
           "name": "f_171C_0160",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m171C.c",
+          "source": "src/memory/ralloc.c",
           "source_sha256": "31bd9caa243220db2bd1ba940ac8fae7f5d189b2ec95f1662918e9ca2160b10e",
-          "source_anchor": "src/root/m171C.c:177-230",
+          "source_anchor": "src/memory/ralloc.c:177-230",
           "composition_role": "Exact conditional block merge/free helper used by free path."
         },
         {
           "claim_id": "root:1FAA:0006",
           "name": "f_1FAA_0006",
           "provenance": "EXACT_NATURAL",
-          "source": "src/root/m1FAA.c",
+          "source": "src/graphics/trapezoid.c",
           "source_sha256": "e13a110be3cf3643419027a40a18002af231b6f9e159e89fc78f031a70929f66",
-          "source_anchor": "src/root/m1FAA.c:17-54",
+          "source_anchor": "src/graphics/trapezoid.c:17-54",
           "composition_role": "Consumes the caller far point array and flags, sets raster attributes, then iterates scanlines."
         }
       ],
@@ -593,7 +593,7 @@
       ],
       "source_only_structural_gate": {
         "topic": "Runtime ownership and concrete implementation of graphics callback pointers.",
-        "known": "Caller call sites select the same near data slots, use the same far-function-pointer ABI, pass the same widths/signedness/arguments, and preserve the same call order. layout/symbols.json pins g_9128 at 55B3:9128 and g_913C at 55B3:913C; source prototypes are listed under indirect_callback_abi. The pinned src/root/m1B4E.asm driver-entry table references the g_9128 slot; it does not resolve the selected backend target.",
+        "known": "Caller call sites select the same near data slots, use the same far-function-pointer ABI, pass the same widths/signedness/arguments, and preserve the same call order. layout/symbols.json pins g_9128 at 55B3:9128 and g_913C at 55B3:913C; source prototypes are listed under indirect_callback_abi. The pinned src/platform/video/bios_bitmap.asm driver-entry table references the g_9128 slot; it does not resolve the selected backend target.",
         "unresolved": "The concrete runtime target/storage owner and backend implementation for the driver slots are not resolved by these caller sources.",
         "classification": "Separate source-only structural gate. It is not an unexplained caller semantic because the callers\u2019 slot selection, pointer dataflow, arguments, order, and relevant prior state are statically accounted."
       },
@@ -620,7 +620,7 @@
       {
         "symbol": "g_9128",
         "slot": "55B3:9128 (near data slot; layout/symbols.json data record, segment 0x55B3 offset 0x9128)",
-        "declaration": "src/root/m1FAA.c:12: extern void (far * near g_9128)(int a, int b, int c);",
+        "declaration": "src/graphics/trapezoid.c:12: extern void (far * near g_9128)(int a, int b, int c);",
         "abi": "Near-stored pointer to far void function; three signed 16-bit int parameters in declaration order. Original call is an indirect far call with three stack words.",
         "uses": "Exactly once before scanline loop as g_9128(-1,-1,-1); symbols grounding identifies the slot as an attribute setter, but the concrete target is unresolved.",
         "binding_status": "No C definition/initializer or direct assignment to g_9128 was found by searching canonical src; the slot is referenced by a driver entry table and remains runtime-bound. This is tracked by source_only_structural_gate; caller slot selection/call composition is known."
@@ -628,7 +628,7 @@
       {
         "symbol": "g_913C",
         "slot": "55B3:913C (near data slot; layout/symbols.json data record, segment 0x55B3 offset 0x913C)",
-        "declaration": "src/root/m1FAA.c:13: extern void (far * near g_913C)(int left, int top, int right, int bottom);",
+        "declaration": "src/graphics/trapezoid.c:13: extern void (far * near g_913C)(int left, int top, int right, int bottom);",
         "abi": "Near-stored pointer to far void function; four signed 16-bit int parameters in left,top,right,bottom order. Original call is an indirect far call with four stack words.",
         "uses": "Once for every top<bottom scanline as g_913C(x0,top,x1,top+1), because fore remains -1.",
         "binding_status": "No C definition/initializer or direct assignment to g_913C was found by searching canonical src. layout/symbols.json grounds it as a far code pointer in BSS used as a four-argument XOR-rectangle callback; concrete loaded target and raster implementation are unknown. This is tracked by source_only_structural_gate; caller slot selection/call composition is known."
@@ -1101,7 +1101,7 @@
           "old": "f_171C_1C0A",
           "new": "mem_Free",
           "kind": "recovered",
-          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
+          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/memory/ralloc.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
         },
         {
           "old": "f_171C_1C1C",

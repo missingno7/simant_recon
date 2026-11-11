@@ -168,7 +168,7 @@ def compute():
         'window_object0_geometry':[{k:v for k,v in windows[i].items() if k!='objects'}|{'object0':windows[i]['objects'][0], 'title_type':windows[i]['objects'][1]['type']} for i in sorted(SUPPORTED)],
         'title_type_drag_ids':[i for i in sorted(SUPPORTED) if windows[i]['objects'][1]['type'] in (12,18)],
         'animation':animation,'controls':{'two_cutters_ordered_cases':len(rects)**2,'maximum_counts':maxima,'degenerate_negative':negative}}
-    report['source_pins']={p:sha(ROOT/p) for p in ['src/root/m1D8E.c','src/root/m1E57.c','src/root/m20E8.c','src/root/m218D.c','src/root/m22BF.c','src/root/m2505.c','src/root/m2662.c','src/S05/m3663.c','src/S14/m384C.c','src/S26/m39C7.c']}
+    report['source_pins']={p:sha(ROOT/p) for p in ['src/graphics/clip_rects.c','src/graphics/clip_regions.c','src/window/lifecycle.c','src/window/events.c','src/window/object_attributes.c','src/window/object_geometry.c','src/graphics/anim.c','src/ui/experiment_menu.c','src/ui/scenario_dialogs.c','src/window/move_resize.c']}
     return report
 
 def main():

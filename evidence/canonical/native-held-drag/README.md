@@ -27,7 +27,7 @@ idle -> refresh_application -> portable_input_time_host_refresh_clock
 f_1B73_0A30 -> StillDown -> ButtonHeld -> o26_39C7_040F
 ```
 
-The source authority is `src/root/m1B73.asm:f_1B73_0046`: INT33 functions 7/8
+The source authority is `src/platform/input_timer.asm:f_1B73_0046`: INT33 functions 7/8
 install inclusive horizontal/vertical limits `0..width-4`, `0..height-4`.
 Captured SDL events and letterbox coordinates can lie outside that range.
 The host mouse event adapter now applies these driver limits before invoking

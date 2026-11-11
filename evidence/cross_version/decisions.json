@@ -8680,7 +8680,7 @@
    "reviewed": "2026-11-11",
    "evidence": [
     "Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.",
-    "Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and removes its master handle; Win16 mem_Free delegates to GlobalFree. Both consume the allocation handle, unlike 2276/mem_free which consume a raw pointer."
+    "Implementation/contract: src/memory/ralloc.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and removes its master handle; Win16 mem_Free delegates to GlobalFree. Both consume the allocation handle, unlike 2276/mem_free which consume a raw pointer."
    ]
   },
   "root:171C:1C1C": {
@@ -8789,7 +8789,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:114 (f_1CE2_032B); original-dos.json#root:1CE2:032B",
+    "src/graphics/screen_rects.c:114 (f_1CE2_032B); original-dos.json#root:1CE2:032B",
     "Win16 evidence/disassembly/cards.jsonl 2:0D8A _GInvOutline; original-win16.json#_GInvOutline",
     "Anchor 1: GRectInvOutline forwards its four Rect bounds and width to this helper on both sides.",
     "Anchor 2: Four inverted bands occur in matching top,bottom,left,right order; zero width returns. Windows adjusts edge coordinates, DOS does not."
@@ -9632,7 +9632,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:247 (o00_31AD_0122); original-dos.json#S00:31AD:0122",
+    "src/platform/video/planar_raster.asm:247 (o00_31AD_0122); original-dos.json#S00:31AD:0122",
     "Win16 evidence/disassembly/cards.jsonl 2:1AB2 _GPatBox; original-win16.json#_GPatBox",
     "Anchor 1: win_RectFill and GRectPartialMixedOutline use g_9138; GMixedFill helpers supply 0x20 with a high-byte pattern selector; bodies use pattern/colour tables.",
     "Anchor 2: Win16 GRectPartialMixedOutline supplies the same 0x20 checker selector and foreground/background attribute pair; DOS pattern bodies consume the same colour/pattern convention."
@@ -9643,7 +9643,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:546 (o00_31AD_037C); original-dos.json#S00:31AD:037C",
+    "src/platform/video/planar_raster.asm:546 (o00_31AD_037C); original-dos.json#S00:31AD:037C",
     "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
     "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
     "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
@@ -9654,7 +9654,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:751 (o00_31AD_0522); original-dos.json#S00:31AD:0522",
+    "src/platform/video/planar_raster.asm:751 (o00_31AD_0522); original-dos.json#S00:31AD:0522",
     "Win16 evidence/disassembly/cards.jsonl 2:3DB2 _GPicSize; original-win16.json#_GPicSize",
     "Anchor 1: GPutPacked chooses slot 6 for colour-depth resources, just as the Win16 caller chooses GPicSize.",
     "Anchor 2: S00 byte-count body multiplies covered byte columns by height and four planes, then adds the two-word header; Win16 GPicSize has the same four-plane/header convention (edge convention differs)."
@@ -9665,7 +9665,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:1908 (o00_31AD_0CF9); original-dos.json#S00:31AD:0CF9",
+    "src/platform/video/planar_raster.asm:1908 (o00_31AD_0CF9); original-dos.json#S00:31AD:0CF9",
     "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
     "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
     "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
@@ -9676,7 +9676,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:2579 (o00_31AD_11FB); original-dos.json#S00:31AD:11FB",
+    "src/platform/video/planar_raster.asm:2579 (o00_31AD_11FB); original-dos.json#S00:31AD:11FB",
     "Win16 evidence/disassembly/cards.jsonl 2:3DD6 _GImgSize; original-win16.json#_GImgSize",
     "Anchor 1: GPutPacked chooses slot 7 for monochrome-depth resources, just as Win16 chooses GImgSize.",
     "Anchor 2: Body shares the covered-byte-column helper with colour size but omits its plane multiplier and adds 4, matching the independent one-bit/header contract."
@@ -9687,7 +9687,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:2588 (o00_31AD_1206); original-dos.json#S00:31AD:1206",
+    "src/platform/video/planar_raster.asm:2588 (o00_31AD_1206); original-dos.json#S00:31AD:1206",
     "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
     "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
     "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
@@ -9698,9 +9698,9 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:2910 (o00_31AD_148C); original-dos.json#S00:31AD:148C",
+    "src/platform/video/planar_raster.asm:2910 (o00_31AD_148C); original-dos.json#S00:31AD:148C",
     "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
-    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 1: DoLaserFire in src/ui/yellow_commands.c and drawHistGraph in src/ui/history_window.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
     "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
    ]
   },
@@ -9709,7 +9709,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:3135 (o00_31AD_1659); original-dos.json#S00:31AD:1659",
+    "src/platform/video/planar_raster.asm:3135 (o00_31AD_1659); original-dos.json#S00:31AD:1659",
     "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
     "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
     "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
@@ -9720,7 +9720,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S00/m31AD.asm:3173 (o00_31AD_16A9); original-dos.json#S00:31AD:16A9",
+    "src/platform/video/planar_raster.asm:3173 (o00_31AD_16A9); original-dos.json#S00:31AD:16A9",
     "Win16 evidence/disassembly/cards.jsonl 2:19E6 _GBoxFill; original-win16.json#_GBoxFill",
     "Anchor 1: GRectFill, GBoxOutline and DrawEditGraphs pass left, top, right, bottom, colour through g_9134; bodies fill VRAM rows with edge handling.",
     "Anchor 2: Win16 GRectFill and GBoxOutline invoke GBoxFill with the same ordered coordinates and colour; DOS bodies normalize edges and paint VRAM rows."
@@ -9731,7 +9731,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S01/m3126.asm:316 (o01_3126_0167); original-dos.json#S01:3126:0167",
+    "src/platform/video/mono_raster.asm:316 (o01_3126_0167); original-dos.json#S01:3126:0167",
     "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
     "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
     "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
@@ -9742,7 +9742,7 @@
    "confidence": "REJECTED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S01/m3126.asm:406 (o01_3126_024C); original-dos.json#S01:3126:024C",
+    "src/platform/video/mono_raster.asm:406 (o01_3126_024C); original-dos.json#S01:3126:024C",
     "Dispatch slots3 and4 are the same address. Win16 _GBoxFill and _GPatBox are separate symbols; neither uniquely identifies the combined mono rasterizer. Same purpose in both API roles is established, but a unique recovered spelling is not."
    ]
   },
@@ -9751,7 +9751,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S01/m3126.asm:615 (o01_3126_0414); original-dos.json#S01:3126:0414",
+    "src/platform/video/mono_raster.asm:615 (o01_3126_0414); original-dos.json#S01:3126:0414",
     "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
     "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
     "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
@@ -9762,7 +9762,7 @@
    "confidence": "REJECTED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S01/m3126.asm:632 (o01_3126_0437); original-dos.json#S01:3126:0437",
+    "src/platform/video/mono_raster.asm:632 (o01_3126_0437); original-dos.json#S01:3126:0437",
     "Dispatch slots 6 and 7 are the same address. Win16 _GPicSize and _GImgSize are separate symbols; neither uniquely identifies this shared native-size routine. Use a DOS descriptive name."
    ]
   },
@@ -9771,7 +9771,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S01/m3126.asm:737 (o01_3126_0516); original-dos.json#S01:3126:0516",
+    "src/platform/video/mono_raster.asm:737 (o01_3126_0516); original-dos.json#S01:3126:0516",
     "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
     "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
     "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
@@ -9782,7 +9782,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S01/m3126.asm:1038 (o01_3126_073C); original-dos.json#S01:3126:073C",
+    "src/platform/video/mono_raster.asm:1038 (o01_3126_073C); original-dos.json#S01:3126:073C",
     "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
     "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
     "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
@@ -9793,9 +9793,9 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S01/m3126.asm:1659 (o01_3126_0C7A); original-dos.json#S01:3126:0C7A",
+    "src/platform/video/mono_raster.asm:1659 (o01_3126_0C7A); original-dos.json#S01:3126:0C7A",
     "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
-    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 1: DoLaserFire in src/ui/yellow_commands.c and drawHistGraph in src/ui/history_window.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
     "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
    ]
   },
@@ -9804,7 +9804,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:151 (o02_3126_0040); original-dos.json#S02:3126:0040",
+    "src/platform/video/vga8_raster.asm:151 (o02_3126_0040); original-dos.json#S02:3126:0040",
     "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
     "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
     "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
@@ -9815,7 +9815,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:294 (o02_3126_0185); original-dos.json#S02:3126:0185",
+    "src/platform/video/vga8_raster.asm:294 (o02_3126_0185); original-dos.json#S02:3126:0185",
     "Win16 evidence/disassembly/cards.jsonl 2:1AB2 _GPatBox; original-win16.json#_GPatBox",
     "Anchor 1: win_RectFill and GRectPartialMixedOutline use g_9138; GMixedFill helpers supply 0x20 with a high-byte pattern selector; bodies use pattern/colour tables.",
     "Anchor 2: Win16 GRectPartialMixedOutline supplies the same 0x20 checker selector and foreground/background attribute pair; DOS pattern bodies consume the same colour/pattern convention."
@@ -9826,7 +9826,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:401 (o02_3126_027C); original-dos.json#S02:3126:027C",
+    "src/platform/video/vga8_raster.asm:401 (o02_3126_027C); original-dos.json#S02:3126:027C",
     "Win16 evidence/disassembly/cards.jsonl 2:19E6 _GBoxFill; original-win16.json#_GBoxFill",
     "Anchor 1: GRectFill, GBoxOutline and DrawEditGraphs pass left, top, right, bottom, colour through g_9134; bodies fill VRAM rows with edge handling.",
     "Anchor 2: Win16 GRectFill and GBoxOutline invoke GBoxFill with the same ordered coordinates and colour; DOS bodies normalize edges and paint VRAM rows."
@@ -9837,7 +9837,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:542 (o02_3126_03B1); original-dos.json#S02:3126:03B1",
+    "src/platform/video/vga8_raster.asm:542 (o02_3126_03B1); original-dos.json#S02:3126:03B1",
     "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
     "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
     "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
@@ -9848,7 +9848,7 @@
    "confidence": "REJECTED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:559 (o02_3126_03D4); original-dos.json#S02:3126:03D4",
+    "src/platform/video/vga8_raster.asm:559 (o02_3126_03D4); original-dos.json#S02:3126:03D4",
     "Dispatch slots 6 and 7 are the same address. Win16 _GPicSize and _GImgSize are separate symbols; neither uniquely identifies this shared native-size routine. Use a DOS descriptive name."
    ]
   },
@@ -9857,7 +9857,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:704 (o02_3126_0505); original-dos.json#S02:3126:0505",
+    "src/platform/video/vga8_raster.asm:704 (o02_3126_0505); original-dos.json#S02:3126:0505",
     "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
     "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
     "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
@@ -9868,7 +9868,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:835 (o02_3126_0636); original-dos.json#S02:3126:0636",
+    "src/platform/video/vga8_raster.asm:835 (o02_3126_0636); original-dos.json#S02:3126:0636",
     "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
     "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
     "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
@@ -9879,9 +9879,9 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S02/m3126.asm:947 (o02_3126_073A); original-dos.json#S02:3126:073A",
+    "src/platform/video/vga8_raster.asm:947 (o02_3126_073A); original-dos.json#S02:3126:073A",
     "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
-    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 1: DoLaserFire in src/ui/yellow_commands.c and drawHistGraph in src/ui/history_window.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
     "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
    ]
   },
@@ -9890,7 +9890,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:192 (o03_3126_019E); original-dos.json#S03:3126:019E",
+    "src/platform/video/tandy_raster.asm:192 (o03_3126_019E); original-dos.json#S03:3126:019E",
     "Win16 evidence/disassembly/cards.jsonl 2:19B4 _GSetAttrib; original-win16.json#_GSetAttrib",
     "Anchor 1: win_SetColorFromObjNum / win_SetColorNum and DrawEditGraphs pass fore, back, pattern to g_9128; bodies store drawing-state globals.",
     "Anchor 2: Win16 GSetAttrib writes __foreColor/__backColor and monoPat; DOS writes the corresponding drawing state. Colour drivers ignore pattern argument 3; S01 interprets it. Same API role, not equal arithmetic."
@@ -9901,7 +9901,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:437 (o03_3126_03C2); original-dos.json#S03:3126:03C2",
+    "src/platform/video/tandy_raster.asm:437 (o03_3126_03C2); original-dos.json#S03:3126:03C2",
     "Win16 evidence/disassembly/cards.jsonl 2:1AB2 _GPatBox; original-win16.json#_GPatBox",
     "Anchor 1: win_RectFill and GRectPartialMixedOutline use g_9138; GMixedFill helpers supply 0x20 with a high-byte pattern selector; bodies use pattern/colour tables.",
     "Anchor 2: Win16 GRectPartialMixedOutline supplies the same 0x20 checker selector and foreground/background attribute pair; DOS pattern bodies consume the same colour/pattern convention."
@@ -9912,7 +9912,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:646 (o03_3126_059C); original-dos.json#S03:3126:059C",
+    "src/platform/video/tandy_raster.asm:646 (o03_3126_059C); original-dos.json#S03:3126:059C",
     "Win16 evidence/disassembly/cards.jsonl 2:19E6 _GBoxFill; original-win16.json#_GBoxFill",
     "Anchor 1: GRectFill, GBoxOutline and DrawEditGraphs pass left, top, right, bottom, colour through g_9134; bodies fill VRAM rows with edge handling.",
     "Anchor 2: Win16 GRectFill and GBoxOutline invoke GBoxFill with the same ordered coordinates and colour; DOS bodies normalize edges and paint VRAM rows."
@@ -9923,7 +9923,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:816 (o03_3126_070A); original-dos.json#S03:3126:070A",
+    "src/platform/video/tandy_raster.asm:816 (o03_3126_070A); original-dos.json#S03:3126:070A",
     "Win16 evidence/disassembly/cards.jsonl 2:1966 _GInvBox; original-win16.json#_GInvBox",
     "Anchor 1: GRectInv and the four-band inverted-outline wrapper call g_913C; entries select XOR and invoke the rectangle rasterizer.",
     "Anchor 2: Win16 GRectInv invokes GInvBox on its four Rect fields; DOS GRectInv invokes this slot with those fields, and XOR/all-ones painting establishes inversion independently."
@@ -9934,7 +9934,7 @@
    "confidence": "REJECTED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:833 (o03_3126_072D); original-dos.json#S03:3126:072D",
+    "src/platform/video/tandy_raster.asm:833 (o03_3126_072D); original-dos.json#S03:3126:072D",
     "Dispatch slots 6 and 7 are the same address. Win16 _GPicSize and _GImgSize are separate symbols; neither uniquely identifies this shared native-size routine. Use a DOS descriptive name."
    ]
   },
@@ -9943,7 +9943,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:1038 (o03_3126_091F); original-dos.json#S03:3126:091F",
+    "src/platform/video/tandy_raster.asm:1038 (o03_3126_091F); original-dos.json#S03:3126:091F",
     "Win16 evidence/disassembly/cards.jsonl 2:3D3C _GPutPicS; original-win16.json#_GPutPicS",
     "Anchor 1: GPutPacked and PutTile call g_914C; f_1B4E_003B supplies dimensions from a 4-byte header.",
     "Anchor 2: Win16 GPutPacked selects GPutPicS for colour depth and passes x,y,payload,width,height; DOS GPutPacked selects this slot for colour and f_1B4E_003B adapts the same two-word header. Win16 adds a mask argument and reorders payload/dimensions at the next layer."
@@ -9954,7 +9954,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:1419 (o03_3126_0C11); original-dos.json#S03:3126:0C11",
+    "src/platform/video/tandy_raster.asm:1419 (o03_3126_0C11); original-dos.json#S03:3126:0C11",
     "Win16 evidence/disassembly/cards.jsonl 2:3D8A _GPutImgS; original-win16.json#_GPutImgS",
     "Anchor 1: font_PrintStr, GPutPacked and f_1B4E_0110 call g_9154; slot 12 is the associated raw path.",
     "Anchor 2: Win16 font_PrintStr calls GPutImgS with font bitmap bits,width,height; DOS font_PrintStr calls this slot with the same ordered x,y,bits,width,height. The mono fore/back expansion is present in DOS, replacing DoMonoBitmap."
@@ -9965,9 +9965,9 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/S03/m3126.asm:1952 (o03_3126_104D); original-dos.json#S03:3126:104D",
+    "src/platform/video/tandy_raster.asm:1952 (o03_3126_104D); original-dos.json#S03:3126:104D",
     "Win16 evidence/disassembly/cards.jsonl 2:3FB4 _GLine; original-win16.json#_GLine",
-    "Anchor 1: DoLaserFire in src/S22/m39C7.c and drawHistGraph in src/S24/m39C7.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
+    "Anchor 1: DoLaserFire in src/ui/yellow_commands.c and drawHistGraph in src/ui/history_window.c pass endpoints and colour through g_916C; entries dispatch to root:1D8E:0435 when clipping is active.",
     "Anchor 2: Win16 DoLaserFire and drawHistGraph call GLine with endpoints and colour; DOS same named callers use g_916C with that interface. DOS clip wrapper and Bresenham pixel loops independently establish line drawing."
    ]
   },
@@ -9976,9 +9976,9 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1B4E.asm:143 (f_1B4E_003B); original-dos.json#root:1B4E:003B",
+    "src/platform/video/bios_bitmap.asm:143 (f_1B4E_003B); original-dos.json#root:1B4E:003B",
     "Win16 evidence/disassembly/cards.jsonl 2:3C9A _GPutPic; original-win16.json#_GPutPic",
-    "Anchor 1: win_DrawBitMap on both sides chooses this colour-picture header adapter; DOS caller src/root/m259D.c and Win16 _win_DrawBitMap.",
+    "Anchor 1: win_DrawBitMap on both sides chooses this colour-picture header adapter; DOS caller src/window/pictures.c and Win16 _win_DrawBitMap.",
     "Anchor 2: Both read width,height from the first four bytes and pass payload+4 with x,y to the colour rendering path. Windows adds a mask parameter; DOS uses current raster state."
    ]
   },
@@ -9987,7 +9987,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1B4E.asm:162 (f_1B4E_005E); original-dos.json#root:1B4E:005E",
+    "src/platform/video/bios_bitmap.asm:162 (f_1B4E_005E); original-dos.json#root:1B4E:005E",
     "Win16 evidence/disassembly/cards.jsonl 2:3D02 _GPutImg; original-win16.json#_GPutImg",
     "Anchor 1: win_DrawBitMap selects this header adapter for monochrome data on both sides.",
     "Anchor 2: Both forward the first two header words and payload+4 to monochrome rendering; DOS calls slot 11 and Windows calls DoMonoBitmap."
@@ -9998,7 +9998,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:21 (f_1CE2_0013); original-dos.json#root:1CE2:0013",
+    "src/graphics/screen_rects.c:21 (f_1CE2_0013); original-dos.json#root:1CE2:0013",
     "Win16 evidence/disassembly/cards.jsonl 2:0B18 _GBoxFillOutline; original-win16.json#_GBoxFillOutline",
     "Anchor 1: Signature is five rectangle/thickness words; positioned before text/checker/outline adapters on both sides.",
     "Anchor 2: Fill uses background colour then already paired GBoxOutline; independent five-band effect and fore/back state agree (Windows inlines outline)."
@@ -10009,7 +10009,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:39 (f_1CE2_0077); original-dos.json#root:1CE2:0077",
+    "src/graphics/screen_rects.c:39 (f_1CE2_0077); original-dos.json#root:1CE2:0077",
     "Win16 evidence/disassembly/cards.jsonl 2:0BBC _GTextBox; original-win16.json#_GTextBox",
     "Anchor 1: Five coordinate/colour arguments, text-coordinate adapter before checker helpers in the same graphics family.",
     "Anchor 2: Both shift left/right by3 and include bottom+1; DOS additionally maps encoded text rows through font-cell height, a platform coordinate adaptation."
@@ -10020,7 +10020,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:59 (f_1CE2_0124); original-dos.json#root:1CE2:0124",
+    "src/graphics/screen_rects.c:59 (f_1CE2_0124); original-dos.json#root:1CE2:0124",
     "Win16 evidence/disassembly/cards.jsonl 2:0BE0 _GRectChecker; original-win16.json#_GRectChecker",
     "Anchor 1: Rect-pointer entry followed by coordinate-form sibling immediately before formatted text/outline family.",
     "Anchor 2: Exact distinctive selector ((_foreColor high byte+0x10)<<8)|0x20 and Rect fields passed to paired pattern slot4 agree."
@@ -10031,7 +10031,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:64 (f_1CE2_014B); original-dos.json#root:1CE2:014B",
+    "src/graphics/screen_rects.c:64 (f_1CE2_014B); original-dos.json#root:1CE2:014B",
     "Win16 evidence/disassembly/cards.jsonl 2:0C10 _GCheckerBox; original-win16.json#_GCheckerBox",
     "Anchor 1: Coordinate-form sibling of Rect checker adapter.",
     "Anchor 2: Same four ordered bounds and distinctive foreground-high-byte+0x10, low0x20 pattern selector on both sides."
@@ -10042,7 +10042,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:98 (f_1CE2_0278); original-dos.json#root:1CE2:0278",
+    "src/graphics/screen_rects.c:98 (f_1CE2_0278); original-dos.json#root:1CE2:0278",
     "Win16 evidence/disassembly/cards.jsonl 2:0CC2 _GRectPartialOutline; original-win16.json#_GRectPartialOutline",
     "Anchor 1: GRectPartialMixedOutline calls this when colours equal/mono on both sides.",
     "Anchor 2: Four side-mask bits2,8,1,4 select top,bottom,left,right bands, same Rect/thickness/colour parameter order; Windows adds null guard."
@@ -10053,7 +10053,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:155 (f_1CE2_048D); original-dos.json#root:1CE2:048D",
+    "src/graphics/screen_rects.c:155 (f_1CE2_048D); original-dos.json#root:1CE2:048D",
     "Win16 evidence/disassembly/cards.jsonl 2:0FC6 _GRectFillOutline; original-win16.json#_GRectFillOutline",
     "Anchor 1: Rect/thickness wrapper directly after named GRectFill before GSaveRect/GPutPacked family.",
     "Anchor 2: Background rectangle fill followed by foreground GBoxOutline; Windows inlines the latter and adds null check."
@@ -10064,7 +10064,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:319 (f_1CE2_0951); original-dos.json#root:1CE2:0951",
+    "src/graphics/screen_rects.c:319 (f_1CE2_0951); original-dos.json#root:1CE2:0951",
     "Win16 evidence/disassembly/cards.jsonl 2:131C _GMixedFill; original-win16.json#_GMixedFill",
     "Anchor 1: Located after GPutPacked and before coordinate mixed-fill / named GRectPartialMixedOutline family.",
     "Anchor 2: Unique mono (fore XOR back)&0xF0 test plus nonmono fore!=back; unequal colours set attribute pattern0x20 then checker fill; equal colours solid fill."
@@ -10075,7 +10075,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m1CE2.c:334 (f_1CE2_099C); original-dos.json#root:1CE2:099C",
+    "src/graphics/screen_rects.c:334 (f_1CE2_099C); original-dos.json#root:1CE2:099C",
     "Win16 evidence/disassembly/cards.jsonl 2:139E _GMixedFillBox; original-win16.json#_GMixedFillBox",
     "Anchor 1: Coordinate mixed-fill sibling between Rect variant and named GRectPartialMixedOutline.",
     "Anchor 2: Same fore!=back branch, pattern0x20 attribute call and distinctive checker selector; equal case passes colour to box fill."
@@ -10086,7 +10086,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m208F.c:58 (f_208F_0093); original-dos.json#root:208F:0093",
+    "src/window/text_bitmap_helpers.c:58 (f_208F_0093); original-dos.json#root:208F:0093",
     "Win16 evidence/disassembly/cards.jsonl 2:48F0 _gr_CenterStrInRect; original-win16.json#_gr_CenterStrInRect",
     "Anchor 1: Both call the independently paired font_StringWidth, font_FontHeight twice and font_PrintStr in that order with the supplied string/current font. Rect+string interface is also shared with the adjacent clearing sibling.",
     "Anchor 2: Both copy Rect, center using width/height, clamp left, set right=left+width and bottom=top+height, then print at the adjusted top-left. The distinctive geometry and field layout establish the data/effect anchor independently of the named font-callee sequence; direct callers differ between versions."
@@ -10097,7 +10097,7 @@
    "confidence": "CONFIRMED",
    "reviewed": "2026-11-11",
    "evidence": [
-    "src/root/m208F.c:79 (f_208F_011F); original-dos.json#root:208F:011F",
+    "src/window/text_bitmap_helpers.c:79 (f_208F_011F); original-dos.json#root:208F:011F",
     "Win16 evidence/disassembly/cards.jsonl 2:4816 _gr_CenterStrInRectClear; original-win16.json#_gr_CenterStrInRectClear",
     "Anchor 1: Named win_CenterStrAtObj calls this Rect+string helper in DOS and the named Windows helper; Windows additionally shares it from formatted object-print wrappers.",
     "Anchor 2: Same centering sequence as non-clearing sibling, then two conditional left/right strips filled with background colour through slot3/GBoxFill. Win16 applies right/bottom-minus1 adjustments, a documented platform edge difference."

@@ -16,7 +16,7 @@ external calls, invalid IDs or corrupted memory/control flow.
 
 ## Exact selector owner and observer
 
-`src/state/critical-selector-byte.c` owns only `char near g_8CCB;`, with static
+`src/platform/state/critical_error_selector.c` owns only `char near g_8CCB;`, with static
 duration and genuine CRT zero initialization. The complete current C/ASM token
 census has four references: that definition, two declarations and one read in
 `f_1C62_06A6`. The source has no assignment/address-taking of the selector, no

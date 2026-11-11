@@ -53,7 +53,7 @@
       },
       {
         "path": "layout/functions.json",
-        "sha256": "6089a06e18fbe8f0960392cfe30357f7c19c886f38f10f7f115c72d127a756e7"
+        "sha256": "f28c7de3f74334c001f3b5a5a43342af4222de3e83dca2159896f42da3a11d48"
       },
       {
         "path": "assets/SIMANT.EXE",
@@ -977,7 +977,7 @@
           "old": "f_171C_1C0A",
           "new": "mem_Free",
           "kind": "recovered",
-          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
+          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/memory/ralloc.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
         },
         {
           "old": "f_171C_1C1C",

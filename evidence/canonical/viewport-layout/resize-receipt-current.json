@@ -5,7 +5,7 @@
   "compiled_current_whole_tus": [
     {
       "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
-      "source": "src/S26/m39C7.c",
+      "source": "src/window/move_resize.c",
       "source_sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
       "object_sha256": "1d3ef1a273eb9196c8f806432f7c92a11a003e66ab598fde261e236c5afc850e",
       "linked_code_sha256": "2c39072dd83b515e15c464b0352702534c49142bf185d79c2ee87126b3efa2ea",
@@ -23,7 +23,7 @@
     },
     {
       "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
-      "source": "src/root/m0250.c",
+      "source": "src/ui/edit_view.c",
       "source_sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
       "object_sha256": "12675e0cfa17dbe0989fc3d67b2a48816fc0767c7ebd7009fb84492b0e64db25",
       "linked_code_sha256": "c0948f9bec884194023df949a40310ea9ed1b7198b848623cd713e1093947c32",
@@ -44,79 +44,79 @@
       "sha256": "30e97c3e8fe3caff15e52366ce1f1409f2d0ef8b45a2ee60dba3ba1eca6c836e",
       "size": 260787
     },
-    "src/S26/m39C7.c": {
+    "src/window/move_resize.c": {
       "sha256": "fb4938daa334a8e9f929b44a542392f47fc7c1a654ca87f303ee80528b34c4c4",
       "size": 9163
     },
-    "src/root/m0250.c": {
+    "src/ui/edit_view.c": {
       "sha256": "3e6b2f1499224b7047f7c2df06363781300968c03a72efe60b6666ca4076164a",
       "size": 70665
     },
-    "src/root/m00BA.c": {
+    "src/startup/application_windows.c": {
       "sha256": "d72629d827e2bccd7557566b725f652862d2b1199f40390361179c61cc9ff5dc",
       "size": 3562
     },
-    "src/root/m20E8.c": {
+    "src/window/lifecycle.c": {
       "sha256": "8646710d057e8d9072fe6a19b43863cd085f20f0df4102803c4417f4ca56f821",
       "size": 11180
     },
-    "src/root/m23AE.c": {
+    "src/window/locking.c": {
       "sha256": "61d0cc68294d79b551f5b12332b19a79b7d21187ebbb18d81962f57a90664cc1",
       "size": 4888
     },
-    "src/root/m2505.c": {
+    "src/window/object_geometry.c": {
       "sha256": "d6c0300e4e90bb4ffa3f6f3f8a797b115a0377a0457da754a4623614b8238234",
       "size": 10580
     },
-    "src/root/m218D.c": {
+    "src/window/events.c": {
       "sha256": "3ccc2dedf58831dc2f853beb3133847e7f1f8c1883c445379fd5584b3255112e",
       "size": 8739
     },
-    "src/root/m1FD2.c": {
+    "src/window/menu_helpers.c": {
       "sha256": "c751c5267a0f73137dcc5a93b1e354ccd7352b24c8f95f5db7db607695352099",
       "size": 10146
     },
-    "src/root/m1B73.asm": {
+    "src/platform/input_timer.asm": {
       "sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
       "size": 35074
     },
-    "src/root/m208F.c": {
+    "src/window/text_bitmap_helpers.c": {
       "sha256": "57fc64215f6ff681790e1afe2321f0348ee0cb8c3fbce066cef5f2dd5a18a72e",
       "size": 6853
     },
-    "src/root/m22BF.c": {
+    "src/window/object_attributes.c": {
       "sha256": "f5b617067cdc711593e94dbb725ae9ceaeb12b890f198af0d66c1973e15133a0",
       "size": 18937
     },
-    "src/root/m00F8.c": {
+    "src/ui/view_dialog_helpers.c": {
       "sha256": "4ee148ec616e199f61b671df89da8a21f1789c4177d3dbc7b76a478acb98184a",
       "size": 7304
     },
-    "src/S09/m35F5.c": {
+    "src/ui/save_load.c": {
       "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a",
       "size": 42150
     },
-    "src/S00/m31AD.asm": {
+    "src/platform/video/planar_raster.asm": {
       "sha256": "3aacbc1b1524b3eb6346cc62be24896b1cede919e215b4d7b577ebdbff2cd3a5",
       "size": 84117
     },
-    "src/S00/m31AD_2AB4.asm": {
+    "src/platform/video/planar_mode_blits.asm": {
       "sha256": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
       "size": 40338
     },
-    "src/state/remaining-misc-storage.c": {
+    "src/unresolved/state/remaining_misc_storage.c": {
       "sha256": "14e4a1dee10178208042f2959b670aad9051dfe3dcdcad11d1d3019709b1147a",
       "size": 298
     },
-    "src/state/remaining-ui-state.c": {
+    "src/unresolved/state/remaining_ui_state.c": {
       "sha256": "26e147cfe361cd74f3baf9c8696c735364d9e5dec663fbd310895cbfaabc8b7f",
       "size": 510
     },
-    "src/state/remaining-window-state.c": {
+    "src/unresolved/state/remaining_window_state.c": {
       "sha256": "fd2f545af87160b49456eeb534f9400d256d7e0ffe0ec07da21b6d3c86e1bfaf",
       "size": 851
     },
-    "src/state/window-initialized-views.c": {
+    "src/window/state/hooks_offsets.c": {
       "sha256": "b93b7067493e084a7a506b711846d6e51a3f76fd966336984e6ad99fbdc670dc",
       "size": 124
     },

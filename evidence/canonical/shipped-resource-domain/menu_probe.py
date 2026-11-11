@@ -152,7 +152,7 @@ def main():
         oracle_sha256=exe.load().sha256, results=controls(),
         model_boundaries=["geometry: drawing/clip/font callbacks", "isolated pointer/resource/descriptor state", "mouse: no callbacks"],
         inputs={p: hashlib.sha256((ROOT / p).read_bytes()).hexdigest() for p in
-            ("src/root/m1FD2.c", "src/root/m1B73.asm", "assets/SHARED.DAT", "assets/SHARED.NDX", "tools/behavior.py")})
+            ("src/window/menu_helpers.c", "src/platform/input_timer.asm", "assets/SHARED.DAT", "assets/SHARED.NDX", "tools/behavior.py")})
     (out / "menu.json").write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
 

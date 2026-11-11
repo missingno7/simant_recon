@@ -56,8 +56,8 @@ def main():
     if not out.is_relative_to(ROOT / 'build') or out == ROOT / 'build' or out.exists():
         raise ValueError('fresh output directory strictly beneath build required')
     pinned = ('src/program.json', 'layout/manifest.json', 'layout/oracle.lock.json',
-              'layout/toolchain.json', 'src/S10/m35F5.c', 'src/S20/m39F1.c',
-              'src/root/m1B73.asm', 'src/root/m1FD2.c', 'tools/modules.py',
+              'layout/toolchain.json', 'src/window/menu_tracking.c', 'src/startup/dos_config.c',
+              'src/platform/input_timer.asm', 'src/window/menu_helpers.c', 'tools/modules.py',
               'tools/compiler.py', 'tools/match.py', 'tools/omf.py',
               Path(__file__).relative_to(ROOT).as_posix())
     pins = {name: sha((ROOT / name).read_bytes()) for name in pinned}

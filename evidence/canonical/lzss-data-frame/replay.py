@@ -1,7 +1,7 @@
 """Link whole current/candidate LZSS sources with a shifted test-owned DGROUP.
 
 Reads no original executable or game resource. Writes only this worker tree.
-Once canonical is admitted, invoke --source src/root/m1B05.asm; the legacy
+Once canonical is admitted, invoke --source src/resources/lzss.asm; the legacy
 negative is derived by removing the decoder-region SS assumption pair.
 """
 from pathlib import Path
@@ -207,7 +207,7 @@ def main():
         if OUT==build or (OUT.exists() and any(OUT.iterdir())):
             raise ValueError('--out must be a fresh subdirectory under build/')
         OUT.mkdir(parents=True,exist_ok=True)
-    args.source=Path('src/root/m1B05.asm')
+    args.source=Path('src/resources/lzss.asm')
     compiler.WORK=OUT/'fixture_compile'
     path=args.source if args.source.is_absolute() else ROOT/args.source
     positive=path.read_text()

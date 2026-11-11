@@ -8,6 +8,16 @@ import copy
 import re
 from alignment import calibrate
 
+# Audited Windows platform objects. Positive import uses are regenerated from
+# the original NE before applying this exclusion; this is not a name seed.
+WINDOWS_ONLY = {
+    '_antCursor','_bigFontH','_captureWnd','_clipDC','_clipWind','_digCursor',
+    '_dropCursor','_foodCursor','_hHelpCursor','_hInst','_lpTimerFunc',
+    '_magCursor','_mainRootWnd','_paletteH','_ribbonBarWnd','_rockCursor',
+    '_rootWnd','_smallFontH','_sprayCursor','_theDDEDataH','_updateRgn',
+    '_wSoundBlasterMsg','_win_hwnd',
+}
+
 
 def prepare(data, doc, blind, refs):
     """Filter unsupported deltas, classify tiers and attach auditable observations."""
@@ -21,8 +31,12 @@ def prepare(data, doc, blind, refs):
             rows[i] = copy.deepcopy(b)
     base = {r['win16']: r for r in rows if r['delta'] == 0}
     rejected = copy.deepcopy(doc.get('rejected', []))
+    platform_names={e['win16'] for e in getattr(data,'platform_objects',[])}
     retained = []
     for r in rows:
+        if r['win16'] in WINDOWS_ONLY and r['win16'] in platform_names:
+            rejected.append(dict(row=r,reason='positive Windows API handle/callback/message representation; scalar reference order is not a DOS object correspondence'))
+            continue
         if r['delta']:
             b = base.get(r['win16'])
             expected = None
@@ -115,6 +129,24 @@ def prepare(data, doc, blind, refs):
                 'kind': 'existing_registration',
                 'note': 'existing DOS spelling; no fresh blind recovery',
             })
+        flows = r.get('value_flows', [])
+        for role, kind in [('result', 'call_result_storage'), ('argument', 'call_argument_use'),
+                           ('parameter', 'parameter_storage')]:
+            observations = [e for e in flows if e['role'] == role]
+            if observations:
+                ev.append({'kind': kind, 'observations': observations,
+                           'note': 'whole stored value; low and high halves distinguished explicitly'})
+        if 'content_match' in r:
+            ev.append({'kind': 'initial_contents', **r['content_match'],
+                       'note': 'unique matching initialized bytes; public spacing is not an ownership boundary'})
+        if 'text_table' in r:
+            ev.append({'kind': 'text_table_contents', **r['text_table']})
+        if 'indexed_order' in r:
+            e=r['indexed_order']
+            ev.append({'kind':'indexed_reference_order','function_pairs':e['order_votes'],
+                'functions':e['functions'],'rivals_for_dos':e['second_dos_votes'],
+                'rivals_for_win16':e['second_win16_votes'],
+                'note':'terminal array-only projection; not reused as an anchor'})
         if 'table' in r:
             t = r['table']
             i = t['index']
@@ -158,7 +190,7 @@ def prepare(data, doc, blind, refs):
             uniq = {(s['win16'], s['next_win16']): s for s in r['spacing_support']}
             ev.append({'kind': 'layout_spacing', 'adjacent_objects': list(uniq.values())})
         init = r.get('initial_contents')
-        if init and (init['substantial'] or (method == 'layout-edge' and init['nonzero_bytes'] >= 2)):
+        if 'content_match' not in r and init and (init['substantial'] or (method == 'layout-edge' and init['nonzero_bytes'] >= 2)):
             ev.append({'kind': 'initial_contents', **init})
         if 'pointer_contents' in r:
             ev.append({'kind': 'initialized_pointer_contents', **r['pointer_contents']})
@@ -182,6 +214,15 @@ def prepare(data, doc, blind, refs):
         method = r['method']
         u = r.get('usage', {})
         no_rival = not r.get('second_dos_votes', 0) and (not r.get('second_win16_votes', 0))
+        if {'call_result_storage', 'call_argument_use'} <= kinds:
+            return 'A'
+        if method in ('interior-contents', 'text-table'):
+            shared = r.get('content_match', r.get('text_table', {})).get('functions', [])
+            return 'A' if 'layout_spacing' in kinds or shared else 'B'
+        if method == 'value-flow':
+            return 'A' if 'layout_spacing' in kinds or (u.get('shared',0)>=2 and u.get('jaccard',0)>=0.6) else 'B'
+        if method == 'indexed-order':
+            return 'A' if no_rival and r['order_votes']>=2 and u.get('shared',0)>=2 else 'B'
         if method in ('terminal-gap', 'terminal-usage'):
             return 'B'
         n = max(r.get('order_votes', 0), len(r.get('leave_one_out_order', [])))
@@ -255,6 +296,18 @@ def describe(row, evidence):
     """Summarize decisive observations without overstating ownership or size."""
     kinds = {e['kind']:e for e in evidence}
     clauses = []
+    if 'call_result_storage' in kinds:
+        e = kinds['call_result_storage']['observations'][0]
+        suffix = f" with resource {e['signature'][0]}" if e['callee']=='_LoadStringAnt' else ''
+        clauses.append(f"stores the result of {e['callee'].lstrip('_')}{suffix} ({e['dos_bytes']} DOS / {e['win16_bytes']} Win16 bytes)")
+    if 'call_argument_use' in kinds:
+        e = kinds['call_argument_use']['observations'][0]
+        clauses.append(f"passed as the first argument to {e['callee'].lstrip('_')} in {e['win16_function'].lstrip('_')}")
+    if 'parameter_storage' in kinds:
+        e = kinds['parameter_storage']['observations'][0]
+        clauses.append(f"stores a {e['dos_bytes']}-byte parameter at BP+{e['signature'][0]} in {e['win16_function'].lstrip('_')}")
+    if 'text_table_contents' in kinds:
+        clauses.append(f"same ordered {kinds['text_table_contents']['entries']} text strings across pointer representations")
     if 'initialized_pointer_table' in kinds:
         e = kinds['initialized_pointer_table']
         clauses.append(f"save record index {e['record']} of {e['records']}, same element size and count")
@@ -295,3 +348,57 @@ def describe(row, evidence):
     if order.get('rivals_for_dos',0) or order.get('rivals_for_win16',0):
         clauses.append('rival order votes remain; Tier B')
     return '; '.join(clauses[:4])+'.'
+
+
+def coverage(data, rows, refs, platform_objects):
+    """Account for every original public without turning absence into a DOS match.
+
+    The Windows-only set contains API handles or Windows callback/message state
+    with positive import-use evidence. Other missing names remain unresolved.
+    Pointer-view diagnostics report candidate initialized pointer sites, not new
+    objects: a save-schema pointer to an array is not a named pointer variable.
+    """
+    from binary import Extractor, resolve
+    from data_kinds import dos_coordinate
+    windows_only = WINDOWS_ONLY
+    by_name={r['win16']:r for r in rows if not r['delta']}
+    platform=collections.defaultdict(list)
+    for e in platform_objects:platform[e['win16']].append(e)
+    controls={w[0] for w in data.known.values()}
+    entries=[]
+    for name,symbol in sorted(data.ws.items()):
+        row=by_name.get(name)
+        if name in controls:status='registered'
+        elif row:status='tier-'+row['tier']
+        elif name in windows_only:
+            assert platform[name],name
+            status='Windows-only'
+        else:status='unresolved'
+        users=[p['win16'] for p in refs if any(e[0]==name for e in p['w16_refs'])]
+        entry=dict(win16=name,win16_address=f"{symbol['segment']:04X}:{symbol['offset']:04X}",
+            status=status,candidate=row['dos'] if row else None,win16_spacing=data.wspan(name),
+            paired_function_users=users)
+        if name in windows_only:
+            entry['evidence']=platform[name]
+            entry['reason']='Windows API object, callback, registered message or DDE state; no DOS object with this platform representation'
+        entries.append(entry)
+    de,we=Extractor('dos',data),Extractor('w16',data)
+    views=[]
+    for name in ('_PherMapAPtr','_PherMapBNPtr','_PherMapBTPtr','_PherMapRNPtr','_PherMapRTPtr'):
+        s=data.ws[name];target=we.ptrs.get((s['segment'],s['offset']))
+        resolved=resolve(data.wtable,*target) if target else None
+        row=by_name.get(resolved[0]) if resolved and not resolved[1] else None
+        sites=[]
+        if row:
+            ds,do=(int(x,16) for x in row['dos'].split(':'));linear=ds*16+do
+            for source,t in de.ptrs.items():
+                if t[0]*16+t[1]!=linear:continue
+                coord=dos_coordinate(data,source)
+                if coord:
+                    sites.append(dict(address=f'{coord[0]:04X}:{coord[1]:04X}',
+                        in_save_schema=0x4E4B*16<=source<0x4E4B*16+307*8,
+                        note='raw relocated pointer occurrence; not evidence of a separately allocated pointer variable'))
+        views.append(dict(win16=name,initialized_target=list(resolved) if resolved else None,
+            dos_pointer_occurrences=sites,conclusion='unresolved; matching an array target alone does not identify a pointer variable'))
+    return dict(counts=dict(collections.Counter(e['status'] for e in entries)),
+                names=entries,map_pointer_views=views)

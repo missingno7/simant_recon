@@ -4,24 +4,24 @@
   "modules": [
     {
       "key": "S00:3126",
-      "source": "src/S00/m3126.asm",
+      "source": "src/platform/video/planar_minimap.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "596d463f05bbb39c78f11a1e9a85a6c72e3e467cf2567e2db9cb3ad227d5c4c3",
+      "source_sha256": "759e12a0bc410565f75846b60e76b9b727edda9f0944ed62c8524445f1405efe",
       "unit": "S00"
     },
     {
       "key": "S00:31AD",
-      "source": "src/S00/m31AD.asm",
+      "source": "src/platform/video/planar_raster.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "fb3645e3ce37a341dd403d5ca97c14acc2ff7a869a0167f48ae36c0a19104d29",
+      "source_sha256": "1681092343d39ca24379dbeb6c593a641179b051e48e699c1c4687b4cd0d10a6",
       "unit": "S00",
       "owned_code_references": {
         "owners": [
@@ -50,7 +50,7 @@
             "anchor_delta": 0,
             "references": [
               {
-                "public": "_o00_31AD_0122",
+                "public": "_GPatBox",
                 "operand_offset": 12,
                 "owner_offset": 0,
                 "segment_operand_offset": 8
@@ -66,7 +66,7 @@
             "anchor_delta": 0,
             "references": [
               {
-                "public": "_o00_31AD_037C",
+                "public": "_GInvBox",
                 "operand_offset": 12,
                 "owner_offset": 0,
                 "segment_operand_offset": 8
@@ -78,11 +78,11 @@
             "segment": "S00B_TEXT",
             "start": 5821,
             "size": 1,
-            "anchor_public": "_o00_31AD_16A9",
+            "anchor_public": "_GBoxFill",
             "anchor_delta": 24,
             "references": [
               {
-                "public": "_o00_31AD_16A9",
+                "public": "_GBoxFill",
                 "operand_offset": 12,
                 "owner_offset": 0,
                 "segment_operand_offset": 8
@@ -110,18 +110,18 @@
     },
     {
       "key": "S00:31AD@2AB4",
-      "source": "src/S00/m31AD_2AB4.asm",
+      "source": "src/platform/video/planar_mode_blits.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
+      "source_sha256": "539aed888bce9236f4a9ca7a259bc5a65df7fa27e2582ad5047d0659d27cfd0e",
       "unit": "S00"
     },
     {
       "key": "S00:35A6",
-      "source": "src/S00/m35A6.asm",
+      "source": "src/platform/video/planar_sprites.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -132,7 +132,7 @@
     },
     {
       "key": "S01:3126",
-      "source": "src/S01/m3126.asm",
+      "source": "src/platform/video/mono_raster.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -163,18 +163,18 @@
     },
     {
       "key": "S01:328E",
-      "source": "src/S01/m328E.asm",
+      "source": "src/platform/video/mono_minimap.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "af31ebb956e1d89743a66647fa8ea8beb5f1d6c57a9eab476fa39103df88c521",
+      "source_sha256": "4ec05c3bbae239739d632efd2ae4340e517d2098661c5be3a6fbdaa599161928",
       "unit": "S01"
     },
     {
       "key": "S01:32B5",
-      "source": "src/S01/m32B5.asm",
+      "source": "src/platform/video/mono_sprites.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -185,7 +185,7 @@
     },
     {
       "key": "S02:3126",
-      "source": "src/S02/m3126.asm",
+      "source": "src/platform/video/vga8_raster.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -248,7 +248,7 @@
     },
     {
       "key": "S03:3126",
-      "source": "src/S03/m3126.asm",
+      "source": "src/platform/video/tandy_raster.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -339,18 +339,18 @@
     },
     {
       "key": "S03:3253",
-      "source": "src/S03/m3253.asm",
+      "source": "src/platform/video/tandy_minimap.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "5f67726c1477bfb28285078c835fef3b8e1b9a7e1ad19ce34e225b76366b8165",
+      "source_sha256": "4a8a6f126921b9828fee7d827c083190ddf4bbaa1f569a1ae927ca65a3ace080",
       "unit": "S03"
     },
     {
       "key": "S03:3258",
-      "source": "src/S03/m3258.asm",
+      "source": "src/platform/video/tandy_sprites.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -413,7 +413,7 @@
     },
     {
       "key": "S04:35F5",
-      "source": "src/S04/m35F5.c",
+      "source": "src/ui/minimap.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -423,12 +423,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "de257dc7184a8c579e8d0f1f348050579d38aab73a400d67bfd519b783e574af",
+      "source_sha256": "eea3a780b8aa46c18d019618a77d7ba1997c211d5728d62ba6933ed717582ee2",
       "unit": "S04"
     },
     {
       "key": "S05:35F5",
-      "source": "src/S05/m35F5.c",
+      "source": "src/ui/editor_menus.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -442,7 +442,7 @@
     },
     {
       "key": "S05:3663",
-      "source": "src/S05/m3663.c",
+      "source": "src/ui/experiment_menu.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -457,7 +457,7 @@
     },
     {
       "key": "S06:35F5",
-      "source": "src/S06/m35F5.c",
+      "source": "src/simulation/yard.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -467,12 +467,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "75c9fad469e747b0aff48ce98c9d8a9ac6cda4da6695e8d055e9aceae22f6707",
+      "source_sha256": "e23564c617b4726af51711fca2f35e09a10efd1b6702d5e113223f4fc90e30d8",
       "unit": "S06"
     },
     {
       "key": "S07:35F5",
-      "source": "src/S07/m35F5.c",
+      "source": "src/ui/cheats.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -487,7 +487,7 @@
     },
     {
       "key": "S08:35F5",
-      "source": "src/S08/m35F5.c",
+      "source": "src/simulation/world_generation.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -502,7 +502,7 @@
     },
     {
       "key": "S09:35F5",
-      "source": "src/S09/m35F5.c",
+      "source": "src/ui/save_load.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -512,12 +512,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "a3748b95bc47381bdc62d1964002a40077105b8b6ad446b84b3520921b3dd0e5",
+      "source_sha256": "0752cc658c179205c0304954da6de1a4651a22e2358db55d130f9f5a8052519b",
       "unit": "S09"
     },
     {
       "key": "S09:36EE",
-      "source": "src/S09/m36EE.c",
+      "source": "src/window/text_entry.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -532,7 +532,7 @@
     },
     {
       "key": "S10:35F5",
-      "source": "src/S10/m35F5.c",
+      "source": "src/window/menu_tracking.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -548,7 +548,7 @@
     },
     {
       "key": "S11:35F5",
-      "source": "src/S11/m35F5.c",
+      "source": "src/ui/game_menu.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -563,7 +563,7 @@
     },
     {
       "key": "S12:384C",
-      "source": "src/S12/m384C.c",
+      "source": "src/ui/map_window.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -573,12 +573,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "372fac0c3225a009a357c5f7acb0dcd11177451fd846c7e161f46870b0509eb1",
+      "source_sha256": "be60ad13265529897a864a972f93d66282fd4bf28529dfad0b05c395df6dd200",
       "unit": "S12"
     },
     {
       "key": "S13:384C",
-      "source": "src/S13/m384C.c",
+      "source": "src/ui/yard_window.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -593,7 +593,7 @@
     },
     {
       "key": "S14:384C",
-      "source": "src/S14/m384C.c",
+      "source": "src/ui/scenario_dialogs.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -603,12 +603,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "9f6921f0fa1839ff26566d23599c954f6ce80abb7141361223cd7b3d9f035b08",
+      "source_sha256": "0962e556a6c7f879e0d54402ed912def104264562a0eb8f50639e974c71e96de",
       "unit": "S14"
     },
     {
       "key": "S15:384C",
-      "source": "src/S15/m384C.c",
+      "source": "src/startup/game_session.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -623,7 +623,7 @@
     },
     {
       "key": "S16:384C",
-      "source": "src/S16/m384C.c",
+      "source": "src/ui/intro_credits.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -633,12 +633,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "ae5559fca2b97919ad45a09c73787db56e0f5dacc85a57f7442cad10edb68768",
+      "source_sha256": "58517952115392618185b30bb0f20c80231fa9969727cb248baaaaaa250eaf9d",
       "unit": "S16"
     },
     {
       "key": "S17:384C",
-      "source": "src/S17/m384C.c",
+      "source": "src/window/menu_setup.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -654,7 +654,7 @@
     },
     {
       "key": "S18:384C",
-      "source": "src/S18/m384C.c",
+      "source": "src/simulation/map_patches.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -669,7 +669,7 @@
     },
     {
       "key": "S19:384C",
-      "source": "src/S19/m384C.c",
+      "source": "src/ui/game_events.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -684,7 +684,7 @@
     },
     {
       "key": "S20:39C7",
-      "source": "src/S20/m39C7.c",
+      "source": "src/platform/video/font_setup.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -700,7 +700,7 @@
     },
     {
       "key": "S20:39F1",
-      "source": "src/S20/m39F1.c",
+      "source": "src/startup/dos_config.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -716,7 +716,7 @@
     },
     {
       "key": "S21:39C7",
-      "source": "src/S21/m39C7.asm",
+      "source": "src/platform/video/adapter_probe.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -727,7 +727,7 @@
     },
     {
       "key": "S22:39C7",
-      "source": "src/S22/m39C7.c",
+      "source": "src/ui/yellow_commands.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -737,12 +737,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "c37c73264f518e638422f2fe4f2eddf6e7d8433fa5b2d4b10323df7185c9cf3c",
+      "source_sha256": "1fc3e09dcd48619931a1d573975416b5d5027f3700cf60ba8c83d0c29e6d5857",
       "unit": "S22"
     },
     {
       "key": "S22:3BBD",
-      "source": "src/S22/m3BBD.c",
+      "source": "src/ui/experiment_tools.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -757,7 +757,7 @@
     },
     {
       "key": "S23:39C7",
-      "source": "src/S23/m39C7.c",
+      "source": "src/ui/info_cards.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -767,12 +767,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "b6d78f8ddcb238a06c0b05d481f30094d259ceea09e7946ab7bc84cc3c730804",
+      "source_sha256": "1084b0ada5f824f173825a3ee451f75092130491c9af3587be26e2605c40b2ce",
       "unit": "S23"
     },
     {
       "key": "S24:39C7",
-      "source": "src/S24/m39C7.c",
+      "source": "src/ui/history_window.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -782,12 +782,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "3b22feb82fa00d9fe1f2b743f8c087355a09f006079cd3740ac9336966272563",
+      "source_sha256": "ebf2a836a15049c5da147c981c55b673c00f0129a25ce03fec4705b16cb6c5e3",
       "unit": "S24"
     },
     {
       "key": "S25:39C7",
-      "source": "src/S25/m39C7.c",
+      "source": "src/simulation/black_nest.c",
       "lang": "c",
       "profile": "msc600a",
       "flags": [
@@ -802,7 +802,7 @@
     },
     {
       "key": "S25:3BA4",
-      "source": "src/S25/m3BA4.c",
+      "source": "src/simulation/yellow_ant.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -812,12 +812,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "231ca50716c965b543db3f280503285efc68c876131f6fed1d58b6b8643b38c4",
+      "source_sha256": "cb3b565409274e757d70f818e17e4201878a45db6158fbd0b1a3c1b55fffdd3a",
       "unit": "S25"
     },
     {
       "key": "S26:39C7",
-      "source": "src/S26/m39C7.c",
+      "source": "src/window/move_resize.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -833,7 +833,7 @@
     },
     {
       "key": "data:3D57",
-      "source": "src/data/d3D57.c",
+      "source": "src/simulation/tables.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -848,7 +848,7 @@
     },
     {
       "key": "data:3E1D",
-      "source": "src/data/d3E1D.c",
+      "source": "src/simulation/maps_lists.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -863,7 +863,7 @@
     },
     {
       "key": "data:55B3@0042",
-      "source": "src/data/d55B3_0042.c",
+      "source": "src/startup/version.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -878,7 +878,7 @@
     },
     {
       "key": "data:55B3@0064",
-      "source": "src/data/d55B3_0064.c",
+      "source": "src/sound/theme_song.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -893,7 +893,7 @@
     },
     {
       "key": "data:55B3@00B8",
-      "source": "src/data/d55B3_00B8.c",
+      "source": "src/sound/instruments.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -908,7 +908,7 @@
     },
     {
       "key": "root:0000",
-      "source": "src/root/m0000.c",
+      "source": "src/sound/resource_loading.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -919,12 +919,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "3c2643d6d0b802bdad2fa4ff53a7e62351a0249579021f2c85a112d089b4332c",
+      "source_sha256": "f5108c46131442327d540662ed72ab0bc6376d5422e1142678d4fbb8cde49bae",
       "unit": "root"
     },
     {
       "key": "root:004A",
-      "source": "src/root/m004A.c",
+      "source": "src/ui/map_scrolling.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -934,12 +934,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "88152800cff83de8534c85a1b7c37dd2a070ffa05ffffdd843775013ab4f1767",
+      "source_sha256": "39c09e7295e770eaaf4f33aec7e99f5ed973606602b036aed15a5835e149b670",
       "unit": "root"
     },
     {
       "key": "root:0093",
-      "source": "src/root/m0093.c",
+      "source": "src/simulation/random.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -953,7 +953,7 @@
     },
     {
       "key": "root:00BA",
-      "source": "src/root/m00BA.c",
+      "source": "src/startup/application_windows.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -963,12 +963,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "0581613e46a8866a1bcfb4b9f866a71c01e7a25884e47b532ece856b47846811",
+      "source_sha256": "395a1e3828e58ddf0db1098d48ece336971ce651436ea07feb9ef732f4602734",
       "unit": "root"
     },
     {
       "key": "root:00DE",
-      "source": "src/root/m00DE.c",
+      "source": "src/unresolved/m00de.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -981,7 +981,7 @@
     },
     {
       "key": "root:00DF",
-      "source": "src/root/m00DF.c",
+      "source": "src/sound/game_interface.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -996,7 +996,7 @@
     },
     {
       "key": "root:00F8",
-      "source": "src/root/m00F8.c",
+      "source": "src/ui/view_dialog_helpers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1011,7 +1011,7 @@
     },
     {
       "key": "root:015B",
-      "source": "src/root/m015B.c",
+      "source": "src/ui/view_commands.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1026,7 +1026,7 @@
     },
     {
       "key": "root:0244",
-      "source": "src/root/m0244.c",
+      "source": "src/platform/block_helpers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1035,12 +1035,12 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "1b837925f8afbf3f6a817202acb82023bca85bd9aef1f6492b5b71473c71ae1b",
+      "source_sha256": "be460dc24c80cda5282fc337a52c2ff4492055e03203fcc65ee59f7397dbc763",
       "unit": "root"
     },
     {
       "key": "root:0250",
-      "source": "src/root/m0250.c",
+      "source": "src/ui/edit_view.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1050,12 +1050,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "2e2cd80d80204834de64dfb24d403cef0124b013c872162687ad1defb75b4d72",
+      "source_sha256": "207439568e72a981571dfaebd13c704c855509cb5446c4210d1db3b84ff0ff40",
       "unit": "root"
     },
     {
       "key": "root:075B",
-      "source": "src/root/m075B.c",
+      "source": "src/resources/game_strings.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1065,12 +1065,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "69b5b7ee5f97e11e571f378fe20a9401af1a221e0a656c953ab701e0e22e5d16",
+      "source_sha256": "7c411cef53d3aea5cd9696580be6bccb322b215b857da9c6bd280891cad1d90f",
       "unit": "root"
     },
     {
       "key": "root:078E",
-      "source": "src/root/m078E.c",
+      "source": "src/memory/pointers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1085,7 +1085,7 @@
     },
     {
       "key": "root:0798",
-      "source": "src/root/m0798.c",
+      "source": "src/ui/colony_controls.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1099,7 +1099,7 @@
     },
     {
       "key": "root:0894",
-      "source": "src/root/m0894.c",
+      "source": "src/simulation/surface_ants.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1114,7 +1114,7 @@
     },
     {
       "key": "root:0AD9",
-      "source": "src/root/m0AD9.c",
+      "source": "src/simulation/yard_creatures.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1129,7 +1129,7 @@
     },
     {
       "key": "root:0BE8",
-      "source": "src/root/m0BE8.c",
+      "source": "src/simulation/food_water_counts.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1143,7 +1143,7 @@
     },
     {
       "key": "root:0CDB",
-      "source": "src/root/m0CDB.c",
+      "source": "src/simulation/spider.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1158,7 +1158,7 @@
     },
     {
       "key": "root:0DEF",
-      "source": "src/root/m0DEF.c",
+      "source": "src/simulation/red_initiator.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1173,7 +1173,7 @@
     },
     {
       "key": "root:0E2E",
-      "source": "src/root/m0E2E.c",
+      "source": "src/simulation/tutorial.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1188,7 +1188,7 @@
     },
     {
       "key": "root:0EC1",
-      "source": "src/root/m0EC1.c",
+      "source": "src/simulation/ant_lists.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1203,7 +1203,7 @@
     },
     {
       "key": "root:0F3F",
-      "source": "src/root/m0F3F.c",
+      "source": "src/simulation/red_nest.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1218,7 +1218,7 @@
     },
     {
       "key": "root:10F7",
-      "source": "src/root/m10F7.c",
+      "source": "src/simulation/life_tiles.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1233,7 +1233,7 @@
     },
     {
       "key": "root:1383",
-      "source": "src/root/m1383.c",
+      "source": "src/simulation/strategy.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1248,7 +1248,7 @@
     },
     {
       "key": "root:1496",
-      "source": "src/root/m1496.c",
+      "source": "src/simulation/pheromones.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1263,7 +1263,7 @@
     },
     {
       "key": "root:14EE",
-      "source": "src/root/m14EE.c",
+      "source": "src/simulation/digging.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1273,12 +1273,12 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "bbe3dd7cb42b85d4f7ee4296e2c18ac3c7ae8f72b3b66041c9c064a575a0bc06",
+      "source_sha256": "9377d6f65c5c43b44a48c5606630790ea91cf40fb8a7a50700674d34715d8f32",
       "unit": "root"
     },
     {
       "key": "root:15D9",
-      "source": "src/root/m15D9.c",
+      "source": "src/ui/ribbon_messages.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1293,7 +1293,7 @@
     },
     {
       "key": "root:15F8",
-      "source": "src/root/m15F8.c",
+      "source": "src/startup/main.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1307,7 +1307,7 @@
     },
     {
       "key": "root:1629",
-      "source": "src/root/m1629.c",
+      "source": "src/graphics/balloons.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1317,23 +1317,23 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "0ec8dede44ecfb40da449cb6c9e185befd59dec459450b758ed18554fc7bded5",
+      "source_sha256": "484af459c56f1fd07bf14acde780163201c51c0fc28a7e1b0659cef59ecbe1af",
       "unit": "root"
     },
     {
       "key": "root:1699",
-      "source": "src/root/m1699.asm",
+      "source": "src/graphics/balloon_masks.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "8ba7381cff54203fdd5ffc09f40b4db3b53512e3a01ef524e063a41a71f529a2",
+      "source_sha256": "18791aeadfa13853d611025cdeaeaeaa59b4b2dbc1223de82c6c86f1bb18b5dd",
       "unit": "root"
     },
     {
       "key": "root:16B5",
-      "source": "src/root/m16B5.asm",
+      "source": "src/graphics/lines.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -1344,7 +1344,7 @@
     },
     {
       "key": "root:171C",
-      "source": "src/root/m171C.c",
+      "source": "src/memory/ralloc.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1358,7 +1358,7 @@
     },
     {
       "key": "root:194D",
-      "source": "src/root/m194D.asm",
+      "source": "src/platform/memory_helpers.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -1369,18 +1369,18 @@
     },
     {
       "key": "root:1959",
-      "source": "src/root/m1959.asm",
+      "source": "src/platform/byte_order.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+      "source_sha256": "cd19304ce04effb2607b0c14d2e0dc3da0602f1cd88d6c48f19d20ebb3311d20",
       "unit": "root"
     },
     {
       "key": "root:195A",
-      "source": "src/root/m195A.asm",
+      "source": "src/memory/ems.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -1391,7 +1391,7 @@
     },
     {
       "key": "root:1986",
-      "source": "src/root/m1986.c",
+      "source": "src/resources/database_index.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1406,7 +1406,7 @@
     },
     {
       "key": "root:19A9",
-      "source": "src/root/m19A9.c",
+      "source": "src/resources/database_records.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1416,12 +1416,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "e9827c9c81ecf6f75974b815cd49fcdbc86cda91f7b8140a0f566fbfe993556d",
+      "source_sha256": "fa4f3fad25e071fcf2c32568d762300e8221c2df87528e132f88255aece9ec43",
       "unit": "root"
     },
     {
       "key": "root:19DC",
-      "source": "src/root/m19DC.c",
+      "source": "src/resources/database_ems.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1436,7 +1436,7 @@
     },
     {
       "key": "root:1A28",
-      "source": "src/root/m1A28.c",
+      "source": "src/resources/database_files.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1451,7 +1451,7 @@
     },
     {
       "key": "root:1A53",
-      "source": "src/root/m1A53.c",
+      "source": "src/resources/database_objects.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1466,7 +1466,7 @@
     },
     {
       "key": "root:1A96",
-      "source": "src/root/m1A96.c",
+      "source": "src/resources/object_cache.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1481,85 +1481,85 @@
     },
     {
       "key": "root:1B05",
-      "source": "src/root/m1B05.asm",
+      "source": "src/resources/lzss.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "32660094ed04cbf4939cb345c153dcc6d3cbbd4aab8024cdd0781bbbeb871fcf",
+      "source_sha256": "04c6770d8dea822ba72aa39e1b1e1885eb1a8b3d39d098f316b712129507304c",
       "unit": "root",
       "data_frame_references": {
         "target_segment": "_DATA",
         "frame_group": "DGROUP",
         "sites": [
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 45,
             "displacement": 22
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 53,
             "displacement": 22
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 60,
             "displacement": 22
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 67,
             "displacement": 22
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 74,
             "displacement": 22
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 106,
             "displacement": 10
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 120,
             "displacement": 10
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 141,
             "displacement": 8
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 161,
             "displacement": 10
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 171,
             "displacement": 10
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 194,
             "displacement": 4
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 201,
             "displacement": 20
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 243,
             "displacement": 20
           },
           {
-            "public": "_f_1B05_0046",
+            "public": "_Unpack",
             "operand_offset": 250,
             "displacement": 8
           }
@@ -1568,7 +1568,7 @@
     },
     {
       "key": "root:1B28",
-      "source": "src/root/m1B28.c",
+      "source": "src/platform/cursor_shapes.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1583,29 +1583,29 @@
     },
     {
       "key": "root:1B4E",
-      "source": "src/root/m1B4E.asm",
+      "source": "src/platform/video/bios_bitmap.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "24bb461cac9b32a9e2114598209db4c6a1c75f7d842756d49cf4a6ab04a454a7",
+      "source_sha256": "99b2de658911118a22cac49b39817059320dc0716a9e7afbe1bfbb7a0a1de8c7",
       "unit": "root"
     },
     {
       "key": "root:1B73",
-      "source": "src/root/m1B73.asm",
+      "source": "src/platform/input_timer.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "00239398970278634dba1feae7b26b4a44e48b895f50e46cb65d5bdc433a8d33",
+      "source_sha256": "7e3419e0143330db326bbeb0a70bcbf183b170202d4dcd8dd0b449e135ef3a67",
       "unit": "root"
     },
     {
       "key": "root:1C62",
-      "source": "src/root/m1C62.c",
+      "source": "src/window/alerts.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1616,12 +1616,12 @@
         "/Gs",
         "/Zd"
       ],
-      "source_sha256": "da95bb06d9951ad5967c9afce30f92b4a6d31ee6116ffc13f071d274448dfc57",
+      "source_sha256": "f20b2996f72e189873a2ebe15e56628814f644073b31320633fcd533fff74796",
       "unit": "root"
     },
     {
       "key": "root:1CE2",
-      "source": "src/root/m1CE2.c",
+      "source": "src/graphics/screen_rects.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1632,12 +1632,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "6b6dc9f5b41593272feb23af305c969722238de3705bcc4eb3490dfb0c07ef72",
+      "source_sha256": "1605fefd096ed758516c7e87d31d442ece3f5f32fa8e6227accaf6f80f52a2e5",
       "unit": "root"
     },
     {
       "key": "root:1D8E",
-      "source": "src/root/m1D8E.c",
+      "source": "src/graphics/clip_rects.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1653,7 +1653,7 @@
     },
     {
       "key": "root:1E57",
-      "source": "src/root/m1E57.c",
+      "source": "src/graphics/clip_regions.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1669,7 +1669,7 @@
     },
     {
       "key": "root:1F58",
-      "source": "src/root/m1F58.asm",
+      "source": "src/platform/bios_helpers.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -1680,7 +1680,7 @@
     },
     {
       "key": "root:1F66",
-      "source": "src/root/m1F66.asm",
+      "source": "src/platform/file_helpers.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -1691,7 +1691,7 @@
     },
     {
       "key": "root:1F80",
-      "source": "src/root/m1F80.c",
+      "source": "src/graphics/text_layout.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1701,12 +1701,12 @@
         "/Og",
         "/Gs"
       ],
-      "source_sha256": "a148da96d2615e85e820bf538f7131ee267d97fefcfccaac604dd1a020ee7566",
+      "source_sha256": "427677c3d374ba481b2eddc305645ad294b37b544eaf949737a08bfd5e6b614c",
       "unit": "root"
     },
     {
       "key": "root:1FAA",
-      "source": "src/root/m1FAA.c",
+      "source": "src/graphics/trapezoid.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1722,18 +1722,18 @@
     },
     {
       "key": "root:1FBD",
-      "source": "src/root/m1FBD.asm",
+      "source": "src/graphics/bitmap_text.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "0a881f6e06045205b27b202d8d6d00b7e0a6ba42d8d7f545610f89d8aad143bc",
+      "source_sha256": "062cda452f2e34081b9003404d158c4415f5ebbe5f6d19a4ec40ee9c0cb1cfbc",
       "unit": "root"
     },
     {
       "key": "root:1FD2",
-      "source": "src/root/m1FD2.c",
+      "source": "src/window/menu_helpers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1744,12 +1744,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "4e0271abf080af59191f2c94afbd75d06d56e7536a02a08df281fc50037a73af",
+      "source_sha256": "197b8f3a3643f157213729c41b4cb3ca25ff7bd0e8477faf9ca6043a8d696dae",
       "unit": "root"
     },
     {
       "key": "root:205F",
-      "source": "src/root/m205F.c",
+      "source": "src/platform/video/driver_select.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1765,7 +1765,7 @@
     },
     {
       "key": "root:208F",
-      "source": "src/root/m208F.c",
+      "source": "src/window/text_bitmap_helpers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1775,12 +1775,12 @@
         "/Og",
         "/Gs"
       ],
-      "source_sha256": "41d99129ad0e9a95ad6dee67af45ce5019a59076de79c9a1f6bacc078b7e4f55",
+      "source_sha256": "d0f017c0576528d280a240d67aac2a32abf705a0c4151fe2b68cc744d18269ba",
       "unit": "root"
     },
     {
       "key": "root:20E8",
-      "source": "src/root/m20E8.c",
+      "source": "src/window/lifecycle.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1796,7 +1796,7 @@
     },
     {
       "key": "root:218D",
-      "source": "src/root/m218D.c",
+      "source": "src/window/events.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1812,7 +1812,7 @@
     },
     {
       "key": "root:21FA",
-      "source": "src/root/m21FA.c",
+      "source": "src/window/drawing.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1823,12 +1823,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "e1ccab194dd68be98e4c3cacd5c1eefa7d549f6f7926a456ca2c5ae9ab6bc926",
+      "source_sha256": "0fa15c05c2cfef071e00f8869b051698daf20f7e7466e60c0f54aec3b2129009",
       "unit": "root"
     },
     {
       "key": "root:22BF",
-      "source": "src/root/m22BF.c",
+      "source": "src/window/object_attributes.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1839,12 +1839,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "f60597c0415e1cfad3b7933e37d7d8b9261b1c3b0ea01a020b4062bb348dd2e8",
+      "source_sha256": "9c09a6595a06569582328e319449f9446cdf92c703eda8c2faca8eed2affcb17",
       "unit": "root"
     },
     {
       "key": "root:23AE",
-      "source": "src/root/m23AE.c",
+      "source": "src/window/locking.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1860,7 +1860,7 @@
     },
     {
       "key": "root:23E6",
-      "source": "src/root/m23E6.c",
+      "source": "src/window/lists_sliders.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1871,12 +1871,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "5c1e128d6e15a0896cee4a44f04300e785782236bfe05b99a529a9d96c86ae1a",
+      "source_sha256": "5f99a92583e4954e04ee26fb2de0184446bf40d74f06f43a3c8abad76e5b8092",
       "unit": "root"
     },
     {
       "key": "root:24AB",
-      "source": "src/root/m24AB.c",
+      "source": "src/graphics/font_output.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1887,23 +1887,23 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "b82252189489fbdb16936b18695b91cf05adf7cdc847635653f4a3506ab5365d",
+      "source_sha256": "a8aab5a17e81477beb80d936399d4d680c540e44dbd5a9555aa8d91848c47fad",
       "unit": "root"
     },
     {
       "key": "root:24FA",
-      "source": "src/root/m24FA.asm",
+      "source": "src/graphics/pixel_helpers.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "fe0ce9e992304360b80768c8f1ef580706e44c9182a3681fcd18bdbd3d9baa8c",
+      "source_sha256": "0c7dc1ce797647f9460feb23beb31504fe33a9b34727eacdde847b9b7bd9d562",
       "unit": "root"
     },
     {
       "key": "root:2505",
-      "source": "src/root/m2505.c",
+      "source": "src/window/object_geometry.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1914,12 +1914,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "1026ccc0d20e72a12ee6be5e57826ae72bf3b6c65dacf3fc16f12a30da2b7b36",
+      "source_sha256": "7ef32a8bea6be8bb056d6c00695a3763719467e7b77a6dccbc2b33a1270642cb",
       "unit": "root"
     },
     {
       "key": "root:259D",
-      "source": "src/root/m259D.c",
+      "source": "src/window/pictures.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1930,12 +1930,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "c0eb79af669bf20c10657494cd8d8c618c712532b58f0dfb51fdc8f7428a5275",
+      "source_sha256": "a29df4ab84199e47b0bca978b355f33bb2a924ca79fd28b91cc04ce02d2949aa",
       "unit": "root"
     },
     {
       "key": "root:25E7",
-      "source": "src/root/m25E7.c",
+      "source": "src/graphics/font_resources.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1948,7 +1948,7 @@
     },
     {
       "key": "root:2650",
-      "source": "src/root/m2650.asm",
+      "source": "src/graphics/glyph_blit.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -1959,7 +1959,7 @@
     },
     {
       "key": "root:2662",
-      "source": "src/root/m2662.c",
+      "source": "src/graphics/anim.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1970,12 +1970,12 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "65f636928e52cc2905a1fb65691deac6890e9c28f88b4451c52b8d364540b02c",
+      "source_sha256": "a149d0f48a82f22872ce3caa9bb7da51088b20b43ab28d901d320806e672838f",
       "unit": "root"
     },
     {
       "key": "root:277D",
-      "source": "src/root/m277D.c",
+      "source": "src/platform/debug_stubs.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -1989,7 +1989,7 @@
     },
     {
       "key": "root:277E",
-      "source": "src/root/m277E.c",
+      "source": "src/sound/device_channels.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2004,7 +2004,7 @@
     },
     {
       "key": "root:2815",
-      "source": "src/root/m2815.c",
+      "source": "src/sound/opl2_voices.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2020,7 +2020,7 @@
     },
     {
       "key": "root:283E",
-      "source": "src/root/m283E.asm",
+      "source": "src/sound/opl2_registers.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -2031,7 +2031,7 @@
     },
     {
       "key": "root:284A",
-      "source": "src/root/m284A.c",
+      "source": "src/sound/midi_player.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2047,7 +2047,7 @@
     },
     {
       "key": "root:28BC",
-      "source": "src/root/m28BC.asm",
+      "source": "src/sound/sample_timer.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -2058,7 +2058,7 @@
     },
     {
       "key": "root:290D",
-      "source": "src/root/m290D.c",
+      "source": "src/sound/sample_voices.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2074,7 +2074,7 @@
     },
     {
       "key": "root:293A",
-      "source": "src/root/m293A.c",
+      "source": "src/sound/device_probe.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2090,7 +2090,7 @@
     },
     {
       "key": "root:295C",
-      "source": "src/root/m295C.c",
+      "source": "src/sound/midi_voices.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2106,7 +2106,7 @@
     },
     {
       "key": "root:29B8",
-      "source": "src/root/m29B8.c",
+      "source": "src/sound/dsp_probe.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2122,7 +2122,7 @@
     },
     {
       "key": "root:29BF",
-      "source": "src/root/m29BF.asm",
+      "source": "src/sound/chip_registers.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -2133,7 +2133,7 @@
     },
     {
       "key": "root:29D6",
-      "source": "src/root/m29D6.c",
+      "source": "src/sound/psg_voices.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2149,7 +2149,7 @@
     },
     {
       "key": "root:29F0",
-      "source": "src/root/m29F0.c",
+      "source": "src/platform/port_io.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2163,7 +2163,7 @@
     },
     {
       "key": "root:2CFB",
-      "source": "src/root/m2CFB.asm",
+      "source": "src/memory/hook_thunks.asm",
       "lang": "asm",
       "profile": "masm510",
       "flags": [
@@ -2174,7 +2174,7 @@
     },
     {
       "key": "source-owned:ant-class-histogram",
-      "source": "src/state/ant-class-histogram.c",
+      "source": "src/simulation/state/caste_histogram.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2204,7 +2204,7 @@
     },
     {
       "key": "source-owned:ant-counters-timer",
-      "source": "src/state/ant-counters-timer.c",
+      "source": "src/simulation/state/ant_counts_timer.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2248,7 +2248,7 @@
     },
     {
       "key": "source-owned:ant-list-counts",
-      "source": "src/state/ant-list-counts.c",
+      "source": "src/simulation/state/list_counts.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2292,7 +2292,7 @@
     },
     {
       "key": "source-owned:ant-movement-words",
-      "source": "src/state/ant-movement-words.c",
+      "source": "src/simulation/state/yellow_movement.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2427,7 +2427,7 @@
     },
     {
       "key": "source-owned:ant-player-state",
-      "source": "src/state/ant-player-state.c",
+      "source": "src/simulation/state/player_colony.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2492,7 +2492,7 @@
     },
     {
       "key": "source-owned:ant-ui-control-state",
-      "source": "src/state/ant-ui-control-state.c",
+      "source": "src/ui/state/colony_controls.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2599,7 +2599,7 @@
     },
     {
       "key": "source-owned:audio-track-state",
-      "source": "src/state/audio-track-state.c",
+      "source": "src/sound/state/midi_tracks.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2644,7 +2644,7 @@
     },
     {
       "key": "source-owned:balloon-buffer-tables",
-      "source": "src/state/balloon-buffer-tables.c",
+      "source": "src/ui/state/balloon_buffers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2695,7 +2695,7 @@
     },
     {
       "key": "source-owned:balloon-deadline-timers",
-      "source": "src/state/balloon-deadline-timers.c",
+      "source": "src/ui/state/balloon_deadlines.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2746,7 +2746,7 @@
     },
     {
       "key": "source-owned:clip-pointer",
-      "source": "src/state/clip-pointer.c",
+      "source": "src/graphics/state/clip_pointer.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2774,7 +2774,7 @@
     },
     {
       "key": "source-owned:clip-rect-buffer",
-      "source": "src/state/clip-rect-buffer.c",
+      "source": "src/graphics/state/clip_buffer.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2812,7 +2812,7 @@
     },
     {
       "key": "source-owned:colony-simulation-words",
-      "source": "src/state/colony-simulation-words.c",
+      "source": "src/simulation/state/yard_creature_flags.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2891,7 +2891,7 @@
     },
     {
       "key": "source-owned:control-flag-words",
-      "source": "src/state/control-flag-words.c",
+      "source": "src/ui/state/control_flags.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2935,7 +2935,7 @@
     },
     {
       "key": "source-owned:count-ants-transition-word",
-      "source": "src/state/count-ants-transition-word.c",
+      "source": "src/simulation/state/transfer_flag.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2965,7 +2965,7 @@
     },
     {
       "key": "source-owned:critical-selector-byte",
-      "source": "src/state/critical-selector-byte.c",
+      "source": "src/platform/state/critical_error_selector.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -2993,7 +2993,7 @@
     },
     {
       "key": "source-owned:database-index-state",
-      "source": "src/state/database-index-state.c",
+      "source": "src/resources/state/index_search.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3030,7 +3030,7 @@
     },
     {
       "key": "source-owned:database-record-state",
-      "source": "src/state/database-record-state.c",
+      "source": "src/resources/state/open_databases.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3067,7 +3067,7 @@
     },
     {
       "key": "source-owned:dead-ant-coordinate-rings",
-      "source": "src/state/dead-ant-coordinate-rings.c",
+      "source": "src/simulation/state/dead_ant_positions.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3104,7 +3104,7 @@
     },
     {
       "key": "source-owned:display-mode-selector",
-      "source": "src/state/display-mode-selector.c",
+      "source": "src/platform/video/state/display_mode.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3132,7 +3132,7 @@
     },
     {
       "key": "source-owned:driver-callback-table",
-      "source": "src/state/driver-callback-table.c",
+      "source": "src/platform/video/state/driver_callbacks.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3160,7 +3160,7 @@
     },
     {
       "key": "source-owned:event-records",
-      "source": "src/state/event-records.c",
+      "source": "src/window/state/event_records.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3197,7 +3197,7 @@
     },
     {
       "key": "source-owned:experiment-anchor",
-      "source": "src/state/experiment-anchor.c",
+      "source": "src/ui/state/experiment_anchor.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3227,7 +3227,7 @@
     },
     {
       "key": "source-owned:floor-task-words",
-      "source": "src/state/floor-task-words.c",
+      "source": "src/simulation/state/terrain_task.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3264,7 +3264,7 @@
     },
     {
       "key": "source-owned:g2108-color-translation",
-      "source": "src/state/g2108-color-translation.c",
+      "source": "src/platform/video/state/color_translation.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3294,7 +3294,7 @@
     },
     {
       "key": "source-owned:graphics-formulas",
-      "source": "src/state/graphics-formulas.c",
+      "source": "src/graphics/state/pixel_masks.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3334,7 +3334,7 @@
     },
     {
       "key": "source-owned:history-scalar-state",
-      "source": "src/state/history-scalar-state.c",
+      "source": "src/simulation/state/history_counters.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3441,7 +3441,7 @@
     },
     {
       "key": "source-owned:icon-handle-cell-view",
-      "source": "src/state/icon-handle-cell-view.c",
+      "source": "src/window/state/icon_handle.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3471,7 +3471,7 @@
     },
     {
       "key": "source-owned:language-string-list-pointers",
-      "source": "src/state/language-string-list-pointers.c",
+      "source": "src/resources/state/string_lists.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3529,7 +3529,7 @@
     },
     {
       "key": "source-owned:last-filename",
-      "source": "src/state/last-filename.c",
+      "source": "src/ui/state/last_filename.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3567,7 +3567,7 @@
     },
     {
       "key": "source-owned:lion-sow-pillar",
-      "source": "src/state/lion-sow-pillar.c",
+      "source": "src/simulation/state/yard_creature_lists.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3674,7 +3674,7 @@
     },
     {
       "key": "source-owned:memory-far-state",
-      "source": "src/state/memory-far-state.c",
+      "source": "src/memory/state/allocator_cache.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3732,7 +3732,7 @@
     },
     {
       "key": "source-owned:memory-state",
-      "source": "src/state/memory-state.c",
+      "source": "src/memory/state/ralloc_blocks.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3780,7 +3780,7 @@
     },
     {
       "key": "source-owned:menu-title-state",
-      "source": "src/state/menu-title-state.c",
+      "source": "src/window/state/menu_titles.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3825,7 +3825,7 @@
     },
     {
       "key": "source-owned:mode-population-vectors",
-      "source": "src/state/mode-population-vectors.c",
+      "source": "src/simulation/state/mode_counts.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3876,7 +3876,7 @@
     },
     {
       "key": "source-owned:mono-pattern-prefix",
-      "source": "src/state/mono-pattern-prefix.c",
+      "source": "src/graphics/state/mono_pattern_prefix.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3904,7 +3904,7 @@
     },
     {
       "key": "source-owned:mono-pattern-vga-linkage",
-      "source": "src/state/mono-pattern-vga-linkage.c",
+      "source": "src/graphics/state/mono_pattern_link.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3940,7 +3940,7 @@
     },
     {
       "key": "source-owned:mouse-words",
-      "source": "src/state/mouse-words.c",
+      "source": "src/window/state/mouse_buttons.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -3978,7 +3978,7 @@
     },
     {
       "key": "source-owned:player-locations",
-      "source": "src/state/player-locations.c",
+      "source": "src/simulation/state/ant_locations.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4043,7 +4043,7 @@
     },
     {
       "key": "source-owned:point-state",
-      "source": "src/state/point-state.c",
+      "source": "src/ui/state/view_origins.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4101,7 +4101,7 @@
     },
     {
       "key": "source-owned:population-work-arrays",
-      "source": "src/state/population-work-arrays.c",
+      "source": "src/simulation/state/caste_counts.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4138,7 +4138,7 @@
     },
     {
       "key": "source-owned:remaining-ant-state",
-      "source": "src/state/remaining-ant-state.c",
+      "source": "src/unresolved/state/remaining_ant_state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4287,7 +4287,7 @@
     },
     {
       "key": "source-owned:remaining-far-state-words",
-      "source": "src/state/remaining-far-state-words.c",
+      "source": "src/unresolved/state/remaining_far_state_words.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4345,7 +4345,7 @@
     },
     {
       "key": "source-owned:remaining-history-words",
-      "source": "src/state/remaining-history-words.c",
+      "source": "src/unresolved/state/remaining_history_words.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4494,7 +4494,7 @@
     },
     {
       "key": "source-owned:remaining-misc-storage",
-      "source": "src/state/remaining-misc-storage.c",
+      "source": "src/unresolved/state/remaining_misc_storage.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4580,7 +4580,7 @@
     },
     {
       "key": "source-owned:remaining-preparestrings-string-pointers",
-      "source": "src/state/remaining-preparestrings-string-pointers.c",
+      "source": "src/resources/state/message_string_lists.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4694,7 +4694,7 @@
     },
     {
       "key": "source-owned:remaining-scalar-tail",
-      "source": "src/state/remaining-scalar-tail.c",
+      "source": "src/unresolved/state/remaining_scalar_tail.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4850,7 +4850,7 @@
     },
     {
       "key": "source-owned:remaining-sound-storage",
-      "source": "src/state/remaining-sound-storage.c",
+      "source": "src/unresolved/state/remaining_sound_storage.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -4936,7 +4936,7 @@
     },
     {
       "key": "source-owned:remaining-ui-state",
-      "source": "src/state/remaining-ui-state.c",
+      "source": "src/unresolved/state/remaining_ui_state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5099,7 +5099,7 @@
     },
     {
       "key": "source-owned:remaining-window-state",
-      "source": "src/state/remaining-window-state.c",
+      "source": "src/unresolved/state/remaining_window_state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5325,7 +5325,7 @@
     },
     {
       "key": "source-owned:remaining-world-state",
-      "source": "src/state/remaining-world-state.c",
+      "source": "src/unresolved/state/remaining_world_state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5467,7 +5467,7 @@
     },
     {
       "key": "source-owned:render-delay-word",
-      "source": "src/state/render-delay-word.c",
+      "source": "src/window/state/draw_delay.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5497,7 +5497,7 @@
     },
     {
       "key": "source-owned:render-scalars",
-      "source": "src/state/render-scalars.c",
+      "source": "src/ui/state/map_draw_work.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5540,7 +5540,7 @@
     },
     {
       "key": "source-owned:sample-free-list",
-      "source": "src/state/sample-free-list.c",
+      "source": "src/sound/state/sample_free_list.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5578,7 +5578,7 @@
     },
     {
       "key": "source-owned:saved-sound-state",
-      "source": "src/state/saved-sound-state.c",
+      "source": "src/sound/state/saved_driver_state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5608,7 +5608,7 @@
     },
     {
       "key": "source-owned:screen-clip-list",
-      "source": "src/state/screen-clip-list.c",
+      "source": "src/graphics/state/screen_clip.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5638,7 +5638,7 @@
     },
     {
       "key": "source-owned:sound-control-words",
-      "source": "src/state/sound-control-words.c",
+      "source": "src/sound/state/device_controls.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5703,7 +5703,7 @@
     },
     {
       "key": "source-owned:sound-record-arrays",
-      "source": "src/state/sound-record-arrays.c",
+      "source": "src/sound/state/voices_channels.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5740,7 +5740,7 @@
     },
     {
       "key": "source-owned:spider-controls",
-      "source": "src/state/spider-controls.c",
+      "source": "src/simulation/state/spider_targets.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5805,7 +5805,7 @@
     },
     {
       "key": "source-owned:spider-counters",
-      "source": "src/state/spider-counters.c",
+      "source": "src/simulation/state/spider_counters.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5877,7 +5877,7 @@
     },
     {
       "key": "source-owned:spider-image",
-      "source": "src/state/spider-image.c",
+      "source": "src/ui/state/spider_image.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5914,7 +5914,7 @@
     },
     {
       "key": "source-owned:swarm-serialized-buffers",
-      "source": "src/state/swarm-serialized-buffers.c",
+      "source": "src/simulation/state/swarm_buffers.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -5965,7 +5965,7 @@
     },
     {
       "key": "source-owned:terrain-state-words",
-      "source": "src/state/terrain-state-words.c",
+      "source": "src/simulation/state/terrain_selection.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6002,7 +6002,7 @@
     },
     {
       "key": "source-owned:ui-geometry-state",
-      "source": "src/state/ui-geometry-state.c",
+      "source": "src/ui/state/view_geometry.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6053,7 +6053,7 @@
     },
     {
       "key": "source-owned:ui-resource-scalars",
-      "source": "src/state/ui-resource-scalars.c",
+      "source": "src/unresolved/state/ui_resource_scalars.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6118,7 +6118,7 @@
     },
     {
       "key": "source-owned:window-clip-handles",
-      "source": "src/state/window-clip-handles.c",
+      "source": "src/graphics/state/window_clip_handles.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6148,7 +6148,7 @@
     },
     {
       "key": "source-owned:window-handles",
-      "source": "src/state/window-handles.c",
+      "source": "src/window/state/handles.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6184,7 +6184,7 @@
     },
     {
       "key": "source-owned:window-initialized-views",
-      "source": "src/state/window-initialized-views.c",
+      "source": "src/window/state/hooks_offsets.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6221,7 +6221,7 @@
     },
     {
       "key": "source-owned:window-palette",
-      "source": "src/state/window-palette.c",
+      "source": "src/window/state/palette.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6259,7 +6259,7 @@
     },
     {
       "key": "source-owned:window-ralloc-handles",
-      "source": "src/state/window-ralloc-handles.c",
+      "source": "src/ui/state/map_image_handles.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6296,7 +6296,7 @@
     },
     {
       "key": "source-owned:world-output-state",
-      "source": "src/state/world-output-state.c",
+      "source": "src/simulation/state/world_totals.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6431,7 +6431,7 @@
     },
     {
       "key": "source-owned:yard-animation-arrays",
-      "source": "src/state/yard-animation-arrays.c",
+      "source": "src/ui/state/yard_animation.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6482,7 +6482,7 @@
     },
     {
       "key": "source-owned:yard-init-state",
-      "source": "src/state/yard-init-state.c",
+      "source": "src/simulation/state/yard_initialization.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -6680,7 +6680,7 @@
     },
     {
       "key": "source-owned:yard-scalars",
-      "source": "src/state/yard-scalars.c",
+      "source": "src/simulation/state/yard_game_state.c",
       "lang": "c",
       "profile": "msc600ax",
       "flags": [
@@ -9094,17 +9094,17 @@
   ],
   "semantics": [
     {
-      "function": "f_0250_1018",
+      "function": "DoCalcTile",
       "module": "root:0250",
       "status": "BEHAVIOR_EXACT_CONFIRMED",
-      "definition_sha256": "eb358c800687c1bda9b17a81d0c6b2fcf4ded201714612376db725981f97a7ff",
+      "definition_sha256": "5ff786ba23403d73f5d0d45a7a70d809ecffbaa6cfaaeab18cf9aac4ecd0f5a8",
       "receipt": "evidence/canonical/semantic/original-context/f_0250_1018.json"
     },
     {
       "function": "DrawBalloons",
       "module": "root:0250",
       "status": "BEHAVIOR_EXACT_CONFIRMED",
-      "definition_sha256": "b7b7e308e5a4eb317d20413566b6b75089536a321e8d916ef204eaf6a529b72c",
+      "definition_sha256": "899840dc2d278571115d2308dbed9a52416f6cb54d775759b0b3f650f22e57f4",
       "receipt": "evidence/canonical/semantic/original-context/DrawBalloons.json"
     },
     {
@@ -9153,7 +9153,7 @@
       "function": "win_DrawBitMap",
       "module": "root:259D",
       "status": "BEHAVIOR_EXACT_CONFIRMED",
-      "definition_sha256": "1230852c4800d47b403f7d091cdb0421618089578f37a2652741cd8a22fc8eb8",
+      "definition_sha256": "d53741a75762557fb111a9ec45f58fe55302c56c1d446083f7f5def6bd625c54",
       "receipt": "evidence/canonical/semantic/win_DrawBitMap.json"
     },
     {
@@ -9495,9 +9495,9 @@
         "id": "menu-table-cross-owner-layout",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
         "sources": [
-          "src/root/m1FD2.c",
-          "src/S10/m35F5.c",
-          "src/S17/m384C.c"
+          "src/window/menu_helpers.c",
+          "src/window/menu_tracking.c",
+          "src/window/menu_setup.c"
         ],
         "historical_intersections": [
           {
@@ -9547,7 +9547,7 @@
       {
         "id": "database-open-minus-one-record",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
-        "source": "src/root/m1A28.c",
+        "source": "src/resources/database_files.c",
         "normal_owner": "openDBData[4]",
         "historical_failure_address": "50F6:38DC",
         "reason": "GetFreeHandle returns -1 when four slots are occupied. OpenDB calls Punt and then computes the record address if it returns. A four-record typed owner supplies no preceding storage; returning-Punt reachability and layout semantics must be proved separately. A bounded graphics-index failure executes the real 25-slot callback reset and the genuine empty callback, then reaches the uninitialized zero-height raster loop; its first glyph visits all 65536 DGROUP offsets before cleanup. This removes the hypothetical null-callback-return premise for that failure prefix, but proves neither eventual continuation nor an actual minus-one/fifth-record access. No global fatal-state invariance or noreturn waiver follows. An isolated unchanged-original guard1/four-occupied witness now reaches the real minus-one record copy before any DOS call. This confirms the conditional contract, not ordinary-game reachability.",
@@ -9562,7 +9562,7 @@
       {
         "id": "database-handle-plus-four",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
-        "source": "src/root/m1A53.c",
+        "source": "src/resources/database_objects.c",
         "normal_owner": "db_handles[4]",
         "historical_failure_address": "50F6:3B58",
         "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate.",
@@ -9577,7 +9577,7 @@
         "id": "icon-handle-computed-alias-and-activation",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
         "sources": [
-          "src/root/m208F.c"
+          "src/window/text_bitmap_helpers.c"
         ],
         "owner": "fd_50F6_46D2 minimum four-byte mutable Handle slot",
         "reason": "Original pointer-chain reads, unchanged complete consumer TU and real RTLink/CRT controls authorize only the slot view and initial null representation. There is no known nominal game producer or observed ordinary incoming consumer edge. Computed writers/readers, indirect or control-corrupted activation and original physical aliases are not globally excluded. Independent placement does not preserve them. No deadness, permanent zero or safe null dereference follows from slot ownership.",
@@ -9591,7 +9591,7 @@
         "id": "icon-handle-cell-and-payload-lifetime",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
         "sources": [
-          "src/root/m208F.c"
+          "src/window/text_bitmap_helpers.c"
         ],
         "mandatory_if": "Either icon helper reaches its pointer-load branch",
         "reason": "The slot must designate a live four-byte far-pointer cell with a live byte payload covering the selected n and all renderer row accesses, or the corresponding activation must be independently excluded. The minimum slot provider creates neither referent. Producer/resource/allocator/lock/unhook identity, n bounds and payload capacity remain unproved.",
@@ -9605,13 +9605,13 @@
         "id": "sound-selector-out-of-range-layout",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
         "sources": [
-          "src/S20/m39F1.c",
-          "src/S15/m384C.c",
-          "src/root/m15F8.c",
-          "src/root/m00DF.c",
-          "src/root/m277E.c",
-          "src/root/m293A.c",
-          "src/root/m2815.c"
+          "src/startup/dos_config.c",
+          "src/startup/game_session.c",
+          "src/startup/main.c",
+          "src/sound/game_interface.c",
+          "src/sound/device_channels.c",
+          "src/sound/device_probe.c",
+          "src/sound/opl2_voices.c"
         ],
         "reason": "The command-line parser accepts /s9, but detector/setup/cleanup tables have only nine entries (0..8). If the sound DB open returns, detector index 9 reads the adjacent same-TU saved-state pointer and calls its source-owned data as code. Return and effects are unproved. Conditional later setup/cleanup overreads include cross-TU data adjacency. Complete saved-state storage does not resolve this executable/layout dependency; no clamp, extra slot or padding is introduced.",
         "closure_class": "SUPPORTED_DOMAIN",
@@ -9652,8 +9652,8 @@
         "id": "map-viewport-grid-layout",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
         "sources": [
-          "src/root/m0250.c",
-          "src/S26/m39C7.c"
+          "src/ui/edit_view.c",
+          "src/window/move_resize.c"
         ],
         "declared_grid": "fd_50F6_15C4[30][40]",
         "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout.",
@@ -9667,9 +9667,9 @@
         "id": "ctype-out-of-range-index-layout",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
         "sources": [
-          "src/S23/m39C7.c",
-          "src/S10/m35F5.c",
-          "src/root/m1C62.c"
+          "src/ui/info_cards.c",
+          "src/window/menu_tracking.c",
+          "src/window/alerts.c"
         ],
         "consumer": "(_ctype + 1)[signed character or keyboard code]",
         "original_ctype_offset": 31262,
@@ -9693,7 +9693,7 @@
       {
         "id": "graphics-computed-copy-layout",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
-        "source": "src/root/m1E57.c",
+        "source": "src/graphics/clip_regions.c",
         "reason": "Clip list generation writes a 2048-byte heap temporary before each overflow check, so counts of 256 or more overrun that temporary before the Punt diagnostic. Original synthetic 31-window geometry generates 256 disjoint rectangles and writes the sentinel at displacement 2050 before C097; the adjacent 29-window control completes with 225 rectangles. The fixed destination 50F6:3C14 is now source-owned for every pre-Punt prefix; only a returning Punt copies beyond it (original guard-1 control: 2056 bytes). Shipped geometry reachability of such counts, the heap-adjacency effect of the pre-check overrun and returning-Punt continuation remain unresolved.",
         "closure_class": "SUPPORTED_DOMAIN",
         "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
@@ -9707,7 +9707,7 @@
       {
         "id": "filename-selector-local-capacity",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
-        "source": "src/S09/m35F5.c",
+        "source": "src/ui/save_load.c",
         "reason": "LoadGame and SaveGame(0) pass an uninitialized char name[100]; FileSelect concatenates path + name into buf[80] and copies it back before clearing it. No admitted proof or premise guarantees a terminator with P+len(S)+1 <= 80: intact caller frames give zeros only at name+103/104. Observed strings are 0..15 bytes on every ordinary chain and differ between builds (pointer values, different last writers) with matching visible behaviour. Longer residue would overrun buf[80] and the copy-back would reach the caller's fd/ok/saved BP/return address. Separately, the inherited L=66 separator append exceeds path[67]/lastDir[67] and the declined-overwrite retry exceeds buf[80] from L=33; directory lengths <= 32 and valid 8.3 names bound those filesystem parts.",
         "closure_class": "SUPPORTED_DOMAIN",
         "closure_basis": "Prove an all-history terminator bound for the incoming uninitialized name (both builds, including interrupt, driver and overlay-manager writers) or preserve the observed behaviour; filesystem parts additionally need explicit directory-length/8.3 premises. No clamp, initialization or resize.",
@@ -9732,7 +9732,7 @@
           "module": "root:0798"
         },
         {
-          "symbol": "_f_0250_0EDA",
+          "symbol": "_win_DrawEditWindow",
           "module": "root:0250"
         },
         {
@@ -9744,7 +9744,7 @@
           "module": "S23:39C7"
         },
         {
-          "symbol": "_o12_384C_1035",
+          "symbol": "_win_DrawMapWindow",
           "module": "S12:384C"
         },
         {

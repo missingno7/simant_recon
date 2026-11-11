@@ -37,8 +37,8 @@ class NearDataModule(unittest.TestCase):
         self.assertEqual(modules.parse_key("data:55B3@0042"), ("data", DG, 0x42))
         self.assertEqual(modules.parse_key("data;55B3@0042"), ("data", DG, 0x42))       # MSYS-mangled
         self.assertEqual(modules.module_key("data", DG, 0x42), "data:55B3@0042")
-        self.assertEqual(modules.module_source("data", DG, 0x42, "c"), "src/data/d55B3_0042.c")
-        self.assertEqual(modules.module_source("data", 0x3D57, None, "c"), "src/data/d3D57.c")
+        self.assertEqual(modules.module_source("data", DG, 0x42, "c"), "src/startup/version.c")
+        self.assertEqual(modules.module_source("data", 0x3D57, None, "c"), "src/simulation/tables.c")
         for bad in ("data:55B3", "data:3D57@0042"):
             with self.assertRaises(SystemExit):
                 modules.parse_key(bad)

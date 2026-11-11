@@ -9,8 +9,8 @@ import behavior as b
 import csrc, exe, functions
 if not __debug__: raise RuntimeError('proof checks require Python without -O')
 sha=lambda data:hashlib.sha256(data).hexdigest()
-OWNER='src/state/window-handles.c'
-SOURCES=['src/root/m20E8.c','src/root/m23AE.c','src/root/m22BF.c','src/root/m2505.c','src/S09/m35F5.c']
+OWNER='src/window/state/handles.c'
+SOURCES=['src/window/lifecycle.c','src/window/locking.c','src/window/object_attributes.c','src/window/object_geometry.c','src/ui/save_load.c']
 class Reject(RuntimeError): pass
 class BoundaryReached(Exception): pass
 def norm(t):return ' '.join(x.text for x in csrc.tokenize(t) if x.kind not in {'ws','nl','cmt'})

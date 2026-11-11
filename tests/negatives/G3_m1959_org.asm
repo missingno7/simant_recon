@@ -11,21 +11,21 @@ SWAP_TEXT       segment word public 'CODE'
                 assume  cs:SWAP_TEXT
                 org     0       ; GATEFIX G3: org is not admitted
 
-                public  _f_1959_0002
-                public  _f_1959_000C
+                public  _FlipWord
+                public  _FlipLong
 
-; unsigned far f_1959_0002(unsigned value): swap the bytes of a word
-_f_1959_0002    proc    far
+; unsigned far FlipWord(unsigned value): swap the bytes of a word
+_FlipWord    proc    far
                 push    bp
                 mov     bp, sp
                 mov     ax, [bp+6]
                 xchg    al, ah
                 pop     bp
                 ret
-_f_1959_0002    endp
+_FlipWord    endp
 
-; unsigned long far f_1959_000C(unsigned long value): swap the byte order of a dword
-_f_1959_000C    proc    far
+; unsigned long far FlipLong(unsigned long value): swap the byte order of a dword
+_FlipLong    proc    far
                 push    bp
                 mov     bp, sp
                 mov     ax, [bp+8]
@@ -34,7 +34,7 @@ _f_1959_000C    proc    far
                 xchg    dl, dh
                 pop     bp
                 ret
-_f_1959_000C    endp
+_FlipLong    endp
 
 SWAP_TEXT       ends
                 end

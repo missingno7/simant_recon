@@ -140,7 +140,7 @@
         "role": "empty stub disassembly"
       },
       {
-        "path": "src/root/m277D.c",
+        "path": "src/platform/debug_stubs.c",
         "sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
         "role": "empty DOS formatter/sibling stubs"
       },
@@ -1650,7 +1650,7 @@
           "old": "f_171C_1C0A",
           "new": "mem_Free",
           "kind": "recovered",
-          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
+          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/memory/ralloc.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
         },
         {
           "old": "f_171C_1C1C",

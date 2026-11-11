@@ -221,8 +221,8 @@ def native_guard(conversion):
     report = json.loads(report_path.read_text())
     rows = {r['module']: r for r in report['canonical_TUs']}
     keys = ('root:1986', 'source-owned:database-record-state', 'source-owned:database-index-state')
-    for rel in ('src/root/m1986.c', 'src/state/database-record-state.c',
-                'src/state/database-index-state.c',
+    for rel in ('src/resources/database_index.c', 'src/resources/state/open_databases.c',
+                'src/resources/state/index_search.c',
                 'portable/canonical_native_abi/findindex_native_guard.py',
                 'portable/whole_program/types/database.h'):
         assert report['input_pins'][rel] == pin(ROOT / rel)['sha256'], rel
@@ -338,9 +338,9 @@ def main():
             PRIOR.relative_to(ROOT).as_posix(), 'tools/behavior.py', 'tools/behavior_suites/memory.py',
             'tools/functions.py', 'tools/exe.py', 'tools/match.py', 'assets/SIMANT.EXE',
             'assets/SOUND.NDX', 'layout/oracle.lock.json', 'layout/functions.json',
-            'layout/symbols.json', 'src/root/m1986.c', 'src/root/m171C.c',
-            'src/root/m19A9.c', 'src/root/m1A53.c', 'src/root/m15F8.c',
-            'src/S15/m384C.c', 'portable/whole_program/platform/handles.c',
+            'layout/symbols.json', 'src/resources/database_index.c', 'src/memory/ralloc.c',
+            'src/resources/database_records.c', 'src/resources/database_objects.c', 'src/startup/main.c',
+            'src/startup/game_session.c', 'portable/whole_program/platform/handles.c',
             'portable/canonical_native_abi/findindex_native_guard.py',
             'portable/whole_program/types/database.h']],
         'parent_review_required': True, 'production_edits': 0}

@@ -238,9 +238,9 @@ def collect() -> dict:
     # Pin all manually interpreted consumer contexts. This records dependencies;
     # it does not pretend a regex census is a complete indirect-call proof.
     sources = {}
-    for name in ("src/S17/m384C.c", "src/S20/m39F1.c", "src/S10/m35F5.c", "src/S11/m35F5.c",
-                 "src/root/m1FD2.c", "src/root/m20E8.c", "src/root/m21FA.c", "src/root/m22BF.c",
-                 "src/root/m23AE.c", "src/root/m23E6.c", "src/root/m2505.c", "src/S23/m39C7.c"):
+    for name in ("src/window/menu_setup.c", "src/startup/dos_config.c", "src/window/menu_tracking.c", "src/ui/game_menu.c",
+                 "src/window/menu_helpers.c", "src/window/lifecycle.c", "src/window/drawing.c", "src/window/object_attributes.c",
+                 "src/window/locking.c", "src/window/lists_sliders.c", "src/window/object_geometry.c", "src/ui/info_cards.c"):
         sources[name] = hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
     return dict(schema="simant-shipped-resource-domain-v1", assets=assets, sources=sources,
         census=census, corpus=dict(records=total, compressed=compressed, fnv1a64=f"{aggregate:016x}"),

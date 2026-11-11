@@ -23,8 +23,8 @@
     "start": 201312,
     "end": 203475
    },
-   "source": "src/S00/m3126.asm",
-   "source_sha256": "596d463f05bbb39c78f11a1e9a85a6c72e3e467cf2567e2db9cb3ad227d5c4c3",
+   "source": "src/platform/video/planar_minimap.asm",
+   "source_sha256": "759e12a0bc410565f75846b60e76b9b727edda9f0944ed62c8524445f1405efe",
    "claims": [
     {
      "name": "o00_3126_0000",
@@ -105,7 +105,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ed8badb20820fff7a3c0539c85d250dcba9352e45d3394bd66ca591beed75402"
+   "object_sha256": "83fc831d43cbbf17aee7840876d2c9b5c760e2c37dc4d1a4dcba83cee5fc44b4",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S00/m3126.asm",
+     "why": "Builds the small map pixel tables used by the planar display driver. It also defines dither and palette data and the driver dispatch table."
+    }
+   ]
   },
   "S00:31AD": {
    "unit": "S00",
@@ -122,8 +129,8 @@
     "start": 203476,
     "end": 214403
    },
-   "source": "src/S00/m31AD.asm",
-   "source_sha256": "fb3645e3ce37a341dd403d5ca97c14acc2ff7a869a0167f48ae36c0a19104d29",
+   "source": "src/platform/video/planar_raster.asm",
+   "source_sha256": "1681092343d39ca24379dbeb6c593a641179b051e48e699c1c4687b4cd0d10a6",
    "claims": [
     {
      "name": "o00_31AD_0004",
@@ -148,7 +155,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_0122",
+     "name": "GPatBox",
      "unit": "S00",
      "seg": 12717,
      "off": 290,
@@ -170,7 +177,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_037C",
+     "name": "GInvBox",
      "unit": "S00",
      "seg": 12717,
      "off": 892,
@@ -192,7 +199,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_0522",
+     "name": "GPicSize",
      "unit": "S00",
      "seg": 12717,
      "off": 1314,
@@ -291,7 +298,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_0CF9",
+     "name": "GPutPicS",
      "unit": "S00",
      "seg": 12717,
      "off": 3321,
@@ -357,7 +364,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_11FB",
+     "name": "GImgSize",
      "unit": "S00",
      "seg": 12717,
      "off": 4603,
@@ -368,7 +375,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_1206",
+     "name": "GPutImgS",
      "unit": "S00",
      "seg": 12717,
      "off": 4614,
@@ -434,7 +441,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_148C",
+     "name": "GLine",
      "unit": "S00",
      "seg": 12717,
      "off": 5260,
@@ -456,7 +463,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o00_31AD_1659",
+     "name": "GSetAttrib",
      "unit": "S00",
      "seg": 12717,
      "off": 5721,
@@ -489,7 +496,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o00_31AD_16A9",
+     "name": "GBoxFill",
      "unit": "S00",
      "seg": 12717,
      "off": 5801,
@@ -611,7 +618,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0939b4c0e5f29994c2006e3b048be527ef5c4c722afcc87445180dde0df9ca1e"
+   "object_sha256": "07cbd01f111296adef52a9e241068628d5d3cd3b483f1b5e4696cf11208d8483",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S00/m31AD.asm",
+     "why": "Implements planar screen drawing, copying and raster operations for the EGA/VGA display path. Its assembly programs the graphics controller and selects raster loops by modifying instructions."
+    }
+   ]
   },
   "S00:31AD@2AB4": {
    "unit": "S00",
@@ -630,8 +644,8 @@
     "start": 214404,
     "end": 219749
    },
-   "source": "src/S00/m31AD_2AB4.asm",
-   "source_sha256": "21a4230526afe9da960fd5762e0616d2d3a7c34d0cecabc8c6365b2600b3b788",
+   "source": "src/platform/video/planar_mode_blits.asm",
+   "source_sha256": "539aed888bce9236f4a9ca7a259bc5a65df7fa27e2582ad5047d0659d27cfd0e",
    "claims": [
     {
      "name": "o00_31AD_2AB4",
@@ -701,7 +715,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "226da093749320088589ce77404eb2086016254860adee3d1cff7fa1a5a491d5"
+   "object_sha256": "b71396961ff99aa746d319eee92ede1707d4b453750468732a1acd30343d5d5a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S00/m31AD_2AB4.asm",
+     "why": "Sets up planar display modes and performs masked planar tile blits through a scratch buffer. It is the second object in frame 31AD and remains a separate file from the main raster routines."
+    }
+   ]
   },
   "S00:35A6": {
    "unit": "S00",
@@ -718,7 +739,7 @@
     "start": 219750,
     "end": 220994
    },
-   "source": "src/S00/m35A6.asm",
+   "source": "src/platform/video/planar_sprites.asm",
    "source_sha256": "62a8b50548f6f2e39d3620f2e9063a6d4b817266e950655b6a22f54abc55dac1",
    "claims": [
     {
@@ -778,7 +799,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "349a48b9d517a3992ee3e193828697289c37139090d9bcc3722937f4ac4d6cf1"
+   "object_sha256": "349a48b9d517a3992ee3e193828697289c37139090d9bcc3722937f4ac4d6cf1",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S00/m35A6.asm",
+     "why": "Blits masked sprite images into planar buffers and tests rectangles. The window bitmap layer calls these entries through the display callbacks."
+    }
+   ]
   },
   "S01:3126": {
    "unit": "S01",
@@ -801,7 +829,7 @@
     "start": 201312,
     "end": 207082
    },
-   "source": "src/S01/m3126.asm",
+   "source": "src/platform/video/mono_raster.asm",
    "source_sha256": "bd2b025d59c04957e2cc4ec49bb2da62587d26126dc6cc135872bf1d8fbc33e5",
    "claims": [
     {
@@ -1246,7 +1274,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "abb48283968125d676dcbb433f3cee427272fe2f68641b4a8b6176362c7cf3c5"
+   "object_sha256": "abb48283968125d676dcbb433f3cee427272fe2f68641b4a8b6176362c7cf3c5",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S01/m3126.asm",
+     "why": "Supplies screen, bitmap and raster operations for the monochrome display paths. Mode setup includes Hercules CRTC programming and the shared monochrome driver dispatch table."
+    }
+   ]
   },
   "S01:328E": {
    "unit": "S01",
@@ -1263,11 +1298,11 @@
     "start": 207082,
     "end": 207710
    },
-   "source": "src/S01/m328E.asm",
-   "source_sha256": "af31ebb956e1d89743a66647fa8ea8beb5f1d6c57a9eab476fa39103df88c521",
+   "source": "src/platform/video/mono_minimap.asm",
+   "source_sha256": "4ec05c3bbae239739d632efd2ae4340e517d2098661c5be3a6fbdaa599161928",
    "claims": [
     {
-     "name": "o01_328E_000A",
+     "name": "WindowsMono_MakeTable4x4a",
      "unit": "S01",
      "seg": 12942,
      "off": 10,
@@ -1278,7 +1313,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_328E_009D",
+     "name": "WindowsMono_MakeTable4x4b",
      "unit": "S01",
      "seg": 12942,
      "off": 157,
@@ -1289,7 +1324,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_328E_012C",
+     "name": "WindowsMono_MakeTable2x2a",
      "unit": "S01",
      "seg": 12942,
      "off": 300,
@@ -1300,7 +1335,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o01_328E_01D5",
+     "name": "WindowsMono_MakeTable2x2b",
      "unit": "S01",
      "seg": 12942,
      "off": 469,
@@ -1312,7 +1347,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c3e5c549c864bb76ef3d99eba9bdf1b665dfab78ce3b15562b648ee8e6f13efe"
+   "object_sha256": "0423b67d329fe599f7704ec2fdb002646102340eb6edc6a1e3d8b5a76c07a477",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S01/m328E.asm",
+     "why": "Builds monochrome small map representations. Its four assembly entries belong to the same display family as the monochrome screen driver."
+    }
+   ]
   },
   "S01:32B5": {
    "unit": "S01",
@@ -1329,7 +1371,7 @@
     "start": 207710,
     "end": 208363
    },
-   "source": "src/S01/m32B5.asm",
+   "source": "src/platform/video/mono_sprites.asm",
    "source_sha256": "446836eb5562f7ceee6f9d5e862d2cccd7c59b327421cf9e06ad3e420590b22d",
    "claims": [
     {
@@ -1389,7 +1431,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0c434b53880629a3fc1594cc1fefd8dafef7350f93d0339d3748abbbf306989d"
+   "object_sha256": "0c434b53880629a3fc1594cc1fefd8dafef7350f93d0339d3748abbbf306989d",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S01/m32B5.asm",
+     "why": "Blits masked monochrome sprites and tests rectangles. The driver selector installs these functions for every odd numbered monochrome display mode."
+    }
+   ]
   },
   "S02:3126": {
    "unit": "S02",
@@ -1412,7 +1461,7 @@
     "start": 201312,
     "end": 203721
    },
-   "source": "src/S02/m3126.asm",
+   "source": "src/platform/video/vga8_raster.asm",
    "source_sha256": "06cf139a28dac823c9fa9dbc7c25abd7cbe1b953b4f354a97ad90622a59f467a",
    "claims": [
     {
@@ -1714,7 +1763,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1c9fe3764e88ddb3140fa71791ef62c7e2664fa76461770a1f7f6993cff35a47"
+   "object_sha256": "1c9fe3764e88ddb3140fa71791ef62c7e2664fa76461770a1f7f6993cff35a47",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S02/m3126.asm",
+     "why": "Implements the screen and bitmap operations for the 256 colour display path. Its entries include raster operations and a driver dispatch table."
+    }
+   ]
   },
   "S03:3126": {
    "unit": "S03",
@@ -1737,7 +1793,7 @@
     "start": 201312,
     "end": 206136
    },
-   "source": "src/S03/m3126.asm",
+   "source": "src/platform/video/tandy_raster.asm",
    "source_sha256": "e091bf235571f5373812f5b5d649604093daaa2e490a4ca3ab8e1784a96c9b7b",
    "claims": [
     {
@@ -2105,7 +2161,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "270122a2306b1bb337cabb084e9ced8cae28eebc6778b54eb08b5a3e6ed7ec58"
+   "object_sha256": "270122a2306b1bb337cabb084e9ced8cae28eebc6778b54eb08b5a3e6ed7ec58",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S03/m3126.asm",
+     "why": "Implements Tandy screen drawing, bitmap copying and raster operations. It contains a 320 byte line buffer in its code segment as well as palette and bank tables."
+    }
+   ]
   },
   "S03:3253": {
    "unit": "S03",
@@ -2128,8 +2191,8 @@
     "start": 206136,
     "end": 206220
    },
-   "source": "src/S03/m3253.asm",
-   "source_sha256": "5f67726c1477bfb28285078c835fef3b8e1b9a7e1ad19ce34e225b76366b8165",
+   "source": "src/platform/video/tandy_minimap.asm",
+   "source_sha256": "4a8a6f126921b9828fee7d827c083190ddf4bbaa1f569a1ae927ca65a3ace080",
    "claims": [
     {
      "name": "o03_3253_0008",
@@ -2143,7 +2206,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o03_3253_002F",
+     "name": "Windows_MakeTable1x1",
      "unit": "S03",
      "seg": 12883,
      "off": 47,
@@ -2155,7 +2218,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "29c665e5ca3600600fef1396b7ea54fb0442176e322753b97d2f7d679d4cd2f9"
+   "object_sha256": "a75823c95078e20c0ca617dcb5c1dae045ab18e954c3f95b41106cd7dbfa4231",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S03/m3253.asm",
+     "why": "Translates small map pixels into packed colour nibbles for the Tandy path. The two functions use adjacent high and low nibble colour tables."
+    }
+   ]
   },
   "S03:3258": {
    "unit": "S03",
@@ -2172,7 +2242,7 @@
     "start": 206220,
     "end": 212275
    },
-   "source": "src/S03/m3258.asm",
+   "source": "src/platform/video/tandy_sprites.asm",
    "source_sha256": "87865dc022ad48b4f6b211a06a638ee5a87d5d4ad3e7aa6a06bc475861160c78",
    "claims": [
     {
@@ -2265,7 +2335,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ce1efe24548b04185500f3c0fd4387ffebfde2f5a90237ec23fe1da9352d6fee"
+   "object_sha256": "ce1efe24548b04185500f3c0fd4387ffebfde2f5a90237ec23fe1da9352d6fee",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S03/m3258.asm",
+     "why": "Blits colour translated sprites and tiles for the Tandy display path. Four tables in its code segment supply pixel translation and transparency masks."
+    }
+   ]
   },
   "S04:35F5": {
    "unit": "S04",
@@ -2296,8 +2373,8 @@
     "start": 221008,
     "end": 223440
    },
-   "source": "src/S04/m35F5.c",
-   "source_sha256": "de257dc7184a8c579e8d0f1f348050579d38aab73a400d67bfd519b783e574af",
+   "source": "src/ui/minimap.c",
+   "source_sha256": "eea3a780b8aa46c18d019618a77d7ba1997c211d5728d62ba6933ed717582ee2",
    "claims": [
     {
      "name": "MapToolsMenu",
@@ -2378,7 +2455,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5c65a9da8abf004c26bd10fec16056a8d24d3e6177a6700597d3fc9ca893af96"
+   "object_sha256": "b23cd26f183de736ecaaf85d6526b4c12f1cee55330b3f61d3cd750ab3e410c9",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S04/m35F5.c",
+     "why": "Handles the map tools menu and the small map window. It creates the map image table, draws the view and maintains its cursor."
+    }
+   ]
   },
   "S05:35F5": {
    "unit": "S05",
@@ -2408,7 +2492,7 @@
     "start": 221008,
     "end": 222772
    },
-   "source": "src/S05/m35F5.c",
+   "source": "src/ui/editor_menus.c",
    "source_sha256": "483c48e56a911eb3740923101f3c562be7870adabc62067478dc70086a6f6d7c",
    "claims": [
     {
@@ -2503,7 +2587,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "23c3af61efc657a89d0070ca279b0223bae829cad3f58f15dde4ec448bec246a"
+   "object_sha256": "23c3af61efc657a89d0070ca279b0223bae829cad3f58f15dde4ec448bec246a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S05/m35F5.c",
+     "why": "Handles scent, editing, ant and magnification menus. These menus select tools and change yellow ant health or black colony warning settings."
+    }
+   ]
   },
   "S05:3663": {
    "unit": "S05",
@@ -2534,7 +2625,7 @@
     "start": 222772,
     "end": 223516
    },
-   "source": "src/S05/m3663.c",
+   "source": "src/ui/experiment_menu.c",
    "source_sha256": "b8e5aa00e0cd0a8054354eaf49cc6566dc78214294ad04df3903d4b250096239",
    "claims": [
     {
@@ -2551,7 +2642,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3c382cd8dfddeaac39067a88437006f53bd86cdaaf781622ff0dbfb91285e022"
+   "object_sha256": "3c382cd8dfddeaac39067a88437006f53bd86cdaaf781622ff0dbfb91285e022",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S05/m3663.c",
+     "why": "Implements the experiment tool menu. Its single function tracks submenu state and returns the selected editing tool."
+    }
+   ]
   },
   "S06:35F5": {
    "unit": "S06",
@@ -2578,8 +2676,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/S06/m35F5.c",
-   "source_sha256": "75c9fad469e747b0aff48ce98c9d8a9ac6cda4da6695e8d055e9aceae22f6707",
+   "source": "src/simulation/yard.c",
+   "source_sha256": "e23564c617b4726af51711fca2f35e09a10efd1b6702d5e113223f4fc90e30d8",
    "claims": [
     {
      "name": "InitSimYard",
@@ -2604,7 +2702,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_01CA",
+     "name": "SendBoyMsg",
      "unit": "S06",
      "seg": 13813,
      "off": 458,
@@ -2615,7 +2713,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_020C",
+     "name": "SimRain",
      "unit": "S06",
      "seg": 13813,
      "off": 524,
@@ -2626,7 +2724,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o06_35F5_02B9",
+     "name": "SimKidOutside",
      "unit": "S06",
      "seg": 13813,
      "off": 697,
@@ -2637,7 +2735,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o06_35F5_0967",
+     "name": "GetMowDir",
      "unit": "S06",
      "seg": 13813,
      "off": 2407,
@@ -2648,7 +2746,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_09F7",
+     "name": "NotMowed",
      "unit": "S06",
      "seg": 13813,
      "off": 2551,
@@ -2659,7 +2757,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_0A32",
+     "name": "IsValidYard",
      "unit": "S06",
      "seg": 13813,
      "off": 2610,
@@ -2670,7 +2768,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_0A5F",
+     "name": "InitGrassMap",
      "unit": "S06",
      "seg": 13813,
      "off": 2655,
@@ -2692,7 +2790,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o06_35F5_1A0F",
+     "name": "FollowBoyDir",
      "unit": "S06",
      "seg": 13813,
      "off": 6671,
@@ -2703,7 +2801,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_1ABF",
+     "name": "FollowCatDir",
      "unit": "S06",
      "seg": 13813,
      "off": 6847,
@@ -2714,7 +2812,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o06_35F5_1B08",
+     "name": "MakeBark",
      "unit": "S06",
      "seg": 13813,
      "off": 6920,
@@ -2736,7 +2834,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o06_35F5_1CEA",
+     "name": "MowerFall",
      "unit": "S06",
      "seg": 13813,
      "off": 7402,
@@ -2747,7 +2845,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o06_35F5_1D9D",
+     "name": "MaintainSwarm",
      "unit": "S06",
      "seg": 13813,
      "off": 7581,
@@ -2758,7 +2856,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_2381",
+     "name": "Reproduce",
      "unit": "S06",
      "seg": 13813,
      "off": 9089,
@@ -2769,7 +2867,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_2433",
+     "name": "StartMigrate",
      "unit": "S06",
      "seg": 13813,
      "off": 9267,
@@ -2780,7 +2878,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_24CA",
+     "name": "EndMigrate",
      "unit": "S06",
      "seg": 13813,
      "off": 9418,
@@ -2791,7 +2889,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o06_35F5_2314",
+     "name": "GetNearbyPatches",
      "unit": "S06",
      "seg": 13813,
      "off": 8980,
@@ -2848,7 +2946,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "577c39ed6dcb3126be6ce3d3abc0011547d3f110903e4315817d8c8fccd7d8c0"
+   "object_sha256": "490281f611dd2d32e394a107986a09c994b85943c215ad87d18fbced14cecf27",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S06/m35F5.c",
+     "why": "Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also advances yard colonies and swarms."
+    }
+   ]
   },
   "S07:35F5": {
    "unit": "S07",
@@ -2878,7 +2983,7 @@
     "start": 221008,
     "end": 222182
    },
-   "source": "src/S07/m35F5.c",
+   "source": "src/ui/cheats.c",
    "source_sha256": "a75bffc5c82f5394018c04b732a249a32b55f993d619e36261992dec85ce6e54",
    "claims": [
     {
@@ -2894,7 +2999,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "aa0cd30d5a44f70e72a29ba4b1c52091ee15cd06aff1c12cce2517dc899a90e6"
+   "object_sha256": "aa0cd30d5a44f70e72a29ba4b1c52091ee15cd06aff1c12cce2517dc899a90e6",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S07/m35F5.c",
+     "why": "Handles cheat key commands. The handler changes game state and reports the selected cheat number."
+    }
+   ]
   },
   "S08:35F5": {
    "unit": "S08",
@@ -2921,7 +3033,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/S08/m35F5.c",
+   "source": "src/simulation/world_generation.c",
    "source_sha256": "74706339564ed31c6420a8ef336a998fb652ac38175bd5408292b20aa65252e8",
    "claims": [
     {
@@ -3125,7 +3237,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "7b9e9ffb8844bfba667f2bcb931e3c32de56d705768518ff5824df7f36f58048"
+   "object_sha256": "7b9e9ffb8844bfba667f2bcb931e3c32de56d705768518ff5824df7f36f58048",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S08/m35F5.c",
+     "why": "Initializes simulation variables and generates the yard, maps, nests and starting ants. It also constructs the tutorial starting world."
+    }
+   ]
   },
   "S09:35F5": {
    "unit": "S09",
@@ -3166,8 +3285,8 @@
     "start": 221008,
     "end": 225002
    },
-   "source": "src/S09/m35F5.c",
-   "source_sha256": "a3748b95bc47381bdc62d1964002a40077105b8b6ad446b84b3520921b3dd0e5",
+   "source": "src/ui/save_load.c",
+   "source_sha256": "0752cc658c179205c0304954da6de1a4651a22e2358db55d130f9f5a8052519b",
    "claims": [
     {
      "name": "LoadGame",
@@ -3203,7 +3322,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o09_35F5_0D7A",
+     "name": "DoPreLoadInits",
      "unit": "S09",
      "seg": 13813,
      "off": 3450,
@@ -3238,7 +3357,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c806640066ef078734021636776e635ebc92ae6342eae37f33c0b31890dadc1a"
+   "object_sha256": "70e61e35da275c55fb1a58aec961dd4325c9bd22c76fd5e06a9babb0d3ebf431",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S09/m35F5.c",
+     "why": "Reads and writes saved games and presents the DOS file selector. It contains the 307 record save schema and the initializations needed after loading."
+    }
+   ]
   },
   "S09:36EE": {
    "unit": "S09",
@@ -3268,7 +3394,7 @@
     "start": 225002,
     "end": 226233
    },
-   "source": "src/S09/m36EE.c",
+   "source": "src/window/text_entry.c",
    "source_sha256": "8a8eab2a69a4c0a7d215f5fe5d3a0acbf72c02ef25c308e78040a6fc24c299c2",
    "claims": [
     {
@@ -3306,7 +3432,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "dd97bdc2bb277b4f9587db433cee9fbf08eeb728a3a37b0242e0fcd41aa7fc16"
+   "object_sha256": "dd97bdc2bb277b4f9587db433cee9fbf08eeb728a3a37b0242e0fcd41aa7fc16",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S09/m36EE.c",
+     "why": "Draws and edits a text entry field. It converts character cell positions into pixels and handles acceptance or cancellation."
+    }
+   ]
   },
   "S10:35F5": {
    "unit": "S10",
@@ -3334,7 +3467,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/S10/m35F5.c",
+   "source": "src/window/menu_tracking.c",
    "source_sha256": "ccfa0c4106454b739ae9baa501da50903b85983af9a8e31fab74283aebf2c5d6",
    "claims": [
     {
@@ -3394,7 +3527,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "6b87b35183425ee91941142ccf70a4c1a4a739af15bf28c7f98782bb6309e5d9"
+   "object_sha256": "6b87b35183425ee91941142ccf70a4c1a4a739af15bf28c7f98782bb6309e5d9",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S10/m35F5.c",
+     "why": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length."
+    }
+   ]
   },
   "S11:35F5": {
    "unit": "S11",
@@ -3424,7 +3564,7 @@
     "start": 221008,
     "end": 221878
    },
-   "source": "src/S11/m35F5.c",
+   "source": "src/ui/game_menu.c",
    "source_sha256": "2fb1da1b102cec38592306d0f5895b6308c56d9eda3f4644d8a4d28ab1dd1e3a",
    "claims": [
     {
@@ -3473,7 +3613,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "269b8bcbaa32420a4603a2995643d04ef3b01381e9449e37105690e3b61ef9c5"
+   "object_sha256": "269b8bcbaa32420a4603a2995643d04ef3b01381e9449e37105690e3b61ef9c5",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S11/m35F5.c",
+     "why": "Updates game menu entries and handles menu commands. It also manages pause state and the Pause or Unpause label."
+    }
+   ]
   },
   "S12:384C": {
    "unit": "S12",
@@ -3499,8 +3646,8 @@
     }
    },
    "lang": "c",
-   "source": "src/S12/m384C.c",
-   "source_sha256": "372fac0c3225a009a357c5f7acb0dcd11177451fd846c7e161f46870b0509eb1",
+   "source": "src/ui/map_window.c",
+   "source_sha256": "be60ad13265529897a864a972f93d66282fd4bf28529dfad0b05c395df6dd200",
    "claims": [
     {
      "name": "DeinitMapFunctions",
@@ -3635,7 +3782,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o12_384C_1035",
+     "name": "win_DrawMapWindow",
      "unit": "S12",
      "seg": 14412,
      "off": 4149,
@@ -3646,7 +3793,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o12_384C_10A5",
+     "name": "DrawMapSpider",
      "unit": "S12",
      "seg": 14412,
      "off": 4261,
@@ -3657,7 +3804,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o12_384C_1181",
+     "name": "DrawMapFoot",
      "unit": "S12",
      "seg": 14412,
      "off": 4481,
@@ -3702,7 +3849,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "14f0e3fd834f0b67f2dd9e55c0ca8e6b275caf0f9ce16b553aa2d1917c7f31e5"
+   "object_sha256": "70ca1dfaf8da77d57554c8cd11bfc4900dd9976b42e3b8ea0f5b7d45b717a8c8",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S12/m384C.c",
+     "why": "Handles map window events, view setup and map image generation. It draws map data and keeps the view cursor aligned with the selected location."
+    }
+   ]
   },
   "S13:384C": {
    "unit": "S13",
@@ -3729,7 +3883,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/S13/m384C.c",
+   "source": "src/ui/yard_window.c",
    "source_sha256": "1344b0f5dda79f9ff3cf118cb5474f2a1f96ff36e1e302c61085a2846e74dbcb",
    "claims": [
     {
@@ -3987,7 +4141,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "4d27c9d5bd0a81cf6687045fabd5249ca519d80a654846515f12fcce092b6258"
+   "object_sha256": "4d27c9d5bd0a81cf6687045fabd5249ca519d80a654846515f12fcce092b6258",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S13/m384C.c",
+     "why": "Handles yard window events and renders the yard. It draws animated people, animals, weather, swarms and colony population bars."
+    }
+   ]
   },
   "S14:384C": {
    "unit": "S14",
@@ -4021,8 +4182,8 @@
     "start": 230592,
     "end": 235245
    },
-   "source": "src/S14/m384C.c",
-   "source_sha256": "9f6921f0fa1839ff26566d23599c954f6ce80abb7141361223cd7b3d9f035b08",
+   "source": "src/ui/scenario_dialogs.c",
+   "source_sha256": "0962e556a6c7f879e0d54402ed912def104264562a0eb8f50639e974c71e96de",
    "claims": [
     {
      "name": "DoScenario",
@@ -4150,7 +4311,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a4de27346dc14b8641a66a91e21949ca075bf199716064d97171eb29afb92c56"
+   "object_sha256": "a6334d72b13f37d17a26d5095957f77c09e57a2880acde6c5033c7c10132f669",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S14/m384C.c",
+     "why": "Displays scenario, score, end game, help and picture dialogs. The file also computes the score and draws caste and spider popups."
+    }
+   ]
   },
   "S15:384C": {
    "unit": "S15",
@@ -4176,7 +4344,7 @@
     }
    },
    "lang": "c",
-   "source": "src/S15/m384C.c",
+   "source": "src/startup/game_session.c",
    "source_sha256": "7c8b75e2ecb54347fd7f9ef71191fc15b74397fdb44d2862b1f3acdbc0741005",
    "claims": [
     {
@@ -4258,7 +4426,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "36ed878ebde9c8f7439b73f63b27d9cd016cc445d7b32f5d595237061fcf3fd6"
+   "object_sha256": "36ed878ebde9c8f7439b73f63b27d9cd016cc445d7b32f5d595237061fcf3fd6",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S15/m384C.c",
+     "why": "Starts a new game and restores default windows, and handles quit and fatal exit paths. It also loads monochrome patterns and checks the demo expiry date."
+    }
+   ]
   },
   "S16:384C": {
    "unit": "S16",
@@ -4289,8 +4464,8 @@
     "start": 230592,
     "end": 232355
    },
-   "source": "src/S16/m384C.c",
-   "source_sha256": "ae5559fca2b97919ad45a09c73787db56e0f5dacc85a57f7442cad10edb68768",
+   "source": "src/ui/intro_credits.c",
+   "source_sha256": "58517952115392618185b30bb0f20c80231fa9969727cb248baaaaaa250eaf9d",
    "claims": [
     {
      "name": "DrawSimPayoff",
@@ -4330,7 +4505,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "38fd6844176cc3e93951a622eaff80f54ac6778822ad07160a8d68930abace40"
+   "object_sha256": "9eb635854053bf3010f9e4236fb01b9504259f7114bacef24670ba502cffdd84",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S16/m384C.c",
+     "why": "Displays the intro, credits and simulation payoff animation. The three entries manage these presentation sequences and their resources."
+    }
+   ]
   },
   "S17:384C": {
    "unit": "S17",
@@ -4357,7 +4539,7 @@
     "start": 230592,
     "end": 231035
    },
-   "source": "src/S17/m384C.c",
+   "source": "src/window/menu_setup.c",
    "source_sha256": "028adfd17423f115a800315be32a2aaee0f7049e0b8c3211eebd9d65ab7a1351",
    "claims": [
     {
@@ -4418,7 +4600,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a8d3a2d1de9683d1a12e70ccc8024c11bd725b9b4d47e1bd098bb3cf7a7a2bfa"
+   "object_sha256": "a8d3a2d1de9683d1a12e70ccc8024c11bd725b9b4d47e1bd098bb3cf7a7a2bfa",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S17/m384C.c",
+     "why": "Initializes menu bar data and fixes up its pointers. It calculates item rectangles and applies menu colours before drawing."
+    }
+   ]
   },
   "S18:384C": {
    "unit": "S18",
@@ -4448,7 +4637,7 @@
     "start": 230592,
     "end": 234951
    },
-   "source": "src/S18/m384C.c",
+   "source": "src/simulation/map_patches.c",
    "source_sha256": "78a0f63aa99b2c2346e799b4e63f5d94256ab62b17f88d301bb986112aeed8d3",
    "claims": [
     {
@@ -4706,7 +4895,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "61ca2854c3ee0e04a8b7b3c77d0bf2f8190964f7670b24ca4a305c9c757f4fad"
+   "object_sha256": "61ca2854c3ee0e04a8b7b3c77d0bf2f8190964f7670b24ca4a305c9c757f4fad",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S18/m384C.c",
+     "why": "Builds house and yard patches from map cells. It lays out floors, household fixtures, rocks and yard terrain."
+    }
+   ]
   },
   "S19:384C": {
    "unit": "S19",
@@ -4736,7 +4932,7 @@
     "start": 230592,
     "end": 231712
    },
-   "source": "src/S19/m384C.c",
+   "source": "src/ui/game_events.c",
    "source_sha256": "511d172318d671af9562823c3af8e6e448b5b7629679d86eca94155d212ebe21",
    "claims": [
     {
@@ -4785,7 +4981,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "cbb841f38dcb9ccededc3b4b85ec2d7a8e3a72ef75f63cfee968e362e08410b2"
+   "object_sha256": "cbb841f38dcb9ccededc3b4b85ec2d7a8e3a72ef75f63cfee968e362e08410b2",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S19/m384C.c",
+     "why": "Runs the main game event dispatcher and keyboard command handling. The same file provides a debug memory report."
+    }
+   ]
   },
   "S20:39C7": {
    "unit": "S20",
@@ -4811,7 +5014,7 @@
     "start": 236656,
     "end": 237337
    },
-   "source": "src/S20/m39C7.c",
+   "source": "src/platform/video/font_setup.c",
    "source_sha256": "a392244a7023099b7e9930ea45bf3989eb0bff37202889249795db8b5ae7d13a",
    "claims": [
     {
@@ -4992,7 +5195,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9f7af680cd5970e2d1ab83d08fdaf480cc12c27069284c2b14e05bac4afb5018"
+   "object_sha256": "9f7af680cd5970e2d1ab83d08fdaf480cc12c27069284c2b14e05bac4afb5018",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S20/m39C7.c",
+     "why": "Loads the fonts required by the display modes and provides empty driver hooks. The graphics selector chooses these setup functions along with the raster driver."
+    }
+   ]
   },
   "S20:39F1": {
    "unit": "S20",
@@ -5023,7 +5233,7 @@
     "start": 237338,
     "end": 238743
    },
-   "source": "src/S20/m39F1.c",
+   "source": "src/startup/dos_config.c",
    "source_sha256": "9bc2a6faba4099f98b9f919e73ceff9c0b2f02629796b3abd18f812c48597ff2",
    "claims": [
     {
@@ -5072,7 +5282,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "988112a5b6430f0598e1896de05d277b252ebdee564dc92bb19c7ce99203d87d"
+   "object_sha256": "988112a5b6430f0598e1896de05d277b252ebdee564dc92bb19c7ce99203d87d",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S20/m39F1.c",
+     "why": "Initializes DOS specific application resources and reads configuration words. It chooses language and database resources and rejects invalid display mode settings."
+    }
+   ]
   },
   "S21:39C7": {
    "unit": "S21",
@@ -5095,7 +5312,7 @@
     "start": 236656,
     "end": 237128
    },
-   "source": "src/S21/m39C7.asm",
+   "source": "src/platform/video/adapter_probe.asm",
    "source_sha256": "537d7b811340a7615c2d49e8eb5253953937bd1b037344ecbaba246c27f338bd",
    "claims": [
     {
@@ -5210,7 +5427,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "539a27784c5bba22db93a7549da7c548525cc22fe95ac753a5ee40da4c7acb03"
+   "object_sha256": "539a27784c5bba22db93a7549da7c548525cc22fe95ac753a5ee40da4c7acb03",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S21/m39C7.asm",
+     "why": "Probes video adapters and identifies the active display subsystem. It checks BIOS services, CRTC ports and the Tandy ROM signature."
+    }
+   ]
   },
   "S22:39C7": {
    "unit": "S22",
@@ -5241,8 +5465,8 @@
     "start": 236656,
     "end": 244698
    },
-   "source": "src/S22/m39C7.c",
-   "source_sha256": "c37c73264f518e638422f2fe4f2eddf6e7d8433fa5b2d4b10323df7185c9cf3c",
+   "source": "src/ui/yellow_commands.c",
+   "source_sha256": "1fc3e09dcd48619931a1d573975416b5d5027f3700cf60ba8c83d0c29e6d5857",
    "claims": [
     {
      "name": "processEdit",
@@ -5413,7 +5637,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f77cd9e4085bbf772ad4445bb873202ff03d216d2aee5d683a0c7cf31a57bdba"
+   "object_sha256": "ec51e2979e43e37f512e3c57817279c2705aa00e20722c17fac0ee362be08575",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S22/m39C7.c",
+     "why": "Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals, dialogs, alarm drops and special interactions such as laser fire."
+    }
+   ]
   },
   "S22:3BBD": {
    "unit": "S22",
@@ -5444,7 +5675,7 @@
     "start": 244698,
     "end": 249366
    },
-   "source": "src/S22/m3BBD.c",
+   "source": "src/ui/experiment_tools.c",
    "source_sha256": "e65c5836825b233080cc6dc80725f6682ef3132bb557b098b728f95e22fbec61",
    "claims": [
     {
@@ -5704,7 +5935,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "95346db70e861fd1c36826935da53c2d1bba8ac8c0d1254d51641365eee64ecb"
+   "object_sha256": "95346db70e861fd1c36826935da53c2d1bba8ac8c0d1254d51641365eee64ecb",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S22/m3BBD.c",
+     "why": "Applies experiment mode map editing tools. It digs and fills terrain, adds ants and food, changes scent, and connects or smooths walls."
+    }
+   ]
   },
   "S23:39C7": {
    "unit": "S23",
@@ -5741,8 +5979,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/S23/m39C7.c",
-   "source_sha256": "b6d78f8ddcb238a06c0b05d481f30094d259ceea09e7946ab7bc84cc3c730804",
+   "source": "src/ui/info_cards.c",
+   "source_sha256": "1084b0ada5f824f173825a3ee451f75092130491c9af3587be26e2605c40b2ce",
    "claims": [
     {
      "name": "XFlipLong",
@@ -5835,7 +6073,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c7c3f500b39258afd0b597cc184f69650f7861937c28c42f05d010b40093e95c"
+   "object_sha256": "9c95adc7171a3f10c3bb169256d1e6c516864c701a7f4a9c6bee485de20e4ede",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S23/m39C7.c",
+     "why": "Displays the information window and card resources with styled text. It also contains byte order conversion helpers used when reading those resources."
+    }
+   ]
   },
   "S24:39C7": {
    "unit": "S24",
@@ -5867,8 +6112,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/S24/m39C7.c",
-   "source_sha256": "3b22feb82fa00d9fe1f2b743f8c087355a09f006079cd3740ac9336966272563",
+   "source": "src/ui/history_window.c",
+   "source_sha256": "ebf2a836a15049c5da147c981c55b673c00f0129a25ce03fec4705b16cb6c5e3",
    "claims": [
     {
      "name": "OpenHistoryWindow",
@@ -5950,7 +6195,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ebb128ffa906318017b63e04c6dd294b222be64beff1fb9de2cc040ed831fdb4"
+   "object_sha256": "640132a3ba75c1d0fbae883bdec45ed0d418733b1fa161efc90a477824fef9f6",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S24/m39C7.c",
+     "why": "Displays the history window and handles its controls. It clears, updates and plots the recorded history graphs."
+    }
+   ]
   },
   "S25:39C7": {
    "unit": "S25",
@@ -5976,7 +6228,7 @@
     "start": 236656,
     "end": 244295
    },
-   "source": "src/S25/m39C7.c",
+   "source": "src/simulation/black_nest.c",
    "source_sha256": "2924051f92e75d6dabb4d0fbc3a54e7daf124a0f23fd99750d4c39cfca27eb56",
    "claims": [
     {
@@ -6314,7 +6566,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ecc92db7ce0b73087fb74f71472c216fbeefe55d403556249c104f6376653081"
+   "object_sha256": "ecc92db7ce0b73087fb74f71472c216fbeefe55d403556249c104f6376653081",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S25/m39C7.c",
+     "why": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment."
+    }
+   ]
   },
   "S25:3BA4": {
    "unit": "S25",
@@ -6341,8 +6600,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/S25/m3BA4.c",
-   "source_sha256": "231ca50716c965b543db3f280503285efc68c876131f6fed1d58b6b8643b38c4",
+   "source": "src/simulation/yellow_ant.c",
+   "source_sha256": "cb3b565409274e757d70f818e17e4201878a45db6158fbd0b1a3c1b55fffdd3a",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -6405,7 +6664,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "o25_3BA4_188A",
+     "name": "CheckMyBestDirs",
      "unit": "S25",
      "seg": 15268,
      "off": 6282,
@@ -6417,7 +6676,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "o25_3BA4_1935",
+     "name": "GetMyNextRandDirs",
      "unit": "S25",
      "seg": 15268,
      "off": 6453,
@@ -6441,7 +6700,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "o25_3BA4_1A0D",
+     "name": "GetMyBestDir",
      "unit": "S25",
      "seg": 15268,
      "off": 6669,
@@ -6465,7 +6724,7 @@
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
-     "name": "o25_3BA4_13AB",
+     "name": "GetMyDis",
      "unit": "S25",
      "seg": 15268,
      "off": 5035,
@@ -6512,7 +6771,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8088ee9c2478daccc2b5356cf820b0115be5f630097f25b14194344a63eaff6b"
+   "object_sha256": "fcb4c16a60f21c05400441fe153460d26580a2869f74e8865a02fb331e39f893",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S25/m3BA4.c",
+     "why": "Advances the player yellow ant and chooses its movement directions. It handles nest exit, fighting and fight animation."
+    }
+   ]
   },
   "S26:39C7": {
    "unit": "S26",
@@ -6544,7 +6810,7 @@
     "start": 236656,
     "end": 238892
    },
-   "source": "src/S26/m39C7.c",
+   "source": "src/window/move_resize.c",
    "source_sha256": "91c5fca2fb53e637613d1a7ea089834afe394ff0a35cec04933fdb3fed40043e",
    "claims": [
     {
@@ -6593,7 +6859,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "69378b044c39cdd3168650e41a03b3b04687bc19ffc7440190b8e99a6709aa2a"
+   "object_sha256": "69378b044c39cdd3168650e41a03b3b04687bc19ffc7440190b8e99a6709aa2a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S26/m39C7.c",
+     "why": "Tracks window zooming, dragging and resizing. It constrains the resulting rectangles to the screen and uses the resize icon."
+    }
+   ]
   },
   "data:3D57": {
    "unit": "data",
@@ -6617,11 +6890,18 @@
    "source_origin": "hand-written C",
    "link_after": "",
    "kind": "data",
-   "source": "src/data/d3D57.c",
+   "source": "src/simulation/tables.c",
    "source_sha256": "c84494f7988004013b67cad6eec8f7b721d71ee2362dab6e233c60e9a03aa7f6",
    "claims": [],
    "scaffold": [],
-   "object_sha256": "5cd903664c88844448ff0a71191df9fee2be5d683a4ea3595a8ad53cbf0fe04c"
+   "object_sha256": "5cd903664c88844448ff0a71191df9fee2be5d683a4ea3595a8ad53cbf0fe04c",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/data/d3D57.c",
+     "why": "Defines initialized direction, caste, mode and display lookup tables together with initial game state. The same file includes yard and creature defaults and history references, so its contents span several simulation and rendering tasks."
+    }
+   ]
   },
   "data:3E1D": {
    "unit": "data",
@@ -6649,11 +6929,18 @@
    "lang": "c",
    "link_after": "data:3D57",
    "kind": "data",
-   "source": "src/data/d3E1D.c",
+   "source": "src/simulation/maps_lists.c",
    "source_sha256": "076287872d399a3b9a69485985b51b9c378bdd8294b730dbe65da33315989d7d",
    "claims": [],
    "scaffold": [],
-   "object_sha256": "13a2aa00269cc49db0f189fbb5467c709a54ba546341fed97cd9842cf19275e6"
+   "object_sha256": "13a2aa00269cc49db0f189fbb5467c709a54ba546341fed97cd9842cf19275e6",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/data/d3E1D.c",
+     "why": "Defines the large colony maps, life and pheromone arrays and ant lists, along with a saved game header string. The compiler emits two far data segments from this one file."
+    }
+   ]
   },
   "data:55B3@0042": {
    "unit": "data",
@@ -6679,11 +6966,18 @@
    "source_origin": "hand-written C",
    "link_after": "",
    "kind": "data",
-   "source": "src/data/d55B3_0042.c",
+   "source": "src/startup/version.c",
    "source_sha256": "c5953a15914be21c0df170962254d663da6a163a44a7db96b558e7612c0f3c3f",
    "claims": [],
    "scaffold": [],
-   "object_sha256": "e4ebada196867a877340cdeb80bc9ec0becb6ccfb4ac06b4ae10b0b1b20058f2"
+   "object_sha256": "e4ebada196867a877340cdeb80bc9ec0becb6ccfb4ac06b4ae10b0b1b20058f2",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/data/d55B3_0042.c",
+     "why": "Defines the DOS release version string. It is the data contribution immediately after the runtime BEGDATA region."
+    }
+   ]
   },
   "data:55B3@0064": {
    "unit": "data",
@@ -6709,11 +7003,18 @@
    "source_origin": "hand-written C",
    "link_after": "data:55B3@0042",
    "kind": "data",
-   "source": "src/data/d55B3_0064.c",
+   "source": "src/sound/theme_song.c",
    "source_sha256": "1f66577e566a3b7b1507e47f27892279f17057a6db449f591223a465d5184cc3",
    "claims": [],
    "scaffold": [],
-   "object_sha256": "18670fc99ccafa9be1192e129c9ea2168716d44edeae7254bc8c5ce6e36db88c"
+   "object_sha256": "18670fc99ccafa9be1192e129c9ea2168716d44edeae7254bc8c5ce6e36db88c",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/data/d55B3_0064.c",
+     "why": "Defines the theme song descriptor and its program and bank mapping. It also carries the pointer to the separate version string and the unused MIDI filename text."
+    }
+   ]
   },
   "data:55B3@00B8": {
    "unit": "data",
@@ -6739,11 +7040,18 @@
    "source_origin": "hand-written C",
    "link_after": "data:55B3@0064",
    "kind": "data",
-   "source": "src/data/d55B3_00B8.c",
+   "source": "src/sound/instruments.c",
    "source_sha256": "d04646a28691ff05ad93a50c5e7142405ab64932f875f2d2a4d10d04a4566f3d",
    "claims": [],
    "scaffold": [],
-   "object_sha256": "d3402e98622841a43f498c755d46c7151f6ff0da7c91b869ae2bb783816e2774"
+   "object_sha256": "d3402e98622841a43f498c755d46c7151f6ff0da7c91b869ae2bb783816e2774",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/data/d55B3_00B8.c",
+     "why": "Defines sound effect instruments, sample descriptors, FM patches and MIDI mappings. The device tables select which representation each sound backend uses."
+    }
+   ]
   },
   "root:0000": {
    "unit": "root",
@@ -6774,8 +7082,8 @@
     "start": 0,
     "end": 1193
    },
-   "source": "src/root/m0000.c",
-   "source_sha256": "3c2643d6d0b802bdad2fa4ff53a7e62351a0249579021f2c85a112d089b4332c",
+   "source": "src/sound/resource_loading.c",
+   "source_sha256": "f5108c46131442327d540662ed72ab0bc6376d5422e1142678d4fbb8cde49bae",
    "claims": [
     {
      "name": "f_0000_0000",
@@ -6867,7 +7175,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ad5a4bf5b61eae1b4dc354fdaad0568f53c1f81b628dc5535daafe70d1a94012"
+   "object_sha256": "1eac1ff87d7f91be19cdbd7b19032ec91d7ea695392ccc32af4464e399e21243",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0000.c",
+     "why": "Loads song resources and decompresses sampled sounds through a database hook. It also manages the sample free list and releases sound resources."
+    }
+   ]
   },
   "root:004A": {
    "unit": "root",
@@ -6897,11 +7212,11 @@
     "start": 1194,
     "end": 2353
    },
-   "source": "src/root/m004A.c",
-   "source_sha256": "88152800cff83de8534c85a1b7c37dd2a070ffa05ffffdd843775013ab4f1767",
+   "source": "src/ui/map_scrolling.c",
+   "source_sha256": "39c09e7295e770eaaf4f33aec7e99f5ed973606602b036aed15a5835e149b670",
    "claims": [
     {
-     "name": "f_004A_000A",
+     "name": "goStepRight",
      "unit": "root",
      "seg": 74,
      "off": 10,
@@ -6912,7 +7227,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_004A_0052",
+     "name": "goStepLeft",
      "unit": "root",
      "seg": 74,
      "off": 82,
@@ -6923,7 +7238,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_004A_008A",
+     "name": "goStepDown",
      "unit": "root",
      "seg": 74,
      "off": 138,
@@ -6934,7 +7249,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_004A_00D2",
+     "name": "goStepUp",
      "unit": "root",
      "seg": 74,
      "off": 210,
@@ -6945,7 +7260,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_004A_01E9",
+     "name": "goStepSW",
      "unit": "root",
      "seg": 74,
      "off": 489,
@@ -6956,7 +7271,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_004A_0253",
+     "name": "goStepNW",
      "unit": "root",
      "seg": 74,
      "off": 595,
@@ -6967,7 +7282,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_004A_02AD",
+     "name": "FinishDiagStep",
      "unit": "root",
      "seg": 74,
      "off": 685,
@@ -6978,7 +7293,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_004A_038B",
+     "name": "FinishHorzStep",
      "unit": "root",
      "seg": 74,
      "off": 907,
@@ -6989,7 +7304,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_004A_040E",
+     "name": "FinishVertStep",
      "unit": "root",
      "seg": 74,
      "off": 1038,
@@ -7000,7 +7315,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_004A_010A",
+     "name": "goStepNE",
      "unit": "root",
      "seg": 74,
      "off": 266,
@@ -7011,7 +7326,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_004A_0172",
+     "name": "goStepSE",
      "unit": "root",
      "seg": 74,
      "off": 370,
@@ -7023,7 +7338,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "da55062e367fec9beec5d41cc42d6686b8b5b339a2bc04251397d56bad82fcb9"
+   "object_sha256": "474dcfb5f13c7ef7ffffa889615435912344b59961260581d1a5817a0c35479b",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m004A.c",
+     "why": "Scrolls the map view and clamps its origin to the view limits. It remembers the centre separately for each map plane."
+    }
+   ]
   },
   "root:0093": {
    "unit": "root",
@@ -7047,7 +7369,7 @@
     "start": 2354,
     "end": 2977
    },
-   "source": "src/root/m0093.c",
+   "source": "src/simulation/random.c",
    "source_sha256": "dd5a593457dd72297e41dabef1e00e0be2fbca53d7586adc2c47812e960297af",
    "claims": [
     {
@@ -7261,7 +7583,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3dcefc33d2395427456d08b67cafcaadbe8e84db40d4c41a0f3a74379803a9c2"
+   "object_sha256": "3dcefc33d2395427456d08b67cafcaadbe8e84db40d4c41a0f3a74379803a9c2",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0093.c",
+     "why": "Provides the simulation random number generators and seed management. It combines an LFSR with the C runtime generator and timing based seeding."
+    }
+   ]
   },
   "root:00BA": {
    "unit": "root",
@@ -7291,8 +7620,8 @@
     "start": 2978,
     "end": 3561
    },
-   "source": "src/root/m00BA.c",
-   "source_sha256": "0581613e46a8866a1bcfb4b9f866a71c01e7a25884e47b532ece856b47846811",
+   "source": "src/startup/application_windows.c",
+   "source_sha256": "395a1e3828e58ddf0db1098d48ece336971ce651436ea07feb9ef732f4602734",
    "claims": [
     {
      "name": "InitApplicationStuff",
@@ -7351,7 +7680,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d9f62658eeb843ef11353a311c78686458fe52626a63c6f3f0463026dab2cf90"
+   "object_sha256": "ec231d2ac4cfa4b8a4ebcf544724c11de5eaddd23283852678141e3c3a5ddd8f",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m00BA.c",
+     "why": "Initializes application windows and installs drawing and control hooks. It loads saved window headers and handles window closure or control changes."
+    }
+   ]
   },
   "root:00DE": {
    "unit": "root",
@@ -7364,7 +7700,7 @@
    ],
    "placements": {},
    "lang": "c",
-   "source": "src/root/m00DE.c",
+   "source": "src/unresolved/m00de.c",
    "source_sha256": "ed0dcfe0256211fd6a2e368deb6ab4eae5df29b582c52966e21fd7dd31c3720c",
    "claims": [
     {
@@ -7380,7 +7716,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e82bc0b2d5dfe08cabb2341931dce1e1618581e57153b1b0c08b61d5ff556c62"
+   "object_sha256": "e82bc0b2d5dfe08cabb2341931dce1e1618581e57153b1b0c08b61d5ff556c62",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m00DE.c",
+     "why": "Contains one empty far Pascal entry taking an integer. A caller passes one before exiting, but the original purpose of the hook is not established."
+    }
+   ]
   },
   "root:00DF": {
    "unit": "root",
@@ -7410,7 +7753,7 @@
     "start": 3572,
     "end": 3969
    },
-   "source": "src/root/m00DF.c",
+   "source": "src/sound/game_interface.c",
    "source_sha256": "4f2d3d8ec85eb6d54bc4cce386c219fd297620041a035949868919cb8ed3f696",
    "claims": [
     {
@@ -7547,7 +7890,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "fddb82c901b98cb150d5dc0a7fd3030d4c6db6017dd2a863cd913f39963729d9"
+   "object_sha256": "fddb82c901b98cb150d5dc0a7fd3030d4c6db6017dd2a863cd913f39963729d9",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m00DF.c",
+     "why": "Provides the game facing sound and song interface. It initializes the sound driver shell and forwards start, reverse, completion and control requests."
+    }
+   ]
   },
   "root:00F8": {
    "unit": "root",
@@ -7582,7 +7932,7 @@
     "start": 3970,
     "end": 5565
    },
-   "source": "src/root/m00F8.c",
+   "source": "src/ui/view_dialog_helpers.c",
    "source_sha256": "eb8acd65f6206f62f30ff0b907eefbfd4628b25536dc5c7f322c4dc9e5efab7d",
    "claims": [
     {
@@ -8027,7 +8377,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5c4daf0b3161e91b4010dc6a4970f777a537af038f04302660ff678f1c83465c"
+   "object_sha256": "5c4daf0b3161e91b4010dc6a4970f777a537af038f04302660ff678f1c83465c",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m00F8.c",
+     "why": "Collects small map and yard window hooks, coordinate conversions and visibility checks. It also supplies dialog waiting, abort and timing helpers."
+    }
+   ]
   },
   "root:015B": {
    "unit": "root",
@@ -8057,7 +8414,7 @@
     "start": 5566,
     "end": 9279
    },
-   "source": "src/root/m015B.c",
+   "source": "src/ui/view_commands.c",
    "source_sha256": "19c123ed5fbcc793baa091c238ce4534319db9794b599c59163cabd75e9c9771",
    "claims": [
     {
@@ -8282,7 +8639,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1dd0ddfb0a9ef9567a644be5226a2a6df4e759149159a8e0bb29b3f37aea3a82"
+   "object_sha256": "1dd0ddfb0a9ef9567a644be5226a2a6df4e759149159a8e0bb29b3f37aea3a82",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m015B.c",
+     "why": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands."
+    }
+   ]
   },
   "root:0244": {
    "unit": "root",
@@ -8311,8 +8675,8 @@
     "start": 9280,
     "end": 9485
    },
-   "source": "src/root/m0244.c",
-   "source_sha256": "1b837925f8afbf3f6a817202acb82023bca85bd9aef1f6492b5b71473c71ae1b",
+   "source": "src/platform/block_helpers.c",
+   "source_sha256": "be460dc24c80cda5282fc337a52c2ff4492055e03203fcc65ee59f7397dbc763",
    "claims": [
     {
      "name": "BlockMove",
@@ -8326,7 +8690,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0244_0022",
+     "name": "FlipHandleWords",
      "unit": "root",
      "seg": 580,
      "off": 34,
@@ -8337,7 +8701,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0244_00A7",
+     "name": "OverlayOutsideTiles",
      "unit": "root",
      "seg": 580,
      "off": 167,
@@ -8348,7 +8712,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0244_00BA",
+     "name": "OverlayInsideTiles",
      "unit": "root",
      "seg": 580,
      "off": 186,
@@ -8360,7 +8724,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8f2402703c2dcdcd5ee5ae019c9007eb0fb53e017e9d7eecafd070411718d503"
+   "object_sha256": "73cca42468f04452f2368fda4fd47175d4e6deaf241b5de1c4cc0a590d277635",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0244.c",
+     "why": "Contains BlockMove, a debug byte swap dump and barrier level setters. These unrelated small helpers remain together because they share one original code module."
+    }
+   ]
   },
   "root:0250": {
    "unit": "root",
@@ -8392,8 +8763,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m0250.c",
-   "source_sha256": "2e2cd80d80204834de64dfb24d403cef0124b013c872162687ad1defb75b4d72",
+   "source": "src/ui/edit_view.c",
+   "source_sha256": "207439568e72a981571dfaebd13c704c855509cb5446c4210d1db3b84ff0ff40",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -8605,7 +8976,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0250_0E15",
+     "name": "win_EditChanged",
      "unit": "root",
      "seg": 592,
      "off": 3605,
@@ -8660,7 +9031,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_0EC6",
+     "name": "UpdateEditWindow",
      "unit": "root",
      "seg": 592,
      "off": 3782,
@@ -8682,7 +9053,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_0250_0EDA",
+     "name": "win_DrawEditWindow",
      "unit": "root",
      "seg": 592,
      "off": 3802,
@@ -8693,7 +9064,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_0250_0F2C",
+     "name": "BoundEditPosition",
      "unit": "root",
      "seg": 592,
      "off": 3884,
@@ -8933,7 +9304,7 @@
      "target_sha256": "8321fb9488615fc252bb7a43316fe4f39b699530296fff3b1f4a68013989799a",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "layout_inferred": "SYM-1: move real fd_50F6_37EA callback prototype before f_0250_1018; inferred declaration placement, no dummy identifiers",
+     "layout_inferred": "SYM-1: move real fd_50F6_37EA callback prototype before DoCalcTile; inferred declaration placement, no dummy identifiers",
      "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
@@ -8962,7 +9333,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "93a06c71611742f3f2988e2035a3fd9e93525823f0f77aac132ff5659274ef91"
+   "object_sha256": "8732220d5fcdf43f2c1bb25b18e6238df5595d3a21857a045fb4f4da34344586",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0250.c",
+     "why": "Draws and updates the detailed ant view, including tiles, the spider, speech balloons and graphs. It also contains tile loading, EMS tile cache setup and editor event handling."
+    }
+   ]
   },
   "root:075B": {
    "unit": "root",
@@ -8992,8 +9370,8 @@
     "start": 30128,
     "end": 30956
    },
-   "source": "src/root/m075B.c",
-   "source_sha256": "69b5b7ee5f97e11e571f378fe20a9401af1a221e0a656c953ab701e0e22e5d16",
+   "source": "src/resources/game_strings.c",
+   "source_sha256": "7c411cef53d3aea5cd9696580be6bccb322b215b857da9c6bd280891cad1d90f",
    "claims": [
     {
      "name": "initStuff",
@@ -9052,7 +9430,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c6fe0c4b4f3d719008ab2d40669ed20d72fcd0eea8890e6a6cb0cd713656e647"
+   "object_sha256": "682eeb4d6d370338e2f056cf572d6f08b2e0b344a0f62371551f33281d7cc45a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m075B.c",
+     "why": "Loads startup resources and prepares game string lists. It provides the resource string lookup used by the interface and simulation messages."
+    }
+   ]
   },
   "root:078E": {
    "unit": "root",
@@ -9077,7 +9462,7 @@
     "start": 30956,
     "end": 31104
    },
-   "source": "src/root/m078E.c",
+   "source": "src/memory/pointers.c",
    "source_sha256": "ecc45ba98ca1071c6da1d73101956b78585736ade9c266b10ee5458924c22848",
    "claims": [
     {
@@ -9104,7 +9489,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8447b1f289c55c1efe08cdccd2c3bc621c47303b79b2d30f609196a8db35c93a"
+   "object_sha256": "8447b1f289c55c1efe08cdccd2c3bc621c47303b79b2d30f609196a8db35c93a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m078E.c",
+     "why": "Allocates and frees pointer style storage using memory manager handles. It dereferences the master pointer and rejects allocations that exceed its pointer size limit."
+    }
+   ]
   },
   "root:0798": {
    "unit": "root",
@@ -9134,7 +9526,7 @@
     "start": 31104,
     "end": 35149
    },
-   "source": "src/root/m0798.c",
+   "source": "src/ui/colony_controls.c",
    "source_sha256": "13d14f9fa2319f85453ac6043d49e10697a6ed350f5cfb6ac48dec6d6b8164fa",
    "claims": [
     {
@@ -9338,7 +9730,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "cd58b19a7db1007c1dc39a01604fa310355beb7b5eddaf5945b1fbc100d916c5"
+   "object_sha256": "cd58b19a7db1007c1dc39a01604fa310355beb7b5eddaf5945b1fbc100d916c5",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0798.c",
+     "why": "Implements caste and activity mode control windows with triangular controls. It maps pointer positions into control levels and draws the resulting production settings."
+    }
+   ]
   },
   "root:0894": {
    "unit": "root",
@@ -9368,7 +9767,7 @@
     "start": 35150,
     "end": 44444
    },
-   "source": "src/root/m0894.c",
+   "source": "src/simulation/surface_ants.c",
    "source_sha256": "c77a058b5b390ca8cfd07419f7e4d93a11a4e4bd859cd13afe3e8a7a1c147152",
    "claims": [
     {
@@ -9714,7 +10113,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "991826e4d46e10de508095453d4d7bd9fd838d7c08228e27c45007da13606574"
+   "object_sha256": "991826e4d46e10de508095453d4d7bd9fd838d7c08228e27c45007da13606574",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0894.c",
+     "why": "Runs the main ant simulation and the surface ant list. It advances scent, feeding, reproduction, foraging, recruitment, combat and nest transitions."
+    }
+   ]
   },
   "root:0AD9": {
    "unit": "root",
@@ -9744,7 +10150,7 @@
     "start": 44444,
     "end": 48769
    },
-   "source": "src/root/m0AD9.c",
+   "source": "src/simulation/yard_creatures.c",
    "source_sha256": "ab62f0311a743daf9b113e74c329230c8b1f0dd703513496cde4e6bd1cd1803e",
    "claims": [
     {
@@ -9958,7 +10364,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e8160fcf6d4c6b35dbbc273ec256bc7bc931e71a345f644e3ff55fd835d01bcf"
+   "object_sha256": "e8160fcf6d4c6b35dbbc273ec256bc7bc931e71a345f644e3ff55fd835d01bcf",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0AD9.c",
+     "why": "Simulates sowing, ant lions and the pill bug. It maintains creature lists, movement and the pill bug tile map."
+    }
+   ]
   },
   "root:0BE8": {
    "unit": "root",
@@ -9987,7 +10400,7 @@
     "start": 48770,
     "end": 52655
    },
-   "source": "src/root/m0BE8.c",
+   "source": "src/simulation/food_water_counts.c",
    "source_sha256": "cef7be7d137ce0fa92f83b4c1c3dec270c28b1a18420592e88af785ec10bcbfc",
    "claims": [
     {
@@ -10256,7 +10669,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d859811b98c19ab5e0e8f17151dedf68d65f75aeba6547061e5ec7989f0d6862"
+   "object_sha256": "d859811b98c19ab5e0e8f17151dedf68d65f75aeba6547061e5ec7989f0d6862",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0BE8.c",
+     "why": "Updates ant counts, water, food and eggs. It also supplies direction, distance and nest entrance helpers used throughout the simulation."
+    }
+   ]
   },
   "root:0CDB": {
    "unit": "root",
@@ -10278,7 +10698,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m0CDB.c",
+   "source": "src/simulation/spider.c",
    "source_sha256": "510be88ef72e2efb919a4f97047ea93845864b72fc09438ffa04cf0e457f3b27",
    "claims": [
     {
@@ -10366,7 +10786,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "86d95264214a36aa15520e5656272fcf277a6c3f73c356bddd221cb39db44e48"
+   "object_sha256": "86d95264214a36aa15520e5656272fcf277a6c3f73c356bddd221cb39db44e48",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0CDB.c",
+     "why": "Initializes and advances the spider and scans for prey. It tracks targets, queen hunting and spider death."
+    }
+   ]
   },
   "root:0DEF": {
    "unit": "root",
@@ -10391,7 +10818,7 @@
     "start": 57072,
     "end": 58090
    },
-   "source": "src/root/m0DEF.c",
+   "source": "src/simulation/red_initiator.c",
    "source_sha256": "5d4ad0d51f66493fd0c33433c98d383907c2cd4c5229df711c0d5e9ba626e07c",
    "claims": [
     {
@@ -10440,7 +10867,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "7b6d29f0589293bd6c68cd212ae416fc6c5d348c770339e6d3060d8c791396ed"
+   "object_sha256": "7b6d29f0589293bd6c68cd212ae416fc6c5d348c770339e6d3060d8c791396ed",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0DEF.c",
+     "why": "Creates and advances the red colony initiator ant. It selects new tasks and the best directions for that ant."
+    }
+   ]
   },
   "root:0E2E": {
    "unit": "root",
@@ -10462,7 +10896,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m0E2E.c",
+   "source": "src/simulation/tutorial.c",
    "source_sha256": "8ebfd21d45cd27e867059b87dbb16e3015ada4eebfa6944256879cdaa78ae5c0",
    "claims": [
     {
@@ -10506,7 +10940,14 @@
     "historical_checkpoint": "2be85a8",
     "current_byte_exact": false,
     "reason": "Corrected LessonDone case41 refers to existing fd_3D57_049E; CONST+40 now binds its actual owner segment."
-   }
+   },
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0E2E.c",
+     "why": "Runs tutorial lessons and advice feedback. It selects the next lesson and delivers the corresponding instructions."
+    }
+   ]
   },
   "root:0EC1": {
    "unit": "root",
@@ -10531,7 +10972,7 @@
     "start": 60434,
     "end": 62455
    },
-   "source": "src/root/m0EC1.c",
+   "source": "src/simulation/ant_lists.c",
    "source_sha256": "516121f3568fffaa6a6f17a0a87da5696dbb1e4db02cbcfa93ad5ad4497454cc",
    "claims": [
     {
@@ -10723,7 +11164,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e57b15122526b0bebef4c369ce9a46b1d1f764829dbcd353958b51d5a3124f06"
+   "object_sha256": "e57b15122526b0bebef4c369ce9a46b1d1f764829dbcd353958b51d5a3124f06",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0EC1.c",
+     "why": "Maintains surface, black nest and red nest ant lists. It compacts, searches, adds and removes entries and handles drowning or hole exits."
+    }
+   ]
   },
   "root:0F3F": {
    "unit": "root",
@@ -10754,7 +11202,7 @@
     "start": 62456,
     "end": 69501
    },
-   "source": "src/root/m0F3F.c",
+   "source": "src/simulation/red_nest.c",
    "source_sha256": "0f26231a0c8dbfcc755f8272a0ae1c53fa3b6e044bd77844b10328df5101f869",
    "claims": [
     {
@@ -11067,7 +11515,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "eda37b67aa56e4007422511919df44720c4a29416996f19a8f6f1b6ff1d9e669"
+   "object_sha256": "eda37b67aa56e4007422511919df44720c4a29416996f19a8f6f1b6ff1d9e669",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m0F3F.c",
+     "why": "Advances ants in the red colony nest. It handles nest movement, fights, food, eggs, the queen, tail following and digging."
+    }
+   ]
   },
   "root:10F7": {
    "unit": "root",
@@ -11093,7 +11548,7 @@
     "start": 69502,
     "end": 79921
    },
-   "source": "src/root/m10F7.c",
+   "source": "src/simulation/life_tiles.c",
    "source_sha256": "7f126a82534a02ff8843530aa60ea7d13a6c55b15414000c223ec4295e3539cd",
    "claims": [
     {
@@ -11725,7 +12180,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "526931808c10653c3ff3ddae39daa7d9c10bfdef24eb00d68119dd1f27b788ff"
+   "object_sha256": "526931808c10653c3ff3ddae39daa7d9c10bfdef24eb00d68119dd1f27b788ff",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m10F7.c",
+     "why": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives."
+    }
+   ]
   },
   "root:1383": {
    "unit": "root",
@@ -11754,7 +12216,7 @@
     "start": 79922,
     "end": 84326
    },
-   "source": "src/root/m1383.c",
+   "source": "src/simulation/strategy.c",
    "source_sha256": "ff886debc252430bc097f14e34998343e4cd1be0cd80990d21b9dd43a1d92a95",
    "claims": [
     {
@@ -12001,7 +12463,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "24bd6c6d8f0e1916fa6f369bbad19b0f564f746f878b601fc3dfec29bb9b94d5"
+   "object_sha256": "24bd6c6d8f0e1916fa6f369bbad19b0f564f746f878b601fc3dfec29bb9b94d5",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1383.c",
+     "why": "Selects colony strategy, caste production and ant activity modes. It recruits ants and chooses movement directions for foraging, defence, alarms and nest return."
+    }
+   ]
   },
   "root:1496": {
    "unit": "root",
@@ -12026,7 +12495,7 @@
     "start": 84326,
     "end": 85730
    },
-   "source": "src/root/m1496.c",
+   "source": "src/simulation/pheromones.c",
    "source_sha256": "2b158a9367c89c7acf496efe4ff8490865fda03c5c88cfd70343264d1e2d15de",
    "claims": [
     {
@@ -12196,7 +12665,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "98ceac25bf4f3df1d75e05a8296d33cfbbfe7e57fa915b351dc135549f80c25a"
+   "object_sha256": "98ceac25bf4f3df1d75e05a8296d33cfbbfe7e57fa915b351dc135549f80c25a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1496.c",
+     "why": "Updates colony scent and alarm maps. It fills nest holes in the scent representation, smooths alarms and decays pheromone levels."
+    }
+   ]
   },
   "root:14EE": {
    "unit": "root",
@@ -12227,8 +12703,8 @@
     "start": 85730,
     "end": 89494
    },
-   "source": "src/root/m14EE.c",
-   "source_sha256": "bbe3dd7cb42b85d4f7ee4296e2c18ac3c7ae8f72b3b66041c9c064a575a0bc06",
+   "source": "src/simulation/digging.c",
+   "source_sha256": "9377d6f65c5c43b44a48c5606630790ea91cf40fb8a7a50700674d34715d8f32",
    "claims": [
     {
      "name": "CanBeHouseHole",
@@ -12253,7 +12729,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_14EE_0E46",
+     "name": "FloodNestB",
      "unit": "root",
      "seg": 5358,
      "off": 3654,
@@ -12419,7 +12895,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1488e27edcbef7fe570650e6968eb556e85e5bd37d8e231584a73d4979d00587"
+   "object_sha256": "723b9bf1ba403c3c9e6f6c3692f0e9d8d737263b68fb5489f519deb324200e44",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m14EE.c",
+     "why": "Creates nest entrances and digs or smooths tunnels. It updates both colony maps and fixes their exit maps after terrain changes."
+    }
+   ]
   },
   "root:15D9": {
    "unit": "root",
@@ -12444,7 +12927,7 @@
     "start": 89494,
     "end": 89988
    },
-   "source": "src/root/m15D9.c",
+   "source": "src/ui/ribbon_messages.c",
    "source_sha256": "0a761acf7ee309bb373523cd189141c59046ef0d4c0e88134ed6d945b4f9e9c4",
    "claims": [
     {
@@ -12471,7 +12954,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "76421d43496319860e7076dab35a1c07196c947f32aec118fad3e6d3b9b52fe5"
+   "object_sha256": "76421d43496319860e7076dab35a1c07196c947f32aec118fad3e6d3b9b52fe5",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m15D9.c",
+     "why": "Draws centred ribbon text and sets game messages. It forwards the selected message to the ribbon or yard display with its duration."
+    }
+   ]
   },
   "root:15F8": {
    "unit": "root",
@@ -12505,7 +12995,7 @@
     "start": 89988,
     "end": 90779
    },
-   "source": "src/root/m15F8.c",
+   "source": "src/startup/main.c",
    "source_sha256": "f9eb4c7d91d727038145d63599065ba9d201aaa21df89b824bb80b71de98dba6",
    "claims": [
     {
@@ -12532,7 +13022,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a75d3a2c57c3f2f6138127054b47945af8270f724284f10811dff1ba78153215"
+   "object_sha256": "a75d3a2c57c3f2f6138127054b47945af8270f724284f10811dff1ba78153215",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m15F8.c",
+     "why": "Contains main and the main game loop. It processes command line options, checks configuration and resources, initializes the game and performs shutdown."
+    }
+   ]
   },
   "root:1629": {
    "unit": "root",
@@ -12562,8 +13059,8 @@
     "start": 90780,
     "end": 92559
    },
-   "source": "src/root/m1629.c",
-   "source_sha256": "0ec8dede44ecfb40da449cb6c9e185befd59dec459450b758ed18554fc7bded5",
+   "source": "src/graphics/balloons.c",
+   "source_sha256": "484af459c56f1fd07bf14acde780163201c51c0fc28a7e1b0659cef59ecbe1af",
    "claims": [
     {
      "name": "ConvertMonoMaskToTandy",
@@ -12600,7 +13097,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d1c3c94d6c0e76796a0bbf3a9d30e5b9ff4cd3fe4dc1ca6a638015fc045874d3"
+   "object_sha256": "19773fe1743f84d457b9fdc426b6804aa5f69fd0cd96ef6c2f8852a2f9527e20",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1629.c",
+     "why": "Constructs speech balloon images from text. It converts their monochrome masks into the colour formats required by the display modes."
+    }
+   ]
   },
   "root:1699": {
    "unit": "root",
@@ -12623,11 +13127,11 @@
     "start": 92560,
     "end": 93016
    },
-   "source": "src/root/m1699.asm",
-   "source_sha256": "8ba7381cff54203fdd5ffc09f40b4db3b53512e3a01ef524e063a41a71f529a2",
+   "source": "src/graphics/balloon_masks.asm",
+   "source_sha256": "18791aeadfa13853d611025cdeaeaeaa59b4b2dbc1223de82c6c86f1bb18b5dd",
    "claims": [
     {
-     "name": "f_1699_0000",
+     "name": "CopyChar",
      "unit": "root",
      "seg": 5785,
      "off": 0,
@@ -12638,7 +13142,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1699_0050",
+     "name": "CopyCharRep",
      "unit": "root",
      "seg": 5785,
      "off": 80,
@@ -12671,7 +13175,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1699_01AA",
+     "name": "exchange",
      "unit": "root",
      "seg": 5785,
      "off": 426,
@@ -12683,7 +13187,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "7abd5a04606b6043318eaa4a13437e8b8ef50a449305ed9fe318804bf6f9adcc"
+   "object_sha256": "ab6272e41d592190c426a76a890143100b2e64d5769eae6d297a3fcfeea1a305",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1699.asm",
+     "why": "Fills balloon bitmap rows and moves text into their masks. It also converts masks for the Tandy representation."
+    }
+   ]
   },
   "root:16B5": {
    "unit": "root",
@@ -12706,7 +13217,7 @@
     "start": 93016,
     "end": 94658
    },
-   "source": "src/root/m16B5.asm",
+   "source": "src/graphics/lines.asm",
    "source_sha256": "a38a5b8c6c44549a99a501b7931279b3c597e516d79238216c27e479f399bc8a",
    "claims": [
     {
@@ -12810,7 +13321,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d02556eedcf90181da671c3b1cee5d5a0620af2d69a779e8fadcf33dd0a69f81"
+   "object_sha256": "d02556eedcf90181da671c3b1cee5d5a0620af2d69a779e8fadcf33dd0a69f81",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m16B5.asm",
+     "why": "Draws clipped lines using Bresenham stepping. It dispatches to bitmap plot routines for each display format."
+    }
+   ]
   },
   "root:171C": {
    "unit": "root",
@@ -12841,7 +13359,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m171C.c",
+   "source": "src/memory/ralloc.c",
    "source_sha256": "81ea959f69d4fae9cedfe189341d6850ef77dc252b377f615a7c989d6c9db6f9",
    "claims": [
     {
@@ -13496,7 +14014,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8ec68b879dc5d4cb03194d8e132c5d2019bc0070c8e98046168995914d9e5325"
+   "object_sha256": "8ec68b879dc5d4cb03194d8e132c5d2019bc0070c8e98046168995914d9e5325",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m171C.c",
+     "why": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics."
+    }
+   ]
   },
   "root:194D": {
    "unit": "root",
@@ -13513,7 +14038,7 @@
     "start": 103638,
     "end": 103825
    },
-   "source": "src/root/m194D.asm",
+   "source": "src/platform/memory_helpers.asm",
    "source_sha256": "8becfaafd57faf7e3bfb7e7150d4438bf8d78e1319aa90618f76a2be89175c0f",
    "claims": [
     {
@@ -13551,7 +14076,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "af5c576252f7619c22139b18b1289cd5dc9ed83503b8f18edf9ebf02f5063fdd"
+   "object_sha256": "af5c576252f7619c22139b18b1289cd5dc9ed83503b8f18edf9ebf02f5063fdd",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m194D.asm",
+     "why": "Copies large blocks while stepping through segment paragraphs. The same assembly file also probes Tandy video memory and computes a checksum using 386 instructions."
+    }
+   ]
   },
   "root:1959": {
    "unit": "root",
@@ -13568,11 +14100,11 @@
     "start": 103826,
     "end": 103851
    },
-   "source": "src/root/m1959.asm",
-   "source_sha256": "73186753eaea7bcf17b6419094a21937299b1cba5be10a79e7a513794d408f56",
+   "source": "src/platform/byte_order.asm",
+   "source_sha256": "cd19304ce04effb2607b0c14d2e0dc3da0602f1cd88d6c48f19d20ebb3311d20",
    "claims": [
     {
-     "name": "f_1959_0002",
+     "name": "FlipWord",
      "unit": "root",
      "seg": 6489,
      "off": 2,
@@ -13583,7 +14115,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1959_000C",
+     "name": "FlipLong",
      "unit": "root",
      "seg": 6489,
      "off": 12,
@@ -13595,7 +14127,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "dc5962fb9bf49637913a69a10534341f921e4540bf4f4106aae7f47a5c561613"
+   "object_sha256": "735d419efad13ec5c1137d20e28cc02c4a7780a174236c1f624c4be39b5e3487",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1959.asm",
+     "why": "Swaps the byte order of a word or a double word. Both routines use small assembly entry points."
+    }
+   ]
   },
   "root:195A": {
    "unit": "root",
@@ -13618,7 +14157,7 @@
     "start": 103852,
     "end": 104547
    },
-   "source": "src/root/m195A.asm",
+   "source": "src/memory/ems.asm",
    "source_sha256": "b634ca4916d811140f6a06b29f731bd323d49f5c50a76ef3afee38a7f23f6a81",
    "claims": [
     {
@@ -13953,7 +14492,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a949e4dfede00503b645194eedcc72e0bcf16527f4a116916444789ad5a238ab"
+   "object_sha256": "a949e4dfede00503b645194eedcc72e0bcf16527f4a116916444789ad5a238ab",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m195A.asm",
+     "why": "Wraps LIM EMS services for allocating, mapping and naming expanded memory pages. It detects the memory manager and establishes the page frame."
+    }
+   ]
   },
   "root:1986": {
    "unit": "root",
@@ -13980,7 +14526,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m1986.c",
+   "source": "src/resources/database_index.c",
    "source_sha256": "d6d69634205cfbc7dd7cc7b18d1b05f8b82c68ed329d85fa933382c5af4fab9d",
    "claims": [
     {
@@ -14063,7 +14609,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "7d72c19e6f15c39ecb7506e614224007eef583a4dbeaac03638a4f815a80083e"
+   "object_sha256": "7d72c19e6f15c39ecb7506e614224007eef583a4dbeaac03638a4f815a80083e",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1986.c",
+     "why": "Opens and searches database index files. Create and write-side index operations are empty in the read-only DOS game."
+    }
+   ]
   },
   "root:19A9": {
    "unit": "root",
@@ -14094,8 +14647,8 @@
     "start": 105112,
     "end": 105927
    },
-   "source": "src/root/m19A9.c",
-   "source_sha256": "e9827c9c81ecf6f75974b815cd49fcdbc86cda91f7b8140a0f566fbfe993556d",
+   "source": "src/resources/database_records.c",
+   "source_sha256": "fa4f3fad25e071fcf2c32568d762300e8221c2df87528e132f88255aece9ec43",
    "claims": [
     {
      "name": "f_19A9_0008",
@@ -14165,7 +14718,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0856a0a5f39591e59c96f573e3e5ca5af7373000b9602affb5ff7193f9e56fc5"
+   "object_sha256": "1cacf60cc7c66c903efc233cddc097db1fbe7d28b75bfda1dd36d9acdf249904",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m19A9.c",
+     "why": "Reads database records and decompresses their contents when required. Add, delete and pack operations reject writes in this read-only build."
+    }
+   ]
   },
   "root:19DC": {
    "unit": "root",
@@ -14200,7 +14760,7 @@
     "start": 105928,
     "end": 107142
    },
-   "source": "src/root/m19DC.c",
+   "source": "src/resources/database_ems.c",
    "source_sha256": "90b0d3a7a6e171bb7395410af72ec10d3a094865c0395824cb744b9ba5a48c8c",
    "claims": [
     {
@@ -14271,7 +14831,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3aabcb16c50a056626b5352d5839fc382e6b41227564b454d5691d98f50ac0e7"
+   "object_sha256": "3aabcb16c50a056626b5352d5839fc382e6b41227564b454d5691d98f50ac0e7",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m19DC.c",
+     "why": "Reads database files through an EMS page cache. It tracks cached pages and validates handles before returning record data."
+    }
+   ]
   },
   "root:1A28": {
    "unit": "root",
@@ -14305,7 +14872,7 @@
     "start": 107142,
     "end": 107829
    },
-   "source": "src/root/m1A28.c",
+   "source": "src/resources/database_files.c",
    "source_sha256": "0be6fdcb48ee24f5c78b3ce26c85268ce2798e6d1fae43dc653d65849a4fd8da",
    "claims": [
     {
@@ -14376,7 +14943,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "05139cf4963a26679236a83a4349544d0f5f6b0c6d042d3a622884360f79a3e2"
+   "object_sha256": "05139cf4963a26679236a83a4349544d0f5f6b0c6d042d3a622884360f79a3e2",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1A28.c",
+     "why": "Opens and closes the database data files and manages file handles. It also formats DOS file errors for the application."
+    }
+   ]
   },
   "root:1A53": {
    "unit": "root",
@@ -14406,7 +14980,7 @@
     "start": 107830,
     "end": 108908
    },
-   "source": "src/root/m1A53.c",
+   "source": "src/resources/database_objects.c",
    "source_sha256": "2dd88955634e00f44fdca37009e40a0652d78a8c047119cc416cc49b234ca50b",
    "claims": [
     {
@@ -14554,7 +15128,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "59e9774ca3432afc258d0360f90fbf55d91408c22c14f636ccf7967f36e6d44c"
+   "object_sha256": "59e9774ca3432afc258d0360f90fbf55d91408c22c14f636ccf7967f36e6d44c",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1A53.c",
+     "why": "Provides the database object loading and lifetime API. It selects databases and connects object handles to the cache, including purge, release and unhook operations."
+    }
+   ]
   },
   "root:1A96": {
    "unit": "root",
@@ -14585,7 +15166,7 @@
     "start": 108908,
     "end": 110680
    },
-   "source": "src/root/m1A96.c",
+   "source": "src/resources/object_cache.c",
    "source_sha256": "caa563f72577706a178f907df149a58d2eb93fb751c0d18e01216e6069b3d2c6",
    "claims": [
     {
@@ -14711,7 +15292,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1cf71247a31222f2c0a59e105acdd1cee0619f3ca5ffe30be64ca3a1cfdc0953"
+   "object_sha256": "1cf71247a31222f2c0a59e105acdd1cee0619f3ca5ffe30be64ca3a1cfdc0953",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1A96.c",
+     "why": "Maintains the resource object cache lookup table. It adds, finds, removes and ages entries and invokes cache hooks."
+    }
+   ]
   },
   "root:1B05": {
    "unit": "root",
@@ -14739,11 +15327,11 @@
     "start": 110680,
     "end": 111237
    },
-   "source": "src/root/m1B05.asm",
-   "source_sha256": "32660094ed04cbf4939cb345c153dcc6d3cbbd4aab8024cdd0781bbbeb871fcf",
+   "source": "src/resources/lzss.asm",
+   "source_sha256": "04c6770d8dea822ba72aa39e1b1e1885eb1a8b3d39d098f316b712129507304c",
    "claims": [
     {
-     "name": "f_1B05_0008",
+     "name": "UnpackInit",
      "unit": "root",
      "seg": 6917,
      "off": 8,
@@ -14754,7 +15342,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B05_0046",
+     "name": "Unpack",
      "unit": "root",
      "seg": 6917,
      "off": 70,
@@ -14765,7 +15353,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B05_0178",
+     "name": "UnpackSetBuf",
      "unit": "root",
      "seg": 6917,
      "off": 376,
@@ -14776,7 +15364,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B05_018E",
+     "name": "UnpackFileOpen",
      "unit": "root",
      "seg": 6917,
      "off": 398,
@@ -14787,7 +15375,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_1B05_01C7",
+     "name": "UnpackFileRead",
      "unit": "root",
      "seg": 6917,
      "off": 455,
@@ -14798,7 +15386,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B05_022A",
+     "name": "UnpackFileClose",
      "unit": "root",
      "seg": 6917,
      "off": 554,
@@ -14810,7 +15398,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9457eeed457acfc181019cd0922cfa5c60429e48d09d69177af619de7afbcb39"
+   "object_sha256": "5437bb626b1ddcaec012a14621b059b667ed7de7032223bb1625c4a64180da14",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1B05.asm",
+     "why": "Decompresses LZSS data from memory or a file. Its decoder preserves state between calls and uses a 4096 byte sliding window."
+    }
+   ]
   },
   "root:1B28": {
    "unit": "root",
@@ -14840,7 +15435,7 @@
     "start": 111238,
     "end": 111851
    },
-   "source": "src/root/m1B28.c",
+   "source": "src/platform/cursor_shapes.c",
    "source_sha256": "fbf7625776c79ad746e8f9017cf1146ca3d14f5d36654684cd5fa6e957ee5776",
    "claims": [
     {
@@ -14911,7 +15506,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "65c6760c86a59b97cf60f937913dec24cdc9550036815472335204e9679571de"
+   "object_sha256": "65c6760c86a59b97cf60f937913dec24cdc9550036815472335204e9679571de",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1B28.c",
+     "why": "Loads mouse cursor pictures and masks from the resource database. It installs or changes the selected cursor shape."
+    }
+   ]
   },
   "root:1B4E": {
    "unit": "root",
@@ -14934,8 +15536,8 @@
     "start": 111852,
     "end": 112438
    },
-   "source": "src/root/m1B4E.asm",
-   "source_sha256": "24bb461cac9b32a9e2114598209db4c6a1c75f7d842756d49cf4a6ab04a454a7",
+   "source": "src/platform/video/bios_bitmap.asm",
+   "source_sha256": "99b2de658911118a22cac49b39817059320dc0716a9e7afbe1bfbb7a0a1de8c7",
    "claims": [
     {
      "name": "f_1B4E_000C",
@@ -14971,7 +15573,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_003B",
+     "name": "GPutPic",
      "unit": "root",
      "seg": 6990,
      "off": 59,
@@ -14982,7 +15584,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1B4E_005E",
+     "name": "GPutImg",
      "unit": "root",
      "seg": 6990,
      "off": 94,
@@ -15126,7 +15728,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "90e787a70fbc75a14518af77c93e442f2ae99bcb6de1d623e9a02f9a99ea3757"
+   "object_sha256": "0054f2c20c34bc82d9d900739ea0a036ab58d8d8c250783b458be411beb407ea",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1B4E.asm",
+     "why": "Provides video BIOS operations and low level bitmap and text entry points. It includes palette and pen colour handling and accented character folding for the small font."
+    }
+   ]
   },
   "root:1B73": {
    "unit": "root",
@@ -15154,8 +15763,8 @@
     "start": 112438,
     "end": 116268
    },
-   "source": "src/root/m1B73.asm",
-   "source_sha256": "00239398970278634dba1feae7b26b4a44e48b895f50e46cb65d5bdc433a8d33",
+   "source": "src/platform/input_timer.asm",
+   "source_sha256": "7e3419e0143330db326bbeb0a70bcbf183b170202d4dcd8dd0b449e135ef3a67",
    "claims": [
     {
      "name": "f_1B73_0024",
@@ -15764,10 +16373,17 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5cfa9fb20364533530f46c508ff63a855f35c55805b359a97bb42a761234f773",
+   "object_sha256": "f961e343dfc165c833f120aa40a5e25aaf5445bdb9c4b7d898c7dd996597b455",
    "code_data_publics": {
     "fd_1B73_0006": 6
-   }
+   },
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1B73.asm",
+     "why": "Implements DOS mouse, keyboard and timer services. It owns the input queues, hot boxes, cursor save buffer and interrupt handlers."
+    }
+   ]
   },
   "root:1C62": {
    "unit": "root",
@@ -15799,8 +16415,8 @@
     }
    },
    "lang": "c",
-   "source": "src/root/m1C62.c",
-   "source_sha256": "da95bb06d9951ad5967c9afce30f92b4a6d31ee6116ffc13f071d274448dfc57",
+   "source": "src/window/alerts.c",
+   "source_sha256": "f20b2996f72e189873a2ebe15e56628814f644073b31320633fcd533fff74796",
    "claims": [
     {
      "name": "Punt",
@@ -15936,7 +16552,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5c8056b77b86b975e90d5d3865c73f8edf87a402d1988a3fcc1c66b59df0634a"
+   "object_sha256": "f77ccf0bcf0724f797f7d0b1cf2184a9c06222f7c1c971df1ed196584a44f551",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1C62.c",
+     "why": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs."
+    }
+   ]
   },
   "root:1CE2": {
    "unit": "root",
@@ -15972,8 +16595,8 @@
     "start": 118316,
     "end": 121057
    },
-   "source": "src/root/m1CE2.c",
-   "source_sha256": "6b6dc9f5b41593272feb23af305c969722238de3705bcc4eb3490dfb0c07ef72",
+   "source": "src/graphics/screen_rects.c",
+   "source_sha256": "1605fefd096ed758516c7e87d31d442ece3f5f32fa8e6227accaf6f80f52a2e5",
    "claims": [
     {
      "name": "f_1CE2_000C",
@@ -15987,7 +16610,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_0013",
+     "name": "GBoxFillOutline",
      "unit": "root",
      "seg": 7394,
      "off": 19,
@@ -16009,7 +16632,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_0077",
+     "name": "GTextBox",
      "unit": "root",
      "seg": 7394,
      "off": 119,
@@ -16042,7 +16665,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_0124",
+     "name": "GRectChecker",
      "unit": "root",
      "seg": 7394,
      "off": 292,
@@ -16053,7 +16676,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_014B",
+     "name": "GCheckerBox",
      "unit": "root",
      "seg": 7394,
      "off": 331,
@@ -16097,7 +16720,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_0278",
+     "name": "GRectPartialOutline",
      "unit": "root",
      "seg": 7394,
      "off": 632,
@@ -16108,7 +16731,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_032B",
+     "name": "GInvOutline",
      "unit": "root",
      "seg": 7394,
      "off": 811,
@@ -16174,7 +16797,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_048D",
+     "name": "GRectFillOutline",
      "unit": "root",
      "seg": 7394,
      "off": 1165,
@@ -16240,7 +16863,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_0951",
+     "name": "GMixedFill",
      "unit": "root",
      "seg": 7394,
      "off": 2385,
@@ -16251,7 +16874,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_1CE2_099C",
+     "name": "GMixedFillBox",
      "unit": "root",
      "seg": 7394,
      "off": 2460,
@@ -16285,7 +16908,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "6bc21c324b1adebeb454b6e0dac5211ed75291b8853f9e6aa7fbac804284d7c9"
+   "object_sha256": "47046d29f242a3e369d3bd89e06bcc82bcac24bc87423270a78639902fce464f",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1CE2.c",
+     "why": "Draws screen rectangles, outlines and frames using character cell coordinates. It saves and restores rectangles and draws packed pictures."
+    }
+   ]
   },
   "root:1D8E": {
    "unit": "root",
@@ -16311,7 +16941,7 @@
     "start": 121058,
     "end": 124277
    },
-   "source": "src/root/m1D8E.c",
+   "source": "src/graphics/clip_rects.c",
    "source_sha256": "afe9364f319633dd85c276bed18e848a605934156bfbb4fc276d304cd2ec2556",
    "claims": [
     {
@@ -16437,7 +17067,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5c14a42d28ac3e3887892e032401096762988a55c98e462556a0dec584de5b55"
+   "object_sha256": "5c14a42d28ac3e3887892e032401096762988a55c98e462556a0dec584de5b55",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1D8E.c",
+     "why": "Clips rectangle drawing operations against the current rectangle list. It decomposes the visible intersections before calling the drawing operations."
+    }
+   ]
   },
   "root:1E57": {
    "unit": "root",
@@ -16465,7 +17102,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m1E57.c",
+   "source": "src/graphics/clip_regions.c",
    "source_sha256": "c7ceb45929ec402857caffa2f3d7d49c35190d55d83542f0daaec88d33f9140a",
    "claims": [
     {
@@ -16745,7 +17382,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "b5b026869dead7e54dbfa60993945326cdb83c698dbe60625d47eaf6e42f759e"
+   "object_sha256": "b5b026869dead7e54dbfa60993945326cdb83c698dbe60625d47eaf6e42f759e",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1E57.c",
+     "why": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack."
+    }
+   ]
   },
   "root:1F58": {
    "unit": "root",
@@ -16768,7 +17412,7 @@
     "start": 128390,
     "end": 128616
    },
-   "source": "src/root/m1F58.asm",
+   "source": "src/platform/bios_helpers.asm",
    "source_sha256": "9f314c6e964bcb0955c1f3e976819bdbeddf048781c1bb257c30b2c0b25d49d2",
    "claims": [
     {
@@ -16872,7 +17516,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a5656c890171744eb635d2e8515214fc2bbf7551190accdba84c51ebb990a800"
+   "object_sha256": "a5656c890171744eb635d2e8515214fc2bbf7551190accdba84c51ebb990a800",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1F58.asm",
+     "why": "Reads BIOS ticks and keyboard state and installs a Ctrl-Break hook. The same module contains a byte swapping copy helper."
+    }
+   ]
   },
   "root:1F66": {
    "unit": "root",
@@ -16889,7 +17540,7 @@
     "start": 128616,
     "end": 129035
    },
-   "source": "src/root/m1F66.asm",
+   "source": "src/platform/file_helpers.asm",
    "source_sha256": "b477ccb8ce87afd98692cbf32dc11d4f0bb9df1000e3a6334ffc5ab8076f33b3",
    "claims": [
     {
@@ -16971,7 +17622,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0336355a81481027fb652fd1eeaaecda59437b382a126da5ee6d8e6615a44862"
+   "object_sha256": "0336355a81481027fb652fd1eeaaecda59437b382a126da5ee6d8e6615a44862",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1F66.asm",
+     "why": "Matches wildcard filenames and queries directories and drives. It also contains checksum and register test helpers from the library identified by its copyright string."
+    }
+   ]
   },
   "root:1F80": {
    "unit": "root",
@@ -17006,8 +17664,8 @@
     "start": 129036,
     "end": 129701
    },
-   "source": "src/root/m1F80.c",
-   "source_sha256": "a148da96d2615e85e820bf538f7131ee267d97fefcfccaac604dd1a020ee7566",
+   "source": "src/graphics/text_layout.c",
+   "source_sha256": "427677c3d374ba481b2eddc305645ad294b37b544eaf949737a08bfd5e6b614c",
    "claims": [
     {
      "name": "f_1F80_0081",
@@ -17110,7 +17768,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "55e77e775c1f4235ebe0683cf88cdb938e078dac6c9e28af3239605739746bd4"
+   "object_sha256": "acf2232364475e6005140daf898bb596719edcffb321e579496929b2e65160c4",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1F80.c",
+     "why": "Measures and centres text blocks. It also includes delay and fatal text helpers in the same module."
+    }
+   ]
   },
   "root:1FAA": {
    "unit": "root",
@@ -17130,7 +17795,7 @@
     "start": 129702,
     "end": 130000
    },
-   "source": "src/root/m1FAA.c",
+   "source": "src/graphics/trapezoid.c",
    "source_sha256": "054a33c2e5d79ff001c61b39ffe3d7616c37d2261a121f1fcb82bc98809e557b",
    "claims": [
     {
@@ -17146,7 +17811,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "63554bd334d877b142e32ea49aa61be2990f1b7bf83ded6e760ea1e0a3264180"
+   "object_sha256": "63554bd334d877b142e32ea49aa61be2990f1b7bf83ded6e760ea1e0a3264180",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1FAA.c",
+     "why": "Fills a quadrilateral one scanline at a time. Its edges advance using 16.16 fixed point arithmetic."
+    }
+   ]
   },
   "root:1FBD": {
    "unit": "root",
@@ -17169,8 +17841,8 @@
     "start": 130000,
     "end": 130343
    },
-   "source": "src/root/m1FBD.asm",
-   "source_sha256": "0a881f6e06045205b27b202d8d6d00b7e0a6ba42d8d7f545610f89d8aad143bc",
+   "source": "src/graphics/bitmap_text.asm",
+   "source_sha256": "062cda452f2e34081b9003404d158c4415f5ebbe5f6d19a4ec40ee9c0cb1cfbc",
    "claims": [
     {
      "name": "GPutStr",
@@ -17185,7 +17857,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "7bde86853e0494a1b9e64099cf7d4a035622c03b787f8576e85f083e4c21f6f0"
+   "object_sha256": "906f909ff3ac1d82008d6d1cd4b8a74313bcc7e0edb929dde457c1562042e9dc",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1FBD.asm",
+     "why": "Draws a string with the bitmap font. It folds accented characters and supports underlining."
+    }
+   ]
   },
   "root:1FD2": {
    "unit": "root",
@@ -17222,8 +17901,8 @@
     "start": 130344,
     "end": 132596
    },
-   "source": "src/root/m1FD2.c",
-   "source_sha256": "4e0271abf080af59191f2c94afbd75d06d56e7536a02a08df281fc50037a73af",
+   "source": "src/window/menu_helpers.c",
+   "source_sha256": "197b8f3a3643f157213729c41b4cb3ca25ff7bd0e8477faf9ca6043a8d696dae",
    "claims": [
     {
      "name": "f_1FD2_0008",
@@ -17590,7 +18269,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9f5cb3ce3e788d48949d61b1f86afeb6a5038e74b9a0d1d4ee1445e0367f0b34"
+   "object_sha256": "126a70d219412442d53747cfeb3ec4dadf32ffb7362a3a01bc0a3470bb7192b0",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1FD2.c",
+     "why": "Provides menu bar and menu item state helpers. It also contains timers, mouse position and button tracking functions used by the interface."
+    }
+   ]
   },
   "root:205F": {
    "unit": "root",
@@ -17621,7 +18307,7 @@
     "start": 132596,
     "end": 133367
    },
-   "source": "src/root/m205F.c",
+   "source": "src/platform/video/driver_select.c",
    "source_sha256": "225326bdd127dd3825035ae0fe8434e6677c0ee81203fee2e16bac0cf90fffc6",
    "claims": [
     {
@@ -17637,7 +18323,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "361f874c8816be008361d54db2df6b4441305f30b7f28692b3b61ea763a3255a"
+   "object_sha256": "361f874c8816be008361d54db2df6b4441305f30b7f28692b3b61ea763a3255a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m205F.c",
+     "why": "Identifies the graphics adapter and selects its display and resource drivers. It installs the screen and sprite callback tables for the chosen mode."
+    }
+   ]
   },
   "root:208F": {
    "unit": "root",
@@ -17672,8 +18365,8 @@
     "start": 133368,
     "end": 134783
    },
-   "source": "src/root/m208F.c",
-   "source_sha256": "41d99129ad0e9a95ad6dee67af45ce5019a59076de79c9a1f6bacc078b7e4f55",
+   "source": "src/window/text_bitmap_helpers.c",
+   "source_sha256": "d0f017c0576528d280a240d67aac2a32abf705a0c4151fe2b68cc744d18269ba",
    "claims": [
     {
      "name": "f_208F_0008",
@@ -17709,7 +18402,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_208F_0093",
+     "name": "gr_CenterStrInRect",
      "unit": "root",
      "seg": 8335,
      "off": 147,
@@ -17720,7 +18413,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_208F_011F",
+     "name": "gr_CenterStrInRectClear",
      "unit": "root",
      "seg": 8335,
      "off": 287,
@@ -17941,7 +18634,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d1dd50f08eea20d721e1fa8079d77402f7d56213a373cf82b9dda1c2ba75999d"
+   "object_sha256": "0d59a88f578060efcbe3105e0befd82c1404bab65fffddedea68baf973c6627a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m208F.c",
+     "why": "Provides window object text and bitmap helpers and resource loading. The file also includes delays and display format sizing helpers."
+    }
+   ]
   },
   "root:20E8": {
    "unit": "root",
@@ -17969,7 +18669,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m20E8.c",
+   "source": "src/window/lifecycle.c",
    "source_sha256": "7347884f2ae95bb552c695a7671519069b63b5aafac8920dc3361d788a015b66",
    "claims": [
     {
@@ -18151,7 +18851,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "156f1cc4022063df0a7c823f5434022b072ffc4acd33ca70d015243a268e8f1c"
+   "object_sha256": "156f1cc4022063df0a7c823f5434022b072ffc4acd33ca70d015243a268e8f1c",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m20E8.c",
+     "why": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation."
+    }
+   ]
   },
   "root:218D": {
    "unit": "root",
@@ -18187,7 +18894,7 @@
     "start": 137436,
     "end": 139170
    },
-   "source": "src/root/m218D.c",
+   "source": "src/window/events.c",
    "source_sha256": "6af632fc1b65d2e86ae84617bd4de825f629639fcb36809bce2ac74c240d1b78",
    "claims": [
     {
@@ -18324,7 +19031,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3a7b45487e389f4bbeb7247242f676ed2e35c1ae3656391e825a6d0a3c94e16c"
+   "object_sha256": "3a7b45487e389f4bbeb7247242f676ed2e35c1ae3656391e825a6d0a3c94e16c",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m218D.c",
+     "why": "Fetches and dispatches window events. It handles proximity events, queues and event flushing."
+    }
+   ]
   },
   "root:21FA": {
    "unit": "root",
@@ -18361,8 +19075,8 @@
     "start": 139170,
     "end": 142329
    },
-   "source": "src/root/m21FA.c",
-   "source_sha256": "e1ccab194dd68be98e4c3cacd5c1eefa7d549f6f7926a456ca2c5ae9ab6bc926",
+   "source": "src/window/drawing.c",
+   "source_sha256": "0fa15c05c2cfef071e00f8869b051698daf20f7e7466e60c0f54aec3b2129009",
    "claims": [
     {
      "name": "gr_JustifyStrInRect",
@@ -18576,7 +19290,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e4983bf6f2f65971575dca06419b25aa3f5fb72ea793945166f9062853520565"
+   "object_sha256": "c84b61f64d3543a9637c033f9f3b6f41c7fa4321bf950f97df2103076bffd633",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m21FA.c",
+     "why": "Draws window frames, titles and objects. It includes colour selection, string justification and button border helpers."
+    }
+   ]
   },
   "root:22BF": {
    "unit": "root",
@@ -18608,8 +19329,8 @@
     "start": 142330,
     "end": 146148
    },
-   "source": "src/root/m22BF.c",
-   "source_sha256": "f60597c0415e1cfad3b7933e37d7d8b9261b1c3b0ea01a020b4062bb348dd2e8",
+   "source": "src/window/object_attributes.c",
+   "source_sha256": "9c09a6595a06569582328e319449f9446cdf92c703eda8c2faca8eed2affcb17",
    "claims": [
     {
      "name": "win_StringSize",
@@ -19131,7 +19852,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "aa9f2b7faf34399bdd29b31810d6263fe5b1764f6277e983e0b7b1a62246da1a"
+   "object_sha256": "9d119f1fb969c478df5f8d14bccd8194be0803b418f536659e869aad40580206",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m22BF.c",
+     "why": "Updates window object selection, visibility, formatting and bitmaps. It also draws object text, bars and proximity menus."
+    }
+   ]
   },
   "root:23AE": {
    "unit": "root",
@@ -19164,7 +19892,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m23AE.c",
+   "source": "src/window/locking.c",
    "source_sha256": "0d806e24af44b368fca74f3065f4481cde11f989b9daa532480f0c99432330fc",
    "claims": [
     {
@@ -19257,7 +19985,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "cfd7ab2a92c086984c3db7cceac839bd29e76a8608d7b179c541d7d117b51036"
+   "object_sha256": "cfd7ab2a92c086984c3db7cceac839bd29e76a8608d7b179c541d7d117b51036",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m23AE.c",
+     "why": "Locks and unlocks window resources through nested access. It checks window numbers, discarded handles and lock depth."
+    }
+   ]
   },
   "root:23E6": {
    "unit": "root",
@@ -19285,8 +20020,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m23E6.c",
-   "source_sha256": "5c1e128d6e15a0896cee4a44f04300e785782236bfe05b99a529a9d96c86ae1a",
+   "source": "src/window/lists_sliders.c",
+   "source_sha256": "5f99a92583e4954e04ee26fb2de0184446bf40d74f06f43a3c8abad76e5b8092",
    "claims": [
     {
      "name": "f_23E6_009F",
@@ -19444,7 +20179,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "bf79ced910b96909ce506b8f290f42acda15bc94ce5c47a728c66713b556b826"
+   "object_sha256": "e0a979398bacb244503aab93ef537b799999d2ab9bc563409c98cfdd196e71dc",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m23E6.c",
+     "why": "Implements list box and slider window objects. It calculates elevator geometry, draws controls and handles list movement and slider events."
+    }
+   ]
   },
   "root:24AB": {
    "unit": "root",
@@ -19476,8 +20218,8 @@
     "start": 150194,
     "end": 151460
    },
-   "source": "src/root/m24AB.c",
-   "source_sha256": "b82252189489fbdb16936b18695b91cf05adf7cdc847635653f4a3506ab5365d",
+   "source": "src/graphics/font_output.c",
+   "source_sha256": "a8aab5a17e81477beb80d936399d4d680c540e44dbd5a9555aa8d91848c47fad",
    "claims": [
     {
      "name": "f_24AB_0002",
@@ -19502,7 +20244,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_24AB_030B",
+     "name": "font_FontHeight",
      "unit": "root",
      "seg": 9387,
      "off": 779,
@@ -19513,7 +20255,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_24AB_0329",
+     "name": "font_StringWidth",
      "unit": "root",
      "seg": 9387,
      "off": 809,
@@ -19524,7 +20266,7 @@
      "reloc_order": "GROUPED"
     },
     {
-     "name": "f_24AB_0367",
+     "name": "font_CharWidth",
      "unit": "root",
      "seg": 9387,
      "off": 871,
@@ -19580,7 +20322,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "7f0443b7647bb2d20ba7c3b6058f2f1b2aaa8f07383183357f749604e81fe008"
+   "object_sha256": "2e8c288278a6dd9c1f4e9964fcb34151309b8d5adae604f91df08977955cc172",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m24AB.c",
+     "why": "Selects the current font and prints strings with it. It initializes the display fonts and manages their output buffer."
+    }
+   ]
   },
   "root:24FA": {
    "unit": "root",
@@ -19597,11 +20346,11 @@
     "start": 151460,
     "end": 151638
    },
-   "source": "src/root/m24FA.asm",
-   "source_sha256": "fe0ce9e992304360b80768c8f1ef580706e44c9182a3681fcd18bdbd3d9baa8c",
+   "source": "src/graphics/pixel_helpers.asm",
+   "source_sha256": "0c7dc1ce797647f9460feb23beb31504fe33a9b34727eacdde847b9b7bd9d562",
    "claims": [
     {
-     "name": "f_24FA_0004",
+     "name": "MemRChr",
      "unit": "root",
      "seg": 9466,
      "off": 4,
@@ -19612,7 +20361,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_24FA_0029",
+     "name": "ConvertMonoToTandy",
      "unit": "root",
      "seg": 9466,
      "off": 41,
@@ -19657,7 +20406,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e950442ab54d7ae0a21febaac877c8f4703c103beda86d137c95f281d65d328b"
+   "object_sha256": "3938b6c2836e6189fba299ac5745839c84ee05ce3db5bf917e5b8479117e8c05",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m24FA.asm",
+     "why": "Searches bytes, expands packed two bit pixels and inverts bytes. It also contains a breakpoint stub."
+    }
+   ]
   },
   "root:2505": {
    "unit": "root",
@@ -19690,8 +20446,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m2505.c",
-   "source_sha256": "1026ccc0d20e72a12ee6be5e57826ae72bf3b6c65dacf3fc16f12a30da2b7b36",
+   "source": "src/window/object_geometry.c",
+   "source_sha256": "7ef32a8bea6be8bb056d6c00695a3763719467e7b77a6dccbc2b33a1270642cb",
    "claims": [
     {
      "name": "f_2505_0006",
@@ -19893,7 +20649,7 @@
      "reloc_order": "EXACT"
     },
     {
-     "name": "f_2505_033C",
+     "name": "win_WinObjAddr",
      "unit": "root",
      "seg": 9477,
      "off": 828,
@@ -19916,7 +20672,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "2b8a66c909c8c4e5cada1855555e12d2b8ce02031cc8de2312fdd8cad8064fe7"
+   "object_sha256": "ea3bc86ccfbc859884dd890273f5a398042673218b48b04415fef434229f081d",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m2505.c",
+     "why": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values."
+    }
+   ]
   },
   "root:259D": {
    "unit": "root",
@@ -19939,8 +20702,8 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m259D.c",
-   "source_sha256": "c0eb79af669bf20c10657494cd8d8c618c712532b58f0dfb51fdc8f7428a5275",
+   "source": "src/window/pictures.c",
+   "source_sha256": "a29df4ab84199e47b0bca978b355f33bb2a924ca79fd28b91cc04ce02d2949aa",
    "claims": [
     {
      "name": "win_DrawBitMapAtObj",
@@ -19977,7 +20740,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "35bb5ab32f2cbc6a620194b6e709b26eee8a8b9303c8344800494fad213634c8"
+   "object_sha256": "a8d5110abce47332839947d6cc3237d2dc5411b76ae3411949cc80d1dd193e48",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m259D.c",
+     "why": "Draws bitmap resources at window objects. It also prints text inside a rectangle and handles picture buffer formats."
+    }
+   ]
   },
   "root:25E7": {
    "unit": "root",
@@ -20005,7 +20775,7 @@
     "start": 155256,
     "end": 156933
    },
-   "source": "src/root/m25E7.c",
+   "source": "src/graphics/font_resources.c",
    "source_sha256": "fe5bc257ffc5a57318ad2ee46ed27386d56da49f0c30264632080cb2449a5dfa",
    "claims": [
     {
@@ -20098,7 +20868,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "791cfc75984ebfe6aafee7c1f132c4f6492f1b7c9a25058e839f09bd6102fa14"
+   "object_sha256": "791cfc75984ebfe6aafee7c1f132c4f6492f1b7c9a25058e839f09bd6102fa14",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m25E7.c",
+     "why": "Loads Macintosh format bitmap fonts and converts their byte order for DOS. It measures strings and glyphs and builds text images."
+    }
+   ]
   },
   "root:2650": {
    "unit": "root",
@@ -20121,7 +20898,7 @@
     "start": 156934,
     "end": 157223
    },
-   "source": "src/root/m2650.asm",
+   "source": "src/graphics/glyph_blit.asm",
    "source_sha256": "1f1d9f61f3a00f06e840250a231dee2274d0c83453000894fdba4a1e2ba95a0f",
    "claims": [
     {
@@ -20159,7 +20936,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a89853f5c9c5a45328e086f2ea4c7c60f9dcd5a6e36e2f7d50b378166a842236"
+   "object_sha256": "a89853f5c9c5a45328e086f2ea4c7c60f9dcd5a6e36e2f7d50b378166a842236",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m2650.asm",
+     "why": "Blits bit aligned glyphs between far bitmaps using OR operations. It also clears the destination byte buffer."
+    }
+   ]
   },
   "root:2662": {
    "unit": "root",
@@ -20190,8 +20974,8 @@
     "start": 157224,
     "end": 161754
    },
-   "source": "src/root/m2662.c",
-   "source_sha256": "65f636928e52cc2905a1fb65691deac6890e9c28f88b4451c52b8d364540b02c",
+   "source": "src/graphics/anim.c",
+   "source_sha256": "a149d0f48a82f22872ce3caa9bb7da51088b20b43ab28d901d320806e672838f",
    "claims": [
     {
      "name": "hanim_PrintSet",
@@ -20383,7 +21167,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "897c11cd39126911ac3470bddd903dfefa752df2b9dd1001678827402475dd09"
+   "object_sha256": "633f2cc56dde1d85249c7003b6728b9e12503133d1eea56c6444adc96e77dc12",
+   "source_name_kind": "recovered",
+   "source_path_history": [
+    {
+     "was": "src/root/m2662.c",
+     "why": "Manages animation object sets, their positions, priorities and backing buffers. It composites changed objects and restores obscured screen regions."
+    }
+   ]
   },
   "root:277D": {
    "unit": "root",
@@ -20401,7 +21192,7 @@
     "start": 161754,
     "end": 161760
    },
-   "source": "src/root/m277D.c",
+   "source": "src/platform/debug_stubs.c",
    "source_sha256": "6b7b7e4b468987b3ad3c869934df31e0e9325ab7e1771735d1e6113971047591",
    "claims": [
     {
@@ -20472,7 +21263,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "6bb49fe92f9ffd55aabff724c31338af1bd79ed619c166465e1944de68799a51"
+   "object_sha256": "6bb49fe92f9ffd55aabff724c31338af1bd79ed619c166465e1944de68799a51",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m277D.c",
+     "why": "Contains six empty debug entry points in the DOS release. WinPrintf has a named Win16 counterpart; the other stub identities remain uncertain."
+    }
+   ]
   },
   "root:277E": {
    "unit": "root",
@@ -20502,7 +21300,7 @@
     "start": 161760,
     "end": 164186
    },
-   "source": "src/root/m277E.c",
+   "source": "src/sound/device_channels.c",
    "source_sha256": "4e928689c743f473c5a007bbbbb5287cdf8728d12e9cae5652b1cb55debf09ee",
    "claims": [
     {
@@ -20705,7 +21503,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "592e24698e616450543b26519a92fe7ac1b57650fb492cd9eb0eb7af980ab31f"
+   "object_sha256": "592e24698e616450543b26519a92fe7ac1b57650fb492cd9eb0eb7af980ab31f",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m277E.c",
+     "why": "Selects sound devices and builds their channel tables. It initializes and dispatches the voice backends used by the sound driver."
+    }
+   ]
   },
   "root:2815": {
    "unit": "root",
@@ -20733,7 +21538,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m2815.c",
+   "source": "src/sound/opl2_voices.c",
    "source_sha256": "6d7a3e90d0e6555dc5c1d205f18ad9df9579c743d829ba86011e36c95a2010eb",
    "claims": [
     {
@@ -20783,7 +21588,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8eee22a8d5f97c0d68cf07aac90e62bfb8939ebf8b5297bbce411e3fc6f7e179"
+   "object_sha256": "8eee22a8d5f97c0d68cf07aac90e62bfb8939ebf8b5297bbce411e3fc6f7e179",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m2815.c",
+     "why": "Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume data into chip register writes."
+    }
+   ]
   },
   "root:283E": {
    "unit": "root",
@@ -20800,7 +21612,7 @@
     "start": 164842,
     "end": 165028
    },
-   "source": "src/root/m283E.asm",
+   "source": "src/sound/opl2_registers.asm",
    "source_sha256": "c7fc07dbb9830dfad40597e5fe377c4a62bc9d3551a80aef602dad3925daa0c5",
    "claims": [
     {
@@ -20838,7 +21650,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c45c43d10fbce2ac2ff21dc246f582bf99fd19e0c79042f6a2f7cde3267a5fd3"
+   "object_sha256": "c45c43d10fbce2ac2ff21dc246f582bf99fd19e0c79042f6a2f7cde3267a5fd3",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m283E.asm",
+     "why": "Writes and resets AdLib OPL2 registers. It includes the status port delays and PIT based reset wait."
+    }
+   ]
   },
   "root:284A": {
    "unit": "root",
@@ -20870,7 +21689,7 @@
     }
    },
    "lang": "c",
-   "source": "src/root/m284A.c",
+   "source": "src/sound/midi_player.c",
    "source_sha256": "7c995a2589e9bb1a12f4f13a90fed1f5860d1b487584339119de105492dba581",
    "claims": [
     {
@@ -21073,7 +21892,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3864e67ad9637e56e8fba9f914f750da03e4b9cd943f7d766f58fca0ee47fe90"
+   "object_sha256": "3864e67ad9637e56e8fba9f914f750da03e4b9cd943f7d766f58fca0ee47fe90",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m284A.c",
+     "why": "Loads and advances MIDI songs and their tracks. It decodes timed events and sends notes through the sound driver channel layer."
+    }
+   ]
   },
   "root:28BC": {
    "unit": "root",
@@ -21096,7 +21922,7 @@
     "start": 166848,
     "end": 168157
    },
-   "source": "src/root/m28BC.asm",
+   "source": "src/sound/sample_timer.asm",
    "source_sha256": "e1b3d7a49330d3e7f817da331c3142ce0db64bd03de8c75ad3c7e6cddf4b82cf",
    "claims": [
     {
@@ -21222,7 +22048,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "39357ec9d16b8cc7fbcf18ccdea0be0aada274579cde478577b698eba4aeafa3"
+   "object_sha256": "39357ec9d16b8cc7fbcf18ccdea0be0aada274579cde478577b698eba4aeafa3",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m28BC.asm",
+     "why": "Mixes sampled sound channels in the timer interrupt and sends the result to the selected output device. It also schedules the MIDI sequencer on a private stack and chains the old timer vector."
+    }
+   ]
   },
   "root:290D": {
    "unit": "root",
@@ -21254,7 +22087,7 @@
     "start": 168158,
     "end": 168870
    },
-   "source": "src/root/m290D.c",
+   "source": "src/sound/sample_voices.c",
    "source_sha256": "eaec23e8d37bd606616dc44208c7bbcf82ced13e24abe0362ef767c5e4cc4fed",
    "claims": [
     {
@@ -21304,7 +22137,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0ee43c869d6518db99d59029a5754db4ab04c3f89a126579397241eec90da655"
+   "object_sha256": "0ee43c869d6518db99d59029a5754db4ab04c3f89a126579397241eec90da655",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m290D.c",
+     "why": "Starts and controls digitized sound voices. It tracks sample playback position and channel state for the interrupt mixer."
+    }
+   ]
   },
   "root:293A": {
    "unit": "root",
@@ -21336,7 +22176,7 @@
     "start": 168870,
     "end": 169418
    },
-   "source": "src/root/m293A.c",
+   "source": "src/sound/device_probe.c",
    "source_sha256": "601b4e4e9e8b9d128cc97cca3da7dcf0ad863dbb5c6df587c601530cbe4ec5e6",
    "claims": [
     {
@@ -21442,7 +22282,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "684595d316bdb6073a2229e5ab59f75ef4a506b66b6e0b20a766f3955da5641c"
+   "object_sha256": "684595d316bdb6073a2229e5ab59f75ef4a506b66b6e0b20a766f3955da5641c",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m293A.c",
+     "why": "Probes available sound devices. It performs port tests and selects the hardware capabilities reported to the sound layer."
+    }
+   ]
   },
   "root:295C": {
    "unit": "root",
@@ -21474,7 +22321,7 @@
     "start": 169418,
     "end": 170880
    },
-   "source": "src/root/m295C.c",
+   "source": "src/sound/midi_voices.c",
    "source_sha256": "d392b6ce886cfd664a192194b79569bb6a0d4dea8b0bc029ffa9e32ff44add89",
    "claims": [
     {
@@ -21645,7 +22492,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "adab4cde1aac881324e868640bd6ee3efda6779761f883d8ac7fddc91b7ab7fa"
+   "object_sha256": "adab4cde1aac881324e868640bd6ee3efda6779761f883d8ac7fddc91b7ab7fa",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m295C.c",
+     "why": "Allocates MIDI voices and maps instruments to channels. It sends melodic and percussion events through the MPU-401 output interface."
+    }
+   ]
   },
   "root:29B8": {
    "unit": "root",
@@ -21671,7 +22525,7 @@
     "start": 170880,
     "end": 170999
    },
-   "source": "src/root/m29B8.c",
+   "source": "src/sound/dsp_probe.c",
    "source_sha256": "630261c9ce29ece91f48e1fa0ec6c4bf1ce6270245f30d4825a66ed2a661878b",
    "claims": [
     {
@@ -21687,7 +22541,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "2ae2882b14c24281893b70164aac8a02a19703fba28bb543a8b7a033177fc748"
+   "object_sha256": "2ae2882b14c24281893b70164aac8a02a19703fba28bb543a8b7a033177fc748",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m29B8.c",
+     "why": "Resets and probes the sound card DSP. It waits for the device acknowledgement and reports whether the probe succeeded."
+    }
+   ]
   },
   "root:29BF": {
    "unit": "root",
@@ -21710,7 +22571,7 @@
     "start": 171000,
     "end": 171370
    },
-   "source": "src/root/m29BF.asm",
+   "source": "src/sound/chip_registers.asm",
    "source_sha256": "bb40cbd77f380b56c0ab0c27d41f08b40f63deb3b8c14f53b15e3d526fa753ac",
    "claims": [
     {
@@ -21836,7 +22697,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5f9d2d5a2e9cbc83c0e010469000c8d63729c3f10c4147f93a42947d7a7d20cf"
+   "object_sha256": "5f9d2d5a2e9cbc83c0e010469000c8d63729c3f10c4147f93a42947d7a7d20cf",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m29BF.asm",
+     "why": "Probes and writes a sound chip through index and data port pairs. It keeps register shadows and checks writes by reading back the result."
+    }
+   ]
   },
   "root:29D6": {
    "unit": "root",
@@ -21864,7 +22732,7 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/root/m29D6.c",
+   "source": "src/sound/psg_voices.c",
    "source_sha256": "bb96401b33bdf7b5f13ae57849c112ac744bff0a48dece78ac057b9fa09b9c1a",
    "claims": [
     {
@@ -21935,7 +22803,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "97034277304a71ba9bf6e0c59a5fa641aad1b79b499e1e0ab60b6de693432b81"
+   "object_sha256": "97034277304a71ba9bf6e0c59a5fa641aad1b79b499e1e0ab60b6de693432b81",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m29D6.c",
+     "why": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module."
+    }
+   ]
   },
   "root:29F0": {
    "unit": "root",
@@ -21953,7 +22828,7 @@
     "start": 171786,
     "end": 171852
    },
-   "source": "src/root/m29F0.c",
+   "source": "src/platform/port_io.c",
    "source_sha256": "2787050f6b809856cde2d2a60fe120357a195041d396bb55caf7dd1b8084e302",
    "claims": [
     {
@@ -22024,7 +22899,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93"
+   "object_sha256": "e0880ade56f53bf9b3430d01c93709e798cccfb1e314dc76670fb3ede093eb93",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m29F0.c",
+     "why": "Provides byte port input and output helpers. It also wraps interrupt flag save, disable and restore operations using MSC inline assembly."
+    }
+   ]
   },
   "root:2CFB": {
    "unit": "root",
@@ -22041,7 +22923,7 @@
     "start": 184242,
     "end": 184292
    },
-   "source": "src/root/m2CFB.asm",
+   "source": "src/memory/hook_thunks.asm",
    "source_sha256": "36580a1355703e04abf09fb4e3f03bf21e9b5c04fad75b0af887fe8ee4fce655",
    "claims": [
     {
@@ -22156,7 +23038,14 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9428229251fdf40b49cd473e057fd3cfa119a840fe9c4bf292f9f3793af97f6a"
+   "object_sha256": "9428229251fdf40b49cd473e057fd3cfa119a840fe9c4bf292f9f3793af97f6a",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m2CFB.asm",
+     "why": "Provides ten far jump entries into the memory manager. The database reader calls these hook addresses instead of the underlying allocation functions."
+    }
+   ]
   }
  },
  "runtime": {

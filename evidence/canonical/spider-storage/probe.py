@@ -261,9 +261,9 @@ def main():
         'scope': 'Original functions at valid typed entry states; screen clip/table initialization are explicit fixtures, not a proof of actual startup/caller state.',
         'oracle_sha256': IMAGE.sha256,
         'pins': {rel: hashlib.sha256((ROOT / rel).read_bytes()).hexdigest() for rel in
-            ('assets/HCEGANT.NDX', 'assets/HCEGANT.DAT', 'src/root/m0250.c', 'src/root/m16B5.asm',
-             'src/root/m2662.c', 'src/root/m1D8E.c', 'src/S00/m35A6.asm', 'src/S00/m31AD.asm',
-             'src/S01/m3126.asm', 'src/S03/m3126.asm')},
+            ('assets/HCEGANT.NDX', 'assets/HCEGANT.DAT', 'src/ui/edit_view.c', 'src/graphics/lines.asm',
+             'src/graphics/anim.c', 'src/graphics/clip_rects.c', 'src/platform/video/planar_sprites.asm', 'src/platform/video/planar_raster.asm',
+             'src/platform/video/mono_raster.asm', 'src/platform/video/tandy_raster.asm')},
         'hcegant_sprite_controls': resource_controls(),
         'missing_resource_bound_negative_control': resource_bound_negative_control(),
         'last_pixel_line_controls': line_controls(),

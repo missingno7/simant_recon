@@ -1,8 +1,8 @@
 # Native held-input polling boundary
 
 The logo click hang is a platform input defect. Canonical `DialogWaitInit`
-(`src/root/m00F8.c`) runs `while (StillDown()) win_FlushEvents();` when the click
-advances `ShowIntro` into `CustomerIDDialog`. `StillDown` (`src/root/m1FD2.c`)
+(`src/ui/view_dialog_helpers.c`) runs `while (StillDown()) win_FlushEvents();` when the click
+advances `ShowIntro` into `CustomerIDDialog`. `StillDown` (`src/window/menu_helpers.c`)
 reads the mouse buttons and queries Insert, Space and Delete through
 `f_1B73_0A30`. No clock or BIOS-key polling occurs in that loop.
 
@@ -32,7 +32,7 @@ Canonical DOS observation, fixed 200000 cycles and guest clock 1992-01-01
 These addresses were resolved from the canonical `SOURCE.MAP` and unique VGA
 clip owner pattern, not the historical executable's data layout. The observed
 load base was `0x8240`; `g_9120` was linear `0x651A2`. Symbolic assembly in
-`src/root/m1B73.asm` independently establishes the interrupt store contract.
+`src/platform/input_timer.asm` independently establishes the interrupt store contract.
 
 The permanent regression uses ordinary SDL input plus read-only GDB startup
 entry/return observations. It includes animation and late clicks, corner and

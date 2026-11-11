@@ -5,7 +5,7 @@ lookup contract: a DOS `int` success result and a far pointer to four `Rect` wor
 The old `void` declaration and separate offset/segment integer parameters omitted
 source-level facts that were already present in the executable.
 
-`src/root/m1B73.asm:f_1B73_0C42` reads ID at BP+6, the far queue at BP+8 and the
+`src/platform/input_timer.asm:f_1B73_0C42` reads ID at BP+6, the far queue at BP+8 and the
 far output pointer at BP+0C. Its lookup-miss branch returns AX=0 without writing
 the output. Its success branch copies offsets 0, 2, 4 and 6, then returns AX=1.
 Both epilogues restore saved registers without overwriting AX. The only canonical

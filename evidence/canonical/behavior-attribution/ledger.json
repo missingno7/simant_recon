@@ -42,8 +42,8 @@
         "paths": [
           "evidence/canonical/native-edge-scroll/README.md",
           "evidence/canonical/native-edge-scroll/receipt.json",
-          "src/root/m00F8.c",
-          "src/root/m1B73.asm",
+          "src/ui/view_dialog_helpers.c",
+          "src/platform/input_timer.asm",
           "layout/manifest.json"
         ],
         "original_exe": {
@@ -76,7 +76,7 @@
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/native-logo-release/README.md",
-          "src/root/m1B73.asm",
+          "src/platform/input_timer.asm",
           "layout/manifest.json"
         ],
         "commits": [
@@ -143,7 +143,7 @@
           "portable/whole_program/application.c",
           "portable/whole_program/platform/native_video_profile.c",
           "evidence/canonical/validation/canonical-dos-acceptance.json",
-          "src/root/m15F8.c"
+          "src/startup/main.c"
         ],
         "commits": [
           "44de644"
@@ -206,7 +206,7 @@
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/native-audio-device/review.md",
-          "src/data/d3D57.c",
+          "src/simulation/tables.c",
           "portable/canonical_native_abi/audio_shared_state_preword.py",
           "evidence/canonical/validation/canonical-dos-acceptance.json",
           "evidence/canonical/native-semantic-spans/review.md"
@@ -265,7 +265,7 @@
         "paths": [
           "portable/whole_program/platform/graphics_s00_raster_source.c",
           "portable/whole_program/platform/tests/graphics_s00_raster_source_test.c",
-          "src/S00/m31AD.asm",
+          "src/platform/video/planar_raster.asm",
           "evidence/canonical/validation/canonical-dos-acceptance.json",
           "build/workers/p2-diff/RESULT.md"
         ],
@@ -298,7 +298,7 @@
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/native-input-irq/README.md",
-          "src/root/m1B73.asm",
+          "src/platform/input_timer.asm",
           "portable/tests/input_irq/oracle-matrix.json",
           "layout/manifest.json"
         ],
@@ -366,7 +366,7 @@
           "evidence/canonical/filename-domain/residue-review.md",
           "evidence/canonical/filename-domain/domain-facts.json",
           "evidence/canonical/filename-domain/residue-receipt.json",
-          "src/S09/m35F5.c",
+          "src/ui/save_load.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -400,7 +400,7 @@
           "evidence/canonical/filename-domain/residue-review.md",
           "evidence/canonical/filename-domain/domain-facts.json",
           "evidence/canonical/filename-domain/residue-receipt.json",
-          "src/S09/m35F5.c",
+          "src/ui/save_load.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -434,7 +434,7 @@
           "evidence/canonical/filename-domain/residue-review.md",
           "evidence/canonical/filename-domain/domain-facts.json",
           "evidence/canonical/filename-domain/residue-receipt.json",
-          "src/S09/m35F5.c",
+          "src/ui/save_load.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -468,7 +468,7 @@
           "evidence/canonical/filename-domain/residue-review.md",
           "evidence/canonical/filename-domain/domain-facts.json",
           "evidence/canonical/filename-domain/residue-receipt.json",
-          "src/S09/m35F5.c",
+          "src/ui/save_load.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -502,7 +502,7 @@
           "evidence/canonical/filename-domain/residue-review.md",
           "evidence/canonical/filename-domain/domain-facts.json",
           "evidence/canonical/filename-domain/residue-receipt.json",
-          "src/S09/m35F5.c",
+          "src/ui/save_load.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -536,7 +536,7 @@
           "evidence/canonical/filename-domain/residue-review.md",
           "evidence/canonical/filename-domain/domain-facts.json",
           "evidence/canonical/filename-domain/residue-receipt.json",
-          "src/S09/m35F5.c",
+          "src/ui/save_load.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -596,8 +596,8 @@
         "level": "OBSERVED",
         "paths": [
           "evidence/canonical/diagnostic-link/load-lock.json",
-          "src/root/m23AE.c",
-          "src/root/m23E6.c",
+          "src/window/locking.c",
+          "src/window/lists_sliders.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -629,8 +629,8 @@
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/diagnostic-link/load-lock.json",
-          "src/root/m23AE.c",
-          "src/root/m23E6.c",
+          "src/window/locking.c",
+          "src/window/lists_sliders.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -662,8 +662,8 @@
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/diagnostic-link/load-lock.json",
-          "src/root/m23AE.c",
-          "src/root/m23E6.c",
+          "src/window/locking.c",
+          "src/window/lists_sliders.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -697,8 +697,8 @@
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/diagnostic-link/load-lock.json",
-          "src/root/m23AE.c",
-          "src/root/m23E6.c",
+          "src/window/locking.c",
+          "src/window/lists_sliders.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -729,7 +729,7 @@
       "evidence": {
         "level": "PROVEN",
         "paths": [
-          "src/root/m1E57.c",
+          "src/graphics/clip_regions.c",
           "layout/manifest.json",
           "portable/tests/acceptance/state_policy.py",
           "build/workers/p2-diff/RESULT.md"
@@ -765,7 +765,7 @@
           "evidence/canonical/clip-generation/review.md",
           "evidence/canonical/clip-generation/facts.json",
           "evidence/canonical/clip-generation/animation-fixture.json",
-          "src/root/m1E57.c",
+          "src/graphics/clip_regions.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -827,7 +827,7 @@
       "evidence": {
         "level": "PROVEN",
         "paths": [
-          "src/root/m1FBD.asm",
+          "src/graphics/bitmap_text.asm",
           "evidence/canonical/historical-layout/review.md"
         ],
         "commits": [],
@@ -857,8 +857,8 @@
       "evidence": {
         "level": "PROVEN",
         "paths": [
-          "src/S13/m384C.c",
-          "src/state/yard-animation-arrays.c",
+          "src/ui/yard_window.c",
+          "src/ui/state/yard_animation.c",
           "evidence/canonical/storage.json"
         ],
         "commits": [],
@@ -890,7 +890,7 @@
         "paths": [
           "evidence/canonical/ctype-domain/review.md",
           "evidence/canonical/ctype-domain/facts.json",
-          "src/root/m1C62.c"
+          "src/window/alerts.c"
         ],
         "commits": [],
         "original_exe": {
@@ -922,7 +922,7 @@
         "paths": [
           "evidence/canonical/ctype-domain/review.md",
           "evidence/canonical/ctype-domain/facts.json",
-          "src/root/m15F8.c"
+          "src/startup/main.c"
         ],
         "commits": [],
         "original_exe": {
@@ -953,7 +953,7 @@
         "paths": [
           "evidence/canonical/error-continuation/review.md",
           "evidence/canonical/error-continuation/receipt.json",
-          "src/root/m1C62.c",
+          "src/window/alerts.c",
           "layout/manifest.json"
         ],
         "commits": [],
@@ -1017,8 +1017,8 @@
         "paths": [
           "evidence/canonical/diagnostic-link/rng-domain.json",
           "evidence/canonical/validation/native-rng.json",
-          "src/root/m0093.c",
-          "src/root/m075B.c"
+          "src/simulation/random.c",
+          "src/resources/game_strings.c"
         ],
         "commits": [],
         "original_exe": {
@@ -1050,7 +1050,7 @@
         "paths": [
           "evidence/canonical/diagnostic-link/rng-domain.json",
           "evidence/canonical/diagnostic-link/save-load.json",
-          "src/S09/m35F5.c",
+          "src/ui/save_load.c",
           "evidence/canonical/validation/canonical-dos-acceptance.json"
         ],
         "commits": [],
@@ -1855,8 +1855,8 @@
         "paths": [
           "build/workers/p2-diff/RESULT.md",
           "portable/tests/acceptance/save_projection.py",
-          "src/S09/m35F5.c",
-          "src/data/d3D57.c",
+          "src/ui/save_load.c",
+          "src/simulation/tables.c",
           "evidence/canonical/behavior-attribution/observations.json",
           "evidence/canonical/behavior-attribution/observations.json",
           "evidence/canonical/native-semantic-spans/review.md"
@@ -2023,8 +2023,8 @@
       "root_cause": {
         "defect_class": "consumed DOS register return absent from native C definition",
         "origin_function": "f_00F8_02EF",
-        "origin_source": "src/root/m00F8.c",
-        "consumer": "initStuff in src/root/m075B.c",
+        "origin_source": "src/ui/view_dialog_helpers.c",
+        "consumer": "initStuff in src/resources/game_strings.c",
         "proof_level": "EXACT_NATURAL: byte-exact original/canonical root:00F8 and root:075B",
         "mechanism": "Original XOR AX,AX + successful __aFchkstk + RETF yields0. Native void definition had no specified result, so consumed EAX suppressed InitSimVars and both seed calls."
       },
@@ -2177,8 +2177,8 @@
       "root_cause": {
         "defect_class": "consumed DOS register return absent from native C definition",
         "origin_function": "f_00F8_02EF",
-        "origin_source": "src/root/m00F8.c",
-        "consumer": "initStuff in src/root/m075B.c",
+        "origin_source": "src/ui/view_dialog_helpers.c",
+        "consumer": "initStuff in src/resources/game_strings.c",
         "proof_level": "EXACT_NATURAL: byte-exact original/canonical root:00F8 and root:075B",
         "mechanism": "Original XOR AX,AX + successful __aFchkstk + RETF yields0. Native void definition had no specified result, so consumed EAX suppressed InitSimVars and both seed calls."
       },
@@ -2229,8 +2229,8 @@
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
-          "src/root/m00F8.c",
-          "src/root/m15F8.c",
+          "src/ui/view_dialog_helpers.c",
+          "src/startup/main.c",
           "evidence/canonical/behavior-attribution/observations.json",
           "evidence/canonical/native-register-returns/README.md",
           "evidence/canonical/native-register-returns/census.json",
@@ -2267,8 +2267,8 @@
       "root_cause": {
         "defect_class": "consumed DOS register return absent from native C definition",
         "origin_function": "f_00F8_02EF",
-        "origin_source": "src/root/m00F8.c",
-        "consumer": "initStuff in src/root/m075B.c",
+        "origin_source": "src/ui/view_dialog_helpers.c",
+        "consumer": "initStuff in src/resources/game_strings.c",
         "proof_level": "EXACT_NATURAL: byte-exact original/canonical root:00F8 and root:075B",
         "mechanism": "Original XOR AX,AX + successful __aFchkstk + RETF yields0. Native void definition had no specified result, so consumed EAX suppressed InitSimVars and both seed calls."
       },
@@ -2320,7 +2320,7 @@
         "paths": [
           "build/workers/p2-diff/RESULT.md",
           "portable/whole_program/platform/drive_directory.c",
-          "src/root/m1F66.asm"
+          "src/platform/file_helpers.asm"
         ],
         "commits": [],
         "original_exe": {
@@ -2382,7 +2382,7 @@
         "paths": [
           "build/workers/p2-diff/RESULT.md",
           "dos/scenarios/sustained-full-game.scr",
-          "src/root/m00F8.c"
+          "src/ui/view_dialog_helpers.c"
         ],
         "commits": [],
         "original_exe": {
@@ -17854,7 +17854,7 @@
           "build/workers/p2-diff/RESULT.md",
           "portable/whole_program/text_bitmap_bridge.c",
           "portable/whole_program/text_bitmap.c",
-          "src/root/m1FBD.asm",
+          "src/graphics/bitmap_text.asm",
           "evidence/canonical/behavior-attribution/observations.json",
           "portable/canonical_native_abi/asm_data.py",
           "portable/build.py",
@@ -17898,7 +17898,7 @@
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
-          "src/root/m1B73.asm",
+          "src/platform/input_timer.asm",
           "portable/whole_program/platform/m1b73_queue_ops.c",
           "evidence/canonical/behavior-attribution/observations.json"
         ],
@@ -17931,7 +17931,7 @@
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
-          "src/S00/m31AD.asm",
+          "src/platform/video/planar_raster.asm",
           "portable/whole_program/platform/graphics_s00_raster_source.c",
           "portable/whole_program/platform/graphics_s00_unowned_source.c",
           "evidence/canonical/behavior-attribution/observations.json"
@@ -17966,7 +17966,7 @@
         "level": "PROVEN",
         "paths": [
           "build/workers/p2-diff/RESULT.md",
-          "src/root/m1B73.asm",
+          "src/platform/input_timer.asm",
           "evidence/canonical/behavior-attribution/observations.json"
         ],
         "commits": [],
@@ -18041,8 +18041,8 @@
         "paths": [
           "evidence/canonical/native-register-returns/census.json",
           "evidence/canonical/native-register-returns/README.md",
-          "src/root/m1C62.c",
-          "src/root/m195A.asm"
+          "src/window/alerts.c",
+          "src/memory/ems.asm"
         ],
         "commits": [
           "9add4828e6cbec60372264358e429bdff4486797"
@@ -18066,9 +18066,9 @@
         "level": "PROVEN",
         "paths": [
           "evidence/canonical/native-register-returns/census.json",
-          "src/S13/m384C.c",
-          "src/root/m1629.c",
-          "src/root/m24AB.c"
+          "src/ui/yard_window.c",
+          "src/graphics/balloons.c",
+          "src/graphics/font_output.c"
         ],
         "commits": [
           "9add4828e6cbec60372264358e429bdff4486797"
@@ -18090,9 +18090,9 @@
       "evidence": {
         "level": "PROVEN",
         "paths": [
-          "src/root/m15D9.c",
-          "src/S12/m384C.c",
-          "src/S13/m384C.c",
+          "src/ui/ribbon_messages.c",
+          "src/ui/map_window.c",
+          "src/ui/yard_window.c",
           "evidence/canonical/native-semantic-spans/review.md"
         ],
         "commits": [],
@@ -18113,9 +18113,9 @@
       },
       "origin": {
         "owner": "fd_55B3_299A",
-        "definition": "src/S12/m384C.c:29",
-        "writer": "src/root/m15D9.c:65",
-        "consumer": "src/S12/m384C.c:564",
+        "definition": "src/ui/map_window.c:29",
+        "writer": "src/ui/ribbon_messages.c:65",
+        "consumer": "src/ui/map_window.c:564",
         "proof": "BYTE_EXACT"
       },
       "related_items": [
@@ -18425,7 +18425,7 @@
       "evidence": {
         "level": "PROVEN",
         "paths": [
-          "src/root/m1B73.asm",
+          "src/platform/input_timer.asm",
           "portable/whole_program/platform/graphics_cursor_source.c"
         ],
         "commits": [],
@@ -18453,9 +18453,9 @@
       "evidence": {
         "level": "OBSERVED",
         "paths": [
-          "src/root/m00F8.c",
-          "src/root/m15F8.c",
-          "src/data/d3D57.c",
+          "src/ui/view_dialog_helpers.c",
+          "src/startup/main.c",
+          "src/simulation/tables.c",
           "portable/whole_program/application.c",
           "portable/tests/runtime/run_edge.py"
         ],
@@ -18484,7 +18484,7 @@
       "evidence": {
         "level": "PROVEN",
         "paths": [
-          "src/root/m1B73.asm",
+          "src/platform/input_timer.asm",
           "portable/whole_program/platform/m1b73_queue_ops.c",
           "portable/tests/runtime/run_windows.py"
         ],

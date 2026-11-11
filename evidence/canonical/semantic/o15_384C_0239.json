@@ -17,7 +17,7 @@
       "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
       "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
       "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
-      "same_content_as_canonical": "src/S15/m384C.c"
+      "same_content_as_canonical": "src/startup/game_session.c"
     },
     "registry_evidence": {
       "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/evidence.json",
@@ -28,15 +28,15 @@
     "inputs": {
       "pinned_files": [
         {
-          "path": "src/S15/m384C.c",
+          "path": "src/startup/game_session.c",
           "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5"
         },
         {
-          "path": "src/S09/m35F5.c",
+          "path": "src/ui/save_load.c",
           "sha256": "028e1575990d5d45233f9102a0d2a060810349bd2f1297182c4af435ecbe912a"
         },
         {
-          "path": "src/root/m20E8.c",
+          "path": "src/window/lifecycle.c",
           "sha256": "c2ec2474010ef9821fd46cdf72e50f164c850446b6f4b051a91d474b53dd5ae2"
         },
         {
@@ -66,10 +66,10 @@
         {
           "path": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
           "sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
-          "role": "registered whole-module candidate source; identical to current src/S15/m384C.c"
+          "role": "registered whole-module candidate source; identical to current src/startup/game_session.c"
         },
         {
-          "path": "src/root/m2505.c",
+          "path": "src/window/object_geometry.c",
           "sha256": "22a03f15e95fff376d27211426c4f9e3395e16e5decd92ef501fbfe3c1aba623",
           "role": "mode-5 axis selection and private window parameter reads"
         },
@@ -760,7 +760,7 @@
       "target_callee": {
         "name": "win_Open",
         "entry": "root:20E8:04B6",
-        "source": "src/root/m20E8.c:207-222",
+        "source": "src/window/lifecycle.c:207-222",
         "target_context": "build/workers/dos_static_ovl15/win_Open-context.txt",
         "target_frame": "BP frame; target context reports arg_bytes_min=10; formal win is at BP+6; target reads BP+8,+0xA,+0xC,+0xE and stores those words to the private window fields w+0x10,+0x12,+0x14,+0x16 before win_Recalc."
       },
@@ -813,7 +813,7 @@
       "registered_candidate_compile": {
         "source": "evidence/behavior/functions/o15_384C_0239/contracts/actual-window-v2/module.c",
         "source_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
-        "current_canonical_source": "src/S15/m384C.c",
+        "current_canonical_source": "src/startup/game_session.c",
         "canonical_sha256": "01b51eecedcd28e2213819572c846a9754039f4a527e6da5e56e57783398bdd5",
         "whole_module_source_equal_to_canonical": true,
         "compiler": "msc600ax",
@@ -945,7 +945,7 @@
         }
       },
       "mode5_semantics": {
-        "source": "src/root/m2505.c:211-269; src/root/m20E8.c:207-222",
+        "source": "src/window/object_geometry.c:211-269; src/window/lifecycle.c:207-222",
         "effect": "For an object axis whose mode is 5, f_2505_03B9 reads win+0x10+2*axis through f_2505_04D7, so each of the four win_Open words can contribute to that axis before the object origin is added. The words are genuinely observable when the corresponding axis uses mode 5.",
         "actual_2100_resource": {
           "source": "pinned caller-boundary-audit.json actual_window_evidence",
@@ -997,19 +997,19 @@
       "actual_callers": [
         {
           "caller": "LoadGame",
-          "source": "src/S09/m35F5.c:101",
+          "source": "src/ui/save_load.c:101",
           "original_call": "S09:35F5:0x001D far vector call to o15 with one word 0 (only when fd_3D57_02C2 != 0)",
           "o15_entry_registers": "LoadGame makes no SI/DI changes before this call; it inherits them from its caller."
         },
         {
           "caller": "MenuQuit",
-          "source": "src/S15/m384C.c:131",
+          "source": "src/startup/game_session.c:131",
           "original_call": "S15:384C:0x0207 near same-module call to o15 with one word 1, after push cs",
           "o15_entry_registers": "MenuQuit makes no SI/DI changes before the call; its direct path is reached from o19_384C_0000 case 8 or the failed-load/new-game path."
         },
         {
           "outer_caller": "o19_384C_0000",
-          "source": "src/S19/m384C.c:68-83",
+          "source": "src/ui/game_events.c:68-83",
           "original_calls": "Original context calls LoadGame at 0x0049 and MenuQuit at 0x006E. The two o15 caller modes are therefore 0 (LoadGame) and 1 (MenuQuit) on the recorded source paths; SI/DI are inherited machine state, not constants invented by this audit."
         }
       ],
@@ -1488,7 +1488,7 @@
           "old": "f_171C_1C0A",
           "new": "mem_Free",
           "kind": "recovered",
-          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/root/m171C.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
+          "why": "Win16 symbol _mem_Free, reviewed 2026-11-11: Caller alignment: confirmed ConvertMonoMaskToTandy and hanim_RenderAnimSet release their temporary image/animation handles with DOS 171C:1C0A at the positions occupied by Win16 mem_Free (2:5580); also the unlock-then-free tail of GPutPacked agrees.; Implementation/contract: src/memory/ralloc.c 1C0A delegates to 13E4, which resolves encoded handles, returns the underlying block to free storage and rem"
         },
         {
           "old": "f_171C_1C1C",
