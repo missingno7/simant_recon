@@ -189,38 +189,32 @@ void far win_DrawHistoryWindow(int flags)
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far * far fd_3D57_082A[];
 extern int far * far fd_3D57_0852[];
-extern void (far * near g_916C)(int x0, int y0, int x1, int y1, int color);
+extern void (far * near g_916C)(int, int, int, int, int);
 extern char far * far * far fd_50F6_02BA;
 extern int far sprintf(char far *buf, char far *fmt, ...);
-extern void (far * near g_9128)(int a, int b, int c);
+extern void (far * near g_9128)(int, int, int);
 extern void far f_24AB_02AD(int font);
 extern int far f_24AB_030B(void);
 extern void far f_24AB_038D(int x, int y, char far *text);
 extern int far f_24AB_0329(char far *text);
-extern void far f_1CE2_01F8(int left, int top, int right, int bottom, int width);
+extern void far f_1CE2_01F8(int, int, int, int, int);
 
 
-extern int far BpopT;
-extern int far RpopT;
-extern int far FoodB;
-extern int far FoodR;
-extern int far HealthB;
-extern int far HealthR;
-extern int far fd_50F6_1040;
-extern int _fastcall win_IsWinOpen(int win);
 void far drawHistGraph(int graph, int hilite, int slot)
 {
     struct Rect r;
     int color;
     int width;
     int height;
-    int far *data;
+    /* MSC operand choices require this declaration order in the current TU. */
     int far *data2;
-    int start;
-    int count;
+    int n;
+    /* STEERED intermediate: grouping retains the snapshot/label homes.
+       The original record identity is not established by the bytes. */
+    struct { int count; int start; char label[20]; } range;
+    int far *data;
     int j;
     int max;
-    int n;
     int mul;
     int div;
     int x;
@@ -228,7 +222,6 @@ void far drawHistGraph(int graph, int hilite, int slot)
     int px;
     int py;
     char far *s;
-    char buf[30];
     int ty;
     int th;
 
@@ -241,11 +234,11 @@ void far drawHistGraph(int graph, int hilite, int slot)
     graph = (graph & 1) * 5 + (graph >> 1);
     data = fd_3D57_082A[graph];
     data2 = fd_3D57_0852[graph];
-    start = fd_50F6_04F4;
-    count = fd_3D57_0828;
-    j = (start - count) & 0x3f;
+    range.start = fd_50F6_04F4;
+    range.count = fd_3D57_0828;
+    j = (range.start - range.count) & 0x3f;
     max = 0;
-    for (n = 0; n < count; n++) {
+    for (n = 0; range.count > n; n++) {
         if (data[j] > max)
             max = data[j];
         if (data2[j] > max)
@@ -255,7 +248,7 @@ void far drawHistGraph(int graph, int hilite, int slot)
     div = 1;
     mul = 1;
     if (max > 0) {
-        for (mul = 1; max * mul < height; mul++)
+        for (; max * mul < height; mul++)
             ;
         if (mul > 1)
             mul--;
@@ -263,12 +256,12 @@ void far drawHistGraph(int graph, int hilite, int slot)
             while (max / div > height)
                 div++;
     }
-    j = start & 0x3f;
+    j = range.start & 0x3f;
     x = r.left;
     if (div == 1)
-        y = r.bottom - data[start] * mul;
+        y = r.bottom - data[range.start] * mul;
     else
-        y = r.bottom - data[start] / div;
+        y = r.bottom - data[range.start] / div;
     px = x;
     py = y;
     for (n = 1; n < 64; n++) {
@@ -285,13 +278,14 @@ void far drawHistGraph(int graph, int hilite, int slot)
     if (hilite == 0)
         s = fd_50F6_02BA[graph];
     else {
-        sprintf(buf, "%d", data[j]);
-        s = buf;
+        sprintf(range.label, "%d", data[j]);
+        s = range.label;
     }
     (*g_9128)(color, 0, color);
     f_24AB_02AD(3);
     f_24AB_038D(x, ty = y - (th = f_24AB_030B()) / 2, s);
-    f_1CE2_01F8(x - 1, ty - 1, f_24AB_0329(s) + x + 1, ty + th + 1, 1);
+    width = f_24AB_0329(s);
+    f_1CE2_01F8(x - 1, ty - 1, width + x + 1, ty + th + 1, 1);
     f_24AB_02AD(0);
 }
 

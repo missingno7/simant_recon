@@ -5854,8 +5854,9 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
    "source": "src/S24/m39C7.c",
-   "source_sha256": "1eb5a0000fccff4615c0ed490460fa997569b38d95201cb0f472f5c1bdd8f98b",
+   "source_sha256": "25b3ad3d7bd0b8357546b198a4af91f9496576d01da0dbafcf004bb4ff379d3c",
    "claims": [
     {
      "name": "OpenHistoryWindow",
@@ -5922,10 +5923,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "drawHistGraph",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 812,
+     "size": 732,
+     "target_sha256": "89b60c8b92891415c7a845684a95c75ce2e0c45cc44065d6f6286a62b8b114e3",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "6a67b1fa84eec7d9eaebfb1a0a0e5ea0cbfbbf78cd8141b0a52155f7baaf06af"
+   "object_sha256": "79389202a02d04df7dbd4f92a0ef7ace10073d1b189d4c2b5fdb64010b238225"
   },
   "S25:39C7": {
    "unit": "S25",
@@ -8357,7 +8370,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/root/m0250.c",
-   "source_sha256": "675e8caf319424b88c92bf005db081f574fa934212cc842c145959d9e1cdfc2a",
+   "source_sha256": "6363954778e7a2edbc80c8849cdd72ead2e79c9f386f2e04a2f1583460013e5b",
    "claims": [
     {
      "name": "f_0250_0CF6",
@@ -8841,7 +8854,7 @@
      "target_sha256": "3b4bbed0d771ff78c03b865f74d4634204014f3d0a3b6a4eb8324c7b8b30c35f",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "DrawEditGraphs",
@@ -8852,7 +8865,7 @@
      "target_sha256": "f4a94eee2a12bffd619d0f4380bf78af31c4d235911faeb31931716cfe92de48",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "f_0250_13A6",
@@ -8911,10 +8924,22 @@
      "provenance": "EXACT_NATURAL",
      "layout_inferred": "SYM-1 and OE-1: move two real far-variable declarations earlier, emit rectangle left before top, and use conditional image-mode calls; whole-module gate verifies the resulting register and stack allocation",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_0250_129E",
+     "unit": "root",
+     "seg": 592,
+     "off": 4766,
+     "size": 264,
+     "target_sha256": "d8ad09647417f00d37bd81c3f7ed193ba2cd532ad8152f15b7c91bad3f121091",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "f_0250_129E=a point local of which only y is read keeps two frame words, and copying y through the later index variable selects the early DI load; the original locals are unknown",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "8742f77792644f9380fcb128d97c10cff71b295aadc90c32b40d2c0b98c0f4ce"
+   "object_sha256": "35494b17bdd2e0058182aa7794eedb691b587c191de2cb0f2d4864dd4c4a275a"
   },
   "root:075B": {
    "unit": "root",

@@ -840,33 +840,34 @@ noscent:
 
 extern unsigned char far fd_50F6_1114[30 * 40];
 
-/* OPEN: residue 2 extra frame words ([bp-2],[bp-4]) and SI/DI swapped (y param in DI,
- * index in SI in the original). */
+/* STEERED: the point retains two frame words though only y is read.
+ * Copying y through i selects the early DI load; original locals are unknown. */
 
 void far f_0250_129E(int x, int y)
 {
-    int ay;
+    Pnt absolute;
     int i;
-    int far *p;
+    int row;
 
-    ay = fd_50F6_0508.y + y;
-    if (x < 0 || y < 0 || x >= 40 || y >= 30)
+    i = y;
+    row = i;
+    absolute.y = fd_50F6_0508.y + row;
+    if (x < 0 || row < 0 || x >= 40 || row >= 30)
         return;
-    if (ay > 0x3f)
+    if (absolute.y > 0x3f)
         Punt("Y>MAXAY");
-    f_0250_1018(x, y);
-    i = y * 40 + x;
+    f_0250_1018(x, row);
+    i = row * 40 + x;
     if (fd_50F6_15C4[0][i] == -2) {
         fd_50F6_15C4[0][i]++;
         return;
     }
-    p = &fd_50F6_15C4[0][i];
-    if (*p != g_9126 || fd_50F6_1114[i] != g_94E4 || (y == 0 && g_19CE != 0)) {
+    if (fd_50F6_15C4[0][i] != g_9126 || fd_50F6_1114[i] != g_94E4 || (row == 0 && g_19CE != 0)) {
         if (g_9126)
-            f_0250_0721(g_19BE * x + fd_50F6_110C.left, g_19C0 * y + fd_50F6_110C.top);
+            f_0250_0721(g_19BE * x + fd_50F6_110C.left, g_19C0 * row + fd_50F6_110C.top);
         else
-            f_0250_0ADB(g_19BE * x + fd_50F6_110C.left, y * g_19C0 + fd_50F6_110C.top);
-        *p = g_9126;
+            f_0250_0ADB(g_19BE * x + fd_50F6_110C.left, row * g_19C0 + fd_50F6_110C.top);
+        fd_50F6_15C4[0][i] = g_9126;
         fd_50F6_1114[i] = g_94E4;
     }
 }
