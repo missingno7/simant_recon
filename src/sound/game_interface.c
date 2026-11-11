@@ -1,4 +1,11 @@
-/* Module at root frame 00DF (large-model code segment): sound driver shell. */
+/*
+ * Provides the game facing sound and song interface. It initializes the sound driver shell and
+ * forwards start, reverse, completion and control requests.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 00DF; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory. Some pairs are HIGH
+ * confidence, not confirmed.
+ */
 
 int g_1926 = 0;
 

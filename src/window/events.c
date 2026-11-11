@@ -1,4 +1,11 @@
-/* Root module 218D: window event dispatch. */
+/*
+ * Fetches and dispatches window events. It handles proximity events, queues and event flushing.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 218D; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Event {
     int what;

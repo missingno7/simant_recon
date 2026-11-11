@@ -1,4 +1,11 @@
-/* Root module 1CE2: screen primitives (character-cell rectangles, frames, save/restore). */
+/*
+ * Draws screen rectangles, outlines and frames using character cell coordinates. It saves and
+ * restores rectangles and draws packed pictures.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1CE2; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Rect {
     int left;

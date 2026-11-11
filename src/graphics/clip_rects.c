@@ -1,4 +1,11 @@
-/* Root module 1D8E: rectangle clipping against the clip-rectangle list. */
+/*
+ * Clips rectangle drawing operations against the current rectangle list. It decomposes the
+ * visible intersections before calling the drawing operations.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1D8E; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Rect {
     int left;

@@ -1,4 +1,9 @@
-; Root module 1FBD: draw a text string with the bitmap font (accented-character folding, underline).
+; Draws a string with the bitmap font. It folds accented characters and supports underlining.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1FBD; complete original translation unit.
+; Windows: GR, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 1FBD, linear 1FBD0-1FD27.
 ; Genuine assembly: push si; push di saves (MSC saves DI first, rule ASM-2) and a BP frame
 ; without stack check ending pop bp without mov sp,bp (ASM-1).

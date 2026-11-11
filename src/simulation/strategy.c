@@ -1,4 +1,11 @@
-/* Root module, code frame 1383: colony strategy, recruiting, new modes and movement directions. */
+/*
+ * Selects colony strategy, caste production and ant activity modes. It recruits ants and chooses
+ * movement directions for foraging, defence, alarms and nest return.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1383; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ */
 
 extern int far ChaseSpid;
 extern int far MePlane;

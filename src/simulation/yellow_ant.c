@@ -1,9 +1,21 @@
-/* Overlay section S25, code frame 3BA4: yellow ant movement (DoAntMoveY unit).
+/*
+ * Advances the player yellow ant and chooses its movement directions. It handles nest exit,
+ * fighting and fight animation.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 25 (S25); segment 3BA4; partial original translation unit.
+ * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
+ * Functions not yet exact: GetMyRandDirs.
+ * Steered functions: DoAntSimY, AnimYellowFight, AnimYellowInsane, YellowFight, GetMyBestDirs,
+ * CheckMyBestDirs, GetMyNextRandDirs, o25_3BA4_19AD, GetMyBestDir, ExitNest, GetMyDis,
+ * DoAntMoveY.
+ *
  * Built /AL /Os /Oe /Og /Zi.  The order of the extern declarations is part of the
  * fingerprint: MSC 6.00A breaks some operand-order ties by symbol-table state
  * (ExitNest's MePlane/MeGoalPlane compare, GetMyDis' GetDis call order), and this
  * order (0D6C/0EF8 first, MeLastX/Y before MeGoalY, entrance arrays A4,B0,A8,AC)
- * reproduces them. */
+ * reproduces them.
+ */
+
 extern int far MeCrazyCnt;
 extern int far MeCrazyDir;
 

@@ -1,4 +1,11 @@
-/* Root module 00F8: map/yard window helpers, timing and small hooks. */
+/*
+ * Collects small map and yard window hooks, coordinate conversions and visibility checks. It
+ * also supplies dialog waiting, abort and timing helpers.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 00F8; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ */
 
 struct Rect {
     int left;

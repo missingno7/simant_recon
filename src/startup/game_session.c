@@ -1,6 +1,12 @@
-/* Overlay section S15, code frame 384C: start-up and shut-down helpers
-   (demo expiry, monochrome patterns, disk reset, fatal exit, quit dialog,
-   default windows, new game). */
+/*
+ * Starts a new game and restores default windows, and handles quit and fatal exit paths. It also
+ * loads monochrome patterns and checks the demo expiry date.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 15 (S15); segment 384C; partial original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Functions not yet exact: ui_prompt_save_discard_cancel.
+ */
 
 typedef char far * far *Handle;
 

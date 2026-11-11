@@ -1,5 +1,9 @@
-; Display driver S01, module 3: masked sprite blits and rectangle test.
-; Overlay section S01, code frame 32B5, linear 32B5E-32DEB.
+; Blits masked monochrome sprites and tests rectangles. The driver selector installs these
+; functions for every odd numbered monochrome display mode.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 1 (S01); segment 32B5; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
 
 _DATA	segment word public 'DATA'
 	extrn	_g_3D20:byte

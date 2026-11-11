@@ -1,11 +1,16 @@
-; Display driver S00, object 2 of code frame 31AD (after the LINK fill byte at 31AD:2AB3).
-; Overlay section S00, code frame 31AD, linear 34584-35A65.
-; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
-; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in
-; work/ovlA/probe), the EGA/VGA sequencer and graphics controller are programmed
-; with out dx loops, raster operations are selected by self-modifying code (instruction
-; templates copied over loop instructions with "mov cs:[...],ax"), and near subroutines
-; return with retn inside far procs.  The segment ends at an odd offset (31AD:2AB3); LINK
+; Sets up planar display modes and performs masked planar tile blits through a scratch buffer.
+; It is the second object in frame 31AD and remains a separate file from the main raster
+; routines.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 0 (S00); segment 31AD, object starts at 2AB4; complete original
+; translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
+;
+; The object begins at 31AD:2AB4 after the one-byte LINK fill at 31AD:2AB3.
+; Genuine assembly: SI is saved before DI, unlike MSC (ASM-2); planar I/O,
+; self-modifying raster templates and near returns inside far procs also
+; exclude C compiler output. MASM 5.10 reproduces the complete object.
 
 _DATA	segment word public 'DATA'
 	extrn	_g_3D20:byte

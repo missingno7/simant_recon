@@ -1,5 +1,10 @@
-; Display driver S01, module 2: mini-map tables.
-; Overlay section S01, code frame 328E, linear 328EA-32B5E.
+; Builds monochrome small map representations. Its four assembly entries belong to the same
+; display family as the monochrome screen driver.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 1 (S01); segment 328E; complete original translation unit.
+; Windows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside
+; the six named application groups.
+; Build profile: masm510; /Mx.
 
 _DATA	segment word public 'DATA'
 	extrn	_g_8ED8:byte

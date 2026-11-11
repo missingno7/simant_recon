@@ -1,4 +1,10 @@
-; Root module 1F66: wildcard file-name match, current directory, checksum, drive count, register self-test (Daniel Goldman library).
+; Matches wildcard filenames and queries directories and drives. It also contains checksum and
+; register test helpers from the library identified by its copyright string.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1F66; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 1F66, linear 1F668-1F80B.
 ; Genuine assembly: code-segment copyright string, two entry stubs (mov dl,1/0; jmp) into one
 ; body, lodsb/loop/rol checksum, int 21h calls with carry results (cmc/adc) and register-only

@@ -1,4 +1,13 @@
-/* Source-only data candidate; root review pending; no historical TU identity claim. */
+/*
+ * Bundles game type, balloon counts, spider and rebirth coordinates and scroll limits. These
+ * fields serve several simulation and view tasks.
+ * The opaque or residual file name is retained; folder placement is ours (inferred).
+ * DOS references: resident data extension (section 27), registered frames 50F6. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
+ */
+
 int far CurGameType;
 int far fd_50F6_0EB4;
 int far EggBalloonCnt;

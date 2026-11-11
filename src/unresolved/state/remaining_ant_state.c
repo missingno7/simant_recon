@@ -1,4 +1,14 @@
-/* Source-derived 18-owner natural provider candidate; scratch only, root_accepted=false. */
+/*
+ * Bundles balloon points and planes, yellow ant modes, game time and several opaque words. The
+ * consumers span rendering, editing and simulation without a sufficiently established common
+ * file purpose.
+ * The opaque or residual file name is retained; folder placement is ours (inferred).
+ * DOS references: resident data extension (section 27), registered frames 50F6. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
+ */
+
 typedef struct { int x; int y; } Pnt;
 typedef union { long signed_view; unsigned long unsigned_view; } CountViews;
 Pnt far LastQueenPnt;

@@ -1,5 +1,10 @@
-/* Overlay section S11, code frame 35F5: menu entry states (Win16 SetMenuEntries twin), pause
- * switch (Win16 PauseGame/SetPause twins) and the menu command dispatcher ProcMenu. */
+/*
+ * Updates game menu entries and handles menu commands. It also manages pause state and the Pause
+ * or Unpause label.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 11 (S11); segment 35F5; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
+ */
 
 extern int far GameSpeed;
 extern void far SetMenuItemState(int id, int state);

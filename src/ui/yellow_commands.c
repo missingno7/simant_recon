@@ -1,4 +1,11 @@
-/* Overlay section S22, code frame 39C7: editor mouse dispatch and the yellow ant
+/*
+ * Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals,
+ * dialogs, alarm drops and special interactions such as laser fire.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 22 (S22); segment 39C7; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ *
  * (processEdit..YellowHelp; Win16 SIMANT unit processEdit..YellowHelp).
  * Built /AL /Os /Oe /Og /Zi under MSC 6.00AX: 6.00A allocates CONST segment words for
  * far variables whose loads were all hoisted to immediate segments (YellowDeath), 6.00AX
@@ -6,8 +13,9 @@
  * across all 15 functions, /Zd cannot (SetGoalsY and YellowCommandKey start records).
  * The one-line ifs and the while loops in YellowDeath place the line-number record
  * breaks (every 52 entries) where the original has them.  The MapPnt/editTileRect
- * struct types decide the imul operand order in DoLaserFire; the fd_50F6_048A
- * declaration after 0AE8 decides the compare order in YellowCommandKey. */
+ * struct types decide the imul operand order in DoLaserFire; the MeLocY
+ * declaration after 0AE8 decides the compare order in YellowCommandKey.
+ */
 
 struct Event {
     int what;

@@ -1,6 +1,16 @@
-/* Data-only translation unit (hypothesis): far tables of frame 3D57.
- * No code references its variables through its own segment: every referencing module
- * uses per-symbol relocation groups (see work/data/s27_map.md). */
+/*
+ * Defines initialized direction, caste, mode and display lookup tables together with initial
+ * game state. The same file includes yard and creature defaults and history references, so its
+ * contents span several simulation and rendering tasks.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident data extension, section 27; segments 3D57:0000. Data contributions are exact;
+ * original translation unit completeness is unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ *
+ * The data-only file grouping is a hypothesis. All referencing code modules
+ * use per-symbol relocation groups, rather than their own data segment
+ * (historical investigation: work/data/s27_map.md).
+ */
 
 extern unsigned char far H_BPop[];
 extern unsigned char far H_RPop[];

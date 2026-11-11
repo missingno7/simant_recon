@@ -1,5 +1,11 @@
-/* Root module 075B: startup resources (Win16 unit initStuff / PrepareStrings /
- * LoadStringAnt). */
+/*
+ * Loads startup resources and prepares game string lists. It provides the resource string lookup
+ * used by the interface and simulation messages.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 075B; complete original translation unit.
+ * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ */
 
 typedef char far * far *Handle;
 typedef char far * far *StrList;

@@ -1,5 +1,13 @@
 /*
- * Relocatable memory manager ("Ralloc") (root module, code frame 171C).
+ * Implements the relocatable memory manager and its handle, lock and allocation APIs. It also
+ * provides malloc style wrappers, discardable blocks and memory diagnostics.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 171C; partial original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Oeg /Gs /Zi.
+ * Functions not yet exact: mem_resize_in_place, f_171C_0CF4.
+ * Steered functions: RallocSetType.
+ *
  * Blocks are paragraph aligned with a 32-byte header; a handle is a far pointer
  * to a far master pointer (the block data, header segment + 2).  Handles may also
  * be passed as indexes encoded as 0F0F:index.

@@ -1,4 +1,12 @@
-/* Overlay section S13, code frame 384C: yard window (yard events, animated yard objects, colonies). */
+/*
+ * Handles yard window events and renders the yard. It draws animated people, animals, weather,
+ * swarms and colony population bars.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 13 (S13); segment 384C; partial original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Functions not yet exact: InvertPatch.
+ */
 
 #include <string.h>
 

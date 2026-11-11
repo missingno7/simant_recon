@@ -1,4 +1,12 @@
-/* Root module 295C: MIDI (MPU-401) voice allocation and output. */
+/*
+ * Allocates MIDI voices and maps instruments to channels. It sends melodic and percussion events
+ * through the MPU-401 output interface.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 295C; complete original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ * Steered functions: snd_stop_assigned_voices.
+ */
 
 struct Chan {
     unsigned char type;

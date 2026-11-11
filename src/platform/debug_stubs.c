@@ -1,9 +1,14 @@
 /*
- * Module at root frame 277D: six empty far functions (6 bytes, one RETF each).
- * The Win16 build implements WinPrintf and sibling debug formatters; in this
- * DOS release they compile to empty bodies.  Only WinPrintf is named (xver HIGH);
- * the siblings keep address names until independent evidence identifies them.
- * Compiled with /Gs: with stack checking each would be an 8-byte frame.
+ * Contains six empty debug entry points in the DOS release. WinPrintf has a named Win16
+ * counterpart; the other stub identities remain uncertain.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 277D; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory. Some pairs are HIGH
+ * confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Gs /Zi.
+ *
+ * Each stub is one RETF. Only WinPrintf has a named counterpart (HIGH);
+ * the siblings keep address names. Without /Gs each stub would be eight bytes.
  */
 
 int far WinPrintf(char far *format, ...)

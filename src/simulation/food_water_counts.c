@@ -1,4 +1,12 @@
-/* Root module, code frame 0BE8: ant counts, water, eggs, directions. */
+/*
+ * Updates ant counts, water, food and eggs. It also supplies direction, distance and nest
+ * entrance helpers used throughout the simulation.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0BE8; complete original translation unit.
+ * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oe /Og.
+ */
 
 extern int far SRand1(int range);
 extern int far SRand2(void);

@@ -1,3 +1,13 @@
+/*
+ * Bundles tile drawing state, display callbacks, colony control resources, map cursor geometry
+ * and dialog handles. Its address named fields cover more than the generic window library.
+ * The opaque or residual file name is retained; folder placement is ours (inferred).
+ * DOS references: resident data extension (section 27), registered frames 50F6. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
+ */
+
 struct Rect { int left; int top; int right; int bottom; };
 typedef char far * far *Handle;
 int far fd_50F6_37D2;

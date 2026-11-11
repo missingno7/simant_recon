@@ -1,4 +1,11 @@
-/* Overlay section S26, code frame 39C7: window zoom, drag and grow with screen constraints (_fastcall window API). */
+/*
+ * Tracks window zooming, dragging and resizing. It constrains the resulting rectangles to the
+ * screen and uses the resize icon.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 26 (S26); segment 39C7; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ * Build profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.
+ */
 
 #include <string.h>
 

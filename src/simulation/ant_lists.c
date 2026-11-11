@@ -1,4 +1,10 @@
-/* Root module, code frame 0EC1: ant lists (A = surface, B = black nest, R = red nest). */
+/*
+ * Maintains surface, black nest and red nest ant lists. It compacts, searches, adds and removes
+ * entries and handles drowning or hole exits.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0EC1; complete original translation unit.
+ * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory.
+ */
 
 extern int far ListIndexA;
 extern unsigned char far AlistT[];

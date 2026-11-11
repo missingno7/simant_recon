@@ -1,6 +1,16 @@
-/* Scratch-only natural provider candidate; its basename is intentionally UIGEO.
- * No runtime initializer, fixed address, or placement is supplied.
+/*
+ * Defines editor and map view rectangles together with the text bitmap view used for yard
+ * messages. The consumers use these geometry objects independently.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS references: resident data extension (section 27), registered frames 50F6. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
+ *
+ * No runtime initializer, fixed address or placement is supplied. The old
+ * UIGEO scratch basename is not a recovered historical file name.
  */
+
 struct Rect {
     int left;
     int top;

@@ -1,4 +1,10 @@
-; Byte-order helpers (root module, code frame 1959; linear 0x19592-0x195AB).
+; Swaps the byte order of a word or a double word. Both routines use small assembly entry
+; points.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1959; complete original translation unit.
+; Windows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside
+; the six named application groups.
+; Build profile: masm510; /Mx.
 ;
 ; Genuine assembly: MSC 6.00 never emits this shape.  C spellings of the swap
 ; compile to "mov al,[bp+7] / mov ah,[bp+6]", and an inline-asm body always gets

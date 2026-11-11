@@ -1,3 +1,13 @@
+/*
+ * Defines world food, water, queen and digging totals together with colony outcome flags. The
+ * same bundle includes the editor message delay value.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS references: resident data extension (section 27), registered frames 50F6. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
+ */
+
 int far TileMassXR;
 int far TileMassYR;
 int far TilesDugB;

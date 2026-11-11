@@ -1,5 +1,9 @@
-; Sound chip register interface with read-back check (root module, code frame
-; 29BF; linear 0x29BF8-0x29D6A).
+; Probes and writes a sound chip through index and data port pairs. It keeps register shadows
+; and checks writes by reading back the result.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 29BF; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
 ;
 ; Genuine assembly (sound driver library): near procedures that pass values
 ; in AL/AH/CX/DL and report errors in the carry flag, LOOP counters,

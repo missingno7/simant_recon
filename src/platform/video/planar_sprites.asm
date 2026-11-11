@@ -1,4 +1,10 @@
-; Display driver S00 (EGA/VGA planar), module 3: masked sprite blits and rectangle test.
+; Blits masked sprite images into planar buffers and tests rectangles. The window bitmap layer
+; calls these entries through the display callbacks.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 0 (S00); segment 35A6; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
+;
 ; Overlay section S00, code frame 35A6, linear 35A66-35F42.
 ; Genuine assembly (MASM 5.10 reproduces it byte for byte).  Evidence against compiler
 ; output: every framed proc saves "push si; push di; push ds" and restores in reverse order,

@@ -1,5 +1,10 @@
-/* Root module 00BA: application window setup (draw hooks, saved window headers)
- * and the window-close/control-change hooks. */
+/*
+ * Initializes application windows and installs drawing and control hooks. It loads saved window
+ * headers and handles window closure or control changes.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 00BA; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
+ */
 
 typedef char far * far *Handle;
 

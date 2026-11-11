@@ -1,4 +1,10 @@
-; Root module 1F58: BIOS tick count, byte swap copy, keyboard polling and Ctrl-Break vector hook.
+; Reads BIOS ticks and keyboard state and installs a Ctrl-Break hook. The same module contains a
+; byte swapping copy helper.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1F58; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 1F58, linear 1F586-1F668.
 ; Genuine assembly: BIOS data area and interrupt-vector access through ES=0, int 16h,
 ; cli/sti around the vector swap, xchg with memory, frameless procs (rules ASM-1, ASM-2).

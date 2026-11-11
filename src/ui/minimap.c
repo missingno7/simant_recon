@@ -1,4 +1,11 @@
-/* Overlay section S04, code frame 35F5: map window tools menu and mini map (Win16 ANTEDIT_MODULE map members). */
+/*
+ * Handles the map tools menu and the small map window. It creates the map image table, draws the
+ * view and maintains its cursor.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 4 (S04); segment 35F5; complete original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ */
 
 struct Rect {
     int left;

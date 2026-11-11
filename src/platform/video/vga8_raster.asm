@@ -1,4 +1,10 @@
-; Display driver S02 (dispatch table DGROUP:21A6, 25 entries): screen, blit and raster-op procs.
+; Implements the screen and bitmap operations for the 256 colour display path. Its entries
+; include raster operations and a driver dispatch table.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 2 (S02); segment 3126; complete original translation unit.
+; Windows: GR, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Overlay section S02, code frame 3126, linear 31260-31BC9.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in

@@ -1,4 +1,11 @@
-/* Overlay section S06, code frame 35F5: back-yard simulation (SimYard unit). */
+/*
+ * Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also
+ * advances yard colonies and swarms.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 6 (S06); segment 35F5; partial original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ * Steered functions: SimColonies.
+ */
 
 static char dogA[6] = { 3, 4, -3, -4, 0, 0 };  /* 2448 */
 static char dogB[6] = { -3, 0, 3, 0, 0, 0 };  /* 244E */

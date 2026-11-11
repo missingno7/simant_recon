@@ -1,4 +1,11 @@
-/* Root module 15F8: program entry (main) and the main loop. */
+/*
+ * Contains main and the main game loop. It processes command line options, checks configuration
+ * and resources, initializes the game and performs shutdown.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 15F8; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og.
+ */
 
 char far *fd_55B3_1CD4[] = {
     "nt",

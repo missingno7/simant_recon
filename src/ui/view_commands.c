@@ -1,5 +1,11 @@
-/* Root module, code frame 015B: map/yard mode control and ant-list commands
- * (Win16 unit AddSomeAnts .. MysteryButton). */
+/*
+ * Changes map and yard modes and moves the view to ants, queens or the spider. It also applies
+ * ant count, food and patch transfer commands.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 015B; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ */
 
 extern int far ListIndexA;
 extern int far fd_3D57_0798;

@@ -1,5 +1,11 @@
-/* Overlay section S17, code frame 384C: menu bar start-up (menu data fix-up, item
- * rectangles, menu colours). */
+/*
+ * Initializes menu bar data and fixes up its pointers. It calculates item rectangles and applies
+ * menu colours before drawing.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 17 (S17); segment 384C; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Rect {
     int left;

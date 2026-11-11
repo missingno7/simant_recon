@@ -1,4 +1,10 @@
-; Display driver S03 (dispatch table DGROUP:2276, 25 entries): screen, blit and raster-op procs.
+; Implements Tandy screen drawing, bitmap copying and raster operations. It contains a 320 byte
+; line buffer in its code segment as well as palette and bank tables.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 3 (S03); segment 3126; complete original translation unit.
+; Windows: GR, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Overlay section S03, code frame 3126, linear 31260-32538.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in

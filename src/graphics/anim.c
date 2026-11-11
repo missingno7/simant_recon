@@ -1,4 +1,12 @@
-/* Root module 2662: animation object sets (ANIM.C; Win16 hanim_* unit). */
+/*
+ * Manages animation object sets, their positions, priorities and backing buffers. It composites
+ * changed objects and restores obscured screen regions.
+ * Basename ANIM.C is recovered from its own DOS diagnostic; graphics/ is inferred.
+ * DOS: resident code; segment 2662; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ * Steered functions: hanim_SetObjectPos.
+ */
 
 typedef char far * far *Handle;
 

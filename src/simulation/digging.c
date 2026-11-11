@@ -1,4 +1,10 @@
-/* Root module, code frame 14EE: nest holes and tunnel digging. */
+/*
+ * Creates nest entrances and digs or smooths tunnels. It updates both colony maps and fixes
+ * their exit maps after terrain changes.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 14EE; complete original translation unit.
+ * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory.
+ */
 
 extern int far SRand1(int range);
 extern int far SRand8(void);

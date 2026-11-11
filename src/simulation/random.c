@@ -1,15 +1,17 @@
 /*
- * Random numbers (root module, code frame 0093; linear 0x932-0xBA1).
- * Profile: MSC 6.00 /AL /Os /Oe.  /Oe (global register allocation) is required:
- * plain autos land in SI/DI while their unused BP homes remain, which is the
- * frame shape of SGSRand, SeedRRand and RRand.
+ * Provides the simulation random number generators and seed management. It combines an LFSR with
+ * the C runtime generator and timing based seeding.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0093; complete original translation unit.
+ * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Zi.
  *
- * Same translation unit as the Win16 build's SetSRandSeed..SRand256 group
- * (simantw_recon unit simone_1506): an LFSR "S" generator with feedback
- * 0x1BF5 whose state is this module's private seed, and an "R" generator on
- * the C runtime rand().  The DOS module additionally holds three two-draw
- * helpers and a BIOS tick reader.  SRand1..SRand256 are inline assembly in
- * the original (dead "mov dx, 0" and flag-based branch no C form produces).
+ * /Oe leaves unused BP homes for plain autos allocated to SI/DI in SGSRand,
+ * SeedRRand and RRand. The Windows SetSRandSeed..SRand256 order supports
+ * the grouping; the DOS unit adds three two-draw helpers and a BIOS tick reader.
+ * The LFSR uses feedback 0x1BF5 and a private seed; R uses C runtime rand().
+ * SRand1..SRand256 have inline assembly, including dead mov dx,0 and flag
+ * branches for which the C experiments did not produce the original form.
  */
 
 extern unsigned long far TickCount(void);

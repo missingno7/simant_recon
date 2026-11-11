@@ -1,4 +1,11 @@
-/* Root module 25E7: bitmap fonts (Macintosh FONT layout, byte-swapped on load). */
+/*
+ * Loads Macintosh format bitmap fonts and converts their byte order for DOS. It measures strings
+ * and glyphs and builds text images.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 25E7; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Od /Zi.
+ */
 
 typedef struct _iobuf FILE;
 

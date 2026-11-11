@@ -1,4 +1,11 @@
-/* Root module 29D6 (0x29D6A-0x29F0A): note output for two further sound devices (port 205h; chip at 29BF). */
+/*
+ * Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the
+ * register interface in the preceding sound chip module.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 29D6; partial original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 int g_75E8[] = {
     0x1ddd, 0x1c31, 0x1a9c, 0x191b, 0x17b4, 0x165e, 0x151f, 0x13ee,

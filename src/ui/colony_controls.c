@@ -1,4 +1,12 @@
-/* Root module 0798: caste/mode control triangles (Win16 InitTriVars .. initControls unit). */
+/*
+ * Implements caste and activity mode control windows with triangular controls. It maps pointer
+ * positions into control levels and draws the resulting production settings.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0798; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og.
+ * Steered functions: GetTriLatDist.
+ */
 
 struct Rect {
     int left;

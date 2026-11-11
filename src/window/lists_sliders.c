@@ -1,4 +1,12 @@
-/* Root module 23E6: list-box and slider window objects. */
+/*
+ * Implements list box and slider window objects. It calculates elevator geometry, draws controls
+ * and handles list movement and slider events.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 23E6; partial original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ * Functions not yet exact: f_23E6_0000.
+ */
 
 struct Rect {
     int left;

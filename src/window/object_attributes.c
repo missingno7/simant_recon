@@ -1,4 +1,12 @@
-/* Root module 22BF: window object attribute and drawing helpers. */
+/*
+ * Updates window object selection, visibility, formatting and bitmaps. It also draws object
+ * text, bars and proximity menus.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 22BF; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Pt {
     int x;

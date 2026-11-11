@@ -1,13 +1,20 @@
-/* Data-only translation unit (hypothesis): the theme song descriptor, DGROUP _DATA 0064-00B7.
-   Code-less: no code module references this data through its own _DATA segment.
-   * fd_55B3_0064 points at the version stamp (external symbol: S27 relocation #365 is a target
-     group of its own, so the string is another file's).
-   * fd_55B3_00B4 points at the song record of this file (S27 relocation #1049, _DATA segment
-     target; inside the program's _DATA group it follows the entries of the 00B8-1811 object,
-     i.e. this object precedes that one in link order, so they are two files).
-   The record has the layout of struct Song in modules 0000 and 284A (program[14], bank[14],
-   Handle); 284A loads the song resource named by the record's number and copies its
-   program/bank maps; the file name after it is not referenced by code. */
+/*
+ * Defines the theme song descriptor and its program and bank mapping. It also carries the
+ * pointer to the separate version string and the unused MIDI filename text.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident data extension, section 27; segments 55B3:0064. Data contributions are exact;
+ * original translation unit completeness is unproven.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ *
+ * The grouping is a hypothesis: the pointer and song record could be one or
+ * two files. No code module addresses these values through its own _DATA.
+ * fd_55B3_0064 targets another file (S27 relocation #365, external group).
+ * fd_55B3_00B4 targets the local song record; its _DATA relocation #1049
+ * follows the 00B8-1811 object in the descending-address group, establishing
+ * this contribution before that object. Song has program[14], bank[14],
+ * Handle as consumed by 0000/284A; 284A loads its resource and copies the maps.
+ * The following MIDI filename has no code reference.
+ */
 
 typedef char far * far *Handle;
 

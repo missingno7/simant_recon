@@ -1,4 +1,11 @@
-/* Root module 23AE: window lock/unlock layer. */
+/*
+ * Locks and unlocks window resources through nested access. It checks window numbers, discarded
+ * handles and lock depth.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 23AE; partial original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 extern void far Punt(char far *format, ...);
 

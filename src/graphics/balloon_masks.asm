@@ -1,4 +1,11 @@
-; Root module 1699: balloon bitmap helpers (row fill, mask conversion, Tandy mask conversion).
+; Fills balloon bitmap rows and moves text into their masks. It also converts masks for the
+; Tandy representation.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1699; complete original translation unit.
+; Windows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside
+; the six named application groups.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 1699, linear 16990-16B58.
 ; Genuine assembly: 'add bp,6' argument frames, DS loaded with DGROUP inside the procs,
 ; push es; push ds; push si; push di saves (MSC saves DI first, rule ASM-2) and pop bp without

@@ -1,15 +1,20 @@
-/* Data-only translation unit (hypothesis): sound effect instrument tables, DGROUP _DATA
-   00B8-1811 (the object right before module 0000's _DATA at 1812).
-   Evidence: the nine instrument tables (0C42 + 9 x 336) point into this object's own data through
-   _DATA segment fixups (S27 relocations #570-#1048, one ascending run of LEDATA records, descending
-   inside each record), so the MIDI maps, FM patches and samples at 00B8-0A81 are defined here; no
-   code module references any of it through its own segment (277E, 295C, 0000, 2815 and 290D use
-   external symbols and have their _DATA elsewhere), and no module with code links before 0000.
-   Layout of struct Sample (packed, 31 bytes) as in modules 0000/290D; each sample is a separate
-   variable (word-aligned, one pad byte).  FM patch fields as read by 2815 (+0Bh octave shift,
-   +0Dh volume); MIDI map int[3] as read by 295C (key/program, volume offset, transpose).
-   Instrument kinds dispatch through 295C's device tables: 1 DAC (290D), 2 FM (2815),
-   3/4/5 PSG devices (29D6), 6 MIDI melodic, 7 MIDI percussion (295C). */
+/*
+ * Defines sound effect instruments, sample descriptors, FM patches and MIDI mappings. The device
+ * tables select which representation each sound backend uses.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident data extension, section 27; segments 55B3:00B8. Data contributions are exact;
+ * original translation unit completeness is unproven.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ *
+ * The object grouping is inferred from _DATA fixups: nine 336-byte instrument
+ * tables at 0C42 point into the local MIDI maps, FM patches and samples
+ * (00B8-0A81; S27 relocations #570-#1048, ascending records, descending
+ * within a record). It precedes root:0000 _DATA at 1812. Every code reference
+ * is external; no code object links before 0000. Samples use the packed
+ * 31-byte 0000/290D view, word-aligned with one pad byte. OPL2 reads octave
+ * shift at +0B and volume at +0D; MIDI uses key/program, volume, transpose
+ * int[3]. Kinds select 1 DAC, 2 FM, 3/4/5 PSG, 6 MIDI melodic, 7 percussion.
+ */
 
 typedef char far * far *Handle;
 

@@ -1,5 +1,10 @@
-/* Root module 0DEF: red colony initiator ant (Win16 unit MakeRedInitiator,
- * DoRedInitiator, GetNewRedTask, GetRedBestDirs; SIMANT1 segment order). */
+/*
+ * Creates and advances the red colony initiator ant. It selects new tasks and the best
+ * directions for that ant.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0DEF; complete original translation unit.
+ * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
+ */
 
 extern int far RedInitOn;
 extern int far BpopT;

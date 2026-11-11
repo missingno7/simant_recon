@@ -1,17 +1,18 @@
 /*
- * Reviewed candidate for functional SOURCE_ONLY_DOS graphics tables.
+ * Defines bit phase and tail masks for monochrome and packed pixel operations. The values are
+ * expressed as formulas derived from the consumer indexing rules.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS references: resident data extension (section 27), registered frames 55B3. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
  *
- * These three typed near arrays are derived from consumer algorithms, not
- * copied executable bytes and not a historical TU or address-ownership claim.
- * `_g_2100` is source-spelled by two consumers.  The other two names describe
- * the SS-indexed roles at 68AC and 68B4; those physical names/owners are not
- * recovered.  All three are isolated in _DATA and have the bounds implied by
- * their indexes: 8 horizontal phases, 8 one-bit tail residues, 2 packed
- * nibble parities.
- *
- * This candidate remains inadmissible as original storage while indirect
- * writes/aliases are unclosed.  The companion probe checks only test-owned
- * source, OMF layout/fixups and DOS runtime semantics.
+ * The three near arrays derive from consumer algorithms. Only _g_2100 is
+ * source-spelled by its two consumers; the SS-indexed 68AC/68B4 roles have
+ * no recovered physical names or owners. _DATA bounds follow the indexes:
+ * eight horizontal phases, eight one-bit tail residues, two nibble parities.
+ * Indirect writes and aliases remain open; probes establish functional
+ * OMF layout, fixups and DOS semantics, not original storage.
  */
 
 #define PLANE_BIT(phase) \

@@ -1,5 +1,9 @@
-; AdLib (YM3812 / OPL2) register access (root module, code frame 283E;
-; linear 0x283EA-0x284A4).
+; Writes and resets AdLib OPL2 registers. It includes the status port delays and PIT based reset
+; wait.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 283E; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
 ;
 ; Genuine assembly (sound driver library): a register-called far procedure
 ; (snd_opl_write_regs: AH = register, AL = value, DX = index port) with status-port

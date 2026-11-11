@@ -1,4 +1,11 @@
-/* Root module 1F80: text block measuring, centring and delay helpers. */
+/*
+ * Measures and centres text blocks. It also includes delay and fatal text helpers in the same
+ * module.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1F80; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs.
+ */
 
 struct Rect {
     int left;

@@ -1,4 +1,12 @@
-/* Overlay section S05, code frame 35F5: editor tool and ant menus (Win16 ANTEDIT_MODULE run). */
+/*
+ * Handles scent, editing, ant and magnification menus. These menus select tools and change
+ * yellow ant health or black colony warning settings.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 5 (S05); segment 35F5; complete original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Og /Oe.
+ */
 
 struct Rect {
     int left;

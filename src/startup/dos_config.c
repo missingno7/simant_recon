@@ -1,4 +1,11 @@
-/* Overlay section S20, code frame 39F1: IBM start-up (Win16 GR_MODULE IBMInitStuff..ReadConfig). */
+/*
+ * Initializes DOS specific application resources and reads configuration words. It chooses
+ * language and database resources and rejects invalid display mode settings.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 20 (S20); segment 39F1; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.
+ */
 
 struct Pt {
     int x;

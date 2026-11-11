@@ -1,4 +1,11 @@
-/* Root module 29B8 (0x29B80-0x29BF7): sound card DSP reset and detection. */
+/*
+ * Resets and probes the sound card DSP. It waits for the device acknowledgement and reports
+ * whether the probe succeeded.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 29B8; complete original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 int fd_55B3_7564 = 0;
 

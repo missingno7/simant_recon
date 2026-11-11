@@ -1,4 +1,12 @@
-/* Root module 284A: MIDI song player. */
+/*
+ * Loads and advances MIDI songs and their tracks. It decodes timed events and sends notes
+ * through the sound driver channel layer.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 284A; partial original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ * Functions not yet exact: f_284A_0138.
+ */
 
 struct Song {
     int program[14];

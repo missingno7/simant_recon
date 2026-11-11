@@ -1,5 +1,10 @@
-; Display driver S03, module 2: mini-map tables.
-; Overlay section S03, code frame 3253, linear 32538-3258C.
+; Translates small map pixels into packed colour nibbles for the Tandy path. The two functions
+; use adjacent high and low nibble colour tables.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 3 (S03); segment 3253; complete original translation unit.
+; Windows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside
+; the six named application groups.
+; Build profile: masm510; /Mx.
 
 _DATA	segment word public 'DATA'
 ; S03B mini-map xlat tables: byte colours, high nibbles, low nibbles.

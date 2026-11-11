@@ -1,4 +1,9 @@
-; Video adapter identification (overlay section S21, code frame 39C7; linear 39C70-39E48).
+; Probes video adapters and identifies the active display subsystem. It checks BIOS services,
+; CRTC ports and the Tandy ROM signature.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 21 (S21); segment 39C7; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
 ;
 ; Genuine assembly: the routine is R. Wilton's VIDEO_ID probe ("Programmer's Guide to PC &
 ; PS/2 Video Systems", 1987) adapted to SimAnt.  Near procedures are reached through a

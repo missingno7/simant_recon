@@ -1,5 +1,10 @@
-/* Root module 1629: speech balloons (Win16 unit MakeBalloon, ConvertMonoMaskToTandy,
- * ConvertMonoMaskToColor). */
+/*
+ * Constructs speech balloon images from text. It converts their monochrome masks into the colour
+ * formats required by the display modes.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1629; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ */
 
 typedef char far * far *Handle;
 

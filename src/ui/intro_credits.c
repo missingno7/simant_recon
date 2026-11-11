@@ -1,4 +1,11 @@
-/* Overlay section S16, code frame 384C: payoff animation, credits and intro. */
+/*
+ * Displays the intro, credits and simulation payoff animation. The three entries manage these
+ * presentation sequences and their resources.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 16 (S16); segment 384C; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
+ * Steered functions: DrawSimPayoff, AboutDialog, ShowIntro.
+ */
 
 typedef char far * far *Handle;
 

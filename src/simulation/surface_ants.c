@@ -1,7 +1,13 @@
-/* Root module, code frame 0894: ant colony simulation (DoAntSim, A-list ants).
- * MSC 6.00A /AL /Os /Oe /Og.  The set/order of declarations (externs and locals, also of
- * earlier functions) decides commutative operand order under /Og (e.g. tile ^ attribute),
- * so declarations are kept exactly as verified. */
+/*
+ * Runs the main ant simulation and the surface ant list. It advances scent, feeding,
+ * reproduction, foraging, recruitment, combat and nest transitions.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0894; complete original translation unit.
+ * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
+ *
+ * Declaration order and count, including earlier locals, select /Og operand
+ * order (for example tile ^ attribute); retain the verified declarations.
+ */
 
 extern int far SRand1(int range);
 extern int far SRand2(void);

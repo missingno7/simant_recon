@@ -1,6 +1,10 @@
 /*
- * Database file reader with an EMS page cache (root module, code frame 19DC).
- * No direct Win16 counterpart (DOS-only EMS layer).
+ * Reads database files through an EMS page cache. It tracks cached pages and validates handles
+ * before returning record data.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 19DC; complete original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Oeg /Gs /Zi.
  */
 
 typedef struct {

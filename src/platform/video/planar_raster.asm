@@ -1,4 +1,11 @@
-; Display driver S00 (EGA/VGA planar; dispatch table DGROUP:2098), object 1 of code frame 31AD.
+; Implements planar screen drawing, copying and raster operations for the EGA/VGA display path.
+; Its assembly programs the graphics controller and selects raster loops by modifying
+; instructions.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 0 (S00); segment 31AD; complete original translation unit.
+; Windows: GR, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Overlay section S00, code frame 31AD, linear 31AD4-34583.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in

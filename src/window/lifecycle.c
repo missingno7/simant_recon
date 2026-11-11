@@ -1,4 +1,13 @@
-/* Root module 20E8: window loading and window-stack operations. */
+/*
+ * Loads window resources and opens or closes windows. It manages window stacking, swapping and
+ * draw hook installation.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 20E8; partial original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ * Functions not yet exact: f_20E8_0903.
+ */
 
 struct Rect {
     int left;

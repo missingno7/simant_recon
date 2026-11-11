@@ -1,4 +1,10 @@
-/* Overlay section S22, code frame 3BBD: experiment-mode map editor tools (Win16
+/*
+ * Applies experiment mode map editing tools. It digs and fills terrain, adds ants and food,
+ * changes scent, and connects or smooths walls.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 22 (S22); segment 3BBD; complete original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory.
+ *
  * ANTEDIT run processExp..SetSM, same 23 members in the same order).
  * Built /AL /Os /Oe /Og /Zi (like S22:39C7: one code record per function, which
  * the program-wide __aFchkstk relocation order requires).  processExp takes the
@@ -8,7 +14,8 @@
  * fixes its compares.  DropWall/ExpDig walk local copies of their start point
  * (the copies decide the SI/DI assignment).  IncFoodHere keeps the original
  * dangling else.  The one-line "} else v++;" puts the 52-line-entry record break
- * inside ConnectAll where the original has it. */
+ * inside ConnectAll where the original has it.
+ */
 
 struct Pt {
     int x;

@@ -1,4 +1,11 @@
-/* Root module 1B28: mouse cursor shapes (cursor image/mask objects from the database). */
+/*
+ * Loads mouse cursor pictures and masks from the resource database. It installs or changes the
+ * selected cursor shape.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1B28; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs.
+ */
 
 typedef char far * far *Handle;
 

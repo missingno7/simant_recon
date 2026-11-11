@@ -1,4 +1,10 @@
-; Root module 16B5: line drawing (Bresenham) with per-mode near plot procedures.
+; Draws clipped lines using Bresenham stepping. It dispatches to bitmap plot routines for each
+; display format.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 16B5; complete original translation unit.
+; Windows: unknown; no confirmed function pair identifies a symbol group.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 16B5, linear 16B58-171C2.
 ; Genuine assembly: 'add bp,6' argument frames, near plot/init procedures dispatched through DGROUP
 ; tables of near code offsets (call word ptr [bx+table]), a shared clip subroutine returning in the

@@ -1,6 +1,10 @@
 /*
- * Database file layer (root module, code frame 1A28).
- * Win16 counterpart: OpenDB / DosPunt (simtwo).
+ * Opens and closes the database data files and manages file handles. It also formats DOS file
+ * errors for the application.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1A28; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oeg /Gs /Zi.
  */
 
 typedef struct {

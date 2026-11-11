@@ -1,4 +1,10 @@
-; Root module 1B4E: video BIOS and bitmap/text entry points (pen colour byte, palette, text draw, mode set).
+; Provides video BIOS operations and low level bitmap and text entry points. It includes palette
+; and pen colour handling and accented character folding for the small font.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1B4E; complete original translation unit.
+; Windows: GR, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 1B4E, linear 1B4EC-1B736.
 ; Genuine assembly: frameless register procs (xchg/stosw loops, rep movsw with DS swapped through ES),
 ; video BIOS int 10h wrappers, a fold table in the code segment read with cs:, push si; push di and

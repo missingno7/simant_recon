@@ -1,4 +1,9 @@
-; Memory hook thunks (root, code frame 2CFB; linear 0x2CFB2-0x2CFE4).
+; Provides ten far jump entries into the memory manager. The database reader calls these hook
+; addresses instead of the underlying allocation functions.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 2CFB; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
 ;
 ; Ten far jumps into the memory manager (module 171C), placed after the
 ; runtime's EMULATOR_TEXT (2CFB:0000-0001).  The database modules 19A9/19DC
@@ -7,7 +12,7 @@
 ; prologue or at least retf after the body), and each entry is exactly the
 ; 5-byte EA instruction.
 
-                extrn   _Ralloc:far
+extrn   _Ralloc:far
                 extrn   _RallocFree:far
                 extrn   _RallocFreshen:far
                 extrn   _mem_handle_age_delta:far

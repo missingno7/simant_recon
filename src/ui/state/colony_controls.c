@@ -1,8 +1,16 @@
 /*
- * Functional source-only owner candidate for the control state used by root:0798.
- * This is a scratch source for ownership and OMF/runtime probes; it does not
- * claim a historical object boundary, address, segment order, or initial bytes.
+ * Defines mode and caste control levels and triangle geometry. The control window initializer
+ * and drawing handlers use the dimensions, points and knob size.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS references: resident data extension (section 27), registered frames 50F6. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
+ *
+ * The functional ownership and OMF/runtime probes do not establish an
+ * original object boundary, address, segment order or initial bytes.
  */
+
 struct TriLevel {
     unsigned frac;
     unsigned mid;

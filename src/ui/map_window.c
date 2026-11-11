@@ -1,4 +1,12 @@
-/* Overlay section S12, code frame 384C: map window (map functions, map image generation). */
+/*
+ * Handles map window events, view setup and map image generation. It draws map data and keeps
+ * the view cursor aligned with the selected location.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 12 (S12); segment 384C; partial original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Functions not yet exact: DrawMapCursor.
+ */
 
 #include <string.h>
 

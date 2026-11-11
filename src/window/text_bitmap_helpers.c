@@ -1,6 +1,14 @@
-/* Root module 208F: window-object text and bitmap helpers, resource loading, delays.
-   Built without /Zi: the cross-function relocation order forbids per-function record
-   breaks (e.g. none between 0x0074 and 0x0245); /Zd is equally consistent. */
+/*
+ * Provides window object text and bitmap helpers and resource loading. The file also includes
+ * delays and display format sizing helpers.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 208F; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs.
+ *
+ * Built without /Zi: the cross-function relocation order forbids per-function record
+ *    breaks (e.g. none between 0x0074 and 0x0245); /Zd is equally consistent.
+ */
 
 struct Rect {
     int left;

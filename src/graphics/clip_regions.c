@@ -1,4 +1,12 @@
-/* Root module 1E57: window clip regions (clip lists, clip stack). */
+/*
+ * Maintains window clip regions and their rectangle lists. It implements include, exclude and
+ * push or pop operations on the clip stack.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1E57; partial original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 typedef char far * far *Handle;
 

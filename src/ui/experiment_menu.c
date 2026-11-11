@@ -1,4 +1,10 @@
-/* Overlay section S05, code frame 3663: expansion tool menu (Win16 DoExpMenu). */
+/*
+ * Implements the experiment tool menu. Its single function tracks submenu state and returns the
+ * selected editing tool.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 5 (S05); segment 3663; complete original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory.
+ */
 
 struct Rect {
     int left;

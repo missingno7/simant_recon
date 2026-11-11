@@ -1,4 +1,10 @@
-; Display driver S01 (dispatch table DGROUP:211A, 25 entries): screen, blit and raster-op procs.
+; Supplies screen, bitmap and raster operations for the monochrome display paths. Mode setup
+; includes Hercules CRTC programming and the shared monochrome driver dispatch table.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 1 (S01); segment 3126; complete original translation unit.
+; Windows: GR, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Overlay section S01, code frame 3126, linear 31260-328EA.
 ; Genuine assembly, reproduced byte for byte by MASM 5.10.  Evidence against compiler output:
 ; framed procs save "push si; push di" (MSC always saves DI first, probe ASM-2 in

@@ -1,4 +1,10 @@
-; Root module 194D: paragraph-stepping block copy, Tandy video memory probe, 386 dword checksum.
+; Copies large blocks while stepping through segment paragraphs. The same assembly file also
+; probes Tandy video memory and computes a checksum using 386 instructions.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 194D; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 194D, linear 194D6-19591.
 ; Genuine assembly: 'and ax,ax'/'and dx,dx' tests (MSC emits or r,r), rep movsw with manual
 ; segment stepping, rep stosw/repe scasw video probe, 386 instructions (xor edx,edx; lodsd;

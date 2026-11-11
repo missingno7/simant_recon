@@ -1,4 +1,12 @@
-/* Root module 1FD2: menu bar, menu item states, timers and small input helpers. */
+/*
+ * Provides menu bar and menu item state helpers. It also contains timers, mouse position and
+ * button tracking functions used by the interface.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1FD2; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory. Some pairs are HIGH
+ * confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Rect {
     int left;

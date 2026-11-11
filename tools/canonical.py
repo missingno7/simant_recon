@@ -196,6 +196,18 @@ def check_semantic_review(row: dict, text: str) -> dict:
     return review
 
 
+def preserve_module_annotations(record: dict, previous: dict | None) -> None:
+    """Retain omitted annotations when a writer rebuilds a module record.
+
+    Copy only existing evidence; absent fields remain absent. A reviewed plan
+    can explicitly replace an annotation without this helper reverting it.
+    """
+    for field in ('source_name_kind', 'source_path_history', 'name_kind',
+                  'windows_group', 'summary', 'file_header'):
+        if field not in record and previous is not None and field in previous:
+            record[field] = copy.deepcopy(previous[field])
+
+
 def exact_inventory(program: dict, key: str, module: dict, raw: bytes,
                     previous: dict | None, *, source: str,
                     exact_claims: frozenset = frozenset()) -> dict:
@@ -321,6 +333,8 @@ def publish(plan_path: Path, verify_only: bool) -> int:
         old_modules = {m['key']: m for m in previous['modules']}
         if old_modules.keys() - {m['key'] for m in plan['program']['modules']}:
             raise ValueError('canonical publication cannot silently drop live modules')
+        for item in plan['program']['modules']:
+            preserve_module_annotations(item, old_modules.get(item['key']))
         for item in plan['files']:
             old = old_modules.get(item['key'])
             if old and (item['source'] != old['source'] or item.get('prior_sha256') != old['source_sha256']):

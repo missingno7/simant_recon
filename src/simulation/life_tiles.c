@@ -1,4 +1,12 @@
-/* root:10F7 draft: recovered prefix */
+/*
+ * Queries and updates life and terrain at map locations. It also implements the yellow ant
+ * interactions for carrying, eating, dropping, targeting and exchanging objects or lives.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 10F7; complete original translation unit.
+ * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ */
+
 extern signed char far Dx8[];
 extern signed char far Dy8[];
 extern unsigned char far LifeA[128][64];

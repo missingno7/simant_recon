@@ -1,4 +1,9 @@
-/* Overlay section S14, code frame 384C: score, scenario and picture dialogs.
+/*
+ * Displays scenario, score, end game, help and picture dialogs. The file also computes the score
+ * and draws caste and spider popups.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 14 (S14); segment 384C; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  *
  * Source-form evidence (worker resF):
  *  - Every font choice is written `if (g_3DB2 == 320) font_SetFont(a); else font_SetFont(b);`
@@ -10,7 +15,7 @@
  *    parameters. The forward prototypes of CalcScore/DoWinHelp/SetDefaultWindPrompt/
  *    PictStrnDialog are named (+6, CalcScore operand order), g_9134's and PictureDialog's forward
  *    declaration are unnamed (-5 before DrawCastePopUp, -4 before PictureDialog).
- *    CalcScore scopes its history index separately from the later matrix index; f_00F8_02F7 has an unnamed real prototype parameter.
+ *    CalcScore scopes its history index separately from the later matrix index; DialogWaitInit has an unnamed real prototype parameter.
  *    Alternative scopes and prototype-name removals also match; these forms are inferred.
  */
 

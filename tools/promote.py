@@ -439,9 +439,9 @@ def main() -> int:
             raise SystemExit(f"{key}: " + "; ".join(modmod.source_origin_reasons(origin_src, lang))
                              + " (--source-origin)")
         module["source_origin"] = origin_src
-        for field in ('source_name_kind', 'source_path_history'):
-            if mod and field in mod:
-                module[field] = mod[field]
+        # Source annotations describe the existing module; promoting a new
+        # exact source revision must not discard their naming/evidence ledger.
+        canonical.preserve_module_annotations(module, mod)
         if layout_notes:
             module["layout_inferred"] = layout_notes
         if data_only_key:

@@ -1,12 +1,18 @@
-; Root module 1B05: LZSS decompression (4096-byte ring buffer) from memory or from a file.
+; Decompresses LZSS data from memory or a file. Its decoder preserves state between calls and
+; uses a 4096 byte sliding window.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1B05; complete original translation unit.
+; Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 1B05, linear 1B058-1B285.
 ; Genuine assembly: a decoder state machine that resumes mid-token (State), DGROUP variables
 ; addressed with ss: while DS points at the input, DS switched between input and ring buffer inside
 ; the loop, xchg bx,cx ring copying, "and ax,ax" tests and "mov ax,0" (MSC emits or r,r / sub r,r),
 ; BP frames without stack check and 'pop bp' without 'mov sp,bp' (rule ASM-1).
-
 ; LZSS ring buffer: N + F - 1 = 4096 + 18 - 1 bytes (N = 4096 ring, F = 18 lookahead); the
 ; decoder fills 0FEEh (N - F) bytes with spaces and masks positions with 0FFFh (N - 1).
+
 LZSS_DATA	segment para public 'FAR_DATA'
 _fd_4F6F_0000	db	4096 + 18 - 1 dup (0)
 LZSS_DATA	ends

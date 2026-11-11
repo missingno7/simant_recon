@@ -1,4 +1,10 @@
-; Root module 2650: bit-aligned glyph blit (OR) between far bitmaps, byte-buffer clear.
+; Blits bit aligned glyphs between far bitmaps using OR operations. It also clears the
+; destination byte buffer.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 2650; complete original translation unit.
+; Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 2650, linear 26506-26627.
 ; Genuine assembly: 'add bp,6' argument frames, BP reused as a loop counter, lodsw/xchg/shl/shr
 ; bit shifting with xchg ch,cl, xlat, rep stosw with 'adc di,-1' odd-byte fix, a mask table in the

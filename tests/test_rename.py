@@ -814,6 +814,74 @@ class TransactionControls(unittest.TestCase):
         self.assertEqual(record['source_path_history'][0]['why'], 'inferred unit')
         self.assertFalse((self.root / self.source).exists())
 
+    def test_later_promotion_preserves_header_annotations_in_both_ledgers(self):
+        code, output = self.run_batch([self.header_row()])
+        self.assertEqual(code, 0, output)
+        annotations = {field: self.read('layout/manifest.json')['modules'][self.key][field]
+                       for field in ('windows_group', 'summary', 'file_header')}
+        # Some module records use name_kind in addition to source_name_kind.
+        # Preserve either spelling without inventing one for other records.
+        annotations.update(name_kind='descriptive', source_name_kind='descriptive')
+        man = self.read('layout/manifest.json')
+        man['modules'][self.key].update(copy.deepcopy(annotations))
+        program = self.read('src/program.json')
+        program['modules'][0].update(copy.deepcopy(annotations))
+        self.write('layout/manifest.json', json.dumps(man))
+        self.write('src/program.json', json.dumps(program))
+        prior_program = copy.deepcopy(program)
+        candidate = self.root / 'draft.c'
+        candidate.write_bytes((self.root / self.source).read_bytes() + b'/* later revision */\n')
+        with patch.multiple(promote, ROOT=self.root, JOURNAL=self.root / 'evidence/promotions.jsonl'), \
+                patch.object(modules, 'MANIFEST', self.root / 'layout/manifest.json'), \
+                patch.object(promote.exemod, 'load', return_value=object()), \
+                patch.object(sys, 'argv', ['promote.py', str(candidate), '--module', self.key]), \
+                r.binding(self.syms), redirect_stdout(io.StringIO()):
+            self.assertEqual(promote.main(), 0)
+        for record in (self.read('layout/manifest.json')['modules'][self.key],
+                       self.read('src/program.json')['modules'][0]):
+            for field, value in annotations.items():
+                self.assertEqual(record.get(field), value, field)
+            self.assertEqual(record['source_sha256'], canonical.sha(candidate.read_bytes()))
+        self.assertEqual(program, prior_program)
+
+    def test_canonical_plan_preserves_omitted_annotations_before_unchanged_module_check(self):
+        annotations = {'windows_group': 'SIMONE', 'summary': 'Invented module.',
+                       'name_kind': 'descriptive', 'file_header': {'text': 'Invented header.'}}
+        self.program['modules'][0].update(copy.deepcopy(annotations))
+        self.persist()
+        plan = {'program': copy.deepcopy(self.program), 'files': [],
+                'prior_program_sha256': canonical.sha((self.root / 'src/program.json').read_bytes()),
+                'prior_manifest_sha256': canonical.sha((self.root / 'layout/manifest.json').read_bytes())}
+        for field in annotations:
+            del plan['program']['modules'][0][field]
+        path = self.root / 'plan.json'
+        self.write('plan.json', json.dumps(plan))
+        before = self.snapshot()
+        def reviewed(program, *args):
+            for field, value in annotations.items():
+                self.assertEqual(program['modules'][0][field], value)
+            raise RuntimeError('reached semantic review')
+        with patch.object(modules, 'MANIFEST', self.root / 'layout/manifest.json'), \
+                patch.object(canonical, 'check_semantic_publication', side_effect=reviewed):
+            with self.assertRaisesRegex(RuntimeError, 'reached semantic review'):
+                canonical.publish(path, True)
+            plan['program']['modules'][0]['flags'] = ['/invented']
+            self.write('plan.json', json.dumps(plan))
+            with self.assertRaisesRegex(ValueError, 'omitted module differs'):
+                canonical.publish(path, True)
+        self.assertEqual(before, self.snapshot())
+
+    def test_annotation_preservation_copies_evidence_without_inventing_or_overwriting_it(self):
+        before = {'summary': 'Prior summary.', 'file_header': {'text': 'Prior header.'}}
+        after = {'summary': 'Explicit revised summary.'}
+        canonical.preserve_module_annotations(after, before)
+        self.assertEqual(after, {'summary': 'Explicit revised summary.', 'file_header': {'text': 'Prior header.'}})
+        after['file_header']['text'] = 'Revised nested evidence.'
+        self.assertEqual(before['file_header']['text'], 'Prior header.')
+        empty = {}
+        canonical.preserve_module_annotations(empty, None)
+        self.assertEqual(empty, {})
+
     def test_proof_compiler_basename_and_live_segments_ignore_source_path(self):
         cases = [('c', 'msc600ax', ['/AL', '/Os'],
                   'unsigned char far sample[2] = {1,2};\nint far sample_func(void) { return 3; }\n'),

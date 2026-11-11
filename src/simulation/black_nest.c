@@ -1,8 +1,15 @@
-/* Overlay section S25, code frame 39C7: black colony nest simulation (DoAntSimB unit).
+/*
+ * Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding,
+ * digging, eggs, the queen and recruitment.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 25 (S25); segment 39C7; complete original translation unit.
+ * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600a; /AL /Os /Oe /Og /Zi.
+ *
  * Built /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function
  * relocation-order constraints are violated, under /Zi none.  Line layout: the seven
  * "map = list = value" stores are written as two statements (the file's own style, e.g.
- * "BlistT[..] = ..; fd_3E1D_8180[x][y] = BlistT[..];"); byte-identical either way, but the
+ * "BlistT[..] = ..; LifeB[x][y] = BlistT[..];"); byte-identical either way, but the
  * extra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis
  * call, as its within-group relocation order requires (FORBID (0CDC,0D54]).
  * Worker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds
@@ -14,7 +21,8 @@
  * "if (DigTileThemB(..)) {..} else {..; return;}" like its red twin DoDigInR (root:0F3F); the
  * negated early-return form compiles to the same instructions except that dir then loses DI
  * in the first region (allocation: the if/else form puts the GetEnterDirB result in DI and
- * spills it to [bp-4] after the y == 0x3f test, as the original does). */
+ * spills it to [bp-4] after the y == 0x3f test, as the original does).
+ */
 
 extern int far ListIndexB;
 extern int far fd_50F6_0F18;

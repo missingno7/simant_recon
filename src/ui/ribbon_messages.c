@@ -1,4 +1,10 @@
-/* Root module 15D9: centred ribbon text and the ribbon/yard message setter (Win16 EditMessage). */
+/*
+ * Draws centred ribbon text and sets game messages. It forwards the selected message to the
+ * ribbon or yard display with its duration.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 15D9; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
+ */
 
 struct Rect {
     int left;

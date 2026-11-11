@@ -1,5 +1,14 @@
-/* Data-only translation unit (hypothesis): colony maps and ant lists.  MSC 6 closes the
- * far data segment at 0xF89F bytes and opens a second one for PherMapRT (frame 4DA7). */
+/*
+ * Defines the large colony maps, life and pheromone arrays and ant lists, along with a saved
+ * game header string. The compiler emits two far data segments from this one file.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident data extension, section 27; segments 3E1D:0000, 4DA7:0000. Data contributions
+ * are exact; original translation unit completeness is unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ *
+ * The data-only file grouping is a hypothesis. MSC closes the first far data
+ * segment at 0xF89F bytes and opens frame 4DA7 for PherMapRT (FARSEG-1).
+ */
 
 unsigned char far fd_3E1D_0000[384] = { 0 };
 unsigned char far MapA[8192] = { 0 };

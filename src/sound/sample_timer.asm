@@ -1,5 +1,10 @@
-; Sample-playback timer interrupt handler (root module, code frame 28BC;
-; linear 0x28BC0-0x290DD) and its DGROUP data (55B3:693E-74C0).
+; Mixes sampled sound channels in the timer interrupt and sends the result to the selected
+; output device. It also schedules the MIDI sequencer on a private stack and chains the old
+; timer vector.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 28BC; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
 ;
 ; Genuine assembly (sound driver library).  The INT 8 handlers mix up to four
 ; 8-bit sample channels through per-channel volume tables (xlat) and send the

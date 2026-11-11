@@ -1,5 +1,9 @@
-; Display driver S03, module 3: colour-translated sprite and tile blits.
-; Overlay section S03, code frame 3258, linear 3258C-33D33.
+; Blits colour translated sprites and tiles for the Tandy display path. Four tables in its code
+; segment supply pixel translation and transparency masks.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: overlay section 3 (S03); segment 3258; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
 
 _DATA	segment word public 'DATA'
 	extrn	_g_3D20:byte

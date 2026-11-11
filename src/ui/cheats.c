@@ -1,4 +1,10 @@
-/* Overlay section S07, code frame 35F5: cheat key handler. */
+/*
+ * Handles cheat key commands. The handler changes game state and reports the selected cheat
+ * number.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 7 (S07); segment 35F5; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ */
 
 extern int far fd_3D57_06DE;
 extern char far fd_50F6_0B0A[];

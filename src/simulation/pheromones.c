@@ -1,4 +1,11 @@
-/* Root module, code frame 1496: pheromone maps (nest holes, colony smell decay, alarm). */
+/*
+ * Updates colony scent and alarm maps. It fills nest holes in the scent representation, smooths
+ * alarms and decays pheromone levels.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1496; complete original translation unit.
+ * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ */
 
 extern unsigned char far HoleMapB[];
 extern unsigned char far MapA[128][64];

@@ -1,4 +1,11 @@
-/* Overlay section S20, code frame 39C7: display driver font loaders and empty hooks. */
+/*
+ * Loads the fonts required by the display modes and provides empty driver hooks. The graphics
+ * selector chooses these setup functions along with the raster driver.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 20 (S20); segment 39C7; complete original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.
+ */
 
 void far o20_39C7_0000(void)
 {

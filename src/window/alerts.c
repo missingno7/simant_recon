@@ -1,4 +1,12 @@
-/* Root module 1C62: fatal error, alert and question boxes. */
+/*
+ * Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors
+ * and timed waits for these dialogs.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1C62; partial original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zd.
+ * Functions not yet exact: ui_choice_prompt.
+ */
 
 struct Rect {
     int left;

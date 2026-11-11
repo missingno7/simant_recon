@@ -1,4 +1,12 @@
-/* Module at root frame 0250 (large-model code segment). */
+/*
+ * Draws and updates the detailed ant view, including tiles, the spider, speech balloons and
+ * graphs. It also contains tile loading, EMS tile cache setup and editor event handling.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0250; partial original translation unit.
+ * Windows: mixed (ANTEDIT, _TEXT), from recorded function pairs.
+ * Functions not yet exact: DoCalcTile, DrawBalloons.
+ * Steered functions: f_0250_129E.
+ */
 
 struct Event {
     int what;

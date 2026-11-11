@@ -1,3 +1,10 @@
+; Implements DOS mouse, keyboard and timer services. It owns the input queues, hot boxes, cursor
+; save buffer and interrupt handlers.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 1B73; complete original translation unit.
+; Windows: GR, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Mouse, keyboard and timer services: INT 33h mouse driver interface, mouse event
 ; queue, hot-box (screen region) lists, cursor drawing, and the INT 08h / INT 09h /
 ; INT 15h(4Fh) handlers.  Root module, code frame 1B73, linear 1B736-1C62B

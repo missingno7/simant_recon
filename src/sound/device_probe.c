@@ -1,4 +1,12 @@
-/* Root module 293A (0x293A6-0x295CA): sound device detection. */
+/*
+ * Probes available sound devices. It performs port tests and selects the hardware capabilities
+ * reported to the sound layer.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 293A; complete original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ * Steered functions: f_293A_017F.
+ */
 
 int far f_293A_0029(void);
 int far f_293A_002D(void);

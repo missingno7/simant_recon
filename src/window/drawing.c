@@ -1,4 +1,12 @@
-/* Root module 21FA: DOS window-object drawing (partial). */
+/*
+ * Draws window frames, titles and objects. It includes colour selection, string justification
+ * and button border helpers.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 21FA; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Rect {
     int left;

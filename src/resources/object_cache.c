@@ -1,7 +1,13 @@
 /*
- * Object cache table (root module, code frame 1A96).
- * Win16 counterpart: unit simtwo_8F46 (ch_* functions).
- * A cache table is a DOS memory handle (far pointer to a far master pointer).
+ * Maintains the resource object cache lookup table. It adds, finds, removes and ages entries and
+ * invokes cache hooks.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1A96; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oeg /Gs /Zi.
+ *
+ * A cache table handle is a far pointer to a far master pointer.
  */
 
 #include <string.h>

@@ -1,4 +1,10 @@
-/* Root module 078E: pointer allocation helpers (memory-manager handles dereferenced). */
+/*
+ * Allocates and frees pointer style storage using memory manager handles. It dereferences the
+ * master pointer and rejects allocations that exceed its pointer size limit.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 078E; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ */
 
 typedef char far * far *Handle;
 

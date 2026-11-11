@@ -1,9 +1,17 @@
 /*
- * Typed SOURCE_ONLY_DOS candidate for the five Ralloc DGROUP objects.
- * This translation unit owns only these five uninitialized objects. Their
- * definitions follow the independently pinned source and storage controls in
- * ../memory-state-probe.py. It makes no historical placement or TU-order claim.
+ * Defines the Ralloc manager counters and near pointers to its block lists. The Block type
+ * records the header view used by the allocator.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS references: resident data extension (section 27), registered frames 55B3. Source-owned
+ * storage; original placement, owning file and completeness are unproven.
+ * Windows: unknown; this storage file has no functions to pair.
+ * Build profile: msc600ax; /AL /Os /Gs.
+ *
+ * These are five uninitialized DGROUP objects; the Block type is a view.
+ * Their source and storage controls do not establish original placement or
+ * translation-unit order. The former relative probe path belonged to scratch.
  */
+
 typedef struct Block {
     int handle;
     long size;

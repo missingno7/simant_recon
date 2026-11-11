@@ -1,4 +1,10 @@
-; EMS (LIM 4.0) interface: INT 67h wrappers, EMM detection and page-frame setup.
+; Wraps LIM EMS services for allocating, mapping and naming expanded memory pages. It detects
+; the memory manager and establishes the page frame.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 195A; complete original translation unit.
+; Windows: none (DOS only), based on the platform-specific code or DOS release data.
+; Build profile: masm510; /Mx.
+;
 ; Root module, code frame 195A, linear 195AC-19862 (LINK fill 00 at 19863).
 ;
 ; Genuine assembly.  MSC 6.00(AX) cannot produce this object: most procedures are

@@ -1,8 +1,10 @@
 /*
- * Overlay section S18, code frame 384C: house and yard map patches.
- * Same translation unit as the Win16 SIMONE_MODULE run MakeMap..AddRock3
- * (23 members, same order).  MakeMap picks the patch from the map cell;
- * cells above 37 get the random yard, the others one of the house floors.
+ * Builds house and yard patches from map cells. It lays out floors, household fixtures, rocks
+ * and yard terrain.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 18 (S18); segment 384C; complete original translation unit.
+ * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
  */
 
 extern int far TERRAINset;

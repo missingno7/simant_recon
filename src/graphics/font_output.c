@@ -1,5 +1,11 @@
-/* Root module 24AB: current-font text output (Win16 unit font_SetFont,
- * font_InitFonts, font_PrintStr; GR segment). */
+/*
+ * Selects the current font and prints strings with it. It initializes the display fonts and
+ * manages their output buffer.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 24AB; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 typedef char far * far *Handle;
 

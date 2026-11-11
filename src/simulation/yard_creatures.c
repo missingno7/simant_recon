@@ -1,4 +1,10 @@
-/* Root module, code frame 0AD9: sowing, ant lions and the pill bug (pillar). */
+/*
+ * Updates the moving surface creatures tracked by the Sow arrays, ant lions and the pill bug. It
+ * maintains creature lists, movement and the pill bug tile map.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0AD9; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ */
 
 extern int far SRand1(int range);
 extern unsigned char far MapA[128][64];

@@ -1,4 +1,11 @@
-/* Overlay section S09, code frame 35F5: saved games (LoadGame, SaveGame, FileSelect). */
+/*
+ * Reads and writes saved games and presents the DOS file selector. It contains the 307 record
+ * save schema and the initializations needed after loading.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 9 (S09); segment 35F5; complete original translation unit.
+ * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory.
+ * Steered functions: o09_35F5_03C6.
+ */
 
 #include <stdio.h>
 #include <stdlib.h>

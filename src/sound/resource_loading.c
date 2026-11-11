@@ -1,5 +1,11 @@
-/* Root module 0000: sampled-sound and song resources (database load hook that
- * unpacks DAC samples, sample free list, song loading and release). */
+/*
+ * Loads song resources and decompresses sampled sounds through a database hook. It also manages
+ * the sample free list and releases sound resources.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0000; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 typedef char far * far *Handle;
 

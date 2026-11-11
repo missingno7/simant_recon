@@ -1,4 +1,11 @@
-/* Overlay section S08, code frame 35F5: world generation (RandWorld unit). */
+/*
+ * Initializes simulation variables and generates the yard, maps, nests and starting ants. It
+ * also constructs the tutorial starting world.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 8 (S08); segment 35F5; partial original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ * Steered functions: RandWorld.
+ */
 
 extern int far GameSpeed;
 int far MeWarnHealth;

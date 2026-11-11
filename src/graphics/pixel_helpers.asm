@@ -1,4 +1,10 @@
-; Root module 24FA: byte search, 2-bit to 8-bit pixel expansion, byte inversion, breakpoint stub.
+; Searches bytes, expands packed two bit pixels and inverts bytes. It also contains a breakpoint
+; stub.
+; File name and folder are ours, inferred from the DOS routines or storage defined here.
+; DOS: resident code; segment 24FA; complete original translation unit.
+; Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+; Build profile: masm510; /Mx.
+;
 ; Root code frame 24FA, linear 24FA4-25056.
 ; Genuine assembly: std/repne scasb/cld, a 4-byte xlat table in the code segment read with cs:,
 ; frameless-epilogue procs (pop bp without mov sp,bp) and push si; push di saves (rule ASM-2).

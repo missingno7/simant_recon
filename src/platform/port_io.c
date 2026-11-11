@@ -1,6 +1,12 @@
 /*
- * Port and interrupt-flag helpers (root module, code frame 29F0; linear 0x29F0A-0x29F4C).
- * C functions whose bodies are MSC inline assembly.
+ * Provides byte port input and output helpers. It also wraps interrupt flag save, disable and
+ * restore operations using MSC inline assembly.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 29F0; complete original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Gs /Zi.
+ *
+ * The C function bodies use MSC inline assembly.
  */
 
 void far f_29F0_000A(void)

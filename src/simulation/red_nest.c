@@ -1,5 +1,10 @@
-/* Root module, code frame 0F3F: red colony nest ants (DoAntSimR, R-list ants).
- * MSC 6.00AX /AL /Os /Oe /Og /Zi. */
+/*
+ * Advances ants in the red colony nest. It handles nest movement, fights, food, eggs, the queen,
+ * tail following and digging.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 0F3F; complete original translation unit.
+ * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
+ */
 
 extern int far Tindex;
 extern int far ListIndexR;

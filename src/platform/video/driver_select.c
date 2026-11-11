@@ -1,4 +1,11 @@
-/* Root module 205F: graphics adapter detection and display driver selection. */
+/*
+ * Identifies the graphics adapter and selects its display and resource drivers. It installs the
+ * screen and sprite callback tables for the chosen mode.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 205F; complete original translation unit.
+ * Windows: none (DOS only), based on the platform-specific code or DOS release data.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ */
 
 struct Rect {
     int left;

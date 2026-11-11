@@ -1,4 +1,10 @@
-/* Overlay section S09, code frame 36EE: text entry field helpers. */
+/*
+ * Draws and edits a text entry field. It converts character cell positions into pixels and
+ * handles acceptance or cancellation.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 9 (S09); segment 36EE; complete original translation unit.
+ * Windows: unknown; no confirmed function pair identifies a symbol group.
+ */
 
 extern char near fontWidth;
 extern char near g_3DDC;

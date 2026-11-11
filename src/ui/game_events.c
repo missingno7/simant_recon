@@ -1,5 +1,10 @@
-/* Overlay section S19, code frame 384C: the main event pump, key commands and the
- * debug memory report. */
+/*
+ * Runs the main game event dispatcher and keyboard command handling. The same file provides a
+ * debug memory report.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 19 (S19); segment 384C; complete original translation unit.
+ * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
+ */
 
 struct Event {
     int what;

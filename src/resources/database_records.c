@@ -1,9 +1,15 @@
 /*
- * Database record reader (root module, code frame 19A9; the object starts at 19A9:0008).
- * The three empty functions at 19A95-19A97 end the index module 1986 (CODEALIGN-1:
- * an MSC code segment is WORD aligned, so this object cannot start at the odd 19A95).
- * Win16 counterpart: DBRecall.  The DOS game opens the database read-only:
- * add/delete/pack are stubs that Punt.
+ * Reads database records and decompresses their contents when required. Add, delete and pack
+ * operations reject writes in this read-only build.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 19A9; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
+ * HIGH confidence, not confirmed.
+ * Build profile: msc600ax; /AL /Os /Oeg /Gs /Zi.
+ *
+ * The object starts at 19A9:0008. Empty entries at 19A95-19A97 finish the
+ * index module: WORD alignment excludes an object start at odd 19A95
+ * (CODEALIGN-1). DOS add/delete/pack paths call Punt in this read-only build.
  */
 
 typedef struct {

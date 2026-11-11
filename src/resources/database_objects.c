@@ -1,6 +1,11 @@
 /*
- * Object database front end (root module, code frame 1A53).
- * Win16 counterpart: unit simtwo_8176 (db_Exists .. db_CloseDataBase).
+ * Provides the database object loading and lifetime API. It selects databases and connects
+ * object handles to the cache, including purge, release and unhook operations.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1A53; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oeg /Gs /Zi.
+ *
  * DOS memory handles are far pointers.
  */
 

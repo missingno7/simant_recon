@@ -1,5 +1,12 @@
-/* Root module 004A: map view scrolling (view origin MapPnt clamped to
- * 0..hScrollMax/0F38) and per-plane view centre bookkeeping. */
+/*
+ * Scrolls the map view and clamps its origin to the view limits. It remembers the centre
+ * separately for each map plane.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 004A; complete original translation unit.
+ * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ *
+ * MapPnt is clamped to 0..hScrollMax/0F38; view centres are remembered per plane.
+ */
 
 typedef struct {
     int x;

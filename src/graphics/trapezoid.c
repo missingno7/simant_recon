@@ -1,7 +1,15 @@
-/* Root module 1FAA: fill a quadrilateral scanline by scanline (16.16 fixed-point edges).
+/*
+ * Fills a quadrilateral one scanline at a time. Its edges advance using 16.16 fixed point
+ * arithmetic.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: resident code; segment 1FAA; complete original translation unit.
+ * Windows: GR, from recorded function pairs in the Windows symbol inventory.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ *
  * The local copy `p = q` is what makes /Og load the far pointer with a split
  * `mov di,[bp+6]; mov es,[bp+8]` (and spill it to a temp) instead of `les di,[bp+6]`;
- * `top` doubles as the scanline counter (no separate y: frame 0x22). */
+ * `top` doubles as the scanline counter (no separate y: frame 0x22).
+ */
 
 struct Pt {
     int x;

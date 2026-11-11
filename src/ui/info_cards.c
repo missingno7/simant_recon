@@ -1,4 +1,12 @@
-/* Overlay section S23, code frame 39C7: info window and card display. */
+/*
+ * Displays the information window and card resources with styled text. It also contains byte
+ * order conversion helpers used when reading those resources.
+ * File name and folder are ours, inferred from the DOS routines or storage defined here.
+ * DOS: overlay section 23 (S23); segment 39C7; partial original translation unit.
+ * Windows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside
+ * the six named application groups.
+ * Functions not yet exact: DisplayCard.
+ */
 
 int g_2E04[16] = { 0 };
 int g_2E24 = 0;
