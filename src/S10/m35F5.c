@@ -173,8 +173,8 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
 {
     int j;
     int t;
+    int mode;
     int key;
-    int old;
     int cur;
     char far *p;
     int nItems;
@@ -187,7 +187,6 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     struct Pt pt;
     struct Rect r;
     struct Rect saveR;
-    int k;
     int d;
     int result;
     char fmt[10];
@@ -197,25 +196,20 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     char far *saved;
     int c;
 
-    cur = -1;
-    result = down = 0;
-    if (items == 0 || *items == 0)
-        goto none;
-    buf = malloc(4000);
-    saved = g_5AAC;
-    g_5AAC = 0;
-    last.x = last.y = -1;
-    f_1F80_0081(1);
-    f_1B73_0A40();
-    t = curMenu == -1 ? 0 : 1;
+    cur = -1; down = result = 0;
+    if (items != 0 && *items != 0) {
+    buf = malloc(4000); saved = g_5AAC;
+    g_5AAC = 0; last.x = last.y = -1;
+    f_1F80_0081(1); f_1B73_0A40();
+    mode = curMenu == -1 ? 0 : 1;
     f_1FD2_04D0(&pt);
-    old = maxLen = i = 0;
+    maxLen = i = 0;
     for (; items[i] != 0; i++) {
         len = _fstrlen(items[i]);
         if (len > maxLen)
             maxLen = len;
     }
-    maxLen += 1 - t;
+    maxLen += 1 - mode;
     nItems = i;
     if (curMenu == -1) {
         r.left = (pt.x & ~7) + 16;
@@ -253,7 +247,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     f_1FD2_02B1(1);
     x = r.left;
     j = r.top;
-    if (t)
+    if (mode)
         sprintf(fmt, "%%-%ds", maxLen);
     else
         sprintf(fmt, "%%c%%-%ds", maxLen - 1);
@@ -264,7 +258,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
             p[maxLen] = 0;
             p[maxLen - 1] = ' ';
             p[0] = ' ';
-        } else if (t)
+        } else if (mode)
             sprintf(p, fmt, items[i]);
         else
             sprintf(p, fmt, i == *sel - 1 ? 16 : ' ', items[i]);
@@ -277,7 +271,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     f_1FD2_02FF();
     if (!StillDown())
         down = 0;
-    k = -1;
+    i = -1;
     for (;;) {
         if (down && !StillDown())
             goto done;
@@ -294,19 +288,18 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
                 continue;
             last = pt;
             if (f_1FD2_04E5(&pt, &r)) {
-                k = (pt.y - r.top) / g_3DDC;
-                if (k >= 0 && k < nItems &&
-                    items[k][1] != '-' && !(items[k][0] & 0x80))
+                i = (pt.y - r.top) / g_3DDC;
+                if (i >= 0 && i < nItems &&
+                    items[i][1] != '-' && !(items[i][0] & 0x80))
                     goto moved;
             }
-            k = -1;
+            i = -1;
         } else if (f_1F58_0038()) {
             key = f_1F58_0090();
             if (!(key & 0x800) && islower(key))
                 key -= 0x20;
-            old = cur;
+            i = cur;
             j = 0;
-            k = cur;
 retry:
             switch (key) {
             case 10:
@@ -316,66 +309,64 @@ retry:
             case 0x853:
                 goto done;
             case 27:
-                goto escape;
+                cur = -1;
+                goto done;
             default:
-                old = k;
+                ;
                 if (key & 0x800)
                     goto flush;
                 j = t = cur;
                 if (!isalpha(key))
                     goto restore;
-                k = t;
-nextc:
-                if (++k < nItems)
-                    goto trych;
-                k = -1;
-                goto testc;
+                do {
+                    if (++j >= nItems)
+                        j = -1;
+                    else {
+                        c = items[j][1];
+                        if (islower(c))
+                            c -= 0x20;
+                        if (c == key)
+                            goto found;
+                    }
+                } while (t != j);
+                goto restore;
             case '+':
             case 0x850:
-                k = (k + 1) % nItems;
+                i = (i + 1) % nItems;
                 goto check;
             case '-':
             case 0x848:
-                k = (k > 0 ? k : nItems) - 1;
+                i = (i > 0 ? i : nItems) - 1;
 check:
-                if (items[k][1] != '-' && !(items[k][0] & 0x80))
+                if (items[i][1] != '-' && !(items[i][0] & 0x80))
                     goto warp;
-                if (j <= 16) {
-                    j++;
-                    goto retry;
+                if (j > 16) {
+                    i = cur;
+                    goto moved;
                 }
-                k = cur;
-                break;
-trych:
-                c = items[k][1];
-                if (islower(c))
-                    c -= 0x20;
-                if (c == key)
-                    goto found;
-testc:
-                if (t != k)
-                    goto nextc;
+                j++;
+                goto retry;
 restore:
-                k = old;
+                ;
             }
         }
 moved:
-        if (cur == k)
+        if (cur == i)
             continue;
         if (cur != -1) {
             f_1FD2_0008(x, g_3DDC * cur + r.top, 1, buf + (maxLen + 1) * cur);
             cur = -1;
         }
-        if (k == -1)
+        if (i == -1)
             continue;
-        cur = k;
+        cur = i;
         f_1FD2_02B1(0);
-        f_1FD2_0008(x, g_3DDC * k + r.top, 0, buf + (maxLen + 1) * k);
+        f_1FD2_0008(x, g_3DDC * i + r.top, 0, buf + (maxLen + 1) * i);
     }
 found:
-    old = k;
+    i = j;
 warp:
-    f_1B73_09E9(g_3DDE * 4 + x, g_3DDC / 2 + g_3DDC * k + r.top);
+    f_1B73_09E9(g_3DDE * 4 + x, g_3DDC / 2 + g_3DDC * i + r.top);
     goto moved;
 flush:
     f_1F58_007F(key & 0xff);
@@ -399,7 +390,7 @@ done:
 other:
     f_1B73_030F(ev.code, ev.xE, ev.h, ev.v, 0);
     goto done;
-none:
+    }
     if (curMenu != -1)
         f_1B73_030F((curMenu - 0x30) << 4, 0, 0, 0);
     *sel = 0;
