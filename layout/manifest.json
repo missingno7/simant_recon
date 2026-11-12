@@ -9857,101 +9857,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/ui/info_cards.c",
-   "source_sha256": "3e96562a7f66e6cf31b6cab0a1ec652b3d37915c79df1d8be3f2055a7cdf21a5",
-   "claims": [
-    {
-     "name": "XFlipLong",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 0,
-     "size": 36,
-     "target_sha256": "5f66357fbba31d534c99e67a17f93712e68e49002011511a5739f22dd3c89983",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "FlipWords",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 36,
-     "size": 81,
-     "target_sha256": "63ab6d50b477eef6c236683cb1ae1f7753d571d27a5cd41c877cef061181d0cd",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_DrawInfoWindow",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 117,
-     "size": 29,
-     "target_sha256": "235359aa26d9f423306ab35352f9ea9ab1b57aa66b569c21a59df6149a2e488f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "OpenInfoWindow",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 3097,
-     "size": 99,
-     "target_sha256": "32671e2c503edc16bcf7c4e8a8e4598c265ab04f30cdc0361ef2eac3b817a06b",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "PopUpInfoWindow",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 3196,
-     "size": 724,
-     "target_sha256": "ce4008881c82c42f52b06ff27b4fa020c239bb1ec556400e1acd4f9f3dbef65c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ProcInfoEvent",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 3920,
-     "size": 442,
-     "target_sha256": "2808ae1caa66a37c3396f526515cfe13fede11f4a405ba886eb87c4a65597b91",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "win_GetStyleTextHeight",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 1185,
-     "size": 455,
-     "target_sha256": "22ee1c4f28b33778ce02fd0891365025461271fd14ddd1de22aaea68e756c5fd",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "layout_inferred": "SYM-1 and TU-1: bring real res_load_with_alloc_type/mem_Lock loader/locker prototypes earlier; declaration position inferred with full-module gate, no padding symbols",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "win_PrintStyleTextInRect",
-     "unit": "S23",
-     "seg": 14791,
-     "off": 146,
-     "size": 1039,
-     "target_sha256": "372ebfdaaac7d3f86918bd638ca8e5a76c561fe9d4356983e2de8c7171c85d31",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "c8b93bc45848173f116f4c2c06cf147eb7255cbc5193b78cf52ff1e48bf39d13",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -9959,8 +9864,8 @@
      "why": "Displays the information window and card resources with styled text. It also contains byte order conversion helpers used when reading those resources."
     }
    ],
-   "summary": "Displays the information window and card resources with styled text. It also contains byte order conversion helpers used when reading those resources.",
    "windows_group": "_TEXT",
+   "summary": "Displays the information window and card resources with styled text. It also contains byte order conversion helpers used when reading those resources.",
    "file_header": {
     "text": "Displays the information window and card resources with styled text. It also contains byte\norder conversion helpers used when reading those resources.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 23 (S23); segment 39C7; partial original translation unit.\nWindows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside\nthe six named application groups.\nFunctions not yet exact: DisplayCard.",
     "name_kind": "descriptive",
@@ -10094,7 +9999,113 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "source": "src/ui/info_cards.c",
+   "source_sha256": "50ffc63336c0d85fc3db776054f929f3453dab02d54cf2dd5c551bf1b4c48d4a",
+   "claims": [
+    {
+     "name": "XFlipLong",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 0,
+     "size": 36,
+     "target_sha256": "5f66357fbba31d534c99e67a17f93712e68e49002011511a5739f22dd3c89983",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FlipWords",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 36,
+     "size": 81,
+     "target_sha256": "63ab6d50b477eef6c236683cb1ae1f7753d571d27a5cd41c877cef061181d0cd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_DrawInfoWindow",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 117,
+     "size": 29,
+     "target_sha256": "235359aa26d9f423306ab35352f9ea9ab1b57aa66b569c21a59df6149a2e488f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "OpenInfoWindow",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 3097,
+     "size": 99,
+     "target_sha256": "32671e2c503edc16bcf7c4e8a8e4598c265ab04f30cdc0361ef2eac3b817a06b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "PopUpInfoWindow",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 3196,
+     "size": 724,
+     "target_sha256": "ce4008881c82c42f52b06ff27b4fa020c239bb1ec556400e1acd4f9f3dbef65c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ProcInfoEvent",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 3920,
+     "size": 442,
+     "target_sha256": "2808ae1caa66a37c3396f526515cfe13fede11f4a405ba886eb87c4a65597b91",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_GetStyleTextHeight",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 1185,
+     "size": 455,
+     "target_sha256": "22ee1c4f28b33778ce02fd0891365025461271fd14ddd1de22aaea68e756c5fd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "SYM-1 and TU-1: bring real res_load_with_alloc_type/mem_Lock loader/locker prototypes earlier; declaration position inferred with full-module gate, no padding symbols",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "win_PrintStyleTextInRect",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 146,
+     "size": 1039,
+     "target_sha256": "372ebfdaaac7d3f86918bd638ca8e5a76c561fe9d4356983e2de8c7171c85d31",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DisplayCard",
+     "unit": "S23",
+     "seg": 14791,
+     "off": 1640,
+     "size": 1457,
+     "target_sha256": "5b864ebe9f24515a9448f58d9100baa0ae324ba88a2abacd5bac893ee00366a1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "03786d9dd966e1a46f0180b333f799395fea681fb4652cb7c9b80c24cf95c1af"
   },
   "S24:39C7": {
    "unit": "S24",
@@ -28156,8 +28167,83 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1C62.c",
+     "why": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs."
+    }
+   ],
+   "windows_group": "GR",
+   "summary": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs.",
+   "file_header": {
+    "text": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors\nand timed waits for these dialogs.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 1C62; partial original translation unit.\nWindows: GR, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zd.\nFunctions not yet exact: ui_choice_prompt.",
+    "name_kind": "descriptive",
+    "why": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:1C62",
+      "summary": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:1C62",
+      "module": "root:1C62",
+      "source": "src/window/alerts.c",
+      "reviewed_source_sha256": "a2bb1be8716caaa256db887bb348ea8752b7f5e0668a0f5fe081cf4839ba27a0",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "1C62",
+       "origin": null,
+       "translation_unit": "partial original translation unit",
+       "extent": null
+      },
+      "not_exact": [
+       "ui_choice_prompt"
+      ],
+      "steered": [],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Gs",
+       "/Zd"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "Punt",
+        "dos_address": "root:1C62:000C",
+        "win16": "_Punt",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 6334,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1C62:000C"
+       }
+      ],
+      "groups": [
+       "GR"
+      ]
+     },
+     {
+      "path": "src/window/alerts.c",
+      "prior_leading_comment": "Root module 1C62: fatal error, alert and question boxes.",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
    "source": "src/window/alerts.c",
-   "source_sha256": "51af5c001c8b6aca519e4c6cc59452d111bf7cf6df02c84c819a44c24f83273d",
+   "source_sha256": "3085c50ae62828b04ccaa2e371d7c08d6473bca8f88a12654081ecc7a32ec96b",
    "claims": [
     {
      "name": "Punt",
@@ -28290,84 +28376,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ui_choice_prompt",
+     "unit": "root",
+     "seg": 7266,
+     "off": 1045,
+     "size": 649,
+     "target_sha256": "b96eb29ac1efbe6cbea9f4f7ea8ef03932337759ba92cceb418d65cf53caa026",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "d1c1233128b6af2ad6add5dee019e0277a24ae8653caaf420ca7fc3f7c43ceb1",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m1C62.c",
-     "why": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs."
-    }
-   ],
-   "summary": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs.",
-   "windows_group": "GR",
-   "file_header": {
-    "text": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors\nand timed waits for these dialogs.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 1C62; partial original translation unit.\nWindows: GR, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zd.\nFunctions not yet exact: ui_choice_prompt.",
-    "name_kind": "descriptive",
-    "why": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:1C62",
-      "summary": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:1C62",
-      "module": "root:1C62",
-      "source": "src/window/alerts.c",
-      "reviewed_source_sha256": "a2bb1be8716caaa256db887bb348ea8752b7f5e0668a0f5fe081cf4839ba27a0",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "1C62",
-       "origin": null,
-       "translation_unit": "partial original translation unit",
-       "extent": null
-      },
-      "not_exact": [
-       "ui_choice_prompt"
-      ],
-      "steered": [],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Gs",
-       "/Zd"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "Punt",
-        "dos_address": "root:1C62:000C",
-        "win16": "_Punt",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 6334,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1C62:000C"
-       }
-      ],
-      "groups": [
-       "GR"
-      ]
-     },
-     {
-      "path": "src/window/alerts.c",
-      "prior_leading_comment": "Root module 1C62: fatal error, alert and question boxes.",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "e4c3dd9de902c9a6b0848292f7eb9b9ba6157c98e861aba23cd7e29359b0d99a"
   },
   "root:1CE2": {
    "unit": "root",

@@ -5,7 +5,6 @@
  * DOS: overlay section 23 (S23); segment 39C7; partial original translation unit.
  * Windows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside
  * the six named application groups.
- * Functions not yet exact: DisplayCard.
  */
 
 int g_2E04[16] = { 0 };
@@ -337,10 +336,14 @@ extern void far clip_SetWin(int win);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern long far mem_Size(char far *handle);
 extern void _fastcall win_SetColorFromObjNum(int obj);
-extern void far * far _fmemcpy(void far *dst, void far *src, unsigned int n);
+/* The prototypes without parameter names in this file are written that way because the
+ * operand order of DisplayCard's pointer sums depends on how many identifiers the file
+ * has declared before it (docs/codegen-rules.md); the names are not known to be absent
+ * in the original. */
+extern void far * far _fmemcpy(void far *, void far *, unsigned int);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
-extern void far * far _fmemchr(void far *buf, int c, unsigned int n);
-extern void far * far _fmemmove(void far *dst, void far *src, unsigned int n);
+extern void far * far _fmemchr(void far *, int, unsigned int);
+extern void far * far _fmemmove(void far *, void far *, unsigned int);
 extern void far f_277D_000B(char far *text);
 
 struct PicRec {
@@ -358,19 +361,26 @@ struct TextRec {
 };
 
 
+/* Draws an information card: its title, then the picture records (with their link
+ * rectangles) and the styled text records of the card resource.
+ * `k` counts the picture links as well as the text frames and the style runs, and the
+ * title is walked with its own pointer: only this assignment of variables gives the
+ * original frame. */
 void far DisplayCard(int card)
 {
+    long size;
     long off;
     char far *h1;
     char far *h2;
     char far *p;
     char far *q;
-    long size;
+    char far *cur;
     char far *base;
     struct Rect r;
     char hdr[4];
     struct PicRec pic;
     struct TextRec tr;
+    int k;
     int i;
     int t;
     int rez;
@@ -381,7 +391,6 @@ void far DisplayCard(int card)
     int tlen;
     struct StyleRun far *styles;
     char far *nul;
-    int k;
 
     off = 4;
     g_2E26 = card;
@@ -394,9 +403,9 @@ void far DisplayCard(int card)
     h2 = res_load_with_alloc_type(card, 0x13, 1);
     if (h2 != 0) {
         p = mem_Lock(h2);
-        for (q = p; *q; q++)
-            if (*q == '_')
-                *q = ' ';
+        for (cur = p; *cur; cur++)
+            if (*cur == '_')
+                *cur = ' ';
         win_SetObjFormatStr(0x501, p);
         mem_Unlock(h2);
         db_PurgeObject(card, 0x13);
@@ -410,17 +419,17 @@ void far DisplayCard(int card)
     win_SetColorFromObjNum(0x502);
     g_8C22 = 0;
     while (off < size) {
-        _fmemcpy(hdr, off + base, 4);
+        _fmemcpy(hdr, &base[off], 4);
         off += 4;
         switch (hdr[0]) {
         case 'P':
-            _fmemcpy(&pic, off + base, 12);
+            _fmemcpy(&pic, &base[off], 12);
             off += 12;
             FlipWords((unsigned char far *)&pic, 12);
             win_DrawBitMap(pic.left + r.left, pic.top + r.top, pic.id);
             win_SetColorFromObjNum(0x502);
-            for (i = 0; i < pic.nLinks; i++) {
-                _fmemcpy(&fd_4EE5_0280[g_8C22], off + base, 10);
+            for (k = 0; k < pic.nLinks; k++) {
+                _fmemcpy(&fd_4EE5_0280[g_8C22], &base[off], 10);
                 off += 10;
                 FlipWords((unsigned char far *)&fd_4EE5_0280[g_8C22], 10);
                 t = fd_4EE5_0280[g_8C22].r.left;
@@ -433,13 +442,13 @@ void far DisplayCard(int card)
             }
             break;
         case 'T':
-            _fmemcpy(&tr, off + base, 10);
+            _fmemcpy(&tr, &base[off], 10);
             off += 10;
             FlipWords((unsigned char far *)&tr, 10);
             WinPrintf("Text: %#x %#x %#x %#x NumOfFrames: %#x\n",
                       tr.r.left, tr.r.top, tr.r.right, tr.r.bottom, tr.nFrames);
             for (k = 0; k < tr.nFrames; k++) {
-                _fmemcpy(&rez, off + base, 2);
+                _fmemcpy(&rez, &base[off], 2);
                 off += 2;
                 FlipWords((unsigned char far *)&rez, 2);
                 t = tr.r.left;
@@ -547,13 +556,13 @@ void far OpenInfoWindow(void)
 }
 
 extern void far clip_Push(void);
-extern char far * far GSaveRect(struct Rect far *r);
+extern char far * far GSaveRect(struct Rect far *);
 extern unsigned char near g_5A97;
 extern int near _foreColor;
-extern void far GBoxFillOutline(int left, int top, int right, int bottom, int width);
+extern void far GBoxFillOutline(int, int, int, int, int);
 extern int far StillDown(void);
 extern void far win_Events(void);
-extern void far gfx_restore_and_free_rect(struct Rect far *r, char far *buf);
+extern void far gfx_restore_and_free_rect(struct Rect far *, char far *);
 extern void far clip_Pop(void);
 
 void far PopUpInfoWindow(int x, int top, int bottom, int rez)

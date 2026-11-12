@@ -12,13 +12,13 @@ Last gate result: **PASS** (2026-11-12).
 
 | Item | State | Open |
 | --- | --- | --- |
-| 1. Code exact | 1,626 of 1,640 game functions | 14 functions, 7,094 bytes; 25 of 122 code modules are not yet complete translation units |
+| 1. Code exact | 1,628 of 1,640 game functions | 12 functions, 4,988 bytes; 25 of 122 code modules are not yet complete translation units |
 | 2. No unexplained steering | 27 exact functions depend on a steering construct | 15,436 bytes |
 | 3. Data: one owner, type, size | 113,838 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 175 bytes unresolved |
 | 4. Layout assumptions explained | 78 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
-| 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 19 functions |
+| 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 20 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 943 C and 357 assembly named; data: 484 named | 316 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 945 C and 357 assembly named; data: 484 named | 316 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -42,13 +42,11 @@ Last gate result: **PASS** (2026-11-12).
 | `S12:384C` | `DrawMapCursor` | 205 |
 | `S13:384C` | `InvertPatch` | 261 |
 | `S15:384C` | `ui_prompt_save_discard_cancel` | 326 |
-| `S23:39C7` | `DisplayCard` | 1457 |
 | `root:0250` | `DoCalcTile` | 646 |
 | `root:0250` | `DrawBalloons` | 1060 |
 | `root:0E2E` | `LessonDone` | 723 |
 | `root:171C` | `f_171C_0CF4` | 490 |
 | `root:171C` | `mem_resize_in_place` | 144 |
-| `root:1C62` | `ui_choice_prompt` | 649 |
 | `root:20E8` | `f_20E8_0903` | 286 |
 | `root:23E6` | `f_23E6_0000` | 159 |
 | `root:259D` | `win_DrawBitMap` | 663 |
@@ -190,7 +188,7 @@ use, not original sizes.
 
 ## Relocation order still unproven
 
-`SimCat`, `SimColonies`, `SimDog`, `SimKidInside`, `RandWorld`, `win_GetStyleTextHeight`, `AnimYellowFight`, `AnimYellowInsane`, `ExitNest`, `GetMyBestDirs`, `GetMyDis`, `DrawCurBalloons`, `DrawEditGraphs`, `RallocSetType`, `f_171C_0A5C`, `mem_alloc_handle_block`, `mem_lock_handle`, `clip_Push`, `clip_SubExclude`
+`SimCat`, `SimColonies`, `SimDog`, `SimKidInside`, `RandWorld`, `DisplayCard`, `win_GetStyleTextHeight`, `AnimYellowFight`, `AnimYellowInsane`, `ExitNest`, `GetMyBestDirs`, `GetMyDis`, `DrawCurBalloons`, `DrawEditGraphs`, `RallocSetType`, `f_171C_0A5C`, `mem_alloc_handle_block`, `mem_lock_handle`, `clip_Push`, `clip_SubExclude`
 
 ## Upper layers
 

@@ -5,7 +5,6 @@
  * DOS: resident code; segment 1C62; partial original translation unit.
  * Windows: GR, from recorded function pairs in the Windows symbol inventory.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zd.
- * Functions not yet exact: ui_choice_prompt.
  */
 
 struct Rect {
@@ -259,6 +258,10 @@ extern void far o10_35F5_0A63(int key, int far *sel, int count, int id);
 extern char far * near sys_errlist[];
 extern int near sys_nerr;
 extern char near g_8CCB;
+/* Shows a message with a row of buttons and returns the index of the one chosen, by
+ * its key or by the mouse. `v` first accumulates the minimum width of the button row
+ * and later holds the buttons' vertical position, and `j` also indexes the key search:
+ * the frame has one word for each and the zero stores match only this way. */
 int far ui_choice_prompt(char far *msg, int set)
 {
     int c;
@@ -282,15 +285,15 @@ int far ui_choice_prompt(char far *msg, int set)
     size = f_1F80_000C(msg);
     width = size.x;
     count = g_5584[set];
-    c = v = h = j = 0;
-    for (; j < count;) {
+    v = h = j = 0;
+    while (j < count) {
         widths[j] = _fstrlen(labels[j] + 1);
         h += widths[j];
         j++;
-        c += 2;
+        v += 2;
     }
-    if (width < c)
-        width = c;
+    if (width < v)
+        width = v;
     f_1F80_01A8(&g_557C, width + 2, size.y + 4);
     pr = *f_1CE2_039B(&g_557C);
     save = GSaveRect(&pr);
@@ -313,9 +316,9 @@ int far ui_choice_prompt(char far *msg, int set)
         if (kbd_poll_bios_key() && (c = kbd_read_key_code()) > 0) {
             if (_ctype[c + 1] & 2)
                 c -= 0x20;
-            for (i = 0; i < count; i++) {
-                if (labels[i][0] == c || labels[i][1] == c) {
-                    ev.code = i;
+            for (j = 0; j < count; j++) {
+                if (labels[j][0] == c || labels[j][1] == c) {
+                    ev.code = j;
                     goto done;
                 }
             }
