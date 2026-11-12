@@ -240,3 +240,22 @@ that remain open and the freshly compiled execution controls.
   the jump table first reaches them; of two bodies with identical code one survives, and which
   one depends on how each is written. `build/workers/claude/settle/lesson/swdis.py` (scratch)
   lists such a function with the table decoded.
+* **Unused scalar stores vanish, stores to an array element stay** (InvertPatch, S13:384C):
+  `h = a; h = b;` keeps only the second assignment, also when a label, a block or a test lies
+  between them. A store through an array element or a structure member is always emitted, even
+  when nothing reads it. Stores that survive without a reader are therefore not plain locals.
+* **A value used again in a later basic block is kept in a frame word** (InvertPatch): inside
+  one block a repeated product stays in a register (copied to BX if needed); when its next use
+  is in another block it is stored to a frame word at once and reloaded there. A test whose
+  body is an unused scalar assignment leaves no code but still ends the block; an empty test,
+  `if (1)`, an unused label and `do {} while (0)` do not. Positive control: the promoted source;
+  negative contrast: the same source without the test (256 bytes instead of 261, frame 26
+  instead of 30).
+* **Declaration numbers that coincide modulo 17 change code** (DrawMapCursor S12:384C and
+  f_20E8_0903 root:20E8, neither exact yet). Putting N unused file-level identifiers before one
+  declaration changes the function only for isolated values of N, and N and N+17 always agree.
+  The affected code is whether a repeated far global is read once and kept in a register, and
+  which operand of a commutative operation is loaded first; the spelling of the expression has
+  no effect. Reading: a 17-entry table indexed by declaration number in the code generator, most
+  likely for repeated subexpressions. This is the mechanism behind the "identifier count"
+  entries on the status page. The scan scripts are in `build/workers/claude/settle/map/` (scratch).

@@ -6085,265 +6085,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/ui/yard_window.c",
-   "source_sha256": "0a818512d347837f70e458501e5077512171f5bf9f528377c43663ea291343e8",
-   "claims": [
-    {
-     "name": "ProcYardEvent",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 0,
-     "size": 403,
-     "target_sha256": "feecd57f661ef2d1a1587fd9f111748d56dd063e5d3b80f3ab2cbce32ee675a1",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawYardCursor",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 403,
-     "size": 41,
-     "target_sha256": "cfc23942a0b172b371f7315aef5024582fb96d329438379254325f2696c7dea3",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "EraseYardCursor",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 444,
-     "size": 41,
-     "target_sha256": "854dddb326d0f6ae66d32d788566c089279837c1db680a7368ff3276452049b4",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "yard_update_message",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 485,
-     "size": 151,
-     "target_sha256": "569e0ec2d1c5537bd8953b6f46cbb7aa36146b7179082cb9c2fcd92291dcc6fa",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "yard_draw_content_totals",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 636,
-     "size": 91,
-     "target_sha256": "2650f3f22109718d59919ee126d42c10092e9b57528da2972910df45b520e245",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "win_DrawYardWindow",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 727,
-     "size": 289,
-     "target_sha256": "0a967814df06c0e9f34a021bc42a70d3d362d0a690f63ba8ed8cc3002b5925fc",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "yard_refresh_message_area",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 1016,
-     "size": 78,
-     "target_sha256": "3b8281dc890fa43cd5d5567c7248855f3748df95d755f94abdc6c59583b9392c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawYard",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 1094,
-     "size": 44,
-     "target_sha256": "d5de6a152f7eb5aa5ecd6865cf25843c4bb4c16b4a4fe12c6e0c7c15146eff1f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "UpdateYard",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 1138,
-     "size": 12,
-     "target_sha256": "d6c2f1243245fc8a05f32f267feb0a7a4c4b499ba0dff6b0b5bb82c82d604acb",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DrawSimKid",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 1150,
-     "size": 581,
-     "target_sha256": "ed4682092cfd645544d9a7ada937dd66244d57841fc699e7469bfeb118373269",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawDog",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 1731,
-     "size": 224,
-     "target_sha256": "4828a18572092963a244294c5856b08f5072027df760c8287529dcd0ce0e2551",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawSimBird",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 1955,
-     "size": 187,
-     "target_sha256": "aab716dabace0e9c6b08ffb267cb70604abf6cb8d77868f5d5abafa0094847ca",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawSimCat",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 2142,
-     "size": 216,
-     "target_sha256": "aea0138c7fba7acad0822ff795777bcfeb5dc8a9b1553e333ef3a091f07f06ac",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawForSale",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 2358,
-     "size": 127,
-     "target_sha256": "dad71dc91747e36781df2a47b904717c8167b4550b6e098e9f5f1e09b98e9a1b",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "Draw_SimYard",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 2823,
-     "size": 564,
-     "target_sha256": "8862dd51da6f0fe1d62cb7d421dd98b3c60b5ac0e777f9ae6fbc0025e3be3799",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawAnimYardMessage",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 3387,
-     "size": 214,
-     "target_sha256": "a81d09b409fb824036775819d534f776b2d7f287170277acdb33ef9d9b7a03e8",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawRain",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 3601,
-     "size": 207,
-     "target_sha256": "9caf307242866a21abe976aab327f5c9c99a7e27e4569e967c40f8f458c07093",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawSwarm",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 3808,
-     "size": 896,
-     "target_sha256": "d288eebbfb10564dafe349a6ef94020724f85ccdde670e4c380a7f9edefb0a93",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "TooFar",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 4704,
-     "size": 45,
-     "target_sha256": "7b688c3a941252bf298a6a163e0fdee36e0fdce75cdf2015d4d26202608029c5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "YardArea",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 5871,
-     "size": 180,
-     "target_sha256": "cf24ed03c50fd3cb8f06b78bab5004c9e1f7ff50ec0ea05e71674840ac9bd15f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawSimColonies",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 5010,
-     "size": 371,
-     "target_sha256": "fc6ebd04143eec76318f4d8e239cad2cd5c3dc8df7c8ecd65bed6dbc59b1f644",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DrawMower",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 2485,
-     "size": 338,
-     "target_sha256": "4c9f1c2581d99dc3f4eac8efa048b735dcfba7fca5897654e0aefb35997f85e7",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawColonyBars",
-     "unit": "S13",
-     "seg": 14412,
-     "off": 5381,
-     "size": 490,
-     "target_sha256": "c0d79875124bd9d04ef4f940dab1d390597a71157c8019f0a4150e818aae10d5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "b441ce065a828b763d92eb788f64a57aec846ea3b092f32071eb641c65c0ff19",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -6351,8 +6092,8 @@
      "why": "Handles yard window events and renders the yard. It draws animated people, animals, weather, swarms and colony population bars."
     }
    ],
-   "summary": "Handles yard window events and renders the yard. It draws animated people, animals, weather, swarms and colony population bars.",
    "windows_group": "ANTEDIT",
+   "summary": "Handles yard window events and renders the yard. It draws animated people, animals, weather, swarms and colony population bars.",
    "file_header": {
     "text": "Handles yard window events and renders the yard. It draws animated people, animals, weather,\nswarms and colony population bars.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 13 (S13); segment 384C; partial original translation unit.\nWindows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nFunctions not yet exact: InvertPatch.",
     "name_kind": "descriptive",
@@ -6616,7 +6357,278 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "source": "src/ui/yard_window.c",
+   "source_sha256": "cac923e6a7a494a813101efdd375becd94ac5778b41fc36dd8cdf09c95e83f9c",
+   "claims": [
+    {
+     "name": "ProcYardEvent",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 0,
+     "size": 403,
+     "target_sha256": "feecd57f661ef2d1a1587fd9f111748d56dd063e5d3b80f3ab2cbce32ee675a1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawYardCursor",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 403,
+     "size": 41,
+     "target_sha256": "cfc23942a0b172b371f7315aef5024582fb96d329438379254325f2696c7dea3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "EraseYardCursor",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 444,
+     "size": 41,
+     "target_sha256": "854dddb326d0f6ae66d32d788566c089279837c1db680a7368ff3276452049b4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "yard_update_message",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 485,
+     "size": 151,
+     "target_sha256": "569e0ec2d1c5537bd8953b6f46cbb7aa36146b7179082cb9c2fcd92291dcc6fa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "yard_draw_content_totals",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 636,
+     "size": 91,
+     "target_sha256": "2650f3f22109718d59919ee126d42c10092e9b57528da2972910df45b520e245",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_DrawYardWindow",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 727,
+     "size": 289,
+     "target_sha256": "0a967814df06c0e9f34a021bc42a70d3d362d0a690f63ba8ed8cc3002b5925fc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "yard_refresh_message_area",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1016,
+     "size": 78,
+     "target_sha256": "3b8281dc890fa43cd5d5567c7248855f3748df95d755f94abdc6c59583b9392c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawYard",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1094,
+     "size": 44,
+     "target_sha256": "d5de6a152f7eb5aa5ecd6865cf25843c4bb4c16b4a4fe12c6e0c7c15146eff1f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "UpdateYard",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1138,
+     "size": 12,
+     "target_sha256": "d6c2f1243245fc8a05f32f267feb0a7a4c4b499ba0dff6b0b5bb82c82d604acb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DrawSimKid",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1150,
+     "size": 581,
+     "target_sha256": "ed4682092cfd645544d9a7ada937dd66244d57841fc699e7469bfeb118373269",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawDog",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1731,
+     "size": 224,
+     "target_sha256": "4828a18572092963a244294c5856b08f5072027df760c8287529dcd0ce0e2551",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawSimBird",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 1955,
+     "size": 187,
+     "target_sha256": "aab716dabace0e9c6b08ffb267cb70604abf6cb8d77868f5d5abafa0094847ca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawSimCat",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2142,
+     "size": 216,
+     "target_sha256": "aea0138c7fba7acad0822ff795777bcfeb5dc8a9b1553e333ef3a091f07f06ac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawForSale",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2358,
+     "size": 127,
+     "target_sha256": "dad71dc91747e36781df2a47b904717c8167b4550b6e098e9f5f1e09b98e9a1b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "Draw_SimYard",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2823,
+     "size": 564,
+     "target_sha256": "8862dd51da6f0fe1d62cb7d421dd98b3c60b5ac0e777f9ae6fbc0025e3be3799",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawAnimYardMessage",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 3387,
+     "size": 214,
+     "target_sha256": "a81d09b409fb824036775819d534f776b2d7f287170277acdb33ef9d9b7a03e8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawRain",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 3601,
+     "size": 207,
+     "target_sha256": "9caf307242866a21abe976aab327f5c9c99a7e27e4569e967c40f8f458c07093",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawSwarm",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 3808,
+     "size": 896,
+     "target_sha256": "d288eebbfb10564dafe349a6ef94020724f85ccdde670e4c380a7f9edefb0a93",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "TooFar",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 4704,
+     "size": 45,
+     "target_sha256": "7b688c3a941252bf298a6a163e0fdee36e0fdce75cdf2015d4d26202608029c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "YardArea",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 5871,
+     "size": 180,
+     "target_sha256": "cf24ed03c50fd3cb8f06b78bab5004c9e1f7ff50ec0ea05e71674840ac9bd15f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawSimColonies",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 5010,
+     "size": 371,
+     "target_sha256": "fc6ebd04143eec76318f4d8e239cad2cd5c3dc8df7c8ecd65bed6dbc59b1f644",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DrawMower",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 2485,
+     "size": 338,
+     "target_sha256": "4c9f1c2581d99dc3f4eac8efa048b735dcfba7fca5897654e0aefb35997f85e7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawColonyBars",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 5381,
+     "size": 490,
+     "target_sha256": "c0d79875124bd9d04ef4f940dab1d390597a71157c8019f0a4150e818aae10d5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "InvertPatch",
+     "unit": "S13",
+     "seg": 14412,
+     "off": 4749,
+     "size": 261,
+     "target_sha256": "c59b111d2235f9fc10424d949c6510927adcff80b3fc81f11b51b109195d7653",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "InvertPatch=BLOCK-1: a test with an unused assignment starts the basic block the original has between the first stores and the raw offsets; the statement it stands for is unknown",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "7d19c3830eb605939b51b529f2ab87784614664ab1d4e6f3b41939860771e973"
   },
   "S14:384C": {
    "unit": "S14",

@@ -4,9 +4,9 @@
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
  "known_functions": 1730,
  "known_game_functions": 1640,
- "exact_c_functions": 1261,
+ "exact_c_functions": 1262,
  "historical_exact_source_rebuilt_functions": [],
- "exact_c_bytes": 247572,
+ "exact_c_bytes": 247833,
  "exact_asm_functions": 367,
  "exact_asm_bytes": 50441,
  "exact_code_segment_data_bytes": 1481,
@@ -15,7 +15,7 @@
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1718,
+ "owned_functions": 1719,
  "rtlink_manager_bytes_unaccepted": 17001,
  "data_bytes_accepted": 113838,
  "far_data_bytes_accepted": 80310,
@@ -36,7 +36,7 @@
  "far_bss_sizes_unverified_bytes": 14928,
  "bss_bytes_placed": 496,
  "game_code_span_bytes": 304798,
- "unresolved_code_bytes": 5304,
+ "unresolved_code_bytes": 5043,
  "unresolved_data_bytes": 175,
  "overlay_coverage": {
   "S00": {
@@ -93,7 +93,7 @@
   },
   "S13": {
    "bytes": 6064,
-   "claimed": 5790
+   "claimed": 6051
   },
   "S14": {
    "bytes": 4656,
@@ -152,11 +152,11 @@
  "scaffold_functions": 0,
  "exact_translation_units": 97,
  "claims_within_group_order_pending": 20,
- "inplace_draft_functions": 12,
- "claims_exact_steered": 27,
+ "inplace_draft_functions": 11,
+ "claims_exact_steered": 28,
  "exact_c_bytes_in_complete_tus": 153413,
- "exact_c_bytes_in_partial_modules": 94159,
- "exact_c_bytes_steered": 15436,
+ "exact_c_bytes_in_partial_modules": 94420,
+ "exact_c_bytes_steered": 15697,
  "exact_c_bytes_layout_inferred": 20867,
  "exact_c_bytes_within_group_pending": 13792,
  "claims_layout_inferred": 24,
@@ -172,25 +172,25 @@
  "runtime_oracle_derived_words": 244,
  "released_claims_unowned": [],
  "modules_origin_unevidenced": [],
- "manifest_sha256": "ff08875d349598f4f4d7aeaa603000cb0398f75b8a80bda02b20d6becb8a546f",
+ "manifest_sha256": "3ec60e5598e1b0f5e8b7ea7a46e6c71b11da2e5c41dae91347aa66bbd25bc8db",
  "complete_tus_relocation_order_proven": 95,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD",
   "root:1B73"
  ],
  "codegen_rules_reproduced": 50,
- "behavior_exact_confirmed_functions": 12,
+ "behavior_exact_confirmed_functions": 11,
  "historical_exact_source_rebuilt_function_count": 0,
  "canonical_translation_units": 200,
  "canonical_storage_units": 73,
- "canonical_program_sha256": "7d4c3ff5a0378d2f0e7f1930ee72b9d9742c88f7bda8cd978cb121f3e58f0dcb",
+ "canonical_program_sha256": "8db85b2695d7e2a4c6a277cc04bfe1701e889b9df11c124c325901ba96eade6e",
  "whole_executable": "FUNCTIONAL_SOURCE_BUILD (dos/build.py links the canonical source; the original image layout is not reproduced; see docs/dos-closure.md)",
  "validation": "PASS",
  "failures": [],
  "verdicts": {
   "code": {
    "verdict": "NOT EQUAL",
-   "detail": "1628 of 1640 game functions exact; 12 not exact",
+   "detail": "1629 of 1640 game functions exact; 11 not exact",
    "proves": "each exact function's bytes, fixups and relocations, compiled from the current source by the pinned tools in its whole module",
    "excludes": "where the linker places the module; functions listed as not exact"
   },

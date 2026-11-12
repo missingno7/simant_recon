@@ -12,13 +12,13 @@ Last gate result: **PASS** (2026-11-12).
 
 | Item | State | Open |
 | --- | --- | --- |
-| 1. Code exact | 1,628 of 1,640 game functions | 12 functions, 4,988 bytes; 25 of 122 code modules are not yet complete translation units |
-| 2. No unexplained steering | 27 exact functions depend on a steering construct | 15,436 bytes |
+| 1. Code exact | 1,629 of 1,640 game functions | 11 functions, 4,727 bytes; 25 of 122 code modules are not yet complete translation units |
+| 2. No unexplained steering | 28 exact functions depend on a steering construct | 15,697 bytes |
 | 3. Data: one owner, type, size | 113,838 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 175 bytes unresolved |
-| 4. Layout assumptions explained | 78 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
+| 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 20 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 945 C and 357 assembly named; data: 484 named | 316 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 946 C and 357 assembly named; data: 484 named | 316 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -40,7 +40,6 @@ Last gate result: **PASS** (2026-11-12).
 | Module | Function | Bytes |
 | --- | --- | ---: |
 | `S12:384C` | `DrawMapCursor` | 205 |
-| `S13:384C` | `InvertPatch` | 261 |
 | `S15:384C` | `ui_prompt_save_discard_cancel` | 326 |
 | `root:0250` | `DoCalcTile` | 646 |
 | `root:0250` | `DrawBalloons` | 1060 |
@@ -62,6 +61,7 @@ They stay here until a natural spelling replaces it.
 | `S06:35F5` | `SimColonies` | 1216 | record order only: the nested 'if (CurGameType == 2) if (x < 2 ...)' test adds one /Zi line entry so the 52-entry LINNUM flush falls in 229F..2309; the cumulative count also depends on the SimKidInside scaffold draft's line count (bytes are natural: r reused for the population clamps, b loaded before r) |
 | `S08:35F5` | `RandWorld` | 1355 | RandWorld=ZERO-1: folded unsigned seed < 0 supplies the original AX-to-DI zero initialization; its eliminated original expression is unknown |
 | `S09:35F5` | `o09_35F5_03C6` | 2405 | USE-2: folded unsigned path/save/index reads; original eliminated expressions unknown. |
+| `S13:384C` | `InvertPatch` | 261 | InvertPatch=BLOCK-1: a test with an unused assignment starts the basic block the original has between the first stores and the raw offsets; the statement it stands for is unknown |
 | `S16:384C` | `AboutDialog` | 657 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S16:384C` | `DrawSimPayoff` | 481 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S16:384C` | `ShowIntro` | 625 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |

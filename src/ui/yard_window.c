@@ -5,7 +5,6 @@
  * DOS: overlay section 13 (S13); segment 384C; partial original translation unit.
  * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are
  * HIGH confidence, not confirmed.
- * Functions not yet exact: InvertPatch.
  */
 
 #include <string.h>
@@ -729,34 +728,48 @@ extern void far GRectFill(struct Rect far *rect, int color);
 extern int far YMapPnt[2];
 extern void far WinPrintf(char far *format, ...);
 extern void far XferPatch(void);
+/*
+ * Inverts the highlight of yard patch (x, y): the four-corner outline g_2A42 placed at the
+ * patch's projected offset (28*x - 10*y, 10*y) inside the yard rectangle. In the 320-wide mode
+ * the offset and the outline are halved and the origin moves by (4, 10).
+ *
+ * pts[4] is one element past the array. The two stores fall on the frame words of h and v
+ * (BP-6, BP-4), which both branches overwrite before the loops read them; see G12 in
+ * docs/data-adjacency.md. Hypothesis: the bytes show stores of the full-scale origin to those two
+ * words and nothing else; a fifth point is our spelling of them.
+ *
+ * STEERED (BLOCK-1): the original starts a new basic block between those stores and the raw
+ * offsets (the two products are kept in frame words and reloaded). The test with the unused
+ * assignment reproduces that boundary and leaves no code; the statement it stands for is unknown.
+ * The Windows build has a real test at this point (YardMode < 2 moves the offset left by one).
+ */
 void far InvertPatch(int x, int y)
 {
     struct Pt pts[4];
-    struct Pt org;
-    int i, h, v;
+    int i, v, h;
 
     clip_Push();
     clip_SetWin(0x1900);
-    org.h = x * 28 - y * 10 + fd_50F6_10D2.left;
-    org.v = y * 10 + fd_50F6_10D2.top;
+    pts[4].h = x * 28 - y * 10 + fd_50F6_10D2.left;
+    pts[4].v = y * 10 + fd_50F6_10D2.top;
+    if (g_3DB2 == 320)
+        h = 0;
     h = x * 28 - y * 10;
     v = y * 10;
     if (g_3DB2 == 320) {
-        h = (h >> 1) + fd_50F6_10D2.left + 4;
-        v = (v >> 1) + fd_50F6_10D2.top + 10;
-        org.h = h;
-        org.v = v;
+        h >>= 1;
+        v >>= 1;
+        h += fd_50F6_10D2.left + 4;
+        v += fd_50F6_10D2.top + 10;
         for (i = 0; i < 4; i++) {
-            pts[i].h = g_2A42[i * 2] / 2 + org.h;
+            pts[i].h = g_2A42[i * 2] / 2 + h;
             pts[i].v = g_2A42[i * 2 + 1] / 2 + v;
         }
     } else {
         h += fd_50F6_10D2.left;
         v += fd_50F6_10D2.top;
-        org.h = h;
-        org.v = v;
         for (i = 0; i < 4; i++) {
-            pts[i].h = g_2A42[i * 2] + org.h;
+            pts[i].h = g_2A42[i * 2] + h;
             pts[i].v = g_2A42[i * 2 + 1] + v;
         }
     }
