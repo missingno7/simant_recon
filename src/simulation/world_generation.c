@@ -2,8 +2,9 @@
  * Initializes simulation variables and generates the yard, maps, nests and starting ants. It
  * also constructs the tutorial starting world.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: overlay section 8 (S08); segment 35F5; partial original translation unit.
+ * DOS: overlay section 8 (S08); segment 35F5; complete original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
+ * Statement layout is inferred from /Zi record order, not recovered or unique.
  * Steered functions: RandWorld.
  */
 
@@ -227,14 +228,10 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
             MapB[count][0] = SRand4() + 0x1c;
             MapR[count][0] = SRand4() + 0x1c;
         } else {
-            if (mapKind > 3)
-                MapB[count][0] = SRand1(2) + 0x1c;
-            else
-                MapB[count][0] = 0x1e;
-            if (mapKind > 3)
-                MapR[count][0] = SRand1(2) + 0x1c;
-            else
-                MapR[count][0] = 0x1e;
+            if (mapKind > 3) MapB[count][0] = SRand1(2) + 0x1c;
+            else MapB[count][0] = 0x1e;
+            if (mapKind > 3) MapR[count][0] = SRand1(2) + 0x1c;
+            else MapR[count][0] = 0x1e;
         }
         ExitMapB[count][0] = 0xff;
         ExitMapR[count][0] = 0xff;
@@ -262,18 +259,13 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
         if (MapA[count][x] < 0x50) {
             if (LifeA[count][x] != 0) {
                 tries++;
-                if (tries < 50)
-                    n++;
+                if (tries < 50) n++;
             } else {
                 roll = SRand16();
-                if (roll < lim1)
-                    LifeA[count][x] = SRand8() + 0x10;
-                else if (roll < lim2)
-                    LifeA[count][x] = SRand8() + 0x30;
-                else if (SRand2())
-                    LifeA[count][x] = SRand8() + 0x20;
-                else
-                    LifeA[count][x] = SRand8() + 0x40;
+                if (roll < lim1) LifeA[count][x] = SRand8() + 0x10;
+                else if (roll < lim2) LifeA[count][x] = SRand8() + 0x30;
+                else if (SRand2()) LifeA[count][x] = SRand8() + 0x20;
+                else LifeA[count][x] = SRand8() + 0x40;
             }
         }
     }
@@ -289,18 +281,13 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
         if (MapA[count][x] < 0x50) {
             if (LifeA[count][x] != 0) {
                 tries++;
-                if (tries < 50)
-                    n++;
+                if (tries < 50) n++;
             } else {
                 roll = SRand16();
-                if (roll < lim1)
-                    LifeA[count][x] = SRand8() - 0x70;
-                else if (roll < lim2)
-                    LifeA[count][x] = SRand8() - 0x50;
-                else if (SRand2())
-                    LifeA[count][x] = SRand8() - 0x60;
-                else
-                    LifeA[count][x] = SRand8() - 0x40;
+                if (roll < lim1) LifeA[count][x] = SRand8() - 0x70;
+                else if (roll < lim2) LifeA[count][x] = SRand8() - 0x50;
+                else if (SRand2()) LifeA[count][x] = SRand8() - 0x60;
+                else LifeA[count][x] = SRand8() - 0x40;
             }
         }
     }
@@ -310,10 +297,8 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
         HoleMapR[x] = 0;
     }
 
-    if (CurGameType != 2 || blackSize >= 1)
-        MakeNewHoleB(0x20);
-    if (redSize >= 1)
-        MakeNewHoleR(0x20);
+    if (CurGameType != 2 || blackSize >= 1) MakeNewHoleB(0x20);
+    if (redSize >= 1) MakeNewHoleR(0x20);
 
     TileTotYR = 0;
     TileTotXR = 0;
@@ -327,10 +312,8 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
     TileMassXB = 0;
     WaterTable = 0x40;
 
-    if (blackSize > 1)
-        DigOutBNest(blackSize << 4);
-    if (redSize > 1)
-        DigOutRNest(redSize << 4);
+    if (blackSize > 1) DigOutBNest(blackSize << 4);
+    if (redSize > 1) DigOutRNest(redSize << 4);
 
     f_0EC1_0719();
     f_0EC1_07C1();
@@ -343,17 +326,14 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
     LastRedEgg[0] = -1;
     LastRedEgg[1] = -1;
 
-    if (redSize > 0)
-        PlaceRedQueen();
-    if (blackSize > 0)
-        PlaceBlackQueen();
+    if (redSize > 0) PlaceRedQueen();
+    if (blackSize > 0) PlaceBlackQueen();
     InitYelloAnt();
 
     FoodB = 0;
     FoodR = 0;
     FoodA = 0;
-    if (CurGameType != 3)
-        AddFood(-1, 0);
+    if (CurGameType != 3) AddFood(-1, 0);
 
     HealthB = 100;
     HealthR = 100;

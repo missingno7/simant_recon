@@ -2,7 +2,8 @@
  * Implements the relocatable memory manager and its handle, lock and allocation APIs. It also
  * provides malloc style wrappers, discardable blocks and memory diagnostics.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 171C; partial original translation unit.
+ * DOS: resident code; segment 171C; complete original translation unit.
+ * Statement layout is inferred from /Zi relocation order, not recovered or unique.
  * Windows: GR, from recorded function pairs in the Windows symbol inventory.
  * Build profile: msc600ax; /AL /Oeg /Gs /Zi.
  * Steered functions: RallocSetType, f_171C_0CF4.
@@ -386,12 +387,15 @@ void far mem_init_movable_heap(void)
     s_2F46 = (Handle)(((unsigned long)s_8C72 + g_91A2 - 0x1000) << 16);
     g_91A0 -= s_8C72 + 1;
     g_91A2 += s_8C72 + 1;
-    g_91AC = g_91A4 = BLK(g_91A2);
+    g_91A4 = BLK(g_91A2);
+    g_91AC = g_91A4;
     g_91AC->type = 0x80;
     g_91AC->next = 0;
     g_91AC->prev = 0;
     if (f_171C_0034()) {
-        g_91AC->paras = s_2F40 = s_2F3E = fd_50F6_394E + fd_50F6_394C - g_91A2;
+        s_2F3E = fd_50F6_394E + fd_50F6_394C - g_91A2;
+        s_2F40 = s_2F3E;
+        g_91AC->paras = s_2F40;
         g_91A8 = BLK(s_2F3E + SEG(BLK(g_91A2)));
         s_8C70 = SEG(g_91A8);
         fd_50F6_3950 = SEG(BLK(g_91A2)) + g_91A0 - 2;
@@ -399,9 +403,12 @@ void far mem_init_movable_heap(void)
         mem_carve_free_block(BLK(g_91A2 + g_91A0 - 2), fd_50F6_394C - g_91A2 - g_91A0 + 2, 2);
         mem_free_and_coalesce(BLK(g_91A2), 0);
     } else {
-        g_91AC->paras = s_2F40 = s_2F3E = g_91A0;
+        s_2F3E = g_91A0;
+        s_2F40 = s_2F3E;
+        g_91AC->paras = s_2F40;
         g_91A8 = BLK(s_2F3E + g_91A2);
-        fd_50F6_3950 = s_8C70 = SEG(g_91A8);
+        s_8C70 = SEG(g_91A8);
+        fd_50F6_3950 = s_8C70;
     }
     _fmemset(s_2F46 - s_2F4A, 0, s_2F4A * 4);
     fd_50F6_3948 = *Ralloc(0x20L, 0, "DiscardEntry");
@@ -421,13 +428,15 @@ int far mem_resize_in_place(Handle h, unsigned paras, int type)
     if (b->paras > paras) {
         if (b->paras < paras + 0x20)
             return 1;
-        mem_carve_free_block(b = mem_free_and_coalesce(b, 0), paras, type);
+        b = mem_free_and_coalesce(b, 0);
+        mem_carve_free_block(b, paras, type);
         return 1;
     } else {
         next = BLK(SEG(b) + b->paras);
         if (SEG(next) >= SEG(g_91A8) || next->type != 0x80 || next->paras + b->paras < paras)
             return 0;
-        mem_carve_free_block(b = mem_free_and_coalesce(b, 0), paras, type);
+        b = mem_free_and_coalesce(b, 0);
+        mem_carve_free_block(b, paras, type);
         return 1;
     }
 }
@@ -443,12 +452,15 @@ Handle far f_171C_0A5C(void)
     if (g_2F42 < g_2F44)
         Punt("HANDLES USED > HANDLES ALLOCATED");
     h = s_2F46 - 1;
-    for (i = 0; i < g_2F42 + 1; i++, h--) {
+    for (i = 0; i < g_2F42 + 1;) {
         if (!*h) {
-            if (++g_2F44 > g_2F42)
+            g_2F44++;
+            if (g_2F44 > g_2F42)
                 g_2F42 = g_2F44;
             return h;
         }
+        i++;
+        h--;
     }
     Punt("Handle free - but none found");
 }
@@ -494,7 +506,8 @@ int far f_171C_0BE2(int emsOnly)
     oldest = 0;
     found = 0L;
     h = s_2F46 - 1;
-    for (n = g_2F44; n; h--) {
+    n = g_2F44;
+    for (; n; h--) {
         if (*h) {
             b = HDR(h);
             if ((!emsOnly || (unsigned)SEG(b) < fd_50F6_3950) && b->type == 3 && s_2F30 - b->age >= oldest && !b->lock) {
@@ -577,7 +590,8 @@ Block far * far mem_find_free_block(unsigned paras, int type, char far *name, in
     char buffer[100];
 
     for (;;) {
-        for (b = g_91AC; b; b = BLK(b->next)) {
+        b = g_91AC;
+        for (; b; b = BLK(b->next)) {
             if (noems && SEG(b) >= fd_50F6_3950)
                 break;
             if (b->paras >= paras)
@@ -609,16 +623,23 @@ Block far * far f_171C_0FBC(unsigned paras, int type)
     compacted = 0;
     for (;;) {
         best = b = g_91AC;
-        for (; b; b = BLK(b->next))
+        for (; b;) {
             if (b->paras >= paras)
                 best = b;
+            b = BLK(b->next);
+        }
         if (best && best->paras >= paras) {
             if (first) {
-                for (n = BLK((unsigned)SEG(best) + (unsigned long)best->paras); (unsigned)SEG(n) < s_8C70; n = BLK((unsigned)SEG(n) + (unsigned long)n->paras))
-                    if ((t = n->type, !n->lock) && (t == 1 || t == 3 || t == 0x80))
+                n = BLK((unsigned)SEG(best) + (unsigned long)best->paras);
+                for (; (unsigned)SEG(n) < s_8C70;) {
+                    t = n->type;
+                    if (!n->lock && (t == 1 || t == 3 || t == 0x80))
                         goto again;
+                    n = BLK((unsigned)SEG(n) + (unsigned long)n->paras);
+                }
             }
-            if ((t = best->paras) > paras + 4) {
+            t = best->paras;
+            if (t > paras + 4) {
                 WinPrintf("<SPLIT>");
                 mem_carve_free_block(best, t - paras, 0);
                 n = BLK((unsigned)SEG(best) + (unsigned long)best->paras);
@@ -692,7 +713,8 @@ Handle far mem_alloc_handle_block(long size, int flags, char far *name, int unus
     flags &= ~8;
     if (size == 0)
         Punt("ALLOC 0 BYTES");
-    INIT();
+    if (!s_2F34)
+        mem_init_movable_heap();
     _fstrncpy(b_8C62, name, 13);
     b_8C62[13] = 0;
     paras = ((unsigned)size + 15) >> 4;

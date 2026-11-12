@@ -2,9 +2,10 @@
  * Displays the information window and card resources with styled text. It also contains byte
  * order conversion helpers used when reading those resources.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: overlay section 23 (S23); segment 39C7; partial original translation unit.
+ * DOS: overlay section 23 (S23); segment 39C7; complete original translation unit.
  * Windows: _TEXT, from recorded function pairs in the Windows symbol inventory. This is outside
  * the six named application groups.
+ * Nested-test and statement layout is inferred from /Zi relocation order, not recovered.
  */
 
 int g_2E04[16] = { 0 };
@@ -159,45 +160,47 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
         start = pos;
         x = rect->left + 1;
         while (width > w && done == 0) {
-            if (styl && *styl > styleIdx + 1 && styles[styleIdx + 1].pos <= (long)pos) {
-                styleIdx++;
-                n = pos - start;
-                if (n > 0) {
-                    if (n > 110)
-                        Punt("len = %d", n);
-                    _fstrncpy(buf, &text[start], n);
-                    buf[n] = 0;
-                    WinPrintf("%d(%d)(%d): [%s]\n", pos, n, styles[styleIdx].face, buf);
-                    font_PrintStr(x, y, buf);
-                    if (record && styles[styleIdx - 1].face == 0x100) {
-                        idx = 0;
-                        while (buf[idx] == ' ')
-                            _fstrcpy(buf + idx, buf + idx + 1);
-                        for (; buf[idx]; idx++)
-                            if ((_ctype + 1)[buf[idx]] & 2)
-                                buf[idx] -= 0x20;
-                        for (idx = 0; fd_4EE5_0500[idx].id != 0; idx++)
-                            if (_fstrcmp(buf, fd_4EE5_0500[idx].name) == 0)
-                                break;
-                        if (fd_4EE5_0500[idx].id != 0) {
-                            fd_4EE5_0000[g_8C24].r.left = x;
-                            fd_4EE5_0000[g_8C24].r.right = rect->left + w;
-                            fd_4EE5_0000[g_8C24].r.top = y;
-                            fd_4EE5_0000[g_8C24].r.bottom = y + lineH;
-                            fd_4EE5_0000[g_8C24].id = fd_4EE5_0500[idx].id;
-                            g_8C24++;
-                        } else {
-                            WinPrintf("\nERROR: Cannot file text rez(%s)\n", buf);
+            if (styl)
+                if (*styl > styleIdx + 1)
+                    if (styles[styleIdx + 1].pos <= (long)pos) {
+                        styleIdx++;
+                        n = pos - start;
+                        if (n > 0) {
+                            if (n > 110)
+                                Punt("len = %d", n);
+                            _fstrncpy(buf, &text[start], n);
+                            buf[n] = 0;
+                            WinPrintf("%d(%d)(%d): [%s]\n", pos, n, styles[styleIdx].face, buf);
+                            font_PrintStr(x, y, buf);
+                            if (record && styles[styleIdx - 1].face == 0x100) {
+                                idx = 0;
+                                while (buf[idx] == ' ')
+                                    _fstrcpy(buf + idx, buf + idx + 1);
+                                for (; buf[idx]; idx++)
+                                    if ((_ctype + 1)[buf[idx]] & 2)
+                                        buf[idx] -= 0x20;
+                                for (idx = 0; fd_4EE5_0500[idx].id != 0; idx++)
+                                    if (_fstrcmp(buf, fd_4EE5_0500[idx].name) == 0)
+                                        break;
+                                if (fd_4EE5_0500[idx].id != 0) {
+                                    fd_4EE5_0000[g_8C24].r.left = x;
+                                    fd_4EE5_0000[g_8C24].r.right = rect->left + w;
+                                    fd_4EE5_0000[g_8C24].r.top = y;
+                                    fd_4EE5_0000[g_8C24].r.bottom = y + lineH;
+                                    fd_4EE5_0000[g_8C24].id = fd_4EE5_0500[idx].id;
+                                    g_8C24++;
+                                } else {
+                                    WinPrintf("\nERROR: Cannot file text rez(%s)\n", buf);
+                                }
+                            }
                         }
+                        x = rect->left + w + 1;
+                        if (styles[styleIdx].face == 0x100)
+                            font_SetFont(font2);
+                        else
+                            font_SetFont(font1);
+                        start = pos;
                     }
-                }
-                x = rect->left + w + 1;
-                if (styles[styleIdx].face == 0x100)
-                    font_SetFont(font2);
-                else
-                    font_SetFont(font1);
-                start = pos;
-            }
             w += font_CharWidth(text[pos]);
             if (w < width) {
                 switch (text[pos]) {
@@ -230,11 +233,12 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
             if (pos < start)
                 start = pos;
         }
-        if (line >= firstLine && (n = pos - start) > 0) {
-            _fstrncpy(buf, &text[start], n);
-            buf[n] = 0;
-            font_PrintStr(x, y, buf);
-        }
+        if (line >= firstLine)
+            if ((n = pos - start) > 0) {
+                _fstrncpy(buf, &text[start], n);
+                buf[n] = 0;
+                font_PrintStr(x, y, buf);
+            }
         while (text[pos] == ' ')
             pos++;
         if (text[pos] == '\n' || text[pos] == '\r')
@@ -244,7 +248,9 @@ void far win_PrintStyleTextInRect(char far *text, int far *styl, struct Rect far
 }
 
 
-extern char far * far res_load_with_alloc_type(int object, int kind, int type);
+/* The three nested tests above take three declaration numbers. These unnamed
+ * parameters preserve the later functions' declaration context; spelling is inferred. */
+extern char far * far res_load_with_alloc_type(int, int, int);
 extern char far * far mem_Lock(char far *handle);
 
 int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int font1, int font2)
@@ -281,13 +287,14 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
         done = 0;
         brk = 0;
         while (w < width && done == 0) {
-            if (styl && styleIdx + 1 < *styl && styles[styleIdx + 1].pos <= (long)pos) {
-                styleIdx++;
-                if (styles[styleIdx].face == 0x100)
-                    font_SetFont(font2);
-                else
-                    font_SetFont(font1);
-            }
+            if (styl)
+                if (styleIdx + 1 < *styl && styles[styleIdx + 1].pos <= (long)pos) {
+                    styleIdx++;
+                    if (styles[styleIdx].face == 0x100)
+                        font_SetFont(font2);
+                    else
+                        font_SetFont(font1);
+                }
             w += font_CharWidth(text[pos]);
             if (w < width) {
                 switch (text[pos]) {
@@ -328,7 +335,8 @@ int far win_GetStyleTextHeight(char far *text, int far *styl, int width, int fon
 
 
 extern void far win_SetObjFormatStr(int obj, char far *text);
-extern void far mem_Unlock(char far *handle);
+/* Offsets the additional nested test in win_GetStyleTextHeight (inferred layout). */
+extern void far mem_Unlock(char far *);
 extern void far db_PurgeObject(int object, int kind);
 extern void _fastcall win_DrawTitle(int obj);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);

@@ -113,8 +113,10 @@ that remain open and the freshly compiled execution controls.
   `char` locals are never enregistered under `/Oe /Og`.
 * **Module 171C (`/AL /Oeg /Gs`, no `/Os`) needs record breaks between almost every pair of
   functions**: `/Zd` flushes too rarely, whereas `/Zi` (CodeView: a record per function)
-  satisfies 59 of 64 within-group order constraints. Open lead: the memory manager may have
-  been built with `/Zi`. Declaration-sensitive functions there: 07BE, 2086, 0EEA.
+  satisfies all cross-function constraints. Settled 2026-11-12 (worker layout-171c): the file
+  is exact as a complete translation unit under `/Zi` with an inferred statement layout;
+  `/Zd` violates 24 constraints and no debug option 26. Declaration-sensitive functions
+  there: 07BE, 2086, 0EEA.
 * **Private `_BSS` arrays are laid out in reverse declaration order** (worker win2, 23AE:
   declaring `g_8DA6[45]` before `g_8CF2[45]` puts `g_8CF2` at the lower address, 8CF2).
 * **A BP-slot value while SI/DI are free is usually an /Og CSE temporary, not a named local**:
