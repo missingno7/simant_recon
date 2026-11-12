@@ -11328,7 +11328,7 @@
     "end": 251234
    },
    "source": "src/simulation/yellow_ant.c",
-   "source_sha256": "1421f8f29f273661d4c6d65dfc80760cbc5d234449f5e9efe256f63d48ab8021",
+   "source_sha256": "b88b7b6391f4ff140699cc4ef232cf2c9cd61f3813147877512a7e6b2482c02c",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -11536,9 +11536,14 @@
      "size": 1990,
      "target_sha256": "972b0bdc52cf2602c3648410e00feae365406cbade83f255396fd90cae6e65f3",
      "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown",
-     "reloc_order": "GROUPED"
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "steered_history": [
+      {
+       "steered": "USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown",
+       "cleared": "the folded attribute test is gone: one direction local d is used throughout and the plane before EnterNest or ExitNest is saved in its own local, as the Macintosh build shows (C10:0004 keeps the direction in D4 and the saved plane in D7); worker witness-moveY"
+      }
+     ]
     },
     {
      "name": "EnterNest",
@@ -11564,7 +11569,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a24de857e767486882cec77a8153a074f3979af52ad8290f493a882ac77856fd"
+   "object_sha256": "34d18941bc0258e2b5b1773dfa3039dba377a76c3e3d02d64f922ccba4b76fef"
   },
   "S26:39C7": {
    "unit": "S26",

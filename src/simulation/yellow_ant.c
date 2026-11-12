@@ -4,7 +4,6 @@
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
  * DOS: overlay section 25 (S25); segment 3BA4; complete original translation unit.
  * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
- * Steered functions: DoAntMoveY.
  *
  * Built /AL /Os /Oe /Og /Zi.  The order of the extern declarations is part of the
  * fingerprint: MSC 6.00A breaks some operand-order ties by symbol-table state
@@ -95,12 +94,11 @@ extern int far TERRAINset;
 extern unsigned char far MapA[128][64];
 extern void far YellowDeath(int code);
 
-/* DoAntMoveY: exact body and relocation evidence. The folded unsigned
- * attribute range check is STEERED: it reproduces the stack-slot use ranking,
- * but the eliminated expression in the original source is unknown. */
+/* Advances the player ant toward its target and handles arrival or obstruction.
+ * One direction local and a separate saved plane follow Mac C10:0004
+ * (D4 and D7); local names and sharing are source hypotheses. */
 void far DoAntMoveY(void)
 {
-    int dir;
     int x;
     int result;
     int ty;
@@ -113,13 +111,14 @@ void far DoAntMoveY(void)
     int dx;
     int dy;
     int tile;
+    int oldplane;
 
     if (MeMoveMe == 0)
         return;
     result = 0;
     if (MeCmd >= 3) {
         if (GetAntIndex(MeTargLifePlane, MeTargIndex, &tx, &ty, &tattr, &tstate, &tdir) == 0
-            || (((unsigned)tattr >= 0) && ((MeTargLife ^ tattr) & 0xf0) != 0)) {
+            || ((MeTargLife ^ tattr) & 0xf0) != 0) {
             result = -2;
             goto done;
         }
@@ -142,9 +141,9 @@ void far DoAntMoveY(void)
     }
     if (MeCmd == 1)
     if (MeGoalPlane == MePlane) {
-        dir = GetDir(MeLocX, MeLocY, MeGoalX, MeGoalY);
-        x = Dx9[dir] + MeLocX;
-        y = Dy9[dir] + MeLocY;
+        d = GetDir(MeLocX, MeLocY, MeGoalX, MeGoalY);
+        x = Dx9[d] + MeLocX;
+        y = Dy9[d] + MeLocY;
         if (x < 0 || x > 0x7f)
             x = MeLocX;
         if (y < 0 || y > 0x3f)
@@ -195,9 +194,9 @@ void far DoAntMoveY(void)
         if (MeGoalPlane > 1 || (MeGoalPlane == MePlane && MeGoalX == MeLocX
                                  && MeGoalY == MeLocY)) {
             DoEditAndMapUpdateDraw();
-            d = MePlane;
+            oldplane = MePlane;
             EnterNest();
-            if (MeGoalPlane != d || MeGoalX != x || MeGoalY != y
+            if (MeGoalPlane != oldplane || MeGoalX != x || MeGoalY != y
                 || MePlane == MapPlane)
                 goto done;
             if (OptionStates[0] == 0)
@@ -208,9 +207,9 @@ void far DoAntMoveY(void)
     }
     if (MeLocY == 0) {
         DoEditAndMapUpdateDraw();
-        d = MePlane;
+        oldplane = MePlane;
         ExitNest();
-        if (MeGoalPlane != d || MeGoalX != x || MeGoalY != y
+        if (MeGoalPlane != oldplane || MeGoalX != x || MeGoalY != y
             || MePlane == MapPlane)
             goto done;
         if (OptionStates[0] == 0)

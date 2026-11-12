@@ -13,7 +13,7 @@ Last gate result: **PASS** (2026-11-12).
 | Item | State | Open |
 | --- | --- | --- |
 | 1. Code exact | 1,637 of 1,643 game functions | 6 functions, 2,421 bytes; 5 of 122 code modules are not yet complete translation units |
-| 2. No unexplained steering | 18 exact functions depend on a steering construct | 10,820 bytes |
+| 2. No unexplained steering | 17 exact functions depend on a steering construct | 8,830 bytes |
 | 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 2 functions |
@@ -59,7 +59,6 @@ They stay here until a natural spelling replaces it.
 | `S16:384C` | `DrawSimPayoff` | 481 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S16:384C` | `ShowIntro` | 625 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S24:39C7` | `drawHistGraph` | 732 | drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown |
-| `S25:3BA4` | `DoAntMoveY` | 1990 | USE-1: eliminated unsigned tattr >= 0 read reproduces address-taken local use ranking; original eliminated expression unknown |
 | `root:0250` | `f_0250_129E` | 264 | f_0250_129E=a point local of which only y is read keeps two frame words, and copying y through the later index variable selects the early DI load; the original locals are unknown |
 | `root:0798` | `GetTriLatDist` | 294 | three unused locals x, y, j in DrawControlLevels -> identifier count before GetTriLatDist (+5..7 mod 17 after DrawControlLevels selects the dx-w CSE/operand order) |
 | `root:171C` | `RallocSetType` | 228 | volatile int type in RallocSetType -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX |

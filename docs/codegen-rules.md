@@ -308,6 +308,12 @@ that remain open and the freshly compiled execution controls.
   random roll. `roll = 0;` before the loop with `= roll;` in the six stores is exact in DOS;
   literal zero stores give 1,359 bytes for 1,355, and the same construct with any other local
   gives 1,358. Check the other builds for a variable where our source has a literal.
+* **A folded test can stand for a different sharing of locals** (DoAntMoveY, S25:3BA4,
+  2026-11-12, worker witness-moveY; rule USE-1 no longer needed there). The Macintosh build
+  keeps the direction in one register throughout and the plane saved before EnterNest or
+  ExitNest in another. One direction local `d` and a separate `oldplane` are exact in DOS
+  without the folded attribute test. Negative: the file selector `o09_35F5_03C6` has no
+  witness (the Macintosh uses the system file dialog, Windows lacks the affected regions).
 * **White space alone moves line entries** (yard file, S06:35F5, worker yard-layout,
   2026-11-12). An `if` on the line after its `else` usually adds one line entry (21 of 23
   sites; none where the entries merge at one offset), and a single-statement `if` written on
