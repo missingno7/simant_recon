@@ -290,3 +290,8 @@ that remain open and the freshly compiled execution controls.
   file needed four more before AnimYellowFight's second SRand2 call and eight in total before
   GetMyDis' last return; the result is recorded as layout inferred because the layout is not
   unique.
+* **White space alone moves line entries** (yard file, S06:35F5, worker yard-layout,
+  2026-11-12). An `if` on the line after its `else` usually adds one line entry (21 of 23
+  sites; none where the entries merge at one offset), and a single-statement `if` written on
+  one line with its statement usually saves one. Neither takes a declaration number, so no
+  later function changes. Prefer these to nested `if`s when solving record breaks.

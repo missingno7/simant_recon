@@ -2,9 +2,15 @@
  * Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also
  * advances yard colonies and swarms.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: overlay section 6 (S06); segment 35F5; partial original translation unit.
+ * DOS: overlay section 6 (S06); segment 35F5; complete original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
- * Steered functions: SimColonies.
+ *
+ * Line layout (inferred, not recovered): /Zi starts a new object record every 52 line
+ * entries, and the original relocation order fixes where those breaks fall.  This layout
+ * satisfies all order constraints of the file and is not unique.  It differs from the
+ * usual spelling in white space only: every "else if" has the "if" on its own line, the
+ * four dog position clamps of SimDog and the single-statement tests of FollowBoyDir and
+ * FollowCatDir are written on one line, and SimColonies tests CurGameType in a nested if.
  */
 
 static char dogA[6] = { 3, 4, -3, -4, 0, 0 };  /* 2448 */
@@ -275,42 +281,46 @@ void far SimKidOutside(void)
     if (BoyIsMowing != 0) {
         if (LastMowX != BoyPx || LastMowY != BoyPy)
             BoyDir = GetMowDir(BoyPx, BoyPy);
-    } else if (--BoyTurnCnt < 0) {
-        BoyDir = (SRand1(3) + BoyDir - 1) & 3;
-        BoyTurnCnt = 4;
-    }
+    } else
+        if (--BoyTurnCnt < 0) {
+            BoyDir = (SRand1(3) + BoyDir - 1) & 3;
+            BoyTurnCnt = 4;
+        }
     switch (BoyHere) {
     case 1:
         if (SRand1(900) == 0) {
             SendBoyMsg(1);
             BoyHere = 2;
-        } else if (SRand1(600) == 0 || CurGameType == 3 || CurGameType == 0) {
-            SendBoyMsg(2);
-            BoyHere = 5;
-        } else {
-            if (SRand1(200) == 0)
-                SendBoyMsg(SRand1(8) + 7);
-            if (RainOn != 0)
+        } else
+            if (SRand1(600) == 0 || CurGameType == 3 || CurGameType == 0) {
+                SendBoyMsg(2);
                 BoyHere = 5;
-        }
+            } else {
+                if (SRand1(200) == 0)
+                    SendBoyMsg(SRand1(8) + 7);
+                if (RainOn != 0)
+                    BoyHere = 5;
+            }
         break;
     case 2:
         if (BoyPy < 12)
             BoyDir = 2;
-        else if (BoyPy > 12)
-            BoyDir = 0;
-        else if (BoyPx > 3)
-            BoyDir = 3;
-        else {
-            BoyHere = 3;
-            LastMowX = 3;
-            LastMowY = 13;
-            BoyIsMowing = 1;
-            InitGrassMap();
-            BoyDir = 2;
-            BoyX = 0x7d;
-            BoyY = 0xaa;
-        }
+        else
+            if (BoyPy > 12)
+                BoyDir = 0;
+            else
+                if (BoyPx > 3)
+                    BoyDir = 3;
+                else {
+                    BoyHere = 3;
+                    LastMowX = 3;
+                    LastMowY = 13;
+                    BoyIsMowing = 1;
+                    InitGrassMap();
+                    BoyDir = 2;
+                    BoyX = 0x7d;
+                    BoyY = 0xaa;
+                }
         break;
     case 3:
         if (SRand1(100) == 0)
@@ -326,26 +336,30 @@ void far SimKidOutside(void)
     case 4:
         if (BoyPy < 12)
             BoyDir = 2;
-        else if (BoyPy > 12)
-            BoyDir = 0;
-        else if (BoyPx > 3)
-            BoyDir = 3;
-        else {
-            BoyHere = 5;
-            BoyIsMowing = 0;
-        }
+        else
+            if (BoyPy > 12)
+                BoyDir = 0;
+            else
+                if (BoyPx > 3)
+                    BoyDir = 3;
+                else {
+                    BoyHere = 5;
+                    BoyIsMowing = 0;
+                }
         LastMowX = BoyPx;
         LastMowY = BoyPy;
         break;
     case 5:
         if (BoyPy < 5)
             BoyDir = 2;
-        else if (BoyPy > 5)
-            BoyDir = 0;
-        else if (BoyPx > 3)
-            BoyDir = 3;
         else
-            BoyHere = 1;
+            if (BoyPy > 5)
+                BoyDir = 0;
+            else
+                if (BoyPx > 3)
+                    BoyDir = 3;
+                else
+                    BoyHere = 1;
         break;
     }
     BoyFrame = dirFrame[BoyDir] + stepAnim[YardCycle & 3];
@@ -353,15 +367,16 @@ void far SimKidOutside(void)
         BoyFrame += 100;
         BoyX += BxTab[BoyDir];
         BoyY += ByTab[BoyDir];
-    } else if (BoyStandCnt == 0) {
-        if (SRand32() == 0)
-            BoyStandCnt = 20;
-        BoyX += BxTab[BoyDir];
-        BoyY += ByTab[BoyDir];
-    } else {
-        BoyStandCnt--;
-        BoyFrame = BoyDir + 20;
-    }
+    } else
+        if (BoyStandCnt == 0) {
+            if (SRand32() == 0)
+                BoyStandCnt = 20;
+            BoyX += BxTab[BoyDir];
+            BoyY += ByTab[BoyDir];
+        } else {
+            BoyStandCnt--;
+            BoyFrame = BoyDir + 20;
+        }
     BoyPx = (BoyX + BoyY - 200) / 28;
     BoyPy = (BoyY - 38) / 10;
     if (BoyPy < 0)
@@ -375,22 +390,25 @@ void far SimKidOutside(void)
     if (BoyIsMowing == 0) {
         if (BoyPy < 1)
             BoyDir = 2;
-        else if (BoyPy > 14)
-            BoyDir = 0;
+        else
+            if (BoyPy > 14)
+                BoyDir = 0;
         if (BoyPx > 10)
             BoyDir = 3;
-        else if (BoyPy < 5) {
-            if (BoyPx < 4)
-                BoyDir = 1;
-        } else if (BoyPx < 3) {
-            BoyDir = 0;
-            if (BoyPy < 6) {
-                if (BoyHere == 3)
+        else
+            if (BoyPy < 5) {
+                if (BoyPx < 4)
                     BoyDir = 1;
-                else
-                    NodeNum = 21;
-            }
-        }
+            } else
+                if (BoyPx < 3) {
+                    BoyDir = 0;
+                    if (BoyPy < 6) {
+                        if (BoyHere == 3)
+                            BoyDir = 1;
+                        else
+                            NodeNum = 21;
+                    }
+                }
     }
     FootHere = 0;
     FootTog = !FootTog;
@@ -416,18 +434,19 @@ void far SimKidOutside(void)
         FootFall(FootX, FootY);
         if (BoyIsMowing != 0)
             MowerFall(MowX, MowY);
-    } else if (BoyIsMowing != 0) {
-        if ((v = YMapPopB[BoyPx][BoyPy]) != 0) {
-            if ((v -= v >> 2) == 0)
-                BColoniesKilled++;
-            YMapPopB[BoyPx][BoyPy] = v;
+    } else
+        if (BoyIsMowing != 0) {
+            if ((v = YMapPopB[BoyPx][BoyPy]) != 0) {
+                if ((v -= v >> 2) == 0)
+                    BColoniesKilled++;
+                YMapPopB[BoyPx][BoyPy] = v;
+            }
+            if ((v = YMapPopR[BoyPx][BoyPy]) != 0) {
+                if ((v -= v >> 2) == 0)
+                    RColoniesKilled++;
+                YMapPopR[BoyPx][BoyPy] = v;
+            }
         }
-        if ((v = YMapPopR[BoyPx][BoyPy]) != 0) {
-            if ((v -= v >> 2) == 0)
-                RColoniesKilled++;
-            YMapPopR[BoyPx][BoyPy] = v;
-        }
-    }
 }
 
 /* GetMowDir (Win16 unit order): direction toward an adjacent uncut grass cell */
@@ -647,16 +666,17 @@ void far SimKidInside(void)
             y = kidY21[NodeCnt];
             break;
         }
-    } else if (NodeNum < 39) {
-        i = NodeNum - 30;
-        frame = outF[i];
-        x = outX[i];
-        y = outY[i];
-        if (SRand1(outChance[i]) == 0) {
-            NodeNum = outNext[i];
-            NodeCnt = 0;
+    } else
+        if (NodeNum < 39) {
+            i = NodeNum - 30;
+            frame = outF[i];
+            x = outX[i];
+            y = outY[i];
+            if (SRand1(outChance[i]) == 0) {
+                NodeNum = outNext[i];
+                NodeCnt = 0;
+            }
         }
-    }
     BoyHere = 0;
     if (NodeNum == 38)
         BoyHere = BoyDir = 1;
@@ -784,18 +804,19 @@ void far SimBird(void)
                 f_00DF_00E8(7, 0, 6);
         }
         BirdOn = 2;
-    } else if (fd_50F6_383A > BirdDelay) {
-        BirdDelay = fd_50F6_383A + 20L;
-        if (CurYardPnt[0] >= 5 && SRand2() == 0 &&
-            (SwarmCntB > 0 || SwarmCntR > 0)) {
-            BirdGoalX = CurYardPnt[0] * 0x1c - CurYardPnt[1] * 10 + 0xb2;
-            BirdGoalY = CurYardPnt[1] * 10 + 0x2e;
-            BirdOn = 1;
-            BirdX = 0;
-            BirdY = SRand64() + 4;
-            BirdFrame = 0;
+    } else
+        if (fd_50F6_383A > BirdDelay) {
+            BirdDelay = fd_50F6_383A + 20L;
+            if (CurYardPnt[0] >= 5 && SRand2() == 0 &&
+                (SwarmCntB > 0 || SwarmCntR > 0)) {
+                BirdGoalX = CurYardPnt[0] * 0x1c - CurYardPnt[1] * 10 + 0xb2;
+                BirdGoalY = CurYardPnt[1] * 10 + 0x2e;
+                BirdOn = 1;
+                BirdX = 0;
+                BirdY = SRand64() + 4;
+                BirdFrame = 0;
+            }
         }
-    }
 }
 
 extern int far CatDir;
@@ -829,13 +850,14 @@ void far SimCat(void)
                     if (CatFrame >= 6)
                         CatFrame = 4;
                 }
-            } else if (CatDir == 2) {
-                CatDir = 6;
-                CatFrame = 4;
-            } else {
-                CatDir = 2;
-                CatFrame = 1;
-            }
+            } else
+                if (CatDir == 2) {
+                    CatDir = 6;
+                    CatFrame = 4;
+                } else {
+                    CatDir = 2;
+                    CatFrame = 1;
+                }
             if (MapMode == 0 && YardMode < 2 && SRand64() == 0) {
                 f_00DF_00E8(0xd, 0, 5);
                 return;
@@ -854,32 +876,34 @@ void far SimCat(void)
                         f_00DF_00E8(0xe, 0, 5);
                 }
             }
-        } else if (CatOn == 2) {
-            if (++CatFrame >= 13)
-                CatFrame = 11;
-            if (++CatCycle > 30) {
-                CatCycle = 0;
+        } else
+            if (CatOn == 2) {
+                if (++CatFrame >= 13)
+                    CatFrame = 11;
+                if (++CatCycle > 30) {
+                    CatCycle = 0;
+                    CatOn = 1;
+                    CatFrame = (CatDir == 2) ? 0 : 3;
+                }
+            } else {
+                if (++CatFrame >= 30) {
+                    CatFrame = 0;
+                    CatOn = 0;
+                    CatDelay = MacTickCount() + 600L;
+                }
+            }
+    } else
+        if (MacTickCount() > CatDelay) {
+            CatDelay = MacTickCount() + 200L;
+            if (SRand16() == 0 || GlobalKey == 0x8d) {
                 CatOn = 1;
-                CatFrame = (CatDir == 2) ? 0 : 3;
-            }
-        } else {
-            if (++CatFrame >= 30) {
+                CatX = 0xfc;
+                CatY = 0x19;
+                CatDir = 2;
                 CatFrame = 0;
-                CatOn = 0;
-                CatDelay = MacTickCount() + 600L;
+                CatCycle = 0;
             }
         }
-    } else if (MacTickCount() > CatDelay) {
-        CatDelay = MacTickCount() + 200L;
-        if (SRand16() == 0 || GlobalKey == 0x8d) {
-            CatOn = 1;
-            CatX = 0xfc;
-            CatY = 0x19;
-            CatDir = 2;
-            CatFrame = 0;
-            CatCycle = 0;
-        }
-    }
 }
 
 extern long far DogBarkDelay;
@@ -895,10 +919,11 @@ void far SimDog(void)
     if (--DogTurnCnt < 0) {
         if (CatOn != 0)
             DogDir = FollowCatDir();
-        else if (NodeNum < 0x26)
-            DogDir = (SRand1(3) + DogDir - 1) & 3;
         else
-            DogDir = FollowBoyDir();
+            if (NodeNum < 0x26)
+                DogDir = (SRand1(3) + DogDir - 1) & 3;
+            else
+                DogDir = FollowBoyDir();
         DogTurnCnt = 4;
     }
     if (DogDir == 1 && SRand1(10) == 0) {
@@ -913,22 +938,20 @@ void far SimDog(void)
     DogPy = (DogY - 38) / 10;
     DogX += dogA[DogDir];
     DogPx = (DogX + DogY - 200) / 28;
-    if (DogPy < 0)
-        DogPy = 0;
-    if (DogPy > 15)
-        DogPy = 15;
-    if (DogPx < 0)
-        DogPx = 0;
-    if (DogPx > 11)
-        DogPx = 11;
+    if (DogPy < 0) DogPy = 0;
+    if (DogPy > 15) DogPy = 15;
+    if (DogPx < 0) DogPx = 0;
+    if (DogPx > 11) DogPx = 11;
     if (DogPy < 1)
         DogDir = 2;
-    else if (DogPy > 14)
-        DogDir = 0;
+    else
+        if (DogPy > 14)
+            DogDir = 0;
     if (DogPx > 10)
         DogDir = 3;
-    else if (DogPx < 4)
-        DogDir = 1;
+    else
+        if (DogPx < 4)
+            DogDir = 1;
     if (DogFrame >= 100 && DogFrame <= 103 && SRand1(6) == 0)
         MakeBark(SRand4(), 5);
 }
@@ -943,38 +966,25 @@ int far FollowBoyDir(void)
 
     dy = DogPy - BoyPy;
     dx = DogPx - BoyPx;
-    if (dx < 0)
-        adx = -dx;
-    else
-        adx = dx;
-    if (dy < 0)
-        ady = -dy;
-    else
-        ady = dy;
-    if (adx < 1 && ady < 1 && BoyIsMowing != 0)
-        MakeBark(1, 0x7f);
-    if (adx < 2 && ady < 2)
-        return YardCycle & 3;
-    if (dy < 0)
-        return 2;
-    if (dy > 1)
-        return 0;
-    if (dx < 0)
-        return 1;
-    if (dx > 1)
-        return 3;
+    if (dx < 0) adx = -dx;
+    else adx = dx;
+    if (dy < 0) ady = -dy;
+    else ady = dy;
+    if (adx < 1 && ady < 1 && BoyIsMowing != 0) MakeBark(1, 0x7f);
+    if (adx < 2 && ady < 2) return YardCycle & 3;
+    if (dy < 0) return 2;
+    if (dy > 1) return 0;
+    if (dx < 0) return 1;
+    if (dx > 1) return 3;
     return YardCycle & 3;
 }
 
 /* FollowCatDir (Win16 unit order) */
 int far FollowCatDir(void)
 {
-    if (DogPx < 5)
-        return 1;
-    if (DogPx > 8)
-        return 3;
-    if (DogPy > 0)
-        return 0;
+    if (DogPx < 5) return 1;
+    if (DogPx > 8) return 3;
+    if (DogPy > 0) return 0;
     return YardCycle & 3;
 }
 
@@ -1113,8 +1123,7 @@ void far Reproduce(int x, int y, int colony);
 
 /* SimColonies (Win16 unit order): yard colony growth, swarms and the for-sale scenario */
 /* r also carries the two home-nest populations before the loops and b is read before r: both
- * decide the frame layout (r at [bp-8], b [bp-4], patches [bp-2]); the nested game-type test
- * keeps the /Zi line-entry count that places a LEDATA break in 229F..2309 (worker resB). */
+ * decide the frame layout (r at [bp-8], b [bp-4], patches [bp-2]). */
 void far SimColonies(void)
 {
     int patches, b, y, r;
@@ -1160,13 +1169,14 @@ void far SimColonies(void)
                 if (b <= 0) {
                     BColoniesKilled++;
                     YMapPopB[x][y] = 0;
-                } else if (b < 250)
-                    YMapPopB[x][y] = b;
-                else {
-                    YMapPopB[x][y] = 250;
-                    if (SRand1(10) == 0)
-                        Reproduce(x, y, 0);
-                }
+                } else
+                    if (b < 250)
+                        YMapPopB[x][y] = b;
+                    else {
+                        YMapPopB[x][y] = 250;
+                        if (SRand1(10) == 0)
+                            Reproduce(x, y, 0);
+                    }
             }
             if (r != 0) {
                 ColonyTotalRed++;
@@ -1181,13 +1191,14 @@ void far SimColonies(void)
                         y = 8;
                         YMapPopR[SRand1(6) + 2][0] = 20;
                     }
-                } else if (r < 250)
-                    YMapPopR[x][y] = r;
-                else {
-                    YMapPopR[x][y] = 250;
-                    if (SRand1(10) == 0)
-                        Reproduce(x, y, 1);
-                }
+                } else
+                    if (r < 250)
+                        YMapPopR[x][y] = r;
+                    else {
+                        YMapPopR[x][y] = 250;
+                        if (SRand1(10) == 0)
+                            Reproduce(x, y, 1);
+                    }
             }
         }
     }

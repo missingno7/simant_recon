@@ -35,16 +35,16 @@ Validation: **PASS** (2026-11-12)
 | unresolved_code_bytes | 2,737 |
 | unresolved_data_bytes | 113 |
 | scaffold_functions | 0 |
-| exact_translation_units | 98 |
-| complete_tus_relocation_order_proven | 96 |
-| claims_within_group_order_pending | 16 |
+| exact_translation_units | 99 |
+| complete_tus_relocation_order_proven | 97 |
+| claims_within_group_order_pending | 12 |
 | inplace_draft_functions | 6 |
-| claims_exact_steered | 19 |
-| exact_c_bytes_in_complete_tus | 160,351 |
-| exact_c_bytes_in_partial_modules | 89,788 |
-| exact_c_bytes_steered | 12,830 |
-| exact_c_bytes_layout_inferred | 30,271 |
-| exact_c_bytes_within_group_pending | 12,030 |
+| claims_exact_steered | 18 |
+| exact_c_bytes_in_complete_tus | 169,934 |
+| exact_c_bytes_in_partial_modules | 80,205 |
+| exact_c_bytes_steered | 11,614 |
+| exact_c_bytes_layout_inferred | 39,854 |
+| exact_c_bytes_within_group_pending | 7,564 |
 | claims_layout_inferred | 27 |
 | asm_transcribed_bytes | 51,922 |
 | exact_asm_bytes_genuine | 50,441 |
@@ -52,7 +52,7 @@ Validation: **PASS** (2026-11-12)
 | data_bytes_opaque_unmarked | 6,333 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `9c667bd876453b169a710f5de2067ac2816e0809ff4415cc2ff162665f28180b`
+Manifest: `2d06d6e472648e9efc26bf76f52d7d34b5f4de1605d4d2675c0da59f886e74da`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 

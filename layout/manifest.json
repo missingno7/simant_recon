@@ -3874,277 +3874,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/simulation/yard.c",
-   "source_sha256": "a739058ece6c61f02cd37b770cbe36fa53b8f9f947c8e60015a05141816f502d",
-   "claims": [
-    {
-     "name": "InitSimYard",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 0,
-     "size": 371,
-     "target_sha256": "81cf45a6c8d0943c41618af6b6acea460f8f9d5b873478575d6a0908f1a972ea",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DoSimYard",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 371,
-     "size": 87,
-     "target_sha256": "1e75122a1904e259f61b7ac43f9ff9c5cdc0bdcb6139363caf3d3347fe4fc167",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SendBoyMsg",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 458,
-     "size": 66,
-     "target_sha256": "bd3aed93182d978b80fcaf08ad2b3842869dddef1fc4cbd4041dfddb7bdfc73a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SimRain",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 524,
-     "size": 173,
-     "target_sha256": "c09c759ff20455ba998c62fdf16374f14c904e5d9f75091da0c96cbf866c9b69",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SimKidOutside",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 697,
-     "size": 1710,
-     "target_sha256": "2596a3fd398a363d8a8202a996ac2b96c813291524127f07dfea0032d8f10002",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetMowDir",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 2407,
-     "size": 144,
-     "target_sha256": "49f3ec670870f88fe4d787162e41fb2c2aeb79dd93eb5bc32c831b17f07bfb91",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "NotMowed",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 2551,
-     "size": 59,
-     "target_sha256": "7fedcdfa6c060253a090a2c4628dcf97218c105f0e43c1e2d7198528c9f1a5b9",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "IsValidYard",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 2610,
-     "size": 45,
-     "target_sha256": "273d9c1ddeacc6b1d32e98660c87846acee4100762cdd035f022a085117094f8",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "InitGrassMap",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 2655,
-     "size": 49,
-     "target_sha256": "5a8c0d383109b7415eb43bcf6b8ab892b50c85451b0900c27c8cc34dbd3ef242",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SimBird",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 4607,
-     "size": 717,
-     "target_sha256": "5db3f3ed674e81879512f5e57cb43eed2dd9d075a253ce0163870c85d13f1b81",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "FollowBoyDir",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 6671,
-     "size": 176,
-     "target_sha256": "3485e02eeee003319e9e69c8c4ab5a58ab4bdc47ae59b9daf2f4bc31aebb0b65",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "FollowCatDir",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 6847,
-     "size": 73,
-     "target_sha256": "5a95e4298fb77dfcb2dea8a87188d7edf089f1bd4bbf69435a220793c13733a2",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "MakeBark",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 6920,
-     "size": 171,
-     "target_sha256": "d3f39158fba93e4c255cdb6645e655627ff2a021dbbb4524df4676c7c3eee0d4",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "FootFall",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 7091,
-     "size": 311,
-     "target_sha256": "d26fcbcdadb5b72c77a2dc38e1b9d0307b440944e3266d1a743521470e4697db",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "MowerFall",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 7402,
-     "size": 179,
-     "target_sha256": "4dce6f868a063c79adba4d2452b0eacc36d168d1256721f2e42265fdef985f19",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "MaintainSwarm",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 7581,
-     "size": 183,
-     "target_sha256": "4391940c0756618ddc3e65edbbea80d286901e15793005b72e091b68eb85273e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "Reproduce",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 9089,
-     "size": 178,
-     "target_sha256": "3eac88337dd11a5ead6ba875cab70fdcf7aba931c3cd62f7a3ba768283a36151",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "StartMigrate",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 9267,
-     "size": 151,
-     "target_sha256": "1edfdbed7614424d517f424199cf728a4807e99b84c07645d456c74556c7ecfa",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "EndMigrate",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 9418,
-     "size": 165,
-     "target_sha256": "17086f4b437cf0d0f2f13b21caca484889803f7fe7735592c9431afa8d99f971",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "GetNearbyPatches",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 8980,
-     "size": 109,
-     "target_sha256": "3fea7680775903c3ab5d8b06d3e2747a6e9b42703fc90fe242e22719bbb97673",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SimColonies",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 7764,
-     "size": 1216,
-     "target_sha256": "b206741c80247ec8389bab5a70d2865fa771531978dda51274bf83ceea5e2863",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "record order only: the nested 'if (CurGameType == 2) if (x < 2 ...)' test adds one /Zi line entry so the 52-entry LINNUM flush falls in 229F..2309; the cumulative count also depends on the SimKidInside scaffold draft's line count (bytes are natural: r reused for the population clamps, b loaded before r)",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "SimKidInside",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 2704,
-     "size": 1903,
-     "target_sha256": "886f033b4d56bc4125ba278eaaf8d09bbe9b02b2f356cc746579d70661374f99",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "SimCat",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 5324,
-     "size": 823,
-     "target_sha256": "dcc91a06ea6b329413a5ef697e39cba2e05f06dd64d2fd8126e56d90bcf90194",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    },
-    {
-     "name": "SimDog",
-     "unit": "S06",
-     "seg": 13813,
-     "off": 6147,
-     "size": 524,
-     "target_sha256": "6158a8994db0bcd9f954c59825feb1c5715987754ab3fccbb8e35ba91cff56de",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "ddc38342c30d04865066e3930d9c4d54209d9d06d12af20e0d973928005d3bb7",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -4152,8 +3881,8 @@
      "why": "Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also advances yard colonies and swarms."
     }
    ],
-   "summary": "Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also advances yard colonies and swarms.",
    "windows_group": "SIMTWO",
+   "summary": "Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also advances yard colonies and swarms.",
    "file_header": {
     "text": "Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also\nadvances yard colonies and swarms.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 6 (S06); segment 35F5; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory.\nSteered functions: SimColonies.",
     "name_kind": "descriptive",
@@ -4427,7 +4156,290 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "layout_inferred": [
+    "line layout, white space only (worker yard-layout): every else-if has the if on its own line (23 sites), the four dog clamps of SimDog and the single-statement tests of FollowBoyDir and FollowCatDir are on one line, SimColonies keeps the nested CurGameType test; this puts the 52-entry /Zi record breaks where the relocation order of the complete file needs them. No declaration changed. The layout is not unique, so the original line structure stays unknown"
+   ],
+   "extent": {
+    "start": 221008,
+    "end": 230591
+   },
+   "source": "src/simulation/yard.c",
+   "source_sha256": "d41fab60fc7eb23fcac27f78739b808eab49ee150285296ea47be94046ed9d6e",
+   "claims": [
+    {
+     "name": "InitSimYard",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 0,
+     "size": 371,
+     "target_sha256": "81cf45a6c8d0943c41618af6b6acea460f8f9d5b873478575d6a0908f1a972ea",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoSimYard",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 371,
+     "size": 87,
+     "target_sha256": "1e75122a1904e259f61b7ac43f9ff9c5cdc0bdcb6139363caf3d3347fe4fc167",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SendBoyMsg",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 458,
+     "size": 66,
+     "target_sha256": "bd3aed93182d978b80fcaf08ad2b3842869dddef1fc4cbd4041dfddb7bdfc73a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SimRain",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 524,
+     "size": 173,
+     "target_sha256": "c09c759ff20455ba998c62fdf16374f14c904e5d9f75091da0c96cbf866c9b69",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SimKidOutside",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 697,
+     "size": 1710,
+     "target_sha256": "2596a3fd398a363d8a8202a996ac2b96c813291524127f07dfea0032d8f10002",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetMowDir",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2407,
+     "size": 144,
+     "target_sha256": "49f3ec670870f88fe4d787162e41fb2c2aeb79dd93eb5bc32c831b17f07bfb91",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "NotMowed",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2551,
+     "size": 59,
+     "target_sha256": "7fedcdfa6c060253a090a2c4628dcf97218c105f0e43c1e2d7198528c9f1a5b9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "IsValidYard",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2610,
+     "size": 45,
+     "target_sha256": "273d9c1ddeacc6b1d32e98660c87846acee4100762cdd035f022a085117094f8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "InitGrassMap",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2655,
+     "size": 49,
+     "target_sha256": "5a8c0d383109b7415eb43bcf6b8ab892b50c85451b0900c27c8cc34dbd3ef242",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SimBird",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 4607,
+     "size": 717,
+     "target_sha256": "5db3f3ed674e81879512f5e57cb43eed2dd9d075a253ce0163870c85d13f1b81",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "FollowBoyDir",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6671,
+     "size": 176,
+     "target_sha256": "3485e02eeee003319e9e69c8c4ab5a58ab4bdc47ae59b9daf2f4bc31aebb0b65",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FollowCatDir",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6847,
+     "size": 73,
+     "target_sha256": "5a95e4298fb77dfcb2dea8a87188d7edf089f1bd4bbf69435a220793c13733a2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "MakeBark",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6920,
+     "size": 171,
+     "target_sha256": "d3f39158fba93e4c255cdb6645e655627ff2a021dbbb4524df4676c7c3eee0d4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "FootFall",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 7091,
+     "size": 311,
+     "target_sha256": "d26fcbcdadb5b72c77a2dc38e1b9d0307b440944e3266d1a743521470e4697db",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "MowerFall",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 7402,
+     "size": 179,
+     "target_sha256": "4dce6f868a063c79adba4d2452b0eacc36d168d1256721f2e42265fdef985f19",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "MaintainSwarm",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 7581,
+     "size": 183,
+     "target_sha256": "4391940c0756618ddc3e65edbbea80d286901e15793005b72e091b68eb85273e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "Reproduce",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 9089,
+     "size": 178,
+     "target_sha256": "3eac88337dd11a5ead6ba875cab70fdcf7aba931c3cd62f7a3ba768283a36151",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "StartMigrate",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 9267,
+     "size": 151,
+     "target_sha256": "1edfdbed7614424d517f424199cf728a4807e99b84c07645d456c74556c7ecfa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "EndMigrate",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 9418,
+     "size": 165,
+     "target_sha256": "17086f4b437cf0d0f2f13b21caca484889803f7fe7735592c9431afa8d99f971",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetNearbyPatches",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 8980,
+     "size": 109,
+     "target_sha256": "3fea7680775903c3ab5d8b06d3e2747a6e9b42703fc90fe242e22719bbb97673",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SimColonies",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 7764,
+     "size": 1216,
+     "target_sha256": "b206741c80247ec8389bab5a70d2865fa771531978dda51274bf83ceea5e2863",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "steered_history": [
+      {
+       "steered": "record order only: the nested 'if (CurGameType == 2) if (x < 2 ...)' test adds one /Zi line entry so the 52-entry LINNUM flush falls in 229F..2309; the cumulative count also depends on the SimKidInside scaffold draft's line count (bytes are natural: r reused for the population clamps, b loaded before r)",
+       "cleared": "the nested CurGameType test is part of the inferred line layout of the complete file, recorded as layout inferred on the module; the SimKidInside scaffold it was counted against is gone"
+      }
+     ]
+    },
+    {
+     "name": "SimKidInside",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 2704,
+     "size": 1903,
+     "target_sha256": "886f033b4d56bc4125ba278eaaf8d09bbe9b02b2f356cc746579d70661374f99",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SimCat",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 5324,
+     "size": 823,
+     "target_sha256": "dcc91a06ea6b329413a5ef697e39cba2e05f06dd64d2fd8126e56d90bcf90194",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SimDog",
+     "unit": "S06",
+     "seg": 13813,
+     "off": 6147,
+     "size": 524,
+     "target_sha256": "6158a8994db0bcd9f954c59825feb1c5715987754ab3fccbb8e35ba91cff56de",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "05bfbc998a9111048c05bc8680a7d9b3821b5a73b54b682300457de1f760f0ed"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -11285,7 +11297,7 @@
     "end": 251234
    },
    "source": "src/simulation/yellow_ant.c",
-   "source_sha256": "6cada29a0971952a3953f54e70b5247be84ebd799d4ba8589a5e2060535c511c",
+   "source_sha256": "1421f8f29f273661d4c6d65dfc80760cbc5d234449f5e9efe256f63d48ab8021",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -11521,7 +11533,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "4f890e9306299dab70db9fa38beed1f496051d58cbfae0a420ec06e1a1c03ece"
+   "object_sha256": "a24de857e767486882cec77a8153a074f3979af52ad8290f493a882ac77856fd"
   },
   "S26:39C7": {
    "unit": "S26",
