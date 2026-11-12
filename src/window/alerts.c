@@ -2,9 +2,10 @@
  * Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors
  * and timed waits for these dialogs.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 1C62; partial original translation unit.
+ * DOS: resident code; segment 1C62; complete original translation unit.
  * Windows: GR, from recorded function pairs in the Windows symbol inventory.
- * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zd.
+ * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
+ * Loop structure and statement layout are inferred, not recovered or unique.
  */
 
 struct Rect {
@@ -84,10 +85,11 @@ void far f_1C62_00A1(void)
     mouse_remove_absent_stub();
 }
 
-/* Alert box.  The only exit from the key switch is "goto done"; under /Zi that label would
- * start a LEDATA record (02CB) which the original FIXUPP order excludes (no break in
- * 02A7..02F0), so this module is built with /Zd like the window library (worker resB).
- * hit[] carries the original's dead store of -1 ([bp-0Ch], never read). */
+/* Alert box.  STEERED (record order only): the key switch leaves the loop through
+ * "continue; done: break;" at the end of the body.  A label after the loop compiles to the
+ * same bytes but starts a /Zi record at 02CB that the original relocation order excludes;
+ * how the original left the loop from its switch is unknown.
+ * hit[] retains the original dead store of -1 ([bp-0Ch], never read). */
 void far f_1C62_00D5(char far *msg, int timed);
 
 void far ui_message_acknowledge(char far *msg)
@@ -190,8 +192,10 @@ void far f_1C62_00D5(char far *msg, int timed)
             if ((ev.code >> 8) == 9)
                 break;
         }
-    }
+        continue;
 done:
+        break;
+    }
     input_remove_object_rect(0x900);
     input_release_screen_capture();
     gfx_restore_and_free_rect(&pr, save);
@@ -251,12 +255,15 @@ static struct Rect g_557C = { 9, 30, 14, 50 };
 static int g_5584[] = { 2, 3, 2 };
 
 void far f_1C62_0737(void);
+int far f_1C62_069E(void);
 extern int far kbd_read_key_code(void);
 extern void far o10_35F5_0A63(int key, int far *sel, int count, int id);
 
 
+/* Declaration order is inferred (declaration numbers, docs/codegen-rules.md): these two
+ * and the prototype of f_1C62_069E above come before ui_choice_prompt, sys_nerr after it.
+ * Other placements change ui_choice_prompt or f_1C62_06A6. */
 extern char far * near sys_errlist[];
-extern int near sys_nerr;
 extern char near g_8CCB;
 /* Shows a message with a row of buttons and returns the index of the one chosen, by
  * its key or by the mouse. `v` first accumulates the minimum width of the button row
@@ -338,10 +345,16 @@ done:
     return (unsigned char)ev.code;
 }
 
+/* No reference to this function was found.  It calls f_1C62_0090 and returns 1; the
+ * parameter list is a hypothesis (none is read). */
+int far f_1C62_069E(void)
+{
+    f_1C62_0090();
+    return 1;
+}
 
-extern char far * near sys_errlist[];
+
 extern int near sys_nerr;
-extern char near g_8CCB;
 
 static char far *g_567A[] = {
     "Write-protection error",

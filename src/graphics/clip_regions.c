@@ -2,7 +2,8 @@
  * Maintains window clip regions and their rectangle lists. It implements include, exclude and
  * push or pop operations on the clip stack.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 1E57; partial original translation unit.
+ * DOS: resident code; segment 1E57; complete original translation unit.
+ * Statement layout is inferred from relocation order; original formatting is unknown.
  * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are
  * HIGH confidence, not confirmed.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
@@ -33,6 +34,12 @@ void far f_1E57_0006(int n, int kind)
 }
 
 void far f_1E57_0007(void)
+{
+}
+
+/* A third empty function; no reference to it was found.  The parameter list is a
+ * hypothesis. */
+void far f_1E57_0008(void)
 {
 }
 
@@ -279,8 +286,7 @@ void far win_rebuild_visible_clips(void)
     win_GetObjRect(win, &r);
     end = f_1D8E_02BD(&r, list, 0L, tmp);
     n = end - tmp;
-    if (n >= 256)
-        Punt("C099: Clip overflow %d", n);
+    if (n >= 256) Punt("C099: Clip overflow %d", n);
     f_1E57_0006(n, 0);
     n = (n + 1) * sizeof(struct Rect);
     _fmemcpy(list, tmp, n);
@@ -342,8 +348,11 @@ void far f_1E57_08F5(struct Rect far *r)
         buf = (struct Rect far *)mem_Lock(h);
         p = buf;
         if (!g_5AAC) {
-            for (n = 0; r->top != (int)0x8000; p++, r++, n++)
+            for (n = 0; r->top != (int)0x8000; n++) {
                 *p = *r;
+                p++;
+                r++;
+            }
         } else {
             for (; r->top != (int)0x8000; r++)
                 for (c = g_5AAC; c->top != (int)0x8000; c++)
@@ -417,10 +426,15 @@ void far f_1E57_0C2D(struct Rect far *r)
         h = mem_Alloc(2048, 0, "include");
         buf = (struct Rect far *)mem_Lock(h);
         if (g_5AAC && g_5AAC->top != (int)0x8000) {
-            for (c = g_5AAC, p = buf; c->top != (int)0x8000; c++, p++)
+            for (c = g_5AAC, p = buf; c->top != (int)0x8000;) {
                 *p = *c;
-            for (; g_5AAC->top != (int)0x8000; g_5AAC++)
+                c++;
+                p++;
+            }
+            for (; g_5AAC->top != (int)0x8000;) {
                 p = clip_split_rect(r, g_5AAC, 0L, p);
+                g_5AAC++;
+            }
             if ((n = p - buf) >= 256)
                 Punt("CL174:Temp clip overflow in SubExclude");
         } else {
@@ -470,6 +484,14 @@ void far clip_Push(void)
     if (++g_5756 > 20)
         Punt("Error CL98463: Pushed it too far");
     mem_Unlock(h);
+}
+
+/* Pushes the clip state and turns clipping off.  No reference to this function was
+ * found; the parameter list is a hypothesis. */
+void far f_1E57_0EB0(void)
+{
+    clip_Push();
+    clip_Off();
 }
 
 void far clip_Pop(void)

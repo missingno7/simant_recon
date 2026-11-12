@@ -8326,6 +8326,20 @@
 {
 "unit": "root",
 "seg": 7266,
+"off": 1694,
+"size": 8,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"8 bytes between ui_choice_prompt and f_1C62_06A6: push cs / call near 1C62:0090 / mov ax,1 / retf; a complete function with no reference found"
+]
+},
+{
+"unit": "root",
+"seg": 7266,
 "off": 1702,
 "size": 54,
 "region": "game_or_library",
@@ -8857,6 +8871,20 @@
 {
 "unit": "root",
 "seg": 7767,
+"off": 8,
+"size": 1,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"single retf between f_1E57_0007 and clip_reset_temporary_state: an empty function like its two neighbours, no reference found"
+]
+},
+{
+"unit": "root",
+"seg": 7767,
 "off": 9,
 "size": 58,
 "region": "game_or_library",
@@ -9086,6 +9114,20 @@
 "extent": "DESCENT",
 "evidence": [
 "far_call"
+]
+},
+{
+"unit": "root",
+"seg": 7767,
+"off": 3760,
+"size": 9,
+"region": "game_or_library",
+"extent": "REVIEWED",
+"evidence": [
+"reviewed"
+],
+"notes": [
+"9 bytes between clip_Push and clip_Pop: push cs / call near 1E57:0DAA / push cs / call near 1E57:0362 / retf; a complete function with no reference found"
 ]
 },
 {

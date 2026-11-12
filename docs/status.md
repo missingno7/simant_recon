@@ -12,13 +12,13 @@ Last gate result: **PASS** (2026-11-12).
 
 | Item | State | Open |
 | --- | --- | --- |
-| 1. Code exact | 1,634 of 1,640 game functions | 6 functions, 2,421 bytes; 7 of 122 code modules are not yet complete translation units |
-| 2. No unexplained steering | 18 exact functions depend on a steering construct | 11,614 bytes |
+| 1. Code exact | 1,637 of 1,643 game functions | 6 functions, 2,421 bytes; 5 of 122 code modules are not yet complete translation units |
+| 2. No unexplained steering | 19 exact functions depend on a steering construct | 12,175 bytes |
 | 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
-| 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 4 functions |
+| 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 2 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 950 C and 357 assembly named; data: 487 named | 317 C and 10 assembly functions and 491 data objects keep address-based identifiers; 0 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 950 C and 357 assembly named; data: 487 named | 320 C and 10 assembly functions and 491 data objects keep address-based identifiers; 0 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -66,6 +66,7 @@ They stay here until a natural spelling replaces it.
 | `root:171C` | `RallocSetType` | 228 | volatile int type in RallocSetType -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX |
 | `root:171C` | `f_171C_0CF4` | 490 | a record grouping the scan segment word with a 32-bit result whose high word is the flag reproduces the frame placement; the original local types and grouping are unknown |
 | `root:1986` | `FindIndex` | 267 | FindIndex=block layout only: goto into the else block reproduces the original order of the two search branches; the original control structure is unknown |
+| `root:1C62` | `f_1C62_00D5` | 561 | record order only: the key switch leaves the loop through a label on a break inside the loop body (continue; done: break;); a label after the loop gives the same bytes but a /Zi record break at 02CB that the original relocation order excludes; the original loop exit is unknown (worker layout-1c62, 40 label-free spellings change bytes) |
 | `root:2505` | `win_GetArg` | 58 | identifier count only: named temporaries windowIndex/result (with the unnamed win_GetVal forward prototype) keep the original code of every later function; the original identifiers are unknown |
 | `root:259D` | `win_DrawBitMap` | 663 | win_DrawBitMap=FOLD-1: a folded always-true unsigned test before the second packed-picture test leaves the block boundary that splits the pointer reload at 0081 into two word loads; the eliminated original expression is unknown |
 | `root:2662` | `hanim_SetObjectPos` | 598 | named redeclarations of f_2662_0348 and f_2662_059C before f_2662_090D -> identifier count (+7 mod 17) selecting 090D's operand order; 090D's reinsert flag is only read in a constant-folded test (keeps the dead store and frees DI) |
@@ -77,7 +78,7 @@ They stay here until a natural spelling replaces it.
 Their accepted functions are exact, but the module as a whole is not yet shown to be one
 original source file from first byte to last.
 
-`S12:384C`, `S15:384C`, `root:0250`, `root:1C62`, `root:1E57`, `root:23E6`, `root:284A`
+`S12:384C`, `S15:384C`, `root:0250`, `root:23E6`, `root:284A`
 
 ## Data we defined ourselves
 
@@ -173,7 +174,7 @@ use, not original sizes.
 
 ## Relocation order still unproven
 
-`DrawCurBalloons`, `DrawEditGraphs`, `clip_Push`, `clip_SubExclude`
+`DrawCurBalloons`, `DrawEditGraphs`
 
 ## Upper layers
 

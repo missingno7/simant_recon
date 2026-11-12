@@ -12439,6 +12439,12 @@
    "off": 986,
    "grounding": "reviewed: prologue scan in unreached gap; descent ends in a return; no references found (unreferenced or indirect)"
   },
+  "f_1C62_069E": {
+   "unit": "root",
+   "seg": 7266,
+   "off": 1694,
+   "grounding": "reviewed: 8 bytes between ui_choice_prompt and f_1C62_06A6: push cs / call near 1C62:0090 / mov ax,1 / retf; a complete function with no reference found"
+  },
   "f_1C62_06A6": {
    "unit": "root",
    "seg": 7266,
@@ -12607,6 +12613,12 @@
    "off": 7,
    "grounding": "inventory:push_cs_call"
   },
+  "f_1E57_0008": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 8,
+   "grounding": "reviewed: single retf between f_1E57_0007 and clip_reset_temporary_state: an empty function like its two neighbours, no reference found"
+  },
   "f_1E57_0043": {
    "unit": "root",
    "seg": 7767,
@@ -12702,6 +12714,12 @@
    "seg": 7767,
    "off": 3498,
    "alias_of": "clip_Push"
+  },
+  "f_1E57_0EB0": {
+   "unit": "root",
+   "seg": 7767,
+   "off": 3760,
+   "grounding": "reviewed: 9 bytes between clip_Push and clip_Pop: push cs / call near 1E57:0DAA / push cs / call near 1E57:0362 / retf; a complete function with no reference found"
   },
   "f_1E57_0EB9": {
    "unit": "root",

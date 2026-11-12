@@ -292,6 +292,16 @@ that remain open and the freshly compiled execution controls.
   file needed four more before AnimYellowFight's second SRand2 call and eight in total before
   GetMyDis' last return; the result is recorded as layout inferred because the layout is not
   unique.
+* **A function definition takes a declaration number too, and unowned bytes can be whole
+  functions** (alerts and clip files, root:1C62 and root:1E57, 2026-11-12). The 18 bytes no
+  claim covered in these two files are three unreferenced functions. Adding the one in the
+  alerts file changed its neighbour `f_1C62_06A6` (operand order of `err > sys_nerr`); the
+  file's duplicated runtime declarations had been compensating for the missing function.
+  A forward prototype does not move the effect; where `sys_nerr` is first declared does.
+* **A label on a `break` inside a loop starts no /Zi record at the loop exit** (alerts file,
+  worker layout-1c62). `goto done` to a label after the loop and to `done: break;` at the end
+  of the loop body compile to the same bytes, but only the first starts a record at the exit
+  address. Recorded as steering for `f_1C62_00D5`; forty label-free spellings change bytes.
 * **White space alone moves line entries** (yard file, S06:35F5, worker yard-layout,
   2026-11-12). An `if` on the line after its `else` usually adds one line entry (21 of 23
   sites; none where the entries merge at one offset), and a single-statement `if` written on

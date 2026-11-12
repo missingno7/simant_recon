@@ -28313,7 +28313,7 @@
     "/Oe",
     "/Og",
     "/Gs",
-    "/Zd"
+    "/Zi"
    ],
    "placements": {
     "_DATA": {
@@ -28408,8 +28408,15 @@
      }
     ]
    },
+   "layout_inferred": [
+    "declaration order: sys_errlist, g_8CCB and the prototype of f_1C62_069E are declared before ui_choice_prompt and sys_nerr after it; other placements change ui_choice_prompt or f_1C62_06A6 (declaration numbers). The duplicated runtime declarations are removed"
+   ],
+   "extent": {
+    "start": 116268,
+    "end": 118315
+   },
    "source": "src/window/alerts.c",
-   "source_sha256": "3085c50ae62828b04ccaa2e371d7c08d6473bca8f88a12654081ecc7a32ec96b",
+   "source_sha256": "b297143e8a5b231beccbdd2e9a4e2965349e7376b7e65a2d629eb1bd39ee4061",
    "claims": [
     {
      "name": "Punt",
@@ -28540,8 +28547,9 @@
      "size": 561,
      "target_sha256": "3fa59934dc05b5e29b99f6fcb333471b7d39040ba9ad128cd76219a11b6d0313",
      "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "provenance": "EXACT_STEERED",
+     "reloc_order": "GROUPED",
+     "steered": "record order only: the key switch leaves the loop through a label on a break inside the loop body (continue; done: break;); a label after the loop gives the same bytes but a /Zi record break at 02CB that the original relocation order excludes; the original loop exit is unknown (worker layout-1c62, 40 label-free spellings change bytes)"
     },
     {
      "name": "ui_choice_prompt",
@@ -28553,10 +28561,21 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1C62_069E",
+     "unit": "root",
+     "seg": 7266,
+     "off": 1694,
+     "size": 8,
+     "target_sha256": "16d5961406a7cb94b0921174a13d5ec5cc005547210c60ced1575feb6267e256",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "e4c3dd9de902c9a6b0848292f7eb9b9ba6157c98e861aba23cd7e29359b0d99a"
+   "object_sha256": "b6436c8521e73d56680f4b421b28139124f110058935563c587ceb7eee49c573"
   },
   "root:1CE2": {
    "unit": "root",
@@ -29362,8 +29381,147 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m1E57.c",
+     "why": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack."
+    }
+   ],
+   "windows_group": "ANTEDIT",
+   "summary": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack.",
+   "file_header": {
+    "text": "Maintains window clip regions and their rectangle lists. It implements include, exclude and\npush or pop operations on the clip stack.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 1E57; partial original translation unit.\nWindows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.",
+    "name_kind": "descriptive",
+    "why": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:1E57",
+      "summary": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:1E57",
+      "module": "root:1E57",
+      "source": "src/graphics/clip_regions.c",
+      "reviewed_source_sha256": "2076ceed6fea9c26c1ea4ea2308d2b8db86c30b1af9d620f81318f37a1fbfec6",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "1E57",
+       "origin": null,
+       "translation_unit": "partial original translation unit",
+       "extent": null
+      },
+      "not_exact": [],
+      "steered": [],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Gs",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "clip_KillWin",
+        "dos_address": "root:1E57:0115",
+        "win16": "_clip_KillWin",
+        "group": "ANTEDIT",
+        "confidence": "HIGH",
+        "win16_segment": 3,
+        "win16_offset": 36424,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0115"
+       },
+       {
+        "function": "clip_SetWin",
+        "dos_address": "root:1E57:0174",
+        "win16": "_clip_SetWin",
+        "group": "ANTEDIT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 3,
+        "win16_offset": 36420,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0174"
+       },
+       {
+        "function": "clip_Off",
+        "dos_address": "root:1E57:0362",
+        "win16": "_clip_Off",
+        "group": "ANTEDIT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 3,
+        "win16_offset": 36422,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0362"
+       },
+       {
+        "function": "clip_SubInclude",
+        "dos_address": "root:1E57:0773",
+        "win16": "_clip_SubInclude",
+        "group": "ANTEDIT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 3,
+        "win16_offset": 36426,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0773"
+       },
+       {
+        "function": "clip_SubExclude",
+        "dos_address": "root:1E57:0AAF",
+        "win16": "_clip_SubExclude",
+        "group": "ANTEDIT",
+        "confidence": "HIGH",
+        "win16_segment": 3,
+        "win16_offset": 36428,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0AAF"
+       },
+       {
+        "function": "clip_Push",
+        "dos_address": "root:1E57:0DAA",
+        "win16": "_clip_Push",
+        "group": "ANTEDIT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 3,
+        "win16_offset": 36432,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0DAA"
+       },
+       {
+        "function": "clip_Pop",
+        "dos_address": "root:1E57:0EB9",
+        "win16": "_clip_Pop",
+        "group": "ANTEDIT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 3,
+        "win16_offset": 36430,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0EB9"
+       }
+      ],
+      "groups": [
+       "ANTEDIT"
+      ]
+     },
+     {
+      "path": "src/graphics/clip_regions.c",
+      "prior_leading_comment": "Root module 1E57: window clip regions (clip lists, clip stack).",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
+   "layout_inferred": [
+    "line layout (worker layout-1e57): one overflow test of win_rebuild_visible_clips is written on one line and the loop updates of three loops are statements in the loop body, which puts the 52-entry /Zi record breaks where the relocation order of the complete file needs them. No declaration changed. The layout is not unique, so the original line structure stays unknown"
+   ],
+   "extent": {
+    "start": 124278,
+    "end": 128389
+   },
    "source": "src/graphics/clip_regions.c",
-   "source_sha256": "4dcb936367fb621fef55775cb0cbd549edb53dec2ec4fc5d5da315256a0543b3",
+   "source_sha256": "f680a62afcae53ffe1b45198c00c17fe0a93950165718ab1336b9984b3e7074e",
    "claims": [
     {
      "name": "f_1E57_0006",
@@ -29550,7 +29708,7 @@
      "target_sha256": "d4d1047d2803beb945878282d05d1ab0455390084e3afb3a845380f72398f402",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "f_1E57_0C1A",
@@ -29594,7 +29752,7 @@
      "target_sha256": "73b30aa09806a016d47347aff07d228fd6db7700abedd3814536ca491cedb2a1",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "GROUPED"
     },
     {
      "name": "clip_Pop",
@@ -29639,142 +29797,32 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1E57_0008",
+     "unit": "root",
+     "seg": 7767,
+     "off": 8,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1E57_0EB0",
+     "unit": "root",
+     "seg": 7767,
+     "off": 3760,
+     "size": 9,
+     "target_sha256": "26be0bc1223808bb3b774c9cb10a79ff3573a82b4aabe7e217b9a7985cabcc43",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
     }
    ],
    "scaffold": [],
-   "object_sha256": "b301f219a0d3929ba2515ef637eef410e9dbd46a0303a33774f22a2f2ccf5840",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m1E57.c",
-     "why": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack."
-    }
-   ],
-   "summary": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack.",
-   "windows_group": "ANTEDIT",
-   "file_header": {
-    "text": "Maintains window clip regions and their rectangle lists. It implements include, exclude and\npush or pop operations on the clip stack.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 1E57; partial original translation unit.\nWindows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.",
-    "name_kind": "descriptive",
-    "why": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:1E57",
-      "summary": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:1E57",
-      "module": "root:1E57",
-      "source": "src/graphics/clip_regions.c",
-      "reviewed_source_sha256": "2076ceed6fea9c26c1ea4ea2308d2b8db86c30b1af9d620f81318f37a1fbfec6",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "1E57",
-       "origin": null,
-       "translation_unit": "partial original translation unit",
-       "extent": null
-      },
-      "not_exact": [],
-      "steered": [],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Gs",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "clip_KillWin",
-        "dos_address": "root:1E57:0115",
-        "win16": "_clip_KillWin",
-        "group": "ANTEDIT",
-        "confidence": "HIGH",
-        "win16_segment": 3,
-        "win16_offset": 36424,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0115"
-       },
-       {
-        "function": "clip_SetWin",
-        "dos_address": "root:1E57:0174",
-        "win16": "_clip_SetWin",
-        "group": "ANTEDIT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 3,
-        "win16_offset": 36420,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0174"
-       },
-       {
-        "function": "clip_Off",
-        "dos_address": "root:1E57:0362",
-        "win16": "_clip_Off",
-        "group": "ANTEDIT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 3,
-        "win16_offset": 36422,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0362"
-       },
-       {
-        "function": "clip_SubInclude",
-        "dos_address": "root:1E57:0773",
-        "win16": "_clip_SubInclude",
-        "group": "ANTEDIT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 3,
-        "win16_offset": 36426,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0773"
-       },
-       {
-        "function": "clip_SubExclude",
-        "dos_address": "root:1E57:0AAF",
-        "win16": "_clip_SubExclude",
-        "group": "ANTEDIT",
-        "confidence": "HIGH",
-        "win16_segment": 3,
-        "win16_offset": 36428,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0AAF"
-       },
-       {
-        "function": "clip_Push",
-        "dos_address": "root:1E57:0DAA",
-        "win16": "_clip_Push",
-        "group": "ANTEDIT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 3,
-        "win16_offset": 36432,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0DAA"
-       },
-       {
-        "function": "clip_Pop",
-        "dos_address": "root:1E57:0EB9",
-        "win16": "_clip_Pop",
-        "group": "ANTEDIT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 3,
-        "win16_offset": 36430,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:1E57:0EB9"
-       }
-      ],
-      "groups": [
-       "ANTEDIT"
-      ]
-     },
-     {
-      "path": "src/graphics/clip_regions.c",
-      "prior_leading_comment": "Root module 1E57: window clip regions (clip lists, clip stack).",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "57ba3671641acc9e874cc73d4dd29a562a252864c4dc46e975102254309ef25a"
   },
   "root:1F58": {
    "unit": "root",
