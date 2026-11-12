@@ -13,7 +13,7 @@ Last gate result: **PASS** (2026-11-12).
 | Item | State | Open |
 | --- | --- | --- |
 | 1. Code exact | 1,637 of 1,643 game functions | 6 functions, 2,421 bytes; 5 of 122 code modules are not yet complete translation units |
-| 2. No unexplained steering | 19 exact functions depend on a steering construct | 12,175 bytes |
+| 2. No unexplained steering | 18 exact functions depend on a steering construct | 10,820 bytes |
 | 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 2 functions |
@@ -53,7 +53,6 @@ They stay here until a natural spelling replaces it.
 
 | Module | Function | Bytes | Construct |
 | --- | --- | ---: | --- |
-| `S08:35F5` | `RandWorld` | 1355 | RandWorld=ZERO-1: folded unsigned seed < 0 supplies the original AX-to-DI zero initialization; its eliminated original expression is unknown |
 | `S09:35F5` | `o09_35F5_03C6` | 2405 | USE-2: folded unsigned path/save/index reads; original eliminated expressions unknown. |
 | `S13:384C` | `InvertPatch` | 261 | InvertPatch=BLOCK-1: a test with an unused assignment starts the basic block the original has between the first stores and the raw offsets; the statement it stands for is unknown |
 | `S16:384C` | `AboutDialog` | 657 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |

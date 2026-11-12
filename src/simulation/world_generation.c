@@ -5,7 +5,6 @@
  * DOS: overlay section 8 (S08); segment 35F5; complete original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
  * Statement layout is inferred from /Zi record order, not recovered or unique.
- * Steered functions: RandWorld.
  */
 
 extern int far GameSpeed;
@@ -194,10 +193,10 @@ void far InitSimVars(void)
     QueenStorageB = 0;
 }
 
-/* STEERED (ZERO-1): seed is unsigned, so seed < 0 is always false.
- * This folded initializer reproduces the original AX-to-DI zeroing; the
- * eliminated original expression is unknown. All array boundary indexes
- * are literal zero. The unused y declaration is retained from the draft. */
+/* The six cleared maps are filled from roll, which holds zero until the first random
+ * roll; the Macintosh build keeps that zero in the register it later uses for the roll
+ * (C08:36BC).  A literal zero in the stores compiles to different code.  y is never
+ * used here, but the frame has its word; what the original kept in it is unknown. */
 void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int mapKind)
 {
     int count, roll, tries, lim1, lim2, x, n;
@@ -210,16 +209,17 @@ void far RandWorld(unsigned seed, int blackSize, int redSize, int mapWidth, int 
     blackSize += blackSize >> 2;
     redSize += redSize >> 2;
 
-    for (count = (seed < 0); count < 64; count++) {
+    roll = 0;
+    for (count = 0; count < 64; count++) {
         for (x = 0; x < 64; x++) {
             MapB[count][x] = 0x2e;
             MapR[count][x] = 0x2e;
-            ExitMapB[count][x] = 0;
-            ExitMapR[count][x] = 0;
-            LifeB[count][x] = 0;
-            LifeR[count][x] = 0;
-            LifeA[count][x] = 0;
-            LifeA[count + 64][x] = 0;
+            ExitMapB[count][x] = roll;
+            ExitMapR[count][x] = roll;
+            LifeB[count][x] = roll;
+            LifeR[count][x] = roll;
+            LifeA[count][x] = roll;
+            LifeA[count + 64][x] = roll;
         }
     }
 

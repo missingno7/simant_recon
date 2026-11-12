@@ -302,6 +302,12 @@ that remain open and the freshly compiled execution controls.
   worker layout-1c62). `goto done` to a label after the loop and to `done: break;` at the end
   of the loop body compile to the same bytes, but only the first starts a record at the exit
   address. Recorded as steering for `f_1C62_00D5`; forty label-free spellings change bytes.
+* **A folded test can stand for a variable that holds a constant** (RandWorld, S08:35F5,
+  2026-11-12; rule ZERO-1 no longer needed there). The Macintosh build zeroes a register
+  before the first loop, stores that register into six maps and later reuses it for the
+  random roll. `roll = 0;` before the loop with `= roll;` in the six stores is exact in DOS;
+  literal zero stores give 1,359 bytes for 1,355, and the same construct with any other local
+  gives 1,358. Check the other builds for a variable where our source has a literal.
 * **White space alone moves line entries** (yard file, S06:35F5, worker yard-layout,
   2026-11-12). An `if` on the line after its `else` usually adds one line entry (21 of 23
   sites; none where the entries merge at one offset), and a single-statement `if` written on

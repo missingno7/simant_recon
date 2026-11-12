@@ -39,10 +39,10 @@ Validation: **PASS** (2026-11-12)
 | complete_tus_relocation_order_proven | 115 |
 | claims_within_group_order_pending | 2 |
 | inplace_draft_functions | 6 |
-| claims_exact_steered | 19 |
+| claims_exact_steered | 18 |
 | exact_c_bytes_in_complete_tus | 220,636 |
 | exact_c_bytes_in_partial_modules | 29,521 |
-| exact_c_bytes_steered | 12,175 |
+| exact_c_bytes_steered | 10,820 |
 | exact_c_bytes_layout_inferred | 62,495 |
 | exact_c_bytes_within_group_pending | 2,058 |
 | claims_layout_inferred | 27 |
@@ -52,7 +52,7 @@ Validation: **PASS** (2026-11-12)
 | data_bytes_opaque_unmarked | 6,333 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `61000bda09a65ed0262c03b9bbb0565e17dca4b66d5f9d8f10eb1908bc19e32d`
+Manifest: `ced17e66ebe32cedc60b377a059d1768309e2ee88a8bf9f3ec023481a180ba76`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 

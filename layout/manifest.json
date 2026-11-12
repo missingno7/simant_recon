@@ -4764,7 +4764,7 @@
     "end": 226061
    },
    "source": "src/simulation/world_generation.c",
-   "source_sha256": "b9c7b814fa326985bcc0ba5d0b2e7343eca7003b9a2a48c901795e383ffca190",
+   "source_sha256": "f8a8a4b93de50d5ccd782d7b434605ce90b489c64b95726ead317631e3445db2",
    "claims": [
     {
      "name": "InitSimVars",
@@ -4961,13 +4961,18 @@
      "size": 1355,
      "target_sha256": "e39f2848a79db0996ea9914b5b3e2f735dcc84ed7b69370de63696b359b3787d",
      "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "RandWorld=ZERO-1: folded unsigned seed < 0 supplies the original AX-to-DI zero initialization; its eliminated original expression is unknown",
-     "reloc_order": "GROUPED"
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "steered_history": [
+      {
+       "steered": "RandWorld=ZERO-1: folded unsigned seed < 0 supplies the original AX-to-DI zero initialization; its eliminated original expression is unknown",
+       "cleared": "the folded seed test is gone: roll holds zero before the first loop and is stored into the six cleared maps, as the Macintosh build shows (C08:36BC zeroes the register it later uses for the roll and stores that register); literal zero stores give 1359 bytes"
+      }
+     ]
     }
    ],
    "scaffold": [],
-   "object_sha256": "24d0ef3ed034c310bbc14b88d46f021d74daa5485f387e5bfbfa063ef173d6b4"
+   "object_sha256": "4b9f4eb383d4b211c66009366dfb290cab4fe30c62591af37bd821cf5e8cae3a"
   },
   "S09:35F5": {
    "unit": "S09",
