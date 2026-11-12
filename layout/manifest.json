@@ -19028,51 +19028,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/simulation/tutorial.c",
-   "source_sha256": "eca15c241baff559790fa6d24469ae5be6df61cf2876e5c4bf2d41394554d66a",
-   "claims": [
-    {
-     "name": "Feedback",
-     "unit": "root",
-     "seg": 3630,
-     "off": 10,
-     "size": 315,
-     "target_sha256": "ffb98b45cce675a9aa023645129f93fd3bc790957850c31db6967d83b2c300bd",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "RunTutor",
-     "unit": "root",
-     "seg": 3630,
-     "off": 325,
-     "size": 191,
-     "target_sha256": "06a554e23df41a35f721828f6abfa4d15562eec8985460ca5aa9d96373cba504",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GiveLesson",
-     "unit": "root",
-     "seg": 3630,
-     "off": 516,
-     "size": 1114,
-     "target_sha256": "255ab86541a04d67eed4262ee41d3cfec16a0a396d7c872c61aeade39f0777a3",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "59f5b84368fbce3c729b111d9186db759ebe7966fa5b0904b0781985d9068e1d",
-   "canonical_admission": {
-    "receipt": "evidence/canonical/icon-handle-view/publication.json",
-    "historical_checkpoint": "2be85a8",
-    "current_byte_exact": false,
-    "reason": "Corrected LessonDone case41 refers to existing fd_3D57_049E; CONST+40 now binds its actual owner segment."
-   },
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -19080,8 +19035,8 @@
      "why": "Runs tutorial lessons and advice feedback. It selects the next lesson and delivers the corresponding instructions."
     }
    ],
-   "summary": "Runs tutorial lessons and advice feedback. It selects the next lesson and delivers the corresponding instructions.",
    "windows_group": "SIMTWO",
+   "summary": "Runs tutorial lessons and advice feedback. It selects the next lesson and delivers the corresponding instructions.",
    "file_header": {
     "text": "Runs tutorial lessons and advice feedback. It selects the next lesson and delivers the\ncorresponding instructions.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 0E2E; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory.\nFunctions not yet exact: LessonDone.",
     "name_kind": "descriptive",
@@ -19175,7 +19130,58 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "source": "src/simulation/tutorial.c",
+   "source_sha256": "7b4127029653760d00e2d0cc320bb58bb3b820c52e0fe456fe1d1462f5c079f7",
+   "claims": [
+    {
+     "name": "Feedback",
+     "unit": "root",
+     "seg": 3630,
+     "off": 10,
+     "size": 315,
+     "target_sha256": "ffb98b45cce675a9aa023645129f93fd3bc790957850c31db6967d83b2c300bd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "RunTutor",
+     "unit": "root",
+     "seg": 3630,
+     "off": 325,
+     "size": 191,
+     "target_sha256": "06a554e23df41a35f721828f6abfa4d15562eec8985460ca5aa9d96373cba504",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GiveLesson",
+     "unit": "root",
+     "seg": 3630,
+     "off": 516,
+     "size": 1114,
+     "target_sha256": "255ab86541a04d67eed4262ee41d3cfec16a0a396d7c872c61aeade39f0777a3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "LessonDone",
+     "unit": "root",
+     "seg": 3630,
+     "off": 1630,
+     "size": 723,
+     "target_sha256": "d53fcd3b79c21247c81f0f15d388fb51680c03cefd76c70396b3a77c4a15566f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "the first statement of each case stays on its label's line: the newline after a case label changes which of two identical case bodies survives; this reproduces the selection, not original formatting (source comment)",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "41b7bd14419100983729120ef745a8e2ed1d6323b2ceb1ec9474520cfc0f4da1"
   },
   "root:0EC1": {
    "unit": "root",
@@ -23722,8 +23728,253 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m171C.c",
+     "why": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics."
+    }
+   ],
+   "windows_group": "GR",
+   "summary": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics.",
+   "file_header": {
+    "text": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also\nprovides malloc style wrappers, discardable blocks and memory diagnostics.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 171C; partial original translation unit.\nWindows: GR, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600ax; /AL /Oeg /Gs /Zi.\nFunctions not yet exact: mem_resize_in_place, f_171C_0CF4.\nSteered functions: RallocSetType.\n\nBlocks are paragraph aligned with a 32-byte header; a handle is a far pointer\nto a far master pointer (the block data, header segment + 2).  Handles may also\nbe passed as indexes encoded as 0F0F:index.",
+    "name_kind": "descriptive",
+    "why": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:171C",
+      "summary": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:171C",
+      "module": "root:171C",
+      "source": "src/memory/ralloc.c",
+      "reviewed_source_sha256": "00378850059334a41b4313d48fd8b99547b5f7b3df820b5badecf619527ed4b4",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "171C",
+       "origin": null,
+       "translation_unit": "partial original translation unit",
+       "extent": null
+      },
+      "not_exact": [
+       "mem_resize_in_place",
+       "f_171C_0CF4"
+      ],
+      "steered": [
+       "RallocSetType"
+      ],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Oeg",
+       "/Gs",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "Ralloc",
+        "dos_address": "root:171C:13CA",
+        "win16": "_Ralloc",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22514,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:13CA"
+       },
+       {
+        "function": "RallocFree",
+        "dos_address": "root:171C:13E4",
+        "win16": "_RallocFree",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22838,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:13E4"
+       },
+       {
+        "function": "RallocFreshen",
+        "dos_address": "root:171C:152C",
+        "win16": "_RallocFreshen",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22910,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:152C"
+       },
+       {
+        "function": "RallocType",
+        "dos_address": "root:171C:1686",
+        "win16": "_RallocType",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22948,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1686"
+       },
+       {
+        "function": "RallocSize",
+        "dos_address": "root:171C:16EA",
+        "win16": "_RallocSize",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22960,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:16EA"
+       },
+       {
+        "function": "RallocMemoryFree",
+        "dos_address": "root:171C:1750",
+        "win16": "_RallocMemoryFree",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22976,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1750"
+       },
+       {
+        "function": "RallocMemorySoft",
+        "dos_address": "root:171C:1772",
+        "win16": "_RallocMemorySoft",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22984,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1772"
+       },
+       {
+        "function": "RallocFreed",
+        "dos_address": "root:171C:1794",
+        "win16": "_RallocFreed",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22988,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1794"
+       },
+       {
+        "function": "mem_Alloc",
+        "dos_address": "root:171C:1A9E",
+        "win16": "_mem_Alloc",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21722,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1A9E"
+       },
+       {
+        "function": "mem_LockLevel",
+        "dos_address": "root:171C:1AD4",
+        "win16": "_mem_LockLevel",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21650,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1AD4"
+       },
+       {
+        "function": "mem_Realloc",
+        "dos_address": "root:171C:1B2C",
+        "win16": "_mem_Realloc",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21802,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1B2C"
+       },
+       {
+        "function": "mem_Lock",
+        "dos_address": "root:171C:1B84",
+        "win16": "_mem_Lock",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21902,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1B84"
+       },
+       {
+        "function": "mem_Unlock",
+        "dos_address": "root:171C:1BBA",
+        "win16": "_mem_Unlock",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21916,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1BBA"
+       },
+       {
+        "function": "mem_Free",
+        "dos_address": "root:171C:1C0A",
+        "win16": "_mem_Free",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21888,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1C0A"
+       },
+       {
+        "function": "mem_Size",
+        "dos_address": "root:171C:1C1C",
+        "win16": "_mem_Size",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21930,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1C1C"
+       },
+       {
+        "function": "mem_malloc",
+        "dos_address": "root:171C:2190",
+        "win16": "_mem_malloc",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 21692,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:2190"
+       },
+       {
+        "function": "RallocRealloc",
+        "dos_address": "root:171C:18A6",
+        "win16": "_RallocRealloc",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22674,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:18A6"
+       },
+       {
+        "function": "RallocSetType",
+        "dos_address": "root:171C:15A2",
+        "win16": "_RallocSetType",
+        "group": "GR",
+        "confidence": "CONFIRMED",
+        "win16_segment": 2,
+        "win16_offset": 22932,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:15A2"
+       }
+      ],
+      "groups": [
+       "GR"
+      ]
+     },
+     {
+      "path": "src/memory/ralloc.c",
+      "prior_leading_comment": "Relocatable memory manager (\"Ralloc\") (root module, code frame 171C).\nBlocks are paragraph aligned with a 32-byte header; a handle is a far pointer\nto a far master pointer (the block data, header segment + 2).  Handles may also\nbe passed as indexes encoded as 0F0F:index.",
+      "retained_comment": "Blocks are paragraph aligned with a 32-byte header; a handle is a far pointer\nto a far master pointer (the block data, header segment + 2).  Handles may also\nbe passed as indexes encoded as 0F0F:index.",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
    "source": "src/memory/ralloc.c",
-   "source_sha256": "f905edc2c9e78d695c750c9b8a24dc32d38931c9c642aa807b4dbe34989a4abc",
+   "source_sha256": "25dbb37ce2a9a84fc8d72c83cf56b8e9fc05dd8e2fd3ed18d5cf9cd794ff57f8",
    "claims": [
     {
      "name": "mem_carve_free_block",
@@ -23778,7 +24029,7 @@
      "target_sha256": "0e2240f99617b1e9308a177841fe40e87dc33d679cb7443849bfe64a3c20810d",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "EXACT"
     },
     {
      "name": "mem_handle_from_pointer",
@@ -24306,7 +24557,7 @@
      "target_sha256": "34cbd81d7e15eddc867b9408c123440d3032ce91a917b241de214ffb17673afd",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
+     "reloc_order": "WITHIN_GROUP_PENDING"
     },
     {
      "name": "f_171C_0A5C",
@@ -24373,256 +24624,34 @@
      "target_sha256": "487d534acbf914989efda2c9ebbc4eef0c81463cc66250e05551dc2d97a6e793",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
+     "reloc_order": "WITHIN_GROUP_PENDING"
+    },
+    {
+     "name": "mem_resize_in_place",
+     "unit": "root",
+     "seg": 5916,
+     "off": 2508,
+     "size": 144,
+     "target_sha256": "64b965dc4e59c6b8e9335d26c33e2fc8c315eaea074c2545cefea9b3fe00dedb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_171C_0CF4",
+     "unit": "root",
+     "seg": 5916,
+     "off": 3316,
+     "size": 490,
+     "target_sha256": "7eff690a77728988acd6c7b2523d2809341f1e03c92d07dc6be32e6332fb084a",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "a record grouping the scan segment word with a 32-bit result whose high word is the flag reproduces the frame placement; the original local types and grouping are unknown",
      "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "718683704accb9ea618eaf19e18dfce160f2112456bb3d2030530e19071df728",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m171C.c",
-     "why": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics."
-    }
-   ],
-   "summary": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics.",
-   "windows_group": "GR",
-   "file_header": {
-    "text": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also\nprovides malloc style wrappers, discardable blocks and memory diagnostics.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 171C; partial original translation unit.\nWindows: GR, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600ax; /AL /Oeg /Gs /Zi.\nFunctions not yet exact: mem_resize_in_place, f_171C_0CF4.\nSteered functions: RallocSetType.\n\nBlocks are paragraph aligned with a 32-byte header; a handle is a far pointer\nto a far master pointer (the block data, header segment + 2).  Handles may also\nbe passed as indexes encoded as 0F0F:index.",
-    "name_kind": "descriptive",
-    "why": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:171C",
-      "summary": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:171C",
-      "module": "root:171C",
-      "source": "src/memory/ralloc.c",
-      "reviewed_source_sha256": "00378850059334a41b4313d48fd8b99547b5f7b3df820b5badecf619527ed4b4",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "171C",
-       "origin": null,
-       "translation_unit": "partial original translation unit",
-       "extent": null
-      },
-      "not_exact": [
-       "mem_resize_in_place",
-       "f_171C_0CF4"
-      ],
-      "steered": [
-       "RallocSetType"
-      ],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Oeg",
-       "/Gs",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "Ralloc",
-        "dos_address": "root:171C:13CA",
-        "win16": "_Ralloc",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22514,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:13CA"
-       },
-       {
-        "function": "RallocFree",
-        "dos_address": "root:171C:13E4",
-        "win16": "_RallocFree",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22838,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:13E4"
-       },
-       {
-        "function": "RallocFreshen",
-        "dos_address": "root:171C:152C",
-        "win16": "_RallocFreshen",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22910,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:152C"
-       },
-       {
-        "function": "RallocType",
-        "dos_address": "root:171C:1686",
-        "win16": "_RallocType",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22948,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1686"
-       },
-       {
-        "function": "RallocSize",
-        "dos_address": "root:171C:16EA",
-        "win16": "_RallocSize",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22960,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:16EA"
-       },
-       {
-        "function": "RallocMemoryFree",
-        "dos_address": "root:171C:1750",
-        "win16": "_RallocMemoryFree",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22976,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1750"
-       },
-       {
-        "function": "RallocMemorySoft",
-        "dos_address": "root:171C:1772",
-        "win16": "_RallocMemorySoft",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22984,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1772"
-       },
-       {
-        "function": "RallocFreed",
-        "dos_address": "root:171C:1794",
-        "win16": "_RallocFreed",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22988,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1794"
-       },
-       {
-        "function": "mem_Alloc",
-        "dos_address": "root:171C:1A9E",
-        "win16": "_mem_Alloc",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21722,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1A9E"
-       },
-       {
-        "function": "mem_LockLevel",
-        "dos_address": "root:171C:1AD4",
-        "win16": "_mem_LockLevel",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21650,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1AD4"
-       },
-       {
-        "function": "mem_Realloc",
-        "dos_address": "root:171C:1B2C",
-        "win16": "_mem_Realloc",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21802,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1B2C"
-       },
-       {
-        "function": "mem_Lock",
-        "dos_address": "root:171C:1B84",
-        "win16": "_mem_Lock",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21902,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1B84"
-       },
-       {
-        "function": "mem_Unlock",
-        "dos_address": "root:171C:1BBA",
-        "win16": "_mem_Unlock",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21916,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1BBA"
-       },
-       {
-        "function": "mem_Free",
-        "dos_address": "root:171C:1C0A",
-        "win16": "_mem_Free",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21888,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1C0A"
-       },
-       {
-        "function": "mem_Size",
-        "dos_address": "root:171C:1C1C",
-        "win16": "_mem_Size",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21930,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:1C1C"
-       },
-       {
-        "function": "mem_malloc",
-        "dos_address": "root:171C:2190",
-        "win16": "_mem_malloc",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 21692,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:2190"
-       },
-       {
-        "function": "RallocRealloc",
-        "dos_address": "root:171C:18A6",
-        "win16": "_RallocRealloc",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22674,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:18A6"
-       },
-       {
-        "function": "RallocSetType",
-        "dos_address": "root:171C:15A2",
-        "win16": "_RallocSetType",
-        "group": "GR",
-        "confidence": "CONFIRMED",
-        "win16_segment": 2,
-        "win16_offset": 22932,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:171C:15A2"
-       }
-      ],
-      "groups": [
-       "GR"
-      ]
-     },
-     {
-      "path": "src/memory/ralloc.c",
-      "prior_leading_comment": "Relocatable memory manager (\"Ralloc\") (root module, code frame 171C).\nBlocks are paragraph aligned with a 32-byte header; a handle is a far pointer\nto a far master pointer (the block data, header segment + 2).  Handles may also\nbe passed as indexes encoded as 0F0F:index.",
-      "retained_comment": "Blocks are paragraph aligned with a 32-byte header; a handle is a far pointer\nto a far master pointer (the block data, header segment + 2).  Handles may also\nbe passed as indexes encoded as 0F0F:index.",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "47bb1b22481455456181cd3b6d1ad1ca6650d3b259cc41263bb98345c74b50e7"
   },
   "root:194D": {
    "unit": "root",
@@ -34879,45 +34908,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/window/pictures.c",
-   "source_sha256": "5a315815b7c6c65dc2468e0abc61b9e07f7a33a33dff00c88df6c0d6b069fe80",
-   "claims": [
-    {
-     "name": "win_DrawBitMapAtObj",
-     "unit": "root",
-     "seg": 9629,
-     "off": 677,
-     "size": 51,
-     "target_sha256": "49c25f0af7247ea35b2d2cf754314afeec4e761717927cf3da335ef36e91abc1",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_DrawBitMapAtObjNum",
-     "unit": "root",
-     "seg": 9629,
-     "off": 728,
-     "size": 82,
-     "target_sha256": "88c16b037f804ecac03103c887cf3cf3ea6af219ec4d98062fe92ed4c81e652f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "win_PrintTextInRect",
-     "unit": "root",
-     "seg": 9629,
-     "off": 810,
-     "size": 382,
-     "target_sha256": "2314006b3d733f0de7ad62986512144c7b63cf9def1fd3ab0625985925a78251",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "ad63c6efb9d008eeab7cb94f88100eaabe7586396b5a9cb7236c8a1b4c0fa833",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -34925,8 +34915,8 @@
      "why": "Draws bitmap resources at window objects. It also prints text inside a rectangle and handles picture buffer formats."
     }
    ],
-   "summary": "Draws bitmap resources at window objects. It also prints text inside a rectangle and handles picture buffer formats.",
    "windows_group": "SIMTWO",
+   "summary": "Draws bitmap resources at window objects. It also prints text inside a rectangle and handles picture buffer formats.",
    "file_header": {
     "text": "Draws bitmap resources at window objects. It also prints text inside a rectangle and handles\npicture buffer formats.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 259D; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.\nFunctions not yet exact: win_DrawBitMap.",
     "name_kind": "descriptive",
@@ -35021,7 +35011,58 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "source": "src/window/pictures.c",
+   "source_sha256": "9a4f65bf5b2f5221676b78e69467b31f751e4dcc7f844befaa86c17ac7da2d12",
+   "claims": [
+    {
+     "name": "win_DrawBitMapAtObj",
+     "unit": "root",
+     "seg": 9629,
+     "off": 677,
+     "size": 51,
+     "target_sha256": "49c25f0af7247ea35b2d2cf754314afeec4e761717927cf3da335ef36e91abc1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_DrawBitMapAtObjNum",
+     "unit": "root",
+     "seg": 9629,
+     "off": 728,
+     "size": 82,
+     "target_sha256": "88c16b037f804ecac03103c887cf3cf3ea6af219ec4d98062fe92ed4c81e652f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_PrintTextInRect",
+     "unit": "root",
+     "seg": 9629,
+     "off": 810,
+     "size": 382,
+     "target_sha256": "2314006b3d733f0de7ad62986512144c7b63cf9def1fd3ab0625985925a78251",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_DrawBitMap",
+     "unit": "root",
+     "seg": 9629,
+     "off": 14,
+     "size": 663,
+     "target_sha256": "862b51706b2b515c07353b08f5c672cc04a49da3dbfd7330debdd4280bba83bd",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "win_DrawBitMap=FOLD-1: a folded always-true unsigned test before the second packed-picture test leaves the block boundary that splits the pointer reload at 0081 into two word loads; the eliminated original expression is unknown",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "5a5ecda3611f7667f9ce35e198fab05b97ff3934b18722b671d385bd7cab07f4"
   },
   "root:25E7": {
    "unit": "root",

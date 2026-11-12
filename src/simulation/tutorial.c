@@ -4,7 +4,6 @@
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
  * DOS: resident code; segment 0E2E; partial original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
- * Functions not yet exact: LessonDone.
  */
 
 typedef struct {
@@ -90,7 +89,7 @@ extern int far LessonTemp;
 extern Point far MapPnt;
 extern void far SetMyHealth(int);
 extern void far AddBlackAnts(int count);
-extern int far fd_3D57_049E[3];
+extern unsigned int far modeLevels[3];
 extern unsigned char far PherMapA[64][32];
 
 void far GiveLesson(int lesson)
@@ -233,7 +232,7 @@ void far GiveLesson(int lesson)
         break;
     case 41:
         PictStrnDialog(0x4270, 0x2b48, 1);
-        LessonTemp = fd_3D57_049E[1] + fd_3D57_049E[0];
+        LessonTemp = modeLevels[1] + modeLevels[0];
         break;
     case 42:
         PictStrnDialog(0, 0x2b4a, 1);
@@ -306,129 +305,124 @@ extern int far MapPlane;
 extern int far YardMode;
 
 
+/* Tests the condition for the selected tutorial step; case 30 also clears the drop alarm.
+ * MSC 6.00AX is sensitive to the newline after a case label: keep each first statement
+ * on its label's line. This reproduces duplicate-body selection, not original formatting.
+ * The marker test returns both outcomes here; other conditional cases share the final zero.
+ */
 int far LessonDone(int lesson)
 {
     switch (lesson) {
-    case 1:
-        return 1;
-    case 2:
-        return 1;
-    case 3:
-        if (TilesDugB > TimeTemp && MeMoveMe == 0)
+    case 1: return 1;
+    case 2: return 1;
+    case 3: if (TilesDugB > TimeTemp && MeMoveMe == 0)
             return 1;
         break;
-    case 4:
-        if (TilesDugB > TimeTemp && MeMoveMe == 0)
+    case 4: if (TilesDugB > TimeTemp && MeMoveMe == 0)
             return 1;
         break;
-    case 5:
-        return MePlane == 1;
-    case 6:
-        return 1;
-    case 7:
-        if (MeLocY + MeLocX != LessonTemp && MeDis == 0 && MacTickCount() > TimeTemp)
+    case 5: if (MePlane == 1)
             return 1;
         break;
-    case 9:
-        if (MapPnt.y + MapPnt.x != LessonTemp || MacTickCount() > TimeTemp)
+    case 6: return 1;
+    case 7: if (MeLocY + MeLocX != LessonTemp && MeDis == 0 && MacTickCount() > TimeTemp)
             return 1;
         break;
-    case 10:
-        return win_IsWinInFront(0x100) != 0;
-    case 11:
-        return 1;
-    case 12:
-        return win_IsWinInFront(0) != 0;
-    case 13:
-        if (MePlane == 1 && MapA[MeLocX][MeLocY] > 0x47)
+    case 9: if (MapPnt.y + MapPnt.x != LessonTemp || MacTickCount() > TimeTemp)
             return 1;
         break;
-    case 14:
-        return MeHealth > 0x5a;
-    case 15:
-        return 1;
-    case 16:
-        return MeType == 0x18;
-    case 17:
-        return 1;
-    case 18:
-        return MePlane == 2;
-    case 19:
-        return MeType == 0x10;
-    case 20:
-        return MePlane == 1;
-    case 21:
-        return MeType == 0x28;
-    case 22:
-        return MeType == 0x10;
-    case 23:
-        return 1;
-    case 24:
-        return ModePopB[5] > 1;
-    case 25:
-        return 1;
-    case 26:
-        if (MeLocY + MeLocX != LessonTemp && MeDis == 0 && MacTickCount() > TimeTemp)
+    case 10: if (win_IsWinInFront(0x100) != 0)
             return 1;
         break;
-    case 27:
-        if (MeLocY + MeLocX != LessonTemp && MeDropAlarm != 0 && MeDis == 0)
+    case 11: return 1;
+    case 12: if (win_IsWinInFront(0) != 0)
             return 1;
         break;
-    case 28:
-        return 1;
-    case 29:
-        return 1;
-    case 30:
-        if (MeDropAlarm != 0)
+    case 13: if (MePlane == 1 && MapA[MeLocX][MeLocY] > 0x47)
+            return 1;
+        break;
+    case 14: if (MeHealth > 0x5a)
+            return 1;
+        break;
+    case 15: return 1;
+    case 16: if (MeType == 0x18)
+            return 1;
+        break;
+    case 17: return 1;
+    case 18: if (MePlane == 2)
+            return 1;
+        break;
+    case 19: if (MeType == 0x10)
+            return 1;
+        break;
+    case 20: if (MePlane == 1)
+            return 1;
+        break;
+    case 21: if (MeType == 0x28)
+            return 1;
+        break;
+    case 22: if (MeType == 0x10)
+            return 1;
+        break;
+    case 23: return 1;
+    case 24: if (ModePopB[5] > 1)
+            return 1;
+        break;
+    case 25: return 1;
+    case 26: if (MeLocY + MeLocX != LessonTemp && MeDis == 0 && MacTickCount() > TimeTemp)
+            return 1;
+        break;
+    case 27: if (MeLocY + MeLocX != LessonTemp && MeDropAlarm != 0 && MeDis == 0)
+            return 1;
+        break;
+    case 28: return 1;
+    case 29: return 1;
+    case 30: if (MeDropAlarm != 0)
             SetAlarmDropState(0, 1);
-    case 8:
-    case 43:
-    case 46:
-    case 50:
-        return LessonTemp != 0;
-    case 31:
-        return 1;
-    case 32:
-        return win_IsWinInFront(0x100) != 0;
-    case 33:
-        return MapPlane == 0;
-    case 34:
-        return 1;
-    case 35:
-        return 1;
-    case 36:
-        return YardMode == 1;
-    case 37:
-        return 1;
-    case 38:
-        return MapPlane == 1;
-    case 39:
-        return win_IsWinInFront(0x1200) != 0;
-    case 40:
-        return 1;
-    case 41:
-        return fd_3D57_049E[1] + fd_3D57_049E[0] != LessonTemp;
-    case 42:
-        return win_IsWinInFront(0x100) != 0;
-    case 44:
-        return 1;
-    case 45:
-        return 1;
-    case 47:
-        return win_IsWinInFront(0x1300) != 0;
-    case 48:
-        return 1;
-    case 49:
-        return win_IsWinInFront(0) != 0;
-    case 51:
-        return 1;
-    case 52:
-        return ModePopB[5] > 0x28;
-    case 53:
-        return 1;
-    case 54:
-        if (MePlane == 3) {
+    case 8: case 43: case 46: case 50: if (LessonTemp != 0)
+            return 1;
+        return 0;
+    case 31: return 1;
+    case 32: if (win_IsWinInFront(0x100) != 0)
+            return 1;
+        break;
+    case 33: if (MapPlane == 0)
+            return 1;
+        break;
+    case 34: return 1;
+    case 35: return 1;
+    case 36: if (YardMode == 1)
+            return 1;
+        break;
+    case 37: return 1;
+    case 38: if (MapPlane == 1)
+            return 1;
+        break;
+    case 39: if (win_IsWinInFront(0x1200) != 0)
+            return 1;
+        break;
+    case 40: return 1;
+    case 41: if (modeLevels[1] + modeLevels[0] != LessonTemp)
+            return 1;
+        break;
+    case 42: if (win_IsWinInFront(0x100) != 0)
+            return 1;
+        break;
+    case 44: return 1;
+    case 45: return 1;
+    case 47: if (win_IsWinInFront(0x1300) != 0)
+            return 1;
+        break;
+    case 48: return 1;
+    case 49: if (win_IsWinInFront(0) != 0)
+            return 1;
+        break;
+    case 51: return 1;
+    case 52: if (ModePopB[5] > 0x28)
+            return 1;
+        break;
+    case 53: return 1;
+    case 54: if (MePlane == 3) {
             LessonTemp = 0;
             return 1;
         }
@@ -437,10 +431,8 @@ int far LessonDone(int lesson)
             return 1;
         }
         break;
-    case 55:
-        return 1;
-    case 56:
-        return 1;
+    case 55: return 1;
+    case 56: return 1;
     }
     return 0;
 }

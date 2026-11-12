@@ -5,7 +5,6 @@
  * DOS: resident code; segment 259D; partial original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
- * Functions not yet exact: win_DrawBitMap.
  */
 
 struct Rect {
@@ -68,20 +67,18 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
             db_ReleaseObject(id, 2);
             return 1;
         }
-        if ((*(struct Pic far * far *)h)->type == (int)0x8000) {
+        /* STEERING: this folded range check preserves the split DI/ES reload.
+           The original eliminated expression is unknown; x is a hypothesis. */
+        if ((unsigned)x >= 0 && (*(struct Pic far * far *)h)->type == (int)0x8000) {
             GPutPacked(x, y, *(char far * far *)h);
-            db_ReleaseObject(id, 2);
-            return 1;
         }
-        if (pic->type == 0) {
+        else if (pic->type == 0) {
             if (pic->mode == 1)
                 GPutImg(x, y, (char far *)pic + 8);
             else
                 GPutPic(x, y, (char far *)pic + 8);
-            db_ReleaseObject(id, 2);
-            return 1;
         }
-        if (pic->type == 3) {
+        else if (pic->type == 3) {
             if (g_5A97 == 2) {
                 x1 = ((x & ~1) + pic->width + 3) & ~1;
                 y1 = pic->height + y;
@@ -89,7 +86,6 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
                 (*g_9148)(x & ~1, y, x1, y1, h);
                 gfx_tandy_mask_to_buffer((char far *)pic + 8, h, x & 1, 0);
                 GPutPic(x & ~1, y, h);
-                free(h);
             } else {
                 x1 = ((x & ~7) + pic->width + 15) & ~7;
                 y1 = pic->height + y;
@@ -105,8 +101,8 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
                     gfx_planar_mask_to_buffer((char far *)pic + 8, h, x & 7, 0);
                 WinPrintf("\nGPutPic size %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
                 GPutPic(x & ~7, y, h);
-                free(h);
             }
+            free(h);
         }
         db_ReleaseObject(id, 2);
         return 1;

@@ -5,8 +5,7 @@
  * DOS: resident code; segment 171C; partial original translation unit.
  * Windows: GR, from recorded function pairs in the Windows symbol inventory.
  * Build profile: msc600ax; /AL /Oeg /Gs /Zi.
- * Functions not yet exact: mem_resize_in_place, f_171C_0CF4.
- * Steered functions: RallocSetType.
+ * Steered functions: RallocSetType, f_171C_0CF4.
  *
  * Blocks are paragraph aligned with a 32-byte header; a handle is a far pointer
  * to a far master pointer (the block data, header segment + 2).  Handles may also
@@ -416,17 +415,21 @@ int far mem_resize_in_place(Handle h, unsigned paras, int type)
     Block far *b;
     Block far *next;
 
+    /* The compiler merges these two carve paths; factoring their call changes
+     * register allocation. The source grouping is inferred from that experiment. */
     b = HDR(h);
     if (b->paras > paras) {
         if (b->paras < paras + 0x20)
             return 1;
+        mem_carve_free_block(b = mem_free_and_coalesce(b, 0), paras, type);
+        return 1;
     } else {
         next = BLK(SEG(b) + b->paras);
         if (SEG(next) >= SEG(g_91A8) || next->type != 0x80 || next->paras + b->paras < paras)
             return 0;
+        mem_carve_free_block(b = mem_free_and_coalesce(b, 0), paras, type);
+        return 1;
     }
-    mem_carve_free_block(mem_free_and_coalesce(b, 0), paras, type);
-    return 1;
 }
 
 
@@ -514,23 +517,24 @@ int far f_171C_0BE2(int emsOnly)
 
 int far f_171C_0CF4(int emsOnly)
 {
+    /* Steering: grouping the scan word with a high-word result reproduces the
+     * frame. The original grouping and types remain unknown. */
+    struct { unsigned seg; unsigned long moved; } state;
     int t;
-    unsigned seg;
     long size;
     unsigned paras;
     Block far *n;
     unsigned end;
     Block far *b;
-    unsigned long moved;
     Block far *nb;
 
-    moved = 0;
+    state.moved = 0;
     b = g_91A4;
     end = emsOnly ? fd_50F6_3950 : s_8C70;
-    for (; (seg = (unsigned)SEG(b)) < end; b = BLK(b->paras + seg)) {
+    for (; (state.seg = (unsigned)SEG(b)) < end; b = BLK(b->paras + state.seg)) {
         if (b->type != 0x80)
             continue;
-        n = BLK(b->paras + seg);
+        n = BLK(b->paras + state.seg);
         if ((unsigned)SEG(n) < end && (t = n->type, !n->lock) && (t == 1 || t == 3) && !(n->attr & 0x10)) {
             f_171C_0ADC(b);
             continue;
@@ -556,9 +560,9 @@ found:
         *(Handle)((char far *)s_2F46 + nb->handle) = (char far *)((long)nb + 0x20000L);
         _enable();
         mem_free_and_coalesce(n, 1);
-        moved = 1;
+        state.moved = 0x10000L;
     }
-    return (int)moved;
+    return (int)(state.moved >> 16);
 }
 
 
