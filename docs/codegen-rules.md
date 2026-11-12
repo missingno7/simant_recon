@@ -276,3 +276,17 @@ that remain open and the freshly compiled execution controls.
   probe `build/workers/open10-lesson/CASELINE-1.json`, also without `/Zi`). Of two case
   bodies with identical code, which one survives depends on whether the first statement
   shares the line of its `case` label.
+* **A nested `if` takes a declaration number** (yellow ant file, S25:3BA4, 2026-11-12).
+  Writing `if (a && b)` as `if (a) if (b)` compiles to the same instructions and adds one /Zi
+  line entry, but it shifts the modulo-17 declaration numbers of everything declared later
+  like one more identifier would. Control: nesting the `kind == 0 && SRand2()` test of
+  AnimYellowFight alone changes GetMyDis from 470 to 487 bytes; with one parameter name
+  removed from a prototype the file is exact again. Three different layouts with every
+  nested `if` offset one for one by an unnamed parameter directly after it are exact as a
+  complete file. Splitting a condition over several lines adds no line entry and no number;
+  splitting `a = b = v` into two statements adds one line entry and no number.
+* **Record breaks of a complete file are solved with `tools/records.py --plan`.** It gives, per
+  52-entry flush, how many line entries must be added or removed before it. The yellow ant
+  file needed four more before AnimYellowFight's second SRand2 call and eight in total before
+  GetMyDis' last return; the result is recorded as layout inferred because the layout is not
+  unique.

@@ -13,6 +13,18 @@
  * (ExitNest's MePlane/MeGoalPlane compare, GetMyDis' GetDis call order), and this
  * order (0D6C/0EF8 first, MeLastX/Y before MeGoalY, entrance arrays A4,B0,A8,AC)
  * reproduces them.
+ *
+ * Line layout (inferred, not recovered): /Zi starts a new object record every 52 line
+ * entries, and the original relocation order fixes where those breaks fall.  The layout
+ * here is one that satisfies all 90 order constraints of the file; it is not unique.
+ * Compared with the shortest spelling it has seven more line entries: the two goal
+ * stores of DoAntMoveY are written as separate statements, three of its tests and the
+ * target test of YellowFight are nested ifs instead of && chains, and GetMyDis tests
+ * p1 and p2 in two ifs.  Every form compiles to the same instructions.  A nested if
+ * also takes one declaration number (see docs/codegen-rules.md), so each one before a
+ * later function is offset by a prototype without parameter names directly after it
+ * (PlaceEggB, MakeNewHoleB, MakeNewHoleR); the original names and line structure are
+ * unknown.
  */
 
 extern int far MeCrazyCnt;
@@ -116,7 +128,8 @@ void far DoAntMoveY(void)
         if (MePlane == MeTargLifePlane) {
             dx = ABS(MeLocX - tx);
             dy = ABS(MeLocY - ty);
-            if (dx <= 1 && dy <= 1) {
+            if (dx <= 1)
+            if (dy <= 1) {
                 d = GetDir(MeLocX, MeLocY, tx, ty) - 1;
                 if (d >= 0)
                     MeDir = d;
@@ -124,10 +137,13 @@ void far DoAntMoveY(void)
                 goto moved;
             }
         }
-        MeGoalX = MeTargLifeX = tx;
-        MeGoalY = MeTargLifeY = ty;
+        MeTargLifeX = tx;
+        MeGoalX = MeTargLifeX;
+        MeTargLifeY = ty;
+        MeGoalY = MeTargLifeY;
     }
-    if (MeCmd == 1 && MeGoalPlane == MePlane) {
+    if (MeCmd == 1)
+    if (MeGoalPlane == MePlane) {
         dir = GetDir(MeLocX, MeLocY, MeGoalX, MeGoalY);
         x = Dx9[dir] + MeLocX;
         y = Dy9[dir] + MeLocY;
@@ -135,7 +151,8 @@ void far DoAntMoveY(void)
             x = MeLocX;
         if (y < 0 || y > 0x3f)
             y = MeLocY;
-        if (MeGoalX == x && MeGoalY == y) {
+        if (MeGoalX == x)
+        if (MeGoalY == y) {
             if ((result = TryMyDropOrLift(MePlane, x, y)) != 0) {
                 result = (result == 1) ? -1 : -2;
                 goto done;
@@ -255,7 +272,7 @@ extern int far MeMode;
 extern unsigned char far Cycle;
 extern int far InNestBounds(int x, int y);
 extern int far SRand128(void);
-extern void far PlaceEggB(int x, int y, int type);
+extern void far PlaceEggB(int, int, int);
 extern void far DecEatB(void);
 extern void far PlaceEggR(int x, int y, int type);
 extern void far DecEatR(void);
@@ -481,7 +498,9 @@ void far YellowFight(int list, int index)
         if (list <= 1)
             DeadAntHere(px[index], py[index], pl[index] & 0x80);
         pl[index] = 0;
-        if (MeCmd == 3 && MePlane == MeTargLifePlane && MeTargIndex == index)
+        if (MeCmd == 3)
+        if (MePlane == MeTargLifePlane)
+        if (MeTargIndex == index)
             ResetYellowVars(MePlane, MeLocX, MeLocY);
     } else {
         SetLife(list, px[index], py[index], pl[index]);
@@ -495,9 +514,9 @@ extern void far TryAntTheme(void);
 extern void far SetAlarmDropState(int state, int quiet);
 extern void far DigMyTile(int plane, int x, int y);
 extern unsigned char far HoleMapB[];
-extern void far MakeNewHoleB(int x);
+extern void far MakeNewHoleB(int);
 extern unsigned char far HoleMapR[];
-extern void far MakeNewHoleR(int x);
+extern void far MakeNewHoleR(int);
 extern signed char far absSearchDirs[];
 extern int far IsNotObstacle(int plane, int x, int y);
 
@@ -601,7 +620,8 @@ int far GetMyDis(int p1, int x1, int y1, int p2, int x2, int y2)
 {
     if (p2 == p1)
         return GetDis(x1, y1, x2, y2);
-    if (p1 == 1 && p2 > p1) {
+    if (p1 == 1)
+    if (p2 > p1) {
         if (p2 == 2)
             return GetDis(x1, y1, LastNewHoleB[0], LastNewHoleB[1])
                  + GetDis(LastNewExitB[0], LastNewExitB[1], x2, y2);
