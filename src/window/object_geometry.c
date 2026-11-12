@@ -2,7 +2,7 @@
  * Locates window records and objects and fixes up their pointers. It computes object rectangles,
  * automatic sizing and layout values.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 2505; partial original translation unit.
+ * DOS: resident code; segment 2505; complete original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
  * HIGH confidence, not confirmed.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.

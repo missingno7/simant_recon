@@ -2,7 +2,7 @@
  * Runs tutorial lessons and advice feedback. It selects the next lesson and delivers the
  * corresponding instructions.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 0E2E; partial original translation unit.
+ * DOS: resident code; segment 0E2E; complete original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
  */
 

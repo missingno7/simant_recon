@@ -5346,8 +5346,71 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S10/m35F5.c",
+     "why": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length."
+    }
+   ],
+   "windows_group": "unknown",
+   "summary": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length.",
+   "file_header": {
+    "text": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking\nthe menu data length.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 10 (S10); segment 35F5; partial original translation unit.\nWindows: unknown; no confirmed function pair identifies a symbol group.\nBuild profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.",
+    "name_kind": "descriptive",
+    "why": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/S10:35F5",
+      "summary": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/S10:35F5",
+      "module": "S10:35F5",
+      "source": "src/window/menu_tracking.c",
+      "reviewed_source_sha256": "5207493f0885cf6e841bdcb53e07c32afaa6dd6492373cbbe526ab61e47a48a3",
+      "link_facts": {
+       "part": "overlay section 10 (S10)",
+       "segment": "35F5",
+       "origin": null,
+       "translation_unit": "partial original translation unit",
+       "extent": null
+      },
+      "not_exact": [],
+      "steered": [],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Og",
+       "/Oe",
+       "/Gs",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [],
+      "groups": []
+     },
+     {
+      "path": "src/window/menu_tracking.c",
+      "prior_leading_comment": "Overlay section S10, code frame 35F5: pull-down menu bar.",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
+   "extent": {
+    "start": 221008,
+    "end": 223739
+   },
    "source": "src/window/menu_tracking.c",
-   "source_sha256": "14083bfbd1cef8c7b8603df674a80f0df3687dbeb23944b7239274ff059ccab9",
+   "source_sha256": "7065a8617858ea85552488b7d122264c28fc1a2a9aaa0da526b103b010924973",
    "claims": [
     {
      "name": "o10_35F5_0000",
@@ -5406,66 +5469,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "11078efa976be373050c7d4f6c8d3f8388768eff2b9b89590b957ed60ab4e9a8",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/S10/m35F5.c",
-     "why": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length."
-    }
-   ],
-   "summary": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length.",
-   "windows_group": "unknown",
-   "file_header": {
-    "text": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking\nthe menu data length.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 10 (S10); segment 35F5; partial original translation unit.\nWindows: unknown; no confirmed function pair identifies a symbol group.\nBuild profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.",
-    "name_kind": "descriptive",
-    "why": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/S10:35F5",
-      "summary": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/S10:35F5",
-      "module": "S10:35F5",
-      "source": "src/window/menu_tracking.c",
-      "reviewed_source_sha256": "5207493f0885cf6e841bdcb53e07c32afaa6dd6492373cbbe526ab61e47a48a3",
-      "link_facts": {
-       "part": "overlay section 10 (S10)",
-       "segment": "35F5",
-       "origin": null,
-       "translation_unit": "partial original translation unit",
-       "extent": null
-      },
-      "not_exact": [],
-      "steered": [],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Og",
-       "/Oe",
-       "/Gs",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [],
-      "groups": []
-     },
-     {
-      "path": "src/window/menu_tracking.c",
-      "prior_leading_comment": "Overlay section S10, code frame 35F5: pull-down menu bar.",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "11078efa976be373050c7d4f6c8d3f8388768eff2b9b89590b957ed60ab4e9a8"
   },
   "S11:35F5": {
    "unit": "S11",
@@ -6370,8 +6374,12 @@
      }
     ]
    },
+   "extent": {
+    "start": 230592,
+    "end": 236643
+   },
    "source": "src/ui/yard_window.c",
-   "source_sha256": "cac923e6a7a494a813101efdd375becd94ac5778b41fc36dd8cdf09c95e83f9c",
+   "source_sha256": "9f946470a6302ad09c90f9ffe4652113d29fe59624aece20a2591d4bdd4461f6",
    "claims": [
     {
      "name": "ProcYardEvent",
@@ -10162,90 +10170,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/ui/history_window.c",
-   "source_sha256": "f30c33a3d6ba7597256aeec856550e5108acbc6fbc7ff69e2056edd4d1c6b12d",
-   "claims": [
-    {
-     "name": "OpenHistoryWindow",
-     "unit": "S24",
-     "seg": 14791,
-     "off": 0,
-     "size": 18,
-     "target_sha256": "61601499f6701512a695f337431875daeadecd4fa118e50eb5cf5a0c0a8e3610",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ProcHistoryEvent",
-     "unit": "S24",
-     "seg": 14791,
-     "off": 18,
-     "size": 161,
-     "target_sha256": "4fc2030a315436340c524a437df9222ab6fa17f5ca80179dedda5c9a9ad0491f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ToggleHistButton",
-     "unit": "S24",
-     "seg": 14791,
-     "off": 179,
-     "size": 261,
-     "target_sha256": "ddcba3c3072d8b9fc9bec494d132bd0f1c80538a7e1f0e94af3797ad0cd4a3af",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ClearHistory",
-     "unit": "S24",
-     "seg": 14791,
-     "off": 440,
-     "size": 290,
-     "target_sha256": "1206a0e761655e7f81bd6f15f29bc2ffd3100df06a3efd142eb10c5cdc250bc6",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_DrawHistoryWindow",
-     "unit": "S24",
-     "seg": 14791,
-     "off": 730,
-     "size": 82,
-     "target_sha256": "80b4e21eb93aeac2008e3344677958b8543f75274d141806f2887c72446913b4",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "HistUpdate",
-     "unit": "S24",
-     "seg": 14791,
-     "off": 1544,
-     "size": 259,
-     "target_sha256": "50253e24101878b4426eb52b04be42679d6725a3ddf65a87d7e8638ae7d71dcb",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "drawHistGraph",
-     "unit": "S24",
-     "seg": 14791,
-     "off": 812,
-     "size": 732,
-     "target_sha256": "89b60c8b92891415c7a845684a95c75ce2e0c45cc44065d6f6286a62b8b114e3",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "f702bf1b7ec547db76b52d0d50f9cbfde05d4318a9bfcd2f6a072a867eadea8c",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -10253,8 +10177,8 @@
      "why": "Displays the history window and handles its controls. It clears, updates and plots the recorded history graphs."
     }
    ],
-   "summary": "Displays the history window and handles its controls. It clears, updates and plots the recorded history graphs.",
    "windows_group": "SIMANT",
+   "summary": "Displays the history window and handles its controls. It clears, updates and plots the recorded history graphs.",
    "file_header": {
     "text": "Displays the history window and handles its controls. It clears, updates and plots the\nrecorded history graphs.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 24 (S24); segment 39C7; partial original translation unit.\nWindows: SIMANT, from recorded function pairs in the Windows symbol inventory.\nSteered functions: drawHistGraph.",
     "name_kind": "descriptive",
@@ -10378,7 +10302,95 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 236656,
+    "end": 238459
+   },
+   "source": "src/ui/history_window.c",
+   "source_sha256": "ece8770c8921db24d04daac27f78460de2ff8dcfef3244fba8e2bda67239e9fd",
+   "claims": [
+    {
+     "name": "OpenHistoryWindow",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 0,
+     "size": 18,
+     "target_sha256": "61601499f6701512a695f337431875daeadecd4fa118e50eb5cf5a0c0a8e3610",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ProcHistoryEvent",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 18,
+     "size": 161,
+     "target_sha256": "4fc2030a315436340c524a437df9222ab6fa17f5ca80179dedda5c9a9ad0491f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ToggleHistButton",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 179,
+     "size": 261,
+     "target_sha256": "ddcba3c3072d8b9fc9bec494d132bd0f1c80538a7e1f0e94af3797ad0cd4a3af",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ClearHistory",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 440,
+     "size": 290,
+     "target_sha256": "1206a0e761655e7f81bd6f15f29bc2ffd3100df06a3efd142eb10c5cdc250bc6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_DrawHistoryWindow",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 730,
+     "size": 82,
+     "target_sha256": "80b4e21eb93aeac2008e3344677958b8543f75274d141806f2887c72446913b4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "HistUpdate",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 1544,
+     "size": 259,
+     "target_sha256": "50253e24101878b4426eb52b04be42679d6725a3ddf65a87d7e8638ae7d71dcb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "drawHistGraph",
+     "unit": "S24",
+     "seg": 14791,
+     "off": 812,
+     "size": 732,
+     "target_sha256": "89b60c8b92891415c7a845684a95c75ce2e0c45cc44065d6f6286a62b8b114e3",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "f702bf1b7ec547db76b52d0d50f9cbfde05d4318a9bfcd2f6a072a867eadea8c"
   },
   "S25:39C7": {
    "unit": "S25",
@@ -13340,23 +13352,7 @@
    ],
    "placements": {},
    "lang": "c",
-   "source": "src/unresolved/m00de.c",
-   "source_sha256": "bca642b8afc9dca62574a9c3f55ed65bc51d03d363643feb4e98cd14bcbf5204",
-   "claims": [
-    {
-     "name": "f_00DE_000A",
-     "unit": "root",
-     "seg": 222,
-     "off": 10,
-     "size": 10,
-     "target_sha256": "f3b6f81e20343838dacc9c2961083d5e3ca5b2ec1cf7d2f20cc711339ecc95fd",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "ec31657ebc6219d63d466ed36e04b9056a8508608b1a0e275776ffa294035552",
+   "source_origin": "hand-written C",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -13364,8 +13360,8 @@
      "why": "Contains one empty far Pascal entry taking an integer. A caller passes one before exiting, but the original purpose of the hook is not established."
     }
    ],
-   "summary": "Contains one empty far Pascal entry taking an integer. A caller passes one before exiting, but the original purpose of the hook is not established.",
    "windows_group": "unknown",
+   "summary": "Contains one empty far Pascal entry taking an integer. A caller passes one before exiting, but the original purpose of the hook is not established.",
    "file_header": {
     "text": "Contains one empty far Pascal entry taking an integer. A caller passes one before exiting, but\nthe original purpose of the hook is not established.\nThe opaque or residual file name is retained; folder placement is ours (inferred).\nDOS: resident code; segment 00DE; partial original translation unit.\nWindows: unknown; no confirmed function pair identifies a symbol group.\nBuild profile: msc600ax; /AL /Os /Zi.",
     "name_kind": "descriptive",
@@ -13412,7 +13408,28 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 3562,
+    "end": 3572
+   },
+   "source": "src/unresolved/m00de.c",
+   "source_sha256": "6cf163d45ae8bda10178f791b5d2480e51bbdaf34283344c8ec664553b33fb59",
+   "claims": [
+    {
+     "name": "f_00DE_000A",
+     "unit": "root",
+     "seg": 222,
+     "off": 10,
+     "size": 10,
+     "target_sha256": "f3b6f81e20343838dacc9c2961083d5e3ca5b2ec1cf7d2f20cc711339ecc95fd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "ec31657ebc6219d63d466ed36e04b9056a8508608b1a0e275776ffa294035552"
   },
   "root:00DF": {
    "unit": "root",
@@ -18693,95 +18710,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/simulation/spider.c",
-   "source_sha256": "b9d64c454603eee0890313105de35d3a56869c31b7a03ecf45aeec0dedb691ff",
-   "claims": [
-    {
-     "name": "InitSpider",
-     "unit": "root",
-     "seg": 3291,
-     "off": 0,
-     "size": 179,
-     "target_sha256": "6a1e37e811aa09d26e8849c0c8a9a4718a18233b43c3eba3fb547ce5e748da1e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MoveSpider",
-     "unit": "root",
-     "seg": 3291,
-     "off": 179,
-     "size": 3245,
-     "target_sha256": "53ea16011121c847b9eabca08d9bfcfd3a5037a3e39b52df1db9835b44305053",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ScanForAnts",
-     "unit": "root",
-     "seg": 3291,
-     "off": 3424,
-     "size": 128,
-     "target_sha256": "0aec00a4df0d276e444ce11dff03ff56e006ab00189047beafff9ffa25375605",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "KillSpider",
-     "unit": "root",
-     "seg": 3291,
-     "off": 3552,
-     "size": 41,
-     "target_sha256": "7558b59a58bd29818df720580143e9627e0ad2a3eb54a667b1ca326f85710f27",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SGetDis",
-     "unit": "root",
-     "seg": 3291,
-     "off": 4376,
-     "size": 40,
-     "target_sha256": "20181f562ae458e77479beaccf3eb9cf62e33471c4ceef99a9c9ff197143f08a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SFoundAnt",
-     "unit": "root",
-     "seg": 3291,
-     "off": 3593,
-     "size": 391,
-     "target_sha256": "76c422a04276fca575ada0cdee55e76bef28ad1f0444a132ce8551ef1bf31241",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SpiderScan",
-     "unit": "root",
-     "seg": 3291,
-     "off": 3984,
-     "size": 392,
-     "target_sha256": "650be461544c9e00de673f776a184395b75ff88009dc9ea0ea68d029a15630d6",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "steered_history": [
-      {
-       "steered": "SpiderScan=two constructs with no other reason: a local aggregate holding the scan state (keeps the initial radius store and the frame homes) and a folded unsigned x check (selects SI/DI for x and y); the original declarations and the eliminated expression are unknown",
-       "cleared": "the Macintosh build (CODE 12, 1B6A) keeps a separate kill counter cleared on entry and incremented after each kill; with that counter ordinary locals reproduce the code, so the scan aggregate and the folded check are gone"
-      }
-     ]
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "29535026dbbf081e1a5c0adfee9a453915ab62aa469f455c3a67fb0b3933d635",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -18789,8 +18717,8 @@
      "why": "Initializes and advances the spider and scans for prey. It tracks targets, queen hunting and spider death."
     }
    ],
-   "summary": "Initializes and advances the spider and scans for prey. It tracks targets, queen hunting and spider death.",
    "windows_group": "SIMONE",
+   "summary": "Initializes and advances the spider and scans for prey. It tracks targets, queen hunting and spider death.",
    "file_header": {
     "text": "Initializes and advances the spider and scans for prey. It tracks targets, queen hunting and\nspider death.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 0CDB; partial original translation unit.\nWindows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
     "name_kind": "descriptive",
@@ -18902,7 +18830,100 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 52656,
+    "end": 57072
+   },
+   "source": "src/simulation/spider.c",
+   "source_sha256": "6c0dc09b0905ffafdf503b1f4a1ec42e1e1868486b3674b58bde751b641f7c0d",
+   "claims": [
+    {
+     "name": "InitSpider",
+     "unit": "root",
+     "seg": 3291,
+     "off": 0,
+     "size": 179,
+     "target_sha256": "6a1e37e811aa09d26e8849c0c8a9a4718a18233b43c3eba3fb547ce5e748da1e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MoveSpider",
+     "unit": "root",
+     "seg": 3291,
+     "off": 179,
+     "size": 3245,
+     "target_sha256": "53ea16011121c847b9eabca08d9bfcfd3a5037a3e39b52df1db9835b44305053",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ScanForAnts",
+     "unit": "root",
+     "seg": 3291,
+     "off": 3424,
+     "size": 128,
+     "target_sha256": "0aec00a4df0d276e444ce11dff03ff56e006ab00189047beafff9ffa25375605",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "KillSpider",
+     "unit": "root",
+     "seg": 3291,
+     "off": 3552,
+     "size": 41,
+     "target_sha256": "7558b59a58bd29818df720580143e9627e0ad2a3eb54a667b1ca326f85710f27",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SGetDis",
+     "unit": "root",
+     "seg": 3291,
+     "off": 4376,
+     "size": 40,
+     "target_sha256": "20181f562ae458e77479beaccf3eb9cf62e33471c4ceef99a9c9ff197143f08a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SFoundAnt",
+     "unit": "root",
+     "seg": 3291,
+     "off": 3593,
+     "size": 391,
+     "target_sha256": "76c422a04276fca575ada0cdee55e76bef28ad1f0444a132ce8551ef1bf31241",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SpiderScan",
+     "unit": "root",
+     "seg": 3291,
+     "off": 3984,
+     "size": 392,
+     "target_sha256": "650be461544c9e00de673f776a184395b75ff88009dc9ea0ea68d029a15630d6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "steered_history": [
+      {
+       "steered": "SpiderScan=two constructs with no other reason: a local aggregate holding the scan state (keeps the initial radius store and the frame homes) and a folded unsigned x check (selects SI/DI for x and y); the original declarations and the eliminated expression are unknown",
+       "cleared": "the Macintosh build (CODE 12, 1B6A) keeps a separate kill counter cleared on entry and incremented after each kill; with that counter ordinary locals reproduce the code, so the scan aggregate and the folded check are gone"
+      }
+     ]
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "29535026dbbf081e1a5c0adfee9a453915ab62aa469f455c3a67fb0b3933d635"
   },
   "root:0DEF": {
    "unit": "root",
@@ -19205,8 +19226,12 @@
      }
     ]
    },
+   "extent": {
+    "start": 58090,
+    "end": 60433
+   },
    "source": "src/simulation/tutorial.c",
-   "source_sha256": "7b4127029653760d00e2d0cc320bb58bb3b820c52e0fe456fe1d1462f5c079f7",
+   "source_sha256": "93f4bbddfd4e50594e77dfa884163fef9791a8fac60e9d171dea54491a6d5c62",
    "claims": [
     {
      "name": "Feedback",
@@ -25403,90 +25428,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/resources/database_index.c",
-   "source_sha256": "52315df2d4a699d7d6242b3d7a4ecebae2b2fbaebd20e1ffa9abd432f9f0fe1b",
-   "claims": [
-    {
-     "name": "OpenIndex",
-     "unit": "root",
-     "seg": 6534,
-     "off": 4,
-     "size": 240,
-     "target_sha256": "6b190879d02cd6e670a5facc84f7f60a460c571639c586be35853ab3797578d0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "CreateIndex",
-     "unit": "root",
-     "seg": 6534,
-     "off": 244,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "CloseIndex",
-     "unit": "root",
-     "seg": 6534,
-     "off": 245,
-     "size": 53,
-     "target_sha256": "d50635e8ae0e3d588c3cfa84f23e0b31f3f860d712ea1936720733a43f88fa69",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_1986_0235",
-     "unit": "root",
-     "seg": 6534,
-     "off": 565,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_1986_0236",
-     "unit": "root",
-     "seg": 6534,
-     "off": 566,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "f_1986_0237",
-     "unit": "root",
-     "seg": 6534,
-     "off": 567,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "FindIndex",
-     "unit": "root",
-     "seg": 6534,
-     "off": 298,
-     "size": 267,
-     "target_sha256": "cd7dc4c9f31b0130089cdd098142e038285519096270ec05a653e61c07baf64d",
-     "kind": "C",
-     "provenance": "EXACT_STEERED",
-     "steered": "FindIndex=block layout only: goto into the else block reproduces the original order of the two search branches; the original control structure is unknown",
-     "reloc_order": "EXACT"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "7b304cb8e08c8b7615860f866aca266fe12182cd0f131c3dedb5e501fa4374c1",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -25494,8 +25435,8 @@
      "why": "Opens and searches database index files. Create and write-side index operations are empty in the read-only DOS game."
     }
    ],
-   "summary": "Opens and searches database index files. Create and write-side index operations are empty in the read-only DOS game.",
    "windows_group": "SIMTWO",
+   "summary": "Opens and searches database index files. Create and write-side index operations are empty in the read-only DOS game.",
    "file_header": {
     "text": "Opens and searches database index files. Create and write-side index operations are empty in\nthe read-only DOS game.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 1986; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Oeg /Gs /Zi.\nSteered functions: FindIndex.",
     "name_kind": "descriptive",
@@ -25589,7 +25530,95 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 104548,
+    "end": 105112
+   },
+   "source": "src/resources/database_index.c",
+   "source_sha256": "5161cb6444d9d3e69c32c04b2ac5421ee75e7162e59e448355ae6ad6db8c2824",
+   "claims": [
+    {
+     "name": "OpenIndex",
+     "unit": "root",
+     "seg": 6534,
+     "off": 4,
+     "size": 240,
+     "target_sha256": "6b190879d02cd6e670a5facc84f7f60a460c571639c586be35853ab3797578d0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CreateIndex",
+     "unit": "root",
+     "seg": 6534,
+     "off": 244,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "CloseIndex",
+     "unit": "root",
+     "seg": 6534,
+     "off": 245,
+     "size": 53,
+     "target_sha256": "d50635e8ae0e3d588c3cfa84f23e0b31f3f860d712ea1936720733a43f88fa69",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1986_0235",
+     "unit": "root",
+     "seg": 6534,
+     "off": 565,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1986_0236",
+     "unit": "root",
+     "seg": 6534,
+     "off": 566,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "f_1986_0237",
+     "unit": "root",
+     "seg": 6534,
+     "off": 567,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FindIndex",
+     "unit": "root",
+     "seg": 6534,
+     "off": 298,
+     "size": 267,
+     "target_sha256": "cd7dc4c9f31b0130089cdd098142e038285519096270ec05a653e61c07baf64d",
+     "kind": "C",
+     "provenance": "EXACT_STEERED",
+     "steered": "FindIndex=block layout only: goto into the else block reproduces the original order of the two search branches; the original control structure is unknown",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "7b304cb8e08c8b7615860f866aca266fe12182cd0f131c3dedb5e501fa4374c1"
   },
   "root:19A9": {
    "unit": "root",
@@ -31703,8 +31732,12 @@
      }
     ]
    },
+   "extent": {
+    "start": 134784,
+    "end": 137436
+   },
    "source": "src/window/lifecycle.c",
-   "source_sha256": "303a66ed2e6ae1d4438e84630a4758fc5aeaab716ad2d7ef9f6602c5e625edf2",
+   "source_sha256": "e7e1cdbcd437ba63a224eaffb687d8d43774b19fa2aadafc5a30987a2ba59c51",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -33655,100 +33688,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "source": "src/window/locking.c",
-   "source_sha256": "988f84c4c24c42d5880c079e005622930723aa3becc9de866532ac8ffa9833fa",
-   "claims": [
-    {
-     "name": "win_NoWindowsShouldBeLocked",
-     "unit": "root",
-     "seg": 9134,
-     "off": 4,
-     "size": 30,
-     "target_sha256": "7296c5853c7808f2903008b7654b8d9612bf30b5cfde4e27729adf30af1f1e08",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_LockInit",
-     "unit": "root",
-     "seg": 9134,
-     "off": 34,
-     "size": 47,
-     "target_sha256": "6d4edfe6b0047c04824ab514f7783f17257fe6443d851efbf5125a78c379e4ac",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_IsWinLocked",
-     "unit": "root",
-     "seg": 9134,
-     "off": 81,
-     "size": 24,
-     "target_sha256": "e7467839131fdccd096b00d6acfd2cf4b65dc3a2fdaf8e52070e3c3f1845d131",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_load_and_lock_resource",
-     "unit": "root",
-     "seg": 9134,
-     "off": 105,
-     "size": 370,
-     "target_sha256": "50f35feec0e52bfff3b4fa57da7ab70388fc5b1cf258252604caa39d5473433e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "f_23AE_035D",
-     "unit": "root",
-     "seg": 9134,
-     "off": 861,
-     "size": 18,
-     "target_sha256": "f4ff8adc03db3c7481fa7da61d1b376dff51246639b7bb5f5101a83bfcfc4c10",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "win_LockWinHigh",
-     "unit": "root",
-     "seg": 9134,
-     "off": 879,
-     "size": 8,
-     "target_sha256": "2263a3edad3af8312e7e2c055a7874ead7fc49b4db9ecc0a6afde1a036c166a8",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_LockWin",
-     "unit": "root",
-     "seg": 9134,
-     "off": 887,
-     "size": 7,
-     "target_sha256": "2ee8df406191f7e93f646bd5215c689717ceb2164fa94bd47dbb2eb3f52a3fa0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "win_UnlockWin",
-     "unit": "root",
-     "seg": 9134,
-     "off": 475,
-     "size": 386,
-     "target_sha256": "ea9f824c02968d1b0dbd6f5a2e315c738c13a16fc20c5854c67f28e25f6a2d6e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "4363011f29e9d2dafa9254cedd66d77dac2c308f42f6c0cabf8a1c9e8f89f6c3",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -33756,8 +33695,8 @@
      "why": "Locks and unlocks window resources through nested access. It checks window numbers, discarded handles and lock depth."
     }
    ],
-   "summary": "Locks and unlocks window resources through nested access. It checks window numbers, discarded handles and lock depth.",
    "windows_group": "SIMTWO",
+   "summary": "Locks and unlocks window resources through nested access. It checks window numbers, discarded handles and lock depth.",
    "file_header": {
     "text": "Locks and unlocks window resources through nested access. It checks window numbers, discarded\nhandles and lock depth.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 23AE; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.",
     "name_kind": "descriptive",
@@ -33870,7 +33809,105 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 146148,
+    "end": 147038
+   },
+   "source": "src/window/locking.c",
+   "source_sha256": "2648d52fc6dd830e6595749167d8a7dc3281ee7923288cd6daac8c36351ff09f",
+   "claims": [
+    {
+     "name": "win_NoWindowsShouldBeLocked",
+     "unit": "root",
+     "seg": 9134,
+     "off": 4,
+     "size": 30,
+     "target_sha256": "7296c5853c7808f2903008b7654b8d9612bf30b5cfde4e27729adf30af1f1e08",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_LockInit",
+     "unit": "root",
+     "seg": 9134,
+     "off": 34,
+     "size": 47,
+     "target_sha256": "6d4edfe6b0047c04824ab514f7783f17257fe6443d851efbf5125a78c379e4ac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_IsWinLocked",
+     "unit": "root",
+     "seg": 9134,
+     "off": 81,
+     "size": 24,
+     "target_sha256": "e7467839131fdccd096b00d6acfd2cf4b65dc3a2fdaf8e52070e3c3f1845d131",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_load_and_lock_resource",
+     "unit": "root",
+     "seg": 9134,
+     "off": 105,
+     "size": 370,
+     "target_sha256": "50f35feec0e52bfff3b4fa57da7ab70388fc5b1cf258252604caa39d5473433e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_23AE_035D",
+     "unit": "root",
+     "seg": 9134,
+     "off": 861,
+     "size": 18,
+     "target_sha256": "f4ff8adc03db3c7481fa7da61d1b376dff51246639b7bb5f5101a83bfcfc4c10",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "win_LockWinHigh",
+     "unit": "root",
+     "seg": 9134,
+     "off": 879,
+     "size": 8,
+     "target_sha256": "2263a3edad3af8312e7e2c055a7874ead7fc49b4db9ecc0a6afde1a036c166a8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_LockWin",
+     "unit": "root",
+     "seg": 9134,
+     "off": 887,
+     "size": 7,
+     "target_sha256": "2ee8df406191f7e93f646bd5215c689717ceb2164fa94bd47dbb2eb3f52a3fa0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "win_UnlockWin",
+     "unit": "root",
+     "seg": 9134,
+     "off": 475,
+     "size": 386,
+     "target_sha256": "ea9f824c02968d1b0dbd6f5a2e315c738c13a16fc20c5854c67f28e25f6a2d6e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "4363011f29e9d2dafa9254cedd66d77dac2c308f42f6c0cabf8a1c9e8f89f6c3"
   },
   "root:23E6": {
    "unit": "root",
@@ -34569,8 +34606,176 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m2505.c",
+     "why": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values."
+    }
+   ],
+   "windows_group": "SIMTWO",
+   "summary": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values.",
+   "file_header": {
+    "text": "Locates window records and objects and fixes up their pointers. It computes object rectangles,\nautomatic sizing and layout values.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 2505; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.\nSteered functions: win_GetArg.",
+    "name_kind": "descriptive",
+    "why": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:2505",
+      "summary": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:2505",
+      "module": "root:2505",
+      "source": "src/window/object_geometry.c",
+      "reviewed_source_sha256": "80d5cfd8c97bf7e2907a3b56234ec657e9ea4decc7e56d3d5db617ff177926ab",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "2505",
+       "origin": null,
+       "translation_unit": "partial original translation unit",
+       "extent": null
+      },
+      "not_exact": [],
+      "steered": [
+       "win_GetArg"
+      ],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Gs",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "RepointObjects",
+        "dos_address": "root:2505:0048",
+        "win16": "_RepointObjects",
+        "group": "SIMTWO",
+        "confidence": "HIGH",
+        "win16_segment": 7,
+        "win16_offset": 50694,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0048"
+       },
+       {
+        "function": "win_AutoSize",
+        "dos_address": "root:2505:0171",
+        "win16": "_win_AutoSize",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 58374,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0171"
+       },
+       {
+        "function": "win_WinAddr",
+        "dos_address": "root:2505:0345",
+        "win16": "_win_WinAddr",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 50126,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0345"
+       },
+       {
+        "function": "win_ObjAddr",
+        "dos_address": "root:2505:02D7",
+        "win16": "_win_ObjAddr",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 49966,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:02D7"
+       },
+       {
+        "function": "_win_CalcObjElement",
+        "dos_address": "root:2505:03B9",
+        "win16": "__win_CalcObjElement",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 58798,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:03B9"
+       },
+       {
+        "function": "win_GetArg",
+        "dos_address": "root:2505:04D7",
+        "win16": "_win_GetArg",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 58738,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:04D7"
+       },
+       {
+        "function": "win_sort_rect_coords",
+        "dos_address": "root:2505:0511",
+        "win16": "_win_SortRect",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 58286,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0511"
+       },
+       {
+        "function": "win_Recalc",
+        "dos_address": "root:2505:0545",
+        "win16": "_win_Recalc",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 59106,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0545"
+       },
+       {
+        "function": "win_WinObjAddr",
+        "dos_address": "root:2505:033C",
+        "win16": "_win_WinObjAddr",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 50038,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:033C"
+       },
+       {
+        "function": "win_GetVal",
+        "dos_address": "root:2505:0453",
+        "win16": "_win_GetVal",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 58600,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0453"
+       }
+      ],
+      "groups": [
+       "SIMTWO"
+      ]
+     },
+     {
+      "path": "src/window/object_geometry.c",
+      "prior_leading_comment": "Root module 2505: DOS window-object engine (partial).",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
+   "extent": {
+    "start": 151638,
+    "end": 154078
+   },
    "source": "src/window/object_geometry.c",
-   "source_sha256": "01f6ee0684d9d7cc121f8b33d65dfb559700f23ef6e669d066c969f96ac32a24",
+   "source_sha256": "d9efe89248a59659eb6e9c825ae96db605b8c5d8e9a44f8ce930cd9c0d439122",
    "claims": [
     {
      "name": "win_locked_resource_ptr",
@@ -34795,171 +35000,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "20af14f7877158329ba87f6af0fda1b1d4e5f80e01a250acb07ab621f313ca9a",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m2505.c",
-     "why": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values."
-    }
-   ],
-   "summary": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values.",
-   "windows_group": "SIMTWO",
-   "file_header": {
-    "text": "Locates window records and objects and fixes up their pointers. It computes object rectangles,\nautomatic sizing and layout values.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 2505; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.\nSteered functions: win_GetArg.",
-    "name_kind": "descriptive",
-    "why": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:2505",
-      "summary": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:2505",
-      "module": "root:2505",
-      "source": "src/window/object_geometry.c",
-      "reviewed_source_sha256": "80d5cfd8c97bf7e2907a3b56234ec657e9ea4decc7e56d3d5db617ff177926ab",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "2505",
-       "origin": null,
-       "translation_unit": "partial original translation unit",
-       "extent": null
-      },
-      "not_exact": [],
-      "steered": [
-       "win_GetArg"
-      ],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Gs",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "RepointObjects",
-        "dos_address": "root:2505:0048",
-        "win16": "_RepointObjects",
-        "group": "SIMTWO",
-        "confidence": "HIGH",
-        "win16_segment": 7,
-        "win16_offset": 50694,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0048"
-       },
-       {
-        "function": "win_AutoSize",
-        "dos_address": "root:2505:0171",
-        "win16": "_win_AutoSize",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 58374,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0171"
-       },
-       {
-        "function": "win_WinAddr",
-        "dos_address": "root:2505:0345",
-        "win16": "_win_WinAddr",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 50126,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0345"
-       },
-       {
-        "function": "win_ObjAddr",
-        "dos_address": "root:2505:02D7",
-        "win16": "_win_ObjAddr",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 49966,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:02D7"
-       },
-       {
-        "function": "_win_CalcObjElement",
-        "dos_address": "root:2505:03B9",
-        "win16": "__win_CalcObjElement",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 58798,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:03B9"
-       },
-       {
-        "function": "win_GetArg",
-        "dos_address": "root:2505:04D7",
-        "win16": "_win_GetArg",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 58738,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:04D7"
-       },
-       {
-        "function": "win_sort_rect_coords",
-        "dos_address": "root:2505:0511",
-        "win16": "_win_SortRect",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 58286,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0511"
-       },
-       {
-        "function": "win_Recalc",
-        "dos_address": "root:2505:0545",
-        "win16": "_win_Recalc",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 59106,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0545"
-       },
-       {
-        "function": "win_WinObjAddr",
-        "dos_address": "root:2505:033C",
-        "win16": "_win_WinObjAddr",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 50038,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:033C"
-       },
-       {
-        "function": "win_GetVal",
-        "dos_address": "root:2505:0453",
-        "win16": "_win_GetVal",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 58600,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:2505:0453"
-       }
-      ],
-      "groups": [
-       "SIMTWO"
-      ]
-     },
-     {
-      "path": "src/window/object_geometry.c",
-      "prior_leading_comment": "Root module 2505: DOS window-object engine (partial).",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "20af14f7877158329ba87f6af0fda1b1d4e5f80e01a250acb07ab621f313ca9a"
   },
   "root:259D": {
    "unit": "root",
@@ -35086,8 +35127,12 @@
      }
     ]
    },
+   "extent": {
+    "start": 154078,
+    "end": 155256
+   },
    "source": "src/window/pictures.c",
-   "source_sha256": "9a4f65bf5b2f5221676b78e69467b31f751e4dcc7f844befaa86c17ac7da2d12",
+   "source_sha256": "780731fff93dd921ef4b52d20f0b54fbbfa9ebe219dd85c5aaa75a00c7a3bd38",
    "claims": [
     {
      "name": "win_DrawBitMapAtObj",
@@ -36476,8 +36521,12 @@
      }
     ]
    },
+   "extent": {
+    "start": 164186,
+    "end": 164841
+   },
    "source": "src/sound/opl2_voices.c",
-   "source_sha256": "cd5f745ba88deea8756370058b64bcc4a2c5d1986f058fb0214d3f5bcc9efb09",
+   "source_sha256": "3e2e6d73fca67dcc01e4f986e222fdb25b4a9991b0d48a1d9f002b22c19ce2ca",
    "claims": [
     {
      "name": "f_2815_0118",
@@ -38115,8 +38164,71 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m29D6.c",
+     "why": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module."
+    }
+   ],
+   "windows_group": "none (DOS only)",
+   "summary": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module.",
+   "file_header": {
+    "text": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the\nregister interface in the preceding sound chip module.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 29D6; partial original translation unit.\nWindows: none (DOS only), based on the platform-specific code or DOS release data.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.",
+    "name_kind": "descriptive",
+    "why": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:29D6",
+      "summary": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:29D6",
+      "module": "root:29D6",
+      "source": "src/sound/psg_voices.c",
+      "reviewed_source_sha256": "bce104a10d596869aa937d3c9f843791d3ef166df34bdbf38507c1a0b7fbfb24",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "29D6",
+       "origin": null,
+       "translation_unit": "partial original translation unit",
+       "extent": null
+      },
+      "not_exact": [],
+      "steered": [],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Gs",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [],
+      "groups": []
+     },
+     {
+      "path": "src/sound/psg_voices.c",
+      "prior_leading_comment": "Root module 29D6 (0x29D6A-0x29F0A): note output for two further sound devices (port 205h; chip at 29BF).",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
+   "extent": {
+    "start": 171370,
+    "end": 171786
+   },
    "source": "src/sound/psg_voices.c",
-   "source_sha256": "8005fa19a2a49ad400dce7056e2b9e195a44a199e4af18bca3c05ba66fd89a35",
+   "source_sha256": "bd27f04d154148fabdbfb3fb2ea1e4fb80447a2e2da5da5873278f358fc30045",
    "claims": [
     {
      "name": "f_29D6_0082",
@@ -38186,66 +38298,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "6ffc0ae0d05b6ba007a38d7b805005476981c592a9c009c6aad5d95d09288634",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m29D6.c",
-     "why": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module."
-    }
-   ],
-   "summary": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module.",
-   "windows_group": "none (DOS only)",
-   "file_header": {
-    "text": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the\nregister interface in the preceding sound chip module.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 29D6; partial original translation unit.\nWindows: none (DOS only), based on the platform-specific code or DOS release data.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.",
-    "name_kind": "descriptive",
-    "why": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:29D6",
-      "summary": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:29D6",
-      "module": "root:29D6",
-      "source": "src/sound/psg_voices.c",
-      "reviewed_source_sha256": "bce104a10d596869aa937d3c9f843791d3ef166df34bdbf38507c1a0b7fbfb24",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "29D6",
-       "origin": null,
-       "translation_unit": "partial original translation unit",
-       "extent": null
-      },
-      "not_exact": [],
-      "steered": [],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Gs",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [],
-      "groups": []
-     },
-     {
-      "path": "src/sound/psg_voices.c",
-      "prior_leading_comment": "Root module 29D6 (0x29D6A-0x29F0A): note output for two further sound devices (port 205h; chip at 29BF).",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "6ffc0ae0d05b6ba007a38d7b805005476981c592a9c009c6aad5d95d09288634"
   },
   "root:29F0": {
    "unit": "root",

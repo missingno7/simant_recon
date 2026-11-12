@@ -2,7 +2,7 @@
  * Initializes and advances the spider and scans for prey. It tracks targets, queen hunting and
  * spider death.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 0CDB; partial original translation unit.
+ * DOS: resident code; segment 0CDB; complete original translation unit.
  * Windows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are
  * HIGH confidence, not confirmed.
  */

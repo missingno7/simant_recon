@@ -2,7 +2,7 @@
  * Draws and tracks pull down menus. It formats menu text and dispatches selection while checking
  * the menu data length.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: overlay section 10 (S10); segment 35F5; partial original translation unit.
+ * DOS: overlay section 10 (S10); segment 35F5; complete original translation unit.
  * Windows: unknown; no confirmed function pair identifies a symbol group.
  * Build profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.
  */

@@ -2,7 +2,7 @@
  * Opens and searches database index files. Create and write-side index operations are empty in
  * the read-only DOS game.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 1986; partial original translation unit.
+ * DOS: resident code; segment 1986; complete original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
  * HIGH confidence, not confirmed.
  * Build profile: msc600ax; /AL /Os /Oeg /Gs /Zi.

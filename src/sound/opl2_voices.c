@@ -2,7 +2,7 @@
  * Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume
  * data into chip register writes.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 2815; partial original translation unit.
+ * DOS: resident code; segment 2815; complete original translation unit.
  * Windows: none (DOS only), based on the platform-specific code or DOS release data.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */

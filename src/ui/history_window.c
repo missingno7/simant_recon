@@ -2,7 +2,7 @@
  * Displays the history window and handles its controls. It clears, updates and plots the
  * recorded history graphs.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: overlay section 24 (S24); segment 39C7; partial original translation unit.
+ * DOS: overlay section 24 (S24); segment 39C7; complete original translation unit.
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  * Steered functions: drawHistGraph.
  */

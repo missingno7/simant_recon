@@ -12,7 +12,7 @@ Last gate result: **PASS** (2026-11-12).
 
 | Item | State | Open |
 | --- | --- | --- |
-| 1. Code exact | 1,634 of 1,640 game functions | 6 functions, 2,421 bytes; 23 of 122 code modules are not yet complete translation units |
+| 1. Code exact | 1,634 of 1,640 game functions | 6 functions, 2,421 bytes; 10 of 122 code modules are not yet complete translation units |
 | 2. No unexplained steering | 18 exact functions depend on a steering construct | 11,614 bytes |
 | 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
@@ -77,7 +77,7 @@ They stay here until a natural spelling replaces it.
 Their accepted functions are exact, but the module as a whole is not yet shown to be one
 original source file from first byte to last.
 
-`S08:35F5`, `S10:35F5`, `S12:384C`, `S13:384C`, `S15:384C`, `S23:39C7`, `S24:39C7`, `root:00DE`, `root:0250`, `root:0CDB`, `root:0E2E`, `root:171C`, `root:1986`, `root:1C62`, `root:1E57`, `root:20E8`, `root:23AE`, `root:23E6`, `root:2505`, `root:259D`, `root:2815`, `root:284A`, `root:29D6`
+`S08:35F5`, `S12:384C`, `S15:384C`, `S23:39C7`, `root:0250`, `root:171C`, `root:1C62`, `root:1E57`, `root:23E6`, `root:284A`
 
 ## Data we defined ourselves
 

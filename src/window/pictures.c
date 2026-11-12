@@ -2,7 +2,7 @@
  * Draws bitmap resources at window objects. It also prints text inside a rectangle and handles
  * picture buffer formats.
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
- * DOS: resident code; segment 259D; partial original translation unit.
+ * DOS: resident code; segment 259D; complete original translation unit.
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
