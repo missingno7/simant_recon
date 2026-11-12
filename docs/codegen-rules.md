@@ -259,3 +259,12 @@ that remain open and the freshly compiled execution controls.
   no effect. Reading: a 17-entry table indexed by declaration number in the code generator, most
   likely for repeated subexpressions. This is the mechanism behind the "identifier count"
   entries on the status page. The scan scripts are in `build/workers/claude/settle/map/` (scratch).
+* **Symbol-table volume and the source file name are not inputs** (DoCalcTile, root:0250, not
+  yet exact; tested because MSC 5.10 showed pressure bands in another project). A synthetic
+  header of 50 to 5,000 unrelated declarations (extern ints, prototypes with named parameters,
+  40-character names, structures, string literals) before the module changes nothing except the
+  modulo-17 flip above, under 6.00AX and under real-mode 6.00A, up to the compiler's own limit
+  (C1055, C1027). Seven base names from one to eight characters give identical code records.
+  `#pragma optimize` for each letter and common combinations, on and off, does not give the
+  original shape either. Scripts: `build/workers/claude/settle/pressure.py`, `envtest.py`,
+  `pragma_scan.py` (scratch).
