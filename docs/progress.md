@@ -6,10 +6,10 @@ Validation: **PASS** (2026-11-12)
 |---|---:|
 | known_functions | 1,730 |
 | known_game_functions | 1,640 |
-| exact_c_functions | 1,262 |
-| exact_c_bytes | 247,833 |
+| exact_c_functions | 1,263 |
+| exact_c_bytes | 248,119 |
 | historical_exact_source_rebuilt_function_count | 0 |
-| behavior_exact_confirmed_functions | 11 |
+| behavior_exact_confirmed_functions | 10 |
 | canonical_translation_units | 200 |
 | canonical_storage_units | 73 |
 | exact_asm_bytes | 50,441 |
@@ -18,7 +18,7 @@ Validation: **PASS** (2026-11-12)
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,719 |
+| owned_functions | 1,720 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,001 |
 | data_bytes_accepted | 113,838 |
@@ -32,27 +32,27 @@ Validation: **PASS** (2026-11-12)
 | far_bss_sizes_consistent_bytes | 2,912 |
 | far_bss_sizes_unverified_bytes | 14,928 |
 | game_code_span_bytes | 304,798 |
-| unresolved_code_bytes | 5,043 |
+| unresolved_code_bytes | 4,757 |
 | unresolved_data_bytes | 175 |
 | scaffold_functions | 0 |
 | exact_translation_units | 97 |
 | complete_tus_relocation_order_proven | 95 |
 | claims_within_group_order_pending | 20 |
-| inplace_draft_functions | 11 |
+| inplace_draft_functions | 10 |
 | claims_exact_steered | 28 |
 | exact_c_bytes_in_complete_tus | 153,413 |
-| exact_c_bytes_in_partial_modules | 94,420 |
+| exact_c_bytes_in_partial_modules | 94,706 |
 | exact_c_bytes_steered | 15,697 |
-| exact_c_bytes_layout_inferred | 20,867 |
+| exact_c_bytes_layout_inferred | 22,610 |
 | exact_c_bytes_within_group_pending | 13,792 |
-| claims_layout_inferred | 24 |
+| claims_layout_inferred | 26 |
 | asm_transcribed_bytes | 51,922 |
 | exact_asm_bytes_genuine | 50,441 |
 | exact_asm_bytes_workaround | 0 |
 | data_bytes_opaque_unmarked | 6,333 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `3ec60e5598e1b0f5e8b7ea7a46e6c71b11da2e5c41dae91347aa66bbd25bc8db`
+Manifest: `080466172b161371a356b9ce41c632b86d1cb34bf9ce43cc6cf272f36b44ca69`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 

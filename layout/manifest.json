@@ -10113,7 +10113,8 @@
      "target_sha256": "5b864ebe9f24515a9448f58d9100baa0ae324ba88a2abacd5bac893ee00366a1",
      "kind": "C",
      "provenance": "EXACT_NATURAL",
-     "reloc_order": "WITHIN_GROUP_PENDING"
+     "reloc_order": "WITHIN_GROUP_PENDING",
+     "layout_inferred": "six prototypes before it are written without parameter names: the operand order of its pointer sums depends on the number of identifiers declared earlier; which original declarations made up the count is unknown (source comment)"
     }
    ],
    "scaffold": [],
@@ -31465,8 +31466,142 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m20E8.c",
+     "why": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation."
+    }
+   ],
+   "windows_group": "SIMTWO",
+   "summary": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation.",
+   "file_header": {
+    "text": "Loads window resources and opens or closes windows. It manages window stacking, swapping and\ndraw hook installation.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 20E8; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.\nFunctions not yet exact: f_20E8_0903.",
+    "name_kind": "descriptive",
+    "why": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:20E8",
+      "summary": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:20E8",
+      "module": "root:20E8",
+      "source": "src/window/lifecycle.c",
+      "reviewed_source_sha256": "b751d17f9de44632304be30d6dc91648ae4faf2bf5c2950a40bf5642cc3852fc",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "20E8",
+       "origin": null,
+       "translation_unit": "partial original translation unit",
+       "extent": null
+      },
+      "not_exact": [
+       "f_20E8_0903"
+      ],
+      "steered": [],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Gs",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "win_LoadAllWindows",
+        "dos_address": "root:20E8:0141",
+        "win16": "_win_LoadAllWindows",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 51206,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0141"
+       },
+       {
+        "function": "win_Swap",
+        "dos_address": "root:20E8:032F",
+        "win16": "_win_Swap",
+        "group": "SIMTWO",
+        "confidence": "HIGH",
+        "win16_segment": 7,
+        "win16_offset": 54324,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:032F"
+       },
+       {
+        "function": "win_Close",
+        "dos_address": "root:20E8:0635",
+        "win16": "_win_Close",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 53144,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0635"
+       },
+       {
+        "function": "win_ToTop",
+        "dos_address": "root:20E8:0725",
+        "win16": "_win_ToTop",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 54302,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0725"
+       },
+       {
+        "function": "win_SetWinDrawHook",
+        "dos_address": "root:20E8:0862",
+        "win16": "_win_SetWinDrawHook",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 54684,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0862"
+       },
+       {
+        "function": "win_LoadWindow",
+        "dos_address": "root:20E8:0001",
+        "win16": "_win_LoadWindow",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 50786,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0001"
+       },
+       {
+        "function": "win_Open",
+        "dos_address": "root:20E8:04B6",
+        "win16": "_win_Open",
+        "group": "SIMTWO",
+        "confidence": "CONFIRMED",
+        "win16_segment": 7,
+        "win16_offset": 51758,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:04B6"
+       }
+      ],
+      "groups": [
+       "SIMTWO"
+      ]
+     },
+     {
+      "path": "src/window/lifecycle.c",
+      "prior_leading_comment": "Root module 20E8: window loading and window-stack operations.",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
    "source": "src/window/lifecycle.c",
-   "source_sha256": "f3f31f2cb262728dad8d0f9440eea523f2fe19cf6c499b8b4b047c5cde3d5d0c",
+   "source_sha256": "303a66ed2e6ae1d4438e84630a4758fc5aeaab716ad2d7ef9f6602c5e625edf2",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -31644,144 +31779,22 @@
      "kind": "C",
      "provenance": "EXACT_NATURAL",
      "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_20E8_0903",
+     "unit": "root",
+     "seg": 8424,
+     "off": 2307,
+     "size": 286,
+     "target_sha256": "1ad918579c60cc5c5a97d7ddd0ff696863cee9d87c0b2a6ef4642bb22c995afc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "origin declared before o, and four parameter names left out before the function (three hook parameter lists, win_ObjAddr): -4 identifiers put its locals at the declaration numbers modulo 17 that decide BX/DI in the indexed accesses; which original declarations made up the count is unknown (source comment)",
+     "reloc_order": "GROUPED"
     }
    ],
    "scaffold": [],
-   "object_sha256": "7b8b741d9a1501b62ca63bb86e9703a4a76adc04cbfcc0e279ca34ce2cdd6a74",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m20E8.c",
-     "why": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation."
-    }
-   ],
-   "summary": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation.",
-   "windows_group": "SIMTWO",
-   "file_header": {
-    "text": "Loads window resources and opens or closes windows. It manages window stacking, swapping and\ndraw hook installation.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 20E8; partial original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.\nFunctions not yet exact: f_20E8_0903.",
-    "name_kind": "descriptive",
-    "why": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:20E8",
-      "summary": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:20E8",
-      "module": "root:20E8",
-      "source": "src/window/lifecycle.c",
-      "reviewed_source_sha256": "b751d17f9de44632304be30d6dc91648ae4faf2bf5c2950a40bf5642cc3852fc",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "20E8",
-       "origin": null,
-       "translation_unit": "partial original translation unit",
-       "extent": null
-      },
-      "not_exact": [
-       "f_20E8_0903"
-      ],
-      "steered": [],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Gs",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "win_LoadAllWindows",
-        "dos_address": "root:20E8:0141",
-        "win16": "_win_LoadAllWindows",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 51206,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0141"
-       },
-       {
-        "function": "win_Swap",
-        "dos_address": "root:20E8:032F",
-        "win16": "_win_Swap",
-        "group": "SIMTWO",
-        "confidence": "HIGH",
-        "win16_segment": 7,
-        "win16_offset": 54324,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:032F"
-       },
-       {
-        "function": "win_Close",
-        "dos_address": "root:20E8:0635",
-        "win16": "_win_Close",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 53144,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0635"
-       },
-       {
-        "function": "win_ToTop",
-        "dos_address": "root:20E8:0725",
-        "win16": "_win_ToTop",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 54302,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0725"
-       },
-       {
-        "function": "win_SetWinDrawHook",
-        "dos_address": "root:20E8:0862",
-        "win16": "_win_SetWinDrawHook",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 54684,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0862"
-       },
-       {
-        "function": "win_LoadWindow",
-        "dos_address": "root:20E8:0001",
-        "win16": "_win_LoadWindow",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 50786,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:0001"
-       },
-       {
-        "function": "win_Open",
-        "dos_address": "root:20E8:04B6",
-        "win16": "_win_Open",
-        "group": "SIMTWO",
-        "confidence": "CONFIRMED",
-        "win16_segment": 7,
-        "win16_offset": 51758,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:20E8:04B6"
-       }
-      ],
-      "groups": [
-       "SIMTWO"
-      ]
-     },
-     {
-      "path": "src/window/lifecycle.c",
-      "prior_leading_comment": "Root module 20E8: window loading and window-stack operations.",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "d7e80c1e72beb4dcb938086c10b6b97062fc5250e89a6aaf6d2d637b360d4342"
   },
   "root:218D": {
    "unit": "root",

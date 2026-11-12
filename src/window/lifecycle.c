@@ -6,7 +6,6 @@
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
  * HIGH confidence, not confirmed.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
- * Functions not yet exact: f_20E8_0903.
  */
 
 struct Rect {
@@ -357,17 +356,17 @@ void _fastcall f_20E8_0776(int win)
     clip_Off();
 }
 
-void _fastcall win_SetWinDrawHook(int win, void (far *hook)(int phase))
+void _fastcall win_SetWinDrawHook(int win, void (far *hook)(int))
 {
     win_drawHooks[win >> 8] = hook;
 }
 
-void _fastcall win_set_state_change_hook(void (far *hook)(int win))
+void _fastcall win_set_state_change_hook(void (far *hook)(int))
 {
     g_62E0 = hook;
 }
 
-void _fastcall win_set_before_close_hook(void (far *hook)(int win))
+void _fastcall win_set_before_close_hook(void (far *hook)(int))
 {
     g_62F4 = hook;
 }
@@ -393,15 +392,24 @@ void _fastcall f_20E8_08EF(void (far *hook)(void))
 }
 
 
-extern int far * _fastcall win_ObjAddr(int obj);
+extern int far * _fastcall win_ObjAddr(int);
 
 extern int far f_2505_036E(void);
+/*
+ * Code generation here depends on declaration numbers (docs/codegen-rules.md, "Declaration
+ * numbers that coincide modulo 17"): whether the pointer or the doubled index goes to BX in
+ * o[i], mode[i], ref[i], rect[i] and origin[i] follows the order in which those names were
+ * declared, counted modulo 17 from the start of the file. The bytes need origin declared before
+ * o, and four fewer identifiers before this function than our named prototypes give. The four
+ * parameter names left out above (the three hook parameter lists and win_ObjAddr) stand for that
+ * count; which original declarations made it up is unknown.
+ */
 void _fastcall f_20E8_0903(int obj, int far *rect)
 {
     int j;
     int win;
-    int far *o;
     int far *origin;
+    int far *o;
     int far *mode;
     int far *ref;
     int i;

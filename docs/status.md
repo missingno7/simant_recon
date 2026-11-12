@@ -12,13 +12,13 @@ Last gate result: **PASS** (2026-11-12).
 
 | Item | State | Open |
 | --- | --- | --- |
-| 1. Code exact | 1,629 of 1,640 game functions | 11 functions, 4,727 bytes; 25 of 122 code modules are not yet complete translation units |
+| 1. Code exact | 1,630 of 1,640 game functions | 10 functions, 4,441 bytes; 25 of 122 code modules are not yet complete translation units |
 | 2. No unexplained steering | 28 exact functions depend on a steering construct | 15,697 bytes |
 | 3. Data: one owner, type, size | 113,838 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 175 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 20 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 946 C and 357 assembly named; data: 484 named | 316 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 946 C and 357 assembly named; data: 484 named | 317 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -46,7 +46,6 @@ Last gate result: **PASS** (2026-11-12).
 | `root:0E2E` | `LessonDone` | 723 |
 | `root:171C` | `f_171C_0CF4` | 490 |
 | `root:171C` | `mem_resize_in_place` | 144 |
-| `root:20E8` | `f_20E8_0903` | 286 |
 | `root:23E6` | `f_23E6_0000` | 159 |
 | `root:259D` | `win_DrawBitMap` | 663 |
 | `root:284A` | `f_284A_0138` | 25 |
