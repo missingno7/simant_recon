@@ -18,7 +18,7 @@ Last gate result: **PASS** (2026-11-12).
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 20 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 946 C and 357 assembly named; data: 484 named | 317 C and 10 assembly functions and 491 data objects keep address-based identifiers; 94 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 947 C and 357 assembly named; data: 487 named | 316 C and 10 assembly functions and 491 data objects keep address-based identifiers; 0 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -74,9 +74,9 @@ They stay here until a natural spelling replaces it.
 | `S25:3BA4` | `GetMyBestDir` | 146 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
 | `S25:3BA4` | `GetMyBestDirs` | 261 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
 | `S25:3BA4` | `GetMyDis` | 470 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
+| `S25:3BA4` | `GetMyInitialRandDir` | 96 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
 | `S25:3BA4` | `GetMyNextRandDirs` | 120 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
 | `S25:3BA4` | `YellowFight` | 570 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
-| `S25:3BA4` | `o25_3BA4_19AD` | 96 | DoAntMoveY scaffold stand-in: CONST word order + 21 filler lines -> /Zd LINNUM (52/record) LEDATA boundary that fixes within-group reloc order of AnimYellowFight |
 | `root:0250` | `f_0250_129E` | 264 | f_0250_129E=a point local of which only y is read keeps two frame words, and copying y through the later index variable selects the early DI load; the original locals are unknown |
 | `root:0798` | `GetTriLatDist` | 294 | three unused locals x, y, j in DrawControlLevels -> identifier count before GetTriLatDist (+5..7 mod 17 after DrawControlLevels selects the dx-w CSE/operand order) |
 | `root:171C` | `RallocSetType` | 228 | volatile int type in RallocSetType -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX |

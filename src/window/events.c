@@ -19,7 +19,7 @@ struct Event {
 };
 
 long g_6364 = -1;
-int g_6368 = -1;
+int lastProxObj = -1;
 static char g_8CEC;
 
 extern void _fastcall win_LockWin(int win);
@@ -91,12 +91,12 @@ done:
 
 void far f_218D_01EB(void)
 {
-    g_6368 = -1;
+    lastProxObj = -1;
 }
 
 int far win_GetProxEvent(void)
 {
-    return g_6368;
+    return lastProxObj;
 }
 
 extern void far clip_restrict_rect(char far *p);
@@ -107,11 +107,11 @@ void _fastcall _win_SetProxItem(int obj)
 {
     clip_Push();
     clip_restrict_rect(g_5A9C);
-    if (g_6368 != -1)
-        win_ObjInv(g_6368);
+    if (lastProxObj != -1)
+        win_ObjInv(lastProxObj);
     if (obj != -1)
         win_ObjInv(obj);
-    g_6368 = obj;
+    lastProxObj = obj;
     clip_Pop();
 }
 
@@ -125,10 +125,10 @@ void _fastcall f_218D_023A(struct Event far *ev)
     if ((char)(g_5702[0] >> 8) == (unsigned char)ev->code) {
         win_LockWin(g_5702[0]);
         obj = hotbox_pointer_hit_id();
-        if (obj != 0 && (obj & 0xff00) == g_5702[0] && g_6368 != obj &&
+        if (obj != 0 && (obj & 0xff00) == g_5702[0] && lastProxObj != obj &&
             (*(int far *)(win_ObjAddr(obj) + 0x24) & 0x10))
             _win_SetProxItem(obj);
-        else if (g_6368 != -1 && !(*(int far *)(win_ObjAddr(g_6368) + 0x24) & 0x400) && obj != g_6368)
+        else if (lastProxObj != -1 && !(*(int far *)(win_ObjAddr(lastProxObj) + 0x24) & 0x400) && obj != lastProxObj)
             _win_SetProxItem(-1);
         win_UnlockWin(g_5702[0]);
     }

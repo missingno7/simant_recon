@@ -45,8 +45,8 @@ typedef char far * far *Handle;
 
 char g_1B46[4] = { 36, 38, 34, 0 };
 char g_1B4A[4] = { 40, 43, 39, 0 };
-int g_1B4E = 0;
-int g_1B50 = 0;
+int casteSet = 0;
+int modeSet = 0;
 int g_1B52[8] = { 0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0x8000, 0x8000 };
 int g_1B62 = 1;
 int g_1B64 = 1;
@@ -155,9 +155,9 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
     case 4:
     case 5:
         win_MakeObjSelected(0x1305);
-        _fmemcpy(&casteSetLevels[g_1B4E], &casteLevels, 6);
-        g_1B4E = msg->code - 0x1306;
-        _fmemcpy(&casteLevels, &casteSetLevels[g_1B4E], 6);
+        _fmemcpy(&casteSetLevels[casteSet], &casteLevels, 6);
+        casteSet = msg->code - 0x1306;
+        _fmemcpy(&casteLevels, &casteSetLevels[casteSet], 6);
         clip_SetWin(0x1300);
         win_DrawCasteWindow(3);
     case 2:
@@ -186,7 +186,7 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
             }
             GetMousePos(&msg->pt);
         } while (StillDown());
-        _fmemcpy(&casteSetLevels[g_1B4E], &casteLevels, 6);
+        _fmemcpy(&casteSetLevels[casteSet], &casteLevels, 6);
         cvtLevels2IdealCaste(IdealCaste);
         break;
     case 12:
@@ -223,9 +223,9 @@ void far ProcModeEvent(struct CtlMsg far *msg)
     case 4:
     case 5:
         win_MakeObjSelected(0x1205);
-        _fmemcpy(&modeSetLevels[g_1B50], &modeLevels, 6);
-        g_1B50 = msg->code - 0x1206;
-        _fmemcpy(&modeLevels, &modeSetLevels[g_1B50], 6);
+        _fmemcpy(&modeSetLevels[modeSet], &modeLevels, 6);
+        modeSet = msg->code - 0x1206;
+        _fmemcpy(&modeLevels, &modeSetLevels[modeSet], 6);
         clip_SetWin(0x1200);
         win_DrawModeWindow(3);
     case 2:
@@ -254,7 +254,7 @@ void far ProcModeEvent(struct CtlMsg far *msg)
             }
             GetMousePos(&msg->pt);
         } while (StillDown());
-        _fmemcpy(&modeSetLevels[g_1B50], &modeLevels, 6);
+        _fmemcpy(&modeSetLevels[modeSet], &modeLevels, 6);
         break;
     case 12:
     case 13:

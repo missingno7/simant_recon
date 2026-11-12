@@ -5,7 +5,7 @@
  * DOS: overlay section 25 (S25); segment 3BA4; partial original translation unit.
  * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
  * Steered functions: DoAntSimY, AnimYellowFight, AnimYellowInsane, YellowFight, GetMyBestDirs,
- * CheckMyBestDirs, GetMyNextRandDirs, o25_3BA4_19AD, GetMyBestDir, ExitNest, GetMyDis,
+ * CheckMyBestDirs, GetMyNextRandDirs, GetMyInitialRandDir, GetMyBestDir, ExitNest, GetMyDis,
  * DoAntMoveY.
  *
  * Built /AL /Os /Oe /Og /Zi.  The order of the extern declarations is part of the
@@ -794,7 +794,7 @@ int far GetMyNextRandDirs(int plane, int x, int y, int a, int b)
     return dir;
 }
 
-int far o25_3BA4_19AD(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
+int far GetMyInitialRandDir(int far *rot, int far *dir, int plane, int x, int y, int a, int b)
 {
     MeCrazyDir = GetDir(x, y, a, b) - 1;
     MeCrazyCnt = 0x10;
@@ -809,7 +809,7 @@ int far GetMyBestDir(int plane, int x, int y, int a, int b)
     if (MeCrazyCnt < 0) {
         dir = GetMyBestDirs(plane, x, y, a, b);
         if (dir == -2 && MeCrazyCnt == -2)
-            dir = o25_3BA4_19AD(&MeCrazyRot, &MeCrazyDir, plane, x, y, a, b);
+            dir = GetMyInitialRandDir(&MeCrazyRot, &MeCrazyDir, plane, x, y, a, b);
     } else {
         dir = GetMyNextRandDirs(plane, x, y, a, b);
         MeCrazyCnt--;

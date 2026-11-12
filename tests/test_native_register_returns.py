@@ -17,7 +17,7 @@ census=importlib.util.module_from_spec(spec); spec.loader.exec_module(census)
 class RegisterReturns(unittest.TestCase):
     def test_each_proven_definition_has_an_explicit_result(self):
         contracts=json.loads(register_returns.CONTRACT_PATH.read_text())['repairs']
-        self.assertEqual({r['function'] for r in contracts},{'f_00F8_02EF','myButton','o25_3BA4_19AD'})
+        self.assertEqual({r['function'] for r in contracts},{'f_00F8_02EF','myButton','GetMyInitialRandDir'})
         for path in {r['source'] for r in contracts}:
             original=scalar.convert((ROOT/path).read_text(encoding='latin1'))
             converted,receipt=register_returns.adapt(original,path)
@@ -36,7 +36,7 @@ class RegisterReturns(unittest.TestCase):
                 if row['function']=='f_00F8_02EF':
                     self.assertEqual(census.constant(returns[0].expr),0)
                 else:
-                    expected={'myButton':'StillDown','o25_3BA4_19AD':'GetMyRandDirs'}[row['function']]
+                    expected={'myButton':'StillDown','GetMyInitialRandDir':'GetMyRandDirs'}[row['function']]
                     self.assertIsInstance(returns[0].expr,census.C.FuncCall)
                     self.assertEqual(returns[0].expr.name.name,expected)
 

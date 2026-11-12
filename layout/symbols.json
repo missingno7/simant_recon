@@ -3776,6 +3776,19 @@
    ],
    "name_kind": "recovered"
   },
+  "GetMyInitialRandDir": {
+   "unit": "S25",
+   "seg": 15268,
+   "off": 6573,
+   "grounding": "inventory:push_cs_call",
+   "history": [
+    {
+     "was": "o25_3BA4_19AD",
+     "why": "Win16 symbol _GetMyInitialRandDir, CONFIRMED 2026-11-11 in evidence/cross_version/decisions.json (S25:3BA4:19AD): member 13 of the DoAntMoveY..GetMyDir run in original order; sets MeCrazyDir, MeCrazyCnt, MeCrazyRot and calls GetMyRandDirs as the Win16 function does"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "GetMyNextRandDirs": {
    "unit": "S25",
    "seg": 15268,
@@ -20598,12 +20611,6 @@
    "off": 4430,
    "alias_of": "ExitNest"
   },
-  "o25_3BA4_19AD": {
-   "unit": "S25",
-   "seg": 15268,
-   "off": 6573,
-   "grounding": "inventory:push_cs_call"
-  },
   "o26_39C7_022F": {
    "unit": "S26",
    "seg": 14791,
@@ -27743,6 +27750,18 @@
     }
    ]
   },
+  "casteSet": {
+   "seg": 21939,
+   "off": 6990,
+   "grounding": "Win16 symbol _casteSet, CONFIRMED 2026-09-30 in evidence/cross_version/decisions.json (root:55B3:1B4E): ProcCasteEvent stores msg->code - 0x1306 and indexes casteSetLevels with it, as Win16 does",
+   "name_kind": "recovered",
+   "history": [
+    {
+     "was": "g_1B4E",
+     "why": "Win16 symbol _casteSet, CONFIRMED 2026-09-30 in evidence/cross_version/decisions.json (root:55B3:1B4E): ProcCasteEvent stores msg->code - 0x1306 and indexes casteSetLevels with it, as Win16 does"
+    }
+   ]
+  },
   "casteSetLevels": {
    "seg": 15703,
    "off": 2034,
@@ -30769,6 +30788,18 @@
     }
    ]
   },
+  "lastProxObj": {
+   "seg": 21939,
+   "off": 25448,
+   "grounding": "Win16 symbol _lastProxObj, CONFIRMED 2026-09-30 in evidence/cross_version/decisions.json (root:55B3:6368): DGROUP int initialised -1, returned by win_GetProxEvent and stored by win_SetProxItem, same reader and writer as Win16",
+   "name_kind": "recovered",
+   "history": [
+    {
+     "was": "g_6368",
+     "why": "Win16 symbol _lastProxObj, CONFIRMED 2026-09-30 in evidence/cross_version/decisions.json (root:55B3:6368): DGROUP int initialised -1, returned by win_GetProxEvent and stored by win_SetProxItem, same reader and writer as Win16"
+    }
+   ]
+  },
   "mapCursorRect": {
    "seg": 20726,
    "off": 14530,
@@ -30861,6 +30892,18 @@
     {
      "was": "fd_50F6_049E",
      "why": "decision root:50F6:049E CONFIRMED (names3): initControls copies modeLevelDefaults into it; SetModeProd and DrawControlLevels index it [0..2] as Win16 modeLevels"
+    }
+   ]
+  },
+  "modeSet": {
+   "seg": 21939,
+   "off": 6992,
+   "grounding": "Win16 symbol _modeSet, CONFIRMED 2026-09-30 in evidence/cross_version/decisions.json (root:55B3:1B50): ProcModeEvent stores code - 0x1206; first word of the Win16 modeSet array, whose other ten words the DOS source declares as separate objects",
+   "name_kind": "recovered",
+   "history": [
+    {
+     "was": "g_1B50",
+     "why": "Win16 symbol _modeSet, CONFIRMED 2026-09-30 in evidence/cross_version/decisions.json (root:55B3:1B50): ProcModeEvent stores code - 0x1206; first word of the Win16 modeSet array, whose other ten words the DOS source declares as separate objects"
     }
    ]
   },

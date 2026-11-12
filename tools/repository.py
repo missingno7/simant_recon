@@ -574,9 +574,23 @@ def write_status():
     data_named = sum(1 for n in data_rows if not placeholder_data.match(n))
     decisions = json.loads((ROOT / 'evidence/cross_version/decisions.json').read_text())['pairs']
     confirmed = sum(1 for v in decisions.values() if v.get('confidence') == 'CONFIRMED')
-    code_names = set(symbols['code'])
-    pending_names = sum(1 for v in decisions.values() if v.get('confidence') == 'CONFIRMED' and v.get('win16')
-                        and v['win16'].lstrip('_') not in code_names)
+    # A confirmed pair is pending only while the DOS object at its address still has an
+    # address-based identifier.  Keys are UNIT:SEG:OFF; data pairs use the data segment.
+    primary = {}
+    for name, rec in symbols['code'].items():
+        if not rec.get('alias_of'):
+            primary[(rec.get('unit'), rec.get('seg'), rec.get('off'))] = (name, placeholder_code)
+    for name, rec in symbols['data'].items():
+        if not rec.get('alias_of'):
+            primary.setdefault(('root', rec.get('seg'), rec.get('off')), (name, placeholder_data))
+
+    def pair_pending(key):
+        unit, seg, off = key.split(':')
+        hit = primary.get((unit, int(seg, 16), int(off, 16)))
+        return hit is None or bool(hit[1].match(hit[0]))
+
+    pending_names = sum(1 for k, v in decisions.items() if v.get('confidence') == 'CONFIRMED' and v.get('win16')
+                        and pair_pending(k))
 
     adjacency = ROOT / 'docs/data-adjacency.md'
     adjacency_entries = sum(1 for line in adjacency.read_text(encoding='utf-8').splitlines()
