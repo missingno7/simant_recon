@@ -13,7 +13,8 @@ SPEC:
    "expect_segments": {"variant@profileindex": {                              (optional)
         "SEGNAME": {"class": "FAR_DATA", "align": "paragraph", "length": 20, "combine": "public"},
         "OTHER_SEG": null,                      # the object must not define this segment
-        "communals": {"_ga": 8} or ["_ga"]}}}   # far/near COMDEF names (and sizes)
+        "communals": {"_ga": 8} or ["_ga"],     # far/near COMDEF names (and sizes)
+        "communal_order": ["_gb", "_ga"]}}}     # the exact order in which COMDEFs are emitted
    # expect_bindings uses the same variant@profileindex keys. Fields are exact
    # live fixup-target counts, ordered CONST fixups, external scopes or data publics.
 
@@ -140,6 +141,9 @@ def segment_checks(key: str, row: dict, want: dict) -> list[dict]:
         return [{"check": key, "needle": "segments", "ok": False}]
     out = []
     for name, exp in want.items():
+        if name == "communal_order":         # exact COMDEF emission order (rule COMDEF-1)
+            out.append({"check": key, "needle": f"communal order of {len(exp)} names", "ok": list(comm) == list(exp)})
+            continue
         if name == "communals":
             items = exp.items() if isinstance(exp, dict) else ((n, None) for n in exp)
             for n, size in items:
