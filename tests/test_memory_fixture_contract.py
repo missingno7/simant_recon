@@ -57,6 +57,12 @@ class HeapFixturePremise(unittest.TestCase):
                 preserve=True, original_entry=functions.get('mem_handle_from_pointer'))
 
     def test_completed_original_allocations_survive_candidate_compaction(self):
+        import json
+        program = json.loads((ROOT / 'src/program.json').read_text())
+        if 'f_171C_0CF4' not in {r['function'] for r in program['semantics']}:
+            # The differential comparison exists for a function that is only behaviour-reviewed.
+            # f_171C_0CF4 is exact since 2026-11-12, so there is no candidate to compare.
+            self.skipTest('f_171C_0CF4 is exact; byte proof supersedes the differential check')
         pair = b.PreparedPair('f_171C_0CF4', sequence_targets=m.TARGETS,
             out=ROOT / 'build/workers/heap_fixture_contract_tests/completed-history')
         steps = m.completed_allocation_sequence('test/completed-history')

@@ -268,3 +268,11 @@ that remain open and the freshly compiled execution controls.
   `#pragma optimize` for each letter and common combinations, on and off, does not give the
   original shape either. Scripts: `build/workers/claude/settle/pressure.py`, `envtest.py`,
   `pragma_scan.py` (scratch).
+* **Writing the same call in both branches changes register allocation** (mem_resize_in_place,
+  root:171C; worker open10-ralloc). With the free-and-carve call and `return 1` written in
+  each branch the compiler merges the tails and keeps the size parameter in DI; the same
+  call written once after the `if` puts the zero offset in DI instead (148 bytes for 144).
+* **A newline after a case label is an input** (LessonDone, root:0E2E; worker open10-lesson,
+  probe `build/workers/open10-lesson/CASELINE-1.json`, also without `/Zi`). Of two case
+  bodies with identical code, which one survives depends on whether the first statement
+  shares the line of its `case` label.
