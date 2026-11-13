@@ -95,9 +95,22 @@ Within a module RTLink **groups relocations by target symbol**:
   constraints, 349 conflicts — all between `DGROUP`/segment fixups or aliases such as
   `__fmemcpy`/`_memcpy`, plus rare same-bucket pairs).
 The global order is not address order, first-reference order in placement order, EXTDEF
-order, alphabetical order or a simple name hash (tested on the runtime's true names). It is
-most likely symbol-table insertion order from reading objects in *command-line* order,
-which only a historical link can reproduce.
+order, alphabetical order or a simple name hash (tested on the runtime's true names).
+
+**The ordering rule of RTLink/Plus 4.14 and 6.10 is known (2026-11-13, worker rtl-order,
+read from the linker binaries, not fitted).** The order is per *final combined segment*,
+not per object or per program. Each relocation group is a fixup descriptor keyed by four
+16-bit words (flags, secondary, frame symbol number, target symbol number; for `seg
+external` the key is `048B, 0000, id, id`). Symbol numbers are assigned in the order the
+linker first registers a name (PUBDEF and COMDEF where processed, referenced externals at
+the FIXUPP, unused externals at the module boundary, and the generated `$$MAIN`). The key
+is hashed as `(sum of ROR16(byte_j, j) over its eight bytes) mod 101`; each of the 101
+buckets is a chain to which new descriptors are prepended; the writer walks buckets 0..100
+and each chain from its head. A model built only from this description predicted 22 new
+links (10,680 relocations) exactly in both releases. Model, routine addresses and receipt:
+`evidence/toolchain/rtlink-order/`. Not shown: that the missing 4.15/5.00 release uses the
+same rule, and the original input stream it would need (every registered name of every
+object and library member, in processing order). Communal allocation uses a separate list.
 
 The gate therefore requires the exact relocation set and the exact within-group order
 (an object property) and records `reloc_order: GROUPED` when only the between-group order

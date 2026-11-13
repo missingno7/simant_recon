@@ -112,6 +112,22 @@ words, the runtime library of each release in hand contains 78 (2.x), 358 (4.00)
 442 (4.14) and 641 (6.10). Two distinctive routines (the entry stack switch at `2D6FF` and
 the EMS detection at `2FBED`) occur in no release in hand. No release matches.
 
+Source-level comparison (2026-11-13, worker rtl-manager, re-run by the supervisor): the
+shipped `OVLMGR.ASM` sources are the sources of the shipped binaries (MASM 5.10 rebuilds
+all eight 4.14 manager library members and MASM 6.00 all nine 6.10 members; 25 of 25
+members of 4.00/4.14/6.10 byte-identical after the historical librarian). SimAnt's manager
+is the 4.14 source assembled with MASM 6.00 plus two fixes that 6.10's source also has (a
+corrected argument list in the compressed-section path and a missing handle store after a
+direct open), in the RELOAD variant without DEBUG, CODEVIEW or CONTEXT. The entry stack
+switch is unchanged 4.14 source under MASM 6.00, so the byte fingerprint above overstated
+the distance. `clean_region` (56 bytes) assembles exactly from unchanged 4.14 source; the
+whole 2,479-byte main module assembles to the target bytes with 80 external-reference bytes
+bound from the target and a 352-byte uninitialised buffer (a diagnostic, not proof). Of the
+17,066-byte region, 8,167 bytes are linker-generated tables, 4,148 have shipped source, 329
+match a 6.10 source template and 4,346 (the EMS/XMS cache and the allocator) have no source
+in any release. The ordering rule of the linker itself is in `docs/exe-format.md`
+("Relocation order").
+
 In hand, none of them the original: `C:	ools\RTLink-Plus-4.00-DiscMaster`,
 `C:	oolstlink-plus-4.14-discmaster-ibm0041` (downloaded 2026-11-11, see its
 `PROVENANCE.txt`; unpacked with a data-only parser of the vendor's installer archive,
