@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-13",
- "source": "canonical-source-stable-for-port (f31f51d); native build d5d4133e... from build/current/portable",
+ "source": "1748006 (canonical-source-stable-for-port plus port fixes)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -11,18 +11,21 @@
  },
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
-  "Scenario-level comparison is blocked for everything seeded or paced by the clock: the native and DOS runs read different clock values (world seed from TickCount in src/simulation/random.c). Until clock reads are replayed and steps aligned, scenario differences in simulation state are not attributable."
+  "Scenario comparison is aligned at DoAntSim entries with the original run's seeding clock reads replayed (portable/tests/acceptance, time-align); non-seeding clock reads and input delivery are not yet aligned (worker clock-all)."
  ],
  "scenarios": {
   "new-game-save": "original = canonical DOS (saves and sound EQUAL); native save A.ANT differs from the world map on (different seed); no memory checkpoints defined",
-  "quick-game": "original = canonical DOS on game state at all six checkpoints except 17 to 21 address-valued variables (layout); native differs from checkpoint 60000 on, starting with YMapSeeds (different seed); 502 to 575 variables equal three ways"
+  "quick-game": "aligned at DoAntSim entries 1-8: entry 1 equal three ways in all 307 SaveRec records; entries 2-8 differ only in CatDelay (827/827/878) from the unreplayed game clock; original = canonical DOS throughout"
  },
  "subsystems": [
   {
    "id": "startup",
    "name": "Startup, configuration and initialisation",
    "domain": "shipped assets, SIMANT.CFG with VGA and Sound Blaster mode 6, no command-line switches",
-   "level": {"isolated": 3, "scenario": 4},
+   "level": {
+    "isolated": 3,
+    "scenario": 4
+   },
    "original_dos": "dos/acceptance.py new-game-save and quick-game: startup and menus reach the game identically to canonical DOS",
    "canonical_dos": "same runs; working build links (case-sensitive) and runs",
    "native": "portable/tests/runtime/run.py --flow vga PASS; diagnostics PASS; 502 to 575 variables equal three ways in quick-game (configuration and static state)",
@@ -34,7 +37,10 @@
    "id": "windows-events",
    "name": "Menus, windows, dialogs and the event queue",
    "domain": "shipped window resources; mouse and keyboard through menus, file dialogs and message boxes used by the scenarios",
-   "level": {"isolated": 3, "scenario": 5},
+   "level": {
+    "isolated": 3,
+    "scenario": 5
+   },
    "original_dos": "scenarios drive menus and Save As dialogs on the original",
    "canonical_dos": "same",
    "native": "runtime flows (logo click, save, load) PASS",
@@ -46,43 +52,55 @@
    "id": "timing-rng",
    "name": "Simulation timing and deterministic RNG",
    "domain": "SRand/RRand/C rand sequences; simulation pacing",
-   "level": {"isolated": 2, "scenario": 5},
+   "level": {
+    "isolated": 2,
+    "scenario": 5
+   },
    "original_dos": "native_rng suite compares against the original DOS lane",
    "canonical_dos": "-",
    "native": "native_rng PASS: 3,096 trace rows, no mismatch, negative control",
-   "known_divergence": "clock-derived seeds differ between DOS and native runs (harness input, not logic)",
+   "known_divergence": "seeding reads aligned; non-seeding game clock 17 ticks ahead on native (CatDelay)",
    "first_open_question": "which clock reads reach game state, and can they be replayed from the original run?",
-   "next": "worker time-align: clock reads as inputs, step-aligned comparison"
+   "next": "worker clock-all: replay every state-relevant clock read; inputs by pump ordinal"
   },
   {
    "id": "simulation",
    "name": "Ant movement, behaviour, AI and colony simulation",
    "domain": "function-level fixtures; scenario level pending alignment",
-   "level": {"isolated": 2, "scenario": 5},
+   "level": {
+    "isolated": 2,
+    "scenario": 5
+   },
    "original_dos": "native_simulation fixtures compare with the original DOS lane",
    "canonical_dos": "-",
    "native": "native_simulation PASS: 194 cases including mutation controls",
-   "known_divergence": "none attributable yet (scenario differences follow the seed)",
-   "first_open_question": "first divergence after alignment",
-   "next": "rerun quick-game aligned"
+   "known_divergence": "none at step 1 (all 307 records equal); later steps blocked by the clock (CatDelay)",
+   "first_open_question": "next divergence once all state-relevant clock reads are replayed",
+   "next": "worker clock-all"
   },
   {
    "id": "world-rules",
    "name": "Terrain, food, populations and game rules",
    "domain": "Full Game and Quick Game",
-   "level": {"isolated": 2, "scenario": 5},
+   "level": {
+    "isolated": 2,
+    "scenario": 5
+   },
    "original_dos": "quick-game checkpoints",
    "canonical_dos": "quick-game checkpoints equal to original",
    "native": "differs from seed on",
-   "known_divergence": "not attributable yet",
-   "first_open_question": "same as simulation",
-   "next": "rerun quick-game aligned"
+   "known_divergence": "none at step 1 (all 307 records equal); later steps blocked by the clock (CatDelay)",
+   "first_open_question": "next divergence once all state-relevant clock reads are replayed",
+   "next": "worker clock-all"
   },
   {
    "id": "save-load",
    "name": "Save, Load and persistent state",
    "domain": "File > Save As to A.ANT/B.ANT, File > Open of the game's own saves",
-   "level": {"isolated": 3, "scenario": 5},
+   "level": {
+    "isolated": 3,
+    "scenario": 5
+   },
    "original_dos": "saves of both scenarios byte-equal to canonical DOS (307 SaveRec records)",
    "canonical_dos": "same",
    "native": "runtime save and load flows PASS; scenario saves differ (seed)",
@@ -94,7 +112,10 @@
    "id": "graphics",
    "name": "Graphics, sprites, VGA and palette",
    "domain": "VGA 640x480",
-   "level": {"isolated": 3, "scenario": 5},
+   "level": {
+    "isolated": 3,
+    "scenario": 5
+   },
    "original_dos": "no frame comparison exists",
    "canonical_dos": "-",
    "native": "runtime VGA flow; BIOS font regression; F12 indexed capture",
@@ -106,7 +127,10 @@
    "id": "input",
    "name": "Mouse, keyboard and input queue",
    "domain": "scenario inputs; IRQ projection",
-   "level": {"isolated": 2, "scenario": 5},
+   "level": {
+    "isolated": 2,
+    "scenario": 5
+   },
    "original_dos": "input_irq oracle matrix from original instruction execution",
    "canonical_dos": "-",
    "native": "input_irq PASS: 2,304 rows",
@@ -118,7 +142,10 @@
    "id": "audio",
    "name": "Audio, sound drivers and timing",
    "domain": "Sound Blaster mode 6 (DSP and OPL)",
-   "level": {"isolated": 3, "scenario": 4},
+   "level": {
+    "isolated": 3,
+    "scenario": 4
+   },
    "original_dos": "dos/acceptance.py records DSP and OPL write streams; original = canonical DOS (34,193 and 37,438 writes, timing within 1.4 ms) on quick-game",
    "canonical_dos": "same",
    "native": "audio suite PASS; evidence/canonical/native-audio-device/review.md",
@@ -130,7 +157,10 @@
    "id": "memory-semantics",
    "name": "Heap, ownership, pointer aliasing and integer semantics",
    "domain": "supported gameplay",
-   "level": {"isolated": 2, "scenario": 5},
+   "level": {
+    "isolated": 2,
+    "scenario": 5
+   },
    "original_dos": "allocator fixtures against bounded original execution; word-intermediate witnesses",
    "canonical_dos": "-",
    "native": "integer semantics census; word_intermediates; semantic spans tests PASS",
@@ -142,13 +172,33 @@
    "id": "modes",
    "name": "Full Game, Quick Game, experiments, tutorial",
    "domain": "Full Game start; Quick Game run",
-   "level": {"isolated": 3, "scenario": 5},
+   "level": {
+    "isolated": 3,
+    "scenario": 5
+   },
    "original_dos": "two scenarios: new-game-save (Full Game start), quick-game",
    "canonical_dos": "same",
    "native": "same scenarios run to completion",
    "known_divergence": "no scenario for experiment mode or the tutorial",
    "first_open_question": "-",
    "next": "add experiment-mode and tutorial scenarios once alignment works"
+  }
+ ],
+ "fixes": [
+  {
+   "commit": "1748006",
+   "layer": "projection",
+   "summary": "MSC order of unsequenced calls and stores preserved at 55 sites (AddRandAntLion antlion placement was the observed symptom); regression portable/tests/evaluation_order with negative control"
+  },
+  {
+   "commit": "adbc8ba",
+   "layer": "test harness",
+   "summary": "seeding clock reads replayed from the original run; three-way step capture"
+  },
+  {
+   "commit": "f31f51d",
+   "layer": "port catch-up / DOS build",
+   "summary": "port follows the current source; working DOS link case-sensitive (EditMessage vs editMessage)"
   }
  ]
 }
