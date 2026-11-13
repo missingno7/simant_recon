@@ -709,6 +709,70 @@ class Generator(c_generator.CGenerator):
         self.helper_name='simant_int_lvalue'
         while self.helper_name in analyzer.reserved_identifiers:
             self.helper_name+='_' 
+        self.effect_replacements={}
+        self.sequencing=set()
+        self.preparing=None
+
+    def visit(self,n):
+        if n is None:return ''
+        key=id(n)
+        if key in self.effect_replacements:return self.effect_replacements[key]
+        if self.preparing and isinstance(n,C.UnaryOp) and n.op in {'++','--','p++','p--'}:
+            return self.preparing(n)
+        plan=getattr(self.analysis,'evaluation_plans',{}).get(key)
+        if plan and key not in self.sequencing:return self.sequence(n,*plan)
+        return super().visit(n)
+
+    def sequence(self,root,plan,nodes):
+        """Emit instruction-ordered events, retaining the existing typed lowering.
+
+        An MSC postincrement store can follow its consumer's store. Capturing
+        its address/value on first use permits that order without evaluating
+        either lvalue twice. No work is hoisted out of this expression.
+        """
+        statements=[];prepared={};saved=dict(self.effect_replacements)
+        prefix='simant_eval_'+plan['id'].replace('-','_')+'_'
+        while any(name.startswith(prefix) for name in self.analysis.reserved_identifiers):prefix+='x_'
+        indexes={id(n):i for i,n in enumerate(nodes)}
+        active={id(root),*indexes}
+        self.sequencing.update(active);previous=self.preparing
+        def prepare(n):
+            index=indexes.get(id(n))
+            if index is None:raise ValueError('increment outside evaluation schedule')
+            value=prefix+str(index);pointer=value+'_ptr'
+            if id(n) not in prepared:
+                lvalue=self.visit(n.expr)
+                statements.extend(['__auto_type '+pointer+' = &('+lvalue+');',
+                                   '__auto_type '+value+' = *'+pointer+';'])
+                prepared[id(n)]=(value,pointer)
+            return prepared[id(n)][0]
+        try:
+            for index in plan['order']:
+                n=nodes[index];value=prefix+str(index)
+                if isinstance(n,C.UnaryOp) and n.op in {'++','--','p++','p--'}:
+                    self.preparing=prepare;prepare(n);self.preparing=previous
+                    _,pointer=prepared[id(n)]
+                    statements.append(('++' if '+' in n.op else '--')+'(*'+pointer+');')
+                    if n.op in {'++','--'}:statements.append(value+' = *'+pointer+';')
+                else:
+                    self.preparing=prepare
+                    # This event itself is emitted now; any not-yet-emitted
+                    # effect descendant other than deferred ++ is rejected.
+                    pending=[c for c in nodes if c is not n and c in list(self.analysis.nodes(n)) and id(c) not in self.effect_replacements and not (isinstance(c,C.UnaryOp) and c.op in {'++','--','p++','p--'})]
+                    if pending:raise ValueError('evaluation schedule violates an effect dependency')
+                    expression=super().visit(n)
+                    self.preparing=previous
+                    t=self.analysis.info[id(n)][0]
+                    if t.kind=='void':statements.append(expression+';');value='((void)0)'
+                    else:
+                        if t.kind=='int':expression=self.cast(t,expression)
+                        statements.append('__auto_type '+value+' = ('+expression+');')
+                self.effect_replacements[id(n)]=value
+            result=self.visit(root)
+            return '(__extension__ ({ '+' '.join(statements)+' '+result+'; }))'
+        finally:
+            self.effect_replacements=saved;self.preparing=previous
+            self.sequencing.difference_update(active)
 
     def visit_StaticAssert(self,n):
         if not self.analysis.active(n) or n.coord.line not in self.assertions:
@@ -779,12 +843,14 @@ def preprocess(source, filename, cc, include_dirs):
     return run.stdout,command
 
 
-def convert(source, filename, cc, include_dirs, lower=True, canonical_source=None):
+def convert(source, filename, cc, include_dirs, lower=True, canonical_source=None, sequence_effects=True):
     preprocessed,command=preprocess(source,filename,cc,include_dirs)
     tree=c_parser.CParser().parse(preprocessed,filename=str(filename))
     analysis=Analyzer(filename,instruction_sites(canonical_source));analysis.walk(tree)
     analysis.verify_word_sites()
     analysis.reserved_identifiers=set(re.findall(r'\b[A-Za-z_]\w*\b',source+preprocessed))
+    from . import evaluation_order
+    analysis.evaluation_plans,evaluation_receipt=evaluation_order.bind(tree,analysis,canonical_source,enabled=lower and sequence_effects)
     includes='\n'.join(re.findall(r'^\s*#\s*include[^\n]*',source,re.M))+'\n'
     # Macros have already expanded in the AST. Real headers retain their native
     # types, assertions and layout macros; fake libc is parse-only.
@@ -808,6 +874,7 @@ def convert(source, filename, cc, include_dirs, lower=True, canonical_source=Non
              'input_sha256':hashlib.sha256(source.encode('latin1')).hexdigest(),
              'output_sha256':hashlib.sha256(output.encode('latin1')).hexdigest(),
              'counts':dict(counts),'categories':dict(categories),'expressions':analysis.records,
+             'evaluation_order':evaluation_receipt,
              'open_domain_expressions':sum(any(c.endswith('-domain') for c in r['categories']) for r in analysis.records),
              'premises':['MinGW GCC signed char; Windows LLP64; int16 storage/casts are signed short',
                          'MSC usual arithmetic conversion and C90 literal candidate sequence',

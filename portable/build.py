@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
-from canonical_native_abi import scalar, tokenizer as csrc, integer_frontend, register_returns, semantic_spans
+from canonical_native_abi import scalar, tokenizer as csrc, integer_frontend, register_returns, semantic_spans, evaluation_order
 from canonical_native_abi.source_views import (
     GRAPHICS_SCALARS,
     audio_overlap_views,
@@ -126,7 +126,7 @@ def main():
                 raise ValueError('third-party source differs from provenance: '+name)
     def current_inputs():
         paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',PROJECT/'portable/semantic-spans.json',Path(__file__),register_returns.CONTRACT_PATH,
-               integer_frontend.WORD_CONTRACT_PATH}
+               integer_frontend.WORD_CONTRACT_PATH,evaluation_order.CONTRACT_PATH}
         paths.update(ROOT/u['source'] for u in canonical['modules'])
         paths.update((ROOT/'include').glob('*.h'))
         paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
@@ -352,6 +352,10 @@ def main():
         if row['lang']!='c':continue
         dest=Path(row['generated'])
         try:
+            expression_input=OUT/'expression-inputs'/dest.name
+            expression_input.parent.mkdir(exist_ok=True)
+            expression_input.write_bytes(dest.read_bytes())
+            row['integer_expression_input']=str(expression_input)
             text,row['integer_expressions']=integer_frontend.convert(dest.read_text(encoding='latin1'),dest.as_posix(),CC,
                 [OUT/'include',PROJECT/'include',PROJECT,OUT,PROJECT/'portable/whole_program'],canonical_source=row['source'])
             dest.write_text(text,encoding='latin1')

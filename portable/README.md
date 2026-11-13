@@ -118,6 +118,19 @@ Signed overflow elsewhere, invalid shifts and pointer/layout effects remain
 explicit debt; per-TU receipts include every expression and its mechanical reason.
 Install the parser once with `python -m pip install --target build/deps/pycparser -r
 portable/tests/integer_semantics/requirements.txt`. The fake libc headers are parse-only.
+The same pass preserves MSC's per-expression order of unsequenced effects using
+an [object-backed site inventory](../evidence/canonical/native-evaluation-order/README.md).
+Typed effect temporaries retain calls, stores and deferred postincrements in the
+recorded order. New sites fail closed; existing C sequence boundaries stay local.
+Each build retains the pre-expression whole TUs under `expression-inputs/` for
+reproducible disabled-pass controls.
+
+```powershell
+python -m unittest portable.tests.evaluation_order.test_evaluation_order
+python portable/tests/evaluation_order/census.py --report build/current/portable/report.json --out build/workers/eval-order/native-census-check
+python portable/tests/evaluation_order/run.py --report build/current/portable/report.json --out build/workers/eval-order/rng-order-check
+```
+
 `whole_program/platform/` implements DOS/BIOS services. The small
 `whole_program/algorithms/` files project genuine canonical assembly algorithms
 that a native C compiler cannot assemble; they are not an alternative C game

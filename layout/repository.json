@@ -435,6 +435,13 @@
       "reason": "Realizes explicit canonical DOS cross-owner spans as packed native owner groups and symbol aliases, preserving all original access expressions and initializers.",
       "blocker_ids": [],
       "deletion_condition": "Keep as the mechanical DOS storage ABI; no ordinary game algorithm or guessed padding is admitted."
+    },
+    {
+      "module": "evaluation_order",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Sequences unsequenced side-effecting operands (calls, stores, increments) in the order MSC 6.00AX used, taken per site from the compiled canonical objects (evidence/canonical/native-evaluation-order/contracts.json); C leaves the order unspecified and GCC chooses differently. No canonical source change.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep while the native compiler may order unsequenced operands differently from MSC; extend the contract when a new site appears (the census check rejects uncovered sites)."
     }
   ],
   "passes": [
