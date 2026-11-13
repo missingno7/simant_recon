@@ -11,10 +11,10 @@
 
 _DATA	segment word public 'DATA'
 	extrn	_g_53BD:byte
-_g_5A2A		dw	0		; pending key (scan code in AH, 80h = pushed back)
-_g_5A2C		dw	0		; second pending key
-_g_5A2E		dw	0		; saved INT 23h vector (offset, segment)
-_g_5A30		dw	0
+_kbd_pending_key		dw	0		; pending key (scan code in AH, 80h = pushed back)
+_kbd_second_pending_key		dw	0		; second pending key
+_dos_saved_int23_offset		dw	0		; saved INT 23h vector (offset, segment)
+_dos_saved_int23_segment		dw	0
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -72,7 +72,7 @@ L0033:
 _mem_exchange_byte_ranges	endp
 
 _kbd_poll_bios_key	proc	far
-	mov ax, word ptr _g_5A2A
+	mov ax, word ptr _kbd_pending_key
 	and ax, ax
 	jne L0047
 	inc ah
@@ -90,7 +90,7 @@ L0059:
 _kbd_poll_bios_key	endp
 
 _kbd_read_bios_char	proc	far
-	mov ax, word ptr _g_5A2A
+	mov ax, word ptr _kbd_pending_key
 	and ax, ax
 	jne L0072
 	xor ah, ah
@@ -98,7 +98,7 @@ _kbd_read_bios_char	proc	far
 	and al, al
 	jne L0070
 	mov al, ah
-	mov word ptr _g_5A2A, ax
+	mov word ptr _kbd_pending_key, ax
 	xor al, al
 L0070:
 	cbw
@@ -106,8 +106,8 @@ L0070:
 L0072:
 	xor ah, ah
 	xor cx, cx
-	xchg word ptr _g_5A2C, cx
-	mov word ptr _g_5A2A, cx
+	xchg word ptr _kbd_second_pending_key, cx
+	mov word ptr _kbd_pending_key, cx
 	retf
 _kbd_read_bios_char	endp
 
@@ -116,8 +116,8 @@ _kbd_unread_char	proc	far
 	mov bp, sp
 	mov ax, word ptr [bp+6]
 	mov ah, 80h
-	xchg word ptr _g_5A2A, ax
-	mov word ptr _g_5A2C, ax
+	xchg word ptr _kbd_pending_key, ax
+	mov word ptr _kbd_second_pending_key, ax
 	pop bp
 	retf
 _kbd_unread_char	endp
@@ -136,8 +136,8 @@ _kbd_restore_ctrl_break_vector	proc	far
 	cli
 	xor ax, ax
 	mov es, ax
-	mov ax, word ptr _g_5A2E
-	mov dx, word ptr _g_5A30
+	mov ax, word ptr _dos_saved_int23_offset
+	mov dx, word ptr _dos_saved_int23_segment
 	mov word ptr es:[8Ch], ax
 	mov word ptr es:[8Eh], dx
 	sti
@@ -154,8 +154,8 @@ _kbd_install_ctrl_break_vector	proc	far
 	mov es, ax
 	xchg word ptr es:[8Ch], bx
 	xchg word ptr es:[8Eh], dx
-	mov word ptr _g_5A2E, bx
-	mov word ptr _g_5A30, dx
+	mov word ptr _dos_saved_int23_offset, bx
+	mov word ptr _dos_saved_int23_segment, dx
 	push cs
 	assume	ds:KBD_TEXT
 	lea bx, _kbd_restore_ctrl_break_vector

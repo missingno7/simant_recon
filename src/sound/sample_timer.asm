@@ -21,49 +21,49 @@ DGROUP          group   _DATA
                 extrn   _snd_song_process_due_events:far
 
 
-                public  _g_693C
-                public  _fd_55B3_6B42
-                public  _fd_55B3_6B4A
-                public  _fd_55B3_6B9C
-                public  _fd_55B3_6BA0
-                public  _fd_55B3_74AD
-                public  _fd_55B3_74AF
-                public  _fd_55B3_74B1
-                public  _fd_55B3_74B3
-                public  _fd_55B3_74B5
-                public  _fd_55B3_74B7
-                public  _fd_55B3_74B9
+                public  _snd_lpt_dac_port
+                public  _midi_service_countdown
+                public  _snd_dac_io_base
+                public  _snd_sample_output_routine
+                public  _snd_sb_dsp_write_port
+                public  _snd_speaker_output_pointer
+                public  _snd_adlib_output_pointer
+                public  _snd_lpt_output_pointer
+                public  _snd_port200_output_pointer
+                public  _snd_sb_output_pointer
+                public  _snd_port222_output_pointer
+                public  _snd_based_dac_output_pointer
 
 CHANNELS        equ     4
 CHAN_SIZE       equ     14h             ; channel record (see snd_start_sample_voice)
 
 _DATA           segment word public 'DATA'
-_g_693C         dw      3BCh            ; LPT DAC port (set by snd_init_lpt_sample_channels from the BIOS)
+_snd_lpt_dac_port         dw      3BCh            ; LPT DAC port (set by snd_init_lpt_sample_channels from the BIOS)
 isr_stack       db      200h dup (0)    ; private stack of the sequencer tick
 isr_stack_top   label   word
 g_6B3E          dw      10h             ; ticks to the next sequencer call
 g_6B40          dw      10h             ; reload of g_6B3E
-_fd_55B3_6B42   dw      2               ; sequencer delay (returned by snd_song_process_due_events)
+_midi_service_countdown   dw      2               ; sequencer delay (returned by snd_song_process_due_events)
 g_6B44          dw      1               ; channel 0 sample (4-channel mixer)
                 dw      1
 g_6B48          dw      3               ; speaker output state (0, 1, 2)
-_fd_55B3_6B4A   dw      10h             ; DAC port base (out to port + 1)
-_fd_55B3_6B4C label byte
+_snd_dac_io_base   dw      10h             ; DAC port base (out to port + 1)
+_snd_sample_channel_records label byte
 g_6B4C          db      CHAN_SIZE dup (0)
 _fd_55B3_6B4E equ g_6B4C+2
-                public _fd_55B3_6B4C, _fd_55B3_6B4E
+                public _snd_sample_channel_records, _fd_55B3_6B4E
 g_6B60          db      CHAN_SIZE dup (0)
 g_6B74          db      CHAN_SIZE dup (0)
 g_6B88          db      CHAN_SIZE dup (0)
-_fd_55B3_6B9C   dw      offset out_speaker      ; current output routine
-                public _fd_55B3_6B9E
-_fd_55B3_6B9E label word
+_snd_sample_output_routine   dw      offset out_speaker      ; current output routine
+                public _snd_volume_table_offset
+_snd_volume_table_offset label word
 g_6B9E          dw      offset DGROUP:vol_tab   ; volume table base
-_fd_55B3_6BA0   dw      0               ; Sound Blaster DSP write port
+_snd_sb_dsp_write_port   dw      0               ; Sound Blaster DSP write port
                 dw      0
 ; AdLib output level table (indexed by sample value, read by snd_opl_set_note_level in steps of 2)
-                public _fd_55B3_6BA4
-_fd_55B3_6BA4 label byte
+                public _snd_opl_volume_curve
+_snd_opl_volume_curve label byte
 g_6BA4          label   byte
                 db      40h, 38h, 33h, 30h, 2Dh, 2Bh, 29h, 28h, 26h, 25h, 24h, 23h, 22h, 21h, 20h, 20h
                 db      1Fh, 1Eh, 1Eh, 1Dh, 1Ch, 1Ch, 1Bh, 1Bh, 1Ah, 1Ah, 1Ah, 19h, 19h, 18h, 18h, 18h
@@ -207,13 +207,13 @@ g_74A7          dw      1               ; reload of g_74A3 (fast timer)
 g_74A9          dw      64h             ; PIT divisor (sample rate)
 g_74AB          dw      64h             ; PIT divisor for the fast timer
 ; output routines by device
-_fd_55B3_74AD   dw      offset out_speaker
-_fd_55B3_74AF   dw      offset out_adlib
-_fd_55B3_74B1   dw      offset out_lpt
-_fd_55B3_74B3   dw      offset out_200
-_fd_55B3_74B5   dw      offset out_sb
-_fd_55B3_74B7   dw      offset out_222
-_fd_55B3_74B9   dw      offset out_6B4A
+_snd_speaker_output_pointer   dw      offset out_speaker
+_snd_adlib_output_pointer   dw      offset out_adlib
+_snd_lpt_output_pointer   dw      offset out_lpt
+_snd_port200_output_pointer   dw      offset out_200
+_snd_sb_output_pointer   dw      offset out_sb
+_snd_port222_output_pointer   dw      offset out_222
+_snd_based_dac_output_pointer   dw      offset out_6B4A
                 db      0
 g_74BC          dw      0               ; handler to install (offset, segment)
 g_74BE          dw      0
@@ -324,7 +324,7 @@ L00B9:
                 xor     dh, dh
                 add     ax, dx
                 shr     ax, 1
-                jmp     word ptr _fd_55B3_6B9C
+                jmp     word ptr _snd_sample_output_routine
 L00C5:
                 test    byte ptr [si+0Fh], 80h
                 je      L00D2
@@ -338,7 +338,7 @@ L00D2:
 L00DE:
                 mov     ax, word ptr g_6B40
                 mov     word ptr g_6B3E, ax
-                dec     word ptr _fd_55B3_6B42
+                dec     word ptr _midi_service_countdown
                 jne     L0136
                 mov     word ptr cs:save_ss, ss
                 mov     word ptr cs:save_sp, sp
@@ -353,7 +353,7 @@ L00DE:
                 mov     bx, ax
                 mov     ax, DGROUP
                 mov     ds, ax
-                mov     word ptr _fd_55B3_6B42, bx
+                mov     word ptr _midi_service_countdown, bx
                 pop     di
                 pop     cx
                 mov     ss, word ptr cs:save_ss
@@ -396,7 +396,7 @@ L014C:
                 jmp     dword ptr cs:old_int8
                 even
 out_lpt:
-                mov     dx, _g_693C
+                mov     dx, _snd_lpt_dac_port
                 out     dx, al
                 jmp     short $+2
                 add     dx, 2
@@ -415,7 +415,7 @@ out_222:
                 jmp     out_done
                 even
 out_6B4A:
-                mov     dx, word ptr _fd_55B3_6B4A
+                mov     dx, word ptr _snd_dac_io_base
                 inc     dx
                 out     dx, al
                 jmp     out_done
@@ -426,7 +426,7 @@ out_200:
                 jmp     out_done
                 even
 out_sb:
-                mov     dx, word ptr _fd_55B3_6BA0
+                mov     dx, word ptr _snd_sb_dsp_write_port
                 mov     ah, al
 L0194:
                 in      al, dx
@@ -631,7 +631,7 @@ L033C:
                 add     ax, word ptr g_6B44
                 shr     ax, 1
                 shr     ax, 1
-                jmp     word ptr _fd_55B3_6B9C
+                jmp     word ptr _snd_sample_output_routine
 _snd_slow_timer_interrupt:
                 inc     byte ptr cs:busy
                 push    ax
@@ -640,7 +640,7 @@ _snd_slow_timer_interrupt:
                 out     20h, al
                 mov     ax, DGROUP
                 mov     ds, ax
-                dec     word ptr _fd_55B3_6B42
+                dec     word ptr _midi_service_countdown
                 je      L038A
 L036A:
                 dec     word ptr g_74A3
@@ -674,7 +674,7 @@ L038A:
                 mov     bx, ax
                 mov     ax, DGROUP
                 mov     ds, ax
-                mov     word ptr _fd_55B3_6B42, bx
+                mov     word ptr _midi_service_countdown, bx
                 pop     di
                 pop     si
                 pop     es

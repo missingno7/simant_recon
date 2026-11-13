@@ -14,43 +14,43 @@ struct Rect {
     int bottom;
 };
 
-extern char far g_5A9C[];
+extern char far gfx_screen_clip_list[];
 
 char far * far gfx_screen_rect(void)
 {
-    return g_5A9C;
+    return gfx_screen_clip_list;
 }
 
 extern int near g_3DE2;
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
 void far GBoxOutline(int left, int top, int right, int bottom, int width);
 
 void far GBoxFillOutline(int left, int top, int right, int bottom, int width)
 {
-    g_9134(left, top, right, bottom, g_3DE2);
+    gfx_fill_rect_hook(left, top, right, bottom, g_3DE2);
     GBoxOutline(left, top, right, bottom, width);
 }
 
 extern void far gfx_put_fixed_font_char(int x, int y, int c);
-extern char near g_3DDC;
+extern char near gfx_font_height_pixels;
 extern char near fontWidth;
 
 void far gfx_draw_outlined_char(int x, int y, int c, int width)
 {
     gfx_put_fixed_font_char(x, y, c);
-    GBoxOutline(x, y, fontWidth + x, g_3DDC + y, width);
+    GBoxOutline(x, y, fontWidth + x, gfx_font_height_pixels + y, width);
 }
 
-#define CELLY(v) (((v) & 0xff) * g_3DDC + (char)((v) >> 8) * g_3DDC / 14)
+#define CELLY(v) (((v) & 0xff) * gfx_font_height_pixels + (char)((v) >> 8) * gfx_font_height_pixels / 14)
 
 void far GTextBox(int left, int top, int right, int bottom, int color)
 {
-    g_9134(left << 3, CELLY(top), right << 3, CELLY(bottom + 1), color);
+    gfx_fill_rect_hook(left << 3, CELLY(top), right << 3, CELLY(bottom + 1), color);
 }
 
 void far gfx_outline_cell_box(int left, int top, int right, int bottom, int width)
 {
-    GBoxOutline(left << 3, g_3DDC * top, right << 3, g_3DDC * (bottom + 1), width);
+    GBoxOutline(left << 3, gfx_font_height_pixels * top, right << 3, gfx_font_height_pixels * (bottom + 1), width);
 }
 
 extern void (far * near g_9174)(int left, int top, int right, int bottom, int mode);
@@ -95,10 +95,10 @@ void far gfx_printf_at(int x, int y, char far *format, ...)
 void far GBoxOutline(int left, int top, int right, int bottom, int width)
 {
     if (width) {
-        g_9134(left + width, top + width, right - width, top, _foreColor);
-        g_9134(left + width, bottom - width, right - width, bottom, _foreColor);
-        g_9134(left + width, top, left, bottom, _foreColor);
-        g_9134(right, top, right - width, bottom, _foreColor);
+        gfx_fill_rect_hook(left + width, top + width, right - width, top, _foreColor);
+        gfx_fill_rect_hook(left + width, bottom - width, right - width, bottom, _foreColor);
+        gfx_fill_rect_hook(left + width, top, left, bottom, _foreColor);
+        gfx_fill_rect_hook(right, top, right - width, bottom, _foreColor);
     }
 }
 
@@ -107,13 +107,13 @@ void far GRectPartialOutline(struct Rect far *r, int width, char sides, int colo
     if (width == 0)
         return;
     if (sides & 2)
-        g_9134(r->left + width, r->top + width, r->right - width, r->top, color);
+        gfx_fill_rect_hook(r->left + width, r->top + width, r->right - width, r->top, color);
     if (sides & 8)
-        g_9134(r->left + width, r->bottom - width, r->right - width, r->bottom, color);
+        gfx_fill_rect_hook(r->left + width, r->bottom - width, r->right - width, r->bottom, color);
     if (sides & 1)
-        g_9134(r->left + width, r->top, r->left, r->bottom, color);
+        gfx_fill_rect_hook(r->left + width, r->top, r->left, r->bottom, color);
     if (sides & 4)
-        g_9134(r->right, r->top, r->right - width, r->bottom, color);
+        gfx_fill_rect_hook(r->right, r->top, r->right - width, r->bottom, color);
 }
 
 extern void (far * near g_913C)(int left, int top, int right, int bottom);
@@ -156,19 +156,19 @@ void far GRectOutline(struct Rect far *r, int width)
 
 void far GRectFill(struct Rect far *r, int color)
 {
-    g_9134(r->left, r->top, r->right, r->bottom, color);
+    gfx_fill_rect_hook(r->left, r->top, r->right, r->bottom, color);
 }
 
 void far GRectFillOutline(struct Rect far *r, int width)
 {
-    g_9134(r->left, r->top, r->right, r->bottom, g_3DE2);
+    gfx_fill_rect_hook(r->left, r->top, r->right, r->bottom, g_3DE2);
     GBoxOutline(r->left, r->top, r->right, r->bottom, width);
 }
 
 extern char near g_21A4;
 extern int (far * near g_9140)(int left, int top, int right, int bottom);
 extern char far * far mem_malloc(int size, char far *name);
-extern void (far * near g_9148)(int left, int top, int right, int bottom, char far *buffer);
+extern void (far * near gfx_capture_rect_hook)(int left, int top, int right, int bottom, char far *buffer);
 
 char far * far GSaveRect(struct Rect far *r)
 {
@@ -183,7 +183,7 @@ char far * far GSaveRect(struct Rect far *r)
         return 0;
     p = mem_malloc(size, "GSaveRect");
     if (p)
-        g_9148(x, r->top, r->right, r->bottom, p);
+        gfx_capture_rect_hook(x, r->top, r->right, r->bottom, p);
     g_21A4 = 0;
     return p;
 }
@@ -237,14 +237,14 @@ struct PackHdr {
 
 extern void far UnpackInit(char far *packed, int length);
 extern unsigned int far Unpack(char far *dest, unsigned int length);
-extern char near g_5A97;
-extern void (far * near g_914C)();
-extern void (far * near g_9154)();
+extern char near gfx_display_mode;
+extern void (far * near gfx_put_picture_hook)();
+extern void (far * near gfx_put_image_hook)();
 extern int (far * near g_9144)(int, int, int, int);
 extern void far Punt(char far *format, ...);
 extern char far * far * far mem_Alloc(long size, int flags, char far *name);
 extern char far * far mem_Lock(char far * far *handle);
-extern void (far * far fd_50F6_37EA)();
+extern void (far * far gfx_mask_to_buffer_hook)();
 extern void far mem_Unlock(char far * far *handle);
 extern void far mem_Free(char far * far *handle);
 
@@ -268,17 +268,17 @@ void far GPutPacked(int x, int y, char far *pic)
     hdr.height &= ~7;
     row = 0;
     if (hdr.depth != 4 && hdr.depth != 8) {
-        blit = (g_5A97 & 1) ? g_914C : g_9154;
+        blit = (gfx_display_mode & 1) ? gfx_put_picture_hook : gfx_put_image_hook;
         size = g_9144;
     } else {
-        if (g_5A97 & 1)
+        if (gfx_display_mode & 1)
             Punt("Color picture in mono file");
-        blit = g_914C;
+        blit = gfx_put_picture_hook;
         size = g_9140;
     }
     len = size(0, 0, hdr.width, 1) - 4;
     if (hdr.type == 3) {
-        if (g_5A97 != 2)
+        if (gfx_display_mode != 2)
             len = len / (unsigned char)hdr.depth * ((unsigned char)hdr.depth + 1);
         right = (hdr.width + x + 15) & ~7;
         saveLen = size(x, 0, right, 1) - 4;
@@ -299,8 +299,8 @@ void far GPutPacked(int x, int y, char far *pic)
         if (hdr.type == 0)
             blit(x, y, buf + 2, hdr.width, 8);
         else if (hdr.type == 3) {
-            g_9148(x & ~7, y, right, y + 8, (char far *)save);
-            fd_50F6_37EA(buf, save, x & 7, 0);
+            gfx_capture_rect_hook(x & ~7, y, right, y + 8, (char far *)save);
+            gfx_mask_to_buffer_hook(buf, save, x & 7, 0);
             blit(x & ~7, y, save + 2, save[0], save[1], 0);
         }
     }
@@ -311,8 +311,8 @@ void far GPutPacked(int x, int y, char far *pic)
         else if (hdr.type == 3) {
             buf[1] = rem;
             save[1] = rem;
-            g_9148(x & ~7, y, right, rem + y, (char far *)save);
-            fd_50F6_37EA(buf, save, x & 7, 0);
+            gfx_capture_rect_hook(x & ~7, y, right, rem + y, (char far *)save);
+            gfx_mask_to_buffer_hook(buf, save, x & 7, 0);
             blit(x & ~7, y, save + 2, save[0], save[1], 0);
             free((char far *)save);
         }
@@ -321,18 +321,18 @@ void far GPutPacked(int x, int y, char far *pic)
     mem_Free(h);
 }
 
-extern void (far * near g_9128)(int fore, int back, int pattern);
+extern void (far * near gfx_set_attributes_hook)(int fore, int back, int pattern);
 
 void far GMixedFill(struct Rect far *r, int fore, int back)
 {
-    if (g_5A97 & 1) {
+    if (gfx_display_mode & 1) {
         if ((fore ^ back) & 0xf0) {
-            g_9128(fore, back, 0x20);
+            gfx_set_attributes_hook(fore, back, 0x20);
             GRectChecker(r);
         } else
             GRectFill(r, fore);
     } else if (back != fore) {
-        g_9128(fore, back, 0x20);
+        gfx_set_attributes_hook(fore, back, 0x20);
         GRectChecker(r);
     } else
         GRectFill(r, fore);
@@ -341,22 +341,22 @@ void far GMixedFill(struct Rect far *r, int fore, int back)
 void far GMixedFillBox(int left, int top, int right, int bottom, int fore, int back)
 {
     if (fore != back) {
-        g_9128(fore, back, 0x20);
+        gfx_set_attributes_hook(fore, back, 0x20);
         GCheckerBox(left, top, right, bottom);
         return;
     }
-    g_9134(left, top, right, bottom, fore);
+    gfx_fill_rect_hook(left, top, right, bottom, fore);
 }
 
 void far GRectPartialMixedOutline(struct Rect far *r, int width, char sides, int fore, int back)
 {
     if (width == 0)
         return;
-    if (back == fore || (g_5A97 & 1)) {
+    if (back == fore || (gfx_display_mode & 1)) {
         GRectPartialOutline(r, width, sides, fore);
         return;
     }
-    g_9128(fore, back, 0x20);
+    gfx_set_attributes_hook(fore, back, 0x20);
     if (sides & 2)
         GCheckerBox(r->left + width, r->top + width, r->right - width, r->top);
     if (sides & 8)

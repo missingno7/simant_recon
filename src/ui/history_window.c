@@ -196,10 +196,10 @@ void far win_DrawHistoryWindow(int flags)
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far * far HistGraphs[];
 extern int far * far AltHistGraphs[];
-extern void (far * near g_916C)(int, int, int, int, int);
+extern void (far * near gfx_draw_line_hook)(int, int, int, int, int);
 extern char far * far * far HistGraphStrs;
 extern int far sprintf(char far *buf, char far *fmt, ...);
-extern void (far * near g_9128)(int, int, int);
+extern void (far * near gfx_set_attributes_hook)(int, int, int);
 extern void far font_SetFont(int font);
 extern int far font_FontHeight(void);
 extern void far font_PrintStr(int x, int y, char far *text);
@@ -278,7 +278,7 @@ void far drawHistGraph(int graph, int hilite, int slot)
             y = r.bottom - data[j] * mul;
         else
             y = r.bottom - data[j] / div;
-        (*g_916C)(px, py, x, y, color);
+        (*gfx_draw_line_hook)(px, py, x, y, color);
         px = x;
         py = y;
     }
@@ -288,7 +288,7 @@ void far drawHistGraph(int graph, int hilite, int slot)
         sprintf(range.label, "%d", data[j]);
         s = range.label;
     }
-    (*g_9128)(color, 0, color);
+    (*gfx_set_attributes_hook)(color, 0, color);
     font_SetFont(3);
     font_PrintStr(x, ty = y - (th = font_FontHeight()) / 2, s);
     width = font_StringWidth(s);

@@ -30,9 +30,9 @@ void far ExpAddAnt(int x, int y);
 void far ReDrawMapEdit(int flags);
 extern int far myButton(void);
 extern void far GetMousePos(struct Pt far *pt);
-extern int far fd_50F6_0A9C;
+extern int far main_cycle_phase;
 extern int _fastcall win_IsWinInFront(int win);
-extern int far fd_50F6_10D2[2];
+extern int far map_viewport_rect[2];
 extern int far mapXsize;
 extern int far mapYsize;
 extern int far editTileRect[2];
@@ -58,10 +58,10 @@ void far processExp(int x, int y, int shift)
         ReDrawMapEdit(count);
         while (myButton() == 1) {
             GetMousePos(&pt);
-            fd_50F6_0A9C++;
+            main_cycle_phase++;
             if (win_IsWinInFront(0x100)) {
-                nx = (pt.x - fd_50F6_10D2[0]) / mapXsize;
-                ny = (pt.y - fd_50F6_10D2[1]) / mapYsize;
+                nx = (pt.x - map_viewport_rect[0]) / mapXsize;
+                ny = (pt.y - map_viewport_rect[1]) / mapYsize;
                 if (MapPlane > 1)
                     nx -= 32;
             } else {

@@ -30,7 +30,7 @@ class SaveComparisonTests(unittest.TestCase):
 
     def test_virtual_save_reads_records_relative_to_runtime_base(self):
         addresses = {row[4]: 0x2000 + 0x40 * i for i, row in enumerate(self.schema)}
-        addresses["g_5A9C"] = 0x100
+        addresses["gfx_screen_clip_list"] = 0x100
         for row in self.schema:
             if row[4].startswith("("):
                 addresses[row[4][1:].split(" ")[0]] = addresses[row[4]] - int(row[4].split("+")[1].rstrip(") "))

@@ -44,9 +44,9 @@ extern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);
 
 extern int near _foreColor;
 extern char near g_3DE4;
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern unsigned int (far * near g_9140)(int x0, int y0, int x1, int y1);
-extern void (far * near g_9148)(int x0, int y0, int x1, int y1, char far *buffer);
+extern void (far * near gfx_capture_rect_hook)(int x0, int y0, int x1, int y1, char far *buffer);
 
 int _fastcall win_DrawBitMap(int x, int y, int id);
 
@@ -79,11 +79,11 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
                 GPutPic(x, y, (char far *)pic + 8);
         }
         else if (pic->type == 3) {
-            if (g_5A97 == 2) {
+            if (gfx_display_mode == 2) {
                 x1 = ((x & ~1) + pic->width + 3) & ~1;
                 y1 = pic->height + y;
                 h = malloc((*g_9140)(x & ~1, y, x1, y1));
-                (*g_9148)(x & ~1, y, x1, y1, h);
+                (*gfx_capture_rect_hook)(x & ~1, y, x1, y1, h);
                 gfx_tandy_mask_to_buffer((char far *)pic + 8, h, x & 1, 0);
                 GPutPic(x & ~1, y, h);
             } else {
@@ -93,9 +93,9 @@ int _fastcall win_DrawBitMap(int x, int y, int id)
                 WinPrintf("\nGGetPic - trans @ %d, %d (%d, %d), bytes=%u", x & ~7, y, x1, y1, n);
                 h = malloc(n + 1);
                 h[n] = 0xf3;
-                (*g_9148)(x & ~7, y, x1, y1, h);
+                (*gfx_capture_rect_hook)(x & ~7, y, x1, y1, h);
                 WinPrintf("\nGPutPic size AA %d, %d, tag=%x", *(int far *)h, *(int far *)h + 2, (unsigned char)h[n]);
-                if (g_5A97 & 1)
+                if (gfx_display_mode & 1)
                     gfx_mono_mask_bitmap_to_buffer((char far *)pic + 8, h, x & 7, 0);
                 else
                     gfx_planar_mask_to_buffer((char far *)pic + 8, h, x & 7, 0);

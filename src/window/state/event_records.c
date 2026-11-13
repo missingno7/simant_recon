@@ -18,5 +18,5 @@ struct Event {
     int code;
     int xE;
 };
-struct Event far fd_50F6_49FA;
-struct Event far fd_50F6_4A0A;
+struct Event far window_current_event;
+struct Event far window_previous_event;

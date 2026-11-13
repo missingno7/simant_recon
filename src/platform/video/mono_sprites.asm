@@ -6,7 +6,7 @@
 ; Build profile: masm510; /Mx.
 
 _DATA	segment word public 'DATA'
-	extrn	_g_3D20:byte
+	extrn	_gfx_row_scratch:byte
 	extrn	_mono_tail_masks:byte
 _DATA	ends
 DGROUP	group	_DATA
@@ -319,7 +319,7 @@ _gfx_mono_scratch_to_buffer	proc	far
 	push si
 	push di
 	les di, dword ptr [bp+6]
-	lea si, _g_3D20
+	lea si, _gfx_row_scratch
 	mov bx, word ptr [bp+0Ah]
 	shr bx, 1
 	shr bx, 1

@@ -70,10 +70,10 @@ def _map_cursor_case(label, xorigin, yorigin, width, height, sx, sy,
     b = behavior
     writes = [
         (b.symbol_address("MapPnt"), _w(xorigin) + _w(yorigin)),
-        (b.symbol_address("fd_50F6_10D2"), _w(left) + _w(top) + _w(left + 320) + _w(top + 200)),
+        (b.symbol_address("map_viewport_rect"), _w(left) + _w(top) + _w(left + 320) + _w(top + 200)),
         (b.symbol_address("mapXsize"), _w(sx)),
         (b.symbol_address("mapYsize"), _w(sy)),
-        (b.symbol_address("fd_50F6_38C0"), _w(offset)),
+        (b.symbol_address("map_side_margin_pixels"), _w(offset)),
         (b.symbol_address("fd_50F6_10E0"), _w(width)),
         (b.symbol_address("fd_50F6_10DE"), _w(height)),
     ]
@@ -114,13 +114,13 @@ def _invert_case(label, x, y, left, top, resolution):
     # Point offset constants vary by run to test pointer dereferences, not just
     # the output's translation. Four signed h/v pairs match g_2A42's contract.
     shape = [(0, 0), (28, 0), (28, 20), (0, 20)]
-    writes = [(b.symbol_address("fd_50F6_10D2"), _w(left) + _w(top) + _w(left + 320) + _w(top + 200)),
-              (b.symbol_address("g_3DB2"), _w(resolution)),
-              (b.symbol_address("fd_55B3_2A42"), b"".join(_w(q) for pt in shape for q in pt))]
+    writes = [(b.symbol_address("map_viewport_rect"), _w(left) + _w(top) + _w(left + 320) + _w(top + 200)),
+              (b.symbol_address("gfx_screen_width_pixels"), _w(resolution)),
+              (b.symbol_address("yard_screen_origin"), b"".join(_w(q) for pt in shape for q in pt))]
     callbacks = {"clip_Push": _callback(handler=_noop), "clip_SetWin": _callback(1, _noop),
                  "clip_Pop": _callback(handler=_noop), "TrapFill": _callback(4, _noop, project=_capture_quad)}
     return b.Case(label, args=[x, y], writes=writes,
-        callbacks=callbacks, observe=[_range("fd_50F6_10D2", 8)], return_kind="void",
+        callbacks=callbacks, observe=[_range("map_viewport_rect", 8)], return_kind="void",
         metadata={"suite": SUITE, "contract": "InvertPatch semantic four-point polygon and ordered clip/draw trace", "host_boundary": "clip calls and TrapFill polygon XOR"})
 
 
@@ -141,14 +141,14 @@ def _project_map_draw_intent(machine, args):
     """Project draw arguments together with all implicit helper input globals."""
     word = lambda name: machine.word(behavior.symbol_address(name))
     clip = list(struct.unpack("<4h", machine.read(behavior.symbol_address("editTileRect"), 8)))
-    return {"xy": list(args), "tile": word("g_94E4"), "life_or_draw_code": word("g_9126"),
-            "plane": word("MapPlane"), "mode": word("fd_50F6_1102"),
-            "display_family": machine.read(behavior.symbol_address("g_5A97"), 1)[0],
+    return {"xy": list(args), "tile": word("edit_current_terrain_tile"), "life_or_draw_code": word("edit_current_life_tile"),
+            "plane": word("MapPlane"), "mode": word("edit_tile_renderer_kind"),
+            "display_family": machine.read(behavior.symbol_address("gfx_display_mode"), 1)[0],
             "tile_scale": [word("tileWidth"), word("tileHeight")], "clip_rect": clip,
             "g_19D0": machine.word(memory_suite.dga(0x19D0)),
-            "tile_buffer_pointers": machine.read(behavior.symbol_address("fd_50F6_10E6"), 8).hex(),
-            "tile_source_pointer": machine.read(behavior.symbol_address("fd_50F6_10EE"), 4).hex(),
-            "draw_functions": {"g_914C": machine.read(behavior.symbol_address("g_914C"), 4).hex(),
+            "tile_buffer_pointers": machine.read(behavior.symbol_address("edit_life_tiles_handle"), 8).hex(),
+            "tile_source_pointer": machine.read(behavior.symbol_address("edit_terrain_tiles_handle"), 4).hex(),
+            "draw_functions": {"gfx_put_picture_hook": machine.read(behavior.symbol_address("gfx_put_picture_hook"), 4).hex(),
                                "g_917C": machine.read(behavior.symbol_address("g_917C"), 4).hex()}}
 
 
@@ -159,13 +159,13 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
     writes = [
         (b.symbol_address("MapPlane"), _w(plane)), (b.symbol_address("ELayerMode"), _w(view)),
         (b.symbol_address("MapPnt"), _w(0) + _w(0)),
-        (b.symbol_address("g_94E4"), _w(0x7777)), (b.symbol_address("g_9126"), _w(0x6666)),
+        (b.symbol_address("edit_current_terrain_tile"), _w(0x7777)), (b.symbol_address("edit_current_life_tile"), _w(0x6666)),
         (b.symbol_address("MeBase"), _w(2)), (b.symbol_address("MeType"), _w(3)),
         (b.symbol_address("MeEgg"), _w(4)), (b.symbol_address("MeDir"), _w(5)),
         (b.symbol_address("tileWidth"), _w(16)), (b.symbol_address("tileHeight"), _w(16)),
-        (b.symbol_address("fd_55B3_19CE"), _w(topflag)),
-        (b.symbol_address("fd_50F6_15C4"), _w(cache) * 1200),
-        (b.symbol_address("fd_50F6_1114"), bytes([tilecache & 255]) * 1200),
+        (b.symbol_address("edit_message_dirty"), _w(topflag)),
+        (b.symbol_address("edit_cached_life_tiles"), _w(cache) * 1200),
+        (b.symbol_address("edit_cached_terrain_tiles"), bytes([tilecache & 255]) * 1200),
     ]
     if target == "edit_redraw_changed_tile":
         # Run the original/candidate helper bodies for their caller-visible
@@ -174,13 +174,13 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
         # base pointer even in this mode, so provide a valid disjoint buffer.
         safe_base = 0xA300
         writes += [
-            (b.symbol_address("fd_50F6_1102"), _w(0)),
-            (b.symbol_address("g_5A97"), b"\0"),
+            (b.symbol_address("edit_tile_renderer_kind"), _w(0)),
+            (b.symbol_address("gfx_display_mode"), b"\0"),
             (memory_suite.dga(0x19D0), _w(0)),
-            (b.symbol_address("fd_50F6_10E6"), _w(0) + _w(safe_base) + _w(0) + _w(safe_base)),
-            (b.symbol_address("fd_50F6_10EE"), _w(0) + _w(safe_base)),
+            (b.symbol_address("edit_life_tiles_handle"), _w(0) + _w(safe_base) + _w(0) + _w(safe_base)),
+            (b.symbol_address("edit_terrain_tiles_handle"), _w(0) + _w(safe_base)),
             (b.symbol_address("editTileRect"), _w(0) + _w(0) + _w(640) + _w(480)),
-            (b.symbol_address("g_914C"), b"\0" * 4),
+            (b.symbol_address("gfx_put_picture_hook"), b"\0" * 4),
             (b.symbol_address("g_917C"), b"\0" * 4),
             (safe_base * 16, bytes(0x2000)),
         ]
@@ -205,15 +205,15 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
                           "edit_draw_ground_tile": b.Callback(2, project=_project_map_draw_intent)})
     else:
         callbacks.update({"edit_draw_life_and_ground_tile": _callback(2, _noop), "edit_draw_ground_tile": _callback(2, _noop)})
-    observe = [_range("g_94E4", 2), _range("g_9126", 2), _range("MapPlane", 2),
-               _range("fd_50F6_1102", 2), _range("g_5A97", 1),
+    observe = [_range("edit_current_terrain_tile", 2), _range("edit_current_life_tile", 2), _range("MapPlane", 2),
+               _range("edit_tile_renderer_kind", 2), _range("gfx_display_mode", 1),
                b.Range("g_19D0", memory_suite.dga(0x19D0), 2),
-               _range("fd_50F6_10E6", 8), _range("fd_50F6_10EE", 4),
-               _range("editTileRect", 8), _range("g_914C", 4), _range("g_917C", 4),
-               _range("fd_50F6_15C4", 2400), _range("fd_50F6_1114", 1200)]
+               _range("edit_life_tiles_handle", 8), _range("edit_terrain_tiles_handle", 4),
+               _range("editTileRect", 8), _range("gfx_put_picture_hook", 4), _range("g_917C", 4),
+               _range("edit_cached_life_tiles", 2400), _range("edit_cached_terrain_tiles", 1200)]
     return b.Case(label, args=[x, y], writes=writes, observe=observe, callbacks=callbacks,
         return_kind="void", metadata={"suite": SUITE,
-        "contract": (f"{target} selected cell and cache effects; edit_redraw_changed_tile executes original helper bodies and captures normalized draw intent from x/y plus pre-entry g_94E4, g_9126, plane, mode and render globals" if target == "edit_redraw_changed_tile" else f"{target} selected cell, life/view partitions and map state effects"),
+        "contract": (f"{target} selected cell and cache effects; edit_redraw_changed_tile executes original helper bodies and captures normalized draw intent from x/y plus pre-entry edit_current_terrain_tile, edit_current_life_tile, plane, mode and render globals" if target == "edit_redraw_changed_tile" else f"{target} selected cell, life/view partitions and map state effects"),
         "host_boundary": ("edit_draw_life_and_ground_tile/edit_draw_ground_tile trace-and-pass-through; mode 0 avoids hardware dispatch, not helper state transitions; Punt guarded by safe domain" if target == "edit_redraw_changed_tile" else "Punt invalid-state boundary guarded by safe directed/randomized domain")})
 
 
@@ -357,8 +357,8 @@ def _bitmap_printf_project(machine, args):
 
 
 def _render_tile(machine, args):
-    tile = {"tile": machine.word(behavior.symbol_address("g_94E4")),
-            "life": machine.word(behavior.symbol_address("g_9126")),
+    tile = {"tile": machine.word(behavior.symbol_address("edit_current_terrain_tile")),
+            "life": machine.word(behavior.symbol_address("edit_current_life_tile")),
             "plane": machine.word(behavior.symbol_address("MapPlane"))}
     machine.state.setdefault("tile_render_requests", []).append(tile)
     bpp = machine.state["tile_bytes"]
@@ -453,7 +453,7 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
     writes = list(arena.writes) + [
         (resource_ptr[0] * 16 + resource_ptr[1], picture + bytes(224 - len(picture))),
         (text_linear, BALLOON_MESSAGE + b"\0"),
-        (b.symbol_address("fd_50F6_1092"), _w(1)),
+        (b.symbol_address("message_balloon_count"), _w(1)),
         (b.symbol_address("CurBalloonPnts"), _w(x) + _w(y)),
         (b.symbol_address("CurBalloonPlane"), _w(plane)),
         (b.symbol_address("CurBalloonFlags"), _w(0)),
@@ -462,24 +462,24 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
         (b.symbol_address("MapPnt"), _w(0) + _w(0)),
         (b.symbol_address("fd_50F6_10E0"), _w(40)), (b.symbol_address("fd_50F6_10DE"), _w(30)),
         (b.symbol_address("editTileRect"), _w(0) + _w(0) + _w(640) + _w(480)),
-        (b.symbol_address("fd_50F6_1102"), _w(mode)),
+        (b.symbol_address("edit_tile_renderer_kind"), _w(mode)),
         (b.symbol_address("fd_50F6_37D2"), _w(0 if spider_clip else 500)),
         (b.symbol_address("fd_50F6_37D4"), _w(0 if spider_clip else 500)),
         # noems allocations compare free-block segments with this DOS limit;
         # keep the entire deterministic arena below the boundary.
-        (b.symbol_address("fd_50F6_3950"), _w(memory_suite.HEAP_SEG + 0x100)),
-        (b.symbol_address("fd_50F6_37D6"), _w(22) + _w(28) + _w(36) + _w(42)),
-        (b.symbol_address("fd_50F6_1F26"), _w(14) + _w(14)),
-        (b.symbol_address("fd_50F6_15C4"), _w(-1) * 1200),
-        (b.symbol_address("fd_50F6_1114"), bytes(1200)),
-        (b.symbol_address("fd_50F6_37E6"), struct.pack("<HH", b.symbol("edit_draw_ground_tile")["off"], b.symbol("edit_draw_ground_tile")["seg"])),
-        (b.symbol_address("fd_50F6_37EA"), struct.pack("<HH", b.symbol("edit_draw_life_and_ground_tile")["off"], b.symbol("edit_draw_life_and_ground_tile")["seg"])),
-        (b.symbol_address("fd_50F6_37EE"), struct.pack("<HH", b.symbol("edit_scroll_and_redraw")["off"], b.symbol("edit_scroll_and_redraw")["seg"])),
+        (b.symbol_address("mem_ems_boundary_segment"), _w(memory_suite.HEAP_SEG + 0x100)),
+        (b.symbol_address("spider_composite_rect"), _w(22) + _w(28) + _w(36) + _w(42)),
+        (b.symbol_address("spider_composite_bitmap"), _w(14) + _w(14)),
+        (b.symbol_address("edit_cached_life_tiles"), _w(-1) * 1200),
+        (b.symbol_address("edit_cached_terrain_tiles"), bytes(1200)),
+        (b.symbol_address("gfx_scratch_to_buffer_hook"), struct.pack("<HH", b.symbol("edit_draw_ground_tile")["off"], b.symbol("edit_draw_ground_tile")["seg"])),
+        (b.symbol_address("gfx_mask_to_buffer_hook"), struct.pack("<HH", b.symbol("edit_draw_life_and_ground_tile")["off"], b.symbol("edit_draw_life_and_ground_tile")["seg"])),
+        (b.symbol_address("gfx_buffer_intersection_hook"), struct.pack("<HH", b.symbol("edit_scroll_and_redraw")["off"], b.symbol("edit_scroll_and_redraw")["seg"])),
         (b.symbol_address("tileWidth"), _w(16)), (b.symbol_address("tileHeight"), _w(16)),
-        (b.symbol_address("fd_50F6_10E6"), b"\0" * 4),
-        (b.symbol_address("fd_50F6_10EA"), b"\0" * 4),
+        (b.symbol_address("edit_life_tiles_handle"), b"\0" * 4),
+        (b.symbol_address("edit_life_alt_tiles_handle"), b"\0" * 4),
         (memory_suite.dga(0x19D0), _w(0)),
-        (b.symbol_address("fd_50F6_3950"), _w(memory_suite.HEAP_SEG + 0x100)),
+        (b.symbol_address("mem_ems_boundary_segment"), _w(memory_suite.HEAP_SEG + 0x100)),
     ]
     if 0 <= tx < 128 and 0 <= ty < 64:
         writes += [(b.symbol_address("MapA") + tx * 64 + ty, b"\x42"),
@@ -508,12 +508,12 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
         "edit_scroll_and_redraw": b.Callback(8, _noop, project=_capture_clipcopy),
     }
     observed = [
-        _range("fd_50F6_1092", 2), _range("CurBalloonPnts", 6 * 4),
+        _range("message_balloon_count", 2), _range("CurBalloonPnts", 6 * 4),
         _range("CurBalloonPlane", 6 * 2), _range("CurBalloonFlags", 6 * 2),
-        _range("CurBalloonMsgs", 6 * 4), _range("fd_50F6_15C4", 1200 * 2),
-        _range("fd_50F6_1114", 1200), _range("LifeA", 128 * 64),
+        _range("CurBalloonMsgs", 6 * 4), _range("edit_cached_life_tiles", 1200 * 2),
+        _range("edit_cached_terrain_tiles", 1200), _range("LifeA", 128 * 64),
         _range("MapA", 128 * 64),
-        _range("fd_50F6_10E6", 8),
+        _range("edit_life_tiles_handle", 8),
         b.Range("ralloc_globals", memory_suite.dga(0x2F2A), 0x28),
         b.Range("heap", memory_suite.HEAP_SEG * 16, 0x100 * 16),
         b.Range("handle_table", memory_suite.HANDLE_SEG * 16 + memory_suite.MASTER_START,
@@ -531,7 +531,7 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
                   "resource_picture": {"type": 0, "width": picw, "height": pich, "pixel_bytes": len(pixels), "handle": list(handle), "plane": plane},
                   "coordinates": {"x": x, "y": y},
                   "buffer_layout": {"mode": mode, "bytes_per_tile": bpp, "rowbytes_per_tile": rowbytes, "width_tiles": wt, "height_tiles": ht, "allocation_bytes": buf_size},
-                  "host_boundaries": ["f_1629_000C resource acquisition", "edit_prepare_life_tiles tile-set switch", "edit_compose_life_tile/edit_copy_ground_tile source tile renderer", "fd_50F6_37E6 tile pixel transfer", "fd_50F6_37EA picture overlay", "fd_50F6_37EE clipping save/restore"],
+                  "host_boundaries": ["f_1629_000C resource acquisition", "edit_prepare_life_tiles tile-set switch", "edit_compose_life_tile/edit_copy_ground_tile source tile renderer", "gfx_scratch_to_buffer_hook tile pixel transfer", "gfx_mask_to_buffer_hook picture overlay", "gfx_buffer_intersection_hook clipping save/restore"],
                   "helper_policy": "mem_Alloc/1B84/1BBA/1C0A execute original Ralloc code over the memory_suite valid arena; resource acquisition and host pixel/render calls are explicit callbacks",
                   "limits": "normalized render/copy traces and complete pointed source/destination bytes; no display framebuffer is modeled or claimed"})
 
@@ -587,9 +587,9 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
         raise ValueError(f"bitmap fixture exceeds picture Ralloc block ({len(picture)} bytes)")
     writes = list(arena.writes) + [
         (pic_seg * 16 + pic_off, picture + bytes(224 - len(picture))),
-        (b.symbol_address("g_5A97"), bytes([display & 255])),
+        (b.symbol_address("gfx_display_mode"), bytes([display & 255])),
         (b.symbol_address("g_9140"), struct.pack("<HH", b.symbol("edit_draw_life_and_ground_tile")["off"], b.symbol("edit_draw_life_and_ground_tile")["seg"])),
-        (b.symbol_address("g_9148"), struct.pack("<HH", b.symbol("edit_scroll_and_redraw")["off"], b.symbol("edit_scroll_and_redraw")["seg"])),
+        (b.symbol_address("gfx_capture_rect_hook"), struct.pack("<HH", b.symbol("edit_scroll_and_redraw")["off"], b.symbol("edit_scroll_and_redraw")["seg"])),
     ]
     callbacks = {
         "db_LoadObject": b.Callback(2, _bitmap_load),
@@ -597,7 +597,7 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
         "GPutPacked": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=True)),
         "GPutPic": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=False)),
         "GPutImg": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=False)),
-        # These callbacks are used as the documented g_9140/g_9148 function
+        # These callbacks are used as the documented g_9140/gfx_capture_rect_hook function
         # pointer services only in type-3 contracts added below.
         "edit_draw_life_and_ground_tile": b.Callback(4, _screen_size),
         "edit_scroll_and_redraw": b.Callback(6, _screen_copy, project=_screen_copy_project),
@@ -612,8 +612,8 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
             b.Range("heap", memory_suite.HEAP_SEG * 16, 0x100 * 16),
             b.Range("handle_table", memory_suite.HANDLE_SEG * 16 + memory_suite.MASTER_START,
                     memory_suite.MASTER_CAPACITY * 4),
-            _range("g_5A97", 1), b.Range("screen_size_callback", b.symbol_address("g_9140"), 4),
-            b.Range("screen_copy_callback", b.symbol_address("g_9148"), 4)],
+            _range("gfx_display_mode", 1), b.Range("screen_size_callback", b.symbol_address("g_9140"), 4),
+            b.Range("screen_copy_callback", b.symbol_address("gfx_capture_rect_hook"), 4)],
         callbacks=callbacks, return_kind="s16",
         state={"resource_handle": handle, "resource_available": available, "display": display,
                "picture_bytes": picture.hex(), "picture_length": len(picture), "pixel_length": len(pixels),

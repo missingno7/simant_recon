@@ -194,16 +194,16 @@ def _actual_window_state(fixture,text,previous_window=0x0200):
         (b.symbol_address('win_handles')+0x21*4,b.words(window_slot,lists.HANDLE[1])),
         (b.symbol_address('win_numOfWindows'),b.words(45)),
         (b.symbol_address('g_6300'),b.words(0)),
-        (b.symbol_address('g_5702'),b.words(*([0x8000]*32))),
+        (b.symbol_address('clip_window_z_order'),b.words(*([0x8000]*32))),
         (b.symbol_address('g_62E0'),noop_pointer*6)]
     fixture.observe=[r for r in fixture.observe if r.name!='dialog_resource_heap']
     fixture.observe += [r for r in arena.observe if r.name not in ('heap','handle_table')]
     fixture.observe += [b.Range('actual_2100_payload',window_data_seg*16,len(payload)),
         b.Range('dialog_resource_heap',(lists.DATA[1]-2)*16,
                 (text_paras+win_paras+free_paras)*16),
-        b.Range('actual_window_stack',b.symbol_address('g_5702'),64),
+        b.Range('actual_window_stack',b.symbol_address('clip_window_z_order'),64),
         b.Range('actual_window_handles',b.symbol_address('win_handles'),45*4)]
-    fixture.writes.append((b.symbol_address('g_5702'),
+    fixture.writes.append((b.symbol_address('clip_window_z_order'),
                            b.words(previous_window,0x8000,*([0x8000]*30))))
     fixture.state.update({'stale_events':[0x2100,0x2102], 'flush_count':0,
                           'drawn_windows':[],'invalidated_rects':[]})
@@ -257,7 +257,7 @@ def case(label,which,width,mono,keys,events,rect,volatile,text=b'Dialog text',re
                        (dg+0x9128,b.words(empty['off'],empty['seg'])),
                        (dg+0x912C,b.words(zero['off'],zero['seg'])),
                        (dg+0x9130,b.words(zero['off'],zero['seg']))]
-    font_table=b.symbol('fd_50F6_4A1A')
+    font_table=b.symbol('font_loaded_font_pointers')
     font_at=font_table['seg']*16+font_table['off']
     # Stable opaque far-pointer tokens for fonts 2 and 4.  The dialog only
     # selects/passes these handles; the host print command does not dereference.

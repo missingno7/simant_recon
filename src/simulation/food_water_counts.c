@@ -69,8 +69,8 @@ extern int far fd_50F6_0F3A;
 extern int far FoodA;
 extern int far FoodB;
 extern int far FoodR;
-unsigned char g_1B9A[4] = { 0, 1, 0, 0xFF };
-unsigned char g_1B9E[4] = { 0xFF, 0, 1, 0 };
+unsigned char food_walk_dx[4] = { 0, 1, 0, 0xFF };
+unsigned char food_walk_dy[4] = { 0xFF, 0, 1, 0 };
 extern int far SRand16(void);
 extern int far SRand8(void);
 extern long far TickCount(void);
@@ -378,8 +378,8 @@ void far FoodFall(int a, int b)
             FoodA++;
             go = 0;
         }
-        x += g_1B9A[fd_50F6_0F3A];
-        y += g_1B9E[fd_50F6_0F3A];
+        x += food_walk_dx[fd_50F6_0F3A];
+        y += food_walk_dy[fd_50F6_0F3A];
         if (x < 0 || x > 0x7f)
             go = 0;
         if (y < 0 || y > 0x3f)

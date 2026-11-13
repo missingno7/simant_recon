@@ -23,7 +23,7 @@ extern unsigned char far MapB[64][64];
 extern unsigned char far MapR[64][64];
 extern char far Dy8[8];
 extern char far Dx8[8];
-unsigned char g_1BB2[8] = { 0x19, 0x1A, 0x1C, 0x1F, 0x1E, 0x1D, 0x1B, 0x18 };
+unsigned char hole_border_tile_ids[8] = { 0x19, 0x1A, 0x1C, 0x1F, 0x1E, 0x1D, 0x1B, 0x18 };
 extern int far IsItDirt(int value);
 extern long far TileTotXB;
 extern long far TileTotYB;
@@ -236,7 +236,7 @@ void far HoleBorder(int x, int y)
         if (nx < 0 || nx > 127 || ny < 0 || ny > 63)
             continue;
         if (MapA[nx][ny] < 0x50)
-            MapA[nx][ny] = g_1BB2[i];
+            MapA[nx][ny] = hole_border_tile_ids[i];
     }
 }
 

@@ -15,20 +15,20 @@
 ; The far pointers to the 25 entries live in the DGROUP dispatch table at 2276 (not reconstructed here).
 
 _DATA	segment word public 'DATA'
-	extrn	_fd_55B3_3DE6:byte
-	extrn	_fd_55B3_3DE8:byte
-	extrn	_g_3DA4:byte
-	extrn	_g_3DA8:byte
-	extrn	_g_3DAE:byte
-	extrn	_g_3DB0:byte
-	extrn	_g_3DB2:byte
-	extrn	_g_3DB4:byte
+	extrn	_gfx_clip_left_pixels:byte
+	extrn	_gfx_clip_right_pixels:byte
+	extrn	_gfx_secondary_font:byte
+	extrn	_gfx_primary_font_offset:byte
+	extrn	_gfx_screen_bitmap_segment:byte
+	extrn	_gfx_video_segment:byte
+	extrn	_gfx_screen_width_pixels:byte
+	extrn	_gfx_screen_height_pixels:byte
 	extrn	_g_3DD2:byte
-	extrn	_g_3DD4:byte
-	extrn	_g_3DD6:byte
-	extrn	_g_3DD8:byte
-	extrn	_g_3DDA:byte
-	extrn	_g_3DDC:byte
+	extrn	_gfx_cursor_draw_lock:byte
+	extrn	_gfx_active_font_offset:byte
+	extrn	_gfx_active_font_segment:byte
+	extrn	_gfx_font_glyph_stride:byte
+	extrn	_gfx_font_height_pixels:byte
 	extrn	_fontWidth:byte
 	extrn	__foreColor:byte
 	extrn	_g_3DE2:byte
@@ -39,23 +39,23 @@ _DATA	segment word public 'DATA'
 	extrn	_g_3DEF:byte
 	extrn	_g_3DF2:byte
 	extrn	_g_3DFC:byte
-	extrn	_g_41C0:byte
-	extrn	_g_4331:byte
-	extrn	_g_4333:byte
-	extrn	_g_4340:byte
-	extrn	_g_4342:byte
-	extrn	_g_4344:byte
-	extrn	_g_4346:byte
-	extrn	_g_4365:byte
+	extrn	_gfx_colour_translation:byte
+	extrn	_cursor_drawn_flag:byte
+	extrn	_cursor_update_lock:byte
+	extrn	_cursor_drawn_left:byte
+	extrn	_cursor_drawn_top:byte
+	extrn	_cursor_drawn_bottom:byte
+	extrn	_cursor_drawn_right:byte
+	extrn	_cursor_show_level:byte
 	extrn	_g_4366:byte
-	extrn	_g_5AAE:byte
-; S03 private data (DGROUP:220E-2307): driver state, palette map (_g_2216), bank offsets,
+	extrn	_clip_active_list_segment:byte
+; S03 private data (DGROUP:220E-2307): driver state, palette map (_gfx_tandy_colour_map), bank offsets,
 ; pixel masks, the dispatch table the game calls through and a far pointer to it, colour tables.
 _g_220E	db	0, 0
 _g_2210	db	0, 0
 _g_2212	db	0, 0
 _g_2214	db	0, 0
-_g_2216	db	00Fh, 00Eh, 00Ch, 4, 00Dh, 5, 1, 00Bh, 2, 00Ah, 6, 6
+_gfx_tandy_colour_map	db	00Fh, 00Eh, 00Ch, 4, 00Dh, 5, 1, 00Bh, 2, 00Ah, 6, 6
 	db	7, 7, 8, 0
 _g_2226	db	0
 _g_2227	db	0
@@ -160,15 +160,15 @@ _gfx_tandy_init_tandy	proc	far
 	push es
 	push si
 	push di
-	mov word ptr _g_3DB0, 0B800h
+	mov word ptr _gfx_video_segment, 0B800h
 	mov cx, 0C8h
-	mov word ptr _g_3DB4, cx
-	mov word ptr _g_3DB2, 140h
-	mov byte ptr _g_3DDC, 2
+	mov word ptr _gfx_screen_height_pixels, cx
+	mov word ptr _gfx_screen_width_pixels, 140h
+	mov byte ptr _gfx_font_height_pixels, 2
 	mov byte ptr _fontWidth, 8
 	xor ax, ax
 	mov di, OFFSET DGROUP:_g_3DFC
-	mov es, word ptr _g_3DAE
+	mov es, word ptr _gfx_screen_bitmap_segment
 L016A:
 	stosw
 	add ax, 2000h
@@ -184,8 +184,8 @@ L0173:
 	pop ax
 	mov ax, ds
 	mov es, ax
-	lea di, _g_41C0
-	lea si, _g_2216
+	lea di, _gfx_colour_translation
+	lea si, _gfx_tandy_colour_map
 	mov cx, 8
 	rep movsw
 	pop di
@@ -217,27 +217,27 @@ _gfx_tandy_restore_text_mode	proc	far
 _gfx_tandy_restore_text_mode	endp
 
 _gfx_tandy_select_small_font	proc	far
-	les bx, dword ptr _g_3DA8
-	mov word ptr _g_3DD6, bx
-	mov word ptr _g_3DD8, es
-	mov byte ptr _g_3DDC, 6
+	les bx, dword ptr _gfx_primary_font_offset
+	mov word ptr _gfx_active_font_offset, bx
+	mov word ptr _gfx_active_font_segment, es
+	mov byte ptr _gfx_font_height_pixels, 6
 	mov byte ptr _fontWidth, 4
-	mov word ptr _g_3DDA, 6
+	mov word ptr _gfx_font_glyph_stride, 6
 	retf
 _gfx_tandy_select_small_font	endp
 
 _gfx_tandy_select_big_font	proc	far
-	les bx, dword ptr _g_3DA4
-	mov word ptr _g_3DD6, bx
-	mov word ptr _g_3DD8, es
-	mov byte ptr _g_3DDC, 8
+	les bx, dword ptr _gfx_secondary_font
+	mov word ptr _gfx_active_font_offset, bx
+	mov word ptr _gfx_active_font_segment, es
+	mov byte ptr _gfx_font_height_pixels, 8
 	mov byte ptr _fontWidth, 8
-	mov word ptr _g_3DDA, 8
+	mov word ptr _gfx_font_glyph_stride, 8
 	retf
 _gfx_tandy_select_big_font	endp
 
 _gfx_tandy_dither_box	proc	far
-	mov ax, word ptr _g_5AAE
+	mov ax, word ptr _clip_active_list_segment
 	and ax, ax
 	je _gfx_tandy_dither_box_raw
 	mov ax, S03A_TEXT
@@ -267,20 +267,20 @@ L0226:
 	xchg word ptr [bp+0Ch], ax
 	xchg word ptr [bp+8], ax
 L0234:
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0268
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+0Ch]
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L0268
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L0268
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Ah]
-	cmp ax, word ptr _g_4346
+	cmp ax, word ptr _cursor_drawn_right
 	jg L0268
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L0268
 	call far ptr _mouse_hide_cursor
 L0268:
@@ -289,7 +289,7 @@ L0268:
 	shl bl, 1
 	mov ax, word ptr [bx+_g_22E8]
 	mov byte ptr [bp-4], al
-	mov es, word ptr _g_3DB0
+	mov es, word ptr _gfx_video_segment
 	mov bx, word ptr [bp+8]
 	mov si, bx
 	and si, 3
@@ -419,11 +419,11 @@ L035C:
 L038E:
 	loop L035C
 L0390:
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L03B8
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L03AC
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L03B8
 	call far ptr _mouse_refresh_cursor
 	jmp short L03B8
@@ -432,7 +432,7 @@ L03AC:
 	jne L03B8
 	call far ptr _mouse_show_cursor
 L03B8:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	mov sp, bp
@@ -441,7 +441,7 @@ L03B8:
 _gfx_tandy_dither_box_raw	endp
 
 _gfx_tandy_gpatbox	proc	far
-	mov ax, word ptr _g_5AAE
+	mov ax, word ptr _clip_active_list_segment
 	and ax, ax
 	je _gfx_tandy_pattern_box_raw
 	mov ax, S03A_TEXT
@@ -471,20 +471,20 @@ L03F0:
 	xchg word ptr [bp+0Ch], ax
 	xchg word ptr [bp+8], ax
 L03FE:
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0432
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+0Ch]
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L0432
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L0432
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Ah]
-	cmp ax, word ptr _g_4346
+	cmp ax, word ptr _cursor_drawn_right
 	jg L0432
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L0432
 	call far ptr _mouse_hide_cursor
 L0432:
@@ -497,7 +497,7 @@ L0432:
 	shl bl, 1
 	mov ax, word ptr [bx+_g_22E8]
 	mov byte ptr [bp-6], al
-	mov es, word ptr _g_3DB0
+	mov es, word ptr _gfx_video_segment
 	mov bx, word ptr [bp+8]
 	mov si, bx
 	and si, 3
@@ -628,11 +628,11 @@ L0536:
 L0568:
 	loop L0536
 L056A:
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0592
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L0586
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L0592
 	call far ptr _mouse_refresh_cursor
 	jmp short L0592
@@ -641,7 +641,7 @@ L0586:
 	jne L0592
 	call far ptr _mouse_show_cursor
 L0592:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	mov sp, bp
@@ -650,7 +650,7 @@ L0592:
 _gfx_tandy_pattern_box_raw	endp
 
 _gfx_tandy_gboxfill	proc	far
-	mov ax, word ptr _g_5AAE
+	mov ax, word ptr _clip_active_list_segment
 	and ax, ax
 	je L05B4
 	mov ax, S03A_TEXT
@@ -677,20 +677,20 @@ L05C7:
 	xchg word ptr [bp+0Ch], ax
 	xchg word ptr [bp+8], ax
 L05D5:
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0609
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+0Ch]
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L0609
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L0609
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Ah]
-	cmp ax, word ptr _g_4346
+	cmp ax, word ptr _cursor_drawn_right
 	jg L0609
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L0609
 	call far ptr _mouse_hide_cursor
 L0609:
@@ -698,7 +698,7 @@ L0609:
 	and bx, 0Fh
 	shl bx, 1
 	mov dl, byte ptr [bx+_g_22E8]
-	mov es, word ptr _g_3DB0
+	mov es, word ptr _gfx_video_segment
 	mov bx, word ptr [bp+8]
 	mov cx, word ptr [bp+0Ch]
 	sub cx, bx
@@ -799,11 +799,11 @@ L06C0:
 L06D8:
 	loop L06B9
 L06DA:
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0702
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L06F6
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L0702
 	call far ptr _mouse_refresh_cursor
 	jmp short L0702
@@ -812,7 +812,7 @@ L06F6:
 	jne L0702
 	call far ptr _mouse_show_cursor
 L0702:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	pop bp
@@ -861,20 +861,20 @@ _gfx_tandy_capture_box	proc	far
 	push si
 	push di
 	push ds
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0788
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+0Ch]
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L0788
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L0788
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Ah]
-	cmp ax, word ptr _g_4346
+	cmp ax, word ptr _cursor_drawn_right
 	jg L0788
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L0788
 	call far ptr _mouse_hide_cursor
 L0788:
@@ -902,7 +902,7 @@ L0788:
 	je L07D9
 	mov word ptr es:[di], dx
 	add di, 2
-	mov ds, word ptr _g_3DB0
+	mov ds, word ptr _gfx_video_segment
 	xor ch, ch
 L07C4:
 	mov bx, si
@@ -917,11 +917,11 @@ L07D6:
 	jne L07C4
 L07D9:
 	pop ds
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0802
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L07F6
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L0802
 	call far ptr _mouse_refresh_cursor
 	jmp short L0802
@@ -930,7 +930,7 @@ L07F6:
 	jne L0802
 	call far ptr _mouse_show_cursor
 L0802:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	pop bp
@@ -1042,7 +1042,7 @@ L091D:
 _gfx_tandy_set_raster_op	endp
 
 _gfx_tandy_gputpics	proc	far
-	mov ax, word ptr _g_5AAE
+	mov ax, word ptr _clip_active_list_segment
 	and ax, ax
 	je _gfx_tandy_put_picture_raw
 	call far ptr _clip_blit_packed4
@@ -1056,24 +1056,24 @@ _gfx_tandy_put_picture_raw	proc	far
 	push si
 	push di
 	push ds
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0975
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+10h]
 	add dx, ax
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L0975
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L0975
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Eh]
 	add dx, ax
-	sub dx, word ptr _fd_55B3_3DE8
-	add ax, word ptr _fd_55B3_3DE6
-	cmp ax, word ptr _g_4346
+	sub dx, word ptr _gfx_clip_right_pixels
+	add ax, word ptr _gfx_clip_left_pixels
+	cmp ax, word ptr _cursor_drawn_right
 	jg L0975
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L0975
 	call far ptr _mouse_hide_cursor
 L0975:
@@ -1087,12 +1087,12 @@ L0975:
 L0988:
 	cmp word ptr [bp+0Eh], 8
 	jne L09B8
-	cmp word ptr _fd_55B3_3DE6, 0
+	cmp word ptr _gfx_clip_left_pixels, 0
 	jne L09B8
-	cmp word ptr _fd_55B3_3DE8, 0
+	cmp word ptr _gfx_clip_right_pixels, 0
 	jne L09B8
 	mov cx, word ptr [bp+10h]
-	mov es, word ptr _g_3DB0
+	mov es, word ptr _gfx_video_segment
 	lds si, dword ptr [bp+0Ah]
 	sar ax, 1
 L09A8:
@@ -1128,11 +1128,11 @@ L09DC:
 	jne L09CD
 L09E1:
 	pop ds
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0A0A
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L09FE
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L0A0A
 	call far ptr _mouse_refresh_cursor
 	jmp short L0A0A
@@ -1141,7 +1141,7 @@ L09FE:
 	jne L0A0A
 	call far ptr _mouse_show_cursor
 L0A0A:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	mov sp, bp
@@ -1178,7 +1178,7 @@ L0A46:
 _gfx_tandy_put_picture_raw	endp
 
 _gfx_tandy_prepare_bitmap_row	proc	far
-	mov ax, word ptr _fd_55B3_3DE6
+	mov ax, word ptr _gfx_clip_left_pixels
 	mov bx, word ptr [bp+6]
 	mov bh, al
 	and bl, 1
@@ -1196,7 +1196,7 @@ _gfx_tandy_prepare_bitmap_row	proc	far
 	shl bl, 1
 	mov byte ptr _g_3DEE, bl
 	mov bx, dx
-	add bx, word ptr _fd_55B3_3DE6
+	add bx, word ptr _gfx_clip_left_pixels
 	and bx, 1
 	mov ch, byte ptr [bx+_g_22DF]
 	mov byte ptr _g_3DEC, ch
@@ -1210,7 +1210,7 @@ _gfx_tandy_prepare_bitmap_row	proc	far
 	inc ax
 	shr ax, 1
 	mov dl, al
-	sub bx, word ptr _fd_55B3_3DE8
+	sub bx, word ptr _gfx_clip_right_pixels
 	mov ax, bx
 	dec bx
 	and bx, 1
@@ -1230,7 +1230,7 @@ _gfx_tandy_prepare_bitmap_row	proc	far
 	mov byte ptr _g_3DED, bh
 L0AD7:
 	assume ss:DGROUP
-	mov es, word ptr ss:_g_3DB0
+	mov es, word ptr ss:_gfx_video_segment
 	assume ss:nothing
 	lds si, dword ptr [bp+0Ah]
 	pop ax
@@ -1423,7 +1423,7 @@ L0C0B:
 _gfx_tandy_shift_bitmap_row	endp
 
 _gfx_tandy_gputimgs	proc	far
-	mov ax, word ptr _g_5AAE
+	mov ax, word ptr _clip_active_list_segment
 	and ax, ax
 	je _gfx_tandy_put_image_raw
 	call far ptr _clip_blit_mono
@@ -1437,24 +1437,24 @@ _gfx_tandy_put_image_raw	proc	far
 	push si
 	push di
 	push ds
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0C67
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+10h]
 	add dx, ax
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L0C67
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L0C67
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Eh]
 	add dx, ax
-	sub dx, word ptr _fd_55B3_3DE8
-	add ax, word ptr _fd_55B3_3DE6
-	cmp ax, word ptr _g_4346
+	sub dx, word ptr _gfx_clip_right_pixels
+	add ax, word ptr _gfx_clip_left_pixels
+	cmp ax, word ptr _cursor_drawn_right
 	jg L0C67
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L0C67
 	call far ptr _mouse_hide_cursor
 L0C67:
@@ -1502,11 +1502,11 @@ L0CCE:
 	jne L0CBF
 L0CD3:
 	pop ds
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L0CFC
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L0CF0
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L0CFC
 	call far ptr _mouse_refresh_cursor
 	jmp short L0CFC
@@ -1515,7 +1515,7 @@ L0CF0:
 	jne L0CFC
 	call far ptr _mouse_show_cursor
 L0CFC:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	mov sp, bp
@@ -1539,7 +1539,7 @@ L0D22:
 	jne L0D13
 	jmp L0CD3
 L0D29:
-	mov ax, word ptr _fd_55B3_3DE6
+	mov ax, word ptr _gfx_clip_left_pixels
 	mov bx, word ptr [bp+6]
 	mov bh, al
 	and bl, 1
@@ -1557,7 +1557,7 @@ L0D29:
 	shl bl, 1
 	mov byte ptr _g_3DEE, bl
 	mov bx, dx
-	add bx, word ptr _fd_55B3_3DE6
+	add bx, word ptr _gfx_clip_left_pixels
 	and bx, 1
 	mov ch, byte ptr [bx+_g_22DF]
 	mov byte ptr _g_3DEC, ch
@@ -1577,7 +1577,7 @@ L0D29:
 	inc ax
 	shr ax, 1
 	mov dl, al
-	sub bx, word ptr _fd_55B3_3DE8
+	sub bx, word ptr _gfx_clip_right_pixels
 	mov ax, bx
 	dec bx
 	and bx, 1
@@ -1597,7 +1597,7 @@ L0D29:
 	mov byte ptr _g_3DED, bh
 L0DC2:
 	assume ss:DGROUP
-	mov es, word ptr ss:_g_3DB0
+	mov es, word ptr ss:_gfx_video_segment
 	assume ss:nothing
 	lds si, dword ptr [bp+0Ah]
 	pop ax
@@ -1956,7 +1956,7 @@ L1047:
 _gfx_tandy_shift_mono_row	endp
 
 _gfx_tandy_gline	proc	far
-	mov ax, word ptr _g_5AAE
+	mov ax, word ptr _clip_active_list_segment
 	and ax, ax
 	je _gfx_tandy_draw_line_raw
 	call far ptr _clip_draw_line
@@ -1968,8 +1968,8 @@ _gfx_tandy_draw_line_raw	proc	far
 	mov bp, sp
 	push si
 	push di
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L109D
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+0Ch]
@@ -1977,9 +1977,9 @@ _gfx_tandy_draw_line_raw	proc	far
 	jle L1075
 	xchg dx, ax
 L1075:
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L109D
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L109D
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Ah]
@@ -1987,9 +1987,9 @@ L1075:
 	jle L108C
 	xchg dx, ax
 L108C:
-	cmp ax, word ptr _g_4346
+	cmp ax, word ptr _cursor_drawn_right
 	jg L109D
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L109D
 	call far ptr _mouse_hide_cursor
 L109D:
@@ -2076,11 +2076,11 @@ L1144:
 	add bx, ax
 	loop L1104
 L1150:
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L1178
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L116C
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L1178
 	call far ptr _mouse_refresh_cursor
 	jmp short L1178
@@ -2089,7 +2089,7 @@ L116C:
 	jne L1178
 	call far ptr _mouse_show_cursor
 L1178:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	pop bp
@@ -2124,20 +2124,20 @@ _gfx_tandy_move_box	proc	far
 	push si
 	push di
 	push ds
-	inc byte ptr _g_3DD4
-	test byte ptr _g_4333, 0FFh
+	inc byte ptr _gfx_cursor_draw_lock
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L11CF
 	mov ax, word ptr [bp+8]
 	mov dx, word ptr [bp+0Ch]
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L11CF
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L11CF
 	mov ax, word ptr [bp+6]
 	mov dx, word ptr [bp+0Ah]
-	cmp ax, word ptr _g_4346
+	cmp ax, word ptr _cursor_drawn_right
 	jg L11CF
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L11CF
 	call far ptr _mouse_hide_cursor
 	jmp L1202
@@ -2146,17 +2146,17 @@ L11CF:
 	mov dx, ax
 	add dx, word ptr [bp+0Ah]
 	sub dx, word ptr [bp+6]
-	cmp ax, word ptr _g_4346
+	cmp ax, word ptr _cursor_drawn_right
 	jg L1202
-	cmp dx, word ptr _g_4340
+	cmp dx, word ptr _cursor_drawn_left
 	jl L1202
 	mov ax, word ptr [bp+10h]
 	mov dx, ax
 	add dx, word ptr [bp+0Ch]
 	sub dx, word ptr [bp+8]
-	cmp ax, word ptr _g_4344
+	cmp ax, word ptr _cursor_drawn_bottom
 	jg L1202
-	cmp dx, word ptr _g_4342
+	cmp dx, word ptr _cursor_drawn_top
 	jl L1202
 	call far ptr _mouse_hide_cursor
 L1202:
@@ -2199,7 +2199,7 @@ L1219:
 L1251:
 	sub dx, ax
 L1253:
-	mov bx, word ptr _g_3DB0
+	mov bx, word ptr _gfx_video_segment
 	mov ds, bx
 	mov es, bx
 	mov bx, word ptr [bp+0Ch]
@@ -2227,11 +2227,11 @@ L1282:
 L1285:
 	cld
 	pop ds
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L12AF
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L12A3
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	je L12AF
 	call far ptr _mouse_refresh_cursor
 	jmp short L12AF
@@ -2240,7 +2240,7 @@ L12A3:
 	jne L12AF
 	call far ptr _mouse_show_cursor
 L12AF:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	pop bp

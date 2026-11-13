@@ -47,7 +47,7 @@ static int g_54F8 = 0;
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
 extern int far sprintf(char far *buffer, char far *format, ...);
 extern int far printf(char far *format, ...);
-extern void (far * near g_9128)(int fore, int back, int pattern);
+extern void (far * near gfx_set_attributes_hook)(int fore, int back, int pattern);
 extern void far gfx_printf_at(int x, int y, char far *format, ...);
 extern void far app_cleanup_and_exit(char far *message, int code);
 
@@ -61,18 +61,18 @@ void far Punt(char far *format, ...)
         vsprintf(msg, format, (char far *)(&format + 1));
         sprintf(text, "FATAL ERROR: PROGRAM ABORTED\n%s", msg);
         printf("\n\n\n\n");
-        g_9128(0, 15, 0);
+        gfx_set_attributes_hook(0, 15, 0);
         gfx_printf_at(0, 0, text);
         app_cleanup_and_exit(text, 1);
     }
 }
 
-extern int far fd_55B3_6262;
+extern int far gfx_driver_initialized;
 extern void (far * near g_9178)(void);
 
 void far gfx_restore_text_mode(void)
 {
-    if (fd_55B3_6262)
+    if (gfx_driver_initialized)
         g_9178();
 }
 
@@ -108,7 +108,7 @@ static struct AlertColors g_550C[] = {
 };
 
 static struct AlertColors far *g_8CBE;
-extern struct Rect far * near g_5AAC;
+extern struct Rect far * near clip_active_list_offset;
 extern struct Pt far gfx_measure_text_cells(char far *text);
 extern void far gfx_center_cell_rect(struct Rect far *r, int width, int height);
 extern struct Rect far * far gfx_cell_rect_to_pixels(struct Rect far *r);
@@ -151,21 +151,21 @@ void far ui_show_alert(char far *msg, int timed)
 
     hit[0] = -1;
     g_8CBE = &g_550C[timed];
-    g_5AAC = 0;
+    clip_active_list_offset = 0;
     size = gfx_measure_text_cells(msg);
     gfx_center_cell_rect(&r, size.x + 2, size.y + 4);
     pr = *gfx_cell_rect_to_pixels(&r);
     save = GSaveRect(&pr);
     GRectFill(&pr, g_8CBE->fill);
-    g_9128(g_8CBE->frame, g_8CBE->frame, 0x20);
+    gfx_set_attributes_hook(g_8CBE->frame, g_8CBE->frame, 0x20);
     GRectOutline(&pr, 4);
-    g_9128(0x404, g_8CBE->fill, 0);
+    gfx_set_attributes_hook(0x404, g_8CBE->fill, 0);
     ui_draw_centered_message_lines(&r, r.top, msg);
     x = gfx_center_fixed_text_x(&pr, "Continue") / fontWidth;
     y = r.bottom - 2;
-    g_9128(g_8CBE->frame, g_8CBE->text, 0xc0);
+    gfx_set_attributes_hook(g_8CBE->frame, g_8CBE->text, 0xc0);
     ui_draw_horizontal_button(x, y, "Continue", 0x900);
-    g_9128(g_8CBE->frame, g_8CBE->text, 0);
+    gfx_set_attributes_hook(g_8CBE->frame, g_8CBE->text, 0);
     input_capture_screen();
     input_noop_0510();
     stamp = TickCount();
@@ -264,7 +264,7 @@ extern void far ui_step_button_focus(int key, int far *sel, int count, int id);
  * and the prototype of gfx_restore_text_mode_success above come before ui_choice_prompt, sys_nerr after it.
  * Other placements change ui_choice_prompt or ui_error_text. */
 extern char far * near sys_errlist[];
-extern char near g_8CCB;
+extern char near dos_critical_error_selector;
 /* Shows a message with a row of buttons and returns the index of the one chosen, by
  * its key or by the mouse. `v` first accumulates the minimum width of the button row
  * and later holds the buttons' vertical position, and `j` also indexes the key search:
@@ -305,15 +305,15 @@ int far ui_choice_prompt(char far *msg, int set)
     pr = *gfx_cell_rect_to_pixels(&g_557C);
     save = GSaveRect(&pr);
     GRectFill(&pr, 0xf2f);
-    g_9128(0x404, 0x404, 0x40);
+    gfx_set_attributes_hook(0x404, 0x404, 0x40);
     GRectOutline(&pr, 4);
-    g_9128(0, 0, 0);
+    gfx_set_attributes_hook(0, 0, 0);
     GRectOutline(&pr, 1);
-    g_9128(0x404, 0xf0f, 0xc0);
+    gfx_set_attributes_hook(0x404, 0xf0f, 0xc0);
     ui_draw_centered_message_lines(&g_557C, g_557C.top, msg);
     h = (width - h - 2) / 2 + g_557C.left;
     v = g_557C.bottom - 2;
-    g_9128(0x404, 0xc0c, 0xc0);
+    gfx_set_attributes_hook(0x404, 0xc0c, 0xc0);
     for (j = 0; j < count; j++) {
         ui_draw_horizontal_button(h, v, labels[j] + 1, j + 0x900);
         h += widths[j] + 2;
@@ -378,7 +378,7 @@ static int g_56B2 = 12;
 char far * far ui_error_text(int err)
 {
     if (err > sys_nerr || err < 0)
-        return g_567A[g_8CCB];
+        return g_567A[dos_critical_error_selector];
     return sys_errlist[err];
 }
 
@@ -409,10 +409,10 @@ char far * far ui_save_and_draw_alert_frame(struct Rect far *r, int width, int h
     *r = *gfx_cell_rect_to_pixels(r);
     save = GSaveRect(r);
     g_8CBE = &g_550C[timed];
-    g_5AAC = 0;
+    clip_active_list_offset = 0;
     GRectFill(r, g_8CBE->fill);
-    g_9128(g_8CBE->frame, g_8CBE->frame, 0x20);
+    gfx_set_attributes_hook(g_8CBE->frame, g_8CBE->frame, 0x20);
     GRectOutline(r, 4);
-    g_9128(0x404, g_8CBE->fill, 0);
+    gfx_set_attributes_hook(0x404, g_8CBE->fill, 0);
     return save;
 }

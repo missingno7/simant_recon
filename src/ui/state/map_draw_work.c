@@ -8,7 +8,7 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
-int near g_8BD2;
-int near g_8BD4;
-unsigned near g_9126;
-unsigned char near g_94E4;
+int near minimap_x_scale;
+int near minimap_y_scale;
+unsigned near edit_current_life_tile;
+unsigned char near edit_current_terrain_tile;

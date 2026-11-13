@@ -23,8 +23,8 @@ import behavior_ledger
 
 SUITE = "small_contracts_v1"
 FIND_DB = "openDBData"
-FIND_LOW = "fd_50F6_3956"
-FIND_PTR = "fd_50F6_3952"
+FIND_LOW = "db_index_lower_bound"
+FIND_PTR = "db_index_search_entry"
 DB_RECORD_BYTES = 124
 DB_COUNT_OFF = 0x54
 DB_INDEX_OFF = 0x50

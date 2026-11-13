@@ -13,11 +13,11 @@ typedef struct {
     int page;
 } EmsSlot;
 
-extern signed char far fd_55B3_360C;
-extern int far fd_55B3_3612;
-extern char far * far fd_55B3_360E;
-extern char far * far fd_50F6_3B48;
-extern EmsSlot far * far * far fd_50F6_3B4C;
+extern signed char far ems_version;
+extern int far ems_free_page_count;
+extern char far * far ems_page_frame_pointer;
+extern char far * far db_ems_page_buffer;
+extern EmsSlot far * far * far db_ems_slot_list_handle;
 
 extern void far Punt(char far *format, ...);
 extern void far DosPunt(char far *message);
@@ -56,11 +56,11 @@ int far db_init_ems_cache(long size)
 
     if (g_389C)
         return 1;
-    if (!ems_initialize() || fd_55B3_360C < 0x40)
+    if (!ems_initialize() || ems_version < 0x40)
         return 0;
     ems_query_page_counts();
     pages = (int)((size + 0x3FFF) >> 14);
-    avail = fd_55B3_3612 - g_38A0;
+    avail = ems_free_page_count - g_38A0;
     g_389E = avail > pages ? pages : avail;
     if (g_389E < 8) {
         g_389E = 0;
@@ -69,9 +69,9 @@ int far db_init_ems_cache(long size)
     ems_query_page_frame();
     g_389C = ems_allocate_pages(g_389E);
     ems_set_handle_name(g_389C, "DBEMSXXX");
-    fd_50F6_3B48 = fd_55B3_360E - 0x4000;
-    fd_50F6_3B4C = f_2CFB_0002((long)g_389E * 6, 0, "DBEMSLIST");
-    slot = *fd_50F6_3B4C;
+    db_ems_page_buffer = ems_page_frame_pointer - 0x4000;
+    db_ems_slot_list_handle = f_2CFB_0002((long)g_389E * 6, 0, "DBEMSLIST");
+    slot = *db_ems_slot_list_handle;
     for (i = 0; i < g_389E; i++) {
         slot->age = 0;
         slot->file = slot->page = -1;
@@ -98,8 +98,8 @@ char far * far db_get_ems_page(int file, int page)
     found = 0;
     oldest = 0;
     if (file == g_38B8 && page == g_38BA)
-        return fd_50F6_3B48;
-    slot = *fd_50F6_3B4C;
+        return db_ems_page_buffer;
+    slot = *db_ems_slot_list_handle;
     for (i = 0; i < g_389E; i++, slot++) {
         if (slot->file == -1) {
             freeSlot = i;
@@ -122,7 +122,7 @@ char far * far db_get_ems_page(int file, int page)
         i = freeSlot;
         if (i == -1)
             i = oldestSlot;
-        slot = &(*fd_50F6_3B4C)[i];
+        slot = &(*db_ems_slot_list_handle)[i];
         slot->file = file;
         slot->page = page;
         ems_map_page(g_389C, i, 3);
@@ -131,14 +131,14 @@ char far * far db_get_ems_page(int file, int page)
         while ((int)lseek(file, (long)page << 14, 0) == -1)
             db_report_read_error();
         for (;;) {
-            if (read(file, fd_50F6_3B48, 0x4000) != -1)
+            if (read(file, db_ems_page_buffer, 0x4000) != -1)
                 break;
             db_report_read_error();
         }
     }
     g_38B8 = file;
     g_38BA = page;
-    return fd_50F6_3B48;
+    return db_ems_page_buffer;
 }
 
 

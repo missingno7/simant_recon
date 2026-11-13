@@ -19,7 +19,7 @@ extern void far mouse_initialize_driver(void);
 extern void far input_install_hooks(void);
 extern void far hotbox_initialize_dispatch(void);
 extern void far mouse_set_mickey_ratio(int a, int b);
-extern struct Rect far g_5A9C;
+extern struct Rect far gfx_screen_clip_list;
 extern void far input_register_object_rect(struct Rect far *r, int ticks);
 
 void far input_init_desktop_region(void)
@@ -29,15 +29,15 @@ void far input_init_desktop_region(void)
     input_install_hooks();
     hotbox_initialize_dispatch();
     mouse_set_mickey_ratio(0x10, 0x10);
-    input_register_object_rect(&g_5A9C, 0xff00);
+    input_register_object_rect(&gfx_screen_clip_list, 0xff00);
 }
 
 extern long far * far * far db_LoadObject(int object, int kind);
-extern long far * far fd_55B3_6054;
+extern long far * far menu_resource_tables;
 extern void far db_UnhookObject(int object, int kind);
 extern int far menu_layout_bar(int draw);
-extern int far fd_50F6_46BC[];
-extern int far fd_50F6_46A8[];
+extern int far menu_title_char_counts[];
+extern int far menu_title_x_pixels[];
 void far menu_register_title_hit_rect(int x, int len, int id);
 
 /* LIFE-2: draw is a real later call argument. Initializing it before the
@@ -55,41 +55,41 @@ int far menu_load_and_register(int id)
     h = db_LoadObject(id, 6);
     if (h == 0L)
         return 0;
-    fd_55B3_6054 = *h;
+    menu_resource_tables = *h;
     db_UnhookObject(id, 6);
     draw = 0;
-    for (p = fd_55B3_6054; *p; p++) {
-        *p += (long)fd_55B3_6054;
+    for (p = menu_resource_tables; *p; p++) {
+        *p += (long)menu_resource_tables;
         for (q = *(long far * far *)p; *q; q++)
-            *q += (long)fd_55B3_6054;
+            *q += (long)menu_resource_tables;
     }
     menu_layout_bar(draw);
-    for (i = 0, r = (long far *)*fd_55B3_6054; *r; i++, r++)
-        menu_register_title_hit_rect(fd_50F6_46A8[i], fd_50F6_46BC[i], i - 0x200);
+    for (i = 0, r = (long far *)*menu_resource_tables; *r; i++, r++)
+        menu_register_title_hit_rect(menu_title_x_pixels[i], menu_title_char_counts[i], i - 0x200);
     return 1;
 }
 
-extern int far g_5FEA;
-extern int far g_5FEC;
-extern int far g_5FEE;
+extern int far menu_normal_background_colour;
+extern int far menu_normal_text_colour;
+extern int far menu_disabled_text_colour;
 
 void far menu_set_state_colours(int a, int b, int c)
 {
-    g_5FEA = a;
-    g_5FEC = b;
-    g_5FEE = c;
+    menu_normal_background_colour = a;
+    menu_normal_text_colour = b;
+    menu_disabled_text_colour = c;
 }
 
-extern int far g_5FE6;
-extern int far g_5FE8;
+extern int far desktop_fill_colour_a;
+extern int far desktop_fill_colour_b;
 
 void far win_set_desktop_colours(int a, int b)
 {
-    g_5FE6 = a;
-    g_5FE8 = b;
+    desktop_fill_colour_a = a;
+    desktop_fill_colour_b = b;
 }
 
-extern char near g_3DDC;
+extern char near gfx_font_height_pixels;
 extern char near fontWidth;
 
 void far menu_register_title_hit_rect(int x, int len, int id)
@@ -97,7 +97,7 @@ void far menu_register_title_hit_rect(int x, int len, int id)
     struct Rect r;
 
     r.top = 1;
-    r.bottom = g_3DDC + 1;
+    r.bottom = gfx_font_height_pixels + 1;
     r.left = x;
     r.right = fontWidth * len + x;
     input_register_object_rect(&r, id);

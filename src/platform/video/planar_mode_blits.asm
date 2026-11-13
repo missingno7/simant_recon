@@ -13,12 +13,12 @@
 ; exclude C compiler output. MASM 5.10 reproduces the complete object.
 
 _DATA	segment word public 'DATA'
-	extrn	_g_3D20:byte
-	extrn	_g_3DAE:byte
+	extrn	_gfx_row_scratch:byte
+	extrn	_gfx_screen_bitmap_segment:byte
 	extrn	_g_3DFC:byte
-	extrn	_g_3DB0:byte
-	extrn	_g_3DB4:byte
-	extrn	_g_3DD4:byte
+	extrn	_gfx_video_segment:byte
+	extrn	_gfx_screen_height_pixels:byte
+	extrn	_gfx_cursor_draw_lock:byte
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -45,7 +45,7 @@ _gfx_planar_init_640x350	proc	far
 	mov cx, 15Eh
 	xor ax, ax
 	mov di, OFFSET DGROUP:_g_3DFC
-	mov es, word ptr _g_3DAE
+	mov es, word ptr _gfx_screen_bitmap_segment
 L2AC8:
 	stosw
 	add ax, 50h
@@ -70,10 +70,10 @@ _gfx_planar_init_640x480	proc	far
 	push si
 	push di
 	mov cx, 1E0h
-	mov word ptr _g_3DB4, cx
+	mov word ptr _gfx_screen_height_pixels, cx
 	xor ax, ax
 	mov di, OFFSET DGROUP:_g_3DFC
-	mov es, word ptr _g_3DAE
+	mov es, word ptr _gfx_screen_bitmap_segment
 L2AFD:
 	stosw
 	add ax, 50h
@@ -96,7 +96,7 @@ _gfx_planar_compose_life_ems	proc	far
 	mov bp, sp
 	push si
 	push di
-	inc byte ptr _g_3DD4
+	inc byte ptr _gfx_cursor_draw_lock
 	mov ah, byte ptr [bp+8]
 	mov al, 4
 	mov dx, 3CEh
@@ -107,9 +107,9 @@ _gfx_planar_compose_life_ems	proc	far
 	push ds
 	les di, dword ptr [bp+0Ah]
 	mov si, word ptr [bp+6]
-	mov ds, word ptr _g_3DB0
+	mov ds, word ptr _gfx_video_segment
 	push bp
-	lea bp, _g_3D20
+	lea bp, _gfx_row_scratch
 	mov dx, word ptr es:[di]
 	inc di
 	inc di
@@ -800,7 +800,7 @@ _gfx_planar_compose_life_ems	proc	far
 	inc bp
 	pop bp
 	pop ds
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	pop bp
@@ -821,7 +821,7 @@ _gfx_planar_draw_life_ems	proc	far
 	push ax
 	push ax
 	push ds
-	lea ax, _g_3D20
+	lea ax, _gfx_row_scratch
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
@@ -846,7 +846,7 @@ _gfx_planar_draw_life_hires	proc	far
 	push ax
 	push ax
 	push ds
-	lea ax, _g_3D20
+	lea ax, _gfx_row_scratch
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
@@ -861,7 +861,7 @@ _gfx_planar_compose_life_hires	proc	far
 	mov bp, sp
 	push si
 	push di
-	inc byte ptr _g_3DD4
+	inc byte ptr _gfx_cursor_draw_lock
 	mov ah, byte ptr [bp+8]
 	mov al, 4
 	mov dx, 3CEh
@@ -872,7 +872,7 @@ _gfx_planar_compose_life_hires	proc	far
 	push ds
 	les di, dword ptr [bp+0Ah]
 	mov si, word ptr [bp+6]
-	mov ds, word ptr _g_3DB0
+	mov ds, word ptr _gfx_video_segment
 	cmp byte ptr [bp+0Eh], 0
 	jne L3069
 	jmp near ptr L3521
@@ -882,7 +882,7 @@ L3069:
 	jmp near ptr L3A8B
 L3072:
 	push bp
-	lea bp, _g_3D20
+	lea bp, _gfx_row_scratch
 	mov dx, word ptr es:[di]
 	add di, 4
 	lodsw
@@ -1558,14 +1558,14 @@ L3072:
 	pop bp
 	pop ds
 L3519:
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	pop di
 	pop si
 	pop bp
 	retf
 L3521:
 	push bp
-	lea bp, _g_3D20
+	lea bp, _gfx_row_scratch
 	mov dx, word ptr es:[di]
 	inc di
 	inc di
@@ -2371,7 +2371,7 @@ L3521:
 	jmp L3519
 L3A8B:
 	push bp
-	lea bp, _g_3D20
+	lea bp, _gfx_row_scratch
 	mov dx, word ptr es:[di]
 	inc di
 	inc di

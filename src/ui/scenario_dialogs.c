@@ -6,14 +6,14 @@
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  *
  * Source-form evidence (worker resF):
- *  - Every font choice is written `if (g_3DB2 == 320) font_SetFont(a); else font_SetFont(b);`
+ *  - Every font choice is written `if (gfx_screen_width_pixels == 320) font_SetFont(a); else font_SetFont(b);`
  *    (six sites).  The two calls are cross-jumped into the same bytes as a `?:` argument, but
  *    each if/else adds two /Zi line entries; with all six the 52-entry LINNUM flushes land where
  *    the oracle's relocation order needs record breaks (DrawCastePopUp, PictureDialog,
  *    SpiderDialog: 0 violations of 115 order constraints).
  *  - Identifier counts (symbol-table state, periodic mod 17) include local and prototype
  *    parameters. The forward prototypes of CalcScore/DoWinHelp/SetDefaultWindPrompt/
- *    PictStrnDialog are named (+6, CalcScore operand order), g_9134's and PictureDialog's forward
+ *    PictStrnDialog are named (+6, CalcScore operand order), gfx_fill_rect_hook's and PictureDialog's forward
  *    declaration are unnamed (-5 before DrawCastePopUp, -4 before PictureDialog).
  *    CalcScore scopes its history index separately from the later matrix index; DialogWaitInit has an unnamed real prototype parameter.
  *    Alternative scopes and prototype-name removals also match; these forms are inferred.
@@ -262,7 +262,7 @@ void far DoWinHelp(int win)
 extern long far OverallScore;
 extern void far f_22BF_059A(int obj, ...);
 extern char far * far * far WindPromptStrs;
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far font_SetFont(int font);
 extern void far f_22BF_0D53(int obj, char far *format, ...);
 extern char far * far * far MiscStrs;
@@ -282,7 +282,7 @@ void far ScoreDialog(void)
     f_22BF_059A(0x180c, WindPromptStrs[14]);
     f_218D_042B();
     f_20E8_04B6(0x1800);
-    if (g_3DB2 == 320)
+    if (gfx_screen_width_pixels == 320)
         font_SetFont(0);
     else
         font_SetFont(4);
@@ -293,7 +293,7 @@ void far ScoreDialog(void)
         for (i = 4; i < 8; i++)
             f_22BF_0D53(0x1802 + i, MiscStrs[16]);
     }
-    if (g_3DB2 == 320)
+    if (gfx_screen_width_pixels == 320)
         font_SetFont(3);
     else
         font_SetFont(4);
@@ -328,7 +328,7 @@ extern int far CastePopR[];
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far font_PrintStr(int x, int y, char far *text);
 extern int near _foreColor;
-extern void (far * near g_9134)(int, int, int, int, int);
+extern void (far * near gfx_fill_rect_hook)(int, int, int, int, int);
 
 void far DrawCastePopUp(void)
 {
@@ -338,12 +338,12 @@ void far DrawCastePopUp(void)
     int i, w, y, max, a, b;
 
     LessonTemp = 1;
-    half = g_3DB2 == 320 ? 1 : 2;
+    half = gfx_screen_width_pixels == 320 ? 1 : 2;
     f_20E8_04B6(0x1700);
     f_1FD2_057F();
     win_GetObjRect(0x1702, &r);
     clip_SubInclude(&r);
-    if (g_3DB2 == 320)
+    if (gfx_screen_width_pixels == 320)
         font_SetFont(0);
     else
         font_SetFont(2);
@@ -356,10 +356,10 @@ void far DrawCastePopUp(void)
     left = maxw * 4 + r.left + 2;
     width = r.right - left;
     lineh = font_FontHeight();
-    if (g_3DB2 == 320)
+    if (gfx_screen_width_pixels == 320)
         lineh--;
     gap = r.bottom - lineh * 12 - r.top;
-    if (g_3DB2 != 320)
+    if (gfx_screen_width_pixels != 320)
         gap += 3;
     rem = gap % 5;
     acc = 0;
@@ -387,12 +387,12 @@ void far DrawCastePopUp(void)
         sprintf(buf, "%d", CastePopB[i]);
         font_PrintStr(r.left, y, buf);
         if (i)
-            (*g_9134)(left, half / 2 + y, left + a, h - half + y, _foreColor);
+            (*gfx_fill_rect_hook)(left, half / 2 + y, left + a, h - half + y, _foreColor);
         win_SetColorFromObjNum(0x1704);
         sprintf(buf, "%d", CastePopR[i]);
         font_PrintStr(r.left, h + y, buf);
         if (i)
-            (*g_9134)(left, half / 2 + h + y, left + b, h * 2 - half + y, _foreColor);
+            (*gfx_fill_rect_hook)(left, half / 2 + h + y, left + b, h * 2 - half + y, _foreColor);
     }
     font_SetFont(0);
     f_1FD2_057F();
@@ -446,7 +446,7 @@ void far PictStrnDialog(int picture, int object, int force)
 
 extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int far font_StringWidth(char far *text);
-extern int near g_3DB4;
+extern int near gfx_screen_height_pixels;
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
 extern void far gr_CenterStrInRect(struct Rect far *rect, char far *text);
 extern void far f_00F8_02F7(int);
@@ -459,7 +459,7 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     struct Rect r;
     struct Event ev;
 
-    if (g_3DB2 == 320)
+    if (gfx_screen_width_pixels == 320)
         font_SetFont(3);
     else
         font_SetFont(4);
@@ -474,9 +474,9 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
             maxw = w;
     }
     maxw += 8;
-    r.top = (g_3DB4 - h) / 2;
+    r.top = (gfx_screen_height_pixels - h) / 2;
     r.bottom = r.top + h;
-    r.left = (g_3DB2 - maxw) / 2;
+    r.left = (gfx_screen_width_pixels - maxw) / 2;
     r.right = r.left + maxw;
     f_20E8_04B6(0x1e00, r.left, r.top, r.right, r.bottom);
     WinPrintf("Pict=%d", picture);
@@ -484,7 +484,7 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
         win_DrawBitMap((r.left + r.right - size.h) / 2, r.top, picture);
         r.top += size.v + 2;
     }
-    if (g_3DB2 == 320)
+    if (gfx_screen_width_pixels == 320)
         font_SetFont(3);
     else
         font_SetFont(4);
@@ -543,7 +543,7 @@ void far EndGameDialog(void)
     if (BlackWon == 0)
         level += 5;
     f_20E8_04B6(0x400);
-    if (g_3DB2 == 320)
+    if (gfx_screen_width_pixels == 320)
         font_SetFont(2);
     else
         font_SetFont(4);
@@ -588,7 +588,7 @@ void far SpiderDialog(void)
     f_00F8_02BE();
     t = f_00F8_02BE() + 8;
     f_00F8_02F7(8);
-    if (g_3DB2 != 320) {
+    if (gfx_screen_width_pixels != 320) {
         r.left += 0x2e;
         r.top += 0x4d;
     }

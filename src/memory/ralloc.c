@@ -57,18 +57,18 @@ typedef char far * far *Handle;
 
 #define INIT() if (!s_2F34) mem_init_movable_heap()
 
-extern signed char far fd_55B3_360C;
-extern int far fd_55B3_3612;
-extern char far * far fd_55B3_360E;
-extern unsigned far fd_50F6_394C;
-extern unsigned far fd_50F6_394E;
-extern unsigned far fd_50F6_3950;
-extern char far * far fd_50F6_3948;
-extern unsigned near g_91A0;
-extern unsigned near g_91A2;
-extern Block far * near g_91A4;
-extern Block far * near g_91A8;
-extern Block far * near g_91AC;
+extern signed char far ems_version;
+extern int far ems_free_page_count;
+extern char far * far ems_page_frame_pointer;
+extern unsigned far mem_ems_arena_start_segment;
+extern unsigned far mem_ems_arena_paragraphs;
+extern unsigned far mem_ems_boundary_segment;
+extern char far * far mem_discard_entry_template;
+extern unsigned near mem_conventional_paragraphs;
+extern unsigned near mem_arena_start_segment;
+extern Block far * near mem_arena_first_block;
+extern Block far * near mem_arena_end_pointer;
+extern Block far * near mem_free_list_cursor;
 
 extern void far Punt(char far *format, ...);
 extern void far WinPrintf(char far *format, ...);
@@ -144,13 +144,13 @@ int far mem_init_ems_heap(void)
     if (s_2F6E)
         return 1;
     if (ems_initialize()) {
-        if (fd_55B3_360C >= 0x40) {
+        if (ems_version >= 0x40) {
             ems_query_page_counts();
-            if (fd_55B3_3612 >= 3) {
+            if (ems_free_page_count >= 3) {
                 ems_query_page_frame();
-                fd_50F6_394C = FP_SEG(fd_55B3_360E) + 1;
+                mem_ems_arena_start_segment = FP_SEG(ems_page_frame_pointer) + 1;
                 s_2F6E = ems_allocate_pages(3);
-                fd_50F6_394E = 0xBF8;
+                mem_ems_arena_paragraphs = 0xBF8;
                 ems_set_handle_name(s_2F6E, "RALLOCXX");
                 ems_map_page(s_2F6E, 0, 0);
                 ems_map_page(s_2F6E, 1, 1);
@@ -207,8 +207,8 @@ Block far * far mem_free_and_coalesce(Block far *b, int merge)
     }
     s_2F3E += paras;
     s_2F3C -= paras;
-    if (g_91AC == 0L) {
-        g_91AC = b;
+    if (mem_free_list_cursor == 0L) {
+        mem_free_list_cursor = b;
         b->next = b->prev = 0;
     } else {
         mem_find_free_list_neighbors(b);
@@ -232,7 +232,7 @@ Block far * far mem_free_and_coalesce(Block far *b, int merge)
                 next->prev = SEG(b);
         }
         if (b->prev == 0)
-            g_91AC = b;
+            mem_free_list_cursor = b;
     }
     return b;
 }
@@ -282,7 +282,7 @@ void far mem_dump_heap(char far *where)
         h--;
     }
     mem_dump_printf(fd, "\n\nBy location:\n");
-    for (b = g_91A4; SEG(b) < SEG(g_91A8); b = BLK(SEG(b) + b->paras)) {
+    for (b = mem_arena_first_block; SEG(b) < SEG(mem_arena_end_pointer); b = BLK(SEG(b) + b->paras)) {
         _fstrncpy(name, b->name, 13);
         name[13] = 0;
         h = (Handle)((char far *)s_2F46 + b->handle);
@@ -313,7 +313,7 @@ void far f_171C_0676(void)
 
 void far mem_release_dos_heap(void)
 {
-    _dos_freemem(g_91A2);
+    _dos_freemem(mem_arena_start_segment);
     s_2F34 = 0;
 }
 
@@ -331,7 +331,7 @@ void far mem_carve_free_block(Block far *b, unsigned paras, int type)
         if (prev)
             prev->next = seg;
         else
-            g_91AC = BLK(seg);
+            mem_free_list_cursor = BLK(seg);
         if (next)
             next->prev = seg;
         nb = BLK(seg);
@@ -342,7 +342,7 @@ void far mem_carve_free_block(Block far *b, unsigned paras, int type)
         if (prev)
             prev->next = SEG(next);
         else
-            g_91AC = next;
+            mem_free_list_cursor = next;
         if (next)
             next->prev = SEG(prev);
         paras = b->paras;
@@ -377,42 +377,42 @@ void far mem_init_movable_heap(void)
     if (s_2F34)
         return;
     s_2F34 = 1;
-    if (_dos_allocmem(0xFF00, &g_91A0)) {
-        g_91A0 -= 0x10;
-        _dos_allocmem(g_91A0, &g_91A2);
-        g_91A0 -= 0x10;
+    if (_dos_allocmem(0xFF00, &mem_conventional_paragraphs)) {
+        mem_conventional_paragraphs -= 0x10;
+        _dos_allocmem(mem_conventional_paragraphs, &mem_arena_start_segment);
+        mem_conventional_paragraphs -= 0x10;
     } else
         exit(1);
     s_8C72 = (s_2F4A * 4 + 15) / 16;
-    s_2F46 = (Handle)(((unsigned long)s_8C72 + g_91A2 - 0x1000) << 16);
-    g_91A0 -= s_8C72 + 1;
-    g_91A2 += s_8C72 + 1;
-    g_91A4 = BLK(g_91A2);
-    g_91AC = g_91A4;
-    g_91AC->type = 0x80;
-    g_91AC->next = 0;
-    g_91AC->prev = 0;
+    s_2F46 = (Handle)(((unsigned long)s_8C72 + mem_arena_start_segment - 0x1000) << 16);
+    mem_conventional_paragraphs -= s_8C72 + 1;
+    mem_arena_start_segment += s_8C72 + 1;
+    mem_arena_first_block = BLK(mem_arena_start_segment);
+    mem_free_list_cursor = mem_arena_first_block;
+    mem_free_list_cursor->type = 0x80;
+    mem_free_list_cursor->next = 0;
+    mem_free_list_cursor->prev = 0;
     if (mem_init_ems_heap()) {
-        s_2F3E = fd_50F6_394E + fd_50F6_394C - g_91A2;
+        s_2F3E = mem_ems_arena_paragraphs + mem_ems_arena_start_segment - mem_arena_start_segment;
         s_2F40 = s_2F3E;
-        g_91AC->paras = s_2F40;
-        g_91A8 = BLK(s_2F3E + SEG(BLK(g_91A2)));
-        s_8C70 = SEG(g_91A8);
-        fd_50F6_3950 = SEG(BLK(g_91A2)) + g_91A0 - 2;
-        mem_carve_free_block(BLK(g_91A2), g_91A0 - 2, 0);
-        mem_carve_free_block(BLK(g_91A2 + g_91A0 - 2), fd_50F6_394C - g_91A2 - g_91A0 + 2, 2);
-        mem_free_and_coalesce(BLK(g_91A2), 0);
+        mem_free_list_cursor->paras = s_2F40;
+        mem_arena_end_pointer = BLK(s_2F3E + SEG(BLK(mem_arena_start_segment)));
+        s_8C70 = SEG(mem_arena_end_pointer);
+        mem_ems_boundary_segment = SEG(BLK(mem_arena_start_segment)) + mem_conventional_paragraphs - 2;
+        mem_carve_free_block(BLK(mem_arena_start_segment), mem_conventional_paragraphs - 2, 0);
+        mem_carve_free_block(BLK(mem_arena_start_segment + mem_conventional_paragraphs - 2), mem_ems_arena_start_segment - mem_arena_start_segment - mem_conventional_paragraphs + 2, 2);
+        mem_free_and_coalesce(BLK(mem_arena_start_segment), 0);
     } else {
-        s_2F3E = g_91A0;
+        s_2F3E = mem_conventional_paragraphs;
         s_2F40 = s_2F3E;
-        g_91AC->paras = s_2F40;
-        g_91A8 = BLK(s_2F3E + g_91A2);
-        s_8C70 = SEG(g_91A8);
-        fd_50F6_3950 = s_8C70;
+        mem_free_list_cursor->paras = s_2F40;
+        mem_arena_end_pointer = BLK(s_2F3E + mem_arena_start_segment);
+        s_8C70 = SEG(mem_arena_end_pointer);
+        mem_ems_boundary_segment = s_8C70;
     }
     _fmemset(s_2F46 - s_2F4A, 0, s_2F4A * 4);
-    fd_50F6_3948 = *Ralloc(0x20L, 0, "DiscardEntry");
-    _fmemcpy(fd_50F6_3948, &s_2F4E, 0x20);
+    mem_discard_entry_template = *Ralloc(0x20L, 0, "DiscardEntry");
+    _fmemcpy(mem_discard_entry_template, &s_2F4E, 0x20);
     atexit(mem_release_dos_heap);
 }
 
@@ -433,7 +433,7 @@ int far mem_resize_in_place(Handle h, unsigned paras, int type)
         return 1;
     } else {
         next = BLK(SEG(b) + b->paras);
-        if (SEG(next) >= SEG(g_91A8) || next->type != 0x80 || next->paras + b->paras < paras)
+        if (SEG(next) >= SEG(mem_arena_end_pointer) || next->type != 0x80 || next->paras + b->paras < paras)
             return 0;
         b = mem_free_and_coalesce(b, 0);
         mem_carve_free_block(b, paras, type);
@@ -481,7 +481,7 @@ void far mem_slide_next_block_down(Block far *b)
     if (b->prev)
         BLK(b->prev)->next = SEG(b);
     else
-        g_91AC = b;
+        mem_free_list_cursor = b;
     if (b->next) {
         n = BLK(b->next);
         if (b->next - b->paras == (unsigned)SEG(b)) {
@@ -510,7 +510,7 @@ int far mem_discard_oldest_soft_block(int emsOnly)
     for (; n; h--) {
         if (*h) {
             b = HDR(h);
-            if ((!emsOnly || (unsigned)SEG(b) < fd_50F6_3950) && b->type == 3 && s_2F30 - b->age >= oldest && !b->lock) {
+            if ((!emsOnly || (unsigned)SEG(b) < mem_ems_boundary_segment) && b->type == 3 && s_2F30 - b->age >= oldest && !b->lock) {
                 oldest = s_2F30 - b->age;
                 found = h;
             }
@@ -520,7 +520,7 @@ int far mem_discard_oldest_soft_block(int emsOnly)
     if (found) {
         WinPrintf("OLDESTH=%p", found);
         b = HDR(found);
-        *found = (char far *)((long)fd_50F6_3948 + 0x20000L);
+        *found = (char far *)((long)mem_discard_entry_template + 0x20000L);
         mem_free_and_coalesce(b, 1);
         return 1;
     }
@@ -542,8 +542,8 @@ int far mem_compact_region(int emsOnly)
     Block far *nb;
 
     state.moved = 0;
-    b = g_91A4;
-    end = emsOnly ? fd_50F6_3950 : s_8C70;
+    b = mem_arena_first_block;
+    end = emsOnly ? mem_ems_boundary_segment : s_8C70;
     for (; (state.seg = (unsigned)SEG(b)) < end; b = BLK(b->paras + state.seg)) {
         if (b->type != 0x80)
             continue;
@@ -590,9 +590,9 @@ Block far * far mem_find_free_block(unsigned paras, int type, char far *name, in
     char buffer[100];
 
     for (;;) {
-        b = g_91AC;
+        b = mem_free_list_cursor;
         for (; b; b = BLK(b->next)) {
-            if (noems && SEG(b) >= fd_50F6_3950)
+            if (noems && SEG(b) >= mem_ems_boundary_segment)
                 break;
             if (b->paras >= paras)
                 return b;
@@ -622,7 +622,7 @@ Block far * far mem_allocate_high_block(unsigned paras, int type)
     first = 1;
     compacted = 0;
     for (;;) {
-        best = b = g_91AC;
+        best = b = mem_free_list_cursor;
         for (; b;) {
             if (b->paras >= paras)
                 best = b;
@@ -684,7 +684,7 @@ void far mem_find_free_list_neighbors(Block far *b)
     Block far *cur;
     Block far *prev;
 
-    cur = g_91AC;
+    cur = mem_free_list_cursor;
     prev = 0L;
     while ((unsigned)SEG(b) > SEG(cur)) {
         if (!cur)
@@ -861,7 +861,7 @@ void far mem_discard_handle(Handle h)
     CHECKH(h);
     if (h && HDR(h)->type != 5) {
         b = HDR(h);
-        *h = (char far *)((long)fd_50F6_3948 + 0x20000L);
+        *h = (char far *)((long)mem_discard_entry_template + 0x20000L);
         mem_free_and_coalesce(b, 1);
     }
 }
@@ -1007,7 +1007,7 @@ void far mem_set_alloc_type(Handle h, int flags)
 int far mem_handle_above_ems_boundary(Handle h)
 {
     CHECKH(h);
-    if (SEG(*h) > fd_50F6_3950)
+    if (SEG(*h) > mem_ems_boundary_segment)
         return 1;
     return 0;
 }

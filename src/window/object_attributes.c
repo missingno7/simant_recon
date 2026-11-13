@@ -37,7 +37,7 @@ extern void _fastcall win_LockWin(int win);
 extern char far * far win_locked_resource_ptr(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
-extern int g_5702[];
+extern int clip_window_z_order[];
 extern void far input_register_object_rect(char far *obj, int objNum);
 extern void far input_remove_object_rect(int objNum);
 extern void far GRectInv(char far *rect);
@@ -62,7 +62,7 @@ extern void far gr_CenterStrInRectClear(struct Rect far *rect, char far *text);
 extern void far clip_Pop(void);
 extern void far font_SetFont(int font);
 extern char far * far * far db_LoadObject(int object, int kind);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern void far gfx_set_ega_palette(char far *pal, int count);
 extern void far gfx_set_dac_palette(char far *pal, int count);
 extern void far db_ReleaseObject(int object, int kind);
@@ -76,8 +76,8 @@ extern int far win_GetProxEvent(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern void _fastcall win_Close(int win);
 extern char far win_colors[][6];
-extern struct Pt g_3DA0;
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern struct Pt gfx_text_pen_x;
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
 extern void far GRectFill(struct Rect far *rect, int color);
 extern int near _foreColor;
 extern int near g_3DE2;
@@ -173,7 +173,7 @@ void _fastcall win_SetObjSelectableState(int obj, int state)
 
     win_LockWin(obj);
     o = (unsigned char far *)win_ObjAddr(obj);
-    if (g_5702[0] == (obj & 0xff00)) {
+    if (clip_window_z_order[0] == (obj & 0xff00)) {
         if (state == 1) {
             if (!(o[0x24] & 2))
                 input_register_object_rect((char far *)o, obj);
@@ -208,7 +208,7 @@ void _fastcall win_SetGroupSelectableState(int win, int group, int state)
     for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) {
         o = ((unsigned char far * far *)(w + 0x2c))[i];
         if (o[0x20] == group) {
-            if (g_5702[0] == win) {
+            if (clip_window_z_order[0] == win) {
                 if (state == 1) {
                     if (!(o[0x24] & 2))
                         input_register_object_rect((char far *)o, objNum);
@@ -454,13 +454,13 @@ int _fastcall win_SetPalette(int id)
     p = *h;
     switch (p[1]) {
     case 0:
-        if (g_5A97 == 0) {
+        if (gfx_display_mode == 0) {
             q = p + 2;
             for (i = 0; i < 16; q += 3, i++)
                 pal[i] = ((((q[0] & 0x10) | ((((q[1] & 0x10) | ((q[2] & 0x10) >> 1)) >> 1) | (q[2] & 0x20))) >> 1 | (q[1] & 0x20)) >> 1) | (q[0] & 0x20);
             pal[17] = 0;
             gfx_set_ega_palette(pal, p[0]);
-        } else if (g_5A97 == 8) {
+        } else if (gfx_display_mode == 8) {
             gfx_set_dac_palette(p + 2, p[0]);
         }
         break;
@@ -508,7 +508,7 @@ int _fastcall win_IsWinOpen(int win)
 
 int _fastcall win_IsWinInFront(int win)
 {
-    if (g_5702[0] == win)
+    if (clip_window_z_order[0] == win)
         return 1;
     return 0;
 }
@@ -626,16 +626,16 @@ void far win_ClearObjToEOL(int obj)
     win_LockWin(obj);
     win_GetObjRect(obj, &r);
     c = win_ObjAddr(obj)[0x26];
-    if (g_5A97 & 1)
+    if (gfx_display_mode & 1)
         c = win_colors[c][3];
     else
         c = win_colors[c][2];
     c = (c << 8) | (c & 0xff);
-    top = g_3DA0.y;
+    top = gfx_text_pen_x.y;
     if (top < r.top)
         top = r.top;
-    if (r.bottom > top && (left = g_3DA0.x) >= r.left && r.right > left)
-        (*g_9134)(left, top, r.right, r.bottom, c);
+    if (r.bottom > top && (left = gfx_text_pen_x.x) >= r.left && r.right > left)
+        (*gfx_fill_rect_hook)(left, top, r.right, r.bottom, c);
     win_UnlockWin(obj);
 }
 
@@ -649,7 +649,7 @@ void far win_clear_obj_rect(int obj)
     c = win_ObjAddr(obj)[0x26];
     c = win_colors[c][2];
     c = (c & 0xf) | (((c & 0xf) << 4) | (c << 8));
-    (*g_9134)(r.left, r.top, r.right, r.bottom, c);
+    (*gfx_fill_rect_hook)(r.left, r.top, r.right, r.bottom, c);
     win_UnlockWin(obj);
 }
 

@@ -11,4 +11,4 @@
  */
 
 struct Rect { int left; int top; int right; int bottom; };
-struct Rect far fd_50F6_3C14[256];
+struct Rect far clip_rectangle_workspace[256];

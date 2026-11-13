@@ -23,7 +23,7 @@ struct KeyCmd {
 };
 
 char fd_55B3_2CBA = 0;
-int fd_55B3_2CBC = 0;
+int ui_pending_menu_item = 0;
 struct KeyCmd g_2CBE[] = {
     { 0x821, 0xfe00 }, { 0x811, 0xfe01 }, { 0x82f, 0xfe02 }, { 0x818, 0xfe03 },
     { 0x81f, 0xfe04 }, { 0x83c, 0xfe00 }, { 0x83d, 0xfe01 }, { 0x83e, 0xfe02 },
@@ -72,8 +72,8 @@ int far DoEvent(void)
     if (g_2D3A) return 0;
     g_2D3A = 1;
     win_NoWindowsShouldBeLocked();
-    if (fd_55B3_2CBC) {
-        switch (fd_55B3_2CBC) {
+    if (ui_pending_menu_item) {
+        switch (ui_pending_menu_item) {
         case 4:
             if (LoadGame(0L) == 0 && CurGameType == -1 && NewGame(1) < 0)
                 MenuQuit();
@@ -88,7 +88,7 @@ int far DoEvent(void)
             MenuQuit();
             break;
         }
-        fd_55B3_2CBC = 0;
+        ui_pending_menu_item = 0;
     }
     if (win_Events()) {
         win_GetEvent(&ev);
@@ -168,7 +168,7 @@ extern void far CheatKeys(int key);
 void far ui_show_memory_statistics(void);
 extern void far mem_dump_heap(char far *where);
 extern void far mem_discard_soft_blocks(void);
-extern char far * far fd_55B3_0064;
+extern char far * far version_message_pointer;
 extern void far ui_message_transient(char far *msg);
 extern void far input_enqueue_event_args();
 extern int far YellowCommandKey(int key);
@@ -193,7 +193,7 @@ void far input_dispatch_game_key(void)
             mem_dump_heap("User Request");
             return;
         case 0x82f:
-            ui_message_transient(fd_55B3_0064);
+            ui_message_transient(version_message_pointer);
             return;
         }
     }
@@ -211,7 +211,7 @@ void far input_dispatch_game_key(void)
 
 extern long far RallocMemoryFree(void);
 extern long far RallocMemorySoft(void);
-extern long far fd_50F6_3944;
+extern long far startup_free_memory_bytes;
 extern int far sprintf(char far *buf, const char far *fmt, ...);
 
 void far ui_show_memory_statistics(void)
@@ -219,7 +219,7 @@ void far ui_show_memory_statistics(void)
     char buf[200];
 
     sprintf(buf, "%ld bytes @ startup\n %ld bytes free now\n %ld bytes discardable stuff\n %ld AVAILABLE",
-            fd_50F6_3944, RallocMemoryFree(), RallocMemorySoft(), RallocMemoryFree() + RallocMemorySoft());
+            startup_free_memory_bytes, RallocMemoryFree(), RallocMemorySoft(), RallocMemoryFree() + RallocMemorySoft());
     ui_message_transient(buf);
 }
 

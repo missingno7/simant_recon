@@ -84,7 +84,7 @@ struct Rect g_635C = { (int)0x8000, (int)0x8000, (int)0x8000, (int)0x8000 };
 extern void far font_InitFonts(void);
 extern void far win_LockInit(void);
 extern void (far * far win_drawHooks[])(int phase);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern char far * far * far db_LoadObject(int object, int kind);
 extern char far * far mem_Lock(char far * far *handle);
 extern void far mem_Unlock(char far * far *handle);
@@ -94,7 +94,7 @@ struct Pt {
     int y;
 };
 extern void far gr_BitMapSize(struct Pt far *size, int id);
-extern struct Pt far fd_50F6_47DA;
+extern struct Pt far window_scroll_arrow_size;
 extern int far win_numOfWindows;
 extern int far win_numOfColors;
 extern int far win_numOfGroups;
@@ -113,13 +113,13 @@ int far win_LoadAllWindows(void)
     win_LockInit();
     _fmemset(win_drawHooks, 0, 0xb4);
     for (i = 0; i < 45; i++) win_offsets[i] = g_635C;
-    h = db_LoadObject(g_5A97, 9);
+    h = db_LoadObject(gfx_display_mode, 9);
     if (h) {
         _fmemcpy(win_offsets, mem_Lock(h), 0x140);
         mem_Unlock(h);
-        db_PurgeObject(g_5A97, 9);
+        db_PurgeObject(gfx_display_mode, 9);
     }
-    gr_BitMapSize(&fd_50F6_47DA, 0x6f);
+    gr_BitMapSize(&window_scroll_arrow_size, 0x6f);
     h = db_LoadObject(0x80, 0);
     if (h == 0) {
         Punt("Cannot load resource\nplease try another");
@@ -149,7 +149,7 @@ int far win_LoadAllWindows(void)
 }
 
 extern char far * far win_locked_resource_ptr(int win);
-extern int g_5702[];
+extern int clip_window_z_order[];
 extern void _fastcall win_deactivate_pointer_regions(int win);
 extern void far clip_KillWin(int win);
 extern void _fastcall win_Recalc(int win);
@@ -170,8 +170,8 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     w = win_locked_resource_ptr(from);
     origin = *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8);
     rect = *(struct Rect far *)w;
-    if (g_5702[0] != 0)
-        win_deactivate_pointer_regions(g_5702[0]);
+    if (clip_window_z_order[0] != 0)
+        win_deactivate_pointer_regions(clip_window_z_order[0]);
     if (*(int far *)(w + 0x1c) & 0x200) {
         (*g_62E4)();
         (*g_62F4)(from);
@@ -194,8 +194,8 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     win_Recalc(to);
     (*g_62E0)(to);
     *(int far *)(win_locked_resource_ptr(to) + 0x1c) |= 0x200;
-    if (g_5702[0] != (int)0x8000)
-        win_deactivate_pointer_regions(g_5702[0]);
+    if (clip_window_z_order[0] != (int)0x8000)
+        win_deactivate_pointer_regions(clip_window_z_order[0]);
     win_raise_and_reclip(to);
     win_activate_pointer_regions(to);
     clip_SetWin(to);
@@ -207,9 +207,9 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
 
 extern void _fastcall win_LockWinHigh(int win);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern int near g_3DB4;
-extern struct Rect far fd_50F6_393C;
-extern int near g_3DB2;
+extern int near gfx_screen_height_pixels;
+extern struct Rect far menu_bar_rect;
+extern int near gfx_screen_width_pixels;
 extern void far win_FlushEvents(void);
 
 void far win_Open(int win, ...)
@@ -220,7 +220,7 @@ void far win_Open(int win, ...)
     struct Rect r;
     int far *origin;
 
-    if (g_5702[0] != win) {
+    if (clip_window_z_order[0] != win) {
         win_LockWinHigh(win);
         (*g_62E4)();
         w = win_locked_resource_ptr(win);
@@ -233,14 +233,14 @@ void far win_Open(int win, ...)
         if (*(int far *)(w + 0x1c) & 0x1000) {
             dx = dy = 0;
             win_GetObjRect(win, &r);
-            if (r.bottom > g_3DB4)
-                dy = g_3DB4 - r.bottom;
-            else if (r.top <= fd_50F6_393C.bottom)
-                dy = fd_50F6_393C.bottom - r.top;
+            if (r.bottom > gfx_screen_height_pixels)
+                dy = gfx_screen_height_pixels - r.bottom;
+            else if (r.top <= menu_bar_rect.bottom)
+                dy = menu_bar_rect.bottom - r.top;
             if (r.left < 0)
                 dx = -r.left;
-            else if (r.right >= g_3DB2)
-                dx = g_3DB2 - r.right;
+            else if (r.right >= gfx_screen_width_pixels)
+                dx = gfx_screen_width_pixels - r.right;
             origin = (int far *)(((char far * far *)(w + 0x2c))[0] + 8);
             win_offsets[win >> 8] = *(struct Rect far *)origin;
             origin[0] += dx;
@@ -249,8 +249,8 @@ void far win_Open(int win, ...)
         }
         (*g_62E0)(win);
         *(int far *)(win_locked_resource_ptr(win) + 0x1c) |= 0x200;
-        if (g_5702[0] != (int)0x8000)
-            win_deactivate_pointer_regions(g_5702[0]);
+        if (clip_window_z_order[0] != (int)0x8000)
+            win_deactivate_pointer_regions(clip_window_z_order[0]);
         win_raise_and_reclip(win);
         win_activate_pointer_regions(win);
         clip_SetWin(win);
@@ -274,11 +274,11 @@ void _fastcall win_Close(int win)
     if (*(int far *)(w + 0x1c) & 0x200) {
         (*g_62E4)();
         (*g_62F4)(win);
-        if (g_5702[0] == win) {
+        if (clip_window_z_order[0] == win) {
             win_deactivate_pointer_regions(win);
             clip_KillWin(win);
-            if (g_5702[0] != (int)0x8000)
-                win_activate_pointer_regions(g_5702[0]);
+            if (clip_window_z_order[0] != (int)0x8000)
+                win_activate_pointer_regions(clip_window_z_order[0]);
         } else {
             clip_KillWin(win);
         }
@@ -303,7 +303,7 @@ void _fastcall win_ToTop(int win)
     int top;
     int flag;
 
-    top = g_5702[0];
+    top = clip_window_z_order[0];
     if (top != win) {
         if (top != (int)0x8000) {
             win_LockWin(top);
@@ -327,19 +327,19 @@ void _fastcall win_lower_or_dismiss(int win)
 
     win_LockWin(win);
     win_locked_resource_ptr(win);
-    flag = *(int far *)(win_WinAddr(g_5702[0]) + 0x1c) & 1;
+    flag = *(int far *)(win_WinAddr(clip_window_z_order[0]) + 0x1c) & 1;
     win_UnlockWin(win);
     (*g_62E4)();
-    if (g_5702[0] == win) {
-        if (g_5702[1] != (int)0x8000) {
+    if (clip_window_z_order[0] == win) {
+        if (clip_window_z_order[1] != (int)0x8000) {
             if (flag) {
-                win_Close(g_5702[0]);
+                win_Close(clip_window_z_order[0]);
                 return;
             }
             clip_lower_window(win);
-            if (g_5702[0] != win) {
+            if (clip_window_z_order[0] != win) {
                 win_deactivate_pointer_regions(win);
-                win_activate_pointer_regions(g_5702[0]);
+                win_activate_pointer_regions(clip_window_z_order[0]);
             }
         }
     } else {
@@ -445,7 +445,7 @@ void far win_close_auto_dismiss(void)
 {
     int top;
 
-    top = g_5702[0];
+    top = clip_window_z_order[0];
     if (win_any_window_open()) {
         win_LockWin(top);
         if (*(int far *)(win_WinAddr(top) + 0x1c) & 1)

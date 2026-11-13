@@ -18,7 +18,7 @@ struct Pt {
     int y;
 };
 
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far font_SetFont(int font);
 extern struct Pt _fastcall win_StringSize(char far *text);
 extern void far font_PrintStr(int x, int y, char far *text);
@@ -29,7 +29,7 @@ void far ui_draw_centered_clipped_text(char far *text, struct Rect far *r, int y
     struct Rect rc;
     struct Pt size;
 
-    font_SetFont(g_3DB2 == 0x140 ? 0 : 2);
+    font_SetFont(gfx_screen_width_pixels == 0x140 ? 0 : 2);
     size = win_StringSize(text);
     rc.top = y;
     rc.left = (r->right - size.x + r->left) / 2;
@@ -41,34 +41,34 @@ void far ui_draw_centered_clipped_text(char far *text, struct Rect far *r, int y
 }
 
 extern int far OptionStates[];
-extern char far * far fd_55B3_19C6;
-extern long far fd_55B3_19CA;
+extern char far * far editMessage;
+extern long far edit_message_deadline;
 extern long far TickCount(void);
-extern int far fd_55B3_19CE;
-extern long far fd_55B3_299E;
+extern int far edit_message_dirty;
+extern long far map_message_deadline;
 extern char far * far mapMessage;
-extern int far fd_55B3_29A2;
+extern int far map_yard_redraw_pending;
 
 void far EditMessage(char far *message, long duration, int mode)
 {
-    if (mode == 0 && (OptionStates[4] == 0 || fd_55B3_19C6 != 0L)) {
-        if (message != 0L || fd_55B3_19CA != 0x7fffffffL)
+    if (mode == 0 && (OptionStates[4] == 0 || editMessage != 0L)) {
+        if (message != 0L || edit_message_deadline != 0x7fffffffL)
             return;
     }
     if (duration >= 0L)
-        fd_55B3_19CA = TickCount() + (duration * 3L) / 2L;
+        edit_message_deadline = TickCount() + (duration * 3L) / 2L;
     else
-        fd_55B3_19CA = 0x7fffffffL;
-    if (message != fd_55B3_19C6) {
-        fd_55B3_19C6 = message;
-        fd_55B3_19CE = 1;
+        edit_message_deadline = 0x7fffffffL;
+    if (message != editMessage) {
+        editMessage = message;
+        edit_message_dirty = 1;
     }
     if (duration >= 0L)
-        fd_55B3_299E = TickCount() + (duration * 3L) / 2L;
+        map_message_deadline = TickCount() + (duration * 3L) / 2L;
     else
-        fd_55B3_299E = 0x7fffffffL;
+        map_message_deadline = 0x7fffffffL;
     if (message != mapMessage) {
         mapMessage = message;
-        fd_55B3_29A2 = 1;
+        map_yard_redraw_pending = 1;
     }
 }

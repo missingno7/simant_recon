@@ -61,7 +61,7 @@ extern void far clip_SetWin(int win);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
 extern void far clip_Pop(void);
-extern struct Rect far fd_50F6_10D2;
+extern struct Rect far map_viewport_rect;
 extern int far PointInRect(struct Pt far *pt, struct Rect far *r);
 extern void far WinPrintf(char far *fmt, ...);
 extern int far mapYsize;
@@ -79,7 +79,7 @@ extern void far DrawMapCursor(void);
 extern void far GetMousePos(struct Pt far *pt);
 extern int far f_00F8_02AC(void);
 extern void far OpenEditWindow(void);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern void far gfx_planar_map64_pack8(char far *src, char far *dst);
 extern void far gfx_planar_map128_pack8(char far *src, char far *dst);
 extern void far Windows_MakeTable1x1(char far *src, char far *dst, int mult);
@@ -87,13 +87,13 @@ extern void far WindowsMono_MakeTable2x2b(char far *src, char far *dst, int y);
 extern void far WindowsMono_MakeTable2x2a(char far *src, char far *dst, int y);
 extern struct Rect far miniMapRect;
 extern int far fd_50F6_3852;
-extern int far fd_55B3_2996;
+extern int far mapMem;
 extern char far * far mem_Alloc(long size, int flag, char far *name);
-extern char far * far fd_50F6_385E;
-extern char far * far fd_50F6_385A;
+extern char far * far map_scanline_image_handle;
+extern char far * far map_generated_image_handle;
 extern void far map_generate_surface_colours(void);
 extern void far map_generate_nest_colours(void);
-extern int near g_8BD2;
+extern int near minimap_x_scale;
 extern int far MapMode;
 extern void far map_expand_scent_colours(unsigned char far *map);
 extern unsigned char far PherMapBN[];
@@ -102,10 +102,10 @@ extern unsigned char far PherMapRN[];
 extern unsigned char far PherMapRT[];
 extern unsigned char far PherMapA[];
 extern int far ConvColor(int color);
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
 extern char far * far mem_Lock(char far *handle);
-extern int near g_8BD4;
-extern void (far * near g_914C)(int x, int y, char far *line, int width, int height);
+extern int near minimap_y_scale;
+extern void (far * near gfx_put_picture_hook)(int x, int y, char far *line, int width, int height);
 extern void far mem_Unlock(char far *handle);
 extern void far mem_Free(char far *handle);
 extern void far win_Open();
@@ -189,13 +189,13 @@ void far MapAreaEvent(struct Event far *ev)
     int x;
     int y;
 
-    if (!PointInRect((struct Pt far *)&ev->h, &fd_50F6_10D2))
+    if (!PointInRect((struct Pt far *)&ev->h, &map_viewport_rect))
         return;
     last.x = (int)0x8000;
     WinPrintf("ePtr->mouse_flags=%x, MRPRESSED=%x", ev->modifiers, 0x800);
     if (ev->modifiers & 0x4800) {
-        y = (ev->v - fd_50F6_10D2.top) / mapYsize;
-        ev->h = ((ev->h - fd_50F6_10D2.left) / mapXsize - MapPnt[0]) * tileWidth + editTileRect[0];
+        y = (ev->v - map_viewport_rect.top) / mapYsize;
+        ev->h = ((ev->h - map_viewport_rect.left) / mapXsize - MapPnt[0]) * tileWidth + editTileRect[0];
         ev->v = (y - MapPnt[1]) * tileHeight + editTileRect[1];
         if (ev->modifiers & 0x4000)
             ev->modifiers = 0x2000;
@@ -207,10 +207,10 @@ void far MapAreaEvent(struct Event far *ev)
     do {
         if (last.x != ev->h || last.y != ev->v) {
             last = *(struct Pt far *)&ev->h;
-            x = (ev->h - fd_50F6_10D2.left) / mapXsize;
+            x = (ev->h - map_viewport_rect.left) / mapXsize;
             if (multiplier == 0x40)
                 x -= 0x20;
-            y = (ev->v - fd_50F6_10D2.top) / mapYsize;
+            y = (ev->v - map_viewport_rect.top) / mapYsize;
             if (x >= 0 && x < multiplier) {
                 EraseMapCursor();
                 f_0250_0FC4(x, y);
@@ -229,7 +229,7 @@ void far MapAreaEvent(struct Event far *ev)
 
 void far Mini_MakeTable(char far *src, char far *dst, int y)
 {
-    switch (g_5A97) {
+    switch (gfx_display_mode) {
     case 0:
     case 4:
     case 8:
@@ -264,16 +264,16 @@ void far Mini_DrawMapI(void)
     win_GetObjRect(0x1401, &miniMapRect);
     multiplier = 0x80;
     fd_50F6_3852 = 0;
-    if (fd_55B3_2996 == 0) {
-        fd_50F6_385E = mem_Alloc(0x400L, 1, "Map window image");
-        fd_50F6_385A = mem_Alloc(0x2000L, 1, "Generated map window");
+    if (mapMem == 0) {
+        map_scanline_image_handle = mem_Alloc(0x400L, 1, "Map window image");
+        map_generated_image_handle = mem_Alloc(0x2000L, 1, "Generated map window");
     }
     if (fd_50F6_032E < 2)
         map_generate_surface_colours();
     if (fd_50F6_032E > 1 && fd_50F6_032E < 4) {
         map_generate_nest_colours();
         multiplier = 0x40;
-        fd_50F6_3852 = g_8BD2 << 5;
+        fd_50F6_3852 = minimap_x_scale << 5;
     }
     switch (MapMode) {
     case 4:
@@ -292,23 +292,23 @@ void far Mini_DrawMapI(void)
         map_expand_scent_colours(PherMapA);
         break;
     }
-    (*g_9134)(miniMapRect.left, miniMapRect.top, miniMapRect.left + fd_50F6_3852,
+    (*gfx_fill_rect_hook)(miniMapRect.left, miniMapRect.top, miniMapRect.left + fd_50F6_3852,
               miniMapRect.bottom, ConvColor(15));
-    (*g_9134)(miniMapRect.right - fd_50F6_3852 - 1, miniMapRect.top, miniMapRect.right,
+    (*gfx_fill_rect_hook)(miniMapRect.right - fd_50F6_3852 - 1, miniMapRect.top, miniMapRect.right,
               miniMapRect.bottom, ConvColor(15));
-    table = mem_Lock(fd_50F6_385A);
-    line = mem_Lock(fd_50F6_385E);
+    table = mem_Lock(map_generated_image_handle);
+    line = mem_Lock(map_scanline_image_handle);
     n = 64;
     y = miniMapRect.top;
-    for (i = 0; i < n; i++, y += g_8BD4) {
+    for (i = 0; i < n; i++, y += minimap_y_scale) {
         Mini_MakeTable(table + multiplier * i, line, y);
-        (*g_914C)(miniMapRect.left + fd_50F6_3852, y, line, multiplier * g_8BD2, g_8BD4);
+        (*gfx_put_picture_hook)(miniMapRect.left + fd_50F6_3852, y, line, multiplier * minimap_x_scale, minimap_y_scale);
     }
-    mem_Unlock(fd_50F6_385E);
-    mem_Unlock(fd_50F6_385A);
-    if (fd_55B3_2996 == 0) {
-        mem_Free(fd_50F6_385E);
-        mem_Free(fd_50F6_385A);
+    mem_Unlock(map_scanline_image_handle);
+    mem_Unlock(map_generated_image_handle);
+    if (mapMem == 0) {
+        mem_Free(map_scanline_image_handle);
+        mem_Free(map_generated_image_handle);
     }
 }
 
@@ -320,10 +320,10 @@ void far OpenMiniMapWin(void)
     int x;
     int y;
 
-    if (g_5A97 & 1)
-        g_8BD2 = g_8BD4 = 2;
+    if (gfx_display_mode & 1)
+        minimap_x_scale = minimap_y_scale = 2;
     else
-        g_8BD2 = g_8BD4 = 1;
+        minimap_x_scale = minimap_y_scale = 1;
     win_Open(0x1400);
     Mini_DrawMapI();
     DrawMiniMapCursor();
@@ -345,10 +345,10 @@ void far OpenMiniMapWin(void)
         do {
             if (pt.x != ev.h || pt.y != ev.v) {
                 pt = *(struct Pt far *)&ev.h;
-                x = (ev.h - miniMapRect.left) / g_8BD2;
+                x = (ev.h - miniMapRect.left) / minimap_x_scale;
                 if (multiplier == 0x40)
                     x -= 0x20;
-                y = (ev.v - miniMapRect.top) / g_8BD4;
+                y = (ev.v - miniMapRect.top) / minimap_y_scale;
                 if (x >= 0 && x < multiplier) {
                     EraseMiniMapCursor();
                     EraseMapCursor();
@@ -367,10 +367,10 @@ void far OpenMiniMapWin(void)
 
 void far DrawMiniMapCursor(void)
 {
-    miniMapCursorRect.left = MapPnt[0] * g_8BD2 + miniMapRect.left + fd_50F6_3852;
-    miniMapCursorRect.top = MapPnt[1] * g_8BD4 + miniMapRect.top;
-    miniMapCursorRect.bottom = miniMapCursorRect.top + fd_50F6_10DE * g_8BD4;
-    miniMapCursorRect.right = miniMapCursorRect.left + fd_50F6_10E0 * g_8BD2;
+    miniMapCursorRect.left = MapPnt[0] * minimap_x_scale + miniMapRect.left + fd_50F6_3852;
+    miniMapCursorRect.top = MapPnt[1] * minimap_y_scale + miniMapRect.top;
+    miniMapCursorRect.bottom = miniMapCursorRect.top + fd_50F6_10DE * minimap_y_scale;
+    miniMapCursorRect.right = miniMapCursorRect.left + fd_50F6_10E0 * minimap_x_scale;
     f_1CE2_0410(&miniMapCursorRect, 1);
     miniCursorOn = 1;
 }
@@ -379,4 +379,14 @@ void far EraseMiniMapCursor(void)
 {
     f_1CE2_0410(&miniMapCursorRect, 1);
     miniCursorOn = 0;
+}
+
+/* Shows the minimap cursor if it is hidden and hides it if it is shown. No caller is
+ * recorded in the DOS code (a menu or key handler may reach it through a table). */
+void far ToggleMiniMapCursor(void)
+{
+    if (miniCursorOn)
+        EraseMiniMapCursor();
+    else
+        DrawMiniMapCursor();
 }

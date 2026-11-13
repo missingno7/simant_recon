@@ -11,5 +11,5 @@
  * Functional source ownership; no historical producer or capacity claim.
  */
 
-int far fd_50F6_46A8[5];
-int far fd_50F6_46BC[5];
+int far menu_title_x_pixels[5];
+int far menu_title_char_counts[5];

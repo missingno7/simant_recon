@@ -11,8 +11,8 @@
 ; shr edx,16) and push ds; push di; push si saves (MSC saves DI first, rule ASM-2).
 
 _DATA	segment word public 'DATA'
-	extrn	_g_91A0:byte
-	extrn	_g_91A2:byte
+	extrn	_mem_conventional_paragraphs:byte
+	extrn	_mem_arena_start_segment:byte
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -73,8 +73,8 @@ _gfx_probe_tandy_video_area	proc	far
 	call far ptr _gfx_bios_has_tandy_signature
 	and ax, ax
 	je L0088
-	mov ax, word ptr _g_91A2
-	add ax, word ptr _g_91A0
+	mov ax, word ptr _mem_arena_start_segment
+	add ax, word ptr _mem_conventional_paragraphs
 	sub ax, 400h
 	mov word ptr [bp-2], ax
 	mov es, ax

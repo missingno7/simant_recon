@@ -47,9 +47,9 @@ extern void far DrawYard(void);
 extern void far myDelay(long ticks);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_SetObjBitmap(int obj, int bitmap);
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void _fastcall win_get_obj_layout_rect(int obj, struct Rect far *r);
-extern struct Rect far fd_50F6_393C;
+extern struct Rect far menu_bar_rect;
 extern void _fastcall win_set_obj_layout_rect(int obj, struct Rect far *r);
 extern void far win_Open(int win);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
@@ -84,11 +84,11 @@ void far DrawSimPayoff(void)
     myDelay(0x96L);
     win_LockWin(0x1a00);
     win_SetObjBitmap(0x1a01, 0x3f48);
-    if (g_3DB2 == 0x140) {
+    if (gfx_screen_width_pixels == 0x140) {
         win_get_obj_layout_rect(0x1a01, &saved);
         bounds = saved;
         bounds.left = 4;
-        bounds.top = fd_50F6_393C.bottom + 3;
+        bounds.top = menu_bar_rect.bottom + 3;
         win_set_obj_layout_rect(0x1a01, &bounds);
     }
     win_Open(0x1a00);
@@ -111,7 +111,7 @@ void far DrawSimPayoff(void)
             for (i = 0; i < 6; i++) {
                 x = g_2C2C[i][1] + rect.left;
                 y = g_2C2C[i][0] + rect.top;
-                if (g_3DB2 == 0x140) {
+                if (gfx_screen_width_pixels == 0x140) {
                     x += 0x3f;
                     y -= 10;
                 }
@@ -123,7 +123,7 @@ void far DrawSimPayoff(void)
     }
     myDelay(0x12cL);
     win_Close(0x1a00);
-    if (g_3DB2 == 0x140)
+    if (gfx_screen_width_pixels == 0x140)
         win_set_obj_layout_rect(0x1a01, &saved);
 }
 
@@ -138,11 +138,11 @@ extern void far clip_set_screen_intersection(struct Rect far *r);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far font_SetFont(int font);
 extern int far font_FontHeight(void);
-extern void (far * near g_9188)(int left, int top, int right, int bottom, int x, int y);
+extern void (far * near gfx_copy_screen_rect_hook)(int left, int top, int right, int bottom, int x, int y);
 extern void _fastcall gr_JustifyStrInRect(int mode, struct Rect far *rect, char far *text);
 extern int near g_3DE2;
-extern int far g_3DA0;
-extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
+extern int far gfx_text_pen_x;
+extern void (far * near gfx_fill_rect_hook)(int x0, int y0, int x1, int y1, int color);
 extern void far clip_Off(void);
 extern void far free(char far *p);
 extern void far db_PurgeObject(int object, int kind);
@@ -203,7 +203,7 @@ void far AboutDialog(void)
             y = rect.top - pix;
             idx = line;
             if (drawn)
-                (*g_9188)(rect.left, rect.top + 1, rect.right, rect.bottom, rect.left, rect.top);
+                (*gfx_copy_screen_rect_hook)(rect.left, rect.top + 1, rect.right, rect.bottom, rect.left, rect.top);
             for (; y < rect.bottom; idx++, y += height) {
                 if (idx < n && *list[idx] != 0) {
                     if (drawn && height + y < rect.bottom)
@@ -213,9 +213,9 @@ void far AboutDialog(void)
                     box.left = rect.left;
                     box.right = rect.right;
                     gr_JustifyStrInRect(3, &box, list[idx]);
-                    (*g_9134)(g_3DA0, y, rect.right, height + y, g_3DE2);
+                    (*gfx_fill_rect_hook)(gfx_text_pen_x, y, rect.right, height + y, g_3DE2);
                 } else {
-                    (*g_9134)(rect.left, y, rect.right, height + y, g_3DE2);
+                    (*gfx_fill_rect_hook)(rect.left, y, rect.right, height + y, g_3DE2);
                 }
             }
             if (++pix == height) {
@@ -235,7 +235,7 @@ out:
     win_Close(0x1f00);
 }
 
-extern Handle far fd_50F6_10CC[];
+extern Handle far startup_info_block_handle[];
 extern Handle far mem_Alloc(long size, int flags, char far *name);
 extern Handle far fd_50F6_3836;
 extern Handle far fd_50F6_3938;
@@ -256,11 +256,11 @@ void far ShowIntro(void)
     win_Open(0x300);
     myBeginSong(0x2711, 0x7e);
     DialogWaitInit(0x28);
-    if (fd_50F6_10CC[0] != 0) {
+    if (startup_info_block_handle[0] != 0) {
         fd_50F6_3836 = mem_Alloc(0x28L, 1, "Malloc");
         fd_50F6_3938 = mem_Alloc(0x32L, 1, "Malloc");
         fd_50F6_3934 = mem_Alloc(0x1eL, 1, "Malloc");
-        p = mem_Lock(fd_50F6_10CC[0]);
+        p = mem_Lock(startup_info_block_handle[0]);
         a = mem_Lock(fd_50F6_3836);
         b = mem_Lock(fd_50F6_3938);
         _fmemcpy(a, p + 0x80, 0x1e);
@@ -272,9 +272,9 @@ void far ShowIntro(void)
             b[i % 30] ^= (char)(i + 0x55);
         }
         p[8] = 0;
-        mem_Unlock(fd_50F6_10CC[0]);
-        mem_Free(fd_50F6_10CC[0]);
-        fd_50F6_10CC[0] = 0;
+        mem_Unlock(startup_info_block_handle[0]);
+        mem_Free(startup_info_block_handle[0]);
+        startup_info_block_handle[0] = 0;
         mem_Unlock(fd_50F6_3934);
         mem_Unlock(fd_50F6_3938);
         mem_Unlock(fd_50F6_3836);

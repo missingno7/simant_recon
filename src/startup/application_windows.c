@@ -34,7 +34,7 @@ extern void _fastcall win_set_before_close_hook(void (far *hook)(void));
 void far app_before_window_close(void);
 extern void far win_copy_obj_layout_origin(int, int);
 extern void far InitMapFunctions(void);
-extern int far fd_50F6_10D0;
+extern int far startup_executable_fd;
 /* read() and lseek() are called without prototypes (no <io.h>): with the MSC prototype
    (unsigned count) the 0x100 size argument of mem_Alloc is pushed as mov ax,100h; cwd
    instead of the original mov cx,100h; sub dx,dx (PROTO-1 family, worker resG). */
@@ -42,7 +42,7 @@ extern Handle far mem_Alloc(long size, int flags, char far *name);
 extern char far * far mem_Lock(Handle h);
 extern Handle far mem_Unlock(Handle h);
 extern void far mem_Free(Handle h);
-extern Handle far fd_50F6_10CC;
+extern Handle far startup_info_block_handle;
 
 void far InitApplicationWindows(void)
 {
@@ -63,20 +63,20 @@ void far InitApplicationWindows(void)
     win_set_before_close_hook(app_before_window_close);
     win_copy_obj_layout_origin(0x1900, 0x100);
     InitMapFunctions();
-    if (fd_50F6_10D0 == 0)
+    if (startup_executable_fd == 0)
         return;
-    lseek(fd_50F6_10D0, 0L, 0);
-    read(fd_50F6_10D0, &hdr, sizeof hdr);
-    lseek(fd_50F6_10D0, hdr.headers + sizeof hdr, 0);
+    lseek(startup_executable_fd, 0L, 0);
+    read(startup_executable_fd, &hdr, sizeof hdr);
+    lseek(startup_executable_fd, hdr.headers + sizeof hdr, 0);
     h = mem_Alloc(0x100UL, 1, "winheaders");
-    n = read(fd_50F6_10D0, mem_Lock(h), 0x100);
-    read(fd_50F6_10D0, mem_Lock(h), 1);
+    n = read(startup_executable_fd, mem_Lock(h), 0x100);
+    read(startup_executable_fd, mem_Lock(h), 1);
     mem_Unlock(h);
     mem_Unlock(h);
     if (n != 0x100)
         mem_Free(h);
     else
-        fd_50F6_10CC = h;
+        startup_info_block_handle = h;
 }
 
 extern void far initStuff(void);

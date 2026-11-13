@@ -12,12 +12,12 @@
 
 _DATA	segment word public 'DATA'
 	public	_source_bitmap_width, _dest_bitmap_width, _glyph_edge_masks
-_g_676C		dw	0		; source, destination segment
-_g_676E		dw	0
+_glyph_source_segment		dw	0		; source, destination segment
+_glyph_destination_segment		dw	0
 _source_bitmap_width	dw	0		; source, destination row bytes (set by module 25E7)
 _dest_bitmap_width	dw	0
 		dw	0		; not referenced
-_g_6776		dw	0		; row count
+_glyph_remaining_rows		dw	0		; row count
 _glyph_edge_masks label byte
 		db	0FFh, 80h, 0C0h, 0E0h, 0F0h, 0F8h, 0FCh, 0FEh	; not referenced (edge masks)
 _DATA	ends
@@ -55,15 +55,15 @@ _DrawChar	proc	far
 	mov bx, ax
 	les ax, dword ptr [bp]
 	shr ax, cl
-	mov word ptr _g_676C, es
-	add word ptr _g_676C, ax
+	mov word ptr _glyph_source_segment, es
+	add word ptr _glyph_source_segment, ax
 	mov ax, word ptr [bp]
 	and ax, 0Fh
 	add si, ax
 	les ax, dword ptr [bp+4]
 	shr ax, cl
-	mov word ptr _g_676E, es
-	add word ptr _g_676E, ax
+	mov word ptr _glyph_destination_segment, es
+	add word ptr _glyph_destination_segment, ax
 	mov ax, word ptr [bp+4]
 	and ax, 0Fh
 	add di, ax
@@ -74,13 +74,13 @@ _DrawChar	proc	far
 	shr dx, 1
 	shr dx, 1
 	shr dx, 1
-	mov word ptr _g_6776, dx
+	mov word ptr _glyph_remaining_rows, dx
 L0079:
 	push si
 	push di
-	mov dx, word ptr _g_6776
-	mov es, word ptr _g_676E
-	mov ds, word ptr _g_676C
+	mov dx, word ptr _glyph_remaining_rows
+	mov es, word ptr _glyph_destination_segment
+	mov ds, word ptr _glyph_source_segment
 	or dx, dx
 	je L00A2
 L008B:
@@ -132,14 +132,14 @@ L00CA:
 	shr ax, 1
 	shr ax, 1
 	shr ax, 1
-	add word ptr _g_676C, ax
+	add word ptr _glyph_source_segment, ax
 	mov ax, di
 	and di, 0Fh
 	shr ax, 1
 	shr ax, 1
 	shr ax, 1
 	shr ax, 1
-	add word ptr _g_676E, ax
+	add word ptr _glyph_destination_segment, ax
 	jmp L0079
 L0101:
 	pop di

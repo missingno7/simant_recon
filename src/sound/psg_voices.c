@@ -33,7 +33,7 @@ unsigned g_7600[] = {
 extern void far snd_port_write_byte(int port, char value);
 
 extern void far snd_regchip_write(int reg, int value);
-extern int far fd_50F6_4B14;
+extern int far snd_device_io_base;
 void far snd_ps1_set_note(int a, int note, int vol, int chan)
 {
     int f;
@@ -77,7 +77,7 @@ void far snd_tandy_set_note(int a, int note, int vol, int ch)
     reg = (char)ch + 0x80 & 0xe0;
     val = ~(vol >> 3) & 0xf;
     tmp = 0;
-    port = fd_50F6_4B14;
+    port = snd_device_io_base;
     freq = g_7600[note] >> 1;
     _asm {
         mov dx, port

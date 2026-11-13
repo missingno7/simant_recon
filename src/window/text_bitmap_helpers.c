@@ -37,15 +37,15 @@ void far win_invert_obj_rect(int obj)
 }
 
 extern char near fontWidth;
-extern Point far g_3DA0;
+extern Point far gfx_text_pen_x;
 
 void far win_set_obj_text_pen(int obj, int col)
 {
     struct Rect r;
 
     win_GetObjRect(obj, &r);
-    g_3DA0.x = fontWidth * col + r.left;
-    g_3DA0.y = r.top;
+    gfx_text_pen_x.x = fontWidth * col + r.left;
+    gfx_text_pen_x.y = r.top;
 }
 
 extern void _fastcall win_SetColorFromObjNum(int obj);
@@ -82,7 +82,7 @@ void far gr_CenterStrInRect(struct Rect far *rect, char far *text)
 }
 
 extern int near g_3DE2;
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
 
 void far gr_CenterStrInRectClear(struct Rect far *rect, char far *text)
 {
@@ -101,9 +101,9 @@ void far gr_CenterStrInRectClear(struct Rect far *rect, char far *text)
     r.bottom = font_FontHeight() + r.top;
     font_PrintStr(r.left, r.top, text);
     if (rect->left < r.left)
-        g_9134(rect->left, r.top, r.left, r.bottom, g_3DE2);
+        gfx_fill_rect_hook(rect->left, r.top, r.left, r.bottom, g_3DE2);
     if (rect->right > r.right)
-        g_9134(r.right, r.top, rect->right, r.bottom, g_3DE2);
+        gfx_fill_rect_hook(r.right, r.top, rect->right, r.bottom, g_3DE2);
 }
 
 void far win_center_text_unclipped(int obj, char far *text)
@@ -124,7 +124,7 @@ void far win_print_obj_text(int obj, char far *text)
     font_PrintStr(r.left, r.top, text);
 }
 
-extern void (far * near g_9128)(int a, int b, int c);
+extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 extern void far GRectOutline(struct Rect far *rect, int width);
 
 void far win_outline_obj_rect(int obj, int color, int width)
@@ -132,42 +132,42 @@ void far win_outline_obj_rect(int obj, int color, int width)
     struct Rect r;
 
     win_GetObjRect(obj, &r);
-    g_9128(color, color, color);
+    gfx_set_attributes_hook(color, color, color);
     GRectOutline(&r, width);
 }
 
-extern unsigned char near g_5A97;
+extern unsigned char near gfx_display_mode;
 extern void (far * near g_917C)(int x, int y, int offset);
-extern char far * far * far fd_50F6_46D2;
-extern void (far * near g_914C)(int x, int y, char far *p, int w, int h);
+extern char far * far * far ui_icon_bitmap_handle;
+extern void (far * near gfx_put_picture_hook)(int x, int y, char far *p, int w, int h);
 
 void far gfx_draw_tile_at_obj(int obj, int n)
 {
     struct Rect r;
 
     win_GetObjRect(obj, &r);
-    if (!(g_5A97 & 1)) {
-        if (g_5A97 & 2)
-            g_914C(r.left, r.top, *fd_50F6_46D2 + (n << 5), 8, 8);
+    if (!(gfx_display_mode & 1)) {
+        if (gfx_display_mode & 2)
+            gfx_put_picture_hook(r.left, r.top, *ui_icon_bitmap_handle + (n << 5), 8, 8);
         else
             g_917C(r.left, r.top, (n << g_62C0) + g_62BE);
     } else
-        g_914C(r.left, r.top, *fd_50F6_46D2 + (n << 5), 16, 16);
+        gfx_put_picture_hook(r.left, r.top, *ui_icon_bitmap_handle + (n << 5), 16, 16);
 }
 
 /* Two separate mode tests with identical calls: the 8x8 call of mode 6 is laid out inline
    and cross-jumped into the 16x16 tail; `==6 || ==2` places the shared block last. */
 void far gfx_draw_tile_at(int x, int y, int n)
 {
-    if (!(g_5A97 & 1)) {
-        if (g_5A97 == 6)
-            g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);
-        else if (g_5A97 == 2)
-            g_914C(x, y, *fd_50F6_46D2 + (n << 5), 8, 8);
+    if (!(gfx_display_mode & 1)) {
+        if (gfx_display_mode == 6)
+            gfx_put_picture_hook(x, y, *ui_icon_bitmap_handle + (n << 5), 8, 8);
+        else if (gfx_display_mode == 2)
+            gfx_put_picture_hook(x, y, *ui_icon_bitmap_handle + (n << 5), 8, 8);
         else
             g_917C(x, y, (n << g_62C0) + g_62BE);
     } else
-        g_914C(x, y, *fd_50F6_46D2 + (n << 5), 16, 16);
+        gfx_put_picture_hook(x, y, *ui_icon_bitmap_handle + (n << 5), 16, 16);
 }
 
 extern char far * far db_LoadObject(int object, int kind);
@@ -253,13 +253,13 @@ int far gr_BitMapSize(Point far *size, int object)
 }
 
 static long g_8CE8;
-extern int far fd_50F6_46D0;
+extern int far dialog_wait_delay;
 extern unsigned long far TickCount(void);
 
 void far ui_start_dismiss_timer(int delay)
 {
     g_8CE8 = TickCount();
-    fd_50F6_46D0 = delay;
+    dialog_wait_delay = delay;
 }
 
 extern int far kbd_poll_bios_key(void);
@@ -275,7 +275,7 @@ int far ui_poll_dismiss_timer(void)
         if (key != 13 && key != 27)
             key = 0;
     }
-    return WaitedEnough(&g_8CE8, fd_50F6_46D0) || key;
+    return WaitedEnough(&g_8CE8, dialog_wait_delay) || key;
 }
 
 extern int far fd_1B73_0006;

@@ -37,12 +37,12 @@ struct Pt {
 static int curMenu = -1;
 
 extern char near fontWidth;
-extern char near g_3DDC;
+extern char near gfx_font_height_pixels;
 extern void far GRectOutline(struct Rect far *r, int width);
 extern int near g_3DE4;
 extern int near _foreColor;
 extern int near g_3DE2;
-extern void (far * near g_9128)(int a, int b, int c);
+extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 extern void far GPutStr(int x, int y, char far *s);
 extern void far input_register_object_rect(struct Rect far *r, int v);
 
@@ -54,12 +54,12 @@ void far ui_draw_horizontal_button(int x, int y, char far *s, int v)
     len = _fstrlen(s);
     r.left = x = (char)(x >> 8) + (x & 0xff) * fontWidth;
     r.right = x + fontWidth * len - 1;
-    r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;
-    r.bottom = y + g_3DDC - 1;
+    r.top = y = gfx_font_height_pixels * (y & 0xff) + (char)(y >> 8) * gfx_font_height_pixels / 14;
+    r.bottom = y + gfx_font_height_pixels - 1;
     GRectOutline(&r, -3);
-    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
+    (*gfx_set_attributes_hook)(g_3DE2, _foreColor, g_3DE4);
     GRectOutline(&r, -2);
-    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
+    (*gfx_set_attributes_hook)(g_3DE2, _foreColor, g_3DE4);
     GPutStr(x, y, s);
     input_register_object_rect(&r, v);
 }
@@ -74,29 +74,29 @@ void far ui_draw_vertical_button(int x, int y, char far *s, int v)
     len = _fstrlen(s);
     r.left = x = (char)(x >> 8) + (x & 0xff) * fontWidth;
     r.right = x + fontWidth - 1;
-    r.top = y = g_3DDC * (y & 0xff) + (char)(y >> 8) * g_3DDC / 14;
-    r.bottom = y + g_3DDC * len - 1;
+    r.top = y = gfx_font_height_pixels * (y & 0xff) + (char)(y >> 8) * gfx_font_height_pixels / 14;
+    r.bottom = y + gfx_font_height_pixels * len - 1;
     GRectOutline(&r, -5);
-    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
+    (*gfx_set_attributes_hook)(g_3DE2, _foreColor, g_3DE4);
     GRectOutline(&r, -2);
-    (*g_9128)(g_3DE2, _foreColor, g_3DE4);
+    (*gfx_set_attributes_hook)(g_3DE2, _foreColor, g_3DE4);
     while (*s) {
         gfx_put_fixed_font_char(x, y, *s);
         s++;
-        y += g_3DDC;
+        y += gfx_font_height_pixels;
     }
     input_register_object_rect(&r, v);
 }
 
 extern void (far * near g_9130)(void);
-extern char far * far * far * far fd_55B3_6054;
+extern char far * far * far * far menu_resource_tables;
 extern int far StillDown(void);
-extern int far fd_50F6_46A8[];
+extern int far menu_title_x_pixels[];
 extern void far menu_printf_label(int x, int y, int mode, char far *s);
 int far menu_track_popup(char far *sel, char far * far *items);
 extern int far kbd_poll_bios_key(void);
 extern char far kbd_read_bios_char(void);
-extern int far fd_55B3_604C;
+extern int far menu_bar_title_count;
 extern void far mouse_set_position(int x, int y);
 extern void far kbd_unread_char(int c);
 
@@ -109,20 +109,20 @@ int far menu_track_bar_selection(struct Event far *ev)
 
     (*g_9130)();
     m = ev->code & 0xff;
-    if (fd_55B3_6054[0][m][0] & 0x80)
+    if (menu_resource_tables[0][m][0] & 0x80)
         return 0;
     if ((!StillDown() && (char)(ev->modifiers >> 8)) || curMenu == m)
         return;
     if (curMenu != -1) {
 again:
-        menu_printf_label(fd_50F6_46A8[curMenu], 1, 1, fd_55B3_6054[0][curMenu]);
+        menu_printf_label(menu_title_x_pixels[curMenu], 1, 1, menu_resource_tables[0][curMenu]);
         curMenu = -1;
     }
     if (m >= 100)
         return;
     curMenu = m;
-    menu_printf_label(fd_50F6_46A8[m], 1, 0, fd_55B3_6054[0][m]);
-    if (!menu_track_popup(&sel, fd_55B3_6054[m + 1]))
+    menu_printf_label(menu_title_x_pixels[m], 1, 0, menu_resource_tables[0][m]);
+    if (!menu_track_popup(&sel, menu_resource_tables[m + 1]))
         return;
     m = 0xff;
     if (!kbd_poll_bios_key())
@@ -136,29 +136,29 @@ next:
         if (prev)
             m = prev - 1;
         else
-            m = fd_55B3_604C - 1;
+            m = menu_bar_title_count - 1;
     } else if (c == 0x4d) {
-        m = (prev + 1) % fd_55B3_604C;
+        m = (prev + 1) % menu_bar_title_count;
     } else {
         kbd_unread_char(c);
         kbd_unread_char(0);
         m = 0xff;
         goto again;
     }
-    if (fd_55B3_6054[0][m][0] & 0x80) {
+    if (menu_resource_tables[0][m][0] & 0x80) {
         prev = m;
         goto next;
     }
-    mouse_set_position(fd_50F6_46A8[m] + fontWidth * 3, g_3DDC / 2);
+    mouse_set_position(menu_title_x_pixels[m] + fontWidth * 3, gfx_font_height_pixels / 2);
     goto again;
 }
 
 extern char far * far malloc(unsigned size);
-extern char far * near g_5AAC;
+extern char far * near clip_active_list_offset;
 extern void far timer_wait_double_ticks(int a);
 extern void far kbd_disable_mouse_emulation(void);
 extern void far GetMousePos(struct Pt far *pt);
-extern int far fd_50F6_46BC[];
+extern int far menu_title_char_counts[];
 extern int far fd_55B3_5AA0[2];
 extern char far * far GSaveRect(struct Rect far *r);
 extern void far menu_set_draw_colours(int a);
@@ -205,8 +205,8 @@ int far menu_track_popup(char far *sel, char far * far *items)
 
     cur = -1; down = result = 0;
     if (items != 0 && *items != 0) {
-    buf = malloc(4000); saved = g_5AAC;
-    g_5AAC = 0; last.x = last.y = -1;
+    buf = malloc(4000); saved = clip_active_list_offset;
+    clip_active_list_offset = 0; last.x = last.y = -1;
     timer_wait_double_ticks(1); kbd_disable_mouse_emulation();
     mode = curMenu == -1 ? 0 : 1;
     GetMousePos(&pt);
@@ -220,12 +220,12 @@ int far menu_track_popup(char far *sel, char far * far *items)
     nItems = i;
     if (curMenu == -1) {
         r.left = (pt.x & ~7) + 16;
-        r.top = g_3DDC * (1 - i) + pt.y - 3;
+        r.top = gfx_font_height_pixels * (1 - i) + pt.y - 3;
     } else {
-        r.left = ((fd_50F6_46BC[curMenu] - maxLen) >> 1) * fontWidth + fd_50F6_46A8[curMenu];
+        r.left = ((menu_title_char_counts[curMenu] - maxLen) >> 1) * fontWidth + menu_title_x_pixels[curMenu];
         if (r.left < 0)
             r.left = 0;
-        r.top = g_3DDC + 1;
+        r.top = gfx_font_height_pixels + 1;
     }
     r.right = fontWidth * maxLen + r.left + 16;
     if (r.right > fd_55B3_5AA0[0]) {
@@ -233,9 +233,9 @@ int far menu_track_popup(char far *sel, char far * far *items)
         r.right -= d;
         r.left -= d;
     }
-    if (g_3DDC + 5 > r.top)
-        r.top = g_3DDC + 5;
-    r.bottom = g_3DDC * i + r.top + 6;
+    if (gfx_font_height_pixels + 5 > r.top)
+        r.top = gfx_font_height_pixels + 5;
+    r.bottom = gfx_font_height_pixels * i + r.top + 6;
     if (r.bottom > fd_55B3_5AA0[1] - 5) {
         d = r.bottom - fd_55B3_5AA0[1] + 5;
         r.top -= d;
@@ -259,7 +259,7 @@ int far menu_track_popup(char far *sel, char far * far *items)
     else
         sprintf(fmt, "%%c%%-%ds", maxLen - 1);
     p = buf;
-    for (i = 0; i < nItems; i++, j += g_3DDC) {
+    for (i = 0; i < nItems; i++, j += gfx_font_height_pixels) {
         if (items[i][1] == '-') {
             _fmemset(p + 1, '-', maxLen - 2);
             p[maxLen] = 0;
@@ -295,7 +295,7 @@ int far menu_track_popup(char far *sel, char far * far *items)
                 continue;
             last = pt;
             if (PointInRect(&pt, &r)) {
-                i = (pt.y - r.top) / g_3DDC;
+                i = (pt.y - r.top) / gfx_font_height_pixels;
                 if (i >= 0 && i < nItems &&
                     items[i][1] != '-' && !(items[i][0] & 0x80))
                     goto moved;
@@ -361,19 +361,19 @@ moved:
         if (cur == i)
             continue;
         if (cur != -1) {
-            menu_printf_label(x, g_3DDC * cur + r.top, 1, buf + (maxLen + 1) * cur);
+            menu_printf_label(x, gfx_font_height_pixels * cur + r.top, 1, buf + (maxLen + 1) * cur);
             cur = -1;
         }
         if (i == -1)
             continue;
         cur = i;
         menu_set_draw_colours(0);
-        menu_printf_label(x, g_3DDC * i + r.top, 0, buf + (maxLen + 1) * i);
+        menu_printf_label(x, gfx_font_height_pixels * i + r.top, 0, buf + (maxLen + 1) * i);
     }
 found:
     i = j;
 warp:
-    mouse_set_position(fontWidth * 4 + x, g_3DDC / 2 + g_3DDC * i + r.top);
+    mouse_set_position(fontWidth * 4 + x, gfx_font_height_pixels / 2 + gfx_font_height_pixels * i + r.top);
     goto moved;
 flush:
     kbd_unread_char(key & 0xff);
@@ -391,7 +391,7 @@ done:
     input_release_screen_capture();
     kbd_enable_mouse_emulation();
     gfx_restore_and_free_rect(&saveR, saveBuf);
-    g_5AAC = saved;
+    clip_active_list_offset = saved;
     free(buf);
     return result;
 other:

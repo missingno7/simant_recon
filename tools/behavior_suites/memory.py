@@ -122,8 +122,8 @@ def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contr
     # The enclosing permanent allocation remains a bounded fixture proxy.
     discard = header(0, 5, size=0, name=b"")
     writes += [(discard_header_seg*16, discard),
-               (behavior.symbol_address("fd_50F6_3948"), far(0, discard_header_seg)),
-               (behavior.symbol_address("fd_50F6_3950"), w(end))]
+               (behavior.symbol_address("mem_discard_entry_template"), far(0, discard_header_seg)),
+               (behavior.symbol_address("mem_ems_boundary_segment"), w(end))]
     writes += list(extra)
     observe = [behavior.Range("heap",heap_seg*16,(end-heap_seg)*16),
                behavior.Range("handle_table",handle_seg*16+MASTER_START,MASTER_CAPACITY*4),
@@ -131,7 +131,7 @@ def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contr
                behavior.Range("free_list_head",dga(0x91ac),4),
                behavior.Range("heap_bounds",dga(0x91a4),12),
                behavior.Range("ems_limit",dga(0x8c70),2),
-               behavior.Range("discard_entry_pointer",behavior.symbol_address("fd_50F6_3948"),4),
+               behavior.Range("discard_entry_pointer",behavior.symbol_address("mem_discard_entry_template"),4),
                behavior.Range("discard_entry_header",discard_header_seg*16,32)]
     return behavior.Case(label=label,args=list(args),writes=writes,observe=observe,return_kind=result,
         registers={"ds":DG,"ss":DG},

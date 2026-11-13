@@ -27,8 +27,8 @@ struct SaveRec {
 extern int far gGameNeedsSaving;
 extern int far CurGameType;
 extern int far fd_3D57_07AA;
-extern char far fd_50F6_3862[];
-extern struct SaveRec far fd_4E4B_0000[];
+extern char far save_last_filename[];
+extern struct SaveRec far save_record_table[];
 
 extern int far ui_prompt_save_discard_cancel(int a);
 extern void far ui_message_acknowledge(char far *msg);
@@ -111,17 +111,17 @@ int far LoadGame(void)
         } while (r == 1 && SaveGame(0) == 0);
     }
     if (o09_35F5_03C6(name, "Load Game", "LOAD", 0) != 0) {
-        _fstrcpy(fd_50F6_3862, name);
+        _fstrcpy(save_last_filename, name);
         gGameNeedsSaving = 0;
         fd = open(name, O_RDONLY | O_BINARY);
         if (fd <= 0)
             ui_message_acknowledge(sys_errlist[errno]);
         else {
             n = 0;
-            for (p = fd_4E4B_0000; p->count != 0; p++)
+            for (p = save_record_table; p->count != 0; p++)
                 n += p->count * p->size;
             DoPreLoadInits();
-            for (p = fd_4E4B_0000; p->count != 0; p++) {
+            for (p = save_record_table; p->count != 0; p++) {
                 if ((r = read(fd, p->data, n = p->count * p->size)) != n) {
                     ui_message_acknowledge("  Read error  \ngame not loaded");
                     CurGameType = -1;
@@ -155,15 +155,15 @@ int far SaveGame(int useLast)
     int total;
 
     ok = 0;
-    if (fd_50F6_3862 != 0L && *fd_50F6_3862 != 0 && useLast != 0) {
-        _fstrcpy(name, fd_50F6_3862);
+    if (save_last_filename != 0L && *save_last_filename != 0 && useLast != 0) {
+        _fstrcpy(name, save_last_filename);
         goto tryit;
     }
 select:
     if (o09_35F5_03C6(name, "Save Game", "SAVE", 1) == 0)
         goto done;
-    _fstrcpy(fd_50F6_3862, name);
-    WinPrintf("\nlastFileName==%s", fd_50F6_3862);
+    _fstrcpy(save_last_filename, name);
+    WinPrintf("\nlastFileName==%s", save_last_filename);
 tryit:
     fd = open(name, O_RDWR | O_BINARY);
     if (fd > 0) {
@@ -176,19 +176,19 @@ tryit:
     fd = open(name, O_RDWR | O_CREAT | O_TRUNC | O_BINARY, S_IREAD | S_IWRITE);
     if (fd <= 0) {
         ui_message_acknowledge(sys_errlist[errno]);
-        *fd_50F6_3862 = 0;
+        *save_last_filename = 0;
         goto done;
     }
 write:
     total = 0;
-    for (p = fd_4E4B_0000; p->count != 0; p++) {
+    for (p = save_record_table; p->count != 0; p++) {
         total += p->count * p->size;
         WinPrintf("\nTOTALLEN=%u", total);
     }
     WinPrintf("\nCOPYING DATA INTO BUFFER!");
-    for (p = fd_4E4B_0000; p->count != 0; p++) {
+    for (p = save_record_table; p->count != 0; p++) {
         if (write(fd, p->data, p->count * p->size) == -1) {
-            *fd_50F6_3862 = 0;
+            *save_last_filename = 0;
             ui_message_acknowledge(sys_errlist[errno]);
             close(fd);
             remove(name);
@@ -199,7 +199,7 @@ write:
     gGameNeedsSaving = 0;
     sprintf(msg, "%s\nSaved correctly", name);
     ui_message_transient(msg);
-    _fstrcpy(fd_50F6_3862, name);
+    _fstrcpy(save_last_filename, name);
     ok = 1;
     close(fd);
 done:
@@ -226,9 +226,9 @@ struct Event {
 
 typedef char far * far *Handle;
 
-extern int far fd_50F6_38B6;
-extern char far * far fd_50F6_38B2;
-extern char far g_2970;
+extern int far startup_drive_letter;
+extern char far * far startup_working_directory;
+extern char far text_entry_pending_key;
 
 extern int far file_drive_current_directory(int drive, char far *path);
 extern Handle far Ralloc(long size, int flags, char far *name);
@@ -305,7 +305,7 @@ int far o09_35F5_03C6(char far *name, char far *title, char far *verb, int save)
     sel = -1;
     chdir(lastDir);
     if (s_2966 == 0)
-        s_2966 = fd_50F6_38B6;
+        s_2966 = startup_drive_letter;
     if (*name != 0 && file_drive_current_directory(s_2966 - '@', path) != 0) {
         if (path[_fstrlen(path) - 1] != '\\')
             _fstrcat(path, "\\");
@@ -344,11 +344,11 @@ retry:
         ui_message_acknowledge(buf);
         s_2966 = oldDrive;
         if ((s_2966 == 0 || file_drive_current_directory(s_2966 - '@', path) == 0) && ((unsigned)save >= 0)) {
-            if (fd_50F6_38B6 == s_2966)
+            if (startup_drive_letter == s_2966)
                 ui_message_acknowledge("Can't read disk\nAborting");
             sprintf(buf, "Cannot read drive %c", s_2966);
             ui_message_acknowledge(buf);
-            oldDrive = fd_50F6_38B6;
+            oldDrive = startup_drive_letter;
             goto retry;
         }
     }
@@ -369,8 +369,8 @@ retry:
         y = (r3.bottom + tmp2 - font_FontHeight() + 1) / 2;
         x = r3.left + 4;
         win_SetColorFromObjNum(0x1604);
-        if (ok && *fd_50F6_3862 != 0) {
-            _fstrcpy(name, _fstrrchr(fd_50F6_3862, '\\') + 1);
+        if (ok && *save_last_filename != 0) {
+            _fstrcpy(name, _fstrrchr(save_last_filename, '\\') + 1);
             GPutStr(x, y, name);
         }
     }
@@ -434,7 +434,7 @@ first:
         if (kbd_poll_bios_key() && ((unsigned)path >= 0)) {
             key = kbd_read_key_code();
             if (!(key & 0x800) && isalnum(key) && save == 1) {
-                g_2970 = key;
+                text_entry_pending_key = key;
                 goto edit;
             }
             switch (key) {
@@ -534,8 +534,8 @@ close:
     _fstrcpy(lastDir, path);
     _fstrcpy(buf, name);
     sprintf(name, "%s%s", path, buf);
-    chdir(fd_50F6_38B2);
-    WinPrintf("\nPathName=%s, iniPath=%s", name, fd_50F6_38B2);
+    chdir(startup_working_directory);
+    WinPrintf("\nPathName=%s, iniPath=%s", name, startup_working_directory);
     return ok;
 }
 
@@ -630,7 +630,7 @@ extern unsigned char far HoleMapB[];
 extern unsigned char far HoleMapR[];
 extern unsigned char far YMapPopB[];
 extern unsigned char far YMapPopR[];
-extern unsigned char far fd_3E1D_0000[];
+extern unsigned char far YMapSeeds[];
 extern unsigned char far BAntsEaten[];
 extern unsigned char far BAntsExpired[];
 extern unsigned char far BAntsKilled[];
@@ -897,7 +897,7 @@ extern unsigned char far RevSpider[];
 extern unsigned char far ShowPercentCaste[];
 extern unsigned char far ShowPercentMode[];
 
-struct SaveRec far fd_4E4B_0000[308] = {
+struct SaveRec far save_record_table[308] = {
     { 1, 8192, (void far *)&MapA },
     { 1, 4096, (void far *)&MapB },
     { 1, 4096, (void far *)&MapR },
@@ -927,7 +927,7 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 1, 64, (void far *)&HoleMapR },
     { 1, 192, (void far *)&YMapPopB },
     { 1, 192, (void far *)&YMapPopR },
-    { 2, 192, (void far *)&fd_3E1D_0000 },
+    { 2, 192, (void far *)&YMapSeeds },
     { 4, 1, (void far *)&BAntsEaten },
     { 4, 1, (void far *)&BAntsExpired },
     { 4, 1, (void far *)&BAntsKilled },

@@ -40,14 +40,14 @@ void far o20_39C7_0007(void)
 }
 
 extern char far * far * far db_LoadObject(int object, int kind);
-extern char far * near g_3DA8;
-extern char far * near g_3DA4;
+extern char far * near gfx_primary_font_offset;
+extern char far * near gfx_secondary_font;
 extern void far db_UnhookObject(int object, int kind);
 
 void far gfx_load_fonts_hercules(void)
 {
-    g_3DA8 = *db_LoadObject(0x14, 9);
-    g_3DA4 = *db_LoadObject(0x15, 9);
+    gfx_primary_font_offset = *db_LoadObject(0x14, 9);
+    gfx_secondary_font = *db_LoadObject(0x15, 9);
     db_UnhookObject(0x14, 9);
     db_UnhookObject(0x15, 9);
 }
@@ -61,9 +61,9 @@ void far gfx_load_fonts_tandy(void)
     char far * far *q;
 
     p = db_LoadObject(0x14, 9);
-    g_3DA4 = *p;
+    gfx_secondary_font = *p;
     q = db_LoadObject(0x13, 9);
-    g_3DA8 = *q;
+    gfx_primary_font_offset = *q;
     if (q == 0 || p == 0) {
         printf("Could not find fonts");
         Punt("Could not find fonts!");
@@ -74,16 +74,16 @@ void far gfx_load_fonts_tandy(void)
 
 void far gfx_load_fonts_mono_480(void)
 {
-    g_3DA8 = *db_LoadObject(0x14, 9);
-    g_3DA4 = *db_LoadObject(0x15, 9);
+    gfx_primary_font_offset = *db_LoadObject(0x14, 9);
+    gfx_secondary_font = *db_LoadObject(0x15, 9);
     db_UnhookObject(0x14, 9);
     db_UnhookObject(0x15, 9);
 }
 
 void far gfx_load_fonts_mono_350_400(void)
 {
-    g_3DA8 = *db_LoadObject(0x14, 9);
-    g_3DA4 = *db_LoadObject(0x15, 9);
+    gfx_primary_font_offset = *db_LoadObject(0x14, 9);
+    gfx_secondary_font = *db_LoadObject(0x15, 9);
     db_UnhookObject(0x14, 9);
     db_UnhookObject(0x15, 9);
 }
@@ -97,7 +97,7 @@ void far gfx_load_font_planar_320(void)
     p = db_LoadObject(0x13, 9);
     if (p) {
         WinPrintf("\nFont loaded!");
-        g_3DA8 = *p;
+        gfx_primary_font_offset = *p;
         db_UnhookObject(0x13, 9);
     }
 }
@@ -112,9 +112,9 @@ void far gfx_load_fonts_vga256(void)
     char far * far *q;
 
     p = db_LoadObject(0x14, 9);
-    g_3DA4 = *p;
+    gfx_secondary_font = *p;
     q = db_LoadObject(0x13, 9);
-    g_3DA8 = *q;
+    gfx_primary_font_offset = *q;
     if (q == 0 || p == 0) {
         printf("Could not find fonts");
         Punt("Could not find fonts!");

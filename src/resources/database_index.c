@@ -37,8 +37,8 @@ typedef struct {
 } OpenDBRec;
 
 extern OpenDBRec far openDBData[];
-extern int far fd_50F6_3956;
-extern IndexEntry far * far fd_50F6_3952;
+extern int far db_index_lower_bound;
+extern IndexEntry far * far db_index_search_entry;
 
 extern int far sprintf(char far *buffer, char far *format, ...);
 extern int far open(char far *path, int flags, ...);
@@ -85,26 +85,26 @@ IndexEntry far * far FindIndex(int db, int id, int kind)
     int mid;
     int top;
 
-    fd_50F6_3956 = 0;
+    db_index_lower_bound = 0;
     top = openDBData[db].indexHeader.count - 1;
     if (top == -1)
         return 0L;
-    while (fd_50F6_3956 <= top) {
-        mid = (fd_50F6_3956 + top) / 2;
-        fd_50F6_3952 = &openDBData[db].index[mid];
-        if (fd_50F6_3952->kind > kind) goto high;
+    while (db_index_lower_bound <= top) {
+        mid = (db_index_lower_bound + top) / 2;
+        db_index_search_entry = &openDBData[db].index[mid];
+        if (db_index_search_entry->kind > kind) goto high;
         else {
-            if (fd_50F6_3952->kind != kind || fd_50F6_3952->id < id) {
-                fd_50F6_3956 = mid + 1;
+            if (db_index_search_entry->kind != kind || db_index_search_entry->id < id) {
+                db_index_lower_bound = mid + 1;
                 continue;
             }
 high:
             top = mid - 1;
         }
     }
-    fd_50F6_3952 = &openDBData[db].index[fd_50F6_3956];
-    if (fd_50F6_3952->id == id && fd_50F6_3952->kind == kind)
-        return fd_50F6_3952;
+    db_index_search_entry = &openDBData[db].index[db_index_lower_bound];
+    if (db_index_search_entry->id == id && db_index_search_entry->kind == kind)
+        return db_index_search_entry;
     return 0L;
 }
 

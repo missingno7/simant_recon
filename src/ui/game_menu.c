@@ -75,7 +75,7 @@ struct Event {
 extern void far AboutDialog(void);
 extern void far myBeginSong(int id, int arg);
 extern int far NewGame(int a);
-extern int far fd_55B3_2CBC;
+extern int far ui_pending_menu_item;
 extern void far OpenEditWindow(void);
 extern void far OpenMapYard(void);
 extern void far OpenModeWindow(void);
@@ -110,7 +110,7 @@ void far ProcMenu(struct Event far *ev)
     case 5:
     case 6:
     case 8:
-        fd_55B3_2CBC = item;
+        ui_pending_menu_item = item;
         break;
     case 0x11:
         OpenEditWindow();

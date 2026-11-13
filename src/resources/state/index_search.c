@@ -20,5 +20,5 @@ typedef struct IndexEntry {
     unsigned char flags;
 } IndexEntry;
 
-IndexEntry far * far fd_50F6_3952;
-int far fd_50F6_3956;
+IndexEntry far * far db_index_search_entry;
+int far db_index_lower_bound;

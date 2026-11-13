@@ -61,19 +61,19 @@ extern void far clip_SubExclude(struct Rect far *rect);
 extern void far win_redraw_desktop_menu(void);
 extern void far mem_Unlock(char far * far *handle);
 
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern int near _foreColor;
-extern char near g_3DDC;
+extern char near gfx_font_height_pixels;
 extern int near g_3DE2;
-extern int g_3DA0;
+extern int gfx_text_pen_x;
 extern int g_6300;
-extern int g_5702[];
-extern int near g_3DB2;
-extern int far * near g_5AAC;
+extern int clip_window_z_order[];
+extern int near gfx_screen_width_pixels;
+extern int far * near clip_active_list_offset;
 extern void (far * far win_drawHooks[])(int phase);
 extern char far win_colors[][6];
-extern void (far * near g_9128)(int fore, int back, int pattern);
-extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
+extern void (far * near gfx_set_attributes_hook)(int fore, int back, int pattern);
+extern void (far * near gfx_fill_rect_hook)(int x0, int y0, int x1, int y1, int color);
 extern void (far * near g_9138)(int left, int top, int right, int bottom, int mode);
 
 static char far *colorEntry;
@@ -101,18 +101,18 @@ void _fastcall gr_JustifyStrInRect(int mode, struct Rect far *rect, char far *te
     r.top = (r.bottom + (r.top - font_FontHeight())) / 2;
     font_PrintStr(x, r.top, text);
     if (mode == 3) {
-        (*g_9134)(g_3DA0, r.top, rect->right, r.top + g_3DDC, g_3DE2);
-        (*g_9134)(rect->left, r.top, x, r.top + g_3DDC, g_3DE2);
+        (*gfx_fill_rect_hook)(gfx_text_pen_x, r.top, rect->right, r.top + gfx_font_height_pixels, g_3DE2);
+        (*gfx_fill_rect_hook)(rect->left, r.top, x, r.top + gfx_font_height_pixels, g_3DE2);
     }
 }
 
 void _fastcall win_SetColorNum(int color)
 {
     colorEntry = win_colors[color];
-    if ((g_5A97 & 1) == 0)
-        (*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
+    if ((gfx_display_mode & 1) == 0)
+        (*gfx_set_attributes_hook)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
     else
-        (*g_9128)(colorEntry[0] * 0x101, colorEntry[3] * 0x101, colorEntry[0] * 0x101);
+        (*gfx_set_attributes_hook)(colorEntry[0] * 0x101, colorEntry[3] * 0x101, colorEntry[0] * 0x101);
 }
 
 void _fastcall win_SetColorFromObj(char far *obj)
@@ -121,10 +121,10 @@ void _fastcall win_SetColorFromObj(char far *obj)
         colorEntry = win_colors[obj[0x27]];
     else
         colorEntry = win_colors[obj[0x26]];
-    if ((g_5A97 & 1) == 0)
-        (*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
+    if ((gfx_display_mode & 1) == 0)
+        (*gfx_set_attributes_hook)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
     else
-        (*g_9128)(colorEntry[0] * 0x101, colorEntry[3] * 0x101, colorEntry[0] * 0x101);
+        (*gfx_set_attributes_hook)(colorEntry[0] * 0x101, colorEntry[3] * 0x101, colorEntry[0] * 0x101);
 }
 
 void _fastcall win_SetColorFromObjNum(int obj)
@@ -136,10 +136,10 @@ void _fastcall win_SetColorFromObjNum(int obj)
 
 void _fastcall win_RectFill(struct Rect far *rect)
 {
-    if (colorEntry[2] != colorEntry[3] && (g_5A97 & 1) == 0) {
-        (*g_9128)(colorEntry[3] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
+    if (colorEntry[2] != colorEntry[3] && (gfx_display_mode & 1) == 0) {
+        (*gfx_set_attributes_hook)(colorEntry[3] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
         (*g_9138)(rect->left, rect->top, rect->right, rect->bottom, 0);
-        (*g_9128)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
+        (*gfx_set_attributes_hook)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
     } else
         GRectFill(rect, colorEntry[2] * 0x101);
 }
@@ -208,10 +208,10 @@ void _fastcall win_DrawButtonBorder(char far *obj)
             GRectPartialMixedOutline(rect, i, sides, entry[2] * 0x101, entry[3] * 0x101);
         }
     } else {
-        (*g_9128)(entry[0] * 0x101, entry[0] * 0x101, entry[0] * 0x101);
+        (*gfx_set_attributes_hook)(entry[0] * 0x101, entry[0] * 0x101, entry[0] * 0x101);
         GRectOutline(rect, 3);
-        if ((g_5A97 & 1) == 0) {
-            (*g_9128)(entry[3] * 0x101, entry[3] * 0x101, entry[1] * 0x101);
+        if ((gfx_display_mode & 1) == 0) {
+            (*gfx_set_attributes_hook)(entry[3] * 0x101, entry[3] * 0x101, entry[1] * 0x101);
             GRectOutline(rect, 2);
         }
     }
@@ -272,7 +272,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         break;
     case 12:
         win_RectFill(rect);
-        (*g_9134)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
+        (*gfx_fill_rect_hook)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
         goto plainText;
     case 13:
         win_DrawBitMapAtObj(*(int far *)((char far *)obj->data + ((obj->flags & 4) ? 2 : 4)), (struct Rect far *)obj);
@@ -304,7 +304,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         break;
     case 18:
         win_RectFill(rect);
-        (*g_9134)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
+        (*gfx_fill_rect_hook)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
         goto formatText;
     case 19:
         win_RectHOutline(rect, *(char far *)&obj->data[1]);
@@ -355,13 +355,13 @@ void _fastcall win_draw_frame_controls(char far *w)
     rect = *(struct Rect far *)w;
     m = (*(char far * far *)(w + 0x2c))[0x28];
     rect.bottom -= m;
-    if (g_3DB2 == 0x140)
+    if (gfx_screen_width_pixels == 0x140)
         m = m / 2;
     rect.left += m;
     rect.right -= m;
     rect.top += m;
-    if (g_5A97 & 1)
-        (*g_9128)(0, 0, 0x40);
+    if (gfx_display_mode & 1)
+        (*gfx_set_attributes_hook)(0, 0, 0x40);
     if (*(int far *)(w + 0x1c) & 4) {
         win_DrawBitMap(rect.left, rect.top, 0x64);
         gr_BitMapSize(&size, 0x64);
@@ -406,7 +406,7 @@ void _fastcall win_DrawWindow(int win)
     sprintf(buf, "QQW:%x", win);
     w = win_locked_resource_ptr(win);
     if ((*(int far *)(w + 0x1c) & 0x20) == 0) {
-        if (g_5AAC != 0 && g_5AAC[1] == (int)0x8000)
+        if (clip_active_list_offset != 0 && clip_active_list_offset[1] == (int)0x8000)
             goto hooks;
         sprintf(buf, "##W:%x", win);
         if (win_drawHooks[win >> 8])
@@ -446,12 +446,12 @@ void _fastcall win_redraw_rect(char far *p)
     clip_set_desktop_region();
     clip_restrict_rect(p);
     win_redraw_desktop_menu();
-    for (i = 0; g_5702[i] != (int)0x8000; i++)
+    for (i = 0; clip_window_z_order[i] != (int)0x8000; i++)
         ;
     while (--i >= 0) {
-        clip_SetWin(g_5702[i]);
+        clip_SetWin(clip_window_z_order[i]);
         clip_restrict_rect(p);
-        win_DrawWindow(g_5702[i]);
+        win_DrawWindow(clip_window_z_order[i]);
     }
     clip_Off();
 }
@@ -464,25 +464,25 @@ void _fastcall win_redraw_exposed_windows(char far *p)
 
     clip_set_desktop_region();
     clip_restrict_rect(p);
-    if (g_5702[0] != (int)0x8000) {
-        win_GetObjRect(g_5702[0], &r);
+    if (clip_window_z_order[0] != (int)0x8000) {
+        win_GetObjRect(clip_window_z_order[0], &r);
         clip_SubExclude(&r);
     }
     win_redraw_desktop_menu();
-    for (i = 0; g_5702[i] != (int)0x8000; i++)
+    for (i = 0; clip_window_z_order[i] != (int)0x8000; i++)
         ;
     while (--i >= 1) {
-        clip_SetWin(g_5702[i]);
+        clip_SetWin(clip_window_z_order[i]);
         sprintf(buf, "i:%x", i);
         clip_restrict_rect(p);
         sprintf(buf, "!!i:%x", i);
         clip_SubExclude(&r);
         sprintf(buf, "@@i:%x", i);
-        win_DrawWindow(g_5702[i]);
+        win_DrawWindow(clip_window_z_order[i]);
     }
-    if (g_5702[0] != (int)0x8000) {
-        clip_SetWin(g_5702[0]);
-        win_DrawWindow(g_5702[0]);
+    if (clip_window_z_order[0] != (int)0x8000) {
+        clip_SetWin(clip_window_z_order[0]);
+        win_DrawWindow(clip_window_z_order[0]);
     }
     clip_Off();
 }

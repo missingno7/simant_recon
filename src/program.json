@@ -10,7 +10,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "8b8fd4b8acbd43a74c22fc2c178b1bdf6412b27b9618c6a8be8e88d18aeda26a",
+      "source_sha256": "13512532066ccf9bb73edbbfcbc81cd89477fe9b42ac3547d50ff33ceace1831",
       "unit": "S00",
       "summary": "Builds the small map pixel tables used by the planar display driver. It also defines dither and palette data and the driver dispatch table.",
       "windows_group": "none (DOS only)",
@@ -71,7 +71,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "aaf861fd2ab713c6fe9d968cb642a844c99fe7ff18535f7258ed250b964fdb5b",
+      "source_sha256": "a891edd9b6c8c034ccad794698decf1d5e746243a36b7d2864cf86dad097e295",
       "unit": "S00",
       "owned_code_references": {
         "owners": [
@@ -309,7 +309,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "c4fcdc7f78c8f2e9d76b3aa19e52f5b0ee2319ac56571722700cb4e8391f43eb",
+      "source_sha256": "74b621078e385428ff04ee6e079ee4ea384d8f809a7e33fa45fce52737913573",
       "unit": "S00",
       "summary": "Sets up planar display modes and performs masked planar tile blits through a scratch buffer. It is the second object in frame 31AD and remains a separate file from the main raster routines.",
       "windows_group": "none (DOS only)",
@@ -370,7 +370,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "9d23be94eaecb881d951bc27f7c4a0b711eb4205058e266a626c53ff23c91950",
+      "source_sha256": "3becdec68a4ceba06061979d1d9046510f85f1f6e819d090a24f4c5ec9f2b0d7",
       "unit": "S00",
       "summary": "Blits masked sprite images into planar buffers and tests rectangles. The window bitmap layer calls these entries through the display callbacks.",
       "windows_group": "none (DOS only)",
@@ -431,7 +431,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "455abf29f429ceb615c64d1905ef16f6d1da6835117b705d6eaaa38c62e30bbb",
+      "source_sha256": "caaf6682d80511b99440793f09fee73e52bd6bb611397550f366f9e5e5afec8b",
       "unit": "S01",
       "owned_code_references": {
         "owners": [
@@ -669,7 +669,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "5d345f22f2b192c53d03ae5423994d94d1f6ff1b94a2683f336b7bef7247d8b8",
+      "source_sha256": "17410c7b0b521224c099705ac3f2cbb9aecde57ee3d10c7dd62b43627ed69a5f",
       "unit": "S01",
       "summary": "Blits masked monochrome sprites and tests rectangles. The driver selector installs these functions for every odd numbered monochrome display mode.",
       "windows_group": "none (DOS only)",
@@ -730,7 +730,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "3610ed36544d00c3122f47fc7d062d341f0f29dd3129828b2184a0a60c3772e4",
+      "source_sha256": "4015ded77bac0da36313efdd92f2a2e454873a733a08effd173c382c1c781290",
       "unit": "S02",
       "owned_code_references": {
         "owners": [
@@ -916,7 +916,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "e463e26614654d6a2d3826993a8f31cac502d380da020a7e50a7f95d6f8a7124",
+      "source_sha256": "27ad9fd1e2ad6b14cea52b51a3a2d14984a7a0f36a5a9af1d431e831167de671",
       "unit": "S03",
       "owned_code_references": {
         "owners": [
@@ -1204,7 +1204,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "5700d75defbca9505b0663ee69542ac29ca6b427198bd531954e487352499cc8",
+      "source_sha256": "744bff415949cd59aa737291c5178f2f2224dfa90917fefd4a6322808ebab350",
       "unit": "S03",
       "owned_code_references": {
         "owners": [
@@ -1321,7 +1321,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "379d11990bbf0d8b75f45ae892602e53625c84a17a8a8393c825311aac26ccc7",
+      "source_sha256": "902ab61f42ea69d46064a0d6d0acb2788e579cb20b09f8b59ac6f39479486567",
       "unit": "S04",
       "summary": "Handles the map tools menu and the small map window. It creates the map image table, draws the view and maintains its cursor.",
       "windows_group": "ANTEDIT",
@@ -1452,7 +1452,7 @@
         "/Og",
         "/Oe"
       ],
-      "source_sha256": "cef243b17e0b190af10adcc779968f238feee84256c58c892b68fcc2c4f7b68e",
+      "source_sha256": "9dd40e5db0887e0448f22396146b2501ba187296837e66d24278c993e3ccc8cc",
       "unit": "S05",
       "summary": "Handles scent, editing, ant and magnification menus. These menus select tools and change yellow ant health or black colony warning settings.",
       "windows_group": "ANTEDIT",
@@ -1583,7 +1583,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "c2d689ccf57d272bf486b5ab5912672b890d7975bc9356e9491cc1944b626977",
+      "source_sha256": "99949c904b62b6d80b60b4c5d43a366f0cd6747cfc88a9785a2dceba3a8aedcf",
       "unit": "S05",
       "summary": "Implements the experiment tool menu. Its single function tracks submenu state and returns the selected editing tool.",
       "windows_group": "ANTEDIT",
@@ -1665,7 +1665,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "8eba77c085cd692396e8d2691f78ddab18c0869eb050984436011073832c31cd",
+      "source_sha256": "9d66e5cec147a023d02091646d4cf048c0601e2aa2c4e161acca0d7b9bade12c",
       "unit": "S06",
       "summary": "Runs the back yard simulation, including the boy, bird, cat, dog, mower and rain. It also advances yard colonies and swarms.",
       "windows_group": "SIMTWO",
@@ -1956,7 +1956,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "4d6228470c18cc0950aefffb5bbe3882f7cb3a412e284149657b18c6a2eb024a",
+      "source_sha256": "5ca290369f7d0dfe824dde60e2f59308e9548679401c463eb249559d68d5f439",
       "unit": "S07",
       "summary": "Handles cheat key commands. The handler changes game state and reports the selected cheat number.",
       "windows_group": "unknown",
@@ -2025,7 +2025,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "f8a8a4b93de50d5ccd782d7b434605ce90b489c64b95726ead317631e3445db2",
+      "source_sha256": "7bdf9192898827a0b6009e973196fab85c63e13ad1678faa4bf1c3d250d1309e",
       "unit": "S08",
       "summary": "Initializes simulation variables and generates the yard, maps, nests and starting ants. It also constructs the tutorial starting world.",
       "windows_group": "SIMTWO",
@@ -2216,7 +2216,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "b5f1b14ee0d792d3ba7e56326a870cc80ddfd2e5910100b85cb382f3032b6af3",
+      "source_sha256": "12ed2786b828aea72f1ebef279285eadba45ad3fa9f0dd8966ef941628e7d5d1",
       "unit": "S09",
       "summary": "Reads and writes saved games and presents the DOS file selector. It contains the 307 record save schema and the initializations needed after loading.",
       "windows_group": "ANTEDIT",
@@ -2340,7 +2340,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "e7df6acce92848f7cf14836483247fce879fb0ef67f36058733d0c7c11ddb6ea",
+      "source_sha256": "6010fd695cd4220907a0fa3463cfd63a8435e927be411e441efd31ebfc747c62",
       "unit": "S09",
       "summary": "Draws and edits a text entry field. It converts character cell positions into pixels and handles acceptance or cancellation.",
       "windows_group": "unknown",
@@ -2410,7 +2410,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "b9045c3effa3188a32d1fc5c1cd833a1ed77f8a47e6e3d2ed73e722ff5867473",
+      "source_sha256": "7e7049ebcda89a0b60971ffb42507a8d9338e9885b0264690039d461e2f73978",
       "unit": "S10",
       "summary": "Draws and tracks pull down menus. It formats menu text and dispatches selection while checking the menu data length.",
       "windows_group": "unknown",
@@ -2477,7 +2477,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "a77d5904ed36f2131af69db3171fb47c4755b98eec29f95f2181b922c87921e9",
+      "source_sha256": "e72fac8f24d569af254b1893b3d93d7fa434f8aac6a756cd4431140e528276ae",
       "unit": "S11",
       "summary": "Updates game menu entries and handles menu commands. It also manages pause state and the Pause or Unpause label.",
       "windows_group": "SIMANT",
@@ -2589,7 +2589,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "13f76d32078812a6063a270d2aed3d890bba5033a82c8b31cde16d43b817ac64",
+      "source_sha256": "ad2c0c3f1833247a226f207ffe4f354b837128c438ba1af2d7e44d9b351a2747",
       "unit": "S12",
       "summary": "Handles map window events, view setup and map image generation. It draws map data and keeps the view cursor aligned with the selected location.",
       "windows_group": "ANTEDIT",
@@ -2790,7 +2790,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "21d83dfc3d1a20658b53e688ca4f8e428cf39ba6a653b3e495f2213d2e068e8d",
+      "source_sha256": "23bcb58ec53bd5e0a41975f32a987170e1f326dbb82531b37736e70e936f96f6",
       "unit": "S13",
       "summary": "Handles yard window events and renders the yard. It draws animated people, animals, weather, swarms and colony population bars.",
       "windows_group": "ANTEDIT",
@@ -3071,7 +3071,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "6fb56287ba04051c7a20515cb068bf4064bc2962fd6e623a909034eb66868441",
+      "source_sha256": "59a639a22bc4a3d36d1966563973de58d629ab27b9440ba3e6a260e36012943a",
       "unit": "S14",
       "summary": "Displays scenario, score, end game, help and picture dialogs. The file also computes the score and draws caste and spider popups.",
       "windows_group": "SIMANT",
@@ -3243,7 +3243,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "bb377e3932d4ec2677e7eddd1c42d0d015ed894296947a12635690fae0a5e646",
+      "source_sha256": "71d4b18aed1605a051a03a5e6867ddeea2d7633b0251b89cf12f0887b3ae745d",
       "unit": "S15",
       "summary": "Starts a new game and restores default windows, and handles quit and fatal exit paths. It also loads monochrome patterns and checks the demo expiry date.",
       "windows_group": "SIMANT",
@@ -3344,7 +3344,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "0f43041b5a668bf961e54642346486ce3732c9dea247e168a75f34858ce71f3c",
+      "source_sha256": "e856f668b3d5adf6fcff074f0a7f60532ff5f77882f7773c1667a888ec0741e9",
       "unit": "S16",
       "summary": "Displays the intro, credits and simulation payoff animation. The three entries manage these presentation sequences and their resources.",
       "windows_group": "SIMANT",
@@ -3441,7 +3441,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "f0016448be4902efe103167666bbf03d730ee8f272130ac028f9141532703a96",
+      "source_sha256": "9b17025b62b3af7533a80d41a832f791783e404996d9972a388bb790e02c5b04",
       "unit": "S17",
       "summary": "Initializes menu bar data and fixes up its pointers. It calculates item rectangles and applies menu colours before drawing.",
       "windows_group": "unknown",
@@ -3813,7 +3813,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "83046b8797debc1461a10427f06c0a50723c0efd297820df8ce9b7767bb2cc38",
+      "source_sha256": "a4f75cb761b9e8772b898b2f30096d500415085b818b09769e74ec464018832f",
       "unit": "S19",
       "summary": "Runs the main game event dispatcher and keyboard command handling. The same file provides a debug memory report.",
       "windows_group": "SIMANT",
@@ -3896,7 +3896,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "8afb111e64a721b2ef564c0d1813ef0978697623a89260d35bed18a6d5c80105",
+      "source_sha256": "cfb4b22365321397e829ae3ec032ff1dbcd5b51f536d7e06529d43f5e0819419",
       "unit": "S20",
       "summary": "Loads the fonts required by the display modes and provides empty driver hooks. The graphics selector chooses these setup functions along with the raster driver.",
       "windows_group": "none (DOS only)",
@@ -3967,7 +3967,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "1f949eb719653c5bbdd57e1b27bdf415c468114382aa73eb855fd3decca08abb",
+      "source_sha256": "aee06fbc8334ea660b2713c99fb846839838e57edfad0d9a29089a9aaf285d78",
       "unit": "S20",
       "summary": "Initializes DOS specific application resources and reads configuration words. It chooses language and database resources and rejects invalid display mode settings.",
       "windows_group": "GR",
@@ -4131,7 +4131,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "2c48576f50054cb1b7489a7abb646d00ae27043c247cdc2d0c1b607b55c073d2",
+      "source_sha256": "6a5de26368707202946a65ec4fa8b0b36ae9db8ad08dad3f7c1e2eeb6b485600",
       "unit": "S22",
       "summary": "Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals, dialogs, alarm drops and special interactions such as laser fire.",
       "windows_group": "SIMANT",
@@ -4343,7 +4343,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "6207986dab856ce4ddcdae1b58b1f35096a438d3acdb52da9efe30dc382a0b07",
+      "source_sha256": "3a0a162090cadda9952a869fff79650448303a1c360f4538004b0de9ba246a77",
       "unit": "S22",
       "summary": "Applies experiment mode map editing tools. It digs and fills terrain, adds ants and food, changes scent, and connects or smooths walls.",
       "windows_group": "ANTEDIT",
@@ -4645,7 +4645,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "07ed1b7e779358779b126dd14e126cce28eba43760103ebc0aa8b2f62f0b18e5",
+      "source_sha256": "0db6fbcb364687b0b5b6a96ebe29d906b46a9f208bc38930a0f9ede478baf0ae",
       "unit": "S23",
       "summary": "Displays the information window and card resources with styled text. It also contains byte order conversion helpers used when reading those resources.",
       "windows_group": "_TEXT",
@@ -4796,7 +4796,7 @@
         "/Oe",
         "/Zi"
       ],
-      "source_sha256": "ece8770c8921db24d04daac27f78460de2ff8dcfef3244fba8e2bda67239e9fd",
+      "source_sha256": "d0c12643457aa98380e4400d898996e5ace63fb6658c93e75cdbc21a8e659e42",
       "unit": "S24",
       "summary": "Displays the history window and handles its controls. It clears, updates and plots the recorded history graphs.",
       "windows_group": "SIMANT",
@@ -5474,7 +5474,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "7f2e71cde9b171531ad8b6c9d9024f92f1d2f30aaf9921816dceaa8e85d158bc",
+      "source_sha256": "2561db126bc375878a5d86291fa1a69e150d9e6d91555792a257a1c1f16e978f",
       "unit": "S26",
       "summary": "Tracks window zooming, dragging and resizing. It constrains the resulting rectangles to the screen and uses the resize icon.",
       "windows_group": "unknown",
@@ -5544,7 +5544,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "d2f1c6df32eb0e79f452895df9d5690675be61608e1969ad84de772f4d084a21",
+      "source_sha256": "06501095ada223542f01de5345e4bc186f086fdde6587a834b6436697385daeb",
       "unit": "data",
       "summary": "Defines initialized direction, caste, mode and display lookup tables together with initial game state. The same file includes yard and creature defaults and history references, so its contents span several simulation and rendering tasks.",
       "windows_group": "unknown",
@@ -5615,7 +5615,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "2c5802ca4ad97a50386510b92574cd77d4ac3c8171b566b16e4c4a3464f7af3a",
+      "source_sha256": "b2a6aa6d5fb93ff18e34acbc6787ea2a5a9b1880d1eb097c49def9c55ca47c10",
       "unit": "data",
       "summary": "Defines the large colony maps, life and pheromone arrays and ant lists, along with a saved game header string. The compiler emits two far data segments from this one file.",
       "windows_group": "unknown",
@@ -5691,7 +5691,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "0f8b4d8eac857cbfb42bc41811ae746fa4615a7d0f7da42e1c0d1d1f44691c4d",
+      "source_sha256": "840e229049918a2fb09eaff0910fa051d7c3c23eb8f9a791bf0f019a14065d1e",
       "unit": "data",
       "summary": "Defines the DOS release version string. It is the data contribution immediately after the runtime BEGDATA region.",
       "windows_group": "none (DOS only)",
@@ -5762,7 +5762,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "8b97e187f91c19efda95855c3b345178e0e684f6da978b8228abe05b9b7c0ffc",
+      "source_sha256": "63bc84b017cf2c6ee8ab8faea0ffa56d9954ba9f71b855d6539b42fda3a7d0fe",
       "unit": "data",
       "summary": "Defines the theme song descriptor and its program and bank mapping. It also carries the pointer to the separate version string and the unused MIDI filename text.",
       "windows_group": "none (DOS only)",
@@ -5833,7 +5833,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "352b598d2c65786cb5352b69327d5b8f9df85e1e18dae8d9ee86e5f03684e19b",
+      "source_sha256": "ad1a7a8dc17b0604ac7ad2a3920a866e84fd79b3d486514eb587978fa762ca70",
       "unit": "data",
       "summary": "Defines sound effect instruments, sample descriptors, FM patches and MIDI mappings. The device tables select which representation each sound backend uses.",
       "windows_group": "none (DOS only)",
@@ -5905,7 +5905,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "3ead987abf31593c38e94ccb2f33e42a3a7278c242cbe3a6504b15157725622f",
+      "source_sha256": "8f9e70776d70123a1e05655f7cb2a9bb39308a30aeb2858dffd2a44d74cd8050",
       "unit": "root",
       "summary": "Loads song resources and decompresses sampled sounds through a database hook. It also manages the sample free list and releases sound resources.",
       "windows_group": "unknown",
@@ -6417,7 +6417,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "0c1a408feff84cde73bff70b8364b99b16e1db1d470f860d9cd8ee0acfa40f1e",
+      "source_sha256": "2c2c23b51d861c1c547dcde58a05d84cd123e2b69f94f9571c2b30c8cebcba64",
       "unit": "root",
       "summary": "Initializes application windows and installs drawing and control hooks. It loads saved window headers and handles window closure or control changes.",
       "windows_group": "SIMANT",
@@ -6571,7 +6571,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "9fa41ad3311c7587feffd34e554460b3a342014ec9a0a54924b2ec6ac8cd0e5a",
+      "source_sha256": "5bf6218512c615d0e8798dd8666f6571ed6d11404a2f2823bd2c577da55956ee",
       "unit": "root",
       "summary": "Provides the game facing sound and song interface. It initializes the sound driver shell and forwards start, reverse, completion and control requests.",
       "windows_group": "GR",
@@ -6693,7 +6693,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "8b4391eec02c1bdf522b5f517d2025947e5eb27ed0eedefb998d03b6a74219e8",
+      "source_sha256": "11d0abedd6d2f19b3de21d9d65bb729daf5d51021f1380fdd1ef320e044afee0",
       "unit": "root",
       "summary": "Collects small map and yard window hooks, coordinate conversions and visibility checks. It also supplies dialog waiting, abort and timing helpers.",
       "windows_group": "SIMANT",
@@ -6975,7 +6975,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "b0e3bf0ab2842153d4bb8c4c02b47853073ec012a94d23e7836d136799dfba99",
+      "source_sha256": "0044bc15b3392cd921cf720f51adae1f6d489f9e750f29a68b73acaeaa97c1da",
       "unit": "root",
       "summary": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands.",
       "windows_group": "SIMANT",
@@ -7317,7 +7317,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "ff330af40f7001136c0e28cc9c438541a0077f3332311b6483e54420c7067ea3",
+      "source_sha256": "d8a3e6c30a3a785c0864fe40e2dbc24de5269779213cb5e41e204bb44080f745",
       "unit": "root",
       "summary": "Draws and updates the detailed ant view, including tiles, the spider, speech balloons and graphs. It also contains tile loading, EMS tile cache setup and editor event handling.",
       "windows_group": "mixed",
@@ -7872,7 +7872,7 @@
         "/Oe",
         "/Og"
       ],
-      "source_sha256": "0acb60d352b20287eeb832617df0cd67c413bcc176f19498b246775bf13e192d",
+      "source_sha256": "65be1ba3fe5d35f50ec836a5e73144078c2246c1fc65d838cb38cb957f6e6d54",
       "unit": "root",
       "summary": "Implements caste and activity mode control windows with triangular controls. It maps pointer positions into control levels and draws the resulting production settings.",
       "windows_group": "SIMANT",
@@ -8748,7 +8748,7 @@
         "/Oe",
         "/Og"
       ],
-      "source_sha256": "e0abc945f1140457fcbe395cfdb169ef5deb217da0434f47b2dc5b6fd1559536",
+      "source_sha256": "76baadbbbde4278a5aa8b386de2a9c094c44aaa88c47116ec56e595681009ff9",
       "unit": "root",
       "summary": "Updates ant counts, water, food and eggs. It also supplies direction, distance and nest entrance helpers used throughout the simulation.",
       "windows_group": "SIMONE",
@@ -10839,7 +10839,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "bcd9ff8526926306ed1637e541c0c48d64acb2f181f71efd5339e4be58e3d250",
+      "source_sha256": "8979f5815b51ae25aded5b660c15483777c59ec4e95c4528e3598215191e4ca6",
       "unit": "root",
       "summary": "Updates colony scent and alarm maps. It fills nest holes in the scent representation, smooths alarms and decays pheromone levels.",
       "windows_group": "SIMANT1",
@@ -11061,7 +11061,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "aae9c671f0f3cef98eadd30b54b7cb70c8e13155bebf1c6f18d73d7fb813b40c",
+      "source_sha256": "c1bc8dccf57129fbebf98ea3365d29a3c3df903dee4326000d77e92e94220ee5",
       "unit": "root",
       "summary": "Creates nest entrances and digs or smooths tunnels. It updates both colony maps and fixes their exit maps after terrain changes.",
       "windows_group": "SIMONE",
@@ -11253,7 +11253,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "81c8944665920b67c169ab891e4dd31b5239ce917663dfff16aa917bcf6711fb",
+      "source_sha256": "c1a0778c8be9d24a300e84dbd17d72c5e95397348865a7f0ae092c8a46492d45",
       "unit": "root",
       "summary": "Draws centred ribbon text and sets game messages. It forwards the selected message to the ribbon or yard display with its duration.",
       "windows_group": "SIMANT",
@@ -11334,7 +11334,7 @@
         "/Oe",
         "/Og"
       ],
-      "source_sha256": "3a803bebbdbae693f8b9c9e1cebd2235d6ad284c17955578f7bc707c26bc139f",
+      "source_sha256": "0fd2ba7f49b1ea04d01c973f70f48cd51f581cbd3b8919244610bb33026a999d",
       "unit": "root",
       "summary": "Contains main and the main game loop. It processes command line options, checks configuration and resources, initializes the game and performs shutdown.",
       "windows_group": "SIMANT",
@@ -11415,7 +11415,7 @@
         "/Og",
         "/Zi"
       ],
-      "source_sha256": "57fe38dc64eb2853df2aef794aa2eec040bc4a8c132de3839fb391d4830dc0aa",
+      "source_sha256": "1c730731645d4e03a1dbda22362b9708cd29f2d75f537fb8d1512760c71d7256",
       "unit": "root",
       "summary": "Constructs speech balloon images from text. It converts their monochrome masks into the colour formats required by the display modes.",
       "windows_group": "GR",
@@ -11617,7 +11617,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "a622f1f33bd63de18f799050f7cf2730188fa3a23ff71c8a68697e8237e0161e",
+      "source_sha256": "58fecf44dc506d09ef0a6c62af8eed64cb99028e970b8f2ac7fcf927336305b7",
       "unit": "root",
       "summary": "Draws clipped lines using Bresenham stepping. It dispatches to bitmap plot routines for each display format.",
       "windows_group": "unknown",
@@ -11681,7 +11681,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "fdebd5300c35a7273cc4212b91616198b6b823bc0c04a13b7afe821c9d7027f4",
+      "source_sha256": "74fd9c7a0a6b069b9d0d1de8b1f75a2c49eca18dec5916905b406f1a4aeef278",
       "unit": "root",
       "summary": "Implements the relocatable memory manager and its handle, lock and allocation APIs. It also provides malloc style wrappers, discardable blocks and memory diagnostics.",
       "windows_group": "GR",
@@ -11930,7 +11930,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "143d0a7c6373feca800038aabe4d6fc59718861a4e897094e0a07c8fc1b7dc8c",
+      "source_sha256": "e4af02e6e41e0329be3ab04ddec1c1b026893f3407b0181705c3a7c880519e1f",
       "unit": "root",
       "summary": "Copies large blocks while stepping through segment paragraphs. The same assembly file also probes Tandy video memory and computes a checksum using 386 instructions.",
       "windows_group": "none (DOS only)",
@@ -12075,7 +12075,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "d01fc585d2f9d63e4f474e55468dc91d28dde66293e1bd52867920a3e7b6a28b",
+      "source_sha256": "df83ad6e509ffe544081b50eedc856d1c5c4ca6a55e8d16938f774d5e27e7c27",
       "unit": "root",
       "summary": "Wraps LIM EMS services for allocating, mapping and naming expanded memory pages. It detects the memory manager and establishes the page frame.",
       "windows_group": "none (DOS only)",
@@ -12140,7 +12140,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "5161cb6444d9d3e69c32c04b2ac5421ee75e7162e59e448355ae6ad6db8c2824",
+      "source_sha256": "b897f35d2484230d1e105c4ccd51b827abfe6327d99969cc2163a2881060370c",
       "unit": "root",
       "summary": "Opens and searches database index files. Create and write-side index operations are empty in the read-only DOS game.",
       "windows_group": "SIMTWO",
@@ -12363,7 +12363,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "41edf750eb66874be88b0a4c0b129c628f0ef18ab6804eae7547b00cf1049157",
+      "source_sha256": "a7b398c55daf0372c6c3aa3d96e2aed9fbfbc333df76294a866b9ac5b817ac1c",
       "unit": "root",
       "summary": "Reads database files through an EMS page cache. It tracks cached pages and validates handles before returning record data.",
       "windows_group": "none (DOS only)",
@@ -12904,7 +12904,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "23fea2805051ceb20432c4b7fc0b38c29cf4828ec5f323cb36fdff23eae727df",
+      "source_sha256": "a805430f8838ca65e0441d50c8c1be462f1c18b5eae5f883bd0cfc46951430fe",
       "unit": "root",
       "data_frame_references": {
         "target_segment": "_DATA",
@@ -13108,7 +13108,7 @@
         "/Og",
         "/Gs"
       ],
-      "source_sha256": "39ef6d7c085f8a3c247eb416cd9c0dd5a0e38dbcd11602fff42f623fce47a3f9",
+      "source_sha256": "fb2065378736c35d13095dae9ca6df84c276056905e54bf3aac179d62d993f3f",
       "unit": "root",
       "summary": "Loads mouse cursor pictures and masks from the resource database. It installs or changes the selected cursor shape.",
       "windows_group": "unknown",
@@ -13173,7 +13173,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "13f983e85dcd457d5cd2fc2cd27ae1fbe9d5e886eae87186981ee96014673c76",
+      "source_sha256": "b17138f8605fff461e5a557920840499624c9488c9e96afd3a4ddcd4d2c25f40",
       "unit": "root",
       "summary": "Provides video BIOS operations and low level bitmap and text entry points. It includes palette and pen colour handling and accented character folding for the small font.",
       "windows_group": "GR",
@@ -13267,7 +13267,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "144a11f6f383891c9bc1e728c14c97c0d88048455007011feb28d231f94c69fe",
+      "source_sha256": "c7bac0c206bada2e960dfd219fe14b1f53cddf67ad0e6cafd1990a9524965844",
       "unit": "root",
       "summary": "Implements DOS mouse, keyboard and timer services. It owns the input queues, hot boxes, cursor save buffer and interrupt handlers.",
       "windows_group": "GR",
@@ -13346,7 +13346,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "6ffbf0d374c7041863608e238e653e7d070476ebb35002e62b2778fdd3c2d929",
+      "source_sha256": "75fc3c3da532b1646526ec41362b611ea7c5192435121866490d5b137b9bf904",
       "unit": "root",
       "summary": "Displays fatal errors, alerts and confirmation questions. It also handles DOS critical errors and timed waits for these dialogs.",
       "windows_group": "GR",
@@ -13429,7 +13429,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "110f7605f2bb18c6be26be6a56e2f33f414bb6fcb0c00a0370f87e98caa490ae",
+      "source_sha256": "664d6b4cf63096b25bdbbb2216cfc44803059b66c31b17d233bf95ee06531589",
       "unit": "root",
       "summary": "Draws screen rectangles, outlines and frames using character cell coordinates. It saves and restores rectangles and draws packed pictures.",
       "windows_group": "GR",
@@ -13653,7 +13653,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "5e38c7aca4318c0939037d9ab5ed696bc9720effb534003320f18427b7206ce6",
+      "source_sha256": "4c434eaf48053a2f825ae48f9b0cb0e15ed2becf25e175d74555b734815ed64c",
       "unit": "root",
       "summary": "Clips rectangle drawing operations against the current rectangle list. It decomposes the visible intersections before calling the drawing operations.",
       "windows_group": "unknown",
@@ -13724,7 +13724,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "7928261bd26fc5ba5c51ea67d6d4e6547b0982d06a0fc3ee77620af09557aa8b",
+      "source_sha256": "7cb4a39295152ef645dd7d4493f15eed54a31ae70dc47fd33b9e9b9a645572ea",
       "unit": "root",
       "summary": "Maintains window clip regions and their rectangle lists. It implements include, exclude and push or pop operations on the clip stack.",
       "windows_group": "ANTEDIT",
@@ -13860,7 +13860,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "94fd00162f47a6a671e3adc4f468876f26fb04fef165e4c9e5ba80e03e18fcbb",
+      "source_sha256": "440bdc0561a0fa488c5e2e3d1cf2875de0ed070932ccf9ef437bbaf9a5f00827",
       "unit": "root",
       "summary": "Reads BIOS ticks and keyboard state and installs a Ctrl-Break hook. The same module contains a byte swapping copy helper.",
       "windows_group": "none (DOS only)",
@@ -13986,7 +13986,7 @@
         "/Og",
         "/Gs"
       ],
-      "source_sha256": "7507ccfea3dc232e953d5506e984b9078aaa43e208956c0209dc4cd135f1223e",
+      "source_sha256": "5b7ee4895aafbecd1591a7a5d375dabc6aacc5eb9847e41ddd2b9404de443bbf",
       "unit": "root",
       "summary": "Measures and centres text blocks. It also includes delay and fatal text helpers in the same module.",
       "windows_group": "unknown",
@@ -14056,7 +14056,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "f15336f79c1915d3fc3d5c1545860bbe50292cf96ffa71d5c0421bd81e8ea5d4",
+      "source_sha256": "85c15aa82dc765b40a49627f25212f3db53cd05d32eca183d29cd9aafb6fce3e",
       "unit": "root",
       "summary": "Fills a quadrilateral one scanline at a time. Its edges advance using 16.16 fixed point arithmetic.",
       "windows_group": "GR",
@@ -14135,7 +14135,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "34e1a65b84a4de1b8010a1ba6a650d9bdf2c0d4ae1198bed3ff6e9ffa4d0fe16",
+      "source_sha256": "42fae632d17b083e92d3a313d4dbb474f5d33c36ee82f70ab7823672e10e77d2",
       "unit": "root",
       "summary": "Draws a string with the bitmap font. It folds accented characters and supports underlining.",
       "windows_group": "GR",
@@ -14214,7 +14214,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "3f3dabd5550d4069e12408924bdcd257ea82abe2921fa503f2baecb106164f99",
+      "source_sha256": "a25ab2f3adf77ea6e43f1b3f6445ecd1dc3c0c9fd1ecadd56c2310fc9b1a0af0",
       "unit": "root",
       "summary": "Provides menu bar and menu item state helpers. It also contains timers, mouse position and button tracking functions used by the interface.",
       "windows_group": "GR",
@@ -14368,7 +14368,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "ca129aa0e7455d125cce28d88b02480df14d82be1d2a4d4b1874c7720e7cce66",
+      "source_sha256": "db68eb7cc465cf1080e5209cc8cb28e8aafc8dd231e7d81a3daba15c64f762c3",
       "unit": "root",
       "summary": "Identifies the graphics adapter and selects its display and resource drivers. It installs the screen and sprite callback tables for the chosen mode.",
       "windows_group": "none (DOS only)",
@@ -14438,7 +14438,7 @@
         "/Og",
         "/Gs"
       ],
-      "source_sha256": "5b7ba3ddd3e7a1e1003a1386243d97efb3c17dcab2601a46f99a516dc7801c0c",
+      "source_sha256": "6a5580aa60feb1b65c348729e5791a4d6b791c3ca61e18301f0efd31f4755d8d",
       "unit": "root",
       "summary": "Provides window object text and bitmap helpers and resource loading. The file also includes delays and display format sizing helpers.",
       "windows_group": "GR",
@@ -14541,7 +14541,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "cd6a067a7cf7928067d15c6f418183ae689e904125624d1cb7d8cef34668d790",
+      "source_sha256": "b37b6d15d858f194a147e4f751ca51c3f28ddfe0ccd94428a588fd0aa7df407d",
       "unit": "root",
       "summary": "Loads window resources and opens or closes windows. It manages window stacking, swapping and draw hook installation.",
       "windows_group": "SIMTWO",
@@ -14684,7 +14684,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "4a99f202b4c9a1483fa5ded0079b344479d32c69e2bbf1929395524c19b9942d",
+      "source_sha256": "65cd73e47a8ed8f1fb9f7657d81e4af1b1b808acbbce6922bbc62a38cf8d3787",
       "unit": "root",
       "summary": "Fetches and dispatches window events. It handles proximity events, queues and event flushing.",
       "windows_group": "SIMTWO",
@@ -14808,7 +14808,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "77b2fd1f52e63aae837e2396f6d73cd169b49dcd67fa4aa1622ebcf2d80f5b89",
+      "source_sha256": "8f6d108c6b6c93b522111c722a0a2f21713780825fc39454e5eae13866360939",
       "unit": "root",
       "summary": "Draws window frames, titles and objects. It includes colour selection, string justification and button border helpers.",
       "windows_group": "SIMTWO",
@@ -15042,7 +15042,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "f8ba2f7c5019dab2d93810b7a59d395fbf802e63c7dc44ff566934149c5afe3b",
+      "source_sha256": "e75a3bedd2368577b103d9e3c885834c94eac55e4aed430d58f55756d08a7a82",
       "unit": "root",
       "summary": "Updates window object selection, visibility, formatting and bitmaps. It also draws object text, bars and proximity menus.",
       "windows_group": "SIMTWO",
@@ -15587,7 +15587,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "66d6d881b85ecfef6781fac9c06ff5f1981d2e83e96c8d1ecad991fb78f7a82a",
+      "source_sha256": "109ca2a3df91f5d4d8167046cd9b62fe164d152fa8ec9ec2146b72cd99c22000",
       "unit": "root",
       "summary": "Implements list box and slider window objects. It calculates elevator geometry, draws controls and handles list movement and slider events.",
       "windows_group": "unknown",
@@ -15657,7 +15657,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "8d0a388605682fb9c9db5c6b6e363f79ef54fe80d0bcdd7b1009eddeb8dc10cb",
+      "source_sha256": "b032fbbd6ce00c993b88278b1f9d4499b87153335dca6cf7603beea2a4c5db55",
       "unit": "root",
       "summary": "Selects the current font and prints strings with it. It initializes the display fonts and manages their output buffer.",
       "windows_group": "GR",
@@ -15875,7 +15875,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "d36361190487ab19651c5c987c8049767ae0dad2f03dcae75fc31587464cf53b",
+      "source_sha256": "7309495dcf9201250a84a27ee2b38eec75bee6c5fe1bc3989c0a4c9c1662186e",
       "unit": "root",
       "summary": "Locates window records and objects and fixes up their pointers. It computes object rectangles, automatic sizing and layout values.",
       "windows_group": "SIMTWO",
@@ -16048,7 +16048,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "780731fff93dd921ef4b52d20f0b54fbbfa9ebe219dd85c5aaa75a00c7a3bd38",
+      "source_sha256": "937111a96c9f5ca6f8fa31ed2fe3b5f30072bef82bb39af5fda6f697eafd5067",
       "unit": "root",
       "summary": "Draws bitmap resources at window objects. It also prints text inside a rectangle and handles picture buffer formats.",
       "windows_group": "SIMTWO",
@@ -16294,7 +16294,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "21e67fe06f0639f0e3b9a747c6e681a4e3b9dc5ac2d29fdb808581c07fb87000",
+      "source_sha256": "ca1a2de678c7e3f50e9979774a33c5e72eef0e1cd272447e37256d88e7f7bbd7",
       "unit": "root",
       "summary": "Blits bit aligned glyphs between far bitmaps using OR operations. It also clears the destination byte buffer.",
       "windows_group": "SIMTWO",
@@ -16383,7 +16383,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "5220ab27a29040c61984254f5c98c8828eb10b3d685037f5a167992503001979",
+      "source_sha256": "ee651edf029b29abee4f70e963dd170ce0c609a60c4785da4adcceeede855ea1",
       "unit": "root",
       "summary": "Manages animation object sets, their positions, priorities and backing buffers. It composites changed objects and restores obscured screen regions.",
       "windows_group": "GR",
@@ -16648,7 +16648,7 @@
         "/Og",
         "/Gs"
       ],
-      "source_sha256": "b60e9438fa21afce41ae88eb9f5b483d63580d521dc7ce9444438a7dc128a342",
+      "source_sha256": "381f41a66e1f03123521ec178ce2926d3f745eb6859603a4ff7cbde59c69d9fb",
       "unit": "root",
       "summary": "Selects sound devices and builds their channel tables. It initializes and dispatches the voice backends used by the sound driver.",
       "windows_group": "none (DOS only)",
@@ -16718,7 +16718,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "000da509e7ae4b340aae85f8619c78e858f4390c4835393a1d9dc03afbecb49f",
+      "source_sha256": "0b94a561d2e1f74328748d137b6695d2669ba8721eb05ad1554e87a4612ce1c0",
       "unit": "root",
       "summary": "Controls AdLib OPL2 voices and their instrument settings. It converts note, pitch and volume data into chip register writes.",
       "windows_group": "none (DOS only)",
@@ -16849,7 +16849,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "3e21df2148235f271cb9dffff09cb6cddc6c68d817053adb7fb28dad06744978",
+      "source_sha256": "cdf21ef5b5ae24159ee33d10d81077026f2cc3173116f07e986dab510fd9a4ad",
       "unit": "root",
       "summary": "Loads and advances MIDI songs and their tracks. It decodes timed events and sends notes through the sound driver channel layer.",
       "windows_group": "GR",
@@ -16927,7 +16927,7 @@
       "flags": [
         "/Mx"
       ],
-      "source_sha256": "dddbe35da4844f72b498118914465ac6bf0f77b12ab66fcfc8689f1deb54f2e8",
+      "source_sha256": "02bd58d8375ae47761ee26b8799c4974f8457a3fa0cae47d05d42f81002c7eac",
       "unit": "root",
       "summary": "Mixes sampled sound channels in the timer interrupt and sends the result to the selected output device. It also schedules the MIDI sequencer on a private stack and chains the old timer vector.",
       "windows_group": "none (DOS only)",
@@ -16993,7 +16993,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "2fa9235d9b2bdc6a5cafa9d7301d189fb957b48b6aac46d28180eb699afca576",
+      "source_sha256": "20612d460354f4e465b6a3f67918df88e0ff87be8a1c91e09daa5093af67fea2",
       "unit": "root",
       "summary": "Starts and controls digitized sound voices. It tracks sample playback position and channel state for the interrupt mixer.",
       "windows_group": "none (DOS only)",
@@ -17064,7 +17064,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "c0a1a953ecd197f3f213e59d4d77ac27148115c966f90cf195920c7aadd51c2c",
+      "source_sha256": "57d7882337ab64895d2c4594bb2fc6f5946c4162d66b158aeb0fc64ce0d120a3",
       "unit": "root",
       "summary": "Probes available sound devices. It performs port tests and selects the hardware capabilities reported to the sound layer.",
       "windows_group": "none (DOS only)",
@@ -17137,7 +17137,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "001d4b6f0fb5b671aff2fe6bec343aefb2ce97d86a1f764381cab45e3e1a29e5",
+      "source_sha256": "49746007e8dad8a9707357bc80946d369d0e1723cdfad347db4cf188bfc18bf5",
       "unit": "root",
       "summary": "Allocates MIDI voices and maps instruments to channels. It sends melodic and percussion events through the MPU-401 output interface.",
       "windows_group": "none (DOS only)",
@@ -17210,7 +17210,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "9ff37b9a1172a0fc01c61e1192974f2240d40d663580887bb2fc2b74d0a3c38a",
+      "source_sha256": "ce43621f373c6a2fa58d719d9f8e421451cafe2d785f210a894a9b8a897cd08f",
       "unit": "root",
       "summary": "Resets and probes the sound card DSP. It waits for the device acknowledgement and reports whether the probe succeeded.",
       "windows_group": "none (DOS only)",
@@ -17342,7 +17342,7 @@
         "/Gs",
         "/Zi"
       ],
-      "source_sha256": "e4c72870f629f6ed1a7b2c6122d89047df4cf25521f3eb8820fc6a380e458fe1",
+      "source_sha256": "2083681ac30702ac03ac24d0c3409305854dabde960d74ae2027c26656a7e340",
       "unit": "root",
       "summary": "Outputs notes and controls voices for additional PSG style devices. It uses port 205h and the register interface in the preceding sound chip module.",
       "windows_group": "none (DOS only)",
@@ -18108,7 +18108,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "33fc164db1038b41d3d8f22913dfbe0fd2fcb4653920187809214a9a8669ef0e",
+      "source_sha256": "d7215952b8d639ab67bdfa549feb6e8b5cb848e218736e13453555005e0c45fe",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -18187,14 +18187,14 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0358",
+            "name": "_mode_knob_center",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_022E",
+            "name": "_caste_knob_center",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -18266,19 +18266,19 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "437e2ad6e5d95031fb21b0f4c695d4e098ec1f3cffad41009b1d243221919936",
+      "source_sha256": "4eb28534d837220f8a67e4aac531b74e2b19d6a120056ef3ba8f3eb544728067",
       "unit": "root",
       "storage_contract": {
         "communals": [
           {
-            "name": "_fd_50F6_4B30",
+            "name": "_midi_track_status",
             "kind": "far",
             "length": 10,
             "count": 10,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B42",
+            "name": "_midi_track_event_ticks",
             "kind": "far",
             "length": 40,
             "count": 10,
@@ -18566,7 +18566,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "60fff73a449ca2ec086209210e8d7b24b7d02cd2ba541d7e9d0333d92a5c2c9e",
+      "source_sha256": "ebe13ac6bc141d8619f2acb3c16415b28ae427bb60f25fd0acb02ec11b473108",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -18575,7 +18575,7 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_g_5AAC",
+            "name": "_clip_active_list_offset",
             "kind": "near",
             "length": 4
           }
@@ -18645,12 +18645,12 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "5fc4ed5bbc72a46b7b31f3815701886fe6593750ca4e734855211e2354e9acab",
+      "source_sha256": "8b44d49a73b928fb9f121126c1c720768606903e352534a39dfcf67f08cace29",
       "unit": "root",
       "storage_contract": {
         "communals": [
           {
-            "name": "_fd_50F6_3C14",
+            "name": "_clip_rectangle_workspace",
             "kind": "far",
             "length": 2048,
             "count": 256,
@@ -19040,7 +19040,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "4599ec1480a1885118bc2a667b7f1f111d01fdda08d169229518a6f661e23dbd",
+      "source_sha256": "c9106f0948acfd142e81745f8a5d68fe26ddccc619fa56c78ee1a876b60b42c4",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -19049,7 +19049,7 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_g_8CCB",
+            "name": "_dos_critical_error_selector",
             "kind": "near",
             "length": 1
           }
@@ -19119,7 +19119,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "7062b88516ed455369134b006a48fac7c80c852cb51fb0ccffb55378d07558d3",
+      "source_sha256": "bbd54000a56eb56df2c139d0276ac035fc47bf31a837692a2dd7352d1740e82b",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -19128,14 +19128,14 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_3952",
+            "name": "_db_index_search_entry",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3956",
+            "name": "_db_index_lower_bound",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -19383,7 +19383,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "e584517175a80a84f95902ccbd2857a436a5e48ac95e94412a430fef3bfcd0ce",
+      "source_sha256": "64900b0c3d2bf582987626a3f6ce600d566a5a9674af8eeede5f39118a0fb4da",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -19393,7 +19393,7 @@
         "communals": [],
         "publics": [
           {
-            "name": "_g_5A97",
+            "name": "_gfx_display_mode",
             "segment": "_DATA",
             "offset": 0
           }
@@ -19543,7 +19543,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "56062b2497bb3a418f683a0687a5ecadde6d3bf292ebee1b732769fcde375bd8",
+      "source_sha256": "27f539d015c7cd91322628e59222fe465ae2eb770ad37afbdaedf7f8735de09e",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -19552,14 +19552,14 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_49FA",
+            "name": "_window_current_event",
             "kind": "far",
             "length": 16,
             "count": 16,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4A0A",
+            "name": "_window_previous_event",
             "kind": "far",
             "length": 16,
             "count": 16,
@@ -19800,7 +19800,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "1047cda3659498ff23725386c5336141ef20833d61a52b24bf2c516a77472de6",
+      "source_sha256": "21c391bc8d1a4742d429d95173e12ecc7d8ddf5af64b8661afc01a028e48c7a9",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -19810,7 +19810,7 @@
         "communals": [],
         "publics": [
           {
-            "name": "_g_2108",
+            "name": "_gfx_planar_colour_map",
             "segment": "_DATA",
             "offset": 0
           }
@@ -20130,7 +20130,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "57bb52fe38f70d7a00bdc05b4eac24e22aadbda792c4318f3da68e1ef37fe93d",
+      "source_sha256": "790cc6e8056a14bab0af2ec2d93380612167219a48ad98367e190f5b1c5c2673",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -20139,7 +20139,7 @@
         "live_initialized_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_46D2",
+            "name": "_ui_icon_bitmap_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -20320,12 +20320,12 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "eab78d393bf7cceb4f94aba3f150dde33777d1766d6dbb5d04492eccb6954e2a",
+      "source_sha256": "8f9fc798b159fc9f4165cbc0f899f94c2856d3b408338ed5e38417f3213654e0",
       "unit": "root",
       "storage_contract": {
         "communals": [
           {
-            "name": "_fd_50F6_3862",
+            "name": "_save_last_filename",
             "kind": "far",
             "length": 100,
             "count": 100,
@@ -20567,7 +20567,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "95a0c740c6289d5a62c59997757e475475ee2c31b369b083aa45302f4915e6ae",
+      "source_sha256": "b64d5b98ae774183372f928b4e11076e238c3479f22d11ffe59a24d005a76eae",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -20576,35 +20576,35 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_394C",
+            "name": "_mem_ems_arena_start_segment",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_394E",
+            "name": "_mem_ems_arena_paragraphs",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3950",
+            "name": "_mem_ems_boundary_segment",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3948",
+            "name": "_mem_discard_entry_template",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3B48",
+            "name": "_db_ems_page_buffer",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -20676,7 +20676,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "0cd292451e0fc9d24de2c480471d98e5941e80be7d0c810ba2efcba07f9b53c2",
+      "source_sha256": "054d0986cc2f4825ae902ab0b7de3ddc457ca6495bc66b888575bc1cebdb2019",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -20685,27 +20685,27 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_g_91A0",
+            "name": "_mem_conventional_paragraphs",
             "kind": "near",
             "length": 2
           },
           {
-            "name": "_g_91A2",
+            "name": "_mem_arena_start_segment",
             "kind": "near",
             "length": 2
           },
           {
-            "name": "_g_91A4",
+            "name": "_mem_arena_first_block",
             "kind": "near",
             "length": 4
           },
           {
-            "name": "_g_91A8",
+            "name": "_mem_arena_end_pointer",
             "kind": "near",
             "length": 4
           },
           {
-            "name": "_g_91AC",
+            "name": "_mem_free_list_cursor",
             "kind": "near",
             "length": 4
           }
@@ -20775,19 +20775,19 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "d828335dc4b99d9fc60cf367db5e0e6e1af3c9ea34ef59cc37df7c51afd0527d",
+      "source_sha256": "d7ca4359a366d6ac7795006c6a27ae56f1358bf84da7ae75672360c755ad585d",
       "unit": "root",
       "storage_contract": {
         "communals": [
           {
-            "name": "_fd_50F6_46A8",
+            "name": "_menu_title_x_pixels",
             "kind": "far",
             "length": 10,
             "count": 5,
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_46BC",
+            "name": "_menu_title_char_counts",
             "kind": "far",
             "length": 10,
             "count": 5,
@@ -21139,7 +21139,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "7eea4b15727919cf7bb4cae1530d1f35ad408bcee122a3fa23a3f6bd904dc185",
+      "source_sha256": "6fc3543dd7e10933c20f253921def30b9b9951c5cd2248cc0d1206fd04bf6cb2",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -21148,17 +21148,17 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_g_9120",
+            "name": "_mouse_button_state",
             "kind": "near",
             "length": 2
           },
           {
-            "name": "_g_9122",
+            "name": "_mouse_x_pixels",
             "kind": "near",
             "length": 2
           },
           {
-            "name": "_g_9124",
+            "name": "_mouse_y_pixels",
             "kind": "near",
             "length": 2
           }
@@ -21541,7 +21541,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "2865f923c850f23cc9c2f26456718c2d8c9eba5702f0f2f7e45d5f8311762faa",
+      "source_sha256": "474da374fb9c971c3b9b4d59480997e7f62aff969273ea6b00062eeb29304b05",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -21585,7 +21585,7 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0A9C",
+            "name": "_main_cycle_phase",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -22050,7 +22050,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "1b5d4ab8ab7dc12c692792be42986f7e0a91583d7c40f5b0979dce7d3c1eed05",
+      "source_sha256": "856437d2feb1eddaf5a0ddcd1f5e01e2068b84f63c42f3ce094d0cc0f5ff4bc6",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -22094,7 +22094,7 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_0B0A",
+            "name": "_cheat_key_prefix",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -22108,14 +22108,14 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1114",
+            "name": "_edit_cached_terrain_tiles",
             "kind": "far",
             "length": 1200,
             "count": 1200,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_15C4",
+            "name": "_edit_cached_life_tiles",
             "kind": "far",
             "length": 2400,
             "count": 1200,
@@ -22559,7 +22559,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "36807ff02190cd2579be5f3b34706383722120ed1b7dd301ee937e9aa06f48a6",
+      "source_sha256": "4e5681a3af4821ff29e03f173a543333ebc4841db82cec0f064017e03c8891af",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -22568,63 +22568,63 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_47DA",
+            "name": "_window_scroll_arrow_size",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4A1A",
+            "name": "_font_loaded_font_pointers",
             "kind": "far",
             "length": 16,
             "count": 4,
             "element_size": 4
           },
           {
-            "name": "_fd_50F6_4A42",
+            "name": "_anim_last_added_object",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B28",
+            "name": "_midi_song_data_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B2C",
+            "name": "_midi_song_data_bytes",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B2E",
+            "name": "_midi_header_division",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B8A",
+            "name": "_midi_tick_delay_scale",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B8E",
+            "name": "_midi_channel_instruments",
             "kind": "far",
             "length": 28,
             "count": 14,
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_4BAA",
+            "name": "_midi_channel_priorities",
             "kind": "far",
             "length": 28,
             "count": 14,
@@ -22696,7 +22696,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "39175c058a60c6c02d16fbdcd889e901dd7825529efb44c57c7c7083404b0bbb",
+      "source_sha256": "3de58cb401749b2f989079a1ece11af91509b8c8579e9335cc1d7423c9cfcf8d",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -22740,7 +22740,7 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1092",
+            "name": "_message_balloon_count",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -22775,14 +22775,14 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_10CC",
+            "name": "_startup_info_block_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_10D0",
+            "name": "_startup_executable_fd",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -22817,28 +22817,28 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_10E6",
+            "name": "_edit_life_tiles_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_10EA",
+            "name": "_edit_life_alt_tiles_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_10EE",
+            "name": "_edit_terrain_tiles_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_1102",
+            "name": "_edit_tile_renderer_kind",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -22910,7 +22910,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "3abbbe34db56132c4b044b249596f594586feb1cd7ff449cde908593cdfd651a",
+      "source_sha256": "9598ce33c979bd6e71a6549edb8042c3c5cbc98f31e7c862305f0f6e5315b6a5",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -22926,14 +22926,14 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_393C",
+            "name": "_menu_bar_rect",
             "kind": "far",
             "length": 8,
             "count": 8,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3944",
+            "name": "_startup_free_memory_bytes",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -22954,35 +22954,35 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_37D6",
+            "name": "_spider_composite_rect",
             "kind": "far",
             "length": 8,
             "count": 8,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_37DE",
+            "name": "_edit_uploaded_tiles_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_37E6",
+            "name": "_gfx_scratch_to_buffer_hook",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_37EA",
+            "name": "_gfx_mask_to_buffer_hook",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_37EE",
+            "name": "_gfx_buffer_intersection_hook",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -23010,7 +23010,7 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_37FC",
+            "name": "_mode_knob_anim_index",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -23024,7 +23024,7 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_383A",
+            "name": "_main_iteration_count",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -23073,35 +23073,35 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_38B2",
+            "name": "_startup_working_directory",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_38B6",
+            "name": "_startup_drive_letter",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_38B8",
+            "name": "_map_wide_row_converter",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_38BC",
+            "name": "_map_narrow_row_converter",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_38C0",
+            "name": "_map_side_margin_pixels",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -23380,7 +23380,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "cd6f531f9619d7de45a3f37854f644a947d111e1071b61e8d9df1c97abaad750",
+      "source_sha256": "bf2eecebffb1400d4df94fa96041ad455f7e3dfcff22c2c3fe423b2eec602782",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -23389,7 +23389,7 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_46D0",
+            "name": "_dialog_wait_delay",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -23461,7 +23461,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "0efc70b24a58d96ead1a5f5005244f6d056878c66bdae923a4d3718316490832",
+      "source_sha256": "a981059d5f74e2f2156fc6b288846a406ab8abf84f70849580efca1bf93101d4",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -23470,22 +23470,22 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_g_8BD2",
+            "name": "_minimap_x_scale",
             "kind": "near",
             "length": 2
           },
           {
-            "name": "_g_8BD4",
+            "name": "_minimap_y_scale",
             "kind": "near",
             "length": 2
           },
           {
-            "name": "_g_9126",
+            "name": "_edit_current_life_tile",
             "kind": "near",
             "length": 2
           },
           {
-            "name": "_g_94E4",
+            "name": "_edit_current_terrain_tile",
             "kind": "near",
             "length": 1
           }
@@ -23555,12 +23555,12 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "99ce93b4d49871a9db7f8528562f14cd1ed380585177727049cf1216f818f31c",
+      "source_sha256": "ccbb60a0be4bba194e47af2c331e73a1b3017c4355976d61e32816dab09d75d9",
       "unit": "root",
       "storage_contract": {
         "communals": [
           {
-            "name": "_fd_50F6_0150",
+            "name": "_snd_sample_release_list",
             "kind": "far",
             "length": 156,
             "count": 39,
@@ -23644,7 +23644,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "e229c9c75b754ca9963a9e5658339fed82cb02c68355bdbb99ed7bef818a6cba",
+      "source_sha256": "b40ed3552f7b78cd5be70cebbf711436f6655a39da36af15e11a0bff7d76a1a4",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -23653,7 +23653,7 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_01F0",
+            "name": "_snd_driver_capabilities",
             "kind": "far",
             "length": 14,
             "count": 7,
@@ -23725,7 +23725,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "1c1c85f0eccfd1dfe79773f35c8bfaded13d194b3fe93f808809dd2cbbfa3c7a",
+      "source_sha256": "4d19bbfddf3b1d5012b4bba01ff3edeae1ee004e51fba6afa2a3025b2594c47e",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -23735,7 +23735,7 @@
         "communals": [],
         "publics": [
           {
-            "name": "_g_5A9C",
+            "name": "_gfx_screen_clip_list",
             "segment": "_DATA",
             "offset": 0
           }
@@ -23806,7 +23806,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "9d4e239924fc11fa3d8652743f260d997eb580593029b248b2b0a85f9874519f",
+      "source_sha256": "6154f9060faa1bfef975da71d88922cbd50a3266c0838476a4ae3456cdf59982",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -23822,7 +23822,7 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4A48",
+            "name": "_snd_sample_channel_count",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -23836,21 +23836,21 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4A4C",
+            "name": "_snd_voice_build_index",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B14",
+            "name": "_snd_device_io_base",
             "kind": "far",
             "length": 2,
             "count": 2,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_4B16",
+            "name": "_snd_opl_volume_bias",
             "kind": "far",
             "length": 2,
             "count": 2,
@@ -23922,7 +23922,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "8299830f54024510a2f81a2db5a389a3bc5baf3a7ad565bb1023c6807130b39b",
+      "source_sha256": "4ab4f9bce61ea11a3d77109166c96312bea59b1a685ea6585d00110b5038d649",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -23935,14 +23935,14 @@
             "element_size": 6,
             "kind": "far",
             "length": 336,
-            "name": "_fd_50F6_0000"
+            "name": "_snd_instrument_descriptors"
           },
           {
             "count": 33,
             "element_size": 6,
             "kind": "far",
             "length": 198,
-            "name": "_fd_50F6_4A4E"
+            "name": "_snd_voice_slots"
           }
         ],
         "publics": [],
@@ -24249,12 +24249,12 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "d88ec8c40d96dd4fe0cc30c993a79743d4ca7e3fce33947e9fe1e98c76c56b15",
+      "source_sha256": "c82df15f4e9f7b9fa6864cb8dca8700924c82bd954bdb0f0b40d01a1a2925d45",
       "unit": "root",
       "storage_contract": {
         "communals": [
           {
-            "name": "_fd_50F6_1F26",
+            "name": "_spider_composite_bitmap",
             "kind": "far",
             "length": 6276,
             "count": 6276,
@@ -24527,7 +24527,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "be0c3e750602c92226dc1010bd5bc0f26a46f39ea323079d73200ed0786719d3",
+      "source_sha256": "f3df83684e4dbc59935db2cb568f8a4dbcc503987ceb6126af23f45800e5b07d",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -24536,7 +24536,7 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_10D2",
+            "name": "_map_viewport_rect",
             "kind": "far",
             "length": 8,
             "count": 8,
@@ -24629,7 +24629,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "7de279e31b4b3609fee96b60afa1b67c0bbfe605b79d024b2234101fc7fe572f",
+      "source_sha256": "e6a468496ebca3b6016af6619bde3ad4794e95acc71462c0921c58b6e66a86c2",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -24659,21 +24659,21 @@
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3B4C",
+            "name": "_db_ems_slot_list_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3B58",
+            "name": "_gfx_copy_to_buffer_hook",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_3B5C",
+            "name": "_clip_saved_state_stack",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -24745,7 +24745,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "fd19e0bf47278d8e34d994e72e4b5f6abcc26b947a5717d9c550bc481d65758c",
+      "source_sha256": "8ca1866f3be98045f78f157ed5404e68b5a41108d3693c93f4cad0022ae42200",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -24754,7 +24754,7 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_3B60",
+            "name": "_clip_window_list_handles",
             "kind": "far",
             "length": 180,
             "count": 45,
@@ -25090,7 +25090,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "f7a589c8e51de06707d6076de008914e1ee617c9e59d579d732eff6e60eb59f8",
+      "source_sha256": "1c72507a61c891fb8f52cc22248d71c22f19edba036fab1ab83da094239a0f92",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -25099,14 +25099,14 @@
         "code_bytes": 0,
         "communals": [
           {
-            "name": "_fd_50F6_385A",
+            "name": "_map_generated_image_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
             "element_size": 1
           },
           {
-            "name": "_fd_50F6_385E",
+            "name": "_map_scanline_image_handle",
             "kind": "far",
             "length": 4,
             "count": 4,
@@ -25364,7 +25364,7 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "1ce5c4cd1ff72dc1e9c6baa49c477a9c1b6299bb270d17d70b161d538e7cd395",
+      "source_sha256": "660a5483dd895e869929d1fa2fb39633fd8ba5776f493b58fde7686ee4dfc1db",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
@@ -25380,21 +25380,21 @@
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_38CA",
+            "name": "_yard_rain_anim_indices",
             "kind": "far",
             "length": 30,
             "count": 15,
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_38E8",
+            "name": "_yard_black_swarm_anim_indices",
             "kind": "far",
             "length": 34,
             "count": 17,
             "element_size": 2
           },
           {
-            "name": "_fd_50F6_390A",
+            "name": "_yard_red_swarm_anim_indices",
             "kind": "far",
             "length": 34,
             "count": 17,
@@ -27389,7 +27389,7 @@
       }
     },
     {
-      "alias": "_fd_3D57_07CE",
+      "alias": "_game_speed_delay_table",
       "target": "_GameSpeed",
       "offset": 2,
       "kind": "data",
@@ -27458,7 +27458,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_19C6",
+      "alias": "_editMessage",
       "target": "_g_19C6",
       "offset": 0,
       "kind": "data",
@@ -27469,7 +27469,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_19CA",
+      "alias": "_edit_message_deadline",
       "target": "_g_19CA",
       "offset": 0,
       "kind": "data",
@@ -27480,7 +27480,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_19CE",
+      "alias": "_edit_message_dirty",
       "target": "_g_19CE",
       "offset": 0,
       "kind": "data",
@@ -27491,8 +27491,8 @@
       }
     },
     {
-      "alias": "_fd_55B3_1CD8",
-      "target": "_fd_55B3_1CD4",
+      "alias": "_startup_low_memory_message",
+      "target": "_startup_config_strings",
       "offset": 4,
       "kind": "data",
       "reason": "reviewed source owner/interior view",
@@ -27508,8 +27508,8 @@
       }
     },
     {
-      "alias": "_fd_55B3_1CDC",
-      "target": "_fd_55B3_1CD4",
+      "alias": "_startup_bad_switch_message",
+      "target": "_startup_config_strings",
       "offset": 8,
       "kind": "data",
       "reason": "reviewed source owner/interior view",
@@ -27525,8 +27525,8 @@
       }
     },
     {
-      "alias": "_fd_55B3_1CE0",
-      "target": "_fd_55B3_1CD4",
+      "alias": "_startup_missing_config_message",
+      "target": "_startup_config_strings",
       "offset": 12,
       "kind": "data",
       "reason": "reviewed source owner/interior view",
@@ -27542,8 +27542,8 @@
       }
     },
     {
-      "alias": "_fd_55B3_1CE4",
-      "target": "_fd_55B3_1CD4",
+      "alias": "_startup_config_path",
+      "target": "_startup_config_strings",
       "offset": 16,
       "kind": "data",
       "reason": "reviewed source owner/interior view",
@@ -27559,7 +27559,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_2996",
+      "alias": "_mapMem",
       "target": "_g_2996",
       "offset": 0,
       "kind": "data",
@@ -27592,7 +27592,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_2A42",
+      "alias": "_yard_screen_origin",
       "target": "_g_2A42",
       "offset": 0,
       "kind": "data",
@@ -27614,7 +27614,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_604C",
+      "alias": "_menu_bar_title_count",
       "target": "_g_604C",
       "offset": 0,
       "kind": "data",
@@ -27625,7 +27625,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_6054",
+      "alias": "_menu_resource_tables",
       "target": "_g_6054",
       "offset": 0,
       "kind": "data",
@@ -27636,7 +27636,7 @@
       }
     },
     {
-      "alias": "_fd_55B3_610A",
+      "alias": "_snd_requested_driver_mode",
       "target": "_g_610A",
       "offset": 0,
       "kind": "data",
@@ -27737,7 +27737,7 @@
       }
     },
     {
-      "alias": "_g_9128",
+      "alias": "_gfx_set_attributes_hook",
       "target": "_driver_callback_table",
       "offset": 0,
       "kind": "data",
@@ -27784,7 +27784,7 @@
       }
     },
     {
-      "alias": "_g_9134",
+      "alias": "_gfx_fill_rect_hook",
       "target": "_driver_callback_table",
       "offset": 12,
       "kind": "data",
@@ -27869,7 +27869,7 @@
       }
     },
     {
-      "alias": "_g_9148",
+      "alias": "_gfx_capture_rect_hook",
       "target": "_driver_callback_table",
       "offset": 32,
       "kind": "data",
@@ -27886,7 +27886,7 @@
       }
     },
     {
-      "alias": "_g_914C",
+      "alias": "_gfx_put_picture_hook",
       "target": "_driver_callback_table",
       "offset": 36,
       "kind": "data",
@@ -27920,7 +27920,7 @@
       }
     },
     {
-      "alias": "_g_9154",
+      "alias": "_gfx_put_image_hook",
       "target": "_driver_callback_table",
       "offset": 44,
       "kind": "data",
@@ -28005,7 +28005,7 @@
       }
     },
     {
-      "alias": "_g_916C",
+      "alias": "_gfx_draw_line_hook",
       "target": "_driver_callback_table",
       "offset": 68,
       "kind": "data",
@@ -28107,7 +28107,7 @@
       }
     },
     {
-      "alias": "_g_9188",
+      "alias": "_gfx_copy_screen_rect_hook",
       "target": "_driver_callback_table",
       "offset": 96,
       "kind": "data",
@@ -28124,8 +28124,8 @@
       }
     },
     {
-      "alias": "_g_5AAE",
-      "target": "_g_5AAC",
+      "alias": "_clip_active_list_segment",
+      "target": "_clip_active_list_offset",
       "offset": 2,
       "kind": "data",
       "reason": "reviewed source communal slot view",
@@ -28139,7 +28139,7 @@
     },
     {
       "alias": "_fd_55B3_5AA0",
-      "target": "_g_5A9C",
+      "target": "_gfx_screen_clip_list",
       "offset": 4,
       "kind": "data",
       "reason": "reviewed source owner/interior view",
@@ -28155,7 +28155,7 @@
     },
     {
       "alias": "_fd_55B3_5AA2",
-      "target": "_g_5A9C",
+      "target": "_gfx_screen_clip_list",
       "offset": 6,
       "kind": "data",
       "reason": "reviewed source owner/interior view",
@@ -28175,14 +28175,14 @@
       "function": "DoCalcTile",
       "module": "root:0250",
       "status": "BEHAVIOR_EXACT_CONFIRMED",
-      "definition_sha256": "5ff786ba23403d73f5d0d45a7a70d809ecffbaa6cfaaeab18cf9aac4ecd0f5a8",
+      "definition_sha256": "ee58f22c33d6d39fc83626b5191ebf2cded31db114c11f32909b0974947d012b",
       "receipt": "evidence/canonical/semantic/DoCalcTile-no-repeats.json"
     },
     {
       "function": "DrawBalloons",
       "module": "root:0250",
       "status": "BEHAVIOR_EXACT_CONFIRMED",
-      "definition_sha256": "ac23c99e8c8910a29c512134a14800693083680ff186da089f5a6e0bbba6a05e",
+      "definition_sha256": "9992e4f786f9b4cf702967a54de39917fcf66f55138e04b0dc8ead433ee0561a",
       "receipt": "evidence/canonical/semantic/DrawBalloons-no-repeats.json"
     },
     {
@@ -28203,14 +28203,14 @@
       "function": "DrawMapCursor",
       "module": "S12:384C",
       "status": "BEHAVIOR_EXACT_CONFIRMED",
-      "definition_sha256": "34281e87a50b8d430877911164155d75bee9647c9372c2566b33d9712e4a42de",
+      "definition_sha256": "6947ba72f690c93b7c855932dda9a56a84ee897476fb751c0b7c68ef16dc493e",
       "receipt": "evidence/canonical/semantic/DrawMapCursor-no-repeats.json"
     },
     {
       "function": "ui_prompt_save_discard_cancel",
       "module": "S15:384C",
       "status": "BEHAVIOR_EXACT_CONFIRMED",
-      "definition_sha256": "6779561262a0dbe6acb52f7c9756a1377aafc90086d15522bd6a7381edeb351c",
+      "definition_sha256": "985aacb471340009bd6c444ffaf56b8afcba6d77ed9ea8abab5a65e862fe6fd0",
       "receipt": "evidence/canonical/semantic/ui_prompt_save_discard_cancel-no-repeats.json"
     }
   ],
@@ -28363,7 +28363,7 @@
             "Original synthetic 31-window clipping control writes beyond the 256-record temporary before Punt; the 29-window positive completes. Window count alone does not prove capacity. Shipped geometry reachability remains unproved.",
             "The VGA8/HCEGANT spider image has one 6,276-byte zero-initialized process-lifetime owner. Resource, raster, overlap, first-use zero-header and valid source-produced index domains bound all supported accesses; alternate display resources remain excluded.",
             "Locked configuration and the complete startup/writer/alias/save census preserve mode8. Startup skips LoadMonoPats, map dispatch selects S00 color converters and Mini_MakeTable bypasses every S01 pattern consumer. A one-byte near linkage owner supplies the unresolved symbol with zero supported accesses; odd-mode reads remain negative controls and historical capacity is unclaimed.",
-            "Every fd_50F6_3C14 writer copies one sentinel-terminated list after its 256-record overflow check or from a list already bounded by such a check. A 256-record far owner covers every pre-Punt prefix; original 255/256 controls and a returning-Punt 2056-byte contrast are retained. Native code now uses that canonical owner directly.",
+            "Every clip_rectangle_workspace writer copies one sentinel-terminated list after its 256-record overflow check or from a list already bounded by such a check. A 256-record far owner covers every pre-Punt prefix; original 255/256 controls and a returning-Punt 2056-byte contrast are retained. Native code now uses that canonical owner directly.",
             "Viewport: in absolute-callback mouse mode the resize cursor sample stays in {start} U screen per axis, so object 4 is at most 29x36 within the 30x40 map cache; mickey-mode witness retained.",
             "Clip generation: window stack <=172 records; other producers select their overflow diagnostic identically, with post-capacity heap effects and fatal continuation excluded."
           ],
@@ -28509,37 +28509,37 @@
         ],
         "historical_intersections": [
           {
-            "array": "fd_50F6_46BC",
+            "array": "menu_title_char_counts",
             "index": 10,
-            "target": "fd_50F6_46D0"
+            "target": "dialog_wait_delay"
           },
           {
-            "array": "fd_50F6_46A8",
+            "array": "menu_title_x_pixels",
             "index": 20,
-            "target": "fd_50F6_46D0"
+            "target": "dialog_wait_delay"
           },
           {
-            "array": "fd_50F6_46BC",
+            "array": "menu_title_char_counts",
             "index": 11,
-            "target": "fd_50F6_46D2",
+            "target": "ui_icon_bitmap_handle",
             "target_word": 0
           },
           {
-            "array": "fd_50F6_46BC",
+            "array": "menu_title_char_counts",
             "index": 12,
-            "target": "fd_50F6_46D2",
+            "target": "ui_icon_bitmap_handle",
             "target_word": 1
           },
           {
-            "array": "fd_50F6_46A8",
+            "array": "menu_title_x_pixels",
             "index": 21,
-            "target": "fd_50F6_46D2",
+            "target": "ui_icon_bitmap_handle",
             "target_word": 0
           },
           {
-            "array": "fd_50F6_46A8",
+            "array": "menu_title_x_pixels",
             "index": 22,
-            "target": "fd_50F6_46D2",
+            "target": "ui_icon_bitmap_handle",
             "target_word": 1
           }
         ],
@@ -28573,7 +28573,7 @@
         "source": "src/resources/database_objects.c",
         "normal_owner": "db_handles[4]",
         "historical_failure_address": "50F6:3B58",
-        "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct fd_50F6_3B58 object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate.",
+        "reason": "A returning failed OpenDB can be stored at db_handles[4] before the front end checks the negative result. The original address overlaps the distinct gfx_copy_to_buffer_hook object. No fifth slot, padding or noreturn assumption is introduced; this remains a separate source-only preflight gate.",
         "closure_class": "SUPPORTED_DOMAIN",
         "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
         "error_contract_evidence": "evidence/canonical/error-continuation/review.md",
@@ -28587,7 +28587,7 @@
         "sources": [
           "src/window/text_bitmap_helpers.c"
         ],
-        "owner": "fd_50F6_46D2 minimum four-byte mutable Handle slot",
+        "owner": "ui_icon_bitmap_handle minimum four-byte mutable Handle slot",
         "reason": "Original pointer-chain reads, unchanged complete consumer TU and real RTLink/CRT controls authorize only the slot view and initial null representation. There is no known nominal game producer or observed ordinary incoming consumer edge. Computed writers/readers, indirect or control-corrupted activation and original physical aliases are not globally excluded. Independent placement does not preserve them. No deadness, permanent zero or safe null dereference follows from slot ownership.",
         "closure_class": "LAYOUT_SENSITIVE",
         "closure_basis": "A conditional physical alias exists, but supported reachability/observability is unresolved. It cannot yet be called historical-only or waived.",
@@ -28648,7 +28648,7 @@
       {
         "id": "critical-selector-computed-alias-layout",
         "status": "RESOLVED_SUPPORTED_DOMAIN",
-        "owner": "g_8CCB signed mutable byte",
+        "owner": "dos_critical_error_selector signed mutable byte",
         "reason": "The exact consumer and genuine CRT prove a minimal signed-byte view and startup zero. Window-pointer[-10] and a conditional uncapped song word-store continuation can cover the historical byte. No ordinary symbolic inbound selector edge exists, but computed/control-corrupted continuations and returning Punt are not globally excluded. Independent placement does not preserve those aliases. No constant-zero, dead-read or physical-alias waiver follows from the byte owner.",
         "closure_class": "LAYOUT_SENSITIVE",
         "closure_basis": "The two reviewed cache/song aliases are excluded in the supported domain. Other physical writes, including indirect effects of the open graphics-copy and viewport contracts, remain unresolved under those gates.",
@@ -28663,7 +28663,7 @@
           "src/ui/edit_view.c",
           "src/window/move_resize.c"
         ],
-        "declared_grid": "fd_50F6_15C4[30][40]",
+        "declared_grid": "edit_cached_life_tiles[30][40]",
         "reason": "ZapEuMapAt and InvalEuMap bound writes against runtime viewport dimensions, rather than the thirty-row/forty-column storage extent. Dimensions derive from object 4 rectangles; resize and loaded window offsets are not yet proved to enforce that grid bound. A baseline resource rectangle in range does not prove all reachable writes or preserve cross-object overreads under a new layout.",
         "closure_class": "SUPPORTED_DOMAIN",
         "closure_basis": "Prove the complete ordinary input/state domain and all consumers, or preserve the observed behavior; arbitrary corrupt-state adjacency is not automatically a functional requirement.",
@@ -29307,7 +29307,7 @@
         "bytes": 4,
         "classification": "SEMANTIC / PORT-BLOCKING",
         "evidence_class": "UNKNOWN_FIELD_SEMANTICS",
-        "reason": "Four zero bytes lie before g_5702; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance.",
+        "reason": "Four zero bytes lie before clip_window_z_order; no typed field or use chain identifies them. Zero content is not evidence of padding or irrelevance.",
         "classification_basis": "No admitted semantic exclusion; this is a conservative blocker, not a new assertion that every residual byte is live.",
         "proof_refs": [
           "https://github.com/missingno7/simant_recon/blob/a1938e61452a63581718aee6659829528c3b8635/work/takeover/behavioral-oracle/data-debt-disposition-approved-v1.json",

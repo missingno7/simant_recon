@@ -142,7 +142,7 @@ extern int far OldMapPlane;
 extern int far WinPrintf(char far *format, ...);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_MakeObjInvisible(int obj);
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void _fastcall win_UnlockWin(int win);
 extern void far win_YardClosed(void);
 extern void _fastcall win_MakeObjVisible(int obj);
@@ -165,7 +165,7 @@ void far SetYardMode(int newMode)
             YardMode = newMode;
             win_LockWin(0x1900);
             win_MakeObjInvisible(0x1903);
-            if (g_3DB2 != 0x140)
+            if (gfx_screen_width_pixels != 0x140)
                 win_MakeObjInvisible(0x190f);
             win_UnlockWin(0x1900);
             win_YardClosed();
@@ -173,7 +173,7 @@ void far SetYardMode(int newMode)
             YardMode = newMode;
             win_LockWin(0x1900);
             win_MakeObjVisible(0x1903);
-            if (g_3DB2 != 0x140)
+            if (gfx_screen_width_pixels != 0x140)
                 win_MakeObjVisible(0x190f);
             win_UnlockWin(0x1900);
             win_YardClosed();
@@ -182,7 +182,7 @@ void far SetYardMode(int newMode)
                 clip_Push();
                 clip_SetWin(0x1900);
                 win_DrawObjectNum(0x1903);
-                if (g_3DB2 != 0x140)
+                if (gfx_screen_width_pixels != 0x140)
                     win_DrawObjectNum(0x190f);
                 clip_Pop();
             }
@@ -395,7 +395,7 @@ extern int far QueenStorageR;
 extern int far SwarmCntB;
 extern int far SwarmCntR;
 extern void far InvalQueenStorageDisp(void);
-extern int far fd_3E1D_0000[][12];
+extern int far YMapSeeds[][12];
 extern unsigned char far YMapPopR[][16];
 extern void far RandWorld(unsigned seed, int blackSize, int redSize, int x, int y);
 extern int far HealthR;
@@ -429,7 +429,7 @@ void far XferPatch(void)
         SwarmCntR = 0;
         InvalQueenStorageDisp();
         MeNestStarted = 1;
-        RandWorld(fd_3E1D_0000[y][x], YMapPopB[x][y], YMapPopR[x][y], x, y);
+        RandWorld(YMapSeeds[y][x], YMapPopB[x][y], YMapPopR[x][y], x, y);
         if (YMapPopR[x][y] == 0)
             HealthR = 0;
         if ((x << 4) + y > 0x24)
@@ -462,8 +462,8 @@ extern int far LayDownQueenMode;
 extern int _fastcall win_GetEvent(struct Event far *);
 extern void far GetMousePos(Point far *);
 extern int _fastcall win_IsWinInFront(int);
-extern Point far fd_50F6_10D2;
-extern Point far fd_55B3_2A42;
+extern Point far map_viewport_rect;
+extern Point far yard_screen_origin;
 extern void far InvertPatch(int, int);
 extern int far BColoniesStarted;
 extern int far ColonyUpdateFlag;
@@ -525,14 +525,14 @@ void far PlaceQueenInYard(void)
             }
             if (!win_IsWinInFront(0x1900))
                 goto out;
-            y = pt.y - fd_50F6_10D2.y;
-            x = pt.x - fd_50F6_10D2.x;
-            if (g_3DB2 == 0x140) {
+            y = pt.y - map_viewport_rect.y;
+            x = pt.x - map_viewport_rect.x;
+            if (gfx_screen_width_pixels == 0x140) {
                 x = (x + 2) * 2;
                 y = (y - 8) * 2;
             }
-            y = (y - fd_55B3_2A42.y) / 10;
-            x = (y * 10 - fd_55B3_2A42.x + x) / 28;
+            y = (y - yard_screen_origin.y) / 10;
+            x = (y * 10 - yard_screen_origin.x + x) / 28;
             WinPrintf("\nYARD AREA @ %d, %d  : %d, %d", x, y, 12, 16);
             if (lastX != x || lastY != y) {
                 lastX = x;

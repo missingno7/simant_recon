@@ -45,5 +45,5 @@ unsigned far triWidthR;
 struct TriPoints far modeVerts;
 struct TriPoints far casteVerts;
 long far leftYSlope;
-struct Pt far fd_50F6_0358;
-struct Pt far fd_50F6_022E;
+struct Pt far mode_knob_center;
+struct Pt far caste_knob_center;

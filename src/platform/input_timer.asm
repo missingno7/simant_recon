@@ -20,22 +20,22 @@
 ; stacks, key tables, queue descriptors) and the far queue segment at 5071.
 
 _DATA	segment word public 'DATA'
-	extrn	_fd_55B3_3DE6:byte
-	extrn	_fd_55B3_3DE8:byte
+	extrn	_gfx_clip_left_pixels:byte
+	extrn	_gfx_clip_right_pixels:byte
 	extrn	_g_21A4:byte
-	extrn	_g_3D10:byte
-	extrn	_g_3D14:byte
-	extrn	_g_3D18:byte
-	extrn	_g_3D1C:byte
-	extrn	_g_3DB2:byte
-	extrn	_g_3DB4:byte
+	extrn	_cursor_custom_image_handle:byte
+	extrn	_cursor_custom_mask_handle:byte
+	extrn	_cursor_alternate_image_handle:byte
+	extrn	_cursor_alternate_mask_handle:byte
+	extrn	_gfx_screen_width_pixels:byte
+	extrn	_gfx_screen_height_pixels:byte
 	extrn	_g_3DD2:byte
-	extrn	_g_3DD4:byte
+	extrn	_gfx_cursor_draw_lock:byte
 	extrn	__foreColor:byte
 	extrn	_g_3DE2:byte
 	extrn	_g_3DE4:byte
-	extrn	_g_5AAC:byte
-	extrn	_g_5AAE:byte
+	extrn	_clip_active_list_offset:byte
+	extrn	_clip_active_list_segment:byte
 	extrn	_g_5FF0:byte
 	extrn	_g_5FF2:byte
 	extrn	_g_5FF4:byte
@@ -44,40 +44,40 @@ _DATA	segment word public 'DATA'
 	extrn	_g_5FF9:byte
 	extrn	_g_5FFA:byte
 	extrn	_g_5FFE:byte
-	extrn	_g_9120:byte
-	extrn	_g_9122:byte
-	extrn	_g_9124:byte
-	extrn	_g_9128:byte
-	extrn	_g_9148:byte
+	extrn	_mouse_button_state:byte
+	extrn	_mouse_x_pixels:byte
+	extrn	_mouse_y_pixels:byte
+	extrn	_gfx_set_attributes_hook:byte
+	extrn	_gfx_capture_rect_hook:byte
 	extrn	_g_9160:byte
 	extrn	_g_9164:byte
 	extrn	_g_9168:byte
 	extrn	_g_9184:byte
-	extrn	_g_5A9C:byte
+	extrn	_gfx_screen_clip_list:byte
 ; ---- the module's DGROUP data (DGROUP 432A-54D0) -----------------------------------
-	public	_g_432A, _g_4331, _g_4333, _g_4340, _g_4342, _g_4344, _g_4346
-	public	_g_4365, _g_4366, _g_53BD
+	public	_g_432A, _cursor_drawn_flag, _cursor_update_lock, _cursor_drawn_left, _cursor_drawn_top, _cursor_drawn_bottom, _cursor_drawn_right
+	public	_cursor_show_level, _g_4366, _g_53BD
 _g_432A		db	0		; set by IBMInitStuff (/b option or BUG=MSMOUSE)
 _g_432B		db	0
-_g_432C		dw	0		; last mickey count x
-_g_432E		dw	0		; last mickey count y
+_mouse_last_half_mickeys_x		dw	0		; last mickey count x
+_mouse_last_half_mickeys_y		dw	0		; last mickey count y
 		db	0
-_g_4331		db	0		; cursor drawn flag (read by the display drivers)
+_cursor_drawn_flag		db	0		; cursor drawn flag (read by the display drivers)
 _g_4332		db	0
-_g_4333		db	0		; cursor update lock (display drivers)
-_g_4334		dw	0		; hide rectangle active
-_g_4336		dw	0		; hide rectangle left, top, right, bottom
-_g_4338		dw	0
-_g_433A		dw	0
-_g_433C		dw	0
+_cursor_update_lock		db	0		; cursor update lock (display drivers)
+_cursor_alternate_rect_active		dw	0		; hide rectangle active
+_cursor_alternate_rect_left		dw	0		; hide rectangle left, top, right, bottom
+_cursor_alternate_rect_top		dw	0
+_cursor_alternate_rect_right		dw	0
+_cursor_alternate_rect_bottom		dw	0
 _g_433E		db	0		; button state
 		db	0
-_g_4340		dw	0		; cursor x, y (display drivers)
-_g_4342		dw	0
-_g_4344		dw	0
-_g_4346		dw	0
-_g_4348		dw	16h		; cursor image width, height
-_g_434A		dw	16h
+_cursor_drawn_left		dw	0		; cursor x, y (display drivers)
+_cursor_drawn_top		dw	0
+_cursor_drawn_bottom		dw	0
+_cursor_drawn_right		dw	0
+_cursor_bitmap_width		dw	16h		; cursor image width, height
+_cursor_bitmap_height		dw	16h
 		dw	32h
 _g_434E		dd	0		; event counters
 _g_4352		dd	0
@@ -87,21 +87,21 @@ _g_435A		dw	0
 _g_4362		db	0		; keyboard cursor step x, y
 _g_4363		db	0
 _g_4364		db	0
-_g_4365		db	0		; cursor show level (display drivers)
+_cursor_show_level		db	0		; cursor show level (display drivers)
 _g_4366		db	0
 		db	0
 _g_4368		db	0
 _g_4369		db	0
 SaveUnder	db	2596 dup (0)	; screen bytes under the cursor
-_g_4D8E		dd	0		; cursor image
-_g_4D92		dd	0		; cursor mask
-_g_4D96		dd	0
-_g_4D9A		dd	0
-_g_4D9E		dw	0
-_g_4DA0		dw	0
-_g_4DA2		dw	DGROUP:SaveUnder
+_cursor_putimg_bitmap_pointer		dd	0		; cursor image
+_cursor_putpic_bitmap_pointer		dd	0		; cursor mask
+_cursor_selected_putimg_pointer		dd	0
+_cursor_selected_putpic_pointer		dd	0
+_cursor_selected_height		dw	0
+_cursor_selected_width		dw	0
+_cursor_save_under_offset		dw	DGROUP:SaveUnder
 _g_4DA4		db	0
-_g_4DA5		dw	0		; current hot-box record
+_cursor_current_hotbox_offset		dw	0		; current hot-box record
 		db	0
 ; private stacks of the interrupt handlers (sp is loaded with the label above each one)
 		dw	80h
@@ -111,19 +111,19 @@ _g_4FAA		dw	80h
 _g_51AC		dw	80h
 		db	512 dup (0)
 _g_53AE		dw	80h
-_g_53B0		dw	0		; saved sp, ss
-_g_53B2		dw	0
+_input_callback_saved_sp		dw	0		; saved sp, ss
+_input_callback_saved_ss		dw	0
 _g_53B4		dw	0
 _g_53B6		dw	0
 _g_53B8		dw	0
 _g_53BA		dw	0
 _g_53BC		db	0
 _g_53BD		db	1
-_g_53BE		db	10h, 'MouseHide < 0', 0
-_g_53CD		db	128 dup (80h)	; key state per scan code
-_g_544D		db	48h, 50h, 4Bh, 4Dh, 47h, 4Fh, 49h, 51h, 4Ch, 52h	; cursor keypad scan codes
+_cursor_hide_underflow_message		db	10h, 'MouseHide < 0', 0
+_kbd_scan_code_state		db	128 dup (80h)	; key state per scan code
+_kbd_keypad_scan_codes		db	48h, 50h, 4Bh, 4Dh, 47h, 4Fh, 49h, 51h, 4Ch, 52h	; cursor keypad scan codes
 		db	53h, 39h, 3Bh, 19h, 4Eh, 4Ah, 13h, 2Ch, 0
-_g_5460		dw	L08AB, L08C0, L08FA, L08DF, L0946, L095E, L0979, L0990	; their handlers
+_kbd_keypad_handler_table		dw	L08AB, L08C0, L08FA, L08DF, L0946, L095E, L0979, L0990	; their handlers
 		dw	L092F, L09AF, L09C2, L09AF, L0803, L0821, L0834, L084B
 		dw	L0862, L0877
 _g_5484		dd	Queue0		; event queues: count word, capacity at -2, 18-byte entries
@@ -135,8 +135,8 @@ _g_5484		dd	Queue0		; event queues: count word, capacity at -2, 18-byte entries
 		dd	0
 _g_549A		dd	_fd_5071_0728
 		dw	1Fh
-_g_54A0		db	'HotBox overflow', 0
-_g_54B0		db	'MouseError**********************', 0
+_input_hotbox_overflow_message		db	'HotBox overflow', 0
+_cursor_error_message		db	'MouseError**********************', 0
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -289,12 +289,12 @@ L0087:
 	and ax, ax
 	je L00BA
 	xor cx, cx
-	mov dx, word ptr _g_3DB4
+	mov dx, word ptr _gfx_screen_height_pixels
 	sub dx, 4
 	mov ax, 8
 	int 33h
 	xor cx, cx
-	mov dx, word ptr _g_3DB2
+	mov dx, word ptr _gfx_screen_width_pixels
 	sub dx, 4
 	mov ax, 7
 	int 33h
@@ -308,12 +308,12 @@ L0087:
 L00BA:
 	mov byte ptr _g_4DA4, al
 	push ax
-	mov ax, word ptr _g_3DB4
+	mov ax, word ptr _gfx_screen_height_pixels
 	shr ax, 1
-	mov word ptr _g_9122, ax
-	mov ax, word ptr _g_3DB2
+	mov word ptr _mouse_x_pixels, ax
+	mov ax, word ptr _gfx_screen_width_pixels
 	shr ax, 1
-	mov word ptr _g_9124, ax
+	mov word ptr _mouse_y_pixels, ax
 	call near ptr _mouse_refresh_position
 	pop ax
 	mov word ptr _g_435A, 1
@@ -327,11 +327,11 @@ _mouse_show_cursor	proc	far
 	inc word ptr _g_4352+2
 L00E4:
 	mov byte ptr _g_4332, 0
-	mov al, byte ptr _g_4365
+	mov al, byte ptr _cursor_show_level
 	and al, al
 	jne L0120
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
 	push ds
 	lds di, dword ptr _g_549A
 	mov ax, 0FFFFh
@@ -342,13 +342,13 @@ L00E4:
 	je L010C
 	xor bx, bx
 L010C:
-	mov word ptr _g_4DA5, bx
+	mov word ptr _cursor_current_hotbox_offset, bx
 	mov al, 1
 	pushf
 	call near ptr _mouse_cursor_action
-	inc byte ptr _g_4365
+	inc byte ptr _cursor_show_level
 	popf
-	mov byte ptr _g_4331, 0
+	mov byte ptr _cursor_drawn_flag, 0
 L0120:
 	pop di
 	retf
@@ -356,16 +356,16 @@ _mouse_show_cursor	endp
 
 ; redraw the mouse cursor through the display driver (AL = 1 show / 2 hide)
 _mouse_cursor_action	proc	near
-	inc byte ptr _g_4333
+	inc byte ptr _cursor_update_lock
 	push di
-	lea di, _g_5AAC
+	lea di, _clip_active_list_offset
 	push word ptr [di]
 	push word ptr [di+2]
-	push word ptr _fd_55B3_3DE6
-	push word ptr _fd_55B3_3DE8
+	push word ptr _gfx_clip_left_pixels
+	push word ptr _gfx_clip_right_pixels
 	mov cx, DGROUP
 	mov word ptr [di+2], cx
-	mov cx, offset DGROUP:_g_5A9C
+	mov cx, offset DGROUP:_gfx_screen_clip_list
 	mov word ptr [di], cx
 	push word ptr _g_3DD2
 	push word ptr _g_3DE4
@@ -374,7 +374,7 @@ _mouse_cursor_action	proc	near
 	push ax
 	call dword ptr _g_9168
 	pop ax
-	mov bx, word ptr _g_4DA5
+	mov bx, word ptr _cursor_current_hotbox_offset
 	and bx, bx
 	jne L0169
 	push ax
@@ -387,27 +387,27 @@ L0169:
 	call dword ptr es:[bx+8]
 L0173:
 	pop ax
-	call dword ptr _g_9128
+	call dword ptr _gfx_set_attributes_hook
 	add sp, 6
 	call dword ptr _g_9184
 	pop ax
-	pop word ptr _fd_55B3_3DE8
-	pop word ptr _fd_55B3_3DE6
-	pop word ptr _g_5AAE
-	pop word ptr _g_5AAC
+	pop word ptr _gfx_clip_right_pixels
+	pop word ptr _gfx_clip_left_pixels
+	pop word ptr _clip_active_list_segment
+	pop word ptr _clip_active_list_offset
 	pop di
-	dec byte ptr _g_4333
+	dec byte ptr _cursor_update_lock
 	retn
 _mouse_cursor_action	endp
 
 _mouse_hide_cursor	proc	far
 	mov al, 1
 	mov byte ptr _g_4332, al
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	je L01CA
 	jg L01B3
 	push ds
-	mov ax, offset DGROUP:_g_53BE
+	mov ax, offset DGROUP:_cursor_hide_underflow_message
 	push ax
 	call far ptr _puts
 	call far ptr _Punt
@@ -420,20 +420,20 @@ L01BD:
 	cli
 	mov ax, 2
 	call near ptr _mouse_cursor_action
-	dec byte ptr _g_4365
+	dec byte ptr _cursor_show_level
 	popf
 L01CA:
 	retf
 _mouse_hide_cursor	endp
 
 _mouse_begin_screen_access	proc	far
-	inc byte ptr _g_3DD4
+	inc byte ptr _gfx_cursor_draw_lock
 	call far ptr _mouse_hide_cursor
 	retf
 _mouse_begin_screen_access	endp
 
 _mouse_end_screen_access	proc	far
-	dec byte ptr _g_3DD4
+	dec byte ptr _gfx_cursor_draw_lock
 	jne L01E0
 	call far ptr _mouse_show_cursor
 L01E0:
@@ -446,19 +446,19 @@ _mouse_set_cursor_bitmaps	proc	far
 	pushf
 	cli
 	les bx, dword ptr [bp+0Ah]
-	mov word ptr _g_4D8E, bx
-	mov word ptr _g_4D8E+2, es
+	mov word ptr _cursor_putimg_bitmap_pointer, bx
+	mov word ptr _cursor_putimg_bitmap_pointer+2, es
 	mov ax, word ptr es:[bx]
-	mov word ptr _g_4348, ax
+	mov word ptr _cursor_bitmap_width, ax
 	mov ax, word ptr es:[bx+2]
-	mov word ptr _g_434A, ax
+	mov word ptr _cursor_bitmap_height, ax
 	les bx, dword ptr [bp+6]
-	mov word ptr _g_4D92, bx
-	mov word ptr _g_4D92+2, es
+	mov word ptr _cursor_putpic_bitmap_pointer, bx
+	mov word ptr _cursor_putpic_bitmap_pointer+2, es
 	mov ax, word ptr _g_435A
 	and ax, ax
 	je L0215
-	mov byte ptr _g_4331, 1
+	mov byte ptr _cursor_drawn_flag, 1
 L0215:
 	popf
 	pop bp
@@ -705,32 +705,32 @@ _mouse_mickey_callback	proc	far
 	push di
 	mov ax, DGROUP
 	mov ds, ax
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
 	sar si, 1
 	sar di, 1
 	mov ax, si
-	sub ax, word ptr _g_432C
-	mov word ptr _g_432C, si
+	sub ax, word ptr _mouse_last_half_mickeys_x
+	mov word ptr _mouse_last_half_mickeys_x, si
 	add cx, ax
 	jns L041B
 	xor cx, cx
 L041B:
-	cmp cx, word ptr _g_3DB2
+	cmp cx, word ptr _gfx_screen_width_pixels
 	jl L0426
-	mov cx, word ptr _g_3DB2
+	mov cx, word ptr _gfx_screen_width_pixels
 	dec cx
 L0426:
 	mov ax, di
-	sub ax, word ptr _g_432E
-	mov word ptr _g_432E, di
+	sub ax, word ptr _mouse_last_half_mickeys_y
+	mov word ptr _mouse_last_half_mickeys_y, di
 	add dx, ax
 	jns L0436
 	xor dx, bx
 L0436:
-	cmp dx, word ptr _g_3DB4
+	cmp dx, word ptr _gfx_screen_height_pixels
 	jl L0441
-	mov dx, word ptr _g_3DB4
+	mov dx, word ptr _gfx_screen_height_pixels
 	dec dx
 L0441:
 	pop di
@@ -754,31 +754,31 @@ _mouse_event_callback	proc	far
 	mov al, bl
 	mov bx, DGROUP
 	mov ds, bx
-	mov word ptr _g_9120, ax
-	mov word ptr _g_9122, cx
-	mov word ptr _g_9124, dx
+	mov word ptr _mouse_button_state, ax
+	mov word ptr _mouse_x_pixels, cx
+	mov word ptr _mouse_y_pixels, dx
 	mov word ptr _g_53B4, ss
 	mov word ptr _g_53B6, sp
 	mov ss, bx
 	mov sp, offset DGROUP:_g_4FAA
 	cld
-	mov al, byte ptr _g_4365
+	mov al, byte ptr _cursor_show_level
 	and al, al
 	jg L0488
 L0481:
 	mov al, 1
-	mov byte ptr _g_4331, al
+	mov byte ptr _cursor_drawn_flag, al
 	jmp short L049D
 L0488:
-	mov al, byte ptr _g_3DD4
+	mov al, byte ptr _gfx_cursor_draw_lock
 	or al, byte ptr cs:timer_busy
-	or al, byte ptr _g_4333
+	or al, byte ptr _cursor_update_lock
 	jne L0481
 	push es
 	call far ptr _mouse_refresh_cursor
 	pop es
 L049D:
-	mov ax, word ptr _g_9120
+	mov ax, word ptr _mouse_button_state
 	test byte ptr _g_5FF9, ah
 	je L04AA
 	call word ptr _g_5FFA
@@ -798,16 +798,16 @@ _mouse_refresh_cursor	proc	far
 	jne L04C6
 	inc word ptr _g_4356+2
 L04C6:
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	jle L0502
-	mov bx, word ptr _g_4DA5
+	mov bx, word ptr _cursor_current_hotbox_offset
 	mov al, 2
 	call near ptr _mouse_cursor_action
 	push ds
 	push es
-	mov ax, word ptr _g_9120
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
+	mov ax, word ptr _mouse_button_state
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
 	lds di, dword ptr _g_549A
 	xor bh, bh
 	call near ptr _hotbox_hit_and_callback
@@ -817,10 +817,10 @@ L04C6:
 	je L04F4
 	xor bx, bx
 L04F4:
-	mov word ptr _g_4DA5, bx
+	mov word ptr _cursor_current_hotbox_offset, bx
 	mov al, 1
 	call near ptr _mouse_cursor_action
-	mov byte ptr _g_4331, 0
+	mov byte ptr _cursor_drawn_flag, 0
 L0502:
 	pop di
 	retf
@@ -892,13 +892,13 @@ L0558:
 	je L057D
 	jmp near ptr L063B
 L057D:
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	jle L059F
-	test byte ptr _g_3DD4, 0FFh
+	test byte ptr _gfx_cursor_draw_lock, 0FFh
 	jne L05CB
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L05CB
-	shr byte ptr _g_4331, 1
+	shr byte ptr _cursor_drawn_flag, 1
 	jae L05CB
 	call far ptr _mouse_refresh_cursor
 	jmp short L05CB
@@ -906,14 +906,14 @@ L059F:
 	shr byte ptr _g_4332, 1
 	jne L05CB
 	mov byte ptr _g_4332, 1
-	test byte ptr _g_4331, 0FFh
+	test byte ptr _cursor_drawn_flag, 0FFh
 	jne L05B8
 	test byte ptr _g_4366, 0FFh
 	jne L05CB
 L05B8:
-	test byte ptr _g_3DD4, 0FFh
+	test byte ptr _gfx_cursor_draw_lock, 0FFh
 	jne L05CB
-	test byte ptr _g_4333, 0FFh
+	test byte ptr _cursor_update_lock, 0FFh
 	jne L05CB
 	call far ptr _mouse_show_cursor
 L05CB:
@@ -940,32 +940,32 @@ L05F8:
 L0600:
 	mov al, bl
 	cbw
-	add ax, word ptr _g_9122
+	add ax, word ptr _mouse_x_pixels
 	cmp ax, 0
 	jge L060E
 	xor ax, ax
 L060E:
-	mov cx, word ptr _g_3DB2
+	mov cx, word ptr _gfx_screen_width_pixels
 	cmp ax, cx
 	jl L0619
 	mov ax, cx
 	dec ax
 L0619:
-	mov word ptr _g_9122, ax
+	mov word ptr _mouse_x_pixels, ax
 	mov al, bh
 	cbw
-	add ax, word ptr _g_9124
+	add ax, word ptr _mouse_y_pixels
 	cmp ax, 0
 	jge L062A
 	xor ax, ax
 L062A:
-	mov cx, word ptr _g_3DB4
+	mov cx, word ptr _gfx_screen_height_pixels
 	cmp ax, cx
 	jl L0635
 	mov ax, cx
 	dec ax
 L0635:
-	mov word ptr _g_9124, ax
+	mov word ptr _mouse_y_pixels, ax
 	call near ptr _mouse_refresh_position
 L063B:
 	pop dx
@@ -1006,8 +1006,8 @@ _kbd_int15_scan_hook	proc	far
 	cld
 	mov dx, DGROUP
 	mov ds, dx
-	mov word ptr _g_53B2, ss
-	mov word ptr _g_53B0, sp
+	mov word ptr _input_callback_saved_ss, ss
+	mov word ptr _input_callback_saved_sp, sp
 	mov ss, dx
 	mov sp, offset DGROUP:_g_53AE
 	mov dl, byte ptr _g_432B
@@ -1015,8 +1015,8 @@ _kbd_int15_scan_hook	proc	far
 	jne L06B1
 	call near ptr _kbd_process_scan
 L069B:
-	mov ss, word ptr _g_53B2
-	mov sp, word ptr _g_53B0
+	mov ss, word ptr _input_callback_saved_ss
+	mov sp, word ptr _input_callback_saved_sp
 	pop ax
 	pop ds
 	pop dx
@@ -1060,14 +1060,14 @@ _kbd_int09_hook	proc	far
 	push ds
 	mov dx, DGROUP
 	mov ds, dx
-	mov word ptr _g_53B2, ss
-	mov word ptr _g_53B0, sp
+	mov word ptr _input_callback_saved_ss, ss
+	mov word ptr _input_callback_saved_sp, sp
 	mov ss, dx
 	mov sp, offset DGROUP:_g_53AE
 	mov byte ptr _g_432B, 1
 	call near ptr _kbd_process_scan
-	mov ss, word ptr _g_53B2
-	mov sp, word ptr _g_53B0
+	mov ss, word ptr _input_callback_saved_ss
+	mov sp, word ptr _input_callback_saved_sp
 	pop ds
 	pop dx
 	cli
@@ -1133,9 +1133,9 @@ L0787:
 L079E:
 	jmp L07F7
 L07A1:
-	cmp byte ptr [bx+_g_53CD], ah
+	cmp byte ptr [bx+_kbd_scan_code_state], ah
 	je L07F8
-	mov byte ptr [bx+_g_53CD], ah
+	mov byte ptr [bx+_kbd_scan_code_state], ah
 	rol ah, 1
 	jb L07C0
 	push es
@@ -1150,7 +1150,7 @@ L07A1:
 L07C0:
 	xor ah, 1
 	mov cx, 13h
-	mov di, offset DGROUP:_g_544D
+	mov di, offset DGROUP:_kbd_keypad_scan_codes
 	mov bx, di
 	repne scasb
 	stc
@@ -1169,7 +1169,7 @@ L07C0:
 	jne L07F8
 L07ED:
 	shl bx, 1
-	jmp word ptr [bx+_g_5460-2]
+	jmp word ptr [bx+_kbd_keypad_handler_table-2]
 L07F3:
 	stc
 	cmc
@@ -1269,7 +1269,7 @@ L088A:
 L08AB:
 	and ah, ah
 	je L08D3
-	mov bx, word ptr _g_3DB4
+	mov bx, word ptr _gfx_screen_height_pixels
 	mov cl, 7
 	shr bx, cl
 	inc bx
@@ -1280,7 +1280,7 @@ L08AB:
 L08C0:
 	and ah, ah
 	je L08D3
-	mov bx, word ptr _g_3DB4
+	mov bx, word ptr _gfx_screen_height_pixels
 	mov cl, 7
 	shr bx, cl
 	inc bx
@@ -1296,7 +1296,7 @@ L08D9:
 L08DF:
 	and ah, ah
 	je L08D9
-	mov bx, word ptr _g_3DB2
+	mov bx, word ptr _gfx_screen_width_pixels
 	shr bx, 1
 	shr bx, 1
 	shr bx, 1
@@ -1309,7 +1309,7 @@ L08DF:
 L08FA:
 	and ah, ah
 	je L08D9
-	mov bx, word ptr _g_3DB2
+	mov bx, word ptr _gfx_screen_width_pixels
 	shr bx, 1
 	shr bx, 1
 	shr bx, 1
@@ -1335,65 +1335,65 @@ L0929:
 	call near ptr L09D9
 	jmp L07F3
 L092F:
-	mov bx, word ptr _g_3DB4
+	mov bx, word ptr _gfx_screen_height_pixels
 	shr bx, 1
-	mov word ptr _g_9124, bx
-	mov bx, word ptr _g_3DB2
+	mov word ptr _mouse_y_pixels, bx
+	mov bx, word ptr _gfx_screen_width_pixels
 	shr bx, 1
-	mov word ptr _g_9122, bx
+	mov word ptr _mouse_x_pixels, bx
 	jmp near ptr L09E3
 L0946:
 	and ah, ah
 	je L09AC
 	xor ax, ax
-	mov bx, word ptr _g_9122
+	mov bx, word ptr _mouse_x_pixels
 	cmp bx, 8
 	jbe L0958
 	mov ax, 6
 L0958:
-	mov word ptr _g_9122, ax
+	mov word ptr _mouse_x_pixels, ax
 	jmp near ptr L09E3
 L095E:
 	and ah, ah
 	je L09AC
-	mov ax, word ptr _g_3DB2
+	mov ax, word ptr _gfx_screen_width_pixels
 	dec ax
 	mov bx, ax
 	sub bx, 8
-	cmp bx, word ptr _g_9122
+	cmp bx, word ptr _mouse_x_pixels
 	jb L0974
 	sub ax, 6
 L0974:
-	mov word ptr _g_9122, ax
+	mov word ptr _mouse_x_pixels, ax
 	jmp short L09E3
 L0979:
 	and ah, ah
 	je L09AC
 	xor ax, ax
-	mov bx, word ptr _g_9124
+	mov bx, word ptr _mouse_y_pixels
 	cmp bx, 8
 	jbe L098B
 	mov ax, 6
 L098B:
-	mov word ptr _g_9124, ax
+	mov word ptr _mouse_y_pixels, ax
 	jmp short L09E3
 L0990:
 	and ah, ah
 	je L09AC
-	mov ax, word ptr _g_3DB4
+	mov ax, word ptr _gfx_screen_height_pixels
 	dec ax
 	mov bx, ax
 	sub bx, 8
-	cmp bx, word ptr _g_9124
+	cmp bx, word ptr _mouse_y_pixels
 	jbe L09A6
 	sub ax, 6
 L09A6:
-	mov word ptr _g_9124, ax
+	mov word ptr _mouse_y_pixels, ax
 	call near ptr _mouse_refresh_position
 L09AC:
 	jmp L07F3
 L09AF:
-	mov al, byte ptr _g_9120
+	mov al, byte ptr _mouse_button_state
 	and al, 0FEh
 	or al, ah
 	shl ah, 1
@@ -1403,7 +1403,7 @@ L09AF:
 	mov ah, 4
 	jmp short _kbd_dispatch_pointer_action
 L09C2:
-	mov al, byte ptr _g_9120
+	mov al, byte ptr _mouse_button_state
 	and al, 0FDh
 	shl ah, 1
 	or al, ah
@@ -1435,12 +1435,12 @@ _mouse_set_position	proc	far
 _mouse_set_position	endp
 
 _mouse_refresh_position	proc	near
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
 _mouse_refresh_position	endp
 
 _mouse_update_position_regs	proc	near
-	mov bl, byte ptr _g_9120
+	mov bl, byte ptr _mouse_button_state
 	mov al, 1
 	mov ah, byte ptr _g_4DA4
 	and ah, ah
@@ -1462,8 +1462,8 @@ _kbd_dispatch_pointer_action	proc	near
 	jmp L07F3
 L0A21:
 	mov al, ah
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
 	push cs
 	call near ptr _mouse_event_callback
 	retn
@@ -1473,7 +1473,7 @@ _kbd_scan_state	proc	far
 	push bp
 	mov bp, sp
 	mov bx, word ptr [bp+6]
-	mov al, byte ptr [bx+_g_53CD]
+	mov al, byte ptr [bx+_kbd_scan_code_state]
 	xor al, 80h
 	xor ah, ah
 	pop bp
@@ -1487,7 +1487,7 @@ _kbd_disable_mouse_emulation	proc	far
 	mov byte ptr _g_53BD, bl
 	mov ax, 3
 	int 33h
-	mov word ptr _g_9120, bx
+	mov word ptr _mouse_button_state, bx
 	xor al, al
 	mov byte ptr cs:shift_state, al
 	mov byte ptr _g_4362, al
@@ -1501,7 +1501,7 @@ _kbd_enable_mouse_emulation	proc	far
 	push di
 	mov ax, ds
 	mov es, ax
-	mov di, offset DGROUP:_g_53CD
+	mov di, offset DGROUP:_kbd_scan_code_state
 	mov ax, 8080h
 	mov cx, 40h
 	rep stosw
@@ -1572,7 +1572,7 @@ _hotbox_append	proc	far
 	retf
 L0AF1:
 	popf
-	mov ax, offset DGROUP:_g_54A0
+	mov ax, offset DGROUP:_input_hotbox_overflow_message
 	push ax
 	call far ptr _puts
 	call far ptr _Punt
@@ -1638,7 +1638,7 @@ _hotbox_remove_id	proc	far
 	les di, dword ptr [bp+8]
 	cmp di, offset _fd_5071_0728
 	jne L0B84
-	test byte ptr _g_4365, 0FFh
+	test byte ptr _cursor_show_level, 0FFh
 	jle L0B84
 	call far ptr _mouse_hide_cursor
 	inc word ptr [bp-2]
@@ -1691,12 +1691,12 @@ _hotbox_contains_pointer	proc	far
 	call near ptr _hotbox_find_id
 	jb L0BF8
 	mov ax, 1
-	mov bx, word ptr _g_9122
+	mov bx, word ptr _mouse_x_pixels
 	cmp bx, word ptr es:[di]
 	jl L0BF8
 	cmp bx, word ptr es:[di+4]
 	jg L0BF8
-	mov bx, word ptr _g_9124
+	mov bx, word ptr _mouse_y_pixels
 	cmp bx, word ptr es:[di+2]
 	jl L0BF8
 	cmp bx, word ptr es:[di+6]
@@ -1716,8 +1716,8 @@ _hotbox_pointer_hit_id	proc	far
 	push di
 	push ds
 	les di, dword ptr _g_5484+12
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
 	mov bl, byte ptr es:[di]
 	and bl, bl
 	je L0C36
@@ -1815,9 +1815,9 @@ _hotbox_dispatch_event	proc	near
 	mov es, si
 	mov si, offset DGROUP:_g_5484
 	assume es:DGROUP
-	mov ax, word ptr es:_g_9120
-	mov cx, word ptr es:_g_9122
-	mov dx, word ptr es:_g_9124
+	mov ax, word ptr es:_mouse_button_state
+	mov cx, word ptr es:_mouse_x_pixels
+	mov dx, word ptr es:_mouse_y_pixels
 	assume es:nothing
 L0CCD:
 	lds di, dword ptr es:[si]
@@ -1873,9 +1873,9 @@ L0CF8:
 	call dword ptr es:[di+8]
 	add sp, 0Ah
 	and ax, ax
-	mov ax, word ptr _g_9120
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
+	mov ax, word ptr _mouse_button_state
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
 	pop bx
 	pop ds
 	je L0D47
@@ -1915,9 +1915,9 @@ L0D6C:
 	push word ptr _g_21A4
 	mov word ptr _g_21A4, 1
 	push ds
-	push word ptr _g_4DA2
-	push word ptr _g_4342
-	push word ptr _g_4340
+	push word ptr _cursor_save_under_offset
+	push word ptr _cursor_drawn_top
+	push word ptr _cursor_drawn_left
 	call far ptr _GPutPic
 	add sp, 8
 	pop word ptr _g_21A4
@@ -1926,7 +1926,7 @@ L0D93:
 	retf
 L0D95:
 	push ds
-	mov ax, offset DGROUP:_g_54B0
+	mov ax, offset DGROUP:_cursor_error_message
 	push ax
 	call far ptr _f_277D_000B
 	add sp, 4
@@ -1934,89 +1934,89 @@ L0D95:
 _mouse_default_cursor_action	endp
 
 _mouse_draw_default_cursor	proc	near
-	les bx, dword ptr _g_4D8E
-	mov word ptr _g_4D96, bx
-	mov word ptr _g_4D96+2, es
+	les bx, dword ptr _cursor_putimg_bitmap_pointer
+	mov word ptr _cursor_selected_putimg_pointer, bx
+	mov word ptr _cursor_selected_putimg_pointer+2, es
 	mov ax, word ptr es:[bx]
-	mov word ptr _g_4DA0, ax
+	mov word ptr _cursor_selected_width, ax
 	mov ax, word ptr es:[bx+2]
-	mov word ptr _g_4D9E, ax
-	les bx, dword ptr _g_4D92
-	mov word ptr _g_4D9A, bx
-	mov word ptr _g_4D9A+2, es
-	les bx, dword ptr _g_3D1C
+	mov word ptr _cursor_selected_height, ax
+	les bx, dword ptr _cursor_putpic_bitmap_pointer
+	mov word ptr _cursor_selected_putpic_pointer, bx
+	mov word ptr _cursor_selected_putpic_pointer+2, es
+	les bx, dword ptr _cursor_alternate_mask_handle
 	mov ax, es
 	and ax, ax
 	je L0E29
-	mov ax, word ptr _g_4DA5
+	mov ax, word ptr _cursor_current_hotbox_offset
 	and ax, ax
 	jne L0E29
 	les bx, dword ptr es:[bx]
-	test word ptr _g_4334, 0FFh
+	test word ptr _cursor_alternate_rect_active, 0FFh
 	je L0E29
-	mov cx, word ptr _g_9122
-	mov dx, word ptr _g_9124
-	cmp cx, word ptr _g_4336
+	mov cx, word ptr _mouse_x_pixels
+	mov dx, word ptr _mouse_y_pixels
+	cmp cx, word ptr _cursor_alternate_rect_left
 	jl L0E29
-	cmp cx, word ptr _g_433A
+	cmp cx, word ptr _cursor_alternate_rect_right
 	jg L0E29
-	cmp dx, word ptr _g_4338
+	cmp dx, word ptr _cursor_alternate_rect_top
 	jl L0E29
-	cmp dx, word ptr _g_433C
+	cmp dx, word ptr _cursor_alternate_rect_bottom
 	jg L0E29
-	mov word ptr _g_4D96, bx
-	mov word ptr _g_4D96+2, es
+	mov word ptr _cursor_selected_putimg_pointer, bx
+	mov word ptr _cursor_selected_putimg_pointer+2, es
 	mov ax, word ptr es:[bx]
-	mov word ptr _g_4DA0, ax
+	mov word ptr _cursor_selected_width, ax
 	mov ax, word ptr es:[bx+2]
-	mov word ptr _g_4D9E, ax
-	les bx, dword ptr _g_3D18
+	mov word ptr _cursor_selected_height, ax
+	les bx, dword ptr _cursor_alternate_image_handle
 	les bx, dword ptr es:[bx]
-	mov word ptr _g_4D9A, bx
-	mov word ptr _g_4D9A+2, es
+	mov word ptr _cursor_selected_putpic_pointer, bx
+	mov word ptr _cursor_selected_putpic_pointer+2, es
 L0E29:
 	test byte ptr cs:shift_state, 0FFh
 	je L0E62
-	les bx, dword ptr _g_3D14
+	les bx, dword ptr _cursor_custom_mask_handle
 	mov ax, es
 	and ax, ax
 	je L0E62
 	les bx, dword ptr es:[bx]
-	mov word ptr _g_4D96, bx
-	mov word ptr _g_4D96+2, es
+	mov word ptr _cursor_selected_putimg_pointer, bx
+	mov word ptr _cursor_selected_putimg_pointer+2, es
 	mov ax, word ptr es:[bx]
-	mov word ptr _g_4DA0, ax
+	mov word ptr _cursor_selected_width, ax
 	mov ax, word ptr es:[bx+2]
-	mov word ptr _g_4D9E, ax
-	les bx, dword ptr _g_3D10
+	mov word ptr _cursor_selected_height, ax
+	les bx, dword ptr _cursor_custom_image_handle
 	les bx, dword ptr es:[bx]
-	mov word ptr _g_4D9A, bx
-	mov word ptr _g_4D9A+2, es
+	mov word ptr _cursor_selected_putpic_pointer, bx
+	mov word ptr _cursor_selected_putpic_pointer+2, es
 L0E62:
 	push word ptr _g_21A4
 	mov word ptr _g_21A4, 1
 	push si
 	push di
-	mov di, word ptr _g_9122
+	mov di, word ptr _mouse_x_pixels
 	push di
 	and di, -8
 	push ds
-	push word ptr _g_4DA2
-	mov si, word ptr _g_9124
-	mov word ptr _g_4340, di
-	mov word ptr _g_4342, si
+	push word ptr _cursor_save_under_offset
+	mov si, word ptr _mouse_y_pixels
+	mov word ptr _cursor_drawn_left, di
+	mov word ptr _cursor_drawn_top, si
 	mov ax, si
 	mov bx, di
-	add ax, word ptr _g_4D9E
-	add bx, word ptr _g_4DA0
+	add ax, word ptr _cursor_selected_height
+	add bx, word ptr _cursor_selected_width
 	add bx, 7
-	mov word ptr _g_4346, bx
-	mov word ptr _g_4344, ax
+	mov word ptr _cursor_drawn_right, bx
+	mov word ptr _cursor_drawn_bottom, ax
 	push ax
 	push bx
 	push si
 	push di
-	call dword ptr _g_9148
+	call dword ptr _gfx_capture_rect_hook
 	add sp, 0Ch
 	pop di
 	xor ax, ax
@@ -2024,12 +2024,12 @@ L0E62:
 	push ax
 	mov ax, 0FF0Fh
 	push ax
-	call dword ptr _g_9128
+	call dword ptr _gfx_set_attributes_hook
 	add sp, 6
 	call dword ptr _g_9164
 	xor ax, ax
 	mov word ptr _g_21A4, ax
-	les ax, dword ptr _g_4D96
+	les ax, dword ptr _cursor_selected_putimg_pointer
 	push es
 	push ax
 	push si
@@ -2037,7 +2037,7 @@ L0E62:
 	call far ptr _GPutImg
 	add sp, 8
 	call dword ptr _g_9160
-	les ax, dword ptr _g_4D9A
+	les ax, dword ptr _cursor_selected_putpic_pointer
 	push es
 	push ax
 	push si

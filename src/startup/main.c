@@ -7,7 +7,7 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og.
  */
 
-char far *fd_55B3_1CD4[] = {
+char far *startup_config_strings[] = {
     "nt",
     "Sorry, not enough memory to run.  Please see your SimAnt addendum for\nmore information on how to free up memory on your system.",
     "\nBAD SWITCH\nUSAGE: SimAnt [/d{EeTHMm2V}] [/s{NABCI}]",
@@ -19,7 +19,7 @@ char g_1CE8 = 0;
 extern int far fd_55B3_38A0;
 extern int far open(char far *name, int mode, ...);
 extern int near errno;
-char far fd_4E37_0000[] =
+char far dos_files_shortage_format[] =
     "\nSimAnt cannot open enough files to run.  Please increase the 'FILES=n'\n"
     "statement in the CONFIG.SYS file on your boot drive by %d.  If there \n"
     "is no 'FILES=n' (where n is some number) in your CONFIG.SYS file, or \n"
@@ -29,31 +29,31 @@ extern int far printf(char far *format, ...);
 extern void far exit(int code);
 extern char far * near sys_errlist[];
 extern int far close(int fh);
-extern int far fd_50F6_10D0;
+extern int far startup_executable_fd;
 extern void (far * far signal(int sig, void (far *func)(int)))(int);
 extern void far res_install_cache_hook(void);
 extern void far bios_probe_reset_disks(void);
 extern void far IBMInitStuff(int argc, char far * far *argv);
 extern void far db_SetDataBase(char far *name);
 extern void far snd_init_driver_once(void);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern void far LoadMonoPats(void);
 extern void far ShowIntro(void);
 extern void far CustomerIDDialog(void);
 extern int far NewGame(int a);
 extern void far app_cleanup_and_exit(char far *message, int code);
-extern int far fd_50F6_0A9C;
+extern int far main_cycle_phase;
 extern int far fd_50F6_0AA6;
 extern long far MacTickCount(void);
 extern int far GameSpeed;
 extern void far win_NoWindowsShouldBeLocked(void);
 extern void far snd_service_pending(void);
-extern long far fd_50F6_383A;
+extern long far main_iteration_count;
 void far f_15F8_0313(void);
 extern int far GamePaused;
 extern int far MeMoveMe;
 extern int far CurGameTool;
-extern int far fd_3D57_07CE[];
+extern int far game_speed_delay_table[];
 extern void far DoAntSim(void);
 extern int _fastcall win_IsWinOpen(int win);
 extern int _fastcall win_IsWinInFront(int win);
@@ -81,7 +81,7 @@ void main(int argc, char far * far *argv)
     for (i = 0; i < 5; i++) {
         if ((fh[i] = open("install.exe", 0)) <= 0) {
             if (errno == 24) {
-                printf(fd_4E37_0000, 5 - i);
+                printf(dos_files_shortage_format, 5 - i);
                 exit(1);
             } else {
                 printf("DOS Error %d: %s", errno, sys_errlist[errno]);
@@ -91,7 +91,7 @@ void main(int argc, char far * far *argv)
     }
     for (i = 0; i < 5; i++)
         close(fh[i]);
-    fd_50F6_10D0 = fh[0];
+    startup_executable_fd = fh[0];
     signal(0x15, (void (far *)(int))1L);
     signal(2, (void (far *)(int))1L);
     res_install_cache_hook();
@@ -99,13 +99,13 @@ void main(int argc, char far * far *argv)
     IBMInitStuff(argc, argv);
     db_SetDataBase("sound");
     snd_init_driver_once();
-    if (g_5A97 & 1)
+    if (gfx_display_mode & 1)
         LoadMonoPats();
     ShowIntro();
     CustomerIDDialog();
     if (NewGame(1) < 0)
         app_cleanup_and_exit("SimAnt cancelled.", 0);
-    fd_50F6_0A9C = 0;
+    main_cycle_phase = 0;
     fd_50F6_0AA6 = 0;
     frames = 0;
     MacTickCount();
@@ -114,14 +114,14 @@ void main(int argc, char far * far *argv)
         win_NoWindowsShouldBeLocked();
         frames++;
         snd_service_pending();
-        fd_50F6_383A++;
+        main_iteration_count++;
         f_15F8_0313();
         i = MacTickCount();
         if (GamePaused == 0 || (MeMoveMe != 0 && CurGameTool < 10)) {
-            i += fd_3D57_07CE[GameSpeed];
+            i += game_speed_delay_table[GameSpeed];
             DoAntSim();
         }
-        if (GameSpeed != 3 || (fd_50F6_0A9C & 3) == 0) {
+        if (GameSpeed != 3 || (main_cycle_phase & 3) == 0) {
             if (win_IsWinOpen(0x100)) {
                 if (fd_50F6_0AA6 >= 0 && !win_IsWinInFront(0x100) && GameSpeed != 3) {
                     if (fd_50F6_04C0 == 0) {
@@ -151,7 +151,7 @@ void main(int argc, char far * far *argv)
             while (MacTickCount() < i);
         }
         ui_pump_events_edge_scroll();
-        fd_50F6_0A9C = (fd_50F6_0A9C + 1) & 0x3f;
+        main_cycle_phase = (main_cycle_phase + 1) & 0x3f;
     }
 }
 

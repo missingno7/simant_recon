@@ -24,7 +24,7 @@ typedef char far * far *Handle;
 extern int far TileIsVisible(int plane, int x, int y);
 extern int far fd_50F6_10E0;
 extern int far fd_50F6_10DE;
-extern int far fd_50F6_15C4[30][40];
+extern int far edit_cached_life_tiles[30][40];
 
 int g_19BE = 16;
 int g_19C0 = 16;
@@ -47,7 +47,7 @@ void far ZapEuMapAt(int plane, int x, int y)
         if (h >= 0 && h < fd_50F6_10E0) {
             v = y;
             if (v >= 0 && v < fd_50F6_10DE)
-                fd_50F6_15C4[v][h] = -1;
+                edit_cached_life_tiles[v][h] = -1;
         }
     }
 }
@@ -70,7 +70,7 @@ void far InvalEuMap(int left, int top, int right, int bottom)
         i = y * 40 + left;
         for (x = left; x <= right; x++, i++)
             if (x >= 0 && x < fd_50F6_10E0 && y >= 0 && y < fd_50F6_10DE)
-                fd_50F6_15C4[0][i] = -1;
+                edit_cached_life_tiles[0][i] = -1;
     }
 }
 
@@ -83,11 +83,11 @@ void far edit_free_tile_ems(void)
 }
 
 extern int far ems_initialize(void);
-extern char far fd_55B3_360C;
+extern char far ems_version;
 extern int far WinPrintf(char far *format, ...);
 extern void far ems_query_page_counts(void);
-extern int far fd_55B3_3614;
-extern int far fd_55B3_3612;
+extern int far ems_total_page_count;
+extern int far ems_free_page_count;
 extern void far ems_query_page_frame(void);
 extern int far ems_allocate_pages(int pages);
 extern void far ems_set_handle_name(int handle, char far *name);
@@ -100,12 +100,12 @@ int far edit_alloc_tile_ems(void)
 
     if (g_19D0 != 0)
         return 1;
-    if (ems_initialize() && fd_55B3_360C >= 0x40) {
-        WinPrintf("\nEMS version: %x", fd_55B3_360C);
+    if (ems_initialize() && ems_version >= 0x40) {
+        WinPrintf("\nEMS version: %x", ems_version);
         ems_query_page_counts();
-        WinPrintf("\ntotal pages: %d", fd_55B3_3614);
-        WinPrintf("\nfree  pages: %d", fd_55B3_3612);
-        if (fd_55B3_3612 >= 8) {
+        WinPrintf("\ntotal pages: %d", ems_total_page_count);
+        WinPrintf("\nfree  pages: %d", ems_free_page_count);
+        if (ems_free_page_count >= 8) {
             ems_query_page_frame();
             g_19D0 = ems_allocate_pages(8);
             ems_set_handle_name(g_19D0, "TILESXXX");
@@ -116,32 +116,32 @@ int far edit_alloc_tile_ems(void)
     return 0;
 }
 
-extern Handle far fd_50F6_10EA;
+extern Handle far edit_life_alt_tiles_handle;
 extern void far db_ReleaseHandle(Handle handle);
-extern Handle far fd_50F6_10E6;
+extern Handle far edit_life_tiles_handle;
 
 void far edit_release_life_tiles(void)
 {
-    if (fd_50F6_10EA) {
-        db_ReleaseHandle(fd_50F6_10EA);
-        fd_50F6_10EA = 0;
+    if (edit_life_alt_tiles_handle) {
+        db_ReleaseHandle(edit_life_alt_tiles_handle);
+        edit_life_alt_tiles_handle = 0;
     }
-    if (fd_50F6_10E6) {
-        db_ReleaseHandle(fd_50F6_10E6);
-        fd_50F6_10E6 = 0;
+    if (edit_life_tiles_handle) {
+        db_ReleaseHandle(edit_life_tiles_handle);
+        edit_life_tiles_handle = 0;
     }
 }
 
 static int g_1A2E = -1;
 
 extern int far TERRAINset;
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern Handle far res_load_firm_object(int object, int kind);
-extern Handle far fd_50F6_37DE;
+extern Handle far edit_uploaded_tiles_handle;
 extern void far gfx_planar_upload_tiles(char far *p, unsigned seg, int n);
 extern void far gfx_planar_upload_plane(char far *p, unsigned seg, int page, unsigned n);
 extern void far db_PurgeObject(int object, int kind);
-extern Handle far fd_50F6_10EE;
+extern Handle far edit_terrain_tiles_handle;
 extern void far mem_Free(Handle h);
 extern void far db_UnhookObject(int object, int kind);
 
@@ -153,18 +153,18 @@ void far edit_load_terrain_tiles(int set)
         return;
     g_1A2E = set;
     TERRAINset = set;
-    if ((g_5A97 & 1) || g_5A97 == 2) {
-        if (fd_50F6_10EE)
-            mem_Free(fd_50F6_10EE);
-        fd_50F6_10EE = res_load_firm_object(10 - set, 9);
+    if ((gfx_display_mode & 1) || gfx_display_mode == 2) {
+        if (edit_terrain_tiles_handle)
+            mem_Free(edit_terrain_tiles_handle);
+        edit_terrain_tiles_handle = res_load_firm_object(10 - set, 9);
         db_UnhookObject(10 - set, 9);
     } else {
         if (g_19D0 == 0)
             edit_release_life_tiles();
-        fd_50F6_37DE = res_load_firm_object(10 - set, 9);
-        gfx_planar_upload_tiles(*fd_50F6_37DE, 0xa000, 0x100);
+        edit_uploaded_tiles_handle = res_load_firm_object(10 - set, 9);
+        gfx_planar_upload_tiles(*edit_uploaded_tiles_handle, 0xa000, 0x100);
         for (i = 0; i < 4; i++)
-            gfx_planar_upload_plane(*fd_50F6_37DE + (i << 13), 0xc000, i, 0x2000);
+            gfx_planar_upload_plane(*edit_uploaded_tiles_handle + (i << 13), 0xc000, i, 0x2000);
         db_PurgeObject(10 - set, 9);
     }
 }
@@ -184,7 +184,7 @@ void far OverlayTileSet(int type, int id)
     }
 }
 
-extern int far fd_50F6_1102;
+extern int far edit_tile_renderer_kind;
 extern Handle far res_load_with_alloc_type(int object, int kind, int type);
 extern long far mem_Size(Handle h);
 extern int far mem_handle_above_ems_boundary(Handle h);
@@ -193,7 +193,7 @@ extern char far * far mem_Lock(Handle h);
 extern void far * far _fmemcpy(void far *dest, void far *src, unsigned n);
 extern void far ems_save_handle_map(int handle);
 extern void far ems_map_multiple_pages(int handle, int n, int far *map);
-extern char far * far fd_55B3_360E;
+extern char far * far ems_page_frame_pointer;
 extern void far ems_restore_handle_map(int handle);
 extern Handle far mem_Unlock(Handle h);
 
@@ -204,50 +204,50 @@ void far LoadTiles(void)
     Handle h;
     char far *p;
 
-    fd_50F6_10EA = 0;
-    fd_50F6_10E6 = 0;
-    fd_50F6_10EE = 0;
+    edit_life_alt_tiles_handle = 0;
+    edit_life_tiles_handle = 0;
+    edit_terrain_tiles_handle = 0;
     edit_load_terrain_tiles(0);
-    switch (g_5A97) {
+    switch (gfx_display_mode) {
     case 0:
     case 8:
         edit_alloc_tile_ems();
     case 4:
-        fd_50F6_1102 = 1;
+        edit_tile_renderer_kind = 1;
         if (g_19D0) {
             for (i = 0; i < 6; i++) {
-                fd_50F6_10E6 = res_load_with_alloc_type(i + 15, 9, 1);
-                n = mem_Size(fd_50F6_10E6);
-                if (mem_handle_above_ems_boundary(fd_50F6_10E6)) {
+                edit_life_tiles_handle = res_load_with_alloc_type(i + 15, 9, 1);
+                n = mem_Size(edit_life_tiles_handle);
+                if (mem_handle_above_ems_boundary(edit_life_tiles_handle)) {
                     h = Ralloc((long)n, 9, "emstiles");
                     p = mem_Lock(h);
-                    _fmemcpy(p, mem_Lock(fd_50F6_10E6), n);
+                    _fmemcpy(p, mem_Lock(edit_life_tiles_handle), n);
                 } else {
                     h = 0;
-                    p = mem_Lock(fd_50F6_10E6);
+                    p = mem_Lock(edit_life_tiles_handle);
                 }
                 ems_save_handle_map(g_19D0);
                 ems_map_multiple_pages(g_19D0, 4, i < 3 ? g_19D2 : g_19E2);
-                _fmemcpy(fd_55B3_360E + i % 3 * 0x5000, p, n);
+                _fmemcpy(ems_page_frame_pointer + i % 3 * 0x5000, p, n);
                 ems_restore_handle_map(g_19D0);
-                mem_Unlock(fd_50F6_10E6);
+                mem_Unlock(edit_life_tiles_handle);
                 if (h) {
                     mem_Unlock(h);
                     mem_Free(h);
                 }
                 db_PurgeObject(i + 15, 9);
             }
-            fd_50F6_10E6 = 0;
+            edit_life_tiles_handle = 0;
         }
         break;
     case 2:
         g_19BE = g_19C0 = 12;
-        fd_50F6_1102 = 2;
+        edit_tile_renderer_kind = 2;
         break;
     case 3:
     case 5:
     case 7:
-        fd_50F6_1102 = 3;
+        edit_tile_renderer_kind = 3;
         break;
     }
 }
@@ -256,7 +256,7 @@ extern void far * far _fmemset(void far *dest, int c, unsigned n);
 
 void far edit_invalidate_life_cache(void)
 {
-    _fmemset(fd_50F6_15C4, -1, 0x960);
+    _fmemset(edit_cached_life_tiles, -1, 0x960);
 }
 
 extern int far MapPlane;
@@ -282,27 +282,27 @@ void far edit_prepare_life_tiles(int which)
 {
     if (g_19D0 == 0) {
         if (which == 1) {
-            if (fd_50F6_10EA) {
-                db_ReleaseHandle(fd_50F6_10EA);
-                fd_50F6_10EA = 0;
+            if (edit_life_alt_tiles_handle) {
+                db_ReleaseHandle(edit_life_alt_tiles_handle);
+                edit_life_alt_tiles_handle = 0;
             }
-            if (fd_50F6_10E6 == 0)
-                fd_50F6_10E6 = res_load_firm_object(13, 9);
+            if (edit_life_tiles_handle == 0)
+                edit_life_tiles_handle = res_load_firm_object(13, 9);
         } else {
-            if (fd_50F6_10E6) {
-                db_ReleaseHandle(fd_50F6_10E6);
-                fd_50F6_10E6 = 0;
+            if (edit_life_tiles_handle) {
+                db_ReleaseHandle(edit_life_tiles_handle);
+                edit_life_tiles_handle = 0;
             }
-            if (fd_50F6_10EA == 0)
-                fd_50F6_10EA = res_load_firm_object(14, 9);
+            if (edit_life_alt_tiles_handle == 0)
+                edit_life_alt_tiles_handle = res_load_firm_object(14, 9);
         }
     } else
         edit_map_tile_ems_for_plane();
 }
 
-extern unsigned char near g_94E4;
+extern unsigned char near edit_current_terrain_tile;
 extern void far Punt(char far *format, ...);
-extern unsigned near g_9126;
+extern unsigned near edit_current_life_tile;
 extern void far gfx_planar_draw_life_ems(int x, int y, int col, int row, char far *p);
 extern void far gfx_planar_draw_life_320(int x, int y, int col, int row, char far *p, int mask);
 extern void far gfx_planar_draw_life_hires(int x, int y, int col, int row, char far *p, int mask);
@@ -318,41 +318,41 @@ void far edit_draw_life_and_ground_tile(int x, int y)
     int mask;
     char far *base;
 
-    row = g_94E4 >> 6;
-    col = ((g_94E4 & 0x3f) - 0x80) << 7;
-    if (g_94E4 >= 0x100)
+    row = edit_current_terrain_tile >> 6;
+    col = ((edit_current_terrain_tile & 0x3f) - 0x80) << 7;
+    if (edit_current_terrain_tile >= 0x100)
         Punt("Tile >= 256 in PutLifeAndTile");
-    if (g_9126 >= 0x380) {
-        g_9126 -= 0x280;
+    if (edit_current_life_tile >= 0x380) {
+        edit_current_life_tile -= 0x280;
         flip = 0;
-    } else if (g_9126 >= 0x300) {
-        g_9126 -= 0x200;
+    } else if (edit_current_life_tile >= 0x300) {
+        edit_current_life_tile -= 0x200;
         flip = 1;
-    } else if (g_9126 >= 0x200) {
-        g_9126 -= 0x200;
+    } else if (edit_current_life_tile >= 0x200) {
+        edit_current_life_tile -= 0x200;
         flip = 1;
     } else {
-        g_9126 -= 0x100;
+        edit_current_life_tile -= 0x100;
         flip = 0;
     }
-    if (g_19D0 && fd_50F6_1102 == 1) {
-        gfx_planar_draw_life_ems(x & ~0xf, y, col, row, fd_55B3_360E + g_9126 * 0xa0);
+    if (g_19D0 && edit_tile_renderer_kind == 1) {
+        gfx_planar_draw_life_ems(x & ~0xf, y, col, row, ems_page_frame_pointer + edit_current_life_tile * 0xa0);
         return;
     }
-    base = *(flip == 1 ? fd_50F6_10E6 : fd_50F6_10EA);
-    if (g_9126 >= 0xf0 && g_9126 <= 0xff)
+    base = *(flip == 1 ? edit_life_tiles_handle : edit_life_alt_tiles_handle);
+    if (edit_current_life_tile >= 0xf0 && edit_current_life_tile <= 0xff)
         mask = masks[0];
     else
-        mask = masks[g_9126 >> 7];
-    if (fd_50F6_1102 == 1) {
-        if (g_5A97 == 4)
-            gfx_planar_draw_life_320(x & ~0xf, y, col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
+        mask = masks[edit_current_life_tile >> 7];
+    if (edit_tile_renderer_kind == 1) {
+        if (gfx_display_mode == 4)
+            gfx_planar_draw_life_320(x & ~0xf, y, col, row, base + (edit_current_life_tile & 0x7f) * 0xc0, mask);
         else
-            gfx_planar_draw_life_hires(x & ~0xf, y, col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
-    } else if (fd_50F6_1102 == 2)
-        gfx_tandy_draw_life_tile(x & ~1, y, *fd_50F6_10EE + g_94E4 * 0x48, base + (g_9126 & 0x7f) * 0x48, mask);
-    else if (fd_50F6_1102 == 3)
-        gfx_mono_draw_life_tile(x & ~7, y, *fd_50F6_10EE + (g_94E4 << 5), base + (g_9126 << 5), 0x3000 - ((g_9126 >> 7) << 12));
+            gfx_planar_draw_life_hires(x & ~0xf, y, col, row, base + (edit_current_life_tile & 0x7f) * 0xc0, mask);
+    } else if (edit_tile_renderer_kind == 2)
+        gfx_tandy_draw_life_tile(x & ~1, y, *edit_terrain_tiles_handle + edit_current_terrain_tile * 0x48, base + (edit_current_life_tile & 0x7f) * 0x48, mask);
+    else if (edit_tile_renderer_kind == 3)
+        gfx_mono_draw_life_tile(x & ~7, y, *edit_terrain_tiles_handle + (edit_current_terrain_tile << 5), base + (edit_current_life_tile << 5), 0x3000 - ((edit_current_life_tile >> 7) << 12));
 }
 
 extern void far gfx_planar_compose_life_ems(int col, int row, char far *p);
@@ -370,77 +370,77 @@ void far edit_compose_life_tile(void)
     int mask;
     char far *base;
 
-    row = g_94E4 >> 6;
-    col = ((g_94E4 & 0x3f) - 0x80) << 7;
-    if (g_94E4 >= 0x100)
+    row = edit_current_terrain_tile >> 6;
+    col = ((edit_current_terrain_tile & 0x3f) - 0x80) << 7;
+    if (edit_current_terrain_tile >= 0x100)
         Punt("Tile >= 256 in PutLifeAndTile");
-    if (g_9126 >= 0x380) {
-        g_9126 -= 0x280;
+    if (edit_current_life_tile >= 0x380) {
+        edit_current_life_tile -= 0x280;
         flip = 0;
-    } else if (g_9126 >= 0x300) {
-        g_9126 -= 0x200;
+    } else if (edit_current_life_tile >= 0x300) {
+        edit_current_life_tile -= 0x200;
         flip = 1;
-    } else if (g_9126 >= 0x200) {
-        g_9126 -= 0x200;
+    } else if (edit_current_life_tile >= 0x200) {
+        edit_current_life_tile -= 0x200;
         flip = 1;
     } else {
-        g_9126 -= 0x100;
+        edit_current_life_tile -= 0x100;
         flip = 0;
     }
-    if (g_19D0 && fd_50F6_1102 == 1) {
-        gfx_planar_compose_life_ems(col, row, fd_55B3_360E + g_9126 * 0xa0);
+    if (g_19D0 && edit_tile_renderer_kind == 1) {
+        gfx_planar_compose_life_ems(col, row, ems_page_frame_pointer + edit_current_life_tile * 0xa0);
         return;
     }
-    base = *(flip == 1 ? fd_50F6_10E6 : fd_50F6_10EA);
-    if (g_9126 >= 0xf0 && g_9126 <= 0xff)
+    base = *(flip == 1 ? edit_life_tiles_handle : edit_life_alt_tiles_handle);
+    if (edit_current_life_tile >= 0xf0 && edit_current_life_tile <= 0xff)
         mask = masks[0];
     else
-        mask = masks[g_9126 >> 7];
-    if (fd_50F6_1102 == 1) {
-        if (g_5A97 == 4)
-            gfx_planar_compose_life_320(col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
+        mask = masks[edit_current_life_tile >> 7];
+    if (edit_tile_renderer_kind == 1) {
+        if (gfx_display_mode == 4)
+            gfx_planar_compose_life_320(col, row, base + (edit_current_life_tile & 0x7f) * 0xc0, mask);
         else
-            gfx_planar_compose_life_hires(col, row, base + (g_9126 & 0x7f) * 0xc0, mask);
-    } else if (fd_50F6_1102 == 2)
-        gfx_tandy_compose_life_tile(*fd_50F6_10EE + g_94E4 * 0x48, base + (g_9126 & 0x7f) * 0x48, mask);
-    else if (fd_50F6_1102 == 3)
-        gfx_mono_compose_life_tile(*fd_50F6_10EE + (g_94E4 << 5), base + (g_9126 << 5), 0x3000 - ((g_9126 >> 7) << 12));
+            gfx_planar_compose_life_hires(col, row, base + (edit_current_life_tile & 0x7f) * 0xc0, mask);
+    } else if (edit_tile_renderer_kind == 2)
+        gfx_tandy_compose_life_tile(*edit_terrain_tiles_handle + edit_current_terrain_tile * 0x48, base + (edit_current_life_tile & 0x7f) * 0x48, mask);
+    else if (edit_tile_renderer_kind == 3)
+        gfx_mono_compose_life_tile(*edit_terrain_tiles_handle + (edit_current_terrain_tile << 5), base + (edit_current_life_tile << 5), 0x3000 - ((edit_current_life_tile >> 7) << 12));
 }
 
 extern void (far * near g_917C)(int x, int y, int offset);
-extern void (far * near g_914C)(int x, int y, char far *p, int w, int h);
+extern void (far * near gfx_put_picture_hook)(int x, int y, char far *p, int w, int h);
 
 void far edit_draw_ground_tile(int x, int y)
 {
-    if (g_94E4 >= 0x100)
+    if (edit_current_terrain_tile >= 0x100)
         Punt("PutTile grndTile > 0x100");
-    switch (fd_50F6_1102) {
+    switch (edit_tile_renderer_kind) {
     case 1:
-        (*g_917C)(x, y, (g_94E4 - 0x300) << 5);
+        (*g_917C)(x, y, (edit_current_terrain_tile - 0x300) << 5);
         break;
     case 2:
-        (*g_914C)(x & ~1, y, *fd_50F6_10EE + g_94E4 * 0x48, 12, 12);
+        (*gfx_put_picture_hook)(x & ~1, y, *edit_terrain_tiles_handle + edit_current_terrain_tile * 0x48, 12, 12);
         break;
     case 3:
-        (*g_914C)(x & ~0xf, y, *fd_50F6_10EE + (g_94E4 << 5), 16, 16);
+        (*gfx_put_picture_hook)(x & ~0xf, y, *edit_terrain_tiles_handle + (edit_current_terrain_tile << 5), 16, 16);
         break;
     }
 }
 
 extern void far gfx_planar_read_tile_plane(int row, int col);
-extern char near g_3D20[];
+extern char near gfx_row_scratch[];
 
 void far edit_copy_ground_tile(void)
 {
-    switch (fd_50F6_1102) {
+    switch (edit_tile_renderer_kind) {
     case 1:
-        gfx_planar_read_tile_plane(g_94E4 >> 6, ((g_94E4 & 0x3f) - 0x80) << 7);
+        gfx_planar_read_tile_plane(edit_current_terrain_tile >> 6, ((edit_current_terrain_tile & 0x3f) - 0x80) << 7);
         break;
     case 2:
-        _fmemcpy(g_3D20, *fd_50F6_10EE + g_94E4 * 0x48, 0x48);
+        _fmemcpy(gfx_row_scratch, *edit_terrain_tiles_handle + edit_current_terrain_tile * 0x48, 0x48);
         break;
     case 3:
-        _fmemcpy(g_3D20, *fd_50F6_10EE + (g_94E4 << 5), 0x20);
+        _fmemcpy(gfx_row_scratch, *edit_terrain_tiles_handle + (edit_current_terrain_tile << 5), 0x20);
         break;
     }
 }
@@ -734,7 +734,7 @@ extern unsigned char far LifeR[64][64];
  * 4-byte frame; here v wins SI.  Taking &v reproduces the allocation (not adopted).  The
  * sums fd_049A+fd_04C2(+fd_0496) load in the original order only with one declaration
  * between fd_049A and fd_04C2 (mod-17 symbol order). */
-extern void (far * far fd_50F6_37EA)(char far *src, char far *dst, int x, int y);
+extern void (far * far gfx_mask_to_buffer_hook)(char far *src, char far *dst, int x, int y);
 
 
 extern int far FootX;
@@ -752,8 +752,8 @@ void far DoCalcTile(int x, int y)
         mx += 0x40;
         my &= 0x3f;
     }
-    g_94E4 = 0;
-    g_9126 = 0;
+    edit_current_terrain_tile = 0;
+    edit_current_life_tile = 0;
     switch (MapPlane) {
     case 0:
     case 1:
@@ -778,73 +778,73 @@ void far DoCalcTile(int x, int y)
             goto noscent;
         }
         if (v > 0x10)
-            g_94E4 = ((v >> 4) & 0x1f) - 0x10;
+            edit_current_terrain_tile = ((v >> 4) & 0x1f) - 0x10;
         else
-            g_94E4 = 0;
+            edit_current_terrain_tile = 0;
 noscent:
-        if (g_94E4 == 0)
-            g_94E4 = MapA[mx][my];
+        if (edit_current_terrain_tile == 0)
+            edit_current_terrain_tile = MapA[mx][my];
         v = LifeA[mx][my];
         if (v == 0)
             return;
         if (v == 0xff) {
-            g_9126 = MeBase + MeType + 0x380;
+            edit_current_life_tile = MeBase + MeType + 0x380;
             if (MeType < 8)
-                g_9126 += MeEgg;
+                edit_current_life_tile += MeEgg;
             else
-                g_9126 += MeDir;
+                edit_current_life_tile += MeDir;
         } else if (v == 0xfe)
-            g_9126 = MeBase + MeDir + MeType + 0x388;
+            edit_current_life_tile = MeBase + MeDir + MeType + 0x388;
         else
-            g_9126 = v + 0x100;
+            edit_current_life_tile = v + 0x100;
         break;
     case 2:
         mx &= 0x3f;
-        g_94E4 = MapB[mx][my] - 0x70;
+        edit_current_terrain_tile = MapB[mx][my] - 0x70;
         v = LifeB[mx][my];
         if (v == 0)
             return;
         switch (v) {
         case 0xfe:
-            g_9126 = MeBase + MeDir + MeType + 0x308;
+            edit_current_life_tile = MeBase + MeDir + MeType + 0x308;
             break;
         case 0xff:
-            g_9126 = MeBase + MeType + 0x300;
+            edit_current_life_tile = MeBase + MeType + 0x300;
             if (MeType < 8)
-                g_9126 += MeEgg;
+                edit_current_life_tile += MeEgg;
             else
-                g_9126 += MeDir;
+                edit_current_life_tile += MeDir;
             break;
         default:
-            g_9126 = v + 0x200;
+            edit_current_life_tile = v + 0x200;
         }
         break;
     case 3:
         mx &= 0x3f;
-        g_94E4 = MapR[mx][my] - 0x70;
+        edit_current_terrain_tile = MapR[mx][my] - 0x70;
         v = LifeR[mx][my];
         if (v == 0)
             return;
         switch (v) {
         case 0xfe:
-            g_9126 = MeBase + MeDir + MeType + 0x308;
+            edit_current_life_tile = MeBase + MeDir + MeType + 0x308;
             break;
         case 0xff:
-            g_9126 = MeBase + MeType + 0x300;
+            edit_current_life_tile = MeBase + MeType + 0x300;
             if (MeType < 8)
-                g_9126 += MeEgg;
+                edit_current_life_tile += MeEgg;
             else
-                g_9126 += MeDir;
+                edit_current_life_tile += MeDir;
             break;
         default:
-            g_9126 = v + 0x200;
+            edit_current_life_tile = v + 0x200;
         }
         break;
     }
 }
 
 
-extern unsigned char far fd_50F6_1114[30 * 40];
+extern unsigned char far edit_cached_terrain_tiles[30 * 40];
 
 /* STEERED: the point retains two frame words though only y is read.
  * Copying y through i selects the early DI load; original locals are unknown. */
@@ -864,17 +864,17 @@ void far edit_redraw_changed_tile(int x, int y)
         Punt("Y>MAXAY");
     DoCalcTile(x, row);
     i = row * 40 + x;
-    if (fd_50F6_15C4[0][i] == -2) {
-        fd_50F6_15C4[0][i]++;
+    if (edit_cached_life_tiles[0][i] == -2) {
+        edit_cached_life_tiles[0][i]++;
         return;
     }
-    if (fd_50F6_15C4[0][i] != g_9126 || fd_50F6_1114[i] != g_94E4 || (row == 0 && g_19CE != 0)) {
-        if (g_9126)
+    if (edit_cached_life_tiles[0][i] != edit_current_life_tile || edit_cached_terrain_tiles[i] != edit_current_terrain_tile || (row == 0 && g_19CE != 0)) {
+        if (edit_current_life_tile)
             edit_draw_life_and_ground_tile(g_19BE * x + editTileRect.left, g_19C0 * row + editTileRect.top);
         else
             edit_draw_ground_tile(g_19BE * x + editTileRect.left, row * g_19C0 + editTileRect.top);
-        fd_50F6_15C4[0][i] = g_9126;
-        fd_50F6_1114[i] = g_94E4;
+        edit_cached_life_tiles[0][i] = edit_current_life_tile;
+        edit_cached_terrain_tiles[i] = edit_current_terrain_tile;
     }
 }
 
@@ -891,8 +891,8 @@ void far DrawSpider(void);
 void far DrawBalloons(void);
 extern int far fd_50F6_37D4;
 extern void far GPutPic(int x, int y, char far *image);
-extern Pnt far fd_50F6_1F26;
-extern struct Rect far fd_50F6_37D6;
+extern Pnt far spider_composite_bitmap;
+extern struct Rect far spider_composite_rect;
 
 static struct Rect balTileRect;
 static struct Rect balloonRect;
@@ -943,7 +943,7 @@ void far edit_render_viewport(void)
                 || (y == fd_50F6_10DE - 1 && x == fd_50F6_10E0 - 1)) {
                 if (spider)
                     continue;
-                GPutPic(fd_50F6_37D6.left, fd_50F6_37D6.top, (char far *)&fd_50F6_1F26);
+                GPutPic(spider_composite_rect.left, spider_composite_rect.top, (char far *)&spider_composite_bitmap);
                 spider = 1;
                 if (balTileRect.left == 500)
                     continue;
@@ -971,7 +971,7 @@ extern int far HealthB;
 extern int far HealthR;
 extern int near _foreColor;
 extern void far GRectFill(struct Rect far *rect, int color);
-extern void (far * near g_9128)(int a, int b, int c);
+extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 extern void far GRectOutline(struct Rect far *rect, int width);
 extern int near g_3DE2;
 extern int far MeWarnHealth;
@@ -1005,8 +1005,8 @@ void far DrawEditGraphs(void)
         r.top = r.bottom - (int)(h * frac / 0x10000L);
         if (r.top < r.bottom) {
             GRectFill(&r, _foreColor);
-            if ((g_5A97 & 1) && i == 0) {
-                (*g_9128)(0, 0, 0);
+            if ((gfx_display_mode & 1) && i == 0) {
+                (*gfx_set_attributes_hook)(0, 0, 0);
                 GRectOutline(&r, 1);
                 win_SetColorFromObjNum(obj);
             }
@@ -1061,7 +1061,7 @@ void far PreDrawSpider(void)
     int x, y, px, py;
     int sx, sy;
 
-    fd_50F6_37D6.top = 0x8000;
+    spider_composite_rect.top = 0x8000;
     fd_50F6_37D2 = 500;
     fd_50F6_37D4 = 500;
     if (!SpidOn)
@@ -1072,7 +1072,7 @@ void far PreDrawSpider(void)
     py = y * g_19C0;
     sx = SpidX;
     sy = SpidY;
-    if (g_5A97 == 2) {
+    if (gfx_display_mode == 2) {
         sx = sx * 3 / 4;
         sy = sy * 3 / 4;
     }
@@ -1086,8 +1086,8 @@ void far PreDrawSpider(void)
         return;
     if (fd_50F6_10DE * g_19C0 + py < sy)
         return;
-    fd_50F6_1F26.x = 7 * g_19BE;
-    fd_50F6_1F26.y = 7 * g_19C0;
+    spider_composite_bitmap.x = 7 * g_19BE;
+    spider_composite_bitmap.y = 7 * g_19C0;
     fd_50F6_37D2 = SpidX / 16 - x - 3;
     fd_50F6_37D4 = SpidY / 16 - y - 3;
 }
@@ -1095,7 +1095,7 @@ void far PreDrawSpider(void)
 extern void far anim_bitmap_to_buffer(int x, int y, Pnt far *buf, int id);
 void far DrawLegs(int x, int y, int dir, int frame);
 void far DrawPalps(int x, int y, int dir);
-extern void (far * far fd_50F6_37E6)(char far *p, int stride);
+extern void (far * far gfx_scratch_to_buffer_hook)(char far *p, int stride);
 extern void far gfx_buffer_line_target(Pnt far *buf, int mode);
 extern int far SMode;
 extern int far Scycle;
@@ -1105,11 +1105,11 @@ extern int far SpidDir;
 extern char far BodX[];
 extern char far BodY[];
 extern int far fd_3D57_07B2;
-extern long far fd_3D57_098E;
+extern long far SpidBalloonTicks;
 extern int far SRand64(void);
 extern int far SRand2(void);
 extern int far WantSpiderBalloon;
-extern int far fd_3D57_0992;
+extern int far spider_message_variant;
 extern int far LastSMode;
 extern char far * far * far SpiderMsgs;
 extern char far Dy8[8];
@@ -1141,7 +1141,7 @@ void far DrawSpider(void)
 
     px = MapPnt.x * g_19BE;
     py = MapPnt.y * g_19C0;
-    if (g_5A97 == 2) {
+    if (gfx_display_mode == 2) {
         sx = SpidX * 3 / 4;
         modx = sx % 12;
         mody = (SpidY * 3 / 4) % 12;
@@ -1153,13 +1153,13 @@ void far DrawSpider(void)
         left = SpidX - modx + editTileRect.left - px - 0x30;
         top = SpidY - mody + editTileRect.top - py - 0x30;
     }
-    fd_50F6_37D6.left = left;
-    fd_50F6_37D6.top = top;
-    fd_50F6_37D6.bottom = top + fd_50F6_1F26.y;
-    fd_50F6_37D6.right = left + fd_50F6_1F26.x;
+    spider_composite_rect.left = left;
+    spider_composite_rect.top = top;
+    spider_composite_rect.bottom = top + spider_composite_bitmap.y;
+    spider_composite_rect.right = left + spider_composite_bitmap.x;
     edit_prepare_life_tiles(MapPlane / 2);
     w = 2;
-    switch (fd_50F6_1102) {
+    switch (edit_tile_renderer_kind) {
     case 2:
         w = 6;
     case 1:
@@ -1169,8 +1169,8 @@ void far DrawSpider(void)
         skip = 8;
         break;
     }
-    skip = g_19C0 / skip * fd_50F6_1F26.x - w * 7;
-    p = (char far *)&fd_50F6_1F26 + 4;
+    skip = g_19C0 / skip * spider_composite_bitmap.x - w * 7;
+    p = (char far *)&spider_composite_bitmap + 4;
     for (j = 0, ty = fd_50F6_37D4; j < 7; j++, ty++, p += skip) {
         int tx;
         int n;
@@ -1179,63 +1179,63 @@ void far DrawSpider(void)
         for (idx = ty * 40 + (tx = fd_50F6_37D2), n = 0; n < 7; n++, tx++, p += w, idx++) {
             DoCalcTile(tx, ty);
             if (idx >= 0 && idx < 1200)
-                fd_50F6_15C4[0][idx] = -1;
-            if (g_9126)
+                edit_cached_life_tiles[0][idx] = -1;
+            if (edit_current_life_tile)
                 edit_compose_life_tile();
             else
                 edit_copy_ground_tile();
-            (*fd_50F6_37E6)(p, fd_50F6_1F26.x);
+            (*gfx_scratch_to_buffer_hook)(p, spider_composite_bitmap.x);
         }
     }
     edit_restore_tile_ems_map();
-    (g_5A97 & 1) ? gfx_buffer_line_target(&fd_50F6_1F26, 0) : (g_5A97 == 2 ? gfx_buffer_line_target(&fd_50F6_1F26, 1) : gfx_buffer_line_target(&fd_50F6_1F26, 2));
+    (gfx_display_mode & 1) ? gfx_buffer_line_target(&spider_composite_bitmap, 0) : (gfx_display_mode == 2 ? gfx_buffer_line_target(&spider_composite_bitmap, 1) : gfx_buffer_line_target(&spider_composite_bitmap, 2));
     if (SMode == 5) {
         lx = DBodX[Scycle] + 0x30;
         ly = DBodY[Scycle] + 0x30;
-        if (g_5A97 == 2) {
+        if (gfx_display_mode == 2) {
             lx = lx * 3 / 4 + modx;
             ly = ly * 3 / 4 + mody;
         } else {
             lx += modx;
             ly += mody;
         }
-        anim_bitmap_to_buffer(lx, ly, &fd_50F6_1F26, Scycle + 0x41a);
+        anim_bitmap_to_buffer(lx, ly, &spider_composite_bitmap, Scycle + 0x41a);
     } else {
         lx = BodX[SpidDir] + 0x30;
         ly = BodY[SpidDir] + 0x30;
-        if (g_5A97 == 2) {
-            anim_bitmap_to_buffer(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &fd_50F6_1F26, SpidDir + 1000);
+        if (gfx_display_mode == 2) {
+            anim_bitmap_to_buffer(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &spider_composite_bitmap, SpidDir + 1000);
             DrawLegs((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir, Scycle & 7);
             DrawPalps((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir);
         } else {
-            anim_bitmap_to_buffer(modx + lx, mody + ly, &fd_50F6_1F26, SpidDir + 1000);
+            anim_bitmap_to_buffer(modx + lx, mody + ly, &spider_composite_bitmap, SpidDir + 1000);
             DrawLegs(modx + 0x30, mody + 0x30, SpidDir, Scycle & 7);
             DrawPalps(modx + 0x30, mody + 0x30, SpidDir);
         }
     }
     if (fd_3D57_07B2) {
-        if (GamePaused == 0 && fd_3D57_098E < TickCount()) {
-            fd_3D57_098E = TickCount() + SRand64() + 180;
+        if (GamePaused == 0 && SpidBalloonTicks < TickCount()) {
+            SpidBalloonTicks = TickCount() + SRand64() + 180;
             if (SRand2() == 0) {
                 WantSpiderBalloon = 1;
-                if (++fd_3D57_0992 >= 5)
-                    fd_3D57_0992 = 0;
+                if (++spider_message_variant >= 5)
+                    spider_message_variant = 0;
             } else
                 WantSpiderBalloon = 0;
         }
         if (SMode == LastSMode && SMode <= 4) {
             if (WantSpiderBalloon)
                 AddMsgBalloon((Dx8[SpidDir] << 3) + SpidX, (Dy8[SpidDir] << 3) + SpidY, 1, 10,
-                              SpiderMsgs[SMode * 5 + fd_3D57_0992]);
+                              SpiderMsgs[SMode * 5 + spider_message_variant]);
         } else {
-            fd_3D57_098E = TickCount() + SRand32() + 30;
+            SpidBalloonTicks = TickCount() + SRand32() + 30;
             WantSpiderBalloon = 0;
             LastSMode = SMode;
         }
     }
 }
 
-extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
+extern void (far * near gfx_fill_rect_hook)(int x0, int y0, int x1, int y1, int color);
 extern int far BoyDir;
 extern int far BoyHere;
 extern int far MowX;
@@ -1253,7 +1253,7 @@ void far edit_draw_foot_mower_overlays(void)
         && MapPnt.y + fd_50F6_10DE >= FootY && FootY + 15 >= MapPnt.y) {
         x = (FootX - MapPnt.x) * g_19BE + editTileRect.left;
         y = (FootY - MapPnt.y) * g_19C0 + editTileRect.top;
-        (*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x10);
+        (*gfx_fill_rect_hook)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x10);
         x = FootX - MapPnt.x;
         y = FootY - MapPnt.y;
         if (BoyDir & 1)
@@ -1265,7 +1265,7 @@ void far edit_draw_foot_mower_overlays(void)
                 && MapPnt.y + fd_50F6_10DE >= MowY && MowY + 0x1b >= MapPnt.x) {
                 x = (MowX - MapPnt.x) * g_19BE + editTileRect.left;
                 y = (MowY - MapPnt.y) * g_19C0 + editTileRect.top;
-                (*g_9134)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x20);
+                (*gfx_fill_rect_hook)(x, y, 15 * g_19BE + x, 15 * g_19C0 + y, g_19C4 | 0x20);
                 x = MowX - MapPnt.x;
                 y = MowY - MapPnt.y;
                 InvalEuMap(x, y, x + 0x1b, y + 0x1b);
@@ -1276,7 +1276,7 @@ void far edit_draw_foot_mower_overlays(void)
 
 void far ed_MoveTo(int x, int y)
 {
-    if (g_5A97 == 2) {
+    if (gfx_display_mode == 2) {
         x = x * 3 / 4;
         y = y * 3 / 4;
     }
@@ -1288,7 +1288,7 @@ extern void far gfx_buffer_line(int x0, int y0, int x1, int y1, int color);
 
 void far ed_LineTo(int x, int y)
 {
-    if (g_5A97 == 2) {
+    if (gfx_display_mode == 2) {
         x = x * 3 / 4;
         y = y * 3 / 4;
     }
@@ -1317,9 +1317,9 @@ void far DrawPalps(int x, int y, int dir)
     else
         r = SRand1(4);
     if (MeMode == 1)
-        (*g_9128)(ConvColor(1), 0, 0);
+        (*gfx_set_attributes_hook)(ConvColor(1), 0, 0);
     else
-        (*g_9128)(ConvColor(15), 0, 0);
+        (*gfx_set_attributes_hook)(ConvColor(15), 0, 0);
     switch (dir) {
     case 0:
         ed_MoveTo(x + 4, y - 10);
@@ -1429,7 +1429,7 @@ void far DrawLegs(int x, int y, int dir, int frame)
     int other;
 
     other = (frame + 4) & 7;
-    (*g_9128)(ConvColor(15), 0, 0);
+    (*gfx_set_attributes_hook)(ConvColor(15), 0, 0);
     switch (dir) {
     case 0:
         ed_MoveTo(x + Lx[0], y + Ly[0]);
@@ -1747,7 +1747,7 @@ void far RestBalloons(int x, int y, int plane)
     LastRestPlane = plane;
 }
 
-extern int far fd_50F6_1092;
+extern int far message_balloon_count;
 extern Pnt far CurBalloonPnts[];
 extern int far CurBalloonPlane[];
 extern int far CurBalloonFlags[];
@@ -1765,16 +1765,16 @@ void far AddMsgBalloon(int x, int y, int plane, int style, char far *msg)
         tx = x;
         ty = y;
     }
-    if (fd_50F6_1092 >= 6)
+    if (message_balloon_count >= 6)
         return;
     if (!BalloonIsVisible(plane, tx, ty))
         return;
-    CurBalloonPnts[fd_50F6_1092].x = style == 10 ? x : g_19BE * x + 8;
-    CurBalloonPnts[fd_50F6_1092].y = style == 10 ? y : g_19C0 * y + 8;
-    CurBalloonPlane[fd_50F6_1092] = plane;
-    CurBalloonFlags[fd_50F6_1092] = style;
-    CurBalloonMsgs[fd_50F6_1092] = msg;
-    fd_50F6_1092++;
+    CurBalloonPnts[message_balloon_count].x = style == 10 ? x : g_19BE * x + 8;
+    CurBalloonPnts[message_balloon_count].y = style == 10 ? y : g_19C0 * y + 8;
+    CurBalloonPlane[message_balloon_count] = plane;
+    CurBalloonFlags[message_balloon_count] = style;
+    CurBalloonMsgs[message_balloon_count] = msg;
+    message_balloon_count++;
 }
 
 extern int far WantBFightBalloon;
@@ -1801,7 +1801,7 @@ extern void far font_SetFont(int font);
 extern Handle far MakeBalloon(char far *msg, int flags);
 extern long far RestBalloonTicks;
 extern Handle far mem_Alloc(long size, int flags, char far *name);
-extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void far *d);
+extern void (far * far gfx_buffer_intersection_hook)(void far *a, void far *b, void far *c, void far *d);
 
 /* OPEN: residue only the operand order of the five TickCount() vs long-timer compares
  * (original: cmp mem,dx / cmp mem,ax).  A declaration order of the timer externs was found
@@ -1954,7 +1954,7 @@ void far DrawBalloons(void)
     font_SetFont(2);
     bpp = 2;
     rowbytes = 0x80;
-    switch (fd_50F6_1102) {
+    switch (edit_tile_renderer_kind) {
     case 2:
         bpp = 6;
         rowbytes = 0x48;
@@ -1969,7 +1969,7 @@ void far DrawBalloons(void)
     if (fd_50F6_37D2 == 500)
         edit_set_viewport_clip();
     balTileRect.left = 500;
-    for (i = 0, shown = 0; i < fd_50F6_1092; i++) {
+    for (i = 0, shown = 0; i < message_balloon_count; i++) {
         if (shown >= 1 || CurBalloonMsgs[i] == 0)
             break;
         pos = CurBalloonPnts[i];
@@ -2008,27 +2008,27 @@ void far DrawBalloons(void)
             idx = ty * 40 + balTileRect.left;
             for (tx = balTileRect.left, col = 0; col < wt; col++, tx++, dst += bpp, idx++) {
                 DoCalcTile(tx, ty);
-                if (g_9126)
+                if (edit_current_life_tile)
                     edit_compose_life_tile();
                 else
                     edit_copy_ground_tile();
-                (*fd_50F6_37E6)(dst, wpix);
+                (*gfx_scratch_to_buffer_hook)(dst, wpix);
                 if (idx >= 0 && idx < 1200)
-                    fd_50F6_15C4[0][idx] = -1;
+                    edit_cached_life_tiles[0][idx] = -1;
             }
         }
         edit_restore_tile_ems_map();
         if (fd_50F6_37D2 != 500)
-            (*fd_50F6_37EE)(&fd_50F6_37D6, &fd_50F6_1F26, &balloonRect, bufp);
-        (*fd_50F6_37EA)((char far *)pic + 8, bufp, bx % g_19BE, by % g_19C0);
+            (*gfx_buffer_intersection_hook)(&spider_composite_rect, &spider_composite_bitmap, &balloonRect, bufp);
+        (*gfx_mask_to_buffer_hook)((char far *)pic + 8, bufp, bx % g_19BE, by % g_19C0);
         if (fd_50F6_37D2 != 500)
-            (*fd_50F6_37EE)(&balloonRect, bufp, &fd_50F6_37D6, &fd_50F6_1F26);
+            (*gfx_buffer_intersection_hook)(&balloonRect, bufp, &spider_composite_rect, &spider_composite_bitmap);
         mem_Unlock(h);
         mem_Free(h);
         i = saved;
     }
     font_SetFont(0);
-    fd_50F6_1092 = 0;
+    message_balloon_count = 0;
 }
 
 

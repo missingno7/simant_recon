@@ -21,12 +21,12 @@ struct Pt {
     int y;
 };
 
-extern struct Rect far * near g_5AAC;
+extern struct Rect far * near clip_active_list_offset;
 extern void (far * near g_9170)(int, int, int, int, int);
-extern int far fd_55B3_3DE8;
-extern int far fd_55B3_3DE6;
+extern int far gfx_clip_right_pixels;
+extern int far gfx_clip_left_pixels;
 extern void (far * near g_9158)(int, int, char far *, int, int);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern void (far * near g_9150)(int, int, char far *, int, int);
 
 int far clip_point_outcode(int x, int y, struct Rect far *r)
@@ -180,7 +180,7 @@ void far clip_dispatch_rect(void (far *fn)(int, int, int, int, int), int unused1
     r.left = left;
     r.right = right;
     r.bottom = bottom;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         clip_split_rect(&r, clip, pieces, 0);
         for (i = 0; pieces[i].top != RECT_END; i++)
             fn(pieces[i].left, pieces[i].top, pieces[i].right, pieces[i].bottom, color);
@@ -208,7 +208,7 @@ void far clip_draw_line(char far *port, int x1, int y1, int x2, int y2, int colo
     p[0].y = line.top;
     p[1].x = line.right;
     p[1].y = line.bottom;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         code[0] = clip_point_outcode(x1, y1, clip);
         code[1] = clip_point_outcode(x2, y2, clip);
         if (code[0] & code[1])
@@ -266,17 +266,17 @@ void far clip_blit_mono_indexed(char far *port, int x, int y, char far *bits, in
     r.left = x;
     r.right = x + width;
     r.bottom = y + height;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         clip_split_rect(&r, clip, pieces, 0);
         for (i = 0; pieces[i].top != RECT_END; i++) {
-            fd_55B3_3DE8 = r.right - pieces[i].right;
-            fd_55B3_3DE6 = pieces[i].left - r.left;
+            gfx_clip_right_pixels = r.right - pieces[i].right;
+            gfx_clip_left_pixels = pieces[i].left - r.left;
             g_9158(x, pieces[i].top, bits + (pieces[i].top - y) * rowbytes, width,
                    pieces[i].bottom - pieces[i].top);
         }
     }
-    fd_55B3_3DE6 = 0;
-    fd_55B3_3DE8 = 0;
+    gfx_clip_left_pixels = 0;
+    gfx_clip_right_pixels = 0;
 }
 
 void far clip_blit_planar(char far *port, int x, int y, char far *bits, int width, int height)
@@ -289,23 +289,23 @@ void far clip_blit_planar(char far *port, int x, int y, char far *bits, int widt
     struct Rect pieces[10];
 
     rowbytes = (width + 7) / 8;
-    if ((g_5A97 & 1) == 0)
+    if ((gfx_display_mode & 1) == 0)
         rowbytes <<= 2;
     r.left = x;
     r.right = x + width;
     r.top = y;
     r.bottom = y + height;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         clip_split_rect(&r, clip, pieces, 0);
         for (i = 0; pieces[i].top != RECT_END; i++) {
-            fd_55B3_3DE8 = r.right - pieces[i].right;
-            fd_55B3_3DE6 = pieces[i].left - r.left;
+            gfx_clip_right_pixels = r.right - pieces[i].right;
+            gfx_clip_left_pixels = pieces[i].left - r.left;
             g_9150(x, pieces[i].top, bits + (pieces[i].top - y) * rowbytes, width,
                    pieces[i].bottom - pieces[i].top);
         }
     }
-    fd_55B3_3DE6 = 0;
-    fd_55B3_3DE8 = 0;
+    gfx_clip_left_pixels = 0;
+    gfx_clip_right_pixels = 0;
 }
 
 void far clip_blit_mono(char far *port, int x, int y, char far *bits, int width, int height)
@@ -323,16 +323,16 @@ void far clip_blit_mono(char far *port, int x, int y, char far *bits, int width,
     r.left = x;
     r.right = x + width;
     r.bottom = y + height;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
-            fd_55B3_3DE8 = r.right - p->right;
-            fd_55B3_3DE6 = p->left - r.left;
+            gfx_clip_right_pixels = r.right - p->right;
+            gfx_clip_left_pixels = p->left - r.left;
             g_9158(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);
         }
     }
-    fd_55B3_3DE6 = 0;
-    fd_55B3_3DE8 = 0;
+    gfx_clip_left_pixels = 0;
+    gfx_clip_right_pixels = 0;
 }
 
 void far clip_blit_packed4(char far *port, int x, int y, char far *bits, int width, int height)
@@ -350,16 +350,16 @@ void far clip_blit_packed4(char far *port, int x, int y, char far *bits, int wid
     r.left = x;
     r.right = x + width;
     r.bottom = y + height;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
-            fd_55B3_3DE8 = r.right - p->right;
-            fd_55B3_3DE6 = p->left - r.left;
+            gfx_clip_right_pixels = r.right - p->right;
+            gfx_clip_left_pixels = p->left - r.left;
             g_9150(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);
         }
     }
-    fd_55B3_3DE6 = 0;
-    fd_55B3_3DE8 = 0;
+    gfx_clip_left_pixels = 0;
+    gfx_clip_right_pixels = 0;
 }
 
 void far clip_blit_bytes(char far *port, int x, int y, char far *bits, int width, int height)
@@ -377,16 +377,16 @@ void far clip_blit_bytes(char far *port, int x, int y, char far *bits, int width
     r.left = x;
     r.right = x + width;
     r.bottom = y + height;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
-            fd_55B3_3DE8 = r.right - p->right;
-            fd_55B3_3DE6 = p->left - r.left;
+            gfx_clip_right_pixels = r.right - p->right;
+            gfx_clip_left_pixels = p->left - r.left;
             g_9150(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);
         }
     }
-    fd_55B3_3DE6 = 0;
-    fd_55B3_3DE8 = 0;
+    gfx_clip_left_pixels = 0;
+    gfx_clip_right_pixels = 0;
 }
 
 void far clip_blit_mono_byte_stride(char far *port, int x, int y, char far *bits, int width, int height)
@@ -404,14 +404,14 @@ void far clip_blit_mono_byte_stride(char far *port, int x, int y, char far *bits
     r.left = x;
     r.right = x + width;
     r.bottom = y + height;
-    for (clip = g_5AAC; clip->top != RECT_END; clip++) {
+    for (clip = clip_active_list_offset; clip->top != RECT_END; clip++) {
         clip_split_rect(&r, clip, pieces, 0);
         for (p = pieces; p->top != RECT_END; p++) {
-            fd_55B3_3DE8 = r.right - p->right;
-            fd_55B3_3DE6 = p->left - r.left;
+            gfx_clip_right_pixels = r.right - p->right;
+            gfx_clip_left_pixels = p->left - r.left;
             g_9158(x, p->top, bits + (p->top - y) * rowbytes, width, p->bottom - p->top);
         }
     }
-    fd_55B3_3DE6 = 0;
-    fd_55B3_3DE8 = 0;
+    gfx_clip_left_pixels = 0;
+    gfx_clip_right_pixels = 0;
 }

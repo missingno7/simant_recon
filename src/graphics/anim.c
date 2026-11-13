@@ -57,18 +57,18 @@ extern void far kbd_read_key_code(void);
 extern Handle far mem_Unlock(Handle);
 extern long far mem_Size(Handle);
 extern void far Punt(char far *, ...);
-extern void (far * near g_9148)(int, int, int, int, char far *);
-extern void (far * far fd_50F6_37EE)(struct Rect far *, char far *, struct Rect far *, char far *);
+extern void (far * near gfx_capture_rect_hook)(int, int, int, int, char far *);
+extern void (far * far gfx_buffer_intersection_hook)(struct Rect far *, char far *, struct Rect far *, char far *);
 extern Handle far mem_Realloc(Handle, long, int);
 extern void far gr_BitMapSize(struct Size far *, int);
-extern char near g_5A97;
-extern struct AnimObj far * far fd_50F6_4A42;
+extern char near gfx_display_mode;
+extern struct AnimObj far * far anim_last_added_object;
 extern Handle far mem_Alloc(long, int, char far *);
 extern void far * far _fmemmove(void far *, void far *, unsigned);
 extern void far mem_Free(Handle);
 extern Handle far res_load_with_alloc_type(int, int, int);
-extern void (far * far fd_50F6_3B58)(char far *, char far *, int, int);
-extern void (far * far fd_50F6_37EA)(char far *, char far *, int, int);
+extern void (far * far gfx_copy_to_buffer_hook)(char far *, char far *, int, int);
+extern void (far * far gfx_mask_to_buffer_hook)(char far *, char far *, int, int);
 extern void far mem_mark_discardable_1c82(Handle);
 extern void far clip_Push(void);
 extern void far clip_SubExclude(struct Rect far *);
@@ -139,7 +139,7 @@ void far anim_unlock_render_buffers(Handle h)
 
 void far anim_capture_screen_rect(struct Rect far *r, char far *buf)
 {
-    (*g_9148)(r->left, r->top, r->right, r->bottom, buf);
+    (*gfx_capture_rect_hook)(r->left, r->top, r->right, r->bottom, buf);
 }
 
 
@@ -163,7 +163,7 @@ void far anim_compose_object_range(struct AnimObj far *obj, int from, int to, in
                 r = &obj->old;
             else
                 r = &obj->rect;
-            (*fd_50F6_37EE)(r, obj->bufp + obj->size * which, clip, save);
+            (*gfx_buffer_intersection_hook)(r, obj->bufp + obj->size * which, clip, save);
         }
         if (back)
             obj--;
@@ -224,7 +224,7 @@ int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri)
     if (n != i)
         _fmemmove(obj + 1, obj, (n - i) * sizeof(struct AnimObj));
     set->count++;
-    fd_50F6_4A42 = obj;
+    anim_last_added_object = obj;
     obj->show = obj->dirty = 1;
     obj->remove = obj->drawn = obj->moved = 0;
     obj->pri = pri;
@@ -239,9 +239,9 @@ int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri)
     obj->rect.right = right;
     obj->rect.top = y;
     obj->rect.bottom = y + size.h;
-    if (g_5A97 & 1)
+    if (gfx_display_mode & 1)
         obj->size = (right - x) / 8 * size.h + 4;
-    else if (g_5A97 == 2)
+    else if (gfx_display_mode == 2)
         obj->size = (right - x) / 2 * size.h + 4;
     else
         obj->size = ((right - x) / 8 * size.h + 1) * 4;
@@ -417,7 +417,7 @@ again:
     set = (struct AnimSet far *)mem_Lock(h);
     objs = (struct AnimObj far *)mem_Lock(set->objs);
     _hanim_FindObject(objs, &set->count, id, &i)->id = n;
-    fd_50F6_4A42->id = id;
+    anim_last_added_object->id = id;
     mem_Unlock(set->objs);
     mem_Unlock(h);
 }
@@ -430,7 +430,7 @@ Handle far hanim_MakeAnimSet(void)
     struct AnimSet far *set;
 
     if (!s_688A) {
-        if (g_5A97 == 2) {
+        if (gfx_display_mode == 2) {
             g_67D8 = 3;
             g_67DA = ~1;
             g_67DC = 1;
@@ -475,7 +475,7 @@ void far hanim_RenderAnimSet(Handle h)
     int n;
     int i;
 
-    if (g_5A97 & 1)
+    if (gfx_display_mode & 1)
         mem_Free(mem_Alloc(6000, 1, "to flush"));
     set = anim_lock_render_buffers(h);
     n = set->count;
@@ -501,13 +501,13 @@ void far hanim_RenderAnimSet(Handle h)
             anim_compose_object_range(objs, 0, i - 1, 1, &obj->rect, obj->bufp + obj->size);
         pich = res_load_with_alloc_type(obj->pic, 2, 1);
         pic = (int far *)mem_Lock(pich);
-        if (*pic != 3 && g_5A97 != 2) {
+        if (*pic != 3 && gfx_display_mode != 2) {
             if (*pic == 0)
-                (*fd_50F6_3B58)((char far *)pic + 8, obj->bufp + obj->size, obj->x & g_67DC, 0);
+                (*gfx_copy_to_buffer_hook)((char far *)pic + 8, obj->bufp + obj->size, obj->x & g_67DC, 0);
             else
                 Punt("Bad pic type in ANIM.C");
         } else
-            (*fd_50F6_37EA)((char far *)pic + 8, obj->bufp + obj->size, obj->x & g_67DC, 0);
+            (*gfx_mask_to_buffer_hook)((char far *)pic + 8, obj->bufp + obj->size, obj->x & g_67DC, 0);
         mem_Unlock(pich);
         if (obj->pic < 30000)
             mem_mark_discardable_1c82(pich);
@@ -557,9 +557,9 @@ void far anim_bitmap_to_buffer(int shift, int flag, char far *dest, int pic)
     h = res_load_with_alloc_type(pic, 2, 1);
     p = (int far *)mem_Lock(h);
     if (*p == 3)
-        (*fd_50F6_37EA)((char far *)p + 8, dest, shift, flag);
+        (*gfx_mask_to_buffer_hook)((char far *)p + 8, dest, shift, flag);
     else if (*p == 0)
-        (*fd_50F6_3B58)((char far *)p + 8, dest, shift, flag);
+        (*gfx_copy_to_buffer_hook)((char far *)p + 8, dest, shift, flag);
     mem_Unlock(h);
     if (pic < 30000)
         mem_mark_discardable_1c82(h);

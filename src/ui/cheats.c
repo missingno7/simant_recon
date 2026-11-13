@@ -6,9 +6,9 @@
  * Windows: unknown; no confirmed function pair identifies a symbol group.
  */
 
-extern int far fd_3D57_06DE;
-extern char far fd_50F6_0B0A[];
-extern char far fd_3D57_067E[][4];
+extern int far cheat_key_count;
+extern char far cheat_key_prefix[];
+extern char far cheat_code_table[][4];
 extern int far QueenStorageR;
 extern int far MeLocY;
 extern int far MeLocX;
@@ -51,25 +51,25 @@ void far CheatKeys(int key)
     int i, j, k;
     char far *p;
 
-    fd_50F6_0B0A[fd_3D57_06DE] = ~key;
-    fd_3D57_06DE++;
-    for (i = 0; fd_3D57_067E[i][0] != 0; i++) {
-        p = fd_3D57_067E[i];
-        for (j = 0; j < fd_3D57_06DE; j++)
-            if (p[j] != fd_50F6_0B0A[j])
+    cheat_key_prefix[cheat_key_count] = ~key;
+    cheat_key_count++;
+    for (i = 0; cheat_code_table[i][0] != 0; i++) {
+        p = cheat_code_table[i];
+        for (j = 0; j < cheat_key_count; j++)
+            if (p[j] != cheat_key_prefix[j])
                 break;
-        if (j == fd_3D57_06DE)
+        if (j == cheat_key_count)
             break;
     }
-    if (fd_3D57_067E[i][0] == 0) {
-        for (k = fd_3D57_06DE = 0; k < 4; k++)
-            fd_50F6_0B0A[k] = 0;
+    if (cheat_code_table[i][0] == 0) {
+        for (k = cheat_key_count = 0; k < 4; k++)
+            cheat_key_prefix[k] = 0;
         return;
     }
-    if (fd_3D57_06DE < 4)
+    if (cheat_key_count < 4)
         return;
-    for (k = fd_3D57_06DE = 0; k < 4; k++)
-        fd_50F6_0B0A[k] = 0;
+    for (k = cheat_key_count = 0; k < 4; k++)
+        cheat_key_prefix[k] = 0;
     WinPrintf("CHEAT %d", i);
     switch (i) {
     case 0:

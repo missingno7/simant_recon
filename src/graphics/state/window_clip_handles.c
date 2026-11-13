@@ -9,4 +9,4 @@
  */
 
 typedef char far * far *Handle;
-Handle far fd_50F6_3B60[45];
+Handle far clip_window_list_handles[45];

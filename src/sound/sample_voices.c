@@ -39,7 +39,7 @@ void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, in
 void far snd_start_sample_note(int instr, int note, int vol, int ch);
 void far snd_stop_sample_voice(int a, int ch);
 
-int fd_55B3_74C0 = 0;
+int snd_sample_volume_bias = 0;
 unsigned g_74C2[] = { 0x100, 0x10f, 0x11f, 0x130, 0x142, 0x155, 0x169, 0x17f, 0x196, 0x1ae, 0x1c8, 0x1e3 };
 
 char far *snd_decode_delta_nibbles(unsigned char far *src, char far *dst, unsigned n)
@@ -65,22 +65,22 @@ char far *snd_decode_delta_nibbles(unsigned char far *src, char far *dst, unsign
     return dst;
 }
 
-extern int far g_7574;
+extern int far midi_service_active;
 extern void far snd_sample_interrupts_disable(void);
-extern struct SndChan far fd_55B3_6B4C[];
+extern struct SndChan far snd_sample_channel_records[];
 extern void far snd_load_sample_resource(struct Sample far *s);
 extern void far snd_sample_interrupts_enable(void);
-extern unsigned far fd_55B3_6B9E;
+extern unsigned far snd_volume_table_offset;
 extern void far snd_start_sample_timer(void);
 
 void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, int ch)
 {
     struct SndChan far *c;
 
-    if (g_7574 && s->loaded == 0)
+    if (midi_service_active && s->loaded == 0)
         return;
     snd_sample_interrupts_disable();
-    c = &fd_55B3_6B4C[ch];
+    c = &snd_sample_channel_records[ch];
     if (s->loaded == 0)
         snd_load_sample_resource(s);
     if (s->loaded == 0) {
@@ -93,7 +93,7 @@ void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, in
     c->snd = s;
     c->frac = 0;
     c->step = step;
-    c->voltab = (vol << 8) + fd_55B3_6B9E;
+    c->voltab = (vol << 8) + snd_volume_table_offset;
     if (s->looped == 0)
         c->flags &= 0x7f;
     else
@@ -104,7 +104,7 @@ void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, in
 }
 
 extern void far snd_queue_sample_release(struct Sample far *s);
-extern struct Instr far fd_50F6_0000[];
+extern struct Instr far snd_instrument_descriptors[];
 
 void far snd_start_sample_note(int instr, int note, int vol, int ch)
 {
@@ -113,16 +113,16 @@ void far snd_start_sample_note(int instr, int note, int vol, int ch)
     int oct;
     unsigned char base;
 
-    s = fd_55B3_6B4C[ch].owner;
-    fd_55B3_6B4C[ch].snd = 0;
+    s = snd_sample_channel_records[ch].owner;
+    snd_sample_channel_records[ch].snd = 0;
     if (s && s->loaded == 1)
         snd_queue_sample_release(s);
-    s = (struct Sample far *)fd_50F6_0000[instr].p;
+    s = (struct Sample far *)snd_instrument_descriptors[instr].p;
     note += s->tune;
     step = g_74C2[note % 12];
     oct = note / 12;
     base = s->octave;
-    vol += fd_55B3_74C0;
+    vol += snd_sample_volume_bias;
     if (vol < 0)
         vol = 0;
     if (vol > 0x7f)
@@ -139,9 +139,9 @@ void far snd_stop_sample_voice(int a, int ch)
     struct Sample far *s;
 
     snd_sample_interrupts_disable();
-    s = fd_55B3_6B4C[ch].owner;
+    s = snd_sample_channel_records[ch].owner;
     if (s && s->loaded == 1)
         snd_queue_sample_release(s);
-    fd_55B3_6B4C[ch].snd = fd_55B3_6B4C[ch].owner = 0;
+    snd_sample_channel_records[ch].snd = snd_sample_channel_records[ch].owner = 0;
     snd_sample_interrupts_enable();
 }

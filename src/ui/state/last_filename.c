@@ -8,4 +8,4 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
-char far fd_50F6_3862[100];
+char far save_last_filename[100];

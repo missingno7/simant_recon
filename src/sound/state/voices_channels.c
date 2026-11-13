@@ -27,5 +27,5 @@ struct Chan {
     char c5;
 };
 
-struct Voice far fd_50F6_0000[56];
-struct Chan far fd_50F6_4A4E[33];
+struct Voice far snd_instrument_descriptors[56];
+struct Chan far snd_voice_slots[33];

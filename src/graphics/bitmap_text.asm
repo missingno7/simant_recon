@@ -9,21 +9,21 @@
 ; without stack check ending pop bp without mov sp,bp (ASM-1).
 
 _DATA	segment word public 'DATA'
-	extrn	_g_3DA0:byte
-	extrn	_g_3DA2:byte
-	extrn	_g_3DD6:byte
-	extrn	_g_3DDA:byte
-	extrn	_g_3DDC:byte
+	extrn	_gfx_text_pen_x:byte
+	extrn	_gfx_text_pen_y:byte
+	extrn	_gfx_active_font_offset:byte
+	extrn	_gfx_font_glyph_stride:byte
+	extrn	_gfx_font_height_pixels:byte
 	extrn	_fontWidth:byte
-	extrn	_g_5A97:byte
-	public	_g_5ABA, _g_5ABC, _g_5ABE
-_g_5ABA		dw	0		; text bitmap: width, height, pixel rows
-_g_5ABC		dw	0
-_g_5ABE		db	1040 dup (0)
-_g_5ECE		db	79 dup (0)	; copy of the string (at most 79 characters)
+	extrn	_gfx_display_mode:byte
+	public	_text_bitmap_width, _text_bitmap_height, _text_bitmap_pixels
+_text_bitmap_width		dw	0		; text bitmap: width, height, pixel rows
+_text_bitmap_height		dw	0
+_text_bitmap_pixels		db	1040 dup (0)
+_text_bitmap_string_copy		db	79 dup (0)	; copy of the string (at most 79 characters)
 _g_5F1D		db	0
 		db	160 dup (0)	; not referenced
-_g_5FBE		db	'cueaaaaceeeiiiAAEaAooouuyoucLYPfaiounNao'	; folding of characters 80h-A7h
+_text_small_font_fold_table		db	'cueaaaaceeeiiiAAEaAooouuyoucLYPfaiounNao'	; folding of characters 80h-A7h
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -40,7 +40,7 @@ _GPutStr	proc	far
 	mov bp, sp
 	push si
 	push di
-	cmp byte ptr _g_5A97, 6
+	cmp byte ptr _gfx_display_mode, 6
 	je L000E
 	jne L0025
 L000E:
@@ -56,12 +56,12 @@ L000E:
 	pop bp
 	retf
 L0025:
-	mov bl, byte ptr _g_3DDC
+	mov bl, byte ptr _gfx_font_height_pixels
 	xor bh, bh
-	mov word ptr _g_5ABC, bx
+	mov word ptr _text_bitmap_height, bx
 	mov ax, ds
 	mov es, ax
-	mov di, offset DGROUP:_g_5ECE
+	mov di, offset DGROUP:_text_bitmap_string_copy
 	lds si, dword ptr [bp+0Ah]
 	xor dl, dl
 L003B:
@@ -88,7 +88,7 @@ L0057:
 	mov byte ptr _g_5F1D, 0
 	mov al, byte ptr _fontWidth
 	mul dl
-	mov word ptr _g_5ABA, ax
+	mov word ptr _text_bitmap_width, ax
 	dec ax
 	or ax, 7
 	inc ax
@@ -97,16 +97,16 @@ L0057:
 	shr ax, 1
 	mov dx, ax
 	dec dx
-	mov di, offset DGROUP:_g_5ABE
-	mov si, offset DGROUP:_g_5ECE
+	mov di, offset DGROUP:_text_bitmap_pixels
+	mov si, offset DGROUP:_text_bitmap_string_copy
 L007F:
 	lodsb
 	or al, al
 	je L00A2
-	mov cx, word ptr _g_3DDA
+	mov cx, word ptr _gfx_font_glyph_stride
 	mul cl
 	push si
-	lds si, dword ptr _g_3DD6
+	lds si, dword ptr _gfx_active_font_offset
 	add si, ax
 	mov ax, di
 L0093:
@@ -125,7 +125,7 @@ L00A5:
 	mov byte ptr _g_5F1D, 0
 	mov al, byte ptr _fontWidth
 	mul dl
-	mov word ptr _g_5ABA, ax
+	mov word ptr _text_bitmap_width, ax
 	dec ax
 	or ax, 7
 	inc ax
@@ -133,8 +133,8 @@ L00A5:
 	shr ax, 1
 	shr ax, 1
 	mov dx, ax
-	mov di, offset DGROUP:_g_5ABE
-	mov si, offset DGROUP:_g_5ECE
+	mov di, offset DGROUP:_text_bitmap_pixels
+	mov si, offset DGROUP:_text_bitmap_string_copy
 L00C5:
 	lodsb
 	or al, al
@@ -144,13 +144,13 @@ L00C5:
 	push bx
 	mov bl, al
 	xor bh, bh
-	mov al, byte ptr [bx+_g_5FBE]
+	mov al, byte ptr [bx+_text_small_font_fold_table]
 	pop bx
 L00D8:
-	mov cx, word ptr _g_3DDA
+	mov cx, word ptr _gfx_font_glyph_stride
 	mul cl
 	push si
-	lds si, dword ptr _g_3DD6
+	lds si, dword ptr _gfx_active_font_offset
 	add si, ax
 	push di
 L00E6:
@@ -171,13 +171,13 @@ L00E6:
 	push bx
 	mov bl, al
 	xor bh, bh
-	mov al, byte ptr [bx+_g_5FBE]
+	mov al, byte ptr [bx+_text_small_font_fold_table]
 	pop bx
 L0109:
-	mov cx, word ptr _g_3DDA
+	mov cx, word ptr _gfx_font_glyph_stride
 	mul cl
 	push si
-	lds si, dword ptr _g_3DD6
+	lds si, dword ptr _gfx_active_font_offset
 	add si, ax
 	push di
 L0117:
@@ -197,17 +197,17 @@ L0117:
 	jmp L00C5
 L0130:
 	push ds
-	mov ax, offset DGROUP:_g_5ABA
+	mov ax, offset DGROUP:_text_bitmap_width
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
 	call far ptr _GPutImg
 	add sp, 8
 	mov ax, word ptr [bp+6]
-	add ax, word ptr _g_5ABA
-	mov word ptr _g_3DA0, ax
+	add ax, word ptr _text_bitmap_width
+	mov word ptr _gfx_text_pen_x, ax
 	mov ax, word ptr [bp+8]
-	mov word ptr _g_3DA2, ax
+	mov word ptr _gfx_text_pen_y, ax
 	pop di
 	pop si
 	pop bp

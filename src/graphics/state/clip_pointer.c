@@ -9,4 +9,4 @@
  */
 
 struct Rect { int left; int top; int right; int bottom; };
-struct Rect far * near g_5AAC;
+struct Rect far * near clip_active_list_offset;

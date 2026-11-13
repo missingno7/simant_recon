@@ -10537,6 +10537,60 @@
     "Independent spacing check: Win16 next-symbol distance 8 bytes equals DOS next-registered-base distance 8; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU."
    ],
    "reviewer": "worker communal-rest; supervisor 2026-11-13 accepted only objects larger than 2 bytes, where equal spacing discriminates"
+  },
+  "root:3D57:098E": {
+   "win16": "_SpidBalloonTicks",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "reviewer": "worker names-data2; supervisor 2026-11-13 checked the layout and size anchors (object larger than 2 bytes)",
+   "evidence": [
+    "consistent spacing across 90 layout anchors.",
+    "Independent size anchor: Win16 next-symbol spacing 4 bytes equals DOS next-registered-base spacing 4 bytes (object-sizes.json); larger than a two-byte word.",
+    "Next tick deadline for a spider speech balloon."
+   ]
+  },
+  "root:3E1D:0000": {
+   "win16": "_YMapSeeds",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "reviewer": "worker names-data2; supervisor 2026-11-13 checked the layout and size anchors (object larger than 2 bytes)",
+   "evidence": [
+    "save record index 29 of 307, same element size and count.",
+    "Independent size anchor: Win16 next-symbol spacing 384 bytes equals DOS next-registered-base spacing 384 bytes (object-sizes.json); larger than a two-byte word.",
+    "World-generation seeds indexed by yard row and column."
+   ]
+  },
+  "root:55B3:19C6": {
+   "win16": "_editMessage",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "reviewer": "worker names-data2; supervisor 2026-11-13 checked the layout and size anchors (object larger than 2 bytes)",
+   "evidence": [
+    "stores a 4-byte parameter at BP+6 in EditMessage; 1 shared users among 1 DOS and 3 Win16 function pairs.",
+    "Independent size anchor: Win16 next-symbol spacing 4 bytes equals DOS next-registered-base spacing 4 bytes (object-sizes.json); larger than a two-byte word.",
+    "Current editor ribbon message pointer."
+   ]
+  },
+  "root:55B3:2996": {
+   "win16": "_mapMem",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "reviewer": "worker names-data2; supervisor 2026-11-13 checked the layout and size anchors (object larger than 2 bytes)",
+   "evidence": [
+    "consistent spacing across 3 layout anchors.",
+    "Independent size anchor: Win16 next-symbol spacing 4 bytes equals DOS next-registered-base spacing 4 bytes (object-sizes.json); larger than a two-byte word.",
+    "Nonzero suppresses temporary map-buffer allocation and release."
+   ]
+  },
+  "S04:35F5:0980": {
+   "win16": "_ToggleMiniMapCursor",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "symbol order: Win16 ANTEDIT has _DrawMiniMapCursor, _EraseMiniMapCursor, _ToggleMiniMapCursor in sequence; DOS S04:35F5 has DrawMiniMapCursor (08C8), EraseMiniMapCursor (095E) and this function (0980) in the same order",
+    "behaviour: both test the minimap cursor state; if it is shown they erase it (inverted outline, state 0), otherwise they draw it (rectangle from the map position, inverted outline, state 1); Win16 inlines the two bodies, DOS calls EraseMiniMapCursor and DrawMiniMapCursor"
+   ],
+   "reviewer": "supervisor 2026-11-13; function found by worker rtl-linker (s04-gap)"
   }
  }
 }

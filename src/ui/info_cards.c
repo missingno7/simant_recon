@@ -541,7 +541,7 @@ struct Event {
 
 extern int _fastcall win_IsWinOpen(int win);
 extern void far win_Open(int win);
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern int _fastcall win_GetEvent(struct Event far *ev);
 void far ProcInfoEvent(struct Event far *ev);
 
@@ -555,7 +555,7 @@ void far OpenInfoWindow(void)
         g_2E24 = 0;
     }
     win_Open(0x500);
-    if (g_3DB2 == 0x140) {
+    if (gfx_screen_width_pixels == 0x140) {
         while (win_IsWinOpen(0x500)) {
             if (win_GetEvent(&ev))
                 ProcInfoEvent(&ev);
@@ -565,7 +565,7 @@ void far OpenInfoWindow(void)
 
 extern void far clip_Push(void);
 extern char far * far GSaveRect(struct Rect far *);
-extern unsigned char near g_5A97;
+extern unsigned char near gfx_display_mode;
 extern int near _foreColor;
 extern void far GBoxFillOutline(int, int, int, int, int);
 extern int far StillDown(void);
@@ -639,7 +639,7 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
         }
         bits = GSaveRect(&frame);
         win_SetColorFromObjNum(0x502);
-        if (g_5A97 & 1)
+        if (gfx_display_mode & 1)
             _foreColor = 0x80;
         GBoxFillOutline(frame.left, frame.top, frame.right, frame.bottom, 1);
         win_PrintStyleTextInRect(text, styl, &box, 0, 2, 5, 0);

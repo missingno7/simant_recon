@@ -9,5 +9,5 @@
  */
 
 typedef char far * far *Handle;
-Handle far fd_50F6_385A;
-Handle far fd_50F6_385E;
+Handle far map_generated_image_handle;
+Handle far map_scanline_image_handle;

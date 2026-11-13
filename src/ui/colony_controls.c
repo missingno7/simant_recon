@@ -80,25 +80,25 @@ void far InitTriVars(int obj, struct TriPoints far *tri)
 extern struct TriPoints far casteVerts;
 void far SetTriLatPoint(struct TriLevel far *level, struct TriPoints far *tri, struct Pt far *out);
 extern struct TriLevel far casteLevels;
-extern struct Pt far fd_50F6_022E;
+extern struct Pt far caste_knob_center;
 void far win_CasteControlClosed(void);
 
 void far win_CasteControlChanged(void)
 {
     InitTriVars(0x130d, &casteVerts);
-    SetTriLatPoint(&casteLevels, &casteVerts, &fd_50F6_022E);
+    SetTriLatPoint(&casteLevels, &casteVerts, &caste_knob_center);
     win_CasteControlClosed();
 }
 
 extern struct TriPoints far modeVerts;
 extern struct TriLevel far modeLevels;
-extern struct Pt far fd_50F6_0358;
+extern struct Pt far mode_knob_center;
 void far win_ModeControlClosed(void);
 
 void far win_ModeControlChanged(void)
 {
     InitTriVars(0x120d, &modeVerts);
-    SetTriLatPoint(&modeLevels, &modeVerts, &fd_50F6_0358);
+    SetTriLatPoint(&modeLevels, &modeVerts, &mode_knob_center);
     win_ModeControlClosed();
 }
 
@@ -331,7 +331,7 @@ void far DrawControlLevels(int win, int unused, int percent);
 extern Handle far hanim_MakeAnimSet(void);
 extern struct Pt far knobSize;
 extern int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri);
-extern int far fd_50F6_37FC;
+extern int far mode_knob_anim_index;
 extern void far hanim_SetObjectPos(int x, int y, int pic, Handle h, int id, int pri);
 extern void far hanim_RenderAnimSet(Handle h);
 
@@ -344,14 +344,14 @@ void far win_DrawModeWindow(int flags)
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1200, 0, g_1B62);
-    SetTriLatPoint(&modeLevels, &modeVerts, &fd_50F6_0358);
+    SetTriLatPoint(&modeLevels, &modeVerts, &mode_knob_center);
     if (!modeAnimHandle) {
         modeAnimHandle = hanim_MakeAnimSet();
-        fd_50F6_37FC = hanim_AddAnimObject(modeAnimHandle, fd_50F6_0358.x - knobSize.x / 2,
-                                   fd_50F6_0358.y - knobSize.y / 2, 0x578, 0);
+        mode_knob_anim_index = hanim_AddAnimObject(modeAnimHandle, mode_knob_center.x - knobSize.x / 2,
+                                   mode_knob_center.y - knobSize.y / 2, 0x578, 0);
     } else
-        hanim_SetObjectPos(fd_50F6_0358.x - knobSize.x / 2, fd_50F6_0358.y - knobSize.y / 2,
-                    0x8000, modeAnimHandle, fd_50F6_37FC, 0x8000);
+        hanim_SetObjectPos(mode_knob_center.x - knobSize.x / 2, mode_knob_center.y - knobSize.y / 2,
+                    0x8000, modeAnimHandle, mode_knob_anim_index, 0x8000);
     hanim_RenderAnimSet(modeAnimHandle);
 }
 
@@ -377,13 +377,13 @@ void far win_DrawCasteWindow(int flags)
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1300, 0, g_1B64);
-    SetTriLatPoint(&casteLevels, &casteVerts, &fd_50F6_022E);
+    SetTriLatPoint(&casteLevels, &casteVerts, &caste_knob_center);
     if (!casteAnimHandle) {
         casteAnimHandle = hanim_MakeAnimSet();
-        fd_50F6_37FA = hanim_AddAnimObject(casteAnimHandle, fd_50F6_022E.x - knobSize.x / 2,
-                                   fd_50F6_022E.y - knobSize.y / 2, 0x578, 0);
+        fd_50F6_37FA = hanim_AddAnimObject(casteAnimHandle, caste_knob_center.x - knobSize.x / 2,
+                                   caste_knob_center.y - knobSize.y / 2, 0x578, 0);
     } else
-        hanim_SetObjectPos(fd_50F6_022E.x - knobSize.x / 2, fd_50F6_022E.y - knobSize.y / 2,
+        hanim_SetObjectPos(caste_knob_center.x - knobSize.x / 2, caste_knob_center.y - knobSize.y / 2,
                     0x8000, casteAnimHandle, fd_50F6_37FA, 0x8000);
     hanim_RenderAnimSet(casteAnimHandle);
 }
@@ -396,7 +396,7 @@ void far win_CasteControlClosed(void)
     }
 }
 
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far font_SetFont(int font);
 extern int far ModePopB[6];
 extern int far CastePopB;
@@ -404,7 +404,7 @@ extern void far win_PrintfAtObj(int obj, char far *format, ...);
 extern void far win_ClearObjToEOL(int obj);
 extern int far ConvColor(int color);
 extern void far GRectFill(struct Rect far *r, int color);
-extern void (far * near g_9128)(int fore, int back, int pattern);
+extern void (far * near gfx_set_attributes_hook)(int fore, int back, int pattern);
 extern void far GRectOutline(struct Rect far *r, int width);
 
 void far DrawControlLevels(int win, int unused, int percent)
@@ -424,7 +424,7 @@ void far DrawControlLevels(int win, int unused, int percent)
     int y;
     int j;
 
-    font_SetFont(g_3DB2 == 0x140 ? 0 : 4);
+    font_SetFont(gfx_screen_width_pixels == 0x140 ? 0 : 4);
     win_GetObjRect((win & 0xff00) + 12, &rect);
     w = (rect.right - rect.left) / 5;
     h = rect.bottom - rect.top;
@@ -454,7 +454,7 @@ void far DrawControlLevels(int win, int unused, int percent)
         if (r.top + 1 < rect.bottom) {
             color = ConvColor(colors[i]);
             GRectFill(&r, color);
-            (*g_9128)(ConvColor(15), ConvColor(15), 0);
+            (*gfx_set_attributes_hook)(ConvColor(15), ConvColor(15), 0);
             GRectOutline(&r, 1);
         } else
             r.top = rect.bottom;

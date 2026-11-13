@@ -30,10 +30,10 @@ _g_1DF9	db	0
 _g_1DFA	dw	0
 _g_1DFC	dw	0
 _g_1DFE	dw	0
-_g_1E00	dw	_gfx_buffer_line_init_mono, _gfx_buffer_line_init_packed4, _gfx_buffer_line_init_planar
+_gfx_buffer_line_init_table	dw	_gfx_buffer_line_init_mono, _gfx_buffer_line_init_packed4, _gfx_buffer_line_init_planar
 _g_1E06	dw	200 dup (0)
-_g_1F96	dw	0
-_g_1F98	dw	_gfx_buffer_line_mono, _gfx_buffer_line_packed4, _gfx_buffer_line_planar4
+_gfx_buffer_line_draw_pointer	dw	0
+_gfx_buffer_line_draw_table	dw	_gfx_buffer_line_mono, _gfx_buffer_line_packed4, _gfx_buffer_line_planar4
 _DATA	ends
 DGROUP	group	_DATA
 
@@ -67,7 +67,7 @@ _gfx_buffer_line	proc	far
 	mov ax, word ptr [bp+8]
 	pushf
 	cld
-	call word ptr _g_1F96
+	call word ptr _gfx_buffer_line_draw_pointer
 	popf
 	pop di
 	pop si
@@ -103,10 +103,10 @@ _gfx_buffer_line_target	proc	far
 	mov bx, word ptr [bp+4]
 	shl bx, 1
 	push bx
-	call word ptr [bx+_g_1E00]
+	call word ptr [bx+_gfx_buffer_line_init_table]
 	pop bx
-	mov ax, word ptr [bx+_g_1F98]
-	mov word ptr _g_1F96, ax
+	mov ax, word ptr [bx+_gfx_buffer_line_draw_table]
+	mov word ptr _gfx_buffer_line_draw_pointer, ax
 	pop di
 	pop si
 	pop ds

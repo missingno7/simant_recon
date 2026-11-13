@@ -48,9 +48,9 @@ extern int far kbd_read_key_code(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern int far win_GetProxEvent(void);
 extern char far fd_3D57_07B6[];
-extern int far g_5702;
+extern int far clip_window_z_order;
 extern void _fastcall win_GetObjSize(int obj, struct Pt far *size);
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern int far f_1FD2_0598(void);
 extern void far f_1FD2_05EF(void);
 
@@ -113,7 +113,7 @@ int far DoExpMenu(int x, int y)
     if (ev.code == 0xff00)
         goto accept;
     else {
-        if ((ev.code & 0xff00) == g_5702)
+        if ((ev.code & 0xff00) == clip_window_z_order)
             goto proxy;
         if ((char)ev.code != 9)
             goto next;
@@ -135,7 +135,7 @@ int far DoExpMenu(int x, int y)
         win_GetObjRect(cur + 0x902, &r);
         i = subMenus[cur];
         win_GetObjSize(i, &size);
-        if (size.x + r.right + 1 >= g_3DB2)
+        if (size.x + r.right + 1 >= gfx_screen_width_pixels)
             win_Open(i, r.left - size.x, r.top);
         else
             win_Open(i, r.right, r.top);

@@ -74,7 +74,7 @@ def balloon_queue_cases():
         case = render_small._balloon_case(f'queue/visible-index-{index}')
         entries = [(640, 480)] * index + [(80, 80)]
         case.writes.extend([
-            (b.symbol_address('fd_50F6_1092'), b.words(index + 1)),
+            (b.symbol_address('message_balloon_count'), b.words(index + 1)),
             (b.symbol_address('CurBalloonPnts'), b''.join(b.words(x, y) for x, y in entries)),
             (b.symbol_address('CurBalloonPlane'), b.words(0) * (index + 1)),
             (b.symbol_address('CurBalloonFlags'), b.words(0) * (index + 1)),
@@ -127,28 +127,28 @@ def domains(count, seed, full):
 
 MUTATIONS = {
     'DoCalcTile': ('if (v > 0x10)', 'if (v >= 0x10)'),
-    'edit_redraw_changed_tile': ('if (g_9126)\n            edit_draw_life_and_ground_tile', 'if (!g_9126)\n            edit_draw_life_and_ground_tile'),
+    'edit_redraw_changed_tile': ('if (edit_current_life_tile)\n            edit_draw_life_and_ground_tile', 'if (!edit_current_life_tile)\n            edit_draw_life_and_ground_tile'),
     'DrawBalloons': ('wpix = g_19BE * wt;', 'wpix = g_19BE * wt + 1;'),
     'SpiderScan': ('DeadAntHere(x, y, life & 0x80);', '/* negative control: omit corpse */;'),
     'LessonDone': ('case 3:\n        if (TilesDugB > TimeTemp && MeMoveMe == 0)',
                    'case 3:\n        if (TilesDugB >= TimeTemp && MeMoveMe == 0)'),
-    'FindIndex': ('return fd_50F6_3952;', 'return 0L;'),
+    'FindIndex': ('return db_index_search_entry;', 'return 0L;'),
     'ui_choice_prompt': ('labels[i][0] == c || labels[i][1] == c', 'labels[i][0] == c'),
-    'win_rebuild_visible_clips': ('win_GetObjRect(win, &r);\n    fd_50F6_3B60[win >> 8]',
-                   'win_GetObjRect(win, &r);\n    r.right++;\n    fd_50F6_3B60[win >> 8]'),
+    'win_rebuild_visible_clips': ('win_GetObjRect(win, &r);\n    clip_window_list_handles[win >> 8]',
+                   'win_GetObjRect(win, &r);\n    r.right++;\n    clip_window_list_handles[win >> 8]'),
     'win_set_obj_absolute_rect': ('else\n            origin[i] = rect[i] - o[i];',
                    'else\n            origin[i] = rect[(i + 1) & 3] - o[i];'),
     'win_UnlockWin': ('if (--g_8DA6[n] == 0) {', 'if (--g_8DA6[n] == 1) {'),
     'f_23E6_0000': ('s++;\n        n++;', 's++;\n        n += 2;'),
     'win_GetVal': ('return r[kind];', 'return r[kind] ^ 1;'),
     'win_DrawBitMap': ('GPutPic(x, y, (char far *)pic + 8);', 'GPutPic(x, y, (char far *)pic + 9);'),
-    'snd_opl_set_note_level': ('snd_opl_write(voice + 0xa0, g_6924[note % 12]);',
-                   'snd_opl_write(voice + 0xa1, g_6924[note % 12]);'),
+    'snd_opl_set_note_level': ('snd_opl_write(voice + 0xa0, opl_semitone_f_numbers[note % 12]);',
+                   'snd_opl_write(voice + 0xa1, opl_semitone_f_numbers[note % 12]);'),
     'snd_song_read_be16': ('return SONG(off) << 8 | SONG(off + 1);', 'return SONG(off + 1) << 8 | SONG(off);'),
     'snd_ps1_set_note': ('snd_port_write_byte(0x205, f >> 4);', 'snd_port_write_byte(0x205, (f >> 4) ^ 1);'),
     'menu_track_popup': ('k = (k + 1) % nItems;', 'k = (k + 2) % nItems;'),
     'DrawMapCursor': ('mapXsize * MapPnt[0]', 'mapXsize * MapPnt[1]'),
-    'InvertPatch': ('h = (h >> 1) + fd_50F6_10D2.left + 4;', 'h = (h >> 1) + fd_50F6_10D2.left + 5;'),
+    'InvertPatch': ('h = (h >> 1) + map_viewport_rect.left + 4;', 'h = (h >> 1) + map_viewport_rect.left + 5;'),
     'ui_prompt_save_discard_cancel': ("case 's':\n                result = 1;", "case 's':\n                result = 2;"),
     'win_PrintStyleTextInRect': ('x = rect->left + 1;', 'x = rect->left + 2;'),
     'DisplayCard': ('win_DrawBitMap(pic.left + r.left, pic.top + r.top, pic.id);',
@@ -268,7 +268,7 @@ def balloon_width_controls(pair, out):
                     break
             if index:
                 case.writes.extend([
-                    (b.symbol_address('fd_50F6_1092'), b.words(index + 1)),
+                    (b.symbol_address('message_balloon_count'), b.words(index + 1)),
                     (b.symbol_address('CurBalloonPnts'), b.words(640, 480) * index + b.words(76, 85)),
                     (b.symbol_address('CurBalloonPlane'), b.words(0) * (index + 1)),
                     (b.symbol_address('CurBalloonFlags'), b.words(0) * (index + 1)),

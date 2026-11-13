@@ -11,8 +11,8 @@
  */
 
 int far fd_50F6_4A46;
-int far fd_50F6_4A48;
+int far snd_sample_channel_count;
 int far fd_50F6_4A4A;
-int far fd_50F6_4A4C;
-int far fd_50F6_4B14;
-int far fd_50F6_4B16;
+int far snd_voice_build_index;
+int far snd_device_io_base;
+int far snd_opl_volume_bias;

@@ -16,10 +16,10 @@ struct Pt {
     int y;
 };
 
-extern char near g_5A97;
-extern void (far * near g_9128)(int a, int b, int c);
+extern char near gfx_display_mode;
+extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 extern void (far * near g_913C)(int left, int top, int right, int bottom);
-extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
+extern void (far * near gfx_fill_rect_hook)(int x0, int y0, int x1, int y1, int color);
 extern void (far * near g_9138)(int x0, int y0, int x1, int y1, int color);
 
 void far TrapFill(struct Pt far *q, int fore, int back)
@@ -45,14 +45,14 @@ void far TrapFill(struct Pt far *q, int fore, int back)
     sr = ((long)(x1 - p[2].x) << 16) / dy;
     fl = (long)x0 << 16;
     fr = (long)x1 << 16;
-    if (g_5A97 & 1)
+    if (gfx_display_mode & 1)
         fore = back;
-    (*g_9128)(fore, back, fore);
+    (*gfx_set_attributes_hook)(fore, back, fore);
     for (; top < bottom; top++) {
         if (fore == -1)
             (*g_913C)(x0, top, x1, top + 1);
         else if (back == fore)
-            (*g_9134)(x0, top, x1, top + 1, fore);
+            (*gfx_fill_rect_hook)(x0, top, x1, top + 1, fore);
         else
             (*g_9138)(x0, top, x1, top + 1, 0x20);
         fl -= sl;

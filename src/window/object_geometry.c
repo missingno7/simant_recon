@@ -42,7 +42,7 @@ extern struct Pt _fastcall win_StringSize(char far *text);
 extern void far gr_BitMapSize(struct Pt far *size, int id);
 
 extern int g_6300;
-extern int g_5702;
+extern int clip_window_z_order;
 extern char far * far * near win_handles[];
 
 char far * far win_locked_resource_ptr(int win)
@@ -197,7 +197,7 @@ char far * _fastcall win_WinAddr(int win)
 
 int far win_any_window_open(void)
 {
-    if (g_5702 != (int)0x8000)
+    if (clip_window_z_order != (int)0x8000)
         return 1;
     return 0;
 }

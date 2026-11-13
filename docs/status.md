@@ -12,13 +12,13 @@ Last gate result: **PASS** (2026-11-13).
 
 | Item | State | Open |
 | --- | --- | --- |
-| 1. Code exact | 1,637 of 1,643 game functions | 6 functions, 2,421 bytes; 5 of 122 code modules are not yet complete translation units |
+| 1. Code exact | 1,638 of 1,644 game functions | 6 functions, 2,421 bytes; 5 of 122 code modules are not yet complete translation units |
 | 2. No unexplained steering | 17 exact functions depend on a steering construct | 8,830 bytes |
 | 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,330 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 2 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 1203 C and 366 assembly named; data: 527 named | 67 C and 1 assembly functions and 451 data objects keep address-based identifiers; 0 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 1204 C and 366 assembly named; data: 792 named | 67 C and 1 assembly functions and 186 data objects keep address-based identifiers; 0 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves

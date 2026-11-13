@@ -9,6 +9,6 @@
  */
 
 int far GrassMap[12];
-int far fd_50F6_38CA[15];
-int far fd_50F6_38E8[17];
-int far fd_50F6_390A[17];
+int far yard_rain_anim_indices[15];
+int far yard_black_swarm_anim_indices[17];
+int far yard_red_swarm_anim_indices[17];

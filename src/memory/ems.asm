@@ -17,15 +17,15 @@ DGROUP		group	_DATA
 
 _DATA		segment word public 'DATA'
 ems_error	db	'EMS Error', 0
-		public	_fd_55B3_360C
-_fd_55B3_360C	db	0		; EMM version (INT 67h/46h)
+		public	_ems_version
+_ems_version	db	0		; EMM version (INT 67h/46h)
 ems_active	db	0		; set once the page frame is set up
-		public	_fd_55B3_360E
-_fd_55B3_360E	dd	0		; page frame (far pointer, offset 0)
-		public	_fd_55B3_3612
-_fd_55B3_3612	dw	0		; unallocated pages (INT 67h/42h)
-		public	_fd_55B3_3614
-_fd_55B3_3614	dw	0		; total pages
+		public	_ems_page_frame_pointer
+_ems_page_frame_pointer	dd	0		; page frame (far pointer, offset 0)
+		public	_ems_free_page_count
+_ems_free_page_count	dw	0		; unallocated pages (INT 67h/42h)
+		public	_ems_total_page_count
+_ems_total_page_count	dw	0		; total pages
 ems_mappable	dw	0		; mappable physical pages (INT 67h/58h)
 ems_altmap	dw	0		; alternate map register save area size (INT 67h/5B02h)
 ems_off_opt	db	'/E-', 0	; command-line switch that disables EMS
@@ -75,7 +75,7 @@ _ems_query_version	proc	far
 	int 67h
 	and ah, ah
 	jne L0017
-	mov _fd_55B3_360C, al
+	mov _ems_version, al
 L0017:
 	retf
 _ems_query_version	endp
@@ -93,8 +93,8 @@ _ems_query_page_frame	proc	far
 	je L002A
 	call far ptr _ems_fatal_error
 L002A:
-	mov word ptr _fd_55B3_360E, 0
-	mov word ptr _fd_55B3_360E+2, bx
+	mov word ptr _ems_page_frame_pointer, 0
+	mov word ptr _ems_page_frame_pointer+2, bx
 	retf
 _ems_query_page_frame	endp
 
@@ -105,8 +105,8 @@ _ems_query_page_counts	proc	far
 	je L0042
 	call far ptr _ems_fatal_error
 L0042:
-	mov _fd_55B3_3612, bx
-	mov _fd_55B3_3614, dx
+	mov _ems_free_page_count, bx
+	mov _ems_total_page_count, dx
 	retf
 _ems_query_page_counts	endp
 

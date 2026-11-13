@@ -20,20 +20,20 @@ char *g_623C[9] = {
     "MCGA/VGA Color", "MCGA/VGA mono", "VGA Color"
 };
 int g_6260 = 0;
-int fd_55B3_6262 = 0;
+int gfx_driver_initialized = 0;
 long g_6264[13] = {
     0x222e0L, 0x9c40L, 0xea60L, 0xea60L, 0xea60L, 0xea60L, 0x2e630L, 0xea60L,
     0L, 0L, 0x3a98L, 0x7530L, 0x7530L
 };
 int g_6298 = 0;
-char *g_629A[9] = {
+char *gfx_resource_prefixes[9] = {
     "hcega", "mono", "tdyga", "mono", "lcega", "mono", "l256", "mono", "hcega"
 };
 
 extern void far gfx_reset_driver_callbacks(void);
 extern int far gfx_probe_display_adapters(void);
 extern int far gfx_bios_has_tandy_signature(void);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern int far printf(char far *format, ...);
 extern void far exit(int code);
 extern int far sprintf(char far *buf, char far *format, ...);
@@ -64,17 +64,17 @@ extern void far gfx_planar_init_640x480(void);
 extern void far o20_39C7_0211(void);
 extern void far o20_39C7_0005(void);
 extern void (far * near g_9130)(void);
-extern int near g_3DB2;
-extern struct Rect far g_5A9C;
-extern int near g_3DB4;
+extern int near gfx_screen_width_pixels;
+extern struct Rect far gfx_screen_clip_list;
+extern int near gfx_screen_height_pixels;
 extern void far gfx_mono_buffer_noop(void);
-extern void (far * far fd_50F6_37EE)();
+extern void (far * far gfx_buffer_intersection_hook)();
 extern void far gfx_mono_buffer_intersection();
-extern void (far * far fd_50F6_37EA)();
+extern void (far * far gfx_mask_to_buffer_hook)();
 extern void far gfx_mono_mask_bitmap_to_buffer();
-extern void (far * far fd_50F6_3B58)();
+extern void (far * far gfx_copy_to_buffer_hook)();
 extern void far gfx_mono_copy_bitmap_to_buffer();
-extern void (far * far fd_50F6_37E6)();
+extern void (far * far gfx_scratch_to_buffer_hook)();
 extern void far gfx_mono_scratch_to_buffer();
 extern void far gfx_tandy_buffer_noop(void);
 extern void far gfx_tandy_buffer_intersection();
@@ -136,31 +136,31 @@ void far gfx_select_driver_resources(char far *dbname)
             break;
         }
     }
-    if (g_5A97 == -1) {
+    if (gfx_display_mode == -1) {
         if (mode == -1) {
             printf(msg);
             exit(4);
         }
-        g_5A97 = mode;
+        gfx_display_mode = mode;
     }
     if (g_6298) {
-        switch (g_5A97) {
+        switch (gfx_display_mode) {
         case 0:
-            g_5A97 = 5;
+            gfx_display_mode = 5;
             break;
         case 1:
-            g_5A97 = 1;
+            gfx_display_mode = 1;
             break;
         case 6:
         case 8:
-            g_5A97 = 7;
+            gfx_display_mode = 7;
             break;
         }
     }
-    sprintf(path, "%s%s", g_629A[g_5A97], dbname);
+    sprintf(path, "%s%s", gfx_resource_prefixes[gfx_display_mode], dbname);
     db_SetDataBase(path);
     mouse_load_builtin_cursor_pairs();
-    switch (g_5A97) {
+    switch (gfx_display_mode) {
     case 0:
         gfx_planar_init_640x350();
         o20_39C7_0211();
@@ -169,7 +169,7 @@ void far gfx_select_driver_resources(char far *dbname)
     case 1:
         if (g_6298) {
             gfx_mono_init_banked_640x400();
-            g_5A97 = 5;
+            gfx_display_mode = 5;
         }
         gfx_load_fonts_mono_350_400();
         o20_39C7_0003();
@@ -214,26 +214,26 @@ void far gfx_select_driver_resources(char far *dbname)
         break;
     }
     (*g_9130)();
-    g_5A9C.right = g_3DB2;
-    g_5A9C.bottom = g_3DB4;
-    fd_55B3_6262 = 1;
-    if (g_5A97 & 1) {
+    gfx_screen_clip_list.right = gfx_screen_width_pixels;
+    gfx_screen_clip_list.bottom = gfx_screen_height_pixels;
+    gfx_driver_initialized = 1;
+    if (gfx_display_mode & 1) {
         gfx_mono_buffer_noop();
-        fd_50F6_37EE = gfx_mono_buffer_intersection;
-        fd_50F6_37EA = gfx_mono_mask_bitmap_to_buffer;
-        fd_50F6_3B58 = gfx_mono_copy_bitmap_to_buffer;
-        fd_50F6_37E6 = gfx_mono_scratch_to_buffer;
-    } else if (g_5A97 == 2) {
+        gfx_buffer_intersection_hook = gfx_mono_buffer_intersection;
+        gfx_mask_to_buffer_hook = gfx_mono_mask_bitmap_to_buffer;
+        gfx_copy_to_buffer_hook = gfx_mono_copy_bitmap_to_buffer;
+        gfx_scratch_to_buffer_hook = gfx_mono_scratch_to_buffer;
+    } else if (gfx_display_mode == 2) {
         gfx_tandy_buffer_noop();
-        fd_50F6_37EE = gfx_tandy_buffer_intersection;
-        fd_50F6_37EA = gfx_tandy_mask_to_buffer;
-        fd_50F6_3B58 = gfx_tandy_copy_to_buffer;
-        fd_50F6_37E6 = gfx_tandy_scratch_to_buffer;
+        gfx_buffer_intersection_hook = gfx_tandy_buffer_intersection;
+        gfx_mask_to_buffer_hook = gfx_tandy_mask_to_buffer;
+        gfx_copy_to_buffer_hook = gfx_tandy_copy_to_buffer;
+        gfx_scratch_to_buffer_hook = gfx_tandy_scratch_to_buffer;
     } else {
         gfx_planar_buffer_noop();
-        fd_50F6_37EE = gfx_planar_buffer_intersection;
-        fd_50F6_37EA = gfx_planar_mask_to_buffer;
-        fd_50F6_3B58 = gfx_planar_copy_to_buffer;
-        fd_50F6_37E6 = gfx_planar_scratch_to_buffer;
+        gfx_buffer_intersection_hook = gfx_planar_buffer_intersection;
+        gfx_mask_to_buffer_hook = gfx_planar_mask_to_buffer;
+        gfx_copy_to_buffer_hook = gfx_planar_copy_to_buffer;
+        gfx_scratch_to_buffer_hook = gfx_planar_scratch_to_buffer;
     }
 }

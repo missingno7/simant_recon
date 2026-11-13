@@ -8,8 +8,8 @@
  *
  * The grouping is a hypothesis: the pointer and song record could be one or
  * two files. No code module addresses these values through its own _DATA.
- * fd_55B3_0064 targets another file (S27 relocation #365, external group).
- * fd_55B3_00B4 targets the local song record; its _DATA relocation #1049
+ * version_message_pointer targets another file (S27 relocation #365, external group).
+ * snd_active_song_record targets the local song record; its _DATA relocation #1049
  * follows the 00B8-1811 object in the descending-address group, establishing
  * this contribution before that object. Song has program[14], bank[14],
  * Handle as consumed by 0000/284A; 284A loads its resource and copies the maps.
@@ -24,9 +24,9 @@ struct Song {
     Handle data;
 };
 
-extern char g_0042[];
+extern char dos_version_string[];
 
-char *fd_55B3_0064 = g_0042;
+char *version_message_pointer = dos_version_string;
 
 static struct Song g_0068 = {
     { 0, 7, 7, 7, 7, 5, 5, 5, 5, 5, 5, 5, 5, 5 },
@@ -36,4 +36,4 @@ static struct Song g_0068 = {
 
 static char g_00A4[16] = "antthme1.mid";
 
-struct Song *fd_55B3_00B4 = &g_0068;
+struct Song *snd_active_song_record = &g_0068;

@@ -752,7 +752,7 @@ extern int far SwarmCntR;
 extern int far QueenStorageR;
 extern void far InvalQueenStorageDisp(void);
 extern int far SRand2(void);
-extern long far fd_50F6_383A;
+extern long far main_iteration_count;
 
 /* SimBird (Win16 pair MEDIUM, unit order): the bird flies over the yard and eats swarms */
 void far SimBird(void)
@@ -781,7 +781,7 @@ void far SimBird(void)
         BirdFrame = (BirdFrame + 1) & 1;
         if (BirdX < 0 || BirdX > 0x1ff || BirdY < 0 || BirdY > 0xff) {
             BirdOn = 0;
-            BirdDelay = fd_50F6_383A + 30L;
+            BirdDelay = main_iteration_count + 30L;
             return;
         }
         if (BirdOn != 1)
@@ -805,8 +805,8 @@ void far SimBird(void)
         }
         BirdOn = 2;
     } else
-        if (fd_50F6_383A > BirdDelay) {
-            BirdDelay = fd_50F6_383A + 20L;
+        if (main_iteration_count > BirdDelay) {
+            BirdDelay = main_iteration_count + 20L;
             if (CurYardPnt[0] >= 5 && SRand2() == 0 &&
                 (SwarmCntB > 0 || SwarmCntR > 0)) {
                 BirdGoalX = CurYardPnt[0] * 0x1c - CurYardPnt[1] * 10 + 0xb2;

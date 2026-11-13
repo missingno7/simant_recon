@@ -24,7 +24,7 @@ struct Bitmap {
     char far *bits;
 };
 
-struct Rect far fd_50F6_10D2;
+struct Rect far map_viewport_rect;
 struct Rect far editTileRect;
 struct Rect far fd_50F6_1104;
 struct Bitmap far out_buffer;

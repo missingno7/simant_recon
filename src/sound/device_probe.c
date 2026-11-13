@@ -17,13 +17,13 @@ int far snd_find_regchip_base(void);
 int far snd_probe_lpt_unavailable(void);
 int far snd_probe_mpu_reset(void);
 
-extern int far fd_50F6_01F0[];
+extern int far snd_driver_capabilities[];
 
-int (far *fd_55B3_74DA[])(void) = {
+int (far *snd_driver_probe_table[])(void) = {
     snd_probe_assume_present, snd_probe_assume_present, snd_probe_tandy_sound, snd_probe_ps1_sound, snd_probe_opl_timer,
     snd_find_regchip_base, snd_find_blaster_dsp_base, snd_probe_lpt_unavailable, snd_probe_mpu_reset
 };
-int far *fd_55B3_74FE = fd_50F6_01F0;
+int far *snd_capabilities_pointer = snd_driver_capabilities;
 
 int far snd_probe_preferred_device(void)
 {
@@ -32,7 +32,7 @@ int far snd_probe_preferred_device(void)
 
     found = 0;
     for (i = 8; i > 0; i--) {
-        if (fd_55B3_74DA[i]()) {
+        if (snd_driver_probe_table[i]()) {
             found = i;
             break;
         }
@@ -108,7 +108,7 @@ int far snd_probe_opl_timer(void)
     return 0;
 }
 
-extern unsigned far fd_55B3_7564;
+extern unsigned far snd_sb_io_base;
 extern int far snd_probe_dsp_reset_ack(void);
 
 int far snd_find_blaster_dsp_base(void)
@@ -116,18 +116,18 @@ int far snd_find_blaster_dsp_base(void)
     int found;
 
     found = 0;
-    fd_55B3_7564 = 0x200;
+    snd_sb_io_base = 0x200;
     while (!found) {
-        if (fd_55B3_7564 >= 0x260)
+        if (snd_sb_io_base >= 0x260)
             break;
-        fd_55B3_7564 += 0x10;
+        snd_sb_io_base += 0x10;
         found = snd_probe_dsp_reset_ack();
     }
     return found;
 }
 
 extern int far snd_regchip_detect(void);
-extern int far fd_50F6_4B14;
+extern int far snd_device_io_base;
 
 int far snd_find_regchip_base(void)
 {
@@ -135,7 +135,7 @@ int far snd_find_regchip_base(void)
 
     if ((port = snd_regchip_detect()) == 0)
         return 0;
-    fd_50F6_4B14 = port;
+    snd_device_io_base = port;
     return 1;
 }
 

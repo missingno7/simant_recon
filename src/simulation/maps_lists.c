@@ -10,7 +10,7 @@
  * segment at 0xF89F bytes and opens frame 4DA7 for PherMapRT (FARSEG-1).
  */
 
-unsigned char far fd_3E1D_0000[384] = { 0 };
+unsigned char far YMapSeeds[384] = { 0 };
 unsigned char far MapA[8192] = { 0 };
 unsigned char far MapB[4096] = { 0 };
 unsigned char far MapR[4096] = { 0 };
@@ -34,7 +34,7 @@ unsigned char far RlistY[501] = { 0 };
 unsigned char far RlistM[501] = { 0 };
 unsigned char far RlistT[501] = { 0 };
 unsigned char far RlistS[501] = { 0 };
-unsigned char far fd_3E1D_C89F[2048] = { 0 };
+unsigned char far pheromone_diffusion_snapshot[2048] = { 0 };
 unsigned char far PherMapA[2048] = { 0 };
 unsigned char far PherMapF[2048] = { 0 };
 unsigned char far PherMapBN[2048] = { 0 };

@@ -11,6 +11,6 @@
  * aggregate; original COMDEF-producing file and allocation order are unproven.
  */
 
-int near g_9120;
-int near g_9122;
-int near g_9124;
+int near mouse_button_state;
+int near mouse_x_pixels;
+int near mouse_y_pixels;

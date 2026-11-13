@@ -10,12 +10,12 @@
 
 struct Pt { int x; int y; };
 struct AnimObj;
-struct Pt far fd_50F6_47DA;
-void far * far fd_50F6_4A1A[4];
-struct AnimObj far * far fd_50F6_4A42;
-char far * far * far fd_50F6_4B28;
-int far fd_50F6_4B2C;
-int far fd_50F6_4B2E;
-long far fd_50F6_4B8A;
-int far fd_50F6_4B8E[14];
-int far fd_50F6_4BAA[14];
+struct Pt far window_scroll_arrow_size;
+void far * far font_loaded_font_pointers[4];
+struct AnimObj far * far anim_last_added_object;
+char far * far * far midi_song_data_handle;
+int far midi_song_data_bytes;
+int far midi_header_division;
+long far midi_tick_delay_scale;
+int far midi_channel_instruments[14];
+int far midi_channel_priorities[14];

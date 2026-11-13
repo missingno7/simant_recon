@@ -42,7 +42,8 @@ def objects() -> list[tuple[int, str, bool]]:
     rows = {}
     for name, v in data.items():
         if v.get('seg') == SEG and LOW <= v['off'] <= HIGH and not v.get('alias_of'):
-            named = not PLACEHOLDER.match(name)
+            # only original names carry the original checksum: descriptive names are ours
+            named = not PLACEHOLDER.match(name) and v.get('name_kind') != 'descriptive'
             if v['off'] not in rows or (named and not rows[v['off']][2]):
                 rows[v['off']] = (v['off'], name, named)
     return [rows[o] for o in sorted(rows)]

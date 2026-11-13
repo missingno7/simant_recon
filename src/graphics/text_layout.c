@@ -72,7 +72,7 @@ void far timer_wait_double_ticks(int ticks)
 
 /* size: byte-equivalent hypothesis -- the segment ends before FAR_BSS 50F6, so 97..112 all give
    the same image (all zero, no callers of gfx_left_pad_centered_text fix a width) */
-static char far fd_50EF_0000[100];
+static char far text_centering_buffer[100];
 extern void far * far _fmemset(void far *dst, int c, unsigned int n);
 extern char far * far _fstrcpy(char far *dst, char far *src);
 
@@ -81,17 +81,17 @@ char far * far gfx_left_pad_centered_text(char far *text, int width)
     int pad;
 
     pad = (width - _fstrlen(text)) / 2;
-    _fmemset(fd_50EF_0000, ' ', pad);
-    _fstrcpy(fd_50EF_0000 + pad, text);
-    return fd_50EF_0000;
+    _fmemset(text_centering_buffer, ' ', pad);
+    _fstrcpy(text_centering_buffer + pad, text);
+    return text_centering_buffer;
 }
 
 extern char near fontWidth;
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 
 int far gfx_center_cell_x(int width)
 {
-    return (g_3DB2 / fontWidth - width) / 2;
+    return (gfx_screen_width_pixels / fontWidth - width) / 2;
 }
 
 extern int far font_FontHeight(void);
@@ -108,13 +108,13 @@ int far gfx_center_fixed_text_x(struct Rect far *r, char far *text)
     return (r->right - _fstrlen(text) * fontWidth - r->left) / 2 + r->left;
 }
 
-extern int near g_3DB4;
+extern int near gfx_screen_height_pixels;
 
 void far gfx_center_cell_rect(struct Rect far *r, int width, int height)
 {
-    r->left = (g_3DB2 / fontWidth - width) / 2;
+    r->left = (gfx_screen_width_pixels / fontWidth - width) / 2;
     r->right = r->left + width;
-    r->top = (g_3DB4 / font_FontHeight() - height) / 2;
+    r->top = (gfx_screen_height_pixels / font_FontHeight() - height) / 2;
     r->bottom = r->top + height;
 }
 
@@ -122,12 +122,12 @@ void far gfx_place_cell_rect(struct Rect far *r, int x, int y, int width, int he
 {
     if (x < 0)
         x = 0;
-    else if (g_3DB2 / fontWidth <= x + width)
-        x = g_3DB2 / fontWidth - width - 1;
+    else if (gfx_screen_width_pixels / fontWidth <= x + width)
+        x = gfx_screen_width_pixels / fontWidth - width - 1;
     if (y < 1)
         y = 1;
-    else if (g_3DB4 / font_FontHeight() <= y + height)
-        y = g_3DB4 / font_FontHeight() - height - 1;
+    else if (gfx_screen_height_pixels / font_FontHeight() <= y + height)
+        y = gfx_screen_height_pixels / font_FontHeight() - height - 1;
     r->left = x;
     r->right = x + width;
     r->top = y;

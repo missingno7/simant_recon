@@ -32,5 +32,5 @@ int far WinPrintf(char far *format, ...)
 }
 
 
-/* AUDIT T2b: duplicates root:29B8 _DATA word fd_55B3_7564 */
+/* AUDIT T2b: duplicates root:29B8 _DATA word snd_sb_io_base */
 static int audit_dup = 0;

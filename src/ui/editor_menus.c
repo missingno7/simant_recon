@@ -133,8 +133,8 @@ extern int far tileWidth;
 extern int far editTileRect[2];
 extern int far tileHeight;
 extern void _fastcall win_GetObjSize(int obj, struct Pt far *size);
-extern int near g_3DB2;
-extern int near g_3DB4;
+extern int near gfx_screen_width_pixels;
+extern int near gfx_screen_height_pixels;
 extern void far win_Open();
 extern char far * far * far EggStr;
 extern char far * far * far CasteStr;
@@ -182,10 +182,10 @@ int far MagnifyMenu(int x, int y, int plane)
     wx = (x - MapPnt[0] + 1) * tileWidth + editTileRect[0];
     wy = (y - MapPnt[1] - 1) * tileHeight + editTileRect[1];
     win_GetObjSize(0x1d00, &size);
-    if (size.x + wx > g_3DB2)
+    if (size.x + wx > gfx_screen_width_pixels)
         wx -= tileWidth + size.x;
-    if (size.y + wy > g_3DB4)
-        wy = g_3DB4 - size.y;
+    if (size.y + wy > gfx_screen_height_pixels)
+        wy = gfx_screen_height_pixels - size.y;
     win_Open(0x1d00, wx, wy);
     caste = (t & 0x78) >> 3;
     if (caste == 0)

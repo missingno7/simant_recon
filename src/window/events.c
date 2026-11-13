@@ -33,8 +33,8 @@ extern void far clip_set_screen_region(void);
 extern void _fastcall win_SetObjSelectedState(int obj, int state);
 extern void far timer_wait_countdown(int ticks);
 extern void far clip_Pop(void);
-extern struct Event far fd_50F6_49FA;
-extern struct Event far fd_50F6_4A0A;
+extern struct Event far window_current_event;
+extern struct Event far window_previous_event;
 extern long far TickCount(void);
 extern void _fastcall win_UnlockWin(int win);
 
@@ -72,19 +72,19 @@ void _fastcall win_dispatch_object_event(struct Event far *ev)
         clip_Pop();
     }
 check:
-    if (fd_50F6_4A0A.code == fd_50F6_49FA.code && TickCount() - 10 < g_6364) {
-        if (((fd_50F6_4A0A.modifiers ^ fd_50F6_49FA.modifiers) & 0x0a00) == 0) {
-            fd_50F6_49FA.modifiers &= ~0x0a00;
-            if (fd_50F6_4A0A.modifiers & 0x0800)
-                fd_50F6_49FA.modifiers |= 0x4000;
-            if (fd_50F6_4A0A.modifiers & 0x0200)
-                fd_50F6_49FA.modifiers |= 0x2000;
+    if (window_previous_event.code == window_current_event.code && TickCount() - 10 < g_6364) {
+        if (((window_previous_event.modifiers ^ window_current_event.modifiers) & 0x0a00) == 0) {
+            window_current_event.modifiers &= ~0x0a00;
+            if (window_previous_event.modifiers & 0x0800)
+                window_current_event.modifiers |= 0x4000;
+            if (window_previous_event.modifiers & 0x0200)
+                window_current_event.modifiers |= 0x2000;
             g_6364 = -1;
             goto done;
         }
     }
     g_6364 = TickCount();
-    fd_50F6_4A0A = fd_50F6_49FA;
+    window_previous_event = window_current_event;
 done:
     win_UnlockWin(ev->code);
 }
@@ -100,13 +100,13 @@ int far win_GetProxEvent(void)
 }
 
 extern void far clip_restrict_rect(char far *p);
-extern char g_5A9C[];
+extern char gfx_screen_clip_list[];
 extern void _fastcall win_ObjInv(int obj);
 
 void _fastcall _win_SetProxItem(int obj)
 {
     clip_Push();
-    clip_restrict_rect(g_5A9C);
+    clip_restrict_rect(gfx_screen_clip_list);
     if (lastProxObj != -1)
         win_ObjInv(lastProxObj);
     if (obj != -1)
@@ -115,22 +115,22 @@ void _fastcall _win_SetProxItem(int obj)
     clip_Pop();
 }
 
-extern int g_5702[];
+extern int clip_window_z_order[];
 extern int far hotbox_pointer_hit_id(void);
 
 void _fastcall win_update_proximity_event(struct Event far *ev)
 {
     int obj;
 
-    if ((char)(g_5702[0] >> 8) == (unsigned char)ev->code) {
-        win_LockWin(g_5702[0]);
+    if ((char)(clip_window_z_order[0] >> 8) == (unsigned char)ev->code) {
+        win_LockWin(clip_window_z_order[0]);
         obj = hotbox_pointer_hit_id();
-        if (obj != 0 && (obj & 0xff00) == g_5702[0] && lastProxObj != obj &&
+        if (obj != 0 && (obj & 0xff00) == clip_window_z_order[0] && lastProxObj != obj &&
             (*(int far *)(win_ObjAddr(obj) + 0x24) & 0x10))
             _win_SetProxItem(obj);
         else if (lastProxObj != -1 && !(*(int far *)(win_ObjAddr(lastProxObj) + 0x24) & 0x400) && obj != lastProxObj)
             _win_SetProxItem(-1);
-        win_UnlockWin(g_5702[0]);
+        win_UnlockWin(clip_window_z_order[0]);
     }
 }
 
@@ -152,45 +152,45 @@ void far win_translate_pending_event(void)
     snd_service_pending();
     if (g_8CEC != 0 || !input_event_count())
         return;
-    input_pop_event(&fd_50F6_49FA);
-    if (fd_50F6_49FA.code == (int)0xff00) {
-        win_dispatch_desktop_click(&fd_50F6_49FA);
-    } else if ((char)(fd_50F6_49FA.code >> 8) == (char)0xfb) {
-        win_update_proximity_event(&fd_50F6_49FA);
+    input_pop_event(&window_current_event);
+    if (window_current_event.code == (int)0xff00) {
+        win_dispatch_desktop_click(&window_current_event);
+    } else if ((char)(window_current_event.code >> 8) == (char)0xfb) {
+        win_update_proximity_event(&window_current_event);
     } else {
-        if (g_5702[0] != (int)0x8000) {
-            switch (fd_50F6_49FA.code) {
+        if (clip_window_z_order[0] != (int)0x8000) {
+            switch (window_current_event.code) {
             case 0xf081:
                 win_track_move(0L);
                 break;
             case 0xf082:
-                win_lower_or_dismiss(g_5702[0]);
+                win_lower_or_dismiss(clip_window_z_order[0]);
                 win_FlushEvents();
                 return;
             case 0xf083:
-                win_Close(g_5702[0]);
+                win_Close(clip_window_z_order[0]);
                 win_FlushEvents();
                 return;
             case 0xf084:
                 win_track_resize(0L);
                 return;
             case 0xf085:
-                win_toggle_zoom(g_5702[0]);
+                win_toggle_zoom(clip_window_z_order[0]);
                 win_FlushEvents();
                 return;
             case 0xf086:
-                if (g_5702[0] != (int)0x8000)
+                if (clip_window_z_order[0] != (int)0x8000)
                     win_step_object_focus(1);
                 break;
             case 0xf087:
-                if (g_5702[0] != (int)0x8000)
+                if (clip_window_z_order[0] != (int)0x8000)
                     win_step_object_focus(-1);
                 break;
             default:
-                if (!(fd_50F6_49FA.code & 0x8000)) {
-                    if ((fd_50F6_49FA.code & 0xff00) != g_5702[0])
+                if (!(window_current_event.code & 0x8000)) {
+                    if ((window_current_event.code & 0xff00) != clip_window_z_order[0])
                         return;
-                    win_dispatch_object_event(&fd_50F6_49FA);
+                    win_dispatch_object_event(&window_current_event);
                 }
                 break;
             }
@@ -210,7 +210,7 @@ int _fastcall win_GetEvent(struct Event far *ev)
     win_translate_pending_event();
     if (g_8CEC) {
         g_8CEC = 0;
-        *ev = fd_50F6_49FA;
+        *ev = window_current_event;
         win_translate_pending_event();
         return 1;
     }
@@ -244,7 +244,7 @@ void _fastcall win_dispatch_desktop_click(struct Event far *ev)
     struct Rect r;
     int i;
 
-    top = g_5702[0];
+    top = clip_window_z_order[0];
     if (top == (int)0x8000)
         return;
     win_GetObjRect(top, &r);
@@ -254,10 +254,10 @@ void _fastcall win_dispatch_desktop_click(struct Event far *ev)
         win_Close(top);
     win_UnlockWin(top);
     if (noClose == 0) {
-        for (i = 0; g_5702[i] != (int)0x8000; i++) {
-            win_GetObjRect(g_5702[i], &r);
+        for (i = 0; clip_window_z_order[i] != (int)0x8000; i++) {
+            win_GetObjRect(clip_window_z_order[i], &r);
             if (PointInRect(&ev->h, &r)) {
-                win_ToTop(g_5702[i]);
+                win_ToTop(clip_window_z_order[i]);
                 break;
             }
         }
@@ -287,7 +287,7 @@ int far win_focus_nearest_object(void)
     int dy;
 
     found = -1;
-    top = g_5702[0];
+    top = clip_window_z_order[0];
     best = 0xffffffffL;
     win_LockWin(top);
     w = win_locked_resource_ptr(top);
@@ -323,18 +323,18 @@ void _fastcall win_step_object_focus(int dir)
     int last;
     int cur;
 
-    if (g_5702[0] == (int)0x8000)
+    if (clip_window_z_order[0] == (int)0x8000)
         return;
     cur = start = win_focus_nearest_object();
-    last = g_5702[0] + win_object_count(g_5702[0]);
+    last = clip_window_z_order[0] + win_object_count(clip_window_z_order[0]);
     if (start == -1)
         return;
     do {
         cur += dir;
-        if (g_5702[0] + 1 > cur)
+        if (clip_window_z_order[0] + 1 > cur)
             cur = last - 1;
         else if (last <= cur)
-            cur = g_5702[0] + 1;
+            cur = clip_window_z_order[0] + 1;
         if (win_is_obj_selectable(cur)) {
             hotbox_center_pointer(cur);
             return;

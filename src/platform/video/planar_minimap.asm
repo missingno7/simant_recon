@@ -6,7 +6,7 @@
 ; Build profile: masm510; /Mx.
 
 _DATA	segment word public 'DATA'
-	extrn	_g_3DB2:byte
+	extrn	_gfx_screen_width_pixels:byte
 ; S00 driver data (DGROUP:1F9E-20FF): dither tables of the mini-map builders, EGA palette and
 ; plane data used by S00B, the dispatch table the game calls through (entries in S00B, referenced
 ; as externals: RTLink keeps their relocations in per-symbol groups) and a far pointer to it.
@@ -611,7 +611,7 @@ _gfx_planar_map128_pack8	proc	far
 	push di
 	push ds
 	lea bx, _g_1F9E
-	cmp word ptr _g_3DB2, 140h
+	cmp word ptr _gfx_screen_width_pixels, 140h
 	jne L04EE
 	lea bx, _g_2002
 L04EE:
@@ -830,7 +830,7 @@ _gfx_planar_map64_pack8	proc	far
 	push di
 	push ds
 	lea bx, _g_1F9E
-	cmp word ptr _g_3DB2, 140h
+	cmp word ptr _gfx_screen_width_pixels, 140h
 	jne L06B9
 	lea bx, _g_2002
 L06B9:

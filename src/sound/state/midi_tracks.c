@@ -14,5 +14,5 @@
  * Resource/consumer proof: evidence/canonical/shipped-resource-domain/review.md.
  */
 
-unsigned char far fd_50F6_4B30[10];
-long far fd_50F6_4B42[10];
+unsigned char far midi_track_status[10];
+long far midi_track_event_ticks[10];

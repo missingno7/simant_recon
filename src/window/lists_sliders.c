@@ -178,7 +178,7 @@ extern int far font_FontHeight(void);
 extern void _fastcall win_SetColorNum(int color);
 extern void far font_print_and_clear_row(struct Rect far *rect, int y, char far *text);
 extern int near g_3DE2;
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
 extern void far clip_Pop(void);
 
 void _fastcall list_draw_visible_rows(char far *o)
@@ -222,7 +222,7 @@ void _fastcall list_draw_visible_rows(char far *o)
         } else {
             if (cur)
                 win_SetColorNum(color0);
-            g_9134(r->left, y, r->right, y + h, g_3DE2);
+            gfx_fill_rect_hook(r->left, y, r->right, y + h, g_3DE2);
         }
         y += h;
     }
@@ -238,7 +238,7 @@ struct Pt {
     int y;
 };
 
-extern struct Pt far fd_50F6_47DA;
+extern struct Pt far window_scroll_arrow_size;
 extern int far WinPrintf(char far *format, ...);
 extern int near _foreColor;
 
@@ -265,8 +265,8 @@ void _fastcall win_DrawElevator(char far *o)
     win_SetColorNum(o[0x26]);
     r.left++;
     r.right--;
-    r.top += fd_50F6_47DA.y + 1;
-    r.bottom -= fd_50F6_47DA.y + 1;
+    r.top += window_scroll_arrow_size.y + 1;
+    r.bottom -= window_scroll_arrow_size.y + 1;
     height = r.bottom - r.top;
     eleHeight = height * list->visible / list->count;
     WinPrintf("SliderHeight=%d, eleHeight=%d", height, eleHeight);
@@ -274,11 +274,11 @@ void _fastcall win_DrawElevator(char far *o)
         eleHeight = 10;
     eleTop = list->top * (height - eleHeight) / (list->count - list->visible);
     if (eleTop > 0)
-        g_9134(r.left, r.top, r.right, r.top + eleTop, g_3DE2);
+        gfx_fill_rect_hook(r.left, r.top, r.right, r.top + eleTop, g_3DE2);
     WinPrintf(" eleTop= %d", eleTop);
-    g_9134(r.left, r.top + eleTop, r.right, eleTop + eleHeight + r.top, _foreColor);
+    gfx_fill_rect_hook(r.left, r.top + eleTop, r.right, eleTop + eleHeight + r.top, _foreColor);
     if (eleTop + eleHeight < height)
-        g_9134(r.left, eleTop + eleHeight + r.top, r.right, r.bottom, g_3DE2);
+        gfx_fill_rect_hook(r.left, eleTop + eleHeight + r.top, r.right, r.bottom, g_3DE2);
 }
 
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
@@ -290,8 +290,8 @@ void _fastcall win_draw_vertical_slider(char far *o)
     r = *(struct Rect far *)o;
     if (o[0x21] == 8) {
         win_DrawBitMap(r.left, r.top, 0x6d);
-        win_DrawBitMap(r.left, r.bottom - fd_50F6_47DA.y, 0x6f);
-        g_9134(r.left, fd_50F6_47DA.y + r.top, r.right, r.bottom - fd_50F6_47DA.y, g_3DE2);
+        win_DrawBitMap(r.left, r.bottom - window_scroll_arrow_size.y, 0x6f);
+        gfx_fill_rect_hook(r.left, window_scroll_arrow_size.y + r.top, r.right, r.bottom - window_scroll_arrow_size.y, g_3DE2);
         win_DrawElevator(o);
     }
 }
@@ -328,7 +328,7 @@ void _fastcall list_scroll_to_line(int line, char far *o)
     mem_Unlock(list->text);
 }
 
-extern void (far * near g_9188)(int left, int top, int right, int bottom, int x, int y);
+extern void (far * near gfx_copy_screen_rect_hook)(int left, int top, int right, int bottom, int x, int y);
 
 int _fastcall list_scroll_forward_line(char far *o)
 {
@@ -346,7 +346,7 @@ int _fastcall list_scroll_forward_line(char far *o)
     h = font_FontHeight();
     clip_Push();
     clip_SubInclude(&r);
-    g_9188(r.left, r.top + h, r.right, r.bottom, r.left, r.top);
+    gfx_copy_screen_rect_hook(r.left, r.top + h, r.right, r.bottom, r.left, r.top);
     list->top++;
     list->topOff += _fstrlen(base + list->topOff) + 1;
     base += list->endOff;
@@ -376,7 +376,7 @@ int _fastcall PrevListLine(char far *o)
     h = font_FontHeight();
     clip_Push();
     clip_SubInclude(&r);
-    g_9188(r.left, r.top - 1, r.right, r.bottom - h - 1, r.left, h + r.top - 1);
+    gfx_copy_screen_rect_hook(r.left, r.top - 1, r.right, r.bottom - h - 1, r.left, h + r.top - 1);
     if (--list->top) {
         s = MemRChr(base + list->topOff - 2, 0, 0xffff);
         if (s == 0)
@@ -452,7 +452,7 @@ void _fastcall win_ProcSliderEvent(struct Event far *ev)
     if (list->count <= list->visible)
         return;
     r = *(struct Rect far *)o;
-    if (fd_50F6_47DA.y + r.top > ev->v) {
+    if (window_scroll_arrow_size.y + r.top > ev->v) {
         if (ev->modifiers & 0x6800) {
             list_scroll_to_line(0, lo);
             win_DrawElevator(o);
@@ -463,7 +463,7 @@ void _fastcall win_ProcSliderEvent(struct Event far *ev)
                 timer_wait_double_ticks(1);
             } while (StillDown());
         }
-    } else if (r.bottom - fd_50F6_47DA.y < ev->v) {
+    } else if (r.bottom - window_scroll_arrow_size.y < ev->v) {
         if (ev->modifiers & 0x6800) {
             list_scroll_to_line(list->count - list->visible, lo);
             win_DrawElevator(o);

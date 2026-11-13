@@ -8,4 +8,4 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
-int far fd_50F6_46D0;
+int far dialog_wait_delay;

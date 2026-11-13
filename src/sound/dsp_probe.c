@@ -7,7 +7,7 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
-int fd_55B3_7564 = 0;
+int snd_sb_io_base = 0;
 
 extern void far snd_port_write_byte(int port, char value);
 extern unsigned char far snd_port_read_byte(int port);
@@ -17,15 +17,15 @@ int far snd_probe_dsp_reset_ack(void)
     int i;
     unsigned char c;
 
-    snd_port_write_byte(fd_55B3_7564 + 6, 1);
+    snd_port_write_byte(snd_sb_io_base + 6, 1);
     for (i = 0; i < 9999; i++)
         ;
-    snd_port_write_byte(fd_55B3_7564 + 6, 0);
+    snd_port_write_byte(snd_sb_io_base + 6, 0);
     for (i = 0; i < 9999; i++)
         ;
     for (i = 0; i < 200 && !(c & 0x80); i++)
-        c = snd_port_read_byte(fd_55B3_7564 + 0xe);
-    if (snd_port_read_byte(fd_55B3_7564 + 0xa) == 0xaa)
+        c = snd_port_read_byte(snd_sb_io_base + 0xe);
+    if (snd_port_read_byte(snd_sb_io_base + 0xa) == 0xaa)
         return 1;
     return 0;
 }

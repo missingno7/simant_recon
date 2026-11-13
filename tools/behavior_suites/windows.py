@@ -286,7 +286,7 @@ def unlock_live_case(label, object_types=(0,), window_flags=0x800, redraw_pendin
             behavior.Range("map_copy", master_seg * 16 + 0x4892, 16),
             behavior.Range("object_array_map", master_seg * 16 + 0x3000, 0x100),
             behavior.Range("objects", master_seg * 16 + 0x4100, max(0x40, 0x60 * len(object_types))),
-            behavior.Range("all_clip_handles", behavior.symbol_address("fd_50F6_3B60"), 45 * 4),
+            behavior.Range("all_clip_handles", behavior.symbol_address("clip_window_list_handles"), 45 * 4),
         ], callbacks={}, return_kind="void", registers=_registers(ax=WIN_ID),
         metadata={"suite": SUITE,
                   "contract": "final-release win_UnlockWin branch with original Ralloc type lookup, lock decrement, free, unlock, type update, globals, and map copy",
@@ -314,12 +314,12 @@ def clip_empty_case(label):
     # A valid empty stack takes the original early return after freeing/resetting
     # any current clip handles. Seed the handles to null so no allocator calls
     # are needed and compare the full window stack plus clip globals.
-    g5702 = behavior.symbol_address("g_5702")
+    g5702 = behavior.symbol_address("clip_window_z_order")
     g5742 = behavior.symbol_address("g_5742")
     g5746 = behavior.symbol_address("g_5746")
-    g574a = behavior.symbol_address("g_574A")
-    g5aac = behavior.symbol_address("g_5AAC")
-    g574e = behavior.symbol_address("g_574E")
+    g574a = behavior.symbol_address("clip_outside_windows_handle")
+    g5aac = behavior.symbol_address("clip_active_list_offset")
+    g574e = behavior.symbol_address("clip_screen_list_pointer")
     writes = [(g5702, w(0x8000) + w(*([0xA55A] * 31))),
               (g5742, w(0)), (g5746, w(0)), (g574a, w(0)), (g5aac, farptr(0x4444))]
     return behavior.Case(
@@ -328,10 +328,10 @@ def clip_empty_case(label):
                  behavior.Range("clip_handles", g5742, 12),
                  behavior.Range("clip_list_pointer", g5aac, 4)],
         callbacks={}, return_kind="void", registers=_registers(),
-        metadata={"suite": SUITE, "contract": "empty window stack sets g_574A to the default clip list and clears active clipping pointer",
+        metadata={"suite": SUITE, "contract": "empty window stack sets clip_outside_windows_handle to the default clip list and clears active clipping pointer",
                   "abi": "void far function; no parameters; retf",
                   "helper_policy": "original clip_reset_temporary_state executes; null handles avoid allocator dependencies",
-                  "validity": "g_5702[0] is the empty-stack sentinel; no window objects or clip handles are live",
+                  "validity": "clip_window_z_order[0] is the empty-stack sentinel; no window objects or clip handles are live",
                   "coverage_limit": "does not exercise rectangle subtraction, per-window clip lists, handle allocation, 45-entry cache pressure, or window lock state"})
 
 
@@ -375,13 +375,13 @@ def clip_live_case(label, rects, seed=0x1E57038E, win_ids=None, cache_pressure=F
             win < 0x0100 or win > 0x2C00 or win & 0x00FF for win in wins):
         raise ValueError("window IDs must be unique valid high-byte indices 1..44")
     stack_data = w(*wins, 0x8000, *([0xA55A] * (31 - len(wins))))
-    g5702 = behavior.symbol_address("g_5702")
-    g5a9c = behavior.symbol_address("g_5A9C")
+    g5702 = behavior.symbol_address("clip_window_z_order")
+    g5a9c = behavior.symbol_address("gfx_screen_clip_list")
     g5742 = behavior.symbol_address("g_5742")
     g5746 = behavior.symbol_address("g_5746")
-    g574a = behavior.symbol_address("g_574A")
-    g5aac = behavior.symbol_address("g_5AAC")
-    clip_handles = behavior.symbol_address("fd_50F6_3B60")
+    g574a = behavior.symbol_address("clip_outside_windows_handle")
+    g5aac = behavior.symbol_address("clip_active_list_offset")
+    clip_handles = behavior.symbol_address("clip_window_list_handles")
     writes = list(arena.writes) + [
         (g5702, stack_data), (g5a9c, w(*screen)),
         (g5742, w(0)), (g5746, w(0)), (g574a, w(0)),

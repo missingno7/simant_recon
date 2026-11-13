@@ -2,11 +2,11 @@
  "schema": "simant-progress-v1",
  "generated": "2026-11-13",
  "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
- "known_functions": 1733,
- "known_game_functions": 1643,
- "exact_c_functions": 1270,
+ "known_functions": 1734,
+ "known_game_functions": 1644,
+ "exact_c_functions": 1271,
  "historical_exact_source_rebuilt_functions": [],
- "exact_c_bytes": 250157,
+ "exact_c_bytes": 250181,
  "exact_asm_functions": 367,
  "exact_asm_bytes": 50441,
  "exact_code_segment_data_bytes": 1481,
@@ -15,7 +15,7 @@
  "historical_runtime_bytes_located_unaccepted": 0,
  "runtime_functions_known": 90,
  "runtime_functions_owned": 90,
- "owned_functions": 1727,
+ "owned_functions": 1728,
  "rtlink_manager_bytes_unaccepted": 17001,
  "data_bytes_accepted": 113900,
  "far_data_bytes_accepted": 80310,
@@ -36,7 +36,7 @@
  "far_bss_sizes_unverified_bytes": 14928,
  "bss_bytes_placed": 496,
  "game_code_span_bytes": 304798,
- "unresolved_code_bytes": 2719,
+ "unresolved_code_bytes": 2695,
  "unresolved_data_bytes": 113,
  "overlay_coverage": {
   "S00": {
@@ -57,7 +57,7 @@
   },
   "S04": {
    "bytes": 2464,
-   "claimed": 2432
+   "claimed": 2456
   },
   "S05": {
    "bytes": 2512,
@@ -154,7 +154,7 @@
  "claims_within_group_order_pending": 2,
  "inplace_draft_functions": 6,
  "claims_exact_steered": 17,
- "exact_c_bytes_in_complete_tus": 220636,
+ "exact_c_bytes_in_complete_tus": 220660,
  "exact_c_bytes_in_partial_modules": 29521,
  "exact_c_bytes_steered": 8830,
  "exact_c_bytes_layout_inferred": 64115,
@@ -180,7 +180,7 @@
  "runtime_oracle_derived_words": 244,
  "released_claims_unowned": [],
  "modules_origin_unevidenced": [],
- "manifest_sha256": "a3b344c054c3405123ff518a7ff02c545e080d533151c45fa08c65824bb63180",
+ "manifest_sha256": "bbd1f2c62420677b856e39ea5f977354afac7945ee713b608f3df17b1b3e4168",
  "complete_tus_relocation_order_proven": 115,
  "complete_tus_cross_function_order_pending": [
   "S00:31AD",
@@ -191,14 +191,14 @@
  "historical_exact_source_rebuilt_function_count": 0,
  "canonical_translation_units": 200,
  "canonical_storage_units": 73,
- "canonical_program_sha256": "3fbd4077b6470c36c882b512d341e23b2468d031604bb08cdab969570cb783c2",
+ "canonical_program_sha256": "f8ae788e44150b70b79c068a4126639914bd79fba9a4e0542d2724c4fef0c242",
  "whole_executable": "FUNCTIONAL_SOURCE_BUILD (dos/build.py links the canonical source; the original image layout is not reproduced; see docs/dos-closure.md)",
  "validation": "PASS",
  "failures": [],
  "verdicts": {
   "code": {
    "verdict": "NOT EQUAL",
-   "detail": "1637 of 1643 game functions exact; 6 not exact",
+   "detail": "1638 of 1644 game functions exact; 6 not exact",
    "proves": "each exact function's bytes, fixups and relocations, compiled from the current source by the pinned tools in its whole module",
    "excludes": "where the linker places the module; functions listed as not exact"
   },

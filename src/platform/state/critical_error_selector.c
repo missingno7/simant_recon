@@ -10,4 +10,4 @@
  * Mutable minimum signed-byte view; computed alias gate remains open.
  */
 
-char near g_8CCB;
+char near dos_critical_error_selector;

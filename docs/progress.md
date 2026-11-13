@@ -4,10 +4,10 @@ Validation: **PASS** (2026-11-13)
 
 | Measure | Value |
 |---|---:|
-| known_functions | 1,733 |
-| known_game_functions | 1,643 |
-| exact_c_functions | 1,270 |
-| exact_c_bytes | 250,157 |
+| known_functions | 1,734 |
+| known_game_functions | 1,644 |
+| exact_c_functions | 1,271 |
+| exact_c_bytes | 250,181 |
 | historical_exact_source_rebuilt_function_count | 0 |
 | behavior_exact_confirmed_functions | 6 |
 | canonical_translation_units | 200 |
@@ -18,7 +18,7 @@ Validation: **PASS** (2026-11-13)
 | historical_runtime_members_accepted | 90 |
 | runtime_functions_known | 90 |
 | runtime_functions_owned | 90 |
-| owned_functions | 1,727 |
+| owned_functions | 1,728 |
 | historical_runtime_bytes_located_unaccepted | 0 |
 | rtlink_manager_bytes_unaccepted | 17,001 |
 | data_bytes_accepted | 113,900 |
@@ -32,7 +32,7 @@ Validation: **PASS** (2026-11-13)
 | far_bss_sizes_consistent_bytes | 2,912 |
 | far_bss_sizes_unverified_bytes | 14,928 |
 | game_code_span_bytes | 304,798 |
-| unresolved_code_bytes | 2,719 |
+| unresolved_code_bytes | 2,695 |
 | unresolved_data_bytes | 113 |
 | scaffold_functions | 0 |
 | exact_translation_units | 117 |
@@ -40,7 +40,7 @@ Validation: **PASS** (2026-11-13)
 | claims_within_group_order_pending | 2 |
 | inplace_draft_functions | 6 |
 | claims_exact_steered | 17 |
-| exact_c_bytes_in_complete_tus | 220,636 |
+| exact_c_bytes_in_complete_tus | 220,660 |
 | exact_c_bytes_in_partial_modules | 29,521 |
 | exact_c_bytes_steered | 8,830 |
 | exact_c_bytes_layout_inferred | 64,115 |
@@ -52,7 +52,7 @@ Validation: **PASS** (2026-11-13)
 | data_bytes_opaque_unmarked | 6,333 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `a3b344c054c3405123ff518a7ff02c545e080d533151c45fa08c65824bb63180`
+Manifest: `bbd1f2c62420677b856e39ea5f977354afac7945ee713b608f3df17b1b3e4168`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 
@@ -60,4 +60,4 @@ Modules with data placements only (never counted as recovered code): data:3D57, 
 
 Whole executable: FUNCTIONAL_SOURCE_BUILD (dos/build.py links the canonical source; the original image layout is not reproduced; see docs/dos-closure.md)
 
-Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2432/2464, S05 2508/2512, S06 9583/9584, S07 1174/1184, S08 5053/5056, S09 5225/5232, S10 2731/2736, S11 870/880, S12 4773/4992, S13 6051/6064, S14 4653/4656, S15 1025/1360, S16 1763/1776, S17 443/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 4362/4368, S24 1803/1808, S25 14577/14592, S26 2236/2240
+Overlay coverage (claimed/bytes): S00 19679/19696, S01 7051/7056, S02 2409/2416, S03 10963/10976, S04 2456/2464, S05 2508/2512, S06 9583/9584, S07 1174/1184, S08 5053/5056, S09 5225/5232, S10 2731/2736, S11 870/880, S12 4773/4992, S13 6051/6064, S14 4653/4656, S15 1025/1360, S16 1763/1776, S17 443/448, S18 4359/4368, S19 1120/1120, S20 2086/2096, S21 472/480, S22 12710/12720, S23 4362/4368, S24 1803/1808, S25 14577/14592, S26 2236/2240

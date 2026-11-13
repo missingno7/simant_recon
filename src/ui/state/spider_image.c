@@ -18,4 +18,4 @@ typedef struct SpiderImage {
     unsigned char pixels[6272];
 } SpiderImage;
 
-SpiderImage far fd_50F6_1F26;
+SpiderImage far spider_composite_bitmap;

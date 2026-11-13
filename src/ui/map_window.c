@@ -35,8 +35,8 @@ static int g_2994 = 0;
 int g_2996 = 0;
 static int g_2998 = -1;
 long mapMessage = 0;
-long fd_55B3_299E = 0;
-int fd_55B3_29A2 = 0;
+long map_message_deadline = 0;
+int map_yard_redraw_pending = 0;
 static int g_29A4 = 0;
 
 void far DeinitMapFunctions(void)
@@ -48,11 +48,11 @@ extern long far RallocMemorySoft(void);
 extern void far WinPrintf(char far *format, ...);
 extern char far * far * far mem_Alloc(long size, int kind, char far *name);
 extern char far * far * far fd_50F6_10E2;
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern int far mapXsize;
 extern int far mapYsize;
-extern void (far * far fd_50F6_38B8)();
-extern void (far * far fd_50F6_38BC)();
+extern void (far * far map_wide_row_converter)();
+extern void (far * far map_narrow_row_converter)();
 extern void far gfx_planar_map128_pack2();
 extern void far gfx_planar_map64_pack2();
 extern void far gfx_tandy_map_duplicate_rows();
@@ -65,33 +65,33 @@ void far InitMapFunctions(void)
 {
     WinPrintf("\nFREE+SOFT AT INITMAP=%ld", RallocMemoryFree() + RallocMemorySoft());
     fd_50F6_10E2 = mem_Alloc(0x2000L, 1, "Generated buffer window");
-    switch (g_5A97) {
+    switch (gfx_display_mode) {
     case 0:
     case 8:
         mapXsize = 4;
         mapYsize = 4;
-        fd_50F6_38B8 = gfx_planar_map128_pack2;
-        fd_50F6_38BC = gfx_planar_map64_pack2;
+        map_wide_row_converter = gfx_planar_map128_pack2;
+        map_narrow_row_converter = gfx_planar_map64_pack2;
         break;
     case 2:
         mapXsize = 2;
         mapYsize = 2;
-        fd_50F6_38B8 = gfx_tandy_map_duplicate_rows;
-        fd_50F6_38BC = gfx_tandy_map_duplicate_rows;
+        map_wide_row_converter = gfx_tandy_map_duplicate_rows;
+        map_narrow_row_converter = gfx_tandy_map_duplicate_rows;
         break;
     case 3:
     case 5:
     case 7:
         mapXsize = 4;
         mapYsize = 4;
-        fd_50F6_38B8 = WindowsMono_MakeTable4x4a;
-        fd_50F6_38BC = WindowsMono_MakeTable4x4b;
+        map_wide_row_converter = WindowsMono_MakeTable4x4a;
+        map_narrow_row_converter = WindowsMono_MakeTable4x4b;
         break;
     case 4:
         mapXsize = 2;
         mapYsize = 2;
-        fd_50F6_38B8 = gfx_planar_map128_pack4;
-        fd_50F6_38BC = gfx_planar_map64_pack4;
+        map_wide_row_converter = gfx_planar_map128_pack4;
+        map_narrow_row_converter = gfx_planar_map64_pack4;
         break;
     }
 }
@@ -152,10 +152,10 @@ extern int _fastcall win_IsWinOpen(int win);
 extern void far clip_Push(void);
 extern void far clip_SetWin(int win);
 extern int far MapPnt[2];
-extern struct Rect far fd_50F6_10D2;
+extern struct Rect far map_viewport_rect;
 extern struct Rect far mapCursorRect;
 extern int far fd_50F6_10DE;
-extern int far fd_50F6_38C0;
+extern int far map_side_margin_pixels;
 extern int far fd_50F6_10E0;
 extern void far GRectInvOutline(struct Rect far *rect, int width);
 extern void far clip_Pop(void);
@@ -164,7 +164,7 @@ extern void far clip_Pop(void);
 extern int far multiplier;
 extern void far win_MapChanged(void);
 extern int far MapMode;
-extern char far * far * far fd_50F6_385A;
+extern char far * far * far map_generated_image_handle;
 extern char far * far mem_Lock(char far * far *handle);
 extern void far mem_Unlock(char far * far *handle);
 extern unsigned char far LifeA[128][64];
@@ -185,12 +185,12 @@ extern unsigned char far CTabR[];
 extern int far BpopT;
 extern int far RpopT;
 extern int far HealthR;
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far font_SetFont(int font);
 extern void far win_PrintfAtObj(int obj, char far *format, ...);
 extern int far HealthB;
 extern void far win_DrawHBar(int obj, long fraction);
-extern char far * far * far fd_50F6_385E;
+extern char far * far * far map_scanline_image_handle;
 extern void far Punt(char far *msg);
 extern unsigned char far PherMapBN[];
 extern unsigned char far PherMapBT[];
@@ -234,9 +234,9 @@ void far DrawMapCursor(void)
         return;
     clip_Push();
     clip_SetWin(0x100);
-    mapCursorRect.top = mapYsize * MapPnt[1] + fd_50F6_10D2.top;
+    mapCursorRect.top = mapYsize * MapPnt[1] + map_viewport_rect.top;
     mapCursorRect.bottom = mapCursorRect.top + mapYsize * fd_50F6_10DE;
-    mapCursorRect.left = mapXsize * MapPnt[0] + fd_50F6_10D2.left + fd_50F6_38C0;
+    mapCursorRect.left = mapXsize * MapPnt[0] + map_viewport_rect.left + map_side_margin_pixels;
     mapCursorRect.right = mapCursorRect.left + mapXsize * fd_50F6_10E0;
     GRectInvOutline(&mapCursorRect, 2);
     g_298E = 1;
@@ -268,9 +268,9 @@ void far ToggleMapCursor(void)
 void far map_dispatch_scaled_bitmap(char far *src, char far *dst, int n)
 {
     if (multiplier == 64)
-        (*fd_50F6_38BC)(src, dst, multiplier, n);
+        (*map_narrow_row_converter)(src, dst, multiplier, n);
     else
-        (*fd_50F6_38B8)(src, dst, multiplier, n);
+        (*map_wide_row_converter)(src, dst, multiplier, n);
 }
 
 
@@ -294,14 +294,14 @@ void far map_generate_surface_colours(void)
         g_2992 = MapMode;
         fresh = 0;
     }
-    buf = (unsigned char far *)mem_Lock(fd_50F6_385A);
+    buf = (unsigned char far *)mem_Lock(map_generated_image_handle);
     if (fresh) {
         _fmemcpy(buf, mem_Lock(fd_50F6_10E2), 0x2000);
         mem_Unlock(fd_50F6_10E2);
     }
     p = &LifeA[0][0];
     q = &MapA[0][0];
-    if (!(g_5A97 & 1)) {
+    if (!(gfx_display_mode & 1)) {
         if (TERRAINset == 1) {
             for (x = 0; x < 64; x++, p -= 0x1fff, q -= 0x1fff)
                 for (y = 0; y < 128; y++, p += 64, q += 64) {
@@ -330,7 +330,7 @@ void far map_generate_surface_colours(void)
                 }
         }
     }
-    mem_Unlock(fd_50F6_385A);
+    mem_Unlock(map_generated_image_handle);
 }
 
 
@@ -340,9 +340,9 @@ void far map_expand_scent_colours(unsigned char far *src)
     int x, y, i;
     unsigned char c;
 
-    buf = (unsigned char far *)mem_Lock(fd_50F6_385A);
+    buf = (unsigned char far *)mem_Lock(map_generated_image_handle);
     g_2992 = MapMode;
-    if (g_5A97 & 1) {
+    if (gfx_display_mode & 1) {
         for (x = 0; x < 32; x++)
             for (y = 0; y < 64; y++) {
                 i = ((x << 7) + y) << 1;
@@ -363,7 +363,7 @@ void far map_expand_scent_colours(unsigned char far *src)
                 buf[i + 0x80] = c; buf[i + 0x81] = c;
             }
     }
-    mem_Unlock(fd_50F6_385A);
+    mem_Unlock(map_generated_image_handle);
 }
 
 
@@ -381,7 +381,7 @@ void far map_generate_nest_colours(void)
         g_2992 = MapMode;
         fresh = 0;
     }
-    buf = (unsigned char far *)mem_Lock(fd_50F6_385A);
+    buf = (unsigned char far *)mem_Lock(map_generated_image_handle);
     if (fresh) {
         _fmemcpy(buf, mem_Lock(fd_50F6_10E2), 0x2000);
         mem_Unlock(fd_50F6_10E2);
@@ -393,7 +393,7 @@ void far map_generate_nest_colours(void)
         p = &LifeB[0][0];
         q = &MapB[0][0];
     }
-    if (g_5A97 & 1) {
+    if (gfx_display_mode & 1) {
         for (x = 0; x < 64; x++, p -= 0xfff, q -= 0xfff)
             for (y = 0; y < 64; y++, p += 64, q += 64) {
                 c = *p;
@@ -428,7 +428,7 @@ void far map_generate_nest_colours(void)
                 }
             }
     }
-    mem_Unlock(fd_50F6_385A);
+    mem_Unlock(map_generated_image_handle);
 }
 
 
@@ -443,7 +443,7 @@ void far DrawMapData(void)
     if (RpopT > popMax)
         popMax = RpopT;
     redHealth = RpopT == 0 ? 0 : HealthR;
-    font_SetFont(g_3DB2 == 320 ? 0 : 3);
+    font_SetFont(gfx_screen_width_pixels == 320 ? 0 : 3);
     win_PrintfAtObj(0x119, "%-d", BpopT);
     win_PrintfAtObj(0x11a, "%-d", RpopT);
     font_SetFont(0);
@@ -454,8 +454,8 @@ void far DrawMapData(void)
     win_DrawHBar(0x11e, ((long)RpopT << 16) / maxPop);
 }
 
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
-extern void (far * near g_914C)(int x, int y, char far *image, int width, int height);
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
+extern void (far * near gfx_put_picture_hook)(int x, int y, char far *image, int width, int height);
 void far DrawMapSpider(int x, int y, int kind);
 void far DrawMapFoot(void);
 
@@ -471,9 +471,9 @@ void far map_render_immediate(void)
         return;
     }
     multiplier = 0x80;
-    fd_50F6_38C0 = newMapForce = 0;
-    fd_50F6_385E = mem_Alloc(0x400L, 1, "Map window image");
-    fd_50F6_385A = mem_Alloc(0x2000L, 1, "Generated map window");
+    map_side_margin_pixels = newMapForce = 0;
+    map_scanline_image_handle = mem_Alloc(0x400L, 1, "Map window image");
+    map_generated_image_handle = mem_Alloc(0x2000L, 1, "Generated map window");
     if (MapMode != g_2992)
         win_MapChanged();
     switch (MapMode) {
@@ -487,7 +487,7 @@ void far map_render_immediate(void)
     case 3:
         map_generate_nest_colours();
         multiplier = 0x40;
-        fd_50F6_38C0 = mapXsize << 5;
+        map_side_margin_pixels = mapXsize << 5;
         break;
     case 4:
         map_expand_scent_colours(PherMapBN);
@@ -505,41 +505,41 @@ void far map_render_immediate(void)
         map_expand_scent_colours(PherMapA);
         break;
     }
-    n = (fd_50F6_10D2.bottom - fd_50F6_10D2.top) / mapYsize;
+    n = (map_viewport_rect.bottom - map_viewport_rect.top) / mapYsize;
     if (n > 64)
         WinPrintf("\nYMAXCOUNT =%d!!!!!", n);
     n = 64;
-    (*g_9134)(fd_50F6_10D2.left, fd_50F6_10D2.top, fd_50F6_10D2.left + fd_50F6_38C0,
-              fd_50F6_10D2.bottom, ConvColor(15));
-    (*g_9134)(fd_50F6_10D2.right - fd_50F6_38C0, fd_50F6_10D2.top, fd_50F6_10D2.right,
-              fd_50F6_10D2.bottom, ConvColor(15));
+    (*gfx_fill_rect_hook)(map_viewport_rect.left, map_viewport_rect.top, map_viewport_rect.left + map_side_margin_pixels,
+              map_viewport_rect.bottom, ConvColor(15));
+    (*gfx_fill_rect_hook)(map_viewport_rect.right - map_side_margin_pixels, map_viewport_rect.top, map_viewport_rect.right,
+              map_viewport_rect.bottom, ConvColor(15));
     EraseMapCursor();
     if (mapMessage) {
-        if (TickCount() > fd_55B3_299E) {
+        if (TickCount() > map_message_deadline) {
             if (mapMessage)
                 g_29A4 = 1;
             mapMessage = 0;
         } else {
             win_SetColorNum(3);
-            ui_draw_centered_clipped_text(mapMessage, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
+            ui_draw_centered_clipped_text(mapMessage, &map_viewport_rect, map_viewport_rect.top + 4);
         }
     }
     clip_Push();
-    clip_SubInclude(&fd_50F6_10D2);
-    img = mem_Lock(fd_50F6_385A);
-    gen = mem_Lock(fd_50F6_385E);
+    clip_SubInclude(&map_viewport_rect);
+    img = mem_Lock(map_generated_image_handle);
+    gen = mem_Lock(map_scanline_image_handle);
     if (SpidOn && !g_2994 && MapPlane == 1) {
         sx = SpidX >> 4;
         sy = SpidY >> 4;
     } else
         sy = 0x7fff;
     old = mem_Lock(fd_50F6_10E2);
-    y = fd_50F6_10D2.top;
+    y = map_viewport_rect.top;
     for (row = 0, off = 0; row < n; row++, y += mapYsize) {
-        if (_fmemcmp(old + off, img + off, multiplier) || fd_55B3_29A2 || (row < 8 && g_29A4)) {
+        if (_fmemcmp(old + off, img + off, multiplier) || map_yard_redraw_pending || (row < 8 && g_29A4)) {
             _fmemcpy(old + off, img + off, multiplier);
             map_dispatch_scaled_bitmap(img + off, gen, y);
-            (*g_914C)(fd_50F6_10D2.left + fd_50F6_38C0, y, gen, multiplier * mapXsize, mapYsize);
+            (*gfx_put_picture_hook)(map_viewport_rect.left + map_side_margin_pixels, y, gen, multiplier * mapXsize, mapYsize);
         }
         off += multiplier;
         if (sy != 0x7fff && sy + 4 <= row) {
@@ -550,15 +550,15 @@ void far map_render_immediate(void)
     if (sy != 0x7fff)
         DrawMapSpider(sx, sy, SpidDir);
     mem_Unlock(fd_50F6_10E2);
-    mem_Unlock(fd_50F6_385E);
-    mem_Unlock(fd_50F6_385A);
-    mem_Free(fd_50F6_385E);
-    mem_Free(fd_50F6_385A);
+    mem_Unlock(map_scanline_image_handle);
+    mem_Unlock(map_generated_image_handle);
+    mem_Free(map_scanline_image_handle);
+    mem_Free(map_generated_image_handle);
     if (MapPlane == 1 && !g_2994)
         DrawMapFoot();
     DrawMapCursor();
     clip_Pop();
-    fd_55B3_29A2 = newMapForce;
+    map_yard_redraw_pending = newMapForce;
     g_29A4 = 0;
 }
 
@@ -600,14 +600,14 @@ void far DrawMapSpider(int x, int y, int kind)
     int ys;
     unsigned char far *p;
 
-    if (g_3DB2 == 320) {
+    if (gfx_screen_width_pixels == 320) {
         x = x * 2 - 3;
         ys = y * 2 - 3;
     } else {
         x = x * 4 - 3;
         ys = y * 4 - 3;
     }
-    win_DrawBitMap(x + fd_50F6_10D2.left, ys + fd_50F6_10D2.top, kind + 0x44c);
+    win_DrawBitMap(x + map_viewport_rect.left, ys + map_viewport_rect.top, kind + 0x44c);
     y -= 2;
     if (fd_50F6_10E2) {
         p = (unsigned char far *)mem_Lock(fd_50F6_10E2);
@@ -632,19 +632,19 @@ void far DrawMapFoot(void)
         return;
     x = FootX << 2;
     y = FootY << 2;
-    if (g_3DB2 == 320) {
+    if (gfx_screen_width_pixels == 320) {
         x >>= 1;
         y >>= 1;
     }
-    win_DrawBitMap(x + fd_50F6_10D2.left, y + fd_50F6_10D2.top, BoyDir + 0x4b0);
+    win_DrawBitMap(x + map_viewport_rect.left, y + map_viewport_rect.top, BoyDir + 0x4b0);
     if (BoyHere == 3 || BoyHere == 4) {
         x = MowX << 2;
         y = MowY << 2;
-        if (g_3DB2 == 320) {
+        if (gfx_screen_width_pixels == 320) {
             x >>= 1;
             y >>= 1;
         }
-        win_DrawBitMap(x + fd_50F6_10D2.left, y + fd_50F6_10D2.top, (BoyDir & 1) + 0x4ba);
+        win_DrawBitMap(x + map_viewport_rect.left, y + map_viewport_rect.top, (BoyDir & 1) + 0x4ba);
     }
     y = FootY;
     if (fd_50F6_10E2) {

@@ -36,90 +36,90 @@ void far snd_shutdown_opl_output(void);
 void far snd_disable_pc_speaker(void);
 void far snd_shutdown_regchip_output(void);
 
-int (far *g_68B6[])(void) = {
+int (far *snd_driver_init_table[])(void) = {
     f_277E_0179, snd_init_speaker_channels, snd_init_tandy_channels, snd_init_ps1_channels, snd_init_adlib_channels,
     snd_init_regchip_channels, snd_init_blaster_channels, snd_init_lpt_sample_channels, snd_init_midi_channels
 };
 
-void (far *g_68DA[])(void) = {
+void (far *snd_driver_stop_table[])(void) = {
     f_277E_0938, snd_disable_pc_speaker, f_277E_0938, f_277E_0938, f_277E_0938,
     snd_shutdown_regchip_output, snd_shutdown_blaster_output, snd_shutdown_opl_output, f_277E_0938
 };
 
-extern char g_68FE[];
-extern char g_6908[];
-extern char g_6912[];
-extern int g_6924[];
-extern int g_693C;
+extern char opl_modulator_indices[];
+extern char opl_carrier_indices[];
+extern char opl_operator_register_offsets[];
+extern int opl_semitone_f_numbers[];
+extern int snd_lpt_dac_port;
 
-extern int (far * far fd_55B3_74DA[])(void);
+extern int (far * far snd_driver_probe_table[])(void);
 void far snd_reset_channel_tables(void);
 extern void far snd_control_interrupts_disable(void);
-extern int far fd_50F6_4A48;
-extern int far fd_50F6_4A4C;
+extern int far snd_sample_channel_count;
+extern int far snd_voice_build_index;
 extern void far snd_select_four_channel_timer(int a, int b);
 extern void far snd_select_two_channel_timer(int a, int b);
 extern void far snd_start_sample_timer(void);
 extern void far snd_control_interrupts_enable(void);
-extern int far fd_50F6_01F0[];
+extern int far snd_driver_capabilities[];
 extern int far snd_expand_sample_resource(char far * far *handle, int far *size, int object, int type);
 extern void far db_set_recall_hook(int (far *hook)(char far * far *handle, int far *size, int object, int type));
 
 int far snd_initialize_device_channels(int mode, int flag)
 {
-    if (mode != 7 && !fd_55B3_74DA[mode]())
+    if (mode != 7 && !snd_driver_probe_table[mode]())
         mode = 1;
     snd_reset_channel_tables();
     snd_control_interrupts_disable();
-    fd_50F6_4A48 = 2;
+    snd_sample_channel_count = 2;
     if (mode == 7)
         flag = 1;
     if (flag)
-        fd_50F6_4A48 = 4;
-    fd_50F6_4A4C = 0;
-    g_68B6[mode]();
+        snd_sample_channel_count = 4;
+    snd_voice_build_index = 0;
+    snd_driver_init_table[mode]();
     if (flag)
         snd_select_four_channel_timer(0xd6, 0x132);
     else
         snd_select_two_channel_timer(0xd6, 0x132);
     snd_start_sample_timer();
     snd_control_interrupts_enable();
-    fd_50F6_01F0[0] = mode;
+    snd_driver_capabilities[0] = mode;
     db_set_recall_hook(snd_expand_sample_resource);
     return mode;
 }
 
-extern struct Chan far fd_50F6_4A4E[];
+extern struct Chan far snd_voice_slots[];
 
 void far snd_reset_channel_tables(void)
 {
     int i;
 
     for (i = 0; i < 0x21; i++) {
-        fd_50F6_4A4E[i].type = 0;
-        fd_50F6_4A4E[i].num = 0;
-        fd_50F6_4A4E[i].c4 = 0;
-        fd_50F6_4A4E[i].c5 = 15;
-        fd_50F6_4A4E[i].c2 = 0;
-        fd_50F6_4A4E[i].c3 = -1;
+        snd_voice_slots[i].type = 0;
+        snd_voice_slots[i].num = 0;
+        snd_voice_slots[i].c4 = 0;
+        snd_voice_slots[i].c5 = 15;
+        snd_voice_slots[i].c2 = 0;
+        snd_voice_slots[i].c3 = -1;
     }
-    fd_50F6_01F0[1] = 0;
-    fd_50F6_01F0[2] = 0;
-    fd_50F6_01F0[3] = 0;
-    fd_50F6_01F0[4] = 0;
-    fd_50F6_01F0[5] = 0;
-    fd_50F6_01F0[6] = 0;
+    snd_driver_capabilities[1] = 0;
+    snd_driver_capabilities[2] = 0;
+    snd_driver_capabilities[3] = 0;
+    snd_driver_capabilities[4] = 0;
+    snd_driver_capabilities[5] = 0;
+    snd_driver_capabilities[6] = 0;
 }
 
-extern struct Voice far fd_50F6_0000[];
+extern struct Voice far snd_instrument_descriptors[];
 
 void far snd_copy_instrument_table(struct Voice far *src)
 {
     int i;
 
     for (i = 0; i < 0x38; i++) {
-        fd_50F6_0000[i].a = src[i].a;
-        fd_50F6_0000[i].b = src[i].b;
+        snd_instrument_descriptors[i].a = src[i].a;
+        snd_instrument_descriptors[i].b = src[i].b;
     }
 }
 
@@ -131,7 +131,7 @@ void far snd_shutdown_device_channels(void)
 {
     snd_stop_assigned_voices();
     snd_stop_and_release_samples();
-    g_68DA[fd_50F6_01F0[0]]();
+    snd_driver_stop_table[snd_driver_capabilities[0]]();
     snd_restore_bios_timer(0);
 }
 
@@ -140,31 +140,31 @@ int far f_277E_0179(void)
     return 1;
 }
 
-extern int far fd_55B3_74AD;
-extern int far fd_55B3_6B9C;
-extern int far fd_55B3_74C0;
+extern int far snd_speaker_output_pointer;
+extern int far snd_sample_output_routine;
+extern int far snd_sample_volume_bias;
 extern struct Voice far fd_55B3_0C42[];
 
 int far snd_init_speaker_channels(void)
 {
     int i;
 
-    fd_50F6_01F0[1] = fd_50F6_4A48;
-    for (i = 0; i < fd_50F6_4A48; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 1;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    snd_driver_capabilities[1] = snd_sample_channel_count;
+    for (i = 0; i < snd_sample_channel_count; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 1;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    fd_55B3_6B9C = fd_55B3_74AD;
-    fd_55B3_74C0 = 0x40;
+    snd_sample_output_routine = snd_speaker_output_pointer;
+    snd_sample_volume_bias = 0x40;
     snd_copy_instrument_table(fd_55B3_0C42);
     return 1;
 }
 
 extern int far fd_50F6_4A4A;
-extern int far fd_50F6_4B14;
-extern int far fd_55B3_6B4A;
+extern int far snd_device_io_base;
+extern int far snd_dac_io_base;
 extern void far snd_port_write_byte(int port, char value);
-extern int far fd_55B3_74B9;
+extern int far snd_based_dac_output_pointer;
 
 extern struct Voice far fd_55B3_1032[];
 extern struct Voice far fd_55B3_1182[];
@@ -174,13 +174,13 @@ int far snd_init_tandy_channels(void)
     int base;
     char far *bios;
 
-    fd_50F6_01F0[1] = fd_50F6_4A48;
-    for (i = 0; i < fd_50F6_4A48; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 1;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    snd_driver_capabilities[1] = snd_sample_channel_count;
+    for (i = 0; i < snd_sample_channel_count; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 1;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
     bios = (char far *)0xF000FFFEL;
-    fd_50F6_4A4A = fd_55B3_74C0 = 0;
+    fd_50F6_4A4A = snd_sample_volume_bias = 0;
     base = 0xc4;
     _asm {
         mov ax, 8100h
@@ -191,117 +191,117 @@ int far snd_init_tandy_channels(void)
     }
     fd_50F6_4A4A = 0;
 notandy:
-    for (i = 0; i < 3; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 5;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    for (i = 0; i < 3; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 5;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    fd_50F6_01F0[4] = 3;
+    snd_driver_capabilities[4] = 3;
     if (*bios == 0xfc)
-        fd_50F6_4B14 = 0x1e0;
+        snd_device_io_base = 0x1e0;
     else
-        fd_50F6_4B14 = 0xc0;
+        snd_device_io_base = 0xc0;
     if (fd_50F6_4A4A) {
-        snd_port_write_byte(fd_55B3_6B4A = base, 3);
-        fd_55B3_6B9C = fd_55B3_74B9;
+        snd_port_write_byte(snd_dac_io_base = base, 3);
+        snd_sample_output_routine = snd_based_dac_output_pointer;
         snd_copy_instrument_table(fd_55B3_1182);
     } else {
-        fd_55B3_6B9C = fd_55B3_74AD;
+        snd_sample_output_routine = snd_speaker_output_pointer;
         snd_copy_instrument_table(fd_55B3_1032);
     }
     return 1;
 }
 
-extern int far fd_55B3_74B3;
+extern int far snd_port200_output_pointer;
 
 int far snd_init_ps1_channels(void)
 {
     int i;
 
-    fd_50F6_01F0[1] = fd_50F6_4A48;
-    for (i = 0; i < fd_50F6_4A48; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 1;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    snd_driver_capabilities[1] = snd_sample_channel_count;
+    for (i = 0; i < snd_sample_channel_count; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 1;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    for (i = 0; i < 3; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 3;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    for (i = 0; i < 3; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 3;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    fd_50F6_01F0[3] = 3;
+    snd_driver_capabilities[3] = 3;
     snd_port_write_byte(0x203, 1);
-    fd_55B3_6B9C = fd_55B3_74B3;
-    fd_55B3_74C0 = 0;
+    snd_sample_output_routine = snd_port200_output_pointer;
+    snd_sample_volume_bias = 0;
     return 1;
 }
 
 extern void far snd_opl_reset_voices(void);
 extern void far snd_opl_probe_tone(void);
-extern int far fd_55B3_74AF;
-extern int far fd_50F6_4B16;
+extern int far snd_adlib_output_pointer;
+extern int far snd_opl_volume_bias;
 
 extern struct Voice far fd_55B3_0D92[];
 int far snd_init_adlib_channels(void)
 {
     int i;
 
-    fd_50F6_01F0[1] = fd_50F6_4A48;
-    for (i = 0; i < fd_50F6_4A48; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 1;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    snd_driver_capabilities[1] = snd_sample_channel_count;
+    for (i = 0; i < snd_sample_channel_count; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 1;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    for (i = 0; i < 7; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 2;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i + 1;
+    for (i = 0; i < 7; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 2;
+        snd_voice_slots[snd_voice_build_index].num = i + 1;
     }
     snd_opl_reset_voices();
-    fd_50F6_01F0[2] = 7;
+    snd_driver_capabilities[2] = 7;
     snd_opl_probe_tone();
     snd_control_interrupts_disable();
-    fd_55B3_6B9C = fd_55B3_74AF;
+    snd_sample_output_routine = snd_adlib_output_pointer;
     snd_copy_instrument_table(fd_55B3_0D92);
-    fd_50F6_4B16 = -40;
-    fd_55B3_74C0 = 0x60;
+    snd_opl_volume_bias = -40;
+    snd_sample_volume_bias = 0x60;
     return 1;
 }
 
-extern unsigned int far fd_55B3_7564;
+extern unsigned int far snd_sb_io_base;
 extern int far snd_find_blaster_dsp_base(void);
-extern int far fd_55B3_6BA0;
+extern int far snd_sb_dsp_write_port;
 extern unsigned char far snd_port_read_byte(int port);
-extern int far fd_55B3_74B5;
+extern int far snd_sb_output_pointer;
 
 int far snd_init_blaster_channels(void)
 {
     unsigned i;
 
-    fd_50F6_01F0[1] = fd_50F6_4A48;
-    for (i = 0; i < fd_50F6_4A48; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 1;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    snd_driver_capabilities[1] = snd_sample_channel_count;
+    for (i = 0; i < snd_sample_channel_count; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 1;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
     snd_opl_reset_voices();
-    for (i = 0; i < 8; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 2;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    for (i = 0; i < 8; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 2;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    fd_50F6_01F0[2] = 8;
-    fd_55B3_74C0 = -10;
-    if (fd_55B3_7564 < 0x210) {
+    snd_driver_capabilities[2] = 8;
+    snd_sample_volume_bias = -10;
+    if (snd_sb_io_base < 0x210) {
         snd_find_blaster_dsp_base();
-        fd_55B3_6BA0 = fd_55B3_7564 + 12;
-        while (snd_port_read_byte(fd_55B3_6BA0) & 0x80)
+        snd_sb_dsp_write_port = snd_sb_io_base + 12;
+        while (snd_port_read_byte(snd_sb_dsp_write_port) & 0x80)
             ;
     }
-    fd_55B3_6BA0 = fd_55B3_7564 + 12;
-    fd_55B3_6B9C = fd_55B3_74B5;
+    snd_sb_dsp_write_port = snd_sb_io_base + 12;
+    snd_sample_output_routine = snd_sb_output_pointer;
     snd_copy_instrument_table(fd_55B3_0D92);
-    snd_port_write_byte(fd_55B3_6BA0, 0xd1);
+    snd_port_write_byte(snd_sb_dsp_write_port, 0xd1);
     return 1;
 }
 
 extern void far snd_find_regchip_base(void);
 extern int far fd_50F6_4A46;
 extern int far snd_probe_opl_timer(void);
-extern int far fd_55B3_74B7;
+extern int far snd_port222_output_pointer;
 extern void far snd_regchip_initialize(int port);
 
 extern struct Voice far fd_55B3_1572[];
@@ -309,64 +309,64 @@ int far snd_init_regchip_channels(void)
 {
     int i;
 
-    fd_50F6_01F0[1] = fd_50F6_4A48;
-    for (i = 0; i < fd_50F6_4A48; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 1;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    snd_driver_capabilities[1] = snd_sample_channel_count;
+    for (i = 0; i < snd_sample_channel_count; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 1;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    for (i = 0; i < 3; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 4;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    for (i = 0; i < 3; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 4;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
-    fd_50F6_01F0[5] = 3;
-    if (fd_50F6_4B14 == 0)
+    snd_driver_capabilities[5] = 3;
+    if (snd_device_io_base == 0)
         snd_find_regchip_base();
-    if (fd_50F6_4B14 == 0)
-        fd_50F6_4B14 = 0x220;
-    fd_50F6_4A46 = fd_50F6_4B14 + 2;
+    if (snd_device_io_base == 0)
+        snd_device_io_base = 0x220;
+    fd_50F6_4A46 = snd_device_io_base + 2;
     if (snd_probe_opl_timer()) {
         snd_copy_instrument_table(fd_55B3_0D92);
         snd_opl_reset_voices();
-        for (i = 0; i < 8; i++, fd_50F6_4A4C++) {
-            fd_50F6_4A4E[fd_50F6_4A4C].type = 2;
-            fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+        for (i = 0; i < 8; i++, snd_voice_build_index++) {
+            snd_voice_slots[snd_voice_build_index].type = 2;
+            snd_voice_slots[snd_voice_build_index].num = i;
         }
-        fd_50F6_01F0[2] = 8;
+        snd_driver_capabilities[2] = 8;
     } else
         snd_copy_instrument_table(fd_55B3_1572);
-    fd_55B3_6B9C = fd_55B3_74B7;
-    snd_regchip_initialize(fd_50F6_4B14);
-    fd_55B3_74C0 = 0;
+    snd_sample_output_routine = snd_port222_output_pointer;
+    snd_regchip_initialize(snd_device_io_base);
+    snd_sample_volume_bias = 0;
     return 1;
 }
 
-extern int far fd_55B3_74B1;
+extern int far snd_lpt_output_pointer;
 
 extern struct Voice far fd_55B3_0EE2[];
 int far snd_init_lpt_sample_channels(void)
 {
     int i;
 
-    fd_50F6_01F0[1] = fd_50F6_4A48;
-    for (i = 0; i < fd_50F6_4A48; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 1;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i;
+    snd_driver_capabilities[1] = snd_sample_channel_count;
+    for (i = 0; i < snd_sample_channel_count; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 1;
+        snd_voice_slots[snd_voice_build_index].num = i;
     }
     _asm {
         sub bx, bx
         mov es, bx
         mov bx, 408h
         mov ax, es:[bx]
-        mov g_693C, ax
-        mov dx, g_693C
+        mov snd_lpt_dac_port, ax
+        mov dx, snd_lpt_dac_port
         add dx, 2
         in al, dx
         and al, 0F7h
         out dx, al
     }
-    fd_55B3_6B9C = fd_55B3_74B1;
+    snd_sample_output_routine = snd_lpt_output_pointer;
     snd_copy_instrument_table(fd_55B3_0EE2);
-    fd_55B3_74C0 = 0;
+    snd_sample_volume_bias = 0;
     return 1;
 }
 
@@ -379,7 +379,7 @@ int far snd_init_midi_channels(void)
 {
     int i;
 
-    fd_50F6_01F0[6] = 8;
+    snd_driver_capabilities[6] = 8;
     if (snd_find_blaster_dsp_base()) {
         snd_init_blaster_channels();
         snd_copy_instrument_table(fd_55B3_1422);
@@ -387,14 +387,14 @@ int far snd_init_midi_channels(void)
         snd_init_speaker_channels();
         snd_copy_instrument_table(fd_55B3_12D2);
     }
-    fd_55B3_74C0 = 0;
-    for (i = 0; i < 8; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 6;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = i + 1;
+    snd_sample_volume_bias = 0;
+    for (i = 0; i < 8; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 6;
+        snd_voice_slots[snd_voice_build_index].num = i + 1;
     }
-    for (i = 0; i < 10; i++, fd_50F6_4A4C++) {
-        fd_50F6_4A4E[fd_50F6_4A4C].type = 7;
-        fd_50F6_4A4E[fd_50F6_4A4C].num = 10;
+    for (i = 0; i < 10; i++, snd_voice_build_index++) {
+        snd_voice_slots[snd_voice_build_index].type = 7;
+        snd_voice_slots[snd_voice_build_index].num = 10;
     }
     snd_mpu_write_command(0x8a);
     snd_mpu_write_command(0xd7);
@@ -422,7 +422,7 @@ void far f_277E_0938(void)
 
 void far snd_shutdown_blaster_output(void)
 {
-    snd_port_write_byte(fd_55B3_6BA0, 0xd3);
+    snd_port_write_byte(snd_sb_dsp_write_port, 0xd3);
     snd_opl_reset_voices();
 }
 

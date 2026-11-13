@@ -25,8 +25,8 @@ typedef struct Block {
     char name[13];
 } Block;
 
-unsigned near g_91A0;
-unsigned near g_91A2;
-Block far * near g_91A4;
-Block far * near g_91A8;
-Block far * near g_91AC;
+unsigned near mem_conventional_paragraphs;
+unsigned near mem_arena_start_segment;
+Block far * near mem_arena_first_block;
+Block far * near mem_arena_end_pointer;
+Block far * near mem_free_list_cursor;

@@ -30,12 +30,12 @@ struct Pt {
 void far *curFontPtr = 0;
 
 extern struct Bitmap far * far font_MakeImage(char far *s, int x, void far *font);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern Handle far Ralloc(long size, int flags, char far *name);
 extern char far * far mem_Lock(Handle h);
 extern struct Bitmap far out_buffer;
 extern void far ConvertMonoToTandy(char far *dst, char far *src, int width, int height);
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far invert(char far *bits, int size);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
 extern Handle far mem_Unlock(Handle h);
@@ -51,8 +51,8 @@ Handle far font_make_display_bitmap(char far *text)
     char far *dst;
 
     font_MakeImage(text, 0, curFontPtr);
-    if ((g_5A97 & 1) == 0) {
-        if (g_5A97 == 2) {
+    if ((gfx_display_mode & 1) == 0) {
+        if (gfx_display_mode == 2) {
             h = Ralloc((long)((out_buffer.width + 1) / 2 * out_buffer.height + 12), 1, "fontBuf");
             p = mem_Lock(h);
             ConvertMonoToTandy(p + 12, out_buffer.bits, out_buffer.width, out_buffer.height);
@@ -63,7 +63,7 @@ Handle far font_make_display_bitmap(char far *text)
             p = mem_Lock(h);
             src = out_buffer.bits;
             dst = p + 12;
-            if (g_3DB2 == 320)
+            if (gfx_screen_width_pixels == 320)
                 invert(src, size);
             for (i = 0; i < out_buffer.height; i++) {
                 _fmemcpy(dst, src, bpr);
@@ -85,7 +85,7 @@ Handle far font_make_display_bitmap(char far *text)
         _fmemcpy(p + 12, out_buffer.bits, size);
     }
     *(int far *)p = 0;
-    p[2] = (g_5A97 & 1) ? 1 : 4;
+    p[2] = (gfx_display_mode & 1) ? 1 : 4;
     ((int far *)p)[4] = out_buffer.width;
     ((int far *)p)[5] = out_buffer.height;
     mem_Unlock(h);
@@ -94,20 +94,20 @@ Handle far font_make_display_bitmap(char far *text)
 
 extern void (far * near g_9130)(void);
 extern void (far * near g_912C)(void);
-extern void far *fd_50F6_4A1A[];
+extern void far *font_loaded_font_pointers[];
 
 void far font_SetFont(int font)
 {
     switch (font) {
     case 0:
-        if (g_3DB2 == 320)
+        if (gfx_screen_width_pixels == 320)
             (*g_912C)();
         else
             (*g_9130)();
         curFontPtr = 0;
         break;
     case 1:
-        if (g_3DB2 == 320)
+        if (gfx_screen_width_pixels == 320)
             (*g_9130)();
         else
             (*g_912C)();
@@ -116,18 +116,18 @@ void far font_SetFont(int font)
     default:
         if (font > 5 || font < 0)
             font = 2;
-        curFontPtr = fd_50F6_4A1A[font - 2];
+        curFontPtr = font_loaded_font_pointers[font - 2];
         break;
     }
 }
 
-extern char near g_3DDC;
+extern char near gfx_font_height_pixels;
 extern int far _font_FontHeight(void far *font);
 
 int far font_FontHeight(void)
 {
     if (curFontPtr == 0)
-        return g_3DDC;
+        return gfx_font_height_pixels;
     return _font_FontHeight(curFontPtr);
 }
 
@@ -151,15 +151,15 @@ int far font_CharWidth(int c)
     return _font_CharWidth(c, curFontPtr);
 }
 
-extern struct Pt far g_3DA0;
+extern struct Pt far gfx_text_pen_x;
 extern void far GPutStr(int x, int y, char far *text);
-extern void (far * near g_9154)(int x, int y, char far *bits, int width, int height);
+extern void (far * near gfx_put_image_hook)(int x, int y, char far *bits, int width, int height);
 
 void far font_PrintStr(int x, int y, char far *text)
 {
     if (*text == 0) {
-        g_3DA0.x = x;
-        g_3DA0.y = y;
+        gfx_text_pen_x.x = x;
+        gfx_text_pen_x.y = y;
         return;
     }
     if (curFontPtr == 0) {
@@ -167,18 +167,18 @@ void far font_PrintStr(int x, int y, char far *text)
         return;
     }
     font_MakeImage(text, 0, curFontPtr);
-    (*g_9154)(x, y, out_buffer.bits, out_buffer.width, out_buffer.height);
-    g_3DA0.x = out_buffer.width + x;
-    g_3DA0.y = y;
+    (*gfx_put_image_hook)(x, y, out_buffer.bits, out_buffer.width, out_buffer.height);
+    gfx_text_pen_x.x = out_buffer.width + x;
+    gfx_text_pen_x.y = y;
 }
 
 void far font_print_at_pen(char far *text)
 {
-    font_PrintStr(g_3DA0.x, g_3DA0.y, text);
+    font_PrintStr(gfx_text_pen_x.x, gfx_text_pen_x.y, text);
 }
 
 extern int near g_3DE2;
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
 
 void far font_print_and_clear_row(struct Rect far *r, int y, char far *text)
 {
@@ -186,19 +186,19 @@ void far font_print_and_clear_row(struct Rect far *r, int y, char far *text)
     int right;
 
     font_PrintStr(r->left, y, text);
-    x = g_3DA0.x;
+    x = gfx_text_pen_x.x;
     if ((right = r->right) > x)
-        (*g_9134)(x, y, right, font_FontHeight() + y, g_3DE2);
+        (*gfx_fill_rect_hook)(x, y, right, font_FontHeight() + y, g_3DE2);
 }
 
-extern char far g_5ABE[];
+extern char far text_bitmap_pixels[];
 extern void far * far font_ReadFont(char far *name);
 
 void far font_InitFonts(void)
 {
-    out_buffer.bits = g_5ABE;
-    fd_50F6_4A1A[0] = font_ReadFont("font1");
-    fd_50F6_4A1A[1] = font_ReadFont("font2");
-    fd_50F6_4A1A[2] = font_ReadFont("font3");
-    fd_50F6_4A1A[3] = font_ReadFont("font4");
+    out_buffer.bits = text_bitmap_pixels;
+    font_loaded_font_pointers[0] = font_ReadFont("font1");
+    font_loaded_font_pointers[1] = font_ReadFont("font2");
+    font_loaded_font_pointers[2] = font_ReadFont("font3");
+    font_loaded_font_pointers[3] = font_ReadFont("font4");
 }

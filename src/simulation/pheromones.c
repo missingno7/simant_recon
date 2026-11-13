@@ -15,7 +15,7 @@ extern unsigned char far PherMapRN[64][32];
 extern unsigned char far PherMapBT[64][32];
 extern unsigned char far PherMapRT[64][32];
 extern unsigned char far PherMapA[64][32];
-extern unsigned char far fd_3E1D_C89F[64][32];
+extern unsigned char far pheromone_diffusion_snapshot[64][32];
 extern char far Dy8[8];
 extern char far Dx8[8];
 
@@ -118,19 +118,19 @@ void far SmoothAlarm(void)
 
     for (x = 0; x < 64; x++)
         for (y = 0; y < 32; y++)
-            fd_3E1D_C89F[x][y] = PherMapA[x][y];
+            pheromone_diffusion_snapshot[x][y] = PherMapA[x][y];
     for (x = 0; x < 64; x++) {
         for (y = 0; y < 32; y++) {
             sum = 0;
             if (x > 0)
-                sum += fd_3E1D_C89F[x - 1][y];
+                sum += pheromone_diffusion_snapshot[x - 1][y];
             if (y > 0)
-                sum += fd_3E1D_C89F[x][y - 1];
+                sum += pheromone_diffusion_snapshot[x][y - 1];
             if (x < 63)
-                sum += fd_3E1D_C89F[x + 1][y];
+                sum += pheromone_diffusion_snapshot[x + 1][y];
             if (y < 31)
-                sum += fd_3E1D_C89F[x][y + 1];
-            v = (fd_3E1D_C89F[x][y] + (sum >> 2)) >> 1;
+                sum += pheromone_diffusion_snapshot[x][y + 1];
+            v = (pheromone_diffusion_snapshot[x][y] + (sum >> 2)) >> 1;
             if (v > 8)
                 PherMapA[x][y] = v;
             else

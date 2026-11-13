@@ -50,11 +50,11 @@ struct Event {
 extern void far input_enqueue_event_args();
 extern void far mouse_default_cursor_thunk();
 
-int g_5FE6 = 0x707;
-int g_5FE8 = 0x707;
-int g_5FEA = 0x101;
-int g_5FEC = 0xb0b;
-int g_5FEE = 0xf0f;
+int desktop_fill_colour_a = 0x707;
+int desktop_fill_colour_b = 0x707;
+int menu_normal_background_colour = 0x101;
+int menu_normal_text_colour = 0xb0b;
+int menu_disabled_text_colour = 0xf0f;
 struct Event near input_queue[7];
 int g_5FF0 = 7;
 struct Timer g_5FF2 = { { 0, 0, 0, 0xff }, 0, (int)(struct Event near *)input_queue, 5, 0, 10, 0 };
@@ -132,7 +132,7 @@ void far SetMenuOptionText(int id, char far *text)
     _fstrcpy(p, text);
 }
 
-extern int far fd_50F6_46A8[];
+extern int far menu_title_x_pixels[];
 
 void far menu_enable(int id)
 {
@@ -143,7 +143,7 @@ void far menu_enable(int id)
         menu = id >> 4;
         p = g_6054->titles[menu];
         *p &= 0x7f;
-        menu_printf_label(fd_50F6_46A8[menu], 1, 1, p);
+        menu_printf_label(menu_title_x_pixels[menu], 1, 1, p);
     } else {
         p = g_6054->items[id >> 4][(id - 1) & 15];
         *p &= 0x7f;
@@ -159,29 +159,29 @@ void far menu_disable(int id)
         menu = id >> 4;
         p = g_6054->titles[menu];
         *p = (*p & 0x7f) + 0x80;
-        menu_printf_label(fd_50F6_46A8[menu], 1, 1, p);
+        menu_printf_label(menu_title_x_pixels[menu], 1, 1, p);
     } else {
         p = g_6054->items[id >> 4][(id - 1) & 15];
         *p = (*p & 0x7f) + 0x80;
     }
 }
 
-extern void (far * near g_9128)(int a, int b, int c);
+extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 
 void far menu_set_draw_colours(int mode)
 {
     switch (mode) {
     case 0:
-        g_9128(g_5FEC, g_5FEA, 0);
+        gfx_set_attributes_hook(menu_normal_text_colour, menu_normal_background_colour, 0);
         break;
     case 1:
-        g_9128(g_5FEA, g_5FEC, 0xc0);
+        gfx_set_attributes_hook(menu_normal_background_colour, menu_normal_text_colour, 0xc0);
         break;
     case 2:
-        g_9128(g_5FEE, g_5FEA, 0x30);
+        gfx_set_attributes_hook(menu_disabled_text_colour, menu_normal_background_colour, 0x30);
         break;
     case 3:
-        g_9128(g_5FEE, g_5FEC, 0x30);
+        gfx_set_attributes_hook(menu_disabled_text_colour, menu_normal_text_colour, 0x30);
         break;
     }
 }
@@ -277,13 +277,13 @@ int far input_get_object_hit_rect(int id, struct Rect far *out)
     return hotbox_get_rect(id, fd_5071_03C4, out);
 }
 
-extern int near g_9122;
-extern int near g_9124;
+extern int near mouse_x_pixels;
+extern int near mouse_y_pixels;
 
 void far GetMousePos(Point far *pt)
 {
-    pt->x = g_9122;
-    pt->y = g_9124;
+    pt->x = mouse_x_pixels;
+    pt->y = mouse_y_pixels;
 }
 
 int far PointInRect(Point far *pt, struct Rect far *r)
@@ -300,14 +300,14 @@ void far input_probe_object_hit_rect(int ticks)
     hotbox_contains_pointer(ticks, fd_5071_03C4);
 }
 
-extern unsigned char near g_9120;
+extern unsigned char near mouse_button_state;
 extern int far kbd_scan_state(int key);
 
 int far StillDown(void)
 {
     int mods;
 
-    mods = g_9120 & 3;
+    mods = mouse_button_state & 3;
     if (kbd_scan_state(0x52) || kbd_scan_state(0x39))
         mods |= 1;
     if (kbd_scan_state(0x53))
@@ -359,7 +359,7 @@ int far menu_layout_bar(int draw);
 
 void far win_redraw_desktop_menu(void)
 {
-    GMixedFill(gfx_screen_rect(), g_5FE6, g_5FE8);
+    GMixedFill(gfx_screen_rect(), desktop_fill_colour_a, desktop_fill_colour_b);
     menu_layout_bar(1);
 }
 
@@ -373,15 +373,15 @@ void far SetMenuItemState(int id, char state)
 }
 
 extern void (far * near g_9130)(void);
-extern struct Rect far fd_50F6_393C;
-extern char near g_3DDC;
+extern struct Rect far menu_bar_rect;
+extern char near gfx_font_height_pixels;
 extern int near g_3DE4;
 extern int near g_3DE2;
 extern void far GRectFill(struct Rect far *rect, int color);
 extern unsigned far _fstrlen(char far *s);
-extern int far fd_50F6_46BC[];
+extern int far menu_title_char_counts[];
 extern char near fontWidth;
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 
 int far menu_layout_bar(int draw)
 {
@@ -393,31 +393,31 @@ int far menu_layout_bar(int draw)
     if (!g_6054)
         return 0;
     g_9130();
-    fd_50F6_393C = *gfx_screen_rect();
-    fd_50F6_393C.bottom = g_3DDC + fd_50F6_393C.top + 3;
+    menu_bar_rect = *gfx_screen_rect();
+    menu_bar_rect.bottom = gfx_font_height_pixels + menu_bar_rect.top + 3;
     menu_set_draw_colours(1);
     if (draw)
-        GRectFill(&fd_50F6_393C, g_3DE2 | g_3DE4);
+        GRectFill(&menu_bar_rect, g_3DE2 | g_3DE4);
     i = 0;
     total = 0;
     for (t = g_6054->titles; *t; t++) {
-        fd_50F6_46BC[i] = _fstrlen(*t);
-        total += fd_50F6_46BC[i];
+        menu_title_char_counts[i] = _fstrlen(*t);
+        total += menu_title_char_counts[i];
         i++;
     }
     g_604C = i;
     if (i > 1) {
-        g_6050 = (g_3DB2 / fontWidth - total) / (i - 1);
+        g_6050 = (gfx_screen_width_pixels / fontWidth - total) / (i - 1);
         if (g_6050 > 3)
             g_6050 = 3;
         else if (g_6050 < 1)
             g_6050 = 1;
         i = x = 0;
         for (t = g_6054->titles; *t; t++, i++) {
-            fd_50F6_46A8[i] = x;
+            menu_title_x_pixels[i] = x;
             if (draw)
                 menu_printf_label(x, 1, 1, *t);
-            x += (fd_50F6_46BC[i] + g_6050) * fontWidth;
+            x += (menu_title_char_counts[i] + g_6050) * fontWidth;
         }
     }
     return 1;
@@ -431,7 +431,7 @@ void far menu_open_by_index(int menu)
     struct Event ev;
     int x;
 
-    x = fontWidth * 4 + fd_50F6_46A8[menu];
+    x = fontWidth * 4 + menu_title_x_pixels[menu];
     ev.code = menu;
     ev.modHi = 0;
     mouse_set_position(x, 1);

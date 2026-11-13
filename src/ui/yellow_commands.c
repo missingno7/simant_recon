@@ -175,21 +175,21 @@ void far processEdit(struct Event far *ePtr)
 }
 
 extern void far myBeginSound(int a, int b, int c);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern void far clip_Push(void);
 extern int _fastcall win_IsWinOpen(int win);
 extern void far clip_SetWin(int win);
-extern int far * near g_5AAC;
+extern int far * near clip_active_list_offset;
 extern void far edit_set_viewport_clip(void);
 extern int far ConvColor(int color);
-extern void (far * near g_916C)(int x0, int y0, int x1, int y1, int color);
-extern void (far * near g_9134)(int x0, int y0, int x1, int y1, int color);
+extern void (far * near gfx_draw_line_hook)(int x0, int y0, int x1, int y1, int color);
+extern void (far * near gfx_fill_rect_hook)(int x0, int y0, int x1, int y1, int color);
 extern void far win_EditChanged(void);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern int far mapXsize;
-extern struct Rect far fd_50F6_10D2;
+extern struct Rect far map_viewport_rect;
 extern int far mapYsize;
-extern int far fd_55B3_29A2;
+extern int far map_yard_redraw_pending;
 extern void far clip_Pop(void);
 
 void far DoLaserFire(int x1, int y1, int x2, int y2)
@@ -203,7 +203,7 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
 
     myBeginSound(0x37, 0x8265, 0x3f);
     if (MapPlane == 1) {
-        if (g_5A97 == 2) {
+        if (gfx_display_mode == 2) {
             x2 = (3 * x2) / 4;
             y2 = (3 * y2) / 4;
             x1 = (3 * x1) / 4;
@@ -212,7 +212,7 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
         clip_Push();
         if (win_IsWinOpen(0)) {
             clip_SetWin(0);
-            if (g_5AAC[1] != 0x8000) {
+            if (clip_active_list_offset[1] != 0x8000) {
                 edit_set_viewport_clip();
                 originX = MapPnt.x * tileWidth - editTileRect.left;
                 originX = -originX;
@@ -222,23 +222,23 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
                 ey = originY + y1;
                 sx = originX + x2;
                 sy = originY + y2;
-                g_916C(ex, ey, sx, sy, ConvColor(3));
-                g_916C(ex + 1, ey + 1, sx + 1, sy + 1, ConvColor(3));
-                g_9134(sx, sy, sx + 2, sy + 2, ConvColor(2));
+                gfx_draw_line_hook(ex, ey, sx, sy, ConvColor(3));
+                gfx_draw_line_hook(ex + 1, ey + 1, sx + 1, sy + 1, ConvColor(3));
+                gfx_fill_rect_hook(sx, sy, sx + 2, sy + 2, ConvColor(2));
                 win_EditChanged();
             }
         }
         if (win_IsWinOpen(0x100)) {
             clip_SetWin(0x100);
-            clip_SubInclude(&fd_50F6_10D2);
-            sx = (x2 / tileWidth) * mapXsize + fd_50F6_10D2.left;
-            sy = (y2 / tileHeight) * mapYsize + fd_50F6_10D2.top;
-            ex = (x1 / tileWidth) * mapXsize + fd_50F6_10D2.left;
-            ey = (y1 / tileHeight) * mapYsize + fd_50F6_10D2.top;
-            g_916C(ex, ey, sx, sy, ConvColor(3));
-            g_916C(ex + 1, ey + 1, sx + 1, sy + 1, ConvColor(3));
-            g_9134(sx, sy, sx + 2, sy + 2, ConvColor(1) | 0x20);
-            fd_55B3_29A2 = 1;
+            clip_SubInclude(&map_viewport_rect);
+            sx = (x2 / tileWidth) * mapXsize + map_viewport_rect.left;
+            sy = (y2 / tileHeight) * mapYsize + map_viewport_rect.top;
+            ex = (x1 / tileWidth) * mapXsize + map_viewport_rect.left;
+            ey = (y1 / tileHeight) * mapYsize + map_viewport_rect.top;
+            gfx_draw_line_hook(ex, ey, sx, sy, ConvColor(3));
+            gfx_draw_line_hook(ex + 1, ey + 1, sx + 1, sy + 1, ConvColor(3));
+            gfx_fill_rect_hook(sx, sy, sx + 2, sy + 2, ConvColor(1) | 0x20);
+            map_yard_redraw_pending = 1;
         }
         clip_Pop();
     }
@@ -692,8 +692,8 @@ extern int far ColonyUpdateFlag;
 extern void far f_015B_053C(int plane);
 extern void far * far * far WindPromptStrs;
 extern void far EditMessage(void far *msg, long ticks, int mode);
-extern int near g_3DB2;
-extern int far fd_55B3_2A42[2];
+extern int near gfx_screen_width_pixels;
+extern int far yard_screen_origin[2];
 extern int far YMapPnt[2];
 extern void far XferPatch(void);
 
@@ -725,14 +725,14 @@ void far SpecialXfer(void)
             else
                 win_ToTop(0x1900);
         }
-        y = ev.v - fd_50F6_10D2.top;
-        x = ev.h - fd_50F6_10D2.left;
-        if (g_3DB2 == 0x140) {
+        y = ev.v - map_viewport_rect.top;
+        x = ev.h - map_viewport_rect.left;
+        if (gfx_screen_width_pixels == 0x140) {
             x = (x + 2) * 2;
             y = (y - 8) * 2;
         }
-        y = (y - fd_55B3_2A42[1]) / 10;
-        x = (x - fd_55B3_2A42[0] + y * 10) / 28;
+        y = (y - yard_screen_origin[1]) / 10;
+        x = (x - yard_screen_origin[0] + y * 10) / 28;
         if (x >= 0 && y >= 0 && x <= 11 && y <= 15) {
             if (YMapPopB[x][y]) {
                 myBeginSong(0x2afb, 0x7e);
@@ -792,7 +792,7 @@ void far LionDialog(void)
             break;
         if (MacTickCount() >= t2) {
             t2 = MacTickCount() + 30;
-            if (g_3DB2 == 0x140)
+            if (gfx_screen_width_pixels == 0x140)
                 win_DrawBitMap(x0, y0, 0x23f0 + frame);
             else
                 win_DrawBitMap(LionTrapPnts[frame].x + x0, LionTrapPnts[frame].y + y0, 0x23f0 + frame);
@@ -837,7 +837,7 @@ void far YellowDialog(int bitmap, int promptIndex)
     case 0x2396:
         myBeginSound(0x2a, 0, 0x7e);
         myDelay(45L);
-        if (g_3DB2 == 0x140) {
+        if (gfx_screen_width_pixels == 0x140) {
             YellowEatPnt.x = 0x28;
             YellowEatPnt.y = 0x23;
         }

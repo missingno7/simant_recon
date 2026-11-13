@@ -30,5 +30,5 @@ void far f_277D_000F(void)
 {
 }
 
-/* AUDIT T2b: duplicates root:29B8's _DATA word (fd_55B3_7564) */
+/* AUDIT T2b: duplicates root:29B8's _DATA word (snd_sb_io_base) */
 static int audit_dup = 0;

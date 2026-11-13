@@ -26,9 +26,9 @@ import behavior_ledger
 
 TARGET = "snd_opl_set_note_level"
 SUITE = "adlib_register_contract_v1"
-INSTRUMENT_TABLE = "fd_50F6_0000"
-VOLUME_OFFSET = "fd_50F6_4B16"
-OUT_LEVEL_TABLE = "fd_55B3_6BA4"
+INSTRUMENT_TABLE = "snd_instrument_descriptors"
+VOLUME_OFFSET = "snd_opl_volume_bias"
+OUT_LEVEL_TABLE = "snd_opl_volume_curve"
 DATA_SEG = 0xA000
 DATA_OFF = 0x2000
 INSTR_COUNT = 56

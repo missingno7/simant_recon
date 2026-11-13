@@ -6,7 +6,7 @@
 ; Build profile: masm510; /Mx.
 
 _DATA	segment word public 'DATA'
-	extrn	_g_3D20:byte
+	extrn	_gfx_row_scratch:byte
 	extrn	_packed_tail_masks:byte
 _DATA	ends
 DGROUP	group	_DATA
@@ -425,7 +425,7 @@ _gfx_tandy_draw_life_tile	proc	far
 	lea bx, xlat_tabs+768
 L06B8:
 	push bp
-	lea bp, _g_3D20
+	lea bp, _gfx_row_scratch
 	mov al, byte ptr es:[di]
 	inc di
 	mov ah, al
@@ -1512,7 +1512,7 @@ L06B8:
 	push ax
 	push ax
 	push ds
-	lea ax, _g_3D20
+	lea ax, _gfx_row_scratch
 	push ax
 	push word ptr [bp+8]
 	push word ptr [bp+6]
@@ -1542,7 +1542,7 @@ _gfx_tandy_compose_life_tile	proc	far
 	lea bx, xlat_tabs+768
 L0F2C:
 	push bp
-	lea bp, _g_3D20
+	lea bp, _gfx_row_scratch
 	mov al, byte ptr es:[di]
 	inc di
 	mov ah, al
@@ -2637,7 +2637,7 @@ _gfx_tandy_scratch_to_buffer	proc	far
 	push si
 	push di
 	les di, dword ptr [bp+6]
-	lea si, _g_3D20
+	lea si, _gfx_row_scratch
 	mov bx, word ptr [bp+0Ah]
 	shr bx, 1
 	sub bx, 6

@@ -117,7 +117,7 @@ class HeapFixturePremise(unittest.TestCase):
         self.assertEqual(vm.run(case)['return'],1)
         slot = m.HANDLE_SEG*16+m.MASTER_FIRST
         self.assertEqual(int.from_bytes(vm.read(slot,4),'little'),m.DISCARD_DATA_SEG<<16)
-        self.assertEqual(int.from_bytes(vm.read(b.symbol_address('fd_50F6_3948'),4),'little'),
+        self.assertEqual(int.from_bytes(vm.read(b.symbol_address('mem_discard_entry_template'),4),'little'),
                          m.DISCARD_HEADER_SEG<<16)
         for target,expected in (('RallocType',5),('RallocFreed',1)):
             result = vm.run(b.Case(label=target,args=[m.MASTER_FIRST,m.HANDLE_SEG]),

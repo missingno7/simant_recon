@@ -65,9 +65,9 @@ extern void _fastcall win_LockWin(int win);
 extern struct Win far * _fastcall win_WinAddr(int win);
 extern void _fastcall win_UnlockWin(int win);
 extern struct Obj far * _fastcall win_ObjAddr(int obj);
-extern struct Rect far fd_50F6_393C;
-extern int near g_3DB4;
-extern int near g_3DB2;
+extern struct Rect far menu_bar_rect;
+extern int near gfx_screen_height_pixels;
+extern int near gfx_screen_width_pixels;
 extern struct Rect far * _fastcall win_WinRectAddr(int win);
 extern void _fastcall win_Recalc(int win);
 extern void far win_rebuild_visible_clips(void);
@@ -81,7 +81,7 @@ extern void far clip_set_desktop_region(void);
 extern void far win_redraw_desktop_menu(void);
 extern void far clip_Pop(void);
 extern void far clip_SubExclude(struct Rect far *r);
-extern int far g_5702[];
+extern int far clip_window_z_order[];
 extern void far clip_restrict_rect(struct Rect far *r);
 extern void _fastcall win_DrawWindow(int win);
 extern void _fastcall win_deactivate_pointer_regions(int win);
@@ -111,11 +111,11 @@ void _fastcall win_toggle_zoom(int win)
     } else {
         w->zoomRect = *(struct Rect far *)&o->x;
         r.left = 0;
-        r.top = fd_50F6_393C.bottom;
+        r.top = menu_bar_rect.bottom;
         win_constrain_drag_rect(win, 0, &r);
         w->rect = r;
-        r.bottom = g_3DB4;
-        r.right = g_3DB2;
+        r.bottom = gfx_screen_height_pixels;
+        r.right = gfx_screen_width_pixels;
         win_constrain_drag_rect(win, 1, &r);
         w->flags |= 0x80;
         o->x = r.left;
@@ -140,17 +140,17 @@ void _fastcall win_toggle_zoom(int win)
     win_redraw_desktop_menu();
     clip_Pop();
     clip_SubExclude(&r);
-    for (i = 1; g_5702[i] != (int)0x8000; i++)
+    for (i = 1; clip_window_z_order[i] != (int)0x8000; i++)
         ;
     while (--i >= 1) {
         clip_Push();
-        win_GetObjRect(g_5702[i], &r);
+        win_GetObjRect(clip_window_z_order[i], &r);
         clip_restrict_rect(&r);
-        win_DrawWindow(g_5702[i]);
+        win_DrawWindow(clip_window_z_order[i]);
         clip_Pop();
     }
     clip_SetWin(win);
-    win_DrawWindow(g_5702[0]);
+    win_DrawWindow(clip_window_z_order[0]);
     win_deactivate_pointer_regions(win);
     win_activate_pointer_regions(win);
 }
@@ -182,11 +182,11 @@ void _fastcall win_constrain_drag_rect(int win, int mode, struct Rect far *r)
     old = *r;
     do {
         done = 0;
-        if (r->left < g_3DB2 && !((w->flags & 0x1000) && r->right > g_3DB2) &&
-            r->right - r->left < g_3DB2) {
+        if (r->left < gfx_screen_width_pixels && !((w->flags & 0x1000) && r->right > gfx_screen_width_pixels) &&
+            r->right - r->left < gfx_screen_width_pixels) {
             if (r->right >= 0 && r->right - r->left >= w->minWidth && !((w->flags & 0x1000) && r->left < 0)) {
-                if (r->top <= g_3DB4 && !((w->flags & 0x1000) && r->bottom > g_3DB4)) {
-                    if (r->top > fd_50F6_393C.bottom && r->bottom - r->top >= w->minHeight)
+                if (r->top <= gfx_screen_height_pixels && !((w->flags & 0x1000) && r->bottom > gfx_screen_height_pixels)) {
+                    if (r->top > menu_bar_rect.bottom && r->bottom - r->top >= w->minHeight)
                         done = 1;
                     else
                         dy++;
@@ -218,8 +218,8 @@ extern void far mouse_set_position(int x, int y);
 extern void far GRectInvOutline(struct Rect far *r, int width);
 extern void far ButtonHeldInit(void);
 extern int far ButtonHeld(void);
-extern int near g_9122;
-extern int near g_9124;
+extern int near mouse_x_pixels;
+extern int near mouse_y_pixels;
 extern void far GetMousePos(struct Pt far *pt);
 extern struct Rect far win_offsets[];
 extern void _fastcall win_redraw_exposed_windows(struct Rect far *rect);
@@ -238,7 +238,7 @@ void _fastcall win_track_move(struct Event far *ev)
     struct Pt pt;
     struct Rect r;
 
-    if ((win = g_5702[0]) == (int)0x8000)
+    if ((win = clip_window_z_order[0]) == (int)0x8000)
         return;
     win_LockWin(win);
     wr = win_WinRectAddr(win);
@@ -267,7 +267,7 @@ void _fastcall win_track_move(struct Event far *ev)
     pt = start;
     ButtonHeldInit();
     while (ButtonHeld()) {
-        if (pt.x != g_9122 || pt.y != g_9124) {
+        if (pt.x != mouse_x_pixels || pt.y != mouse_y_pixels) {
             GRectInvOutline(&r, 2);
             GetMousePos(&pt);
             win_offset_rect_edges(&r, wr, pt.x - start.x, pt.y - start.y, pt.x - start.x, pt.y - start.y);
@@ -309,7 +309,7 @@ void _fastcall win_track_resize(struct Event far *ev)
     struct Rect r;
     struct Obj far *o;
 
-    if ((win = g_5702[0]) == (int)0x8000)
+    if ((win = clip_window_z_order[0]) == (int)0x8000)
         return;
     win_LockWin(win);
     w = win_WinAddr(win);
@@ -339,7 +339,7 @@ void _fastcall win_track_resize(struct Event far *ev)
     pt = start;
     ButtonHeldInit();
     while (ButtonHeld()) {
-        if (pt.x != g_9122 || pt.y != g_9124) {
+        if (pt.x != mouse_x_pixels || pt.y != mouse_y_pixels) {
             GRectInvOutline(&r, 2);
             GetMousePos(&pt);
             win_offset_rect_edges(&r, &orig, 0, 0, pt.x - start.x, pt.y - start.y);

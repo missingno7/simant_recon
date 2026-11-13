@@ -30,7 +30,7 @@ extern void far hanim_RemoveAnimSet(Handle);
 extern void far clip_Pop(void);
 extern int _fastcall win_IsWinOpen(int win);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern struct Rect far fd_50F6_10D2;
+extern struct Rect far map_viewport_rect;
 extern void far EraseYardCursor(void);
 
 void far win_YardClosed(void)
@@ -45,21 +45,21 @@ void far win_YardClosed(void)
         yardAnimHandle = 0;
     }
     if (win_IsWinOpen(0x1902)) {
-        win_GetObjRect(0x1902, &fd_50F6_10D2);
-        fd_50F6_10D2.left++;
+        win_GetObjRect(0x1902, &map_viewport_rect);
+        map_viewport_rect.left++;
         EraseYardCursor();
     }
 }
 
 extern void far EraseMapCursor(void);
-extern int far fd_55B3_29A2;
+extern int far map_yard_redraw_pending;
 
 void far win_MapChanged(void)
 {
     if (win_IsWinOpen(0x100)) {
         EraseMapCursor();
-        win_GetObjRect(0x102, &fd_50F6_10D2);
-        fd_55B3_29A2 = 1;
+        win_GetObjRect(0x102, &map_viewport_rect);
+        map_yard_redraw_pending = 1;
     }
 }
 
@@ -88,13 +88,13 @@ void far SetMapTitle(void)
 
 static long g_8BA4;
 extern int far WaitedEnough(long far *, int);
-extern int far fd_55B3_2CBC;
+extern int far ui_pending_menu_item;
 extern char far fd_55B3_2CBA;
 void far ui_pump_events_edge_scroll(void);
 
 void far ui_pump_events_periodically(void)
 {
-    if (WaitedEnough(&g_8BA4, 2) && fd_55B3_2CBC == 0) {
+    if (WaitedEnough(&g_8BA4, 2) && ui_pending_menu_item == 0) {
         fd_55B3_2CBA = 1;
         ui_pump_events_edge_scroll();
         fd_55B3_2CBA = 0;
@@ -106,29 +106,29 @@ extern int far kbd_poll_bios_key(void);
 extern int far kbd_scan_state(int);
 extern void far DoEvent(void);
 extern int far kbd_scroll_lock_state(void);
-extern int near g_9122;
-extern int near g_3DB2;
-extern int near g_9124;
-extern int near g_3DB4;
+extern int near mouse_x_pixels;
+extern int near gfx_screen_width_pixels;
+extern int near mouse_y_pixels;
+extern int near gfx_screen_height_pixels;
 extern int far edit_scroll_and_redraw(int dx, int dy);
 
 void far ui_pump_events_edge_scroll(void)
 {
     int dx, dy;
 
-    if (win_Events() || kbd_poll_bios_key() || kbd_scan_state(0x1d) || fd_55B3_2CBC)
+    if (win_Events() || kbd_poll_bios_key() || kbd_scan_state(0x1d) || ui_pending_menu_item)
         DoEvent();
     do {
         dx = dy = 0;
         if (kbd_scroll_lock_state())
             break;
-        if (g_9122 <= 1)
+        if (mouse_x_pixels <= 1)
             dx = -1;
-        else if (g_3DB2 - 4 <= g_9122)
+        else if (gfx_screen_width_pixels - 4 <= mouse_x_pixels)
             dx = 1;
-        if (g_9124 < 1)
+        if (mouse_y_pixels < 1)
             dy = -1;
-        else if (g_3DB4 - 4 <= g_9124)
+        else if (gfx_screen_height_pixels - 4 <= mouse_y_pixels)
             dy = 1;
         if (!dx && !dy)
             break;
@@ -362,11 +362,11 @@ void far UpdateEverything(void)
 }
 
 extern void _fastcall win_redraw_rect(struct Rect far *rect);
-extern struct Rect far g_5A9C;
+extern struct Rect far gfx_screen_clip_list;
 
 void far win_redraw_current_clip(void)
 {
-    win_redraw_rect(&g_5A9C);
+    win_redraw_rect(&gfx_screen_clip_list);
 }
 
 int far DialogAbort(void)

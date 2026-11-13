@@ -10,4 +10,4 @@
 
 struct Sample;
 
-struct Sample far * far fd_50F6_0150[39];
+struct Sample far * far snd_sample_release_list[39];

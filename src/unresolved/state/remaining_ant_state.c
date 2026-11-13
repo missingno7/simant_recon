@@ -16,7 +16,7 @@ Pnt far CurQueenPnt;
 Pnt far LastRestPnt;
 Pnt far CurRestPnt;
 int far MeMode;
-int far fd_50F6_0A9C;
+int far main_cycle_phase;
 int far fd_50F6_0AA6;
 int far LastEggPlane;
 int far CurEggPlane;

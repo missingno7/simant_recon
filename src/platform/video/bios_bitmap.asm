@@ -11,36 +11,36 @@
 ; push ds; push di saves (MSC saves DI first, rule ASM-2), pop bp without mov sp,bp (ASM-1).
 
 _DATA	segment word public 'DATA'
-	extrn	_g_914C:byte
-	extrn	_g_9154:byte
-	extrn	_g_9128:byte
-	public	_g_3D20, _g_3DA0, _g_3DA2, _g_3DA4, _g_3DA8, _g_3DAA, _g_3DAC, _g_3DAE
-	public	_g_3DB0, _g_3DB2, _g_3DB4, _g_3DB6, _g_3DC1, _g_3DCA, _g_3DD2, _g_3DD4
-	public	_g_3DD6, _g_3DD8, _g_3DDA, _g_3DDC, _fontWidth, __foreColor, _g_3DE1, _g_3DE2
-	public	_g_3DE3, _g_3DE4, _g_3DE5, _fd_55B3_3DE6, _fd_55B3_3DE8, _g_3DEA, _g_3DEC
-	public	_g_3DED, _g_3DEE, _g_3DEF, _g_3DF1, _g_3DF2, _g_3DF4, _g_3DF8, _g_3DFC
-	public	_g_41C0, _g_41D0, _g_4220
-_g_3D20		db	128 dup (0)	; scratch bitmap row buffer
-_g_3DA0		dw	0		; text pen x, y
-_g_3DA2		dw	0
-_g_3DA4		dd	0		; font objects
-_g_3DA8		dw	0
-_g_3DAA		dw	0
-_g_3DAC		dw	0		; screen bitmap (DGROUP:0 until the driver sets it)
-_g_3DAE		dw	DGROUP
-_g_3DB0		dw	0A000h		; video segment
-_g_3DB2		dw	640		; screen width, height, bytes per row
-_g_3DB4		dw	350
-_g_3DB6		dw	80
+	extrn	_gfx_put_picture_hook:byte
+	extrn	_gfx_put_image_hook:byte
+	extrn	_gfx_set_attributes_hook:byte
+	public	_gfx_row_scratch, _gfx_text_pen_x, _gfx_text_pen_y, _gfx_secondary_font, _gfx_primary_font_offset, _gfx_primary_font_segment, _gfx_screen_bitmap_offset, _gfx_screen_bitmap_segment
+	public	_gfx_video_segment, _gfx_screen_width_pixels, _gfx_screen_height_pixels, _gfx_screen_row_bytes, _gfx_left_edge_masks, _gfx_right_edge_masks, _g_3DD2, _gfx_cursor_draw_lock
+	public	_gfx_active_font_offset, _gfx_active_font_segment, _gfx_font_glyph_stride, _gfx_font_height_pixels, _fontWidth, __foreColor, _g_3DE1, _g_3DE2
+	public	_g_3DE3, _g_3DE4, _g_3DE5, _gfx_clip_left_pixels, _gfx_clip_right_pixels, _g_3DEA, _g_3DEC
+	public	_g_3DED, _g_3DEE, _g_3DEF, _g_3DF1, _g_3DF2, _gfx_empty_callback_pointer, _gfx_callback_table_pointer, _g_3DFC
+	public	_gfx_colour_translation, _g_41D0, _g_4220
+_gfx_row_scratch		db	128 dup (0)	; scratch bitmap row buffer
+_gfx_text_pen_x		dw	0		; text pen x, y
+_gfx_text_pen_y		dw	0
+_gfx_secondary_font		dd	0		; font objects
+_gfx_primary_font_offset		dw	0
+_gfx_primary_font_segment		dw	0
+_gfx_screen_bitmap_offset		dw	0		; screen bitmap (DGROUP:0 until the driver sets it)
+_gfx_screen_bitmap_segment		dw	DGROUP
+_gfx_video_segment		dw	0A000h		; video segment
+_gfx_screen_width_pixels		dw	640		; screen width, height, bytes per row
+_gfx_screen_height_pixels		dw	350
+_gfx_screen_row_bytes		dw	80
 		db	9 dup (0)
-_g_3DC1		db	0FFh, 7Fh, 3Fh, 1Fh, 0Fh, 07h, 03h, 01h, 00h	; left edge masks
-_g_3DCA		db	80h, 0C0h, 0E0h, 0F0h, 0F8h, 0FCh, 0FEh, 0FFh	; right edge masks
+_gfx_left_edge_masks		db	0FFh, 7Fh, 3Fh, 1Fh, 0Fh, 07h, 03h, 01h, 00h	; left edge masks
+_gfx_right_edge_masks		db	80h, 0C0h, 0E0h, 0F0h, 0F8h, 0FCh, 0FEh, 0FFh	; right edge masks
 _g_3DD2		dw	0
-_g_3DD4		dw	0
-_g_3DD6		dw	0		; current font bitmap (far pointer)
-_g_3DD8		dw	0
-_g_3DDA		dw	0
-_g_3DDC		dw	0		; character cell height, width
+_gfx_cursor_draw_lock		dw	0
+_gfx_active_font_offset		dw	0		; current font bitmap (far pointer)
+_gfx_active_font_segment		dw	0
+_gfx_font_glyph_stride		dw	0
+_gfx_font_height_pixels		dw	0		; character cell height, width
 _fontWidth		dw	8
 __foreColor		db	0Fh		; pen colour
 _g_3DE1		db	0
@@ -48,8 +48,8 @@ _g_3DE2		db	0
 _g_3DE3		db	0
 _g_3DE4		db	0		; fill pattern
 _g_3DE5		db	0
-_fd_55B3_3DE6	dw	0
-_fd_55B3_3DE8	dw	0
+_gfx_clip_left_pixels	dw	0
+_gfx_clip_right_pixels	dw	0
 _g_3DEA		dw	0
 _g_3DEC		db	0
 _g_3DED		db	0
@@ -58,10 +58,10 @@ _g_3DEF		db	0
 		db	0
 _g_3DF1		db	0
 _g_3DF2		dw	0
-_g_3DF4		dd	_gfx_empty_driver_callback	; empty driver entry
-_g_3DF8		dd	_g_9128		; driver entry table (25 far pointers)
+_gfx_empty_callback_pointer		dd	_gfx_empty_driver_callback	; empty driver entry
+_gfx_callback_table_pointer		dd	_gfx_set_attributes_hook		; driver entry table (25 far pointers)
 _g_3DFC		db	964 dup (0)
-_g_41C0		db	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15	; colour map
+_gfx_colour_translation		db	0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15	; colour map
 		; 16-byte fill patterns
 _g_41D0	label	byte
 		db	55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh, 55h, 55h, 0AAh, 0AAh
@@ -118,7 +118,7 @@ _gfx_empty_driver_callback	endp
 _ConvColor	proc	far
 	push bp
 	mov bp, sp
-	lea bx, _g_41C0
+	lea bx, _gfx_colour_translation
 	mov cx, word ptr [bp+6]
 	mov al, cl
 	and al, 0Fh
@@ -132,9 +132,9 @@ _ConvColor	endp
 
 _gfx_reset_driver_callbacks	proc	far
 	push di
-	les bx, dword ptr _g_3DF4
+	les bx, dword ptr _gfx_empty_callback_pointer
 	mov ax, es
-	les di, dword ptr _g_3DF8
+	les di, dword ptr _gfx_callback_table_pointer
 	mov cx, 19h
 L0033:
 	xchg bx, ax
@@ -159,7 +159,7 @@ _GPutPic	proc	far
 	push bx
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call dword ptr _g_914C
+	call dword ptr _gfx_put_picture_hook
 	add sp, 0Ch
 	pop bp
 	retf
@@ -178,7 +178,7 @@ _GPutImg	proc	far
 	push bx
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call dword ptr _g_9154
+	call dword ptr _gfx_put_image_hook
 	add sp, 0Ch
 	pop bp
 	retf
@@ -190,7 +190,7 @@ _gfx_put_fixed_font_chars	proc	far
 	push si
 	push di
 	mov di, word ptr [bp+6]
-	push word ptr _g_3DDC
+	push word ptr _gfx_font_height_pixels
 	les si, dword ptr [bp+0Ah]
 	mov bx, word ptr [bp+8]
 	sub di, word ptr _fontWidth
@@ -209,13 +209,13 @@ L0097:
 	call far ptr _gfx_put_fixed_font_char
 	add sp, 6
 	pop es
-	cmp di, word ptr _g_3DB2
+	cmp di, word ptr _gfx_screen_width_pixels
 	jb L0097
 L00BB:
 	add di, word ptr _fontWidth
-	mov word ptr _g_3DA0, di
+	mov word ptr _gfx_text_pen_x, di
 	mov ax, word ptr [bp+8]
-	mov word ptr _g_3DA2, ax
+	mov word ptr _gfx_text_pen_y, ax
 	pop ax
 	pop di
 	pop si
@@ -229,8 +229,8 @@ _gfx_put_string_at_pen	proc	far
 	les bx, dword ptr [bp+6]
 	push es
 	push bx
-	push word ptr _g_3DA2
-	push word ptr _g_3DA0
+	push word ptr _gfx_text_pen_y
+	push word ptr _gfx_text_pen_x
 	call far ptr _GPutStr
 	add sp, 8
 	pop bp
@@ -245,7 +245,7 @@ _gfx_put_fixed_font_char	proc	far
 	mov bp, sp
 	push si
 	push di
-	mov bx, word ptr _g_3DDA
+	mov bx, word ptr _gfx_font_glyph_stride
 	cmp bx, 6
 	jne L0135
 	test byte ptr [bp+0Ah], 80h
@@ -259,15 +259,15 @@ _gfx_put_fixed_font_char	proc	far
 L0135:
 	mov ax, bx
 	mul byte ptr [bp+0Ah]
-	les si, dword ptr _g_3DD6
+	les si, dword ptr _gfx_active_font_offset
 	add si, ax
-	push word ptr _g_3DDC
+	push word ptr _gfx_font_height_pixels
 	push word ptr _fontWidth
 	push es
 	push si
 	push word ptr [bp+8]
 	push word ptr [bp+6]
-	call dword ptr _g_9154
+	call dword ptr _gfx_put_image_hook
 	add sp, 0Ch
 	pop di
 	pop si
@@ -288,7 +288,7 @@ _gfx_install_driver_callbacks	proc	far
 	push ds
 	push di
 	mov ax, es
-	les di, dword ptr _g_3DF8
+	les di, dword ptr _gfx_callback_table_pointer
 	mov ds, ax
 	mov cx, 32h
 	rep movsw

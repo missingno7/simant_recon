@@ -7,29 +7,29 @@
  * confidence, not confirmed.
  */
 
-int g_1926 = 0;
+int snd_interface_initialized = 0;
 
-extern int far fd_55B3_610A;
+extern int far snd_requested_driver_mode;
 extern int far snd_probe_preferred_device(void);
 extern int far snd_initialize_device_channels(int mode, int flag);
 extern void far WinPrintf(char *fmt, ...);
-extern int far * far fd_55B3_74FE;
+extern int far * far snd_capabilities_pointer;
 
 void far snd_init_driver_once(void)
 {
-    if (g_1926)
+    if (snd_interface_initialized)
         return;
-    if (fd_55B3_610A == -1)
+    if (snd_requested_driver_mode == -1)
         snd_initialize_device_channels(snd_probe_preferred_device(), 0);
-    else if (fd_55B3_610A == 0)
+    else if (snd_requested_driver_mode == 0)
         return;
     else
-        snd_initialize_device_channels(fd_55B3_610A, 0);
+        snd_initialize_device_channels(snd_requested_driver_mode, 0);
     WinPrintf("Sound Driver Shell (c) 1991  -- LIB link version\n");
     WinPrintf("Sound Driver reports driver: %d\n%d DAC channels\n%d FM channels\n%d TANDY PSG channels\n%d PS1 PSG channels\n%d COVOX PSG channels\nand %d MIDI channels\n",
-              fd_55B3_74FE[0], fd_55B3_74FE[1], fd_55B3_74FE[2], fd_55B3_74FE[4],
-              fd_55B3_74FE[3], fd_55B3_74FE[5], fd_55B3_74FE[6]);
-    g_1926 = 1;
+              snd_capabilities_pointer[0], snd_capabilities_pointer[1], snd_capabilities_pointer[2], snd_capabilities_pointer[4],
+              snd_capabilities_pointer[3], snd_capabilities_pointer[5], snd_capabilities_pointer[6]);
+    snd_interface_initialized = 1;
 }
 
 void far snd_log_music_init(void)
@@ -48,7 +48,7 @@ extern void far snd_load_and_start_song(int song);
 
 void far myBeginSong(int song)
 {
-    if (g_1926 && OptionStates[1]) {
+    if (snd_interface_initialized && OptionStates[1]) {
         edit_release_life_tiles();
         snd_load_and_start_song(song);
     }
@@ -62,7 +62,7 @@ extern void far snd_start_configured_effect(int sound);
 
 void far myBeginSound(int a, int b, int c)
 {
-    if (g_1926 && OptionStates[2])
+    if (snd_interface_initialized && OptionStates[2])
         snd_start_configured_effect(a);
 }
 
@@ -80,7 +80,7 @@ extern int far snd_service_and_test_stopped(void);
 
 int far mySongIsDone(void)
 {
-    if (g_1926 && OptionStates[1])
+    if (snd_interface_initialized && OptionStates[1])
         return snd_service_and_test_stopped();
     return 1;
 }
@@ -95,6 +95,6 @@ void far f_00DF_0164(void)
 
 void far snd_start_effect_one_if_music(void)
 {
-    if (g_1926 && OptionStates[1])
+    if (snd_interface_initialized && OptionStates[1])
         snd_start_configured_effect(1);
 }

@@ -14,11 +14,11 @@
 ; decoder fills 0FEEh (N - F) bytes with spaces and masks positions with 0FFFh (N - 1).
 
 LZSS_DATA	segment para public 'FAR_DATA'
-_fd_4F6F_0000	db	4096 + 18 - 1 dup (0)
+_lzss_ring_buffer	db	4096 + 18 - 1 dup (0)
 LZSS_DATA	ends
 
 _DATA	segment word public 'DATA'
-RingBuf		dd	_fd_4F6F_0000	; ring buffer
+RingBuf		dd	_lzss_ring_buffer	; ring buffer
 Threshold	dw	2		; match length bias
 SrcPtr		dd	0		; compressed input
 SrcCount	dw	0		; input bytes left
@@ -131,7 +131,7 @@ L00BB:
 	mov byte ptr es:[di], dl
 	inc di
 	mov ds, word ptr [bp-4]
-	mov byte ptr ds:_fd_4F6F_0000[bx], dl
+	mov byte ptr ds:_lzss_ring_buffer[bx], dl
 	mov ds, word ptr ss:SrcPtr+2
 	inc bx
 	and bx, 0FFFh
@@ -161,13 +161,13 @@ L00EE:
 	mov ds, word ptr [bp-4]
 L0114:
 	xchg bx, cx
-	mov dl, byte ptr ds:_fd_4F6F_0000[bx]
+	mov dl, byte ptr ds:_lzss_ring_buffer[bx]
 	inc bx
 	and bx, 0FFFh
 	mov byte ptr es:[di], dl
 	inc di
 	xchg bx, cx
-	mov byte ptr ds:_fd_4F6F_0000[bx], dl
+	mov byte ptr ds:_lzss_ring_buffer[bx], dl
 	inc bx
 	and bx, 0FFFh
 	inc word ptr [bp-2]

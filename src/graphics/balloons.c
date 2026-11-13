@@ -43,7 +43,7 @@ extern char far * far font_MakeImage(char far *s, int x, void far *font);
 extern void far MoveTextToBalloon(char far *image, char far *dest, int x, int y);
 extern Handle far mem_Unlock(Handle h);
 extern void far f_171C_2276(char far *p);
-extern unsigned char near g_5A97;
+extern unsigned char near gfx_display_mode;
 Handle far ConvertMonoMaskToTandy(Handle h);
 Handle far ConvertMonoMaskToColor(Handle h);
 extern void far exchange(char far *dest, char far *src, int n);
@@ -124,9 +124,9 @@ Handle far MakeBalloon(char far *text, int tail)
     mem_Unlock(h);
     f_171C_2276(buf);
     rowBytes = *(int far *)(p + 8) / 8;
-    if (g_5A97 == 2)
+    if (gfx_display_mode == 2)
         return ConvertMonoMaskToTandy(h);
-    if (!(g_5A97 & 1))
+    if (!(gfx_display_mode & 1))
         return ConvertMonoMaskToColor(h);
     q = p + 12;
     for (i = 0; i < height; i++) {
@@ -168,7 +168,7 @@ Handle far ConvertMonoMaskToTandy(Handle h)
 
 extern int far WinPrintf(char far *, ...);
 extern void far * far _fmemcpy(void far *, void far *, unsigned);
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far invert(char far *, int);
 
 Handle far ConvertMonoMaskToColor(Handle h)
@@ -199,7 +199,7 @@ Handle far ConvertMonoMaskToColor(Handle h)
     for (row = 0; row < height; row++) {
         _fmemcpy(d, s + rb, rb);
         d += rb;
-        if (g_3DB2 != 0x140)
+        if (gfx_screen_width_pixels != 0x140)
             invert(s, rb);
         _fmemcpy(d, s, rb);
         d += rb;

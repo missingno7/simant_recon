@@ -19,37 +19,37 @@ static int g_610C[9] = { 0x6d60, 0, 0x6d61, 0x6d62, 0x6d61, 0x6d62, 0, 0x6d62, 0
 void far ReadConfig(void);
 extern void far f_171C_0676();
 extern char near g_432A;
-extern char near g_5A97;
-extern char far * far fd_55B3_1CDC;
+extern char near gfx_display_mode;
+extern char far * far startup_bad_switch_message;
 extern int far printf(char far *fmt, ...);
 extern void far exit(int code);
 extern char far * far getenv(char far *name);
 extern int far stricmp(char far *a, char far *b);
 extern long far RallocMemoryFree(void);
-extern long far fd_50F6_3944;
-extern char far * far fd_55B3_1CD8;
+extern long far startup_free_memory_bytes;
+extern char far * far startup_low_memory_message;
 extern void far f_277D_000D();
 extern void far f_277D_000C(void);
 extern char far * far getcwd(char far *buf, int size);
-extern char far * far fd_50F6_38B2;
-extern int far fd_50F6_38B6;
+extern char far * far startup_working_directory;
+extern int far startup_drive_letter;
 extern int far strlen(char far *s);
 extern int far open(char far *name, int mode, ...);
 extern int far close(int fd);
 extern int far db_SetDataBase(char far *name);
-extern char far * far fd_55B3_1CD4;
+extern char far * far startup_config_strings;
 extern void far gfx_select_driver_resources(char far *s);
 extern int _fastcall win_SetPalette(int id);
 extern void far gfx_set_border_colour(int color);
 extern void far input_init_desktop_region(void);
 extern int far f_208F_058B();
 extern void far _harderr(int (far *handler)());
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far menu_set_state_colours(int a, int b, int c);
 extern void far win_set_desktop_colours(int a, int b);
 extern int far ConvColor(int color);
-extern int near g_3DB4;
-extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
+extern int near gfx_screen_height_pixels;
+extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
 extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int _fastcall win_DrawBitMap(int x, int y, int id);
 extern void far mem_discard_soft_blocks(void);
@@ -89,34 +89,34 @@ void far IBMInitStuff(int argc, char far * far *argv)
         case 'd':
             switch (v) {
             case '2':
-                g_5A97 = 6;
+                gfx_display_mode = 6;
                 break;
             case '?':
-                g_5A97 = -1;
+                gfx_display_mode = -1;
                 break;
             case 'E':
-                g_5A97 = 0;
+                gfx_display_mode = 0;
                 break;
             case 'H':
-                g_5A97 = 3;
+                gfx_display_mode = 3;
                 break;
             case 'M':
-                g_5A97 = 5;
+                gfx_display_mode = 5;
                 break;
             case 'T':
-                g_5A97 = 2;
+                gfx_display_mode = 2;
                 break;
             case 'V':
-                g_5A97 = 8;
+                gfx_display_mode = 8;
                 break;
             case 'e':
-                g_5A97 = 4;
+                gfx_display_mode = 4;
                 break;
             case 'm':
-                g_5A97 = 7;
+                gfx_display_mode = 7;
                 break;
             default:
-                printf(fd_55B3_1CDC);
+                printf(startup_bad_switch_message);
                 exit(4);
             }
             break;
@@ -128,53 +128,53 @@ void far IBMInitStuff(int argc, char far * far *argv)
     }
     if (getenv("BUG") && stricmp(getenv("BUG"), "MSMOUSE") == 0)
         g_432A = 1;
-    fd_50F6_3944 = RallocMemoryFree();
-    if (!g_6108 && fd_50F6_3944 < 0x1fbd0L) {
-        printf(fd_55B3_1CD8);
+    startup_free_memory_bytes = RallocMemoryFree();
+    if (!g_6108 && startup_free_memory_bytes < 0x1fbd0L) {
+        printf(startup_low_memory_message);
         exit(1);
     }
     f_277D_000D(7);
     f_277D_000C();
-    fd_50F6_38B2 = getcwd(0, 0);
-    fd_50F6_38B6 = *fd_50F6_38B2;
-    v = strlen(fd_50F6_38B2) - 1;
-    if (fd_50F6_38B2[v] == '\\')
-        fd_50F6_38B2[v] = 0;
+    startup_working_directory = getcwd(0, 0);
+    startup_drive_letter = *startup_working_directory;
+    v = strlen(startup_working_directory) - 1;
+    if (startup_working_directory[v] == '\\')
+        startup_working_directory[v] = 0;
     if ((i = open("language.dat", 0)) > 0) {
         close(i);
         db_SetDataBase("language");
     }
     db_SetDataBase("shared");
-    switch (g_5A97) {
+    switch (gfx_display_mode) {
     case 2:
     case 4:
         db_SetDataBase("lrshare");
     }
-    gfx_select_driver_resources(fd_55B3_1CD4);
-    if (g_5A97 == 0)
+    gfx_select_driver_resources(startup_config_strings);
+    if (gfx_display_mode == 0)
         win_SetPalette(1);
-    else if (g_5A97 == 8) {
+    else if (gfx_display_mode == 8) {
         win_SetPalette(0);
         gfx_set_border_colour(15);
     }
     input_init_desktop_region();
     _harderr(f_208F_058B);
-    if (g_3DB2 == 320) {
+    if (gfx_screen_width_pixels == 320) {
         menu_set_state_colours(8, 11, 0);
         win_set_desktop_colours(0, 0);
     } else {
         menu_set_state_colours(7, 14, 12);
         win_set_desktop_colours(7, 7);
     }
-    (*g_9134)(0, 0, g_3DB2, g_3DB4, ConvColor(15));
-    i = g_610C[g_5A97];
+    (*gfx_fill_rect_hook)(0, 0, gfx_screen_width_pixels, gfx_screen_height_pixels, ConvColor(15));
+    i = g_610C[gfx_display_mode];
     gr_BitMapSize(&size, i);
-    win_DrawBitMap((g_3DB2 - size.x) / 2, (g_3DB4 - size.y) / 2, i);
+    win_DrawBitMap((gfx_screen_width_pixels - size.x) / 2, (gfx_screen_height_pixels - size.y) / 2, i);
     mem_discard_soft_blocks();
     mem_compact_any_region();
     t = TickCount();
     mouse_load_cursor_resources(4);
-    if (g_3DB2 != 320 || !menu_load_and_register(1))
+    if (gfx_screen_width_pixels != 320 || !menu_load_and_register(1))
         if (!menu_load_and_register(0))
             Punt("Cannot load menu");
     SetMenuEntries();
@@ -209,8 +209,8 @@ void far SkipWords(int fd, int n)
         ReadWord(fd, buf);
 }
 
-extern char far * far fd_55B3_1CE4;
-extern char far * far fd_55B3_1CE0;
+extern char far * far startup_config_path;
+extern char far * far startup_missing_config_message;
 extern int far puts(char far *s);
 
 void far ReadConfig(void)
@@ -220,8 +220,8 @@ void far ReadConfig(void)
     int fd;
     char far *msg;
 
-    if ((fd = open(fd_55B3_1CE4, 0)) <= 0) {
-        msg = fd_55B3_1CE0;
+    if ((fd = open(startup_config_path, 0)) <= 0) {
+        msg = startup_missing_config_message;
         goto fail;
     } else {
         SkipWords(fd, 2); read(fd, &mode, 1);
@@ -229,28 +229,28 @@ void far ReadConfig(void)
         close(fd);
         switch (mode) {
         case '?':
-            g_5A97 = -1;
+            gfx_display_mode = -1;
             break;
         case 'E':
-            g_5A97 = 0;
+            gfx_display_mode = 0;
             break;
         case 'H':
-            g_5A97 = 3;
+            gfx_display_mode = 3;
             break;
         case 'M':
-            g_5A97 = 5;
+            gfx_display_mode = 5;
             break;
         case 'T':
-            g_5A97 = 2;
+            gfx_display_mode = 2;
             break;
         case 'V':
-            g_5A97 = 8;
+            gfx_display_mode = 8;
             break;
         case 'e':
-            g_5A97 = 4;
+            gfx_display_mode = 4;
             break;
         case 'm':
-            g_5A97 = 7;
+            gfx_display_mode = 7;
             break;
         default:
             msg = "Bad 'Display Mode' in configuration file";

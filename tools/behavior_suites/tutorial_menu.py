@@ -113,8 +113,8 @@ def tutorial_case(label, lesson, values, queries):
     requested_clock = tuple(queries.get("clock", (0, 0)))
     tick_count = _inverse_mac_ticks(requested_clock)
     top_window = int(queries.get("top_window", 0))
-    writes.append((addr("g_5702"), w(top_window)))
-    observe.append(b.Range("window_z_order_top", addr("g_5702"), 2))
+    writes.append((addr("clip_window_z_order"), w(top_window)))
+    observe.append(b.Range("window_z_order_top", addr("clip_window_z_order"), 2))
     return b.Case(label=label, args=[lesson & 0xFFFF], writes=writes, observe=observe,
         callbacks={
             # MacTickCount (the f_00F8_02BE alias) and win_IsWinInFront (the
@@ -137,8 +137,8 @@ def tutorial_case(label, lesson, values, queries):
                                       "host_trace": []},
         metadata={"suite": SUITE, "contract": "LessonDone return, world-query order/arguments, and all touched tutorial state",
                   "abi": "fastcall AX=lesson; far return, no stack arguments",
-                  "validity": "signed 16-bit lesson ids; initialized tutorial globals, 32-bit timer threshold, MapA[128][64] with 64-byte row stride, and point fields; g_5702[0] is seeded as the actual top-window ID",
-                  "modeled_boundary": "TickCount supplies a deterministic 32-bit host clock value chosen by modular inverse so original MacTickCount (f_00F8_02BE alias) returns the requested clock. The f_22BF_0A22 alias uses exact _fastcall AX ABI and runs original win_IsWinInFront code against seeded g_5702[0]; no synthetic objective map exists. The original SetAlarmDropState executes with only win_SetObjSelectedState and InvalEuMap recorded at their Win16 UI boundaries; all other semantic helpers execute original DOS code",
+                  "validity": "signed 16-bit lesson ids; initialized tutorial globals, 32-bit timer threshold, MapA[128][64] with 64-byte row stride, and point fields; clip_window_z_order[0] is seeded as the actual top-window ID",
+                  "modeled_boundary": "TickCount supplies a deterministic 32-bit host clock value chosen by modular inverse so original MacTickCount (f_00F8_02BE alias) returns the requested clock. The f_22BF_0A22 alias uses exact _fastcall AX ABI and runs original win_IsWinInFront code against seeded clip_window_z_order[0]; no synthetic objective map exists. The original SetAlarmDropState executes with only win_SetObjSelectedState and InvalEuMap recorded at their Win16 UI boundaries; all other semantic helpers execute original DOS code",
                   "world": values, "queries": queries})
 
 
@@ -355,15 +355,15 @@ def menu_case(label, keys, *, curmenu=-1, events=(), points=(), down=(), items=N
         memory_suite.DG=old_dg
     writes = list(heap.writes) + [(lin(ITEMS_OFF), bytes(table)), (lin(STRINGS_OFF), bytes(strings)),
               (lin(SEL_OFF), bytes([selected & 255])),
-              (addr("g_5AAC"), far(0x0300)),
+              (addr("clip_active_list_offset"), far(0x0300)),
               (DG * 16 + 0x608A, w(curmenu)),
               (DG * 16 + 0x3DDC, bytes([line_height & 255])),
               (DG * 16 + 0x3DDE, bytes([char_width & 255])),
               (addr("fd_55B3_5AA0"), w(width, height)),
-              (addr("fd_50F6_46BC"), w(*([max(12, len(items) + 1)] * 100))),
-              (addr("fd_50F6_46A8"), w(*[30 + 4 * i for i in range(100)])),
-              (addr("fd_55B3_604C"), w(4))]
-    observe = [b.Range("selection", lin(SEL_OFF), 1), b.Range("menu_saved_surface", addr("g_5AAC"), 4),
+              (addr("menu_title_char_counts"), w(*([max(12, len(items) + 1)] * 100))),
+              (addr("menu_title_x_pixels"), w(*[30 + 4 * i for i in range(100)])),
+              (addr("menu_bar_title_count"), w(4))]
+    observe = [b.Range("selection", lin(SEL_OFF), 1), b.Range("menu_saved_surface", addr("clip_active_list_offset"), 4),
                b.Range("curMenu", DG * 16 + 0x608A, 2)]
     return b.Case(label=label,args=[SEL_OFF,DATA_SEG,ITEMS_OFF,DATA_SEG],writes=writes,observe=observe,
         callbacks=_menu_callbacks(),return_kind="s16",callee_pop=0,
@@ -419,14 +419,14 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
     if not 0 <= set_id <= 2: raise ValueError("question set must select Yes/No, Yes/No/Cancel, or Retry/Cancel")
     msg_off=0x3000
     data=bytes(message)+b"\0"
-    writes=[(lin(msg_off),data),(addr("g_3DDC"),bytes([line_height&255])),
+    writes=[(lin(msg_off),data),(addr("gfx_font_height_pixels"),bytes([line_height&255])),
             (addr("fontWidth"),bytes([char_width&255])),
             (addr("fd_55B3_5AA0"),w(*screen))]
-    # g_9128 is an unset BSS host video-function pointer in this isolated DOS
+    # gfx_set_attributes_hook is an unset BSS host video-function pointer in this isolated DOS
     # startup state. Route it to a separate three-word callback adapter; the
     # real zero-argument kbd_drain_bios_chars queue-flush helper remains original DOS.
     attr=b.symbol("menu_set_draw_colours")
-    writes.append((addr("g_9128"),far(attr["off"],attr["seg"])))
+    writes.append((addr("gfx_set_attributes_hook"),far(attr["off"],attr["seg"])))
     # Keep the original dialog's private labels and button tables in the
     # compiler object / oracle image; only the public input message is supplied.
     callbacks=_menu_callbacks()
@@ -441,7 +441,7 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
         machine.state["host_trace"].append(["discard-pending-key",value])
         return value
     def video_attribute(machine,args):
-        # This is exclusively the indirect g_9128 three-word call. The first
+        # This is exclusively the indirect gfx_set_attributes_hook three-word call. The first
         # setter marks the transition from stale to live dialog input; later
         # attribute writes remain observable sink calls with the same ABI.
         machine.state["input_phase"]="live"
@@ -449,7 +449,7 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
     callbacks["kbd_poll_bios_key"]=b.Callback(0,keyboard_ready)
     callbacks["kbd_read_bios_char"]=b.Callback(0,pending_key)
     callbacks["menu_set_draw_colours"]=b.Callback(3,video_attribute,
-        project=lambda m,a:{"boundary":"HOST:g_9128 attribute setter","args":list(a)})
+        project=lambda m,a:{"boundary":"HOST:gfx_set_attributes_hook attribute setter","args":list(a)})
     return b.Case(label=label,args=[msg_off,DATA_SEG,set_id],writes=writes,
         observe=[b.Range("question_message",lin(msg_off),len(data))],callbacks=callbacks,
         return_kind="s16",callee_pop=0,
@@ -460,7 +460,7 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
             "validity":{"set":set_id,"choices":(("Yes","No"),("Yes","No","Cancel"),("Retry","Cancel"))[set_id],
                 "message_bytes":bytes(message).hex(),"driver_metrics":{"line_height":line_height,"character_width":char_width},
                 "screen":list(screen)},
-            "modeled_boundary":"Host key availability/dequeue providers expose a stale pending-key prefix first and live dialog keys only after the HOST:g_9128 attribute sink's first three-word call; the original zero-argument kbd_drain_bios_chars helper executes its actual while(key-ready) read-key loop over that prefix. HOST:g_9128 is a separate three-word display adapter routed to a dedicated intercepted callback address; it does not alias or replace kbd_drain_bios_chars. Other display/input/timer/allocator services follow the S10 deterministic contracts. Private choice tables, ctype, string/font measurements, original rectangle sizing/clipping and dialog control flow execute from the original DOS image.",
+            "modeled_boundary":"Host key availability/dequeue providers expose a stale pending-key prefix first and live dialog keys only after the HOST:gfx_set_attributes_hook attribute sink's first three-word call; the original zero-argument kbd_drain_bios_chars helper executes its actual while(key-ready) read-key loop over that prefix. HOST:gfx_set_attributes_hook is a separate three-word display adapter routed to a dedicated intercepted callback address; it does not alias or replace kbd_drain_bios_chars. Other display/input/timer/allocator services follow the S10 deterministic contracts. Private choice tables, ctype, string/font measurements, original rectangle sizing/clipping and dialog control flow execute from the original DOS image.",
             "input":{"keys":list(keys),"events":list(events),"pending_keys":list(flush_keys)}})
 
 

@@ -7,10 +7,10 @@
  */
 
 extern char near fontWidth;
-extern char near g_3DDC;
+extern char near gfx_font_height_pixels;
 extern void far gfx_put_fixed_font_char(int x, int y, int c);
 
-char g_2970 = 0;
+char text_entry_pending_key = 0;
 
 int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags);
 
@@ -27,7 +27,7 @@ void far ui_clear_text_cells(int x, int y, int count)
 void far ui_edit_text_at_cells(int col, int row, char far *text, int maxLen, int flags)
 {
     ui_edit_text_field(col = (col >> 8) + fontWidth * (col & 0xff),
-                  row = g_3DDC * (row & 0xff) + (char)(row >> 8) * g_3DDC / 14,
+                  row = gfx_font_height_pixels * (row & 0xff) + (char)(row >> 8) * gfx_font_height_pixels / 14,
                   text, maxLen, flags);
 }
 
@@ -42,7 +42,7 @@ struct Event {
     int xE;
 };
 
-extern int g_5702;
+extern int clip_window_z_order;
 extern char g_4366;
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern int far f_1FD2_0542(void);
@@ -77,12 +77,12 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
 
     blink = 0;
     cnt = 0;
-    saved = g_5702;
+    saved = clip_window_z_order;
     while (win_GetEvent(&ev) || f_1FD2_0542())
         ;
     kbd_disable_mouse_emulation();
     kbd_drain_bios_chars();
-    if (g_5702 != saved)
+    if (clip_window_z_order != saved)
         return 0;
     if (flags) {
         len = _fstrlen(text);
@@ -104,11 +104,11 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
         if (key == 0)
             key = ' ';
         for (;;) {
-            if (kbd_poll_bios_key() || g_2970 || win_Events()) {
+            if (kbd_poll_bios_key() || text_entry_pending_key || win_Events()) {
                 if (blink != 1)
                     break;
             } else {
-                if (g_5702 != saved)
+                if (clip_window_z_order != saved)
                     goto done;
                 if (TickCount() != lastTick) {
                     lastTick = TickCount();
@@ -123,12 +123,12 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
         }
         if (win_Events())
             goto done;
-        if (g_2970 == 0) {
+        if (text_entry_pending_key == 0) {
             if ((key = kbd_read_bios_char()) == 0)
                 key = kbd_read_bios_char() + 0x800;
         } else {
-            key = g_2970;
-            g_2970 = 0;
+            key = text_entry_pending_key;
+            text_entry_pending_key = 0;
         }
         switch (key) {
         case 2:
@@ -223,6 +223,6 @@ cancel:
 out:
     g_4366 = 0;
     kbd_enable_mouse_emulation();
-    g_2970 = 0;
+    text_entry_pending_key = 0;
     return len + 1;
 }

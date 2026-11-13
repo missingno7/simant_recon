@@ -8,4 +8,4 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
-int far fd_50F6_01F0[7];
+int far snd_driver_capabilities[7];

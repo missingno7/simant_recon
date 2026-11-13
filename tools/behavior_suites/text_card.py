@@ -101,7 +101,7 @@ def _fixture_fonts():
             "missing_character": spec["missing_char"],
             "width_samples": {str(ch): widths[ch] for ch in
                                (ord(" "), ord("i"), ord("W"), ord("m"))}})
-    table = b.symbol_address("fd_50F6_4A1A")
+    table = b.symbol_address("font_loaded_font_pointers")
     writes.append((table, b"".join(pointers)))
     return writes, records
 
@@ -146,8 +146,8 @@ def make_case(label, text, rect, styles=(), first_line=0, record=0,
               (RECT[1] * 16 + RECT[0], struct.pack("<4h", *rect)),
               # Other display state is kept explicit; active font metrics come
               # from the four valid far Font records below.
-              (b.symbol_address("g_3DB2"), struct.pack("<H", 320)),
-              (b.symbol_address("g_3DDC"), struct.pack("<b", 12)),
+              (b.symbol_address("gfx_screen_width_pixels"), struct.pack("<H", 320)),
+              (b.symbol_address("gfx_font_height_pixels"), struct.pack("<b", 12)),
               (b.symbol_address("fontWidth"), struct.pack("<b", 8)),
               *font_writes]
     if styles:
@@ -427,12 +427,12 @@ def _history_case(label, graph, hilite, slot, start, count, rect, seed,
     line_draw_ptr = (line_fn["off"], line_fn["seg"])
     color_ptr = (color_fn["off"], color_fn["seg"])
     writes = arrays + [
-        (b.symbol_address("g_916C"), far(*line_draw_ptr)),
-        (b.symbol_address("g_9128"), far(*color_ptr)),
+        (b.symbol_address("gfx_draw_line_hook"), far(*line_draw_ptr)),
+        (b.symbol_address("gfx_set_attributes_hook"), far(*color_ptr)),
         (b.symbol_address("HistStart"), struct.pack("<h", start)),
         (b.symbol_address("HistCnt"), struct.pack("<h", count)),
-        (b.symbol_address("g_3DB2"), struct.pack("<H", 320)),
-        (b.symbol_address("g_3DDC"), struct.pack("<b", 12)),
+        (b.symbol_address("gfx_screen_width_pixels"), struct.pack("<H", 320)),
+        (b.symbol_address("gfx_font_height_pixels"), struct.pack("<b", 12)),
         (b.symbol_address("fontWidth"), struct.pack("<b", 8)),
     ]
     def rectangle(machine, args):

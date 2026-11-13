@@ -92,7 +92,7 @@ static int g_2BD4 = 1;
 extern void far f_171C_0676(int flag);
 extern void far f_277D_000B(char far *msg);
 extern void far mem_dump_heap(char far *msg);
-extern int far fd_55B3_610A;
+extern int far snd_requested_driver_mode;
 extern void far snd_shutdown_device_channels(void);
 extern void far input_shutdown_hooks(void);
 extern void far gfx_restore_text_mode(void);
@@ -113,7 +113,7 @@ void far app_cleanup_and_exit(char far *msg, int flag)
             mem_dump_heap(msg);
     case 2:
         g_2BD4 = 3;
-        if (fd_55B3_610A)
+        if (snd_requested_driver_mode)
             snd_shutdown_device_channels();
         input_shutdown_hooks();
         gfx_restore_text_mode();
@@ -147,11 +147,11 @@ int far MenuQuit(void)
 extern void far win_Open(int win);
 extern Handle far res_load_with_alloc_type(int object, int kind, int type);
 extern char far * far mem_Lock(Handle h);
-extern int near g_3DB2;
+extern int near gfx_screen_width_pixels;
 extern void far font_SetFont(int font);
-extern char near g_5A97;
+extern char near gfx_display_mode;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern void (far * near g_9128)(int a, int b, int c);
+extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 extern void far GRectOutline(struct Rect far *rect, int width);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void _fastcall win_PrintTextInRect(int first, char far *text, struct Rect far *rect);
@@ -202,10 +202,10 @@ int far ui_prompt_save_discard_cancel(int which)
     win_Open(0x2100);
     h = res_load_with_alloc_type((0x41 - which) * 2, 10, 1);
     text = mem_Lock(h);
-    font_SetFont(g_3DB2 == 0x140 ? 2 : 4);
-    if (g_5A97 & 1) {
+    font_SetFont(gfx_screen_width_pixels == 0x140 ? 2 : 4);
+    if (gfx_display_mode & 1) {
         win_GetObjRect(0x2100, &r);
-        (*g_9128)(0, 0, 0);
+        (*gfx_set_attributes_hook)(0, 0, 0);
         GRectOutline(&r, 2);
     }
     win_GetObjRect(0x2101, &r);

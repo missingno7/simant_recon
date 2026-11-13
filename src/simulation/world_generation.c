@@ -102,7 +102,7 @@ extern unsigned long far GameTime;
 extern int far MapPlane;
 extern int far MapMode;
 extern int far YardMode;
-extern int far fd_3E1D_0000[16][12];
+extern int far YMapSeeds[16][12];
 extern int far MeNestStarted;
 extern int far MePlane;
 extern int far MeLocX;
@@ -394,12 +394,12 @@ void far RandYard(void)
     YardMode = 0;
 
     for (i = 0; i < 192; i++)
-        fd_3E1D_0000[0][i] = (RRand(0x7fff) - 0xc000) & 0x7fff;
+        YMapSeeds[0][i] = (RRand(0x7fff) - 0xc000) & 0x7fff;
 
     if (CurGameType == 2)
-        RandWorld(fd_3E1D_0000[*(CurYardPnt + 1)][*CurYardPnt], MeNestStarted = 0, 1, *YMapPnt, *(YMapPnt + 1));
+        RandWorld(YMapSeeds[*(CurYardPnt + 1)][*CurYardPnt], MeNestStarted = 0, 1, *YMapPnt, *(YMapPnt + 1));
     else
-        RandWorld(fd_3E1D_0000[*(CurYardPnt + 1)][*CurYardPnt], MeNestStarted = 1, 1, *YMapPnt, *(YMapPnt + 1));
+        RandWorld(YMapSeeds[*(CurYardPnt + 1)][*CurYardPnt], MeNestStarted = 1, 1, *YMapPnt, *(YMapPnt + 1));
 
     if (MePlane <= 1) {
         AMapPnt[0] = MeLocX;
