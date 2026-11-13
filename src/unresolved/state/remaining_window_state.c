@@ -8,7 +8,7 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
-struct Rect { int left; int top; int right; int bottom; };
+#include "rect.h"
 typedef char far * far *Handle;
 int far fd_50F6_37D2;
 int far fd_50F6_37D4;

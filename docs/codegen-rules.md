@@ -335,6 +335,14 @@ that remain open and the freshly compiled execution controls.
   ExitNest in another. One direction local `d` and a separate `oldplane` are exact in DOS
   without the folded attribute test. Negative: the file selector `o09_35F5_03C6` has no
   witness (the Macintosh uses the system file dialog, Windows lacks the affected regions).
+* **Which names count toward declaration numbers** (2026-11-13,
+  `python tools/research/declaration_kinds.py`). In the declaration-sensitive intro file
+  (S16:384C), inserting 1..17 names before the sensitive code: `extern` variables, struct
+  tags and `typedef` names give the same pattern of changed code (exact again at 17);
+  `#define` constants, `enum` constants and struct member names never change code. So named
+  constants and struct field names are free; a shared header may hold one struct tag and
+  must be included where the file defines that struct today; headers of function and data
+  declarations move where declarations first appear and change code.
 * **Repeated declarations were mostly inert** (2026-11-13). 134 repeated file-scope declarations
   in 14 files, mostly hoisted blocks copying later declarations (67 in map_window.c, 29 in
   game_session.c). Removing the later copies left every claim exact in 13 files; they are gone.

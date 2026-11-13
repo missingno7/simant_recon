@@ -543,12 +543,7 @@ typedef struct {
 void far BoundEditPosition(void);
 void far UpdateEdit(void);
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 extern struct Rect far editTileRect;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);

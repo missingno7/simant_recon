@@ -169,12 +169,7 @@ struct Event {
     int xE;
 };
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct Pt {
     int h;

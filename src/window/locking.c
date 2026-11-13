@@ -99,12 +99,7 @@ void _fastcall win_load_and_lock_resource(int win, int high)
     g_644E--;
 }
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 
 struct Obj {

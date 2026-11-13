@@ -7,12 +7,7 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs.
  */
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct Pt {
     int x;

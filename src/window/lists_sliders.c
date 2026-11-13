@@ -8,12 +8,7 @@
  * Functions not yet exact: f_23E6_0000.
  */
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct List {
     int visible;

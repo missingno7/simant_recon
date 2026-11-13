@@ -15,12 +15,7 @@ extern int _fastcall win_IsWinLocked(int win);
 extern void _fastcall win_LockWin(int win);
 extern void _fastcall win_UnlockWin(int win);
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct Pt {
     int x;

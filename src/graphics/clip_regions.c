@@ -11,12 +11,7 @@
 
 typedef char far * far *Handle;
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 /*
  * Window ids in front-to-back clipping order, terminated by 0x8000.

@@ -6,12 +6,7 @@
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  */
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct Pt {
     int x;

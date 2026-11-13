@@ -21,12 +21,7 @@ struct Event {
     int xE;
 };
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 void far app_cleanup_and_exit(char far *msg, int flag);
 

@@ -10,7 +10,7 @@
  * Functional screen clip list; historical TU/order/placement unclaimed.
  */
 
-struct Rect { int left; int top; int right; int bottom; };
+#include "rect.h"
 #define RECT_END ((int)0x8000)
 /*
  * Full-screen clip rectangle followed by its existing terminator.

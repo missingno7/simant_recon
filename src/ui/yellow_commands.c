@@ -32,12 +32,7 @@ extern int far WinPrintf(char far *format, ...);
 extern int _fastcall win_IsWinInFront(int win);
 extern long far TickCount(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 struct Pt {
     int x;
     int y;

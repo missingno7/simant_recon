@@ -10,12 +10,7 @@
  *    breaks (e.g. none between 0x0074 and 0x0245); /Zd is equally consistent.
  */
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 typedef struct {
     int x;

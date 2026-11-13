@@ -13,12 +13,7 @@ struct Pt {
     int y;
 };
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct Event {
     int what;

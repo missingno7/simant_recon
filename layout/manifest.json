@@ -3396,7 +3396,7 @@
     "end": 223464
    },
    "source": "src/ui/minimap.c",
-   "source_sha256": "902ab61f42ea69d46064a0d6d0acb2788e579cb20b09f8b59ac6f39479486567",
+   "source_sha256": "f2e8fc21360272d9e8089acb2a2e59a9dc7484833e52f7b4c985f20d3ce78643",
    "claims": [
     {
      "name": "MapToolsMenu",
@@ -3488,7 +3488,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a619eb762a4cc6077cda8f4b31821e5ec69933a55d9ba14b7faf685a1755c5c9"
+   "object_sha256": "051d9fcf6966832f1682406f04f55cbe4c26fb0cc1e59cd6eb60ee79be94fd0c"
   },
   "S05:35F5": {
    "unit": "S05",
@@ -3514,106 +3514,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "extent": {
-    "start": 221008,
-    "end": 222772
-   },
-   "source": "src/ui/editor_menus.c",
-   "source_sha256": "9dd40e5db0887e0448f22396146b2501ba187296837e66d24278c993e3ccc8cc",
-   "claims": [
-    {
-     "name": "EditScentMenu",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 0,
-     "size": 100,
-     "target_sha256": "d1b335e5d88ba06cdf4b18fa2d2a2fe58686ea465e956b3da91980bef54c3892",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "EditToolsMenu",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 100,
-     "size": 504,
-     "target_sha256": "8057587c2764c1e4321e7a6ba6b6340ee9050ad8e9aa22714a5cdbfa09ee4298",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SetExpTool",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 1577,
-     "size": 25,
-     "target_sha256": "53b12e4520b44939f6495bed5d86772cb7171c039561532c97d2a2cda9b9b3dd",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DoTab",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 1734,
-     "size": 30,
-     "target_sha256": "f796f59c99bf64fc5fe930de32cd8492244fd83fc06cd00130acc33c5984dad4",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "AntMenu",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 1235,
-     "size": 342,
-     "target_sha256": "8e67dbc62c8e43935e23cf85f937325fe0b2583963e66651d6cffa372a4a63e7",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "layout_inferred": "extern declarations of AntMenu placed and unnamed parameters of SetMyLife/myBeginSound reproduce the symbol-table state (register choices; source comment)"
-    },
-    {
-     "name": "DoWarnSetB",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 1602,
-     "size": 66,
-     "target_sha256": "0d10273de17738df2b1ddd7aa6d7ea536878c1fb7277aadd3fd01934d720c46f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoHealthSetY",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 1668,
-     "size": 66,
-     "target_sha256": "089f19f704935fe893654a3a280b6125b53cde219de3c2516b273095647477af",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "MagnifyMenu",
-     "unit": "S05",
-     "seg": 13813,
-     "off": 604,
-     "size": 631,
-     "target_sha256": "86a6244c2e98eddba5017b1803907cb76ca5fd657515fdeeada49235ae602a57",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "layout_inferred": "declaration layout before MagnifyMenu decides its register choices (source comment)"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "44f2cab4b93e101685b809fab2ba17bccdc0b4073d78b9cee3bf3ed7d2528384",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -3621,8 +3521,8 @@
      "why": "Handles scent, editing, ant and magnification menus. These menus select tools and change yellow ant health or black colony warning settings."
     }
    ],
-   "summary": "Handles scent, editing, ant and magnification menus. These menus select tools and change yellow ant health or black colony warning settings.",
    "windows_group": "ANTEDIT",
+   "summary": "Handles scent, editing, ant and magnification menus. These menus select tools and change yellow ant health or black colony warning settings.",
    "file_header": {
     "text": "Handles scent, editing, ant and magnification menus. These menus select tools and change\nyellow ant health or black colony warning settings.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 5 (S05); segment 35F5; complete original translation unit.\nWindows: ANTEDIT, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\nBuild profile: msc600ax; /AL /Os /Og /Oe.",
     "name_kind": "descriptive",
@@ -3736,7 +3636,107 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 221008,
+    "end": 222772
+   },
+   "source": "src/ui/editor_menus.c",
+   "source_sha256": "626cf8372b1d0d3147350aba04e9b16c0f3d07062922e96f61c04e0635345f32",
+   "claims": [
+    {
+     "name": "EditScentMenu",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 0,
+     "size": 100,
+     "target_sha256": "d1b335e5d88ba06cdf4b18fa2d2a2fe58686ea465e956b3da91980bef54c3892",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EditToolsMenu",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 100,
+     "size": 504,
+     "target_sha256": "8057587c2764c1e4321e7a6ba6b6340ee9050ad8e9aa22714a5cdbfa09ee4298",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetExpTool",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 1577,
+     "size": 25,
+     "target_sha256": "53b12e4520b44939f6495bed5d86772cb7171c039561532c97d2a2cda9b9b3dd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoTab",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 1734,
+     "size": 30,
+     "target_sha256": "f796f59c99bf64fc5fe930de32cd8492244fd83fc06cd00130acc33c5984dad4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "AntMenu",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 1235,
+     "size": 342,
+     "target_sha256": "8e67dbc62c8e43935e23cf85f937325fe0b2583963e66651d6cffa372a4a63e7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "layout_inferred": "extern declarations of AntMenu placed and unnamed parameters of SetMyLife/myBeginSound reproduce the symbol-table state (register choices; source comment)"
+    },
+    {
+     "name": "DoWarnSetB",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 1602,
+     "size": 66,
+     "target_sha256": "0d10273de17738df2b1ddd7aa6d7ea536878c1fb7277aadd3fd01934d720c46f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoHealthSetY",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 1668,
+     "size": 66,
+     "target_sha256": "089f19f704935fe893654a3a280b6125b53cde219de3c2516b273095647477af",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "MagnifyMenu",
+     "unit": "S05",
+     "seg": 13813,
+     "off": 604,
+     "size": 631,
+     "target_sha256": "86a6244c2e98eddba5017b1803907cb76ca5fd657515fdeeada49235ae602a57",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "layout_inferred": "declaration layout before MagnifyMenu decides its register choices (source comment)"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "44f2cab4b93e101685b809fab2ba17bccdc0b4073d78b9cee3bf3ed7d2528384"
   },
   "S05:3663": {
    "unit": "S05",
@@ -3763,28 +3763,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "extent": {
-    "start": 222772,
-    "end": 223516
-   },
-   "source": "src/ui/experiment_menu.c",
-   "source_sha256": "99949c904b62b6d80b60b4c5d43a366f0cd6747cfc88a9785a2dceba3a8aedcf",
-   "claims": [
-    {
-     "name": "DoExpMenu",
-     "unit": "S05",
-     "seg": 13923,
-     "off": 4,
-     "size": 744,
-     "target_sha256": "83b0a24904b443f468af42d0db39ab0f9ed5d73f3561534ec8f0607fe9da65ea",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "layout_inferred": "BYTE-1 plus original statement/declaration order: low event byte lvalue reproduces CMP CX,AX; unsigned-word masking generates CMP AX,CX",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "3cbbd1434bef777a08253d64807a55804c9a9215019e7ee99d97381b406e9312",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -3792,8 +3770,8 @@
      "why": "Implements the experiment tool menu. Its single function tracks submenu state and returns the selected editing tool."
     }
    ],
-   "summary": "Implements the experiment tool menu. Its single function tracks submenu state and returns the selected editing tool.",
    "windows_group": "ANTEDIT",
+   "summary": "Implements the experiment tool menu. Its single function tracks submenu state and returns the selected editing tool.",
    "file_header": {
     "text": "Implements the experiment tool menu. Its single function tracks submenu state and returns the\nselected editing tool.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 5 (S05); segment 3663; complete original translation unit.\nWindows: ANTEDIT, from recorded function pairs in the Windows symbol inventory.",
     "name_kind": "descriptive",
@@ -3858,7 +3836,29 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 222772,
+    "end": 223516
+   },
+   "source": "src/ui/experiment_menu.c",
+   "source_sha256": "726dc47b3fc72b4f1845a46808feea7ffe29ae3afaa13f065dc60234a29ab655",
+   "claims": [
+    {
+     "name": "DoExpMenu",
+     "unit": "S05",
+     "seg": 13923,
+     "off": 4,
+     "size": 744,
+     "target_sha256": "83b0a24904b443f468af42d0db39ab0f9ed5d73f3561534ec8f0607fe9da65ea",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "BYTE-1 plus original statement/declaration order: low event byte lvalue reproduces CMP CX,AX; unsigned-word masking generates CMP AX,CX",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "c2ff188374e4d3c46e9416c3819129e5086141d71bedee98cc4f9e86798b06c6"
   },
   "S06:35F5": {
    "unit": "S06",
@@ -5141,7 +5141,7 @@
     "end": 225002
    },
    "source": "src/ui/save_load.c",
-   "source_sha256": "d283e4ac1a7285a2f09d1cfea4a1190b4ab2c2e271f707ff73d6cda2fbef69f9",
+   "source_sha256": "a7d495872335840fbd21aeea1452d09266102d34bb6669e67a356ac574ec0f11",
    "claims": [
     {
      "name": "LoadGame",
@@ -5212,7 +5212,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "fee020d78e000856398d328905dc537a3c631f5032c160d0128cf456363252ac"
+   "object_sha256": "a770a036e3bb5c8714f4dc3af6561cc9d7467a6f1a2e81c2c1dbfe9b0f37c9e5"
   },
   "S09:36EE": {
    "unit": "S09",
@@ -5434,7 +5434,7 @@
     "end": 223739
    },
    "source": "src/window/menu_tracking.c",
-   "source_sha256": "93aeba3fc55405f77663a828ac7d170d24417885d96222c2094eabe878fe867c",
+   "source_sha256": "64c649097f3ff4d08602c2112c52123ffeddd4213e75e5b7fbb9517ccd00ffdc",
    "claims": [
     {
      "name": "ui_draw_horizontal_button",
@@ -5493,7 +5493,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "96261273e22500d19dba5751b4ad886121ddd8a07d1ab75339bc81f728ca5a11"
+   "object_sha256": "795449c3c863575474d44511661a018e4621edf93967515e2198a87204569975"
   },
   "S11:35F5": {
    "unit": "S11",
@@ -5897,7 +5897,7 @@
     ]
    },
    "source": "src/ui/map_window.c",
-   "source_sha256": "b0a84112e25bfe7de88d3515d859c45931a0a237acc0f9356f326753d85d7975",
+   "source_sha256": "78cb355d89fd96bc430e9c0224698e97d5a05cb21e59c301ddccb631905f48a9",
    "claims": [
     {
      "name": "DeinitMapFunctions",
@@ -6099,7 +6099,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a71accd5bfa345613ba30a3e6d3d7d8c143ec10cc0bf2d7b1ec7aafc3114683c"
+   "object_sha256": "2077ced3032f94498c70198e84496924abae28843c2d42e313ab3df1374e9a48"
   },
   "S13:384C": {
    "unit": "S13",
@@ -6404,7 +6404,7 @@
     "end": 236643
    },
    "source": "src/ui/yard_window.c",
-   "source_sha256": "23bcb58ec53bd5e0a41975f32a987170e1f326dbb82531b37736e70e936f96f6",
+   "source_sha256": "39de80a005561e952a2d0f385d0bee056af67db10d4b403c16050a3a8c76bef0",
    "claims": [
     {
      "name": "ProcYardEvent",
@@ -6673,7 +6673,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "4a153db85410b27909137e9be0cd1205b3af053cc04de9a6655eb6eb17395cd1"
+   "object_sha256": "54b265d1d57fb96c864f8fd8c13318d1bf68487879044c96db8a497aa4018652"
   },
   "S14:384C": {
    "unit": "S14",
@@ -6872,7 +6872,7 @@
     "end": 235245
    },
    "source": "src/ui/scenario_dialogs.c",
-   "source_sha256": "59a639a22bc4a3d36d1966563973de58d629ab27b9440ba3e6a260e36012943a",
+   "source_sha256": "e2d6dac183e83286e62b463a176d4327e4d93c3a9dbaa7238b4421a15a17fc04",
    "claims": [
     {
      "name": "DoScenario",
@@ -7000,7 +7000,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d95ec5398eaee2eb9e970066880151329ffd11ccf57f1b54196441996abaa9d9"
+   "object_sha256": "2bc37d4815969785eb4754954830c2139d358a2efe0756e73cd0578c80a1acce"
   },
   "S15:384C": {
    "unit": "S15",
@@ -7121,7 +7121,7 @@
     ]
    },
    "source": "src/startup/game_session.c",
-   "source_sha256": "bfdcfe002e26b2bcc9d78f153c0c3945e137af8fc6c47c3797706ade706a3d08",
+   "source_sha256": "df955157cd5e62791023ca1e0ad12d21edff87a014869a14e36f5e8c1d3daa8c",
    "claims": [
     {
      "name": "app_exit_demo_expired",
@@ -7202,7 +7202,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5dc18bc7c3f56c0529524f8fdce1ceafd958c906a4f14e450346d2e28632fb0e"
+   "object_sha256": "ad73ee7b1e994dead47f40da0b6629358ec961416f3f4e84b650ead1c36be9c9"
   },
   "S16:384C": {
    "unit": "S16",
@@ -7325,7 +7325,7 @@
     "end": 232355
    },
    "source": "src/ui/intro_credits.c",
-   "source_sha256": "bc22d51deefbd96d69ccc111d3326b4dc6a521360c0e04a61a58180d441d542e",
+   "source_sha256": "3580aa7d64abc4a2edf02ef1baa97403a9589d323293a6b5895f1832cd75bd4b",
    "claims": [
     {
      "name": "DrawSimPayoff",
@@ -7380,7 +7380,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "2e0a2f6059ba916e3f1f174a72fc967cde605f6fc2098b17d27e52e596dd0f65"
+   "object_sha256": "d0c305d63f0e53c23aeba9cfdef897471b1067bf0c1b24019e3b29aaeca8b014"
   },
   "S17:384C": {
    "unit": "S17",
@@ -7470,7 +7470,7 @@
     "end": 231035
    },
    "source": "src/window/menu_setup.c",
-   "source_sha256": "5561fc9f292e84c519addb385498fd3bbfe0141b344124dc9e101e146d7831c7",
+   "source_sha256": "17222bf046a30f2dd31895dc837f8d9f679f76eecae4a403151fa2d4717b136a",
    "claims": [
     {
      "name": "input_init_desktop_region",
@@ -7530,7 +7530,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e1cd86d5b64fa89f4082dd402157fd51bc2ff5e68ffe4b19dc46d8a00fa9bd35"
+   "object_sha256": "e3a721242f19ac15241d02fb612264b02c5841f2c01e60f5781683ddf11df5c4"
   },
   "S18:384C": {
    "unit": "S18",
@@ -8933,183 +8933,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "extent": {
-    "start": 236656,
-    "end": 244698
-   },
-   "source": "src/ui/yellow_commands.c",
-   "source_sha256": "6a5de26368707202946a65ec4fa8b0b36ae9db8ad08dad3f7c1e2eeb6b485600",
-   "claims": [
-    {
-     "name": "processEdit",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 0,
-     "size": 1029,
-     "target_sha256": "c5fc0fd6fc82ada0286974afdf8b1a364c217f10eb65fe769ca817285526fa2a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoLaserFire",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 1029,
-     "size": 705,
-     "target_sha256": "a3a243bfc3e2593e9315e236ebe7a215324a3600a9e8bb2ee7b9aef8e5118e2e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "processSpider",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 1734,
-     "size": 311,
-     "target_sha256": "7aa177f4e8585a66af93fd5429214b094cefa34b169683ca267006993022d0bb",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ResetYellowVars",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 2045,
-     "size": 140,
-     "target_sha256": "3ee79a15497d33c8f5e8050926b9b82b24f6e03e61659a9bfeb392e9459ce974",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SetGoalsY",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 2185,
-     "size": 119,
-     "target_sha256": "548e9951c45ddb30f8bc8537346740a01cc059e4ae0221c3434e6e95f7fc36cd",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "YellowBirth",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 2304,
-     "size": 1057,
-     "target_sha256": "909be7b3a0343ad2a27a54b295a37241b15e2e0a06f0c53a84e178e37865d630",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "YellowDeath",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 3361,
-     "size": 2059,
-     "target_sha256": "41fc84aaa00a13d801ac23020f59a0b0542f7f50ef81f114141cd8f1d57fd898",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "layout_inferred": "one-line ifs and while loops place the line-number record breaks (every 52 entries) where the original has them (source header)"
-    },
-    {
-     "name": "SpecialXfer",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 5420,
-     "size": 507,
-     "target_sha256": "2f67e8841278307de39b85844d315240aff618cb18d1c73aafbf17dd2d5248c7",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "LionDialog",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 5927,
-     "size": 358,
-     "target_sha256": "c58ddd0e051fe485641e1517d90f52e396c62487aff5a7ddeceb48945b457e98",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "YellowDialog",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 6285,
-     "size": 344,
-     "target_sha256": "1cbeb4b9643e84c2e451014137de57072c69a7d7d1ee1b74ed1b93922a62e1da",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoTroph",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 6629,
-     "size": 114,
-     "target_sha256": "779c538aa6e69c9a90474efd983c6308135885ed596222063bd529f50b719717",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SetAlarmDropState",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 6743,
-     "size": 180,
-     "target_sha256": "e62cafbf02fe5971790fa53ffbacb721c588c32a02f6651d79091fe7b321e24a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "YellowCommandKey",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 6923,
-     "size": 462,
-     "target_sha256": "93efbc233fb01f60c781c0a89a04df28e02191098c2e564a2d487c6c529f9f85",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "layout_inferred": "the fd_50F6_048A declaration after 0AE8 decides the compare order in YellowCommandKey (source header)"
-    },
-    {
-     "name": "YellowCommand",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 7385,
-     "size": 508,
-     "target_sha256": "d2f24c22e533a21da65d5f223a67cae4187e48cb63e5a2d2f160ca7613f41a69",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "YellowHelp",
-     "unit": "S22",
-     "seg": 14791,
-     "off": 7893,
-     "size": 149,
-     "target_sha256": "bd593c810d8ffcc8b86d51a1af2b71e4881582cf02e329990f346963e573f348",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "2ff99a743740eaeade23f5d11651c7a390251c87151f135279f26fdba463ae4a",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -9117,8 +8940,8 @@
      "why": "Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals, dialogs, alarm drops and special interactions such as laser fire."
     }
    ],
-   "summary": "Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals, dialogs, alarm drops and special interactions such as laser fire.",
    "windows_group": "SIMANT",
+   "summary": "Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals, dialogs, alarm drops and special interactions such as laser fire.",
    "file_header": {
     "text": "Dispatches editor mouse actions and yellow ant commands. It handles births, deaths, goals,\ndialogs, alarm drops and special interactions such as laser fire.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 22 (S22); segment 39C7; complete original translation unit.\nWindows: SIMANT, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.\n\n(processEdit..YellowHelp; Win16 SIMANT unit processEdit..YellowHelp).\nBuilt /AL /Os /Oe /Og /Zi under MSC 6.00AX: 6.00A allocates CONST segment words for\nfar variables whose loads were all hoisted to immediate segments (YellowDeath), 6.00AX\ndoes not.  /Zi (a code record per function) reproduces the original relocation order\nacross all 15 functions, /Zd cannot (SetGoalsY and YellowCommandKey start records).\nThe one-line ifs and the while loops in YellowDeath place the line-number record\nbreaks (every 52 entries) where the original has them.  The MapPnt/editTileRect\nstruct types decide the imul operand order in DoLaserFire; the MeLocY\ndeclaration after 0AE8 decides the compare order in YellowCommandKey.",
     "name_kind": "descriptive",
@@ -9313,7 +9136,184 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 236656,
+    "end": 244698
+   },
+   "source": "src/ui/yellow_commands.c",
+   "source_sha256": "a9fa749dd12a7cf70ee177b97e05731440bb0fe66d91def035582f36a642713a",
+   "claims": [
+    {
+     "name": "processEdit",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 0,
+     "size": 1029,
+     "target_sha256": "c5fc0fd6fc82ada0286974afdf8b1a364c217f10eb65fe769ca817285526fa2a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoLaserFire",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 1029,
+     "size": 705,
+     "target_sha256": "a3a243bfc3e2593e9315e236ebe7a215324a3600a9e8bb2ee7b9aef8e5118e2e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "processSpider",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 1734,
+     "size": 311,
+     "target_sha256": "7aa177f4e8585a66af93fd5429214b094cefa34b169683ca267006993022d0bb",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ResetYellowVars",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 2045,
+     "size": 140,
+     "target_sha256": "3ee79a15497d33c8f5e8050926b9b82b24f6e03e61659a9bfeb392e9459ce974",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SetGoalsY",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 2185,
+     "size": 119,
+     "target_sha256": "548e9951c45ddb30f8bc8537346740a01cc059e4ae0221c3434e6e95f7fc36cd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "YellowBirth",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 2304,
+     "size": 1057,
+     "target_sha256": "909be7b3a0343ad2a27a54b295a37241b15e2e0a06f0c53a84e178e37865d630",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "YellowDeath",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 3361,
+     "size": 2059,
+     "target_sha256": "41fc84aaa00a13d801ac23020f59a0b0542f7f50ef81f114141cd8f1d57fd898",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "layout_inferred": "one-line ifs and while loops place the line-number record breaks (every 52 entries) where the original has them (source header)"
+    },
+    {
+     "name": "SpecialXfer",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 5420,
+     "size": 507,
+     "target_sha256": "2f67e8841278307de39b85844d315240aff618cb18d1c73aafbf17dd2d5248c7",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "LionDialog",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 5927,
+     "size": 358,
+     "target_sha256": "c58ddd0e051fe485641e1517d90f52e396c62487aff5a7ddeceb48945b457e98",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "YellowDialog",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 6285,
+     "size": 344,
+     "target_sha256": "1cbeb4b9643e84c2e451014137de57072c69a7d7d1ee1b74ed1b93922a62e1da",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoTroph",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 6629,
+     "size": 114,
+     "target_sha256": "779c538aa6e69c9a90474efd983c6308135885ed596222063bd529f50b719717",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetAlarmDropState",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 6743,
+     "size": 180,
+     "target_sha256": "e62cafbf02fe5971790fa53ffbacb721c588c32a02f6651d79091fe7b321e24a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "YellowCommandKey",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 6923,
+     "size": 462,
+     "target_sha256": "93efbc233fb01f60c781c0a89a04df28e02191098c2e564a2d487c6c529f9f85",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "layout_inferred": "the fd_50F6_048A declaration after 0AE8 decides the compare order in YellowCommandKey (source header)"
+    },
+    {
+     "name": "YellowCommand",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 7385,
+     "size": 508,
+     "target_sha256": "d2f24c22e533a21da65d5f223a67cae4187e48cb63e5a2d2f160ca7613f41a69",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "YellowHelp",
+     "unit": "S22",
+     "seg": 14791,
+     "off": 7893,
+     "size": 149,
+     "target_sha256": "bd593c810d8ffcc8b86d51a1af2b71e4881582cf02e329990f346963e573f348",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "01736bcbf2a4b2884c449ad49d8af553dc041173b5759a22987f2e47cff52fbc"
   },
   "S22:3BBD": {
    "unit": "S22",
@@ -10086,7 +10086,7 @@
     "end": 241018
    },
    "source": "src/ui/info_cards.c",
-   "source_sha256": "0db6fbcb364687b0b5b6a96ebe29d906b46a9f208bc38930a0f9ede478baf0ae",
+   "source_sha256": "2ffc662181b361f5efc82e3e41212b7272d06ba20e033e0baf444aefdb2cda69",
    "claims": [
     {
      "name": "XFlipLong",
@@ -10191,7 +10191,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "22956dde06b84d495cac270dfaba20a2f92ecfa6fb1fcbc3699b1452690cbfa0"
+   "object_sha256": "118661be80c162f71fa1d88c9c5a07ddc5baaa2a72969bc1ee90b93061b7ac60"
   },
   "S24:39C7": {
    "unit": "S24",
@@ -10361,7 +10361,7 @@
     "end": 238459
    },
    "source": "src/ui/history_window.c",
-   "source_sha256": "d0c12643457aa98380e4400d898996e5ace63fb6658c93e75cdbc21a8e659e42",
+   "source_sha256": "c0aff69dd03a77e8673055c4466f5aa6eedab6355f21f2d30e8544e2f30dc06f",
    "claims": [
     {
      "name": "OpenHistoryWindow",
@@ -10443,7 +10443,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "dbb7a1358c8d0c4c9913c80a832c07f9d2d770b075328a4e50a0b5a21444e678"
+   "object_sha256": "9b3698fa9b8b9ca3d850e344f987572afd264730ba2e141f7be3624540e9ed41"
   },
   "S25:39C7": {
    "unit": "S25",
@@ -11698,7 +11698,7 @@
     "end": 238892
    },
    "source": "src/window/move_resize.c",
-   "source_sha256": "409f725ca219e1f1f23cc6b198512d590fcc45106e1450bc70fe73595489307d",
+   "source_sha256": "d2aa458f176f212d5135677066f2e292a947f857df34d767b6b44ad8eca12b79",
    "claims": [
     {
      "name": "win_toggle_zoom",
@@ -11746,7 +11746,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "eb57ac02cebe3b267edebf8aff14b3792306142b127ed3312cf36d7f678e727c"
+   "object_sha256": "6fb5cde655a7dd52bbe4e5260f03d28e5df3d30b2ccb6c2ea4202ebe506262f3"
   },
   "data:3D57": {
    "unit": "data",
@@ -14083,7 +14083,7 @@
     "end": 5565
    },
    "source": "src/ui/view_dialog_helpers.c",
-   "source_sha256": "016ca42eec44b916af201bd8cb20c2d52a2ffcc4c8c3da402e67b3b1bdebaaa3",
+   "source_sha256": "5a475ce006b314bf81335957ebd8adb13419eea5d024c8b723eac38f84f95226",
    "claims": [
     {
      "name": "ABS",
@@ -14527,7 +14527,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f011c73587387c8ccfe7358f486b6e8694e86e7cbdccda8834eab1d391d55f2f"
+   "object_sha256": "73580be76827e181d9ed0690137453b220e157a194d293eee6aa748f730b3018"
   },
   "root:015B": {
    "unit": "root",
@@ -14553,12 +14553,237 @@
     }
    },
    "lang": "c",
+   "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m015B.c",
+     "why": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands."
+    }
+   ],
+   "windows_group": "SIMANT",
+   "summary": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands.",
+   "file_header": {
+    "text": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies\nant count, food and patch transfer commands.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 015B; complete original translation unit.\nWindows: SIMANT, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
+    "name_kind": "descriptive",
+    "why": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:015B",
+      "summary": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:015B",
+      "module": "root:015B",
+      "source": "src/ui/view_commands.c",
+      "reviewed_source_sha256": "19c123ed5fbcc793baa091c238ce4534319db9794b599c59163cabd75e9c9771",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "015B",
+       "origin": null,
+       "translation_unit": "complete original translation unit",
+       "extent": {
+        "start": 5566,
+        "end": 9279
+       }
+      },
+      "not_exact": [],
+      "steered": [],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "SetEditMode",
+        "dos_address": "root:015B:01B8",
+        "win16": "_SetEditMode",
+        "group": "SIMANT",
+        "confidence": "HIGH",
+        "win16_segment": 1,
+        "win16_offset": 40562,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:01B8"
+       },
+       {
+        "function": "AddSomeAnts",
+        "dos_address": "root:015B:000E",
+        "win16": "_AddSomeAnts",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 40196,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:000E"
+       },
+       {
+        "function": "KillSomeAnts",
+        "dos_address": "root:015B:006F",
+        "win16": "_KillSomeAnts",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 40286,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:006F"
+       },
+       {
+        "function": "SubtractFood",
+        "dos_address": "root:015B:0157",
+        "win16": "_SubtractFood",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 40484,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0157"
+       },
+       {
+        "function": "SetMapModeAnt",
+        "dos_address": "root:015B:01D1",
+        "win16": "_SetMapModeAnt",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 40578,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:01D1"
+       },
+       {
+        "function": "SetYardMode",
+        "dos_address": "root:015B:0273",
+        "win16": "_SetYardMode",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 40852,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0273"
+       },
+       {
+        "function": "SetMapPlaneLocation",
+        "dos_address": "root:015B:03C6",
+        "win16": "_SetMapPlaneLocation",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 41862,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:03C6"
+       },
+       {
+        "function": "GotoMapPoint",
+        "dos_address": "root:015B:04F7",
+        "win16": "_GotoMapPoint",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 42282,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:04F7"
+       },
+       {
+        "function": "SetMapPlane",
+        "dos_address": "root:015B:053C",
+        "win16": "_SetMapPlane",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 42442,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:053C"
+       },
+       {
+        "function": "CenterAnt",
+        "dos_address": "root:015B:0653",
+        "win16": "_CenterAnt",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 42720,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0653"
+       },
+       {
+        "function": "GotoMyAnt",
+        "dos_address": "root:015B:06A2",
+        "win16": "_GotoMyAnt",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 42852,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:06A2"
+       },
+       {
+        "function": "GotoSpider",
+        "dos_address": "root:015B:06F5",
+        "win16": "_GotoSpider",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 43076,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:06F5"
+       },
+       {
+        "function": "GotoBQueen",
+        "dos_address": "root:015B:073E",
+        "win16": "_GotoBQueen",
+        "group": "SIMANT",
+        "confidence": "HIGH",
+        "win16_segment": 1,
+        "win16_offset": 43702,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:073E"
+       },
+       {
+        "function": "GotoRQueen",
+        "dos_address": "root:015B:075F",
+        "win16": "_GotoRQueen",
+        "group": "SIMANT",
+        "confidence": "HIGH",
+        "win16_segment": 1,
+        "win16_offset": 43908,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:075F"
+       },
+       {
+        "function": "XferPatch",
+        "dos_address": "root:015B:0798",
+        "win16": "_XferPatch",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 43920,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0798"
+       },
+       {
+        "function": "PlaceQueenInYard",
+        "dos_address": "root:015B:094A",
+        "win16": "_PlaceQueenInYard",
+        "group": "SIMANT",
+        "confidence": "CONFIRMED",
+        "win16_segment": 1,
+        "win16_offset": 44306,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:094A"
+       }
+      ],
+      "groups": [
+       "SIMANT"
+      ]
+     },
+     {
+      "path": "src/ui/view_commands.c",
+      "prior_leading_comment": "Root module, code frame 015B: map/yard mode control and ant-list commands\n(Win16 unit AddSomeAnts .. MysteryButton).",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
    "extent": {
     "start": 5566,
     "end": 9279
    },
    "source": "src/ui/view_commands.c",
-   "source_sha256": "0044bc15b3392cd921cf720f51adae1f6d489f9e750f29a68b73acaeaa97c1da",
+   "source_sha256": "89917f7826f4d6d9b253001280b142e7dd2ebc1fa98960bd5733a483b75205cc",
    "claims": [
     {
      "name": "SetEditMode",
@@ -14782,231 +15007,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c2cf46a90366fbf617c7c072cf5e4de5ac8ac8f0302d209eca2b071f14a61360",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m015B.c",
-     "why": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands."
-    }
-   ],
-   "summary": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands.",
-   "windows_group": "SIMANT",
-   "file_header": {
-    "text": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies\nant count, food and patch transfer commands.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 015B; complete original translation unit.\nWindows: SIMANT, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
-    "name_kind": "descriptive",
-    "why": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:015B",
-      "summary": "Changes map and yard modes and moves the view to ants, queens or the spider. It also applies ant count, food and patch transfer commands.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:015B",
-      "module": "root:015B",
-      "source": "src/ui/view_commands.c",
-      "reviewed_source_sha256": "19c123ed5fbcc793baa091c238ce4534319db9794b599c59163cabd75e9c9771",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "015B",
-       "origin": null,
-       "translation_unit": "complete original translation unit",
-       "extent": {
-        "start": 5566,
-        "end": 9279
-       }
-      },
-      "not_exact": [],
-      "steered": [],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "SetEditMode",
-        "dos_address": "root:015B:01B8",
-        "win16": "_SetEditMode",
-        "group": "SIMANT",
-        "confidence": "HIGH",
-        "win16_segment": 1,
-        "win16_offset": 40562,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:01B8"
-       },
-       {
-        "function": "AddSomeAnts",
-        "dos_address": "root:015B:000E",
-        "win16": "_AddSomeAnts",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 40196,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:000E"
-       },
-       {
-        "function": "KillSomeAnts",
-        "dos_address": "root:015B:006F",
-        "win16": "_KillSomeAnts",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 40286,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:006F"
-       },
-       {
-        "function": "SubtractFood",
-        "dos_address": "root:015B:0157",
-        "win16": "_SubtractFood",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 40484,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0157"
-       },
-       {
-        "function": "SetMapModeAnt",
-        "dos_address": "root:015B:01D1",
-        "win16": "_SetMapModeAnt",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 40578,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:01D1"
-       },
-       {
-        "function": "SetYardMode",
-        "dos_address": "root:015B:0273",
-        "win16": "_SetYardMode",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 40852,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0273"
-       },
-       {
-        "function": "SetMapPlaneLocation",
-        "dos_address": "root:015B:03C6",
-        "win16": "_SetMapPlaneLocation",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 41862,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:03C6"
-       },
-       {
-        "function": "GotoMapPoint",
-        "dos_address": "root:015B:04F7",
-        "win16": "_GotoMapPoint",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 42282,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:04F7"
-       },
-       {
-        "function": "SetMapPlane",
-        "dos_address": "root:015B:053C",
-        "win16": "_SetMapPlane",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 42442,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:053C"
-       },
-       {
-        "function": "CenterAnt",
-        "dos_address": "root:015B:0653",
-        "win16": "_CenterAnt",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 42720,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0653"
-       },
-       {
-        "function": "GotoMyAnt",
-        "dos_address": "root:015B:06A2",
-        "win16": "_GotoMyAnt",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 42852,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:06A2"
-       },
-       {
-        "function": "GotoSpider",
-        "dos_address": "root:015B:06F5",
-        "win16": "_GotoSpider",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 43076,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:06F5"
-       },
-       {
-        "function": "GotoBQueen",
-        "dos_address": "root:015B:073E",
-        "win16": "_GotoBQueen",
-        "group": "SIMANT",
-        "confidence": "HIGH",
-        "win16_segment": 1,
-        "win16_offset": 43702,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:073E"
-       },
-       {
-        "function": "GotoRQueen",
-        "dos_address": "root:015B:075F",
-        "win16": "_GotoRQueen",
-        "group": "SIMANT",
-        "confidence": "HIGH",
-        "win16_segment": 1,
-        "win16_offset": 43908,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:075F"
-       },
-       {
-        "function": "XferPatch",
-        "dos_address": "root:015B:0798",
-        "win16": "_XferPatch",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 43920,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:0798"
-       },
-       {
-        "function": "PlaceQueenInYard",
-        "dos_address": "root:015B:094A",
-        "win16": "_PlaceQueenInYard",
-        "group": "SIMANT",
-        "confidence": "CONFIRMED",
-        "win16_segment": 1,
-        "win16_offset": 44306,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:015B:094A"
-       }
-      ],
-      "groups": [
-       "SIMANT"
-      ]
-     },
-     {
-      "path": "src/ui/view_commands.c",
-      "prior_leading_comment": "Root module, code frame 015B: map/yard mode control and ant-list commands\n(Win16 unit AddSomeAnts .. MysteryButton).",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "3e2c4ec248d467dc8884117d059816cf34feb32694210448d71ffcf55c2ae524"
   },
   "root:0244": {
    "unit": "root",
@@ -15607,7 +15608,7 @@
     ]
    },
    "source": "src/ui/edit_view.c",
-   "source_sha256": "a92aec96b1e868e027acef5a383f3f78c1e6b3856ea81d43353a0fbb444f7ce9",
+   "source_sha256": "aa589cf02538afaab8ece39cb5de17ff9cb1f6e9d88b3f16d87d4f3fb1084984",
    "claims": [
     {
      "name": "edit_scroll_delta",
@@ -16176,7 +16177,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "daa37fec37ea3acabd1663904ffb57b4ff1a7ebbc24707c5d529cf5e959ffaaa"
+   "object_sha256": "f9912e9f06024dcf1a3374c58d7e25fa8ea219674378f1e3368b4dad48c75067"
   },
   "root:075B": {
    "unit": "root",
@@ -16743,7 +16744,7 @@
     "end": 35149
    },
    "source": "src/ui/colony_controls.c",
-   "source_sha256": "bda7e5f93f084ca79ca85e3a178bd6c3c5eefde7ef1546bfca542e891b2bc453",
+   "source_sha256": "46e18e220d0d52c7c12c779b3d9e6e62c4e9710dc00c8eb8b9d364d414bc3be9",
    "claims": [
     {
      "name": "InitTriVars",
@@ -23184,7 +23185,7 @@
     "end": 89988
    },
    "source": "src/ui/ribbon_messages.c",
-   "source_sha256": "03f050013c60002130d1f48d13737a5ecaee0ed54d0fc9e22219fac243122e64",
+   "source_sha256": "c304d0ac52eb4cfdc4ee1a8be883b0acfee5fbd376af7a5dc82475e3c582bad7",
    "claims": [
     {
      "name": "ui_draw_centered_clipped_text",
@@ -23210,7 +23211,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "61317ea351d23ac21a47023eb87233242b9b96432e28c6defe2857e2e409d176"
+   "object_sha256": "f661f15923065805626c65de1b74ca73e9b4777b33518b2fa8dfab2489acc423"
   },
   "root:15F8": {
    "unit": "root",
@@ -28483,7 +28484,7 @@
     "end": 118315
    },
    "source": "src/window/alerts.c",
-   "source_sha256": "b5f81880a86c98ed1f69f1a63b62887e5e5dd3826986980630195102ed9ce4d3",
+   "source_sha256": "881bfd25a1d561e6322ce705702d4d7a8dce5266e7dc74316cd0fe7feb9dc6d5",
    "claims": [
     {
      "name": "Punt",
@@ -28642,7 +28643,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "6eaaf0fb72bf3ed5d9e37c2a047a3e32de6d55c5c344b2ca9770f6366b59637d"
+   "object_sha256": "8d2b55a67266a50813cd9cfba298ddbad6dfae5c4e9a9c06e29e72042fbd6e55"
   },
   "root:1CE2": {
    "unit": "root",
@@ -28895,7 +28896,7 @@
     "end": 121057
    },
    "source": "src/graphics/screen_rects.c",
-   "source_sha256": "1a0dd20dfcde680db42cbc1462262095522e0d98ee5fc4e9e503a56bdfb5c8b2",
+   "source_sha256": "f7bec6414823f9ad1c44ba18470ba9a9423fecc6a44d3ad4d5352b6a7601a2be",
    "claims": [
     {
      "name": "gfx_screen_rect",
@@ -29207,7 +29208,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8318a66a28e39159acd4899cc0d9db5cea314184545798a5063de9396177635d"
+   "object_sha256": "3b960cf13e376642fc6589d1748f764e41ddabbda861f350092c85f40fd1d736"
   },
   "root:1D8E": {
    "unit": "root",
@@ -29297,7 +29298,7 @@
     "end": 124277
    },
    "source": "src/graphics/clip_rects.c",
-   "source_sha256": "9c5cc2e218bea7a4aba0dc17ce7c1daff1520cdf581d9ecf7acd9d2912e77a2e",
+   "source_sha256": "e9724aedf51f85e59bf6545201066acb4d047f6f24134bd9c9fbd00f94033e41",
    "claims": [
     {
      "name": "clip_point_outcode",
@@ -29422,7 +29423,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "335db88dc995b441691040e05c9d265c4bf6b29042864ae53f76b8840ac9ff67"
+   "object_sha256": "f59449aceb8355f413516cf46cfeaf73107640c2d1fd523c7da5926a0117850d"
   },
   "root:1E57": {
    "unit": "root",
@@ -29590,7 +29591,7 @@
     "end": 128389
    },
    "source": "src/graphics/clip_regions.c",
-   "source_sha256": "9166e0eee5dea144e18d12e28bb31259c64ba2f1c1122241a38b9b9fab0a98e4",
+   "source_sha256": "dc432d639836ecc0d218e70bc42cf195dd7c65ce863815acae1156741839ab2d",
    "claims": [
     {
      "name": "f_1E57_0006",
@@ -29891,7 +29892,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "64cdb45169bec1d9bb7267a43ec9b216d994cc1269189e70ddb8764f12c7bbf2"
+   "object_sha256": "14780ee603ab10cca7425d9122f7aa49f97609c9acb4b50235a829a2a4042606"
   },
   "root:1F58": {
    "unit": "root",
@@ -30329,7 +30330,7 @@
     "end": 129701
    },
    "source": "src/graphics/text_layout.c",
-   "source_sha256": "663677ec05755374951e59b2bd17a6d89849fe169f4407e27b7d19f0610195c2",
+   "source_sha256": "a62fb68f8afab19cfb24f9c9e8b2d66c95fe7d21449c7d41de9569093cfd6273",
    "claims": [
     {
      "name": "timer_wait_double_ticks",
@@ -30835,7 +30836,7 @@
     "end": 132596
    },
    "source": "src/window/menu_helpers.c",
-   "source_sha256": "c38dadf5c6d32b6a948baf06cf1f51664360fb35973d539a8b02b8be1fd2021a",
+   "source_sha256": "3783e18b09192bce8b0630666f43477813e5db6f31ab338b193466aa8c9f283e",
    "claims": [
     {
      "name": "menu_printf_label",
@@ -31202,7 +31203,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ecd603127f0f2f48257a956444028f7170eeb52f9cd229deb6ee840b038f4234"
+   "object_sha256": "c80834378bd862b9b5b06c752b01fb92ee2a215d1f339cb6c9f415bd948cc5f9"
   },
   "root:205F": {
    "unit": "root",
@@ -31297,7 +31298,7 @@
     "end": 133367
    },
    "source": "src/platform/video/driver_select.c",
-   "source_sha256": "8340430c4002b8fe58ea08d6fa110ffbeb0ad2bb8be362558817d11d45ab645d",
+   "source_sha256": "eb0d4082c8ad213a036543b268925c975c769d47933b2ff5ed21ffa10b902b6a",
    "claims": [
     {
      "name": "gfx_select_driver_resources",
@@ -31312,7 +31313,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d11b46d7e624b44ddbe3a0d755211c35d9818ea23f63a7167a2cd772009c25d9"
+   "object_sha256": "7508ec8ad5b0ea8ef595dda0dd7627b646ebf9effffd06bd2c544c64373ab857"
   },
   "root:208F": {
    "unit": "root",
@@ -31443,7 +31444,7 @@
     "end": 134783
    },
    "source": "src/window/text_bitmap_helpers.c",
-   "source_sha256": "b4b1f0ab0b72d8e0e11d82a43252ad31dc778c41e636344e509c575dbe78bcf1",
+   "source_sha256": "1532a32292eed9c91fc96b27ed45fed3180f1860004fdfdc53dac84860ecf58b",
    "claims": [
     {
      "name": "win_invert_obj_rect",
@@ -31878,7 +31879,7 @@
     "end": 137436
    },
    "source": "src/window/lifecycle.c",
-   "source_sha256": "e68861deb296f7eb412ab1908864d1c98728435077eed43e92350753473c28fb",
+   "source_sha256": "7aa12e78488cbdf445e4dc25e7213368ab4a20b7e8e3fde3ae51e47099338cc9",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -32071,7 +32072,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "95c86ea00ce7c45e0973ae526b8d3174abb1c4d096db245beecd735cacf63ac9"
+   "object_sha256": "7d05d314cbce9dad7a30c2fd17ec74a7550b2b3f22cdca36953265d525827259"
   },
   "root:218D": {
    "unit": "root",
@@ -32224,7 +32225,7 @@
     "end": 139170
    },
    "source": "src/window/events.c",
-   "source_sha256": "03d484a832936eb9823e404561401ace8f151c69b185870e548e65f393457a74",
+   "source_sha256": "1f3c430b8c5b3e1a2d6b60ae0aa15dad43cec6af294b4c80799d1d338fdf7287",
    "claims": [
     {
      "name": "win_dispatch_object_event",
@@ -32360,7 +32361,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "2539f9c11669f118f5d6e9532b0eb7e07631a057c2c1701c6ec42acc67ff6e51"
+   "object_sha256": "b6c60b30bc3bbdbbe3f4d1f5ceb0bef042a09a8531413c585e352b40cd825775"
   },
   "root:21FA": {
    "unit": "root",
@@ -32623,7 +32624,7 @@
     "end": 142329
    },
    "source": "src/window/drawing.c",
-   "source_sha256": "79536c8d5957c7335846dc76bfac2ea97574401cba47963f2d2c8194f6ef9c3f",
+   "source_sha256": "41b462d9dfe1589282f6d5aa24b0974767c687d678fb8c34b4ea037e746d38bd",
    "claims": [
     {
      "name": "gr_JustifyStrInRect",
@@ -32837,7 +32838,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f8538db1ffe0a2b8c23dcb111f8c964d494aa932fb0db9a99fc2022a24312f57"
+   "object_sha256": "7f4a6aa54d798d509f81d5e08e281d3f62e3dd320633138e232ea217824efebb"
   },
   "root:22BF": {
    "unit": "root",
@@ -33275,7 +33276,7 @@
     "end": 146148
    },
    "source": "src/window/object_attributes.c",
-   "source_sha256": "aa97037f71d59a7549924f27c93ec8e019bcf3729d2c5793c482ade7f4cf2659",
+   "source_sha256": "0a87b730b4e479385ada3c0effbbd8e5ad07224bb83eb24334112970bab779dd",
    "claims": [
     {
      "name": "win_StringSize",
@@ -33797,7 +33798,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d4e65c15e390d125378ca0eb6609a33c1cfda9a39cf95a59efad74a895238cc2"
+   "object_sha256": "4ba3bd17a80c2b926e838f25ffe4e65f3be92fd03c0ed3fa4a26abaa1da81129"
   },
   "root:23AE": {
    "unit": "root",
@@ -33957,7 +33958,7 @@
     "end": 147038
    },
    "source": "src/window/locking.c",
-   "source_sha256": "ddec193691c31e5d055da27581e58711abadee42d5a8652bb0ff5a8f8b94a909",
+   "source_sha256": "d7afb938009e33327b9dfe0fe37abe5ac5fdeda146c82be331117ae11a0b48c0",
    "claims": [
     {
      "name": "win_NoWindowsShouldBeLocked",
@@ -34049,7 +34050,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1e66ffd9f20aaec58c1322f95213ed0d77c0591c034a8d358d4533ed012e1583"
+   "object_sha256": "1299fa42b153ea2bb7694d7247a61fd5e4ccd28e31d9b23c7e2304cbf146b22d"
   },
   "root:23E6": {
    "unit": "root",
@@ -34139,7 +34140,7 @@
     ]
    },
    "source": "src/window/lists_sliders.c",
-   "source_sha256": "3fee5478b8aa2495d4235af69ca2b34fe5457523e3d8dec13d7705a0d7d0a65d",
+   "source_sha256": "9d62afdeb7406ceec642b6a863d8a1ac66c14bcfa7a4ba91035f12e7e38c2238",
    "claims": [
     {
      "name": "list_is_line_selected",
@@ -34297,7 +34298,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "40f93d1f6fe206f8140a1b4ee9cc7c3213ba3bad4fb9015ea7a9c6807e75a4e2"
+   "object_sha256": "ebffe0a57a9e3bbe8833df682115f52da242f391a3eaaabba32d5394cafbe9b8"
   },
   "root:24AB": {
    "unit": "root",
@@ -34445,7 +34446,7 @@
     "end": 151460
    },
    "source": "src/graphics/font_output.c",
-   "source_sha256": "2cd8c0893d350c7095d71c58c4b5206a8493e5fe445229523d5fb913bcbb6089",
+   "source_sha256": "745314a792a80854b042d270db9059ab3a69b7d74a59ea32fdbcf6c73e3ebaa1",
    "claims": [
     {
      "name": "font_make_display_bitmap",
@@ -34548,7 +34549,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ec2f5f6b96754e39cb6fc4cd49d33d82a6a3a8044cb66afc2fad85456623e949"
+   "object_sha256": "366094764e198bf70b299d577e6e65ed1c8c94ee166a4f12bcfca791c8cba75a"
   },
   "root:24FA": {
    "unit": "root",
@@ -34920,7 +34921,7 @@
     "end": 154078
    },
    "source": "src/window/object_geometry.c",
-   "source_sha256": "bb049d65223edf06a95a563e0ab7d2f33eaeaf8a525dfa6450d2b6efb99ec0e1",
+   "source_sha256": "ec9bfa450fdb8b5d3b9e681f1abd8afce10aaf8dffc01d6b0bc1d1b7aeea0e10",
    "claims": [
     {
      "name": "win_locked_resource_ptr",
@@ -35150,7 +35151,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "45f9ab68a2516c019bf767ea63c0577c8b7643287d14d20ce1ead3605fd22445"
+   "object_sha256": "bebf36dc097efb3713238a65f6e24fb2cf3e245df1d9d636a9a355d2307cec8c"
   },
   "root:259D": {
    "unit": "root",
@@ -35282,7 +35283,7 @@
     "end": 155256
    },
    "source": "src/window/pictures.c",
-   "source_sha256": "937111a96c9f5ca6f8fa31ed2fe3b5f30072bef82bb39af5fda6f697eafd5067",
+   "source_sha256": "36d3b08b9464ddb4af5ab4b56532fd328c2a76b6b1aaa3ec693daec72bdcdc6f",
    "claims": [
     {
      "name": "win_DrawBitMapAtObj",
@@ -35331,7 +35332,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5d2fbf51e742f81ca8a3800d73c917cbe8e72aaea1c3c957adc439c2e2c941a4"
+   "object_sha256": "7a0945964e539d9490d304c335e5b8f683b26f2d0795d9a2e094cd20fde5f7dd"
   },
   "root:25E7": {
    "unit": "root",
@@ -35938,7 +35939,7 @@
     "end": 161754
    },
    "source": "src/graphics/anim.c",
-   "source_sha256": "da8a2f31a5555906061fb17d286381f46a2d67fc1e529c86c7c9106b1666e90b",
+   "source_sha256": "2d2796d13ee698322063a13bffffa4d29a5215a5f719ddca182eeaad2d530354",
    "claims": [
     {
      "name": "hanim_PrintSet",
@@ -36136,7 +36137,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "44db530adaae7e97780b6d716fbd68d166eb32e7adc9e61bf4e43e2884ba7283"
+   "object_sha256": "745acc39706ecb05eedecc967380311d1a7956bcfe40b9d32ed3ea4947b48f28"
   },
   "root:277D": {
    "unit": "root",

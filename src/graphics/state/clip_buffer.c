@@ -10,7 +10,7 @@
  * clip_SetWin selects this active list before the first Punt.
  */
 
-struct Rect { int left; int top; int right; int bottom; };
+#include "rect.h"
 /*
  * Mutable rectangle workspace used for clipping operations.
  */

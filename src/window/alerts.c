@@ -8,12 +8,7 @@
  * Loop structure and statement layout are inferred, not recovered or unique.
  */
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct Pt {
     int x;

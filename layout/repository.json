@@ -1333,6 +1333,7 @@
     "dos/scenarios/": "Pinned DOS acceptance scenarios and emulated-time input scripts",
     "portable/canonical_native_abi/integer_fake_libc/": "Parse-only C frontend declarations; never native runtime includes",
     "portable/canonical_native_abi/lto-type-mismatch-baseline.json": "Pinned GCC LTO pre-existing declaration mismatch signatures consumed by portable/build.py",
-    "portable/semantic-spans.json": "Reviewed canonical DOS cross-owner storage contracts consumed by portable/build.py"
+    "portable/semantic-spans.json": "Reviewed canonical DOS cross-owner storage contracts consumed by portable/build.py",
+    "include/": "Shared C headers of the canonical source, pinned in the C compiler profiles (layout/toolchain.json include_files) and included where each module defined the declarations"
   }
 }

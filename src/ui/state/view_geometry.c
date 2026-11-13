@@ -11,12 +11,7 @@
  * UIGEO scratch basename is not a recovered historical file name.
  */
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct Bitmap {
     int width;

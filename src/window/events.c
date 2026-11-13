@@ -235,12 +235,7 @@ void far win_FlushEvents(void)
     g_8CEC = 0;
 }
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far PointInRect(int far *pt, struct Rect far *rect);

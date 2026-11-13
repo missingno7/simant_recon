@@ -33,12 +33,7 @@ void far FlipWords(unsigned char far *bytes, long length)
 
 void far DisplayCard(int card);
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 struct HotSpot {
     struct Rect r;

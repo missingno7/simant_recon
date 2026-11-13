@@ -7,12 +7,7 @@
  * HIGH confidence, not confirmed.
  */
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 typedef struct {
     int x;

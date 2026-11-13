@@ -21,12 +21,7 @@ struct Event {
     int xE;
 };
 
-struct Rect {
-    int left;
-    int top;
-    int right;
-    int bottom;
-};
+#include "rect.h"
 
 static int g_298E = 0;
 int newMapForce = 0;
