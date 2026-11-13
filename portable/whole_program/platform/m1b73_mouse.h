@@ -51,13 +51,13 @@ typedef struct PortableM1B73MouseProvider {
     Host *host; /* borrowed */
     PortableInputTimeHost *input_host; /* borrowed */
     PortableM1B73MouseAsmState *state; /* borrowed source-owned view */
-    int16_t *screen_width; /* borrowed g_3DB2 owner */
-    int16_t *screen_height; /* borrowed g_3DB4 owner */
+    int16_t *screen_width; /* borrowed gfx_screen_width_pixels owner */
+    int16_t *screen_height; /* borrowed gfx_screen_height_pixels owner */
     PortableM1B73MouseServices services;
     /* Source application services installed by the whole-program binder. */
     int (*dispatch_queue)(void *context, uint16_t source_status);
     void *dispatch_queue_context;
-    uint8_t *display_busy; /* low byte of graphics word g_3DD4 */
+    uint8_t *display_busy; /* low byte of graphics word gfx_cursor_draw_lock */
     uint16_t ratio_x, ratio_y; /* INT 33h function 0F source settings */
     uint16_t event_mask;       /* source registration 7Fh when active */
     uint8_t event_pump_active; /* replaces installed interrupt callback */
@@ -82,14 +82,14 @@ PortableM1B73MouseStatus portable_m1b73_mouse_callback(
     int16_t x, int16_t y);
 
 /* Source public entrypoints consumed by the original whole-program objects. */
-void f_1B73_0025(void);
-void f_1B73_0046(void);
-void f_1B73_00D9(void);
-void f_1B73_0196(void);
-void f_1B73_04BB(void);
-void f_1B73_01E1(char *image, char *mask);
-void f_1B73_0218(int16_t ratio_x, int16_t ratio_y);
-void f_1B73_0235(void);
-void f_1B73_02A9(void);
+void mouse_remove_absent_stub(void);
+void mouse_initialize_driver(void);
+void mouse_show_cursor(void);
+void mouse_hide_cursor(void);
+void mouse_refresh_cursor(void);
+void mouse_set_cursor_bitmaps(char *image, char *mask);
+void mouse_set_mickey_ratio(int16_t ratio_x, int16_t ratio_y);
+void input_install_hooks(void);
+void input_remove_hooks(void);
 
 #endif

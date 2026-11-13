@@ -1,6 +1,6 @@
 import hashlib
-OLD = '_fmemset(*(table = f_171C_13CA((long)(size * 8 + 4), 0, "cachetable")), -1, (size + 1) * 4);'
-NEW = '_fmemset(*(table = f_171C_13CA((long)(offsetof(CacheTable, e) + (long)size * 2 * sizeof(CacheEntry)), 0, "cachetable")), -1, offsetof(CacheTable, e) + (long)size * sizeof(CacheEntry));'
+OLD = '_fmemset(*(table = Ralloc((long)(size * 8 + 4), 0, "cachetable")), -1, (size + 1) * 4);'
+NEW = '_fmemset(*(table = Ralloc((long)(offsetof(CacheTable, e) + (long)size * 2 * sizeof(CacheEntry)), 0, "cachetable")), -1, offsetof(CacheTable, e) + (long)size * sizeof(CacheEntry));'
 
 def adapt_reviewed(source: str, rel: str) -> tuple[str, dict]:
     if source.count(OLD) != 1:

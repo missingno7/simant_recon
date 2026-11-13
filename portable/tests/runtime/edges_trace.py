@@ -28,7 +28,7 @@ def stack():
 class Return(gdb.FinishBreakpoint):
     def stop(self):
         counts['window_returns'] += 1
-        emit('window-return', rectangle=[value('fd_50F6_110C.' + f)
+        emit('window-return', rectangle=[value('editTileRect.' + f)
              for f in ('left', 'top', 'right', 'bottom')])
         return False
 
@@ -58,7 +58,7 @@ class Observe(gdb.Breakpoint):
                     if counts['sprite_offset'] <= 8:
                         emit('sprite-offset', shift=shift, row_offset=offset)
             elif self.kind == 'map':
-                origin = (value('fd_50F6_0508.x'), value('fd_50F6_0508.y'))
+                origin = (value('MapPnt.x'), value('MapPnt.y'))
                 width = 128 if value('MapPlane') <= 1 else 64
                 limit = (width - value('fd_50F6_10E0'), 64 - value('fd_50F6_10DE'))
                 if (origin[0] == 0 or origin[1] == 0 or
@@ -83,9 +83,9 @@ def stopped(event):
 
 gdb.events.exited.connect(exited)
 gdb.events.stop.connect(stopped)
-Observe('o26_39C7_040F', 'window')
-Observe('o00_31AD_0647', 'tile')
-Observe('o00_35A6_0007', 'sprite')
+Observe('win_track_move', 'window')
+Observe('gfx_planar_put_cached_tile', 'tile')
+Observe('gfx_planar_mask_to_buffer', 'sprite')
 Observe('UpdateEdit', 'map')
 Observe('abort', 'abort')
 Observe('main', 'start')

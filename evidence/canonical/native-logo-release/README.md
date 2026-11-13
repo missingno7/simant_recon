@@ -4,12 +4,12 @@ The logo click hang is a platform input defect. Canonical `DialogWaitInit`
 (`src/ui/view_dialog_helpers.c`) runs `while (StillDown()) win_FlushEvents();` when the click
 advances `ShowIntro` into `CustomerIDDialog`. `StillDown` (`src/window/menu_helpers.c`)
 reads the mouse buttons and queries Insert, Space and Delete through
-`f_1B73_0A30`. No clock or BIOS-key polling occurs in that loop.
+`kbd_scan_state`. No clock or BIOS-key polling occurs in that loop.
 
-DOS INT09 updates the scan table; INT33 callback `f_1B73_0445` stores mouse
+DOS INT09 updates the scan table; INT33 callback `mouse_event_callback` stores mouse
 status independently while the foreground polls. The native implementation
 queried cached host scan state without servicing SDL. A held logo click thus
-froze with `g_9120=0x0201`, mouse-up still pending, and no more presentations.
+froze with `mouse_button_state=0x0201`, mouse-up still pending, and no more presentations.
 
 The native scan service now refreshes the existing shared input/time owner
 before reading its scan state. This delivers asynchronous input through the
@@ -31,7 +31,7 @@ Canonical DOS observation, fixed 200000 cycles and guest clock 1992-01-01
 
 These addresses were resolved from the canonical `SOURCE.MAP` and unique VGA
 clip owner pattern, not the historical executable's data layout. The observed
-load base was `0x8240`; `g_9120` was linear `0x651A2`. Symbolic assembly in
+load base was `0x8240`; `mouse_button_state` was linear `0x651A2`. Symbolic assembly in
 `src/platform/input_timer.asm` independently establishes the interrupt store contract.
 
 The permanent regression uses ordinary SDL input plus read-only GDB startup

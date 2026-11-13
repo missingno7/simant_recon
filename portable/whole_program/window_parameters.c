@@ -42,7 +42,7 @@ SimWindowParameterStatus sim_window_parameters_store_open(
         return SIM_WINDOW_PARAMETERS_BAD_OBJECT_VIEW;
 
     /* Validate the entire source object list before making any parameter
-     * writes. f_2505_03B9 reads each axis mode at +0x18 and mode-5 references
+     * writes. _win_CalcObjElement reads each axis mode at +0x18 and mode-5 references
      * at +0x10, with each axis represented by an int16_t word. */
     for (object_index = 0; object_index < view->count; ++object_index) {
         const uint8_t *object;

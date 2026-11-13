@@ -209,8 +209,8 @@ PortableM1B73MouseStatus portable_m1b73_mouse_consume_event(
     if (!provider->services.host_to_source(provider->services.context,
             event->x, event->y, &source_x, &source_y))
         return PORTABLE_M1B73_MOUSE_PROVIDER_FAILED;
-    /* f_1B73_0046 installs INT33 functions 7/8 with inclusive limits
-     * 0..g_3DB2-4 and 0..g_3DB4-4. SDL capture/letterboxing can deliver
+    /* mouse_initialize_driver installs INT33 functions 7/8 with inclusive limits
+     * 0..gfx_screen_width_pixels-4 and 0..gfx_screen_height_pixels-4. SDL capture/letterboxing can deliver
      * positions outside the window while dragging. Apply the DOS driver
      * limits before its callback, not inside the canonical drag algorithm
      * or rasterizer. Keyboard-generated callbacks keep their own semantics. */
@@ -271,7 +271,7 @@ PortableM1B73MouseStatus portable_m1b73_mouse_callback(
     return status;
 }
 
-void f_1B73_0025(void)
+void mouse_remove_absent_stub(void)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     /* This SDL backend never installs an IVT fallback, so the source's
@@ -279,7 +279,7 @@ void f_1B73_0025(void)
     provider->fallback_stub_active = 0;
 }
 
-void f_1B73_0046(void)
+void mouse_initialize_driver(void)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     PortableM1B73MouseAsmState *s = provider->state;
@@ -289,8 +289,8 @@ void f_1B73_0046(void)
     if (*provider->screen_width <= 0 || *provider->screen_height <= 0 ||
         !portable_input_time_host_get_input_state(provider->input_host, &input))
         abort();
-    /* Preserve the original assignments exactly: source g_9122 receives
-     * g_3DB4/2 and g_9124 receives g_3DB2/2. */
+    /* Preserve the original assignments exactly: source mouse_x_pixels receives
+     * gfx_screen_height_pixels/2 and mouse_y_pixels receives gfx_screen_width_pixels/2. */
     source_x = (int16_t)(*provider->screen_height / 2);
     source_y = (int16_t)(*provider->screen_width / 2);
     if (!provider->services.source_to_host(provider->services.context,
@@ -306,7 +306,7 @@ void f_1B73_0046(void)
     *s->cursor_initialized = 1;
 }
 
-void f_1B73_00D9(void)
+void mouse_show_cursor(void)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     if (portable_input_time_host_refresh_clock(provider->input_host) !=
@@ -315,7 +315,7 @@ void f_1B73_00D9(void)
         abort();
 }
 
-void f_1B73_04BB(void)
+void mouse_refresh_cursor(void)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     if (portable_input_time_host_refresh_clock(provider->input_host) !=
@@ -325,7 +325,7 @@ void f_1B73_04BB(void)
         abort();
 }
 
-void f_1B73_01E1(char *image, char *mask)
+void mouse_set_cursor_bitmaps(char *image, char *mask)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     PortableM1B73MouseAsmState *s = provider->state;
@@ -335,9 +335,9 @@ void f_1B73_01E1(char *image, char *mask)
             provider->services.context, (const uint8_t *)image,
             (const uint8_t *)mask, &width, &height) || width == 0 || height == 0)
         abort();
-    /* Source f_1B73_01E1 stores its second stack argument ([bp+0Ah],
-     * kind-7 one-plane data) at g_4D8E, then its first ([bp+6], kind-8
-     * four-plane data) at g_4D92. _0DA4 consumes those slots as AND then XOR. */
+    /* Source mouse_set_cursor_bitmaps stores its second stack argument ([bp+0Ah],
+     * kind-7 one-plane data) at cursor_putimg_bitmap_pointer, then its first ([bp+6], kind-8
+     * four-plane data) at cursor_putpic_bitmap_pointer. _0DA4 consumes those slots as AND then XOR. */
     *s->cursor_image = (const uint8_t *)mask;
     *s->cursor_mask = (const uint8_t *)image;
     *s->cursor_width = width;
@@ -346,14 +346,14 @@ void f_1B73_01E1(char *image, char *mask)
         *s->cursor_drawn = 1;
 }
 
-void f_1B73_0218(int16_t ratio_x, int16_t ratio_y)
+void mouse_set_mickey_ratio(int16_t ratio_x, int16_t ratio_y)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     provider->ratio_x = (uint16_t)ratio_x;
     provider->ratio_y = (uint16_t)ratio_y;
 }
 
-void f_1B73_0235(void)
+void input_install_hooks(void)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     PortableM1B73MouseAsmState *s = provider->state;
@@ -366,7 +366,7 @@ void f_1B73_0235(void)
      * source scan and cursor projections run at that shared boundary. */
 }
 
-void f_1B73_02A9(void)
+void input_remove_hooks(void)
 {
     PortableM1B73MouseProvider *provider = require_mouse();
     PortableM1B73MouseAsmState *s = provider->state;

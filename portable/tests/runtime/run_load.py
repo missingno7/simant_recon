@@ -144,7 +144,7 @@ def main():
                      if line.startswith(('Replay SDL key ', 'Replay SDL pointer '))]
     event_path = out / 'events.jsonl'
     events = [json.loads(line) for line in event_path.read_text().splitlines()] if event_path.is_file() else []
-    saves = [event for event in events if event['event'] == 'o09_35F5_0188-return']
+    saves = [event for event in events if event['event'] == 'SaveGame-return']
     loads = [event for event in events if event['event'] == 'LoadGame-return']
     selectors = [event for event in events if event['event'] == 'o09_35F5_03C6-return']
     reads = [event for event in events if event['event'] == 'LoadGame-read-entry']

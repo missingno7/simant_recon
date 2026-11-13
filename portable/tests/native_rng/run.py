@@ -47,7 +47,7 @@ def object_path(row, report_path):
 
 
 def native(report, report_path, out, nm):
-    matches = [r for r in report['canonical_TUs'] if r['source']=='src/root/m0093.c']
+    matches = [r for r in report['canonical_TUs'] if r['source']=='src/simulation/random.c']
     if len(matches)!=1 or not matches[0].get('compile',{}).get('passed'):
         raise ValueError('one compiled current canonical root:m0093 is required')
     root = matches[0]
@@ -171,7 +171,7 @@ def main():
     for name, expected_sha in report['input_pins'].items():
         if sha(root/name)!=expected_sha:raise ValueError('native build input changed: '+name)
     program=json.loads((root/'src/program.json').read_text())
-    module=next(x for x in program['modules'] if x['source']=='src/root/m0093.c')
+    module=next(x for x in program['modules'] if x['source']=='src/simulation/random.c')
     if sha(root/module['source'])!=module['source_sha256']:raise ValueError('current canonical RNG source differs from program inventory')
     cc=next(r for r in report['canonical_TUs'] if r['source']==module['source'])['compile']['command'][0]
     nm=args.nm or str(Path(cc).with_name('nm.exe' if Path(cc).suffix.lower()=='.exe' else 'nm'))

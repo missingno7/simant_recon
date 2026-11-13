@@ -35,14 +35,14 @@ def link(report,out,mutation=False):
     objects=list(report['core_link']['object_inputs'])
     pins={p:sha(p) for p in objects}
     if mutation:
-        row=next(r for r in report['canonical_TUs'] if r['source']=='src/S14/m384C.c')
+        row=next(r for r in report['canonical_TUs'] if r['source']=='src/ui/scenario_dialogs.c')
         source=Path(row['generated']).read_text(encoding='latin1')
         pattern=r'scores\[3\] = [^;]+;'
         matches=list(re.finditer(pattern,source))
         if len(matches)!=2 or 'int16_t' not in matches[0][0]:
             raise ValueError('negative-control product anchor changed')
         match=matches[0]
-        source=source[:match.start()]+'scores[3] = fd_50F6_09FA * 100 / n;'+source[match.end():]
+        source=source[:match.start()]+'scores[3] = BlackLost * 100 / n;'+source[match.end():]
         changed=out/'unwrapped-score.c';changed.write_text(source,encoding='latin1')
         obj=out/'unwrapped-score.o';args=list(row['compile']['command'])
         args[args.index('-c')+1]=str(changed);args[args.index('-o')+1]=str(obj)
@@ -104,7 +104,7 @@ class WordWitnessTests(unittest.TestCase):
             with self.subTest(case=case['name']):self.assertEqual([],self.native.check(case),name)
     def test_CalcScore(self):self.witness('CalcScore')
     def test_GetDis(self):self.witness('GetDis')
-    def test_viewport_clamp(self):self.witness('f_0250_0F2C')
+    def test_viewport_clamp(self):self.witness('BoundEditPosition')
     def test_BalloonIsVisible(self):self.witness('BalloonIsVisible')
     def test_BoundPointToTri(self):self.witness('BoundPointToTri')
 

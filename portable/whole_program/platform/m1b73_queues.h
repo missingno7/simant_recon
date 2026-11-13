@@ -44,7 +44,7 @@ typedef struct PortableM1B73QueueEvent {
 } PortableM1B73QueueEvent;
 
 /* Return nonzero to continue the source-order descriptor walk; zero returns
- * immediately from f_1B73_0CB3, including when later descriptors match. */
+ * immediately from hotbox_dispatch_event, including when later descriptors match. */
 typedef int (*PortableM1B73QueueCallback)(
     void *context, uint8_t queue_index, uint8_t record_index,
     const uint8_t record[PORTABLE_M1B73_QUEUE_RECORD_BYTES],
@@ -64,7 +64,7 @@ void portable_m1b73_queues_unbind(void);
 PortableM1B73QueueStatus portable_m1b73_queue_dispatch(void);
 
 /* Original root m1B73 entrypoints used by S17 startup and the Timer callback. */
-void f_1B73_0AA3(void);
-void f_1B73_0CB3(void);
+void hotbox_initialize_dispatch(void);
+void hotbox_dispatch_event(void);
 
 #endif

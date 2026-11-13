@@ -10,16 +10,16 @@
 typedef char **Handle;
 
 /* Canonical owners (root m1E57 and friends). */
-extern int16_t g_5702[32];
-extern Handle fd_50F6_3B60[45];
-extern int16_t g_3DB4;
-extern int16_t g_3DB6;
-extern struct Rect fd_50F6_393C;           /* menu bar; windows stay below it */
+extern int16_t clip_window_z_order[32];
+extern Handle clip_window_list_handles[45];
+extern int16_t gfx_screen_height_pixels;
+extern int16_t gfx_screen_row_bytes;
+extern struct Rect menu_bar_rect;           /* menu bar; windows stay below it */
 extern void (*g_62EC)(int16_t win);         /* window geometry changed hook */
-extern Handle f_171C_1A9E(int32_t size, int16_t flags, char *name);
-extern char *f_171C_1B84(Handle h);
-extern Handle f_171C_1BBA(Handle h);
-extern struct Rect *f_1D8E_02BD(struct Rect *c, struct Rect *list,
+extern Handle mem_Alloc(int32_t size, int16_t flags, char *name);
+extern char *mem_Lock(Handle h);
+extern Handle mem_Unlock(Handle h);
+extern struct Rect *clip_split_rect_list(struct Rect *c, struct Rect *list,
                                 struct Rect *in, struct Rect *out);
 extern void win_GetObjRect(int16_t obj, struct Rect *rect);
 extern char *win_WinAddr(int16_t win);
@@ -29,31 +29,31 @@ extern void win_LockWin(int16_t win);
 extern void win_UnlockWin(int16_t win);
 extern void win_Recalc(int16_t win);
 extern void win_Close(int16_t win);
-extern void f_20E8_0725(int16_t win);       /* activate: close auto-close top, open */
-extern void f_1E57_038E(void);
-extern void f_21FA_0B4B(struct Rect *rect);  /* redraw what a rect exposed */
-extern void f_2505_08EA(int16_t win);
-extern void f_2505_0831(int16_t win);
+extern void win_ToTop(int16_t win);       /* activate: close auto-close top, open */
+extern void win_rebuild_visible_clips(void);
+extern void win_redraw_exposed_windows(struct Rect *rect);  /* redraw what a rect exposed */
+extern void win_deactivate_pointer_regions(int16_t win);
+extern void win_activate_pointer_regions(int16_t win);
 
 /* The linker routes cross-module calls to these canonical entry points
  * through the wrappers below (-Wl,--wrap); the canonical bodies are unchanged. */
 extern void __real_clip_SetWin(int16_t win);
 extern void __real_clip_Off(void);
-extern void __real_f_1E57_0296(void);
-extern void __real_f_1E57_0351(void);
-extern void __real_f_1E57_0FDC(struct Rect *r);
+extern void __real_clip_set_desktop_region(void);
+extern void __real_clip_set_screen_region(void);
+extern void __real_clip_set_screen_intersection(struct Rect *r);
 extern void __real_clip_Push(void);
 extern void __real_clip_Pop(void);
-extern void __real_f_1E57_038E(void);
-extern void __real_f_1E57_0052(int16_t win);
-extern void __real_f_1E57_00B1(int16_t win);
+extern void __real_win_rebuild_visible_clips(void);
+extern void __real_clip_lower_window(int16_t win);
+extern void __real_win_raise_and_reclip(int16_t win);
 extern void __real_clip_KillWin(int16_t win);
 extern void __real_win_DrawTitle(int16_t win);
 extern void __real_f_1B28_0069(void);
 extern char *__real_GSaveRect(struct Rect *r);
-extern void __real_f_1CE2_056C(struct Rect *r, char *buf);
+extern void __real_gfx_restore_and_free_rect(struct Rect *r, char *buf);
 extern void __real_GRectInvOutline(struct Rect *r, int16_t width);
-extern struct Rect fd_50F6_38C2;            /* mapCursorRect (S12 DrawMapCursor) */
+extern struct Rect mapCursorRect;            /* mapCursorRect (S12 DrawMapCursor) */
 
 #define END ((int16_t)(uint16_t)0x8000)
 
@@ -150,21 +150,21 @@ static SimVgaPlanes *popup_planes_at(int x, int y)
  *  - inside an open save-under popup (GSaveRect): the popup's planes;
  *  - the desktop list: the shared planes (the main/desktop window);
  *  - otherwise, including no clip list (text and animation that dialogs draw
- *    after clearing g_5AAC) and full-screen lists (top-window object feedback,
+ *    after clearing clip_active_list_offset) and full-screen lists (top-window object feedback,
  *    outlines): the logical topmost window at each pixel. */
 static unsigned route(void *context, uint16_t offset, SimVgaSpan spans[8])
 {
     const StackEntry *target = NULL;
-    unsigned bit, n = 0, stride = (uint16_t)g_3DB6;
+    unsigned bit, n = 0, stride = (uint16_t)gfx_screen_row_bytes;
     int x, y, desktop;
     (void)context;
     if (!s.enabled || stride == 0) return 0;
     y = offset / stride;
-    if (y >= g_3DB4 || (s.stack_count == 0 && s.popup_count == 0)) return 0;
+    if (y >= gfx_screen_height_pixels || (s.stack_count == 0 && s.popup_count == 0)) return 0;
     x = (int)(offset % stride) * 8;
-    if (s.context == CONTEXT_WINDOW && g_5AAC != NULL)
+    if (s.context == CONTEXT_WINDOW && clip_active_list_offset != NULL)
         target = stack_entry(s.context_window);
-    desktop = g_5AAC != NULL && s.context == CONTEXT_DESKTOP;
+    desktop = clip_active_list_offset != NULL && s.context == CONTEXT_DESKTOP;
     for (bit = 0; bit < 8; ++bit) {
         int px = x + (int)bit;
         SimVgaPlanes *planes = NULL;
@@ -209,16 +209,16 @@ static void hosted_clip_list(int16_t id)
     struct Rect *end;
     Handle h;
     int16_t n;
-    /* f_1E57_038E's per-window list shape, without occlusion by others. */
-    screen[0] = g_5A9C[0];
+    /* win_rebuild_visible_clips's per-window list shape, without occlusion by others. */
+    screen[0] = gfx_screen_clip_list[0];
     screen[1].top = END;
     win_GetObjRect(id, &r);
-    end = f_1D8E_02BD(&r, screen, tmp, NULL);
+    end = clip_split_rect_list(&r, screen, tmp, NULL);
     n = (int16_t)((end - tmp + 1) * (int)sizeof(struct Rect));
-    h = f_171C_1A9E(n, 1, "winClipList");
-    memcpy(f_171C_1B84(h), tmp, (size_t)n);
-    f_171C_1BBA(h);
-    fd_50F6_3B60[(uint16_t)id >> 8] = h;
+    h = mem_Alloc(n, 1, "winClipList");
+    memcpy(mem_Lock(h), tmp, (size_t)n);
+    mem_Unlock(h);
+    clip_window_list_handles[(uint16_t)id >> 8] = h;
 }
 
 static int was_open(int16_t id)
@@ -262,11 +262,11 @@ static void read_info(int16_t id)
                           &sim_window_ref_registry, o, 0x2a)) == NULL) {
                 text = o + 0x2e;
                 if (strchr(text, '%')) text = NULL;
-            } else text = f_171C_1B84(handle);
+            } else text = mem_Lock(handle);
         }
     }
     snprintf(info->title, sizeof(info->title), "%s", text && text[0] ? text : "SimAnt");
-    if (handle) f_171C_1BBA(handle);
+    if (handle) mem_Unlock(handle);
     win_UnlockWin(id);
 }
 
@@ -276,7 +276,7 @@ static void read_info(int16_t id)
 static void erase(SimVgaPlanes *planes, const struct Rect *r)
 {
     int x, y, plane;
-    for (y = r->top < 0 ? 0 : r->top; y < r->bottom && y < g_3DB4; ++y)
+    for (y = r->top < 0 ? 0 : r->top; y < r->bottom && y < gfx_screen_height_pixels; ++y)
         for (x = r->left < 0 ? 0 : r->left; x < r->right && x < 640; ++x) {
             uint16_t offset = (uint16_t)(y * 80 + x / 8);
             for (plane = 0; plane < 4; ++plane)
@@ -290,9 +290,9 @@ static void cache_stack(void)
     unsigned i, j, previous_count = s.stack_count;
     memcpy(previous, s.stack, sizeof(previous));
     s.stack_count = 0;
-    for (i = 0; i < 32 && g_5702[i] != END; ++i) {
+    for (i = 0; i < 32 && clip_window_z_order[i] != END; ++i) {
         StackEntry *e = &s.stack[s.stack_count++];
-        int16_t id = g_5702[i];
+        int16_t id = clip_window_z_order[i];
         e->id = id;
         win_GetObjRect(id, &e->rect);
         e->planes = hosted_planes(id);
@@ -330,25 +330,25 @@ static void restack(void)
     int16_t saved[32], shared[32];
     unsigned i, j, hosted_open = 0;
     if (!s.enabled) return;
-    memcpy(saved, g_5702, sizeof(saved));
+    memcpy(saved, clip_window_z_order, sizeof(saved));
     for (i = j = 0; i < 32 && saved[i] != END; ++i) {
         if (hosted_planes(saved[i])) ++hosted_open;
         else shared[j++] = saved[i];
     }
     if (hosted_open) {
         for (; j < 32; ++j) shared[j] = END;
-        memcpy(g_5702, shared, sizeof(shared));
-        __real_f_1E57_038E();
-        memcpy(g_5702, saved, sizeof(saved));
+        memcpy(clip_window_z_order, shared, sizeof(shared));
+        __real_win_rebuild_visible_clips();
+        memcpy(clip_window_z_order, saved, sizeof(saved));
         for (i = 0; i < 32 && saved[i] != END; ++i)
             if (hosted_planes(saved[i])) hosted_clip_list(saved[i]);
     }
     cache_stack();
 }
 
-void __wrap_f_1E57_038E(void) { __real_f_1E57_038E(); restack(); }
-void __wrap_f_1E57_0052(int16_t win) { __real_f_1E57_0052(win); restack(); }
-void __wrap_f_1E57_00B1(int16_t win) { __real_f_1E57_00B1(win); restack(); }
+void __wrap_win_rebuild_visible_clips(void) { __real_win_rebuild_visible_clips(); restack(); }
+void __wrap_clip_lower_window(int16_t win) { __real_clip_lower_window(win); restack(); }
+void __wrap_win_raise_and_reclip(int16_t win) { __real_win_raise_and_reclip(win); restack(); }
 void __wrap_clip_KillWin(int16_t win) { __real_clip_KillWin(win); restack(); }
 /* Win16 win_DrawTitle also sets the native caption (SetWindowText). */
 void __wrap_win_DrawTitle(int16_t win)
@@ -364,9 +364,9 @@ void __wrap_clip_SetWin(int16_t win)
     s.context_window = (int16_t)(win & 0xff00);
 }
 void __wrap_clip_Off(void) { __real_clip_Off(); s.context = CONTEXT_SCREEN; }
-void __wrap_f_1E57_0296(void) { __real_f_1E57_0296(); s.context = CONTEXT_DESKTOP; }
-void __wrap_f_1E57_0351(void) { __real_f_1E57_0351(); s.context = CONTEXT_SCREEN; }
-void __wrap_f_1E57_0FDC(struct Rect *r) { __real_f_1E57_0FDC(r); s.context = CONTEXT_SCREEN; }
+void __wrap_clip_set_desktop_region(void) { __real_clip_set_desktop_region(); s.context = CONTEXT_DESKTOP; }
+void __wrap_clip_set_screen_region(void) { __real_clip_set_screen_region(); s.context = CONTEXT_SCREEN; }
+void __wrap_clip_set_screen_intersection(struct Rect *r) { __real_clip_set_screen_intersection(r); s.context = CONTEXT_SCREEN; }
 void __wrap_clip_Push(void)
 {
     __real_clip_Push();
@@ -402,9 +402,9 @@ char *__wrap_GSaveRect(struct Rect *r)
     return p->buffer;
 }
 
-void __wrap_f_1CE2_056C(struct Rect *r, char *buf)
+void __wrap_gfx_restore_and_free_rect(struct Rect *r, char *buf)
 {
-    __real_f_1CE2_056C(r, buf);
+    __real_gfx_restore_and_free_rect(r, buf);
     if (s.enabled && s.popup_count && s.popup[s.popup_count - 1].buffer == buf) {
         --s.popup_count;
         ++s.popup_serial;
@@ -432,7 +432,7 @@ unsigned sim_window_hosting_popup_serial(void) { return s.popup_serial; }
  * shown/erased state is mirrored for the presentation to draw. */
 void __wrap_GRectInvOutline(struct Rect *r, int16_t width)
 {
-    if (s.enabled && s.map_cursor_owned && r == &fd_50F6_38C2) {
+    if (s.enabled && s.map_cursor_owned && r == &mapCursorRect) {
         s.map_cursor_shown = !s.map_cursor_shown;
         return;
     }
@@ -442,7 +442,7 @@ void __wrap_GRectInvOutline(struct Rect *r, int16_t width)
 void sim_window_hosting_own_map_cursor(int owned) { s.map_cursor_owned = owned != 0; }
 int sim_window_hosting_map_cursor_shown(void) { return s.map_cursor_owned && s.map_cursor_shown; }
 
-/* The game's event pump (f_218D_02D5 calls this empty stub first): native
+/* The game's event pump (win_translate_pending_event calls this empty stub first): native
  * window actions run here, where Win16 dispatched window messages. */
 void __wrap_f_1B28_0069(void)
 {
@@ -463,13 +463,13 @@ int sim_window_hosting_raise(int16_t id)
 {
     if (!stack_entry(id)) return 0;
     if (s.stack[0].id != (int16_t)(id & 0xff00))
-        f_20E8_0725(id);              /* DOS f_218D_0451's activation */
+        win_ToTop(id);              /* DOS win_dispatch_desktop_click's activation */
     return 1;
 }
 
 /* Win16 WM_SIZE (MAINWNDPROC 2A64): rewrite the record rect and the first
  * object by the size delta, win_Recalc, then DOS's own geometry-change tail
- * (o26_39C7_0671: clip lists, hook, exposed redraw, top-window hot boxes).
+ * (win_track_resize: clip lists, hook, exposed redraw, top-window hot boxes).
  * The logical origin shifts when the size needs room on the 640x480 screen;
  * the native window does not move. */
 int sim_window_hosting_resize(int16_t id, int width, int height)
@@ -477,19 +477,19 @@ int sim_window_hosting_resize(int16_t id, int width, int height)
     struct WindowInfo *info = &s.info[(uint16_t)id >> 8];
     struct Rect orig, r, exposed;
     char *w, *o;
-    int top_limit = fd_50F6_393C.bottom + 1;
+    int top_limit = menu_bar_rect.bottom + 1;
     if (!stack_entry(id)) return 0;
     if (width < (info->min_width > 0 ? info->min_width : 48)) width = info->min_width > 0 ? info->min_width : 48;
     if (height < (info->min_height > 0 ? info->min_height : 48)) height = info->min_height > 0 ? info->min_height : 48;
-    if (width > g_5A9C[0].right) width = g_5A9C[0].right;
-    if (height > g_5A9C[0].bottom - top_limit) height = g_5A9C[0].bottom - top_limit;
+    if (width > gfx_screen_clip_list[0].right) width = gfx_screen_clip_list[0].right;
+    if (height > gfx_screen_clip_list[0].bottom - top_limit) height = gfx_screen_clip_list[0].bottom - top_limit;
     win_LockWin(id);
     w = win_WinAddr(id);
     *(uint16_t *)(w + 0x1c) &= (uint16_t)~0x80u;   /* no longer zoomed */
     orig = *(struct Rect *)w;
     r = orig;
-    if (r.left + width > g_5A9C[0].right) r.left = (int16_t)(g_5A9C[0].right - width);
-    if (r.top + height > g_5A9C[0].bottom) r.top = (int16_t)(g_5A9C[0].bottom - height);
+    if (r.left + width > gfx_screen_clip_list[0].right) r.left = (int16_t)(gfx_screen_clip_list[0].right - width);
+    if (r.top + height > gfx_screen_clip_list[0].bottom) r.top = (int16_t)(gfx_screen_clip_list[0].bottom - height);
     if (r.top < top_limit) r.top = (int16_t)top_limit;
     r.right = (int16_t)(r.left + width);
     r.bottom = (int16_t)(r.top + height);
@@ -507,7 +507,7 @@ int sim_window_hosting_resize(int16_t id, int width, int height)
         win_offsets[(uint16_t)id >> 8] = *(struct Rect *)(o + 0x08);
     win_Recalc(id);
     win_UnlockWin(id);
-    f_1E57_038E();
+    win_rebuild_visible_clips();
     (*g_62EC)(id);
     exposed.left = orig.left < r.left ? orig.left : r.left;
     exposed.top = orig.top < r.top ? orig.top : r.top;
@@ -517,10 +517,10 @@ int sim_window_hosting_resize(int16_t id, int width, int height)
         SimVgaPlanes *planes = hosted_planes(id);
         if (planes) erase(planes, &r);
     }
-    f_21FA_0B4B(&exposed);
+    win_redraw_exposed_windows(&exposed);
     if (s.stack_count && s.stack[0].id == (int16_t)(id & 0xff00)) {
-        f_2505_08EA(id);
-        f_2505_0831(id);
+        win_deactivate_pointer_regions(id);
+        win_activate_pointer_regions(id);
     }
     return 1;
 }

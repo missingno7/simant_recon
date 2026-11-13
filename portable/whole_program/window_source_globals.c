@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-extern char g_5A97;
+extern char gfx_display_mode;
 extern int16_t win_numOfWindows;
 extern int16_t win_numOfColors;
 extern int16_t win_numOfGroups;
@@ -14,7 +14,7 @@ _Static_assert(sizeof(SimWindowSourceDrawHook) >= sizeof(void *),
 
 void sim_window_source_set_profile(char profile)
 {
-    g_5A97 = profile;
+    gfx_display_mode = profile;
 }
 
 void sim_window_source_clear_draw_hooks(SimWindowSourceDrawHook *hooks,

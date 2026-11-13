@@ -17,9 +17,24 @@ if __package__:
 else:
     from canonical_dos_layout import canonical_layout
     from state_policy import state_prefix, G5702_STACK_RESIDUE_TAIL
-DESCRIPTOR_OWNERS=('db_handles','fd_50F6_10D0')
+DESCRIPTOR_OWNERS=('db_handles','startup_executable_fd')
 
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+
+def dos_address_aliases(addresses):
+    """Supply recorded old spellings to the unchanged DOS acceptance interface.
+
+    The DOS utility still asks for pre-rename keys. Aliases preserve the exact
+    observed addresses; an active name for another object is never overwritten.
+    """
+    result=dict(addresses)
+    symbols=json.loads((ROOT/'layout/symbols.json').read_text())['data']
+    for name,fact in symbols.items():
+        if name not in addresses:continue
+        for history in fact.get('history',[]):
+            old=history.get('was')
+            if old and old not in symbols:result.setdefault(old,addresses[name])
+    return result
 
 def input_operations(path):
     return [tuple(p) for line in path.read_text().splitlines()
@@ -158,7 +173,7 @@ def three_way_checkpoint(native,original_dump,canonical_dump,addresses,specs,raw
                                           'RECONSTRUCTION_INTRODUCED','ORIGINAL_DOS_NONDETERMINISTIC')}
     save_path=native.with_suffix('.sav')
     if save_path.is_file():
-        osave=acceptance.virtual_save(om,oa);csave=acceptance.virtual_save(cm,addresses);nsave=save_path.read_bytes()
+        osave=acceptance.virtual_save(om,dos_address_aliases(oa));csave=acceptance.virtual_save(cm,dos_address_aliases(addresses));nsave=save_path.read_bytes()
         row['save']=dict(original_vs_canonical=acceptance.compare_saves(osave,csave),
                          original_vs_native=acceptance.compare_saves(osave,nsave),records={})
         total=sum(record[2] for record in acceptance.save_schema())
@@ -212,15 +227,15 @@ def inventory(project=ROOT, oracle_root=ROOT, dos_report=None, native_build=None
         if facts_path.is_file():
             facts=json.loads(facts_path.read_text())
             text_owner=next((row for row in facts['numeric']
-                             if row.get('name')=='g_5ABE'),None)
+                             if row.get('name')=='text_bitmap_pixels'),None)
             if text_owner is not None:
-                for alias,view in (('g_5ECE','string'),('g_5F1D','terminator')):
+                for alias,view in (('text_bitmap_string_copy','string'),('g_5F1D','terminator')):
                     if alias in result and view in text_owner['alias_layout']:
                         source_view=text_owner['alias_layout'][view]
-                        result[alias].update(owner='g_5ABE',offset=source_view['offset'],
+                        result[alias].update(owner='text_bitmap_pixels',offset=source_view['offset'],
                                              bytes=source_view['count'],
                                              native_file='canonical_asm_numeric_data.c',
-                                             address_evidence='canonical ASM g_5ABE generated interior view + typed native owner')
+                                             address_evidence='canonical ASM text_bitmap_pixels generated interior view + typed native owner')
     return result
 
 KEYS = {'enter':'Return','space':'Space','esc':'Escape','backspace':'Backspace',
@@ -280,7 +295,7 @@ def save_differences(a,b):
 
 def memory_base(memory,addresses):
     hits=[m.start() for m in re.finditer(re.escape(acceptance.SCREEN_CLIP_PATTERN),memory)]
-    bases={h-addresses['g_5A9C'] for h in hits}
+    bases={h-addresses['gfx_screen_clip_list'] for h in hits}
     if len(bases)!=1: raise ValueError('nonunique canonical DOS runtime base: '+str(bases))
     return bases.pop()
 
@@ -315,9 +330,9 @@ def compare_checkpoint(native,dump,addresses,specs,raw_state):
         da,nb,policy=state_prefix(name,a,b,raw_state)
         row['symbols'][name]=differences(da,nb)
         if policy: row['partial_exclusions'][name]=dict(policy,raw_difference=differences(a,b))
-        if name in ('fd_55B3_6B9C','fd_55B3_6B9E','fd_55B3_74AD','fd_55B3_74AF','fd_55B3_74B1',
-                    'fd_55B3_74B3','fd_55B3_74B5','fd_55B3_74B7','fd_55B3_74B9'):
-            row['flagged_address_words'][name]=dict(reason='src/root/m28BC.asm OFFSET word; native asm_data.py preserves symbolic address metadata. Raw address equality is not handler/state identity.',
+        if name in ('snd_sample_output_routine','snd_volume_table_offset','snd_speaker_output_pointer','snd_adlib_output_pointer','snd_lpt_output_pointer',
+                    'snd_port200_output_pointer','snd_sb_output_pointer','snd_port222_output_pointer','snd_based_dac_output_pointer'):
+            row['flagged_address_words'][name]=dict(reason='src/sound/sample_timer.asm OFFSET word; native asm_data.py preserves symbolic address metadata. Raw address equality is not handler/state identity.',
                                                     raw_difference=row['symbols'][name])
     row['differing_symbols']=[name for name,r in row['symbols'].items() if r['status']!='EQUAL']
     row['compared_symbols']=len(row['symbols'])
@@ -345,7 +360,7 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha):
             if meta.get('hit')!=step or meta.get('dump_address')!='0x00000000': raise ValueError('DOS step observation shape differs')
             memory=dump.read_bytes();base=memory_base(memory,addresses);at=base+specs['Cycle']['dos_address']
             cycle=int.from_bytes(memory[at:at+2],'little')
-            at=base+specs['fd_50F6_0C26']['dos_address']
+            at=base+specs['GameTime']['dos_address']
             calls=int.from_bytes(memory[at:at+4],'little')
             row['dos_boundary']=dict(ordinal=step,milliseconds=meta['emulated_ms'],cycle=cycle,simulation_calls=calls,
                                      dump_sha256=sha(dump))

@@ -1,6 +1,6 @@
-f_2505_04D7  root:2505:04D7  linear 25527  size 58  extent DESCENT  region game_or_library
+win_GetArg  root:2505:04D7  linear 25527  size 58  extent DESCENT  region game_or_library
   entry evidence: push_cs_call
-  module frame 2505: function 15/20; neighbours: f_2505_03B9, f_2505_0453, f_2505_0511, win_Recalc
+  module frame 2505: function 15/20; neighbours: _win_CalcObjElement, win_GetVal, win_sort_rect_coords, win_Recalc
   frame: {'frame': 'bp', 'stack_check': False}
   04D7  push bp
   04D8  mov bp, sp
@@ -18,7 +18,7 @@ f_2505_04D7  root:2505:04D7  linear 25527  size 58  extent DESCENT  region game_
   04F5  jmp 0x50c
   04F7  push si
   04F8  push cs
-  04F9  call 6                             -> f_2505_0006
+  04F9  call 6                             -> win_locked_resource_ptr
   04FC  pop bx
   04FD  mov es, dx
   04FF  mov bx, ax

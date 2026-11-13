@@ -2,15 +2,15 @@ from __future__ import annotations
 import hashlib
 import re
 from dataclasses import dataclass
-SOURCE_RELATIVE = 'src/root/m0250.c'
-OWNER = 'fd_50F6_1F26'
-_DECL = re.compile('^extern Pnt far fd_50F6_1F26;\\r?$', re.MULTILINE)
-_F2662_PROTO = 'extern void far f_2662_1120(int x, int y, Pnt far *buf, int id);'
-_F16B5_PROTO = 'extern void far f_16B5_0033(Pnt far *buf, int mode);'
-_F0008_PROTO = 'extern void far f_16B5_0008(int x0, int y0, int x1, int y1, int color);'
-_F2662_NATIVE_PROTO = 'extern void far f_2662_1120(int x, int y, char far *buf, int id);'
-_F16B5_NATIVE_PROTO = 'extern void far f_16B5_0033(void far *buf, int16_t mode);'
-_F0008_NATIVE_PROTO = 'extern void far f_16B5_0008(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t color);'
+SOURCE_RELATIVE = 'src/ui/edit_view.c'
+OWNER = 'spider_composite_bitmap'
+_DECL = re.compile('^extern Pnt far spider_composite_bitmap;\\r?$', re.MULTILINE)
+_F2662_PROTO = 'extern void far anim_bitmap_to_buffer(int x, int y, Pnt far *buf, int id);'
+_F16B5_PROTO = 'extern void far gfx_buffer_line_target(Pnt far *buf, int mode);'
+_F0008_PROTO = 'extern void far gfx_buffer_line(int x0, int y0, int x1, int y1, int color);'
+_F2662_NATIVE_PROTO = 'extern void far anim_bitmap_to_buffer(int x, int y, char far *buf, int id);'
+_F16B5_NATIVE_PROTO = 'extern void far gfx_buffer_line_target(void far *buf, int16_t mode);'
+_F0008_NATIVE_PROTO = 'extern void far gfx_buffer_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t color);'
 
 @dataclass(frozen=True)
 class SourceAdaptReceipt:
@@ -113,7 +113,7 @@ def adapt(source: bytes, rel: str) -> tuple[bytes, SourceAdaptReceipt]:
         raise ValueError('unexpected source route')
     digest = _sha(source)
     text = source.decode('utf-8')
-    for (anchor, label) in ((_F2662_PROTO, 'f_2662_1120 Pnt prototype'), (_F16B5_PROTO, 'f_16B5_0033 Pnt prototype'), (_F0008_PROTO, 'f_16B5_0008 DOS-word prototype')):
+    for (anchor, label) in ((_F2662_PROTO, 'anim_bitmap_to_buffer Pnt prototype'), (_F16B5_PROTO, 'gfx_buffer_line_target Pnt prototype'), (_F0008_PROTO, 'gfx_buffer_line DOS-word prototype')):
         if text.count(anchor) < 1:
             raise ValueError(f'expected one {label}')
     decl_matches = list(_DECL.finditer(text))
@@ -123,12 +123,12 @@ def adapt(source: bytes, rel: str) -> tuple[bytes, SourceAdaptReceipt]:
     text = text.replace(_F2662_PROTO, _F2662_NATIVE_PROTO)
     text = text.replace(_F16B5_PROTO, _F16B5_NATIVE_PROTO)
     text = text.replace(_F0008_PROTO, _F0008_NATIVE_PROTO)
-    (text, refs) = _replace_identifier_c_lexically(text, 'fd_50F6_1F26', OWNER)
+    (text, refs) = _replace_identifier_c_lexically(text, 'spider_composite_bitmap', OWNER)
     if refs != 16:
         raise ValueError(f'expected 16 active references, got {refs}')
-    f2662_pattern = re.compile('(f_2662_1120\\([^;]*?)(?<![\\w])&' + OWNER)
+    f2662_pattern = re.compile('(anim_bitmap_to_buffer\\([^;]*?)(?<![\\w])&' + OWNER)
     (text, cast2662) = f2662_pattern.subn('\\1(char far *)&' + OWNER, text)
-    f16b5_pattern = re.compile('(f_16B5_0033\\()&' + OWNER)
+    f16b5_pattern = re.compile('(gfx_buffer_line_target\\()&' + OWNER)
     (text, cast16b5) = f16b5_pattern.subn('\\1(char far *)&' + OWNER, text)
     if cast2662 != 3 or cast16b5 != 3:
         raise ValueError(f'byte consumer call anchors changed: f2662={cast2662}, f16b5={cast16b5}')

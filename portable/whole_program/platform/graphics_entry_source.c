@@ -84,23 +84,23 @@ static void bitmap_call(SimGraphicsBitmapCallback callback, int16_t x,
              (int16_t)little_u16((const uint8_t *)image + 2));
 }
 
-void f_1B4E_003B(int16_t x, int16_t y, char *image)
+void GPutPic(int16_t x, int16_t y, char *image)
 {
     bitmap_call((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]), x, y, image);
 }
 
-void f_1B4E_005E(int16_t x, int16_t y, char *image)
+void GPutImg(int16_t x, int16_t y, char *image)
 {
     bitmap_call((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[11]), x, y, image);
 }
 
-void f_1B4E_0110(int16_t x, int16_t y, int16_t character)
+void gfx_put_fixed_font_char(int16_t x, int16_t y, int16_t character)
 {
     SimGraphicsDriver *graphics = sim_graphics_source_owner();
     graphics->last_status = sim_graphics_f_1B4E_0110(graphics, x, y, character);
 }
 
-void f_1B4E_01A1(char *palette17, int16_t count)
+void gfx_set_ega_palette(char *palette17, int16_t count)
 {
     SimGraphicsDriver *graphics = sim_graphics_source_owner();
     (void)count; /* Original INT 10h AX=1002h ignores this C-side word. */
@@ -114,7 +114,7 @@ void f_1B4E_01A1(char *palette17, int16_t count)
     graphics->last_status = SIM_GRAPHICS_OK;
 }
 
-void f_1B4E_01AE(char *rgb_palette, int16_t count)
+void gfx_set_dac_palette(char *rgb_palette, int16_t count)
 {
     SimGraphicsDriver *graphics = sim_graphics_source_owner();
     uint16_t remaining;

@@ -33,9 +33,9 @@ GDB = 'C:/msys64/mingw64/bin/gdb.exe'
 SMOKE = 19500
 CASES = (('default', 'modern-default.txt'), ('zoom', 'modern-zoom.txt'))
 PROBES = ('plane', 'pan', 'keys', 'click', 'click-far', 'zoom')
-STATE = ["'root_0093.c'::seed", 'fd_50F6_0508', 'fd_50F6_383A', 'MapPlane',
-         '*(short *)&fd_50F6_0F12', '*(short *)&fd_50F6_0F34']
-CAMERA = ['fd_50F6_0508', '*(short(*)[4])&fd_50F6_110C', 'MapPlane',
+STATE = ["'root_0093.c'::seed", 'MapPnt', 'main_iteration_count', 'MapPlane',
+         '*(short *)&SpidX', '*(short *)&SpidY']
+CAMERA = ['MapPnt', '*(short(*)[4])&editTileRect', 'MapPlane',
           "'modern_game_view.c'::g.target", "'modern_game_view.c'::g.shown"]
 
 
@@ -81,7 +81,7 @@ def canonical_center(c):
 
 
 CLICK_BREAK = ('break processEdit\ncommands\nsilent\nprint ePtr->h\nprint ePtr->v\n'
-               'print fd_50F6_0508\nprint *(short(*)[4])&fd_50F6_110C\n'
+               'print MapPnt\nprint *(short(*)[4])&editTileRect\n'
                "print 'modern_game_view.c'::g.shown\n"
                "print 'native_windows.c'::n.windows[0].view.left\n"
                "print 'native_windows.c'::n.windows[0].view.top_y\n"
@@ -165,13 +165,13 @@ def main():
     # frame and the state come from the same deterministic run).
     zoom = camera(probes['zoom'])
     overview = gdb_run(build, executable, out, 'gdb-overview', 'modern-zoom.txt',
-                       ["*(short(*)[4])&fd_50F6_10D2", 'fd_50F6_3856', 'fd_50F6_3858', 'fd_50F6_38C0',
+                       ["*(short(*)[4])&map_viewport_rect", 'mapXsize', 'mapYsize', 'map_side_margin_pixels',
                         "'native_windows.c'::n.windows[1].view.left",
                         "'native_windows.c'::n.windows[1].view.top_y",
                         "'native_windows.c'::n.windows[1].strip",
                         "'window_hosting.c'::s.map_cursor_shown",
                         "'modern_game_view.c'::g.shown", 'MapPlane',
-                        '*(short(*)[4])&fd_50F6_110C'], ('--windows',))
+                        '*(short(*)[4])&editTileRect'], ('--windows',))
     map_frame = out / 'gdb-overview' / 'frame.bmp.0100.bmp'
     ov = [numbers(x) for x in values(overview)]
     indicator_ok = False

@@ -1,4 +1,4 @@
-/* Mechanical native projection of src/root/m1699.asm. No VGA operations. */
+/* Mechanical native projection of src/graphics/balloon_masks.asm. No VGA operations. */
 #include "balloon.h"
 #include "portable/whole_program/types/fonts.h"
 #include <stddef.h>
@@ -18,7 +18,7 @@ static size_t row_start(const char *dest, int16_t x, int16_t y)
         (uint16_t)((uint8_t)((uint16_t)y << 1) * (uint8_t)stride);
 }
 
-void f_1699_0000(const uint8_t *pattern, int16_t x, int16_t y, char *dest)
+void CopyChar(const uint8_t *pattern, int16_t x, int16_t y, char *dest)
 {
     size_t i, pos;
     uint16_t stride;
@@ -29,7 +29,7 @@ void f_1699_0000(const uint8_t *pattern, int16_t x, int16_t y, char *dest)
         dest[pos] = (char)pattern[i];
 }
 
-void f_1699_0050(const uint8_t *pattern, int16_t x, int16_t y, char *dest, int16_t count)
+void CopyCharRep(const uint8_t *pattern, int16_t x, int16_t y, char *dest, int16_t count)
 {
     size_t i, pos;
     uint16_t stride;
@@ -40,7 +40,7 @@ void f_1699_0050(const uint8_t *pattern, int16_t x, int16_t y, char *dest, int16
         memset(dest + pos, pattern[i], (uint16_t)count);
 }
 
-void f_1699_00A6(const char *image, char *dest, int16_t x, int16_t y)
+void MoveTextToBalloon(const char *image, char *dest, int16_t x, int16_t y)
 {
     struct Bitmap bitmap;
     size_t row, col, pos;
@@ -56,7 +56,7 @@ void f_1699_00A6(const char *image, char *dest, int16_t x, int16_t y)
             dest[pos + col] = (char)((uint8_t)bitmap.bits[row * columns + col] ^ 0xffu);
 }
 
-void f_1699_0110(const char *source, char *dest)
+void MaskMono2Tandy(const char *source, char *dest)
 {
     uint8_t columns, rows;
     size_t row, col, bit, pos = 4;
@@ -84,7 +84,7 @@ void f_1699_0110(const char *source, char *dest)
     }
 }
 
-void f_1699_01AA(char *dest, char *source, int16_t count)
+void exchange(char *dest, char *source, int16_t count)
 {
     uint32_t i, iterations = (uint16_t)count;
     if (!dest || !source) abort();

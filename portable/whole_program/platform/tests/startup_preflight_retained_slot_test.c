@@ -32,7 +32,7 @@ int main(int argc, char **argv)
         opened != 5 || closed_slot <= 0)
         return 10;
 
-    /* This proves fd_50F6_10D0 is a closed DOS-number slot before any
+    /* This proves startup_executable_fd is a closed DOS-number slot before any
      * subsequent source database open, not an INSTALL.EXE file identity. */
     if (dos_read(closed_slot, header, 1) != -1 || dos_errno != 9)
         return 11;

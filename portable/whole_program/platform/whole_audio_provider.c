@@ -1,4 +1,4 @@
-/* Readable hardware ISR projection of src/root/m28BC.asm. No private voice
+/* Readable hardware ISR projection of src/sound/sample_timer.asm. No private voice
  * copy: completion clears the same snd field consumed by canonical m295C. */
 #include "whole_audio_provider.h"
 #include "audio_native.h"
@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 extern uint8_t portable_canonical_volume_tables[2048];
-extern int16_t f_284A_067F(void);
+extern int16_t snd_song_process_due_events(void);
 int portable_whole_audio_provider_init(PortableWholeAudioProvider *p) {
     memset(p,0,sizeof(*p));p->mix_divider=16;p->devices=sim_isa_audio_create();
     return p->devices!=NULL;
@@ -33,14 +33,14 @@ void portable_whole_audio_provider_start(PortableWholeAudioProvider *p) {
 }
 void portable_whole_audio_provider_stop(PortableWholeAudioProvider *p) { p->armed=0;p->pending_irq=0; }
 static void sequencer(void) {
-    fd_55B3_6B42=(int16_t)((uint16_t)fd_55B3_6B42-1);
-    if(fd_55B3_6B42==0) fd_55B3_6B42=f_284A_067F();
+    midi_service_countdown=(int16_t)((uint16_t)midi_service_countdown-1);
+    if(midi_service_countdown==0) midi_service_countdown=snd_song_process_due_events();
 }
 static void interrupt(PortableWholeAudioProvider *p) {
     unsigned ch,sum=0;int active=0,skip=0;
     if(!p->fast) { sequencer();return; }
     for(ch=0;ch<p->channels;++ch) {
-        PortableWholeAudioRuntimeSample *c=&fd_55B3_6B4C[ch];
+        PortableWholeAudioRuntimeSample *c=&snd_sample_channel_records[ch];
         unsigned sample=128;
         if(c->snd && c->snd->data && *c->snd->data) {
             uint16_t phase=(uint16_t)(c->frac+c->step);
@@ -51,7 +51,7 @@ static void interrupt(PortableWholeAudioProvider *p) {
                 else c->snd=NULL;
                 skip=1;break; // L00C5 skips output and later channels only
             }
-            unsigned row=(uint16_t)(c->voltab-fd_55B3_6B9E)>>8;
+            unsigned row=(uint16_t)(c->voltab-snd_volume_table_offset)>>8;
             if(row>7) { fprintf(stderr,"Unsupported canonical volume table row %u\n",row);abort(); }
             sample=portable_canonical_volume_tables[row*256+((uint8_t *)*c->snd->data)[c->pos]];
         }
@@ -59,11 +59,11 @@ static void interrupt(PortableWholeAudioProvider *p) {
     }
     if(!skip) {
         uint8_t mixed=(uint8_t)(sum/p->channels);
-        if(fd_55B3_6B9C==fd_55B3_74B5) {
-            while(dos_audio_host_in8((uint16_t)fd_55B3_6BA0)&0x80) {}
-            dos_audio_host_out8((uint16_t)fd_55B3_6BA0,0x10);
-            while(dos_audio_host_in8((uint16_t)fd_55B3_6BA0)&0x80) {}
-            dos_audio_host_out8((uint16_t)fd_55B3_6BA0,mixed);
+        if(snd_sample_output_routine==snd_sb_output_pointer) {
+            while(dos_audio_host_in8((uint16_t)snd_sb_dsp_write_port)&0x80) {}
+            dos_audio_host_out8((uint16_t)snd_sb_dsp_write_port,0x10);
+            while(dos_audio_host_in8((uint16_t)snd_sb_dsp_write_port)&0x80) {}
+            dos_audio_host_out8((uint16_t)snd_sb_dsp_write_port,mixed);
         } else { fprintf(stderr,"Unsupported canonical audio output selector (native device profile is Sound Blaster)\n");exit(70); }
     }
     if(--p->mix_divider==0) { p->mix_divider=16;sequencer(); }

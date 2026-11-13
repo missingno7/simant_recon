@@ -2,8 +2,8 @@
 
 The base is `40e1f2d`. Ordinary Full Game input reproduced both reported native
 aborts before the repair: a title-bar drag crossing the right/bottom edges
-reached `win_DrawWindow -> o00_31AD_0647`; map scrolling followed by the shipped
-spider toolbar control reached `UpdateEdit -> DrawSpider -> o00_35A6_0007`.
+reached `win_DrawWindow -> gfx_planar_put_cached_tile`; map scrolling followed by the shipped
+spider toolbar control reached `UpdateEdit -> DrawSpider -> gfx_planar_mask_to_buffer`.
 Read-only GDB observed the latter's horizontal offset 46 and vertical offset 54.
 The original S00 instructions accept these inputs. Canonical source is unchanged.
 

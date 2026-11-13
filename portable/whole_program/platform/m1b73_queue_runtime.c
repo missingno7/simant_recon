@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern void f_1B73_030F(int16_t bx, int16_t es, int16_t ax,
+extern void input_enqueue_event_args(int16_t bx, int16_t es, int16_t ax,
                         int16_t cx, int16_t dx);
-extern int16_t f_1B73_0D4B(int16_t mode);
+extern int16_t mouse_default_cursor_thunk(int16_t mode);
 #include "portable/whole_program/types/input_queue.h"
 
 static PortableM1B73QueueRuntime *active_runtime;
@@ -61,7 +61,7 @@ static int16_t dispatch_event_queue(void *context, int16_t id,
     /* Original f030F loads ES:BX, AX, CX, DX and then unconditionally XORs AX
      * to zero. The real source function enqueues into the already-bound event
      * owner; zero therefore ends the source 0CB3 descriptor walk. */
-    f_1B73_030F(id, (int16_t)flags, (int16_t)status, x, y);
+    input_enqueue_event_args(id, (int16_t)flags, (int16_t)status, x, y);
     return 0;
 }
 
@@ -76,7 +76,7 @@ static int16_t dispatch_cursor_timer(void *context, int16_t id,
     (void)y;
     /* This is the actual Timer.fn target; extra callback stack words are
      * ignored by the original one-word D4B body. Keep its returned AX. */
-    return f_1B73_0D4B(id);
+    return mouse_default_cursor_thunk(id);
 }
 
 int portable_m1b73_queue_runtime_resolve_timer(
@@ -94,9 +94,9 @@ int portable_m1b73_queue_runtime_resolve_timer(
      * standard function-pointer conversion below is identity-only: converted
      * pointers are compared, never invoked or converted to integer/wire form.
      * The invocation itself always uses the true recovered signature above. */
-    if (timer->fn == (void (*)(void))f_1B73_030F) {
+    if (timer->fn == (void (*)(void))input_enqueue_event_args) {
         *callback = dispatch_event_queue;
-    } else if (timer->fn == (void (*)(void))f_1B73_0D4B) {
+    } else if (timer->fn == (void (*)(void))mouse_default_cursor_thunk) {
         *callback = dispatch_cursor_timer;
     } else {
         return 0;
@@ -177,7 +177,7 @@ static int warp_source_pointer(void *context, int16_t x, int16_t y)
         return 0;
 
     /* 09FF calls the source mouse-event handler with AL=1 and BL=buttons;
-     * 0445 writes that pair to g_9120 before running the callback filter. */
+     * 0445 writes that pair to mouse_button_state before running the callback filter. */
     return portable_m1b73_mouse_callback(mouse, 1,
         (uint8_t)*state->button_state, x, y) == PORTABLE_M1B73_MOUSE_OK;
 }
@@ -241,7 +241,7 @@ int portable_m1b73_queue_runtime_bind(
     operations.read_mouse_buttons = read_mouse_buttons;
     operations.set_keyboard_hook = set_keyboard_hook;
     operations.set_cursor_mode = set_cursor_mode;
-    operations.scan_state_table = g_53CD;
+    operations.scan_state_table = kbd_scan_code_state;
     operations.events = events;
     active_runtime = runtime;
     runtime->bound = 1;
@@ -277,7 +277,7 @@ int portable_m1b73_queue_runtime_scan_transition(
     if (!kbd_hook_on || !runtime->mouse->event_pump_active)
         return 0;
     scan = (uint8_t)(event->key >> 8);
-    if (scan >= sizeof(g_53CD))
+    if (scan >= sizeof(kbd_scan_code_state))
         return -1;
     if (event->extended) {
         carry = portable_m1b73_queue_runtime_scan_byte(runtime, 0xe0, 0, 0);
@@ -326,11 +326,11 @@ int portable_m1b73_queue_runtime_scan_byte(
             goto done;
         }
     }
-    if (g_53CD[scan] == release) {
+    if (kbd_scan_code_state[scan] == release) {
         carry = 0; /* equal CMP, not STC: the old BIOS buffer is flushed */
         goto done;
     }
-    g_53CD[scan] = release;
+    kbd_scan_code_state[scan] = release;
     if (make)
         (void)portable_m1b73_event_enqueue_registers(runtime->events,
             0, cx, dx, (uint16_t)(0xfa00 | scan), 0);
@@ -354,35 +354,35 @@ int portable_m1b73_queue_runtime_scan_byte(
         carry = 0;
         break;
     case 0x4c: /* keypad 5 centers on both make and break */
-        g_9122 = (int16_t)(width >> 1);
-        g_9124 = (int16_t)(height >> 1);
+        mouse_x_pixels = (int16_t)(width >> 1);
+        mouse_y_pixels = (int16_t)(height >> 1);
         goto warp;
     case 0x47:
-        if (make) { g_9122 = (uint16_t)g_9122 <= 8 ? 0 : 6; goto warp; }
+        if (make) { mouse_x_pixels = (uint16_t)mouse_x_pixels <= 8 ? 0 : 6; goto warp; }
         carry = 0; break;
     case 0x4f:
         if (make) {
             uint16_t edge = (uint16_t)(width - 1);
-            g_9122 = (int16_t)((uint16_t)(edge - 8) < (uint16_t)g_9122 ? edge : edge - 6);
+            mouse_x_pixels = (int16_t)((uint16_t)(edge - 8) < (uint16_t)mouse_x_pixels ? edge : edge - 6);
             goto warp;
         }
         carry = 0; break;
     case 0x49:
-        if (make) { g_9124 = (uint16_t)g_9124 <= 8 ? 0 : 6; goto warp; }
+        if (make) { mouse_y_pixels = (uint16_t)mouse_y_pixels <= 8 ? 0 : 6; goto warp; }
         carry = 0; break;
     case 0x51:
         if (make) {
             uint16_t edge = (uint16_t)(height - 1);
-            g_9124 = (int16_t)((uint16_t)(edge - 8) <= (uint16_t)g_9124 ? edge : edge - 6);
+            mouse_y_pixels = (int16_t)((uint16_t)(edge - 8) <= (uint16_t)mouse_y_pixels ? edge : edge - 6);
             goto warp;
         }
         carry = 0; break;
     case 0x52: case 0x39: case 0x53: {
         uint8_t button = scan == 0x53 ? 2 : 1;
-        uint8_t buttons = (uint8_t)((g_9120 & (uint16_t)~button) | (make ? button : 0));
+        uint8_t buttons = (uint8_t)((mouse_button_state & (uint16_t)~button) | (make ? button : 0));
         uint8_t mask = button == 1 ? (make ? 2 : 4) : (make ? 8 : 0x10);
         if (portable_m1b73_mouse_callback(runtime->mouse, mask, buttons,
-                g_9122, g_9124) != PORTABLE_M1B73_MOUSE_OK)
+                mouse_x_pixels, mouse_y_pixels) != PORTABLE_M1B73_MOUSE_OK)
             return -1;
         carry = 0;
         break;
@@ -390,7 +390,7 @@ int portable_m1b73_queue_runtime_scan_byte(
     case 0x3b: /* F1: Shift-latch cursor; retains BIOS key */
         if (flags & 0x0f) shift_state = 0;
         else shift_state ^= make ? 0x80 : 0;
-        if (!warp_source_pointer(runtime, g_9122, g_9124)) return -1;
+        if (!warp_source_pointer(runtime, mouse_x_pixels, mouse_y_pixels)) return -1;
         break;
     case 0x19: if (make && (flags & 0x0f) == 4) command = 1; break;
     case 0x4e: if (make && !(flags & 0x0b)) command = flags & 4 ? 2 : 6; break;
@@ -407,7 +407,7 @@ int portable_m1b73_queue_runtime_scan_byte(
     }
     goto done;
 warp:
-    if (!warp_source_pointer(runtime, g_9122, g_9124)) return -1;
+    if (!warp_source_pointer(runtime, mouse_x_pixels, mouse_y_pixels)) return -1;
     carry = 0;
 done:
     kbd_last_scan = raw;
@@ -424,19 +424,19 @@ int portable_m1b73_queue_runtime_cursor_tick(PortableM1B73QueueRuntime *runtime)
     ++timer_busy;
     if (timer_busy != 1 || mouse_busy) goto done;
     /* INT08:888-911: deferred cursor work precedes movement. */
-    if ((int8_t)g_4365 > 0) {
-        if (!(runtime->mouse->display_busy && *runtime->mouse->display_busy) && !g_4333) {
-            uint8_t pending = g_4331 & 1;
-            g_4331 >>= 1;
-            if (pending) f_1B73_04BB();
+    if ((int8_t)cursor_show_level > 0) {
+        if (!(runtime->mouse->display_busy && *runtime->mouse->display_busy) && !cursor_update_lock) {
+            uint8_t pending = cursor_drawn_flag & 1;
+            cursor_drawn_flag >>= 1;
+            if (pending) mouse_refresh_cursor();
         }
     } else {
         g_4332 >>= 1;
         if (!g_4332) {
             g_4332 = 1;
-            if ((g_4331 || !g_4366) &&
-                !(runtime->mouse->display_busy && *runtime->mouse->display_busy) && !g_4333)
-                f_1B73_00D9();
+            if ((cursor_drawn_flag || !g_4366) &&
+                !(runtime->mouse->display_busy && *runtime->mouse->display_busy) && !cursor_update_lock)
+                mouse_show_cursor();
         }
     }
     sx = (uint8_t)(g_4362 + g_4368);
@@ -445,8 +445,8 @@ int portable_m1b73_queue_runtime_cursor_tick(PortableM1B73QueueRuntime *runtime)
     if (tick_phase == 4 || tick_phase == 10 || tick_phase == 28) ++g_4364;
     sx = g_4364 >= 8 ? 0 : (uint8_t)(sx << g_4364);
     sy = g_4364 >= 8 ? 0 : (uint8_t)(sy << g_4364);
-    x = (int16_t)((uint16_t)g_9122 + (int8_t)sx);
-    y = (int16_t)((uint16_t)g_9124 + (int8_t)sy);
+    x = (int16_t)((uint16_t)mouse_x_pixels + (int8_t)sx);
+    y = (int16_t)((uint16_t)mouse_y_pixels + (int8_t)sy);
     if (x < 0) x = 0;
     if (y < 0) y = 0;
     if (x >= *runtime->mouse->screen_width) x = *runtime->mouse->screen_width - 1;
@@ -488,7 +488,7 @@ int portable_m1b73_queue_runtime_prepare_cursor_change(void)
     return prepare_cursor_change(active_runtime);
 }
 
-void f_1B73_0196(void)
+void mouse_hide_cursor(void)
 {
     if (!portable_m1b73_queue_runtime_prepare_cursor_change())
         abort();

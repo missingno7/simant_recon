@@ -7,7 +7,7 @@
 
 /* Win16 SimAnt shows the game's kind-6 menu resource as a native menu bar
  * (InitMenu) and sends WM_COMMAND 0xFDxx to DoMenuEntry. The DOS pull-down
- * (S10 o10_35F5_0384) posts the same command space as a game event:
+ * (S10 menu_track_popup) posts the same command space as a game event:
  * code = (menu << 4) + item - 0x2FF. Item state bytes (byte 0 of each title
  * and item string: 0x10 check, 0x20 none, | 0x80 disabled) stay owned by the
  * game (SetMenuItemState); the native menu only mirrors them. */

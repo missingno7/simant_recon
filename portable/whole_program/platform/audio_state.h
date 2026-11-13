@@ -18,7 +18,7 @@ typedef struct PortableWholeAudioSample {
 #pragma pack(pop)
 
 /* Shared native ownership for source audio globals. Several original TUs use
- * fd_50F6_0000 at DOS address 50F6:0000 with different semantic declarations:
+ * snd_instrument_descriptors at DOS address 50F6:0000 with different semantic declarations:
  * m0000/m290D see {kind, Sample *}, m277E sees {a, void *}, m2815 sees
  * {kind, patch *}, and m295C sees {count, driver-info *}. Every view accesses
  * the same two-byte discriminator and far-pointer payload. This native table
@@ -34,10 +34,10 @@ typedef struct PortableWholeAudioInstrumentEntry {
 typedef struct PortableWholeAudioRuntimeChannel {
     uint8_t type;
     uint8_t num;
-    uint8_t c2;
-    uint8_t c3;
-    uint8_t c4;
-    uint8_t c5;
+    uint8_t priority;
+    uint8_t instrument;
+    uint8_t note;
+    uint8_t age;
 } PortableWholeAudioRuntimeChannel;
 
 typedef struct PortableWholeAudioRuntimeSample {
@@ -64,16 +64,16 @@ typedef struct PortableWholeAudioVoiceSlot {
 } PortableWholeAudioVoiceSlot;
 #pragma pack(pop)
 
-/* Source bounds: fd_50F6_0000 has 56 table entries (the nine DATA instrument
- * tables each contain 56 entries); canonical source owns fd_50F6_0150 as the
- * 39-entry sample free list used by f_0000_0149; fd_50F6_01F0's seven words
- * are addressed directly by f_277E_00AF/0000. Native views are independent
+/* Source bounds: snd_instrument_descriptors has 56 table entries (the nine DATA instrument
+ * tables each contain 56 entries); canonical source owns snd_sample_release_list as the
+ * 39-entry sample free list used by snd_queue_sample_release; snd_driver_capabilities's seven words
+ * are addressed directly by snd_reset_channel_tables/0000. Native views are independent
  * symbols because pointer widening makes original DOS byte offsets unsuitable
  * as host offsets.
  */
-extern PortableWholeAudioInstrumentEntry fd_50F6_0000[56];
-extern PortableWholeAudioSample *fd_50F6_0150[39];
-extern int16_t fd_50F6_01F0[7];
+extern PortableWholeAudioInstrumentEntry snd_instrument_descriptors[56];
+extern PortableWholeAudioSample *snd_sample_release_list[39];
+extern int16_t snd_driver_capabilities[7];
 
 /* Source m277E initializes/scans 0x21 six-byte channel records. The native
  * bytes are unsigned as read by m295C; m277E's -1 initializer is stored as
@@ -81,41 +81,41 @@ extern int16_t fd_50F6_01F0[7];
  * uses two; four-slot mode can use four. The remaining entries are the source
  * zero-type sentinel/available rows consumed by m295C's original scan.
  */
-extern PortableWholeAudioRuntimeChannel fd_50F6_4A4E[33];
+extern PortableWholeAudioRuntimeChannel snd_voice_slots[33];
 extern int16_t fd_50F6_4A46;
-extern int16_t fd_50F6_4A48;
+extern int16_t snd_sample_channel_count;
 extern int16_t fd_50F6_4A4A;
-extern int16_t fd_50F6_4A4C;
-extern int16_t fd_50F6_4B14;
-extern int16_t fd_50F6_4B16;
+extern int16_t snd_voice_build_index;
+extern int16_t snd_device_io_base;
+extern int16_t snd_opl_volume_bias;
 
 /* MIDI parser state: 18 source tracks and 14 source channel instrument maps. */
-extern char **fd_50F6_4B28;
-extern int16_t fd_50F6_4B2C;
-extern int16_t fd_50F6_4B2E;
-extern uint8_t fd_50F6_4B30[];
-extern int32_t fd_50F6_4B42[];
-extern int32_t fd_50F6_4B8A;
-extern int16_t fd_50F6_4B8E[14];
-extern int16_t fd_50F6_4BAA[14];
+extern char **midi_song_data_handle;
+extern int16_t midi_song_data_bytes;
+extern int16_t midi_header_division;
+extern uint8_t midi_track_status[];
+extern int32_t midi_track_event_ticks[];
+extern int32_t midi_tick_delay_scale;
+extern int16_t midi_channel_instruments[14];
+extern int16_t midi_channel_priorities[14];
 
 /* Audio device configuration scalars remain owned by the generated state
  * aliases/source modules. These declarations centralize their shared ABI;
  * this header deliberately provides no storage for them. */
-extern int16_t fd_55B3_6B4A;
-extern int16_t fd_55B3_6B9C;
-extern int16_t fd_55B3_6BA0;
-extern int16_t fd_55B3_74AD;
-extern int16_t fd_55B3_74AF;
-extern int16_t fd_55B3_74B1;
-extern int16_t fd_55B3_74B3;
-extern int16_t fd_55B3_74B5;
-extern int16_t fd_55B3_74B7;
-extern int16_t fd_55B3_74B9;
-extern int16_t fd_55B3_74C0;
-extern uint16_t fd_55B3_7564;
-extern int16_t (*fd_55B3_74DA[9])(void);
-extern uint8_t fd_55B3_6BA4[255];
+extern int16_t snd_dac_io_base;
+extern int16_t snd_sample_output_routine;
+extern int16_t snd_sb_dsp_write_port;
+extern int16_t snd_speaker_output_pointer;
+extern int16_t snd_adlib_output_pointer;
+extern int16_t snd_lpt_output_pointer;
+extern int16_t snd_port200_output_pointer;
+extern int16_t snd_sb_output_pointer;
+extern int16_t snd_port222_output_pointer;
+extern int16_t snd_based_dac_output_pointer;
+extern int16_t snd_sample_volume_bias;
+extern uint16_t snd_sb_io_base;
+extern int16_t (*snd_driver_probe_table[9])(void);
+extern uint8_t snd_opl_volume_curve[255];
 
 static inline PortableWholeAudioSample *portable_whole_audio_sample(
     const PortableWholeAudioInstrumentEntry *entry)
@@ -136,9 +136,9 @@ static inline int16_t *portable_whole_audio_driver_info(
 }
 
 /* Source m28BC/m290D timer and sampled-channel state. */
-extern int16_t fd_55B3_6B42;
-extern PortableWholeAudioRuntimeSample fd_55B3_6B4C[4];
+extern int16_t midi_service_countdown;
+extern PortableWholeAudioRuntimeSample snd_sample_channel_records[4];
 
-extern uint16_t fd_55B3_6B9E;
+extern uint16_t snd_volume_table_offset;
 
 #endif

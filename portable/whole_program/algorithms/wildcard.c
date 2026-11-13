@@ -46,5 +46,5 @@ compare:
     goto restart;
 }
 
-int16_t f_1F66_002D(char *pattern, char *name) { return match(pattern, name, 0); }
-int16_t f_1F66_0029(char *pattern, char *name) { return match(pattern, name, 1); }
+int16_t file_wildcard_match(char *pattern, char *name) { return match(pattern, name, 0); }
+int16_t file_wildcard_search(char *pattern, char *name) { return match(pattern, name, 1); }

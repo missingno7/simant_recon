@@ -90,16 +90,16 @@ static SimNativeVideoBinding *require_binding(void)
     return &s_binding;
 }
 
-int16_t o21_39C7_0000(void)
+int16_t gfx_probe_display_adapters(void)
 {
     (void)require_binding();
     /* The virtual adapter can provide VGA. f_205F uses this descriptor only
-     * when canonical ReadConfig/argv leave g_5A97 in autodetect mode. A
+     * when canonical ReadConfig/argv leave gfx_display_mode in autodetect mode. A
      * configured or command-line source mode remains authoritative. */
     return (int16_t)0x0305;
 }
 
-int16_t o21_39C7_016D(void)
+int16_t gfx_bios_has_tandy_signature(void)
 {
     /* A selected supported descriptor cannot reach the Tandy BIOS query.
      * Returning false here would invent a hardware observation. */
@@ -108,7 +108,7 @@ int16_t o21_39C7_016D(void)
     abort();
 }
 
-void f_1B4E_0025(void)
+void gfx_reset_driver_callbacks(void)
 {
     (void)require_binding();
     uninstall_services();
@@ -144,7 +144,7 @@ static void install_source_mode(int16_t mode)
         abort();
     }
     s_binding.source_abi_bound = 1;
-    f_1B4E_015B(mode);
+    gfx_video_bios_ax(mode);
     graphics_status = sim_graphics_source_last_status();
     if (graphics_status != SIM_GRAPHICS_OK) {
         s_binding.status = SIM_NATIVE_VIDEO_GRAPHICS_FAILURE;
@@ -160,12 +160,12 @@ static void install_source_mode(int16_t mode)
     s_binding.status = SIM_NATIVE_VIDEO_OK;
 }
 
-void o00_31AD_2AB4(void)
+void gfx_planar_init_640x350(void)
 {
     install_source_mode(0x10);
 }
 
-void o00_31AD_2AE5(void)
+void gfx_planar_init_640x480(void)
 {
     install_source_mode(0x12);
 }

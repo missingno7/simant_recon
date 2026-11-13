@@ -132,6 +132,17 @@ and audio working, and has no known observable discrepancy in this domain.
    fix what supported gameplay observes and move on.
 5. Add a focused regression; rerun the scenario; repeat.
 
+## Verification matrix
+
+`evidence/port/verification-matrix.json` is the port's progress record: per subsystem the
+supported domain, coverage level (1 compiles, 2 unit/differential tests, 3 integration,
+4 verified against the original DOS executable, 5 unverified or known to differ), the
+original-DOS, canonical-DOS and native evidence, the known divergence, the first open
+question and the next useful test or fix. Progress is verified behavioural coverage and
+removed observable divergences, not test counts or source metrics. A subsystem is faithfully
+ported only inside its stated domain and only with differential or end-to-end evidence;
+compiling, isolated tests or a plausible screen are not equivalence.
+
 ## Not blockers
 
 A difference does not block SDL3 closure merely because pointer representations,

@@ -1,7 +1,7 @@
 {
   "schema": "canonical-input-0747-register-controls-v1",
-  "source": "src/root/m1B73.asm",
-  "source_sha256": "eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3",
+  "source": "src/platform/input_timer.asm",
+  "source_sha256": "c7bac0c206bada2e960dfd219fe14b1f53cddf67ad0e6cafd1990a9524965844",
   "canonical_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
   "code_snapshot_sha256": "d5befe4fc1c868f8a9bad37f5c1cedfb42515c706baeef9f25335f88a8bef75d",
   "rows": 2304,
@@ -9,14 +9,27 @@
   "csv_sha256": "433ff116ebe7e8e0362647372d4365d80f7c55ea49397b15746f4ac870946ca2",
   "csv_columns": "BDA17word,baseScan,rawScan,carry,count,shiftState,stepXbyte,stepYbyte,accelerationByte,xWord,yWord,then all eight words of each queued record in slot order",
   "controls": {
-    "BDA17words_in_order": [0, 1, 2, 4, 8, 260],
+    "BDA17words_in_order": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      260
+    ],
     "base_scans_in_order": "0 through 127 inclusive",
     "sequence": "make, duplicate make, break; preserve machine between these three steps; fresh state for each sequence",
     "incoming_CX": 768,
     "incoming_DX": 23597,
     "BDA_clock_low_word": 4660,
-    "screen": [640, 480],
-    "position": [260, 330],
+    "screen": [
+      640,
+      480
+    ],
+    "position": [
+      260,
+      330
+    ],
     "initial_scan_table": "128 bytes of 80h",
     "initial_shift_last_scan_steps_acceleration": 0,
     "cursor_show_level_and_mouse_mode": 0,

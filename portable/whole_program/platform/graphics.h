@@ -98,7 +98,7 @@ typedef struct SimGraphicsDriver {
     uint8_t glyph_height;
     const uint8_t *pattern_source; /* caller-owned view of source g_41D0 pattern data */
     size_t pattern_source_size;
-    const uint8_t *custom_font_source; /* caller-owned g_3DA8:g_3DAA font view */
+    const uint8_t *custom_font_source; /* caller-owned gfx_primary_font_offset:gfx_primary_font_segment font view */
     size_t custom_font_source_size;
     const uint8_t *bios_8x8_source; /* host service result for INT 10h AX=1130h/BH=03h */
     size_t bios_8x8_source_size;
@@ -111,7 +111,7 @@ typedef struct SimGraphicsDriver {
 } SimGraphicsDriver;
 
 /* Default source startup profile is EGA mode 10h (640x350); mode 12h selects
- * VGA 640x480. g_3DB6 remains the DOS planar stride (80) in both modes; host
+ * VGA 640x480. gfx_screen_row_bytes remains the DOS planar stride (80) in both modes; host
  * indexed stride equals the logical pixel width. */
 SimGraphicsStatus sim_graphics_init(SimGraphicsDriver *graphics);
 SimGraphicsStatus sim_graphics_set_mode(SimGraphicsDriver *graphics, int16_t mode);
@@ -129,16 +129,16 @@ void sim_graphics_vga_sync(SimGraphicsDriver *graphics);
  * represented as a native uint16_t. Null unbinds the source ABI. */
 SimGraphicsStatus sim_graphics_bind_source_abi(SimGraphicsDriver *graphics,
                                                struct Rect *const *source_g_5AAC);
-/* S00 o00_31AD_1AE7 overrides table slots after the initial 25-entry copy. */
+/* S00 gfx_planar_init_320x200 overrides table slots after the initial 25-entry copy. */
 SimGraphicsStatus sim_graphics_s00_apply_cga_font_overrides(SimGraphicsDriver *graphics);
 SimGraphicsDriver *sim_graphics_source_owner(void);
 SimGraphicsStatus sim_graphics_source_last_status(void);
 
 /* Native equivalents of public source f_1B4E entry points. The void signatures
  * mirror the source far procedures; status is read via source_last_status. */
-void f_1B4E_015B(int16_t mode);
-int16_t f_1B4E_000D(int16_t color);
-void f_1B4E_0228(int16_t color);
+void gfx_video_bios_ax(int16_t mode);
+int16_t ConvColor(int16_t color);
+void gfx_set_border_colour(int16_t color);
 
 /* Selected DOS table globals, initialized only while a graphics owner is
  * bound. Unselected driver entries have no fabricated callback. */
@@ -165,13 +165,13 @@ SimGraphicsStatus sim_graphics_clip_push(SimGraphicsDriver *graphics);
 SimGraphicsStatus sim_graphics_clip_set(SimGraphicsDriver *graphics, PortableRect clip);
 SimGraphicsStatus sim_graphics_clip_pop(SimGraphicsDriver *graphics);
 
-/* Source entry f_1B4E_000D(int color): preserves high color bits and maps its
- * low nibble through the initialized g_41C0 palette map. */
+/* Source entry ConvColor(int color): preserves high color bits and maps its
+ * low nibble through the initialized gfx_colour_translation palette map. */
 int16_t sim_graphics_f_1B4E_000D(SimGraphicsDriver *graphics, int16_t color);
 
 /* Logical driver entries, matching the source call-site word widths. g9128's
  * S00 target stores only fore/back; the third source word is deliberately
- * ignored because o00_31AD_1659 reads only [bp+6] and [bp+8]. */
+ * ignored because gfx_planar_gsetattrib reads only [bp+6] and [bp+8]. */
 SimGraphicsStatus sim_graphics_g9128(SimGraphicsDriver *graphics,
                                      int16_t foreground,
                                      int16_t background,
@@ -204,13 +204,13 @@ SimGraphicsStatus sim_graphics_set_bios_font_sources(SimGraphicsDriver *graphics
                                                      size_t font_8x8_size,
                                                      const uint8_t *font_8x14,
                                                      size_t font_8x14_size);
-/* S00 slot g9170/o00_31AD_1499; source-derived 640x480-domain walk and the
+/* S00 slot g9170/gfx_planar_draw_line_raw; source-derived 640x480-domain walk and the
  * reviewed indexed logic operations in g_3DD2 are supported. */
 SimGraphicsStatus sim_graphics_g9170_line(SimGraphicsDriver *graphics,
                                           int16_t x0, int16_t y0,
                                           int16_t x1, int16_t y1,
                                           int16_t color);
-/* S00 slot g9154/o00_31AD_1206: bounded MSB-first one-bit bitmap transfer,
+/* S00 slot g9154/gfx_planar_gputimgs: bounded MSB-first one-bit bitmap transfer,
  * with foreground/background supplied by the current source pen attributes. */
 SimGraphicsStatus sim_graphics_g9154(SimGraphicsDriver *graphics,
                                      int16_t x, int16_t y,
@@ -219,7 +219,7 @@ SimGraphicsStatus sim_graphics_g9154(SimGraphicsDriver *graphics,
 
 /* Install a caller-owned, bounds-described 1bpp BIOS-font image. Each glyph
  * starts glyph_bytes_per_character bytes after the previous glyph (source
- * g_3DDA); raster rows are MSB-first per m1B4E f_1B4E_0110's g9154 boundary. */
+ * gfx_font_glyph_stride); raster rows are MSB-first per m1B4E gfx_put_fixed_font_char's g9154 boundary. */
 SimGraphicsStatus sim_graphics_set_glyph_source(SimGraphicsDriver *graphics,
                                                 const uint8_t *bytes,
                                                 size_t size,
@@ -227,9 +227,9 @@ SimGraphicsStatus sim_graphics_set_glyph_source(SimGraphicsDriver *graphics,
                                                 uint8_t width,
                                                 uint8_t height);
 
-/* Source entries f_1B4E_0110(int x,int y,int character) and
- * f_1B4E_0081(int x,int y,char far *text), expressed with explicit native
- * state ownership. Text stops at NUL and returns final pen state in g_3DA0/2. */
+/* Source entries gfx_put_fixed_font_char(int x,int y,int character) and
+ * gfx_put_fixed_font_chars(int x,int y,char far *text), expressed with explicit native
+ * state ownership. Text stops at NUL and returns final pen state in gfx_text_pen_x/2. */
 SimGraphicsStatus sim_graphics_f_1B4E_0110(SimGraphicsDriver *graphics,
                                            int16_t x, int16_t y,
                                            int16_t character);

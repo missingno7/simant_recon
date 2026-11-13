@@ -19,7 +19,7 @@ void portable_m1b73_unbind_source_main_input(
 
 /* Logical source queries backed by the same retained SDL input provider.
  * Scan codes must be in the original 0..127 key-state table domain. */
-int16_t f_1B73_0A30(uint16_t scan_code);
-int16_t f_1B73_0EEE(void);
+int16_t kbd_scan_state(uint16_t scan_code);
+int16_t kbd_scroll_lock_state(void);
 
 #endif

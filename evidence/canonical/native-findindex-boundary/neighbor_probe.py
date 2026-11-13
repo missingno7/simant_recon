@@ -70,9 +70,9 @@ def original_history(allocation_size, fill, release=False):
     sequence = []
     visited = []
     tracked = {r['seg'] * 16 + r['off']: name for name in
-        ('OpenIndex', 'FindIndex', 'f_171C_13CA', 'f_171C_125C',
-         'f_171C_0EEA', 'f_171C_0A5C', 'f_171C_068C', 'f_171C_13E4',
-         'f_171C_0160', 'f_171C_1246') for r in (p.entry(name),)}
+        ('OpenIndex', 'FindIndex', 'Ralloc', 'mem_alloc_handle_block',
+         'mem_find_free_block', 'mem_claim_handle_slot', 'mem_carve_free_block', 'RallocFree',
+         'mem_free_and_coalesce', 'mem_release_handle_slot') for r in (p.entry(name),)}
 
     def code(cpu, address, length, user):
         if address in tracked:
@@ -84,7 +84,7 @@ def original_history(allocation_size, fill, release=False):
         args=[0, 0xA600, 0], writes=writes, callbacks=p.callbacks,
         state={'file_bytes': raw, 'file_cursor': 0, 'file_reads': []},
         return_kind='void'))
-    pointer = int.from_bytes(machine.read(b.symbol_address('fd_50F6_3958') + 0x50, 4), 'little')
+    pointer = int.from_bytes(machine.read(b.symbol_address('openDBData') + 0x50, 4), 'little')
     start = p.far_linear(pointer)
     tail = start + size
     index_header = header(machine, start - 32)
@@ -103,20 +103,20 @@ def original_history(allocation_size, fill, release=False):
     visited.clear()
     recovered = machine.run(b.Case(label='recover index handle',
         args=[pointer & 65535, pointer >> 16], return_kind='farptr'),
-        preserve=True, original_entry=p.entry('f_171C_2136'))
+        preserve=True, original_entry=p.entry('mem_handle_from_pointer'))
     assert recovered['return'] == (master_seg << 16) | (index_header['master_slot_offset'] & 65535)
     assert int.from_bytes(machine.read(p.far_linear(recovered['return']), 4), 'little') == pointer
-    sequence.append({'name': 'f_171C_2136', 'payload': far(pointer), 'return_handle': far(recovered['return'])})
+    sequence.append({'name': 'mem_handle_from_pointer', 'payload': far(pointer), 'return_handle': far(recovered['return'])})
     allocated = machine.run(b.Case(label='original neighbor Ralloc',
         args=[allocation_size & 65535, allocation_size >> 16, 0, 0x40, 0xA600],
         callbacks=p.callbacks, return_kind='farptr'), preserve=True,
-        original_entry=p.entry('f_171C_13CA'))
+        original_entry=p.entry('Ralloc'))
     handle = allocated['return']
     neighbor_pointer = int.from_bytes(machine.read(p.far_linear(handle), 4), 'little')
     assert p.far_linear(neighbor_pointer) - 32 == tail
     neighbor = header(machine, tail)
     assert neighbor['requested_bytes'] == allocation_size
-    sequence.append({'name': 'f_171C_13CA',
+    sequence.append({'name': 'Ralloc',
         'args': {'size': allocation_size, 'flags': 0, 'name': 'neighbor'},
         'actual_stack_words': [allocation_size & 65535, allocation_size >> 16, 0, 0x40, 0xA600],
         'return_handle': far(handle), 'payload_pointer': far(neighbor_pointer),
@@ -125,15 +125,15 @@ def original_history(allocation_size, fill, release=False):
     visited.clear()
     recovered = machine.run(b.Case(label='recover neighbor handle',
         args=[neighbor_pointer & 65535, neighbor_pointer >> 16], return_kind='farptr'),
-        preserve=True, original_entry=p.entry('f_171C_2136'))
+        preserve=True, original_entry=p.entry('mem_handle_from_pointer'))
     assert recovered['return'] == handle
-    sequence.append({'name': 'f_171C_2136', 'payload': far(neighbor_pointer), 'return_handle': far(handle)})
+    sequence.append({'name': 'mem_handle_from_pointer', 'payload': far(neighbor_pointer), 'return_handle': far(handle)})
     if release:
         freed = machine.run(b.Case(label='original neighbor free',
             args=[handle & 65535, handle >> 16], callbacks=p.callbacks,
             return_kind='void'), preserve=True,
-            original_entry=p.entry('f_171C_13E4'))
-        sequence.append({'name': 'f_171C_13E4', 'args': far(handle),
+            original_entry=p.entry('RallocFree'))
+        sequence.append({'name': 'RallocFree', 'args': far(handle),
             'return': None, 'actual_entries': visited.copy(),
             'modeled_callbacks': freed['raw_trace'],
             'tail_owner_after': header(machine, tail)})
@@ -153,8 +153,8 @@ def original_history(allocation_size, fill, release=False):
             args=[0, ident, kind], return_kind='farptr'), preserve=True,
             original_entry=p.entry('FindIndex'))
         machine.cpu.hook_del(hook)
-        cursor = machine.word(b.symbol_address('fd_50F6_3956'))
-        candidate = int.from_bytes(machine.read(b.symbol_address('fd_50F6_3952'), 4), 'little')
+        cursor = machine.word(b.symbol_address('db_index_lower_bound'))
+        candidate = int.from_bytes(machine.read(b.symbol_address('db_index_search_entry'), 4), 'little')
         expected_hit = not release and allocation_size == 320 and (ident, kind) == (0, 22)
         if kind >= 22:
             assert cursor == count
@@ -190,7 +190,7 @@ int16_t dos_read(int16_t fd, void *buffer, uint16_t count) { (void)fd; (void)buf
 int16_t dos_close(int16_t fd) { (void)fd; abort(); }
 void DosPunt(char *message) { (void)message; abort(); }
 void Punt(char *format, ...) { (void)format; abort(); }
-void **f_171C_13CA(int32_t size, int16_t flags, char *name) { (void)size; (void)flags; (void)name; abort(); }
+void **Ralloc(int32_t size, int16_t flags, char *name) { (void)size; (void)flags; (void)name; abort(); }
 void dos_free(void *data) { (void)data; abort(); }
 int main(int argc, char **argv) {
     FILE *f;
@@ -203,12 +203,12 @@ int main(int argc, char **argv) {
     rows = malloc((size_t)h.count * sizeof *rows);
     if (!rows || fread(rows, sizeof *rows, (size_t)h.count, f) != (size_t)h.count) return 4;
     fclose(f);
-    fd_50F6_3958[0].indexHeader = h;
-    fd_50F6_3958[0].index = rows;
+    openDBData[0].indexHeader = h;
+    openDBData[0].index = rows;
     for (i = 0; i < sizeof queries / sizeof queries[0]; ++i) {
         got = FindIndex(0, queries[i][0], queries[i][1]);
-        printf("%d,%d,%d,%td,%td\n", queries[i][0], queries[i][1], fd_50F6_3956,
-            got ? got-rows : -1, fd_50F6_3952-rows);
+        printf("%d,%d,%d,%td,%td\n", queries[i][0], queries[i][1], db_index_lower_bound,
+            got ? got-rows : -1, db_index_search_entry-rows);
     }
     free(rows);
     return 0;
@@ -238,7 +238,7 @@ def native_guard(conversion):
         copied.write_bytes(source.read_bytes())
         sources.append(copied)
     body = sources[0].read_text()
-    guard = 'if (fd_50F6_3956 == fd_50F6_3958[db].indexHeader.count) return 0L;'
+    guard = 'if (db_index_lower_bound == openDBData[db].indexHeader.count) return 0L;'
     assert body.count(guard) == 1
     driver = OUT / 'native_guard_driver.c'
     driver.write_text(NATIVE_DRIVER, encoding='utf-8')
@@ -296,8 +296,8 @@ def main():
     results += [original_history(304, 0xA7), original_history(320, 0xA7, release=True)]
     negative = native_guard(args.conversion.resolve())
     contexts = []
-    for name in ('OpenIndex', 'FindIndex', 'f_171C_13CA', 'f_171C_125C',
-                 'f_171C_068C', 'f_171C_13E4', 'f_171C_0160', 'f_171C_2136'):
+    for name in ('OpenIndex', 'FindIndex', 'Ralloc', 'mem_alloc_handle_block',
+                 'mem_carve_free_block', 'RallocFree', 'mem_free_and_coalesce', 'mem_handle_from_pointer'):
         ran = subprocess.run([sys.executable, 'tools/context.py', name], cwd=ROOT,
             text=True, capture_output=True, check=True, timeout=45)
         context = OUT / f'{name}.disasm.txt'

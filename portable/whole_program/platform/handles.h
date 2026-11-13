@@ -85,42 +85,42 @@ size_t sim_handles_capacity_bytes(const SimHandleManager *manager);
 void *dos_malloc(uint16_t size);
 void *dos_realloc(void *pointer, uint16_t size);
 void dos_free(void *pointer);
-void *f_171C_2302(void *pointer, uint16_t size);
+void *mem_realloc_pointer_bridge(void *pointer, uint16_t size);
 
 /* Source-named high-level APIs used outside root:m171C in the migration.
  * Failure mapping: allocation/access return NULL; metadata queries return
  * conservative zero; void mutators leave state unchanged. Inspect
  * sim_handles_global_last_status() for the explicit failure cause. This
  * fail-closed host policy is not the DOS Punt/nonreturn behavior. */
-char **f_171C_13CA(int32_t size, int16_t flags, char *name);
-char **f_171C_1A9E(int32_t size, int16_t flags, char *name);
-char *f_171C_1B84(char **handle);
-char **f_171C_1BBA(char **handle);
-void f_171C_13E4(char **handle);
-void f_171C_1C0A(char **handle);
-char **f_171C_1B2C(char **handle, int32_t size, int16_t flags);
-char **f_171C_18A6(char **handle, int32_t size, int16_t flags);
-int32_t f_171C_1C1C(char **handle);
-int32_t f_171C_16EA(char **handle);
-int16_t f_171C_1686(char **handle);
-int16_t f_171C_1AD4(char **handle);
-int16_t f_171C_1794(char **handle);
-int16_t f_171C_1E9A(char **handle);
-void f_171C_1804(char **handle);
-void f_171C_1C82(char **handle);
-void f_171C_1E86(char **handle, int16_t flags);
-void f_171C_20E2(char **handle);
-void f_171C_1EFA(void);
-int16_t f_171C_0EDE(void);
-int32_t f_171C_1750(void);
-int32_t f_171C_1772(void);
-char *f_171C_1D40(char **handle);
-uint32_t f_171C_14BE(char **handle);
-void f_171C_152C(char **handle);
-void f_171C_15A2(char **handle, int16_t flags);
-char **f_171C_2086(char **handle);
-char *f_171C_2190(uint16_t size, char *name);
-char *f_171C_21CC(uint16_t size);
+char **Ralloc(int32_t size, int16_t flags, char *name);
+char **mem_Alloc(int32_t size, int16_t flags, char *name);
+char *mem_Lock(char **handle);
+char **mem_Unlock(char **handle);
+void RallocFree(char **handle);
+void mem_Free(char **handle);
+char **mem_Realloc(char **handle, int32_t size, int16_t flags);
+char **RallocRealloc(char **handle, int32_t size, int16_t flags);
+int32_t mem_Size(char **handle);
+int32_t RallocSize(char **handle);
+int16_t RallocType(char **handle);
+int16_t mem_LockLevel(char **handle);
+int16_t RallocFreed(char **handle);
+int16_t mem_handle_above_ems_boundary(char **handle);
+void mem_discard_handle(char **handle);
+void mem_mark_discardable_1c82(char **handle);
+void mem_set_alloc_type(char **handle, int16_t flags);
+void mem_mark_discardable_20e2(char **handle);
+void mem_discard_soft_blocks(void);
+int16_t mem_compact_any_region(void);
+int32_t RallocMemoryFree(void);
+int32_t RallocMemorySoft(void);
+char *mem_move_high_and_lock(char **handle);
+uint32_t mem_handle_age_delta(char **handle);
+void RallocFreshen(char **handle);
+void RallocSetType(char **handle, int16_t flags);
+char **mem_unlock_encoded_handle(char **handle);
+char *mem_malloc(uint16_t size, char *name);
+char *mem_malloc_bridge(uint16_t size);
 void f_171C_0676(void);
 SimHandleStatus sim_handles_global_last_status(void);
 SimHandleStatus sim_handles_global_configure(size_t capacity_bytes, size_t max_handles);
@@ -131,7 +131,7 @@ int sim_handles_global_measure_payload(const void *address, size_t *remaining);
 /* Appends a logical handle inventory. Payload sizes are native bytes; physical
  * DOS paragraph ordering and addresses are unavailable in this provider. */
 int sim_handles_dump(const char *path, const char *where);
-void f_171C_030C(char *where);
+void mem_dump_heap(char *where);
 char **f_2CFB_0002(int32_t size, int16_t flags, char *name);
 void f_2CFB_0007(char **handle);
 void f_2CFB_002F(char **handle, int16_t flags);

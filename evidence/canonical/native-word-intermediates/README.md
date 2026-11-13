@@ -15,7 +15,7 @@ In 16-bit code opcode `99` is **CWD**, despite Capstone's `cdq` spelling.
 | --- | --- | --- |
 | CalcScore | IMUL word at 0180; CWD at 0183 replaces the high product; IDIV BX at 0184 consumes the signed low word | /8: score component 3 is 2; total is 17401 |
 | GetDis | SUB AX at 0B92/0BA4; CWD at 0B95/0BA9; long multiplication squares each signed word difference | /8: (-31846,2584,20309,18495) returns 432211082 |
-| f_0250_0F2C | ADD AX at 0F79/0FAE; signed CMP/JLE | /0: viewport (0,1), height 32767 remains (0,1) |
+| BoundEditPosition | ADD AX at 0F79/0FAE; signed CMP/JLE | /0: viewport (0,1), height 32767 remains (0,1) |
 | BalloonIsVisible | ADD AX at 4252/4275 and SUB CX,3 at 426A before signed comparisons | /9 returns 1; this witness wraps the X sum |
 | BoundPointToTri | ADD AX at 06C1 before signed word /2; six word SUB operations feed full signed IMUL or CWD-widened divisors | /16: point (-4509,-11238), rect (11341,-11081,29084,-10794) becomes (-12555,-11081) |
 

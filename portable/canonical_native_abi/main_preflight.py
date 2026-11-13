@@ -1,9 +1,9 @@
 from __future__ import annotations
 import hashlib
 from pathlib import Path
-SOURCE = Path('src/root/m15F8.c')
-OLD_BLOCK = '    for (i = 0; i < 5; i++) {\n        if ((fh[i] = open("install.exe", 0)) <= 0) {\n            if (errno == 24) {\n                printf(fd_4E37_0000, 5 - i);\n                exit(1);\n            } else {\n                printf("DOS Error %d: %s", errno, sys_errlist[errno]);\n                exit(2);\n            }\n        }\n    }\n    for (i = 0; i < 5; i++)\n        close(fh[i]);\n    fd_50F6_10D0 = fh[0];'
-NEW_BLOCK = '    {\n        int16_t opened_before_failure;\n        if (dos_startup_preflight("INSTALL.EXE", &fd_50F6_10D0,\n                                  &opened_before_failure) < 0) {\n            if (dos_errno == 24) {\n                printf(fd_4E37_0000, 5 - opened_before_failure);\n                exit(1);\n            } else {\n                printf("DOS Error %d: %s", dos_errno,\n                       dos_startup_error_text(dos_errno));\n                exit(2);\n            }\n        }\n    }'
+SOURCE = Path('src/startup/main.c')
+OLD_BLOCK = '    for (i = 0; i < 5; i++) {\n        if ((fh[i] = open("install.exe", 0)) <= 0) {\n            if (errno == 24) {\n                printf(dos_files_shortage_format, 5 - i);\n                exit(1);\n            } else {\n                printf("DOS Error %d: %s", errno, sys_errlist[errno]);\n                exit(2);\n            }\n        }\n    }\n    for (i = 0; i < 5; i++)\n        close(fh[i]);\n    startup_executable_fd = fh[0];'
+NEW_BLOCK = '    {\n        int16_t opened_before_failure;\n        if (dos_startup_preflight("INSTALL.EXE", &startup_executable_fd,\n                                  &opened_before_failure) < 0) {\n            if (dos_errno == 24) {\n                printf(dos_files_shortage_format, 5 - opened_before_failure);\n                exit(1);\n            } else {\n                printf("DOS Error %d: %s", dos_errno,\n                       dos_startup_error_text(dos_errno));\n                exit(2);\n            }\n        }\n    }'
 
 def adapt(source: str) -> tuple[str, dict]:
     source = source.replace('\r\n', '\n')

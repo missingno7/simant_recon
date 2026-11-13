@@ -6,14 +6,14 @@
 /* Whole-program link adapters use these original symbol spellings and DOS
  * scalar widths. Pointer values are native pointers; DOS segment/offset
  * aliasing and 64 KiB wrap are not part of this adapter ABI. */
-uint16_t f_1959_0002(uint16_t value);
-uint32_t f_1959_000C(uint32_t value);
-uint8_t *f_24FA_0004(uint8_t *start, uint8_t value, uint16_t count);
-void f_24FA_0029(uint8_t *dst, const uint8_t *src, int16_t width, int16_t height);
-void f_24FA_00A0(uint8_t *bytes, int16_t count);
+uint16_t FlipWord(uint16_t value);
+uint32_t FlipLong(uint32_t value);
+uint8_t *MemRChr(uint8_t *start, uint8_t value, uint16_t count);
+void ConvertMonoToTandy(uint8_t *dst, const uint8_t *src, int16_t width, int16_t height);
+void invert(uint8_t *bytes, int16_t count);
 /* Original entry is INT 3 with no normal return. Native invariant failure. */
-_Noreturn void f_24FA_00B5(void);
-void f_2650_0107(uint8_t *bytes, int16_t count);
+_Noreturn void debug_breakpoint(void);
+void ClearBuffer(uint8_t *bytes, int16_t count);
 
 /* Scalar contracts recovered from the original root assembly modules. */
 uint16_t simant_dos_swap_word(uint16_t value);

@@ -5,20 +5,20 @@
 #include "../state/asm_shared_state.h"
 
 /* Native host pointer replacing the far page-frame pointer when EMS is absent. */
-extern char *fd_55B3_360E;
+extern char *ems_page_frame_pointer;
 
 /* Source-compatible native entry points used by m0250.c and m19DC.c. */
-int16_t f_195A_0260(void);
-_Noreturn void f_195A_001D(void);
-_Noreturn void f_195A_0035(void);
-_Noreturn int16_t f_195A_004B(int16_t pages);
-_Noreturn void f_195A_0062(int16_t handle, int16_t logical_page,
+int16_t ems_initialize(void);
+_Noreturn void ems_query_page_frame(void);
+_Noreturn void ems_query_page_counts(void);
+_Noreturn int16_t ems_allocate_pages(int16_t pages);
+_Noreturn void ems_map_page(int16_t handle, int16_t logical_page,
                            int16_t physical_page);
-_Noreturn void f_195A_007D(int16_t handle);
-_Noreturn void f_195A_00F8(int16_t handle);
-_Noreturn void f_195A_010D(int16_t handle);
-_Noreturn void f_195A_0122(int16_t handle, int16_t count,
+_Noreturn void ems_free_handle(int16_t handle);
+_Noreturn void ems_save_handle_map(int16_t handle);
+_Noreturn void ems_restore_handle_map(int16_t handle);
+_Noreturn void ems_map_multiple_pages(int16_t handle, int16_t count,
                            int16_t *mapping);
-_Noreturn void f_195A_01CB(int16_t handle, char *name);
+_Noreturn void ems_set_handle_name(int16_t handle, char *name);
 
 #endif

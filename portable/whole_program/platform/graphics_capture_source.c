@@ -104,7 +104,7 @@ static SimGraphicsStatus capture_rect_impl(
     vga = (SimVga *)&graphics->vga;
     /* m31AD:L058A/L05C7/L05CA: MUL row stride, SAR left, header STOSW,
      * then four read-map selections and forward byte copies per scanline. */
-    si=sim_vga_pixel_offset(left,top,(uint16_t)g_3DB6);
+    si=sim_vga_pixel_offset(left,top,(uint16_t)gfx_screen_row_bytes);
     buffer[0]=(uint8_t)(columns*8u); buffer[1]=(uint8_t)((columns*8u)>>8);
     buffer[2]=(uint8_t)height; buffer[3]=(uint8_t)(height>>8);
     for (row=0;row<height;++row) {
@@ -113,7 +113,7 @@ static SimGraphicsStatus capture_rect_impl(
             for (byte=0;byte<columns;++byte)
                 buffer[4u+row*columns*4u+plane*columns+byte]=sim_vga_read(vga,(uint16_t)(si+byte));
         }
-        si=(uint16_t)(si+(uint16_t)g_3DB6);
+        si=(uint16_t)(si+(uint16_t)gfx_screen_row_bytes);
     }
     return SIM_GRAPHICS_OK;
 }
@@ -162,7 +162,7 @@ static void source_g9148_capture(int16_t left, int16_t top,
     SimGraphicsDriver *graphics = capture_owner();
     size_t required;
     SimGraphicsStatus status;
-    uint8_t *display_busy = (uint8_t *)&g_3DD4;
+    uint8_t *display_busy = (uint8_t *)&gfx_cursor_draw_lock;
 
     if (graphics == NULL || display_busy == NULL)
         abort();
@@ -173,9 +173,9 @@ static void source_g9148_capture(int16_t left, int16_t top,
 
     /* Preserve the source's inclusive overlap test and callback order:
      * g4344 is the cursor bottom, g4346 its right edge. */
-    if (g_4333 == 0 && top <= (int16_t)g_4344 &&
-        bottom >= (int16_t)g_4342 && left <= (int16_t)g_4346 &&
-        right >= (int16_t)g_4340) {
+    if (cursor_update_lock == 0 && top <= (int16_t)cursor_drawn_bottom &&
+        bottom >= (int16_t)cursor_drawn_top && left <= (int16_t)cursor_drawn_right &&
+        right >= (int16_t)cursor_drawn_left) {
         if (!sim_graphics_cursor_hooks_hide()) {
             graphics->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
             fprintf(stderr, "S00 capture requires bound source cursor-hide service\n");
@@ -206,9 +206,9 @@ static void source_g9148_capture(int16_t left, int16_t top,
     /* The source checks these fields after the copy, independently of the
      * pre-capture overlap decision. The callbacks retain m1B73's actual
      * show-level, mouse-event, hot-box, and redraw side effects. */
-    if (g_4333 == 0) {
-        if (g_4365 != 0) {
-            if (g_4331 != 0 && !sim_graphics_cursor_hooks_redraw_if_shown()) {
+    if (cursor_update_lock == 0) {
+        if (cursor_show_level != 0) {
+            if (cursor_drawn_flag != 0 && !sim_graphics_cursor_hooks_redraw_if_shown()) {
                 graphics->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
                 fprintf(stderr, "S00 capture requires bound source cursor-redraw service\n");
                 exit(70);

@@ -1,5 +1,6 @@
 """Source-span helpers; no source selection or generator dependency."""
 import re
+from pathlib import Path
 from . import tokenizer as csrc
 
 
@@ -76,3 +77,35 @@ def function_heads(source):
     if depth:
         raise ValueError('unbalanced source braces')
     return result
+
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def expand_shared_headers(text, seen=None):
+    """Expose canonical include/ records and constants before native ABI views.
+
+    The existing record adapters need complete declarations to replace DOS
+    pointer slots; included definitions therefore pass through scalar lowering
+    with their consumers. GCC still expands remaining macros in the expression
+    frontend. The builder pins every input header in its identity receipt.
+    """
+    seen = set() if seen is None else seen
+    def include(match):
+        name = match[1]
+        header = ROOT / 'include' / name
+        if not header.is_file():
+            return match[0]
+        if name in seen:
+            return ''
+        seen.add(name)
+        body = header.read_text(encoding='latin1')
+        # Comments between members did not exist in the old local declarations.
+        body = re.sub(r'/\*.*?\*/', '', body, flags=re.S)
+        return expand_shared_headers(body, seen)
+    text = re.sub(r'^\s*#include\s+"([^"\n]+)"\s*$', include, text, flags=re.M)
+    constants = dict(re.findall(r'^#define[ \t]+(\w+)[ \t]+([^\r\n]+)', text, re.M))
+    # Named object constants now occur inside exact hardware/ABI anchors.
+    # Token replacement protects comments/literals and leaves #define directives
+    # for GCC. All current *_ids.h macros are object-like numeric constants.
+    return rename(text, constants)

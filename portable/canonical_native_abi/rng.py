@@ -2,7 +2,7 @@ from __future__ import annotations
 import hashlib
 import re
 from typing import Any
-SOURCE_PATH = 'src/root/m0093.c'
+SOURCE_PATH = 'src/simulation/random.c'
 MASKS = (('SRand2', 'd2', '1', 1), ('SRand4', 'd4', '3', 3), ('SRand8', 'd8', '7', 7), ('SRand16', 'd16', '0fh', 15), ('SRand32', 'd32', '1fh', 31), ('SRand64', 'd64', '3fh', 63), ('SRand128', 'd128', '7fh', 127), ('SRand256', 'd256', '0ffh', 255))
 SRAND1_RE = re.compile('int far SRand1\\(unsigned int range\\)\\s*\\{.*?^\\s*return result;\\s*\\}', re.MULTILINE | re.DOTALL)
 MASK_MACRO_RE = re.compile('^#define SRAND_MASK\\(name, label, mask\\).*?^SRAND_MASK\\(SRand256, d256, 0ffh\\)\\s*$', re.MULTILINE | re.DOTALL)

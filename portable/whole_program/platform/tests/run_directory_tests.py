@@ -426,7 +426,7 @@ def main() -> int:
             "search_slot_cleanup_verified": final_open == 0,
         },
         "contract_notes": {
-            "source_callsite": "S09 m35F5 o09_35F5_03C6 searches *.* with _A_SUBDIR and then filters file entries using *.ant; directories including .. are presented by the selector.",
+            "source_callsite": "S09 m35F5 FileSelect searches *.* with _A_SUBDIR and then filters file entries using *.ant; directories including .. are presented by the selector.",
             "attribute_rules": "Normal/read-only/archive entries are included by default. Hidden, system, and directory entries require their respective mask bits. Returned attributes preserve read-only/hidden/system/subdir/archive bits.",
             "cookie": "The reserved 21-byte MSC field carries only a versioned slot/generation/checksum token; host pointers and enumeration buffers remain private in the provider table. Copying find_t shares one iterator. End-of-search frees its snapshot; dos_findclose supports early cleanup.",
             "error_contract": "Successful calls return 0; no initial match returns DOS 2, exhausted iteration DOS 18, invalid/stale cookie DOS 6, full provider table DOS 4, and non-8.3 or >2GB result DOS 206/223. dos_errno carries the matching MSC errno interpretation (or zero on success).",

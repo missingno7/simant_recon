@@ -3,9 +3,9 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-_Noreturn void f_24FA_00B5(void)
+_Noreturn void debug_breakpoint(void)
 {
-    /* src/root/m24FA.asm contains only INT 3 at this entry. */
+    /* src/graphics/pixel_helpers.asm contains only INT 3 at this entry. */
     abort();
 }
 
@@ -20,12 +20,12 @@ uint32_t simant_dos_swap_dword(uint32_t value)
            simant_dos_swap_word((uint16_t)(value >> 16));
 }
 
-uint16_t f_1959_0002(uint16_t value)
+uint16_t FlipWord(uint16_t value)
 {
     return simant_dos_swap_word(value);
 }
 
-uint32_t f_1959_000C(uint32_t value)
+uint32_t FlipLong(uint32_t value)
 {
     return simant_dos_swap_dword(value);
 }
@@ -43,7 +43,7 @@ const uint8_t *simant_dos_reverse_find_byte(const uint8_t *start,
     return 0;
 }
 
-uint8_t *f_24FA_0004(uint8_t *start, uint8_t value, uint16_t count)
+uint8_t *MemRChr(uint8_t *start, uint8_t value, uint16_t count)
 {
     return (uint8_t *)simant_dos_reverse_find_byte(start, value, count);
 }
@@ -70,7 +70,7 @@ void simant_dos_expand_2bit_bytes(uint8_t *dst,
     }
 }
 
-void f_24FA_0029(uint8_t *dst, const uint8_t *src, int16_t width, int16_t height)
+void ConvertMonoToTandy(uint8_t *dst, const uint8_t *src, int16_t width, int16_t height)
 {
     simant_dos_expand_2bit_bytes(dst, src, width, height);
 }
@@ -84,7 +84,7 @@ void simant_dos_invert_bytes(uint8_t *bytes, uint16_t count)
         bytes[i] = (uint8_t)~bytes[i];
 }
 
-void f_24FA_00A0(uint8_t *bytes, int16_t count)
+void invert(uint8_t *bytes, int16_t count)
 {
     if (bytes == 0)
         abort();
@@ -100,7 +100,7 @@ void simant_dos_clear_bytes(uint8_t *bytes, uint16_t count)
         bytes[i] = 0;
 }
 
-void f_2650_0107(uint8_t *bytes, int16_t count)
+void ClearBuffer(uint8_t *bytes, int16_t count)
 {
     if (bytes == 0 || count <= 0)
         abort();

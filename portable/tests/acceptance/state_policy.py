@@ -4,10 +4,10 @@ Snapshot files always preserve the original bytes. No policy writes source state
 """
 G5702_STACK_RESIDUE_TAIL = {
     'id': 'G5702_STACK_RESIDUE_TAIL',
-    'symbol': 'g_5702',
-    'source': 'src/root/m1E57.c:f_1E57_00B1',
+    'symbol': 'clip_window_z_order',
+    'source': 'src/graphics/clip_regions.c:win_raise_and_reclip',
     'reason': 'buf[32] is filled only through the 0x8000 terminator, then '
-              '_fmemcpy(g_5702, buf, sizeof(buf)) stores its uninitialized stack tail. '
+              '_fmemcpy(clip_window_z_order, buf, sizeof(buf)) stores its uninitialized stack tail. '
               'DOS/native stack residue beyond a shared first sentinel is excluded '
               'by the reviewed comparison policy; prefix and sentinel remain compared.',
     'scope': '64-byte int16 list; exclude bytes strictly after the shared first '
@@ -17,7 +17,7 @@ G5702_STACK_RESIDUE_TAIL = {
 
 def state_prefix(name, dos, native, raw_state=False):
     """Return comparable bytes and an explicit receipt, never a silent mask."""
-    if name != 'g_5702' or raw_state:
+    if name != 'clip_window_z_order' or raw_state:
         return dos, native, None
     receipt = dict(G5702_STACK_RESIDUE_TAIL, applied=False)
     if len(dos) != 64 or len(native) != 64:

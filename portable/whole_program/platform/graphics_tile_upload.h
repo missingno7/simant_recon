@@ -35,7 +35,7 @@ typedef enum SimGraphicsTileUploadStatus {
 } SimGraphicsTileUploadStatus;
 
 /* Canonical source word at DGROUP:3DD4, updated as byte low-order lock depth. */
-extern uint16_t g_3DD4;
+extern uint16_t gfx_cursor_draw_lock;
 typedef void (*SimGraphicsTileBlitCallback)(int16_t x, int16_t y,
                                             uint16_t cache_offset);
 typedef void (*SimGraphicsTileMapUploadCallback)(char *source,
@@ -75,35 +75,35 @@ void sim_graphics_tile_compose(const uint8_t background_record[128],
 SimGraphicsTileUploadStatus sim_graphics_tile_upload_read_plane(
     unsigned plane, uint16_t offset, uint8_t *destination, size_t byte_count);
 
-/* Source ABI entries reached by root:m0250 f_0250_0256 / LoadTiles. In the
+/* Source ABI entries reached by root:m0250 edit_load_terrain_tiles / LoadTiles. In the
  * first routine, the source's second argument is a destination offset (despite
  * the old C declaration's `seg` name); in the second, the third argument is the
  * sequencer plane index. The global source video segment remains A000h. The
  * first source object is 0x8000 bytes, deinterleaved into four 0x2000 planes. */
-void o00_31AD_18BA(char *source, uint16_t destination_offset, int16_t row_count);
-void o00_31AD_186A(char *source, uint16_t destination_offset,
+void gfx_planar_upload_tiles(char *source, uint16_t destination_offset, int16_t row_count);
+void gfx_planar_upload_plane(char *source, uint16_t destination_offset,
                    int16_t plane, uint16_t byte_count);
 
-/* Source driver dispatch slot g917C, S00 o00_31AD_0647. `offset` is the
+/* Source driver dispatch slot g917C, S00 gfx_planar_put_cached_tile. `offset` is the
  * absolute byte offset of one 16x16 tile in the four-plane video aperture;
  * the caller already includes its A000h/C000h cache base. */
 SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     int16_t x, int16_t y, uint16_t offset);
-void o00_31AD_0647(int16_t x, int16_t y, uint16_t offset);
+void gfx_planar_put_cached_tile(int16_t x, int16_t y, uint16_t offset);
 
 /* Source terrain/life compositors. The 0xA0 record has a 10-byte row
  * (mask word + four pixel words); 0xC0 records have a 12-byte row (mask,
  * source color/prefix, and four pixel words). */
-void o00_31AD_2B1A(int16_t cache_offset, int16_t plane, char *record);
-void o00_31AD_2FDA(int16_t x, int16_t y, int16_t cache_offset,
+void gfx_planar_compose_life_ems(int16_t cache_offset, int16_t plane, char *record);
+void gfx_planar_draw_life_ems(int16_t x, int16_t y, int16_t cache_offset,
                    int16_t plane, char *record);
-void o00_31AD_1B7D(int16_t cache_offset, int16_t plane, char *record,
+void gfx_planar_compose_life_320(int16_t cache_offset, int16_t plane, char *record,
                    int16_t mask_mode);
-void o00_31AD_1B49(int16_t x, int16_t y, int16_t cache_offset,
+void gfx_planar_draw_life_320(int16_t x, int16_t y, int16_t cache_offset,
                    int16_t plane, char *record, int16_t mask_mode);
-void o00_31AD_303F(int16_t cache_offset, int16_t plane, char *record,
+void gfx_planar_compose_life_hires(int16_t cache_offset, int16_t plane, char *record,
                    int16_t mask_mode);
-void o00_31AD_300B(int16_t x, int16_t y, int16_t cache_offset,
+void gfx_planar_draw_life_hires(int16_t x, int16_t y, int16_t cache_offset,
                    int16_t plane, char *record, int16_t mask_mode);
 
 #ifdef __cplusplus

@@ -10,9 +10,9 @@
  * docs/modern-frontend.md for the dependency map these views follow.
  *
  * Names follow the Win16 reconstruction where the pairing is proven by the
- * shared formulas (MapPnt = fd_50F6_0508, editWidth/editHeight =
- * fd_50F6_10E0/10DE, editTileRect = fd_50F6_110C, mapTileRect = fd_50F6_10D2,
- * mapXsize/mapYsize = fd_50F6_3856/3858, just = fd_50F6_38C0). */
+ * shared formulas (MapPnt = MapPnt, editWidth/editHeight =
+ * fd_50F6_10E0/10DE, editTileRect = editTileRect, mapTileRect = map_viewport_rect,
+ * mapXsize/mapYsize = mapXsize/3858, just = map_side_margin_pixels). */
 
 enum { MODERN_TILE_SIZE = 16 };
 
@@ -21,7 +21,7 @@ typedef struct ModernRect { int16_t left, top, right, bottom; } ModernRect;
 typedef struct ModernWorldView {
     int plane;               /* MapPlane: 0 yard (the edit view shows the surface),
                                 1 surface, 2 black nest, 3 red nest */
-    int columns, rows;       /* world tiles: 128x64 for planes 0/1, else 64x64 (f_0250_0F2C) */
+    int columns, rows;       /* world tiles: 128x64 for planes 0/1, else 64x64 (BoundEditPosition) */
     int tile_width, tile_height;   /* g_19BE/g_19C0: 16 in the supported EGA/VGA modes */
     int terrain_set;         /* TERRAINset (OverlayTileSet) */
     /* The canonical edit view: the game's camera. */
@@ -32,8 +32,8 @@ typedef struct ModernWorldView {
 
 void modern_world_view(ModernWorldView *view);
 
-/* Canonical cell codes, as f_0250_1018 computes them for the edit view:
- * ground tile (g_94E4) and life code (g_9126: 0 none, +0x100 surface,
+/* Canonical cell codes, as DoCalcTile computes them for the edit view:
+ * ground tile (edit_current_terrain_tile) and life code (edit_current_life_tile: 0 none, +0x100 surface,
  * +0x200 nest, 0x300/0x380 bases for the player's ant). */
 typedef struct ModernCell { uint8_t ground; uint16_t life; } ModernCell;
 /* World tile (x, y), 0 <= y < 64, on the current plane. */
@@ -50,7 +50,7 @@ uint32_t modern_world_cell_key(const ModernCell *cell);
 int modern_world_spider_cells(int *left, int *top);
 
 /* The edit view's status message (g_19C6, e.g. "Game Paused"), drawn by
- * f_0250_13A6 centred in editTileRect at top+4 until it expires; NULL when
+ * edit_render_viewport centred in editTileRect at top+4 until it expires; NULL when
  * none. It belongs to the view, not to the world. */
 const char *modern_world_status_message(void);
 

@@ -32,7 +32,7 @@ def source_consumers(texts, names):
 
 
 def save_records(text):
-    start=re.search(r'struct SaveRec far fd_4E4B_0000\[\d+\] = \{',text)
+    start=re.search(r'struct SaveRec far save_record_table\[\d+\] = \{',text)
     if not start:raise ValueError('canonical SaveRec table missing')
     body=text[start.start():text.index('};',start.start())]
     rows=[]
@@ -86,7 +86,7 @@ class Contracts:
         # not delete its requirement, and a new block cannot silently escape it.
         aliases=self.document['aliases']
         self.cross_records=[]
-        for row in save_records(texts['src/S09/m35F5.c']):
+        for row in save_records(texts['src/ui/save_load.c']):
             name=row['owner'];extra=row['extra']
             if name in aliases:
                 extra+=aliases[name]['offset'];name=aliases[name]['owner']

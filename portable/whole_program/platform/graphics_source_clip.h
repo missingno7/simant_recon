@@ -9,16 +9,16 @@ extern "C" {
 #endif
 
 /* Canonical native owners for DOS DGROUP 55B3:5A9C and the far pointer at
- * 55B3:5AAC. g_5AAE is the pointer's segment word, not another global. */
+ * 55B3:5AAC. clip_active_list_segment is the pointer's segment word, not another global. */
 /* Original 5A9C..5AAB is a full-screen rectangle followed by a sentinel
  * rectangle. Source clip_Off and clip_SubExclude walk it as a list. */
-extern struct Rect g_5A9C[2];
-extern struct Rect *g_5AAC;
-extern int16_t fd_55B3_3DE6;
-extern int16_t fd_55B3_3DE8;
+extern struct Rect gfx_screen_clip_list[2];
+extern struct Rect *clip_active_list_offset;
+extern int16_t gfx_clip_left_pixels;
+extern int16_t gfx_clip_right_pixels;
 
 /* The DOS resident default before a video mode is selected is deliberately
- * retained as 0,0,349,639. f_205F_0004 later writes right/bottom to the chosen
+ * retained as 0,0,349,639. gfx_select_driver_resources later writes right/bottom to the chosen
  * logical dimensions. This binds the live graphics owner but does not invent
  * or install a clipping list. */
 SimGraphicsStatus sim_graphics_source_clip_bind(SimGraphicsDriver *graphics);

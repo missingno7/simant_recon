@@ -5,6 +5,6 @@
 
 /* Source root:m15F8 frame counter. It is incremented once per outer UI loop
  * and read by S06 time-window logic; the original DGROUP cell starts at zero. */
-extern int32_t fd_50F6_383A;
+extern int32_t main_iteration_count;
 
 #endif

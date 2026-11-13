@@ -9,9 +9,9 @@ extern "C" {
  * drawing. The application binds these to the active m1B73 mouse runtime. */
 typedef struct SimGraphicsCursorHooks {
     void *context;
-    int (*hide)(void *context);             /* source f_1B73_0196 */
-    int (*update)(void *context);           /* source f_1B73_00D9 */
-    int (*redraw_if_shown)(void *context);  /* source f_1B73_04BB */
+    int (*hide)(void *context);             /* source mouse_hide_cursor */
+    int (*update)(void *context);           /* source mouse_show_cursor */
+    int (*redraw_if_shown)(void *context);  /* source mouse_refresh_cursor */
 } SimGraphicsCursorHooks;
 
 typedef enum SimGraphicsCursorHooksStatus {

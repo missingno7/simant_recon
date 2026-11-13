@@ -459,120 +459,120 @@ i<g_handles->slot_count;
     g_handles=sim_handles_create(capacity_bytes,max_handles);
     return g_handles?SIM_HANDLE_OK:SIM_HANDLE_NO_MEMORY;
 }
-char **f_171C_13CA(int32_t size,int16_t flags,char *name){
+char **Ralloc(int32_t size,int16_t flags,char *name){
  SimHandle h=NULL;
  sim_handles_allocate(global_manager(),size,flags,name,&h);
 return h;
  }
-char **f_171C_1A9E(int32_t size,int16_t flags,char *name){
- SimHandle h=f_171C_13CA(size,flags,name);
+char **mem_Alloc(int32_t size,int16_t flags,char *name){
+ SimHandle h=Ralloc(size,flags,name);
 return h?sim_handles_index_token(global_manager(),h):NULL;
  }
-char *f_171C_1B84(char **h){
+char *mem_Lock(char **h){
  char *p=NULL;
 sim_handles_lock(global_manager(),h,&p);
 return p;
  }
-char **f_171C_1BBA(char **h){
+char **mem_Unlock(char **h){
  SimHandle token=NULL;
 sim_handles_unlock(global_manager(),h,&token);
 return token;
  }
-void f_171C_13E4(char **h) {
+void RallocFree(char **h) {
  sim_handles_free(global_manager(),h);
  }
-void f_171C_1C0A(char **h) {
- f_171C_13E4(h);
+void mem_Free(char **h) {
+ RallocFree(h);
  }
-char **f_171C_1B2C(char **h,int32_t size,int16_t flags){
+char **mem_Realloc(char **h,int32_t size,int16_t flags){
  SimHandle real=NULL;
 if(sim_handles_resize(global_manager(),h,size,flags)!=SIM_HANDLE_OK)return NULL;
 return sim_handles_resolve(global_manager(),h,&real)==SIM_HANDLE_OK?real:NULL;
  }
-char **f_171C_18A6(char **h,int32_t size,int16_t flags) {
- return f_171C_1B2C(h,size,flags);
+char **RallocRealloc(char **h,int32_t size,int16_t flags) {
+ return mem_Realloc(h,size,flags);
  }
-int32_t f_171C_1C1C(char **h){
+int32_t mem_Size(char **h){
  SimHandleInfo i;
 if(sim_handles_info(global_manager(),h,&i)!=SIM_HANDLE_OK||i.size>INT32_MAX)return 0;
 return (int32_t)i.size;
  }
-int32_t f_171C_16EA(char **h) {
- return f_171C_1C1C(h);
+int32_t RallocSize(char **h) {
+ return mem_Size(h);
  }
-int16_t f_171C_1686(char **h){
+int16_t RallocType(char **h){
  SimHandleInfo i;
 return sim_handles_info(global_manager(),h,&i)==SIM_HANDLE_OK?(int16_t)i.type:0;
  }
-int16_t f_171C_1AD4(char **h){
+int16_t mem_LockLevel(char **h){
  SimHandleInfo i;
 return sim_handles_info(global_manager(),h,&i)==SIM_HANDLE_OK?(int16_t)i.lock_count:0;
  }
-int16_t f_171C_1794(char **h) {
- return f_171C_1686(h)==SIM_HANDLE_DISCARDED;
+int16_t RallocFreed(char **h) {
+ return RallocType(h)==SIM_HANDLE_DISCARDED;
  }
-int16_t f_171C_1E9A(char **h){
+int16_t mem_handle_above_ems_boundary(char **h){
  SimHandleInfo i;
 if(sim_handles_info(global_manager(),h,&i)!=SIM_HANDLE_OK)return 0;
 return 0;
  }
- /* Host has no DOS EMS region. */void f_171C_1804(char **h) {
+ /* Host has no DOS EMS region. */void mem_discard_handle(char **h) {
  (void)sim_handles_discard(global_manager(),h);
  }
-void f_171C_1C82(char **h) {
+void mem_mark_discardable_1c82(char **h) {
  SimHandle r=NULL;
 if(sim_handles_resolve(global_manager(),h,&r)==SIM_HANDLE_OK)(void)sim_handles_set_type(global_manager(),r,SIM_HANDLE_SOFT);
  }
-void f_171C_1E86(char **h,int16_t flags) {
+void mem_set_alloc_type(char **h,int16_t flags) {
  (void)sim_handles_set_type(global_manager(),h,flags);
  }
-void f_171C_20E2(char **h) {
+void mem_mark_discardable_20e2(char **h) {
  SimHandle r=NULL;
 if(sim_handles_resolve(global_manager(),h,&r)==SIM_HANDLE_OK)(void)sim_handles_set_type(global_manager(),r,SIM_HANDLE_SOFT);
  }
-void f_171C_15A2(char **h,int16_t flags) {
+void RallocSetType(char **h,int16_t flags) {
  (void)sim_handles_set_type(global_manager(),h,flags);
  }
-char **f_171C_2086(char **h) {
- return f_171C_1BBA(h);
+char **mem_unlock_encoded_handle(char **h) {
+ return mem_Unlock(h);
  }
 void f_171C_0676(void) {
  /* The original entry is explicitly empty. */ }
-void f_171C_1EFA(void){
+void mem_discard_soft_blocks(void){
     SimHandleManager *m=global_manager();
 size_t i;
     for(i=0;
 m&&i<m->slot_count;
 ++i)if(m->slots[i]&&m->slots[i]->live&&m->slots[i]->type==SIM_HANDLE_SOFT&&!m->slots[i]->lock_count)        (void)sim_handles_discard(m,make_real_handle(m->slots[i]));
 }
-int16_t f_171C_0EDE(void) {
+int16_t mem_compact_any_region(void) {
  return 0;
  }
- /* No segment-fragmented paragraph heap exists to relocate on host. */int32_t f_171C_1750(void){
+ /* No segment-fragmented paragraph heap exists to relocate on host. */int32_t RallocMemoryFree(void){
  SimHandleManager*m=global_manager();
 size_t n;
 if(!m||m->capacity_bytes==SIZE_MAX)return -1;
 n=m->capacity_bytes-m->used_bytes;
 return n>INT32_MAX?INT32_MAX:(int32_t)n;
  }
-int32_t f_171C_1772(void){
+int32_t RallocMemorySoft(void){
  size_t n=sim_handles_soft_bytes(global_manager());
 return n>INT32_MAX?INT32_MAX:(int32_t)n;
  }
-char *f_171C_1D40(char **h){
+char *mem_move_high_and_lock(char **h){
  SimHandleInfo i;
 if(sim_handles_info(global_manager(),h,&i)!=SIM_HANDLE_OK)return NULL;
 if(i.lock_count){
 set_status(global_manager(),SIM_HANDLE_LOCKED);
 return NULL;
 }
-return f_171C_1B84(h);
+return mem_Lock(h);
  }
-uint32_t f_171C_14BE(char **h){
+uint32_t mem_handle_age_delta(char **h){
  SimHandleInfo i;
 return sim_handles_info(global_manager(),h,&i)==SIM_HANDLE_OK?i.age-global_manager()->age:0;
  }
-void f_171C_152C(char **h){
+void RallocFreshen(char **h){
  SimHandleInfo i;
 SimHandleManager*m=global_manager();
 if(sim_handles_info(m,h,&i)==SIM_HANDLE_OK){
@@ -592,11 +592,11 @@ static void *dos_malloc_named(size_t size,const char*name){
     SimHandle h;
 DosPointerEntry*e;
     if(!size)return NULL;
-    h=f_171C_13CA((int32_t)size,0,name?(char*)name:"malloc");
+    h=Ralloc((int32_t)size,0,name?(char*)name:"malloc");
 if(!h)return NULL;
     e=(DosPointerEntry*)malloc(sizeof(*e));
 if(!e){
-f_171C_13E4(h);
+RallocFree(h);
 return NULL;
 }
     e->handle=h;
@@ -620,7 +620,7 @@ return;
 }
 link=&e->next;
 }
-    /* OpenIndex retains the payload address returned by f_171C_13CA, then
+    /* OpenIndex retains the payload address returned by Ralloc, then
      * CloseIndex calls source-visible free(payload). Resolve that live
      * payload identity back to its owning handle. */
     h=find_pointer(pointer);
@@ -652,23 +652,23 @@ s=slot_for(m,h);
 void *dos_malloc(uint16_t size) {
  return dos_malloc_named(size, "malloc");
  }
-char *f_171C_2190(uint16_t size,char *name) {
+char *mem_malloc(uint16_t size,char *name) {
  return (char *)dos_malloc_named(size,name);
  }
-char *f_171C_21CC(uint16_t size) {
+char *mem_malloc_bridge(uint16_t size) {
  return (char *)dos_malloc(size);
  }
 char **f_2CFB_0002(int32_t size,int16_t flags,char *name) {
- return f_171C_13CA(size,flags,name);
+ return Ralloc(size,flags,name);
  }
 void f_2CFB_0007(char **handle) {
- f_171C_13E4(handle);
+ RallocFree(handle);
  }
 void f_2CFB_002F(char **handle,int16_t flags) {
- f_171C_15A2(handle,flags);
+ RallocSetType(handle,flags);
  }
 
-void *f_171C_2302(void *pointer, uint16_t size)
+void *mem_realloc_pointer_bridge(void *pointer, uint16_t size)
 {
     return dos_realloc(pointer, size);
 }
@@ -740,7 +740,7 @@ int sim_handles_dump(const char *path, const char *where)
     return 1;
 }
 
-void f_171C_030C(char *where)
+void mem_dump_heap(char *where)
 {
     (void)sim_handles_dump("ralloc.dmp", where);
 }

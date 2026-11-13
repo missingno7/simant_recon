@@ -1,8 +1,8 @@
 from __future__ import annotations
 import hashlib
-CANONICAL_PATH = 'src/root/m1986.c'
-GUARD = 'if (fd_50F6_3956 == fd_50F6_3958[db].indexHeader.count) return 0L;'
-CURSOR_ASSIGNMENT = 'fd_50F6_3952 = &fd_50F6_3958[db].index[fd_50F6_3956];'
+CANONICAL_PATH = 'src/resources/database_index.c'
+GUARD = 'if (db_index_lower_bound == openDBData[db].indexHeader.count) return 0L;'
+CURSOR_ASSIGNMENT = 'db_index_search_entry = &openDBData[db].index[db_index_lower_bound];'
 DOS_SIGNATURE = 'IndexEntry far * far FindIndex(int db, int id, int kind)'
 
 def _find_one_function(source: str) -> dict:
@@ -19,7 +19,7 @@ def _reviewed_body(source: str) -> tuple[dict, str]:
         raise ValueError(f"reviewed FindIndex signature changed: {head['signature']!r}")
     if body.count(CURSOR_ASSIGNMENT) != 1:
         raise ValueError('expected the one-past cursor assignment exactly once')
-    if 'if (fd_50F6_3952->id == id && fd_50F6_3952->kind == kind)' not in body:
+    if 'if (db_index_search_entry->id == id && db_index_search_entry->kind == kind)' not in body:
         raise ValueError('reviewed return predicate changed')
     return (head, body)
 

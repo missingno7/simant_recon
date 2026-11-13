@@ -9,7 +9,7 @@ extern void (*driver_callback_table[25])();
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-extern void f_1D8E_07F6(char *port, int16_t x, int16_t y, char *bits,
+extern void clip_blit_planar(char *port, int16_t x, int16_t y, char *bits,
                        int16_t width, int16_t height);
 
 static int16_t source_word_add(int16_t left, int16_t right)
@@ -38,8 +38,8 @@ static SimGraphicsStatus draw_planar4(SimGraphicsDriver *graphics,
     int32_t sx0, sx1;
     int32_t row, px;
     uint8_t operation;
-    int16_t cut_left = fd_55B3_3DE6;
-    int16_t cut_right = fd_55B3_3DE8;
+    int16_t cut_left = gfx_clip_left_pixels;
+    int16_t cut_right = gfx_clip_right_pixels;
 
     if (graphics == NULL || graphics->pixel_storage == NULL || bits == NULL ||
         width <= 0 || height <= 0)
@@ -47,7 +47,7 @@ static SimGraphicsStatus draw_planar4(SimGraphicsDriver *graphics,
     /* The admitted S00 planar source supports replace plus the three DOS
      * logic operations selected by f_1B4E's driver-entry callbacks. */
     operation = (uint8_t)g_3DD2;
-    if ((((uint8_t)g_5A97) & 1u) != 0 ||
+    if ((((uint8_t)gfx_display_mode) & 1u) != 0 ||
         (operation != 0 && operation != 0x08u && operation != 0x10u &&
          operation != 0x18u))
         return SIM_GRAPHICS_UNSUPPORTED_MODE;
@@ -114,11 +114,11 @@ static void source_g914C_callback(int16_t x, int16_t y, char *bitmap,
     if (sim_graphics_source_clip_active()) {
         /* This is the live pointer-nullness branch corresponding to the high
          * segment word g5AAE in DOS; execute the real generated clip helper. */
-        f_1D8E_07F6(NULL, x, y, bitmap, width, height);
+        clip_blit_planar(NULL, x, y, bitmap, width, height);
         return;
     }
-    fd_55B3_3DE6 = 0;
-    fd_55B3_3DE8 = 0;
+    gfx_clip_left_pixels = 0;
+    gfx_clip_right_pixels = 0;
     graphics->last_status = draw_planar4(graphics, x, y,
                                          (const uint8_t *)bitmap,
                                          width, height);

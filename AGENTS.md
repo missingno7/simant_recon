@@ -9,9 +9,32 @@ build, inspect and continue without our conversation and without trusting our re
 Read `README.md`, `docs/codegen-rules.md` and `docs/tu-evidence.md` before changing `src/`.
 
 The project has three layers, each built on the one below: this reconstruction, the
-faithful SDL3 port, and the enhanced native presentation. Work is on the reconstruction
-layer until its checklist is complete. The upper layers may go stale meanwhile; they
-adapt to the source afterwards, never the reverse.
+faithful SDL3 port, and the enhanced native presentation. Upper layers adapt to the
+source, never the reverse.
+
+## Milestone: `canonical-source-stable-for-port` (2026-11-13)
+
+The canonical source is stable enough to be the foundation for port validation. Active
+work is now the **faithful SDL3 port** (`docs/port-repair.md`): three-way behavioural
+verification (original DOS, canonical DOS, native) over the normal shipped game, and
+fixes at the lowest layer that is wrong.
+
+What the milestone claims: every game function except six is byte-exact in a whole
+module; the six are behaviour-reviewed; the gate (`tools/validate.py`) passes. What it
+does **not** claim: a byte-exact executable. Still open and documented on the status
+page: the six non-matching functions, the remaining steered constructs, data ownership
+of our own storage units, layout dependencies (`docs/data-adjacency.md`), and the missing
+RTLink/Plus release (linker findings in `docs/exe-format.md` and
+`docs/toolchain-fingerprint.md` are completed research, inactive).
+
+Historical and readability work (opaque names, comments, constants, file boundaries,
+declaration arrangement, the linker) continues only when it explains an observed
+original/canonical or canonical/native difference, exposes an unsafe layout, pointer,
+integer or aliasing assumption, blocks a portability or correctness fix, or settles an
+architectural question the port needs. The canonical source stays the only game logic:
+the port derives from it and never carries a second implementation or native-only fixes
+in `src/`. The completion checklist below remains the definition of a finished
+reconstruction; it is no longer a precondition for port work.
 
 ## What counts as proof
 

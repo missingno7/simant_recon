@@ -1,7 +1,7 @@
 from __future__ import annotations
 import hashlib
 import re
-SOURCE_MODULES = {'src/S19/m384C.c', 'src/S10/m35F5.c'}
+SOURCE_MODULES = {'src/ui/game_events.c', 'src/window/menu_tracking.c'}
 HEADER = '#include "portable/whole_program/platform/m1b73_event_enqueue.h"\n'
 
 def _sha(source: str) -> str:
@@ -59,7 +59,7 @@ def _call_end_and_arity(source: str, open_pos: int) -> tuple[int, int]:
         elif depth == 1 and (not ch.isspace()):
             saw_token = True
         i += 1
-    raise ValueError('unterminated f_1B73_030F call')
+    raise ValueError('unterminated input_enqueue_event_args call')
 
 def _calls(source: str) -> list[tuple[int, int, int, int]]:
     result = []
@@ -87,9 +87,9 @@ def _calls(source: str) -> list[tuple[int, int, int, int]]:
                 else:
                     i += 1
             continue
-        if source.startswith('f_1B73_030F', i):
+        if source.startswith('input_enqueue_event_args', i):
             before = source[i - 1] if i else ' '
-            after_name = i + len('f_1B73_030F')
+            after_name = i + len('input_enqueue_event_args')
             after = source[after_name] if after_name < len(source) else ' '
             if (before.isalnum() or before == '_') or (after.isalnum() or after == '_'):
                 i += 1
@@ -107,12 +107,12 @@ def adapt(source: str, source_path: str) -> tuple[str, dict[str, object]]:
     if source_path not in SOURCE_MODULES:
         raise ValueError(f'unsupported m1B73 event callsite source: {source_path}')
     digest = _sha(source)
-    old_proto = re.compile('(?m)^extern\\s+void\\s+far\\s+f_1B73_030F\\s*\\(\\s*\\)\\s*;\\s*\\n')
+    old_proto = re.compile('(?m)^extern\\s+void\\s+far\\s+input_enqueue_event_args\\s*\\(\\s*\\)\\s*;\\s*\\n')
     (source, proto_count) = old_proto.subn('', source, count=1)
     if proto_count != 1:
-        raise ValueError('expected one old-style f_1B73_030F prototype')
+        raise ValueError('expected one old-style input_enqueue_event_args prototype')
     calls = _calls(source)
-    expected_arities = [4, 5] if source_path == 'src/S19/m384C.c' else [4, 5, 4]
+    expected_arities = [4, 5] if source_path == 'src/ui/game_events.c' else [4, 5, 4]
     if [arity for (_, _, _, arity) in calls] != expected_arities:
         raise ValueError(f'unexpected enqueue callsite arities: {[x[3] for x in calls]}')
     for (start, name_end, _, arity) in reversed(calls):

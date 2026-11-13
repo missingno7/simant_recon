@@ -1,12 +1,12 @@
 from __future__ import annotations
 import hashlib
 from . import main_preflight
-MAIN_PATH = 'src/root/m15F8.c'
-S15_PATH = 'src/S15/m384C.c'
+MAIN_PATH = 'src/startup/main.c'
+S15_PATH = 'src/startup/game_session.c'
 BREAK_CALL = 'signal(0x15, (void (far *)(int))1L);'
 INT_CALL = 'signal(2, (void (far *)(int))1L);'
-BIOS_FUNCTION = 'void far o15_384C_0125(void)\n{\n    int drive;\n\n    for (drive = 0; drive < 12; drive++) {\n        _asm {\n            mov dl, byte ptr drive\n            or dl, 80h\n            mov ah, 1\n            int 13h\n            jc skip\n            mov ah, 0\n            int 13h\n        skip:\n        }\n    }\n}'
-RETIRED_BIOS_FUNCTION = 'void far o15_384C_0125(void)\n{\n    dos_host_retire_bios_reset_loop();\n}'
+BIOS_FUNCTION = 'void far bios_probe_reset_disks(void)\n{\n    int drive;\n\n    for (drive = 0; drive < 12; drive++) {\n        _asm {\n            mov dl, byte ptr drive\n            or dl, 80h\n            mov ah, 1\n            int 13h\n            jc skip\n            mov ah, 0\n            int 13h\n        skip:\n        }\n    }\n}'
+RETIRED_BIOS_FUNCTION = 'void far bios_probe_reset_disks(void)\n{\n    dos_host_retire_bios_reset_loop();\n}'
 
 def _sha(text: str) -> str:
     return hashlib.sha256(text.encode()).hexdigest()

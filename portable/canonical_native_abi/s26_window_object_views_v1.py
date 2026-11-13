@@ -80,10 +80,10 @@ def _adapt_text(text: str, rel: str) -> tuple[str, dict]:
         output = HEADER + output
     if REGISTRY_DECL in output:
         raise ValueError('S26 registry declaration already exists')
-    anchor = '};\n\nstruct Pt {'
-    if output.count(anchor) != 1:
+    anchor = re.search(r'struct Pt\s*\{', output)
+    if anchor is None:
         raise ValueError('S26 Obj/Point declaration anchor drift')
-    output = output.replace(anchor, '};\n\n' + REGISTRY_DECL + HELPER + '\nstruct Pt {', 1)
+    output = output[:anchor.start()] + REGISTRY_DECL + HELPER + '\n' + output[anchor.start():]
     return (output, {'kind': 'S26_WINDOW_OBJECT_SIDECAR_LOOKUPS', 'source': rel, 'active_lookups': lookup_counts, 'helper_count': 1, 'native_pointer_table_bypasses_remaining': 0})
 
 def adapt(source: str | bytes, rel: str) -> tuple[str, dict]:

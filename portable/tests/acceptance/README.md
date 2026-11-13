@@ -98,14 +98,14 @@ remain `unavailable`; unknown ownership/bytes are not inferred from the next sym
 The report records these alongside the number of compared views.
 
 Pointer-valued owners and resource descriptor owners (`db_handles`,
-`fd_50F6_10D0`) are explicitly excluded. Every observed excluded field name and
+`startup_executable_fd`) are explicitly excluded. Every observed excluded field name and
 reason is listed in `excluded-fields.json` and `pointer_and_handle_exclusions`.
-Nine ASM address-valued words (`fd_55B3_6B9C`, `6B9E`, `74AD`, `74AF`, `74B1`,
+Nine ASM address-valued words (`snd_sample_output_routine`, `6B9E`, `74AD`, `74AF`, `74B1`,
 `74B3`, `74B5`, `74B7`, `74B9`) are flagged as address metadata; their raw
 differences remain reported. They are not silently removed.
 
 The sole partial exclusion, `G5702_STACK_RESIDUE_TAIL`, is defined in
-`state_policy.py`. Canonical `f_1E57_00B1` copies the complete 32-word local buffer
+`state_policy.py`. Canonical `win_raise_and_reclip` copies the complete 32-word local buffer
 after initializing only through its `0x8000` sentinel. Compare the live prefix
 **including** the sentinel and exclude only subsequent words, only when both
 64-byte observations have the same sentinel position. Exact offsets, reason and

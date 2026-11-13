@@ -67,7 +67,7 @@ OpenIndex  root:1986:0004  linear 19864  size 240  extent DESCENT  region game_o
   0092  sub dx, dx
   0094  push dx
   0095  push ax
-  0096  lcall 0x171c, 0x13ca               -> f_171C_13CA
+  0096  lcall 0x171c, 0x13ca               -> Ralloc
   009B  add sp, 0xa
   009E  mov es, dx
   00A0  mov bx, ax

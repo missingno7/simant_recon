@@ -1,6 +1,6 @@
 from __future__ import annotations
 import hashlib
-SOURCE_RELATIVE = 'src/S09/m35F5.c'
+SOURCE_RELATIVE = 'src/ui/save_load.c'
 _DECLARATION = 'static char oneFloppy;\n'
 _POLICY = "    oneFloppy = (*(unsigned char far *)0x00000410L & 0xC0) == 0;\n    if (s_2966 == 'B' && oneFloppy)\n        s_2966 = 'A';\n"
 

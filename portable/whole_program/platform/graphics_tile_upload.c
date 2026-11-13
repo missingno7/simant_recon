@@ -17,7 +17,7 @@ extern void (*driver_callback_table[25])();
 #define s_planes (s_graphics_owner->vga.planes)
 static SimGraphicsDriver *s_graphics_owner;
 static SimGraphicsTileUploadStatus s_status = SIM_GRAPHICS_TILE_UPLOAD_NOT_BOUND;
-extern uint16_t g_3DD4;
+extern uint16_t gfx_cursor_draw_lock;
 typedef SimGraphicsTileComposeKind TileCompositorKind;
 #define TILE_COMPOSITOR_2B1A SIM_GRAPHICS_TILE_COMPOSE_2B1A
 #define TILE_COMPOSITOR_1B7D SIM_GRAPHICS_TILE_COMPOSE_1B7D
@@ -37,13 +37,13 @@ static SimGraphicsTileUploadStatus require_owner(void)
 
 static void screen_lock_enter(void)
 {
-    uint8_t *low = (uint8_t *)&g_3DD4;
+    uint8_t *low = (uint8_t *)&gfx_cursor_draw_lock;
     low[0] = (uint8_t)(low[0] + 1u);
 }
 
 static void screen_lock_leave(void)
 {
-    uint8_t *low = (uint8_t *)&g_3DD4;
+    uint8_t *low = (uint8_t *)&gfx_cursor_draw_lock;
     low[0] = (uint8_t)(low[0] - 1u);
 }
 
@@ -61,8 +61,8 @@ SimGraphicsTileUploadStatus sim_graphics_tile_upload_bind(SimGraphicsDriver *gra
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_WRONG_VIDEO_OWNER;
     }
     s_graphics_owner = graphics_owner;
-    (*( SimGraphicsTileBlitCallback *)(void *)&driver_callback_table[21]) = o00_31AD_0647;
-    (*( SimGraphicsTileMapUploadCallback *)(void *)&driver_callback_table[22]) = o00_31AD_18BA;
+    (*( SimGraphicsTileBlitCallback *)(void *)&driver_callback_table[21]) = gfx_planar_put_cached_tile;
+    (*( SimGraphicsTileMapUploadCallback *)(void *)&driver_callback_table[22]) = gfx_planar_upload_tiles;
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }
 
@@ -107,7 +107,7 @@ int sim_graphics_tile_record(unsigned tile, uint8_t record[128])
 {
     unsigned row;
     if (tile > 0xffu || s_graphics_owner == NULL) return 0;
-    /* f_0250_0721: plane tile>>6, offset ((tile&63)-0x80)<<7 = C000h+(tile&63)*128. */
+    /* edit_draw_life_and_ground_tile: plane tile>>6, offset ((tile&63)-0x80)<<7 = C000h+(tile&63)*128. */
     for (row = 0; row < 128u; ++row)
         record[row] = s_planes[tile >> 6][(uint16_t)(SIM_GRAPHICS_TILE_PAGE_OFFSET + (tile & 63u) * 128u + row)];
     return 1;
@@ -140,8 +140,8 @@ static int source_cursor_intersects_tile(int16_t x, int16_t y)
 {
     int16_t right = add_word_15(x);
     int16_t bottom = add_word_15(y);
-    return x <= (int16_t)g_4346 && right >= (int16_t)g_4340 &&
-           y <= (int16_t)g_4344 && bottom >= (int16_t)g_4342;
+    return x <= (int16_t)cursor_drawn_right && right >= (int16_t)cursor_drawn_left &&
+           y <= (int16_t)cursor_drawn_bottom && bottom >= (int16_t)cursor_drawn_top;
 }
 
 static SimGraphicsTileUploadStatus source_cursor_before_tile(int16_t x,
@@ -149,7 +149,7 @@ static SimGraphicsTileUploadStatus source_cursor_before_tile(int16_t x,
 {
     if (!sim_graphics_cursor_hooks_is_bound())
         return SIM_GRAPHICS_TILE_UPLOAD_CURSOR_SERVICE_UNBOUND;
-    if (g_4333 == 0 && source_cursor_intersects_tile(x, y) &&
+    if (cursor_update_lock == 0 && source_cursor_intersects_tile(x, y) &&
         !sim_graphics_cursor_hooks_hide())
         return SIM_GRAPHICS_TILE_UPLOAD_CURSOR_SERVICE_FAILED;
     return SIM_GRAPHICS_TILE_UPLOAD_OK;
@@ -157,12 +157,12 @@ static SimGraphicsTileUploadStatus source_cursor_before_tile(int16_t x,
 
 static SimGraphicsTileUploadStatus source_cursor_after_tile(void)
 {
-    if (g_4333 != 0)
+    if (cursor_update_lock != 0)
         return SIM_GRAPHICS_TILE_UPLOAD_OK;
-    if (g_4365 != 0 && g_4331 != 0) {
+    if (cursor_show_level != 0 && cursor_drawn_flag != 0) {
         if (!sim_graphics_cursor_hooks_redraw_if_shown())
             return SIM_GRAPHICS_TILE_UPLOAD_CURSOR_SERVICE_FAILED;
-    } else if (g_4365 == 0 && g_4366 == 0) {
+    } else if (cursor_show_level == 0 && g_4366 == 0) {
         if (!sim_graphics_cursor_hooks_update())
             return SIM_GRAPHICS_TILE_UPLOAD_CURSOR_SERVICE_FAILED;
     }
@@ -239,7 +239,7 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     /* m31AD:L066F..L0707. No intersecting clip returns without reading the
      * aperture. A containing clip uses the direct latch-copy path. */
     if (!clipped && sim_graphics_source_clip_active()) {
-        const struct Rect *r = g_5AAC;
+        const struct Rect *r = clip_active_list_offset;
         int16_t right = add_word_15(x), bottom = add_word_15(y);
         while (r->top != INT16_MIN) {
             if (r->bottom >= y && r->right >= x && r->left <= right && r->top <= bottom) break;
@@ -274,13 +274,13 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
      * The CPU byte is ignored in mode 1; every plane copies its read latch. */
     sim_vga_out(vga,0x3c4,2); sim_vga_out(vga,0x3c5,15);
     sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,1);
-    di = (uint16_t)((uint16_t)y*(uint16_t)g_3DB6+((uint16_t)x>>3));
+    di = (uint16_t)((uint16_t)y*(uint16_t)gfx_screen_row_bytes+((uint16_t)x>>3));
     for (row = 0; row < 16; ++row) {
         for (byte = 0; byte < 2; ++byte) {
             uint8_t cpu = sim_vga_read(vga,si++);
             sim_vga_write(vga,di++,cpu);
         }
-        di = (uint16_t)(di+(uint16_t)g_3DB6-2u);
+        di = (uint16_t)(di+(uint16_t)gfx_screen_row_bytes-2u);
     }
     sim_vga_out(vga,0x3ce,5); sim_vga_out(vga,0x3cf,0);
     cursor_status = source_cursor_after_tile();
@@ -288,7 +288,7 @@ SimGraphicsTileUploadStatus sim_graphics_tile_cache_blit(
     return s_status = cursor_status;
 }
 
-void o00_31AD_18BA(char *source, uint16_t destination_offset, int16_t row_count)
+void gfx_planar_upload_tiles(char *source, uint16_t destination_offset, int16_t row_count)
 {
     if (upload_interleaved_rows((const uint8_t *)source,
                                 (size_t)(uint16_t)row_count * 128u,
@@ -297,7 +297,7 @@ void o00_31AD_18BA(char *source, uint16_t destination_offset, int16_t row_count)
         abort();
 }
 
-void o00_31AD_186A(char *source, uint16_t destination_offset,
+void gfx_planar_upload_plane(char *source, uint16_t destination_offset,
                    int16_t plane, uint16_t byte_count)
 {
     if (upload_plane_bytes((const uint8_t *)source, byte_count,
@@ -306,7 +306,7 @@ void o00_31AD_186A(char *source, uint16_t destination_offset,
         abort();
 }
 
-void o00_31AD_0647(int16_t x, int16_t y, uint16_t offset)
+void gfx_planar_put_cached_tile(int16_t x, int16_t y, uint16_t offset)
 {
     if (sim_graphics_tile_cache_blit(x, y, offset) !=
         SIM_GRAPHICS_TILE_UPLOAD_OK)
@@ -373,7 +373,7 @@ static SimGraphicsTileUploadStatus compose_record(
     for (byte = 0; byte < 128u; ++byte)
         background[byte] = s_planes[(unsigned)plane & 3u][(uint16_t)(cache_base + byte)];
     sim_graphics_tile_compose(background, (const uint8_t *)record, mask_mode, kind, composed);
-    memcpy(g_3D20, composed, sizeof(composed));
+    memcpy(gfx_row_scratch, composed, sizeof(composed));
     screen_lock_leave();
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }
@@ -389,20 +389,20 @@ static SimGraphicsTileUploadStatus draw_composed_record(
     if ((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) == NULL)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_UNBOUND;
     s_graphics_owner->last_status = SIM_GRAPHICS_OK;
-    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9])(x, y, (char *)g_3D20, 16, 16);
+    (*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9])(x, y, (char *)gfx_row_scratch, 16, 16);
     if (s_graphics_owner->last_status != SIM_GRAPHICS_OK)
         return s_status = SIM_GRAPHICS_TILE_UPLOAD_DRAW_FAILED;
     return s_status = SIM_GRAPHICS_TILE_UPLOAD_OK;
 }
 
-void o00_31AD_2B1A(int16_t cache_offset, int16_t plane, char *record)
+void gfx_planar_compose_life_ems(int16_t cache_offset, int16_t plane, char *record)
 {
     if (compose_record(cache_offset, plane, record, 0,
                        TILE_COMPOSITOR_2B1A) != SIM_GRAPHICS_TILE_UPLOAD_OK)
         abort();
 }
 
-void o00_31AD_2FDA(int16_t x, int16_t y, int16_t cache_offset,
+void gfx_planar_draw_life_ems(int16_t x, int16_t y, int16_t cache_offset,
                    int16_t plane, char *record)
 {
     if (draw_composed_record(x, y, cache_offset, plane, record, 0,
@@ -410,7 +410,7 @@ void o00_31AD_2FDA(int16_t x, int16_t y, int16_t cache_offset,
         abort();
 }
 
-void o00_31AD_1B7D(int16_t cache_offset, int16_t plane, char *record,
+void gfx_planar_compose_life_320(int16_t cache_offset, int16_t plane, char *record,
                    int16_t mask_mode)
 {
     if (compose_record(cache_offset, plane, record, mask_mode,
@@ -418,7 +418,7 @@ void o00_31AD_1B7D(int16_t cache_offset, int16_t plane, char *record,
         abort();
 }
 
-void o00_31AD_1B49(int16_t x, int16_t y, int16_t cache_offset,
+void gfx_planar_draw_life_320(int16_t x, int16_t y, int16_t cache_offset,
                    int16_t plane, char *record, int16_t mask_mode)
 {
     if (draw_composed_record(x, y, cache_offset, plane, record, mask_mode,
@@ -426,7 +426,7 @@ void o00_31AD_1B49(int16_t x, int16_t y, int16_t cache_offset,
         abort();
 }
 
-void o00_31AD_303F(int16_t cache_offset, int16_t plane, char *record,
+void gfx_planar_compose_life_hires(int16_t cache_offset, int16_t plane, char *record,
                    int16_t mask_mode)
 {
     if (compose_record(cache_offset, plane, record, mask_mode,
@@ -434,7 +434,7 @@ void o00_31AD_303F(int16_t cache_offset, int16_t plane, char *record,
         abort();
 }
 
-void o00_31AD_300B(int16_t x, int16_t y, int16_t cache_offset,
+void gfx_planar_draw_life_hires(int16_t x, int16_t y, int16_t cache_offset,
                    int16_t plane, char *record, int16_t mask_mode)
 {
     if (draw_composed_record(x, y, cache_offset, plane, record, mask_mode,

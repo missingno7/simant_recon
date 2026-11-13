@@ -2,8 +2,8 @@
 
 Authority: `src/platform/input_timer.asm` at 44de644, SHA-256
 `eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3`.
-Line references below refer to that unchanged file. `W` and `H` mean g_3DB2
-and g_3DB4, x/y mean g_9122/g_9124. Arithmetic and shifts have 8086 word/byte
+Line references below refer to that unchanged file. `W` and `H` mean gfx_screen_width_pixels
+and gfx_screen_height_pixels, x/y mean mouse_x_pixels/mouse_y_pixels. Arithmetic and shifts have 8086 word/byte
 widths; coordinate containment comparisons are signed unless stated otherwise.
 PROVEN means an instruction consequence; OBSERVED means a bounded canonical
 DOS execution. No whole-program or cycle/interleaving equality is asserted.
@@ -13,7 +13,7 @@ DOS execution. No whole-program or cycle/interleaving equality is asserted.
 - 0235, lines 483–525, saves BDA 40:17 NumLock bit20h in g_433E, selects
   INT33 function1Ch BX=2, installs a mouse callback for mask7Fh, then saves
   and replaces INT15, INT09 and INT08. It increments g_53BC. Initial source
-  keyboard hook/count enable bytes are 1 (lines218–233); all 128 g_53CD cells
+  keyboard hook/count enable bytes are 1 (lines218–233); all 128 kbd_scan_code_state cells
   initially contain80h (line116).
 - 02A9, lines528–566, restores the saved NumLock bit without changing other
   BDA17 bits, conditionally restores keyboard vectors if their saved vectors
@@ -42,7 +42,7 @@ DOS execution. No whole-program or cycle/interleaving equality is asserted.
   and g_53BD. 0A40, lines1476–1491, calls that reset, disables both flags,
   reads physical mouse buttons with INT33/3, clears shift_state, g_4362/3 and
   g_4368/9. It does **not** reset last_shift, kbd_last_scan, tick_phase or4364.
-- 0A30, lines1465–1474, returns `g_53CD[scan] XOR80h` as an unsigned byte in
+- 0A30, lines1465–1474, returns `kbd_scan_code_state[scan] XOR80h` as an unsigned byte in
   AX (nominal down80h/up0). It does not query physical BIOS/SDL state. Native
   retains the logo fix: service host input before reading this canonical table.
   0EEE, lines2047–2054, returns only BDA17 ScrollLock bit10h. The source BIOS
@@ -121,10 +121,10 @@ is why AX is8081 etc, not simply command1. Unreachable instructions after
 unconditional jumps1193 and1256 are not extra command producers.
 
 Movement dispatch09F7/09FF (lines1430–1451) loads x/y, takes BL from current
-g_9120, optionally uses INT33/4 to set driver position when g_4DA4!=0, then
+mouse_button_state, optionally uses INT33/4 to set driver position when g_4DA4!=0, then
 invokes0445 with movement mask1. Button dispatch0A1B (lines1453–1463) invokes
 0445 at current x/y without a driver warp. Thus emulated buttons change source
-g_9120 but do not change the physical mouse driver's BL. A subsequent real
+mouse_button_state but do not change the physical mouse driver's BL. A subsequent real
 mouse callback replaces those bits with physical driver buttons.
 
 ## Timer-driven cursor and redraw (PROVEN)
@@ -133,9 +133,9 @@ INT08 lines852–975 floors countdown after subtracting5, increments private
 TickCount only when enabled, always increments16-bit tick_phase, and guards
 timer reentry. It switches stacks, allows interrupts, and skips cursor work
 while mouse_busy. It chains the old timer after restoring registers/flags.
-Redraw (lines888–911) respects display g_3DD4/cursor g_4333 guards: with positive
-signed show-level, shift g_4331 right and call04BB if old bit0 was1. Otherwise
-shift g_4332 right; if now0, set it1 and call00D9 when g_4331!=0 or4366==0.
+Redraw (lines888–911) respects display gfx_cursor_draw_lock/cursor cursor_update_lock guards: with positive
+signed show-level, shift cursor_drawn_flag right and call04BB if old bit0 was1. Otherwise
+shift g_4332 right; if now0, set it1 and call00D9 when cursor_drawn_flag!=0 or4366==0.
 00D9 increments4352, clears4332, and only when show-level0 performs aFFFFh
 hot-box lookup/show, increments level and clears4331 (lines316–348).
 
@@ -167,7 +167,7 @@ motion before03EE, not the source queue masks. Native absolute-coordinate input
 does not establish these driver domains equivalent.
 
 0445 lines736–786 checks mouse_busy atomically before any state write, ignores
-reentry, writes `g_9120=(mask_low_byte<<8)|buttons_low_byte`, x/y, and switches
+reentry, writes `mouse_button_state=(mask_low_byte<<8)|buttons_low_byte`, x/y, and switches
 to its private stack. A nonpositive signed show-level, busy display, timer or
 cursor renderer sets4331=1. Otherwise04BB increments32-bit4356 and, for positive
 show-level, hides cursor, finds the cursor hot-box using status/coordinates,
@@ -178,7 +178,7 @@ clears mouse_busy. The source does not unconditionally enqueue a mouse event.
 Normal INT33 masks: move1, left make2/break4, right make8/break10h, middle
 make20h/break40h; driver buttons are bits1/2/4 respectively. Registration7Fh
 admits all; AA3's native/source queue callback mask1Fh excludes middle callbacks
-but **does not prevent g_9120/position/cursor writes**.
+but **does not prevent mouse_button_state/position/cursor writes**.
 
 AA3 (lines1526–1538) clears counts of queues0 and1, sets5FF8=0, selects0CB3 and
 5FF9=1Fh.0CB3 (lines1802–1835) walks the three descriptors5484 in order, with
@@ -221,7 +221,7 @@ The path is SDL event → `sdl3/host.c:host_poll_event/dos_key` →
 `sdl3/m1b73_application_input.c:dispatch_source_event` → scan projection or
 mouse callback → descriptor dispatch →030F/036E → canonical Event owner.
 Source BIOS reads use the same retained host FIFO;0A30 refreshes that same
-owner and reads g_53CD. Sources in this paragraph are under
+owner and reads kbd_scan_code_state. Sources in this paragraph are under
 `portable/whole_program/platform/` except `portable/platform/host.h`.
 
 | Difference at44de644 | Repair / remaining limit |

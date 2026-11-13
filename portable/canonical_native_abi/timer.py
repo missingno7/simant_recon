@@ -1,7 +1,7 @@
 from __future__ import annotations
 import hashlib
 import re
-SOURCE_PATH = 'src/root/m1FD2.c'
+SOURCE_PATH = 'src/window/menu_helpers.c'
 HEADER = '#include "portable/whole_program/types/timer.h"\n'
 
 def adapt(source: str) -> tuple[str, dict[str, object]]:

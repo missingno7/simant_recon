@@ -113,9 +113,9 @@ PortableM1B73ApplicationInputStatus portable_m1b73_source_countdown_load(
 void portable_m1b73_source_countdown_wait(int16_t source_ticks);
 
 /* Genuine m1B73 public entrypoints with literal RETF source bodies. */
-void f_1B73_050E(void);
-void f_1B73_0510(void);
+void input_noop_050e(void);
+void input_noop_0510(void);
 /* Original f09E9 stack order: source x then source y. */
-void f_1B73_09E9(int16_t x, int16_t y);
+void mouse_set_position(int16_t x, int16_t y);
 
 #endif

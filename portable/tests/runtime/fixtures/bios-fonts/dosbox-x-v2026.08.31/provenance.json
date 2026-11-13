@@ -21,7 +21,7 @@
     "capture_physical_range": "00000-A0000",
     "bitmap_offset": "0x60D60 (40x14 header, then 70 pixels)",
     "capture_registers": "emulated time 4944.231880 ms, CS:IP 27DF:015E",
-    "cross_check": "Captured 70 pixels are byte-equal to the expected rendering computed from the captured C000:09E9 active BIOS font rows and src/root/m1FBD.asm L007F-L0093's movsb/stride order."
+    "cross_check": "Captured 70 pixels are byte-equal to the expected rendering computed from the captured C000:09E9 active BIOS font rows and src/graphics/bitmap_text.asm L007F-L0093's movsb/stride order."
   },
   "license": "GPL-2.0-or-later; upstream source and COPYING are preserved under portable/runtime/bios-reference/dosbox-x-v2026.08.31/"
 }

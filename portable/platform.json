@@ -192,19 +192,19 @@
   "window_hosting_wraps": [
     "clip_SetWin",
     "clip_Off",
-    "f_1E57_0296",
-    "f_1E57_0351",
-    "f_1E57_0FDC",
+    "clip_set_desktop_region",
+    "clip_set_screen_region",
+    "clip_set_screen_intersection",
     "clip_Push",
     "clip_Pop",
-    "f_1E57_038E",
-    "f_1E57_0052",
-    "f_1E57_00B1",
+    "win_rebuild_visible_clips",
+    "clip_lower_window",
+    "win_raise_and_reclip",
     "clip_KillWin",
     "win_DrawTitle",
     "f_1B28_0069",
     "GSaveRect",
-    "f_1CE2_056C",
+    "gfx_restore_and_free_rect",
     "GRectInvOutline"
   ],
   "ASM_data_recipes": [
@@ -279,7 +279,7 @@
   "source_inventory": "src/program.json",
   "input_time_delivery": {
     "service": "portable/whole_program/platform/sdl3/input_time_host.c:portable_input_time_host_refresh_clock",
-    "contract": "Deliver pending host input/time at platform keyboard flags/scans, event queries, mouse services, BIOS/private tick/countdown reads and presentation boundaries. One shared refresh owns SDL ingestion, guards callback/observer reentry and borrows the existing CLI/STI flag. Real-time delivery is capped at 1 kHz; deterministic mode consumes one configured quantum per outer refresh, with none at nested queries. The guarded application idle hook presents due frames at no more than 60 Hz when the g_3DD4 raster/cursor exclusion depth is zero; an active g_5AAC clip list does not suppress completed tracking draws.",
+    "contract": "Deliver pending host input/time at platform keyboard flags/scans, event queries, mouse services, BIOS/private tick/countdown reads and presentation boundaries. One shared refresh owns SDL ingestion, guards callback/observer reentry and borrows the existing CLI/STI flag. Real-time delivery is capped at 1 kHz; deterministic mode consumes one configured quantum per outer refresh, with none at nested queries. The guarded application idle hook presents due frames at no more than 60 Hz when the gfx_cursor_draw_lock raster/cursor exclusion depth is zero; an active clip_active_list_offset clip list does not suppress completed tracking draws.",
     "evidence": "evidence/canonical/native-edge-scroll/README.md",
     "regression": "portable/tests/runtime/run_edge.py",
     "scope": "Quick Game edge holds and release, exact seed-0 human freeze replay; logo/customer-dialog mouse and key release; title, resize and caste triangle tracking presentation. Arbitrary pure-memory waits and CPU/PIC interrupt interleaving equivalence remain unproved.",
@@ -288,17 +288,17 @@
     "tracking_evidence": "evidence/canonical/native-held-drag/README.md"
   },
   "native_input_interrupts": {
-    "authority": "src/root/m1B73.asm",
+    "authority": "src/platform/input_timer.asm",
     "classification": "TRUE_PLATFORM_BOUNDARY",
     "service": "portable/whole_program/platform/m1b73_queue_runtime.c",
     "contract": "Project 0747 scan transitions and INT08 cursor movement over canonical ASM cells; deliver make FA records before keypad/cursor/F0 actions; share 0445 mouse callback and original descriptor dispatch; apply carry-clear BIOS FIFO flush after BIOS modifier updates.",
     "evidence": "evidence/canonical/native-input-irq/README.md",
     "regression": "portable/tests/input_irq/run.py",
     "raw_state_limit": "native-input-hardware-context",
-    "host_mouse_range": "SDL event recording/delivery, held pointer state and warps are bounded by the visible logical screen (VGA 0..639 x 0..479). f_1B73_0046 installs tighter inclusive INT33 driver bounds 0..g_3DB2-4 and 0..g_3DB4-4. portable_m1b73_mouse_consume_event applies those limits after mapping SDL coordinates, before the canonical callback. Direct source/keypad callback coordinates are unchanged.",
+    "host_mouse_range": "SDL event recording/delivery, held pointer state and warps are bounded by the visible logical screen (VGA 0..639 x 0..479). mouse_initialize_driver installs tighter inclusive INT33 driver bounds 0..gfx_screen_width_pixels-4 and 0..gfx_screen_height_pixels-4. portable_m1b73_mouse_consume_event applies those limits after mapping SDL coordinates, before the canonical callback. Direct source/keypad callback coordinates are unchanged.",
     "mouse_range_regression": "portable/tests/runtime/run_drag.py"
   },
-  "native_heap_boundary": "src/root/m171C.c",
+  "native_heap_boundary": "src/memory/ralloc.c",
   "assembly_profile": "masm510",
   "assembly_metadata": "Current source assembler OFFSET fixups plus admitted DOS DATA placement; never original image bytes.",
   "generated_headers": [
@@ -329,7 +329,7 @@
       "bytes": 0,
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "role": "Native filesystem availability probe; real file handles, no original installer contents.",
-      "source": "src/root/m15F8.c:main",
+      "source": "src/startup/main.c:main",
       "observed_contract": "Five open(\"install.exe\",0) calls, five matching close calls; file bytes are never read or executed."
     }
   ],
@@ -342,7 +342,7 @@
   ],
   "native_audio_boundary": {
     "source_mode": 6,
-    "source_driver": "src/root/m28BC.asm",
+    "source_driver": "src/sound/sample_timer.asm",
     "devices": "OPL3 in OPL2 compatibility mode; SB DSP direct unsigned 8-bit DAC",
     "synthesis": "ymfm BSD-3-Clause, pinned portable/audio/ymfm/provenance.json",
     "trace": "SIMANT_AUDIO_TRACE existing directory; io-sb_dsp/io-opl DOS OUT format",
@@ -359,8 +359,8 @@
     "memory": "One four-plane 64 KiB CPU aperture owned by SimGraphicsDriver; presentation decodes visible rows only.",
     "registers": "Map mask, set/reset, enable set/reset, data rotate/logic, read map, read/write modes, bit mask and latches.",
     "source": [
-      "src/S00/m31AD.asm",
-      "src/S00/m35A6.asm"
+      "src/platform/video/planar_raster.asm",
+      "src/platform/video/planar_sprites.asm"
     ],
     "regression": [
       "portable/tests/runtime/run_edges.py",

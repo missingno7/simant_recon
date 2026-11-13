@@ -1,11 +1,11 @@
 #include "graphics_source_clip.h"
 
 /* This is observed raw resident DGROUP state, not a claim that these are
- * initialized screen bounds. f_205F_0004 is the source writer for right/bottom. */
-extern struct Rect g_5A9C[2] ;
-extern struct Rect *g_5AAC;
-extern int16_t fd_55B3_3DE6;
-extern int16_t fd_55B3_3DE8;
+ * initialized screen bounds. gfx_select_driver_resources is the source writer for right/bottom. */
+extern struct Rect gfx_screen_clip_list[2] ;
+extern struct Rect *clip_active_list_offset;
+extern int16_t gfx_clip_left_pixels;
+extern int16_t gfx_clip_right_pixels;
 
 static SimGraphicsDriver *s_clip_graphics;
 
@@ -29,10 +29,10 @@ SimGraphicsDriver *sim_graphics_source_clip_owner(void)
 
 int sim_graphics_source_clip_active(void)
 {
-    return g_5AAC != NULL;
+    return clip_active_list_offset != NULL;
 }
 
 struct Rect *const *sim_graphics_source_clip_slot(void)
 {
-    return &g_5AAC;
+    return &clip_active_list_offset;
 }

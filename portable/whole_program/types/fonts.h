@@ -23,5 +23,5 @@ _Static_assert(offsetof(struct Font, image) == 26, "thirteen source wire words")
 _Static_assert(offsetof(struct Font, rowWords) == 24, "wire rowWords");
 _Static_assert(offsetof(struct Bitmap, width) == 0, "S13 scalar width view");
 _Static_assert(offsetof(struct Bitmap, bits) == 4, "bitmap scalar prefix");
-extern struct Bitmap fd_50F6_392C;
+extern struct Bitmap out_buffer;
 #endif

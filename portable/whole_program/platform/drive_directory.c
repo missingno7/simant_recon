@@ -359,7 +359,7 @@ int16_t sim_drive_error_to_errno(uint16_t error)
     }
 }
 
-int16_t f_1F66_00AF(int16_t drive, char *path)
+int16_t file_drive_current_directory(int16_t drive, char *path)
 {
     return sim_drive_getcwd(drive, path, 67u);
 }

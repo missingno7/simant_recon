@@ -38,14 +38,23 @@ def convert_window_source(source: str, registry: str=REGISTRY) -> ConversionResu
     (text, counts['window_wire_table_member']) = _replace(text, 'window_wire_table_member', '(?:char|struct\\s+[A-Za-z_]\\w*)\\s+far\\s*\\*\\s*objs\\s*\\[\\s*1\\s*\\]\\s*;', 'uint8_t object_table_wire[4];')
     (text, counts['object_wire_handle_members']) = _replace(text, 'object_wire_handle_members', 'char\\s+far\\s*\\*\\s*far\\s*\\*\\s*(h2a|h34)\\s*;', lambda m: 'uint8_t ' + m.group(1) + '_wire[4];')
     index_guard = '    int window_index;\n\n    window_index = (int)((uint16_t)win >> 8);\n    if (window_index >= 45) {\n        Punt("window sidecar index out of range");\n        return;\n    }\n'
-    bind_line = '    if (sim_window_ref_registry_repoint_handle_signed(' + registry + ', (uint16_t)window_index, win_handles[window_index],\n            (int64_t)f_171C_1C1C(win_handles[window_index])) !=\n        SIM_WINDOW_REFS_OK) {\n        Punt("window object sidecar bind failed");\n        return;\n    }\n'
-    (text, counts['repoint_owner_bind']) = _replace(text, 'repoint_owner_bind', '(void\\s+_fastcall\\s+RepointObjects\\s*\\(\\s*int\\s+win\\s*\\)\\s*\\{\\s*char\\s+far\\s*\\*w;\\s*int\\s+n;\\s*int\\s+i;\\s*char\\s+far\\s*\\*p;\\s*)(w\\s*=\\s*f_2505_0006\\(win\\);)', lambda m: m.group(1) + index_guard + m.group(2) + '\n' + bind_line, re.S)
+    bind_line = '    if (sim_window_ref_registry_repoint_handle_signed(' + registry + ', (uint16_t)window_index, win_handles[window_index],\n            (int64_t)mem_Size(win_handles[window_index])) !=\n        SIM_WINDOW_REFS_OK) {\n        Punt("window object sidecar bind failed");\n        return;\n    }\n'
+    (text, counts['repoint_owner_bind']) = _replace(text, 'repoint_owner_bind', '(void\\s+_fastcall\\s+RepointObjects\\s*\\(\\s*int\\s+win\\s*\\)\\s*\\{\\s*char\\s+far\\s*\\*w;\\s*int\\s+n;\\s*int\\s+i;\\s*char\\s+far\\s*\\*p;\\s*)(w\\s*=\\s*win_locked_resource_ptr\\(win\\);)', lambda m: m.group(1) + index_guard + m.group(2) + '\n' + bind_line, re.S)
     if counts['repoint_owner_bind']:
-        decl = 'extern long far f_171C_1C1C(char far * far *handle);\n'
+        decl = 'extern long far mem_Size(char far * far *handle);\n'
         if decl not in text:
             text = decl + text
     (text, counts['repoint_table_lvalue']) = _replace(text, 'repoint_table_lvalue', '\\(\\(char\\s+far\\s*\\*\\s*far\\s*\\*\\)\\s*\\(\\s*w\\s*\\+\\s*0x2c\\s*\\)\\s*\\)\\s*\\[\\s*i\\s*\\]\\s*=\\s*p\\s*;', 'sim_window_ref_registry_objects_for_buffer(' + registry + ', (char *)w)[i] = p;')
     (text, counts['window_struct_table_read']) = _replace(text, 'window_struct_table_read', '\\b(?P<window>[A-Za-z_]\\w*)\\s*->\\s*objs\\s*\\[\\s*(?P<index>[^\\]]+)\\s*\\]', lambda m: '((' + win_object_type + ' *)sim_window_ref_registry_objects_for_buffer(' + registry + ', (char *)' + m.group('window') + ')[' + m.group('index') + '])')
+    # Shared Win declarations now let canonical code spell these old +0x2c
+    # casts as ((struct Win far *)w)->objs[index]. The sidecar is still needed
+    # because resource records contain DOS-width pointer slots.
+    text, counts['cast_window_table_read'] = re.subn(
+        r'\(\(struct\s+Win\s+far\s*\*\)\s*(\w+)\)->objs\[([^\]]+)\]',
+        lambda m: 'sim_window_ref_registry_objects_for_buffer(' + registry + ', (char *)' + m[1] + ')[' + m[2] + ']', text)
+    text, counts['cast_window_table_pointer'] = re.subn(
+        r'\(\(struct\s+Win\s+far\s*\*\)\s*(\w+(?:\([^()]*\))?)\)->objs\b',
+        lambda m: 'sim_window_ref_registry_objects_for_buffer(' + registry + ', (char *)' + m[1] + ')', text)
     table_item = re.compile('\\(\\(\\s*(?P<type>(?:unsigned\\s+char|char|int|struct\\s+[A-Za-z_]\\w*))\\s+far\\s*\\*\\s*far\\s*\\*\\s*\\)\\s*\\(\\s*(?P<base>(?:[A-Za-z_]\\w*|[A-Za-z_]\\w*\\([^()]*\\)))\\s*\\+\\s*0x2c\\s*\\)\\s*\\)\\s*\\[\\s*(?P<index>[^\\]]+)\\s*\\]')
 
     def replace_item(match: re.Match[str]) -> str:
@@ -57,6 +66,18 @@ def convert_window_source(source: str, registry: str=REGISTRY) -> ConversionResu
     (text, grouped_count) = grouped_first_item.subn(lambda m: 'sim_window_ref_registry_objects_for_buffer(' + registry + ', (char *)' + m.group('base') + ')[0][' + m.group('index') + ']', text)
     counts['wire_first_object_bytes'] += grouped_count
     (text, counts['object_handle_addresses']) = _replace(text, 'object_handle_addresses', '&\\s*(?P<object>[A-Za-z_]\\w*)\\s*->\\s*(?P<field>h2a|h34)\\b', lambda m: 'sim_window_ref_registry_handle_slot_for_object(' + registry + ', (char *)' + m.group('object') + ', 0x' + ('2a' if m.group('field') == 'h2a' else '34') + ')')
+    # Shared Obj names replace the former raw +0x2a/+0x34 pointer casts.
+    # Keep the wire fields four bytes and redirect every lvalue to its host
+    # Handle slot; widening these resource members would corrupt the tail.
+    text, counts['named_object_handle_members'] = re.subn(
+        r'char\s+far\s*\*\s*far\s*\*\s*(text_handle|list_handle)\s*;',
+        lambda m: 'uint8_t ' + m[1] + '_wire[4];', text)
+    text, counts['named_object_handle_accesses'] = re.subn(
+        r'(?P<address>&\s*)?(?:\(\(struct\s+Obj\s+far\s*\*\)\s*(?P<cast>\w+)\)|(?P<plain>\w+))->(?P<field>text_handle|list_handle)\b',
+        lambda m: ('' if m['address'] else '*') +
+            'sim_window_ref_registry_handle_slot_for_object(' + registry +
+            ', (char *)' + (m['cast'] or m['plain']) + ', 0x' +
+            ('2a' if m['field']=='text_handle' else '34') + ')', text)
     (text, counts['object_handle_dereferences']) = _replace(text, 'object_handle_dereferences', '\\*\\s*\\(\\s*char\\s+far\\s*\\*\\s*far\\s*\\*\\s*far\\s*\\*\\s*\\)\\s*\\(\\s*(?P<object>[A-Za-z_]\\w*)\\s*\\+\\s*0x(?P<offset>2a|34)\\s*\\)', lambda m: '*sim_window_ref_registry_handle_slot_for_object(' + registry + ', (char *)' + m.group('object') + ', 0x' + m.group('offset') + ')')
     (text, counts['object_data_word_handle_dereferences']) = _replace(text, 'object_data_word_handle_dereferences', '\\*\\s*\\(\\s*char\\s+far\\s*\\*\\s*far\\s*\\*\\s*far\\s*\\*\\s*\\)\\s*&\\s*(?P<object>[A-Za-z_]\\w*)\\s*->\\s*data\\s*\\[\\s*2\\s*\\]', lambda m: '*sim_window_ref_registry_handle_slot_for_object(' + registry + ', (char *)' + m.group('object') + ', 0x2a)')
     (text, counts['source_memset_handle_reset']) = _replace(text, 'source_memset_handle_reset', '_fmemset\\(\\s*(?P<object>[A-Za-z_]\\w*)\\s*\\+\\s*0x2a\\s*,\\s*0\\s*,\\s*14\\s*\\)', lambda m: 'if (sim_window_ref_registry_clear_runtime_for_object(' + registry + ', (char *)' + m.group('object') + ', 0x2a, 14) != SIM_WINDOW_REFS_OK)\n            { Punt("window type-4 runtime clear failed"); return; }')
@@ -73,6 +94,8 @@ def convert_window_source(source: str, registry: str=REGISTRY) -> ConversionResu
         assertions.extend(['_Static_assert(offsetof(struct Win, count) == 0x0c, "Win count offset");', '_Static_assert(offsetof(struct Win, flags) == 0x1c, "Win flags offset");', '_Static_assert(offsetof(struct Win, object_table_wire) == 0x2c, "Win table offset");', '_Static_assert(sizeof(struct Win) == 0x30, "Win fixed header width");'])
     if counts['object_wire_handle_members']:
         assertions.extend(['_Static_assert(offsetof(struct Obj, type) == 0x21, "Obj type offset");', '_Static_assert(offsetof(struct Obj, h2a_wire) == 0x2a, "Obj h2a offset");', '_Static_assert(offsetof(struct Obj, h34_wire) == 0x34, "Obj h34 offset");', '_Static_assert(sizeof(struct Obj) == 0x38, "Obj fixed width");'])
+    if counts['named_object_handle_members']:
+        assertions.extend(['_Static_assert(offsetof(struct Obj, text_handle_wire) == 0x2a, "Obj text Handle offset");', '_Static_assert(offsetof(struct Obj, list_handle_wire) == 0x34, "Obj list Handle offset");', '_Static_assert(sizeof(struct Obj) == 0x38, "Obj access-view width");'])
     if counts['object_data_word_handle_dereferences']:
         assertions.append('_Static_assert(offsetof(struct WinObj, data) + 2 * sizeof(((struct WinObj *)0)->data[0]) == 0x2a, "WinObj data[2] Handle offset");')
     if assertions:
@@ -81,7 +104,7 @@ def convert_window_source(source: str, registry: str=REGISTRY) -> ConversionResu
     text_without_comments = re.sub('/\\*.*?\\*/|//[^\\r\\n]*', '', text, flags=re.S)
     if re.search('\\(\\s*(?:char|unsigned char|struct\\s+\\w+|int)\\s+far\\s*\\*\\s*far\\s*\\*\\s*\\)\\s*\\([^)]*\\+\\s*0x2c', text_without_comments):
         unresolved.append('raw far-pointer table cast at +0x2c')
-    if re.search('(?:->|\\.)\\s*(?:h2a|h34)\\b', text_without_comments):
+    if re.search('(?:->|\\.)\\s*(?:h2a|h34|text_handle|list_handle)\\b', text_without_comments):
         unresolved.append('unconverted Obj Handle member reference')
     if re.search('\\(\\s*char\\s+far\\s*\\*\\s*far\\s*\\*\\s*far\\s*\\*\\s*\\)\\s*&\\s*\\w+\\s*->\\s*data', text_without_comments):
         unresolved.append('unconverted WinObj word-backed Handle read')

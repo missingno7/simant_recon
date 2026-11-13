@@ -284,7 +284,7 @@ SimS00MapTableStatus sim_s00_map_transform_draw(
         return SIM_S00_MAP_TABLE_BAD_ARGUMENT;
     if ((*( SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9]) == NULL || sim_graphics_source_owner() != graphics)
         return SIM_S00_MAP_TABLE_RENDERER_UNBOUND;
-    profile = g_3DB2 == 320 ? SIM_S00_MAP_TABLE_320 :
+    profile = gfx_screen_width_pixels == 320 ? SIM_S00_MAP_TABLE_320 :
                                         SIM_S00_MAP_TABLE_640;
     switch (transform) {
     case SIM_S00_TRANSFORM_0000:
@@ -329,7 +329,7 @@ static void require_transform(SimS00MapTableStatus status)
         abort();
 }
 
-void o00_3126_0000(char *source, char *destination, int16_t source_width, int16_t count)
+void gfx_planar_map128_pack2(char *source, char *destination, int16_t source_width, int16_t count)
 {
     (void)source_width;
     (void)count;
@@ -337,7 +337,7 @@ void o00_3126_0000(char *source, char *destination, int16_t source_width, int16_
                                         (uint8_t *)destination, 0x400));
 }
 
-void o00_3126_0137(char *source, char *destination, int16_t source_width, int16_t count)
+void gfx_planar_map64_pack2(char *source, char *destination, int16_t source_width, int16_t count)
 {
     (void)source_width;
     (void)count;
@@ -345,7 +345,7 @@ void o00_3126_0137(char *source, char *destination, int16_t source_width, int16_
                                         (uint8_t *)destination, 0x200));
 }
 
-void o00_3126_026A(char *source, char *destination, int16_t source_width, int16_t count)
+void gfx_planar_map128_pack4(char *source, char *destination, int16_t source_width, int16_t count)
 {
     (void)source_width;
     (void)count;
@@ -353,7 +353,7 @@ void o00_3126_026A(char *source, char *destination, int16_t source_width, int16_
                                         (uint8_t *)destination, 0x100));
 }
 
-void o00_3126_03A9(char *source, char *destination, int16_t source_width, int16_t count)
+void gfx_planar_map64_pack4(char *source, char *destination, int16_t source_width, int16_t count)
 {
     (void)source_width;
     (void)count;
@@ -366,18 +366,18 @@ static SimS00MapTableProfile active_profile(void)
     SimGraphicsDriver *graphics = sim_graphics_source_owner();
     if (graphics == NULL)
         abort();
-    return g_3DB2 == 320 ? SIM_S00_MAP_TABLE_320 :
+    return gfx_screen_width_pixels == 320 ? SIM_S00_MAP_TABLE_320 :
                                      SIM_S00_MAP_TABLE_640;
 }
 
-void o00_3126_04D8(char *source, char *destination)
+void gfx_planar_map128_pack8(char *source, char *destination)
 {
     require_transform(sim_s00_map_04D8((const uint8_t *)source, 128,
                                         (uint8_t *)destination, 64,
                                         active_profile()));
 }
 
-void o00_3126_06A3(char *source, char *destination)
+void gfx_planar_map64_pack8(char *source, char *destination)
 {
     require_transform(sim_s00_map_06A3((const uint8_t *)source, 64,
                                         (uint8_t *)destination, 32,

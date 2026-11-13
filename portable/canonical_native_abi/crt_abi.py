@@ -1,7 +1,7 @@
 from __future__ import annotations
 import hashlib
 import re
-SUPPORTED = {'src/root/m15F8.c', 'src/root/m1A28.c', 'src/root/m1C62.c', 'src/S09/m35F5.c', 'src/S20/m39F1.c', 'src/S23/m39C7.c'}
+SUPPORTED = {'src/startup/main.c', 'src/resources/database_files.c', 'src/window/alerts.c', 'src/ui/save_load.c', 'src/startup/dos_config.c', 'src/ui/info_cards.c'}
 
 def _sha(text: str) -> str:
     return hashlib.sha256(text.encode('latin1')).hexdigest()
@@ -16,11 +16,12 @@ def adapt(source: str, module_path: str) -> tuple[str, dict]:
         declaration = 'extern unsigned char near _ctype[];'
         if source.count(declaration) != 1:
             raise ValueError('unexpected _ctype declaration shape')
-        expected_uses = {'src/root/m1C62.c': 2, 'src/S23/m39C7.c': 1}[module_path]
+        expected_uses = {'src/window/alerts.c': 2, 'src/ui/info_cards.c': 1}[module_path]
         if source.count('_ctype') != expected_uses + 1:
             raise ValueError('unexpected number of _ctype references')
         source = source.replace(declaration, '', 1)
         source = source.replace('(_ctype + 1)[buf[start]] & 2', 'sim_msc_ctype_is_lower_ascii((unsigned char)buf[start])')
+        source = source.replace('(_ctype + 1)[buf[idx]] & 2', 'sim_msc_ctype_is_lower_ascii((unsigned char)buf[idx])')
         source = source.replace('(_ctype[c + 1] & 2)', '(sim_msc_ctype_is_lower_ascii((unsigned char)c))')
         source = source.replace('_ctype[c + 1] & 2', 'sim_msc_ctype_is_lower_ascii((unsigned char)c)')
         if re.search('\\b_ctype\\b', source):

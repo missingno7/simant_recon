@@ -13,7 +13,7 @@ typedef void (*SimGraphicsCaptureCallback)(int16_t left, int16_t top,
                                           int16_t right, int16_t bottom,
                                           char *buffer);
 
-/* S00 table slots 6..8 (o00_31AD_0522, _11FB, _0550). */
+/* S00 table slots 6..8 (gfx_planar_gpicsize, _11FB, _0550). */
 /* Install/uninstall the three source callbacks after the common source owner
  * has been bound. The callback reads that owner's sole VGA CPU aperture. */
 SimGraphicsStatus sim_graphics_source_capture_bind(SimGraphicsDriver *graphics);

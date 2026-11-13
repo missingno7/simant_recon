@@ -73,7 +73,7 @@ window rows matched. Resources 0, 1 and 25 have no mode-5 axes. Thus the
 Swap targets 1 and 25 have no source geometry read of any parameter slot.
 
 Across canonical sources the sole direct reader of window+10..16 is
-`f_2505_04D7` (04F7..0509), called solely by `f_2505_03B9` case 5 from
+`win_GetArg` (04F7..0509), called solely by `_win_CalcObjElement` case 5 from
 `win_Recalc`. No canonical code writes the axis-mode words: m20E8:0903 only
 reads them while editing object origins. Mode 5 reads only the indexed supplied
 slot. Actual resource requirements are:
@@ -87,17 +87,17 @@ slot. Actual resource requirements are:
   but their values do not drive canonical window geometry or behavior.
 
 Both function spellings and canonical aliases were inspected. The generic
-bring-forward path f_20E8_0725 still calls Open with count=0. Its literal game
-callers target 1 and 25. Its event-selected path is f_218D_0451: a top window
+bring-forward path win_ToTop still calls Open with count=0. Its literal game
+callers target 1 and 25. Its event-selected path is win_dispatch_desktop_click: a top window
 with flag 0x40 skips the search. Every shipped mode-5 window has 0x40. This
 explains modal behavior; it is not an unrestricted proof that arbitrary caller-
 constructed stacks cannot attempt a mode-5 bring-forward. That domain is
 rejected by the new helper, whereas DOS would use physical frame words.
 
-Additional observers were checked: all canonical f_2505_0006/win_WinAddr and
+Additional observers were checked: all canonical win_locked_resource_ptr/win_WinAddr and
 win_handles consumers; S26, border/title/draw paths, event handling, m00BA
-registered close/change hooks; f_1FD2_044F (copies first rectangle only); and
-f_22BF_0E83 (copies object0 origin x/y only, no parameter vector). There is no
+registered close/change hooks; input_register_proximity_rect (copies first rectangle only); and
+win_copy_obj_layout_origin (copies object0 origin x/y only, no parameter vector). There is no
 SaveWin/CloneWin symbol or heap-window serializer in current canonical source.
 SaveGame writes the static SaveRec owner list; neither that list nor its load/
 save setup includes window handles/payloads. Generic allocator relocation can
@@ -113,7 +113,7 @@ API calls. Such cases cannot be admitted as pure ABI equivalence.
 
 ## NewGame register proof
 
-At S15:0508 NewGame calls f_22BF_0A65 without setting AX. SetDefaultWindows
+At S15:0508 NewGame calls win_is_zoomed without setting AX. SetDefaultWindows
 unconditionally calls OpenEditWindow(0). The following SetMapPlane ends in
 UpdateEdit, which returns AX=0 both if window 0 is closed (IsWinOpen returned
 zero and OR/JE preserve it) and if open (last clip_Off at root:1E57:0362 has

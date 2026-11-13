@@ -33,8 +33,8 @@ int main(int argc, char **argv)
             offsetof(IndexEntry, kind) != 6 || offsetof(IndexEntry, flags) != 7) return 6;
         memcpy(entries, wire, ((size_t)count + 1u) * 8u);
         if (memcmp(entries, wire, ((size_t)count + 1u) * 8u) != 0) return 6;
-        fd_50F6_3958[0].index = entries;
-        fd_50F6_3958[0].indexHeader.count = count;
+        openDBData[0].index = entries;
+        openDBData[0].indexHeader.count = count;
         for (i = 0; i < query_count; ++i) {
             int16_t id, kind;
             IndexEntry *got;
@@ -42,16 +42,16 @@ int main(int argc, char **argv)
             if (!read_exact(f, &id, sizeof id) || !read_exact(f, &kind, sizeof kind)) return 7;
             got = FindIndex(0, id, kind);
             result_rank = got ? got - entries : -1;
-            home_rank = fd_50F6_3952 ? fd_50F6_3952 - entries : -1;
+            home_rank = db_index_search_entry ? db_index_search_entry - entries : -1;
             printf("%u,%u,%d,%d,%d,%td,%lld,%d,%u,%u,%td,%lld,%d,%u,%u\n",
-                   d, i, fd_50F6_3956, (int)id, (int)kind, result_rank,
+                   d, i, db_index_lower_bound, (int)id, (int)kind, result_rank,
                    got ? (long long)(uint32_t)got->offset : -1LL,
                    got ? (int)got->id : -1, got ? (unsigned)got->kind : 0u,
                    got ? (unsigned)got->flags : 0u, home_rank,
-                   fd_50F6_3952 ? (long long)(uint32_t)fd_50F6_3952->offset : -1LL,
-                   fd_50F6_3952 ? (int)fd_50F6_3952->id : -1,
-                   fd_50F6_3952 ? (unsigned)fd_50F6_3952->kind : 0u,
-                   fd_50F6_3952 ? (unsigned)fd_50F6_3952->flags : 0u);
+                   db_index_search_entry ? (long long)(uint32_t)db_index_search_entry->offset : -1LL,
+                   db_index_search_entry ? (int)db_index_search_entry->id : -1,
+                   db_index_search_entry ? (unsigned)db_index_search_entry->kind : 0u,
+                   db_index_search_entry ? (unsigned)db_index_search_entry->flags : 0u);
         }
         free(entries);
         free(wire);

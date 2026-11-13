@@ -1,8 +1,8 @@
 from __future__ import annotations
 import hashlib
-SOURCE = 'src/root/m1E57.c'
-OLD = 'f_171C_1A9E(size + 8L, 1, "clip_Push")'
-NEW = 'f_171C_1A9E(size + (long)(2 * sizeof(Handle)), 1, "clip_Push")'
+SOURCE = 'src/graphics/clip_regions.c'
+OLD = 'mem_Alloc(size + 8L, 1, "clip_Push")'
+NEW = 'mem_Alloc(size + (long)(2 * sizeof(Handle)), 1, "clip_Push")'
 
 def adapt(source: str, rel: str) -> tuple[str, dict | None]:
     if rel != SOURCE:

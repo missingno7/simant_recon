@@ -42,8 +42,8 @@ diagnostic, including the first 14-second divergence and 113/220=30-versus-0.
 
 Plain mouse-driven VGA and Save repeatedly fault after the 11.2-second mouse-down.
 Late attach finds invalid text pointer 0xa7196054 in _font_StringWidth through
-f_24AB_0329, win_StringSize, f_15D9_0006 and o12_384C_0B76. S12 defines
-fd_55B3_299A as long (native int32_t); root15D9 writes char far* (native 64-bit
+font_StringWidth, win_StringSize, ui_draw_centered_clipped_text and map_render_immediate. S12 defines
+mapMessage as long (native int32_t); root15D9 writes char far* (native 64-bit
 pointer), while S12/S13 read its low 32 bits. DOS long/far-pointer views are both
 32 bits. This separate native pointer-owner width defect remains open. Startup-GDB
 runs pass; address placement/timing is an explanatory hypothesis. An old baseline

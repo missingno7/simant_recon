@@ -1,29 +1,29 @@
 import re
 
 def adapt(unit: str, source: str) -> tuple[str, dict | None]:
-    if unit not in {'src/root/m25E7.c', 'src/root/m24AB.c', 'src/S13/m384C.c'}:
+    if unit not in {'src/graphics/font_resources.c', 'src/graphics/font_output.c', 'src/ui/yard_window.c'}:
         return (source, None)
     changes = []
-    if unit in {'src/root/m25E7.c', 'src/root/m24AB.c'}:
+    if unit in {'src/graphics/font_resources.c', 'src/graphics/font_output.c'}:
         (source, count) = re.subn('struct Bitmap\\s*\\{[^{}]*\\};', '', source)
         if count != 1:
             raise ValueError('Bitmap source family changed')
         changes.append('common native Bitmap definition')
-    if unit == 'src/root/m25E7.c':
+    if unit == 'src/graphics/font_resources.c':
         (source, count) = re.subn('struct Font\\s*\\{[^{}]*\\};', '', source)
         if count != 1:
             raise ValueError('Font source definition changed')
-        old = 'f_171C_2190(0x2a, "FontHeader")'
+        old = 'mem_malloc(0x2a, "FontHeader")'
         if source.count(old) != 1:
             raise ValueError('Font runtime allocation changed')
-        source = source.replace(old, 'f_171C_2190(sizeof(struct Font), "FontHeader")')
+        source = source.replace(old, 'mem_malloc(sizeof(struct Font), "FontHeader")')
         changes.extend(['common Font definition; 26-byte wire-read prefix retained', 'runtime FontHeader allocation 0x2a -> sizeof(struct Font), native pointers'])
-    if unit == 'src/S13/m384C.c':
-        old = 'extern int far fd_50F6_392C;'
+    if unit == 'src/ui/yard_window.c':
+        old = 'extern int far out_buffer;'
         if source.count(old) != 1:
             raise ValueError('S13 Bitmap width view changed')
         source = source.replace(old, '')
-        (source, count) = re.subn('\\bfd_50F6_392C\\b', 'fd_50F6_392C.width', source)
+        (source, count) = re.subn('\\bout_buffer\\b', 'out_buffer.width', source)
         if count != 1:
             raise ValueError('S13 Bitmap width use count changed')
         changes.append('same-address S13 scalar width view -> Bitmap.width')

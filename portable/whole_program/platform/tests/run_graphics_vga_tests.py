@@ -37,7 +37,7 @@ def main():
     rng=random.Random(0x35a6)
     cases=[]
     for masked in (0,1):
-        name='o00_35A6_0007' if masked else 'o00_35A6_0177'
+        name='gfx_planar_mask_to_buffer' if masked else 'gfx_planar_copy_to_buffer'
         machine=b.Machine(SimpleNamespace(function=functions.get(name),vectors={}))
         call=getattr(native,'sim_s00_raster_masked_blit' if masked else 'sim_s00_raster_opaque_blit')
         call.argtypes=[ctypes.c_void_p,ctypes.c_size_t,ctypes.c_void_p,ctypes.c_size_t,ctypes.c_int16,ctypes.c_int16]

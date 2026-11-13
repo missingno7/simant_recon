@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char g_3D20[128]; /* source RAM scratch required by the isolated raster DLL */
+char gfx_row_scratch[128]; /* source RAM scratch required by the isolated raster DLL */
 static SimVga vga;
 static uint8_t pixels[640*480];
 static SimVgaPlanes other;

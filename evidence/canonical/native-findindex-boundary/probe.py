@@ -92,7 +92,7 @@ def probe(stem, fill, ident, kind):
         args=[0, 0xA600, 0], writes=writes, callbacks=callbacks,
         state={'file_bytes': raw, 'file_cursor': 0, 'file_reads': []},
         return_kind='void'))
-    db = b.symbol_address('fd_50F6_3958')
+    db = b.symbol_address('openDBData')
     pointer = int.from_bytes(machine.read(db + 0x50, 4), 'little')
     start = far_linear(pointer)
     block = start - 32
@@ -101,7 +101,7 @@ def probe(stem, fill, ident, kind):
     boundary = block + block_paras * 16
     recovered = machine.run(b.Case(label=f'{stem}/recover index handle',
         args=[pointer & 65535, pointer >> 16], return_kind='farptr'),
-        preserve=True, original_entry=entry('f_171C_2136'))
+        preserve=True, original_entry=entry('mem_handle_from_pointer'))
     slot = machine.word(block)
     assert recovered['return'] == (master_seg << 16) | slot
     assert int.from_bytes(machine.read(far_linear(recovered['return']), 4), 'little') == pointer
@@ -118,7 +118,7 @@ def probe(stem, fill, ident, kind):
     machine.cpu.hook_del(hook)
     assert opened['state']['file_cursor'] == 20 + size
     assert machine.read(start, size) == raw[20:20 + size]
-    assert machine.word(b.symbol_address('fd_50F6_3956')) == count
+    assert machine.word(b.symbol_address('db_index_lower_bound')) == count
     assert found['return'] == 0  # reached read, without a false-hit result
     assert reads == [{'address': tail + 4, 'relative_to_end': 4, 'length': 2}]
     if count & 1:
@@ -129,8 +129,8 @@ def probe(stem, fill, ident, kind):
         'physical_payload_bytes': block_paras * 16 - 32,
         'payload_pointer': pointer, 'query': {'id': ident, 'kind': kind},
         'original_return': found['return'],
-        'cursor': machine.word(b.symbol_address('fd_50F6_3956')),
-        'global_candidate': int.from_bytes(machine.read(b.symbol_address('fd_50F6_3952'), 4), 'little'),
+        'cursor': machine.word(b.symbol_address('db_index_lower_bound')),
+        'global_candidate': int.from_bytes(machine.read(b.symbol_address('db_index_search_entry'), 4), 'little'),
         'file_reads': opened['state']['file_reads'],
         'onepast_8_bytes': machine.read(tail, 8).hex(),
         'tail_owner': 'allocated paragraph padding' if tail < boundary else 'next free Block header',
@@ -155,7 +155,7 @@ def main():
     results = [probe(stem, fill, ident, kind)
         for stem, ident, kind in [('HCEGANT', 10010, 18), ('SHARED', 10000, 22), ('SOUND', 10000, 22)]
         for fill in (0xA7, 0xB9)]
-    for name in ('FindIndex', 'OpenIndex', 'f_171C_125C', 'f_171C_068C'):
+    for name in ('FindIndex', 'OpenIndex', 'mem_alloc_handle_block', 'mem_carve_free_block'):
         run = subprocess.run([sys.executable, 'tools/context.py', name], cwd=ROOT,
             text=True, capture_output=True, check=True)
         (OUT / f'{name}.disasm.txt').write_text(run.stdout, encoding='utf-8')

@@ -9,19 +9,19 @@
 #include <string.h>
 
 void (*driver_callback_table[25])();
-int16_t g_3DB6 = 80;
-char g_3D20[128];
-uint16_t g_3DD4;
-uint8_t g_4331, g_4333, g_4365, g_4366;
-uint16_t g_4340, g_4342, g_4344, g_4346;
-struct Rect *g_5AAC;
+int16_t gfx_screen_row_bytes = 80;
+char gfx_row_scratch[128];
+uint16_t gfx_cursor_draw_lock;
+uint8_t cursor_drawn_flag, cursor_update_lock, cursor_show_level, g_4366;
+uint16_t cursor_drawn_left, cursor_drawn_top, cursor_drawn_bottom, cursor_drawn_right;
+struct Rect *clip_active_list_offset;
 static struct Rect clips[2];
 static SimGraphicsDriver graphics;
 static uint8_t pixels[640*480], fallback[128];
 static int calls;
 
 SimGraphicsDriver *sim_graphics_source_owner(void) { return &graphics; }
-int sim_graphics_source_clip_active(void) { return g_5AAC != NULL; }
+int sim_graphics_source_clip_active(void) { return clip_active_list_offset != NULL; }
 SimGraphicsCursorHooksStatus sim_graphics_cursor_hooks_bind(const SimGraphicsCursorHooks *h)
 { (void)h; return SIM_GRAPHICS_CURSOR_HOOKS_OK; }
 void sim_graphics_cursor_hooks_unbind(void) { }
@@ -40,7 +40,7 @@ void tile_test_reset(int clip, const uint8_t *planes)
     memcpy(graphics.vga.planes,planes,sizeof(graphics.vga.planes));
     graphics.pixel_storage=pixels; graphics.video_mode=SIM_GRAPHICS_MODE_VGA_640X480;
     clips[0]=(struct Rect){0,0,640,480}; clips[1]=(struct Rect){0,INT16_MIN,0,0};
-    g_5AAC=clip ? clips : NULL; g_4333=1; g_3DD4=0x8800; calls=0;
+    clip_active_list_offset=clip ? clips : NULL; cursor_update_lock=1; gfx_cursor_draw_lock=0x8800; calls=0;
     (*(SimGraphicsBitmapCallback *)(void *)&driver_callback_table[9])=observe_bitmap;
     sim_graphics_tile_upload_bind(&graphics);
     portable_ega_map_readback_unbind(); portable_ega_map_readback_bind(read_plane,NULL);
@@ -55,12 +55,12 @@ int tile_test_capture(int16_t left,int16_t top,int16_t right,int16_t bottom,uint
 }
 const uint8_t *tile_test_planes(void) { return &graphics.vga.planes[0][0]; }
 const uint8_t *tile_test_fallback(void) { return fallback; }
-const uint8_t *tile_test_pattern(void) { return (const uint8_t *)g_3D20; }
+const uint8_t *tile_test_pattern(void) { return (const uint8_t *)gfx_row_scratch; }
 int tile_test_calls(void) { return calls; }
 unsigned tile_test_state(unsigned field)
 {
     switch(field) {
-    case 0:return g_3DD4; case 1:return graphics.vga.map_mask;
+    case 0:return gfx_cursor_draw_lock; case 1:return graphics.vga.map_mask;
     case 2:return graphics.vga.read_map; case 3:return graphics.vga.mode;
     case 4:return graphics.vga.graphics_index; case 5:return graphics.vga.sequencer_index;
     default:return 0;

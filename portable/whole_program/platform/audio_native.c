@@ -45,37 +45,37 @@ static void configure(int16_t divisor,int16_t chain,unsigned channels) {
     if(!host.configure_timer || divisor!=214 || chain!=306) unavailable("PIT configuration");
     host.configure_timer(host.context,(uint16_t)divisor,(uint16_t)chain,channels);
 }
-void f_28BC_0488(int16_t divisor,int16_t chain) { configure(divisor,chain,2); }
-void f_28BC_046B(int16_t divisor,int16_t chain) { configure(divisor,chain,4); }
-void f_28BC_03CC(void) {
+void snd_select_two_channel_timer(int16_t divisor,int16_t chain) { configure(divisor,chain,2); }
+void snd_select_four_channel_timer(int16_t divisor,int16_t chain) { configure(divisor,chain,4); }
+void snd_start_sample_timer(void) {
     if(!host.start_timer) unavailable("PIT start");
     host.start_timer(host.context);armed=1; interrupts=1;
 }
-void f_28BC_040C(void) { unavailable("manual ISR0422 transition"); }
-void f_28BC_04E0(int16_t divisor) {
+void snd_slow_sample_timer(void) { unavailable("manual ISR0422 transition"); }
+void snd_restore_bios_timer(int16_t divisor) {
     if(divisor) unavailable("nonzero PIT stop");
     if(armed && host.stop_timer) host.stop_timer(host.context);
     armed=0;interrupts=1;
 }
 /* m283E_0020 emits index, 10 status reads, data, 40 status reads. Preserve
  * the complete guest I/O order; no host register-to-note approximation. */
-void f_283E_000A(uint8_t reg,uint8_t value) {
+void snd_opl_write(uint8_t reg,uint8_t value) {
     unsigned i;dos_audio_host_out8(0x388,reg);
     for(i=0;i<10;++i) dos_audio_host_in8(0x388);
     dos_audio_host_out8(0x389,value);
     for(i=0;i<40;++i) dos_audio_host_in8(0x388);
 }
-void f_283E_0035(void) {
-    f_283E_000A(0x20,0x21);f_283E_000A(0x60,0xf0);
-    f_283E_000A(0x80,0xf0);f_283E_000A(0xc0,1);
-    f_283E_000A(0xe0,0);f_283E_000A(0x43,0x3f);
-    f_283E_000A(0xb0,1);f_283E_000A(0xa0,0x8f);
-    f_283E_000A(0xb0,0x2e);
+void snd_opl_probe_tone(void) {
+    snd_opl_write(0x20,0x21);snd_opl_write(0x60,0xf0);
+    snd_opl_write(0x80,0xf0);snd_opl_write(0xc0,1);
+    snd_opl_write(0xe0,0);snd_opl_write(0x43,0x3f);
+    snd_opl_write(0xb0,1);snd_opl_write(0xa0,0x8f);
+    snd_opl_write(0xb0,0x2e);
     /* Mode 4 uses the canonical 0x952-PIT-count delay. It remains outside
      * the Sound Blaster profile until the PIT-latch poll is hosted. */
     unavailable("AdLib-only reset PIT delay");
 }
 /* m29BF is the alternate indexed chip at 220/221, not the SB DSP. */
-void f_29BF_0008(int16_t port) { (void)port;unavailable("indexed sound chip"); }
-int16_t f_29BF_0139(void) { unavailable("indexed sound chip detection"); }
-void f_29BF_00E6(int16_t reg,int16_t value) { (void)reg;(void)value;unavailable("indexed sound chip register"); }
+void snd_regchip_initialize(int16_t port) { (void)port;unavailable("indexed sound chip"); }
+int16_t snd_regchip_detect(void) { unavailable("indexed sound chip detection"); }
+void snd_regchip_write(int16_t reg,int16_t value) { (void)reg;(void)value;unavailable("indexed sound chip register"); }

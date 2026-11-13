@@ -394,7 +394,10 @@ def _link_program(program, out, report, profile):
     # Extended library dependency dictionaries can pull CRT allocation members
     # despite source overrides. Search the original library's ordinary public
     # dictionary instead; no object/library alteration or warning suppression.
-    lines = ['OUTPUT SOURCE', 'MAP = SOURCE S,N,A,L,V,X', 'NODEFLIB', 'NOEXTDICTIONARY',
+    # NOIGNORECASE: the canonical names include the function EditMessage and the data
+    # object editMessage (both Win16 names); a case-insensitive link merges them. The
+    # original link's case setting is not known.
+    lines = ['OUTPUT SOURCE', 'MAP = SOURCE S,N,A,L,V,X', 'NODEFLIB', 'NOEXTDICTIONARY', 'NOIGNORECASE',
              'LIBRARY ' + ', '.join(libraries), 'RELOAD FAR 400', 'VERBOSE']
     rows = report['translation_units']
     roots = [r for r in rows if not re.fullmatch(r'S\d\d', r['unit'])]

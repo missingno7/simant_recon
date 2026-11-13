@@ -9,7 +9,7 @@
 #include <string.h>
 
 void (*driver_callback_table[25])();
-struct Bitmap fd_50F6_392C;
+struct Bitmap out_buffer;
 
 static SimGraphicsDriver graphics;
 static uint8_t glyph_rows[256u * 14u];
@@ -62,8 +62,8 @@ struct Bitmap *sim_font_make_image_source(uint8_t *text, int16_t x,
     (void)text;
     (void)x;
     (void)font;
-    fd_50F6_392C.bits[0] = (char)0x5a;
-    return &fd_50F6_392C;
+    out_buffer.bits[0] = (char)0x5a;
+    return &out_buffer;
 }
 
 static void install_bitmap_callback(void)
@@ -81,34 +81,34 @@ static void test_f_1FBD_writes_canonical_owner(void)
     char text[] = "A";
     size_t row;
 
-    memset(&g_5ABE, 0, sizeof(g_5ABE));
+    memset(&text_bitmap_pixels, 0, sizeof(text_bitmap_pixels));
     memset(glyph_rows, 0, sizeof(glyph_rows));
     for (row = 0; row < 14; ++row)
         glyph_rows['A' * 14u + row] = (uint8_t)(0x80u >> (row & 7u));
     graphics.last_status = SIM_GRAPHICS_OK;
     graphics.glyph_source = glyph_rows;
     graphics.glyph_source_size = sizeof(glyph_rows);
-    g_3DDA = 14;
-    g_3DDC = 14;
-    g_3DDE = 8;
+    gfx_font_glyph_stride = 14;
+    gfx_font_height_pixels = 14;
+    fontWidth = 8;
     callback_seen = 0;
     install_bitmap_callback();
 
     assert(portable_text_bitmap_bind_source(1, NULL, 0) ==
            PORTABLE_TEXT_BITMAP_OK);
-    f_1FBD_0000(0, 5, text);
+    GPutStr(0, 5, text);
 
     assert(portable_text_bitmap_source_status() == PORTABLE_TEXT_BITMAP_OK);
-    assert(g_5ABA == 8);
-    assert(g_5ABC == 14);
-    assert(g_5ABE.aliases.g_5ABE[0] == 0x80);
-    assert(g_5ABE.aliases.g_5ECE[0] == 'A');
-    assert(g_5ABE.aliases.g_5F1D == 0);
-    assert(g_5ECE[0] == 'A');
+    assert(text_bitmap_width == 8);
+    assert(text_bitmap_height == 14);
+    assert(text_bitmap_pixels.aliases.text_bitmap_pixels[0] == 0x80);
+    assert(text_bitmap_pixels.aliases.text_bitmap_string_copy[0] == 'A');
+    assert(text_bitmap_pixels.aliases.g_5F1D == 0);
+    assert(text_bitmap_string_copy[0] == 'A');
     assert(g_5F1D == 0);
     assert(callback_seen);
-    assert((uint8_t)callback_bitmap_expected == g_5ABE.aliases.g_5ABE[0]);
-    assert(g_3DA0.x == 8 && g_3DA0.y == 5);
+    assert((uint8_t)callback_bitmap_expected == text_bitmap_pixels.aliases.text_bitmap_pixels[0]);
+    assert(gfx_text_pen_x.x == 8 && gfx_text_pen_x.y == 5);
 }
 
 static int test_font_make_image_writes_canonical_owner(int negative_control)
@@ -117,25 +117,25 @@ static int test_font_make_image_writes_canonical_owner(int negative_control)
     char text[] = "A";
     struct Font font;
 
-    memset(&g_5ABE, 0, sizeof(g_5ABE));
+    memset(&text_bitmap_pixels, 0, sizeof(text_bitmap_pixels));
     memset(sidecar, 0, sizeof(sidecar));
     memset(&font, 0, sizeof(font));
     font.fRectWidth = 8;
     font.fRectHeight = 15;
     font.rowWords = 1;
     font.image = image;
-    fd_55B3_6770 = 1;
-    fd_55B3_6772 = 1;
+    source_bitmap_width = 1;
+    dest_bitmap_width = 1;
     sim_font_bitmap_bind();
     if (negative_control)
-        fd_50F6_392C.bits = (char *)sidecar;
+        out_buffer.bits = (char *)sidecar;
 
-    if (font_MakeImage((uint8_t *)text, 0, &font) != &fd_50F6_392C)
+    if (font_MakeImage((uint8_t *)text, 0, &font) != &out_buffer)
         return 0;
     /* This check is the negative control: redirecting font_MakeImage to
-     * duplicate backing must fail because canonical g_5ABE stays zero. */
-    if (g_5ABE.clear_span[0] != 0x5a) {
-        fprintf(stderr, "canonical owner check failed: g_5ABE[0] stayed zero\n");
+     * duplicate backing must fail because canonical text_bitmap_pixels stays zero. */
+    if (text_bitmap_pixels.clear_span[0] != 0x5a) {
+        fprintf(stderr, "canonical owner check failed: text_bitmap_pixels[0] stayed zero\n");
         return 0;
     }
     return 1;

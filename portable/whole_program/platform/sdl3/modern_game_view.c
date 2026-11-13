@@ -7,7 +7,7 @@
 
 /* The game's scroll: Bresenham steps of MapPnt, clamp, UpdateEdit
  * (m0250.c:537-592; CenterEdit, edge and Ctrl+arrow scrolling use it). */
-extern int16_t f_0250_0D10(int16_t dx, int16_t dy);
+extern int16_t edit_scroll_and_redraw(int16_t dx, int16_t dy);
 
 enum {
     WORLD_COLUMNS = 128, WORLD_ROWS = 64,
@@ -131,8 +131,8 @@ void modern_game_view_pump(void)
         /* One axis per call: the scroll's XOR-error stepping under-steps the
          * minor axis of a diagonal (5,4 moves 5,3); each call clamps. */
         g.pumping = 1;
-        if (dx) f_0250_0D10((int16_t)dx, 0);
-        if (dy) f_0250_0D10(0, (int16_t)dy);
+        if (dx) edit_scroll_and_redraw((int16_t)dx, 0);
+        if (dy) edit_scroll_and_redraw(0, (int16_t)dy);
         g.pumping = 0;
         /* Our own request: the modern camera already shows this. */
         modern_world_view(&v);
@@ -369,7 +369,7 @@ static void canonical_overlays(const SimVgaPlanes *planes)
 
 static void update_world(int x0, int y0, int x1, int y1);
 
-/* The edit view's status message (f_15D9_0006: an opaque text box centred in
+/* The edit view's status message (ui_draw_centered_clipped_text: an opaque text box centred in
  * editTileRect at top+4) belongs to the view: its pixels are taken from the
  * hosted canonical view where they differ from the world under them, and
  * shown at the same place relative to the top centre of the modern view. */

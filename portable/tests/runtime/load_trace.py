@@ -88,7 +88,7 @@ class Returned(gdb.FinishBreakpoint):
             if self.function == 'o09_35F5_03C6':
                 pointer = fields.pop('name_pointer')
                 fields['selected_path'] = cstring(pointer) if result else None
-            if self.function in ('o09_35F5_0188', 'LoadGame') and result == 1:
+            if self.function in ('SaveGame', 'LoadGame') and result == 1:
                 fields['saved_file'] = file_receipt()
             emit(self.function + '-return', call=self.call, result=result, **fields)
         except Exception as error:
@@ -111,7 +111,7 @@ class Entry(gdb.Breakpoint):
                               verb=cstring(int(gdb.parse_and_eval('verb'))),
                               save=int(gdb.parse_and_eval('save')),
                               name_pointer=int(gdb.parse_and_eval('name')))
-            if self.function == 'o09_35F5_0188':
+            if self.function == 'SaveGame':
                 fields['use_last'] = int(gdb.parse_and_eval('useLast'))
             if self.function == 'LoadGame' and read_breakpoint is None:
                 read_breakpoint = ReadEntry()
@@ -128,7 +128,7 @@ def exited(event):
          calls=calls, load_reads=load_reads)
 
 
-for function in ('o09_35F5_0188', 'o09_35F5_03C6', 'LoadGame'):
+for function in ('SaveGame', 'o09_35F5_03C6', 'LoadGame'):
     Entry(function)
 gdb.events.exited.connect(exited)
 emit('trace-installed', scope='Read-only breakpoints, source return values and file hashes; '

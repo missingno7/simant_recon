@@ -32,7 +32,7 @@ typedef struct SimGraphicsCursorSource {
 
 enum { SIM_GRAPHICS_SOURCE_CURSOR_SAVE_UNDER_BYTES = 2596 };
 
-/* The one native owner corresponding to the ASM SaveUnder and g_4DA2 offset. */
+/* The one native owner corresponding to the ASM SaveUnder and cursor_save_under_offset offset. */
 extern uint8_t SaveUnder[
     SIM_GRAPHICS_SOURCE_CURSOR_SAVE_UNDER_BYTES];
 

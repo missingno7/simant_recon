@@ -8,7 +8,7 @@
       "args": [
         {
           "pointer": {
-            "owner": "fd_50F6_0EB6",
+            "owner": "TemCensus",
             "size": 64,
             "offset": 0
           }
@@ -21,19 +21,19 @@
       "return_value": 17401,
       "memory": [
         {
-          "owner": "fd_50F6_0EB6",
+          "owner": "TemCensus",
           "size": 64,
           "offset": 0,
           "hex": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
         },
         {
-          "owner": "fd_50F6_04F4",
+          "owner": "HistStart",
           "size": 2,
           "offset": 0,
           "hex": "0800"
         },
         {
-          "owner": "fd_3D57_0828",
+          "owner": "HistCnt",
           "size": 2,
           "offset": 0,
           "hex": "3f00"
@@ -45,79 +45,79 @@
           "hex": "6592"
         },
         {
-          "owner": "fd_50F6_09FA",
+          "owner": "BlackLost",
           "size": 2,
           "offset": 0,
           "hex": "7b9a"
         },
         {
-          "owner": "fd_50F6_0A00",
+          "owner": "RedLost",
           "size": 2,
           "offset": 0,
           "hex": "0f87"
         },
         {
-          "owner": "fd_50F6_0A90",
+          "owner": "BColoniesStarted",
           "size": 2,
           "offset": 0,
           "hex": "544f"
         },
         {
-          "owner": "fd_50F6_0AC4",
+          "owner": "RColoniesStarted",
           "size": 2,
           "offset": 0,
           "hex": "9097"
         },
         {
-          "owner": "fd_50F6_0A9E",
+          "owner": "BColoniesKilled",
           "size": 2,
           "offset": 0,
           "hex": "9ea2"
         },
         {
-          "owner": "fd_50F6_0EAC",
+          "owner": "CurGameType",
           "size": 2,
           "offset": 0,
           "hex": "0000"
         },
         {
-          "owner": "fd_50F6_0FC2",
+          "owner": "TotalEggsLaidB",
           "size": 4,
           "offset": 0,
           "hex": "18270000"
         },
         {
-          "owner": "fd_50F6_1000",
+          "owner": "TotalEggsDiedB",
           "size": 4,
           "offset": 0,
           "hex": "a8010000"
         },
         {
-          "owner": "fd_50F6_0C26",
+          "owner": "GameTime",
           "size": 4,
           "offset": 0,
           "hex": "00000000"
         },
         {
-          "owner": "fd_3D57_00A4",
+          "owner": "YMapPopB",
           "size": 192,
           "offset": 0,
           "hex": "c42068af3d41ae921fa01857a76868865dd8a8538ebdaa2e0446e8cbbba4846d288a08e9206f8bd77a3d299722c38964e1069f4bf8ecfd0001edc9dbf2190d7e1936cabe543416af54dc9c791bca9444f2ec70de84b42e8b73ba41e10d7f088187753674425d0aa206b00ea4a351c10c4279418e4b5aa03a90d2197a1991fc8cfb8bc864a41c917b57a742650d2042f29fd2076f210ab44638b515f683f360868f5629923406151d0fa83020925cb0d61d7d1ac2ae64975fa1df3c855648da9c"
         },
         {
-          "owner": "fd_50F6_073C",
+          "owner": "H_BHeal",
           "size": 128,
           "offset": 0,
           "hex": "65927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff46"
         },
         {
-          "owner": "fd_50F6_0626",
+          "owner": "H_BFood",
           "size": 128,
           "offset": 0,
           "hex": "7b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff466592"
         },
         {
-          "owner": "fd_50F6_06AE",
+          "owner": "H_RFood",
           "size": 128,
           "offset": 0,
           "hex": "0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a0f87544f90979ea23a56ff4665927b9a"
@@ -125,7 +125,7 @@
       ],
       "expected_memory": [
         {
-          "owner": "fd_50F6_0EB6",
+          "owner": "TemCensus",
           "size": 64,
           "offset": 0,
           "hex": "0f0100005f0002000000000000000000a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
@@ -153,15 +153,15 @@
       "expected_memory": []
     },
     {
-      "name": "f_0250_0F2C/0",
-      "routine": "f_0250_0F2C",
+      "name": "BoundEditPosition/0",
+      "routine": "BoundEditPosition",
       "args": [],
       "arg_types": [],
       "return_kind": "void",
       "return_value": null,
       "memory": [
         {
-          "owner": "fd_50F6_0508",
+          "owner": "MapPnt",
           "size": 4,
           "offset": 0,
           "hex": "00000100"
@@ -187,7 +187,7 @@
       ],
       "expected_memory": [
         {
-          "owner": "fd_50F6_0508",
+          "owner": "MapPnt",
           "size": 4,
           "offset": 0,
           "hex": "00000100"
@@ -229,7 +229,7 @@
       "return_value": 1,
       "memory": [
         {
-          "owner": "fd_50F6_0508",
+          "owner": "MapPnt",
           "size": 4,
           "offset": 0,
           "hex": "baded790"
@@ -255,7 +255,7 @@
       ],
       "expected_memory": [
         {
-          "owner": "fd_50F6_0508",
+          "owner": "MapPnt",
           "size": 4,
           "offset": 0,
           "hex": "baded790"
@@ -286,14 +286,14 @@
       "args": [
         {
           "pointer": {
-            "owner": "fd_50F6_022E",
+            "owner": "caste_knob_center",
             "size": 4,
             "offset": 0
           }
         },
         {
           "pointer": {
-            "owner": "g_5A9C",
+            "owner": "gfx_screen_clip_list",
             "size": 8,
             "offset": 0
           }
@@ -307,13 +307,13 @@
       "return_value": null,
       "memory": [
         {
-          "owner": "fd_50F6_022E",
+          "owner": "caste_knob_center",
           "size": 4,
           "offset": 0,
           "hex": "63ee1ad4"
         },
         {
-          "owner": "g_5A9C",
+          "owner": "gfx_screen_clip_list",
           "size": 8,
           "offset": 0,
           "hex": "4d2cb7d49c71d6d5"
@@ -321,13 +321,13 @@
       ],
       "expected_memory": [
         {
-          "owner": "fd_50F6_022E",
+          "owner": "caste_knob_center",
           "size": 4,
           "offset": 0,
           "hex": "f5ceb7d4"
         },
         {
-          "owner": "g_5A9C",
+          "owner": "gfx_screen_clip_list",
           "size": 8,
           "offset": 0,
           "hex": "4d2cb7d49c71d6d5"
@@ -351,7 +351,7 @@
       "return_value": 1,
       "memory": [
         {
-          "owner": "fd_50F6_0508",
+          "owner": "MapPnt",
           "size": 4,
           "offset": 0,
           "hex": "00000000"
@@ -377,7 +377,7 @@
       ],
       "expected_memory": [
         {
-          "owner": "fd_50F6_0508",
+          "owner": "MapPnt",
           "size": 4,
           "offset": 0,
           "hex": "00000000"

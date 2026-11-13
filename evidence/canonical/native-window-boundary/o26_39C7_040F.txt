@@ -1,6 +1,6 @@
-o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region game_or_library
+win_track_move  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region game_or_library
   entry evidence: vector
-  module frame 39C7: function 3/4; neighbours: o26_39C7_0000, o26_39C7_022F, o26_39C7_0671
+  module frame 39C7: function 3/4; neighbours: win_toggle_zoom, win_constrain_drag_rect, win_track_resize
   frame: {'frame': 'bp', 'locals': 62, 'stack_check': False}
   040F  push bp
   0410  mov bp, sp
@@ -50,7 +50,7 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   0487  je 0x490
   0489  cmp byte ptr es:[bx + 0x21], 0x12
   048E  jne 0x46d
-  0490  lcall 0x1e57, 0x351                -> f_1E57_0351
+  0490  lcall 0x1e57, 0x351                -> clip_set_screen_region
   0495  lea ax, [bp - 0x3a]
   0498  mov cx, word ptr [bp - 0x12]
   049B  mov dx, word ptr [bp - 0x10]
@@ -74,10 +74,10 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   04B9  lea cx, [bp - 0x3a]
   04BC  push ss
   04BD  push cx
-  04BE  lcall 0x2505, 0x382                -> f_2505_0382
+  04BE  lcall 0x2505, 0x382                -> win_rect_center
   04C3  push word ptr [bp - 0x1c]
   04C6  push word ptr [bp - 0x1e]
-  04C9  lcall 0x1b73, 0x9e9                -> f_1B73_09E9
+  04C9  lcall 0x1b73, 0x9e9                -> mouse_set_position
   04CE  pop bx
   04CF  pop bx
   04D0  jmp 0x4e3
@@ -112,10 +112,10 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   0511  mov word ptr [bp - 0x20], dx
   0514  lcall 0x1fd2, 0x57f                -> ButtonHeldInit
   0519  jmp 0x57a
-  051B  mov ax, word ptr [0x9122]          DS:9122 g_9122
+  051B  mov ax, word ptr [0x9122]          DS:9122 mouse_x_pixels
   051E  cmp word ptr [bp - 0x22], ax
   0521  jne 0x52b
-  0523  mov ax, word ptr [0x9124]          DS:9124 g_9124
+  0523  mov ax, word ptr [0x9124]          DS:9124 mouse_y_pixels
   0526  cmp word ptr [bp - 0x20], ax
   0529  je 0x57a
   052B  mov ax, 2
@@ -128,7 +128,7 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   053C  lea ax, [bp - 0x22]
   053F  push ss
   0540  push ax
-  0541  lcall 0x1fd2, 0x4d0                -> f_1FD2_04D0
+  0541  lcall 0x1fd2, 0x4d0                -> GetMousePos
   0546  pop bx
   0547  pop bx
   0548  lea ax, [bp - 0x2a]
@@ -143,7 +143,7 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   055C  mov ax, word ptr [bp - 0x22]
   055F  sub ax, word ptr [bp - 0x1e]
   0562  mov bx, ax
-  0564  lcall 0x22bf, 0xb5b                -> f_22BF_0B5B
+  0564  lcall 0x22bf, 0xb5b                -> win_offset_rect_edges
   0569  mov ax, 2
   056C  push ax
   056D  lea ax, [bp - 0x2a]
@@ -167,7 +167,7 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   0599  mov ax, word ptr [bp - 0xe]
   059C  sub dx, dx
   059E  push cs
-  059F  call 0x22f                         -> o26_39C7_022F
+  059F  call 0x22f                         -> win_constrain_drag_rect
   05A2  les bx, ptr [bp - 0x1a]
   05A5  mov ax, word ptr es:[bx + 0x2c]
   05A9  mov dx, word ptr es:[bx + 0x2e]
@@ -219,7 +219,7 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   0622  lcall 0x2505, 0x545                -> win_Recalc
   0627  mov ax, word ptr [bp - 0xe]
   062A  lcall 0x23ae, 0x1db                -> win_UnlockWin
-  062F  lcall 0x1e57, 0x38e                -> f_1E57_038E
+  062F  lcall 0x1e57, 0x38e                -> win_rebuild_visible_clips
   0634  push word ptr [bp - 0xe]
   0637  mov es, word ptr [0x8a4c]          DS:8A4C
   063B  lcall es:[0x62ec]
@@ -227,11 +227,11 @@ o26_39C7_040F  S26:39C7:040F  linear 3A07F  size 610  extent DESCENT  region gam
   0641  lea ax, [bp - 0x32]
   0644  push ss
   0645  push ax
-  0646  lcall 0x21fa, 0xb4b                -> f_21FA_0B4B
+  0646  lcall 0x21fa, 0xb4b                -> win_redraw_exposed_windows
   064B  mov ax, word ptr [bp - 0xe]
-  064E  lcall 0x2505, 0x8ea                -> f_2505_08EA
+  064E  lcall 0x2505, 0x8ea                -> win_deactivate_pointer_regions
   0653  mov ax, word ptr [bp - 0xe]
-  0656  lcall 0x2505, 0x831                -> f_2505_0831
+  0656  lcall 0x2505, 0x831                -> win_activate_pointer_regions
   065B  lcall 0x1fd2, 0x542                -> StillDown
   0660  or ax, ax
   0662  jne 0x65b

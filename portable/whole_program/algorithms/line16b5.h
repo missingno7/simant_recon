@@ -10,7 +10,7 @@
 #define PORTABLE_LINE16B5_MAX_INLINE_BYTES 6272u
 
 /* Native typed view of the canonical DrawSpider image owner
- * (src/state/spider-image.c): a two-word Pnt prefix followed by the
+ * (src/ui/state/spider_image.c): a two-word Pnt prefix followed by the
  * 6272-byte inline payload required by the source-proved 112x112,
  * mode-1/mode-2 use. This header declares no storage. */
 typedef struct PortableSpiderLineBuffer {
@@ -19,7 +19,7 @@ typedef struct PortableSpiderLineBuffer {
     uint8_t pixels[PORTABLE_LINE16B5_MAX_INLINE_BYTES];
 } PortableSpiderLineBuffer;
 
-extern PortableSpiderLineBuffer fd_50F6_1F26;
+extern PortableSpiderLineBuffer spider_composite_bitmap;
 
 #if defined(__cplusplus)
 static_assert(offsetof(PortableSpiderLineBuffer, pixels) == 4,
@@ -54,12 +54,12 @@ typedef struct PortableLine16B5InlineBuffer {
 } PortableLine16B5InlineBuffer;
 
 /* Rejects invalid source geometry, undersized payloads, and unsafe address
- * extents. Successful initialization matches f_16B5_0033's table setup. */
+ * extents. Successful initialization matches gfx_buffer_line_target's table setup. */
 int portable_line16b5_init(PortableLine16B5 *state, uint16_t width,
                            uint16_t height, uint16_t mode,
                            uint8_t *pixels, size_t pixels_size);
 
-/* Draws the source f_16B5_0008 line into an initialized native view. Signed
+/* Draws the source gfx_buffer_line line into an initialized native view. Signed
  * word coordinates and color are interpreted as DOS 16-bit values. */
 int portable_line16b5_draw(PortableLine16B5 *state, int16_t x0, int16_t y0,
                            int16_t x1, int16_t y1, int16_t color);
@@ -71,8 +71,8 @@ int portable_line16b5_draw(PortableLine16B5 *state, int16_t x0, int16_t y0,
 /* `void *` preserves the source far-pointer machine ABI for TU-local Pnt *
  * declarations; the pointed-to native object still has the inline 2-word
  * prefix documented above. */
-void f_16B5_0033(void *source_prefix_and_pixels, int16_t mode);
-void f_16B5_0008(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
+void gfx_buffer_line_target(void *source_prefix_and_pixels, int16_t mode);
+void gfx_buffer_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
                  int16_t color);
 void portable_line16b5_unbind(void);
 

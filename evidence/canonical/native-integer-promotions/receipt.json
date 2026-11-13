@@ -5,8 +5,8 @@
   "method": "Bounded read-only inspection of scalar.py and two current canonical/generated function expressions. No global audit, compiler experiment, runtime execution or production/source mutation.",
   "current_input_pins": {
     "src/program.json": "c222e6590814a56702632a832224d05c8675d5cf657aecbda7619c4d444b39a4",
-    "src/root/m1986.c": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
-    "src/root/m0798.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+    "src/resources/database_index.c": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
+    "src/ui/colony_controls.c": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
     "portable/canonical_native_abi/scalar.py": "4ea12beb5431f577fa7d7e7a82a0a093dfa6465bb46b8af1d73195e127815d78",
     "portable/build.py": "f447ff36a0ca7c8353e2fce33f29260c9d2d1452f9060434424f656c20ab2256"
   },
@@ -16,8 +16,8 @@
     "passed": true,
     "relevant_input_pins_match": {
       "src/program.json": true,
-      "src/root/m1986.c": true,
-      "src/root/m0798.c": true,
+      "src/resources/database_index.c": true,
+      "src/ui/colony_controls.c": true,
       "portable/canonical_native_abi/scalar.py": true,
       "portable/build.py": false
     }
@@ -40,12 +40,12 @@
     {
       "id": "index-midpoint",
       "canonical": {
-        "path": "src/root/m1986.c",
+        "path": "src/resources/database_index.c",
         "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
         "function": "FindIndex",
         "definition_line": 77,
         "expression_line": 87,
-        "expression": "mid = (fd_50F6_3956 + top) / 2;"
+        "expression": "mid = (db_index_lower_bound + top) / 2;"
       },
       "generated": {
         "path": "build/portable-checkpoint/root_1986.c",
@@ -53,7 +53,7 @@
         "function": "FindIndex",
         "definition_line": 65,
         "expression_line": 75,
-        "expression": "mid = (fd_50F6_3956 + top) / 2;"
+        "expression": "mid = (db_index_lower_bound + top) / 2;"
       },
       "DOS": "Both operands are signed 16-bit int; the addition is an int expression before division by 2.",
       "native": "Both int16_t operands promote to the current GCC 32-bit int; the sum and division occur at that width, with narrowing only on assignment to mid.",
@@ -62,7 +62,7 @@
     {
       "id": "unsigned-triangle-comparison",
       "canonical": {
-        "path": "src/root/m0798.c",
+        "path": "src/ui/colony_controls.c",
         "sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
         "function": "GetTriLatDist",
         "definition_line": 468,
@@ -78,7 +78,7 @@
         "expression": "if ((uint16_t)dy > triHeight - 2)"
       },
       "declaration": {
-        "canonical": "src/root/m0798.c:50 extern unsigned far triHeight;",
+        "canonical": "src/ui/colony_controls.c:50 extern unsigned far triHeight;",
         "generated": "build/portable-checkpoint/root_0798.c:55 extern uint16_t triHeight;"
       },
       "DOS": "dy is explicitly converted to unsigned 16-bit int. triHeight is also unsigned 16-bit int; the literal 2 converts to that unsigned type, so triHeight-2 is unsigned 16-bit subtraction before the unsigned comparison.",
@@ -98,10 +98,10 @@
     {
       "path": "build/portable-checkpoint/root_1E57.c",
       "sha256": "11ea0572c98db4aaef06531ba79ba2c4c2643546031f4597885d64eefe058fef",
-      "function": "f_1E57_0052",
+      "function": "clip_lower_window",
       "expression_line": 62,
-      "expression": "if (g_5702[i] == (int16_t)0x8000)",
-      "canonical_anchor": "src/root/m1E57.c:61 if (g_5702[i] == (int)0x8000)",
+      "expression": "if (clip_window_z_order[i] == (int16_t)0x8000)",
+      "canonical_anchor": "src/graphics/clip_regions.c:61 if (clip_window_z_order[i] == (int)0x8000)",
       "meaning": "This is an already explicit canonical int cast preserved by scalar lowering, not a global literal rewrite or a new adapter intervention."
     }
   ],

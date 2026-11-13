@@ -119,6 +119,7 @@ def main():
     common_services = [service('portable/' + n) for n in (
         'whole_program/platform/handles.c', 'whole_program/platform/dos_io.c',
         'whole_program/platform/dos_format.c', 'whole_program/platform/dos_memory.c',
+        'whole_program/platform/drive_directory.c',
         'whole_program/platform/crt_abi.c', 'platform/memory.c',
         'whole_program/algorithms/lzss.c')]
     index_objects = compile_sources(index_sources + common_services + [driver, traps], 'index')
@@ -161,7 +162,7 @@ def main():
     # Compare the same complete converted TU without the native guard. Both
     # runners use a fixture-owned reserved row; no out-of-allocation read occurs.
     index_body = index_sources[0].read_text()
-    guard = re.compile(r'if\s*\(\s*fd_50F6_3956\s*==\s*fd_50F6_3958\s*\[\s*db\s*\]\s*\.\s*indexHeader\s*\.\s*count\s*\)\s*return\s+0L\s*;')
+    guard = re.compile(r'if\s*\(\s*db_index_lower_bound\s*==\s*openDBData\s*\[\s*db\s*\]\s*\.\s*indexHeader\s*\.\s*count\s*\)\s*return\s+0L\s*;')
     if len(list(guard.finditer(index_body))) != 1:
         raise ValueError('native FindIndex guard anchor not unique')
     unguarded = out / 'root_1986-without-native-guard.c'

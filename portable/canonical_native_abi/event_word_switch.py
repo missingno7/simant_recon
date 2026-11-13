@@ -1,6 +1,6 @@
 from __future__ import annotations
 import hashlib
-SHAPES = {'src/S19/m384C.c': ('switch (ev->code)', 'switch ((unsigned)ev->code)', 3), 'src/root/m218D.c': ('switch (fd_50F6_49FA.code)', 'switch ((unsigned)fd_50F6_49FA.code)', 1)}
+SHAPES = {'src/ui/game_events.c': ('switch (ev->code)', 'switch ((unsigned)ev->code)', 3), 'src/window/events.c': ('switch (window_current_event.code)', 'switch ((unsigned)window_current_event.code)', 1)}
 
 def adapt(source: str, rel: str) -> tuple[str, dict | None]:
     if rel not in SHAPES:

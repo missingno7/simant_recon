@@ -50,12 +50,12 @@ int portable_m1b73_queue_runtime_scan_byte(
 int portable_m1b73_queue_runtime_cursor_tick(PortableM1B73QueueRuntime *runtime);
 int portable_m1b73_queue_runtime_refresh_cursor(PortableM1B73QueueRuntime *runtime);
 
-/* Source f_1B73_09E9 coordinate command, exposed to the original source ABI
+/* Source mouse_set_position coordinate command, exposed to the original source ABI
  * wrapper. Returns failure when its active mouse/hot-box provider fails. */
 int portable_m1b73_queue_runtime_warp_source(int16_t x, int16_t y);
-/* Source f_1B73_0196 cursor-hide transition reused by display callbacks. */
+/* Source mouse_hide_cursor cursor-hide transition reused by display callbacks. */
 int portable_m1b73_queue_runtime_prepare_cursor_change(void);
-void f_1B73_0196(void);
+void mouse_hide_cursor(void);
 
 int portable_m1b73_queue_runtime_resolve_timer(
     void *context, const struct Timer *timer,

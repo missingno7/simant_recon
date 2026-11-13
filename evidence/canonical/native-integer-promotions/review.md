@@ -13,7 +13,7 @@ also selects different integer types on the two targets.
 Two current anchors illustrate the remaining scope:
 
 - `FindIndex`, canonical `src/resources/database_index.c:87`, generated
-  `build/portable-checkpoint/root_1986.c:75`: `mid = (fd_50F6_3956 + top) / 2;`.
+  `build/portable-checkpoint/root_1986.c:75`: `mid = (db_index_lower_bound + top) / 2;`.
   Native addition precedes division in 32-bit `int`. Shipped counts 120/271/449
   provide no overflow witness. ISO C signed overflow is undefined; this receipt
   does not assume a universal DOS signed-wrap contract.

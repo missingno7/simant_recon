@@ -24,14 +24,14 @@ def convert_window_global_declarations(source: str) -> ConversionResult:
     text = source
     counts: dict[str, int] = {}
     unresolved: list[str] = []
-    (text, counts['signed_profile_declaration']) = re.subn('extern\\s+char\\s+(?:(?:far|near)\\s+)?g_5A97\\s*;', '', text)
-    (text, counts['unsigned_profile_declaration']) = re.subn('extern\\s+(?:unsigned\\s+char|uint8_t)\\s+(?:(?:far|near)\\s+)?g_5A97\\s*;', '', text)
+    (text, counts['signed_profile_declaration']) = re.subn('extern\\s+char\\s+(?:(?:far|near)\\s+)?gfx_display_mode\\s*;', '', text)
+    (text, counts['unsigned_profile_declaration']) = re.subn('extern\\s+(?:unsigned\\s+char|uint8_t)\\s+(?:(?:far|near)\\s+)?gfx_display_mode\\s*;', '', text)
     if counts['unsigned_profile_declaration']:
         code = mask_literals(text)
-        if re.search('(?:&\\s*g_5A97|\\bg_5A97\\s*(?:\\+\\+|--|[+\\-*/%&|^]=|=(?!=))|(?:\\+\\+|--)\\s*g_5A97)', code):
-            unresolved.append('unsigned g_5A97 consumer has a non-read use')
+        if re.search('(?:&\\s*gfx_display_mode|\\bgfx_display_mode\\s*(?:\\+\\+|--|[+\\-*/%&|^]=|=(?!=))|(?:\\+\\+|--)\\s*gfx_display_mode)', code):
+            unresolved.append('unsigned gfx_display_mode consumer has a non-read use')
         else:
-            text = _rewrite_code_identifier(text, 'g_5A97', '((uint8_t)g_5A97)')
+            text = _rewrite_code_identifier(text, 'gfx_display_mode', '((uint8_t)gfx_display_mode)')
     for symbol in ('win_numOfWindows', 'win_numOfColors', 'win_numOfGroups'):
         (text, counts['shared_' + symbol]) = re.subn('extern\\s+(?:int16_t|int)\\s+(?:(?:far|near)\\s+)?' + symbol + '\\s*;', '', text)
     (text, counts['typed_hook_declaration']) = re.subn('extern\\s+void\\s*\\(\\s*(?:(?:far|near)\\s+)?\\*\\s*(?:(?:far|near)\\s+)?win_drawHooks\\s*\\[\\s*\\]\\s*\\)\\s*\\(\\s*(?:int16_t|int)\\s+phase\\s*\\)\\s*;', 'extern SimWindowSourceDrawHook win_drawHooks[SIM_WINDOW_SOURCE_SLOT_COUNT];', text)
@@ -44,7 +44,7 @@ def convert_window_global_declarations(source: str) -> ConversionResult:
             unresolved.append('window_offsets consumer lacked one audited four-word Rect definition')
         if RECT_HEADER not in text:
             text = RECT_HEADER + text
-    if any((name in text for name in ('win_drawHooks', 'win_offsets', 'g_5A97', 'win_numOfWindows', 'win_numOfColors', 'win_numOfGroups'))) and HEADER not in text:
+    if any((name in text for name in ('win_drawHooks', 'win_offsets', 'gfx_display_mode', 'win_numOfWindows', 'win_numOfColors', 'win_numOfGroups'))) and HEADER not in text:
         text = HEADER + text
     return ConversionResult(text=text, replacements=counts, unresolved=unresolved)
 
@@ -63,7 +63,7 @@ def adapt(source: str, rel: str) -> ConversionResult:
     if counts['typed_hook_clear'] == 0 and 'win_drawHooks' in text and ('_fmemset(win_drawHooks' in text):
         (text, counts['typed_hook_clear']) = re.subn('_fmemset\\(\\s*win_drawHooks\\s*,\\s*0\\s*,\\s*0xb4\\s*\\)', 'sim_window_source_clear_draw_hooks(win_drawHooks, 45)', text)
     loader_name = rel.replace('\\', '/').rsplit('/', 1)[-1].lower()
-    is_loader = loader_name in {'m20e8.c', 'root_m20e8.c'}
+    is_loader = rel.replace('\\', '/') == 'src/window/lifecycle.c' or loader_name in {'m20e8.c', 'root_m20e8.c'}
     if is_loader:
         (text, counts['dos_color_copy_width']) = re.subn('_fmemcpy\\(win_colors,\\s*\\*h,\\s*win_numOfColors\\s*\\*\\s*6\\s*\\)', '_fmemcpy(win_colors, *h, (uint16_t)(win_numOfColors * 6))', text)
         if counts['typed_hook_clear'] != 1:

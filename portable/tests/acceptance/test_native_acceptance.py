@@ -21,8 +21,8 @@ class Controls(unittest.TestCase):
             out=Path(scratch)
             # Different image bases AND symbol offsets defeat accidental reuse of
             # canonical addresses when reading the original executable.
-            oa={'g_5A9C':dict(dos_address=8),name:dict(dos_address=32)}
-            ca={'g_5A9C':12,name:64};specs={name:dict(dos_address=64)}
+            oa={'gfx_screen_clip_list':dict(dos_address=8),name:dict(dos_address=32)}
+            ca={'gfx_screen_clip_list':12,name:64};specs={name:dict(dos_address=64)}
             def dump(filename,data,base,clip_at,state_at):
                 memory=bytearray(256);memory[base+clip_at:base+clip_at+16]=acceptance.SCREEN_CLIP_PATTERN
                 memory[base+state_at:base+state_at+len(data)]=data
@@ -74,15 +74,15 @@ class Controls(unittest.TestCase):
     def test_three_way_stack_policy_requires_shared_scope(self):
         a=b'\x00\x01\x00\x80'+bytes(60)
         b=a[:4]+bytes([17])*60
-        row=self.three_way_dump_control(a,b,a,name='g_5702')
-        self.assertEqual(row['symbols']['g_5702']['verdict'],'ORIGINAL_EQUAL_ALL')
-        self.assertEqual(row['partial_exclusions']['g_5702']['raw_verdict']['verdict'],'RECONSTRUCTION_INTRODUCED')
-        row=self.three_way_dump_control(a,b,a,name='g_5702',raw_state=True)
-        self.assertEqual(row['symbols']['g_5702']['verdict'],'RECONSTRUCTION_INTRODUCED')
+        row=self.three_way_dump_control(a,b,a,name='clip_window_z_order')
+        self.assertEqual(row['symbols']['clip_window_z_order']['verdict'],'ORIGINAL_EQUAL_ALL')
+        self.assertEqual(row['partial_exclusions']['clip_window_z_order']['raw_verdict']['verdict'],'RECONSTRUCTION_INTRODUCED')
+        row=self.three_way_dump_control(a,b,a,name='clip_window_z_order',raw_state=True)
+        self.assertEqual(row['symbols']['clip_window_z_order']['verdict'],'RECONSTRUCTION_INTRODUCED')
         moved=b'\x00\x01\x00\x02\x00\x80'+bytes(58)
-        row=self.three_way_dump_control(a,a,moved,name='g_5702')
+        row=self.three_way_dump_control(a,a,moved,name='clip_window_z_order')
         self.assertFalse(row['partial_exclusions'])
-        self.assertEqual(row['symbols']['g_5702']['verdict'],'PORT_INTRODUCED')
+        self.assertEqual(row['symbols']['clip_window_z_order']['verdict'],'PORT_INTRODUCED')
 
     def test_paired_acceptance_directory_and_original_identity(self):
         from portable.tests.acceptance.native_acceptance import dos_directories
@@ -106,8 +106,8 @@ class Controls(unittest.TestCase):
             memory=acceptance.SCREEN_CLIP_PATTERN+bytes(16)
             original=out/'original.bin';original.write_bytes(memory)
             canonical=out/'canonical.bin';canonical.write_bytes(memory)
-            result=three_way_checkpoint(native,original,canonical,{'g_5A9C':0},
-                {'unknown':dict(dos_address=20)},original_specs={'g_5A9C':dict(dos_address=0)})
+            result=three_way_checkpoint(native,original,canonical,{'gfx_screen_clip_list':0},
+                {'unknown':dict(dos_address=20)},original_specs={'gfx_screen_clip_list':dict(dos_address=0)})
             self.assertFalse(result['symbols'])
             self.assertEqual(result['unavailable']['unknown']['status'],'ORIGINAL_MAP_MISSING')
             original.unlink()
@@ -144,7 +144,7 @@ class Controls(unittest.TestCase):
                 executable_sha256='exe',input_script_sha256='script',scenario_sha256='scenario',snapshots={dump.name:sha(dump)})))
             snapshot=dict(replay_next=1,milliseconds=80,clocks=dict(cycle=1,simulation_calls=1))
             path=out/'checkpoints/step1.json'
-            specs={'Cycle':dict(dos_address=0),'fd_50F6_0C26':dict(dos_address=2)}
+            specs={'Cycle':dict(dos_address=0),'GameTime':dict(dos_address=2)}
             module=compare_steps.__module__
             with patch(module+'.compare_checkpoint',return_value=(dict(status='EQUAL_SUBSET'),{},{})), \
                  patch(module+'.memory_base',return_value=0):
@@ -185,7 +185,7 @@ class Controls(unittest.TestCase):
         delta=save_differences(original,bytes(native))
         self.assertEqual(len(delta['differences']),1)
         row=delta['differences'][0]
-        self.assertEqual((row['record'],row['name'],row['native_unsigned']),(113,'fd_50F6_0FFE',30))
+        self.assertEqual((row['record'],row['name'],row['native_unsigned']),(113,'BlkWarnHealth',30))
     def test_canonical_map_anchors_positive(self):
         result,errors=canonical_layout(ROOT,ROOT/'build/current/dos/build-report.json')
         self.assertFalse(errors)
@@ -205,23 +205,23 @@ class Controls(unittest.TestCase):
     def test_named_stack_tail_and_raw_control(self):
         a=b'\x00\x01\x00\x80'+bytes(60)
         b=a[:4]+bytes([17])*60
-        left,right,policy=state_prefix('g_5702',a,b)
+        left,right,policy=state_prefix('clip_window_z_order',a,b)
         self.assertEqual(left,right)
         self.assertEqual(policy['excluded_range'],[4,64])
         self.assertEqual(policy['excluded_differing_offsets'],list(range(4,64)))
-        self.assertEqual(state_prefix('g_5702',a,b,True),(a,b,None))
+        self.assertEqual(state_prefix('clip_window_z_order',a,b,True),(a,b,None))
         self.assertEqual(state_prefix('another_symbol',a,b),(a,b,None))
 
     def test_live_prefix_and_sentinel_differences_remain_failures(self):
         a=b'\x00\x01\x00\x80'+bytes(60)
         b=b'\x00\x02'+a[2:]
-        left,right,policy=state_prefix('g_5702',a,b)
+        left,right,policy=state_prefix('clip_window_z_order',a,b)
         self.assertEqual(differences(left,right)['status'],'DIFFERS')
         b=b'\x00\x01\x00\x02\x00\x80'+bytes(58)
-        left,right,policy=state_prefix('g_5702',a,b)
+        left,right,policy=state_prefix('clip_window_z_order',a,b)
         self.assertFalse(policy['applied'])
         self.assertEqual((left,right),(a,b))
-        _,_,policy=state_prefix('g_5702',bytes(64),a)
+        _,_,policy=state_prefix('clip_window_z_order',bytes(64),a)
         self.assertFalse(policy['applied'])
 
     def test_dos_acceptance_retains_raw_checkpoint(self):

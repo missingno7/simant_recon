@@ -11,15 +11,15 @@
 #undef assert
 #define assert(expr) do { if (!(expr)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#expr);exit(1); } } while(0)
 /* Test-owned canonical externs. The production program uses only source owners. */
-PortableWholeAudioRuntimeSample fd_55B3_6B4C[4];
+PortableWholeAudioRuntimeSample snd_sample_channel_records[4];
 uint8_t portable_canonical_volume_tables[2048];
-uint16_t fd_55B3_6B9E=0x6ca3;
-int16_t fd_55B3_6B42=100,fd_55B3_6B9C=5,fd_55B3_6BA0=0x22c;
-int16_t fd_55B3_74AD=1,fd_55B3_74B5=5;
+uint16_t snd_volume_table_offset=0x6ca3;
+int16_t midi_service_countdown=100,snd_sample_output_routine=5,snd_sb_dsp_write_port=0x22c;
+int16_t snd_speaker_output_pointer=1,snd_sb_output_pointer=5;
 static unsigned sequencer_calls,writes;
 static int restart_in_sequencer;
 static uint8_t values[8192];
-int16_t f_284A_067F(void) { ++sequencer_calls;if(restart_in_sequencer) f_28BC_03CC();return 2; }
+int16_t snd_song_process_due_events(void) { ++sequencer_calls;if(restart_in_sequencer) snd_start_sample_timer();return 2; }
 static void configure(void *ctx,uint16_t d,uint16_t c,unsigned n) { portable_whole_audio_provider_configure(ctx,d,c,n); }
 static void start(void *ctx) { portable_whole_audio_provider_start(ctx); }
 static void stop(void *ctx) { portable_whole_audio_provider_stop(ctx); }
@@ -45,40 +45,40 @@ int main(int argc,char **argv) {
     PortableWholeAudioHost host={&p,configure,start,stop,out,in,enable};
     assert(portable_whole_audio_bind(&host));
     for(unsigned i=0;i<2048;++i) portable_canonical_volume_tables[i]=(uint8_t)i;
-    f_28BC_0488(214,306);f_28BC_03CC();
+    snd_select_two_channel_timer(214,306);snd_start_sample_timer();
     /* Inactive mixer emits one neutral DSP sample then switches to slow PIT.
      * The song divider advances only on each slow IRQ (3424 PIT clocks). */
     frames(&p,2000);
     assert(writes==2 && values[0]==0x10 && values[1]==128);
-    assert(p.fast==0 && fd_55B3_6B42==86); // 14 slow ticks by 41.666 ms
+    assert(p.fast==0 && midi_service_countdown==86); // 14 slow ticks by 41.666 ms
     dos_audio_host_interrupt_disable();frames(&p,500);
-    assert(p.pending_irq==1 && fd_55B3_6B42==86);
+    assert(p.pending_irq==1 && midi_service_countdown==86);
     dos_audio_host_interrupt_enable();
-    assert(!p.pending_irq && fd_55B3_6B42==85); // one coalesced IRQ, not a burst
-    f_28BC_04E0(0);
-    memset(fd_55B3_6B4C,0,sizeof(fd_55B3_6B4C));writes=0;
+    assert(!p.pending_irq && midi_service_countdown==85); // one coalesced IRQ, not a burst
+    snd_restore_bios_timer(0);
+    memset(snd_sample_channel_records,0,sizeof(snd_sample_channel_records));writes=0;
     uint8_t bytes[]={128,240,32,64,128};char *payload=(char *)bytes;
     PortableWholeAudioSample sample={0};sample.data=&payload;sample.len=5;
-    fd_55B3_6B4C[0].snd=&sample;fd_55B3_6B4C[0].owner=&sample;
-    fd_55B3_6B4C[0].step=256;fd_55B3_6B4C[0].end=3;
-    fd_55B3_6B4C[0].voltab=fd_55B3_6B9E;
-    f_28BC_03CC();frames(&p,40);
+    snd_sample_channel_records[0].snd=&sample;snd_sample_channel_records[0].owner=&sample;
+    snd_sample_channel_records[0].step=256;snd_sample_channel_records[0].end=3;
+    snd_sample_channel_records[0].voltab=snd_volume_table_offset;
+    snd_start_sample_timer();frames(&p,40);
     /* Three source samples; the fourth over-end interrupt has no OUT and
      * clears canonical snd, retaining owner until the source allocator frees it. */
-    assert(fd_55B3_6B4C[0].snd==NULL && fd_55B3_6B4C[0].owner==&sample);
+    assert(snd_sample_channel_records[0].snd==NULL && snd_sample_channel_records[0].owner==&sample);
     assert(writes==6 && values[1]==184 && values[3]==80 && values[5]==96);
-    assert(fd_55B3_6B4C[0].pos==4);
+    assert(snd_sample_channel_records[0].pos==4);
     frames(&p,20);assert(writes==8); // next inactive interrupt outputs neutral
-    f_28BC_04E0(0);
-    writes=0;fd_55B3_6B4C[0].snd=&sample;fd_55B3_6B4C[0].step=1;
-    fd_55B3_6B4C[0].pos=0;fd_55B3_6B4C[0].frac=0;
-    p.mix_divider=16;fd_55B3_6B42=1;restart_in_sequencer=1;
-    f_28BC_03CC();unsigned generation=p.timer_generation;frames(&p,138);
+    snd_restore_bios_timer(0);
+    writes=0;snd_sample_channel_records[0].snd=&sample;snd_sample_channel_records[0].step=1;
+    snd_sample_channel_records[0].pos=0;snd_sample_channel_records[0].frac=0;
+    p.mix_divider=16;midi_service_countdown=1;restart_in_sequencer=1;
+    snd_start_sample_timer();unsigned generation=p.timer_generation;frames(&p,138);
     assert(p.timer_generation>generation && p.irq_ns>p.time_ns && p.irq_ns-p.time_ns<180000);
-    restart_in_sequencer=0;f_28BC_04E0(0);
-    p.time_ns=UINT64_C(7200000000000);f_28BC_03CC();
+    restart_in_sequencer=0;snd_restore_bios_timer(0);
+    p.time_ns=UINT64_C(7200000000000);snd_start_sample_timer();
     assert(p.irq_ns>p.time_ns && p.irq_ns-p.time_ns<180000); // two-hour clock must not overflow
-    f_28BC_04E0(0);portable_whole_audio_unbind();
+    snd_restore_bios_timer(0);portable_whole_audio_unbind();
     /* Direct DSP commands preserve unsigned 8-bit DAC magnitude and mute. */
     sim_isa_audio_destroy(p.devices);p.devices=sim_isa_audio_create();
     void *d=p.devices;int16_t s[2];

@@ -27,8 +27,8 @@ typedef enum SimNativeVideoStatus {
 } SimNativeVideoStatus;
 
 /* Bind the host's virtual VGA capability and indexed graphics owner before
- * entering source f_205F_0004. The source callback adapter receives the typed
- * pointer-to-pointer slot for g_5AAC; g_5AAE is only the far-pointer segment
+ * entering source gfx_select_driver_resources. The source callback adapter receives the typed
+ * pointer-to-pointer slot for clip_active_list_offset; clip_active_list_segment is only the far-pointer segment
  * word and is never modeled as a separate native flag. The source ABI has no error return, so an
  * impossible unbound/rejected callback path terminates rather than returning a
  * fabricated probe or successful mode change.
@@ -48,11 +48,11 @@ SimNativeVideoStatus sim_native_video_set_mode_services(
     void *context);
 
 /* Source-compatible host providers referenced by root:m205F. */
-int16_t o21_39C7_0000(void);
-int16_t o21_39C7_016D(void);
-void f_1B4E_0025(void);
-void o00_31AD_2AB4(void);
-void o00_31AD_2AE5(void);
+int16_t gfx_probe_display_adapters(void);
+int16_t gfx_bios_has_tandy_signature(void);
+void gfx_reset_driver_callbacks(void);
+void gfx_planar_init_640x350(void);
+void gfx_planar_init_640x480(void);
 
 #ifdef __cplusplus
 }

@@ -100,7 +100,7 @@ __attribute__((noinline)) void portable_native_checkpoint(uint64_t milliseconds)
 {
     fprintf(stderr, "Native checkpoint %llu ms game_ticks=%u bios_ticks=%u outer_loops=%ld\n",
         (unsigned long long)milliseconds, sim_timing_tick_count(&app.game_clock),
-        sim_timing_tick_count(&app.bios_clock), (long)fd_50F6_383A);
+        sim_timing_tick_count(&app.bios_clock), (long)main_iteration_count);
 }
 
 static void fail(const char *where)
@@ -232,7 +232,7 @@ static void load_replay(const char *path)
 }
 static void replay_input(uint64_t now)
 {
-    simant_diagnostics_progress("replay_input", app.replay_next, (long)fd_50F6_383A);
+    simant_diagnostics_progress("replay_input", app.replay_next, (long)main_iteration_count);
     uint64_t elapsed = (now - app.started_ns) / 1000000u;
     while (app.replay_next < app.replay_count &&
             app.replay[app.replay_next].milliseconds <= elapsed) {
@@ -285,8 +285,8 @@ static void replay_input(uint64_t now)
                 py = state.y + (entry->relative ? entry->pointer.y / 2 : 0);
                 if (px < 0) px = 0;
                 if (py < 0) py = 0;
-                if (px > g_3DB2 - 4) px = g_3DB2 - 4;
-                if (py > g_3DB4 - 4) py = g_3DB4 - 4;
+                if (px > gfx_screen_width_pixels - 4) px = gfx_screen_width_pixels - 4;
+                if (py > gfx_screen_height_pixels - 4) py = gfx_screen_height_pixels - 4;
                 entry->pointer.x = (int16_t)px;
                 entry->pointer.y = (int16_t)py;
             }
@@ -362,19 +362,19 @@ static void retire_display(void *context)
 static int hide_cursor(void *context)
 {
     (void)context;
-    f_1B73_0196();
+    mouse_hide_cursor();
     return 1;
 }
 static int update_cursor(void *context)
 {
     (void)context;
-    f_1B73_00D9();
+    mouse_show_cursor();
     return 1;
 }
 static int redraw_cursor(void *context)
 {
     (void)context;
-    f_1B73_04BB();
+    mouse_refresh_cursor();
     return 1;
 }
 static void uninstall_video(void *context)
@@ -405,7 +405,7 @@ static int install_video(void *context, SimGraphicsDriver *graphics,
         sim_graphics_source_entry_bind(graphics) != SIM_GRAPHICS_OK ||
         sim_graphics_source_capture_bind(graphics) != SIM_GRAPHICS_OK ||
         sim_graphics_source_misc_bind(graphics, retire_display, a) != SIM_GRAPHICS_OK ||
-        portable_text_bitmap_bind_source((uint8_t)g_5A97, NULL, 0) !=
+        portable_text_bitmap_bind_source((uint8_t)gfx_display_mode, NULL, 0) !=
             PORTABLE_TEXT_BITMAP_OK ||
         sim_graphics_tile_upload_bind(graphics) != SIM_GRAPHICS_TILE_UPLOAD_OK ||
         !portable_ega_map_readback_bind(read_plane, a) ||
@@ -443,7 +443,7 @@ static void cleanup(void)
     host_set_event_observer(NULL, NULL);
     free(app.replay);
     portable_m1b73_sdl_application_input_unbind(&app.input);
-    if (portable_whole_audio_timer_armed()) f_28BC_04E0(0);
+    if (portable_whole_audio_timer_armed()) snd_restore_bios_timer(0);
     portable_sdl3_whole_audio_unbind_source_services();
     portable_sdl3_whole_audio_close(&app.audio);
     sim_native_video_startup_unbind();
@@ -474,7 +474,7 @@ static void source_timer_changed(void *context, uint16_t divisor, uint16_t reloa
             pit_divisor, chain) != SIM_TIMING_OK ||
         sim_timing_clock_configure_rate(&a->bios_clock, 14318180, 12,
             pit_divisor, chain) != SIM_TIMING_OK) fail("source PIT rate transition");
-    /* f_28BC_03CC arms g_74A3=1 before the first interrupt. The old INT08
+    /* snd_start_sample_timer arms g_74A3=1 before the first interrupt. The old INT08
      * chain runs after that one interrupt, then every g_74A5 interrupts. */
     if (divisor && reload) {
         a->game_clock.pit_fraction = (uint64_t)(reload - 1u) * divisor;
@@ -485,7 +485,7 @@ static void idle(void *context)
 {
     Application *a = context;
     uint64_t now = host_time_ns();
-    simant_diagnostics_progress("application.idle", a->replay_next, (long)fd_50F6_383A);
+    simant_diagnostics_progress("application.idle", a->replay_next, (long)main_iteration_count);
     if (a->test_input > 0 && a->last_present) {
         /* Hidden regression hook: untagged SDL input exercises the same
          * recording boundary as a keyboard/mouse, without OS focus races. */
@@ -528,20 +528,20 @@ static void idle(void *context)
     /* Events were routed at ingestion. Release the retained host observations;
      * source BIOS keys and hotbox records have their own canonical queues. */
     drain_host_observations();
-    simant_diagnostics_capture(a->host, (long)fd_50F6_383A);
+    simant_diagnostics_capture(a->host, (long)main_iteration_count);
     if (a->test_input == -1) simant_diagnostics_test_crash();
     if (!host_virtual_clock_enabled() && a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
             PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
-    /* Polling yields after a draw, including held-input tracking. g_5AAC is
+    /* Polling yields after a draw, including held-input tracking. clip_active_list_offset is
      * the current clip list, which those loops retain until release; it is
-     * not a frame-in-progress flag. Raster/cursor exclusion is g_3DD4. */
+     * not a frame-in-progress flag. Raster/cursor exclusion is gfx_cursor_draw_lock. */
     /* DOS speed in held-edge scrolling and Fast/Ultra simulation is bounded
      * only by the machine: those source loops redraw without a timer wait.
      * The display shows one refresh of VGA memory at a time (mode 12h:
      * 25.175 MHz / (800 x 525) = 59.94 Hz), so a loop that has stored to VGA
      * since the last presented refresh waits for the next one here, at the
      * platform boundary, instead of producing invisible frames at host speed. */
-    if (a->display_active && (g_3DD4 & 255u) == 0 && sim_sdl_palette_view(&a->palette)) {
+    if (a->display_active && (gfx_cursor_draw_lock & 255u) == 0 && sim_sdl_palette_view(&a->palette)) {
         const uint64_t refresh_ns = 16683217;
         /* Wait in short slices: audio is rendered only up to host time, so
          * the device keeps the same feed cadence while the source waits. */
@@ -567,7 +567,7 @@ static void idle(void *context)
                                    !native_windows_save_frames(a->capture_path)))
             fail("smoke frame capture");
         fprintf(stderr, "Source-main smoke frame captured; outer game loop count=%ld; full gameplay remains a separate check\n",
-            (long)fd_50F6_383A);
+            (long)main_iteration_count);
         exit_reason = "smoke deadline";
         exit(0);
     }
@@ -724,7 +724,7 @@ int main(int argc, char **argv)
         fail("verified font and pattern resources");
     }
     if (sim_graphics_source_clip_bind(&app.graphics) != SIM_GRAPHICS_OK ||
-        sim_graphics_bind_source_abi(&app.graphics, &g_5AAC) != SIM_GRAPHICS_OK ||
+        sim_graphics_bind_source_abi(&app.graphics, &clip_active_list_offset) != SIM_GRAPHICS_OK ||
         sim_native_video_set_mode_services(install_video, uninstall_video, &app) != SIM_NATIVE_VIDEO_OK ||
         sim_native_video_startup_bind(&app.graphics) != SIM_NATIVE_VIDEO_OK)
         fail("source video startup binding");
@@ -745,7 +745,7 @@ int main(int argc, char **argv)
     simant_diagnostics_start(app.started_ns);
     if (smoke_ms) app.smoke_deadline_ns = app.started_ns + smoke_ms * 1000000u;
     fprintf(stderr, "Entering reconstructed DOS main, seed=%u\n", app.seed);
-    simant_diagnostics_progress("dos_game_main", app.replay_next, (long)fd_50F6_383A);
+    simant_diagnostics_progress("dos_game_main", app.replay_next, (long)main_iteration_count);
     dos_game_main((int16_t)source_argc, source_argv);
     free(source_argv);
     return 0;

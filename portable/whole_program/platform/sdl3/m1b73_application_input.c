@@ -90,8 +90,8 @@ static int cursor_header(void *context, const uint8_t *image,
         !measure_cursor_resource(binding, image, &image_size) ||
         !measure_cursor_resource(binding, mask, &mask_size) ||
         /* The source kinds and slot names are counterintuitive: kind 7 is the
-         * one-plane input stored at g_4D8E and consumed by g9154 (AND);
-         * kind 8 is the four-plane input stored at g_4D92 and consumed by
+         * one-plane input stored at cursor_putimg_bitmap_pointer and consumed by g9154 (AND);
+         * kind 8 is the four-plane input stored at cursor_putpic_bitmap_pointer and consumed by
          * g914C (XOR). The source ABI still names the arguments image/mask. */
         !bitmap_required_size(image, image_size, 4u,
                              &image_width, &image_height) ||
@@ -138,8 +138,8 @@ static int render_source_cursor(void *context, PortableM1B73CursorAction action,
         *state->y != y ||
         !measure_cursor_resource(binding, image, &ignored) ||
         !measure_cursor_resource(binding, mask, &ignored) ||
-        /* f_1B73_01E1 stores its second argument in g_4D8E and its first in
-         * g_4D92. Native cursor state names follow those source slots, so
+        /* mouse_set_cursor_bitmaps stores its second argument in cursor_putimg_bitmap_pointer and its first in
+         * cursor_putpic_bitmap_pointer. Native cursor state names follow those source slots, so
          * state.image is kind 7 and state.mask is kind 8 after installation.
          * Reorder back to the public image-kind8/mask-kind7 validator ABI. */
         !cursor_header(context, mask, image, &checked_width, &checked_height) ||
@@ -152,7 +152,7 @@ static int render_source_cursor(void *context, PortableM1B73CursorAction action,
     if (action != PORTABLE_M1B73_CURSOR_SHOW &&
         action != PORTABLE_M1B73_CURSOR_HIDE)
         return 0;
-    (void)f_1B73_0D4B(mode);
+    (void)mouse_default_cursor_thunk(mode);
     return sim_graphics_source_last_status() == SIM_GRAPHICS_OK;
 }
 
@@ -229,7 +229,7 @@ static int dimensions_match(Host *host, const SimGraphicsDriver *graphics)
     return host_get_logical_size(host, &width, &height) &&
         width == graphics->framebuffer.width &&
         height == graphics->framebuffer.height &&
-        width == g_3DB2 && height == g_3DB4 &&
+        width == gfx_screen_width_pixels && height == gfx_screen_height_pixels &&
         width > 0 && height > 0 && width <= INT16_MAX && height <= INT16_MAX;
 }
 
@@ -296,8 +296,8 @@ PortableM1B73ApplicationInputStatus portable_m1b73_sdl_application_input_bind(
     mouse_services.hit_test = hotbox_hit_test;
     mouse_services.render_cursor = render_source_cursor;
     if (portable_m1b73_mouse_bind(&binding->mouse, host, &binding->input_host,
-            &portable_m1b73_mouse_asm_state, &g_3DB2,
-            &g_3DB4, &mouse_services) != PORTABLE_M1B73_MOUSE_OK)
+            &portable_m1b73_mouse_asm_state, &gfx_screen_width_pixels,
+            &gfx_screen_height_pixels, &mouse_services) != PORTABLE_M1B73_MOUSE_OK)
     {
         status = PORTABLE_M1B73_APP_INPUT_MOUSE_BIND_FAILED;
         goto mouse_fail;
@@ -305,13 +305,13 @@ PortableM1B73ApplicationInputStatus portable_m1b73_sdl_application_input_bind(
     binding->mouse_bound = 1;
     binding->mouse.dispatch_queue = source_queue_dispatch;
     binding->mouse.dispatch_queue_context = binding;
-    binding->mouse.display_busy = (uint8_t *)&g_3DD4;
+    binding->mouse.display_busy = (uint8_t *)&gfx_cursor_draw_lock;
 
     graphics_bindings = *cursor_bindings;
     graphics_bindings.graphics = graphics;
     graphics_bindings.source_shift_state = &shift_state;
-    graphics_bindings.hide_rectangle_active = &g_4334;
-    graphics_bindings.hide_rectangle = g_4336;
+    graphics_bindings.hide_rectangle_active = &cursor_alternate_rect_active;
+    graphics_bindings.hide_rectangle = cursor_alternate_rect_left;
     cursor_status = sim_graphics_source_cursor_bind(&binding->graphics_cursor,
                                                     &graphics_bindings);
     if (cursor_status != SIM_GRAPHICS_OK) {
@@ -531,10 +531,10 @@ int16_t portable_m1b73_source_countdown_is_zero(void)
     return (int16_t)(remaining == 0);
 }
 
-void f_1B73_050E(void) { }
-void f_1B73_0510(void) { }
+void input_noop_050e(void) { }
+void input_noop_0510(void) { }
 
-void f_1B73_09E9(int16_t x, int16_t y)
+void mouse_set_position(int16_t x, int16_t y)
 {
     if (!portable_m1b73_queue_runtime_warp_source(x, y))
         abort();

@@ -17,12 +17,12 @@ def emit(event, **fields):
 
 
 def state():
-    return {'mouse_status': int(gdb.parse_and_eval('g_9120')),
+    return {'mouse_status': int(gdb.parse_and_eval('mouse_button_state')),
             'replay_next': int(gdb.parse_and_eval('app.replay_next')),
-            'source_window': int(gdb.parse_and_eval('((short *)&g_5702)[0]')) & 0xffff,
-            'space_down': int(gdb.parse_and_eval('(g_53CD[57] ^ 128) != 0')),
-            'insert_down': int(gdb.parse_and_eval('(g_53CD[82] ^ 128) != 0')),
-            'delete_down': int(gdb.parse_and_eval('(g_53CD[83] ^ 128) != 0'))}
+            'source_window': int(gdb.parse_and_eval('((short *)&clip_window_z_order)[0]')) & 0xffff,
+            'space_down': int(gdb.parse_and_eval('(kbd_scan_code_state[57] ^ 128) != 0')),
+            'insert_down': int(gdb.parse_and_eval('(kbd_scan_code_state[82] ^ 128) != 0')),
+            'delete_down': int(gdb.parse_and_eval('(kbd_scan_code_state[83] ^ 128) != 0'))}
 
 
 class Returned(gdb.FinishBreakpoint):

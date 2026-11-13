@@ -188,7 +188,7 @@ int portable_m1b73_queue_ops_hit_test(
     return 0;
 }
 
-void f_1B73_0AC3(struct Timer *timer, PortableM1B73Queue *slot)
+void hotbox_append(struct Timer *timer, PortableM1B73Queue *slot)
 {
     PortableM1B73CallbackSidecar sidecar = { 0 };
     uint8_t index = queue_index(slot);
@@ -201,7 +201,7 @@ void f_1B73_0AC3(struct Timer *timer, PortableM1B73Queue *slot)
     ++(*slot->count);
 }
 
-void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot)
+void hotbox_prepend(struct Timer *timer, PortableM1B73Queue *slot)
 {
     PortableM1B73CallbackSidecar sidecar = { 0 };
     uint8_t index = queue_index(slot);
@@ -233,15 +233,15 @@ void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot)
         abort();
 }
 
-void f_1B73_0B5B(int16_t id, PortableM1B73Queue *slot)
+void hotbox_remove_id(int16_t id, PortableM1B73Queue *slot)
 {
     uint8_t index = queue_index(slot);
     uint16_t i;
     int restore_cursor = 0;
     validate_queue(slot, index);
-    /* Source hides before lookup only when signed g_4365 is positive. The
+    /* Source hides before lookup only when signed cursor_show_level is positive. The
      * matching 00D9 restore runs after the search even when no ID matched. */
-    if (index == 3 && g_4365 != 0 && g_4365 < 0x80) {
+    if (index == 3 && cursor_show_level != 0 && cursor_show_level < 0x80) {
         if (!ops_bound || active_ops.prepare_cursor_change == NULL ||
             !active_ops.prepare_cursor_change(active_ops.context))
             abort();
@@ -271,7 +271,7 @@ void f_1B73_0B5B(int16_t id, PortableM1B73Queue *slot)
         abort();
 }
 
-int16_t f_1B73_0BC5(int16_t id, PortableM1B73Queue *slot)
+int16_t hotbox_contains_pointer(int16_t id, PortableM1B73Queue *slot)
 {
     uint16_t i;
     uint8_t index = queue_index(slot);
@@ -279,17 +279,17 @@ int16_t f_1B73_0BC5(int16_t id, PortableM1B73Queue *slot)
     for (i = 0; i < (*slot->count); ++i) {
         const uint8_t *record = slot->records[i];
         if (read_i16(record + 12) == id &&
-            g_9122 >= read_i16(record + 0) &&
-            g_9122 <= read_i16(record + 4) &&
-            g_9124 >= read_i16(record + 2) &&
-            g_9124 <= read_i16(record + 6)) {
+            mouse_x_pixels >= read_i16(record + 0) &&
+            mouse_x_pixels <= read_i16(record + 4) &&
+            mouse_y_pixels >= read_i16(record + 2) &&
+            mouse_y_pixels <= read_i16(record + 6)) {
             return 1;
         }
     }
     return 0;
 }
 
-int16_t f_1B73_0BFF(void)
+int16_t hotbox_pointer_hit_id(void)
 {
     /* `les di, _g_5484+12`: descriptor 2, the object hot boxes (fd_5071_03C4),
      * not the cursor hover boxes of _g_549A (queue 3). */
@@ -298,16 +298,16 @@ int16_t f_1B73_0BFF(void)
     validate_queue(queue, 2);
     for (i = 0; i < (*queue->count); ++i) {
         const uint8_t *record = queue->records[i];
-        if (g_9122 >= read_i16(record + 0) &&
-            g_9122 <= read_i16(record + 4) &&
-            g_9124 >= read_i16(record + 2) &&
-            g_9124 < read_i16(record + 6))
+        if (mouse_x_pixels >= read_i16(record + 0) &&
+            mouse_x_pixels <= read_i16(record + 4) &&
+            mouse_y_pixels >= read_i16(record + 2) &&
+            mouse_y_pixels < read_i16(record + 6))
             return read_i16(record + 12);
     }
     return 0;
 }
 
-void f_1B73_0C80(int16_t id)
+void hotbox_center_pointer(int16_t id)
 {
     /* `les di, _g_5484+12`: descriptor 2, the object hot boxes (fd_5071_03C4),
      * not the cursor hover boxes of _g_549A (queue 3). */
@@ -330,7 +330,7 @@ void f_1B73_0C80(int16_t id)
     }
 }
 
-void f_1B73_0A6C(void)
+void kbd_enable_mouse_emulation(void)
 {
     require_ops();
     memset(active_ops.scan_state_table, 0x80, 128);
@@ -341,10 +341,10 @@ void f_1B73_0A6C(void)
         abort();
 }
 
-void f_1B73_0A40(void)
+void kbd_disable_mouse_emulation(void)
 {
     uint16_t buttons;
-    f_1B73_0A6C();
+    kbd_enable_mouse_emulation();
     require_ops();
     if (active_ops.set_keyboard_hook == NULL ||
         !active_ops.set_keyboard_hook(active_ops.context, 0))
@@ -354,7 +354,7 @@ void f_1B73_0A40(void)
     if (active_ops.read_mouse_buttons == NULL ||
         !active_ops.read_mouse_buttons(active_ops.context, &buttons))
         abort();
-    g_9120 = buttons;
+    mouse_button_state = buttons;
     *active_ops.events->source_shift_state = 0;
     g_4362 = 0;
     g_4363 = 0;
@@ -362,7 +362,7 @@ void f_1B73_0A40(void)
     g_4369 = 0;
 }
 
-int16_t f_1B73_0D4B(int16_t mode_arg)
+int16_t mouse_default_cursor_thunk(int16_t mode_arg)
 {
     uint16_t bits = (uint16_t)mode_arg;
     uint8_t mode = (uint8_t)(bits & UINT16_C(3));

@@ -30,11 +30,11 @@ void sim_graphics_source_palette_unbind(void);
 
 /* Source public m1B4E wrappers. Image pointers address source 4-byte
  * [width,height] headers followed by the native S00 source bitmap format. */
-void f_1B4E_003B(int16_t x, int16_t y, char *image);
-void f_1B4E_005E(int16_t x, int16_t y, char *image);
-void f_1B4E_0110(int16_t x, int16_t y, int16_t character);
-void f_1B4E_01A1(char *palette17, int16_t count);
-void f_1B4E_01AE(char *rgb_palette, int16_t count);
+void GPutPic(int16_t x, int16_t y, char *image);
+void GPutImg(int16_t x, int16_t y, char *image);
+void gfx_put_fixed_font_char(int16_t x, int16_t y, int16_t character);
+void gfx_set_ega_palette(char *palette17, int16_t count);
+void gfx_set_dac_palette(char *rgb_palette, int16_t count);
 
 #ifdef __cplusplus
 }

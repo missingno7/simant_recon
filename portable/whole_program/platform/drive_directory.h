@@ -24,6 +24,6 @@ uint16_t sim_drive_chdir(const char *dos_path);
 int16_t sim_drive_error_to_errno(uint16_t dos_error);
 
 /* Exact source ABI used by S09 FileSelect; path is a DOS CWD, never a host path. */
-int16_t f_1F66_00AF(int16_t drive, char *path);
+int16_t file_drive_current_directory(int16_t drive, char *path);
 
 #endif

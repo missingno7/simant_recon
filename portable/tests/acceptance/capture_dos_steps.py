@@ -36,7 +36,7 @@ def main():
         lines=[l for l in lines if int(l.split()[0])<args.until_ms and l.split()[1]!='exit']
         lines.append(f'{args.until_ms} exit')
     lines += [f'0 on_exec lin {base+addresses["DoAntSim"]:X} {args.steps} dump 0 A0000 simstep']
-    for name in ('main','f_00DF_0004','f_28BC_03CC'):
+    for name in ('main','snd_init_driver_once','snd_start_sample_timer'):
         lines.append(f'0 on_exec lin {base+addresses[name]:X} 1 dump 46C 4 startup-{name}')
     for ms in (0,250,500,750,1000,1250,1500,2000,5000,7000,9000,14000):
         if args.until_ms is None or ms<args.until_ms: lines.append(f'{ms} dump 46C 4 clock{ms}')

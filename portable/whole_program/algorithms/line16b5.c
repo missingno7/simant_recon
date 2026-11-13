@@ -56,7 +56,7 @@ static LinePoint midpoint(LinePoint a, LinePoint b)
     return middle;
 }
 
-/* A structured translation of f_16B5_04D8. The boundary search is the
+/* A structured translation of gfx_buffer_clip_line. The boundary search is the
  * original midpoint procedure (including its signed-word midpoint), rather
  * than a floating-point line clip. */
 static int clip_line(const PortableLine16B5 *state, LinePoint *first,
@@ -334,7 +334,7 @@ int portable_line16b5_draw(PortableLine16B5 *state, int16_t x0, int16_t y0,
     return 1;
 }
 
-void f_16B5_0033(void *source_prefix_and_pixels, int16_t mode)
+void gfx_buffer_line_target(void *source_prefix_and_pixels, int16_t mode)
 {
     uint8_t *prefix = (uint8_t *)source_prefix_and_pixels;
     uint16_t width;
@@ -367,7 +367,7 @@ void f_16B5_0033(void *source_prefix_and_pixels, int16_t mode)
                                 (uint16_t)mode, prefix + 4, required);
 }
 
-void f_16B5_0008(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
+void gfx_buffer_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1,
                  int16_t color)
 {
     (void)portable_line16b5_draw(&legacy_state, x0, y0, x1, y1, color);

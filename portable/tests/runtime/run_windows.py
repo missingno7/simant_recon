@@ -41,13 +41,13 @@ def pixels(path):
 
 
 def scroll_origin(build, executable, out, name, script, gdb):
-    """Map scroll origin fd_50F6_0508 at exit (GDB reads it; no inferior calls)."""
+    """Map scroll origin MapPnt at exit (GDB reads it; no inferior calls)."""
     target = out / name
     target.mkdir()
     assets = target / 'a'
     shutil.copytree(build / 'runtime-assets', assets)
     command = [str(gdb), '--batch', '-q', '-ex', 'break __wrap_exit', '-ex', 'run',
-               '-ex', 'print fd_50F6_0508', '--args', str(executable), '--headless', '--windows',
+               '-ex', 'print MapPnt', '--args', str(executable), '--headless', '--windows',
                '--smoke-ms', '19000', '--seed', '0', '--assets', str(assets),
                '--input-script', str(FIXTURES / script)]
     run = subprocess.run(command, capture_output=True, timeout=120)
@@ -111,7 +111,7 @@ def main():
     if raise_caste and caste and behavior:
         # Client = logical rect minus the 20-px title strip the native caption replaces.
         checks['hosted_client_is_rect_minus_title_strip'] = raise_caste[:2] == caste[:2] == (214, 172)
-        # Win16 WM_MOUSEACTIVATE / DOS f_218D_0451: the first click on a background
+        # Win16 WM_MOUSEACTIVATE / DOS win_dispatch_desktop_click: the first click on a background
         # window raises it; the click does not reach the Manual button.
         checks['background_click_only_raises'] = raise_caste[2](12, 29) == GREY and raise_caste[2](12, 12) == RED
         checks['second_click_reaches_game_object'] = caste[2](12, 29) == RED and caste[2](12, 12) == GREY
@@ -131,16 +131,16 @@ def main():
     checks['native_close_closes_through_game'] = (hosted('chrome', '1300') is None and
                                                   hosted('chrome', '1200') is not None)
     edit = hosted('chrome', '0000')
-    # Native sizing frame -> the game's resize icon (o26_39C7_0671): the logical
+    # Native sizing frame -> the game's resize icon (win_track_resize): the logical
     # window and its native client follow the game's result.
     checks['native_resize_resizes_through_game'] = bool(edit) and edit[0] < 404 and edit[1] < 337
-    # Save-under pull-down (GSaveRect .. f_1CE2_056C) -> native popup, not the desktop.
+    # Save-under pull-down (GSaveRect .. gfx_restore_and_free_rect) -> native popup, not the desktop.
     popup = Path(str(runs['menu']['frame']) + '.popup0.bmp')
     menu_root = pixels(runs['menu']['frame'])[2]
     checks['save_under_box_is_native_popup'] = popup.is_file() and menu_root(322, 60) == DESKTOP
     # Native menu choice -> the game's menu command event -> win_Open(0x1500).
     checks['native_menu_command_reaches_game'] = hosted('menucmd', '1500') is not None
-    # Hold-move-release on a prox menu selects (f_1B73_0BFF scans descriptor 2,
+    # Hold-move-release on a prox menu selects (hotbox_pointer_hit_id scans descriptor 2,
     # the object hot boxes): the menu window closes after the release.
     prox_log = (out / 'prox' / 'stderr.txt').read_text()
     checks['prox_menu_release_selects'] = ('Logical window 0700 opened' in prox_log and

@@ -6,9 +6,9 @@
 #include <stdlib.h>
 
 #include "portable/whole_program/types/input_queue.h"
-extern uint16_t g_9120;
-extern int16_t g_9122;
-extern int16_t g_9124;
+extern uint16_t mouse_button_state;
+extern int16_t mouse_x_pixels;
+extern int16_t mouse_y_pixels;
 
 PortableM1B73QueueSet portable_m1b73_queue_set = {
     .queues = {
@@ -66,9 +66,9 @@ PortableM1B73QueueStatus portable_m1b73_queue_dispatch(void)
 {
     PortableM1B73QueueEvent event;
     uint8_t queue_index;
-    event.status = g_9120;
-    event.x = g_9122;
-    event.y = g_9124;
+    event.status = mouse_button_state;
+    event.x = mouse_x_pixels;
+    event.y = mouse_y_pixels;
     for (queue_index = 0;
          queue_index < PORTABLE_M1B73_QUEUE_HOTBOX_DISPATCH_COUNT;
          ++queue_index) {
@@ -94,25 +94,25 @@ PortableM1B73QueueStatus portable_m1b73_queue_dispatch(void)
                 &event);
             if (keep_scanning == 0)
                 return PORTABLE_M1B73_QUEUE_OK;
-            /* f_1B73_0CEF reloads these globals after every callback. */
-            event.status = g_9120;
-            event.x = g_9122;
-            event.y = g_9124;
+            /* hotbox_hit_and_callback reloads these globals after every callback. */
+            event.status = mouse_button_state;
+            event.x = mouse_x_pixels;
+            event.y = mouse_y_pixels;
         }
     }
     return PORTABLE_M1B73_QUEUE_OK;
 }
 
-void f_1B73_0CB3(void)
+void hotbox_dispatch_event(void)
 {
     if (portable_m1b73_queue_dispatch() != PORTABLE_M1B73_QUEUE_OK)
         abort();
 }
 
-void f_1B73_0AA3(void)
+void hotbox_initialize_dispatch(void)
 {
     (*portable_m1b73_queue_set.queues[0].count) = 0;
     (*portable_m1b73_queue_set.queues[1].count) = 0;
     g_5FF2.r.bottom = (int16_t)0x1f00;
-    g_5FF2.fn = f_1B73_0CB3;
+    g_5FF2.fn = hotbox_dispatch_event;
 }

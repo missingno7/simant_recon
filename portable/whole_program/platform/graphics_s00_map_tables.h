@@ -54,13 +54,13 @@ SimS00MapTableStatus sim_s00_map_06A3(const uint8_t *source, size_t source_size,
 
 /* Original S00 entry names, adapted to native flat pointers. The first four
  * procedures consume fixed source spans; the two minimap procedures select
- * their table from the active application's g_3DB2 mode. */
-void o00_3126_0000(char *source, char *destination, int16_t source_width, int16_t count);
-void o00_3126_0137(char *source, char *destination, int16_t source_width, int16_t count);
-void o00_3126_026A(char *source, char *destination, int16_t source_width, int16_t count);
-void o00_3126_03A9(char *source, char *destination, int16_t source_width, int16_t count);
-void o00_3126_04D8(char *source, char *destination);
-void o00_3126_06A3(char *source, char *destination);
+ * their table from the active application's gfx_screen_width_pixels mode. */
+void gfx_planar_map128_pack2(char *source, char *destination, int16_t source_width, int16_t count);
+void gfx_planar_map64_pack2(char *source, char *destination, int16_t source_width, int16_t count);
+void gfx_planar_map128_pack4(char *source, char *destination, int16_t source_width, int16_t count);
+void gfx_planar_map64_pack4(char *source, char *destination, int16_t source_width, int16_t count);
+void gfx_planar_map128_pack8(char *source, char *destination);
+void gfx_planar_map64_pack8(char *source, char *destination);
 
 /* Convert then send the result through the already-bound source g914C renderer
  * into the application's one SimGraphicsDriver framebuffer. */

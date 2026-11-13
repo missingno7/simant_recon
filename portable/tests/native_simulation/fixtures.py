@@ -53,25 +53,25 @@ def case_for(seed, mode, x, y, goal_x, goal_y, terrain=0, obstacles=(),
         return tick & 0xffff, tick >> 16
     callbacks["TickCount"] = behavior.Callback(stack_words=0, handler=tick_count)
     writes = [
-        word_write("fd_50F6_0AA0", 1), word_write("fd_50F6_0A8E", mode),
+        word_write("MeMoveMe", 1), word_write("MeCmd", mode),
         word_write("MePlane", plane), word_write("MeLocX", x), word_write("MeLocY", y),
-        word_write("fd_50F6_04C2", ant_type), word_write("fd_50F6_0496", 0),
-        word_write("fd_50F6_0AF8", 1), word_write("fd_50F6_0AD6", goal_x),
-        word_write("fd_50F6_0AE8", goal_y), word_write("fd_50F6_0AB6", (x + 17) & 127),
-        word_write("fd_50F6_0AC6", (y + 19) & 63), word_write("fd_50F6_0EFA", seed & 7),
-        word_write("fd_50F6_0EF8", (seed >> 3) & 7), word_write("fd_50F6_0D6C", path_delay),
-        word_write("fd_50F6_0C3E", move_count), word_write("MeHealth", 63),
-        word_write("fd_50F6_0FBA", 45), word_write("fd_3D57_0C16", 0),
-        word_write("fd_50F6_104E", 0), word_write("fd_50F6_04C4", 0),
-        word_write("fd_50F6_04E2", 0), word_write("MapPlane", plane),
+        word_write("MeType", ant_type), word_write("MeDir", 0),
+        word_write("MeGoalPlane", 1), word_write("MeGoalX", goal_x),
+        word_write("MeGoalY", goal_y), word_write("MeLastX", (x + 17) & 127),
+        word_write("MeLastY", (y + 19) & 63), word_write("MeCrazyRot", seed & 7),
+        word_write("MeCrazyDir", (seed >> 3) & 7), word_write("MeCrazyCnt", path_delay),
+        word_write("MeSteps", move_count), word_write("MeHealth", 63),
+        word_write("MeWarnHealth", 45), word_write("NeverHungry", 0),
+        word_write("MeDropAlarm", 0), word_write("MeScent", 0),
+        word_write("MeColor", 0), word_write("MapPlane", plane),
         word_write("TERRAINset", terrain), word_write("fd_50F6_0F24", 0),
-        word_write("fd_3D57_07A8", 0), word_write("fd_50F6_08DA", 2),
-        word_write("fd_50F6_07C0", 0), word_write("fd_50F6_084E", 0),
-        word_write("fd_50F6_08E2", goal_x), word_write("fd_50F6_09F0", goal_y),
-        word_write("fd_3D57_0C24", 0), word_write("fd_3D57_0C18", 0),
+        word_write("OptionStates", 0), word_write("MeTargLifePlane", 2),
+        word_write("MeTargIndex", 0), word_write("MeTargLife", 0),
+        word_write("MeTargLifeX", goal_x), word_write("MeTargLifeY", goal_y),
+        word_write("MeNestStarted", 0), word_write("AlwaysHealthy", 0),
         word_write("fd_50F6_10BE", 0),
-        word_write("fd_50F6_0214", theme_last, 4),
-        word_write("fd_50F6_0228", theme_index),
+        word_write("LastThemeTime", theme_last, 4),
+        word_write("LastThemeSong", theme_index),
         map_write("HoleMapB", bytes(64)), map_write("HoleMapR", bytes(64)),
         word_write("g_8BA2", 0xbeef),
         map_write("MapA", bytes(surface)), map_write("MapB", bytes(nest_b)),
@@ -87,7 +87,7 @@ def case_for(seed, mode, x, y, goal_x, goal_y, terrain=0, obstacles=(),
         target_type = 0x18
         caste_mask = 0x10 if mode == 4 else 0
         for i, (address, data) in enumerate(writes):
-            if address == behavior.symbol_address("fd_50F6_084E"):
+            if address == behavior.symbol_address("MeTargLife"):
                 writes[i] = (address, int(caste_mask).to_bytes(2, "little"))
                 break
         active_life[target_x * 64 + target_y] = target_type
@@ -115,21 +115,21 @@ def case_for(seed, mode, x, y, goal_x, goal_y, terrain=0, obstacles=(),
                 hole_map[index & 63] = value & 0xff
             writes.append(map_write(name, bytes(hole_map)))
     # Set the directional distance landmarks used when target plane differs.
-    for name, px, py in (("fd_3D57_02A4", 5, 1), ("fd_3D57_02A8", 58, 1),
-                         ("fd_3D57_02AC", 5, 62), ("fd_3D57_02B0", 58, 62)):
+    for name, px, py in (("LastNewExitB", 5, 1), ("LastNewExitR", 58, 1),
+                         ("LastNewHoleB", 5, 62), ("LastNewHoleR", 58, 62)):
         writes.append((behavior.symbol_address(name),
                        int(px).to_bytes(2, "little") + int(py).to_bytes(2, "little")))
     writes.extend([word_write("fd_50F6_048C", plane),
-                   word_write("fd_50F6_0A8E", mode),
-                   word_write("fd_50F6_0AA0", 1)])
-    observe_names = ["fd_50F6_0AA0", "fd_50F6_0A8E", "MePlane", "MeLocX", "MeLocY",
-        "fd_50F6_04C2", "fd_50F6_0496", "fd_50F6_0AF8", "fd_50F6_0AD6",
-        "fd_50F6_0AE8", "fd_50F6_0AB6", "fd_50F6_0AC6", "fd_50F6_0EFA",
-        "fd_50F6_0EF8", "fd_50F6_0D6C", "fd_50F6_0C3E", "MeHealth",
-        "fd_50F6_1044", "fd_50F6_08DA", "fd_50F6_07C0", "fd_50F6_084E",
-        "fd_50F6_0228", "g_8BA2", "MapPlane"]
+                   word_write("MeCmd", mode),
+                   word_write("MeMoveMe", 1)])
+    observe_names = ["MeMoveMe", "MeCmd", "MePlane", "MeLocX", "MeLocY",
+        "MeType", "MeDir", "MeGoalPlane", "MeGoalX",
+        "MeGoalY", "MeLastX", "MeLastY", "MeCrazyRot",
+        "MeCrazyDir", "MeCrazyCnt", "MeSteps", "MeHealth",
+        "MeWantFood", "MeTargLifePlane", "MeTargIndex", "MeTargLife",
+        "LastThemeSong", "g_8BA2", "MapPlane"]
     observe = [behavior.Range(n, behavior.symbol_address(n), 2) for n in observe_names]
-    observe.append(behavior.Range("fd_50F6_0214", behavior.symbol_address("fd_50F6_0214"), 4))
+    observe.append(behavior.Range("LastThemeTime", behavior.symbol_address("LastThemeTime"), 4))
     observe += [behavior.Range(name, behavior.symbol_address(name), size) for name, size in
         (("MapA", 128 * 64), ("MapB", 64 * 64), ("MapR", 64 * 64),
          ("LifeA", 128 * 64), ("LifeB", 64 * 64), ("LifeR", 64 * 64),

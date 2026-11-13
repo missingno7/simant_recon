@@ -283,7 +283,7 @@ def scan(project, build, out, cc='C:/msys64/mingw64/bin/gcc.exe'):
     inventory = json.loads((project/'src/program.json').read_text())
     aliases = {a['alias'].lstrip('_@'):a.get('target',a.get('owner')).lstrip('_@')
                for a in inventory['aliases'] if a['kind']=='code'}
-    thunk=(project/'src/root/m2CFB.asm').read_text(encoding='latin1')
+    thunk=(project/'src/memory/hook_thunks.asm').read_text(encoding='latin1')
     aliases.update({a.lstrip('_@'):b.lstrip('_@') for a,b in re.findall(r'(?m)^\s*(\w+):\s+jmp\s+(\w+)\s*$',thunk)})
     for name,target in list(aliases.items()):
         seen=set()

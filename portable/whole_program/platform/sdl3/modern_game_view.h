@@ -13,7 +13,7 @@
  * Game-originated MapPnt changes move the modern camera by the same amount
  * (a plane change re-centres it on the edit view). User pans and zooms
  * re-centre the canonical edit view on the modern camera through the game's
- * own scroll (f_0250_0D10) in the event pump, so the overview, edge scrolling,
+ * own scroll (edit_scroll_and_redraw) in the event pump, so the overview, edge scrolling,
  * saved games and every other MapPnt reader see one camera. The canonical
  * edit view keeps drawing at game cadence (its draw path consumes the RNG);
  * rendering here never runs game code that writes state. */

@@ -5,13 +5,13 @@ The seed-0 human recording is retained verbatim as
 `40e1f2d` native executable freezes after `7958 move 374 480`. Its INT33
 adapter already clamps source coordinates to `(374,476)`, so fixing screen
 bounds alone cannot release the loop. Three actual GDB attachments observe
-all threads: the main thread remains in `UpdateEdit <- f_0250_0D10 <-
-f_00F8_01BE <- dos_game_main`, with replay_next 814 and outer loop 4, and
-does not reach its 20-second smoke deadline. Samples inside f_0250_13A6,
-f_0250_5058 and DrawEditGraphs exclude a blocked SDL/audio thread.
+all threads: the main thread remains in `UpdateEdit <- edit_scroll_and_redraw <-
+ui_pump_events_edge_scroll <- dos_game_main`, with replay_next 814 and outer loop 4, and
+does not reach its 20-second smoke deadline. Samples inside edit_render_viewport,
+edit_set_viewport_clip and DrawEditGraphs exclude a blocked SDL/audio thread.
 
-Canonical `src/ui/view_dialog_helpers.c:f_00F8_01BE` reads ISR-owned `g_9122/g_9124`
-and calls `f_1B73_0EEE` each iteration. Exact canonical `m1B73.asm:0445`
+Canonical `src/ui/view_dialog_helpers.c:ui_pump_events_edge_scroll` reads ISR-owned `mouse_x_pixels/mouse_y_pixels`
+and calls `kbd_scroll_lock_state` each iteration. Exact canonical `m1B73.asm:0445`
 writes the pointer state independently of foreground code. In DOS, input and
 timer IRQs arrive while this loop executes. Native keyboard-flag queries
 formerly read cached flags without pumping pending mouse/timer events.

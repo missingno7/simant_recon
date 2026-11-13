@@ -1,6 +1,6 @@
 NewGame  S15:384C:03C6  linear 38886  size 385  extent DESCENT  region game_or_library
   entry evidence: vector
-  module frame 384C: function 8/8; neighbours: o15_384C_0239, SetDefaultWindows
+  module frame 384C: function 8/8; neighbours: ui_prompt_save_discard_cancel, SetDefaultWindows
   frame: {'frame': 'bp', 'locals': 2, 'stack_check': True}
   03C6  push bp
   03C7  mov bp, sp
@@ -113,10 +113,10 @@ NewGame  S15:384C:03C6  linear 38886  size 385  extent DESCENT  region game_or_l
   0503  pop bx
   0504  or si, si
   0506  jne 0x516
-  0508  lcall 0x22bf, 0xa65                -> f_22BF_0A65
+  0508  lcall 0x22bf, 0xa65                -> win_is_zoomed
   050D  or ax, ax
   050F  jne 0x516
-  0511  lcall 0x2cff, 0x2a10               -> o26_39C7_0000 (vector 2A10)
+  0511  lcall 0x2cff, 0x2a10               -> win_toggle_zoom (vector 2A10)
   0516  mov es, word ptr [0x878c]          DS:878C
   051A  push word ptr es:[0x48a]
   051F  mov es, word ptr [0x878e]          DS:878E

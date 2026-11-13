@@ -15,7 +15,7 @@ an exact function, not a guessed change to its game algorithm.
 | --- | --- | --- |
 | f_00F8_02EF | AX=0 | explicit word return 0 |
 | myButton | AX from final StillDown call | return StillDown() |
-| o25_3BA4_19AD | AX from final o25_3BA4_1686 call | return that call |
+| GetMyInitialRandDir | AX from final GetMyRandDirs call | return that call |
 
 The latter two are proven siblings with consumed callers. Their canonical
 functions are byte-exact; their prior native C results were unspecified. This
@@ -48,15 +48,15 @@ AX residue. A zero-result policy would erase that distinction.
 
 Explicit debt remains:
 
-* f_171C_0A5C and f_171C_0EEA return a pointer on success, but can fall through
+* mem_claim_handle_slot and mem_find_free_block return a pointer on success, but can fall through
   after a returning/reentrant Punt on failure. Punt's guard can return; its
   DX:AX residue is not a constant. The three consuming sites belong to the
   excluded DOS heap implementation, replaced at the native heap boundary.
   A matched failed/reentrant-heap observer is required before claiming parity.
-* f_195A_0260 leaves incoming AX on its already-active EMS branch. Supported
+* ems_initialize leaves incoming AX on its already-active EMS branch. Supported
   native no-EMS operation returns the original inactive/no-device 0. Enabled
   or reentered EMS is outside this domain; no arbitrary incoming AX is guessed.
-* MakeBalloon and f_24AB_0002 return DX:AX handles, but S13 stores their results
+* MakeBalloon and font_make_display_bitmap return DX:AX handles, but S13 stores their results
   through `long` declarations. They already have explicit native pointer
   returns. Native 64-bit pointer versus 32-bit storage is separate representation
   debt requiring an original/canonical/native pointer-and-observer fixture.

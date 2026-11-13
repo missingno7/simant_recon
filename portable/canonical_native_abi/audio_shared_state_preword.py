@@ -3,8 +3,8 @@ import hashlib
 import re
 from typing import Callable
 HEADER = '#include "portable/whole_program/platform/audio_state.h"\n'
-SOURCE_MODULES = {'src/root/m290D.c', 'src/root/m2815.c', 'src/root/m284A.c', 'src/root/m29D6.c', 'src/root/m29F0.c', 'src/root/m277E.c', 'src/data/d55B3_00B8.c', 'src/root/m295C.c', 'src/root/m293A.c', 'src/root/m0000.c'}
-_AUDIO_TUS = {f'src/root/{name}.c' for name in ('m0000', 'm277E', 'm2815', 'm284A', 'm290D', 'm293A', 'm295C', 'm29D6', 'm29F0')}
+SOURCE_MODULES = {'src/sound/sample_voices.c', 'src/sound/opl2_voices.c', 'src/sound/midi_player.c', 'src/sound/psg_voices.c', 'src/platform/port_io.c', 'src/sound/device_channels.c', 'src/sound/instruments.c', 'src/sound/midi_voices.c', 'src/sound/device_probe.c', 'src/sound/resource_loading.c'}
+_AUDIO_TUS = {'src/sound/opl2_voices.c', 'src/sound/resource_loading.c', 'src/sound/psg_voices.c', 'src/sound/device_channels.c', 'src/sound/sample_voices.c', 'src/sound/midi_voices.c', 'src/platform/port_io.c', 'src/sound/midi_player.c', 'src/sound/device_probe.c'}
 
 def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -101,45 +101,45 @@ def _remove_then_tag(source: str, tag: str, fields: str, uses: int) -> str:
     return source
 
 def _m0000(source: str) -> str:
-    source = _remove_then_tag(source, 'Sample', 'struct Sample { Handle data; unsigned len; unsigned loop; char looped; unsigned char octave; int tune; int loaded; char name[15]; int object; };', 6)
-    source = _remove_then_tag(source, 'Instr', 'struct Instr { int kind; PortableWholeAudioSample far *sample; };', 1)
-    (source, _) = _code_sub(source, 'fd_50F6_0000\\[song->bank\\[i\\]\\]\\.sample', lambda _m: 'portable_whole_audio_sample(&fd_50F6_0000[song->bank[i]])', label='m0000 bank sample payload', expected=3)
-    (source, _) = _code_sub(source, 'fd_50F6_0000\\[i\\]\\.sample', lambda _m: 'portable_whole_audio_sample(&fd_50F6_0000[i])', label='m0000 cleanup sample payload', expected=1)
+    source = _remove_then_tag(source, 'Sample', 'struct Sample { char far * far *data; unsigned len; unsigned loop; char looped; unsigned char octave; int tune; int loaded; char name[15]; int object; };', 9)
+    source = _remove_then_tag(source, 'Instr', 'struct Instr { int kind; void far *p; };', 1)
+    (source, _) = _code_sub(source, 'snd_instrument_descriptors\\[song->instrument\\[i\\]\\]\\.p', lambda _m: 'portable_whole_audio_sample(&snd_instrument_descriptors[song->instrument[i]])', label='m0000 bank sample payload', expected=3)
+    (source, _) = _code_sub(source, 'snd_instrument_descriptors\\[i\\]\\.p', lambda _m: 'portable_whole_audio_sample(&snd_instrument_descriptors[i])', label='m0000 cleanup sample payload', expected=1)
     return source
 
 def _m277e(source: str) -> str:
-    source = _remove_then_tag(source, 'Chan', 'struct Chan { char type; char num; char c2; char c3; char c4; char c5; };', 1)
+    source = _remove_then_tag(source, 'Chan', 'struct Chan { unsigned char type; unsigned char num; unsigned char priority; unsigned char instrument; unsigned char note; unsigned char age; };', 1)
     source = _remove_then_tag(source, 'Voice', 'struct Voice { int a; void *b; };', 10)
-    for (old, new, expected) in (('fd_50F6_0000[i].a', 'fd_50F6_0000[i].kind', 1), ('fd_50F6_0000[i].b', 'fd_50F6_0000[i].payload', 1), ('src[i].a', 'src[i].kind', 1), ('src[i].b', 'src[i].payload', 1)):
+    for (old, new, expected) in (('snd_instrument_descriptors[i].a', 'snd_instrument_descriptors[i].kind', 1), ('snd_instrument_descriptors[i].b', 'snd_instrument_descriptors[i].payload', 1), ('src[i].a', 'src[i].kind', 1), ('src[i].b', 'src[i].payload', 1)):
         (source, _) = _code_sub(source, re.escape(old), lambda _m, value=new: value, label=f'm277E {old}', expected=expected)
     return source
 
 def _m2815(source: str) -> str:
-    source = _remove_then_tag(source, 'Instr', 'struct Instr { int a; unsigned char far *p; };', 1)
-    (source, _) = _code_sub(source, 'fd_50F6_0000\\[instr\\]\\.p', lambda _m: 'portable_whole_audio_patch_bytes(&fd_50F6_0000[instr])', label='m2815 patch pointer', expected=2)
+    source = _remove_then_tag(source, 'Instr', 'struct Instr { int kind; void far *p; };', 1)
+    (source, _) = _code_sub(source, 'snd_instrument_descriptors\\[instr\\]\\.p', lambda _m: 'portable_whole_audio_patch_bytes(&snd_instrument_descriptors[instr])', label='m2815 patch pointer', expected=2)
     return source
 
 def _m290d(source: str) -> str:
-    source = _remove_then_tag(source, 'Sample', 'struct Sample { char far *data; unsigned len; unsigned loop; char looped; unsigned char octave; int tune; int loaded; };', 9)
+    source = _remove_then_tag(source, 'Sample', 'struct Sample { char far * far *data; unsigned len; unsigned loop; char looped; unsigned char octave; int tune; int loaded; char name[15]; int object; };', 9)
     source = _remove_then_tag(source, 'SndChan', 'struct SndChan { unsigned pos; PortableWholeAudioSample far *snd; unsigned end; unsigned start; unsigned step; unsigned voltab; unsigned char frac; unsigned char flags; PortableWholeAudioSample far *owner; };', 2)
-    source = _remove_then_tag(source, 'Instr', 'struct Instr { int a; unsigned char far *p; };', 1)
-    (source, _) = _code_sub(source, 'fd_50F6_0000\\[instr\\]\\.p', lambda _m: 'portable_whole_audio_sample(&fd_50F6_0000[instr])', label='m290D sample pointer', expected=1)
+    source = _remove_then_tag(source, 'Instr', 'struct Instr { int kind; void far *p; };', 1)
+    (source, _) = _code_sub(source, 'snd_instrument_descriptors\\[instr\\]\\.p', lambda _m: 'portable_whole_audio_sample(&snd_instrument_descriptors[instr])', label='m290D sample pointer', expected=1)
     return source
 
 def _m295c(source: str) -> str:
-    source = _remove_then_tag(source, 'Chan', 'struct Chan { unsigned char type; unsigned char num; unsigned char c2; unsigned char c3; unsigned char c4; unsigned char c5; };', 3)
+    source = _remove_then_tag(source, 'Chan', 'struct Chan { unsigned char type; unsigned char num; unsigned char priority; unsigned char instrument; unsigned char note; unsigned char age; };', 3)
     source = _remove_then_tag(source, 'Drv', 'struct Drv { int count; int far *info; };', 1)
     source = _remove_then_tag(source, 'Slot', 'struct Slot { long busy; int w4; int w6; int w8; int wA; int wC; struct Snd far *snd; int w12; };', 1)
-    (source, _) = _code_sub(source, 'fd_50F6_0000\\[dev\\]\\.count', lambda _m: 'fd_50F6_0000[dev].kind', label='m295C driver kind', expected=2)
-    (source, _) = _code_sub(source, 'fd_50F6_0000\\[dev\\]\\.info', lambda _m: 'portable_whole_audio_driver_info(&fd_50F6_0000[dev])', label='m295C driver info', expected=6)
+    (source, _) = _code_sub(source, 'snd_instrument_descriptors\\[dev\\]\\.count', lambda _m: 'snd_instrument_descriptors[dev].kind', label='m295C driver kind', expected=2)
+    (source, _) = _code_sub(source, 'snd_instrument_descriptors\\[dev\\]\\.info', lambda _m: 'portable_whole_audio_driver_info(&snd_instrument_descriptors[dev])', label='m295C driver info', expected=6)
     return source
 
 def _data_b8(source: str) -> str:
-    source = _remove_then_tag(source, 'Sample', 'struct Sample { Handle data; unsigned len; unsigned loop; char looped; unsigned char octave; int tune; int loaded; char name[15]; int object; };', 58)
-    source = _remove_then_tag(source, 'Instr', 'struct Instr { int kind; void *p; };', 9)
+    source = _remove_then_tag(source, 'Sample', 'struct Sample { char far * far *data; unsigned len; unsigned loop; char looped; unsigned char octave; int tune; int loaded; char name[15]; int object; };', 58)
+    source = _remove_then_tag(source, 'Instr', 'struct Instr { int kind; void far *p; };', 9)
     return source
-_SHARED_EXTERN_COUNTS: dict[str, dict[str, int]] = {'src/root/m0000.c': {'fd_50F6_0150': 1, 'fd_50F6_0000': 1, 'fd_50F6_01F0': 1}, 'src/root/m277E.c': {'fd_55B3_74DA': 1, 'fd_50F6_4A48': 1, 'fd_50F6_4A4C': 1, 'fd_50F6_01F0': 1, 'fd_50F6_4A4E': 1, 'fd_50F6_0000': 1, 'fd_50F6_4A4A': 1, 'fd_50F6_4B14': 1, 'fd_55B3_6B4A': 1, 'fd_55B3_74AD': 1, 'fd_55B3_6B9C': 1, 'fd_55B3_74C0': 1, 'fd_55B3_74B9': 1, 'fd_55B3_74B3': 1, 'fd_55B3_74AF': 1, 'fd_50F6_4B16': 1, 'fd_55B3_7564': 1, 'fd_55B3_6BA0': 1, 'fd_55B3_74B5': 1, 'fd_50F6_4A46': 1, 'fd_55B3_74B7': 1, 'fd_55B3_74B1': 1}, 'src/root/m2815.c': {'fd_50F6_0000': 1, 'fd_50F6_4B16': 1, 'fd_55B3_6BA4': 1}, 'src/root/m284A.c': {'fd_50F6_4B28': 1, 'fd_50F6_4B2C': 1, 'fd_55B3_6B42': 1, 'fd_50F6_4B8E': 1, 'fd_50F6_4BAA': 1, 'fd_50F6_4B2E': 1, 'fd_50F6_4B42': 1, 'fd_50F6_4B30': 1, 'fd_50F6_4B8A': 1}, 'src/root/m290D.c': {'fd_55B3_6B4C': 1, 'fd_50F6_0000': 1}, 'src/root/m293A.c': {'fd_50F6_01F0': 1, 'fd_50F6_4B14': 1}, 'src/root/m295C.c': {'fd_50F6_4A4E': 1, 'fd_55B3_6B4E': 1, 'fd_50F6_0000': 1}, 'src/root/m29D6.c': {'fd_50F6_4B14': 1}}
-_TRANSFORMS: dict[str, Callable[[str], str]] = {'src/root/m0000.c': _m0000, 'src/root/m277E.c': _m277e, 'src/root/m2815.c': _m2815, 'src/root/m290D.c': _m290d, 'src/root/m295C.c': _m295c, 'src/data/d55B3_00B8.c': _data_b8}
+_SHARED_EXTERN_COUNTS: dict[str, dict[str, int]] = {'src/sound/resource_loading.c': {'snd_sample_release_list': 1, 'snd_instrument_descriptors': 1, 'snd_driver_capabilities': 1}, 'src/sound/device_channels.c': {'snd_driver_probe_table': 1, 'snd_sample_channel_count': 1, 'snd_voice_build_index': 1, 'snd_driver_capabilities': 1, 'snd_voice_slots': 1, 'snd_instrument_descriptors': 1, 'fd_50F6_4A4A': 1, 'snd_device_io_base': 1, 'snd_dac_io_base': 1, 'snd_speaker_output_pointer': 1, 'snd_sample_output_routine': 1, 'snd_sample_volume_bias': 1, 'snd_based_dac_output_pointer': 1, 'snd_port200_output_pointer': 1, 'snd_adlib_output_pointer': 1, 'snd_opl_volume_bias': 1, 'snd_sb_io_base': 1, 'snd_sb_dsp_write_port': 1, 'snd_sb_output_pointer': 1, 'fd_50F6_4A46': 1, 'snd_port222_output_pointer': 1, 'snd_lpt_output_pointer': 1}, 'src/sound/opl2_voices.c': {'snd_instrument_descriptors': 1, 'snd_opl_volume_bias': 1, 'snd_opl_volume_curve': 1}, 'src/sound/midi_player.c': {'midi_song_data_handle': 1, 'midi_song_data_bytes': 1, 'midi_service_countdown': 1, 'midi_channel_instruments': 1, 'midi_channel_priorities': 1, 'midi_header_division': 1, 'midi_track_event_ticks': 1, 'midi_track_status': 1, 'midi_tick_delay_scale': 1}, 'src/sound/sample_voices.c': {'snd_sample_channel_records': 1, 'snd_instrument_descriptors': 1}, 'src/sound/device_probe.c': {'snd_driver_capabilities': 1, 'snd_device_io_base': 1}, 'src/sound/midi_voices.c': {'snd_voice_slots': 1, 'fd_55B3_6B4E': 1, 'snd_instrument_descriptors': 1}, 'src/sound/psg_voices.c': {'snd_device_io_base': 1}}
+_TRANSFORMS: dict[str, Callable[[str], str]] = {'src/sound/resource_loading.c': _m0000, 'src/sound/device_channels.c': _m277e, 'src/sound/opl2_voices.c': _m2815, 'src/sound/sample_voices.c': _m290d, 'src/sound/midi_voices.c': _m295c, 'src/sound/instruments.c': _data_b8}
 
 def adapt(path: str, source: str, original_source: str | bytes, *, deferred_scalar_externs: set[str] | frozenset[str]=frozenset()) -> tuple[str, dict[str, object]]:
     """Adapt one original-source-derived TU; original bytes are mandatory pins."""
@@ -170,10 +170,10 @@ def adapt(path: str, source: str, original_source: str | bytes, *, deferred_scal
         (output, count) = _code_sub(output, pattern, lambda _m: '', label=f'{rel} shared extern {symbol}', expected=len(re.findall(pattern, _lexical_mask(output)[0], flags=re.MULTILINE)))
         removed_externs[symbol] = count
     output = HEADER + output
-    if rel.endswith('m0000.c') and re.search('fd_50F6_0000\\s*\\[[^]]+\\]\\s*\\.\\s*sample', _lexical_mask(output)[0]):
+    if rel == 'src/sound/resource_loading.c' and re.search('snd_instrument_descriptors\\s*\\[[^]]+\\]\\s*\\.\\s*p\\b', _lexical_mask(output)[0]):
         raise AssertionError('m0000 direct Sample view remains')
-    if rel.endswith('m2815.c') and re.search('fd_50F6_0000\\s*\\[[^]]+\\]\\s*\\.\\s*p\\b', _lexical_mask(output)[0]):
+    if rel == 'src/sound/opl2_voices.c' and re.search('snd_instrument_descriptors\\s*\\[[^]]+\\]\\s*\\.\\s*p\\b', _lexical_mask(output)[0]):
         raise AssertionError('m2815 direct patch pointer remains')
-    if rel.endswith('m295C.c') and re.search('fd_50F6_0000\\s*\\[[^]]+\\]\\s*\\.\\s*info\\b', _lexical_mask(output)[0]):
+    if rel == 'src/sound/midi_voices.c' and re.search('snd_instrument_descriptors\\s*\\[[^]]+\\]\\s*\\.\\s*info\\b', _lexical_mask(output)[0]):
         raise AssertionError('m295C direct driver-info pointer remains')
     return (output, {'status': 'SOURCE_SHARED_AUDIO_STATE' if transform is not None else 'SOURCE_SHARED_AUDIO_DECLARATIONS', 'original_sha256': actual_sha, 'transformed_input_sha256': _sha(source.encode('utf-8')), 'output_sha256': _sha(output.encode('utf-8')), 'owner_header': 'portable/whole_program/platform/audio_state.h', 'state_ownership': {'pointer_tables_records': 'canonical C/ASM providers with shared native representation types', 'existing_scalar_aliases': 'canonical source providers; no second definitions introduced'}, 'centralized_externs_removed': removed_externs, 'deferred_scalar_externs_retained': retained_scalar_externs, 'lexical_contract': 'Only code tokens and exact complete struct blocks changed; comments and literals are protected by offset-preserving lexer.'})

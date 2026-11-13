@@ -29,11 +29,11 @@ static int16_t source_word_sub(int16_t left, int16_t right)
     return source_word_from_u16((uint16_t)((uint16_t)left - (uint16_t)right));
 }
 
-extern void f_1D8E_0384(SimGraphicsPatternRectCallback callback,
+extern void clip_dispatch_rect(SimGraphicsPatternRectCallback callback,
                         int16_t unused1, int16_t unused2,
                         int16_t left, int16_t top, int16_t right,
                         int16_t bottom, int16_t color);
-extern void f_1D8E_070E(char *port, int16_t x, int16_t y, char *bits,
+extern void clip_blit_mono_indexed(char *port, int16_t x, int16_t y, char *bits,
                         int16_t width, int16_t height);
 
 static SimGraphicsDriver *require_source_owner(void)
@@ -44,41 +44,41 @@ static SimGraphicsDriver *require_source_owner(void)
 }
 
 static const SimGraphicsSlotInfo s00_slots[SIM_GRAPHICS_DRIVER_ENTRY_COUNT] = {
-    { SIM_GFX_ENTRY_G9128, "o00_31AD_1659", 1 },
-    { SIM_GFX_ENTRY_G912C, "o00_31AD_166A", 1 },
-    { SIM_GFX_ENTRY_G9130, "o00_31AD_168C", 1 },
-    { SIM_GFX_ENTRY_G9134, "o00_31AD_16A9", 1 },
-    { SIM_GFX_ENTRY_G9138, "o00_31AD_0122", 1 },
-    { SIM_GFX_ENTRY_G913C, "o00_31AD_037C", 1 },
-    { SIM_GFX_ENTRY_G9140, "o00_31AD_0522", 0 },
-    { SIM_GFX_ENTRY_G9144, "o00_31AD_11FB", 0 },
-    { SIM_GFX_ENTRY_G9148, "o00_31AD_0550", 0 },
-    { SIM_GFX_ENTRY_G914C, "o00_31AD_0CF9", 1 },
-    { SIM_GFX_ENTRY_G9150, "o00_31AD_0D06", 1 },
-    { SIM_GFX_ENTRY_G9154, "o00_31AD_1206", 1 },
-    { SIM_GFX_ENTRY_G9158, "o00_31AD_1213", 1 },
-    { SIM_GFX_ENTRY_G915C, "o00_31AD_062A", 0 },
-    { SIM_GFX_ENTRY_G9160, "o00_31AD_062E", 0 },
-    { SIM_GFX_ENTRY_G9164, "o00_31AD_0632", 0 },
-    { SIM_GFX_ENTRY_G9168, "o00_31AD_0636", 0 },
-    { SIM_GFX_ENTRY_G916C, "o00_31AD_148C", 0 },
-    { SIM_GFX_ENTRY_G9170, "o00_31AD_1499", 1 },
-    { SIM_GFX_ENTRY_G9174, "o00_31AD_0004", 0 },
-    { SIM_GFX_ENTRY_G9178, "o00_31AD_1481", 0 },
-    { SIM_GFX_ENTRY_G917C, "o00_31AD_0647", 0 },
-    { SIM_GFX_ENTRY_G9180, "o00_31AD_18BA", 0 },
-    { SIM_GFX_ENTRY_G9184, "o00_31AD_063C", 0 },
-    { SIM_GFX_ENTRY_G9188, "o00_31AD_1950", 0 }
+    { SIM_GFX_ENTRY_G9128, "gfx_planar_gsetattrib", 1 },
+    { SIM_GFX_ENTRY_G912C, "gfx_planar_select_small_font", 1 },
+    { SIM_GFX_ENTRY_G9130, "gfx_planar_select_big_font", 1 },
+    { SIM_GFX_ENTRY_G9134, "gfx_planar_gboxfill", 1 },
+    { SIM_GFX_ENTRY_G9138, "gfx_planar_gpatbox", 1 },
+    { SIM_GFX_ENTRY_G913C, "gfx_planar_ginvbox", 1 },
+    { SIM_GFX_ENTRY_G9140, "gfx_planar_gpicsize", 0 },
+    { SIM_GFX_ENTRY_G9144, "gfx_planar_gimgsize", 0 },
+    { SIM_GFX_ENTRY_G9148, "gfx_planar_capture_box", 0 },
+    { SIM_GFX_ENTRY_G914C, "gfx_planar_gputpics", 1 },
+    { SIM_GFX_ENTRY_G9150, "gfx_planar_put_picture_raw", 1 },
+    { SIM_GFX_ENTRY_G9154, "gfx_planar_gputimgs", 1 },
+    { SIM_GFX_ENTRY_G9158, "gfx_planar_put_image_raw", 1 },
+    { SIM_GFX_ENTRY_G915C, "gfx_planar_set_or", 0 },
+    { SIM_GFX_ENTRY_G9160, "gfx_planar_set_xor", 0 },
+    { SIM_GFX_ENTRY_G9164, "gfx_planar_set_and", 0 },
+    { SIM_GFX_ENTRY_G9168, "gfx_planar_set_copy", 0 },
+    { SIM_GFX_ENTRY_G916C, "gfx_planar_gline", 0 },
+    { SIM_GFX_ENTRY_G9170, "gfx_planar_draw_line_raw", 1 },
+    { SIM_GFX_ENTRY_G9174, "gfx_planar_dither_box", 0 },
+    { SIM_GFX_ENTRY_G9178, "gfx_planar_restore_text_mode", 0 },
+    { SIM_GFX_ENTRY_G917C, "gfx_planar_put_cached_tile", 0 },
+    { SIM_GFX_ENTRY_G9180, "gfx_planar_upload_tiles", 0 },
+    { SIM_GFX_ENTRY_G9184, "gfx_planar_set_raster_op", 0 },
+    { SIM_GFX_ENTRY_G9188, "gfx_planar_move_box", 0 }
 };
 
 static const char *const s01_targets[SIM_GRAPHICS_DRIVER_ENTRY_COUNT] = {
-    "o01_3126_0167", "o01_3126_019A", "o01_3126_01B2", "o01_3126_024C",
-    "o01_3126_024C", "o01_3126_0414", "o01_3126_0437", "o01_3126_0437",
-    "o01_3126_045D", "o01_3126_073C", "o01_3126_0749", "o01_3126_0516",
-    "o01_3126_0523", "o01_3126_0B26", "o01_3126_0A20", "o01_3126_0ACC",
-    "o01_3126_0A7A", "o01_3126_0C7A", "o01_3126_0C87", "o01_3126_01CA",
-    "o01_3126_0F78", "o01_3126_0F66", "o01_3126_0F6F", "o01_3126_0C53",
-    "o01_3126_109D"
+    "gfx_mono_gsetattrib", "gfx_mono_select_small_font", "gfx_mono_select_big_font", "gfx_mono_fill_or_pattern_box",
+    "gfx_mono_fill_or_pattern_box", "gfx_mono_ginvbox", "gfx_mono_picture_size", "gfx_mono_picture_size",
+    "gfx_mono_capture_box", "gfx_mono_gputpics", "gfx_mono_put_picture_raw", "gfx_mono_gputimgs",
+    "gfx_mono_put_image_raw", "gfx_mono_set_or", "gfx_mono_set_xor", "gfx_mono_set_and",
+    "gfx_mono_set_copy", "gfx_mono_gline", "gfx_mono_draw_line_raw", "gfx_mono_dither_box",
+    "gfx_mono_restore_text_mode", "gfx_mono_tile_noop", "gfx_mono_reserved_noop", "gfx_mono_set_raster_op",
+    "gfx_mono_move_box"
 };
 
 static int16_t wrap16(int32_t value)
@@ -138,9 +138,9 @@ SimGraphicsStatus sim_graphics_set_mode(SimGraphicsDriver *graphics, int16_t mod
     graphics->framebuffer = next_framebuffer;
     graphics->video_mode = (SimGraphicsVideoMode)mode;
     sim_vga_reset(&graphics->vga);
-    g_3DB2 = (int16_t)width;
-    g_3DB4 = (int16_t)height;
-    g_3DB6 = 80; /* DOS planar stride for both supported 640-wide modes */
+    gfx_screen_width_pixels = (int16_t)width;
+    gfx_screen_height_pixels = (int16_t)height;
+    gfx_screen_row_bytes = 80; /* DOS planar stride for both supported 640-wide modes */
     return graphics->last_status = SIM_GRAPHICS_OK;
 }
 
@@ -177,12 +177,12 @@ uint8_t *sim_graphics_pixels(SimGraphicsDriver *graphics, size_t *size_out)
 uint8_t sim_graphics_vga_get(const SimGraphicsDriver *g, int32_t x, int32_t y)
 {
     return sim_vga_color(&g->vga, sim_vga_pixel_offset((int16_t)x, (int16_t)y,
-                         (uint16_t)g_3DB6), (unsigned)x);
+                         (uint16_t)gfx_screen_row_bytes), (unsigned)x);
 }
 
 void sim_graphics_vga_put(SimGraphicsDriver *g, int32_t x, int32_t y, uint8_t color)
 {
-    uint16_t offset = sim_vga_pixel_offset((int16_t)x, (int16_t)y, (uint16_t)g_3DB6);
+    uint16_t offset = sim_vga_pixel_offset((int16_t)x, (int16_t)y, (uint16_t)gfx_screen_row_bytes);
     sim_vga_store_color(&g->vga, offset, (unsigned)x, color);
     /* Keep the presentation view current for read-only debugger observers. */
     if ((unsigned)offset < (unsigned)g->framebuffer.height * 80u) {
@@ -232,7 +232,7 @@ int16_t sim_graphics_f_1B4E_000D(SimGraphicsDriver *graphics, int16_t color)
     uint16_t mapped;
     if (graphics == NULL)
         return color;
-    mapped = (uint16_t)((bits & 0xfff0u) | g_41C0[bits & 0x0fu]);
+    mapped = (uint16_t)((bits & 0xfff0u) | gfx_colour_translation[bits & 0x0fu]);
     return wrap16(mapped);
 }
 
@@ -241,10 +241,10 @@ SimGraphicsStatus sim_graphics_g9128(SimGraphicsDriver *graphics,
                                      int16_t background,
                                      int16_t source_pattern_word)
 {
-    (void)source_pattern_word; /* target o00_31AD_1659 never reads [bp+10]. */
+    (void)source_pattern_word; /* target gfx_planar_gsetattrib never reads [bp+10]. */
     if (graphics == NULL || graphics->pixel_storage == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    g_3DE0 = (uint8_t)foreground;
+    _foreColor = (uint8_t)foreground;
     g_3DE2 = (uint8_t)background;
     return SIM_GRAPHICS_OK;
 }
@@ -302,7 +302,7 @@ SimGraphicsStatus sim_graphics_g9138_pattern_rect(SimGraphicsDriver *graphics,
             uint8_t bits = graphics->pattern_source[row + byte_in_row];
             uint8_t bit = (uint8_t)((bits >> (7u - ((uint32_t)x & 7u))) & 1u);
             sim_graphics_vga_put(graphics, x, y,
-                               bit ? (uint8_t)(g_3DE0 & 0x0fu) :
+                               bit ? (uint8_t)(_foreColor & 0x0fu) :
                                      (uint8_t)(g_3DE2 & 0x0fu));
         }
     }
@@ -359,9 +359,9 @@ static void select_font_view(SimGraphicsDriver *graphics, const uint8_t *bytes,
     graphics->glyph_bytes_per_character = glyph_stride;
     graphics->glyph_width = glyph_width;
     graphics->glyph_height = glyph_height;
-    g_3DDA = wrap16(glyph_stride);
-    g_3DDC = glyph_height;
-    g_3DDE = advance;
+    gfx_font_glyph_stride = wrap16(glyph_stride);
+    gfx_font_height_pixels = glyph_height;
+    fontWidth = advance;
     graphics->font_is_bound = bytes != NULL && size != 0;
 }
 
@@ -392,7 +392,7 @@ SimGraphicsStatus sim_graphics_g9130_select_bios_8x14(SimGraphicsDriver *graphic
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     select_font_view(graphics, graphics->bios_8x14_source,
                      graphics->bios_8x14_source_size, 14, 8, 14,
-                     (uint8_t)g_3DDE);
+                     (uint8_t)fontWidth);
     return graphics->font_is_bound ? SIM_GRAPHICS_OK : SIM_GRAPHICS_FONT_UNBOUND;
 }
 
@@ -426,7 +426,7 @@ SimGraphicsStatus sim_graphics_g9170_line(SimGraphicsDriver *graphics,
     if (g_3DD2 != 0 && g_3DD2 != 0x08 &&
         g_3DD2 != 0x10 && g_3DD2 != 0x18)
         return SIM_GRAPHICS_UNSUPPORTED_MODE;
-    /* S00 receives an already mapped source color and does not read g_41C0. */
+    /* S00 receives an already mapped source color and does not read gfx_colour_translation. */
     raster.graphics = graphics;
     raster.color = (uint8_t)((uint16_t)color & 0x0fu);
     raster.operation = (uint8_t)g_3DD2;
@@ -450,11 +450,11 @@ SimGraphicsStatus sim_graphics_set_glyph_source(SimGraphicsDriver *graphics,
     graphics->glyph_source = bytes;
     graphics->glyph_source_size = size;
     graphics->glyph_bytes_per_character = glyph_bytes_per_character;
-    g_3DDA = (int16_t)glyph_bytes_per_character;
+    gfx_font_glyph_stride = (int16_t)glyph_bytes_per_character;
     graphics->glyph_width = width;
     graphics->glyph_height = height;
-    g_3DDE = width;
-    g_3DDC = height;
+    fontWidth = width;
+    gfx_font_height_pixels = height;
     graphics->font_is_bound = 1;
     return SIM_GRAPHICS_OK;
 }
@@ -479,8 +479,8 @@ SimGraphicsStatus sim_graphics_g9154(SimGraphicsDriver *graphics,
     required = row_bytes * height;
     if (required > bitmap_size)
         return SIM_GRAPHICS_FONT_SPAN_INVALID;
-    first_x = (unsigned)(uint16_t)fd_55B3_3DE6;
-    end_x = (unsigned)width - (unsigned)(uint16_t)fd_55B3_3DE8;
+    first_x = (unsigned)(uint16_t)gfx_clip_left_pixels;
+    end_x = (unsigned)width - (unsigned)(uint16_t)gfx_clip_right_pixels;
     if (first_x > width || end_x > width || first_x > end_x)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
     for (py = 0; py < height; ++py) {
@@ -489,7 +489,7 @@ SimGraphicsStatus sim_graphics_g9154(SimGraphicsDriver *graphics,
             uint8_t bit = (uint8_t)((row >> (7u - (px & 7u))) & 1u);
             int32_t dx = (int32_t)x + (int32_t)px;
             int32_t dy = (int32_t)y + (int32_t)py;
-            uint8_t color = bit ? g_3DE0 : g_3DE2;
+            uint8_t color = bit ? _foreColor : g_3DE2;
             if (operation != 0) {
                 uint8_t old = sim_graphics_vga_get(graphics, dx, dy);
                 color = operation == 8 ? (old & color) : operation == 16 ? (old | color) : (old ^ color);
@@ -514,7 +514,7 @@ static void source_g912C_custom_font_callback(void)
     (void)require_source_owner();
     /* S20's global source pointer is the live resource view. If it is null,
      * S00's custom-font selector preserves its source no-op behavior. */
-    if (g_3DA8 != NULL) {
+    if (gfx_primary_font_offset != NULL) {
         s_source_owner->last_status =
             sim_source_font_bind_driver_view_v1(s_source_owner);
         if (s_source_owner->last_status != SIM_GRAPHICS_OK)
@@ -575,7 +575,7 @@ static void source_g913C_callback_raw(int16_t left, int16_t top,
                                      int16_t right, int16_t bottom,
                                      int16_t ignored)
 {
-    (void)ignored; /* f_1D8E_0384's fifth word is ignored by g913C. */
+    (void)ignored; /* clip_dispatch_rect's fifth word is ignored by g913C. */
     (void)require_source_owner();
     if (!sim_graphics_source_cursor_effects_begin(left, top, right, bottom)) {
         s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
@@ -598,7 +598,7 @@ static void source_g9134_callback(int16_t left, int16_t top,
     }
     s_source_owner->last_status = SIM_GRAPHICS_OK;
     if (*s_source_g_5AAC != NULL)
-        f_1D8E_0384(source_g9134_callback_raw, 0, 0, left, top, right, bottom, color);
+        clip_dispatch_rect(source_g9134_callback_raw, 0, 0, left, top, right, bottom, color);
     else
         source_g9134_callback_raw(left, top, right, bottom, color);
 }
@@ -614,7 +614,7 @@ static void source_g9138_callback(int16_t left, int16_t top,
     }
     s_source_owner->last_status = SIM_GRAPHICS_OK;
     if (*s_source_g_5AAC != NULL)
-        f_1D8E_0384(source_g9138_callback_raw, 0, 0, left, top, right, bottom,
+        clip_dispatch_rect(source_g9138_callback_raw, 0, 0, left, top, right, bottom,
                     pattern_word);
     else
         source_g9138_callback_raw(left, top, right, bottom, pattern_word);
@@ -630,7 +630,7 @@ static void source_g913C_callback(int16_t left, int16_t top,
     }
     s_source_owner->last_status = SIM_GRAPHICS_OK;
     if (*s_source_g_5AAC != NULL)
-        f_1D8E_0384(source_g913C_callback_raw, 0, 0, left, top, right, bottom, 0);
+        clip_dispatch_rect(source_g913C_callback_raw, 0, 0, left, top, right, bottom, 0);
     else
         source_g913C_callback_raw(left, top, right, bottom, 0);
 }
@@ -671,8 +671,8 @@ static void source_g9154_common(int16_t x, int16_t y, char *source_bitmap,
     }
     span = row_bytes * (size_t)(uint16_t)height;
     if (!sim_graphics_source_cursor_effects_begin(
-            source_word_add(x, fd_55B3_3DE6), y,
-            source_word_sub(source_word_add(x, width), fd_55B3_3DE8),
+            source_word_add(x, gfx_clip_left_pixels), y,
+            source_word_sub(source_word_add(x, width), gfx_clip_right_pixels),
             source_word_add(y, height))) {
         s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
         return;
@@ -693,10 +693,10 @@ static void source_g9154_callback(int16_t x, int16_t y, char *bitmap,
         s_source_owner->last_status = SIM_GRAPHICS_INVALID_ARGUMENT;
         return;
     }
-    /* o00_31AD_1206 dispatches through the generated clipping body when set. */
+    /* gfx_planar_gputimgs dispatches through the generated clipping body when set. */
     if (*s_source_g_5AAC != NULL) {
         s_source_owner->last_status = SIM_GRAPHICS_OK;
-        f_1D8E_070E(NULL, x, y, bitmap, width, height);
+        clip_blit_mono_indexed(NULL, x, y, bitmap, width, height);
         return;
     }
     source_g9154_common(x, y, bitmap, width, height);
@@ -750,7 +750,7 @@ SimGraphicsStatus sim_graphics_s00_apply_cga_font_overrides(SimGraphicsDriver *g
 {
     if (graphics == NULL || graphics != s_source_owner)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    /* S00 o00_31AD_1AE7 writes slot1=1AC4 and slot2=166A. */
+    /* S00 gfx_planar_init_320x200 writes slot1=1AC4 and slot2=166A. */
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[1]) = source_g912C_custom_font_callback;
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[2]) = source_g9130_8x8_font_callback;
     return SIM_GRAPHICS_OK;
@@ -767,18 +767,18 @@ SimGraphicsDriver *sim_graphics_source_owner(void)
     return require_source_owner();
 }
 
-void f_1B4E_015B(int16_t mode)
+void gfx_video_bios_ax(int16_t mode)
 {
     (void)require_source_owner();
     s_source_owner->last_status = sim_graphics_set_mode(s_source_owner, mode);
 }
 
-int16_t f_1B4E_000D(int16_t color)
+int16_t ConvColor(int16_t color)
 {
     return sim_graphics_f_1B4E_000D(require_source_owner(), color);
 }
 
-void f_1B4E_0228(int16_t color)
+void gfx_set_border_colour(int16_t color)
 {
     (void)require_source_owner();
     /* Source AX=1001h uses BH; preserve that byte as the host palette request. */
@@ -797,7 +797,7 @@ SimGraphicsStatus sim_graphics_f_1B4E_0110(SimGraphicsDriver *graphics,
     if (graphics->glyph_source == NULL)
         return SIM_GRAPHICS_FONT_UNBOUND;
     ch = (uint8_t)character;
-    if (g_3DDA == 6 && (ch & 0x80u) != 0)
+    if (gfx_font_glyph_stride == 6 && (ch & 0x80u) != 0)
         return SIM_GRAPHICS_UNSUPPORTED_GLYPH_FOLD;
     offset = (size_t)ch * graphics->glyph_bytes_per_character;
     if (offset > graphics->glyph_source_size ||
@@ -816,24 +816,24 @@ SimGraphicsStatus sim_graphics_f_1B4E_0081(SimGraphicsDriver *graphics,
     size_t i;
     if (graphics == NULL || text == NULL)
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    pen = wrap16((int32_t)x - g_3DDE);
+    pen = wrap16((int32_t)x - fontWidth);
     for (i = 0; i < 65535u && text[i] != '\0'; ++i) {
         int8_t signed_character = (int8_t)(uint8_t)text[i];
         SimGraphicsStatus status;
-        pen = wrap16((int32_t)pen + g_3DDE);
+        pen = wrap16((int32_t)pen + fontWidth);
         if (signed_character < 0 || pen < 0)
             continue;
         status = sim_graphics_f_1B4E_0110(graphics, pen, y,
                                          (uint8_t)signed_character);
         if (status != SIM_GRAPHICS_OK)
             return status;
-        if (pen >= g_3DB2)
+        if (pen >= gfx_screen_width_pixels)
             break;
     }
     if (i == 65535u && text[i] != '\0')
         return SIM_GRAPHICS_INVALID_ARGUMENT;
-    g_3DA0.x = wrap16((int32_t)pen + g_3DDE);
-    g_3DA0.y = y;
+    gfx_text_pen_x.x = wrap16((int32_t)pen + fontWidth);
+    gfx_text_pen_x.y = y;
     return SIM_GRAPHICS_OK;
 }
 

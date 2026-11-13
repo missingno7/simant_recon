@@ -39,8 +39,8 @@ static size_t differing_bytes(const uint8_t *left, const uint8_t *right,
     return count;
 }
 
-/* Test-owned stand-ins for the canonical text owners (g_5ABA/g_5ABC
- * dimensions, the 1040-byte g_5ABE pixel view, g_5ECE string, g_5F1D). */
+/* Test-owned stand-ins for the canonical text owners (text_bitmap_width/text_bitmap_height
+ * dimensions, the 1040-byte text_bitmap_pixels pixel view, text_bitmap_string_copy string, g_5F1D). */
 typedef struct TestTextOwners {
     uint16_t width, height;
     uint8_t pixels[1040];

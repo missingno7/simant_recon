@@ -40,7 +40,7 @@ void portable_m1b73_events_init(PortableM1B73Events *events,
 int portable_m1b73_events_bind(PortableM1B73Events *events);
 void portable_m1b73_events_unbind(PortableM1B73Events *events);
 
-/* Source f_1B73_036E register effects. The event's `what` word is untouched.
+/* Source input_enqueue_event register effects. The event's `what` word is untouched.
  * Fields receive BDA keyboard flags, BDA BIOS ticks, and AX/CX/DX/ES:BX;
  * source shift_state bit 7 is ORed into message bit 0 and can be cleared by
  * AX.AH bits 1 or 3. Returns 1 when enqueued, 0 when full. */
@@ -61,15 +61,15 @@ int portable_m1b73_poll_mouse(PortableM1B73Events *events,
 
 /* Original root m1B73 public entrypoints in the native whole-program lane. */
 uint32_t TickCount(void);
-int16_t f_1B73_032A(void);
-int16_t f_1B73_032E(void *event_record);
-void f_1B73_0511(void);
-void f_1B73_0518(void);
+int16_t input_event_count(void);
+int16_t input_pop_event(void *event_record);
+void timer_disable_tick_count(void);
+void timer_enable_tick_count(void);
 /* Native form of ASM's five stack words: BX, ES, AX, CX, DX. Four-word C
  * callsites are separate source domains and must opt into the explicit
  * command helper; it supplies a normalized DX=0 only because those callers'
  * reachable consumers ignore Event.v. */
-void f_1B73_030F(int16_t bx, int16_t es, int16_t ax,
+void input_enqueue_event_args(int16_t bx, int16_t es, int16_t ax,
                  int16_t cx, int16_t dx);
 void portable_m1b73_event_enqueue_four_word_command(
     int16_t bx, int16_t es, int16_t ax, int16_t cx);

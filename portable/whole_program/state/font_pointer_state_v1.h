@@ -5,11 +5,11 @@
 
 #include <stdint.h>
 
-/* Native pointer slots for the source's DGROUP g_3DA4 and g_3DA8 far
+/* Native pointer slots for the source's DGROUP gfx_secondary_font and gfx_primary_font_offset far
  * pointers. Their null startup values are initialized in root:m1B4E.asm;
  * S20's generated loader bodies replace them with resource payload views. */
-extern char *g_3DA4;
-extern char *g_3DA8;
+extern char *gfx_secondary_font;
+extern char *gfx_primary_font_offset;
 
 /* Refresh the driver's borrowed custom-font view from the currently selected
  * source payload pointer. No copy, new ownership, or resource-size guess. */

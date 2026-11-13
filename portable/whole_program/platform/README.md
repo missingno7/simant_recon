@@ -135,7 +135,7 @@ names are usable only through a valid DOS short alias; wildcard results with no
 8.3 name are skipped. `findfirst/findnext` snapshots put directories before files and sort visible
 uppercase DOS names within each group, matching the DOSBox-X directory listing.
 S09's FileSelect also sorts its displayed 16-byte rows after enumeration
-(`src/S09/m35F5.c`, lines 403?411).
+(`src/ui/save_load.c`, lines 403?411).
 
 The permanent directory regression compares full `find_t` records under shallow
 and greater-than-67-character host roots, including a negative control that

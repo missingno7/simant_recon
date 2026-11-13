@@ -8,7 +8,7 @@ python portable/tests/native_simulation/run.py --native-build build/current/port
 
 The native lane links the complete object list from the current build receipt.
 Its `DoAntMoveY` and `DoAntSimY` implementations are the converted whole canonical
-`src/S25/m3BA4.c` translation unit. Their ordinary state, maps, Life grids and
+`src/simulation/yellow_ant.c` translation unit. Their ordinary state, maps, Life grids and
 tables are the actual canonical owners in that same native build. The source RNG
 is initialized and read through its actual canonical accessors. The oracle lane
 executes the locked original DOS functions and their original helpers.

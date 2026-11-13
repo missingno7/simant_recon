@@ -4,11 +4,11 @@ Layer: SDL platform input/presentation. Canonical source is unchanged.
 
 At baseline `c62915b`, held queries already reach the shared guarded input/time
 refresh and the application idle hook. Presentation additionally requires
-`g_5AAC == NULL`. That pointer is the current clip list, not a drawing-depth
-counter: S26's title/resize loops keep `f_1E57_0351` active between complete XOR
+`clip_active_list_offset == NULL`. That pointer is the current clip list, not a drawing-depth
+counter: S26's title/resize loops keep `clip_set_screen_region` active between complete XOR
 outline draws, and `ProcCasteEvent` keeps `clip_SetWin` active between complete
 triangle/control redraws. The old predicate therefore suppresses frames until
-release. The platform now uses the low byte of `g_3DD4` for raster/cursor
+release. The platform now uses the low byte of `gfx_cursor_draw_lock` for raster/cursor
 exclusion at these polling yields, retaining the 16,666,667 ns rate limit and
 existing refresh reentrancy guard.
 
@@ -24,10 +24,10 @@ render_source_cursor -> render_cursor -> run_mouse_callback
 portable_m1b73_mouse_callback -> portable_m1b73_mouse_consume_event
 dispatch_source_event -> ingest_host_events -> drain_host_observations
 idle -> refresh_application -> portable_input_time_host_refresh_clock
-f_1B73_0A30 -> StillDown -> ButtonHeld -> o26_39C7_040F
+kbd_scan_state -> StillDown -> ButtonHeld -> win_track_move
 ```
 
-The source authority is `src/platform/input_timer.asm:f_1B73_0046`: INT33 functions 7/8
+The source authority is `src/platform/input_timer.asm:mouse_initialize_driver`: INT33 functions 7/8
 install inclusive horizontal/vertical limits `0..width-4`, `0..height-4`.
 Captured SDL events and letterbox coordinates can lie outside that range.
 The host mouse event adapter now applies these driver limits before invoking

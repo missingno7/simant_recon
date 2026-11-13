@@ -132,13 +132,12 @@ def words(facts, segment, name, count=1, width=None):
 def emit_mouse(facts):
     # Host spelling is a view choice, while widths/counts/values below must all
     # be justified by actual symbolic ASM declarations, never native owners.
-    grouped = {'g_4336': ('int16_t', 4), 'g_53CD': ('uint8_t', 128)}
-    selected = ['432A','4331','4332','4333','4334','4336','433E','4340','4342','4344','4346',
-                '4348','434A','434E','4352','4356','435A','4362','4363','4364','4365','4366','4368','4369','4DA4','53BC','53BD','53CD']
-    result = ['/* Generated only from src/root/m1B73.asm symbolic data directives. */', '#include <stdint.h>', '']
+    grouped = {'cursor_alternate_rect_left': ('int16_t', 4), 'kbd_scan_code_state': ('uint8_t', 128)}
+    selected = ['g_432A', 'cursor_drawn_flag', 'g_4332', 'cursor_update_lock', 'cursor_alternate_rect_active', 'cursor_alternate_rect_left', 'g_433E', 'cursor_drawn_left', 'cursor_drawn_top', 'cursor_drawn_bottom', 'cursor_drawn_right', 'cursor_bitmap_width', 'cursor_bitmap_height', 'g_434E', 'g_4352', 'g_4356', 'g_435A', 'g_4362', 'g_4363', 'g_4364', 'cursor_show_level', 'g_4366', 'g_4368', 'g_4369', 'g_4DA4', 'g_53BC', 'g_53BD', 'kbd_scan_code_state']
+    result = ['/* Generated only from src/platform/input_timer.asm symbolic data directives. */', '#include <stdint.h>', '']
     receipt = []
-    for suffix in selected:
-        name = 'g_' + suffix; asm = '_' + name
+    for name in selected:
+        asm = '_' + name
         width = next(d['width'] for d in facts['segments']['_DATA']['directives'] if d['offset'] == facts['segments']['_DATA']['labels'][asm]['offset'])
         ctype, count = grouped.get(name, ({1:'uint8_t', 2:'uint16_t', 4:'uint32_t'}[width], 1))
         values, lines = words(facts, '_DATA', asm, count, width)
@@ -161,7 +160,7 @@ def emit_mouse(facts):
                 'timer_busy':('uint8_t','db')}
     header=['#ifndef SIMANT_CANONICAL_MOUSE_INPUT_DATA_H',
             '#define SIMANT_CANONICAL_MOUSE_INPUT_DATA_H','#include <stdint.h>',
-            'extern uint32_t g_434E;', 'extern uint8_t g_53CD[128];']
+            'extern uint32_t g_434E;', 'extern uint8_t kbd_scan_code_state[128];']
     for name,(ctype,directive) in code_cells.items():
         matches=[(n,re.fullmatch(r'\s*'+name+r'\s+(db|dw|dd)\s+(.+?)\s*',line.split(';',1)[0],re.I))
                  for n,line in enumerate(source.read_text(encoding='latin1').splitlines(),1)]
@@ -287,17 +286,17 @@ def emit_numeric(facts):
             initializer = '{ ' + ', '.join(hex(v) for v in values) + ' }' if count > 1 else hex(values[0])
         result.append(f'{ctype} {name}' + (f'[{count}]' if count>1 else '') + f' = {initializer}; /* {source}:{lines[0]} */')
         receipt.append({'name':name,'source':source,'source_lines':lines,'source_width':source_width,'source_count':source_count,'native_count':count,'values':values,'native_type':ctype})
-    graphics = 'src/root/m1B4E.asm'
-    emit(graphics, 'g_3D20', 'char', 128)
-    point, lines = words(by_source[graphics], '_DATA', '_g_3DA0', 2, 2)
-    result.append('CanonicalAsmPoint g_3DA0 = { ' + ', '.join(hex(v) for v in point) + ' };')
-    receipt.append({'name':'g_3DA0','source':graphics,'source_lines':lines,'values':point,'view':'g_3DA0 scalar consumers address x; Point/Pt consumers address x/y'})
-    emit(graphics, 'g_3DA4', 'char *', initializer='NULL')
-    emit(graphics, 'g_3DA8', 'char *', 1, initializer='NULL', source_width=2)
-    if words(by_source[graphics], '_DATA', '_g_3DA8', 2, 2)[0] != [0,0]: raise ValueError('font pointer is not all-zero')
-    for name in ['g_3DB2','g_3DB4','g_3DB6','g_3DD2','g_3DD4','g_3DDA','g_3DDC','g_3DDE','fd_55B3_3DE6','fd_55B3_3DE8']:
+    graphics = 'src/platform/video/bios_bitmap.asm'
+    emit(graphics, 'gfx_row_scratch', 'char', 128)
+    point, lines = words(by_source[graphics], '_DATA', '_gfx_text_pen_x', 2, 2)
+    result.append('CanonicalAsmPoint gfx_text_pen_x = { ' + ', '.join(hex(v) for v in point) + ' };')
+    receipt.append({'name':'gfx_text_pen_x','source':graphics,'source_lines':lines,'values':point,'view':'gfx_text_pen_x scalar consumers address x; Point/Pt consumers address x/y'})
+    emit(graphics, 'gfx_secondary_font', 'char *', initializer='NULL')
+    emit(graphics, 'gfx_primary_font_offset', 'char *', 1, initializer='NULL', source_width=2)
+    if words(by_source[graphics], '_DATA', '_gfx_primary_font_offset', 2, 2)[0] != [0,0]: raise ValueError('font pointer is not all-zero')
+    for name in ['gfx_screen_width_pixels','gfx_screen_height_pixels','gfx_screen_row_bytes','g_3DD2','gfx_cursor_draw_lock','gfx_font_glyph_stride','gfx_font_height_pixels','fontWidth','gfx_clip_left_pixels','gfx_clip_right_pixels']:
         emit(graphics,name,'int16_t')
-    emit(graphics,'g_41C0','uint8_t',16)
+    emit(graphics,'gfx_colour_translation','uint8_t',16)
     data=by_source[graphics]['segments']['_DATA']
     start=data['labels']['_g_41D0']['offset']
     end=max(d['offset']+d['width']*len(d['values']) for d in data['directives'])
@@ -311,52 +310,52 @@ def emit_numeric(facts):
                     'values':values,'native_type':'uint8_t',
                     'interior_view':{'g_4220':'g_41D0+80'},
                     'native_consumed_domain':'S00 pattern index&15,16bytes each;first256bytes'})
-    receipt.append({'name':'g_3DA2','source':graphics,'source_lines':[19],'no_storage':'same second DW already owned by g_3DA0 Point.y','native_view':'g_3DA0.y'})
-    for name in ['g_3DE0','g_3DE2','g_3DE4']:
+    receipt.append({'name':'gfx_text_pen_y','source':graphics,'source_lines':[19],'no_storage':'same second DW already owned by gfx_text_pen_x Point.y','native_view':'gfx_text_pen_x.y'})
+    for name in ['_foreColor','g_3DE2','g_3DE4']:
         values, lines = byte_range(by_source[graphics], '_DATA', '_' + name, 2)
         result.append(f'int16_t {name} = {values[0] | values[1]<<8}; /* two source DB cells, lines {lines} */')
         receipt.append({'name':name,'source':graphics,'source_lines':lines,'values':values,'view':'word over labelled low byte and next labelled high byte; byte consumers select representation byte 0'})
-    ems='src/root/m195A.asm'
-    emit(ems,'fd_55B3_360C','int8_t')
-    emit(ems,'fd_55B3_360E','char *',initializer='NULL')
-    emit(ems,'fd_55B3_3612','int16_t'); emit(ems,'fd_55B3_3614','int16_t')
-    for name in ['fd_55B3_6770','fd_55B3_6772']:emit('src/root/m2650.asm',name,'int16_t')
-    emit('src/S02/m3126.asm','g_21A4','uint16_t')
-    text_source='src/root/m1FBD.asm'
+    ems='src/memory/ems.asm'
+    emit(ems,'ems_version','int8_t')
+    emit(ems,'ems_page_frame_pointer','char *',initializer='NULL')
+    emit(ems,'ems_free_page_count','int16_t'); emit(ems,'ems_total_page_count','int16_t')
+    for name in ['source_bitmap_width','dest_bitmap_width']:emit('src/graphics/glyph_blit.asm',name,'int16_t')
+    emit('src/platform/video/vga8_raster.asm','g_21A4','uint16_t')
+    text_source='src/graphics/bitmap_text.asm'
     text_facts=by_source[text_source]
     text_data=text_facts['segments']['_DATA']
     text_labels=text_data['labels']
-    text_start=text_labels['_g_5ABE']['offset']
+    text_start=text_labels['_text_bitmap_pixels']['offset']
     text_end=text_start+1280
-    pixel_count=text_labels['_g_5ECE']['offset']-text_start
-    string_count=text_labels['_g_5F1D']['offset']-text_labels['_g_5ECE']['offset']
+    pixel_count=text_labels['_text_bitmap_string_copy']['offset']-text_start
+    string_count=text_labels['_g_5F1D']['offset']-text_labels['_text_bitmap_string_copy']['offset']
     terminator=next(d for d in text_data['directives']
                     if d['offset']==text_labels['_g_5F1D']['offset'])
     if terminator['width']!=1 or len(terminator['values'])!=1:
         raise ValueError('g_5F1D source terminator shape differs')
     tail_count=text_end-(terminator['offset']+terminator['width'])
-    if (text_labels['_g_5ABC']['offset']!=text_labels['_g_5ABA']['offset']+2 or
-        text_start!=text_labels['_g_5ABA']['offset']+4 or
+    if (text_labels['_text_bitmap_height']['offset']!=text_labels['_text_bitmap_width']['offset']+2 or
+        text_start!=text_labels['_text_bitmap_width']['offset']+4 or
         pixel_count!=1040 or string_count!=79 or tail_count!=160):
         raise ValueError('canonical text owner/alias layout differs from the reviewed ASM span')
-    bitmap, lines=byte_range(text_facts,'_DATA','_g_5ABE',text_end-text_start)
+    bitmap, lines=byte_range(text_facts,'_DATA','_text_bitmap_pixels',text_end-text_start)
     if any(bitmap):raise ValueError('bitmap source group has nonzero initializer')
-    width_values,width_lines=words(text_facts,'_DATA','_g_5ABA',1,2)
-    height_values,height_lines=words(text_facts,'_DATA','_g_5ABC',1,2)
-    result.append(f'uint16_t g_5ABA = {hex(width_values[0])}; /* canonical source line {width_lines[0]} */')
-    result.append(f'uint16_t g_5ABC = {hex(height_values[0])}; /* canonical source line {height_lines[0]} */')
-    result.append('CanonicalTextBitmapStorage g_5ABE = {0}; /* one 1280-byte clear span with exact ASM interior views */')
-    result.append(f'__asm__(".globl g_5ECE; .set g_5ECE, g_5ABE+{pixel_count}");')
-    result.append(f'__asm__(".globl g_5F1D; .set g_5F1D, g_5ABE+{pixel_count+string_count}");')
-    result.append('_Static_assert(sizeof(g_5ABE) == 1280u, "source text clear extent");')
-    result.append(f'_Static_assert(offsetof(CanonicalTextBitmapAliases, g_5ECE) == {pixel_count}u, "source text string alias offset");')
+    width_values,width_lines=words(text_facts,'_DATA','_text_bitmap_width',1,2)
+    height_values,height_lines=words(text_facts,'_DATA','_text_bitmap_height',1,2)
+    result.append(f'uint16_t text_bitmap_width = {hex(width_values[0])}; /* canonical source line {width_lines[0]} */')
+    result.append(f'uint16_t text_bitmap_height = {hex(height_values[0])}; /* canonical source line {height_lines[0]} */')
+    result.append('CanonicalTextBitmapStorage text_bitmap_pixels = {0}; /* one 1280-byte clear span with exact ASM interior views */')
+    result.append(f'__asm__(".globl text_bitmap_string_copy; .set text_bitmap_string_copy, text_bitmap_pixels+{pixel_count}");')
+    result.append(f'__asm__(".globl g_5F1D; .set g_5F1D, text_bitmap_pixels+{pixel_count+string_count}");')
+    result.append('_Static_assert(sizeof(text_bitmap_pixels) == 1280u, "source text clear extent");')
+    result.append(f'_Static_assert(offsetof(CanonicalTextBitmapAliases, text_bitmap_string_copy) == {pixel_count}u, "source text string alias offset");')
     result.append(f'_Static_assert(offsetof(CanonicalTextBitmapAliases, g_5F1D) == {pixel_count+string_count}u, "source text terminator alias offset");')
     result.append(f'_Static_assert(offsetof(CanonicalTextBitmapAliases, anonymous) == {pixel_count+string_count+1}u, "source text trailing extent");')
-    receipt.append({'name':'g_5ABE','source':text_source,'source_lines':lines,'count':1280,'native_type':'CanonicalTextBitmapStorage','view':'g_5ABE.clear_span covers the exact 1040 + 79 + 1 + 160 source span','alias_layout':{'width':'g_5ABA','height':'g_5ABC','pixels':{'field':'aliases.g_5ABE','offset':0,'count':pixel_count},'string':{'field':'aliases.g_5ECE','offset':pixel_count,'count':string_count},'terminator':{'field':'aliases.g_5F1D','offset':pixel_count+string_count,'count':1},'anonymous':{'field':'aliases.anonymous','offset':pixel_count+string_count+1,'count':tail_count}}})
-    receipt.append({'name':'g_5ABA','source':text_source,'source_lines':width_lines,'count':1,'native_type':'uint16_t','owner':'canonical ASM text width cell'})
-    receipt.append({'name':'g_5ABC','source':text_source,'source_lines':height_lines,'count':1,'native_type':'uint16_t','owner':'canonical ASM text height cell'})
-    receipt.append({'name':'g_5ECE','source':text_source,'source_lines':[text_labels['_g_5ECE']['line']],'count':string_count,'native_view':'g_5ABE.aliases.g_5ECE','native_symbol':'g_5ECE','native_symbol_offset':pixel_count,'owner':'g_5ABE'})
-    receipt.append({'name':'g_5F1D','source':text_source,'source_lines':[text_labels['_g_5F1D']['line']],'count':1,'native_view':'g_5ABE.aliases.g_5F1D','native_symbol':'g_5F1D','native_symbol_offset':pixel_count+string_count,'owner':'g_5ABE'})
+    receipt.append({'name':'text_bitmap_pixels','source':text_source,'source_lines':lines,'count':1280,'native_type':'CanonicalTextBitmapStorage','view':'text_bitmap_pixels.clear_span covers the exact 1040 + 79 + 1 + 160 source span','alias_layout':{'width':'text_bitmap_width','height':'text_bitmap_height','pixels':{'field':'aliases.text_bitmap_pixels','offset':0,'count':pixel_count},'string':{'field':'aliases.text_bitmap_string_copy','offset':pixel_count,'count':string_count},'terminator':{'field':'aliases.g_5F1D','offset':pixel_count+string_count,'count':1},'anonymous':{'field':'aliases.anonymous','offset':pixel_count+string_count+1,'count':tail_count}}})
+    receipt.append({'name':'text_bitmap_width','source':text_source,'source_lines':width_lines,'count':1,'native_type':'uint16_t','owner':'canonical ASM text width cell'})
+    receipt.append({'name':'text_bitmap_height','source':text_source,'source_lines':height_lines,'count':1,'native_type':'uint16_t','owner':'canonical ASM text height cell'})
+    receipt.append({'name':'text_bitmap_string_copy','source':text_source,'source_lines':[text_labels['_text_bitmap_string_copy']['line']],'count':string_count,'native_view':'text_bitmap_pixels.aliases.text_bitmap_string_copy','native_symbol':'text_bitmap_string_copy','native_symbol_offset':pixel_count,'owner':'text_bitmap_pixels'})
+    receipt.append({'name':'g_5F1D','source':text_source,'source_lines':[text_labels['_g_5F1D']['line']],'count':1,'native_view':'text_bitmap_pixels.aliases.g_5F1D','native_symbol':'g_5F1D','native_symbol_offset':pixel_count+string_count,'owner':'text_bitmap_pixels'})
     (WORK/'canonical_asm_numeric_data.c').write_text('\n'.join(result)+'\n')
     return receipt
 
@@ -368,7 +367,7 @@ def emit_audio(facts):
     fixup's displacement resolves each explicit source OFFSET expression.
     Storage sizes and ordinary initializers always come from source directives.
     """
-    f=next(x for x in facts if x['source']=='src/root/m28BC.asm')
+    f=next(x for x in facts if x['source']=='src/sound/sample_timer.asm')
     object_path=AUDIO_OBJECT
     object_source=AUDIO_SOURCE
     if object_source.read_bytes()!= (ROOT/f['source']).read_bytes():
@@ -380,12 +379,12 @@ def emit_audio(facts):
             '#include <stdint.h>',
             '#include "portable/whole_program/platform/audio_state.h"', '']
     receipt=[]
-    for name in ['g_693C','fd_55B3_6B42','fd_55B3_6B4A','fd_55B3_6BA0']:
+    for name in ['snd_lpt_dac_port','midi_service_countdown','snd_dac_io_base','snd_sb_dsp_write_port']:
         values,lines=words(f,'_DATA','_'+name)
         result.append(f'int16_t {name} = {hex(values[0])}; /* canonical ASM line {lines[0]} */')
         receipt.append({'name':name,'source_lines':lines,'source_values':values,'native_type':'int16_t'})
-    for name in ['fd_55B3_6B9C','fd_55B3_74AD','fd_55B3_74AF','fd_55B3_74B1','fd_55B3_74B3',
-                 'fd_55B3_74B5','fd_55B3_74B7','fd_55B3_74B9']:
+    for name in ['snd_sample_output_routine','snd_speaker_output_pointer','snd_adlib_output_pointer','snd_lpt_output_pointer','snd_port200_output_pointer',
+                 'snd_sb_output_pointer','snd_port222_output_pointer','snd_based_dac_output_pointer']:
         label=f['segments']['_DATA']['labels']['_'+name]
         row=next(x for x in f['segments']['_DATA']['directives'] if x['offset']==label['offset'])
         if row['width']!=2 or len(row['values'])!=1 or not isinstance(row['values'][0],dict):raise ValueError('not one OFFSET word')
@@ -398,13 +397,13 @@ def emit_audio(facts):
         result.append(f'int16_t {name} = {hex(fix["displacement"])}; /* {expression}, symbolic assembler displacement */')
         receipt.append({'name':name,'source_lines':[row['line']],'source_expression':expression,'assembler_fixup':fix,'native_meaning':'DOS near-code selector; host never dereferences this numeric word'})
     # Four actual contiguous 20-byte zero records; this is the only owner.
-    values,lines=byte_range(f,'_DATA','_fd_55B3_6B4C',4*20)
+    values,lines=byte_range(f,'_DATA','_snd_sample_channel_records',4*20)
     if any(values):raise ValueError('sample records have nonzero source initializer')
-    result.append('PortableWholeAudioRuntimeSample fd_55B3_6B4C[4] = {{0}};')
-    receipt.append({'name':'fd_55B3_6B4C','source_lines':lines,'source_byte_extent':80,'record_stride':20,'count':4,'native_type':'PortableWholeAudioRuntimeSample[4]','initializer':'every source record field is zero/null','no_owner_for':'fd_55B3_6B4E EQU g_6B4C+2; consumer fields are typed views'})
+    result.append('PortableWholeAudioRuntimeSample snd_sample_channel_records[4] = {{0}};')
+    receipt.append({'name':'snd_sample_channel_records','source_lines':lines,'source_byte_extent':80,'record_stride':20,'count':4,'native_type':'PortableWholeAudioRuntimeSample[4]','initializer':'every source record field is zero/null','no_owner_for':'fd_55B3_6B4E EQU g_6B4C+2; consumer fields are typed views'})
     # Its source value is an OFFSET relocation; the target DGROUP placement
     # provides historical logical address metadata, without host-address casts.
-    label=f['segments']['_DATA']['labels']['_fd_55B3_6B9E']; fix=fixes[label['offset']]
+    label=f['segments']['_DATA']['labels']['_snd_volume_table_offset']; fix=fixes[label['offset']]
     if fix['target']!='_DATA' or fix['loc']!='offset16':raise ValueError('volume base not DATA OFFSET')
     manifest=json.loads((ROOT/'layout/manifest.json').read_text())
     module=manifest['modules']['root:28BC']
@@ -413,17 +412,17 @@ def emit_audio(facts):
     placement=next(x for x in placements if x['segment']=='_DATA') if isinstance(placements,list) else placements['_DATA']
     base=placement['off']
     logical=base+fix['displacement']
-    result.append(f'uint16_t fd_55B3_6B9E = {hex(logical)}; /* OFFSET DGROUP:vol_tab; canonical source logical address */')
-    receipt.append({'name':'fd_55B3_6B9E','source_expression':'offset DGROUP:vol_tab','assembler_fixup':fix,'canonical_DATA_placement_offset':base,'DOS_logical_address':logical,'native_meaning':'arithmetic source word; no host pointer'})
-    start=f['segments']['_DATA']['labels']['_fd_55B3_6BA4']['offset']; end=f['segments']['_DATA']['labels']['vol_tab']['offset']
-    levels,lines=byte_range(f,'_DATA','_fd_55B3_6BA4',end-start)
+    result.append(f'uint16_t snd_volume_table_offset = {hex(logical)}; /* OFFSET DGROUP:vol_tab; canonical source logical address */')
+    receipt.append({'name':'snd_volume_table_offset','source_expression':'offset DGROUP:vol_tab','assembler_fixup':fix,'canonical_DATA_placement_offset':base,'DOS_logical_address':logical,'native_meaning':'arithmetic source word; no host pointer'})
+    start=f['segments']['_DATA']['labels']['_snd_opl_volume_curve']['offset']; end=f['segments']['_DATA']['labels']['vol_tab']['offset']
+    levels,lines=byte_range(f,'_DATA','_snd_opl_volume_curve',end-start)
     # fd6BA4 remains an actual byte owner. Its word-read-then-low-byte source
     # view is a load of fd6BA4[2*vol]; header and consumer conversion must use
     # that explicit byte-index view, never allocate a second word table.
-    result.append(f'uint8_t fd_55B3_6BA4[{len(levels)}] = {{')
+    result.append(f'uint8_t snd_opl_volume_curve[{len(levels)}] = {{')
     for i in range(0,len(levels),16):result.append('    '+', '.join(hex(v) for v in levels[i:i+16])+',')
     result.append('};')
-    receipt.append({'name':'fd_55B3_6BA4','source_lines':lines,'source_byte_extent':len(levels),'native_type':'uint8_t[255]','consumer_view':'m2815 low byte of int16 element vol => fd_55B3_6BA4[2*vol]','header_change_required':'extern uint8_t fd_55B3_6BA4[255];'})
+    receipt.append({'name':'snd_opl_volume_curve','source_lines':lines,'source_byte_extent':len(levels),'native_type':'uint8_t[255]','consumer_view':'m2815 low byte of int16 element vol => snd_opl_volume_curve[2*vol]','header_change_required':'extern uint8_t snd_opl_volume_curve[255];'})
     volume, volume_lines = byte_range(f, '_DATA', 'vol_tab', 2048)
     result.append('uint8_t portable_canonical_volume_tables[2048] = {')
     for i in range(0, len(volume), 16):

@@ -30,7 +30,7 @@ typedef struct PortableTextBitmapInput {
     uint16_t glyph_height;
     const uint8_t *glyph_rows;
     size_t glyph_rows_size;
-    /* Original code indexes from `_g_5FBE` with the raw high-byte value. */
+    /* Original code indexes from `_text_small_font_fold_table` with the raw high-byte value. */
     const uint8_t *fold_lookup_window;
     size_t fold_lookup_window_size;
     const uint8_t *text;

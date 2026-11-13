@@ -75,14 +75,14 @@ class Present(gdb.Breakpoint):
         global presented
         presented += 1
         try:
-            busy = word('g_3DD4') & 255
-            cursor_busy = word('g_4333')
+            busy = word('gfx_cursor_draw_lock') & 255
+            cursor_busy = word('cursor_update_lock')
             now = int(gdb.newest_frame().older().read_var('now'))
             previous = word('app.last_present')
             if busy or cursor_busy or now - previous < 16666667:
                 emit('unsafe-presentation', busy=busy, cursor_busy=cursor_busy,
                      interval_ns=now - previous)
-            if not active or not (word('g_9120') & 1):
+            if not active or not (word('mouse_button_state') & 1):
                 return False
             framebuffer = gdb.parse_and_eval('app.graphics.framebuffer')
             pixels = gdb.selected_inferior().read_memory(
@@ -90,7 +90,7 @@ class Present(gdb.Breakpoint):
             digest = hashlib.sha256(bytes(pixels)).hexdigest()
             for track in active:
                 track['presentations'] += 1
-                if int(gdb.parse_and_eval('g_5AAC')):
+                if int(gdb.parse_and_eval('clip_active_list_offset')):
                     track['active_clip_presentations'] += 1
                 if digest not in track['frames']:
                     track['frames'].append(digest)
@@ -120,7 +120,7 @@ class MouseReturned(gdb.FinishBreakpoint):
 
     def stop(self):
         emit('exterior-mouse-return', host_x=self.x, host_y=self.y,
-             source_x=word('g_9122'), source_y=word('g_9124'))
+             source_x=word('mouse_x_pixels'), source_y=word('mouse_y_pixels'))
         return False
 
 
@@ -146,8 +146,8 @@ def exited(event):
 
 gdb.events.stop.connect(stopped)
 gdb.events.exited.connect(exited)
-Track('o26_39C7_040F', 'window')
-Track('o26_39C7_0671', 'resize')
+Track('win_track_move', 'window')
+Track('win_track_resize', 'resize')
 Track('ProcCasteEvent', 'triangle')
 Present('portable_m1b73_sdl_application_input_present', internal=True)
 Mouse('portable_m1b73_mouse_consume_event', internal=True)

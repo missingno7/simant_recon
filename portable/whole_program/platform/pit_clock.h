@@ -31,7 +31,7 @@ typedef enum SimTimingStatus {
 } SimTimingStatus;
 
 /* Source values: PIT input clock is an explicit hardware assumption; audio
- * setup passes 0xD6 and 0x132 to f_28BC_046B/0488. */
+ * setup passes 0xD6 and 0x132 to snd_select_four_channel_timer/0488. */
 SimTimingStatus sim_timing_clock_init(SimTimingClock *clock,
                                       uint32_t pit_input_numerator,
                                       uint32_t pit_input_denominator,

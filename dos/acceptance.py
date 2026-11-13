@@ -27,7 +27,7 @@ from dos import build, diagnostic
 def save_schema():
     """(index, offset, bytes, element size, name) from the canonical SaveRec table."""
     text = (ROOT / "src/ui/save_load.c").read_text(encoding="latin1")
-    start = re.search(r"struct SaveRec far fd_4E4B_0000\[\d+\] = \{", text).start()
+    start = re.search(r"struct SaveRec far save_record_table\[\d+\] = \{", text).start()
     body = text[start:text.index("};", start)]
     rows, offset = [], 0
     for index, (size, count, data) in enumerate(
@@ -78,7 +78,7 @@ def compare_ports(a: list, b: list) -> dict:
             "max_timing_delta_ms": round(max(deltas), 6) if deltas else 0.0}
 
 
-SCREEN_CLIP_PATTERN = bytes.fromhex("000000008002e0010080008000800080")  # g_5A9C at runtime (VGA)
+SCREEN_CLIP_PATTERN = bytes.fromhex("000000008002e0010080008000800080")  # gfx_screen_clip_list at runtime (VGA)
 DUMP_BYTES = 0xA0000
 
 
@@ -111,7 +111,7 @@ def record_addresses(map_path: Path | None) -> dict:
 def virtual_save(memory: bytes, addresses: dict) -> bytes:
     """Assemble the 307 SaveRec records from a memory image, as SaveGame would write them."""
     hits = [m.start() for m in re.finditer(re.escape(SCREEN_CLIP_PATTERN), memory)]
-    bases = {h - addresses["g_5A9C"] for h in hits}
+    bases = {h - addresses["gfx_screen_clip_list"] for h in hits}
     if len(bases) != 1:
         raise ValueError(f"runtime load base not unique: {sorted(bases)}")
     base = bases.pop()

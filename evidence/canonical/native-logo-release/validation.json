@@ -4,7 +4,7 @@
   "classification": "TRUE_PLATFORM_BOUNDARY",
   "source_baseline_commit": "9915760",
   "cause": "Cached native scan-state polling never serviced SDL during canonical DialogWaitInit/StillDown mouse-release waits.",
-  "repair": "f_1B73_0A30 refreshes the existing shared input/time owner before querying scan state.",
+  "repair": "kbd_scan_state refreshes the existing shared input/time owner before querying scan state.",
   "canonical_game_source_changed": false,
   "DOS": {
     "executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",

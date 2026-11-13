@@ -49,7 +49,7 @@ static PortableInputTimeHost *require_source_input_host(void)
     return active_source_input_host;
 }
 
-int16_t f_1B73_0A30(uint16_t scan_code)
+int16_t kbd_scan_state(uint16_t scan_code)
 {
     PortableInputTimeHost *host = require_source_input_host();
     /* DOS INT09/INT33 callbacks update held input while the source polls
@@ -58,10 +58,10 @@ int16_t f_1B73_0A30(uint16_t scan_code)
     if (scan_code > UINT8_C(0x7f) ||
         portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK)
         abort();
-    return (int16_t)(g_53CD[scan_code] ^ UINT8_C(0x80));
+    return (int16_t)(kbd_scan_code_state[scan_code] ^ UINT8_C(0x80));
 }
 
-int16_t f_1B73_0EEE(void)
+int16_t kbd_scroll_lock_state(void)
 {
     PortableInputTimeHost *host = require_source_input_host();
     if (portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK)

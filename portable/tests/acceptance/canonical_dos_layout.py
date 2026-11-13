@@ -22,7 +22,7 @@ def canonical_layout(root, report_path):
         if m: addresses.setdefault(m[3],int(m[1],16)*16+int(m[2],16))
     # DGROUP frame is an exact MAP paragraph, not a historical DOS segment.
     line=next(s for s in map_path.read_text(encoding='latin1').splitlines()
-              if re.match(r'\s*[0-9A-F]{4}:[0-9A-F]{4}\s+Res\s+_g_5A9C\s',s))
+              if re.match(r'\s*[0-9A-F]{4}:[0-9A-F]{4}\s+Res\s+_gfx_screen_clip_list\s',s))
     dgroup=int(line.split(':',1)[0],16)*16
     result={}; errors=[]
     modules={m['basename']:m for m in report['translation_units'] if 'object' in m}
@@ -138,7 +138,7 @@ def canonical_layout(root, report_path):
                 result['root:1B73::tick_count']=dict(owner='tick_count',dos_address=base+refs[0]['displacement'],
                     bytes=4,segment='CLOCK',native_expr='app.game_clock.tick_count',normalize='u32',
                     address_evidence='canonical TickCount CS-relative DWORD relocation pair + SOURCE.MAP function anchor')
-                disable=next(p for p in obj.publics if p['name']=='_f_1B73_0511')
+                disable=next(p for p in obj.publics if p['name']=='_timer_disable_tick_count')
                 ref=next(f for f in obj.linker_fixups if f['segment']==disable['segment'] and f['offset']==disable['offset']+3)
                 if ref['target']!=tick['segment'] or ref['frame']!=tick['segment'] or ref['loc']!='offset16':
                     raise ValueError('canonical tick enable address changed')

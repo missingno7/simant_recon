@@ -42,7 +42,7 @@ and %d MIDI channels
 and %d MIDI channels
 "
   02D0  lcall 0x22bf, 0x4a0                -> win_MakeObjInvisible
-  02D5  cmp word ptr [0x3db2], 0x140       DS:3DB2 g_3DB2
+  02D5  cmp word ptr [0x3db2], 0x140       DS:3DB2 gfx_screen_width_pixels
   02DB  je 0x2e5
   02DD  mov ax, 0x190f                     "and %d MIDI channels
 "
@@ -63,7 +63,7 @@ and %d MIDI channels
 and %d MIDI channels
 "
   0305  lcall 0x22bf, 0x498                -> win_MakeObjVisible
-  030A  cmp word ptr [0x3db2], 0x140       DS:3DB2 g_3DB2
+  030A  cmp word ptr [0x3db2], 0x140       DS:3DB2 gfx_screen_width_pixels
   0310  je 0x31a
   0312  mov ax, 0x190f                     "and %d MIDI channels
 "
@@ -95,7 +95,7 @@ and %d MIDI channels
 and %d MIDI channels
 "
   0351  lcall 0x21fa, 0x75a                -> win_DrawObjectNum
-  0356  cmp word ptr [0x3db2], 0x140       DS:3DB2 g_3DB2
+  0356  cmp word ptr [0x3db2], 0x140       DS:3DB2 gfx_screen_width_pixels
   035C  je 0x366
   035E  mov ax, 0x190f                     "and %d MIDI channels
 "

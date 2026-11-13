@@ -7,13 +7,13 @@
     {
       "id": "routine-word-CalcScore",
       "function": "CalcScore",
-      "source": "src/S14/m384C.c",
-      "source_sha256": "245f8c01d5a330c571048b8cd1b134cf544394af84f7b502a153c73adbd91020",
+      "source": "src/ui/scenario_dialogs.c",
+      "source_sha256": "962c1a3f710e0206f26dcfd24b704ca3adbb65ebd89b656e920bc9070b871d46",
       "original_address": "S14:384C:0000",
       "summary": "The word product is narrowed before signed word division; long-cast score products keep both DX:AX words.",
       "sites": [
         {
-          "expression": "fd_50F6_09FA * 100",
+          "expression": "BlackLost * 100",
           "count": 1,
           "instructions": [
             "S14:384C:017D MOV AX,100",
@@ -27,8 +27,8 @@
     {
       "id": "routine-word-GetDis",
       "function": "GetDis",
-      "source": "src/root/m0BE8.c",
-      "source_sha256": "3649d25a2024ce0474db430ccb1db8355270d9def303a01e009081b5751764e1",
+      "source": "src/simulation/food_water_counts.c",
+      "source_sha256": "700277338453dc391a07a1ffb8d9c6e0de363bb08fd30c6894a39170e04c3319",
       "original_address": "root:0BE8:0B83",
       "summary": "Subtract each coordinate in a word, sign-extend the low word, then multiply as signed long. CSE reuses the same word difference for both source occurrences.",
       "sites": [
@@ -55,15 +55,15 @@
       ]
     },
     {
-      "id": "routine-word-f_0250_0F2C",
-      "function": "f_0250_0F2C",
-      "source": "src/root/m0250.c",
-      "source_sha256": "6363954778e7a2edbc80c8849cdd72ead2e79c9f386f2e04a2f1583460013e5b",
+      "id": "routine-word-BoundEditPosition",
+      "function": "BoundEditPosition",
+      "source": "src/ui/edit_view.c",
+      "source_sha256": "f93dc7c09d5d3d30798d69f3afe2ad7a9a2556580171f4399801540888224738",
       "original_address": "root:0250:0F2C",
       "summary": "Signed comparisons consume the low word sums; clamped stores already narrow through int16 storage.",
       "sites": [
         {
-          "expression": "fd_50F6_0508.x + fd_50F6_10E0",
+          "expression": "MapPnt.x + fd_50F6_10E0",
           "count": 1,
           "instructions": [
             "root:0250:0F6F MOV AX,ES:[10E0h]",
@@ -73,7 +73,7 @@
           ]
         },
         {
-          "expression": "fd_50F6_0508.y + fd_50F6_10DE",
+          "expression": "MapPnt.y + fd_50F6_10DE",
           "count": 1,
           "instructions": [
             "root:0250:0FA4 MOV AX,ES:[10DEh]",
@@ -87,13 +87,13 @@
     {
       "id": "routine-word-BalloonIsVisible",
       "function": "BalloonIsVisible",
-      "source": "src/root/m0250.c",
-      "source_sha256": "6363954778e7a2edbc80c8849cdd72ead2e79c9f386f2e04a2f1583460013e5b",
+      "source": "src/ui/edit_view.c",
+      "source_sha256": "f93dc7c09d5d3d30798d69f3afe2ad7a9a2556580171f4399801540888224738",
       "original_address": "root:0250:4225",
       "summary": "Viewport sums and y-3 are signed low words before comparisons. The published failing witness is an X-sum wrap, not a y-3 wrap.",
       "sites": [
         {
-          "expression": "fd_50F6_0508.x + fd_50F6_10E0",
+          "expression": "MapPnt.x + fd_50F6_10E0",
           "count": 1,
           "instructions": [
             "root:0250:4252 ADD AX,ES:[10E0h]",
@@ -112,7 +112,7 @@
           ]
         },
         {
-          "expression": "fd_50F6_0508.y + fd_50F6_10DE",
+          "expression": "MapPnt.y + fd_50F6_10DE",
           "count": 1,
           "instructions": [
             "root:0250:4275 ADD AX,ES:[10DEh]",
@@ -125,8 +125,8 @@
     {
       "id": "routine-word-BoundPointToTri",
       "function": "BoundPointToTri",
-      "source": "src/root/m0798.c",
-      "source_sha256": "ecf807dc3159f583f6ee3ea8a9f5422650a64bb557d4551e9c97b5dcc7b6a1b8",
+      "source": "src/ui/colony_controls.c",
+      "source_sha256": "2e96314a80693f20e4da536d0a9df88296bc447da44db7d0c820212ee099ca5a",
       "original_address": "root:0798:0691",
       "summary": "Midpoint sums and interpolation operands are words; IMUL keeps the full long product, long division follows, then ADD AX,left / ADD DI,mid narrows the stored edge. The failing witness first diverges at the midpoint sum.",
       "sites": [

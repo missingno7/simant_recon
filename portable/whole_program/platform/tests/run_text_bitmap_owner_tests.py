@@ -76,7 +76,7 @@ def main() -> int:
                               capture_output=True, text=True)
     (out / "negative.stdout.txt").write_text(negative.stdout, encoding="utf-8")
     (out / "negative.stderr.txt").write_text(negative.stderr, encoding="utf-8")
-    expected_failure = "canonical owner check failed: g_5ABE[0] stayed zero"
+    expected_failure = "canonical owner check failed: text_bitmap_pixels[0] stayed zero"
     if negative.returncode != 2 or expected_failure not in negative.stderr:
         raise SystemExit("negative control did not fail on the canonical owner assertion")
 
@@ -84,7 +84,7 @@ def main() -> int:
         "schema": "simant-canonical-text-bitmap-owner-v1",
         "status": "PASS",
         "positive": "f_1FBD writes pixel/string/terminator owners; font_MakeImage writes the same canonical span",
-        "negative_control": "PASS_EXPECTED_FAILURE: font_MakeImage redirected to sidecar leaves g_5ABE zero",
+        "negative_control": "PASS_EXPECTED_FAILURE: font_MakeImage redirected to sidecar leaves text_bitmap_pixels zero",
         "negative_exit_code": negative.returncode,
         "compile_command": command,
         "abi_build": str(abi_build),

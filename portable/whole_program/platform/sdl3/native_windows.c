@@ -53,7 +53,7 @@ typedef struct NativePopup {
     int x, y;                      /* client position in desktop coordinates */
 } NativePopup;
 
-extern struct Rect { int16_t left, top, right, bottom; } fd_50F6_393C; /* game menu bar */
+extern struct Rect { int16_t left, top, right, bottom; } menu_bar_rect; /* game menu bar */
 
 static struct {
     int active;
@@ -454,9 +454,9 @@ int native_windows_present(const HostPalette *palette)
     if (!n.active) return 1;
     /* Win16 InitMenu: the native bar replaces the game-drawn one; the main
      * window then starts below the game's menu bar rows. */
-    if (native_menu_sync() && !n.crop && fd_50F6_393C.bottom > 0 &&
-        host_set_top_crop(n.host, fd_50F6_393C.bottom))
-        n.crop = fd_50F6_393C.bottom;
+    if (native_menu_sync() && !n.crop && menu_bar_rect.bottom > 0 &&
+        host_set_top_crop(n.host, menu_bar_rect.bottom))
+        n.crop = menu_bar_rect.bottom;
     has_indicator = sim_window_hosting_map_cursor_shown() && modern_game_view_overview(&indicator);
     for (i = 0; i < n.count; ++i) {
         NativeWindow *w = &n.windows[i];
@@ -546,8 +546,8 @@ static void clamp_logical(float *x, float *y)
  * camera decides which world point is under the pointer; the game sees that
  * point where the canonical edit view shows it.
  *
- * f_00F8_01BE scrolls the edit map while the pointer is at a screen edge
- * (x <= 1, x >= g_3DB2-4, y < 1, y >= g_3DB4-4). The edit view's own window
+ * ui_pump_events_edge_scroll scrolls the edit map while the pointer is at a screen edge
+ * (x <= 1, x >= gfx_screen_width_pixels-4, y < 1, y >= gfx_screen_height_pixels-4). The edit view's own window
  * is that screen here: its client edges are the edge zone. */
 static int to_logical(const Origin *o, float cx, float cy, float *x, float *y, int pointer)
 {

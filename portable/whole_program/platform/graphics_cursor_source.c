@@ -14,10 +14,10 @@ extern void (*driver_callback_table[25])();
 
 /* These are the four Handle globals defined by the actual root:m1B28 source
  * module. Their pointee data remains owned by the database handle manager. */
-extern char **g_3D10;
-extern char **g_3D14;
-extern char **g_3D18;
-extern char **g_3D1C;
+extern char **cursor_custom_image_handle;
+extern char **cursor_custom_mask_handle;
+extern char **cursor_alternate_image_handle;
+extern char **cursor_alternate_mask_handle;
 
 extern uint8_t SaveUnder[
     SIM_GRAPHICS_SOURCE_CURSOR_SAVE_UNDER_BYTES];
@@ -128,11 +128,11 @@ static int select_cursor_bitmaps(SimGraphicsCursorSource *cursor,
     /* _0DA4 first selects the hide-rectangle pair when an alternate mask is
      * loaded, no hot-box owns the pointer, and the pointer lies in that rect.
      * Its machine-code order is important: [first,second] feed AND then XOR. */
-    if (g_3D1C != NULL && *cursor->bindings.hide_rectangle_active != 0 &&
+    if (cursor_alternate_mask_handle != NULL && *cursor->bindings.hide_rectangle_active != 0 &&
         mouse->active_hotbox_token == 0 && x >= hide[0] && x <= hide[2] &&
         y >= hide[1] && y <= hide[3]) {
-        if (!resolve_source_handle(cursor, g_3D1C, first, first_size) ||
-            !resolve_source_handle(cursor, g_3D18, second, second_size))
+        if (!resolve_source_handle(cursor, cursor_alternate_mask_handle, first, first_size) ||
+            !resolve_source_handle(cursor, cursor_alternate_image_handle, second, second_size))
             return 0;
     } else {
         if (mouse->cursor_image == NULL || *mouse->cursor_image == NULL ||
@@ -148,10 +148,10 @@ static int select_cursor_bitmaps(SimGraphicsCursorSource *cursor,
     }
 
     /* Shift-state resources override the hide-rectangle selection. This is
-     * the exact final branch in _0DA4 (g_3D14 -> AND, g_3D10 -> XOR). */
-    if (*cursor->bindings.source_shift_state != 0 && g_3D14 != NULL) {
-        if (!resolve_source_handle(cursor, g_3D14, first, first_size) ||
-            !resolve_source_handle(cursor, g_3D10, second, second_size))
+     * the exact final branch in _0DA4 (cursor_custom_mask_handle -> AND, cursor_custom_image_handle -> XOR). */
+    if (*cursor->bindings.source_shift_state != 0 && cursor_custom_mask_handle != NULL) {
+        if (!resolve_source_handle(cursor, cursor_custom_mask_handle, first, first_size) ||
+            !resolve_source_handle(cursor, cursor_custom_image_handle, second, second_size))
             return 0;
     }
     return 1;
@@ -167,7 +167,7 @@ static int draw_saved_cursor(SimGraphicsCursorSource *cursor)
     PortableM1B73MouseAsmState *mouse = &portable_m1b73_mouse_asm_state;
     uint8_t old_display_lock = (uint8_t)g_21A4;
     g_21A4 = 1;
-    f_1B4E_003B((int16_t)mouse->cursor_x[0], (int16_t)mouse->cursor_y[0],
+    GPutPic((int16_t)mouse->cursor_x[0], (int16_t)mouse->cursor_y[0],
                 (char *)SaveUnder);
     g_21A4 = (char)old_display_lock;
     return source_status_ok(cursor);
@@ -225,13 +225,13 @@ static int draw_active_cursor(SimGraphicsCursorSource *cursor)
     }
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[15])();
     g_21A4 = 0;
-    f_1B4E_005E(draw_x, y, (char *)first);
+    GPutImg(draw_x, y, (char *)first);
     if (!source_status_ok(cursor)) {
         g_21A4 = (char)old_display_lock;
         return 0;
     }
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[14])();
-    f_1B4E_003B(draw_x, y, (char *)second);
+    GPutPic(draw_x, y, (char *)second);
     g_21A4 = (char)old_display_lock;
     return source_status_ok(cursor);
 }
@@ -251,19 +251,19 @@ int portable_m1b73_graphics_cursor_mode(void *context, uint8_t mode,
         source_ax == NULL || (mode != 1 && mode != 2))
         return 0;
     graphics = cursor->bindings.graphics;
-    clip_slot = &g_5AAC;
+    clip_slot = &clip_active_list_offset;
     old_clip = *clip_slot;
-    old_left_cut = fd_55B3_3DE6;
-    old_right_cut = fd_55B3_3DE8;
+    old_left_cut = gfx_clip_left_pixels;
+    old_right_cut = gfx_clip_right_pixels;
     old_logic = g_3DD2;
-    old_foreground = g_3DE0;
+    old_foreground = _foreColor;
     old_background = g_3DE2;
     old_pattern = g_3DE4;
 
     /* `_0122` temporarily makes g5A9C the active full-screen clip entry.
      * Its native owner is one Rect, while m1D8E walks a sentinel-terminated
      * list, so adapt that single source entry to a one-entry call-local list. */
-    full_screen_clip_list[0] = g_5A9C[0];
+    full_screen_clip_list[0] = gfx_screen_clip_list[0];
     full_screen_clip_list[1] = (struct Rect){ 0, INT16_MIN, 0, 0 };
     *clip_slot = full_screen_clip_list;
     (*( SimGraphicsFontCallback *)(void *)&driver_callback_table[16])();
@@ -272,8 +272,8 @@ int portable_m1b73_graphics_cursor_mode(void *context, uint8_t mode,
            (int16_t)old_pattern);
     (*( SimGraphicsLogicOperationCallback *)(void *)&driver_callback_table[23])(old_logic);
     *clip_slot = old_clip;
-    fd_55B3_3DE6 = old_left_cut;
-    fd_55B3_3DE8 = old_right_cut;
+    gfx_clip_left_pixels = old_left_cut;
+    gfx_clip_right_pixels = old_right_cut;
     if (!ok) {
         graphics->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
         return 0;

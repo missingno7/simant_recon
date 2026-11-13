@@ -86,10 +86,10 @@ def tick_cases():
             replacements={b.symbol_address('MeHealth'):(health&0xffff).to_bytes(2,'little'),
                           b.symbol_address('g_8BA2'):seed.to_bytes(2,'little')}
             case.writes=[(a,replacements.get(a,d)) for a,d in case.writes]
-            case.writes.extend([fixtures.word_write('fd_50F6_0A06',0),
-                fixtures.word_write('Cycle',phase,1),fixtures.word_write('fd_50F6_1006',99)])
+            case.writes.extend([fixtures.word_write('MeMode',0),
+                fixtures.word_write('Cycle',phase,1),fixtures.word_write('MeHealthCntDwn',99)])
             case.observe.extend([b.Range('Cycle',b.symbol_address('Cycle'),1),
-                b.Range('fd_50F6_1006',b.symbol_address('fd_50F6_1006'),2)])
+                b.Range('MeHealthCntDwn',b.symbol_address('MeHealthCntDwn'),2)])
             case.label=f'tick/plane{plane}/phase{phase}/health{health}/seed{seed:04x}'
             case.metadata['target']='DoAntSimY';case.metadata['RNG_seed']=seed
             yield case
@@ -97,7 +97,7 @@ def tick_cases():
 def callback_cases():
     for mode in (0,1,2):
         case=fixtures.case_for(0x8000+mode,mode,64,32,64,32)
-        address=b.symbol_address('fd_3D57_07A8')
+        address=b.symbol_address('OptionStates')
         case.writes=[(a,b'\x01\x00' if a==address else d) for a,d in case.writes]
         case.label=f'movement/completed-goal/ordered-callbacks/mode{mode}'
         yield case
@@ -137,7 +137,7 @@ def build_native(build,out,mutation=None):
     if sha(response)!=report['core_link']['response_file_sha256'] or response.read_text(encoding='utf-8')!=expected_response:
         raise ValueError('native core linker response differs from its object inventory')
     native_rows=[r for r in report['canonical_TUs'] if r.get('compile',{}).get('passed')]
-    if not any(r['source']=='src/S25/m3BA4.c' for r in native_rows):
+    if not any(r['source']=='src/simulation/yellow_ant.c' for r in native_rows):
         raise ValueError('whole canonical S25 target TU missing from native build')
     pins={str(Path(p).resolve().relative_to(ROOT)):sha(p) for p in objects}
     pins[str(report_path.relative_to(ROOT))]=sha(report_path)
@@ -152,7 +152,7 @@ def build_native(build,out,mutation=None):
     control=None
     if mutation:
         mutation_target,old,new=mutation
-        row=next(r for r in native_rows if r['source']=='src/S25/m3BA4.c')
+        row=next(r for r in native_rows if r['source']=='src/simulation/yellow_ant.c')
         path=Path(row['generated']);text=path.read_text(encoding='latin1')
         body_start,body_end=native_function_body(text,mutation_target)
         body=text[body_start:body_end]
@@ -179,8 +179,12 @@ def build_native(build,out,mutation=None):
     response=out/'fixture-objects.rsp'
     response.write_text('\n'.join('"'+Path(p).as_posix()+'"' for p in objects)+'\n',encoding='utf-8')
     pins[str(response)]=sha(response)
-    command=[report['core_link']['command'][0],'-shared','-Wl,--export-all-symbols',
-        *['-Wl,--wrap='+n for n in BOUNDARIES],str(HERE/'native_callbacks.c'),
+    # Match the application's non-LTO link: GNU --wrap operates on the fat
+    # objects' ordinary relocations, and hosting wrappers also need their real
+    # canonical targets bound even when this fixture never opens a window.
+    platform=json.loads((ROOT/'portable/platform.json').read_text())
+    command=[report['core_link']['command'][0],'-fno-lto','-shared','-Wl,--export-all-symbols',
+        *['-Wl,--wrap='+n for n in BOUNDARIES+platform['window_hosting_wraps']],str(HERE/'native_callbacks.c'),
         '-Wl,@fixture-objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),'-static','-lstdc++',
         '-o',str(out/'native.dll')]
     run=subprocess.run(command,cwd=out,capture_output=True,text=True)
@@ -201,12 +205,12 @@ def bindings(lib,program,cases):
     aliases={x['alias'].lstrip('_@'):x for x in program['aliases'] if x['kind']!='code'}
     sizes={r.name:r.size for c in cases for r in c.observe if r.name!='g_8BA2'}
     sizes['Cycle']=1
-    sizes['fd_50F6_0A06']=2
-    sizes['fd_3D57_0C22']=2
+    sizes['MeMode']=2
+    sizes['MeEggCarried']=2
     text=(HERE/'fixtures.py').read_text()
     for name in re.findall(r'word_write\("([^"]+)"',text):sizes.setdefault(name,2)
-    for name in ('fd_3D57_02A4','fd_3D57_02A8','fd_3D57_02AC','fd_3D57_02B0'):sizes[name]=4
-    sizes['fd_50F6_0214']=4
+    for name in ('LastNewExitB','LastNewExitR','LastNewHoleB','LastNewHoleR'):sizes[name]=4
+    sizes['LastThemeTime']=4
     result={}
     for name,size in sizes.items():
         if name=='g_8BA2':continue
@@ -294,7 +298,7 @@ def main():
             failures.append({'case':case.label,'execution_error':repr(exc)});break
     controls=[]
     if not failures:
-        mutations=[('DoAntMoveY','fd_50F6_0C3E++;','fd_50F6_0C3E += 2;'),
+        mutations=[('DoAntMoveY','MeSteps++;','MeSteps += 2;'),
             ('DoAntMoveY','ResetYellowVars(MePlane, MeLocX, MeLocY);',
              'ResetYellowVars(MePlane, MeLocY, MeLocX);'),
             ('DoAntSimY','if (MeHealth <= 0) {','SRand128();\n    if (MeHealth <= 0) {')]
@@ -321,7 +325,7 @@ def main():
         'targets':['DoAntMoveY','DoAntSimY'],'cases_requested':len(cases),'matched':matched,'failures':failures,
         'elapsed_seconds':round(time.monotonic()-start,3),'seed':args.seed,
         'directed_cases':66,'random_cases':args.random_count,'native_build':str(build.relative_to(ROOT)),
-        'whole_TU':'src/S25/m3BA4.c','definition_sha256':{name:canonical.definition_sha((ROOT/'src/S25/m3BA4.c').read_text(encoding='latin1'),name)
+        'whole_TU':'src/simulation/yellow_ant.c','definition_sha256':{name:canonical.definition_sha((ROOT/'src/simulation/yellow_ant.c').read_text(encoding='latin1'),name)
             for name in ('DoAntMoveY','DoAntSimY')},
         'native_command':command,'native_library_sha256':sha(out/'native.dll'),
         'oracle_sha256':b.exe.load().sha256,'inputs':pins,'changed_inputs':changed,

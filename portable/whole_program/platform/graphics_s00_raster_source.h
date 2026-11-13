@@ -38,12 +38,12 @@ SimS00RasterStatus sim_s00_raster_pattern_transfer(
     size_t destination_size, uint16_t width);
 
 /* Source-compatible S00 selected callback targets. They share the existing
- * graphics state and source g_3D20 pattern owner; none owns a framebuffer. */
-void o00_35A6_02FD(void *source_rect, void *source,
+ * graphics state and source gfx_row_scratch pattern owner; none owns a framebuffer. */
+void gfx_planar_buffer_intersection(void *source_rect, void *source,
                     void *clip_rect, void *destination);
-void o00_35A6_0007(void *image, void *buffer, int16_t shift, int16_t row_offset);
-void o00_35A6_0177(void *image, void *buffer, int16_t shift, int16_t row_offset);
-void o00_35A6_0406(void *destination, int16_t width);
+void gfx_planar_mask_to_buffer(void *image, void *buffer, int16_t shift, int16_t row_offset);
+void gfx_planar_copy_to_buffer(void *image, void *buffer, int16_t shift, int16_t row_offset);
+void gfx_planar_scratch_to_buffer(void *destination, int16_t width);
 
 #ifdef __cplusplus
 }

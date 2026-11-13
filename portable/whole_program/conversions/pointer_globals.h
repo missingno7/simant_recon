@@ -13,11 +13,11 @@ extern int16_t db_handles[SIM_SOURCE_DATABASE_COUNT];
 /* `db_cacheTable` and current-font selection are defined by their original
  * source TUs. These declarations centralize their native pointee types only. */
 extern void *db_cacheTable;
-extern struct Font *fd_55B3_65A4;
+extern struct Font *curFontPtr;
 
-/* font_InitFonts writes slots 0..3; f_24AB_02AD clamps every source read to
+/* font_InitFonts writes slots 0..3; font_SetFont clamps every source read to
  * those four entries. The remaining DOS bytes through 4A41 are not modeled as
  * additional host pointers. */
-extern struct Font *fd_50F6_4A1A[SIM_SOURCE_FONT_COUNT];
+extern struct Font *font_loaded_font_pointers[SIM_SOURCE_FONT_COUNT];
 
 #endif

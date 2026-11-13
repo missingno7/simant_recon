@@ -6,15 +6,14 @@
 
 _Static_assert(sizeof(PortableM1B73Event) == 16,
                "DOS Event ABI is eight 16-bit words");
-_Static_assert(offsetof(PortableM1B73Event, what) == 0 &&
-               offsetof(PortableM1B73Event, message) == 2 &&
-               offsetof(PortableM1B73Event, x4) == 4 &&
-               offsetof(PortableM1B73Event, modLo) == 6 &&
-               offsetof(PortableM1B73Event, modHi) == 7 &&
+_Static_assert(offsetof(PortableM1B73Event, pad00) == 0 &&
+               offsetof(PortableM1B73Event, bios_shift_flags) == 2 &&
+               offsetof(PortableM1B73Event, bios_tick_low) == 4 &&
+               offsetof(PortableM1B73Event, modifiers) == 6 &&
                offsetof(PortableM1B73Event, h) == 8 &&
                offsetof(PortableM1B73Event, v) == 10 &&
                offsetof(PortableM1B73Event, code) == 12 &&
-               offsetof(PortableM1B73Event, xE) == 14,
+               offsetof(PortableM1B73Event, payload_segment) == 14,
                "DOS Event fields preserve original order and widths");
 
 static PortableM1B73Events *active_events;
@@ -115,20 +114,19 @@ int portable_m1b73_event_enqueue_registers(PortableM1B73Events *events,
      * updates them for this key. Mouse callbacks sample the current flags. */
     keyboard_flags = (uint16_t)(modeled_bios_flags |
         ((uint16_t)events->input_host->bios_keyboard_flags_hi << 8));
-    /* f_1B73_036E samples the BIOS data area clock, not m1B73's private
+    /* input_enqueue_event samples the BIOS data area clock, not m1B73's private
      * TickCount counter. */
-    bios_ticks = f_1F58_0006();
+    bios_ticks = timer_bios_tick_count();
     event = &events->source_records[write_index];
-    /* f_1B73_036E does not write source Event.what; retain that slot word. */
-    event->message = signed_word((uint16_t)(keyboard_flags |
+    /* input_enqueue_event does not write source Event.pad00; retain that slot word. */
+    event->bios_shift_flags = signed_word((uint16_t)(keyboard_flags |
         ((*events->source_shift_state & UINT8_C(0x80)) != 0 ? 1u : 0u)));
-    event->x4 = signed_word((uint16_t)bios_ticks);
-    event->modLo = (uint8_t)ax;
-    event->modHi = (uint8_t)(ax >> 8);
+    event->bios_tick_low = signed_word((uint16_t)bios_ticks);
+    event->modifiers = signed_word(ax);
     event->h = signed_word(cx);
     event->v = signed_word(dx);
     event->code = signed_word(bx);
-    event->xE = signed_word(es);
+    event->payload_segment = signed_word(es);
     *events->source_write_index = (int16_t)next;
     *events->source_count = (int16_t)(count + 1u);
     if ((ax & UINT16_C(0x0a00)) != 0)
@@ -208,7 +206,7 @@ uint32_t TickCount(void)
     return sim_timing_tick_count(events->clock);
 }
 
-int16_t f_1B73_032A(void)
+int16_t input_event_count(void)
 {
     PortableM1B73Events *events = require_events();
     if (portable_input_time_host_refresh_clock(events->input_host) !=
@@ -217,7 +215,7 @@ int16_t f_1B73_032A(void)
     return signed_word(portable_m1b73_event_count(events));
 }
 
-int16_t f_1B73_032E(void *event_record)
+int16_t input_pop_event(void *event_record)
 {
     PortableM1B73Events *events = require_events();
     if (event_record == NULL)
@@ -229,17 +227,17 @@ int16_t f_1B73_032E(void *event_record)
         (PortableM1B73Event *)event_record);
 }
 
-void f_1B73_0511(void)
+void timer_disable_tick_count(void)
 {
     sim_timing_set_tick_count_enabled(require_events()->clock, 0);
 }
 
-void f_1B73_0518(void)
+void timer_enable_tick_count(void)
 {
     sim_timing_set_tick_count_enabled(require_events()->clock, 1);
 }
 
-void f_1B73_030F(int16_t bx, int16_t es, int16_t ax,
+void input_enqueue_event_args(int16_t bx, int16_t es, int16_t ax,
                  int16_t cx, int16_t dx)
 {
     /* A full source ring is the original f_036E no-op path. */
@@ -254,5 +252,5 @@ void portable_m1b73_event_enqueue_four_word_command(
     /* The four source callsites enqueue command events whose Event.v is not
      * read by their reachable consumers. The fifth DOS stack word is not
      * represented by C; normalize only this unobserved field to zero. */
-    f_1B73_030F(bx, es, ax, cx, 0);
+    input_enqueue_event_args(bx, es, ax, cx, 0);
 }

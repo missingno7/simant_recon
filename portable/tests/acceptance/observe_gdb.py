@@ -57,8 +57,8 @@ def read_symbol(name, spec):
     size = int(v.type.sizeof)
     ptrs = pointers(v.type)
     row = dict(owner=owner, native_bytes=size, native_type=str(v.type), pointer_fields=ptrs)
-    if owner in ('db_handles','fd_50F6_10D0'):
-        row.update(status='EXCLUDED_HANDLE',reason='DOS/native file descriptor identities are platform-owned; src/root/m00F8.c and m15F8.c, conversions/pointer_globals.h.')
+    if owner in ('db_handles','startup_executable_fd'):
+        row.update(status='EXCLUDED_HANDLE',reason='DOS/native file descriptor identities are platform-owned; src/ui/view_dialog_helpers.c and m15F8.c, conversions/pointer_globals.h.')
         return row
     if ptrs:
         row.update(status='EXCLUDED_POINTER', reason='Pointer/handle or callback representation differs; no raw equality claim.')
@@ -80,7 +80,7 @@ def snapshot(label,ms):
         for name, spec in config['symbols'].items():
             try: symbols[name] = read_symbol(name,spec)
             except Exception as exc: symbols[name] = dict(status='UNAVAILABLE', reason=str(exc))
-        table = value('fd_4E4B_0000')
+        table = value('save_record_table')
         parts = []
         records = []
         for index, offset, length, elem, name in config['save_schema']:
@@ -95,8 +95,8 @@ def snapshot(label,ms):
         if projected is not None: (out/(label+'.sav')).write_bytes(projected)
         clocks = {name:int(gdb.parse_and_eval(expr)) for name,expr in
                   [('game_ticks','app.game_clock.tick_count'),('bios_ticks','app.bios_clock.tick_count'),
-                   ('outer_loops','fd_50F6_383A')]}
-        for key,name in [('cycle','Cycle'),('simulation_calls','fd_50F6_0C26')]:
+                   ('outer_loops','main_iteration_count')]}
+        for key,name in [('cycle','Cycle'),('simulation_calls','GameTime')]:
             item=symbols.get(name,{})
             clocks[key]=int.from_bytes(bytes.fromhex(item['data']),'little') if item.get('status')=='OK' else None
         # Calls into the inferior are deliberately prohibited; virtual_ns is

@@ -14,7 +14,7 @@ static int16_t match_remaining;
 static uint8_t match_low;
 static unsigned state = 1;
 
-void f_1B05_0008(const uint8_t *packed, int16_t length)
+void UnpackInit(const uint8_t *packed, int16_t length)
 {
     if (packed == NULL) abort();
     memset(ring, 0x20, 0xfee);
@@ -34,7 +34,7 @@ static int read_byte(uint8_t *value)
     return 1;
 }
 
-uint16_t f_1B05_0046(uint8_t *destination, uint16_t length)
+uint16_t Unpack(uint8_t *destination, uint16_t length)
 {
     uint32_t produced = 0;
     uint8_t byte;

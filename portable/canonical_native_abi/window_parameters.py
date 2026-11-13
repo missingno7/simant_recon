@@ -131,23 +131,23 @@ def _adapt_open_prox(source: str | bytes, rel: str) -> tuple[str | bytes, dict[s
     (out, declarations) = _replace_declarations(text)
     open_body = None
     prox_body = None
-    if rel == 'src/root/m20E8.c':
+    if rel == 'src/window/lifecycle.c':
         (out, open_body) = _adapt_open_body(out)
         out = f'#include "{RUNTIME_HEADER}"\n#include "{PARAMETER_HEADER}"\n' + out
-    if rel == 'src/root/m22BF.c':
+    if rel == 'src/window/object_attributes.c':
         (out, prox_body) = _adapt_prox_body(out)
     (out, open_calls) = _rewrite_calls(out, 'win_Open', {1: _open_call, 3: _open_call, 5: _open_call}, 6)
     (out, prox_calls) = _rewrite_calls(out, 'win_DoProxMenu', {2: _prox_call, 4: _prox_call}, 5)
-    if rel == 'src/root/m20E8.c' and open_body is None:
+    if rel == 'src/window/lifecycle.c' and open_body is None:
         raise ValueError('root m20E8 adapter did not rewrite the source stack-copy body')
-    if rel == 'src/root/m22BF.c' and prox_body is None:
+    if rel == 'src/window/object_attributes.c' and prox_body is None:
         raise ValueError('root m22BF adapter did not inspect the prox-menu TU')
-    if rel == 'src/root/m20E8.c' and f'#include "{PARAMETER_HEADER}"' not in out:
+    if rel == 'src/window/lifecycle.c' and f'#include "{PARAMETER_HEADER}"' not in out:
         out = f'#include "{PARAMETER_HEADER}"\n' + out
     remainder = mask_literals(out)
-    if rel == 'src/root/m20E8.c' and re.search('\\(&\\s*win\\s*\\)\\s*\\[\\s*[1-9]', remainder):
+    if rel == 'src/window/lifecycle.c' and re.search('\\(&\\s*win\\s*\\)\\s*\\[\\s*[1-9]', remainder):
         raise ValueError('unsafe win_Open argument-stack access remains')
-    if rel == 'src/root/m22BF.c' and re.search('\\(&\\s*item\\s*\\)\\s*\\[\\s*[1-9]', remainder):
+    if rel == 'src/window/object_attributes.c' and re.search('\\(&\\s*item\\s*\\)\\s*\\[\\s*[1-9]', remainder):
         raise ValueError('unsafe win_DoProxMenu argument-stack access remains')
     ledger = {'kind': 'WINDOW_PARAMETERS', 'source': rel, 'input_sha256': before, 'output_sha256': _sha(out), 'fixed_signatures': {'win_Open': OPEN_DECL, 'win_DoProxMenu': PROX_DECL}, 'declarations': declarations, 'win_Open_calls': open_calls, 'win_DoProxMenu_calls': prox_calls, 'open_body': open_body, 'prox_body': prox_body, 'helper_header': PARAMETER_HEADER, 'claim': 'No converted win_Open or win_DoProxMenu call relies on unprovided caller-stack words. Supplied source parameter count is explicit; mode-5 resource references must be present before the window parameter vector is changed or recalculated.'}
     return (out.encode('latin1') if is_bytes else out, ledger)
@@ -193,15 +193,15 @@ def _adapt_swap(source: str | bytes, rel: str) -> tuple[str | bytes, dict[str, A
     before = _sha(text)
     (out, declarations) = _replace_swap_declarations(text)
     body = None
-    if rel == 'src/root/m20E8.c':
+    if rel == 'src/window/lifecycle.c':
         if f'#include "{PARAMETER_HEADER}"' not in out:
             raise ValueError('root m20E8 must lower Open parameters first (parameter helper header absent)')
         (out, body) = _adapt_body(out)
     (out, calls) = _rewrite_calls(out, 'win_Swap', {2: _swap_call}, 7)
-    if rel == 'src/root/m20E8.c' and body is None:
+    if rel == 'src/window/lifecycle.c' and body is None:
         raise ValueError('root m20E8 win_Swap definition was not converted')
     masked = mask_literals(out)
-    if rel == 'src/root/m20E8.c' and re.search('\\(\\(int16_t\\s*\\*\\)\\(w\\s*\\+\\s*0x10\\)\\)\\[\\d+\\]\\s*=\\s*p[0-3]', masked):
+    if rel == 'src/window/lifecycle.c' and re.search('\\(\\(int16_t\\s*\\*\\)\\(w\\s*\\+\\s*0x10\\)\\)\\[\\d+\\]\\s*=\\s*p[0-3]', masked):
         raise ValueError('root win_Swap retains direct optional-slot stores')
     if '(&from)[' in masked or '(&to)[' in masked:
         raise ValueError(f'{rel}: unsafe win_Swap stack read remains')

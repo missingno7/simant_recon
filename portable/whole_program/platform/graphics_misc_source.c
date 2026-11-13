@@ -27,8 +27,8 @@ static int16_t source_word_sub(int16_t left, int16_t right)
     return source_word_from_u16((uint16_t)((uint16_t)left - (uint16_t)right));
 }
 
-extern void f_1D8E_0435(char *, int16_t, int16_t, int16_t, int16_t, int16_t);
-extern void f_1D8E_0384(SimGraphicsPatternRectCallback, int16_t, int16_t,
+extern void clip_draw_line(char *, int16_t, int16_t, int16_t, int16_t, int16_t);
+extern void clip_dispatch_rect(SimGraphicsPatternRectCallback, int16_t, int16_t,
     int16_t, int16_t, int16_t, int16_t, int16_t);
 
 SimGraphicsStatus sim_graphics_s00_masked_rect(SimGraphicsDriver *g,
@@ -51,7 +51,7 @@ SimGraphicsStatus sim_graphics_s00_masked_rect(SimGraphicsDriver *g,
                                          ((uint32_t)y & 3u) * 2u];
         for (x = l; x < r; ++x) {
             uint8_t old, next;
-            uint8_t color = (uint8_t)g_3DE0 & 15u;
+            uint8_t color = (uint8_t)_foreColor & 15u;
             if (!(mask & (0x80u >> ((uint32_t)x & 7u)))) continue;
             old = sim_graphics_vga_get(g,x,y);
             next = operation == 8 ? (old & color) : operation == 16 ? (old | color) :
@@ -74,15 +74,15 @@ SimGraphicsStatus sim_graphics_s00_screen_copy(SimGraphicsDriver *g,
     unsigned row, byte;
     if (!g || !g->pixel_storage) return SIM_GRAPHICS_INVALID_ARGUMENT;
     vga = &g->vga;
-    stride = g_3DB6;
+    stride = gfx_screen_row_bytes;
     /* m31AD:L19F6/L1A38/L1A48: reverse rows and/or bytes independently.
      * Preserve the historical bottom/destination+height start convention. */
     if (top < destination_y) {
         source_y = bottom; target_y = (int16_t)((uint16_t)destination_y+rows); stride = (int16_t)-stride;
     }
     direction = ((uint16_t)left>>3) < ((uint16_t)destination_x>>3) ? -1 : 1;
-    si = (uint16_t)((uint16_t)source_y*(uint16_t)g_3DB6+((uint16_t)left>>3));
-    di = (uint16_t)((uint16_t)target_y*(uint16_t)g_3DB6+((uint16_t)destination_x>>3));
+    si = (uint16_t)((uint16_t)source_y*(uint16_t)gfx_screen_row_bytes+((uint16_t)left>>3));
+    di = (uint16_t)((uint16_t)target_y*(uint16_t)gfx_screen_row_bytes+((uint16_t)destination_x>>3));
     if (direction < 0) { si = (uint16_t)(si+width-1u); di = (uint16_t)(di+width-1u); }
     sim_vga_out(vga,0x3ce,8); sim_vga_out(vga,0x3cf,255);
     sim_vga_out(vga,0x3c4,2); sim_vga_out(vga,0x3c5,15);
@@ -117,13 +117,13 @@ static void raw_mask(int16_t l, int16_t t, int16_t r, int16_t b, int16_t p)
 static void clipped_mask(int16_t l, int16_t t, int16_t r, int16_t b, int16_t p)
 {
     if (sim_graphics_source_clip_active())
-        f_1D8E_0384(raw_mask, 0, 0, l, t, r, b, p);
+        clip_dispatch_rect(raw_mask, 0, 0, l, t, r, b, p);
     else raw_mask(l, t, r, b, p);
 }
 static void clipped_line(int16_t x, int16_t y, int16_t x1, int16_t y1, int16_t c)
 {
     SimGraphicsDriver *g = required();
-    if (sim_graphics_source_clip_active()) f_1D8E_0435(NULL, x, y, x1, y1, c);
+    if (sim_graphics_source_clip_active()) clip_draw_line(NULL, x, y, x1, y1, c);
     else g->last_status = sim_graphics_g9170_line(g, x, y, x1, y1, c);
 }
 static void copy_screen(int16_t l, int16_t t, int16_t r, int16_t b, int16_t x, int16_t y)

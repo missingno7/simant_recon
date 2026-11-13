@@ -41,11 +41,11 @@ class Present(gdb.Breakpoint):
             now = int(frame.read_var('now'))
             data = {'elapsed_ns': now - word('app.started_ns'),
                     'replay_next': word('app.replay_next'),
-                    'outer_loops': word('fd_50F6_383A'),
-                    'mouse': [word('g_9122'), word('g_9124')],
+                    'outer_loops': word('main_iteration_count'),
+                    'mouse': [word('mouse_x_pixels'), word('mouse_y_pixels')],
                     'scroll_loop': bool(active_scrolls),
-                    'busy': word('g_3DD4') & 255,
-                    'cursor_busy': word('g_4333')}
+                    'busy': word('gfx_cursor_draw_lock') & 255,
+                    'cursor_busy': word('cursor_update_lock')}
             if data['busy'] or data['cursor_busy']:
                 emit('unsafe-presentation', **data)
             if data['scroll_loop']:
@@ -67,9 +67,9 @@ class ScrollReturned(gdb.FinishBreakpoint):
     def stop(self):
         active_scrolls.discard(self.key)
         steps, started = scroll_steps.pop(self.key, (0, time.monotonic()))
-        emit('scroll-return', mouse=[word('g_9122'), word('g_9124')],
+        emit('scroll-return', mouse=[word('mouse_x_pixels'), word('mouse_y_pixels')],
              steps=steps, held_seconds=time.monotonic() - started,
-             outer_loops=word('fd_50F6_383A'), replay_next=word('app.replay_next'))
+             outer_loops=word('main_iteration_count'), replay_next=word('app.replay_next'))
         return False
 
 
@@ -78,14 +78,14 @@ class Scroll(gdb.Breakpoint):
         global scrolls
         try:
             frame = gdb.newest_frame().older()
-            if frame is None or frame.name() != 'f_00F8_01BE':
+            if frame is None or frame.name() != 'ui_pump_events_edge_scroll':
                 return False
             key = int(frame.read_register('rsp'))
             if key in active_scrolls:
                 steps, started = scroll_steps[key]
                 scroll_steps[key] = (steps + 1, started)
                 return False
-            x, y = word('g_9122'), word('g_9124')
+            x, y = word('mouse_x_pixels'), word('mouse_y_pixels')
             if x <= 1 or x >= 636 or y < 1 or y >= 476:
                 active_scrolls.add(key)
                 scroll_steps[key] = (1, time.monotonic())
@@ -110,4 +110,4 @@ def exited(event):
 gdb.events.stop.connect(stopped)
 gdb.events.exited.connect(exited)
 Present('portable_m1b73_sdl_application_input_present', internal=True)
-Scroll('f_0250_0D10', internal=True)
+Scroll('edit_scroll_and_redraw', internal=True)

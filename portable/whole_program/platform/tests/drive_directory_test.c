@@ -42,7 +42,7 @@ static int capture_root(const char *root, int compare)
     assert(sim_drive_setdrive(4) == -1);
     assert(sim_drive_getdrive() == 3);
     memset(cwd, 0xA5, sizeof cwd);
-    assert(f_1F66_00AF(3, cwd) == 1 && strcmp(cwd, "C:\\") == 0);
+    assert(file_drive_current_directory(3, cwd) == 1 && strcmp(cwd, "C:\\") == 0);
     assert(sim_drive_getcwd(0, cwd, sizeof cwd) == 1 && strcmp(cwd, "C:\\") == 0);
     assert(sim_drive_getcwd(0, cwd, 3) == 0);
     assert(sim_drive_chdir("FOLDER") == 0);

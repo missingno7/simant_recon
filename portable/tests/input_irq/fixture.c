@@ -15,8 +15,8 @@
 
 /* Controlled source C owner views. ASM cells/queues come from the builder's
  * canonical_mouse_data.c, emitted from actual symbolic source directives. */
-uint16_t g_9120;
-int16_t g_9122, g_9124, g_5FF0 = 7;
+uint16_t mouse_button_state;
+int16_t mouse_x_pixels, mouse_y_pixels, g_5FF0 = 7;
 struct Event input_queue[7];
 struct InputQueueDescriptor g_5FF2;
 extern uint8_t g_4362, g_4363, g_4364, g_4368, g_4369;
@@ -84,17 +84,17 @@ static void clear_ring(void)
     unsigned i;
     g_5FF2.r.left = g_5FF2.r.top = g_5FF2.r.right = 0;
     memset(input_queue, 0, sizeof(input_queue));
-    for (i=0;i<7;++i) input_queue[i].what = (int16_t)0x5a5a;
+    for (i=0;i<7;++i) input_queue[i].pad00 = (int16_t)0x5a5a;
 }
 static void reset(void)
 {
     clear_ring();
-    f_1B73_0A6C();
+    kbd_enable_mouse_emulation();
     kbd_last_scan=last_shift=shift_state=0;
     tick_phase=0; timer_busy=mouse_busy=0;
     g_4362=g_4363=g_4364=g_4368=g_4369=0;
-    g_4331=g_4332=g_4333=g_4365=g_4366=0;
-    g_9120=0; g_9122=260; g_9124=330;
+    cursor_drawn_flag=g_4332=cursor_update_lock=cursor_show_level=g_4366=0;
+    mouse_button_state=0; mouse_x_pixels=260; mouse_y_pixels=330;
     input.bios_keyboard_flags=input.bios_keyboard_flags_hi=0;
     input.key_head=input.key_count=input.event_head=input.event_count=0;
     input.suppress_bios_key=0;
@@ -102,18 +102,18 @@ static void reset(void)
     g_4DA4=2;
     mouse.event_pump_active=1; mouse.event_mask=0x7f;
     pending_head=pending_count=warps=renders=hits=0;
-    f_1B73_0AA3();
+    hotbox_initialize_dispatch();
 }
 static void record(unsigned i, uint16_t ax, uint16_t cx, uint16_t dx,
                    uint16_t bx, uint16_t es, uint16_t message)
 {
     const struct Event *e=&input_queue[i];
-    assert((uint16_t)e->what == 0x5a5a);
-    assert((uint16_t)e->message == message);
-    assert((uint16_t)e->x4 == 0x1234);
-    assert((uint8_t)e->modLo == (uint8_t)ax && (uint8_t)e->modHi == (uint8_t)(ax>>8));
+    assert((uint16_t)e->pad00 == 0x5a5a);
+    assert((uint16_t)e->bios_shift_flags == message);
+    assert((uint16_t)e->bios_tick_low == 0x1234);
+    assert((uint16_t)e->modifiers == ax);
     assert((uint16_t)e->h == cx && (uint16_t)e->v == dx);
-    assert((uint16_t)e->code == bx && (uint16_t)e->xE == es);
+    assert((uint16_t)e->code == bx && (uint16_t)e->payload_segment == es);
 }
 static int scan(uint8_t raw)
 { return portable_m1b73_queue_runtime_scan_byte(&runtime,raw,0x0300,0x5c2d); }
@@ -124,8 +124,8 @@ static void add_key(HostEventKind kind, uint16_t key, uint8_t mods)
 }
 static void button_timer(void)
 {
-    struct Timer t = {{0,0,639,479},(void (*)(void))f_1B73_030F,(int16_t)0xff00,1,1,0,0x1f};
-    f_1B73_0AC3(&t,&portable_m1b73_queue_set.queues[0]);
+    struct Timer t = {{0,0,639,479},(void (*)(void))input_enqueue_event_args,(int16_t)0xff00,1,1,0,0x1f};
+    hotbox_append(&t,&portable_m1b73_queue_set.queues[0]);
 }
 static void test_keys(void)
 {
@@ -136,11 +136,11 @@ static void test_keys(void)
     unsigned i;
     reset();
     assert(scan(0x1e)==1); record(0,0,0x0302,0x5c2d,0xfa1e,0,0);
-    assert(f_1B73_0A30(0x1e)==0x80);
+    assert(kbd_scan_state(0x1e)==0x80);
     assert(scan(0x1e)==0 && g_5FF2.r.left==1); /* repeat suppressed/BIOS flushed */
-    assert(scan(0x9e)==1 && g_53CD[0x1e]==0x80 && g_5FF2.r.left==1);
-    assert(scan(0x2a)==1 && shift_state==2 && g_53CD[0x2a]==0x80);
-    assert(f_1B73_0A30(0x2a)==0); /* held normal Shift leaves source cell up */
+    assert(scan(0x9e)==1 && kbd_scan_code_state[0x1e]==0x80 && g_5FF2.r.left==1);
+    assert(scan(0x2a)==1 && shift_state==2 && kbd_scan_code_state[0x2a]==0x80);
+    assert(kbd_scan_state(0x2a)==0); /* held normal Shift leaves source cell up */
     shift_state |= 0x80;
     assert(scan(0xaa)==1 && shift_state==0); /* masks bit7 even on break */
     assert(scan(0xe0)==0); assert(scan(0x2a)==1);
@@ -174,16 +174,16 @@ static void test_keys(void)
 static void test_mouse(void)
 {
     HostEvent e = {0};
-    reset(); f_1B73_0046();
-    assert(g_9120==0x0100 && g_9122==240 && g_9124==320 && g_4331==1);
+    reset(); mouse_initialize_driver();
+    assert(mouse_button_state==0x0100 && mouse_x_pixels==240 && mouse_y_pixels==320 && cursor_drawn_flag==1);
     assert(g_435A==1 && warps==1 && g_5FF2.r.left==0);
-    g_9120=0x0203; f_1B73_0046();
-    assert(g_9120==0x0103 && mouse.driver_buttons==0); /* 09F7 takes source BL */
+    mouse_button_state=0x0203; mouse_initialize_driver();
+    assert(mouse_button_state==0x0103 && mouse.driver_buttons==0); /* 09F7 takes source BL */
     reset(); button_timer();
-    assert(scan(0x39)==0 && g_5FF2.r.left==2 && g_9120==0x0201);
+    assert(scan(0x39)==0 && g_5FF2.r.left==2 && mouse_button_state==0x0201);
     record(0,0,0x0302,0x5c2d,0xfa39,0,0);
     record(1,0x0201,260,330,0xff00,0x0101,0);
-    assert(scan(0xb9)==0 && g_9120==0x0400 && g_5FF2.r.left==3);
+    assert(scan(0xb9)==0 && mouse_button_state==0x0400 && g_5FF2.r.left==3);
     record(2,0x0400,260,330,0xff00,0x0101,0);
     reset(); button_timer();
     e.kind=HOST_EVENT_MOUSE_DOWN; e.button=1; e.x=260; e.y=330;
@@ -200,38 +200,38 @@ static void test_mouse(void)
     record(3,0x1000,260,330,0xff00,0x0101,0);
     e.kind=HOST_EVENT_MOUSE_DOWN; e.button=2;
     assert(portable_m1b73_mouse_consume_event(&mouse,&e)==PORTABLE_M1B73_MOUSE_OK);
-    assert(g_9120==0x2004 && g_5FF2.r.left==4); /* global callback mask1F excludes middle */
+    assert(mouse_button_state==0x2004 && g_5FF2.r.left==4); /* global callback mask1F excludes middle */
     e.kind=HOST_EVENT_MOUSE_UP;
     assert(portable_m1b73_mouse_consume_event(&mouse,&e)==PORTABLE_M1B73_MOUSE_OK);
-    assert(g_9120==0x4000 && g_5FF2.r.left==4);
+    assert(mouse_button_state==0x4000 && g_5FF2.r.left==4);
     e.kind=HOST_EVENT_MOUSE_DOWN;
     assert(portable_m1b73_mouse_consume_event(&mouse,&e)==PORTABLE_M1B73_MOUSE_OK);
     /* Physical driver BL replaces emulated left, not ORed with it. */
     assert(scan(0x39)==0); e.kind=HOST_EVENT_MOUSE_MOVE;
     assert(portable_m1b73_mouse_consume_event(&mouse,&e)==PORTABLE_M1B73_MOUSE_OK);
-    assert(g_9120==0x0104);
+    assert(mouse_button_state==0x0104);
     reset(); button_timer(); e.kind=HOST_EVENT_MOUSE_MOVE; e.x=261; e.y=331;
     assert(portable_m1b73_mouse_consume_event(&mouse,&e)==PORTABLE_M1B73_MOUSE_OK);
     record(0,0x0100,261,331,0xff00,0x0101,0);
-    reset(); g_4365=1; g_4333=1;
+    reset(); cursor_show_level=1; cursor_update_lock=1;
     assert(portable_m1b73_mouse_callback(&mouse,1,0,10,20)==PORTABLE_M1B73_MOUSE_OK);
-    assert(g_4331==1 && !renders && !hits);
-    g_4333=0; g_4331=0;
+    assert(cursor_drawn_flag==1 && !renders && !hits);
+    cursor_update_lock=0; cursor_drawn_flag=0;
     assert(portable_m1b73_mouse_callback(&mouse,1,0,10,20)==PORTABLE_M1B73_MOUSE_OK);
-    assert(renders==2 && hits==1 && hit_query==0x0100 && g_4331==0);
+    assert(renders==2 && hits==1 && hit_query==0x0100 && cursor_drawn_flag==0);
     mouse_busy=1;
     assert(portable_m1b73_mouse_callback(&mouse,2,1,40,50)==PORTABLE_M1B73_MOUSE_OK);
-    assert(g_9120==0x0100 && g_9122==10 && mouse_busy==1); mouse_busy=0;
+    assert(mouse_button_state==0x0100 && mouse_x_pixels==10 && mouse_busy==1); mouse_busy=0;
     /* Queue0 declares five storage rows but capacity four. At the admitted
      * full count, its final usable row must dispatch. Never expand capacity. */
     reset();
     {
-        struct Timer t = {{0,0,639,479},(void (*)(void))f_1B73_030F,
+        struct Timer t = {{0,0,639,479},(void (*)(void))input_enqueue_event_args,
                           (int16_t)0xff00,1,1,0,0};
         unsigned i;
-        for(i=0;i<3;++i) f_1B73_0AC3(&t,&portable_m1b73_queue_set.queues[0]);
+        for(i=0;i<3;++i) hotbox_append(&t,&portable_m1b73_queue_set.queues[0]);
         t.d=0x1f;
-        f_1B73_0AC3(&t,&portable_m1b73_queue_set.queues[0]);
+        hotbox_append(&t,&portable_m1b73_queue_set.queues[0]);
         assert(*portable_m1b73_queue_set.queues[0].count==4);
         assert(portable_m1b73_mouse_callback(&mouse,2,1,260,330)==PORTABLE_M1B73_MOUSE_OK);
         record(0,0x0201,260,330,0xff00,0x0101,0);
@@ -240,29 +240,29 @@ static void test_mouse(void)
 static void test_cursor(void)
 {
     unsigned i;
-    reset(); g_4365=1; g_4366=1;
+    reset(); cursor_show_level=1; g_4366=1;
     assert(scan(0x4d)==0 && g_4362==5 && !warps);
     for (i=0;i<3;++i) assert(portable_m1b73_queue_runtime_cursor_tick(&runtime));
-    assert(g_9122==275 && g_4364==0 && tick_phase==3);
+    assert(mouse_x_pixels==275 && g_4364==0 && tick_phase==3);
     assert(portable_m1b73_queue_runtime_cursor_tick(&runtime));
-    assert(g_9122==285 && g_4364==1 && tick_phase==4);
+    assert(mouse_x_pixels==285 && g_4364==1 && tick_phase==4);
     assert(scan(0xcd)==0 && !g_4362 && !tick_phase && !g_4364);
     input.bios_keyboard_flags=4; assert(scan(0x48)==1 && !g_4363);
     assert(scan(0xc8)==0 && !g_4363);
-    reset(); assert(scan(0x4c)==0 && g_9122==320 && g_9124==240);
-    g_9122=1; assert(scan(0xcc)==0 && g_9122==320); /* both edges center */
-    assert(scan(0x47)==0 && g_9122==6); assert(scan(0xc7)==0);
-    assert(scan(0x47)==0 && g_9122==0);
-    assert(scan(0x4f)==0 && g_9122==633); assert(scan(0xcf)==0);
-    assert(scan(0x4f)==0 && g_9122==639);
-    assert(scan(0x49)==0 && g_9124==6);
-    assert(scan(0x51)==0 && g_9124==473);
-    reset(); g_9122=638; g_4362=5; g_4365=1;
-    assert(portable_m1b73_queue_runtime_cursor_tick(&runtime) && g_9122==639);
-    reset(); g_4333=1; g_4332=2;
+    reset(); assert(scan(0x4c)==0 && mouse_x_pixels==320 && mouse_y_pixels==240);
+    mouse_x_pixels=1; assert(scan(0xcc)==0 && mouse_x_pixels==320); /* both edges center */
+    assert(scan(0x47)==0 && mouse_x_pixels==6); assert(scan(0xc7)==0);
+    assert(scan(0x47)==0 && mouse_x_pixels==0);
+    assert(scan(0x4f)==0 && mouse_x_pixels==633); assert(scan(0xcf)==0);
+    assert(scan(0x4f)==0 && mouse_x_pixels==639);
+    assert(scan(0x49)==0 && mouse_y_pixels==6);
+    assert(scan(0x51)==0 && mouse_y_pixels==473);
+    reset(); mouse_x_pixels=638; g_4362=5; cursor_show_level=1;
+    assert(portable_m1b73_queue_runtime_cursor_tick(&runtime) && mouse_x_pixels==639);
+    reset(); cursor_update_lock=1; g_4332=2;
     assert(portable_m1b73_queue_runtime_cursor_tick(&runtime) && g_4332==1);
     assert(portable_m1b73_queue_runtime_cursor_tick(&runtime) && g_4332==1 && !renders);
-    reset(); g_4365=1; g_4366=1; g_4362=5;
+    reset(); cursor_show_level=1; g_4366=1; g_4362=5;
     for(i=0;i<10;++i) assert(portable_m1b73_queue_runtime_cursor_tick(&runtime));
     assert(g_4364==2 && tick_phase==10);
     for(;i<28;++i) assert(portable_m1b73_queue_runtime_cursor_tick(&runtime));
@@ -299,11 +299,11 @@ static void test_bios(void)
     record(0,0,2,0,0xfa1d,0,0); /* old BIOS flags before Ctrl update */
     record(1,0,2,0,0xfa19,0,0x0104);
     record(2,0x8081,4,0,0xf081,0,0x0104);
-    reset(); f_1B73_0A40();
+    reset(); kbd_disable_mouse_emulation();
     add_key(HOST_EVENT_KEY_DOWN,0x3920,0);
     assert(input.input_time.services.key_available(&input,&key)==1 && key==0x3920);
-    assert(g_53CD[0x39]==0x80 && f_1B73_0A30(0x39)==0 && g_5FF2.r.left==0);
-    reset(); f_1B73_0A40();
+    assert(kbd_scan_code_state[0x39]==0x80 && kbd_scan_state(0x39)==0 && g_5FF2.r.left==0);
+    reset(); kbd_disable_mouse_emulation();
     for(i=0;i<17;++i) add_key(HOST_EVENT_KEY_DOWN,0x1e61,0);
     assert(input.input_time.services.key_available(&input,&key)==1 && key==0x1e61);
     assert(input.key_count==15 && !input.host_closed); /* original BIOS ring full drops */
@@ -316,7 +316,7 @@ static void test_ring(void)
     assert(g_5FF2.r.left==6);
     assert(!portable_m1b73_event_enqueue_registers(&events,0x0201,1,2,3,4));
     assert(shift_state==0x80 && g_5FF2.r.left==6);
-    { struct Event e; assert(f_1B73_032E(&e)==5); }
+    { struct Event e; assert(input_pop_event(&e)==5); }
     assert(portable_m1b73_event_enqueue_registers(&events,0x0201,1,2,3,4));
     assert(shift_state==0 && g_5FF2.r.top==0);
     record(6,0x0201,1,2,3,4,1);
@@ -328,7 +328,7 @@ static int controlled_refresh(void *context, SimTimingClock *clock)
     (void)context; (void)clock;
     ++refresh_calls;
     /* A service reached from the refresh callback must not recurse. */
-    assert(f_1B73_0EEE() == 0);
+    assert(kbd_scroll_lock_state() == 0);
     return 1;
 }
 static void test_service_delivery(void)
@@ -343,25 +343,25 @@ static void test_service_delivery(void)
     portable_input_time_host_set_interrupt_guard(&input, interrupt_guard);
     delivery_if = refresh_calls = 0;
     add_key(HOST_EVENT_KEY_DOWN, 0x1e61, 0);
-    assert(f_1B73_0EEE() == 0 && pending_head == 0 && refresh_calls == 0);
+    assert(kbd_scroll_lock_state() == 0 && pending_head == 0 && refresh_calls == 0);
     assert(input.input_time.services.key_available(&input, &key) == 0);
     assert(portable_input_time_host_poll_event(&input, &event) == 0);
     assert(TickCount() == 0 && pending_head == 0);
     delivery_if = 1;
-    assert(f_1B73_0EEE() == 0 && pending_head == 1 && refresh_calls == 1);
-    assert(g_53CD[0x1e] == 0); /* The flag query delivered IRQ09 held state. */
+    assert(kbd_scroll_lock_state() == 0 && pending_head == 1 && refresh_calls == 1);
+    assert(kbd_scan_code_state[0x1e] == 0); /* The flag query delivered IRQ09 held state. */
     add_key(HOST_EVENT_KEY_UP, 0x1e61, 0);
-    assert(f_1B73_0EEE() == 0 && pending_head == 1 && refresh_calls == 1);
+    assert(kbd_scroll_lock_state() == 0 && pending_head == 1 && refresh_calls == 1);
     wall_ns = 999999;
-    assert(f_1B73_0EEE() == 0 && pending_head == 1 && refresh_calls == 1);
+    assert(kbd_scroll_lock_state() == 0 && pending_head == 1 && refresh_calls == 1);
     wall_ns = 1000000;
-    assert(f_1B73_0EEE() == 0 && pending_head == 2 && refresh_calls == 2);
-    assert(g_53CD[0x1e] == 0x80);
+    assert(kbd_scroll_lock_state() == 0 && pending_head == 2 && refresh_calls == 2);
+    assert(kbd_scan_code_state[0x1e] == 0x80);
     virtual_mode = 1;
     add_key(HOST_EVENT_KEY_DOWN, 0x1e61, 0);
-    assert(f_1B73_0EEE() == 0 && pending_head == 3 && refresh_calls == 3);
+    assert(kbd_scroll_lock_state() == 0 && pending_head == 3 && refresh_calls == 3);
     add_key(HOST_EVENT_KEY_UP, 0x1e61, 0);
-    assert(f_1B73_0A30(0x1e) == 0 && pending_head == 4 && refresh_calls == 4);
+    assert(kbd_scan_state(0x1e) == 0 && pending_head == 4 && refresh_calls == 4);
     assert(!input.refreshing && !input.ingesting);
     virtual_mode = 0;
     advancing_wall = 1;
@@ -376,13 +376,13 @@ static void matrix(void)
         reset(); g_4DA4=0;
         input.bios_keyboard_flags=(uint8_t)flags[f];
         input.bios_keyboard_flags_hi=(uint8_t)(flags[f]>>8);
-        for(i=0;i<7;++i) input_queue[i].what=0;
+        for(i=0;i<7;++i) input_queue[i].pad00=0;
         for(j=0;j<3;++j) {
             uint8_t raw=(uint8_t)(s|(j==2?0x80:0));
             int carry=scan(raw);
             printf("%u,%u,%u,%d,%u,%u,%u,%u,%u,%u,%u",flags[f],s,raw,carry,
                 (uint16_t)g_5FF2.r.left,shift_state,g_4362,g_4363,g_4364,
-                (uint16_t)g_9122,(uint16_t)g_9124);
+                (uint16_t)mouse_x_pixels,(uint16_t)mouse_y_pixels);
             for(i=0;i<(unsigned)g_5FF2.r.left;++i) {
                 uint16_t words[8]; memcpy(words,&input_queue[i],16);
                 for(k=0;k<8;++k) printf(",%u",words[k]);

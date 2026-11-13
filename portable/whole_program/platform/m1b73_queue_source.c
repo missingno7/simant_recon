@@ -21,7 +21,7 @@ static int16_t read_record_word(const uint8_t *record, uint8_t offset)
     return value;
 }
 
-int16_t f_1B73_0C42(int16_t id, PortableM1B73Queue *slot,
+int16_t hotbox_get_rect(int16_t id, PortableM1B73Queue *slot,
                     struct Rect *out_rect)
 {
     uint16_t i;

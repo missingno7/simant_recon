@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char g_3D20[128];
+char gfx_row_scratch[128];
 
 enum {
     TEST_WIDTH = 112,
@@ -40,7 +40,7 @@ static void check_transfer(const uint8_t *destination, uint8_t untouched)
             if (row == TEST_ROWS - 1u && column >= 2u)
                 continue;
             uint8_t expected = column < 2u
-                ? g_3D20[row * 2u + column] : untouched;
+                ? gfx_row_scratch[row * 2u + column] : untouched;
             if (destination[(size_t)row * TEST_STRIDE + column] != expected) {
                 fprintf(stderr,
                         "row %u column %lu: got %02x want %02x\n", row,
@@ -60,10 +60,10 @@ int main(void)
     SimS00RasterStatus status;
     size_t i;
 
-    fill_pattern((uint8_t *)g_3D20);
+    fill_pattern((uint8_t *)gfx_row_scratch);
     memset(destination, 0xcc, sizeof destination);
     status = sim_s00_raster_pattern_transfer(
-        (const uint8_t *)g_3D20, destination, TEST_SPAN, TEST_WIDTH);
+        (const uint8_t *)gfx_row_scratch, destination, TEST_SPAN, TEST_WIDTH);
     CHECK(status == SIM_S00_RASTER_OK);
     check_transfer(destination, 0xcc);
     CHECK(destination[TEST_SPAN] == 0xcc);
@@ -72,19 +72,19 @@ int main(void)
     /* Negative controls: one byte short and the old 32-row wrapper extent. */
     memset(too_small, 0xa7, sizeof too_small);
     status = sim_s00_raster_pattern_transfer(
-        (const uint8_t *)g_3D20, too_small, TEST_SPAN - 1u, TEST_WIDTH);
+        (const uint8_t *)gfx_row_scratch, too_small, TEST_SPAN - 1u, TEST_WIDTH);
     CHECK(status == SIM_S00_RASTER_BUFFER_TOO_SMALL);
     for (i = 0; i < sizeof too_small; ++i)
         CHECK(too_small[i] == 0xa7);
     status = sim_s00_raster_pattern_transfer(
-        (const uint8_t *)g_3D20, too_small, LEGACY_WRAPPER_SPAN, TEST_WIDTH);
+        (const uint8_t *)gfx_row_scratch, too_small, LEGACY_WRAPPER_SPAN, TEST_WIDTH);
     CHECK(status == SIM_S00_RASTER_BUFFER_TOO_SMALL);
     for (i = 0; i < sizeof too_small; ++i)
         CHECK(too_small[i] == 0xa7);
 
     /* Exercise the source-compatible callback wrapper that previously aborted. */
     memset(destination, 0x3c, sizeof destination);
-    o00_35A6_0406(destination, TEST_WIDTH);
+    gfx_planar_scratch_to_buffer(destination, TEST_WIDTH);
     check_transfer(destination, 0x3c);
     CHECK(destination[TEST_SPAN] == 0x3c);
     CHECK(destination[TEST_SPAN + 1] == 0x3c);

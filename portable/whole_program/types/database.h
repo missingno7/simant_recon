@@ -60,7 +60,7 @@ _Static_assert(sizeof(DBHeader) == 14, "source database header read");
 _Static_assert(offsetof(DBHeader, freeBytes) == 6, "database free count");
 _Static_assert(sizeof(DBRecordHeader) == 10, "source record header read");
 /* GetFreeHandle initializes and searches exactly four source slots. */
-extern OpenDBRec fd_50F6_3958[4];
-extern IndexEntry *fd_50F6_3952;
-extern int16_t fd_50F6_3956;
+extern OpenDBRec openDBData[4];
+extern IndexEntry *db_index_search_entry;
+extern int16_t db_index_lower_bound;
 #endif

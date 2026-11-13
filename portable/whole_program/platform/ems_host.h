@@ -18,14 +18,14 @@ typedef struct EmsHostInfo {
     uint16_t page_frame_segment;
 } EmsHostInfo;
 
-/* Source anchors: m195A.asm f_195A_0260 (probe/version/page-frame setup),
- * f_195A_0035 (page counts), and f_195A_001D (page-frame segment). */
+/* Source anchors: m195A.asm ems_initialize (probe/version/page-frame setup),
+ * ems_query_page_counts (page counts), and ems_query_page_frame (page-frame segment). */
 EmsHostStatus ems_host_probe(EmsHostInfo *out_info);
 EmsHostStatus ems_host_query_pages(uint16_t *out_free, uint16_t *out_total);
 EmsHostStatus ems_host_page_frame(uint16_t *out_segment);
 
-/* Source anchors: f_195A_004B allocate, f_195A_0062 map logical page,
- * f_195A_007D free handle, and f_195A_01CB set handle name. These fail
+/* Source anchors: ems_allocate_pages allocate, ems_map_page map logical page,
+ * ems_free_handle free handle, and ems_set_handle_name set handle name. These fail
  * explicitly on a host with no EMS; none can create a fake successful handle. */
 EmsHostStatus ems_host_allocate(uint16_t pages, uint16_t *out_handle);
 EmsHostStatus ems_host_map(uint16_t handle, uint16_t logical_page,

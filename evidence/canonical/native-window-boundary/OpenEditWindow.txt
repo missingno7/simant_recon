@@ -1,6 +1,6 @@
 OpenEditWindow  root:0250:0E70  linear 03370  size 17  extent DESCENT  region game_or_library
   entry evidence: far_call
-  module frame 0250: function 21/53; neighbours: f_0250_0D10, f_0250_0E15, ForceUpdateEdit, DoEditUpdateDraw
+  module frame 0250: function 21/53; neighbours: edit_scroll_and_redraw, win_EditChanged, ForceUpdateEdit, DoEditUpdateDraw
   frame: {'frame': 'none'}
   0E70  xor ax, ax
   0E72  lcall 0x29f4, 0x2cc                -> __aFchkstk

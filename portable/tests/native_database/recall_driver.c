@@ -13,17 +13,17 @@ extern char *DBRecall(int16_t db, int16_t object, int16_t kind, int16_t *size);
 
 /* DOS EMS configuration is an explicit unavailable test boundary. All other
  * mutable DB/index/resource objects come from current canonical owners. */
-int8_t fd_55B3_360C;
-int16_t fd_55B3_3612;
-char *fd_55B3_360E;
-int16_t f_195A_0260(void) { return 0; }
-void f_195A_001D(void) { abort(); }
-void f_195A_0035(void) { abort(); }
-int16_t f_195A_004B(int16_t pages) { (void)pages; abort(); }
-void f_195A_0062(int16_t handle, int16_t logical, int16_t physical)
+int8_t ems_version;
+int16_t ems_free_page_count;
+char *ems_page_frame_pointer;
+int16_t ems_initialize(void) { return 0; }
+void ems_query_page_frame(void) { abort(); }
+void ems_query_page_counts(void) { abort(); }
+int16_t ems_allocate_pages(int16_t pages) { (void)pages; abort(); }
+void ems_map_page(int16_t handle, int16_t logical, int16_t physical)
 { (void)handle; (void)logical; (void)physical; abort(); }
-void f_195A_007D(int16_t handle) { (void)handle; abort(); }
-void f_195A_01CB(int16_t handle, char *name) { (void)handle; (void)name; abort(); }
+void ems_free_handle(int16_t handle) { (void)handle; abort(); }
+void ems_set_handle_name(int16_t handle, char *name) { (void)handle; (void)name; abort(); }
 int16_t WinPrintf(char *format, ...)
 { fprintf(stderr, "unexpected WinPrintf: %s\n", format); exit(90); }
 void Punt(char *format, ...)
@@ -48,12 +48,12 @@ static int exercise(const char *stem, FILE *fixture)
     if (!read_exact(fixture, &expected_count, sizeof expected_count)) return 10;
     db = OpenDB((char *)stem);
     if (db < 0 || db >= 4) return 11;
-    count = fd_50F6_3958[db].indexHeader.count;
-    if ((uint16_t)count != expected_count || !fd_50F6_3958[db].index) return 12;
+    count = openDBData[db].indexHeader.count;
+    if ((uint16_t)count != expected_count || !openDBData[db].index) return 12;
     /* Actual converted FindIndex has a count guard. No sentinel allocation or
      * source count adjustment is applied by this fixture. */
-    if (FindIndex(db, 32767, 256) != NULL || fd_50F6_3956 != count ||
-        fd_50F6_3952 != fd_50F6_3958[db].index + count) return 13;
+    if (FindIndex(db, 32767, 256) != NULL || db_index_lower_bound != count ||
+        db_index_search_entry != openDBData[db].index + count) return 13;
     for (i = 0; i < expected_count; ++i) {
         int16_t id;
         uint8_t kind, flags;
@@ -69,20 +69,20 @@ static int exercise(const char *stem, FILE *fixture)
         if (!expected || !read_exact(fixture, expected, expected_size)) return 14;
         handle = DBRecall(db, id, kind, &size);
         if (!handle || (uint16_t)size != expected_size) return 15;
-        data = f_171C_1B84((char **)handle);
+        data = mem_Lock((char **)handle);
         if (!data || memcmp(data, expected, expected_size) != 0) {
             fprintf(stderr, "payload mismatch %s id=%d kind=%u\n", stem, id, kind);
             return 16;
         }
         printf("RECORD,%s,%d,%u,%u,%zu,%08x\n", stem, id, kind,
                flags, (size_t)expected_size, fnv1a((const uint8_t *)data, expected_size));
-        if (f_171C_1BBA((char **)handle) == NULL) return 17;
-        f_171C_13E4((char **)handle);
+        if (mem_Unlock((char **)handle) == NULL) return 17;
+        RallocFree((char **)handle);
         free(expected);
         if (sim_handles_global_last_status() != SIM_HANDLE_OK) return 18;
     }
     CloseDB(db);
-    if (fd_50F6_3958[db].name[0] != '\0') return 19;
+    if (openDBData[db].name[0] != '\0') return 19;
     printf("CLOSED,%s,%d\n", stem, count);
     return 0;
 }
@@ -96,11 +96,11 @@ static int write_header(const char *root, const char *stem, int mutate)
     size_t i, size;
     if (db < 0 || db >= 4) return 30;
     if (mutate) {
-        fd_50F6_3958[db].header.magic = 0x12345678;
-        fd_50F6_3958[db].header.count = -7;
-        fd_50F6_3958[db].header.freeBytes = 0x01020304;
-        fd_50F6_3958[db].header.wastedBytes = 0x05060708;
-        fd_50F6_3958[db].dirty = 1;
+        openDBData[db].header.magic = 0x12345678;
+        openDBData[db].header.count = -7;
+        openDBData[db].header.freeBytes = 0x01020304;
+        openDBData[db].header.wastedBytes = 0x05060708;
+        openDBData[db].dirty = 1;
     }
     CloseDB(db);
     snprintf(path, sizeof path, "%s/%s.DAT", root, stem);

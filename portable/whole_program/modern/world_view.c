@@ -10,19 +10,19 @@ typedef struct { int16_t x, y; } ModernPoint;
 extern int16_t MapPlane;
 extern int16_t TERRAINset;
 extern int16_t g_19BE, g_19C0;
-extern ModernPoint fd_50F6_0508;              /* MapPnt */
+extern ModernPoint MapPnt;              /* MapPnt */
 extern int16_t fd_50F6_10E0, fd_50F6_10DE;    /* editWidth, editHeight */
-extern ModernRect fd_50F6_110C;               /* editTileRect */
-extern uint8_t g_94E4;                        /* edit-draw scratch: ground tile */
-extern uint16_t g_9126;                       /* edit-draw scratch: life code */
-extern Handle fd_50F6_10E6, fd_50F6_10EA;     /* life sprite banks: objects 13, 14 */
+extern ModernRect editTileRect;               /* editTileRect */
+extern uint8_t edit_current_terrain_tile;                        /* edit-draw scratch: ground tile */
+extern uint16_t edit_current_life_tile;                       /* edit-draw scratch: life code */
+extern Handle edit_life_tiles_handle, edit_life_alt_tiles_handle;     /* life sprite banks: objects 13, 14 */
 extern int16_t fd_50F6_37D2, fd_50F6_37D4;    /* spider cells, 500 = none */
 extern char *g_19C6;                          /* edit view status message */
-extern ModernRect fd_50F6_10D2;               /* mapTileRect */
-extern int16_t fd_50F6_3856, fd_50F6_3858;    /* mapXsize, mapYsize */
-extern int16_t fd_50F6_38C0;                  /* just */
-extern int16_t fd_50F6_3854;                  /* multiplier */
-extern void f_0250_1018(int16_t x, int16_t y);
+extern ModernRect map_viewport_rect;               /* mapTileRect */
+extern int16_t mapXsize, mapYsize;    /* mapXsize, mapYsize */
+extern int16_t map_side_margin_pixels;                  /* just */
+extern int16_t multiplier;                  /* multiplier */
+extern void DoCalcTile(int16_t x, int16_t y);
 
 void modern_world_view(ModernWorldView *view)
 {
@@ -32,37 +32,37 @@ void modern_world_view(ModernWorldView *view)
     view->tile_width = g_19BE;
     view->tile_height = g_19C0;
     view->terrain_set = TERRAINset;
-    view->origin_x = fd_50F6_0508.x;
-    view->origin_y = fd_50F6_0508.y;
+    view->origin_x = MapPnt.x;
+    view->origin_y = MapPnt.y;
     view->view_columns = fd_50F6_10E0;
     view->view_rows = fd_50F6_10DE;
-    view->view_rect = fd_50F6_110C;
+    view->view_rect = editTileRect;
 }
 
-/* f_0250_1018 reads the plane's map, life and scent arrays and writes only
- * the edit-draw scratch pair g_94E4/g_9126 (m0250.c:891-992). Restoring the
+/* DoCalcTile reads the plane's map, life and scent arrays and writes only
+ * the edit-draw scratch pair edit_current_terrain_tile/edit_current_life_tile (m0250.c:891-992). Restoring the
  * pair makes the call read-only, also when a presentation runs between the
  * canonical decode and its compositor call. */
 void modern_world_cell(int x, int y, ModernCell *cell)
 {
-    uint8_t ground = g_94E4;
-    uint16_t life = g_9126;
-    f_0250_1018((int16_t)(x - fd_50F6_0508.x), (int16_t)(y - fd_50F6_0508.y));
-    cell->ground = g_94E4;
-    cell->life = g_9126;
-    g_94E4 = ground;
-    g_9126 = life;
+    uint8_t ground = edit_current_terrain_tile;
+    uint16_t life = edit_current_life_tile;
+    DoCalcTile((int16_t)(x - MapPnt.x), (int16_t)(y - MapPnt.y));
+    cell->ground = edit_current_terrain_tile;
+    cell->life = edit_current_life_tile;
+    edit_current_terrain_tile = ground;
+    edit_current_life_tile = life;
 }
 
-/* f_0250_0721's interpretation of a life code: sprite bank, record index
+/* edit_draw_life_and_ground_tile's interpretation of a life code: sprite bank, record index
  * and recolouring mode (masks {0,3,1} by code>>7; 0xF0..0xFF use mode 0). */
 static const uint8_t *life_record(unsigned code, int16_t *mask_mode)
 {
     static const int16_t masks[3] = { 0, 3, 1 };
     Handle bank;
-    if (code >= 0x380) { code -= 0x280; bank = fd_50F6_10EA; }
-    else if (code >= 0x200) { code -= 0x200; bank = fd_50F6_10E6; }
-    else { code -= 0x100; bank = fd_50F6_10EA; }
+    if (code >= 0x380) { code -= 0x280; bank = edit_life_alt_tiles_handle; }
+    else if (code >= 0x200) { code -= 0x200; bank = edit_life_tiles_handle; }
+    else { code -= 0x100; bank = edit_life_alt_tiles_handle; }
     if (bank == NULL || *bank == NULL || (code >> 7) > 2) return NULL;
     *mask_mode = code >= 0xf0 && code <= 0xff ? masks[0] : masks[code >> 7];
     return (const uint8_t *)*bank + (code & 0x7fu) * 0xc0u;
@@ -83,7 +83,7 @@ int modern_world_cell_pixels(const ModernCell *cell, uint8_t pixels[256])
     unsigned row, x;
     if (!sim_graphics_tile_record(cell->ground, ground)) return 0;
     if (cell->life && (record = life_record(cell->life, &mode)) != NULL) {
-        /* EGA/VGA (g_5A97 0 and 8) composite with o00_31AD_303F. */
+        /* EGA/VGA (gfx_display_mode 0 and 8) composite with gfx_planar_compose_life_hires. */
         sim_graphics_tile_compose(ground, record, mode, SIM_GRAPHICS_TILE_COMPOSE_303F, composed);
         bits = composed;
     }
@@ -113,9 +113,9 @@ int modern_world_spider_cells(int *left, int *top)
 
 void modern_overview_view(ModernOverviewView *view)
 {
-    view->tiles = fd_50F6_10D2;
-    view->cell_width = fd_50F6_3856;
-    view->cell_height = fd_50F6_3858;
-    view->pad = fd_50F6_38C0;
-    view->multiplier = fd_50F6_3854;
+    view->tiles = map_viewport_rect;
+    view->cell_width = mapXsize;
+    view->cell_height = mapYsize;
+    view->pad = map_side_margin_pixels;
+    view->multiplier = multiplier;
 }

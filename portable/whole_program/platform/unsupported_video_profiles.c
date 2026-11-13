@@ -14,72 +14,72 @@ static _Noreturn void unsupported_video_profile_entry(const char *symbol)
 #define REJECT_NOARGS(symbol) \
     void symbol(void) { unsupported_video_profile_entry(#symbol); }
 
-REJECT_NOARGS(o01_3126_0000)
-REJECT_NOARGS(o01_3126_0068)
-REJECT_NOARGS(o01_3126_007D)
-REJECT_NOARGS(o01_3126_010A)
-void o01_3126_1343(int16_t x, int16_t y, char *tile, char *life, int16_t n)
+REJECT_NOARGS(gfx_mono_init_banked_640x400)
+REJECT_NOARGS(gfx_mono_init_ega480_mono)
+REJECT_NOARGS(gfx_mono_init_ega350_mono)
+REJECT_NOARGS(gfx_mono_init_hercules)
+void gfx_mono_draw_life_tile(int16_t x, int16_t y, char *tile, char *life, int16_t n)
 {
     (void)x; (void)y; (void)tile; (void)life; (void)n;
-    unsupported_video_profile_entry("o01_3126_1343");
+    unsupported_video_profile_entry("gfx_mono_draw_life_tile");
 }
-void o01_3126_14B6(char *tile, char *life, int16_t n)
+void gfx_mono_compose_life_tile(char *tile, char *life, int16_t n)
 {
     (void)tile; (void)life; (void)n;
-    unsupported_video_profile_entry("o01_3126_14B6");
+    unsupported_video_profile_entry("gfx_mono_compose_life_tile");
 }
 
-REJECT_NOARGS(o01_328E_000A)
-REJECT_NOARGS(o01_328E_009D)
-void o01_328E_012C(char *src, char *dst, int16_t y)
+REJECT_NOARGS(WindowsMono_MakeTable4x4a)
+REJECT_NOARGS(WindowsMono_MakeTable4x4b)
+void WindowsMono_MakeTable2x2a(char *src, char *dst, int16_t y)
 {
     (void)src; (void)dst; (void)y;
-    unsupported_video_profile_entry("o01_328E_012C");
+    unsupported_video_profile_entry("WindowsMono_MakeTable2x2a");
 }
-void o01_328E_01D5(char *src, char *dst, int16_t y)
+void WindowsMono_MakeTable2x2b(char *src, char *dst, int16_t y)
 {
     (void)src; (void)dst; (void)y;
-    unsupported_video_profile_entry("o01_328E_01D5");
+    unsupported_video_profile_entry("WindowsMono_MakeTable2x2b");
 }
 
-REJECT_NOARGS(o01_32B5_000E)
-void o01_32B5_000F(char *image, char *buffer, int16_t shift, int16_t flag)
+REJECT_NOARGS(gfx_mono_buffer_noop)
+void gfx_mono_mask_bitmap_to_buffer(char *image, char *buffer, int16_t shift, int16_t flag)
 {
     (void)image; (void)buffer; (void)shift; (void)flag;
-    unsupported_video_profile_entry("o01_32B5_000F");
+    unsupported_video_profile_entry("gfx_mono_mask_bitmap_to_buffer");
 }
-REJECT_NOARGS(o01_32B5_00AA)
-REJECT_NOARGS(o01_32B5_0152)
-REJECT_NOARGS(o01_32B5_024F)
+REJECT_NOARGS(gfx_mono_copy_bitmap_to_buffer)
+REJECT_NOARGS(gfx_mono_buffer_intersection)
+REJECT_NOARGS(gfx_mono_scratch_to_buffer)
 
-REJECT_NOARGS(o02_3126_0000)
-REJECT_NOARGS(o03_3126_0140)
+REJECT_NOARGS(gfx_vga8_init_vga256)
+REJECT_NOARGS(gfx_tandy_init_tandy)
 
-REJECT_NOARGS(o03_3253_0008)
-void o03_3253_002F(char *src, char *dst, int16_t mult)
+REJECT_NOARGS(gfx_tandy_map_duplicate_rows)
+void Windows_MakeTable1x1(char *src, char *dst, int16_t mult)
 {
     (void)src; (void)dst; (void)mult;
-    unsupported_video_profile_entry("o03_3253_002F");
+    unsupported_video_profile_entry("Windows_MakeTable1x1");
 }
 
-REJECT_NOARGS(o03_3258_040C)
-void o03_3258_040D(char *image, char *buffer, int16_t shift, int16_t flag)
+REJECT_NOARGS(gfx_tandy_buffer_noop)
+void gfx_tandy_mask_to_buffer(char *image, char *buffer, int16_t shift, int16_t flag)
 {
     (void)image; (void)buffer; (void)shift; (void)flag;
-    unsupported_video_profile_entry("o03_3258_040D");
+    unsupported_video_profile_entry("gfx_tandy_mask_to_buffer");
 }
-REJECT_NOARGS(o03_3258_04CE)
-REJECT_NOARGS(o03_3258_05A7)
-void o03_3258_0690(int16_t x, int16_t y, char *tile, char *life, int16_t mask)
+REJECT_NOARGS(gfx_tandy_copy_to_buffer)
+REJECT_NOARGS(gfx_tandy_buffer_intersection)
+void gfx_tandy_draw_life_tile(int16_t x, int16_t y, char *tile, char *life, int16_t mask)
 {
     (void)x; (void)y; (void)tile; (void)life; (void)mask;
-    unsupported_video_profile_entry("o03_3258_0690");
+    unsupported_video_profile_entry("gfx_tandy_draw_life_tile");
 }
-void o03_3258_0F04(char *tile, char *life, int16_t mask)
+void gfx_tandy_compose_life_tile(char *tile, char *life, int16_t mask)
 {
     (void)tile; (void)life; (void)mask;
-    unsupported_video_profile_entry("o03_3258_0F04");
+    unsupported_video_profile_entry("gfx_tandy_compose_life_tile");
 }
-REJECT_NOARGS(o03_3258_175F)
+REJECT_NOARGS(gfx_tandy_scratch_to_buffer)
 
 #undef REJECT_NOARGS

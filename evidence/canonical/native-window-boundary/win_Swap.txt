@@ -10,7 +10,7 @@ win_Swap  root:20E8:032F  linear 211AF  size 391  extent DESCENT  region game_or
   0337  mov ax, word ptr [bp + 6]
   033A  lcall 0x23ae, 0x377                -> win_LockWin
   033F  push word ptr [bp + 6]
-  0342  lcall 0x2505, 6                    -> f_2505_0006
+  0342  lcall 0x2505, 6                    -> win_locked_resource_ptr
   0347  pop bx
   0348  mov word ptr [bp - 8], ax
   034B  mov word ptr [bp - 6], dx
@@ -51,7 +51,7 @@ win_Swap  root:20E8:032F  linear 211AF  size 391  extent DESCENT  region game_or
   038D  cmp word ptr es:[bx], 0
   0391  je 0x39b
   0393  mov ax, word ptr es:[bx]
-  0396  lcall 0x2505, 0x8ea                -> f_2505_08EA
+  0396  lcall 0x2505, 0x8ea                -> win_deactivate_pointer_regions
   039B  les bx, ptr [bp - 8]
   039E  test byte ptr es:[bx + 0x1d], 2
   03A3  je 0x3ca
@@ -72,7 +72,7 @@ win_Swap  root:20E8:032F  linear 211AF  size 391  extent DESCENT  region game_or
   03D2  mov ax, word ptr [bp + 8]
   03D5  lcall 0x23ae, 0x377                -> win_LockWin
   03DA  push word ptr [bp + 8]
-  03DD  lcall 0x2505, 6                    -> f_2505_0006
+  03DD  lcall 0x2505, 6                    -> win_locked_resource_ptr
   03E2  pop bx
   03E3  mov es, dx
   03E5  mov bx, ax
@@ -127,7 +127,7 @@ win_Swap  root:20E8:032F  linear 211AF  size 391  extent DESCENT  region game_or
   0454  lcall [0x62e0]                     DS:62E0 g_62E0
   0458  pop bx
   0459  push word ptr [bp + 8]
-  045C  lcall 0x2505, 6                    -> f_2505_0006
+  045C  lcall 0x2505, 6                    -> win_locked_resource_ptr
   0461  pop bx
   0462  mov es, dx
   0464  mov bx, ax
@@ -136,12 +136,12 @@ win_Swap  root:20E8:032F  linear 211AF  size 391  extent DESCENT  region game_or
   046E  cmp word ptr es:[bx], 0x8000
   0473  je 0x47d
   0475  mov ax, word ptr es:[bx]
-  0478  lcall 0x2505, 0x8ea                -> f_2505_08EA
+  0478  lcall 0x2505, 0x8ea                -> win_deactivate_pointer_regions
   047D  push word ptr [bp + 8]
-  0480  lcall 0x1e57, 0xb1                 -> f_1E57_00B1
+  0480  lcall 0x1e57, 0xb1                 -> win_raise_and_reclip
   0485  pop bx
   0486  mov ax, word ptr [bp + 8]
-  0489  lcall 0x2505, 0x831                -> f_2505_0831
+  0489  lcall 0x2505, 0x831                -> win_activate_pointer_regions
   048E  push word ptr [bp + 8]
   0491  lcall 0x1e57, 0x174                -> clip_SetWin
   0496  pop bx

@@ -7,12 +7,12 @@
 #include "canonical_graphics_data.h"
 
 /* Native safe owner for the shared glyph bitmap. The frozen source declares
- * g_5ABE as 1040 bytes while font_MakeImage clears 1280; the native span keeps
+ * text_bitmap_pixels as 1040 bytes while font_MakeImage clears 1280; the native span keeps
  * the required clear and bounded supported glyph rows inside owned storage. */
 #define SIM_FONT_BITMAP_CAPACITY 1280u
-extern struct Bitmap fd_50F6_392C;
-extern int16_t fd_55B3_6770; /* source bytes per glyph row */
-extern int16_t fd_55B3_6772; /* destination bytes per bitmap row */
+extern struct Bitmap out_buffer;
+extern int16_t source_bitmap_width; /* source bytes per glyph row */
+extern int16_t dest_bitmap_width; /* destination bytes per bitmap row */
 
 struct Bitmap *sim_font_bitmap_bind(void);
 /* Checked native boundary around the generated source renderer. A NULL result
@@ -25,7 +25,7 @@ void sim_font_blit_reset_status(void);
 int sim_font_blit_last_status(void);
 
 /* Source ABI for the genuine assembly entries in root:m2650.asm. */
-void f_2650_000F(char *source, char *destination, int16_t width,
+void DrawChar(char *source, char *destination, int16_t width,
                  int16_t height, int16_t source_x, int16_t destination_x);
 
 #endif

@@ -50,14 +50,14 @@ int portable_m1b73_queue_ops_hit_test(
     int16_t x, int16_t y, uint16_t query, uint32_t *hotbox_token);
 
 /* Remaining original m1B73 queue/input exports implemented here. */
-void f_1B73_0AC3(struct Timer *timer, PortableM1B73Queue *slot);
-void f_1B73_0B00(struct Timer *timer, PortableM1B73Queue *slot);
-void f_1B73_0B5B(int16_t id, PortableM1B73Queue *slot);
-int16_t f_1B73_0BC5(int16_t id, PortableM1B73Queue *slot);
-int16_t f_1B73_0BFF(void);
-void f_1B73_0C80(int16_t id);
-void f_1B73_0A40(void);
-void f_1B73_0A6C(void);
-int16_t f_1B73_0D4B(int16_t mode);
+void hotbox_append(struct Timer *timer, PortableM1B73Queue *slot);
+void hotbox_prepend(struct Timer *timer, PortableM1B73Queue *slot);
+void hotbox_remove_id(int16_t id, PortableM1B73Queue *slot);
+int16_t hotbox_contains_pointer(int16_t id, PortableM1B73Queue *slot);
+int16_t hotbox_pointer_hit_id(void);
+void hotbox_center_pointer(int16_t id);
+void kbd_disable_mouse_emulation(void);
+void kbd_enable_mouse_emulation(void);
+int16_t mouse_default_cursor_thunk(int16_t mode);
 
 #endif

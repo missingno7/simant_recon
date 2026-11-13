@@ -68,14 +68,14 @@ PortableInputTimeStatus portable_input_time_restore_ctrl_break(PortableInputTime
 
 /* Original public entrypoint spellings. Native pointers replace DOS far
  * pointers; callers must bind a configured provider before hardware services. */
-uint32_t f_1F58_0006(void);
-int16_t f_1F58_0014(void);
-void f_1F58_0017(uint8_t *destination, uint8_t *source, uint16_t count);
-int16_t f_1F58_0038(void);
-int16_t f_1F58_005A(void);
-void f_1F58_007F(uint16_t character);
-int16_t f_1F58_0090(void);
-void f_1F58_00A1(void);
-void f_1F58_00B8(const uint16_t *new_vector_words);
+uint32_t timer_bios_tick_count(void);
+int16_t input_return_zero(void);
+void mem_exchange_byte_ranges(uint8_t *destination, uint8_t *source, uint16_t count);
+int16_t kbd_poll_bios_key(void);
+int16_t kbd_read_bios_char(void);
+void kbd_unread_char(uint16_t character);
+int16_t kbd_read_key_code(void);
+void kbd_restore_ctrl_break_vector(void);
+void kbd_install_ctrl_break_vector(const uint16_t *new_vector_words);
 
 #endif

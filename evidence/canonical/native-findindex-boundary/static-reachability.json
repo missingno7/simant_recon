@@ -6,7 +6,7 @@
     {
       "function": "OpenIndex",
       "at": "1986:008A-0096",
-      "fact": "Count is shifted left three and passed as a zero-extended 16-bit size to f_171C_13CA."
+      "fact": "Count is shifted left three and passed as a zero-extended 16-bit size to Ralloc."
     },
     {
       "function": "OpenIndex",
@@ -24,22 +24,22 @@
       "fact": "Only after id equality, kind at candidate+6 is read and compared. Successful equality returns the candidate pointer."
     },
     {
-      "function": "f_171C_125C",
+      "function": "mem_alloc_handle_block",
       "at": "171C:12AE-12CC",
       "fact": "Payload paragraph request is ((unsigned16 size+15)>>4), plus two header paragraphs."
     },
     {
-      "function": "f_171C_125C",
+      "function": "mem_alloc_handle_block",
       "at": "171C:1312-1320",
       "fact": "Master pointer receives header segment+2: payload begins at header+32."
     },
     {
-      "function": "f_171C_068C",
+      "function": "mem_carve_free_block",
       "at": "171C:06AB-0724",
       "fact": "Split path copies the current 32-byte header to header+requested_paras*16 and changes next block type/paras; it never clears payload/slack."
     },
     {
-      "function": "f_171C_068C",
+      "function": "mem_carve_free_block",
       "at": "171C:0726-075C",
       "fact": "If free_block.paras-2<=requested_paras, the allocator consumes the whole free block and retains its larger physical paragraph size."
     }
@@ -49,7 +49,7 @@
       "path": "src/resources/database_index.c",
       "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
       "line": 58,
-      "source": "size = fd_50F6_3958[db].indexHeader.count << 3;"
+      "source": "size = openDBData[db].indexHeader.count << 3;"
     },
     {
       "path": "src/resources/database_index.c",
@@ -61,7 +61,7 @@
       "path": "src/resources/database_index.c",
       "sha256": "47f058da6d58a4aca3a1c8485ef2c927f53cea58bca9c3a892642b2820361bff",
       "line": 95,
-      "source": "if (fd_50F6_3952->id == id && fd_50F6_3952->kind == kind)"
+      "source": "if (db_index_search_entry->id == id && db_index_search_entry->kind == kind)"
     },
     {
       "path": "src/memory/ralloc.c",
@@ -133,19 +133,19 @@
       "path": "src/sound/game_interface.c",
       "sha256": "6615da596be7ecdcdf432bd280d53e5d57ac75674b06e71a831989904a1a6ce4",
       "line": 46,
-      "source": "f_284A_0013(song);"
+      "source": "snd_load_and_start_song(song);"
     },
     {
       "path": "src/sound/midi_player.c",
       "sha256": "c6d2df7fe13f9e6de73ebdf2fa010f30bf3c68e02b5c2350a8ce7b02130cd100",
       "line": 52,
-      "source": "if (f_0000_0193(fd_55B3_00B4, number) == -1) {"
+      "source": "if (snd_load_song_resources(snd_active_song_record, number) == -1) {"
     },
     {
       "path": "src/sound/resource_loading.c",
       "sha256": "d9ccffbb69c4fdcae55eef918bf420cff81ead6849f67298271c2844e04199f9",
       "line": 129,
-      "source": "h = f_1A53_00BA(number, 0x12);"
+      "source": "h = res_load_firm_object(number, 0x12);"
     },
     {
       "path": "src/startup/game_session.c",
@@ -228,7 +228,7 @@
     }
   ],
   "caller_reachability": {
-    "music_witness": "Under enabled music, EndGameDialog selects song10010 (0x271a); myBeginSong -> f_284A_0013 -> f_0000_0193 -> f_1A53_00BA -> db_LoadObject -> DBRecall -> FindIndex.",
+    "music_witness": "Under enabled music, EndGameDialog selects song10010 (0x271a); myBeginSong -> snd_load_and_start_song -> snd_load_song_resources -> res_load_firm_object -> db_LoadObject -> DBRecall -> FindIndex.",
     "normal_vga_database_prefix": "Without optional language.dat, IBMInitStuff opens SHARED, then graphics selection opens HCEGANT; main later opens SOUND. db_LoadObject tries that source handle order on a cache miss.",
     "search_ranks": "For song10010/kind18: SHARED449 returns interior rank308 miss; HCEGANT271 reaches one-past rank271; SOUND120 has the actual hit at rank64. Thus the one-past read is not excluded by successful final resource lookup.",
     "pattern_witness": "LoadMonoPats requests kind22 ids10000 and10010. Each provided asset has max kind<22, so every such individual lookup reaches count. This is a source query witness; these three VGA asset files do not themselves prove a successful monochrome run.",

@@ -1,6 +1,6 @@
-f_218D_0451  root:218D:0451  linear 21D21  size 222  extent DESCENT  region game_or_library
+win_dispatch_desktop_click  root:218D:0451  linear 21D21  size 222  extent DESCENT  region game_or_library
   entry evidence: push_cs_call
-  module frame 218D: function 10/12; neighbours: win_GetEvent, win_FlushEvents, f_218D_052F, f_218D_0656
+  module frame 218D: function 10/12; neighbours: win_GetEvent, win_FlushEvents, win_focus_nearest_object, win_step_object_focus
   frame: {'frame': 'bp', 'locals': 10, 'stack_check': False}
   0451  push bp
   0452  mov bp, sp
@@ -35,7 +35,7 @@ f_218D_0451  root:218D:0451  linear 21D21  size 222  extent DESCENT  region game
   049F  add ax, 8
   04A2  push dx
   04A3  push ax
-  04A4  lcall 0x1fd2, 0x4e5                -> f_1FD2_04E5
+  04A4  lcall 0x1fd2, 0x4e5                -> PointInRect
   04A9  add sp, 8
   04AC  or ax, ax
   04AE  jne 0x4c9
@@ -72,7 +72,7 @@ f_218D_0451  root:218D:0451  linear 21D21  size 222  extent DESCENT  region game
   0503  add ax, 8
   0506  push dx
   0507  push ax
-  0508  lcall 0x1fd2, 0x4e5                -> f_1FD2_04E5
+  0508  lcall 0x1fd2, 0x4e5                -> PointInRect
   050D  add sp, 8
   0510  or ax, ax
   0512  jne 0x517
@@ -81,7 +81,7 @@ f_218D_0451  root:218D:0451  linear 21D21  size 222  extent DESCENT  region game
   0517  mov es, word ptr [0x8a2a]          DS:8A2A
   051B  shl si, 1
   051D  mov ax, word ptr es:[si + 0x5702]
-  0522  lcall 0x20e8, 0x725                -> f_20E8_0725
+  0522  lcall 0x20e8, 0x725                -> win_ToTop
   0527  pop si
   0528  pop di
   0529  mov sp, bp

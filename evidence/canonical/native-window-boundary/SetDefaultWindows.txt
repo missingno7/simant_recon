@@ -1,6 +1,6 @@
 SetDefaultWindows  S15:384C:037F  linear 3883F  size 71  extent DESCENT  region game_or_library
   entry evidence: push_cs_call, vector
-  module frame 384C: function 7/8; neighbours: MenuQuit, o15_384C_0239, NewGame
+  module frame 384C: function 7/8; neighbours: MenuQuit, ui_prompt_save_discard_cancel, NewGame
   frame: {'frame': 'none'}
   037F  xor ax, ax
   0381  lcall 0x29f4, 0x2cc                -> __aFchkstk

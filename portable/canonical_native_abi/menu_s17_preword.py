@@ -51,17 +51,17 @@ def _adapt_s17_body(body: str) -> str:
     (body, count) = local_decl.subn('\n    SimHandle h;\n    char **r;\n    int i;\n    int draw;\n', body, count=1)
     if count != 1:
         raise ValueError('S17 local pointer declarations changed')
-    (body, count) = re.subn('\\s*fd_55B3_6054\\s*=\\s*\\*h;', '\n    if (portable_menu_source_record_view_bind_handle(\n            &g_menu_view, h, f_171C_1C1C(h)) !=\n        PORTABLE_MENU_SOURCE_RECORD_OK) {\n        db_UnhookObject(id, 6);\n        return 0;\n    }\n    fd_55B3_6054 = portable_menu_source_record_tables(&g_menu_view);', body, count=1)
+    (body, count) = re.subn('\\s*menu_resource_tables\\s*=\\s*\\*h;', '\n    if (portable_menu_source_record_view_bind_handle(\n            &g_menu_view, h, mem_Size(h)) !=\n        PORTABLE_MENU_SOURCE_RECORD_OK) {\n        db_UnhookObject(id, 6);\n        return 0;\n    }\n    menu_resource_tables = portable_menu_source_record_tables(&g_menu_view);', body, count=1)
     if count != 1:
         raise ValueError('S17 base-pointer assignment changed')
-    relocation = re.compile('\\s*for\\s*\\(p\\s*=\\s*fd_55B3_6054;\\s*\\*p;\\s*p\\+\\+\\)\\s*\\{.*?\\n\\s*\\}', re.DOTALL)
+    relocation = re.compile('\\s*for\\s*\\(p\\s*=\\s*menu_resource_tables;\\s*\\*p;\\s*p\\+\\+\\)\\s*\\{.*?\\n\\s*\\}', re.DOTALL)
     (body, count) = relocation.subn('\n    /* Native sidecar replaces the DOS offset relocation traversal. */', body, count=1)
     if count != 1:
         raise ValueError('S17 DOS pointer-relocation loop changed')
-    (body, count) = re.subn('r\\s*=\\s*\\(long\\s+far\\s+\\*\\s*\\)\\s*\\*fd_55B3_6054', 'r = fd_55B3_6054[0]', body, count=1)
+    (body, count) = re.subn('r\\s*=\\s*\\(long\\s+far\\s+\\*\\s*\\)\\s*\\*menu_resource_tables', 'r = menu_resource_tables[0]', body, count=1)
     if count != 1:
         raise ValueError('S17 title-table traversal changed')
-    ordered = ('db_LoadObject(id, 6)', 'source_record_view_bind_handle', 'db_UnhookObject(id, 6)', 'f_1FD2_0663(draw)', 'o17_384C_0184')
+    ordered = ('db_LoadObject(id, 6)', 'source_record_view_bind_handle', 'db_UnhookObject(id, 6)', 'menu_layout_bar(draw)', 'menu_register_title_hit_rect')
     if list(map(body.index, ordered)) != sorted(map(body.index, ordered)):
         raise ValueError('S17 source operation order changed')
     return body
@@ -71,17 +71,17 @@ def adapt_s17_source(source: str) -> str:
     (source, count) = re.subn('(?m)^extern\\s+long\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+db_LoadObject\\(int\\s+object,\\s*int\\s+kind\\);$', 'extern SimHandle db_LoadObject(int object, int kind);', source, count=1)
     if count != 1:
         raise ValueError('S17 db_LoadObject source declaration changed')
-    (source, count) = re.subn('(?m)^extern\\s+long\\s+far\\s+\\*\\s+far\\s+fd_55B3_6054;$', 'extern char ***fd_55B3_6054;', source, count=1)
+    (source, count) = re.subn('(?m)^extern\\s+long\\s+far\\s+\\*\\s+far\\s+menu_resource_tables;$', 'extern char ***menu_resource_tables;', source, count=1)
     if count != 1:
-        raise ValueError('S17 fd_55B3_6054 declaration changed')
-    (start, end) = _body_span(source, 'o17_384C_0039')
+        raise ValueError('S17 menu_resource_tables declaration changed')
+    (start, end) = _body_span(source, 'menu_load_and_register')
     source = source[:start] + _adapt_s17_body(source[start:end]) + source[end:]
-    headers = '#include "portable/whole_program/platform/handles.h"\n#include "portable/whole_program/platform/resource_menu_view.h"\nextern int32_t f_171C_1C1C(SimHandle handle);\n'
+    headers = '#include "portable/whole_program/platform/handles.h"\n#include "portable/whole_program/platform/resource_menu_view.h"\nextern int32_t mem_Size(SimHandle handle);\n'
     return headers + source
 
 def adapt_s10_source(source: str) -> str:
     """Map S10's over-wide source view to the same native char*** owner."""
-    (source, count) = re.subn('(?m)^extern\\s+char\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+fd_55B3_6054;$', 'extern char ***fd_55B3_6054;', source, count=1)
+    (source, count) = re.subn('(?m)^extern\\s+char\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+\\*\\s+far\\s+menu_resource_tables;$', 'extern char ***menu_resource_tables;', source, count=1)
     if count != 1:
-        raise ValueError('S10 fd_55B3_6054 source declaration changed')
+        raise ValueError('S10 menu_resource_tables source declaration changed')
     return source

@@ -183,7 +183,7 @@ static PortableInputTime *require_active(void)
     return active_input_time;
 }
 
-uint32_t f_1F58_0006(void)
+uint32_t timer_bios_tick_count(void)
 {
     uint32_t ticks;
     if (portable_input_time_read_ticks(require_active(), &ticks) != PORTABLE_INPUT_TIME_OK)
@@ -191,12 +191,12 @@ uint32_t f_1F58_0006(void)
     return ticks;
 }
 
-int16_t f_1F58_0014(void)
+int16_t input_return_zero(void)
 {
     return 0;
 }
 
-void f_1F58_0017(uint8_t *destination, uint8_t *source, uint16_t count)
+void mem_exchange_byte_ranges(uint8_t *destination, uint8_t *source, uint16_t count)
 {
     uint32_t i;
     if (count != 0 && (destination == NULL || source == NULL))
@@ -208,7 +208,7 @@ void f_1F58_0017(uint8_t *destination, uint8_t *source, uint16_t count)
     }
 }
 
-int16_t f_1F58_0038(void)
+int16_t kbd_poll_bios_key(void)
 {
     int16_t available;
     if (portable_input_time_key_available(require_active(), &available) != PORTABLE_INPUT_TIME_OK)
@@ -216,7 +216,7 @@ int16_t f_1F58_0038(void)
     return available;
 }
 
-int16_t f_1F58_005A(void)
+int16_t kbd_read_bios_char(void)
 {
     int16_t character;
     if (portable_input_time_read_char(require_active(), &character) != PORTABLE_INPUT_TIME_OK)
@@ -224,13 +224,13 @@ int16_t f_1F58_005A(void)
     return character;
 }
 
-void f_1F58_007F(uint16_t character)
+void kbd_unread_char(uint16_t character)
 {
     if (portable_input_time_pushback(require_active(), (uint8_t)character) != PORTABLE_INPUT_TIME_OK)
         abort();
 }
 
-int16_t f_1F58_0090(void)
+int16_t kbd_read_key_code(void)
 {
     int16_t key;
     if (portable_input_time_read_key(require_active(), &key) != PORTABLE_INPUT_TIME_OK)
@@ -238,13 +238,13 @@ int16_t f_1F58_0090(void)
     return key;
 }
 
-void f_1F58_00A1(void)
+void kbd_restore_ctrl_break_vector(void)
 {
     if (portable_input_time_restore_ctrl_break(require_active()) != PORTABLE_INPUT_TIME_OK)
         abort();
 }
 
-void f_1F58_00B8(const uint16_t *new_vector_words)
+void kbd_install_ctrl_break_vector(const uint16_t *new_vector_words)
 {
     PortableInputTime *input_time = require_active();
     uint32_t new_vector, old_vector = 0;

@@ -15,7 +15,7 @@ enum {
 /* Source globals consumed by mechanically converted window TUs. */
 typedef void (*SimWindowSourceDrawHook)(int16_t phase);
 
-extern char g_5A97;
+extern char gfx_display_mode;
 extern int16_t win_numOfWindows;
 extern int16_t win_numOfColors;
 extern int16_t win_numOfGroups;

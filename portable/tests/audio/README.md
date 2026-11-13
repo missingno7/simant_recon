@@ -4,8 +4,8 @@ Run `python portable/tests/audio/run.py`. The fixture provides test-owned stand-
 for canonical externs and executes the production ISR projection and device sink.
 It does not supply original executable bytes or an alternate game sequencer.
 
-Grounding: `src/root/m28BC.asm` L00C5/out_done/L00DE/L0148/ISR0354/out_sb;
-`src/root/m283E.asm` register/data writes; canonical `m29B8.c` DSP reset handshake.
+Grounding: `src/sound/sample_timer.asm` L00C5/out_done/L00DE/L0148/ISR0354/out_sb;
+`src/sound/opl2_registers.asm` register/data writes; canonical `m29B8.c` DSP reset handshake.
 Controls cover the /16 song divider, slow idle PIT cadence, one pending IRQ while
 IF is clear, over-end skipped OUT and clearing the canonical `snd` field, DSP
 unsigned DAC magnitude/mute/reset and scheduled writes, OPL timer/key-on/key-off,

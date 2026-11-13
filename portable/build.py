@@ -56,6 +56,7 @@ from canonical_native_abi import newgame_zoom_window_v1
 from canonical_native_abi import s26_window_object_views_v1
 from canonical_native_abi import load_string_ant
 from canonical_native_abi import cross_tu_pointer_widths
+from canonical_native_abi.lexical import expand_shared_headers
 PROJECT=Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT / 'tools'))
 from workspace import prepare_output, retire
@@ -127,6 +128,7 @@ def main():
         paths={ROOT/'src/program.json',PROJECT/'portable/platform.json',PROJECT/'portable/semantic-spans.json',Path(__file__),register_returns.CONTRACT_PATH,
                integer_frontend.WORD_CONTRACT_PATH}
         paths.update(ROOT/u['source'] for u in canonical['modules'])
+        paths.update((ROOT/'include').glob('*.h'))
         paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
         paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
         paths.update((PROJECT/'portable/canonical_native_abi/integer_fake_libc').rglob('*.h'))
@@ -149,7 +151,7 @@ def main():
     aliases=[dict(alias=x['alias'],owner=x.get('target',x.get('owner')),offset=x.get('offset',0),kind=x['kind']) for x in canonical['aliases']]
     # One canonical program inventory and whole canonical source files.
     function_aliases={x['alias'].lstrip('_@'):x['owner'].lstrip('_@') for x in aliases if x['kind']=='code'}
-    thunk_text=(ROOT/'src/root/m2CFB.asm').read_text(encoding='latin1')
+    thunk_text=(ROOT/'src/memory/hook_thunks.asm').read_text(encoding='latin1')
     function_aliases.update({a.lstrip('_@'):b.lstrip('_@') for a,b in re.findall(r'(?m)^\s*(\w+):\s+jmp\s+(\w+)\s*$',thunk_text)})
     for alias,target in list(function_aliases.items()):
         seen=set()
@@ -166,17 +168,20 @@ def main():
                   for u in inventory['translation_units'] if u['lang']=='c'}
     native_source_texts,cross_tu_pointer_receipt=cross_tu_pointer_widths.adapt(source_texts,object_identities)
     spans=semantic_spans.Contracts(ROOT,source_texts)
-    event_definition=re.search(r'struct Event\s*\{[^{}]*\};',source_texts['src/root/m1FD2.c'],re.S).group(0)
+    raw_source_texts=source_texts
+    source_texts={path:expand_shared_headers(text) for path,text in source_texts.items()}
+    native_source_texts={path:expand_shared_headers(text) for path,text in native_source_texts.items()}
+    event_definition=re.search(r'struct Event\s*\{[^{}]*\};',source_texts['src/window/menu_helpers.c'],re.S).group(0)
     queue_header=OUT/'include/portable/whole_program/types/input_queue.h'
     queue_header.parent.mkdir(parents=True,exist_ok=True)
     queue_header.write_text('#ifndef SIMANT_CANONICAL_INPUT_QUEUE_NATIVE_ABI_H\n#define SIMANT_CANONICAL_INPUT_QUEUE_NATIVE_ABI_H\n#include "portable/whole_program/types/timer.h"\n'+scalar.convert(event_definition)+'\n#pragma pack(push,2)\nstruct InputQueueDescriptor { struct Rect r; void (*fn)(void); uint16_t callback_segment_word; struct Event *records; char a,b,c,d; };\n#pragma pack(pop)\nextern struct InputQueueDescriptor g_5FF2;\nextern struct Event input_queue[7];\n#endif\n')
     scalar_header=OUT/'dos_types.h';scalar_header.write_text('#include <stdint.h>\n#include <stddef.h>\nuint8_t dos_keyboard_modifiers(void);\nvoid *dos_malloc(uint16_t);\nvoid dos_free(void *);\nvoid *dos_realloc(void *,uint16_t);\nstruct Event; struct Point; struct Rect;\n')
-    (OUT/'canonical_data_views.h').write_text('#ifndef SIMANT_CANONICAL_DATA_VIEWS_H\n#define SIMANT_CANONICAL_DATA_VIEWS_H\n#include <stdint.h>\nunion CanonicalWordBytes14 { uint8_t bytes[14]; int16_t words[7]; };\nunion CanonicalWordBytes4 { uint8_t bytes[4]; int16_t words[2]; };\nextern union CanonicalWordBytes14 fd_3D57_07CC;\nextern union CanonicalWordBytes4 fd_3D57_0C1A;\nextern void *fd_3D57_082A[20];\nextern char *fd_55B3_1CD4[5];\n#endif\n')
-    (OUT/'canonical_graphics_data.h').write_text('#ifndef SIMANT_CANONICAL_GRAPHICS_DATA_H\n#define SIMANT_CANONICAL_GRAPHICS_DATA_H\n#include <stdint.h>\ntypedef struct CanonicalAsmPoint { int16_t x,y; } CanonicalAsmPoint;\nextern CanonicalAsmPoint g_3DA0;\n'+'\n'.join('extern int16_t '+n+';' for n in GRAPHICS_SCALARS)+'\nextern uint8_t g_41C0[16];\nextern char g_3D20[128];\n#endif\n')
-    (OUT/'canonical_edit_cache.h').write_text('#ifndef SIMANT_CANONICAL_EDIT_CACHE_H\n#define SIMANT_CANONICAL_EDIT_CACHE_H\n#include <stdint.h>\nunion CanonicalEditCache { int16_t rows[30][40]; int16_t linear[1200]; };\nextern union CanonicalEditCache fd_50F6_15C4;\n#endif\n')
+    (OUT/'canonical_data_views.h').write_text('#ifndef SIMANT_CANONICAL_DATA_VIEWS_H\n#define SIMANT_CANONICAL_DATA_VIEWS_H\n#include <stdint.h>\nunion CanonicalWordBytes14 { uint8_t bytes[14]; int16_t words[7]; };\nunion CanonicalWordBytes4 { uint8_t bytes[4]; int16_t words[2]; };\nextern union CanonicalWordBytes14 GameSpeed;\nextern union CanonicalWordBytes4 NextFeed;\nextern void *HistGraphs[20];\nextern char *startup_config_strings[5];\n#endif\n')
+    (OUT/'canonical_graphics_data.h').write_text('#ifndef SIMANT_CANONICAL_GRAPHICS_DATA_H\n#define SIMANT_CANONICAL_GRAPHICS_DATA_H\n#include <stdint.h>\ntypedef struct CanonicalAsmPoint { int16_t x,y; } CanonicalAsmPoint;\nextern CanonicalAsmPoint gfx_text_pen_x;\n'+'\n'.join('extern int16_t '+n+';' for n in GRAPHICS_SCALARS)+'\nextern uint8_t gfx_colour_translation[16];\nextern char gfx_row_scratch[128];\n#endif\n')
+    (OUT/'canonical_edit_cache.h').write_text('#ifndef SIMANT_CANONICAL_EDIT_CACHE_H\n#define SIMANT_CANONICAL_EDIT_CACHE_H\n#include <stdint.h>\nunion CanonicalEditCache { int16_t rows[30][40]; int16_t linear[1200]; };\nextern union CanonicalEditCache edit_cached_life_tiles;\n#endif\n')
     native_startups={}
     try:
-        native_startups,_=abis['startup_bundle'].convert_startup_sources(source_texts['src/root/m15F8.c'],source_texts['src/S15/m384C.c'])
+        native_startups,_=abis['startup_bundle'].convert_startup_sources(source_texts['src/startup/main.c'],source_texts['src/startup/game_session.c'])
     except Exception as exc:errors.append({'source':'startup pair','stage':'ABI conversion','error':str(exc)})
     def apply(name,function,text,*args,**kwargs):
         try:
@@ -189,13 +194,20 @@ def main():
         rel=unit['canonical_destination'];row={'source':rel,'module':unit['module'],'lang':unit['lang']}
         if unit['lang']=='asm':
             row['status']='NEEDS_SYMBOLIC_ASM_TRANSLATION_OR_PLATFORM_REPLACEMENT';rows.append(row);continue
-        original=source_texts[rel];text=native_source_texts[rel]
+        original=raw_source_texts[rel];text=native_source_texts[rel]
+        if unit['module']=='source-owned:event-records':
+            # The storage-only unit still declares the old Event word names.
+            # Its eight-word storage is viewed through the consumers' current
+            # canonical record, including the unsigned action code at +0x0c.
+            text,count=re.subn(r'struct Event\s*\{[^{}]*\};',
+                lambda _:expand_shared_headers('#include "event.h"'),text,count=1,flags=re.S)
+            if count!=1:raise ValueError('event storage record declaration changed')
         if rel in native_startups:text=native_startups[rel]
-        if rel=='src/root/m0093.c':text=apply('rng','adapt',text,text)
-        if rel=='src/root/m0250.c':
+        if rel=='src/simulation/random.c':text=apply('rng','adapt',text,text)
+        if rel=='src/ui/edit_view.c':
             result=apply('spider_inline_source','adapt',text,text.encode('latin1'),rel)
             text=result.decode('latin1') if isinstance(result,bytes) else result
-        if rel=='src/root/m1FD2.c':
+        if rel=='src/window/menu_helpers.c':
             text=apply('timer','adapt',text,text)
             text=apply('m1b73_queue_source','adapt',text,text,rel)
             text=re.sub(r'struct Event\s*\{[^{}]*\};','',text,count=1,flags=re.S)
@@ -204,34 +216,34 @@ def main():
             if count!=1:errors.append({'source':rel,'stage':'canonical input queue native pointer','error':'initializer shape differs'})
             text='#include "portable/whole_program/types/input_queue.h"\n'+text
         if rel in abis['audio_shared_state_preword'].SOURCE_MODULES:
-            if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m284A.c','m29F0.c','m277E.c','m29D6.c','m293A.c','m290D.c'}:
-                text=translate_29d6_port_block(text) if rel=='src/root/m29D6.c' else apply('audio','adapt',text,rel,text)
+            if unit['module'] in {'root:284A','root:29F0','root:277E','root:29D6','root:293A','root:290D'}:
+                text=translate_29d6_port_block(text) if rel=='src/sound/psg_voices.c' else apply('audio','adapt',text,rel,text)
             shared=abis['audio_shared_state_preword']._SHARED_EXTERN_COUNTS.get(rel,{})
             deferred=set(shared)&native_scalar_names
             text=apply('audio_shared_state_preword','adapt',text,rel,text,original,deferred_scalar_externs=deferred)
-        if rel in {'src/S10/m35F5.c','src/S19/m384C.c'}:text=apply('m1b73_event_source','adapt',text,text,rel)
+        if rel in {'src/window/menu_tracking.c','src/ui/game_events.c'}:text=apply('m1b73_event_source','adapt',text,text,rel)
         text=apply('event_word_switch','adapt',text,text,rel)
-        if rel in {'src/S10/m35F5.c','src/S17/m384C.c'}:
-            text=apply('menu_s17_preword','adapt_s17_source' if '/S17/' in rel else 'adapt_s10_source',text,text)
-        if rel=='src/S09/m35F5.c':
+        if rel in {'src/window/menu_tracking.c','src/window/menu_setup.c'}:
+            text=apply('menu_s17_preword','adapt_s17_source' if unit['module'].startswith('S17:') else 'adapt_s10_source',text,text)
+        if rel=='src/ui/save_load.c':
             result=apply('file_select_host','adapt',text,text.encode('latin1'),rel)
             text=result.decode('latin1') if isinstance(result,bytes) else result
-        if rel=='src/root/m23E6.c':text=apply('list_text_handle','adapt',text,text)
-        if rel=='src/root/m1A96.c':text=apply('cache_table_native','adapt_reviewed',text,text,rel)
-        if rel=='src/S26/m39C7.c':text=apply('s26_window_object_views_v1','adapt',text,text,rel)
+        if rel=='src/window/lists_sliders.c':text=apply('list_text_handle','adapt',text,text)
+        if rel=='src/resources/object_cache.c':text=apply('cache_table_native','adapt_reviewed',text,text,rel)
+        if rel=='src/window/move_resize.c':text=apply('s26_window_object_views_v1','adapt',text,text,rel)
         text=apply('clip_stack_native','adapt',text,text,rel)
         if rel in abis['crt_abi'].SUPPORTED:text=apply('crt_abi','adapt',text,text,rel)
-        if rel=='src/root/m1986.c':text=apply('findindex_native_guard','adapt_whole_source',text,text,rel)
+        if rel=='src/resources/database_index.c':text=apply('findindex_native_guard','adapt_whole_source',text,text,rel)
         text=apply('fonts','adapt',text,rel,text)
         text=apply('pointer_globals','adapt',text,rel,text)
-        if rel.startswith('src/root/') and rel.rsplit('/',1)[1] in {'m2505.c','m20E8.c','m23AE.c','m22BF.c','m21FA.c','m218D.c'}:
+        if unit['module'] in {'root:2505','root:20E8','root:23AE','root:22BF','root:21FA','root:218D'}:
             text=apply('windows','convert_window_source',text,text)
         text=apply('window_loader','adapt',text,text,rel)
         text=apply('varargs','adapt',text,text,rel)
         text=re.sub(r'\*\s*\(\s*(?:(unsigned)\s+)?char\s+far\s*\*\s*\)\s*0x0*417L',lambda m:'dos_keyboard_modifiers()',text,flags=re.I)
         text=rename(text,function_aliases)
         text=scalar.convert(text)
-        if rel=='src/root/m075B.c':text=apply('load_string_ant','adapt',text,text)
+        if rel=='src/resources/game_strings.c':text=apply('load_string_ant','adapt',text,text)
         text=centralize(text)
         text=rename(text,object_identities)
         text=canonical_interior_views(text)
@@ -239,16 +251,16 @@ def main():
         text=graphics_canonical_views(text,rel)
         text=menu_resource_view(text,rel)
         text=screen_clip_canonical_views(text,rel)
-        text=re.sub(r'(?m)^\s*extern\s+(?:PortableWholeAudioVoiceSlot\s+fd_55B3_6B4E\[33\]|int16_t\s+fd_55B3_6BA4\[128\])\s*;\s*\n','',text)
+        text=re.sub(r'(?m)^\s*extern\s+(?:PortableWholeAudioVoiceSlot\s+fd_55B3_6B4E\[33\]|int16_t\s+snd_opl_volume_curve\[128\])\s*;\s*\n','',text)
         text=edit_cache_view(text)
         text=callback_views(text,callback_slots)
         text=apply('countdown_host','adapt',text,text,rel)
-        text=unused_cache_release_argument(text) if rel=='src/root/m00F8.c' else text
+        text=unused_cache_release_argument(text) if rel=='src/ui/view_dialog_helpers.c' else text
         text=apply('window_parameters','adapt',text,text,rel)
-        if rel=='src/S15/m384C.c':text=apply('newgame_zoom_window_v1','adapt_postword',text,text,rel,original_source=original)
+        if rel=='src/startup/game_session.c':text=apply('newgame_zoom_window_v1','adapt_postword',text,text,rel,original_source=original)
         # Database record bytes retain their wire sizes; only runtime index
         # pointers widen. The native type adapter is intentionally explicit.
-        db_family=rel in {'src/root/m1986.c','src/root/m19A9.c','src/root/m1A28.c'}
+        db_family=rel in {'src/resources/database_index.c','src/resources/database_records.c','src/resources/database_files.c'}
         if db_family:
             text=re.sub(r'\btypedef\s+struct\s*\{[^{}]*\}\s*(?:IndexEntry|IndexHeader|DBHeader|DBRecordHeader|OpenDBRec)\s*;','',text,flags=re.S)
             text='#include "portable/whole_program/types/database.h"\n'+text
@@ -256,10 +268,10 @@ def main():
             # Its canonical definition names/counts are retained verbatim;
             # the shared runtime/wire ABI supplies only the type spelling.
             ts=csrc.tokenize(text);last_typedef=max((t.e for t in ts if t.text==';'),default=0)
-            owned=re.search(r'(?m)^OpenDBRec\s+fd_50F6_3958\s*\[4\]\s*;',text)
+            owned=re.search(r'(?m)^OpenDBRec\s+openDBData\s*\[4\]\s*;',text)
             if owned:text='#include "portable/whole_program/types/database.h"\n'+text[owned.start():]
         if unit['module']=='source-owned:database-index-state':
-            owned=re.search(r'(?m)^IndexEntry\s+\*\s+fd_50F6_3952\s*;',text)
+            owned=re.search(r'(?m)^IndexEntry\s+\*\s+db_index_search_entry\s*;',text)
             if not owned:raise ValueError('canonical database index cursor owner differs')
             text='#include "portable/whole_program/types/database.h"\n'+text[owned.start():]
         text=spans.extract(rel,text)
@@ -267,10 +279,10 @@ def main():
         for h in native_headers:text=re.sub(r'(?m)^\s*#include\s+"'+re.escape(h)+r'"\s*\n','',text)
         prefix='#include "dos_types.h"\n#include "portable/whole_program/platform/dos_memory.h"\n#include "portable/whole_program/platform/dos_io.h"\n'
         prefix+=''.join('#include "'+h+'"\n' for h in dict.fromkeys(native_headers))
-        if rel.startswith('src/S09/'):prefix+='#include "portable/whole_program/platform/dos_files.h"\n'
-        if rel.startswith('src/S20/'):prefix+='#include <ctype.h>\n'
-        if rel=='src/S17/m384C.c':prefix+='#include "portable/whole_program/menu_globals.h"\n'
-        if rel=='src/S19/m384C.c':prefix+='extern void ProcHistoryEvent(struct Event *);\nextern void ProcYardEvent(struct Event *);\n'
+        if unit['module'].startswith('S09:'):prefix+='#include "portable/whole_program/platform/dos_files.h"\n'
+        if unit['module'].startswith('S20:'):prefix+='#include <ctype.h>\n'
+        if rel=='src/window/menu_setup.c':prefix+='#include "portable/whole_program/menu_globals.h"\n'
+        if rel=='src/ui/game_events.c':prefix+='extern void ProcHistoryEvent(struct Event *);\nextern void ProcYardEvent(struct Event *);\n'
         try:
             text,row['register_returns']=register_returns.adapt(text,rel)
         except ValueError as exc:
@@ -279,7 +291,7 @@ def main():
         text=prefix+'#pragma pack(push,2)\n'+text+'\n#pragma pack(pop)\n'
         dest.write_text(text,encoding='latin1')
         row.update(generated=str(dest),status='WHOLE_CANONICAL_TU_CONVERTED');
-        if rel=='src/root/m171C.c':
+        if rel=='src/memory/ralloc.c':
             row.update(status='PLATFORM_BOUNDARY',platform_boundary='Native malloc/free/realloc service replaces DOS segment:offset heap representation; canonical DOS heap TU is excluded from native compilation.')
         rows.append(row)
     native_rows=[{'source':rel,'generated':str(PROJECT/rel)}
@@ -292,20 +304,20 @@ def main():
     import compiler
     from canonical_native_abi import asm_data
     compiler.WORK=OUT/'assembler'
-    audio_source=ROOT/'src/root/m28BC.asm'
+    audio_source=ROOT/'src/sound/sample_timer.asm'
     assembled=compiler.assemble(audio_source.read_text(encoding='latin1'),'masm510')
     (OUT/'assembler.log').write_text(assembled.log)
     if not assembled.ok:raise ValueError('current canonical audio ASM did not assemble')
     object_path=OUT/'audio-offsets.obj';object_path.write_bytes(assembled.obj)
     source_path=OUT/'audio-offsets.asm';source_path.write_bytes(audio_source.read_bytes())
     asm_data.ROOT=ROOT;asm_data.WORK=OUT;asm_data.AUDIO_OBJECT=object_path;asm_data.AUDIO_SOURCE=source_path
-    paths=['src/root/m1B73.asm','src/root/m1B4E.asm','src/root/m28BC.asm','src/S02/m3126.asm','src/root/m195A.asm','src/root/m2650.asm','src/root/m1FBD.asm']
+    paths=['src/platform/input_timer.asm','src/platform/video/bios_bitmap.asm','src/sound/sample_timer.asm','src/platform/video/vga8_raster.asm','src/memory/ems.asm','src/graphics/glyph_blit.asm','src/graphics/bitmap_text.asm']
     facts=[asm_data.data_facts(ROOT/p) for p in paths]
     asm_receipt={'modules':facts,'mouse':asm_data.emit_mouse(facts[0]),'queues':asm_data.emit_mouse_queues(facts[0]),'numeric':asm_data.emit_numeric(facts),'audio':asm_data.emit_audio(facts)}
     (OUT/'asm-data-facts.json').write_text(json.dumps(asm_receipt,indent=2)+'\n')
     patterns=next(r for r in asm_receipt['numeric'] if r['name']=='g_41D0')
     graphics_header=OUT/'canonical_graphics_data.h'
-    text_owner=next(r for r in asm_receipt['numeric'] if r['name']=='g_5ABE')
+    text_owner=next(r for r in asm_receipt['numeric'] if r['name']=='text_bitmap_pixels')
     aliases=text_owner['alias_layout']
     pixel_count=aliases['pixels']['count']
     string_count=aliases['string']['count']
@@ -313,8 +325,8 @@ def main():
     text_header=(
         'extern uint8_t g_41D0['+str(patterns['native_count'])+'];\n'
         'typedef struct CanonicalTextBitmapAliases {\n'
-        '    uint8_t g_5ABE['+str(pixel_count)+'];\n'
-        '    uint8_t g_5ECE['+str(string_count)+'];\n'
+        '    uint8_t text_bitmap_pixels['+str(pixel_count)+'];\n'
+        '    uint8_t text_bitmap_string_copy['+str(string_count)+'];\n'
         '    uint8_t g_5F1D;\n'
         '    uint8_t anonymous['+str(tail_count)+'];\n'
         '} CanonicalTextBitmapAliases;\n'
@@ -322,14 +334,14 @@ def main():
         '    CanonicalTextBitmapAliases aliases;\n'
         '    uint8_t clear_span['+str(text_owner['count'])+'];\n'
         '} CanonicalTextBitmapStorage;\n'
-        'extern uint16_t g_5ABA, g_5ABC;\n'
-        'extern CanonicalTextBitmapStorage g_5ABE;\n'
-        'extern uint8_t g_5ECE['+str(string_count)+'];\n'
+        'extern uint16_t text_bitmap_width, text_bitmap_height;\n'
+        'extern CanonicalTextBitmapStorage text_bitmap_pixels;\n'
+        'extern uint8_t text_bitmap_string_copy['+str(string_count)+'];\n'
         'extern uint8_t g_5F1D;\n'
-        '#define CANONICAL_TEXT_BITMAP_PIXELS (g_5ABE.aliases.g_5ABE)\n'
-        '#define CANONICAL_TEXT_BITMAP_STRING (g_5ABE.aliases.g_5ECE)\n'
-        '#define CANONICAL_TEXT_BITMAP_TERMINATOR (&g_5ABE.aliases.g_5F1D)\n'
-        '#define CANONICAL_TEXT_BITMAP_CLEAR_SPAN (g_5ABE.clear_span)\n'
+        '#define CANONICAL_TEXT_BITMAP_PIXELS (text_bitmap_pixels.aliases.text_bitmap_pixels)\n'
+        '#define CANONICAL_TEXT_BITMAP_STRING (text_bitmap_pixels.aliases.text_bitmap_string_copy)\n'
+        '#define CANONICAL_TEXT_BITMAP_TERMINATOR (&text_bitmap_pixels.aliases.g_5F1D)\n'
+        '#define CANONICAL_TEXT_BITMAP_CLEAR_SPAN (text_bitmap_pixels.clear_span)\n'
         '#define CANONICAL_TEXT_BITMAP_BITS ((char *)CANONICAL_TEXT_BITMAP_CLEAR_SPAN)\n'
     )
     graphics_header.write_text(graphics_header.read_text().replace(
@@ -341,7 +353,7 @@ def main():
         dest=Path(row['generated'])
         try:
             text,row['integer_expressions']=integer_frontend.convert(dest.read_text(encoding='latin1'),dest.as_posix(),CC,
-                [OUT/'include',PROJECT,OUT,PROJECT/'portable/whole_program'],canonical_source=row['source'])
+                [OUT/'include',PROJECT/'include',PROJECT,OUT,PROJECT/'portable/whole_program'],canonical_source=row['source'])
             dest.write_text(text,encoding='latin1')
         except Exception as exc:
             errors.append({'source':row['source'],'stage':'integer frontend','error':str(exc)})
@@ -364,13 +376,13 @@ def main():
             command=[x for x in command if not x.startswith('-Werror=implicit-')]
         if row['source']=='portable/whole_program/platform/sdl3/diagnostics.c':
             command.insert(1,'-DSIMANT_BUILD_REVISION="'+revision+'"')
-        if row['source']=='src/root/m25E7.c':command.insert(1,'-Dfont_MakeImage=sim_font_make_image_source')
+        if row['source']=='src/graphics/font_resources.c':command.insert(1,'-Dfont_MakeImage=sim_font_make_image_source')
         run=subprocess.run(command,capture_output=True,text=True)
         obj.with_suffix('.compile.txt').write_text(run.stdout+run.stderr)
         row['compile']={'passed':run.returncode==0,'exit_code':run.returncode,'command':command,
                         'errors':re.findall(r'^.*(?:error:|fatal error:).*$',run.stderr,re.M)}
         return str(obj) if run.returncode==0 else None
-    compile_rows=[r for r in rows+native_rows+asm_rows+span_rows if 'generated' in r and r.get('source')!='src/root/m171C.c']
+    compile_rows=[r for r in rows+native_rows+asm_rows+span_rows if 'generated' in r and r.get('source')!='src/memory/ralloc.c']
     with ThreadPoolExecutor(max_workers=args.jobs) as pool:
         objects=[obj for obj in pool.map(compile_row,compile_rows) if obj]
     link={'passed':False,'status':'SKIPPED_REQUIRED_INPUT_FAILURE'}

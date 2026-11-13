@@ -8,17 +8,17 @@
 struct Bitmap *sim_font_make_image_source(uint8_t *s, int16_t x, struct Font *font);
 int16_t _font_StringWidth(uint8_t *s, struct Font *font);
 
-extern int16_t fd_55B3_6770;
-extern int16_t fd_55B3_6772;
+extern int16_t source_bitmap_width;
+extern int16_t dest_bitmap_width;
 static int g_blit_status;
 static const uint8_t *g_source_begin;
 static size_t g_source_size;
-extern struct Bitmap fd_50F6_392C ;
+extern struct Bitmap out_buffer ;
 
 struct Bitmap *sim_font_bitmap_bind(void)
 {
-    fd_50F6_392C.bits = (char *)CANONICAL_TEXT_BITMAP_CLEAR_SPAN;
-    return &fd_50F6_392C;
+    out_buffer.bits = (char *)CANONICAL_TEXT_BITMAP_CLEAR_SPAN;
+    return &out_buffer;
 }
 
 void sim_font_blit_reset_status(void)
@@ -91,12 +91,12 @@ static int validate_rows(const char *source, const char *destination,
     uint32_t sx, dx, row_bytes;
     size_t final_offset;
     if (!source || !destination || width < 0 || height <= 0 ||
-        fd_55B3_6770 <= 0 || fd_55B3_6772 <= 0)
+        source_bitmap_width <= 0 || dest_bitmap_width <= 0)
         return 0;
     if (width == 0)
         return 1;
-    source_stride = (uint16_t)fd_55B3_6770;
-    destination_stride = (uint16_t)fd_55B3_6772;
+    source_stride = (uint16_t)source_bitmap_width;
+    destination_stride = (uint16_t)dest_bitmap_width;
     sx = (uint16_t)source_x;
     dx = (uint16_t)destination_x;
     if (sx + (uint16_t)width > source_stride * 8u ||
@@ -120,7 +120,7 @@ static int validate_rows(const char *source, const char *destination,
     return 1;
 }
 
-void f_2650_000F(char *source, char *destination, int16_t width,
+void DrawChar(char *source, char *destination, int16_t width,
                  int16_t height, int16_t source_x, int16_t destination_x)
 {
     const uint8_t *src = (const uint8_t *)source;
@@ -135,8 +135,8 @@ void f_2650_000F(char *source, char *destination, int16_t width,
         return;
     }
     for (y = 0; y < (uint16_t)height; ++y) {
-        const uint8_t *source_row = src + (size_t)y * (uint16_t)fd_55B3_6770;
-        uint8_t *destination_row = dst + (size_t)y * (uint16_t)fd_55B3_6772;
+        const uint8_t *source_row = src + (size_t)y * (uint16_t)source_bitmap_width;
+        uint8_t *destination_row = dst + (size_t)y * (uint16_t)dest_bitmap_width;
         for (x = 0; x < (uint16_t)width; ++x) {
             uint32_t source_bit = sx + x;
             uint32_t destination_bit = dx + x;

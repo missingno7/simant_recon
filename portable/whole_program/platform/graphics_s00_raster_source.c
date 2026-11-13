@@ -1,7 +1,7 @@
 #include "graphics_s00_raster_source.h"
 #include <string.h>
 
-extern char g_3D20[128];
+extern char gfx_row_scratch[128];
 
 static uint16_t read_word(const uint8_t *p)
 {
@@ -134,23 +134,23 @@ SimS00RasterStatus sim_s00_raster_pattern_transfer(const uint8_t pattern[128],
     return SIM_S00_RASTER_OK;
 }
 
-void o00_35A6_02FD(void *r, void *s, void *c, void *d)
+void gfx_planar_buffer_intersection(void *r, void *s, void *c, void *d)
 {
     (void)sim_s00_raster_copy_rect(r,s,SIZE_MAX,c,d,SIZE_MAX);
 }
 
-void o00_35A6_0007(void *image, void *buffer, int16_t shift, int16_t row_offset)
+void gfx_planar_mask_to_buffer(void *image, void *buffer, int16_t shift, int16_t row_offset)
 {
     (void)shifted_blit(image,SIZE_MAX,buffer,SIZE_MAX,shift,row_offset,1);
 }
 
-void o00_35A6_0177(void *image, void *buffer, int16_t shift, int16_t row_offset)
+void gfx_planar_copy_to_buffer(void *image, void *buffer, int16_t shift, int16_t row_offset)
 {
     (void)shifted_blit(image,SIZE_MAX,buffer,SIZE_MAX,shift,row_offset,0);
 }
 
-void o00_35A6_0406(void *destination, int16_t width)
+void gfx_planar_scratch_to_buffer(void *destination, int16_t width)
 {
-    (void)sim_s00_raster_pattern_transfer((const uint8_t *)g_3D20,
+    (void)sim_s00_raster_pattern_transfer((const uint8_t *)gfx_row_scratch,
                                          destination,SIZE_MAX,(uint16_t)width);
 }
