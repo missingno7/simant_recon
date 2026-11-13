@@ -34,15 +34,15 @@ struct Instr {
     unsigned char far *p;
 };
 
-char far *f_290D_000E(unsigned char far *src, char far *dst, unsigned n);
-void far f_290D_0098(struct Sample far *s, unsigned step, int vol, int ch);
-void far f_290D_0193(int instr, int note, int vol, int ch);
-void far f_290D_026C(int a, int ch);
+char far *snd_decode_delta_nibbles(unsigned char far *src, char far *dst, unsigned n);
+void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, int ch);
+void far snd_start_sample_note(int instr, int note, int vol, int ch);
+void far snd_stop_sample_voice(int a, int ch);
 
 int fd_55B3_74C0 = 0;
 unsigned g_74C2[] = { 0x100, 0x10f, 0x11f, 0x130, 0x142, 0x155, 0x169, 0x17f, 0x196, 0x1ae, 0x1c8, 0x1e3 };
 
-char far *f_290D_000E(unsigned char far *src, char far *dst, unsigned n)
+char far *snd_decode_delta_nibbles(unsigned char far *src, char far *dst, unsigned n)
 {
     char delta[16];
     char acc;
@@ -66,25 +66,25 @@ char far *f_290D_000E(unsigned char far *src, char far *dst, unsigned n)
 }
 
 extern int far g_7574;
-extern void far f_29F0_000A(void);
+extern void far snd_sample_interrupts_disable(void);
 extern struct SndChan far fd_55B3_6B4C[];
-extern void far f_0000_0090(struct Sample far *s);
-extern void far f_29F0_0012(void);
+extern void far snd_load_sample_resource(struct Sample far *s);
+extern void far snd_sample_interrupts_enable(void);
 extern unsigned far fd_55B3_6B9E;
 extern void far snd_start_sample_timer(void);
 
-void far f_290D_0098(struct Sample far *s, unsigned step, int vol, int ch)
+void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, int ch)
 {
     struct SndChan far *c;
 
     if (g_7574 && s->loaded == 0)
         return;
-    f_29F0_000A();
+    snd_sample_interrupts_disable();
     c = &fd_55B3_6B4C[ch];
     if (s->loaded == 0)
-        f_0000_0090(s);
+        snd_load_sample_resource(s);
     if (s->loaded == 0) {
-        f_29F0_0012();
+        snd_sample_interrupts_enable();
         return;
     }
     c->pos = 0;
@@ -99,14 +99,14 @@ void far f_290D_0098(struct Sample far *s, unsigned step, int vol, int ch)
     else
         c->flags |= 0x80;
     c->owner = s;
-    f_29F0_0012();
+    snd_sample_interrupts_enable();
     snd_start_sample_timer();
 }
 
-extern void far f_0000_0149(struct Sample far *s);
+extern void far snd_queue_sample_release(struct Sample far *s);
 extern struct Instr far fd_50F6_0000[];
 
-void far f_290D_0193(int instr, int note, int vol, int ch)
+void far snd_start_sample_note(int instr, int note, int vol, int ch)
 {
     struct Sample far *s;
     unsigned step;
@@ -116,7 +116,7 @@ void far f_290D_0193(int instr, int note, int vol, int ch)
     s = fd_55B3_6B4C[ch].owner;
     fd_55B3_6B4C[ch].snd = 0;
     if (s && s->loaded == 1)
-        f_0000_0149(s);
+        snd_queue_sample_release(s);
     s = (struct Sample far *)fd_50F6_0000[instr].p;
     note += s->tune;
     step = g_74C2[note % 12];
@@ -131,17 +131,17 @@ void far f_290D_0193(int instr, int note, int vol, int ch)
         step <<= oct - base;
     else
         step >>= base - oct;
-    f_290D_0098(s, step, (0x7f - vol) >> 4, ch);
+    snd_start_sample_voice(s, step, (0x7f - vol) >> 4, ch);
 }
 
-void far f_290D_026C(int a, int ch)
+void far snd_stop_sample_voice(int a, int ch)
 {
     struct Sample far *s;
 
-    f_29F0_000A();
+    snd_sample_interrupts_disable();
     s = fd_55B3_6B4C[ch].owner;
     if (s && s->loaded == 1)
-        f_0000_0149(s);
+        snd_queue_sample_release(s);
     fd_55B3_6B4C[ch].snd = fd_55B3_6B4C[ch].owner = 0;
-    f_29F0_0012();
+    snd_sample_interrupts_enable();
 }

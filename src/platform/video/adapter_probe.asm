@@ -44,18 +44,18 @@ _DATA           ends
 VIDEO_TEXT      segment word public 'CODE'
                 assume  cs:VIDEO_TEXT, ds:DGROUP
 
-                public  _o21_39C7_0000
-                public  _o21_39C7_003C
-                public  _o21_39C7_008C
-                public  _o21_39C7_00B8
-                public  _o21_39C7_00C8
-                public  _o21_39C7_010B
-                public  _o21_39C7_0125
-                public  _o21_39C7_0156
-                public  _o21_39C7_016D
+                public  _gfx_probe_display_adapters
+                public  _gfx_probe_bios_display_codes
+                public  _gfx_probe_ega_adapter
+                public  _gfx_probe_cga_adapter
+                public  _gfx_probe_mono_adapter
+                public  _gfx_probe_crtc_readback
+                public  _gfx_order_active_adapter_first
+                public  _gfx_record_probed_adapter
+                public  _gfx_bios_has_tandy_signature
 
-; int far o21_39C7_0000(void): probe all adapters, return Device0 (type | display << 8)
-_o21_39C7_0000  proc    far
+; int far gfx_probe_display_adapters(void): probe all adapters, return Device0 (type | display << 8)
+_gfx_probe_display_adapters  proc    far
                 push    si
                 push    di
                 mov     di, offset DGROUP:Device0
@@ -83,11 +83,11 @@ SkipTest:       loop    NextTest
                 pop     di
                 pop     si
                 ret
-_o21_39C7_0000  endp
+_gfx_probe_display_adapters  endp
 
 ; PS/2 video BIOS: INT 10h function 1Ah returns the display combination code
 FindPS2         proc    near
-_o21_39C7_003C  label   near
+_gfx_probe_bios_display_codes  label   near
                 mov     ax, 1A00h
                 int     10h
                 cmp     al, 1Ah
@@ -121,7 +121,7 @@ FindPS2         endp
 
 ; EGA BIOS: INT 10h function 12h, BL=10h returns the EGA configuration
 FindEGA         proc    near
-_o21_39C7_008C  label   near
+_gfx_probe_ega_adapter  label   near
                 mov     bl, 10h
                 mov     ah, 12h
                 int     10h
@@ -144,7 +144,7 @@ FindEGA         endp
 
 ; CGA: a 6845 CRTC at port 3D4h
 FindCGA         proc    near
-_o21_39C7_00B8  label   near
+_gfx_probe_cga_adapter  label   near
                 mov     dx, 3D4h
                 call    Find6845
                 jc      CGADone
@@ -156,7 +156,7 @@ FindCGA         endp
 
 ; MDA / Hercules: a 6845 CRTC at port 3B4h, then the vertical-sync bit of status port 3BAh
 FindMono        proc    near
-_o21_39C7_00C8  label   near
+_gfx_probe_mono_adapter  label   near
                 mov     dx, 3B4h
                 call    Find6845
                 jc      MonoDone
@@ -192,7 +192,7 @@ FindMono        endp
 
 ; DX = CRTC address port: carry set if no 6845 answers (cursor-low register read-back)
 Find6845        proc    near
-_o21_39C7_010B  label   near
+_gfx_probe_crtc_readback  label   near
                 mov     al, 0Fh
                 out     dx, al
                 inc     dx
@@ -213,7 +213,7 @@ Find6845        endp
 
 ; order Device0/Device1 so that Device0 is the active subsystem
 FindActive      proc    near
-_o21_39C7_0125  label   near
+_gfx_order_active_adapter_first  label   near
                 cmp     word ptr [di+2], 0
                 je      ActiveDone
                 cmp     byte ptr [di], 4
@@ -238,7 +238,7 @@ FindActive      endp
 
 ; AX = subsystem/display: store it in the first free device word
 FoundDevice     proc    near
-_o21_39C7_0156  label   near
+_gfx_record_probed_adapter  label   near
                 lea     bx, [di]
                 cmp     byte ptr [bx], 0
                 je      StoreDevice
@@ -250,8 +250,8 @@ FoundDevice     endp
 TandyName       db      'TANDY', 0
 TandyNamePtr    dd      TandyName
 
-; int far o21_39C7_016D(void): 1 if the BIOS segment F000h contains "TANDY"/"tandy"
-_o21_39C7_016D  proc    far
+; int far gfx_bios_has_tandy_signature(void): 1 if the BIOS segment F000h contains "TANDY"/"tandy"
+_gfx_bios_has_tandy_signature  proc    far
                 push    ds
                 push    si
                 push    di
@@ -292,7 +292,7 @@ TandyDone:      pop     di
                 pop     si
                 pop     ds
                 ret
-_o21_39C7_016D  endp
+_gfx_bios_has_tandy_signature  endp
 
 VIDEO_TEXT      ends
                 end

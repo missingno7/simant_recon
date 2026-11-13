@@ -69,32 +69,32 @@ int g_6052 = 0;
 struct MenuData far *g_6054 = 0;
 
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
-void far f_1FD2_02B1(int mode);
+void far menu_set_draw_colours(int mode);
 extern void far GPutStr(int x, int y, char far *text);
 
-void far f_1FD2_0008(int x, int y, int color, char far *format, ...)
+void far menu_printf_label(int x, int y, int color, char far *format, ...)
 {
     char buf[32];
 
     vsprintf(buf, format, (char far *)(&format + 1));
     if (buf[0] & 0x80) {
-        f_1FD2_02B1(color + 2);
+        menu_set_draw_colours(color + 2);
         buf[0] &= 0x7f;
     } else {
-        f_1FD2_02B1(color);
+        menu_set_draw_colours(color);
     }
     GPutStr(x, y, buf);
 }
 
-void far f_1FD2_0198(int id);
-void far f_1FD2_021B(int id);
+void far menu_enable(int id);
+void far menu_disable(int id);
 
-void far f_1FD2_0059(int id, int on)
+void far menu_set_enabled(int id, int on)
 {
     if (on)
-        f_1FD2_0198(id);
+        menu_enable(id);
     else
-        f_1FD2_021B(id);
+        menu_disable(id);
 }
 
 void far f_1FD2_0077(int id)
@@ -134,7 +134,7 @@ void far SetMenuOptionText(int id, char far *text)
 
 extern int far fd_50F6_46A8[];
 
-void far f_1FD2_0198(int id)
+void far menu_enable(int id)
 {
     char far *p;
     int menu;
@@ -143,14 +143,14 @@ void far f_1FD2_0198(int id)
         menu = id >> 4;
         p = g_6054->titles[menu];
         *p &= 0x7f;
-        f_1FD2_0008(fd_50F6_46A8[menu], 1, 1, p);
+        menu_printf_label(fd_50F6_46A8[menu], 1, 1, p);
     } else {
         p = g_6054->items[id >> 4][(id - 1) & 15];
         *p &= 0x7f;
     }
 }
 
-void far f_1FD2_021B(int id)
+void far menu_disable(int id)
 {
     char far *p;
     int menu;
@@ -159,7 +159,7 @@ void far f_1FD2_021B(int id)
         menu = id >> 4;
         p = g_6054->titles[menu];
         *p = (*p & 0x7f) + 0x80;
-        f_1FD2_0008(fd_50F6_46A8[menu], 1, 1, p);
+        menu_printf_label(fd_50F6_46A8[menu], 1, 1, p);
     } else {
         p = g_6054->items[id >> 4][(id - 1) & 15];
         *p = (*p & 0x7f) + 0x80;
@@ -168,7 +168,7 @@ void far f_1FD2_021B(int id)
 
 extern void (far * near g_9128)(int a, int b, int c);
 
-void far f_1FD2_02B1(int mode)
+void far menu_set_draw_colours(int mode)
 {
     switch (mode) {
     case 0:
@@ -186,12 +186,12 @@ void far f_1FD2_02B1(int mode)
     }
 }
 
-extern struct Rect far * far f_1CE2_000C(void);
-void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks);
+extern struct Rect far * far gfx_screen_rect(void);
+void far input_prepend_cursor_region(struct Rect far *r, void (far *fn)(), int ticks);
 
 void far input_capture_screen(void)
 {
-    f_1FD2_032F(f_1CE2_000C(), mouse_default_cursor_thunk, 100);
+    input_prepend_cursor_region(gfx_screen_rect(), mouse_default_cursor_thunk, 100);
 }
 
 extern char far fd_5071_0728[];
@@ -204,7 +204,7 @@ void far input_release_screen_capture(void)
 
 extern void far hotbox_prepend(struct Timer far *t, char far *slot);
 
-void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks)
+void far input_prepend_cursor_region(struct Rect far *r, void (far *fn)(), int ticks)
 {
     g_6016.r.left = r->left;
     g_6016.r.top = r->top;
@@ -215,14 +215,14 @@ void far f_1FD2_032F(struct Rect far *r, void (far *fn)(), int ticks)
     hotbox_prepend(&g_6016, fd_5071_0728);
 }
 
-void far f_1FD2_0379(int ticks)
+void far input_remove_cursor_region(int ticks)
 {
     hotbox_remove_id(ticks, fd_5071_0728);
 }
 
 extern void far hotbox_append(struct Timer far *t, char far *slot);
 
-void far f_1FD2_0390(struct Rect far *r, void (far *fn)(), int ticks)
+void far input_append_cursor_region(struct Rect far *r, void (far *fn)(), int ticks)
 {
     g_6016.r.left = r->left;
     g_6016.r.top = r->top;
@@ -254,7 +254,7 @@ void far input_remove_object_rect(int ticks)
 
 extern char far fd_5071_0060[];
 
-void far f_1FD2_044F(struct Rect far *r, int ticks)
+void far input_register_proximity_rect(struct Rect far *r, int ticks)
 {
     g_603A.r.left = r->left;
     g_603A.r.top = r->top;
@@ -265,14 +265,14 @@ void far f_1FD2_044F(struct Rect far *r, int ticks)
     hotbox_prepend(&g_603A, fd_5071_0060);
 }
 
-void far f_1FD2_049C(int ticks)
+void far input_remove_proximity_rect(int ticks)
 {
     hotbox_remove_id(ticks, fd_5071_0060);
 }
 
 extern int far hotbox_get_rect(int id, char far *slot, struct Rect far *out);
 
-int far f_1FD2_04B3(int id, struct Rect far *out)
+int far input_get_object_hit_rect(int id, struct Rect far *out)
 {
     return hotbox_get_rect(id, fd_5071_03C4, out);
 }
@@ -295,7 +295,7 @@ int far PointInRect(Point far *pt, struct Rect far *r)
 
 extern void far hotbox_contains_pointer(int ticks, char far *slot);
 
-void far f_1FD2_052B(int ticks)
+void far input_probe_object_hit_rect(int ticks)
 {
     hotbox_contains_pointer(ticks, fd_5071_03C4);
 }
@@ -355,12 +355,12 @@ void far ButtonHeldEnd(void)
 }
 
 extern void far GMixedFill(struct Rect far *r, int fore, int back);
-int far f_1FD2_0663(int draw);
+int far menu_layout_bar(int draw);
 
 void far win_redraw_desktop_menu(void)
 {
-    GMixedFill(f_1CE2_000C(), g_5FE6, g_5FE8);
-    f_1FD2_0663(1);
+    GMixedFill(gfx_screen_rect(), g_5FE6, g_5FE8);
+    menu_layout_bar(1);
 }
 
 extern void far Punt(char far *format, ...);
@@ -383,7 +383,7 @@ extern int far fd_50F6_46BC[];
 extern char near fontWidth;
 extern int near g_3DB2;
 
-int far f_1FD2_0663(int draw)
+int far menu_layout_bar(int draw)
 {
     int i;
     int total;
@@ -393,9 +393,9 @@ int far f_1FD2_0663(int draw)
     if (!g_6054)
         return 0;
     g_9130();
-    fd_50F6_393C = *f_1CE2_000C();
+    fd_50F6_393C = *gfx_screen_rect();
     fd_50F6_393C.bottom = g_3DDC + fd_50F6_393C.top + 3;
-    f_1FD2_02B1(1);
+    menu_set_draw_colours(1);
     if (draw)
         GRectFill(&fd_50F6_393C, g_3DE2 | g_3DE4);
     i = 0;
@@ -416,7 +416,7 @@ int far f_1FD2_0663(int draw)
         for (t = g_6054->titles; *t; t++, i++) {
             fd_50F6_46A8[i] = x;
             if (draw)
-                f_1FD2_0008(x, 1, 1, *t);
+                menu_printf_label(x, 1, 1, *t);
             x += (fd_50F6_46BC[i] + g_6050) * fontWidth;
         }
     }
@@ -426,7 +426,7 @@ int far f_1FD2_0663(int draw)
 extern void far mouse_set_position(int x, int y);
 extern int far menu_track_bar_selection(struct Event far *ev);
 
-void far f_1FD2_07CB(int menu)
+void far menu_open_by_index(int menu)
 {
     struct Event ev;
     int x;
@@ -441,7 +441,7 @@ void far f_1FD2_07CB(int menu)
 extern int far input_event_count(void);
 extern void far input_pop_event(struct Event far *ev);
 
-void far f_1FD2_080D(void)
+void far input_discard_queued_events(void)
 {
     struct Event ev;
 
@@ -452,7 +452,7 @@ void far f_1FD2_080D(void)
 extern int far kbd_poll_bios_key(void);
 extern int far kbd_read_key_code(void);
 
-int far f_1FD2_082E(void)
+int far kbd_poll_return_key(void)
 {
     while (kbd_poll_bios_key())
         if (kbd_read_key_code() == 13)
@@ -462,7 +462,7 @@ int far f_1FD2_082E(void)
 
 extern int _fastcall win_GetEvent(struct Event far *ev);
 
-int far f_1FD2_084F(struct Event far *ev)
+int far win_wait_event_or_escape(struct Event far *ev)
 {
     while (!win_GetEvent(ev))
         if (kbd_poll_bios_key() && kbd_read_key_code() == 0x1b)
@@ -473,7 +473,7 @@ int far f_1FD2_084F(struct Event far *ev)
 
 extern int far gr_BitMapSize(Point far *size, int object);
 
-void far f_1FD2_0883(int x, int y, int object, int ticks, int show)
+void far input_set_bitmap_hit_rect(int x, int y, int object, int ticks, int show)
 {
     Point size;
     struct Rect r;

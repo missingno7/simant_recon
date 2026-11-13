@@ -24,21 +24,21 @@ static char g_8CEC;
 
 extern void _fastcall win_LockWin(int win);
 extern char far * _fastcall win_ObjAddr(int obj);
-extern void _fastcall f_23E6_0A53(struct Event far *ev);
+extern void _fastcall list_process_click(struct Event far *ev);
 extern void _fastcall win_ProcSliderEvent(struct Event far *ev);
 extern char far * _fastcall win_WinAddr(int win);
-extern void _fastcall o26_39C7_040F(struct Event far *ev);
+extern void _fastcall win_track_move(struct Event far *ev);
 extern void far clip_Push(void);
-extern void far f_1E57_0351(void);
+extern void far clip_set_screen_region(void);
 extern void _fastcall win_SetObjSelectedState(int obj, int state);
-extern void far f_208F_0530(int ticks);
+extern void far timer_wait_countdown(int ticks);
 extern void far clip_Pop(void);
 extern struct Event far fd_50F6_49FA;
 extern struct Event far fd_50F6_4A0A;
 extern long far TickCount(void);
 extern void _fastcall win_UnlockWin(int win);
 
-void _fastcall f_218D_000C(struct Event far *ev)
+void _fastcall win_dispatch_object_event(struct Event far *ev)
 {
     char far *obj;
 
@@ -46,7 +46,7 @@ void _fastcall f_218D_000C(struct Event far *ev)
     obj = win_ObjAddr(ev->code);
     switch (obj[0x21]) {
     case 4:
-        f_23E6_0A53(ev);
+        list_process_click(ev);
         goto check;
     case 7:
     case 8:
@@ -55,18 +55,18 @@ void _fastcall f_218D_000C(struct Event far *ev)
     case 12:
     case 18:
         if (*(int far *)(win_WinAddr(ev->code) + 0x1c) & 2)
-            o26_39C7_040F(ev);
+            win_track_move(ev);
         break;
     }
     if (*(int far *)(obj + 0x24) & 0x800) {
         clip_Push();
-        f_1E57_0351();
+        clip_set_screen_region();
         if (*(int far *)(obj + 0x24) & 8) {
             if (!(*(int far *)(obj + 0x24) & 0x20) || !(*(int far *)(obj + 0x24) & 0x400) || !(*(int far *)(obj + 0x24) & 4))
                 win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
         } else if (*(int far *)(obj + 0x24) & 1) {
             win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
-            f_208F_0530(5);
+            timer_wait_countdown(5);
             win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
         }
         clip_Pop();
@@ -89,7 +89,7 @@ done:
     win_UnlockWin(ev->code);
 }
 
-void far f_218D_01EB(void)
+void far win_reset_proximity_object(void)
 {
     lastProxObj = -1;
 }
@@ -118,7 +118,7 @@ void _fastcall _win_SetProxItem(int obj)
 extern int g_5702[];
 extern int far hotbox_pointer_hit_id(void);
 
-void _fastcall f_218D_023A(struct Event far *ev)
+void _fastcall win_update_proximity_event(struct Event far *ev)
 {
     int obj;
 
@@ -138,13 +138,13 @@ extern void far f_1B28_0069(void);
 extern void far snd_service_pending(void);
 extern int far input_event_count(void);
 extern void far input_pop_event(struct Event far *ev);
-void _fastcall f_218D_0451(struct Event far *ev);
-extern void _fastcall f_20E8_0776(int win);
+void _fastcall win_dispatch_desktop_click(struct Event far *ev);
+extern void _fastcall win_lower_or_dismiss(int win);
 void far win_FlushEvents(void);
 extern void _fastcall win_Close(int win);
-extern void _fastcall o26_39C7_0671(struct Event far *ev);
+extern void _fastcall win_track_resize(struct Event far *ev);
 extern void _fastcall win_toggle_zoom(int win);
-void _fastcall f_218D_0656(int dir);
+void _fastcall win_step_object_focus(int dir);
 
 void far win_translate_pending_event(void)
 {
@@ -154,17 +154,17 @@ void far win_translate_pending_event(void)
         return;
     input_pop_event(&fd_50F6_49FA);
     if (fd_50F6_49FA.code == (int)0xff00) {
-        f_218D_0451(&fd_50F6_49FA);
+        win_dispatch_desktop_click(&fd_50F6_49FA);
     } else if ((char)(fd_50F6_49FA.code >> 8) == (char)0xfb) {
-        f_218D_023A(&fd_50F6_49FA);
+        win_update_proximity_event(&fd_50F6_49FA);
     } else {
         if (g_5702[0] != (int)0x8000) {
             switch (fd_50F6_49FA.code) {
             case 0xf081:
-                o26_39C7_040F(0L);
+                win_track_move(0L);
                 break;
             case 0xf082:
-                f_20E8_0776(g_5702[0]);
+                win_lower_or_dismiss(g_5702[0]);
                 win_FlushEvents();
                 return;
             case 0xf083:
@@ -172,7 +172,7 @@ void far win_translate_pending_event(void)
                 win_FlushEvents();
                 return;
             case 0xf084:
-                o26_39C7_0671(0L);
+                win_track_resize(0L);
                 return;
             case 0xf085:
                 win_toggle_zoom(g_5702[0]);
@@ -180,17 +180,17 @@ void far win_translate_pending_event(void)
                 return;
             case 0xf086:
                 if (g_5702[0] != (int)0x8000)
-                    f_218D_0656(1);
+                    win_step_object_focus(1);
                 break;
             case 0xf087:
                 if (g_5702[0] != (int)0x8000)
-                    f_218D_0656(-1);
+                    win_step_object_focus(-1);
                 break;
             default:
                 if (!(fd_50F6_49FA.code & 0x8000)) {
                     if ((fd_50F6_49FA.code & 0xff00) != g_5702[0])
                         return;
-                    f_218D_000C(&fd_50F6_49FA);
+                    win_dispatch_object_event(&fd_50F6_49FA);
                 }
                 break;
             }
@@ -237,7 +237,7 @@ extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far PointInRect(int far *pt, struct Rect far *rect);
 extern void _fastcall win_ToTop(int win);
 
-void _fastcall f_218D_0451(struct Event far *ev)
+void _fastcall win_dispatch_desktop_click(struct Event far *ev)
 {
     int top;
     int noClose;
@@ -273,7 +273,7 @@ extern char far * far win_locked_resource_ptr(int win);
 extern void far GetMousePos(struct Pt far *pt);
 extern void far hotbox_center_pointer(int obj);
 
-int far f_218D_052F(void)
+int far win_focus_nearest_object(void)
 {
     unsigned long d;
     unsigned long best;
@@ -314,10 +314,10 @@ int far f_218D_052F(void)
     return -1;
 }
 
-extern int _fastcall f_22BF_0AC5(int win);
-extern int _fastcall f_22BF_0A97(int obj);
+extern int _fastcall win_object_count(int win);
+extern int _fastcall win_is_obj_selectable(int obj);
 
-void _fastcall f_218D_0656(int dir)
+void _fastcall win_step_object_focus(int dir)
 {
     int start;
     int last;
@@ -325,8 +325,8 @@ void _fastcall f_218D_0656(int dir)
 
     if (g_5702[0] == (int)0x8000)
         return;
-    cur = start = f_218D_052F();
-    last = g_5702[0] + f_22BF_0AC5(g_5702[0]);
+    cur = start = win_focus_nearest_object();
+    last = g_5702[0] + win_object_count(g_5702[0]);
     if (start == -1)
         return;
     do {
@@ -335,7 +335,7 @@ void _fastcall f_218D_0656(int dir)
             cur = last - 1;
         else if (last <= cur)
             cur = g_5702[0] + 1;
-        if (f_22BF_0A97(cur)) {
+        if (win_is_obj_selectable(cur)) {
             hotbox_center_pointer(cur);
             return;
         }

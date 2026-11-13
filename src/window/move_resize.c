@@ -59,7 +59,7 @@ struct Event {
     int xE;
 };
 
-void _fastcall o26_39C7_022F(int win, int mode, struct Rect far *r);
+void _fastcall win_constrain_drag_rect(int win, int mode, struct Rect far *r);
 
 extern void _fastcall win_LockWin(int win);
 extern struct Win far * _fastcall win_WinAddr(int win);
@@ -73,11 +73,11 @@ extern void _fastcall win_Recalc(int win);
 extern void far win_rebuild_visible_clips(void);
 extern void (far * far g_62EC)(int win);
 extern void far clip_SetWin(int win);
-extern void far f_1E57_0D97(struct Rect far *r);
+extern void far clip_expand_by_rect(struct Rect far *r);
 extern void far clip_set_screen_intersection(struct Rect far *r);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far clip_Push(void);
-extern void far f_1E57_0296(void);
+extern void far clip_set_desktop_region(void);
 extern void far win_redraw_desktop_menu(void);
 extern void far clip_Pop(void);
 extern void far clip_SubExclude(struct Rect far *r);
@@ -112,11 +112,11 @@ void _fastcall win_toggle_zoom(int win)
         w->zoomRect = *(struct Rect far *)&o->x;
         r.left = 0;
         r.top = fd_50F6_393C.bottom;
-        o26_39C7_022F(win, 0, &r);
+        win_constrain_drag_rect(win, 0, &r);
         w->rect = r;
         r.bottom = g_3DB4;
         r.right = g_3DB2;
-        o26_39C7_022F(win, 1, &r);
+        win_constrain_drag_rect(win, 1, &r);
         w->flags |= 0x80;
         o->x = r.left;
         o->width = r.right - r.left;
@@ -129,14 +129,14 @@ void _fastcall win_toggle_zoom(int win)
     (*g_62EC)(win);
     if (w->flags & 0x80) {
         clip_SetWin(win);
-        f_1E57_0D97(&saved);
+        clip_expand_by_rect(&saved);
     } else {
         clip_set_screen_intersection(&saved);
         win_GetObjRect(win, &r);
     }
     win_UnlockWin(win);
     clip_Push();
-    f_1E57_0296();
+    clip_set_desktop_region();
     win_redraw_desktop_menu();
     clip_Pop();
     clip_SubExclude(&r);
@@ -155,9 +155,9 @@ void _fastcall win_toggle_zoom(int win)
     win_activate_pointer_regions(win);
 }
 
-extern void _fastcall f_22BF_0B5B(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b);
+extern void _fastcall win_offset_rect_edges(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b);
 
-void _fastcall o26_39C7_022F(int win, int mode, struct Rect far *r)
+void _fastcall win_constrain_drag_rect(int win, int mode, struct Rect far *r)
 {
     struct Rect far *wr;
     struct Win far *w;
@@ -203,17 +203,17 @@ void _fastcall o26_39C7_022F(int win, int mode, struct Rect far *r)
         if ((h = w->gridY) != 0)
             gy -= gy % h;
         if (mode)
-            f_22BF_0B5B(r, wr, 0, 0, gx, gy);
+            win_offset_rect_edges(r, wr, 0, 0, gx, gy);
         else
-            f_22BF_0B5B(r, wr, gx, gy, gx, gy);
+            win_offset_rect_edges(r, wr, gx, gy, gx, gy);
         if (_fmemcmp(&old, r, 8))
             done = 0;
         old = *r;
     } while (!done);
 }
 
-extern void far f_1E57_0351(void);
-extern void _fastcall f_2505_0382(struct Pt far *center, struct Rect far *rect);
+extern void far clip_set_screen_region(void);
+extern void _fastcall win_rect_center(struct Pt far *center, struct Rect far *rect);
 extern void far mouse_set_position(int x, int y);
 extern void far GRectInvOutline(struct Rect far *r, int width);
 extern void far ButtonHeldInit(void);
@@ -226,7 +226,7 @@ extern void _fastcall win_redraw_exposed_windows(struct Rect far *rect);
 extern int far StillDown(void);
 extern void far win_FlushEvents(void);
 
-void _fastcall o26_39C7_040F(struct Event far *ev)
+void _fastcall win_track_move(struct Event far *ev)
 {
     int win;
     struct Rect far *wr;
@@ -253,10 +253,10 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
         win_UnlockWin(win);
         return;
     }
-    f_1E57_0351();
+    clip_set_screen_region();
     orect = o->rect;
     if (ev == 0) {
-        f_2505_0382(&start, &orect);
+        win_rect_center(&start, &orect);
         mouse_set_position(start.x, start.y);
     } else {
         start.x = ev->h;
@@ -270,12 +270,12 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
         if (pt.x != g_9122 || pt.y != g_9124) {
             GRectInvOutline(&r, 2);
             GetMousePos(&pt);
-            f_22BF_0B5B(&r, wr, pt.x - start.x, pt.y - start.y, pt.x - start.x, pt.y - start.y);
+            win_offset_rect_edges(&r, wr, pt.x - start.x, pt.y - start.y, pt.x - start.x, pt.y - start.y);
             GRectInvOutline(&r, 2);
         }
     }
     GRectInvOutline(&r, 2);
-    o26_39C7_022F(win, 0, &r);
+    win_constrain_drag_rect(win, 0, &r);
     o = w->objs[0];
     o->x += r.left - orig.left;
     o->y += r.top - orig.top;
@@ -294,10 +294,10 @@ void _fastcall o26_39C7_040F(struct Event far *ev)
     win_FlushEvents();
 }
 
-extern int far f_1FD2_04B3(int id, struct Rect far *r);
+extern int far input_get_object_hit_rect(int id, struct Rect far *r);
 extern void far Punt(char far *fmt, ...);
 
-void _fastcall o26_39C7_0671(struct Event far *ev)
+void _fastcall win_track_resize(struct Event far *ev)
 {
     int win;
     struct Win far *w;
@@ -324,11 +324,11 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
         min.x = 0x30;
     if (min.y == 0)
         min.y = 0x30;
-    if (!f_1FD2_04B3(0xf084, &icon))
+    if (!input_get_object_hit_rect(0xf084, &icon))
         Punt("Couldn't find resize icoN!!");
-    f_1E57_0351();
+    clip_set_screen_region();
     if (ev == 0) {
-        f_2505_0382(&start, &icon);
+        win_rect_center(&start, &icon);
         mouse_set_position(start.x, start.y);
     } else {
         start.x = ev->h;
@@ -342,7 +342,7 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
         if (pt.x != g_9122 || pt.y != g_9124) {
             GRectInvOutline(&r, 2);
             GetMousePos(&pt);
-            f_22BF_0B5B(&r, &orig, 0, 0, pt.x - start.x, pt.y - start.y);
+            win_offset_rect_edges(&r, &orig, 0, 0, pt.x - start.x, pt.y - start.y);
             if (r.right - r.left < min.x)
                 r.right = min.x + r.left;
             if (r.bottom - r.top < min.y)
@@ -351,7 +351,7 @@ void _fastcall o26_39C7_0671(struct Event far *ev)
         }
     }
     GRectInvOutline(&r, 2);
-    o26_39C7_022F(win, 1, &r);
+    win_constrain_drag_rect(win, 1, &r);
     o = w->objs[0];
     o->width += r.right - orig.right;
     o->height += r.bottom - orig.bottom;

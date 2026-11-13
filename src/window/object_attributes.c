@@ -107,25 +107,25 @@ void _fastcall win_MakeObjInvisible(int);
 void _fastcall win_SetGroupVisibleState(int, int, int);
 void _fastcall win_MakeGroupVisible(int, int);
 void _fastcall win_MakeGroupInvisible(int, int);
-void _fastcall f_22BF_0555(int, char far *);
+void _fastcall win_replace_obj_text_suffix(int, char far *);
 void far win_SetObjFormatStr(int, ...);
 void far win_CenterStrAtObj(int, char far *);
 void far win_ObjFormatPrint(int, ...);
 int _fastcall win_SetPalette(int);
-void _fastcall f_22BF_094F(int, int);
+void _fastcall win_set_obj_colour_index(int, int);
 void _fastcall win_SetObjBitmap(int, int);
 int _fastcall win_IsWinOpen(int);
 int _fastcall win_IsWinInFront(int);
 int _fastcall f_22BF_0A34(int);
 int _fastcall win_is_zoomed(int);
-int _fastcall f_22BF_0A97(int);
-int _fastcall f_22BF_0AC5(int);
+int _fastcall win_is_obj_selectable(int);
+int _fastcall win_object_count(int);
 int _fastcall win_set_flag_0040(int);
 int _fastcall win_clear_flag_0040(int);
-void _fastcall f_22BF_0B5B(struct Rect far *, struct Rect far *, int, int, int, int);
+void _fastcall win_offset_rect_edges(struct Rect far *, struct Rect far *, int, int, int, int);
 int far win_DoProxMenu(int, int, ...);
 void far win_ClearObjToEOL(int);
-void far f_22BF_0CDD(int);
+void far win_clear_obj_rect(int);
 void far win_PrintfAtObj(int, char far *, ...);
 void far win_DrawHBar(int, long);
 void far win_DrawVBar(int, long);
@@ -364,7 +364,7 @@ void _fastcall win_MakeGroupInvisible(int win, int group)
     win_SetGroupVisibleState(win, group, 0);
 }
 
-void _fastcall f_22BF_0555(int obj, char far *text)
+void _fastcall win_replace_obj_text_suffix(int obj, char far *text)
 {
     char far *p;
 
@@ -471,7 +471,7 @@ int _fastcall win_SetPalette(int id)
     db_ReleaseObject(id, 0xf);
 }
 
-void _fastcall f_22BF_094F(int obj, int color)
+void _fastcall win_set_obj_colour_index(int obj, int color)
 {
     win_ObjAddr(obj)[0x26] = color;
 }
@@ -533,7 +533,7 @@ int _fastcall win_is_zoomed(int win)
     return r;
 }
 
-int _fastcall f_22BF_0A97(int obj)
+int _fastcall win_is_obj_selectable(int obj)
 {
     int r;
 
@@ -543,7 +543,7 @@ int _fastcall f_22BF_0A97(int obj)
     return r;
 }
 
-int _fastcall f_22BF_0AC5(int win)
+int _fastcall win_object_count(int win)
 {
     int n;
 
@@ -579,7 +579,7 @@ int _fastcall win_clear_flag_0040(int win)
     return r;
 }
 
-void _fastcall f_22BF_0B5B(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b)
+void _fastcall win_offset_rect_edges(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b)
 {
     dst->left = src->left + l;
     dst->right = src->right + r;
@@ -639,7 +639,7 @@ void far win_ClearObjToEOL(int obj)
     win_UnlockWin(obj);
 }
 
-void far f_22BF_0CDD(int obj)
+void far win_clear_obj_rect(int obj)
 {
     struct Rect r;
     int c;

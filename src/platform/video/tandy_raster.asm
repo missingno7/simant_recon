@@ -111,10 +111,10 @@ DGROUP	group	_DATA
 	extrn	_mouse_show_cursor:far
 	extrn	_mouse_hide_cursor:far
 	extrn	_mouse_refresh_cursor:far
-	extrn	_f_1D8E_0384:far
-	extrn	_f_1D8E_0435:far
-	extrn	_f_1D8E_08EA:far
-	extrn	_f_1D8E_09DE:far
+	extrn	_clip_dispatch_rect:far
+	extrn	_clip_draw_line:far
+	extrn	_clip_blit_mono:far
+	extrn	_clip_blit_packed4:far
 
 S03A_TEXT	segment word public 'CODE'
 	assume	cs:S03A_TEXT, ds:DGROUP
@@ -244,7 +244,7 @@ _gfx_tandy_dither_box	proc	far
 	push ax
 	mov ax, OFFSET _gfx_tandy_dither_box_raw
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 _gfx_tandy_dither_box	endp
@@ -448,7 +448,7 @@ _gfx_tandy_gpatbox	proc	far
 	push ax
 	mov ax, OFFSET _gfx_tandy_pattern_box_raw
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 _gfx_tandy_gpatbox	endp
@@ -657,7 +657,7 @@ _gfx_tandy_gboxfill	proc	far
 	push ax
 	mov ax, OFFSET L05B4
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 L05B4:
@@ -1045,7 +1045,7 @@ _gfx_tandy_gputpics	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_tandy_put_picture_raw
-	call far ptr _f_1D8E_09DE
+	call far ptr _clip_blit_packed4
 	retf
 _gfx_tandy_gputpics	endp
 
@@ -1426,7 +1426,7 @@ _gfx_tandy_gputimgs	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_tandy_put_image_raw
-	call far ptr _f_1D8E_08EA
+	call far ptr _clip_blit_mono
 	retf
 _gfx_tandy_gputimgs	endp
 
@@ -1959,7 +1959,7 @@ _gfx_tandy_gline	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_tandy_draw_line_raw
-	call far ptr _f_1D8E_0435
+	call far ptr _clip_draw_line
 	retf
 _gfx_tandy_gline	endp
 

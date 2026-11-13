@@ -1,4 +1,4 @@
-"""Actual win_Recalc integration controls for f_20E8_0903.
+"""Actual win_Recalc integration controls for win_set_obj_absolute_rect.
 
 This supplements the bounded coordinate corpus, whose manager callback is kept
 as diagnostic evidence.  These cases use valid Ralloc-backed windows and run
@@ -23,7 +23,7 @@ from behavior_suites import windows as window_suite
 from behavior_ledger import CaseLedger
 
 SUITE = "window_recalc_integration_v1"
-TARGET = "f_20E8_0903"
+TARGET = "win_set_obj_absolute_rect"
 WIN_ID = 0x0100
 HEAP_SEG = 0xA100
 MASTER_SEG = 0x90FF
@@ -159,7 +159,7 @@ def live_case(label, seed, *, count=None, target_index=None, forced_modes=None,
         state={},
         metadata={
             "suite": SUITE,
-            "contract": "f_20E8_0903 using actual DOS Ralloc window lock, object lookup, iterative win_Recalc, and final unlock",
+            "contract": "win_set_obj_absolute_rect using actual DOS Ralloc window lock, object lookup, iterative win_Recalc, and final unlock",
             "abi": "AX=window-object id; stack far pointer to normalized logical-screen rectangle; target retf 4",
             "actual_original_helpers": ["win_LockWin", "f_2505_02D7", "win_Recalc", "win_UnlockWin",
                                         "RallocType", "mem_Lock", "mem_Unlock", "mem_unlock_encoded_handle"],

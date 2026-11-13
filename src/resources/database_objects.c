@@ -62,7 +62,7 @@ int far db_SetDataBase(char far *name)
 
 char far * far db_LoadObject(int object, int kind);
 
-char far * far f_1A53_00BA(int object, int kind)
+char far * far res_load_firm_object(int object, int kind)
 {
     char far *handle;
 

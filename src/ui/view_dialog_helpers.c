@@ -92,7 +92,7 @@ extern int far fd_55B3_2CBC;
 extern char far fd_55B3_2CBA;
 void far ui_pump_events_edge_scroll(void);
 
-void far f_00F8_017D(void)
+void far ui_pump_events_periodically(void)
 {
     if (WaitedEnough(&g_8BA4, 2) && fd_55B3_2CBC == 0) {
         fd_55B3_2CBA = 1;
@@ -272,7 +272,7 @@ int far f_00F8_040F(void)
     return 0;
 }
 
-void far f_00F8_044C(void)
+void far ui_flush_window_events(void)
 {
     win_FlushEvents();
 }
@@ -332,7 +332,7 @@ void far OpenMapYard(int unused)
 extern char far *far yardBalloon;
 extern char far *far fd_55B3_2A3A;
 
-char far * far f_00F8_0543(int object, int type)
+char far * far res_lookup_dynamic_balloon(int object, int type)
 {
     if (type == 2) {
         switch (object) {
@@ -349,7 +349,7 @@ extern void far ch_SetCacheHooks(char far * (far *cache)(int object, int type));
 
 void far res_install_cache_hook(void)
 {
-    ch_SetCacheHooks(f_00F8_0543);
+    ch_SetCacheHooks(res_lookup_dynamic_balloon);
 }
 
 extern int far WinPrintf(char far *format, ...);
@@ -361,12 +361,12 @@ void far UpdateEverything(void)
     win_redraw_current_clip();
 }
 
-extern void _fastcall f_21FA_0AD2(struct Rect far *rect);
+extern void _fastcall win_redraw_rect(struct Rect far *rect);
 extern struct Rect far g_5A9C;
 
 void far win_redraw_current_clip(void)
 {
-    f_21FA_0AD2(&g_5A9C);
+    win_redraw_rect(&g_5A9C);
 }
 
 int far DialogAbort(void)

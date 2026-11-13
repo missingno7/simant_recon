@@ -314,7 +314,7 @@ def _menu_callbacks():
         "input_pop_event": b.Callback(2, event_read, project=lambda m,a:{"destination":"logical-event"}),
         "GPutStr": b.Callback(4,draw_font_text,project=lambda m,a:{"x":a[0],"y":a[1],
             "text":_str_read(m,a[2],a[3]).hex()}),
-        "f_1FD2_02B1": b.Callback(1, draw_mode), "input_capture_screen": b.Callback(0),
+        "menu_set_draw_colours": b.Callback(1, draw_mode), "input_capture_screen": b.Callback(0),
         "GSaveRect": b.Callback(2, save_rect, project=lambda m,a:{"rect":_rect(m,a[0],a[1])}),
         "gfx_restore_and_free_rect": b.Callback(4, restore_rect,
             project=lambda m,a:{"rect":_rect(m,a[0],a[1]),"surface":"saved-menu-rectangle"}),
@@ -373,7 +373,7 @@ def menu_case(label, keys, *, curmenu=-1, events=(), points=(), down=(), items=N
             "abi":"far C routine: stack far char* selection, stack far far* items; caller cleanup 8 bytes",
             "validity":{"item_table":items,"sentinel":"null far pointer","initial_selection":selected,
                 "current_menu":curmenu,"screen":[width,height],"line_height":line_height,"char_width":char_width},
-            "modeled_boundary":"Host keyboard/mouse/event providers, display save/draw/restore/cursor commands, DOS mouse setup (INT 33h query), asynchronous TickCount, DOS timer_wait_double_ticks delay ticks, and one successful 4000-byte menu-buffer allocation are deterministic providers. timer_wait_double_ticks advances the deterministic timer by exactly its positive tick argument; TickCount advances one tick per call so original delay helpers run. The allocator returns a zeroed bounded scratch buffer and verifies the matching release. Original sprintf and f_1FD2_0008/vsprintf formatters execute; GPutStr is projected as a C string at the actual renderer sink. Both runtime-proved cursor views retain cursor advancement and remaining capacity while abstracting only invocation-stack pointer homes; if a stream record points to the modeled menu heap, the record remains raw. Raw writes and traces remain in the evidence ledger. Sink projections, per-call snapshots, final globals, all final nonstack writes, strings, rectangles, and input consumption remain compared. Original rectangle adjustment/containment, strings, formatter, and all other semantic helpers run in DOS code.",
+            "modeled_boundary":"Host keyboard/mouse/event providers, display save/draw/restore/cursor commands, DOS mouse setup (INT 33h query), asynchronous TickCount, DOS timer_wait_double_ticks delay ticks, and one successful 4000-byte menu-buffer allocation are deterministic providers. timer_wait_double_ticks advances the deterministic timer by exactly its positive tick argument; TickCount advances one tick per call so original delay helpers run. The allocator returns a zeroed bounded scratch buffer and verifies the matching release. Original sprintf and menu_printf_label/vsprintf formatters execute; GPutStr is projected as a C string at the actual renderer sink. Both runtime-proved cursor views retain cursor advancement and remaining capacity while abstracting only invocation-stack pointer homes; if a stream record points to the modeled menu heap, the record remains raw. Raw writes and traces remain in the evidence ledger. Sink projections, per-call snapshots, final globals, all final nonstack writes, strings, rectangles, and input consumption remain compared. Original rectangle adjustment/containment, strings, formatter, and all other semantic helpers run in DOS code.",
             "input":{"keys":list(keys),"events":list(events),"points":list(points),"down":list(down)}})
 
 
@@ -424,8 +424,8 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
             (addr("fd_55B3_5AA0"),w(*screen))]
     # g_9128 is an unset BSS host video-function pointer in this isolated DOS
     # startup state. Route it to a separate three-word callback adapter; the
-    # real zero-argument f_1C62_0737 queue-flush helper remains original DOS.
-    attr=b.symbol("f_1FD2_02B1")
+    # real zero-argument kbd_drain_bios_chars queue-flush helper remains original DOS.
+    attr=b.symbol("menu_set_draw_colours")
     writes.append((addr("g_9128"),far(attr["off"],attr["seg"])))
     # Keep the original dialog's private labels and button tables in the
     # compiler object / oracle image; only the public input message is supplied.
@@ -448,7 +448,7 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
         machine.state["host_trace"].append(["dialog-attribute",list(args)])
     callbacks["kbd_poll_bios_key"]=b.Callback(0,keyboard_ready)
     callbacks["kbd_read_bios_char"]=b.Callback(0,pending_key)
-    callbacks["f_1FD2_02B1"]=b.Callback(3,video_attribute,
+    callbacks["menu_set_draw_colours"]=b.Callback(3,video_attribute,
         project=lambda m,a:{"boundary":"HOST:g_9128 attribute setter","args":list(a)})
     return b.Case(label=label,args=[msg_off,DATA_SEG,set_id],writes=writes,
         observe=[b.Range("question_message",lin(msg_off),len(data))],callbacks=callbacks,
@@ -460,7 +460,7 @@ def question_case(label, message, set_id, keys=(), events=(), flush_keys=(), lin
             "validity":{"set":set_id,"choices":(("Yes","No"),("Yes","No","Cancel"),("Retry","Cancel"))[set_id],
                 "message_bytes":bytes(message).hex(),"driver_metrics":{"line_height":line_height,"character_width":char_width},
                 "screen":list(screen)},
-            "modeled_boundary":"Host key availability/dequeue providers expose a stale pending-key prefix first and live dialog keys only after the HOST:g_9128 attribute sink's first three-word call; the original zero-argument f_1C62_0737 helper executes its actual while(key-ready) read-key loop over that prefix. HOST:g_9128 is a separate three-word display adapter routed to a dedicated intercepted callback address; it does not alias or replace f_1C62_0737. Other display/input/timer/allocator services follow the S10 deterministic contracts. Private choice tables, ctype, string/font measurements, original rectangle sizing/clipping and dialog control flow execute from the original DOS image.",
+            "modeled_boundary":"Host key availability/dequeue providers expose a stale pending-key prefix first and live dialog keys only after the HOST:g_9128 attribute sink's first three-word call; the original zero-argument kbd_drain_bios_chars helper executes its actual while(key-ready) read-key loop over that prefix. HOST:g_9128 is a separate three-word display adapter routed to a dedicated intercepted callback address; it does not alias or replace kbd_drain_bios_chars. Other display/input/timer/allocator services follow the S10 deterministic contracts. Private choice tables, ctype, string/font measurements, original rectangle sizing/clipping and dialog control flow execute from the original DOS image.",
             "input":{"keys":list(keys),"events":list(events),"pending_keys":list(flush_keys)}})
 
 

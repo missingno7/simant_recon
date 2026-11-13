@@ -28,7 +28,7 @@ int g_62C0 = 5;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far GRectInv(struct Rect far *rect);
 
-void far f_208F_0008(int obj)
+void far win_invert_obj_rect(int obj)
 {
     struct Rect r;
 
@@ -39,7 +39,7 @@ void far f_208F_0008(int obj)
 extern char near fontWidth;
 extern Point far g_3DA0;
 
-void far f_208F_002B(int obj, int col)
+void far win_set_obj_text_pen(int obj, int col)
 {
     struct Rect r;
 
@@ -106,7 +106,7 @@ void far gr_CenterStrInRectClear(struct Rect far *rect, char far *text)
         g_9134(r.right, r.top, rect->right, r.bottom, g_3DE2);
 }
 
-void far f_208F_01ED(int obj, char far *text)
+void far win_center_text_unclipped(int obj, char far *text)
 {
     struct Rect r;
 
@@ -115,7 +115,7 @@ void far f_208F_01ED(int obj, char far *text)
     gr_CenterStrInRect(&r, text);
 }
 
-void far f_208F_021B(int obj, char far *text)
+void far win_print_obj_text(int obj, char far *text)
 {
     struct Rect r;
 
@@ -127,7 +127,7 @@ void far f_208F_021B(int obj, char far *text)
 extern void (far * near g_9128)(int a, int b, int c);
 extern void far GRectOutline(struct Rect far *rect, int width);
 
-void far f_208F_024B(int obj, int color, int width)
+void far win_outline_obj_rect(int obj, int color, int width)
 {
     struct Rect r;
 
@@ -141,7 +141,7 @@ extern void (far * near g_917C)(int x, int y, int offset);
 extern char far * far * far fd_50F6_46D2;
 extern void (far * near g_914C)(int x, int y, char far *p, int w, int h);
 
-void far f_208F_027F(int obj, int n)
+void far gfx_draw_tile_at_obj(int obj, int n)
 {
     struct Rect r;
 
@@ -157,7 +157,7 @@ void far f_208F_027F(int obj, int n)
 
 /* Two separate mode tests with identical calls: the 8x8 call of mode 6 is laid out inline
    and cross-jumped into the 16x16 tail; `==6 || ==2` places the shared block last. */
-void far f_208F_02F0(int x, int y, int n)
+void far gfx_draw_tile_at(int x, int y, int n)
 {
     if (!(g_5A97 & 1)) {
         if (g_5A97 == 6)
@@ -173,7 +173,7 @@ void far f_208F_02F0(int x, int y, int n)
 extern char far * far db_LoadObject(int object, int kind);
 extern void far Punt(char far *format, ...);
 
-char far * far f_208F_0357(int kind, int object)
+char far * far res_load_required_object(int kind, int object)
 {
     char far *p;
 
@@ -184,17 +184,17 @@ char far * far f_208F_0357(int kind, int object)
 }
 
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
-extern void far f_24AB_040C(char far *text);
+extern void far font_print_at_pen(char far *text);
 
-void far f_208F_038E(char far *format, ...)
+void far font_printf_at_pen(char far *format, ...)
 {
     char buf[100];
 
     vsprintf(buf, format, (char far *)(&format + 1));
-    f_24AB_040C(buf);
+    font_print_at_pen(buf);
 }
 
-void far f_208F_03BC(int obj, char far *format, ...)
+void far win_printf_obj_text(int obj, char far *format, ...)
 {
     struct Rect r;
     char buf[100];
@@ -215,7 +215,7 @@ void far f_208F_0404(void)
 
 extern void far db_PurgeHandle(char far *handle);
 
-void far f_208F_0405(char far *handle)
+void far res_purge_handle(char far *handle)
 {
     db_PurgeHandle(handle);
 }
@@ -256,7 +256,7 @@ static long g_8CE8;
 extern int far fd_50F6_46D0;
 extern unsigned long far TickCount(void);
 
-void far f_208F_04D0(int delay)
+void far ui_start_dismiss_timer(int delay)
 {
     g_8CE8 = TickCount();
     fd_50F6_46D0 = delay;
@@ -266,7 +266,7 @@ extern int far kbd_poll_bios_key(void);
 extern int far kbd_read_key_code(void);
 extern int far WaitedEnough(long far *timer, int delay);
 
-int far f_208F_04EE(void)
+int far ui_poll_dismiss_timer(void)
 {
     int key;
 
@@ -280,24 +280,24 @@ int far f_208F_04EE(void)
 
 extern int far fd_1B73_0006;
 
-void far f_208F_0530(int ticks)
+void far timer_wait_countdown(int ticks)
 {
     fd_1B73_0006 = ticks;
     while (fd_1B73_0006 != 0)
         ;
 }
 
-void far f_208F_054B(int ticks)
+void far timer_start_countdown(int ticks)
 {
     fd_1B73_0006 = ticks;
 }
 
-int far f_208F_055B(void)
+int far timer_countdown_done(void)
 {
     return !fd_1B73_0006;
 }
 
-int far f_208F_056A(void)
+int far kbd_poll_escape_key(void)
 {
     while (kbd_poll_bios_key())
         if (kbd_read_key_code() == 0x1b)

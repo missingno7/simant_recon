@@ -40,11 +40,11 @@ int _fastcall win_IsWinLocked(int win)
 extern char far * far * near win_handles[];
 extern void far win_LoadWindow(int win);
 extern int far mem_LockLevel(char far * far *handle);
-void far f_23AE_035D(void);
-extern char far * far f_171C_1D40(char far * far *handle);
+void far win_report_already_locked(void);
+extern char far * far mem_move_high_and_lock(char far * far *handle);
 extern char far * far mem_Lock(char far * far *handle);
 extern void far mem_Free(char far * far *handle);
-extern void far f_171C_1E86(char far * far *handle, int flag);
+extern void far mem_set_alloc_type(char far * far *handle, int flag);
 extern void _fastcall RepointObjects(int win);
 extern void _fastcall win_Recalc(int win);
 
@@ -70,10 +70,10 @@ void _fastcall win_load_and_lock_resource(int win, int high)
         g_8DA6[n]++;
         if (mem_LockLevel(h)) {
             high = 0;
-            f_23AE_035D();
+            win_report_already_locked();
         }
         if (high)
-            w = f_171C_1D40(h);
+            w = mem_move_high_and_lock(h);
         else
             w = mem_Lock(h);
         if (w == 0) {
@@ -81,12 +81,12 @@ void _fastcall win_load_and_lock_resource(int win, int high)
             win_LoadWindow(win);
             h = win_handles[n];
             if (high)
-                w = f_171C_1D40(h);
+                w = mem_move_high_and_lock(h);
             else
                 w = mem_Lock(h);
         }
         if (*(int far *)(w + 0x1c) & 0x800)
-            f_171C_1E86(h, 1);
+            mem_set_alloc_type(h, 1);
         if (g_8CF2[n] != w) {
             g_8CF2[n] = w;
             RepointObjects(win);
@@ -189,7 +189,7 @@ void _fastcall win_UnlockWin(int win)
 
 
 
-void far f_23AE_035D(void)
+void far win_report_already_locked(void)
 {
     WinPrintf("WINLOCKERR!! ALREADY LOCKED!!");
     debug_breakpoint();

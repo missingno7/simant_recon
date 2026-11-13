@@ -17,14 +17,14 @@ class CurrentCandidateControls(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.out = ROOT / 'build/workers/canonical_behavior_tests'
-        cls.pair = b.PreparedPair('f_284A_0138', out=cls.out / 'positive')
-        cls.mutant = b.PreparedPair('f_284A_0138', out=cls.out / 'negative', mutation=(
+        cls.pair = b.PreparedPair('snd_song_read_be16', out=cls.out / 'positive')
+        cls.mutant = b.PreparedPair('snd_song_read_be16', out=cls.out / 'negative', mutation=(
             'return SONG(off) << 8 | SONG(off + 1);',
             'return SONG(off + 1) << 8 | SONG(off);'))
 
     def test_current_canonical_whole_tu_is_the_compiler_input(self):
         program = canonical.load()
-        semantic = next(r for r in program['semantics'] if r['function'] == 'f_284A_0138')
+        semantic = next(r for r in program['semantics'] if r['function'] == 'snd_song_read_be16')
         module = next(r for r in program['modules'] if r['key'] == semantic['module'])
         self.assertEqual(self.pair.source, (ROOT / module['source']).resolve())
         self.assertEqual(self.pair.identity['source_sha256'], module['source_sha256'])
@@ -34,7 +34,7 @@ class CurrentCandidateControls(unittest.TestCase):
 
     def test_arbitrary_candidate_source_argument_is_removed(self):
         with self.assertRaises(TypeError):
-            b.PreparedPair('f_284A_0138', source=self.pair.source)
+            b.PreparedPair('snd_song_read_be16', source=self.pair.source)
 
     def test_msc_based_pointer_wrap_and_byte_order(self):
         for off in (0, 0xFFFE, 0xFFFF):
@@ -51,8 +51,8 @@ class CurrentCandidateControls(unittest.TestCase):
     def test_mutation_preserves_the_rest_of_the_current_module(self):
         original = self.pair.source.read_bytes().decode('latin1')
         changed = (self.out / 'negative/mutant.c').read_bytes().decode('latin1')
-        a = csrc.Source(original).function('f_284A_0138')
-        z = csrc.Source(changed).function('f_284A_0138')
+        a = csrc.Source(original).function('snd_song_read_be16')
+        z = csrc.Source(changed).function('snd_song_read_be16')
         self.assertEqual(original[:a.body.s], changed[:z.body.s])
         self.assertEqual(original[a.body.e:], changed[z.body.e:])
         self.assertNotEqual(original[a.body.s:a.body.e], changed[z.body.s:z.body.e])

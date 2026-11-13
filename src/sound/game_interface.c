@@ -10,8 +10,8 @@
 int g_1926 = 0;
 
 extern int far fd_55B3_610A;
-extern int far f_293A_0006(void);
-extern int far f_277E_0000(int mode, int flag);
+extern int far snd_probe_preferred_device(void);
+extern int far snd_initialize_device_channels(int mode, int flag);
 extern void far WinPrintf(char *fmt, ...);
 extern int far * far fd_55B3_74FE;
 
@@ -20,11 +20,11 @@ void far snd_init_driver_once(void)
     if (g_1926)
         return;
     if (fd_55B3_610A == -1)
-        f_277E_0000(f_293A_0006(), 0);
+        snd_initialize_device_channels(snd_probe_preferred_device(), 0);
     else if (fd_55B3_610A == 0)
         return;
     else
-        f_277E_0000(fd_55B3_610A, 0);
+        snd_initialize_device_channels(fd_55B3_610A, 0);
     WinPrintf("Sound Driver Shell (c) 1991  -- LIB link version\n");
     WinPrintf("Sound Driver reports driver: %d\n%d DAC channels\n%d FM channels\n%d TANDY PSG channels\n%d PS1 PSG channels\n%d COVOX PSG channels\nand %d MIDI channels\n",
               fd_55B3_74FE[0], fd_55B3_74FE[1], fd_55B3_74FE[2], fd_55B3_74FE[4],
@@ -32,12 +32,12 @@ void far snd_init_driver_once(void)
     g_1926 = 1;
 }
 
-void far f_00DF_0089(void)
+void far snd_log_music_init(void)
 {
     WinPrintf("MUSIC INIT!");
 }
 
-void far f_00DF_009D(void)
+void far snd_log_beep(void)
 {
     WinPrintf("BEEP");
 }
@@ -93,7 +93,7 @@ void far f_00DF_0164(void)
 {
 }
 
-void far f_00DF_016C(void)
+void far snd_start_effect_one_if_music(void)
 {
     if (g_1926 && OptionStates[1])
         snd_start_configured_effect(1);

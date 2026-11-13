@@ -46,7 +46,7 @@ extern void (far * near g_9128)(int a, int b, int c);
 extern void far GPutStr(int x, int y, char far *s);
 extern void far input_register_object_rect(struct Rect far *r, int v);
 
-void far o10_35F5_0000(int x, int y, char far *s, int v)
+void far ui_draw_horizontal_button(int x, int y, char far *s, int v)
 {
     int len;
     struct Rect r;
@@ -66,7 +66,7 @@ void far o10_35F5_0000(int x, int y, char far *s, int v)
 
 extern void far gfx_put_fixed_font_char(int x, int y, int c);
 
-void far o10_35F5_00D7(int x, int y, char far *s, int v)
+void far ui_draw_vertical_button(int x, int y, char far *s, int v)
 {
     int len;
     struct Rect r;
@@ -92,8 +92,8 @@ extern void (far * near g_9130)(void);
 extern char far * far * far * far fd_55B3_6054;
 extern int far StillDown(void);
 extern int far fd_50F6_46A8[];
-extern void far f_1FD2_0008(int x, int y, int mode, char far *s);
-int far o10_35F5_0384(char far *sel, char far * far *items);
+extern void far menu_printf_label(int x, int y, int mode, char far *s);
+int far menu_track_popup(char far *sel, char far * far *items);
 extern int far kbd_poll_bios_key(void);
 extern char far kbd_read_bios_char(void);
 extern int far fd_55B3_604C;
@@ -115,14 +115,14 @@ int far menu_track_bar_selection(struct Event far *ev)
         return;
     if (curMenu != -1) {
 again:
-        f_1FD2_0008(fd_50F6_46A8[curMenu], 1, 1, fd_55B3_6054[0][curMenu]);
+        menu_printf_label(fd_50F6_46A8[curMenu], 1, 1, fd_55B3_6054[0][curMenu]);
         curMenu = -1;
     }
     if (m >= 100)
         return;
     curMenu = m;
-    f_1FD2_0008(fd_50F6_46A8[m], 1, 0, fd_55B3_6054[0][m]);
-    if (!o10_35F5_0384(&sel, fd_55B3_6054[m + 1]))
+    menu_printf_label(fd_50F6_46A8[m], 1, 0, fd_55B3_6054[0][m]);
+    if (!menu_track_popup(&sel, fd_55B3_6054[m + 1]))
         return;
     m = 0xff;
     if (!kbd_poll_bios_key())
@@ -161,7 +161,7 @@ extern void far GetMousePos(struct Pt far *pt);
 extern int far fd_50F6_46BC[];
 extern int far fd_55B3_5AA0[2];
 extern char far * far GSaveRect(struct Rect far *r);
-extern void far f_1FD2_02B1(int a);
+extern void far menu_set_draw_colours(int a);
 extern void far Punt(char far *fmt, ...);
 extern void far input_capture_screen(void);
 extern int far input_event_count(void);
@@ -176,7 +176,7 @@ extern void far free(char far *block);
 
 
 extern void far hotbox_center_pointer(int item);
-int far o10_35F5_0384(char far *sel, char far * far *items)
+int far menu_track_popup(char far *sel, char far * far *items)
 {
     int j;
     int t;
@@ -247,11 +247,11 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
     r.right -= fontWidth;
     r.top += 3;
     r.bottom -= 3;
-    f_1FD2_02B1(1);
+    menu_set_draw_colours(1);
     GRectOutline(&r, -3);
-    f_1FD2_02B1(0);
+    menu_set_draw_colours(0);
     GRectOutline(&r, -1);
-    f_1FD2_02B1(1);
+    menu_set_draw_colours(1);
     x = r.left;
     j = r.top;
     if (mode)
@@ -269,7 +269,7 @@ int far o10_35F5_0384(char far *sel, char far * far *items)
             sprintf(p, fmt, items[i]);
         else
             sprintf(p, fmt, i == *sel - 1 ? 16 : ' ', items[i]);
-        f_1FD2_0008(x, j, 1, p);
+        menu_printf_label(x, j, 1, p);
         p[maxLen] = 0;
         p += maxLen + 1;
         if (p > buf + 4000)
@@ -361,14 +361,14 @@ moved:
         if (cur == i)
             continue;
         if (cur != -1) {
-            f_1FD2_0008(x, g_3DDC * cur + r.top, 1, buf + (maxLen + 1) * cur);
+            menu_printf_label(x, g_3DDC * cur + r.top, 1, buf + (maxLen + 1) * cur);
             cur = -1;
         }
         if (i == -1)
             continue;
         cur = i;
-        f_1FD2_02B1(0);
-        f_1FD2_0008(x, g_3DDC * i + r.top, 0, buf + (maxLen + 1) * i);
+        menu_set_draw_colours(0);
+        menu_printf_label(x, g_3DDC * i + r.top, 0, buf + (maxLen + 1) * i);
     }
 found:
     i = j;
@@ -406,7 +406,7 @@ other:
 
 
 
-int far o10_35F5_0A63(int key, int far *sel, int count, int base)
+int far ui_step_button_focus(int key, int far *sel, int count, int base)
 {
     int i;
 

@@ -188,7 +188,7 @@ class DataPointers(unittest.TestCase):
             f = {"target_kind": "external", "target": name}
             for unit in (v.unit, "S26" if v.unit != "S26" else "S25"):
                 self.assertEqual(modules._data_target(f, {}, unit=unit), (exe.MANAGER_SEG, v.offset))
-        f = {"target_kind": "external", "target": "_f_0250_0114"}    # atexit hook, no vector
+        f = {"target_kind": "external", "target": "_edit_free_tile_ems"}    # atexit hook, no vector
         self.assertEqual(modules._data_target(f, {}, unit="root"), (0x0250, 0x0114))
 
 

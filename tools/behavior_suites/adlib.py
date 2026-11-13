@@ -1,6 +1,6 @@
 """Oracle-backed contract suite for the AdLib volume/pitch helper.
 
-Runs f_2815_0165 against the original executable and its current whole-module
+Runs snd_opl_set_note_level against the original executable and its current whole-module
 C draft. The register-helper callback observes call boundaries then falls through
 to original assembly; status-port reads use a deterministic provider because the
 historical delay routine's fixed IN/LOOP values do not affect returned state.
@@ -24,7 +24,7 @@ ROOT = next(p for p in Path(__file__).resolve().parents if (p / 'layout/function
 import behavior
 import behavior_ledger
 
-TARGET = "f_2815_0165"
+TARGET = "snd_opl_set_note_level"
 SUITE = "adlib_register_contract_v1"
 INSTRUMENT_TABLE = "fd_50F6_0000"
 VOLUME_OFFSET = "fd_50F6_4B16"

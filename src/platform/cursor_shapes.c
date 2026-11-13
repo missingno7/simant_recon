@@ -25,7 +25,7 @@ Handle near g_8C7C[6];
 extern Handle far db_LoadObject(int object, int kind);
 extern void far db_UnhookObject(int object, int kind);
 
-void far f_1B28_0006(void)
+void far mouse_load_builtin_cursor_pairs(void)
 {
     int i;
 
@@ -53,7 +53,7 @@ int near g_8CBC;
 extern void far mouse_set_cursor_bitmaps(char far *image, char far *mask);
 extern void far mouse_show_cursor(void);
 
-int far f_1B28_006A(int shape)
+int far mouse_select_cursor_shape(int shape)
 {
     Handle mask;
     Handle image;

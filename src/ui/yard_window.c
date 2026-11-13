@@ -161,7 +161,7 @@ extern long far fd_55B3_299E;
 extern int far fd_55B3_29A2;
 extern void _fastcall win_SetColorNum(int color);
 extern struct Rect far fd_50F6_10D2;
-extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
+extern void far ui_draw_centered_clipped_text(long msg, struct Rect far *rect, int y);
 
 void far yard_update_message(void)
 {
@@ -173,7 +173,7 @@ void far yard_update_message(void)
         } else {
             win_SetColorNum(3);
             if (YardMode > 1)
-                f_15D9_0006(mapMessage, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
+                ui_draw_centered_clipped_text(mapMessage, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
         }
     }
 }

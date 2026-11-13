@@ -167,10 +167,10 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
         (b.symbol_address("fd_50F6_15C4"), _w(cache) * 1200),
         (b.symbol_address("fd_50F6_1114"), bytes([tilecache & 255]) * 1200),
     ]
-    if target == "f_0250_129E":
+    if target == "edit_redraw_changed_tile":
         # Run the original/candidate helper bodies for their caller-visible
         # state effects, while selecting the source's no-render mode so no
-        # physical graphics driver is needed. f_0250_0721 reads the selected
+        # physical graphics driver is needed. edit_draw_life_and_ground_tile reads the selected
         # base pointer even in this mode, so provide a valid disjoint buffer.
         safe_base = 0xA300
         writes += [
@@ -197,14 +197,14 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
         writes += [(b.symbol_address("MapB" if plane == 2 else "MapR") + idx, bytes([tile & 255]),),
                    (b.symbol_address("LifeB" if plane == 2 else "LifeR") + idx, bytes([life & 255]))]
     callbacks = {"Punt": _callback(1, _noop)}
-    if target == "f_0250_129E":
+    if target == "edit_redraw_changed_tile":
         # Register without a handler: PreparedPair traces the original helper
         # entry and then continues into original EXE code. Candidate calls use
         # candidate whole-module entries and execute their natural C bodies.
-        callbacks.update({"f_0250_0721": b.Callback(2, project=_project_map_draw_intent),
-                          "f_0250_0ADB": b.Callback(2, project=_project_map_draw_intent)})
+        callbacks.update({"edit_draw_life_and_ground_tile": b.Callback(2, project=_project_map_draw_intent),
+                          "edit_draw_ground_tile": b.Callback(2, project=_project_map_draw_intent)})
     else:
-        callbacks.update({"f_0250_0721": _callback(2, _noop), "f_0250_0ADB": _callback(2, _noop)})
+        callbacks.update({"edit_draw_life_and_ground_tile": _callback(2, _noop), "edit_draw_ground_tile": _callback(2, _noop)})
     observe = [_range("g_94E4", 2), _range("g_9126", 2), _range("MapPlane", 2),
                _range("fd_50F6_1102", 2), _range("g_5A97", 1),
                b.Range("g_19D0", memory_suite.dga(0x19D0), 2),
@@ -213,8 +213,8 @@ def _mapdata_case(label, target, x, y, plane, view, tile, life, cache=-1, tileca
                _range("fd_50F6_15C4", 2400), _range("fd_50F6_1114", 1200)]
     return b.Case(label, args=[x, y], writes=writes, observe=observe, callbacks=callbacks,
         return_kind="void", metadata={"suite": SUITE,
-        "contract": (f"{target} selected cell and cache effects; f_0250_129E executes original helper bodies and captures normalized draw intent from x/y plus pre-entry g_94E4, g_9126, plane, mode and render globals" if target == "f_0250_129E" else f"{target} selected cell, life/view partitions and map state effects"),
-        "host_boundary": ("f_0250_0721/f_0250_0ADB trace-and-pass-through; mode 0 avoids hardware dispatch, not helper state transitions; Punt guarded by safe domain" if target == "f_0250_129E" else "Punt invalid-state boundary guarded by safe directed/randomized domain")})
+        "contract": (f"{target} selected cell and cache effects; edit_redraw_changed_tile executes original helper bodies and captures normalized draw intent from x/y plus pre-entry g_94E4, g_9126, plane, mode and render globals" if target == "edit_redraw_changed_tile" else f"{target} selected cell, life/view partitions and map state effects"),
+        "host_boundary": ("edit_draw_life_and_ground_tile/edit_draw_ground_tile trace-and-pass-through; mode 0 avoids hardware dispatch, not helper state transitions; Punt guarded by safe domain" if target == "edit_redraw_changed_tile" else "Punt invalid-state boundary guarded by safe directed/randomized domain")})
 
 
 def map_cell_cases(target, random_count=500, seed=0x1018):
@@ -228,7 +228,7 @@ def map_cell_cases(target, random_count=500, seed=0x1018):
     if target == "DoCalcTile":
         for pher in (0x0f, 0x10, 0x11):
             cases.append(_mapdata_case(f"pheromone-boundary/{pher:02x}", target, 3, 4, 0, 0, 0x42, 1, pher=pher))
-    if target == "f_0250_129E":
+    if target == "edit_redraw_changed_tile":
         # Cache hits, dirty cells, top row and argument guards; cache starts at
         # -2 and must be incremented without touching draw helpers.
         for x, y in [(-1, 0), (40, 1), (0, -1), (0, 30), (0, 0), (39, 29), (17, 0)]:
@@ -472,8 +472,8 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
         (b.symbol_address("fd_50F6_1F26"), _w(14) + _w(14)),
         (b.symbol_address("fd_50F6_15C4"), _w(-1) * 1200),
         (b.symbol_address("fd_50F6_1114"), bytes(1200)),
-        (b.symbol_address("fd_50F6_37E6"), struct.pack("<HH", b.symbol("f_0250_0ADB")["off"], b.symbol("f_0250_0ADB")["seg"])),
-        (b.symbol_address("fd_50F6_37EA"), struct.pack("<HH", b.symbol("f_0250_0721")["off"], b.symbol("f_0250_0721")["seg"])),
+        (b.symbol_address("fd_50F6_37E6"), struct.pack("<HH", b.symbol("edit_draw_ground_tile")["off"], b.symbol("edit_draw_ground_tile")["seg"])),
+        (b.symbol_address("fd_50F6_37EA"), struct.pack("<HH", b.symbol("edit_draw_life_and_ground_tile")["off"], b.symbol("edit_draw_life_and_ground_tile")["seg"])),
         (b.symbol_address("fd_50F6_37EE"), struct.pack("<HH", b.symbol("edit_scroll_and_redraw")["off"], b.symbol("edit_scroll_and_redraw")["seg"])),
         (b.symbol_address("tileWidth"), _w(16)), (b.symbol_address("tileHeight"), _w(16)),
         (b.symbol_address("fd_50F6_10E6"), b"\0" * 4),
@@ -493,7 +493,7 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
     buf_size = ht * wt * rowbytes + 4
     callbacks = {
         "f_1629_000C": b.Callback(3, _balloon_load, project=lambda m, a: {"message": _read_cstring(m, a), "flags": a[2]}),
-        "f_1A53_00BA": b.Callback(2, _tile_resource_load),
+        "res_load_firm_object": b.Callback(2, _tile_resource_load),
         "db_ReleaseHandle": b.Callback(2, _tile_resource_release),
         "edit_restore_tile_ems_map": b.Callback(0, project=lambda m, a: a),
         "edit_prepare_life_tiles": b.Callback(1, project=lambda m, a: a),
@@ -503,8 +503,8 @@ def _balloon_case(label, *, mode=1, plane=0, x=80, y=80, picw=8, pich=8,
         "font_SetFont": b.Callback(1, _font_select), "WinPrintf": b.Callback(6, _winprintf, project=_balloon_printf_project),
         "edit_set_viewport_clip": b.Callback(0, _window_clip_setup),
         "edit_compose_life_tile": b.Callback(0, _render_tile), "edit_copy_ground_tile": b.Callback(0, _render_tile),
-        "f_0250_0ADB": b.Callback(3, _copy_tile),
-        "f_0250_0721": b.Callback(6, _message_blit),
+        "edit_draw_ground_tile": b.Callback(3, _copy_tile),
+        "edit_draw_life_and_ground_tile": b.Callback(6, _message_blit),
         "edit_scroll_and_redraw": b.Callback(8, _noop, project=_capture_clipcopy),
     }
     observed = [
@@ -588,7 +588,7 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
     writes = list(arena.writes) + [
         (pic_seg * 16 + pic_off, picture + bytes(224 - len(picture))),
         (b.symbol_address("g_5A97"), bytes([display & 255])),
-        (b.symbol_address("g_9140"), struct.pack("<HH", b.symbol("f_0250_0721")["off"], b.symbol("f_0250_0721")["seg"])),
+        (b.symbol_address("g_9140"), struct.pack("<HH", b.symbol("edit_draw_life_and_ground_tile")["off"], b.symbol("edit_draw_life_and_ground_tile")["seg"])),
         (b.symbol_address("g_9148"), struct.pack("<HH", b.symbol("edit_scroll_and_redraw")["off"], b.symbol("edit_scroll_and_redraw")["seg"])),
     ]
     callbacks = {
@@ -599,7 +599,7 @@ def _pic_case(label, pic_type, mode, x, y, width, height, *, available=True, dis
         "GPutImg": b.Callback(4, _noop, project=lambda m, a: _pic_transfer_project(m, a, header=False)),
         # These callbacks are used as the documented g_9140/g_9148 function
         # pointer services only in type-3 contracts added below.
-        "f_0250_0721": b.Callback(4, _screen_size),
+        "edit_draw_life_and_ground_tile": b.Callback(4, _screen_size),
         "edit_scroll_and_redraw": b.Callback(6, _screen_copy, project=_screen_copy_project),
         "WinPrintf": b.Callback(6, _noop, project=_bitmap_printf_project),
         "gfx_tandy_mask_to_buffer": b.Callback(4), "gfx_mono_mask_bitmap_to_buffer": b.Callback(4),

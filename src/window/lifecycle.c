@@ -316,10 +316,10 @@ void _fastcall win_ToTop(int win)
     }
 }
 
-extern void far f_1E57_0052(int win);
-extern void _fastcall f_21FA_0AD2(struct Rect far *rect);
+extern void far clip_lower_window(int win);
+extern void _fastcall win_redraw_rect(struct Rect far *rect);
 
-void _fastcall f_20E8_0776(int win)
+void _fastcall win_lower_or_dismiss(int win)
 {
     int flag;
     char far *w;
@@ -336,14 +336,14 @@ void _fastcall f_20E8_0776(int win)
                 win_Close(g_5702[0]);
                 return;
             }
-            f_1E57_0052(win);
+            clip_lower_window(win);
             if (g_5702[0] != win) {
                 win_deactivate_pointer_regions(win);
                 win_activate_pointer_regions(g_5702[0]);
             }
         }
     } else {
-        f_1E57_0052(win);
+        clip_lower_window(win);
     }
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
@@ -351,7 +351,7 @@ void _fastcall f_20E8_0776(int win)
     r = *(struct Rect far *)w;
     win_UnlockWin(win);
     (*g_62E0)(win);
-    f_21FA_0AD2(&r);
+    win_redraw_rect(&r);
     (*g_62E8)();
     clip_Off();
 }
@@ -371,12 +371,12 @@ void _fastcall win_set_before_close_hook(void (far *hook)(int))
     g_62F4 = hook;
 }
 
-void _fastcall f_20E8_08B3(void (far *hook)(void))
+void _fastcall win_set_before_update_hook(void (far *hook)(void))
 {
     g_62E4 = hook;
 }
 
-void _fastcall f_20E8_08C7(void (far *hook)(void))
+void _fastcall win_set_after_update_hook(void (far *hook)(void))
 {
     g_62E8 = hook;
 }
@@ -394,7 +394,7 @@ void _fastcall f_20E8_08EF(void (far *hook)(void))
 
 extern int far * _fastcall win_ObjAddr(int);
 
-extern int far f_2505_036E(void);
+extern int far win_any_window_open(void);
 /*
  * Code generation here depends on declaration numbers (docs/codegen-rules.md, "Declaration
  * numbers that coincide modulo 17"): whether the pointer or the doubled index goes to BX in
@@ -404,7 +404,7 @@ extern int far f_2505_036E(void);
  * parameter names left out above (the three hook parameter lists and win_ObjAddr) stand for that
  * count; which original declarations made it up is unknown.
  */
-void _fastcall f_20E8_0903(int obj, int far *rect)
+void _fastcall win_set_obj_absolute_rect(int obj, int far *rect)
 {
     int j;
     int win;
@@ -446,7 +446,7 @@ void far win_close_auto_dismiss(void)
     int top;
 
     top = g_5702[0];
-    if (f_2505_036E()) {
+    if (win_any_window_open()) {
         win_LockWin(top);
         if (*(int far *)(win_WinAddr(top) + 0x1c) & 1)
             win_Close(top);

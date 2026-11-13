@@ -77,7 +77,7 @@ class SearchCompilerControls(unittest.TestCase):
         source = ROOT / "tests/fixtures/memory-near-repaired.c"
         with contextlib.redirect_stdout(io.StringIO()):
             peer = search.run("mem_unlock_encoded_handle", [source], None, None, None, {}, quiet=True)[0]
-            target = search.run("f_171C_0CF4", [source], None, None, None, {}, quiet=True)[0]
+            target = search.run("mem_compact_region", [source], None, None, None, {}, quiet=True)[0]
         self.assertEqual(peer["status"], "EXACT", peer)
         self.assertEqual(peer["flags"], ["/AL", "/Oeg", "/Gs", "/Zi"])
         self.assertEqual(target["status"], "MISMATCH", target)

@@ -19,22 +19,22 @@ struct Pt {
     int y;
 };
 
-struct Pt far f_1F80_000C(char far *);
+struct Pt far gfx_measure_text_cells(char far *);
 void far timer_wait_double_ticks(int);
-char far * far f_1F80_00B8(char far *, int);
-int far f_1F80_0109(int);
-void far f_1F80_0122(struct Rect far *, int, char far *);
-int far f_1F80_0177(struct Rect far *, char far *);
-void far f_1F80_01A8(struct Rect far *, int, int);
-void far f_1F80_01F3(struct Rect far *, int, int, int, int);
-void far f_1F80_0280(char far *);
+char far * far gfx_left_pad_centered_text(char far *, int);
+int far gfx_center_cell_x(int);
+void far gfx_print_centered_cell_line(struct Rect far *, int, char far *);
+int far gfx_center_fixed_text_x(struct Rect far *, char far *);
+void far gfx_center_cell_rect(struct Rect far *, int, int);
+void far gfx_place_cell_rect(struct Rect far *, int, int, int, int);
+void far gfx_fatal_text_wait(char far *);
 
 extern char far * far _fstrchr(char far *s, int c);
 extern unsigned int far _fstrlen(char far *s);
 
 static struct Pt size;
 
-struct Pt far f_1F80_000C(char far *text)
+struct Pt far gfx_measure_text_cells(char far *text)
 {
     int len;
     char far *nl;
@@ -71,12 +71,12 @@ void far timer_wait_double_ticks(int ticks)
 }
 
 /* size: byte-equivalent hypothesis -- the segment ends before FAR_BSS 50F6, so 97..112 all give
-   the same image (all zero, no callers of f_1F80_00B8 fix a width) */
+   the same image (all zero, no callers of gfx_left_pad_centered_text fix a width) */
 static char far fd_50EF_0000[100];
 extern void far * far _fmemset(void far *dst, int c, unsigned int n);
 extern char far * far _fstrcpy(char far *dst, char far *src);
 
-char far * far f_1F80_00B8(char far *text, int width)
+char far * far gfx_left_pad_centered_text(char far *text, int width)
 {
     int pad;
 
@@ -89,7 +89,7 @@ char far * far f_1F80_00B8(char far *text, int width)
 extern char near fontWidth;
 extern int near g_3DB2;
 
-int far f_1F80_0109(int width)
+int far gfx_center_cell_x(int width)
 {
     return (g_3DB2 / fontWidth - width) / 2;
 }
@@ -97,20 +97,20 @@ int far f_1F80_0109(int width)
 extern int far font_FontHeight(void);
 extern void far GPutStr(int x, int y, char far *text);
 
-void far f_1F80_0122(struct Rect far *r, int line, char far *text)
+void far gfx_print_centered_cell_line(struct Rect far *r, int line, char far *text)
 {
     GPutStr(((r->right - _fstrlen(text) - r->left) / 2 + r->left) * fontWidth,
                 font_FontHeight() * (line & 0xff) + (char)(line >> 8), text);
 }
 
-int far f_1F80_0177(struct Rect far *r, char far *text)
+int far gfx_center_fixed_text_x(struct Rect far *r, char far *text)
 {
     return (r->right - _fstrlen(text) * fontWidth - r->left) / 2 + r->left;
 }
 
 extern int near g_3DB4;
 
-void far f_1F80_01A8(struct Rect far *r, int width, int height)
+void far gfx_center_cell_rect(struct Rect far *r, int width, int height)
 {
     r->left = (g_3DB2 / fontWidth - width) / 2;
     r->right = r->left + width;
@@ -118,7 +118,7 @@ void far f_1F80_01A8(struct Rect far *r, int width, int height)
     r->bottom = r->top + height;
 }
 
-void far f_1F80_01F3(struct Rect far *r, int x, int y, int width, int height)
+void far gfx_place_cell_rect(struct Rect far *r, int x, int y, int width, int height)
 {
     if (x < 0)
         x = 0;
@@ -134,11 +134,11 @@ void far f_1F80_01F3(struct Rect far *r, int x, int y, int width, int height)
     r->bottom = y + height;
 }
 
-extern void far f_1CE2_016C(int x, int y, char far *format, ...);
+extern void far gfx_printf_cells(int x, int y, char far *format, ...);
 extern int far kbd_read_bios_char(void);
 
-void far f_1F80_0280(char far *msg)
+void far gfx_fatal_text_wait(char far *msg)
 {
-    f_1CE2_016C(0, 0x16, "FATAL: %s", msg);
+    gfx_printf_cells(0, 0x16, "FATAL: %s", msg);
     kbd_read_bios_char();
 }

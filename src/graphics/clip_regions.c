@@ -59,14 +59,14 @@ void far clip_reset_temporary_state(void)
 
 void far win_raise_and_reclip(int win);
 
-void far f_1E57_0043(int win)
+void far clip_raise_window(int win)
 {
     win_raise_and_reclip(win);
 }
 
 void far win_rebuild_visible_clips(void);
 
-void far f_1E57_0052(int win)
+void far clip_lower_window(int win)
 {
     int i;
     int j;
@@ -154,7 +154,7 @@ void far clip_SetWin(int win)
         g_5AAC = 0;
 }
 
-int far f_1E57_0239(int win)
+int far clip_window_has_visible_rect(int win)
 {
     Handle h;
     struct Rect far *p;
@@ -170,7 +170,7 @@ int far f_1E57_0239(int win)
     return r;
 }
 
-void far f_1E57_0296(void)
+void far clip_set_desktop_region(void)
 {
     struct Rect far *p;
     int size;
@@ -193,7 +193,7 @@ void far f_1E57_0296(void)
     }
 }
 
-void far f_1E57_0351(void)
+void far clip_set_screen_region(void)
 {
     clip_reset_temporary_state();
     g_5AAC = &g_5A9C;
@@ -205,7 +205,7 @@ void far clip_Off(void)
     g_5AAC = 0;
 }
 
-int far f_1E57_036F(struct Rect far *r)
+int far clip_count_rects(struct Rect far *r)
 {
     int n;
 
@@ -219,7 +219,7 @@ int s_584C = 0;
 extern void far * far _fmemset(void far *dst, int c, unsigned n);
 extern Handle far mem_Alloc(long size, int flags, char far *name);
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
-extern struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *list,
+extern struct Rect far * far clip_split_rect_list(struct Rect far *c, struct Rect far *list,
                                          struct Rect far *in, struct Rect far *out);
 extern Handle far mem_Realloc(Handle h, long size, int flags);
 
@@ -261,7 +261,7 @@ void far win_rebuild_visible_clips(void)
     *list = g_5A9C;
     list[1].top = 0x8000;
     win_GetObjRect(win, &r);
-    fd_50F6_3B60[win >> 8] = mem_Alloc(n = (f_1D8E_02BD(&r, list, tmp, 0L) - tmp + 1) * sizeof(struct Rect), 1, "winClipList");
+    fd_50F6_3B60[win >> 8] = mem_Alloc(n = (clip_split_rect_list(&r, list, tmp, 0L) - tmp + 1) * sizeof(struct Rect), 1, "winClipList");
     _fmemcpy(mem_Lock(fd_50F6_3B60[win >> 8]), tmp, n);
     mem_Unlock(fd_50F6_3B60[win >> 8]);
     for (i = 1; i < 32; i++) {
@@ -269,12 +269,12 @@ void far win_rebuild_visible_clips(void)
         if (next == (int)0x8000)
             break;
         win_GetObjRect(win, &r);
-        end = f_1D8E_02BD(&r, list, 0L, tmp);
+        end = clip_split_rect_list(&r, list, 0L, tmp);
         if ((n = end - tmp) >= 256)
             Punt("C097: Clip overflow %d", (end - tmp));
         _fmemcpy(list, tmp, ((end - tmp) + 1) * sizeof(struct Rect));
         win_GetObjRect(next, &r);
-        end = f_1D8E_02BD(&r, list, tmp, 0L);
+        end = clip_split_rect_list(&r, list, tmp, 0L);
         if ((n = end - tmp) >= 256)
             Punt("C098: Clip overflow %d", (end - tmp));
         f_1E57_0006(n, 0);
@@ -284,7 +284,7 @@ void far win_rebuild_visible_clips(void)
         win = next;
     }
     win_GetObjRect(win, &r);
-    end = f_1D8E_02BD(&r, list, 0L, tmp);
+    end = clip_split_rect_list(&r, list, 0L, tmp);
     n = end - tmp;
     if (n >= 256) Punt("C099: Clip overflow %d", n);
     f_1E57_0006(n, 0);
@@ -335,7 +335,7 @@ void far clip_SubInclude(struct Rect far *r)
     f_1E57_0006(n, 1);
 }
 
-void far f_1E57_08F5(struct Rect far *r)
+void far clip_intersect_rect_list(struct Rect far *r)
 {
     Handle h;
     struct Rect far *buf;
@@ -409,12 +409,12 @@ void far clip_SubExclude(struct Rect far *r)
     g_5742 = h;
 }
 
-void far f_1E57_0C1A(struct Rect far *r)
+void far clip_exclude_rect(struct Rect far *r)
 {
     clip_SubExclude(r);
 }
 
-void far f_1E57_0C2D(struct Rect far *r)
+void far clip_append_rect_remainders(struct Rect far *r)
 {
     Handle h;
     struct Rect far *buf;
@@ -452,9 +452,9 @@ void far f_1E57_0C2D(struct Rect far *r)
     mem_Free(h);
 }
 
-void far f_1E57_0D97(struct Rect far *r)
+void far clip_expand_by_rect(struct Rect far *r)
 {
-    f_1E57_0C2D(r);
+    clip_append_rect_remainders(r);
 }
 
 extern Handle far fd_50F6_3B5C;
@@ -488,7 +488,7 @@ void far clip_Push(void)
 
 /* Pushes the clip state and turns clipping off.  No reference to this function was
  * found; the parameter list is a hypothesis. */
-void far f_1E57_0EB0(void)
+void far clip_push_and_disable(void)
 {
     clip_Push();
     clip_Off();
@@ -519,13 +519,13 @@ void far clip_Pop(void)
     mem_Unlock(g_5742);
 }
 
-void far f_1E57_0F8E(struct Rect far *r)
+void far clip_screen_if_rect_outside(struct Rect far *r)
 {
     if (r->top >= g_5A9C.top && r->bottom <= g_5A9C.bottom &&
         r->left >= g_5A9C.left && r->right <= g_5A9C.right)
         clip_Off();
     else
-        f_1E57_0351();
+        clip_set_screen_region();
 }
 
 

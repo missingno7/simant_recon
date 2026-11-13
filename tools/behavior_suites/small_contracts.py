@@ -253,9 +253,9 @@ def tandy_case(label, ignored, note, vol, chan):
     valid_domain = 0 <= note <= 127 and 0 <= chan <= 2 and 0 <= vol <= 255
     return behavior.Case(
         label=label, args=[ignored & 0xFFFF, note & 0xFFFF, vol & 0xFFFF, chan & 0xFFFF],
-        observe=[], callbacks={"f_29F0_002A": b.Callback(stack_words=2)},
+        observe=[], callbacks={"snd_port_write_byte": b.Callback(stack_words=2)},
         return_kind="void", io_reads={},
-        metadata={"suite": SUITE, "contract": "ordered actual OUT port/width/value sequence from original f_29F0_002A helper plus each helper-call argument/state snapshot", "helper_policy": "callback observes entry and falls through to execute original helper and actual OUT; no modeled writes", "expected_writes": 3, "domain_class": "valid-caller-domain" if valid_domain else "diagnostic-out-of-contract", "caller_domain": {"raw_note": "0..127 MIDI data byte before header transpose", "velocity_argument": "caller scales an unsigned MIDI byte; full byte sweep is included", "channel": "0..2 from f_277E_034F type-3 channel initialization"}},
+        metadata={"suite": SUITE, "contract": "ordered actual OUT port/width/value sequence from original snd_port_write_byte helper plus each helper-call argument/state snapshot", "helper_policy": "callback observes entry and falls through to execute original helper and actual OUT; no modeled writes", "expected_writes": 3, "domain_class": "valid-caller-domain" if valid_domain else "diagnostic-out-of-contract", "caller_domain": {"raw_note": "0..127 MIDI data byte before header transpose", "velocity_argument": "caller scales an unsigned MIDI byte; full byte sweep is included", "channel": "0..2 from snd_init_ps1_channels type-3 channel initialization"}},
     )
 
 

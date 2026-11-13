@@ -44,7 +44,7 @@ extern char far * near g_3DA8;
 extern char far * near g_3DA4;
 extern void far db_UnhookObject(int object, int kind);
 
-void far o20_39C7_0008(void)
+void far gfx_load_fonts_hercules(void)
 {
     g_3DA8 = *db_LoadObject(0x14, 9);
     g_3DA4 = *db_LoadObject(0x15, 9);
@@ -55,7 +55,7 @@ void far o20_39C7_0008(void)
 extern int far printf(char far *format, ...);
 extern void far Punt(char far *fmt, ...);
 
-void far o20_39C7_0069(void)
+void far gfx_load_fonts_tandy(void)
 {
     char far * far *p;
     char far * far *q;
@@ -72,7 +72,7 @@ void far o20_39C7_0069(void)
     db_UnhookObject(0x13, 9);
 }
 
-void far o20_39C7_00FF(void)
+void far gfx_load_fonts_mono_480(void)
 {
     g_3DA8 = *db_LoadObject(0x14, 9);
     g_3DA4 = *db_LoadObject(0x15, 9);
@@ -80,7 +80,7 @@ void far o20_39C7_00FF(void)
     db_UnhookObject(0x15, 9);
 }
 
-void far o20_39C7_0160(void)
+void far gfx_load_fonts_mono_350_400(void)
 {
     g_3DA8 = *db_LoadObject(0x14, 9);
     g_3DA4 = *db_LoadObject(0x15, 9);
@@ -90,7 +90,7 @@ void far o20_39C7_0160(void)
 
 extern void far WinPrintf(char far *fmt, ...);
 
-void far o20_39C7_01C1(void)
+void far gfx_load_font_planar_320(void)
 {
     char far * far *p;
 
@@ -106,7 +106,7 @@ void far o20_39C7_0211(void)
 {
 }
 
-void far o20_39C7_0212(void)
+void far gfx_load_fonts_vga256(void)
 {
     char far * far *p;
     char far * far *q;

@@ -5,7 +5,7 @@
  * DOS: resident code; segment 284A; partial original translation unit.
  * Windows: GR, from recorded function pairs in the Windows symbol inventory.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
- * Functions not yet exact: f_284A_0138.
+ * Functions not yet exact: snd_song_read_be16.
  */
 
 struct Song {
@@ -37,45 +37,45 @@ int far snd_service_and_test_stopped(void)
 
 void far StopSong(void);
 extern struct Song far * far fd_55B3_00B4;
-extern int far f_0000_0193(struct Song far *song, int number);
+extern int far snd_load_song_resources(struct Song far *song, int number);
 extern int far WinPrintf(char far *format, ...);
-extern void far f_29F0_001A(void);
+extern void far snd_control_interrupts_disable(void);
 extern char far * far * far fd_50F6_4B28;
 static int g_8DD8[18];
 static _segment g_8DFC;
 extern int far fd_50F6_4B2C;
 extern int far mem_Size(char far * far *handle);
-void far f_284A_0256(void);
-void far f_284A_02E4(void);
+void far snd_song_initialize_tracks(void);
+void far snd_song_reset_clock(void);
 extern int far fd_55B3_6B42;
 extern int far fd_50F6_4B8E[];
 extern int far fd_50F6_4BAA[];
-extern void far f_29F0_0022(void);
+extern void far snd_control_interrupts_enable(void);
 
 void far snd_load_and_start_song(int number)
 {
     int i;
 
     StopSong();
-    if (f_0000_0193(fd_55B3_00B4, number) == -1) {
+    if (snd_load_song_resources(fd_55B3_00B4, number) == -1) {
         WinPrintf("music failure\n");
         return;
     }
-    f_29F0_001A();
+    snd_control_interrupts_disable();
     g_7572 = 0;
     fd_50F6_4B28 = fd_55B3_00B4->data;
     g_8DFC = ((_segment far *)fd_50F6_4B28)[1];
     WinPrintf("Seg=%x, buf=%p, handle=%p", g_8DFC, *fd_50F6_4B28, fd_50F6_4B28);
     fd_50F6_4B2C = mem_Size(fd_50F6_4B28);
-    f_284A_0256();
-    f_284A_02E4();
+    snd_song_initialize_tracks();
+    snd_song_reset_clock();
     g_756E = 1;
     fd_55B3_6B42 = 5;
     for (i = 0; i < 14; i++) {
         fd_50F6_4B8E[i] = fd_55B3_00B4->bank[i];
         fd_50F6_4BAA[i] = fd_55B3_00B4->program[i];
     }
-    f_29F0_0022();
+    snd_control_interrupts_enable();
 }
 
 extern void far snd_release_song_resources(struct Song far *song, int number);
@@ -95,15 +95,15 @@ extern int far fd_50F6_4B2E;
 extern long far fd_50F6_4B42[];
 extern unsigned char far fd_50F6_4B30[];
 extern long far fd_50F6_4B8A;
-extern void far f_295C_02E8(int program, int note);
-extern void far f_295C_01EC(int bank, int program, int note, int velocity);
-int far f_284A_0138(int off)
+extern void far snd_stop_instrument_note(int program, int note);
+extern void far snd_start_instrument_note(int bank, int program, int note, int velocity);
+int far snd_song_read_be16(int off)
 {
     return SONG(off) << 8 | SONG(off + 1);
 }
 
 
-long far f_284A_0151(int off)
+long far snd_song_read_be32(int off)
 {
     long v;
     int i;
@@ -116,13 +116,13 @@ long far f_284A_0151(int off)
     return v;
 }
 
-void far f_284A_0199(int count, int off)
+void far snd_song_index_track_chunks(int count, int off)
 {
     int i;
     long len;
 
     for (i = 0; i < count; i++) {
-        len = f_284A_0151(off + 4);
+        len = snd_song_read_be32(off + 4);
         g_8DD8[i] = off + 8;
         off += len + 8;
     }
@@ -130,7 +130,7 @@ void far f_284A_0199(int count, int off)
 
 static int far *g_8DFE;
 
-long far f_284A_01D5(void)
+long far snd_song_read_varlen(void)
 {
     long v;
     unsigned char c;
@@ -148,38 +148,38 @@ long far f_284A_01D5(void)
     return v;
 }
 
-void far f_284A_024B(unsigned volume)
+void far snd_song_set_volume(unsigned volume)
 {
     g_7570 = volume;
 }
 
 
-void far f_284A_0256(void)
+void far snd_song_initialize_tracks(void)
 {
     long len;
     int i;
 
-    len = f_284A_0151(4);
-    g_7566 = f_284A_0138(10);
-    fd_50F6_4B2E = f_284A_0138(12);
-    f_284A_0199(g_7566, len + 8);
+    len = snd_song_read_be32(4);
+    g_7566 = snd_song_read_be16(10);
+    fd_50F6_4B2E = snd_song_read_be16(12);
+    snd_song_index_track_chunks(g_7566, len + 8);
     for (i = 0; i < g_7566; i++) {
         g_8DFE = &g_8DD8[i];
-        fd_50F6_4B42[i] = f_284A_01D5();
+        fd_50F6_4B42[i] = snd_song_read_varlen();
         fd_50F6_4B30[i] = SONG(*g_8DFE);
     }
 }
 
 static unsigned char far *g_8E02;
-void far f_284A_0325(unsigned division, long tempo);
+void far snd_song_set_tempo(unsigned division, long tempo);
 
-void far f_284A_02E4(void)
+void far snd_song_reset_clock(void)
 {
     g_7568 = 0;
     g_756C = 0;
     g_8DFE = g_8DD8;
     g_8E02 = fd_50F6_4B30;
-    f_284A_0325(0x1e0, 500000L);
+    snd_song_set_tempo(0x1e0, 500000L);
     fd_55B3_6B42 = 99;
 }
 
@@ -188,7 +188,7 @@ void far f_284A_0324(void)
 }
 
 
-void far f_284A_0325(unsigned division, long tempo)
+void far snd_song_set_tempo(unsigned division, long tempo)
 {
     long v;
 
@@ -199,7 +199,7 @@ void far f_284A_0325(unsigned division, long tempo)
     fd_50F6_4B8A = v / 13;
 }
 
-int far f_284A_038F(void)
+int far snd_song_schedule_next_track(void)
 {
     long delta;
     long t;
@@ -207,7 +207,7 @@ int far f_284A_038F(void)
     int i;
 
     if (*g_8E02 != 0x2f) {
-        delta = f_284A_01D5();
+        delta = snd_song_read_varlen();
         fd_50F6_4B42[g_756C] += delta;
     } else
         fd_50F6_4B42[g_756C] = 0x7fffffffL;
@@ -232,23 +232,23 @@ int far f_284A_038F(void)
 }
 
 
-void far f_284A_04C9(int chan, int note, unsigned velocity)
+void far snd_song_dispatch_note(int chan, int note, unsigned velocity)
 {
     velocity = g_7570 * velocity >> 7;
     if (velocity == 0)
-        f_295C_02E8(fd_50F6_4B8E[chan], note);
+        snd_stop_instrument_note(fd_50F6_4B8E[chan], note);
     else
-        f_295C_01EC(fd_50F6_4BAA[chan], fd_50F6_4B8E[chan], note, velocity);
+        snd_start_instrument_note(fd_50F6_4BAA[chan], fd_50F6_4B8E[chan], note, velocity);
 }
 
-void far f_284A_0521(int chan, int program)
+void far snd_song_set_channel_instrument(int chan, int program)
 {
     fd_50F6_4B8E[chan] = program;
 }
 
 int g_75A4[] = { 2, 2, 2, 2, 1, 1, 2 };
 
-void far f_284A_0537(unsigned status)
+void far snd_song_dispatch_channel_event(unsigned status)
 {
     int type;
     int chan;
@@ -258,20 +258,20 @@ void far f_284A_0537(unsigned status)
     if (chan < 14) {
         switch (type) {
         case 0:
-            f_284A_04C9(chan, SONG(*g_8DFE) + g_7576, 0);
+            snd_song_dispatch_note(chan, SONG(*g_8DFE) + g_7576, 0);
             break;
         case 1:
-            f_284A_04C9(chan, SONG(*g_8DFE) + g_7576, SONGP(*g_8DFE)[1]);
+            snd_song_dispatch_note(chan, SONG(*g_8DFE) + g_7576, SONGP(*g_8DFE)[1]);
             break;
         case 12:
-            f_284A_0521(chan, SONG(*g_8DFE));
+            snd_song_set_channel_instrument(chan, SONG(*g_8DFE));
             break;
         }
     }
     *g_8DFE += g_75A4[type];
 }
 
-void far f_284A_05C5(void)
+void far snd_song_dispatch_meta_event(void)
 {
     long tempo;
     int pos;
@@ -284,19 +284,19 @@ void far f_284A_05C5(void)
         pos = *g_8DFE;
         tempo = ((((long)SONGP(pos)[0] << 8) + SONGP(pos)[1]) << 8) + SONGP(pos)[2];
         *g_8DFE += 3;
-        f_284A_0325(fd_50F6_4B2E, tempo);
+        snd_song_set_tempo(fd_50F6_4B2E, tempo);
     } else {
         (*g_8DFE)++;
-        *g_8DFE += (int)f_284A_01D5();
+        *g_8DFE += (int)snd_song_read_varlen();
     }
 }
 
-void far f_284A_0673(unsigned char status)
+void far snd_song_skip_sysex_payload(unsigned char status)
 {
-    *g_8DFE += (int)f_284A_01D5();
+    *g_8DFE += (int)snd_song_read_varlen();
 }
 
-int far f_284A_067F(void)
+int far snd_song_process_due_events(void)
 {
     int r;
 
@@ -310,12 +310,12 @@ int far f_284A_067F(void)
             (*g_8DFE)++;
         }
         if (*g_8E02 == 0xf7 || *g_8E02 == 0xf0)
-            f_284A_0673(*g_8E02);
+            snd_song_skip_sysex_payload(*g_8E02);
         else if (*g_8E02 == 0xff)
-            f_284A_05C5();
+            snd_song_dispatch_meta_event();
         else
-            f_284A_0537(*g_8E02);
-        r = f_284A_038F();
+            snd_song_dispatch_channel_event(*g_8E02);
+        r = snd_song_schedule_next_track();
     } while (r == 0 && g_756E != 2);
     g_7574 = 0;
     return r ? r : 1;

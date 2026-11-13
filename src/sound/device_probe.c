@@ -5,27 +5,27 @@
  * DOS: resident code; segment 293A; complete original translation unit.
  * Windows: none (DOS only), based on the platform-specific code or DOS release data.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
- * Steered functions: f_293A_017F.
+ * Steered functions: snd_probe_mpu_reset.
  */
 
-int far f_293A_0029(void);
-int far f_293A_002D(void);
-int far f_293A_0059(void);
-int far f_293A_0087(void);
-int far f_293A_0121(void);
-int far f_293A_015E(void);
-int far f_293A_017C(void);
-int far f_293A_017F(void);
+int far snd_probe_assume_present(void);
+int far snd_probe_tandy_sound(void);
+int far snd_probe_ps1_sound(void);
+int far snd_probe_opl_timer(void);
+int far snd_find_blaster_dsp_base(void);
+int far snd_find_regchip_base(void);
+int far snd_probe_lpt_unavailable(void);
+int far snd_probe_mpu_reset(void);
 
 extern int far fd_50F6_01F0[];
 
 int (far *fd_55B3_74DA[])(void) = {
-    f_293A_0029, f_293A_0029, f_293A_002D, f_293A_0059, f_293A_0087,
-    f_293A_015E, f_293A_0121, f_293A_017C, f_293A_017F
+    snd_probe_assume_present, snd_probe_assume_present, snd_probe_tandy_sound, snd_probe_ps1_sound, snd_probe_opl_timer,
+    snd_find_regchip_base, snd_find_blaster_dsp_base, snd_probe_lpt_unavailable, snd_probe_mpu_reset
 };
 int far *fd_55B3_74FE = fd_50F6_01F0;
 
-int far f_293A_0006(void)
+int far snd_probe_preferred_device(void)
 {
     int i;
     int found;
@@ -40,12 +40,12 @@ int far f_293A_0006(void)
     return found;
 }
 
-int far f_293A_0029(void)
+int far snd_probe_assume_present(void)
 {
     return 1;
 }
 
-int far f_293A_002D(void)
+int far snd_probe_tandy_sound(void)
 {
     char far *p;
     int base;
@@ -59,7 +59,7 @@ int far f_293A_002D(void)
     return *p == 0x21 || base == 0xc4;
 }
 
-int far f_293A_0059(void)
+int far snd_probe_ps1_sound(void)
 {
     _asm {
         push es
@@ -86,21 +86,21 @@ none:
 }
 
 extern void far snd_opl_write(char reg, char value);
-extern unsigned char far f_29F0_0038(int port);
+extern unsigned char far snd_port_read_byte(int port);
 
-int far f_293A_0087(void)
+int far snd_probe_opl_timer(void)
 {
     int s1;
     unsigned i;
 
     snd_opl_write(4, 0x60);
     snd_opl_write(4, 0x80);
-    s1 = f_29F0_0038(0x388);
+    s1 = snd_port_read_byte(0x388);
     snd_opl_write(2, 0xff);
     snd_opl_write(4, 0x21);
     for (i = 0; i < 200; i++)
-        f_29F0_0038(0x388);
-    i = f_29F0_0038(0x388);
+        snd_port_read_byte(0x388);
+    i = snd_port_read_byte(0x388);
     snd_opl_write(4, 0x60);
     snd_opl_write(4, 0x80);
     if ((s1 & 0xe0) == 0 && (i & 0xe0) == 0xc0)
@@ -109,9 +109,9 @@ int far f_293A_0087(void)
 }
 
 extern unsigned far fd_55B3_7564;
-extern int far f_29B8_0000(void);
+extern int far snd_probe_dsp_reset_ack(void);
 
-int far f_293A_0121(void)
+int far snd_find_blaster_dsp_base(void)
 {
     int found;
 
@@ -121,7 +121,7 @@ int far f_293A_0121(void)
         if (fd_55B3_7564 >= 0x260)
             break;
         fd_55B3_7564 += 0x10;
-        found = f_29B8_0000();
+        found = snd_probe_dsp_reset_ack();
     }
     return found;
 }
@@ -129,7 +129,7 @@ int far f_293A_0121(void)
 extern int far snd_regchip_detect(void);
 extern int far fd_50F6_4B14;
 
-int far f_293A_015E(void)
+int far snd_find_regchip_base(void)
 {
     int port;
 
@@ -139,14 +139,14 @@ int far f_293A_015E(void)
     return 1;
 }
 
-int far f_293A_017C(void)
+int far snd_probe_lpt_unavailable(void)
 {
     return 0;
 }
 
-extern void far f_29F0_002A(int port, char value);
+extern void far snd_port_write_byte(int port, char value);
 
-int far f_293A_017F(void)
+int far snd_probe_mpu_reset(void)
 {
     int i;
     int tries;
@@ -155,27 +155,27 @@ int far f_293A_017F(void)
 
     ok = 0;
     ready = 0;
-    if (!(f_29F0_0038(0x331) & 0x80))
-        f_29F0_0038(0x330);
+    if (!(snd_port_read_byte(0x331) & 0x80))
+        snd_port_read_byte(0x330);
     for (i = 0; i < 5000; i++) {
-        if (!(f_29F0_0038(0x331) & 0x40)) {
+        if (!(snd_port_read_byte(0x331) & 0x40)) {
             ok = 1;
             goto write_ready;
         }
     }
 write_ready:
     if (ok) {
-        f_29F0_002A(0x331, 0xff);
+        snd_port_write_byte(0x331, 0xff);
         for (tries = 0; tries < 3 && ((unsigned)ok >= 0); tries++) {
             for (i = 0; i < 5000; i++) {
-                if (!(f_29F0_0038(0x331) & 0x80)) {
+                if (!(snd_port_read_byte(0x331) & 0x80)) {
                     ready = 1;
                     goto read_ready;
                 }
             }
 read_ready:
             if (ready) {
-                if (f_29F0_0038(0x330) == 0xfe)
+                if (snd_port_read_byte(0x330) == 0xfe)
                     return 1;
                 ready = 0;
             }
@@ -184,7 +184,7 @@ read_ready:
     return 0;
 }
 
-/* f_293A_017F is STEERED: the folded unsigned flag check retains the original
+/* snd_probe_mpu_reset is STEERED: the folded unsigned flag check retains the original
  * stack homes. The eliminated original expression is unknown; LIFE-1 keeps
  * the whole-module positive and negative controls. The two polling continuation
  * labels are inferred from relocation record boundaries (ZI-2). */

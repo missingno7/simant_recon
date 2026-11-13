@@ -221,7 +221,7 @@ def _actual_window_state(fixture,text,previous_window=0x0200):
         'win_FlushEvents':b.Callback(0,_flush_stale),
         'clip_KillWin':b.Callback(1),
         'win_redraw_exposed_windows':b.Callback(2,_rect_invalidated,pop=4),
-        'f_218D_01EB':b.Callback(0,lambda m,a:None),
+        'win_reset_proximity_object':b.Callback(0,lambda m,a:None),
         'win_rebuild_visible_clips':b.Callback(0,lambda m,a:None),
     })
     fixture.metadata['actual_window_resource']=proof

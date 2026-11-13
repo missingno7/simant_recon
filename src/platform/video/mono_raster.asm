@@ -101,10 +101,10 @@ DGROUP	group	_DATA
 	extrn	_mouse_show_cursor:far
 	extrn	_mouse_hide_cursor:far
 	extrn	_mouse_refresh_cursor:far
-	extrn	_f_1D8E_0384:far
-	extrn	_f_1D8E_0435:far
-	extrn	_f_1D8E_070E:far
-	extrn	_f_1D8E_07F6:far
+	extrn	_clip_dispatch_rect:far
+	extrn	_clip_draw_line:far
+	extrn	_clip_blit_mono_indexed:far
+	extrn	_clip_blit_planar:far
 
 S01A_TEXT	segment word public 'CODE'
 	assume	cs:S01A_TEXT, ds:DGROUP
@@ -417,7 +417,7 @@ _gfx_mono_fill_or_pattern_box	proc	far
 	push ax
 	mov ax, OFFSET L0264
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 L0264:
@@ -744,7 +744,7 @@ _gfx_mono_gputimgs	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_mono_put_image_raw
-	call far ptr _f_1D8E_070E
+	call far ptr _clip_blit_mono_indexed
 	retf
 _gfx_mono_gputimgs	endp
 
@@ -1045,7 +1045,7 @@ _gfx_mono_gputpics	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_mono_put_picture_raw
-	call far ptr _f_1D8E_07F6
+	call far ptr _clip_blit_planar
 	retf
 _gfx_mono_gputpics	endp
 
@@ -1666,7 +1666,7 @@ _gfx_mono_gline	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_mono_draw_line_raw
-	call far ptr _f_1D8E_0435
+	call far ptr _clip_draw_line
 	retf
 _gfx_mono_gline	endp
 

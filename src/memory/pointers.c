@@ -11,7 +11,7 @@ typedef char far * far *Handle;
 extern void far Punt(char far *message);
 extern Handle far Ralloc(long size, int flags, char far *name);
 
-char far * far f_078E_000C(long size, char far *name)
+char far * far mem_alloc_pointer(long size, char far *name)
 {
     if (size > 0xffffL)
         Punt("NewPtr argument too large");
@@ -20,7 +20,7 @@ char far * far f_078E_000C(long size, char far *name)
 
 extern void far * far _fmemset(void far *dst, int c, unsigned n);
 
-char far * far f_078E_0053(long size, char far *name)
+char far * far mem_alloc_zeroed_pointer(long size, char far *name)
 {
     Handle h;
 

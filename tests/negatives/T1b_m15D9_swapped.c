@@ -52,7 +52,7 @@ void far EditMessage(char far *message, long duration, int mode)
     }
 }
 
-void far f_15D9_0006(char far *text, struct Rect far *r, int y)
+void far ui_draw_centered_clipped_text(char far *text, struct Rect far *r, int y)
 {
     struct Rect rc;
     struct Pt size;

@@ -34,20 +34,20 @@ extern void far ems_set_handle_name(int handle, char far *name);
 extern int far ems_initialize(void);
 extern EmsSlot far * far * far f_2CFB_0002(long size, int flags, char far *name);
 
-void far f_19DC_04B9(void);
+void far db_report_read_error(void);
 
 static int s_8C74;
 int g_389C = 0;
 int g_389E = 0;
 int g_38A0 = 0;
 
-void far f_19DC_0008(void)
+void far db_free_ems_cache(void)
 {
     if (g_389C)
         ems_free_handle(g_389C);
 }
 
-int far f_19DC_001A(long size)
+int far db_init_ems_cache(long size)
 {
     int i;
     EmsSlot far *slot;
@@ -77,7 +77,7 @@ int far f_19DC_001A(long size)
         slot->file = slot->page = -1;
     }
     ems_map_page(g_389C, 0, 3);
-    atexit(f_19DC_0008);
+    atexit(db_free_ems_cache);
     return 1;
 }
 
@@ -85,7 +85,7 @@ int g_38B6 = -1;
 int g_38B8 = -1;
 int g_38BA = -1;
 
-char far * far f_19DC_0148(int file, int page)
+char far * far db_get_ems_page(int file, int page)
 {
     EmsSlot far *slot;
     int i;
@@ -129,11 +129,11 @@ char far * far f_19DC_0148(int file, int page)
         g_38B6 = i;
         slot->age = 0;
         while ((int)lseek(file, (long)page << 14, 0) == -1)
-            f_19DC_04B9();
+            db_report_read_error();
         for (;;) {
             if (read(file, fd_50F6_3B48, 0x4000) != -1)
                 break;
-            f_19DC_04B9();
+            db_report_read_error();
         }
     }
     g_38B8 = file;
@@ -168,7 +168,7 @@ int far db_read_cached_range(int file, long offset, char far *buffer, long count
     s_8C74 = file;
     if (count == 0L)
         return 0;
-    if (g_390C || !f_19DC_001A(500000L))
+    if (g_390C || !db_init_ems_cache(500000L))
         goto plain;
     page = (int)(offset >> 14);
     off = (unsigned int)offset & 0x3FFF;
@@ -176,13 +176,13 @@ int far db_read_cached_range(int file, long offset, char far *buffer, long count
     if (chunk > count)
         chunk = (unsigned int)count;
     CHECK_FILE();
-    _fmemcpy(buffer, f_19DC_0148(file, page) + off, chunk);
+    _fmemcpy(buffer, db_get_ems_page(file, page) + off, chunk);
     page++;
     done = chunk;
     left = (unsigned int)count - chunk;
     while (left >= 0x4000) {
         CHECK_FILE();
-        src = f_19DC_0148(file, page);
+        src = db_get_ems_page(file, page);
         CHECK_FILE();
         _fmemcpy(buffer + done, src, 0x4000);
         done += 0x4000;
@@ -191,7 +191,7 @@ int far db_read_cached_range(int file, long offset, char far *buffer, long count
     }
     if (left) {
         CHECK_FILE();
-        src = f_19DC_0148(file, page);
+        src = db_get_ems_page(file, page);
         CHECK_FILE();
         _fmemcpy(buffer + done, src, left);
     }
@@ -202,7 +202,7 @@ plain:
     return read(file, buffer, (unsigned int)count);
 }
 
-void far f_19DC_04B9(void)
+void far db_report_read_error(void)
 {
     DosPunt("Database error");
 }

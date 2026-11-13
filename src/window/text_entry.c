@@ -15,7 +15,7 @@ char g_2970 = 0;
 int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags);
 
 /* draws count blanks from (x, y) */
-void far o09_36EE_000A(int x, int y, int count)
+void far ui_clear_text_cells(int x, int y, int count)
 {
     while (count--) {
         gfx_put_fixed_font_char(x, y, ' ');
@@ -24,7 +24,7 @@ void far o09_36EE_000A(int x, int y, int count)
 }
 
 /* text-cell to pixel coordinates, then edit */
-void far o09_36EE_003C(int col, int row, char far *text, int maxLen, int flags)
+void far ui_edit_text_at_cells(int col, int row, char far *text, int maxLen, int flags)
 {
     ui_edit_text_field(col = (col >> 8) + fontWidth * (col & 0xff),
                   row = g_3DDC * (row & 0xff) + (char)(row >> 8) * g_3DDC / 14,
@@ -47,7 +47,7 @@ extern char g_4366;
 extern int _fastcall win_GetEvent(struct Event far *ev);
 extern int far f_1FD2_0542(void);
 extern void far kbd_disable_mouse_emulation(void);
-extern void far f_1C62_0737(void);
+extern void far kbd_drain_bios_chars(void);
 extern unsigned far _fstrlen(char far *s);
 extern void far GPutStr(int x, int y, char far *text);
 extern char far * far _fstrcpy(char far *d, char far *s);
@@ -57,7 +57,7 @@ extern long far TickCount(void);
 extern int far kbd_read_bios_char(void);
 extern char far * far _fstrchr(char far *s, int c);
 extern void far * far _fmemmove(void far *dst, void far *src, unsigned n);
-extern void far f_00DF_016C(void);
+extern void far snd_start_effect_one_if_music(void);
 extern void far kbd_enable_mouse_emulation(void);
 
 /* edits a text field at (x, y); returns the new length + 1, 0 when cancelled */
@@ -81,7 +81,7 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
     while (win_GetEvent(&ev) || f_1FD2_0542())
         ;
     kbd_disable_mouse_emulation();
-    f_1C62_0737();
+    kbd_drain_bios_chars();
     if (g_5702 != saved)
         return 0;
     if (flags) {
@@ -144,7 +144,7 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
         case 8:
         case 0x84B:
             if (pos == 0)
-                f_00DF_016C();
+                snd_start_effect_one_if_music();
             else {
                 pos--;
                 x -= fontWidth;
@@ -154,7 +154,7 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
         case 4:
         case 0x853:
             if (len == 0 || len == pos) {
-                f_00DF_016C();
+                snd_start_effect_one_if_music();
                 break;
             }
             _fmemmove(&buf[pos], &buf[pos + 1], len - pos + 1);
@@ -164,7 +164,7 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
         case 9:
         case 0x852:
             if (len >= maxLen - 1 || len == pos) {
-                f_00DF_016C();
+                snd_start_effect_one_if_music();
                 break;
             }
             _fmemmove(&buf[pos + 1], &buf[pos], len + 1);
@@ -180,7 +180,7 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
         case 0x893:
             if (len == 0)
                 goto cancel;
-            o09_36EE_000A(x, y, len - pos);
+            ui_clear_text_cells(x, y, len - pos);
             len = pos;
             break;
         case 21:
@@ -189,18 +189,18 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
                 x += fontWidth;
                 pos++;
             } else
-                f_00DF_016C();
+                snd_start_effect_one_if_music();
             break;
         case 27:
             if (len == 0)
                 goto cancel;
             x -= pos * fontWidth;
-            o09_36EE_000A(x, y, len);
+            ui_clear_text_cells(x, y, len);
             pos = len = 0;
             break;
         default:
             if (maxLen == pos || _fstrchr(":;,.=+-_\\/*", key)) {
-                f_00DF_016C();
+                snd_start_effect_one_if_music();
                 break;
             }
             if (key < ' ' || key > 0x7f)

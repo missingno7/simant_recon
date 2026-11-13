@@ -172,7 +172,7 @@ void far font_PrintStr(int x, int y, char far *text)
     g_3DA0.y = y;
 }
 
-void far f_24AB_040C(char far *text)
+void far font_print_at_pen(char far *text)
 {
     font_PrintStr(g_3DA0.x, g_3DA0.y, text);
 }

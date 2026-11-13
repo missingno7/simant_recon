@@ -30,7 +30,7 @@ struct Rect {
 
 void far app_cleanup_and_exit(char far *msg, int flag);
 
-void far o15_384C_0000(void)
+void far app_exit_demo_expired(void)
 {
     app_cleanup_and_exit("SimAnt IBM DEMO version has expired.  Please get an update.", 0);
 }
@@ -91,11 +91,11 @@ static int g_2BD4 = 1;
 
 extern void far f_171C_0676(int flag);
 extern void far f_277D_000B(char far *msg);
-extern void far f_171C_030C(char far *msg);
+extern void far mem_dump_heap(char far *msg);
 extern int far fd_55B3_610A;
-extern void far f_277E_0154(void);
-extern void far f_1C62_00A1(void);
-extern void far f_1C62_0090(void);
+extern void far snd_shutdown_device_channels(void);
+extern void far input_shutdown_hooks(void);
+extern void far gfx_restore_text_mode(void);
 extern int far puts(char far *s);
 extern void far pascal f_00DE_000A(int code);
 extern void far exit(int code);
@@ -110,13 +110,13 @@ void far app_cleanup_and_exit(char far *msg, int flag)
     case 1:
         g_2BD4 = 2;
         if (flag)
-            f_171C_030C(msg);
+            mem_dump_heap(msg);
     case 2:
         g_2BD4 = 3;
         if (fd_55B3_610A)
-            f_277E_0154();
-        f_1C62_00A1();
-        f_1C62_0090();
+            snd_shutdown_device_channels();
+        input_shutdown_hooks();
+        gfx_restore_text_mode();
         puts(msg);
     }
     if (flag)

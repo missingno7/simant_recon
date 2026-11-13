@@ -4,22 +4,22 @@
  * C functions whose bodies are MSC inline assembly.
  */
 
-void far f_29F0_0012(void)
+void far snd_sample_interrupts_enable(void)
 {
     _asm sti
 }
 
-void far f_29F0_001A(void)
+void far snd_control_interrupts_disable(void)
 {
     _asm cli
 }
 
-void far f_29F0_0022(void)
+void far snd_control_interrupts_enable(void)
 {
     _asm sti
 }
 
-void far f_29F0_002A(int port, int value)
+void far snd_port_write_byte(int port, int value)
 {
     _asm {
         mov dx, port
@@ -28,7 +28,7 @@ void far f_29F0_002A(int port, int value)
     }
 }
 
-unsigned char far f_29F0_0038(int port)
+unsigned char far snd_port_read_byte(int port)
 {
     unsigned char value;
 

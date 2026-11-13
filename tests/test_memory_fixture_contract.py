@@ -59,11 +59,11 @@ class HeapFixturePremise(unittest.TestCase):
     def test_completed_original_allocations_survive_candidate_compaction(self):
         import json
         program = json.loads((ROOT / 'src/program.json').read_text())
-        if 'f_171C_0CF4' not in {r['function'] for r in program['semantics']}:
+        if 'mem_compact_region' not in {r['function'] for r in program['semantics']}:
             # The differential comparison exists for a function that is only behaviour-reviewed.
-            # f_171C_0CF4 is exact since 2026-11-12, so there is no candidate to compare.
-            self.skipTest('f_171C_0CF4 is exact; byte proof supersedes the differential check')
-        pair = b.PreparedPair('f_171C_0CF4', sequence_targets=m.TARGETS,
+            # mem_compact_region is exact since 2026-11-12, so there is no candidate to compare.
+            self.skipTest('mem_compact_region is exact; byte proof supersedes the differential check')
+        pair = b.PreparedPair('mem_compact_region', sequence_targets=m.TARGETS,
             out=ROOT / 'build/workers/heap_fixture_contract_tests/completed-history')
         steps = m.completed_allocation_sequence('test/completed-history')
         results = list(pair.compare_sequence(steps))
@@ -83,7 +83,7 @@ class HeapFixturePremise(unittest.TestCase):
 
     def test_raw_high_allocation_is_the_terminal_helper_boundary(self):
         steps = m.make_sequence('test/raw-helper')
-        self.assertEqual(steps[-1][0],'f_171C_0FBC')
+        self.assertEqual(steps[-1][0],'mem_allocate_high_block')
         self.assertIn('caller handle installation has not executed',
             steps[-1][1].metadata['sequence']['terminal_boundary'])
         self.assertTrue(all(not case.writes for _,case in steps[1:]))
@@ -113,7 +113,7 @@ class HeapFixturePremise(unittest.TestCase):
 
     def test_reclaimed_handle_resolves_type_five_template_and_free_skips_heap(self):
         case = m.heap_case('actual-reclaim',[(8,3,{"age":7}),(32,0x80)],handles=[0],args=[0])
-        vm = self.original_machine('f_171C_0BE2')
+        vm = self.original_machine('mem_discard_oldest_soft_block')
         self.assertEqual(vm.run(case)['return'],1)
         slot = m.HANDLE_SEG*16+m.MASTER_FIRST
         self.assertEqual(int.from_bytes(vm.read(slot,4),'little'),m.DISCARD_DATA_SEG<<16)
@@ -134,7 +134,7 @@ class HeapFixturePremise(unittest.TestCase):
 
     def test_original_lock_rejects_a_reclaimed_handle(self):
         case = m.heap_case('reclaim-before-lock',[(8,3),(32,0x80)],handles=[0],args=[0])
-        vm = self.original_machine('f_171C_0BE2')
+        vm = self.original_machine('mem_discard_oldest_soft_block')
         vm.run(case)
 
         def rejected_discard(machine,args):

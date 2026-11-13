@@ -53,7 +53,7 @@ extern int _fastcall win_DrawBitMap(int x, int y, int id);
 extern void _fastcall win_LockWinHigh(int win);
 extern char far * far win_locked_resource_ptr(int win);
 extern int far sprintf(char far *buffer, char far *format, ...);
-extern void far f_1E57_0296(void);
+extern void far clip_set_desktop_region(void);
 extern void far clip_restrict_rect(char far *p);
 extern void far clip_SetWin(int win);
 extern void far clip_Off(void);
@@ -439,11 +439,11 @@ void _fastcall win_DrawTitle(int win)
     win_UnlockWin(win);
 }
 
-void _fastcall f_21FA_0AD2(char far *p)
+void _fastcall win_redraw_rect(char far *p)
 {
     int i;
 
-    f_1E57_0296();
+    clip_set_desktop_region();
     clip_restrict_rect(p);
     win_redraw_desktop_menu();
     for (i = 0; g_5702[i] != (int)0x8000; i++)
@@ -462,7 +462,7 @@ void _fastcall win_redraw_exposed_windows(char far *p)
     struct Rect r;
     int i;
 
-    f_1E57_0296();
+    clip_set_desktop_region();
     clip_restrict_rect(p);
     if (g_5702[0] != (int)0x8000) {
         win_GetObjRect(g_5702[0], &r);

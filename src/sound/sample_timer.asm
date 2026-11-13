@@ -10,7 +10,7 @@
 ; 8-bit sample channels through per-channel volume tables (xlat) and send the
 ; result through an output routine selected by a near vector (speaker, LPT DAC,
 ; AdLib, Sound Blaster DSP, ports 200h/222h).  Every 16th tick the old INT 8
-; vector is chained; the MIDI sequencer (f_284A_067F) runs on a private stack.
+; vector is chained; the MIDI sequencer (snd_song_process_due_events) runs on a private stack.
 ; The code segment holds its own data (old vector, saved SS:SP, the private
 ; stack pointer, a re-entry counter), the handlers end in iret, and the C
 ; entry points address their arguments through "add bp,6".  MSC 6.00 produces
@@ -18,7 +18,7 @@
 
 DGROUP          group   _DATA
 
-                extrn   _f_284A_067F:far
+                extrn   _snd_song_process_due_events:far
 
 
                 public  _g_693C
@@ -35,15 +35,15 @@ DGROUP          group   _DATA
                 public  _fd_55B3_74B9
 
 CHANNELS        equ     4
-CHAN_SIZE       equ     14h             ; channel record (see f_290D_0098)
+CHAN_SIZE       equ     14h             ; channel record (see snd_start_sample_voice)
 
 _DATA           segment word public 'DATA'
-_g_693C         dw      3BCh            ; LPT DAC port (set by f_277E_0760 from the BIOS)
+_g_693C         dw      3BCh            ; LPT DAC port (set by snd_init_lpt_sample_channels from the BIOS)
 isr_stack       db      200h dup (0)    ; private stack of the sequencer tick
 isr_stack_top   label   word
 g_6B3E          dw      10h             ; ticks to the next sequencer call
 g_6B40          dw      10h             ; reload of g_6B3E
-_fd_55B3_6B42   dw      2               ; sequencer delay (returned by f_284A_067F)
+_fd_55B3_6B42   dw      2               ; sequencer delay (returned by snd_song_process_due_events)
 g_6B44          dw      1               ; channel 0 sample (4-channel mixer)
                 dw      1
 g_6B48          dw      3               ; speaker output state (0, 1, 2)
@@ -61,7 +61,7 @@ _fd_55B3_6B9E label word
 g_6B9E          dw      offset DGROUP:vol_tab   ; volume table base
 _fd_55B3_6BA0   dw      0               ; Sound Blaster DSP write port
                 dw      0
-; AdLib output level table (indexed by sample value, read by f_2815_0165 in steps of 2)
+; AdLib output level table (indexed by sample value, read by snd_opl_set_note_level in steps of 2)
                 public _fd_55B3_6BA4
 _fd_55B3_6BA4 label byte
 g_6BA4          label   byte
@@ -349,7 +349,7 @@ L00DE:
                 cld
                 mov     ax, DGROUP
                 mov     ds, ax
-                call    _f_284A_067F
+                call    _snd_song_process_due_events
                 mov     bx, ax
                 mov     ax, DGROUP
                 mov     ds, ax
@@ -670,7 +670,7 @@ L038A:
                 mov     ax, DGROUP
                 mov     ds, ax
                 cld
-                call    _f_284A_067F
+                call    _snd_song_process_due_events
                 mov     bx, ax
                 mov     ax, DGROUP
                 mov     ds, ax

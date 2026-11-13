@@ -71,10 +71,10 @@ DGROUP	group	_DATA
 	extrn	_mouse_show_cursor:far
 	extrn	_mouse_hide_cursor:far
 	extrn	_mouse_refresh_cursor:far
-	extrn	_f_1D8E_0384:far
-	extrn	_f_1D8E_0435:far
-	extrn	_f_1D8E_070E:far
-	extrn	_f_1D8E_07F6:far
+	extrn	_clip_dispatch_rect:far
+	extrn	_clip_draw_line:far
+	extrn	_clip_blit_mono_indexed:far
+	extrn	_clip_blit_planar:far
 
 S00B_TEXT	segment word public 'CODE'
 	assume	cs:S00B_TEXT, ds:DGROUP
@@ -132,7 +132,7 @@ _gfx_planar_dither_box	proc	far
 	push ax
 	mov ax, OFFSET _gfx_planar_dither_box_raw
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 _gfx_planar_dither_box	endp
@@ -259,7 +259,7 @@ _gfx_planar_gpatbox	proc	far
 	push ax
 	mov ax, OFFSET _gfx_planar_pattern_box_raw
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 _gfx_planar_gpatbox	endp
@@ -558,7 +558,7 @@ _gfx_planar_ginvbox	proc	far
 	push ax
 	mov ax, OFFSET _gfx_planar_invert_box_raw
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 _gfx_planar_ginvbox	endp
@@ -1916,7 +1916,7 @@ _gfx_planar_gputpics	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_planar_put_picture_raw
-	call far ptr _f_1D8E_07F6
+	call far ptr _clip_blit_planar
 	retf
 _gfx_planar_gputpics	endp
 
@@ -2596,7 +2596,7 @@ _gfx_planar_gputimgs	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_planar_put_image_raw
-	call far ptr _f_1D8E_070E
+	call far ptr _clip_blit_mono_indexed
 	retf
 _gfx_planar_gputimgs	endp
 
@@ -2918,7 +2918,7 @@ _gfx_planar_gline	proc	far
 	mov ax, word ptr _g_5AAE
 	and ax, ax
 	je _gfx_planar_draw_line_raw
-	call far ptr _f_1D8E_0435
+	call far ptr _clip_draw_line
 	retf
 _gfx_planar_gline	endp
 
@@ -3185,7 +3185,7 @@ _gfx_planar_gboxfill	proc	far
 	push ax
 	mov ax, OFFSET L16C1
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 L16C1:
@@ -3216,7 +3216,7 @@ _gfx_planar_fill_box_unsorted	proc	far
 	push ax
 	mov ax, OFFSET _gfx_planar_fill_box_raw
 	push ax
-	call far ptr _f_1D8E_0384
+	call far ptr _clip_dispatch_rect
 	add sp, 4
 	retf
 _gfx_planar_fill_box_unsorted	endp

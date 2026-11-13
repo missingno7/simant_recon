@@ -16,7 +16,7 @@ struct Rect {
 
 extern char far g_5A9C[];
 
-char far * far f_1CE2_000C(void)
+char far * far gfx_screen_rect(void)
 {
     return g_5A9C;
 }
@@ -35,7 +35,7 @@ extern void far gfx_put_fixed_font_char(int x, int y, int c);
 extern char near g_3DDC;
 extern char near fontWidth;
 
-void far f_1CE2_0043(int x, int y, int c, int width)
+void far gfx_draw_outlined_char(int x, int y, int c, int width)
 {
     gfx_put_fixed_font_char(x, y, c);
     GBoxOutline(x, y, fontWidth + x, g_3DDC + y, width);
@@ -48,14 +48,14 @@ void far GTextBox(int left, int top, int right, int bottom, int color)
     g_9134(left << 3, CELLY(top), right << 3, CELLY(bottom + 1), color);
 }
 
-void far f_1CE2_00D5(int left, int top, int right, int bottom, int width)
+void far gfx_outline_cell_box(int left, int top, int right, int bottom, int width)
 {
     GBoxOutline(left << 3, g_3DDC * top, right << 3, g_3DDC * (bottom + 1), width);
 }
 
 extern void (far * near g_9174)(int left, int top, int right, int bottom, int mode);
 
-void far f_1CE2_0104(struct Rect far *r, int mode)
+void far gfx_draw_rect_overlay(struct Rect far *r, int mode)
 {
     g_9174(r->left, r->top, r->right, r->bottom, mode);
 }
@@ -76,7 +76,7 @@ void far GCheckerBox(int left, int top, int right, int bottom)
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
 extern void far font_PrintStr(int x, int y, char far *text);
 
-void far f_1CE2_016C(int x, int y, char far *format, ...)
+void far gfx_printf_cells(int x, int y, char far *format, ...)
 {
     char buf[200];
 
@@ -130,7 +130,7 @@ void far GInvOutline(int left, int top, int right, int bottom, int width)
 
 static struct Rect g_8CCC;
 
-struct Rect far * far f_1CE2_039B(struct Rect far *r)
+struct Rect far * far gfx_cell_rect_to_pixels(struct Rect far *r)
 {
     g_8CCC.left = (r->left & 0xff) * fontWidth;
     g_8CCC.right = (r->right & 0xff) * fontWidth;
@@ -188,23 +188,23 @@ char far * far GSaveRect(struct Rect far *r)
     return p;
 }
 
-void far f_1CE2_0587(struct Rect far *r, char far *buf, int release);
+void far gfx_restore_rect_with_release(struct Rect far *r, char far *buf, int release);
 
-void far f_1CE2_0552(struct Rect far *r, char far *buf)
+void far gfx_restore_rect(struct Rect far *r, char far *buf)
 {
-    f_1CE2_0587(r, buf, 0);
+    gfx_restore_rect_with_release(r, buf, 0);
 }
 
 void far gfx_restore_and_free_rect(struct Rect far *r, char far *buf)
 {
-    f_1CE2_0587(r, buf, 1);
+    gfx_restore_rect_with_release(r, buf, 1);
 }
 
 extern void far GPutPic(int x, int y, char far *image);
 extern void far free(char far *block);
-extern void _fastcall f_21FA_0AD2(struct Rect far *rect);
+extern void _fastcall win_redraw_rect(struct Rect far *rect);
 
-void far f_1CE2_0587(struct Rect far *r, char far *buf, int release)
+void far gfx_restore_rect_with_release(struct Rect far *r, char far *buf, int release)
 {
     int x;
 
@@ -216,10 +216,10 @@ void far f_1CE2_0587(struct Rect far *r, char far *buf, int release)
         if (release)
             free(buf);
     } else
-        f_21FA_0AD2(r);
+        win_redraw_rect(r);
 }
 
-void far f_1CE2_05DF(char far *buf)
+void far gfx_free_saved_rect(char far *buf)
 {
     if (buf)
         free(buf);

@@ -287,7 +287,7 @@ class HelperInputs(unittest.TestCase):
                            capture_output=True, text=True, cwd=ROOT, env=env)
         self.assertEqual(r.returncode, 0, r.stderr[-1500:])
         self.assertIn("line entries (", r.stdout)
-        self.assertIn("f_29F0_0038", r.stdout.split("line entries (")[-1])
+        self.assertIn("snd_port_read_byte", r.stdout.split("line entries (")[-1])
 
 
 def promote(*args):
@@ -340,15 +340,15 @@ class AuditNegatives(unittest.TestCase):
 
     def test_T6_trimmed_extents(self):
         self.refused("outside the extent", NEG / "T6_m29F0_trimmed.c", "--module", "root:29F0",
-                     "--release", "f_29F0_0038=audit", "--extent", "29F0A:29F38")
+                     "--release", "snd_port_read_byte=audit", "--extent", "29F0A:29F38")
         self.refused("outside the extent", NEG / "T6b_m29F0_head_trimmed.c", "--module", "root:29F0",
-                     "--release", "f_29F0_000A=audit", "--extent", "29F12:29F4C")
+                     "--release", "snd_sample_interrupts_disable=audit", "--extent", "29F12:29F4C")
 
     def test_T7_pascal_declaration_of_cdecl(self):
         self.refused("TICKCOUNT", NEG / "T7_m15D9_pascal.c", "--module", "root:15D9")
 
     def test_T8_invented_object(self):
-        args = (NEG / "T8_m29F0_at0038_split.c", "--module", "root:29F0@0038", "--claim", "f_29F0_0038",
+        args = (NEG / "T8_m29F0_at0038_split.c", "--module", "root:29F0@0038", "--claim", "snd_port_read_byte",
                 "--profile", "msc600ax", "--flags", "/AL", "/Os", "/Gs", "/Zi", "--extent", "29F38:29F4C")
         self.refused("--origin-evidence", *args)
         self.refused("beyond frame offset", *args, "--origin-evidence", "audit: invented")

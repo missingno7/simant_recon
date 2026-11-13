@@ -29,7 +29,7 @@ extern void (far * near g_9158)(int, int, char far *, int, int);
 extern char near g_5A97;
 extern void (far * near g_9150)(int, int, char far *, int, int);
 
-int far f_1D8E_0002(int x, int y, struct Rect far *r)
+int far clip_point_outcode(int x, int y, struct Rect far *r)
 {
     int code;
 
@@ -53,8 +53,8 @@ struct Rect far * far clip_split_rect(struct Rect far *r, struct Rect far *c,
     int code2;
 
     t = *r;
-    code1 = f_1D8E_0002(r->left, r->top, c);
-    code2 = f_1D8E_0002(r->right - 1, r->bottom - 1, c);
+    code1 = clip_point_outcode(r->left, r->top, c);
+    code2 = clip_point_outcode(r->right - 1, r->bottom - 1, c);
     if (code1 & code2) {
         if (out) {
             *out++ = *r;
@@ -130,7 +130,7 @@ mark_out:
     return in;
 }
 
-struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *list,
+struct Rect far * far clip_split_rect_list(struct Rect far *c, struct Rect far *list,
                                   struct Rect far *in, struct Rect far *out)
 {
     struct Rect far *res;
@@ -157,7 +157,7 @@ struct Rect far * far f_1D8E_02BD(struct Rect far *c, struct Rect far *list,
     return res;
 }
 
-void far f_1D8E_0384(void (far *fn)(int, int, int, int, int), int unused1, int unused2,
+void far clip_dispatch_rect(void (far *fn)(int, int, int, int, int), int unused1, int unused2,
                      int left, int top, int right, int bottom, int color)
 {
     int i;
@@ -187,7 +187,7 @@ void far f_1D8E_0384(void (far *fn)(int, int, int, int, int), int unused1, int u
     }
 }
 
-void far f_1D8E_0435(char far *port, int x1, int y1, int x2, int y2, int color)
+void far clip_draw_line(char far *port, int x1, int y1, int x2, int y2, int color)
 {
     long slope;
     struct Rect far *clip;
@@ -209,8 +209,8 @@ void far f_1D8E_0435(char far *port, int x1, int y1, int x2, int y2, int color)
     p[1].x = line.right;
     p[1].y = line.bottom;
     for (clip = g_5AAC; clip->top != RECT_END; clip++) {
-        code[0] = f_1D8E_0002(x1, y1, clip);
-        code[1] = f_1D8E_0002(x2, y2, clip);
+        code[0] = clip_point_outcode(x1, y1, clip);
+        code[1] = clip_point_outcode(x2, y2, clip);
         if (code[0] & code[1])
             continue;
         if (code[1] == 0 && code[0] == 0) {
@@ -233,11 +233,11 @@ void far f_1D8E_0435(char far *port, int x1, int y1, int x2, int y2, int color)
                 if (code[i] & 0x80) {
                     p[i].x += (long)(clip->top - p[i].y) * slope / 0x10000L;
                     p[i].y = clip->top;
-                    code[i] = f_1D8E_0002(p[i].x, p[i].y, clip);
+                    code[i] = clip_point_outcode(p[i].x, p[i].y, clip);
                 } else if (code[i] & 0x40) {
                     p[i].x += (long)(clip->bottom - p[i].y) * slope / 0x10000L;
                     p[i].y = clip->bottom - 1;
-                    code[i] = f_1D8E_0002(p[i].x, p[i].y, clip);
+                    code[i] = clip_point_outcode(p[i].x, p[i].y, clip);
                 }
                 if (code[i] & 0x20) {
                     p[i].y += ((long)(clip->left - p[i].x) << 16) / slope;
@@ -252,7 +252,7 @@ void far f_1D8E_0435(char far *port, int x1, int y1, int x2, int y2, int color)
     }
 }
 
-void far f_1D8E_070E(char far *port, int x, int y, char far *bits, int width, int height)
+void far clip_blit_mono_indexed(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int i;
     int tmp;
@@ -279,7 +279,7 @@ void far f_1D8E_070E(char far *port, int x, int y, char far *bits, int width, in
     fd_55B3_3DE8 = 0;
 }
 
-void far f_1D8E_07F6(char far *port, int x, int y, char far *bits, int width, int height)
+void far clip_blit_planar(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int i;
     int tmp;
@@ -308,7 +308,7 @@ void far f_1D8E_07F6(char far *port, int x, int y, char far *bits, int width, in
     fd_55B3_3DE8 = 0;
 }
 
-void far f_1D8E_08EA(char far *port, int x, int y, char far *bits, int width, int height)
+void far clip_blit_mono(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;
     struct Rect far *p;
@@ -335,7 +335,7 @@ void far f_1D8E_08EA(char far *port, int x, int y, char far *bits, int width, in
     fd_55B3_3DE8 = 0;
 }
 
-void far f_1D8E_09DE(char far *port, int x, int y, char far *bits, int width, int height)
+void far clip_blit_packed4(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;
     struct Rect far *p;
@@ -362,7 +362,7 @@ void far f_1D8E_09DE(char far *port, int x, int y, char far *bits, int width, in
     fd_55B3_3DE8 = 0;
 }
 
-void far f_1D8E_0AC7(char far *port, int x, int y, char far *bits, int width, int height)
+void far clip_blit_bytes(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;
     struct Rect far *p;
@@ -389,7 +389,7 @@ void far f_1D8E_0AC7(char far *port, int x, int y, char far *bits, int width, in
     fd_55B3_3DE8 = 0;
 }
 
-void far f_1D8E_0BAE(char far *port, int x, int y, char far *bits, int width, int height)
+void far clip_blit_mono_byte_stride(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;
     struct Rect far *p;

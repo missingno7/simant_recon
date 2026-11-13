@@ -68,7 +68,7 @@ void _fastcall RepointObjects(int win)
     }
 }
 
-int _fastcall f_2505_00AA(int type)
+int _fastcall win_type_has_text_payload(int type)
 {
     switch (type) {
     case 5:
@@ -82,7 +82,7 @@ int _fastcall f_2505_00AA(int type)
     return 0;
 }
 
-int _fastcall f_2505_00DD(char far *obj)
+int _fastcall win_object_record_size(char far *obj)
 {
     int size;
 
@@ -195,14 +195,14 @@ char far * _fastcall win_WinAddr(int win)
     return win_locked_resource_ptr(win);
 }
 
-int far f_2505_036E(void)
+int far win_any_window_open(void)
 {
     if (g_5702 != (int)0x8000)
         return 1;
     return 0;
 }
 
-void _fastcall f_2505_0382(struct Pt far *center, struct Rect far *rect)
+void _fastcall win_rect_center(struct Pt far *center, struct Rect far *rect)
 {
     center->x = (rect->right + rect->left) / 2;
     center->y = (rect->top + rect->bottom) / 2;
@@ -302,7 +302,7 @@ void _fastcall win_sort_rect_coords(struct Rect far *r)
 }
 
 void _fastcall win_Recalc(int win);
-void _fastcall f_2505_06B9(int flag, char far *w);
+void _fastcall win_set_frame_hit_rects(int flag, char far *w);
 void _fastcall win_activate_pointer_regions(int win);
 extern char far * far mem_Lock(char far * far *handle);
 extern void far mem_Unlock(char far * far *handle);
@@ -358,9 +358,9 @@ void _fastcall win_Recalc(int win)
     mem_Unlock(handle);
 }
 
-extern void far f_1FD2_0883(int x, int y, int id, int mode, int flag);
+extern void far input_set_bitmap_hit_rect(int x, int y, int id, int mode, int flag);
 
-void _fastcall f_2505_06B9(int flag, char far *w)
+void _fastcall win_set_frame_hit_rects(int flag, char far *w)
 {
     int m;
     struct Pt size;
@@ -373,34 +373,34 @@ void _fastcall f_2505_06B9(int flag, char far *w)
     rect.top += m;
     rect.bottom -= m;
     if (*(int far *)(w + 0x1c) & 4) {
-        f_1FD2_0883(rect.left, rect.top, 0x64, 0xf083, flag);
+        input_set_bitmap_hit_rect(rect.left, rect.top, 0x64, 0xf083, flag);
         gr_BitMapSize(&size, 0x64);
         rect.left += size.x;
     }
     if (*(int far *)(w + 0x1c) & 8) {
         gr_BitMapSize(&size, 0x70);
-        f_1FD2_0883(rect.right - size.x, rect.bottom - size.y, 0x70, 0xf084, flag);
+        input_set_bitmap_hit_rect(rect.right - size.x, rect.bottom - size.y, 0x70, 0xf084, flag);
     }
     if (*(int far *)(w + 0x1c) & 0x100) {
         if (*(int far *)(w + 0x1c) & 0x80) {
             gr_BitMapSize(&size, 0x66);
-            f_1FD2_0883(rect.right -= size.x, rect.top, 0x66, 0xf085, flag);
+            input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x66, 0xf085, flag);
         } else {
             gr_BitMapSize(&size, 0x67);
-            f_1FD2_0883(rect.right -= size.x, rect.top, 0x67, 0xf085, flag);
+            input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x67, 0xf085, flag);
         }
     }
     if (*(int far *)(w + 0x1c) & 0x10)
-        f_1FD2_0883(rect.left, rect.top, 0x65, 0xf088, flag);
+        input_set_bitmap_hit_rect(rect.left, rect.top, 0x65, 0xf088, flag);
     if (*(int far *)(w + 0x1c) & 0x400) {
         gr_BitMapSize(&size, 0x69);
-        f_1FD2_0883(rect.right -= size.x, rect.top, 0x69, 0xf082, flag);
+        input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x69, 0xf082, flag);
     }
 }
 
 extern void far input_register_object_rect(char far *obj, int objNum);
-extern void far f_1FD2_044F(char far *w, int id);
-extern void far f_218D_01EB(void);
+extern void far input_register_proximity_rect(char far *w, int id);
+extern void far win_reset_proximity_object(void);
 
 void _fastcall win_activate_pointer_regions(int win)
 {
@@ -422,15 +422,15 @@ void _fastcall win_activate_pointer_regions(int win)
         if (obj[0x24] & 0x10)
             dirty = 1;
     }
-    f_2505_06B9(1, (char far *)w);
+    win_set_frame_hit_rects(1, (char far *)w);
     if (dirty)
-        f_1FD2_044F((char far *)w, (win >> 8) - 0x500);
-    f_218D_01EB();
+        input_register_proximity_rect((char far *)w, (win >> 8) - 0x500);
+    win_reset_proximity_object();
     win_UnlockWin(win);
 }
 
 extern void far input_remove_object_rect(int objNum);
-extern void far f_1FD2_049C(int id);
+extern void far input_remove_proximity_rect(int id);
 
 void _fastcall win_deactivate_pointer_regions(int win)
 {
@@ -451,8 +451,8 @@ void _fastcall win_deactivate_pointer_regions(int win)
         if (obj[0x24] & 0x10)
             dirty = 1;
     }
-    f_2505_06B9(0, (char far *)w);
+    win_set_frame_hit_rects(0, (char far *)w);
     if (dirty)
-        f_1FD2_049C((win >> 8) - 0x500);
+        input_remove_proximity_rect((win >> 8) - 0x500);
     win_UnlockWin(win);
 }

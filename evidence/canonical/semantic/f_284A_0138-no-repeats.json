@@ -1,215 +1,931 @@
 {
- "schema": "simant-canonical-semantic-review-v1",
- "function": "f_284A_0138",
- "module": "root:284A",
- "status": "BEHAVIOR_EXACT_CONFIRMED",
- "definition_sha256": "699917966ff3dfbb84f7bc5feb3a49634056544cf07391e228d3c5b178e6b906",
- "historical_review": {
-  "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
-  "path": "work/source-only-dos/static-completeness/f_284A_0138.json",
-  "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e"
- },
- "audit": {
-  "schema": "simant-strict-static-completeness-v1",
-  "function": "f_284A_0138",
+  "schema": "simant-canonical-semantic-review-v1",
+  "function": "snd_song_read_be16",
+  "module": "root:284A",
   "status": "BEHAVIOR_EXACT_CONFIRMED",
-  "source": {
-   "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
-   "path": "evidence/behavior/functions/f_284A_0138/module.c",
-   "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
-   "function_anchor_line": 85
+  "definition_sha256": "e884078ab0c109993027730ceb35fc7404447fb6332efd05c5466e55a344329c",
+  "historical_review": {
+    "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+    "path": "work/source-only-dos/static-completeness/f_284A_0138.json",
+    "sha256": "d8c9cb12172b487a83c5d84426d0bceecb4b0099aa1be9a98d1c39ed2fe5db0e"
   },
-  "registry_evidence": {
-   "path": "evidence/behavior/functions/f_284A_0138/evidence.json",
-   "sha256": "cbe831e8260b122b537c96510fe3c17c2409fe5247b40dd2574c4a16aac2e8e7",
-   "manifest_path": "evidence/behavior/manifest.json",
-   "manifest_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
-   "registered_status": "BEHAVIOR_EXACT",
-   "validation_receipt_sha256": "73846cb5ad0e5812e3fb1c469c908bdc9e6350d0acbdc15d2a9f633f5e41d12e"
-  },
-  "inputs": [
-   {
-    "path": "evidence/behavior/manifest.json",
-    "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
-    "role": "current behavioral registration index"
-   },
-   {
-    "path": "layout/functions.json",
-    "sha256": "f28c7de3f74334c001f3b5a5a43342af4222de3e83dca2159896f42da3a11d48",
-    "role": "function identity/address table"
-   },
-   {
-    "path": "layout/oracle.lock.json",
-    "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
-    "role": "locked original executable identity"
-   },
-   {
-    "path": "layout/manifest.json",
-    "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
-    "role": "historical source/build baseline pinned by run evidence"
-   },
-   {
-    "path": "assets/SIMANT.EXE",
-    "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
-    "role": "original read only through context.py and archived behavioral runner"
-   },
-   {
-    "path": "tools/context.py",
-    "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
-    "role": "original disassembly extraction command; invoked by exact function name without --raw"
-   },
-   {
-    "path": "build/workers/dos_static_small_helpers/original-disassembly.md",
-    "sha256": "fb4e1263b90aebe3b3b4fed069b49a0c0f7f453071565ef86ece054f5f04654a",
-    "role": "readable context.py disassembly for targets and directly-called I/O helpers; contains no raw bytes"
-   },
-   {
-    "path": "evidence/behavior/functions/f_284A_0138/run.json",
-    "sha256": "23ce96543b2b1166946065d51fc9b40aadceea6df7e320eb4db791dc29176daf",
-    "role": "actual-original and candidate differential run"
-   },
-   {
-    "path": "evidence/behavior/functions/f_284A_0138/cases.jsonl.gz",
-    "sha256": "f470d173ef43fd18d2943335b301eb7761bb2b3c645dfe2cc83a38ac93aea69e",
-    "role": "pinned per-case execution ledger"
-   },
-   {
-    "path": "evidence/behavior/functions/f_284A_0138/negative-controls.json",
-    "sha256": "3087926fdb2bc2af98092d63677604b683dbbbc3490b57152d8412c6aba64ee4",
-    "role": "compiled mutant detection report"
-   },
-   {
-    "path": "evidence/behavior/functions/f_284A_0138/contract-review.json",
-    "sha256": "e2cd4c20145945e5f59d14e5965f0082461632d898e695aa8301a2089230818e",
-    "role": "reviewed input/effect contract"
-   },
-   {
-    "path": "tools/behavior_suites/archive/small-contracts-finalmanifest-20261002.py",
-    "sha256": "da20a6488c580b8e6b5b8f6f7b112210eff614a7ef3c9b1b7e37595848516fca",
-    "role": "archived directed/randomized suite"
-   },
-   {
-    "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py",
-    "sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
-    "role": "archived reviewed execution harness identity"
-   }
-  ],
-  "original_function": {
-   "unit": "root",
-   "seg": "284A",
-   "off": "0x0138",
-   "size": "0x0019",
-   "linear_start": "0x285D8",
-   "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
-   "research": "python tools/context.py FUNCTION (no --raw); disassembly transcript is pinned in inputs"
-  },
-  "differential_evidence": {
-   "suite": {
-    "path": "tools/behavior_suites/archive/small-contracts-finalmanifest-20261002.py",
-    "sha256": "da20a6488c580b8e6b5b8f6f7b112210eff614a7ef3c9b1b7e37595848516fca"
-   },
-   "run": {
-    "path": "evidence/behavior/functions/f_284A_0138/run.json",
-    "sha256": "23ce96543b2b1166946065d51fc9b40aadceea6df7e320eb4db791dc29176daf",
-    "completion": "COMPLETE",
-    "cases": 20538,
-    "mismatches": 0,
-    "actual_original_execution": true,
-    "actual_candidate_execution": true
-   },
-   "case_ledger": {
-    "path": "evidence/behavior/functions/f_284A_0138/cases.jsonl.gz",
-    "sha256": "f470d173ef43fd18d2943335b301eb7761bb2b3c645dfe2cc83a38ac93aea69e",
-    "rows": 20538
-   },
-   "negative_controls": {
-    "path": "evidence/behavior/functions/f_284A_0138/negative-controls.json",
-    "sha256": "3087926fdb2bc2af98092d63677604b683dbbbc3490b57152d8412c6aba64ee4"
-   },
-   "contract_review": {
-    "path": "evidence/behavior/functions/f_284A_0138/contract-review.json",
-    "sha256": "e2cd4c20145945e5f59d14e5965f0082461632d898e695aa8301a2089230818e"
-   },
-   "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
-   "validation_receipt_sha256": "73846cb5ad0e5812e3fb1c469c908bdc9e6350d0acbdc15d2a9f633f5e41d12e",
-   "limits": "These executions are corroboration only; the static CFG/dataflow/arithmetic comparison below is the completeness basis. See review_notes for valid-state and excluded-domain limits.",
-   "compiled_candidate_identity": {
-    "source": "work\\takeover\\hardtail\\seeds\\root_284A_5d328bf943dd.c",
-    "source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
-    "compiled_source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
-    "object_sha256": "3d69e2b56de5a167ca9d7f3f6abc1c5e875a25568ccc5cdd16d7cd964fa9a79e",
-    "linked_code_sha256": "6dca175e5e9734ca06b4af296d6d84775ec2d7e1a9802f1e23eab80d175445ad",
-    "profile": "msc600ax",
-    "flags": [
-     "/AL",
-     "/Os",
-     "/Oe",
-     "/Og",
-     "/Gs",
-     "/Zi"
+  "audit": {
+    "schema": "simant-strict-static-completeness-v1",
+    "function": "f_284A_0138",
+    "status": "BEHAVIOR_EXACT_CONFIRMED",
+    "source": {
+      "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
+      "path": "evidence/behavior/functions/f_284A_0138/module.c",
+      "sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+      "function_anchor_line": 85
+    },
+    "registry_evidence": {
+      "path": "evidence/behavior/functions/f_284A_0138/evidence.json",
+      "sha256": "cbe831e8260b122b537c96510fe3c17c2409fe5247b40dd2574c4a16aac2e8e7",
+      "manifest_path": "evidence/behavior/manifest.json",
+      "manifest_sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+      "registered_status": "BEHAVIOR_EXACT",
+      "validation_receipt_sha256": "73846cb5ad0e5812e3fb1c469c908bdc9e6350d0acbdc15d2a9f633f5e41d12e"
+    },
+    "inputs": [
+      {
+        "path": "evidence/behavior/manifest.json",
+        "sha256": "dae79bdf74d7660e7e2eb47e8b463a9576c8d74a8e6ccd9e91af6d51f871ecea",
+        "role": "current behavioral registration index"
+      },
+      {
+        "path": "layout/functions.json",
+        "sha256": "f28c7de3f74334c001f3b5a5a43342af4222de3e83dca2159896f42da3a11d48",
+        "role": "function identity/address table"
+      },
+      {
+        "path": "layout/oracle.lock.json",
+        "sha256": "2c6d9e98c688621ad49a08c78d0e0968f4076b036be56ec0738217b533ccde13",
+        "role": "locked original executable identity"
+      },
+      {
+        "path": "layout/manifest.json",
+        "sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50",
+        "role": "historical source/build baseline pinned by run evidence"
+      },
+      {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+        "role": "original read only through context.py and archived behavioral runner"
+      },
+      {
+        "path": "tools/context.py",
+        "sha256": "6d94d66482736663f4dd29945ae3d206e5543aaccdb062e96304f5cb0d1a97be",
+        "role": "original disassembly extraction command; invoked by exact function name without --raw"
+      },
+      {
+        "path": "build/workers/dos_static_small_helpers/original-disassembly.md",
+        "sha256": "fb4e1263b90aebe3b3b4fed069b49a0c0f7f453071565ef86ece054f5f04654a",
+        "role": "readable context.py disassembly for targets and directly-called I/O helpers; contains no raw bytes"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/run.json",
+        "sha256": "23ce96543b2b1166946065d51fc9b40aadceea6df7e320eb4db791dc29176daf",
+        "role": "actual-original and candidate differential run"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/cases.jsonl.gz",
+        "sha256": "f470d173ef43fd18d2943335b301eb7761bb2b3c645dfe2cc83a38ac93aea69e",
+        "role": "pinned per-case execution ledger"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/negative-controls.json",
+        "sha256": "3087926fdb2bc2af98092d63677604b683dbbbc3490b57152d8412c6aba64ee4",
+        "role": "compiled mutant detection report"
+      },
+      {
+        "path": "evidence/behavior/functions/f_284A_0138/contract-review.json",
+        "sha256": "e2cd4c20145945e5f59d14e5965f0082461632d898e695aa8301a2089230818e",
+        "role": "reviewed input/effect contract"
+      },
+      {
+        "path": "tools/behavior_suites/archive/small-contracts-finalmanifest-20261002.py",
+        "sha256": "da20a6488c580b8e6b5b8f6f7b112210eff614a7ef3c9b1b7e37595848516fca",
+        "role": "archived directed/randomized suite"
+      },
+      {
+        "path": "evidence/behavior/harnesses/ss-ds-window-v1/tools/behavior.py",
+        "sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+        "role": "archived reviewed execution harness identity"
+      }
     ],
-    "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
-   }
+    "original_function": {
+      "unit": "root",
+      "seg": "284A",
+      "off": "0x0138",
+      "size": "0x0019",
+      "linear_start": "0x285D8",
+      "oracle_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+      "research": "python tools/context.py FUNCTION (no --raw); disassembly transcript is pinned in inputs"
+    },
+    "differential_evidence": {
+      "suite": {
+        "path": "tools/behavior_suites/archive/small-contracts-finalmanifest-20261002.py",
+        "sha256": "da20a6488c580b8e6b5b8f6f7b112210eff614a7ef3c9b1b7e37595848516fca"
+      },
+      "run": {
+        "path": "evidence/behavior/functions/f_284A_0138/run.json",
+        "sha256": "23ce96543b2b1166946065d51fc9b40aadceea6df7e320eb4db791dc29176daf",
+        "completion": "COMPLETE",
+        "cases": 20538,
+        "mismatches": 0,
+        "actual_original_execution": true,
+        "actual_candidate_execution": true
+      },
+      "case_ledger": {
+        "path": "evidence/behavior/functions/f_284A_0138/cases.jsonl.gz",
+        "sha256": "f470d173ef43fd18d2943335b301eb7761bb2b3c645dfe2cc83a38ac93aea69e",
+        "rows": 20538
+      },
+      "negative_controls": {
+        "path": "evidence/behavior/functions/f_284A_0138/negative-controls.json",
+        "sha256": "3087926fdb2bc2af98092d63677604b683dbbbc3490b57152d8412c6aba64ee4"
+      },
+      "contract_review": {
+        "path": "evidence/behavior/functions/f_284A_0138/contract-review.json",
+        "sha256": "e2cd4c20145945e5f59d14e5965f0082461632d898e695aa8301a2089230818e"
+      },
+      "harness_sha256": "ee7c997d2f89efa85ce932cd5ac7c674c465f1013a16a8c08e83d43c69f4be5b",
+      "validation_receipt_sha256": "73846cb5ad0e5812e3fb1c469c908bdc9e6350d0acbdc15d2a9f633f5e41d12e",
+      "limits": "These executions are corroboration only; the static CFG/dataflow/arithmetic comparison below is the completeness basis. See review_notes for valid-state and excluded-domain limits.",
+      "compiled_candidate_identity": {
+        "source": "work\\takeover\\hardtail\\seeds\\root_284A_5d328bf943dd.c",
+        "source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+        "compiled_source_sha256": "5d328bf943dd3b1dd8dd797ba7d63885777facf9ea5c194b6b222244bd937a35",
+        "object_sha256": "3d69e2b56de5a167ca9d7f3f6abc1c5e875a25568ccc5cdd16d7cd964fa9a79e",
+        "linked_code_sha256": "6dca175e5e9734ca06b4af296d6d84775ec2d7e1a9802f1e23eab80d175445ad",
+        "profile": "msc600ax",
+        "flags": [
+          "/AL",
+          "/Os",
+          "/Oe",
+          "/Og",
+          "/Gs",
+          "/Zi"
+        ],
+        "manifest_sha256": "025a0a9255d910cae4b122ab5a3f3fb40888bb456d7fe42158db7c9e622fcf50"
+      }
+    },
+    "branch_map": [],
+    "cfg_summary": "Straight-line function: segment load, two byte reads, word result construction, one far return. The entire target contains no conditional/loop/switch/indirect branch and no call.",
+    "call_map": [],
+    "memory_state": {
+      "reads": [
+        "BP+0x06 signed 16-bit off argument.",
+        "One read of the 16-bit based segment global g_8DFC (DS:0x8DFC), used as ES for both accesses.",
+        "Unsigned byte at ES:off and unsigned byte at ES:(off+1 mod 65536)."
+      ],
+      "writes": [
+        "No data-memory writes. Prologue saves BP; epilogue restores it. No caller argument is modified."
+      ],
+      "return": "16-bit word (first byte << 8) | second byte; first byte is the high-order byte and the following based-segment byte is low-order."
+    },
+    "constants_widths_pointer_arithmetic": {
+      "widths_signedness": "off is a signed 16-bit C int but is consumed as its 16-bit offset bit pattern. SONG yields unsigned char and promotes to 16-bit int. The source shift can form bit patterns 0x8000..0xff00, beyond signed-int range; the historical MSC 16-bit lowering supplies the observed 16-bit result bits (as the target register construction does). This is a compiler-model assumption, not a portable ISO-C shift guarantee.",
+      "pointer_math": "SONGP(off) is an unsigned-byte _based(g_8DFC) pointer. Target loads at ES:BX then ES:BX+1; effective-address addition wraps the 16-bit offset within the same ES segment and does not carry into a different segment. C off+1 is evaluated as a 16-bit int by the pinned MSC compiler and its low word matches the target for all 16-bit offsets, including 0x7fff -> 0x8000 and 0xffff -> 0x0000; the latter is signed-safe (-1+1), while 0x7fff+1 relies on MSC word-wrap behavior.",
+      "constants": "Byte shift 8; byte width 8; result width 16. There are no table/index scale constants, loops or calls."
+    },
+    "static_axes": {
+      "algorithm": "Original moves the first byte to the high result byte and the second byte to the low result byte; source SONG(off)<<8 | SONG(off+1) is the same byte order and bit construction under MSC 16-bit target semantics.",
+      "control_flow": "No conditional, loop, switch, computed jump or alternate return exists; branch_map is empty because the full CFG is straight-line.",
+      "calls": "None.",
+      "memory": "Exactly two based-segment byte reads, same segment, second effective offset wrapping modulo 2^16; no writes.",
+      "return_abi": "int far word return; BP is restored and far return consumes no args.",
+      "completeness_basis": "Static comparison accounts for every instruction in the 25-byte context and the whole source expression, including byte order, offset width and based-segment carry behavior."
+    },
+    "remaining_differences": [
+      {
+        "kind": "CODEGEN_ONLY",
+        "original_address": "root:284A:0142..014F",
+        "source_anchor": "module.c:85-87",
+        "explanation": "The registered dossier notes different AH/AL assignment/code shape while both target and natural C read the high byte then low byte using 16-bit based-pointer wrap. The register construction and source shift/OR produce the same 16-bit word for the supported MSC target model; no data write or call difference remains."
+      }
+    ],
+    "unexplained_semantic_differences": [],
+    "review_notes": [
+      "Input domain pins g_8DFC to an accessible 64 KiB segment and includes every 16-bit offset, including 0xffff; malformed segment pointers are excluded.",
+      "The source expression relies on MSC 6.00AX 16-bit behavior both for left-shifting promoted unsigned-char values >=0x80 into the signed-int high bit and for off+1 at 0x7fff. The original disassembly directly specifies the returned bits and same-segment offset wrap; neither operation is being claimed portable under abstract ISO C overflow/shift rules.",
+      "Differential evidence: 538 directed plus 20,000 randomized actual original/candidate cases, 20,538 ledger rows, zero mismatches; byte-order mutation detected. Static byte-flow/wrap reasoning, not the finite corpus, closes the function.",
+      "This receipt is a worker audit candidate for independent root review; it does not edit or reclassify the historical or behavioral registry."
+    ]
   },
-  "branch_map": [],
-  "cfg_summary": "Straight-line function: segment load, two byte reads, word result construction, one far return. The entire target contains no conditional/loop/switch/indirect branch and no call.",
-  "call_map": [],
-  "memory_state": {
-   "reads": [
-    "BP+0x06 signed 16-bit off argument.",
-    "One read of the 16-bit based segment global g_8DFC (DS:0x8DFC), used as ES for both accesses.",
-    "Unsigned byte at ES:off and unsigned byte at ES:(off+1 mod 65536)."
-   ],
-   "writes": [
-    "No data-memory writes. Prologue saves BP; epilogue restores it. No caller argument is modified."
-   ],
-   "return": "16-bit word (first byte << 8) | second byte; first byte is the high-order byte and the following based-segment byte is low-order."
+  "root_review": {
+    "reviewer": "root",
+    "complete_cfg": true,
+    "complete_data_widths": true,
+    "complete_calls_effects": true,
+    "codegen_only_residue": true,
+    "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance.",
+    "source_correction_reviewed": true,
+    "source_correction": "Context only: repeated file-scope declarations of this file are removed; the first copy of each stays. Every exact claim of the module stays exact and the definition of this function is unchanged (same definition_sha256).",
+    "source_correction_date": "2026-11-13"
   },
-  "constants_widths_pointer_arithmetic": {
-   "widths_signedness": "off is a signed 16-bit C int but is consumed as its 16-bit offset bit pattern. SONG yields unsigned char and promotes to 16-bit int. The source shift can form bit patterns 0x8000..0xff00, beyond signed-int range; the historical MSC 16-bit lowering supplies the observed 16-bit result bits (as the target register construction does). This is a compiler-model assumption, not a portable ISO-C shift guarantee.",
-   "pointer_math": "SONGP(off) is an unsigned-byte _based(g_8DFC) pointer. Target loads at ES:BX then ES:BX+1; effective-address addition wraps the 16-bit offset within the same ES segment and does not carry into a different segment. C off+1 is evaluated as a 16-bit int by the pinned MSC compiler and its low word matches the target for all 16-bit offsets, including 0x7fff -> 0x8000 and 0xffff -> 0x0000; the latter is signed-safe (-1+1), while 0x7fff+1 relies on MSC word-wrap behavior.",
-   "constants": "Byte shift 8; byte width 8; result width 16. There are no table/index scale constants, loops or calls."
+  "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt.",
+  "supersedes": {
+    "program_sha256": "4d446ee4f0c8e512ae2adfc737e7eb4b0bd5674d5f8059918024e93cc5c5e8d4",
+    "source_sha256": "f65c9a06551e9bafea9e15a41940bbf9508ad5b6ee84050639e015128081f999",
+    "definition_sha256": "699917966ff3dfbb84f7bc5feb3a49634056544cf07391e228d3c5b178e6b906",
+    "receipt_sha256": "fae1024c7ffe0c007f4da2f80f21186bdff8713130735d158c0763359e5d73a6"
   },
-  "static_axes": {
-   "algorithm": "Original moves the first byte to the high result byte and the second byte to the low result byte; source SONG(off)<<8 | SONG(off+1) is the same byte order and bit construction under MSC 16-bit target semantics.",
-   "control_flow": "No conditional, loop, switch, computed jump or alternate return exists; branch_map is empty because the full CFG is straight-line.",
-   "calls": "None.",
-   "memory": "Exactly two based-segment byte reads, same segment, second effective offset wrapping modulo 2^16; no writes.",
-   "return_abi": "int far word return; BP is restored and far return consumes no args.",
-   "completeness_basis": "Static comparison accounts for every instruction in the 25-byte context and the whole source expression, including byte order, offset width and based-segment carry behavior."
-  },
-  "remaining_differences": [
-   {
-    "kind": "CODEGEN_ONLY",
-    "original_address": "root:284A:0142..014F",
-    "source_anchor": "module.c:85-87",
-    "explanation": "The registered dossier notes different AH/AL assignment/code shape while both target and natural C read the high byte then low byte using 16-bit based-pointer wrap. The register construction and source shift/OR produce the same 16-bit word for the supported MSC target model; no data write or call difference remains."
-   }
-  ],
-  "unexplained_semantic_differences": [],
-  "review_notes": [
-   "Input domain pins g_8DFC to an accessible 64 KiB segment and includes every 16-bit offset, including 0xffff; malformed segment pointers are excluded.",
-   "The source expression relies on MSC 6.00AX 16-bit behavior both for left-shifting promoted unsigned-char values >=0x80 into the signed-int high bit and for off+1 at 0x7fff. The original disassembly directly specifies the returned bits and same-segment offset wrap; neither operation is being claimed portable under abstract ISO C overflow/shift rules.",
-   "Differential evidence: 538 directed plus 20,000 randomized actual original/candidate cases, 20,538 ledger rows, zero mismatches; byte-order mutation detected. Static byte-flow/wrap reasoning, not the finite corpus, closes the function.",
-   "This receipt is a worker audit candidate for independent root review; it does not edit or reclassify the historical or behavioral registry."
+  "renamed": [
+    {
+      "operations": [
+        {
+          "old": "f_1B28_0006",
+          "new": "mouse_load_builtin_cursor_pairs",
+          "kind": "descriptive",
+          "why": "root:1B28:0006 (src/platform/cursor_shapes.c:28): Loads objects 0..5 of kinds 8 and 7 into the two cursor handle arrays and unhooks both kinds once, guarded by DS:3D0C."
+        },
+        {
+          "old": "f_1B28_006A",
+          "new": "mouse_select_cursor_shape",
+          "kind": "descriptive",
+          "why": "root:1B28:006A (src/platform/cursor_shapes.c:56): Checks reentry and mouse availability, chooses the indexed image/mask handles, installs their bitmaps and shows the cursor; -1 reuses the current pair."
+        },
+        {
+          "old": "f_29F0_000A",
+          "new": "snd_sample_interrupts_disable",
+          "kind": "descriptive",
+          "why": "root:29F0:000A (src/platform/port_io.c:12): The body is CLI; its three callers guard sample loading, channel setup and channel release, paired with 29F0:0012."
+        },
+        {
+          "old": "f_29F0_0012",
+          "new": "snd_sample_interrupts_enable",
+          "kind": "descriptive",
+          "why": "root:29F0:0012 (src/platform/port_io.c:17): The body is STI; sample free-list/channel callers pair it with 29F0:000A."
+        },
+        {
+          "old": "f_29F0_001A",
+          "new": "snd_control_interrupts_disable",
+          "kind": "descriptive",
+          "why": "root:29F0:001A (src/platform/port_io.c:22): The body is CLI; device initialization and song startup use this separate entry, paired with 29F0:0022."
+        },
+        {
+          "old": "f_29F0_0022",
+          "new": "snd_control_interrupts_enable",
+          "kind": "descriptive",
+          "why": "root:29F0:0022 (src/platform/port_io.c:27): The body is STI; device initialization and song startup pair it with 29F0:001A."
+        },
+        {
+          "old": "f_29F0_002A",
+          "new": "snd_port_write_byte",
+          "kind": "descriptive",
+          "why": "root:29F0:002A (src/platform/port_io.c:32): Loads DX from port, AL from value and executes OUT DX,AL."
+        },
+        {
+          "old": "f_29F0_0038",
+          "new": "snd_port_read_byte",
+          "kind": "descriptive",
+          "why": "root:29F0:0038 (src/platform/port_io.c:41): Loads DX from port, executes IN AL,DX and returns the byte."
+        },
+        {
+          "old": "o21_39C7_0000",
+          "new": "gfx_probe_display_adapters",
+          "kind": "descriptive",
+          "why": "S21:39C7:0000 (src/platform/video/adapter_probe.asm:58): Clears both device words, arms and traverses four flag/probe triples, orders the active device first, and returns its packed word."
+        },
+        {
+          "old": "o21_39C7_003C",
+          "new": "gfx_probe_bios_display_codes",
+          "kind": "descriptive",
+          "why": "S21:39C7:003C (src/platform/video/adapter_probe.asm:90): INT 10h AX=1A00h supplies BL/BH display codes, translated through the DGROUP table into both device words; unsupported probes are disabled."
+        },
+        {
+          "old": "o21_39C7_008C",
+          "new": "gfx_probe_ega_adapter",
+          "kind": "descriptive",
+          "why": "S21:39C7:008C (src/platform/video/adapter_probe.asm:124): INT 10h AH=12h BL=10h tests EGA; CL selects the display table, AL=3 marks the subsystem and the common recorder stores it."
+        },
+        {
+          "old": "o21_39C7_00B8",
+          "new": "gfx_probe_cga_adapter",
+          "kind": "descriptive",
+          "why": "S21:39C7:00B8 (src/platform/video/adapter_probe.asm:147): Tests the 6845 at DX=3D4h and records AX=0202h only when the read-back succeeds."
+        },
+        {
+          "old": "o21_39C7_00C8",
+          "new": "gfx_probe_mono_adapter",
+          "kind": "descriptive",
+          "why": "S21:39C7:00C8 (src/platform/video/adapter_probe.asm:159): Tests 3B4h then watches bit 7 at 3BAh; stable status records MDA, toggling status and bits 4..6 select Hercules variants."
+        },
+        {
+          "old": "o21_39C7_010B",
+          "new": "gfx_probe_crtc_readback",
+          "kind": "descriptive",
+          "why": "S21:39C7:010B (src/platform/video/adapter_probe.asm:195): DX selects the 6845 address port; register 0Fh is saved, written with 66h, read back after a delay and restored; carry reports failure."
+        },
+        {
+          "old": "o21_39C7_0125",
+          "new": "gfx_order_active_adapter_first",
+          "kind": "descriptive",
+          "why": "S21:39C7:0125 (src/platform/video/adapter_probe.asm:216): When two legacy devices are present, INT 10h AH=0Fh identifies mono mode 7 and swaps the two words if necessary."
+        },
+        {
+          "old": "o21_39C7_0156",
+          "new": "gfx_record_probed_adapter",
+          "kind": "descriptive",
+          "why": "S21:39C7:0156 (src/platform/video/adapter_probe.asm:241): Stores AX at DI when its low byte is zero, otherwise at DI+2."
+        },
+        {
+          "old": "o21_39C7_016D",
+          "new": "gfx_bios_has_tandy_signature",
+          "kind": "descriptive",
+          "why": "S21:39C7:016D (src/platform/video/adapter_probe.asm:254): Scans segment F000h for upper/lower-case TANDY fragments with REPNE SCASB and returns AX=1 or 0."
+        },
+        {
+          "old": "o20_39C7_0008",
+          "new": "gfx_load_fonts_hercules",
+          "kind": "descriptive",
+          "why": "S20:39C7:0008 (src/platform/video/font_setup.c:47): Loads/unhooks kind-9 objects 14h/15h into DS:3DA8/3DA4; driver_select.c mode 3 invokes it after the Hercules initializer."
+        },
+        {
+          "old": "o20_39C7_0069",
+          "new": "gfx_load_fonts_tandy",
+          "kind": "descriptive",
+          "why": "S20:39C7:0069 (src/platform/video/font_setup.c:58): Loads/unhooks kind-9 objects 14h/13h, with the missing-font fatal diagnostic; driver_select.c mode 2 invokes it after the Tandy initializer."
+        },
+        {
+          "old": "o20_39C7_00FF",
+          "new": "gfx_load_fonts_mono_480",
+          "kind": "descriptive",
+          "why": "S20:39C7:00FF (src/platform/video/font_setup.c:75): Loads/unhooks kind-9 objects 14h/15h; driver_select.c mode 7 invokes it after gfx_mono_init_ega480_mono."
+        },
+        {
+          "old": "o20_39C7_0160",
+          "new": "gfx_load_fonts_mono_350_400",
+          "kind": "descriptive",
+          "why": "S20:39C7:0160 (src/platform/video/font_setup.c:83): Loads/unhooks kind-9 objects 14h/15h; driver_select.c invokes it for modes 1 and 5, banked monochrome 400 and EGA monochrome 350."
+        },
+        {
+          "old": "o20_39C7_01C1",
+          "new": "gfx_load_font_planar_320",
+          "kind": "descriptive",
+          "why": "S20:39C7:01C1 (src/platform/video/font_setup.c:93): Loads kind-9 object 13h and installs it only when present; driver_select.c mode 4 invokes it after gfx_planar_init_320x200."
+        },
+        {
+          "old": "o20_39C7_0212",
+          "new": "gfx_load_fonts_vga256",
+          "kind": "descriptive",
+          "why": "S20:39C7:0212 (src/platform/video/font_setup.c:109): Loads/unhooks kind-9 objects 14h/13h, with the missing-font fatal diagnostic; driver_select.c mode 6 invokes it after gfx_vga8_init_vga256."
+        },
+        {
+          "old": "f_277E_0000",
+          "new": "snd_initialize_device_channels",
+          "kind": "descriptive",
+          "why": "root:277E:0000 (src/sound/device_channels.c:68): Probes the requested mode, clears channel state, configures two/four sample channels, invokes the indexed backend initializer, installs the sample timer and database conversion hook."
+        },
+        {
+          "old": "f_277E_00AF",
+          "new": "snd_reset_channel_tables",
+          "kind": "descriptive",
+          "why": "root:277E:00AF (src/sound/device_channels.c:94): Clears 21h six-byte channel records, sets previous instrument to -1 and age to 15, and clears six capability counts."
+        },
+        {
+          "old": "f_277E_010A",
+          "new": "snd_copy_instrument_table",
+          "kind": "descriptive",
+          "why": "root:277E:010A (src/sound/device_channels.c:116): Copies 38h six-byte records from the supplied source into far 50F6:0000, the table used by voice dispatch."
+        },
+        {
+          "old": "f_277E_0154",
+          "new": "snd_shutdown_device_channels",
+          "kind": "descriptive",
+          "why": "root:277E:0154 (src/sound/device_channels.c:130): Stops voices and song/sample resources, invokes the selected backend shutdown vector and restores the BIOS timer."
+        },
+        {
+          "old": "f_277E_017D",
+          "new": "snd_init_speaker_channels",
+          "kind": "descriptive",
+          "why": "root:277E:017D (src/sound/device_channels.c:148): Creates type-1 sample channels, selects the out_speaker vector at 74AD, volume bias 40h and the 0C42 instrument table."
+        },
+        {
+          "old": "f_277E_01FA",
+          "new": "snd_init_tandy_channels",
+          "kind": "descriptive",
+          "why": "root:277E:01FA (src/sound/device_channels.c:171): Creates sample channels plus three type-5 PSG voices, sets C0h/1E0h PSG port from the BIOS model byte, and selects the Tandy output/instrument tables."
+        },
+        {
+          "old": "f_277E_034F",
+          "new": "snd_init_ps1_channels",
+          "kind": "descriptive",
+          "why": "root:277E:034F (src/sound/device_channels.c:216): Creates sample and three type-3 channels, writes 1 to port 203h and selects the 74B3 output vector; game sound capability print identifies capability index 3 as PS1 PSG."
+        },
+        {
+          "old": "f_277E_040E",
+          "new": "snd_init_adlib_channels",
+          "kind": "descriptive",
+          "why": "root:277E:040E (src/sound/device_channels.c:242): Creates sample and seven type-2 voices, resets/probes OPL, chooses 74AF out_adlib, installs OPL instruments and sets the -40 level adjustment."
+        },
+        {
+          "old": "f_277E_04E8",
+          "new": "snd_init_blaster_channels",
+          "kind": "descriptive",
+          "why": "root:277E:04E8 (src/sound/device_channels.c:272): Creates sample plus eight OPL channels, probes the DSP base if needed, sets base+0Ch write port, selects out_blaster and sends D1h."
+        },
+        {
+          "old": "f_277E_0606",
+          "new": "snd_init_regchip_channels",
+          "kind": "descriptive",
+          "why": "root:277E:0606 (src/sound/device_channels.c:308): Creates sample plus three type-4 register-chip voices, detects or defaults the base port, optionally adds OPL voices, and initializes the register chip."
+        },
+        {
+          "old": "f_277E_0760",
+          "new": "snd_init_lpt_sample_channels",
+          "kind": "descriptive",
+          "why": "root:277E:0760 (src/sound/device_channels.c:346): Creates sample channels, reads LPT1 base from 0040:0008, clears control bit 3 at base+2, and selects out_lptdac and its instrument table."
+        },
+        {
+          "old": "f_277E_07FF",
+          "new": "snd_init_midi_channels",
+          "kind": "descriptive",
+          "why": "root:277E:07FF (src/sound/device_channels.c:378): Initializes a sampled backend, appends eight melodic and ten percussion MIDI entries, then sends MPU commands and per-channel MIDI controller resets."
+        },
+        {
+          "old": "f_277E_0939",
+          "new": "snd_shutdown_blaster_output",
+          "kind": "descriptive",
+          "why": "root:277E:0939 (src/sound/device_channels.c:423): Writes D3h to the saved DSP command port then calls the OPL reset routine."
+        },
+        {
+          "old": "f_277E_0952",
+          "new": "snd_shutdown_opl_output",
+          "kind": "descriptive",
+          "why": "root:277E:0952 (src/sound/device_channels.c:429): The backend shutdown dispatch table selects this single call to the OPL reset routine."
+        },
+        {
+          "old": "f_277E_0958",
+          "new": "snd_disable_pc_speaker",
+          "kind": "descriptive",
+          "why": "root:277E:0958 (src/sound/device_channels.c:434): Reads port 61h, clears bits 0 and 1, and writes it back; speaker backend shutdown slot uses this entry."
+        },
+        {
+          "old": "f_277E_0965",
+          "new": "snd_shutdown_regchip_output",
+          "kind": "descriptive",
+          "why": "root:277E:0965 (src/sound/device_channels.c:443): The register-chip backend shutdown vector masks DMA channel 1 at port 0Ah, then writes 0Fh/60h to ports 220h/221h."
+        },
+        {
+          "old": "f_293A_0006",
+          "new": "snd_probe_preferred_device",
+          "kind": "descriptive",
+          "why": "root:293A:0006 (src/sound/device_probe.c:28): Walks probe slots 8 down to 1 and returns the first successful index, or zero."
+        },
+        {
+          "old": "f_293A_0029",
+          "new": "snd_probe_assume_present",
+          "kind": "descriptive",
+          "why": "root:293A:0029 (src/sound/device_probe.c:43): Probe-table slots 0 and 1 point here; its entire body returns 1 without touching hardware."
+        },
+        {
+          "old": "f_293A_002D",
+          "new": "snd_probe_tandy_sound",
+          "kind": "descriptive",
+          "why": "root:293A:002D (src/sound/device_probe.c:48): Probe slot 2 calls INT 1Ah AH=81h and checks AX=C4h or the model byte at FC00:0000 equals 21h; matching initializer configures Tandy PSG."
+        },
+        {
+          "old": "f_293A_0059",
+          "new": "snd_probe_ps1_sound",
+          "kind": "descriptive",
+          "why": "root:293A:0059 (src/sound/device_probe.c:62): Probe slot 3 checks INT 15h AH=C0h configuration model 0BFCh and CMOS register 2Fh bit 4; initializer uses PS/1 ports 203h/205h."
+        },
+        {
+          "old": "f_293A_0087",
+          "new": "snd_probe_opl_timer",
+          "kind": "descriptive",
+          "why": "root:293A:0087 (src/sound/device_probe.c:91): Resets OPL timer status at 388h, starts timer 1 with FFh, delays with status reads, and requires status E0h bits to change from zero to C0h."
+        },
+        {
+          "old": "f_293A_0121",
+          "new": "snd_find_blaster_dsp_base",
+          "kind": "descriptive",
+          "why": "root:293A:0121 (src/sound/device_probe.c:114): Sets the candidate base to 200h then probes 210h..260h in increments of 10h, stopping at the first DSP acknowledgement."
+        },
+        {
+          "old": "f_293A_015E",
+          "new": "snd_find_regchip_base",
+          "kind": "descriptive",
+          "why": "root:293A:015E (src/sound/device_probe.c:132): Calls snd_regchip_detect, returns zero if absent, otherwise stores its port at far 50F6:4B14 and returns one."
+        },
+        {
+          "old": "f_293A_017C",
+          "new": "snd_probe_lpt_unavailable",
+          "kind": "descriptive",
+          "why": "root:293A:017C (src/sound/device_probe.c:142): Probe-table slot 7 always returns zero, although explicit mode 7 initializes the LPT backend and bypasses probing."
+        },
+        {
+          "old": "f_293A_017F",
+          "new": "snd_probe_mpu_reset",
+          "kind": "descriptive",
+          "why": "root:293A:017F (src/sound/device_probe.c:149): Polls 331h, writes reset FFh, and accepts FEh from 330h within bounded retries; LIFE-1 steering remains a separate source uncertainty."
+        },
+        {
+          "old": "f_29B8_0000",
+          "new": "snd_probe_dsp_reset_ack",
+          "kind": "descriptive",
+          "why": "root:29B8:0000 (src/sound/dsp_probe.c:15): Pulses base+6, polls base+0Eh, and accepts AAh at base+0Ah; the original status local is uninitialized before the first poll condition."
+        },
+        {
+          "old": "f_00DF_0089",
+          "new": "snd_log_music_init",
+          "kind": "descriptive",
+          "why": "root:00DF:0089 (src/sound/game_interface.c:35): Only calls WinPrintf with its own string MUSIC INIT!; no initialization is performed."
+        },
+        {
+          "old": "f_00DF_009D",
+          "new": "snd_log_beep",
+          "kind": "descriptive",
+          "why": "root:00DF:009D (src/sound/game_interface.c:40): Only calls WinPrintf with BEEP; there is no tone or port operation."
+        },
+        {
+          "old": "f_00DF_016C",
+          "new": "snd_start_effect_one_if_music",
+          "kind": "descriptive",
+          "why": "root:00DF:016C (src/sound/game_interface.c:96): Checks the initialized flag and OptionStates[1], then invokes snd_start_configured_effect(1)."
+        },
+        {
+          "old": "f_284A_0151",
+          "new": "snd_song_read_be32",
+          "kind": "descriptive",
+          "why": "root:284A:0151 (src/sound/midi_player.c:106): Four iterations shift the accumulator by eight and add SONG(off++); old ExtractDWord correspondence is MEDIUM role analogy only."
+        },
+        {
+          "old": "f_284A_0199",
+          "new": "snd_song_index_track_chunks",
+          "kind": "descriptive",
+          "why": "root:284A:0199 (src/sound/midi_player.c:119): For count chunks, reads length at off+4, stores payload offset off+8 and advances by length+8."
+        },
+        {
+          "old": "f_284A_01D5",
+          "new": "snd_song_read_varlen",
+          "kind": "descriptive",
+          "why": "root:284A:01D5 (src/sound/midi_player.c:133): Reads seven-bit groups from the selected track cursor until the continuation bit clears, updates that cursor and returns the long accumulator; no original ReadVarLen name is claimed."
+        },
+        {
+          "old": "f_284A_024B",
+          "new": "snd_song_set_volume",
+          "kind": "descriptive",
+          "why": "root:284A:024B (src/sound/midi_player.c:151): Stores the argument at DS:7570; 284A:04C9 scales note velocity by this word then shifts by seven."
+        },
+        {
+          "old": "f_284A_0256",
+          "new": "snd_song_initialize_tracks",
+          "kind": "descriptive",
+          "why": "root:284A:0256 (src/sound/midi_player.c:157): Reads SMF header length, track count and division, indexes chunks and reads each initial delta/status byte."
+        },
+        {
+          "old": "f_284A_02E4",
+          "new": "snd_song_reset_clock",
+          "kind": "descriptive",
+          "why": "root:284A:02E4 (src/sound/midi_player.c:176): Clears accumulated time and current-track index, selects the first track/status pointers and sets timing from division 480 and tempo 500000."
+        },
+        {
+          "old": "f_284A_0325",
+          "new": "snd_song_set_tempo",
+          "kind": "descriptive",
+          "why": "root:284A:0325 (src/sound/midi_player.c:191): Computes tempo/1000*1194/division and then divides by 13 into the tick scale used by the scheduler; zero division yields zero."
+        },
+        {
+          "old": "f_284A_038F",
+          "new": "snd_song_schedule_next_track",
+          "kind": "descriptive",
+          "why": "root:284A:038F (src/sound/midi_player.c:202): Adds the current delta or marks end-of-track, selects the earliest unfinished track, updates cursor/time, and returns a scaled delay; all-ended changes play state to 2."
+        },
+        {
+          "old": "f_284A_04C9",
+          "new": "snd_song_dispatch_note",
+          "kind": "descriptive",
+          "why": "root:284A:04C9 (src/sound/midi_player.c:235): Scales velocity by DS:7570 >>7, dispatching zero to note-off and nonzero to voice allocation using per-channel instrument/priority values."
+        },
+        {
+          "old": "f_284A_0521",
+          "new": "snd_song_set_channel_instrument",
+          "kind": "descriptive",
+          "why": "root:284A:0521 (src/sound/midi_player.c:244): Writes the program argument into far 50F6:4B8E indexed by channel, later used as the instrument selector."
+        },
+        {
+          "old": "f_284A_0537",
+          "new": "snd_song_dispatch_channel_event",
+          "kind": "descriptive",
+          "why": "root:284A:0537 (src/sound/midi_player.c:251): Extracts (status&70h)>>4 and low-nibble channel, handles note-off/on and a literal case 12, then advances by g_75A4[type]; case 12 is unreachable under that mask."
+        },
+        {
+          "old": "f_284A_05C5",
+          "new": "snd_song_dispatch_meta_event",
+          "kind": "descriptive",
+          "why": "root:284A:05C5 (src/sound/midi_player.c:274): Handles meta types 2Fh and 51h as end-of-track and tempo, otherwise skips the decoded variable payload length."
+        },
+        {
+          "old": "f_284A_0673",
+          "new": "snd_song_skip_sysex_payload",
+          "kind": "descriptive",
+          "why": "root:284A:0673 (src/sound/midi_player.c:294): Called for F0h/F7h statuses; adds the decoded variable payload length to the selected cursor."
+        },
+        {
+          "old": "f_284A_067F",
+          "new": "snd_song_process_due_events",
+          "kind": "descriptive",
+          "why": "root:284A:067F (src/sound/midi_player.c:299): While play state is 1, restores the song segment, processes running-status/channel/meta/sysex events and schedules tracks until a positive delay or end; timer ISR calls it."
+        },
+        {
+          "old": "f_295C_000A",
+          "new": "snd_set_voice_volume_scale",
+          "kind": "descriptive",
+          "why": "root:295C:000A (src/sound/midi_voices.c:82): Stores volume at DS:7502; 295C:01EC multiplies note velocity by that word and shifts by seven."
+        },
+        {
+          "old": "f_295C_0015",
+          "new": "snd_reap_finished_sample_voices",
+          "kind": "descriptive",
+          "why": "root:295C:0015 (src/sound/midi_voices.c:92): For type-1 channels with zero busy state, clears priority, queues state-1 sample resources for release and clears the owner pointer."
+        },
+        {
+          "old": "f_295C_00C9",
+          "new": "snd_choose_voice_by_priority",
+          "kind": "descriptive",
+          "why": "root:295C:00C9 (src/sound/midi_voices.c:109): Scans channels of the requested type for lowest priority then greatest age, reaps finished samples, ages entries, and rejects requests below the selected priority."
+        },
+        {
+          "old": "f_295C_01EC",
+          "new": "snd_start_instrument_note",
+          "kind": "descriptive",
+          "why": "root:295C:01EC (src/sound/midi_voices.c:146): Chooses a voice by instrument type/priority, stops its old note, programs a changed instrument, dispatches note-on and records priority/instrument/note/age."
+        },
+        {
+          "old": "f_295C_02E8",
+          "new": "snd_stop_instrument_note",
+          "kind": "descriptive",
+          "why": "root:295C:02E8 (src/sound/midi_voices.c:164): Scans channel records for matching note and instrument, invokes the type's stop callback, clears priority/note and sets age to 15."
+        },
+        {
+          "old": "f_295C_03DC",
+          "new": "snd_mpu_write_data",
+          "kind": "descriptive",
+          "why": "root:295C:03DC (src/sound/midi_voices.c:199): Waits for 331h bit 6 to clear and writes the argument byte to 330h."
+        },
+        {
+          "old": "f_295C_03FF",
+          "new": "snd_mpu_write_command",
+          "kind": "descriptive",
+          "why": "root:295C:03FF (src/sound/midi_voices.c:206): Waits for 331h bit 6 to clear, writes there, then reads 330h when bit 7 clears until FEh acknowledgement."
+        },
+        {
+          "old": "f_295C_043E",
+          "new": "snd_midi_note_on",
+          "kind": "descriptive",
+          "why": "root:295C:043E (src/sound/midi_voices.c:217): If instrument info[0] is not -1, sends MPU D7h then 90h+channel, note+info[2], and velocity+info[1]."
+        },
+        {
+          "old": "f_295C_04A2",
+          "new": "snd_midi_percussion_on",
+          "kind": "descriptive",
+          "why": "root:295C:04A2 (src/sound/midi_voices.c:230): Sends MPU D7h then status 99h, instrument info[0] as percussion key, and velocity+info[1]."
+        },
+        {
+          "old": "f_295C_04FB",
+          "new": "snd_midi_note_off",
+          "kind": "descriptive",
+          "why": "root:295C:04FB (src/sound/midi_voices.c:242): Sends MPU D7h then 80h+channel, note+instrument info[2], and zero velocity."
+        },
+        {
+          "old": "f_295C_053D",
+          "new": "snd_midi_percussion_off",
+          "kind": "descriptive",
+          "why": "root:295C:053D (src/sound/midi_voices.c:250): Sends MPU D7h then 89h, instrument info[0] and zero velocity."
+        },
+        {
+          "old": "f_295C_0578",
+          "new": "snd_midi_select_program",
+          "kind": "descriptive",
+          "why": "root:295C:0578 (src/sound/midi_voices.c:262): Unless info[0] equals -1, sends MPU D7h then C0h+channel and the instrument's program byte."
+        },
+        {
+          "old": "f_2815_000A",
+          "new": "snd_opl_write_instrument",
+          "kind": "descriptive",
+          "why": "root:2815:000A (src/sound/opl2_voices.c:22): Maps both voice operators and writes instrument bytes to OPL register families 20h,40h,60h,80h,E0h and voice C0h."
+        },
+        {
+          "old": "f_2815_0118",
+          "new": "snd_opl_reset_voices",
+          "kind": "descriptive",
+          "why": "root:2815:0118 (src/sound/opl2_voices.c:42): Writes OPL registers 1=0,4=80h,8=0,BDh=C0h and clears B0h..B7h."
+        },
+        {
+          "old": "f_2815_0165",
+          "new": "snd_opl_set_note_level",
+          "kind": "descriptive",
+          "why": "root:2815:0165 (src/sound/opl2_voices.c:66): Scales carrier attenuation from instrument byte 2 and volume table, preserves key-scale bits, then writes the instrument-transposed note's frequency/block; existing folded-test hypothesis is retained."
+        },
+        {
+          "old": "f_2815_024D",
+          "new": "snd_opl_clear_voice_pitch",
+          "kind": "descriptive",
+          "why": "root:2815:024D (src/sound/opl2_voices.c:92): Writes zero to voice+A0h and voice+B0h."
+        },
+        {
+          "old": "f_2815_0275",
+          "new": "snd_opl_select_instrument",
+          "kind": "descriptive",
+          "why": "root:2815:0275 (src/sound/opl2_voices.c:98): Looks up the instrument pointer at far 50F6:0000 and passes it with the voice to 2815:000A."
+        },
+        {
+          "old": "f_29D6_000A",
+          "new": "snd_ps1_set_note",
+          "kind": "descriptive",
+          "why": "root:29D6:000A (src/sound/psg_voices.c:37): Dispatch type 3 converts note to PSG divisor and volume to 4-bit attenuation, writing three bytes to port 205h; capabilities index 3 is labelled PS1 PSG."
+        },
+        {
+          "old": "f_29D6_0082",
+          "new": "snd_regchip_set_note",
+          "kind": "descriptive",
+          "why": "root:29D6:0082 (src/sound/psg_voices.c:52): Transposes the note down one octave with a zero floor, writes its divisor to registers 2*ch/2*ch+1 and writes fixed 1Fh level to ch+8."
+        },
+        {
+          "old": "f_29D6_00D9",
+          "new": "snd_tandy_set_note",
+          "kind": "descriptive",
+          "why": "root:29D6:00D9 (src/sound/psg_voices.c:68): Dispatch type 5 computes a divisor and attenuation and writes them through the PSG base at far 50F6:4B14, populated by the Tandy initializer."
+        },
+        {
+          "old": "f_29D6_0148",
+          "new": "snd_ps1_silence_voice",
+          "kind": "descriptive",
+          "why": "root:29D6:0148 (src/sound/psg_voices.c:104): Calls 29D6:000A with zero volume for the supplied note/channel."
+        },
+        {
+          "old": "f_29D6_015D",
+          "new": "snd_regchip_silence_voice",
+          "kind": "descriptive",
+          "why": "root:29D6:015D (src/sound/psg_voices.c:109): Writes zero to level ch+8 and both pitch registers 2*ch and 2*ch+1."
+        },
+        {
+          "old": "f_29D6_0197",
+          "new": "snd_tandy_silence_voice",
+          "kind": "descriptive",
+          "why": "root:29D6:0197 (src/sound/psg_voices.c:116): Calls 29D6:00D9 with note and volume zero for the channel."
+        },
+        {
+          "old": "f_0000_0000",
+          "new": "snd_expand_sample_resource",
+          "kind": "descriptive",
+          "why": "root:0000:0000 (src/sound/resource_loading.c:45): Only kind 5 allocates (size-16)*2 bytes tagged DACsample, expands the old allocation, releases it and replaces handle/size."
+        },
+        {
+          "old": "f_0000_0090",
+          "new": "snd_load_sample_resource",
+          "kind": "descriptive",
+          "why": "root:0000:0090 (src/sound/resource_loading.c:64): If unloaded, obtains kind-5 resource for sample->object, stores its handle/size and marks loaded=1; returns 1 when already loaded, otherwise 0."
+        },
+        {
+          "old": "f_0000_00DE",
+          "new": "snd_drain_sample_release_queue",
+          "kind": "descriptive",
+          "why": "root:0000:00DE (src/sound/resource_loading.c:82): Under CLI/STI scans queued sample pointers, releases loaded==1 handles, clears their state and then empties the queue."
+        },
+        {
+          "old": "f_0000_0149",
+          "new": "snd_queue_sample_release",
+          "kind": "descriptive",
+          "why": "root:0000:0149 (src/sound/resource_loading.c:103): Bounds-checks the queue count against 38, appends the pointer, and immediately drains it unless sequencer flag DS:7574 is set."
+        },
+        {
+          "old": "f_0000_0193",
+          "new": "snd_load_song_resources",
+          "kind": "descriptive",
+          "why": "root:0000:0193 (src/sound/resource_loading.c:125): Stops playback, loads kind-12h metadata and kind-14h song data, makes data accessible below the EMS boundary if needed and pins the song's sampled instruments."
+        },
+        {
+          "old": "f_0000_0429",
+          "new": "snd_stop_and_release_samples",
+          "kind": "descriptive",
+          "why": "root:0000:0429 (src/sound/resource_loading.c:194): Stops song and assigned voices, then queues sampled instruments among all 56 dispatch records."
+        },
+        {
+          "old": "f_290D_000E",
+          "new": "snd_decode_delta_nibbles",
+          "kind": "descriptive",
+          "why": "root:290D:000E (src/sound/sample_voices.c:45): Copies a 16-byte delta dictionary, starts accumulator at 80h, and emits a cumulative byte for each high then low input nibble."
+        },
+        {
+          "old": "f_290D_0098",
+          "new": "snd_start_sample_voice",
+          "kind": "descriptive",
+          "why": "root:290D:0098 (src/sound/sample_voices.c:76): Guards interrupt-time loading, initializes position/loop/end/step/volume fields under CLI/STI and starts the sample timer."
+        },
+        {
+          "old": "f_290D_0193",
+          "new": "snd_start_sample_note",
+          "kind": "descriptive",
+          "why": "root:290D:0193 (src/sound/sample_voices.c:109): Releases the prior owner, resolves the instrument sample, applies tuning/octave to the step table, clamps volume and calls sample-voice setup."
+        },
+        {
+          "old": "f_290D_026C",
+          "new": "snd_stop_sample_voice",
+          "kind": "descriptive",
+          "why": "root:290D:026C (src/sound/sample_voices.c:137): Under CLI/STI queues an unpinned old owner then clears both sample and owner pointers in the channel."
+        },
+        {
+          "old": "f_00BA_01C3",
+          "new": "app_window_layout_changed",
+          "kind": "descriptive",
+          "why": "root:00BA:01C3 (src/startup/application_windows.c:95): Installed as layout hook by InitApplicationWindows; mirrors map/yard layout origin then notifies caste, mode, editor, map and yard handlers."
+        },
+        {
+          "old": "f_00BA_0211",
+          "new": "app_before_window_close",
+          "kind": "descriptive",
+          "why": "root:00BA:0211 (src/startup/application_windows.c:115): Installed as before-close hook by InitApplicationWindows; calls yard cleanup then mode/caste closure handlers."
+        },
+        {
+          "old": "f_00BA_0228",
+          "new": "app_window_state_changed",
+          "kind": "descriptive",
+          "why": "root:00BA:0228 (src/startup/application_windows.c:122): Installed as state-change hook by InitApplicationWindows; calls caste/mode closure and editor/map/yard change handlers."
+        },
+        {
+          "old": "o15_384C_0000",
+          "new": "app_exit_demo_expired",
+          "kind": "descriptive",
+          "why": "S15:384C:0000 (src/startup/game_session.c:33): Passes its own demo-expired diagnostic and status zero to app_cleanup_and_exit."
+        },
+        {
+          "old": "f_0250_0114",
+          "new": "edit_free_tile_ems",
+          "kind": "descriptive",
+          "why": "root:0250:0114 (src/ui/edit_view.c:79): Tests DS:19D0 and calls ems_free_handle; adjacent edit_alloc_tile_ems owns this tile allocation."
+        },
+        {
+          "old": "f_0250_05EB",
+          "new": "edit_map_tile_ems_for_plane",
+          "kind": "descriptive",
+          "why": "root:0250:05EB (src/ui/edit_view.c:264): Saves the tile EMS map, selects 19D2 or 19E2 according to MapPlane<2 and maps four pages; paired with edit_restore_tile_ems_map."
+        },
+        {
+          "old": "f_0250_0721",
+          "new": "edit_draw_life_and_ground_tile",
+          "kind": "descriptive",
+          "why": "root:0250:0721 (src/ui/edit_view.c:312): Own immediate 0250:0754 references 'Tile >= 256 in PutLifeAndTile' (DGROUP:1A39), but edit_compose_life_tile carries it too, so DOS-1 uniqueness fails; the DOS body dispatches life/ground drawing by display mode."
+        },
+        {
+          "old": "f_0250_0ADB",
+          "new": "edit_draw_ground_tile",
+          "kind": "descriptive",
+          "why": "root:0250:0ADB (src/ui/edit_view.c:413): Own diagnostic names PutTile, but lacks a DOS-1 diagnostic form; body dispatches the current ground tile to planar/Tandy/mono drawing vectors."
+        },
+        {
+          "old": "f_0250_129E",
+          "new": "edit_redraw_changed_tile",
+          "kind": "descriptive",
+          "why": "root:0250:129E (src/ui/edit_view.c:852): Bounds-checks the viewport tile, computes its ground/life images, defers -2 cache entries, redraws changed pairs and updates both caches."
+        },
+        {
+          "old": "f_0250_1E80",
+          "new": "edit_draw_foot_mower_overlays",
+          "kind": "descriptive",
+          "why": "root:0250:1E80 (src/ui/edit_view.c:1246): Uses FootX/FootY and optional MowX/MowY to draw overlay flags 10h/20h and invalidates their footprint regions."
+        },
+        {
+          "old": "f_0250_41CA",
+          "new": "edit_invalidate_spider_area",
+          "kind": "descriptive",
+          "why": "root:0250:41CA (src/ui/edit_view.c:1645): Converts SpidX/SpidY relative to MapPnt through tile width/height and invalidates a rectangle with three-tile margins."
+        },
+        {
+          "old": "o19_384C_0320",
+          "new": "ui_show_memory_statistics",
+          "kind": "descriptive",
+          "why": "S19:384C:0320 (src/ui/game_events.c:217): Formats startup/free/discardable/available byte totals from RallocMemoryFree/Soft then shows ui_message_transient."
+        },
+        {
+          "old": "o12_384C_03D0",
+          "new": "map_dispatch_scaled_bitmap",
+          "kind": "descriptive",
+          "why": "S12:384C:03D0 (src/ui/map_window.c:268): Selects far 50F6:38BC when multiplier==64, otherwise 38B8, forwarding source/destination/multiplier/count; map_render_immediate supplies the bitmap operations."
+        },
+        {
+          "old": "o12_384C_0425",
+          "new": "map_notify_view_changed",
+          "kind": "descriptive",
+          "why": "S12:384C:0425 (src/ui/map_window.c:277): Single call to win_MapChanged, reached after map colour generation."
+        },
+        {
+          "old": "f_15D9_0006",
+          "new": "ui_draw_centered_clipped_text",
+          "kind": "descriptive",
+          "why": "root:15D9:0006 (src/ui/ribbon_messages.c:27): Measures text, centers it horizontally in the supplied rectangle at pixel y, prints it, excludes the printed bounds and restores font zero."
+        },
+        {
+          "old": "f_00F8_017D",
+          "new": "ui_pump_events_periodically",
+          "kind": "descriptive",
+          "why": "root:00F8:017D (src/ui/view_dialog_helpers.c:95): Uses WaitedEnough(...,2), rejects pending menu state and brackets ui_pump_events_edge_scroll with a temporary byte flag."
+        },
+        {
+          "old": "f_00F8_044C",
+          "new": "ui_flush_window_events",
+          "kind": "descriptive",
+          "why": "root:00F8:044C (src/ui/view_dialog_helpers.c:275): Single operation calls win_FlushEvents."
+        },
+        {
+          "old": "f_00F8_0543",
+          "new": "res_lookup_dynamic_balloon",
+          "kind": "descriptive",
+          "why": "root:00F8:0543 (src/ui/view_dialog_helpers.c:335): Installed by res_install_cache_hook; returns yardBalloon for object 30000 and the second far pointer for 30001 only when type==2."
+        },
+        {
+          "old": "f_284A_0138",
+          "new": "snd_song_read_be16",
+          "kind": "descriptive",
+          "why": "root:284A:0138 (src/sound/midi_player.c:100): The original 284A:0138 loads song bytes off/off+1, shifts the first by eight and ORs the second; ExtractWord is only a MEDIUM role analogue. This definition has a semantic receipt, not an exact claim."
+        }
+      ],
+      "note": "Lexical identifier rename; semantic review unchanged.",
+      "prior_receipt_sha256": "7db1b4619bc868c0dab9fc349a0a668bd4685fb5674cbf51a8015a2241455944"
+    }
   ]
- },
- "root_review": {
-  "reviewer": "root",
-  "complete_cfg": true,
-  "complete_data_widths": true,
-  "complete_calls_effects": true,
-  "codegen_only_residue": true,
-  "basis": "Reviewed the whole-function branch/call/state/width maps, source/evidence identities, explanations of residue and differential/negative limits. Matching observed service boundaries are composed through the actual caller ABI and same callee/slot/state; finite coverage alone is not acceptance.",
-  "source_correction_reviewed": true,
-  "source_correction": "Context only: repeated file-scope declarations of this file are removed; the first copy of each stays. Every exact claim of the module stays exact and the definition of this function is unchanged (same definition_sha256).",
-  "source_correction_date": "2026-11-13"
- },
- "promotion": "Reviewed definition imported once into canonical whole TU; historical declarations, types and private data retained. Builds do not read the prior candidate or this receipt.",
- "supersedes": {
-  "program_sha256": "4d446ee4f0c8e512ae2adfc737e7eb4b0bd5674d5f8059918024e93cc5c5e8d4",
-  "source_sha256": "f65c9a06551e9bafea9e15a41940bbf9508ad5b6ee84050639e015128081f999",
-  "definition_sha256": "699917966ff3dfbb84f7bc5feb3a49634056544cf07391e228d3c5b178e6b906",
-  "receipt_sha256": "fae1024c7ffe0c007f4da2f80f21186bdff8713130735d158c0763359e5d73a6"
- }
 }

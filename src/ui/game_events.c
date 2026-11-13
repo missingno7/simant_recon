@@ -165,8 +165,8 @@ int far DoEvent(void)
 
 extern int far kbd_read_key_code(void);
 extern void far CheatKeys(int key);
-void far o19_384C_0320(void);
-extern void far f_171C_030C(char far *where);
+void far ui_show_memory_statistics(void);
+extern void far mem_dump_heap(char far *where);
 extern void far mem_discard_soft_blocks(void);
 extern char far * far fd_55B3_0064;
 extern void far ui_message_transient(char far *msg);
@@ -183,14 +183,14 @@ void far input_dispatch_game_key(void)
     if (kbd_scan_state(0x1d)) {
         switch (key) {
         case 0x817:
-            o19_384C_0320();
+            ui_show_memory_statistics();
             return;
         case 0x821:
             WinPrintf("FLUSH");
             mem_discard_soft_blocks();
             return;
         case 0x820:
-            f_171C_030C("User Request");
+            mem_dump_heap("User Request");
             return;
         case 0x82f:
             ui_message_transient(fd_55B3_0064);
@@ -214,7 +214,7 @@ extern long far RallocMemorySoft(void);
 extern long far fd_50F6_3944;
 extern int far sprintf(char far *buf, const char far *fmt, ...);
 
-void far o19_384C_0320(void)
+void far ui_show_memory_statistics(void)
 {
     char buf[200];
 

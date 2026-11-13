@@ -103,20 +103,20 @@ void far mem_init_movable_heap(void);
 Block far * far mem_free_and_coalesce(Block far *b, int merge);
 void far mem_carve_free_block(Block far *b, unsigned paras, int type);
 Block far * far mem_find_free_block(unsigned paras, int type, char far *name, int noems);
-Block far * far f_171C_0FBC(unsigned paras, int type);
-void far f_171C_11F2(Block far *b);
+Block far * far mem_allocate_high_block(unsigned paras, int type);
+void far mem_find_free_list_neighbors(Block far *b);
 void far mem_release_handle_slot(Handle h);
 Handle far Ralloc(long size, int flags, char far *name);
 void far RallocFree(Handle h);
 void far RallocSetType(Handle h, int flags);
-void far f_171C_1804(Handle h);
+void far mem_discard_handle(Handle h);
 Handle far RallocRealloc(Handle h, long size, int flags);
 Handle far mem_lock_handle(Handle h);
 Handle far mem_unlock_encoded_handle(Handle h);
 Handle far mem_handle_from_pointer(char far *p);
 char far * far mem_malloc_bridge(unsigned size);
 
-void far f_171C_0002(char far *where)
+void far mem_abort_with_alloc_context(char far *where)
 {
     Punt("MemPunt @%s after %s", where, (char far *)b_8C62);
 }
@@ -125,13 +125,13 @@ void far f_171C_001E(void)
 {
 }
 
-void far f_171C_0020(void)
+void far mem_free_ems_heap(void)
 {
     if (s_2F6E)
         ems_free_handle(s_2F6E);
 }
 
-int far f_171C_0034(void)
+int far mem_init_ems_heap(void)
 {
     if (s_2F6E)
         return 1;
@@ -147,7 +147,7 @@ int far f_171C_0034(void)
                 ems_map_page(s_2F6E, 0, 0);
                 ems_map_page(s_2F6E, 1, 1);
                 ems_map_page(s_2F6E, 2, 2);
-                atexit(f_171C_0020);
+                atexit(mem_free_ems_heap);
                 return 1;
             }
         }
@@ -155,7 +155,7 @@ int far f_171C_0034(void)
     return 0;
 }
 
-char far * far f_171C_00FA(int type)
+char far * far mem_type_name(int type)
 {
     switch (type) {
     case 3:
@@ -203,7 +203,7 @@ Block far * far mem_free_and_coalesce(Block far *b, int merge)
         g_91AC = b;
         b->next = b->prev = 0;
     } else {
-        f_171C_11F2(b);
+        mem_find_free_list_neighbors(b);
         next = BLK(b->next);
         prev = BLK(b->prev);
         b->type = 0x80;
@@ -229,7 +229,7 @@ Block far * far mem_free_and_coalesce(Block far *b, int merge)
     return b;
 }
 
-void far f_171C_02CA(int fd, char far *format, ...)
+void far mem_dump_printf(int fd, char far *format, ...)
 {
     char buffer[300];
 
@@ -237,7 +237,7 @@ void far f_171C_02CA(int fd, char far *format, ...)
     write(fd, buffer, _fstrlen(buffer));
 }
 
-void far f_171C_030C(char far *where)
+void far mem_dump_heap(char far *where)
 {
     int x;
     int y;
@@ -252,28 +252,28 @@ void far f_171C_030C(char far *where)
         return;
     fd = open("ralloc.dmp", 0x109, 0x180);
     time(&now);
-    f_171C_02CA(fd, "\n\nRalloc dump at %s, %s", where, asctime(localtime(&now)));
-    f_171C_02CA(fd, "\nFree Space:  %ld,  Used Space:  %ld, Total Space: %ld \n",
+    mem_dump_printf(fd, "\n\nRalloc dump at %s, %s", where, asctime(localtime(&now)));
+    mem_dump_printf(fd, "\nFree Space:  %ld,  Used Space:  %ld, Total Space: %ld \n",
                 (unsigned long)s_2F3E << 4, (unsigned long)s_2F3C << 4, (unsigned long)s_2F40 << 4);
-    f_171C_02CA(fd, "Hard space:  %ld,  Firm space:  %ld, Soft Space : %ld\n",
+    mem_dump_printf(fd, "Hard space:  %ld,  Firm space:  %ld, Soft Space : %ld\n",
                 (unsigned long)s_2F36 << 4, (unsigned long)s_2F3A << 4, (unsigned long)s_2F38 << 4);
-    f_171C_02CA(fd, "Handles allocated: %d,  handles used: %d max: %d", g_2F42, g_2F44, s_2F4C);
+    mem_dump_printf(fd, "Handles allocated: %d,  handles used: %d max: %d", g_2F42, g_2F44, s_2F4C);
     h = s_2F46 - 1;
     n = g_2F44;
-    f_171C_02CA(fd, "\nBy handles: \n");
+    mem_dump_printf(fd, "\nBy handles: \n");
     while (n) {
         if (*h) {
             _fstrncpy(name, HDR(h)->name, 29);
             name[29] = 0;
             b = HDR(h);
-            f_171C_02CA(fd, "%p->%p: size=%ld, type=%c%s age=%5ld name=%s\n",
+            mem_dump_printf(fd, "%p->%p: size=%ld, type=%c%s age=%5ld name=%s\n",
                         h, *h, (unsigned long)b->paras << 4, b->lock ? '*' : ' ',
-                        f_171C_00FA(b->type), s_2F30 - b->age, (char far *)name);
+                        mem_type_name(b->type), s_2F30 - b->age, (char far *)name);
             n--;
         }
         h--;
     }
-    f_171C_02CA(fd, "\n\nBy location:\n");
+    mem_dump_printf(fd, "\n\nBy location:\n");
     for (b = g_91A4; SEG(b) < SEG(g_91A8); b = BLK(SEG(b) + b->paras)) {
         _fstrncpy(name, b->name, 13);
         name[13] = 0;
@@ -282,15 +282,15 @@ void far f_171C_030C(char far *where)
         case 2:
         case 5:
         case 0x80:
-            f_171C_02CA(fd, "----:----->%p:", (char far *)((long)b + 0x20000L));
+            mem_dump_printf(fd, "----:----->%p:", (char far *)((long)b + 0x20000L));
             break;
         default:
-            f_171C_02CA(fd, "%p->%p:", h, *h);
+            mem_dump_printf(fd, "%p->%p:", h, *h);
             break;
         }
-        f_171C_02CA(fd, "size=%x, %ld, type=%c%s", b->paras, (unsigned long)b->paras << 4,
-                    HDR(h)->lock ? '*' : ' ', f_171C_00FA(b->type));
-        f_171C_02CA(fd, " age=%5ld name=%s\n", s_2F30 - b->age, (char far *)name);
+        mem_dump_printf(fd, "size=%x, %ld, type=%c%s", b->paras, (unsigned long)b->paras << 4,
+                    HDR(h)->lock ? '*' : ' ', mem_type_name(b->type));
+        mem_dump_printf(fd, " age=%5ld name=%s\n", s_2F30 - b->age, (char far *)name);
     }
     close(fd);
 }
@@ -303,7 +303,7 @@ void far f_171C_0676(void)
 {
 }
 
-void far f_171C_0678(void)
+void far mem_release_dos_heap(void)
 {
     _dos_freemem(g_91A2);
     s_2F34 = 0;
@@ -383,7 +383,7 @@ void far mem_init_movable_heap(void)
     g_91AC->type = 0x80;
     g_91AC->next = 0;
     g_91AC->prev = 0;
-    if (f_171C_0034()) {
+    if (mem_init_ems_heap()) {
         g_91AC->paras = s_2F40 = s_2F3E = fd_50F6_394E + fd_50F6_394C - g_91A2;
         g_91A8 = BLK(s_2F3E + SEG(BLK(g_91A2)));
         s_8C70 = SEG(g_91A8);
@@ -399,7 +399,7 @@ void far mem_init_movable_heap(void)
     _fmemset(s_2F46 - s_2F4A, 0, s_2F4A * 4);
     fd_50F6_3948 = *Ralloc(0x20L, 0, "DiscardEntry");
     _fmemcpy(fd_50F6_3948, &s_2F4E, 0x20);
-    atexit(f_171C_0678);
+    atexit(mem_release_dos_heap);
 }
 
 /* SCAFFOLD BEGIN: draft; residue: register allocation (original keeps paras in DI, next block pointer in memory with two copies [bp-0Ah]/[bp-2]) */
@@ -422,7 +422,7 @@ int far mem_resize_in_place(Handle h, unsigned paras, int type)
 }
 /* SCAFFOLD END */
 
-Handle far f_171C_0A5C(void)
+Handle far mem_claim_handle_slot(void)
 {
     Handle h;
     int i;
@@ -443,7 +443,7 @@ Handle far f_171C_0A5C(void)
 }
 
 /* SCAFFOLD BEGIN: draft; residue: original keeps the long local seg in memory ([bp-28h]); MSC here enregisters it in SI:DI */
-void far f_171C_0ADC(Block far *b)
+void far mem_slide_next_block_down(Block far *b)
 {
     Block far *n;
     Block save;
@@ -472,7 +472,7 @@ void far f_171C_0ADC(Block far *b)
 }
 /* SCAFFOLD END */
 
-int far f_171C_0BE2(int emsOnly)
+int far mem_discard_oldest_soft_block(int emsOnly)
 {
     Block far *b;
     unsigned long oldest;
@@ -503,7 +503,7 @@ int far f_171C_0BE2(int emsOnly)
     return 0;
 }
 
-int far f_171C_0CF4(int emsOnly)
+int far mem_compact_region(int emsOnly)
 {
     int t;
     unsigned seg;
@@ -523,7 +523,7 @@ int far f_171C_0CF4(int emsOnly)
             continue;
         n = BLK(b->paras + seg);
         if ((unsigned)SEG(n) < end && (t = n->type, !n->lock) && (t == 1 || t == 3) && !(n->attr & 0x10)) {
-            f_171C_0ADC(b);
+            mem_slide_next_block_down(b);
             continue;
         }
         while ((unsigned)SEG(n) < end) {
@@ -554,7 +554,7 @@ found:
 
 int far mem_compact_any_region(void)
 {
-    return f_171C_0CF4(0);
+    return mem_compact_region(0);
 }
 
 Block far * far mem_find_free_block(unsigned paras, int type, char far *name, int noems)
@@ -569,11 +569,11 @@ Block far * far mem_find_free_block(unsigned paras, int type, char far *name, in
             if (b->paras >= paras)
                 return b;
         }
-        if (s_2F3E > paras && f_171C_0CF4(noems))
+        if (s_2F3E > paras && mem_compact_region(noems))
             continue;
-        if (!f_171C_0BE2(noems) || s_2F3E + s_2F38 <= paras)
+        if (!mem_discard_oldest_soft_block(noems) || s_2F3E + s_2F38 <= paras)
             break;
-        while (f_171C_0BE2(noems) && s_2F3E < paras)
+        while (mem_discard_oldest_soft_block(noems) && s_2F3E < paras)
             ;
     }
     sprintf(buffer, "Cannot find a big enough space! (%ld bytes) @ %s", (unsigned long)paras << 4, name);
@@ -581,7 +581,7 @@ Block far * far mem_find_free_block(unsigned paras, int type, char far *name, in
 }
 
 /* SCAFFOLD BEGIN: draft; residue: register allocation (original: SI for inner-loop block/size/result, DI for best/paras by region) and frame layout */
-Block far * far f_171C_0FBC(unsigned paras, int type)
+Block far * far mem_allocate_high_block(unsigned paras, int type)
 {
     int first;
     Block far *b;
@@ -622,16 +622,16 @@ Block far * far f_171C_0FBC(unsigned paras, int type)
 again:
         if (!compacted) {
             WinPrintf("<CL>");
-            if (s_2F3E > paras && f_171C_0CF4(0)) {
+            if (s_2F3E > paras && mem_compact_region(0)) {
                 first = compacted = 1;
                 continue;
             }
         }
         WinPrintf("<FO>");
         compacted = 0;
-        if (f_171C_0BE2(0) && s_2F3E + s_2F38 > paras) {
+        if (mem_discard_oldest_soft_block(0) && s_2F3E + s_2F38 > paras) {
             WinPrintf("<FO2>");
-            while (f_171C_0BE2(0) && s_2F3E < paras)
+            while (mem_discard_oldest_soft_block(0) && s_2F3E < paras)
                 ;
             first = 1;
         } else
@@ -640,7 +640,7 @@ again:
 }
 /* SCAFFOLD END */
 
-void far f_171C_11F2(Block far *b)
+void far mem_find_free_list_neighbors(Block far *b)
 {
     Block far *cur;
     Block far *prev;
@@ -681,7 +681,7 @@ Handle far mem_alloc_handle_block(long size, int flags, char far *name, int unus
     b = mem_find_free_block(paras + 2, flags & ~0x78, name, noems);
     if (noems)
         WinPrintf("\nNOEMS - memPtr=%p", b);
-    h = f_171C_0A5C();
+    h = mem_claim_handle_slot();
     if (!h)
         Punt("Could not allocate handle");
     *h = (char far *)((long)b + 0x20000L);
@@ -813,7 +813,7 @@ int far RallocFreed(Handle h)
     return 0;
 }
 
-void far f_171C_1804(Handle h)
+void far mem_discard_handle(Handle h)
 {
     Block far *b;
 
@@ -920,7 +920,7 @@ void far mem_mark_discardable_1c82(Handle h)
     RallocSetType(h, 3);
 }
 
-char far * far f_171C_1CD6(Handle h)
+char far * far mem_pointer_if_locked(Handle h)
 {
     CHECKH(h);
     if (HDR(h)->lock)
@@ -928,7 +928,7 @@ char far * far f_171C_1CD6(Handle h)
     return 0L;
 }
 
-char far * far f_171C_1D40(Handle h)
+char far * far mem_move_high_and_lock(Handle h)
 {
     char far *p;
     int type;
@@ -949,7 +949,7 @@ char far * far f_171C_1D40(Handle h)
     if ((unsigned)(s_8C70 - SEG(p)) - paras < 0x1800)
         return mem_Lock(h);
     BLK(SEG(p) - 2)->type = 1;
-    nb = f_171C_0FBC(paras, type);
+    nb = mem_allocate_high_block(paras, type);
     b = HDR(h);
     mem_copy_paragraphs(nb, b, paras);
     nb->type = type;
@@ -959,7 +959,7 @@ char far * far f_171C_1D40(Handle h)
     return mem_Lock(h);
 }
 
-void far f_171C_1E86(Handle h, int flags)
+void far mem_set_alloc_type(Handle h, int flags)
 {
     RallocSetType(h, flags);
 }
@@ -981,7 +981,7 @@ void far mem_discard_soft_blocks(void)
     for (n = g_2F44; n; h--) {
         if (*h) {
             if (HDR(h)->type == 3)
-                f_171C_1804(h);
+                mem_discard_handle(h);
             n--;
         }
     }
@@ -1100,7 +1100,7 @@ char far * far _frealloc(char far *p, unsigned size)
     return *h;
 }
 
-void far * far f_171C_2302(void far *p, unsigned size)
+void far * far mem_realloc_pointer_bridge(void far *p, unsigned size)
 {
     return _frealloc(p, size);
 }

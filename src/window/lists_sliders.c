@@ -110,7 +110,7 @@ void _fastcall list_clear_selection(int obj)
     win_UnlockWin(obj);
 }
 
-void _fastcall f_23E6_01DC(int obj, int line, int sel)
+void _fastcall list_set_line_selected(int obj, int line, int sel)
 {
     char far *o;
     struct List far *list;
@@ -405,7 +405,7 @@ struct Event {
     int xE;
 };
 
-void _fastcall f_23E6_0A53(struct Event far *ev)
+void _fastcall list_process_click(struct Event far *ev)
 {
     char far *o;
     struct List far *list;
@@ -426,7 +426,7 @@ void _fastcall f_23E6_0A53(struct Event far *ev)
         list_clear_selection(ev->code);
     }
     if (sel == 0)
-        f_23E6_01DC(ev->code, line, 1);
+        list_set_line_selected(ev->code, line, 1);
     list_draw_visible_rows(o);
 }
 

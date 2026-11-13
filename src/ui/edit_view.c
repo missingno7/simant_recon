@@ -5,7 +5,7 @@
  * DOS: resident code; segment 0250; partial original translation unit.
  * Windows: mixed (ANTEDIT, _TEXT), from recorded function pairs.
  * Functions not yet exact: DoCalcTile, DrawBalloons.
- * Steered functions: f_0250_129E.
+ * Steered functions: edit_redraw_changed_tile.
  */
 
 struct Event {
@@ -76,7 +76,7 @@ void far InvalEuMap(int left, int top, int right, int bottom)
 
 extern void far ems_free_handle(int handle);
 
-void far f_0250_0114(void)
+void far edit_free_tile_ems(void)
 {
     if (g_19D0)
         ems_free_handle(g_19D0);
@@ -109,7 +109,7 @@ int far edit_alloc_tile_ems(void)
             ems_query_page_frame();
             g_19D0 = ems_allocate_pages(8);
             ems_set_handle_name(g_19D0, "TILESXXX");
-            atexit(f_0250_0114);
+            atexit(edit_free_tile_ems);
             return 1;
         }
     }
@@ -136,7 +136,7 @@ static int g_1A2E = -1;
 
 extern int far TERRAINset;
 extern char near g_5A97;
-extern Handle far f_1A53_00BA(int object, int kind);
+extern Handle far res_load_firm_object(int object, int kind);
 extern Handle far fd_50F6_37DE;
 extern void far gfx_planar_upload_tiles(char far *p, unsigned seg, int n);
 extern void far gfx_planar_upload_plane(char far *p, unsigned seg, int page, unsigned n);
@@ -156,12 +156,12 @@ void far edit_load_terrain_tiles(int set)
     if ((g_5A97 & 1) || g_5A97 == 2) {
         if (fd_50F6_10EE)
             mem_Free(fd_50F6_10EE);
-        fd_50F6_10EE = f_1A53_00BA(10 - set, 9);
+        fd_50F6_10EE = res_load_firm_object(10 - set, 9);
         db_UnhookObject(10 - set, 9);
     } else {
         if (g_19D0 == 0)
             edit_release_life_tiles();
-        fd_50F6_37DE = f_1A53_00BA(10 - set, 9);
+        fd_50F6_37DE = res_load_firm_object(10 - set, 9);
         gfx_planar_upload_tiles(*fd_50F6_37DE, 0xa000, 0x100);
         for (i = 0; i < 4; i++)
             gfx_planar_upload_plane(*fd_50F6_37DE + (i << 13), 0xc000, i, 0x2000);
@@ -261,7 +261,7 @@ void far edit_invalidate_life_cache(void)
 
 extern int far MapPlane;
 
-void far f_0250_05EB(void)
+void far edit_map_tile_ems_for_plane(void)
 {
     if (g_19D0) {
         ems_save_handle_map(g_19D0);
@@ -287,17 +287,17 @@ void far edit_prepare_life_tiles(int which)
                 fd_50F6_10EA = 0;
             }
             if (fd_50F6_10E6 == 0)
-                fd_50F6_10E6 = f_1A53_00BA(13, 9);
+                fd_50F6_10E6 = res_load_firm_object(13, 9);
         } else {
             if (fd_50F6_10E6) {
                 db_ReleaseHandle(fd_50F6_10E6);
                 fd_50F6_10E6 = 0;
             }
             if (fd_50F6_10EA == 0)
-                fd_50F6_10EA = f_1A53_00BA(14, 9);
+                fd_50F6_10EA = res_load_firm_object(14, 9);
         }
     } else
-        f_0250_05EB();
+        edit_map_tile_ems_for_plane();
 }
 
 extern unsigned char near g_94E4;
@@ -309,7 +309,7 @@ extern void far gfx_planar_draw_life_hires(int x, int y, int col, int row, char 
 extern void far gfx_tandy_draw_life_tile(int x, int y, char far *tile, char far *life, int mask);
 extern void far gfx_mono_draw_life_tile(int x, int y, char far *tile, char far *life, int n);
 
-void far f_0250_0721(int x, int y)
+void far edit_draw_life_and_ground_tile(int x, int y)
 {
     static int masks[3] = { 0, 3, 1 };
     int row;
@@ -410,7 +410,7 @@ void far edit_compose_life_tile(void)
 extern void (far * near g_917C)(int x, int y, int offset);
 extern void (far * near g_914C)(int x, int y, char far *p, int w, int h);
 
-void far f_0250_0ADB(int x, int y)
+void far edit_draw_ground_tile(int x, int y)
 {
     if (g_94E4 >= 0x100)
         Punt("PutTile grndTile > 0x100");
@@ -849,7 +849,7 @@ extern unsigned char far fd_50F6_1114[30 * 40];
 /* STEERED: the point retains two frame words though only y is read.
  * Copying y through i selects the early DI load; original locals are unknown. */
 
-void far f_0250_129E(int x, int y)
+void far edit_redraw_changed_tile(int x, int y)
 {
     Pnt absolute;
     int i;
@@ -870,9 +870,9 @@ void far f_0250_129E(int x, int y)
     }
     if (fd_50F6_15C4[0][i] != g_9126 || fd_50F6_1114[i] != g_94E4 || (row == 0 && g_19CE != 0)) {
         if (g_9126)
-            f_0250_0721(g_19BE * x + editTileRect.left, g_19C0 * row + editTileRect.top);
+            edit_draw_life_and_ground_tile(g_19BE * x + editTileRect.left, g_19C0 * row + editTileRect.top);
         else
-            f_0250_0ADB(g_19BE * x + editTileRect.left, row * g_19C0 + editTileRect.top);
+            edit_draw_ground_tile(g_19BE * x + editTileRect.left, row * g_19C0 + editTileRect.top);
         fd_50F6_15C4[0][i] = g_9126;
         fd_50F6_1114[i] = g_94E4;
     }
@@ -883,7 +883,7 @@ extern void far clip_Push(void);
 void far edit_set_viewport_clip(void);
 extern long far TickCount(void);
 extern void _fastcall win_SetColorNum(int color);
-extern void far f_15D9_0006(char far *msg, struct Rect far *rect, int y);
+extern void far ui_draw_centered_clipped_text(char far *msg, struct Rect far *rect, int y);
 void far PreDrawSpider(void);
 void far PreDrawBalloons(void);
 extern int far fd_50F6_37D2;
@@ -924,7 +924,7 @@ void far edit_render_viewport(void)
             g_19C6 = 0;
         } else {
             win_SetColorNum(3);
-            f_15D9_0006(g_19C6, &editTileRect, editTileRect.top + 4);
+            ui_draw_centered_clipped_text(g_19C6, &editTileRect, editTileRect.top + 4);
         }
     }
     PreDrawSpider();
@@ -954,7 +954,7 @@ void far edit_render_viewport(void)
                 balloon = 1;
                 continue;
             }
-            f_0250_129E(x, y);
+            edit_redraw_changed_tile(x, y);
         }
     }
     edit_restore_tile_ems_map();
@@ -1243,7 +1243,7 @@ extern int far MowY;
 
 /* OPEN: residue commutative operand order MapPnt.x + EditColumns (original loads the
  * MapPnt member first) - structural, not changed by names or preceding declaration counts. */
-void far f_0250_1E80(void)
+void far edit_draw_foot_mower_overlays(void)
 {
     int x;
     int y;
@@ -1642,7 +1642,7 @@ void far DrawLegs(int x, int y, int dir, int frame)
     }
 }
 
-void far f_0250_41CA(void)
+void far edit_invalidate_spider_area(void)
 {
     InvalEuMap((SpidX - MapPnt.x * g_19BE) / g_19BE - 3,
                 (SpidY - MapPnt.y * g_19C0) / g_19C0 - 3,
@@ -1650,7 +1650,7 @@ void far f_0250_41CA(void)
                 (SpidY - MapPnt.y * g_19C0) / g_19C0 + 3);
 }
 
-/* OPEN: residue as f_0250_1E80: original keeps MapPnt.x in AX after the compare and adds
+/* OPEN: residue as edit_draw_foot_mower_overlays: original keeps MapPnt.x in AX after the compare and adds
  * EditColumns; this compiles to load EditColumns then add the [bp-2] CSE temp. */
 int far BalloonIsVisible(int plane, int x, int y)
 {
@@ -2033,7 +2033,7 @@ void far DrawBalloons(void)
 
 
 extern struct Rect far fd_50F6_1104;
-extern void far f_1E57_08F5(struct Rect far *rects);
+extern void far clip_intersect_rect_list(struct Rect far *rects);
 
 void far edit_set_viewport_clip(void)
 {
@@ -2043,5 +2043,5 @@ void far edit_set_viewport_clip(void)
     rects[0] = editTileRect;
     rects[1] = fd_50F6_1104;
     rects[2].top = 0x8000;
-    f_1E57_08F5(rects);
+    clip_intersect_rect_list(rects);
 }

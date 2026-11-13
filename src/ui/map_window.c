@@ -200,7 +200,7 @@ extern unsigned char far PherMapA[];
 extern int far ConvColor(int color);
 extern long far TickCount(void);
 extern void _fastcall win_SetColorNum(int color);
-extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
+extern void far ui_draw_centered_clipped_text(long msg, struct Rect far *rect, int y);
 extern void far clip_SubInclude(struct Rect far *rect);
 extern int far SpidOn;
 extern int far MapPlane;
@@ -265,7 +265,7 @@ void far ToggleMapCursor(void)
 }
 
 
-void far o12_384C_03D0(char far *src, char far *dst, int n)
+void far map_dispatch_scaled_bitmap(char far *src, char far *dst, int n)
 {
     if (multiplier == 64)
         (*fd_50F6_38BC)(src, dst, multiplier, n);
@@ -274,7 +274,7 @@ void far o12_384C_03D0(char far *src, char far *dst, int n)
 }
 
 
-void far o12_384C_0425(void)
+void far map_notify_view_changed(void)
 {
     win_MapChanged();
 }
@@ -290,7 +290,7 @@ void far map_generate_surface_colours(void)
 
     fresh = g_2994;
     if (MapMode != g_2992) {
-        o12_384C_0425();
+        map_notify_view_changed();
         g_2992 = MapMode;
         fresh = 0;
     }
@@ -377,7 +377,7 @@ void far map_generate_nest_colours(void)
 
     fresh = g_2994;
     if (MapMode != g_2992) {
-        o12_384C_0425();
+        map_notify_view_changed();
         g_2992 = MapMode;
         fresh = 0;
     }
@@ -521,7 +521,7 @@ void far map_render_immediate(void)
             mapMessage = 0;
         } else {
             win_SetColorNum(3);
-            f_15D9_0006(mapMessage, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
+            ui_draw_centered_clipped_text(mapMessage, &fd_50F6_10D2, fd_50F6_10D2.top + 4);
         }
     }
     clip_Push();
@@ -538,7 +538,7 @@ void far map_render_immediate(void)
     for (row = 0, off = 0; row < n; row++, y += mapYsize) {
         if (_fmemcmp(old + off, img + off, multiplier) || fd_55B3_29A2 || (row < 8 && g_29A4)) {
             _fmemcpy(old + off, img + off, multiplier);
-            o12_384C_03D0(img + off, gen, y);
+            map_dispatch_scaled_bitmap(img + off, gen, y);
             (*g_914C)(fd_50F6_10D2.left + fd_50F6_38C0, y, gen, multiplier * mapXsize, mapYsize);
         }
         off += multiplier;

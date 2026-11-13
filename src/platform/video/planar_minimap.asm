@@ -87,7 +87,7 @@ DGROUP	group	_DATA
 	extrn	_gfx_planar_gboxfill:far
 	extrn	_gfx_planar_upload_tiles:far
 	extrn	_gfx_planar_move_box:far
-	extrn	_o15_384C_0000:far
+	extrn	_app_exit_demo_expired:far
 
 S00A_TEXT	segment word public 'CODE'
 	assume	cs:S00A_TEXT, ds:DGROUP
@@ -1043,7 +1043,7 @@ L0869:
 _gfx_planar_map64_pack8	endp
 
 _gfx_planar_fatal_display_jump	proc	far
-	jmp far ptr _o15_384C_0000
+	jmp far ptr _app_exit_demo_expired
 _gfx_planar_fatal_display_jump	endp
 
 S00A_TEXT	ends

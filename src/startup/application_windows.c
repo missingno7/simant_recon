@@ -27,11 +27,11 @@ extern void far win_DrawCasteWindow(int flags);
 extern void far win_DrawYardWindow(int flags);
 extern void far win_DrawInfoWindow(int flags);
 extern void _fastcall win_set_state_change_hook(void (far *hook)(void));
-void far f_00BA_0228(void);
+void far app_window_state_changed(void);
 extern void _fastcall win_set_layout_change_hook(void (far *hook)(int item));
-void far f_00BA_01C3(int item);
+void far app_window_layout_changed(int item);
 extern void _fastcall win_set_before_close_hook(void (far *hook)(void));
-void far f_00BA_0211(void);
+void far app_before_window_close(void);
 extern void far win_copy_obj_layout_origin(int, int);
 extern void far InitMapFunctions(void);
 extern int far fd_50F6_10D0;
@@ -58,9 +58,9 @@ void far InitApplicationWindows(void)
     win_SetWinDrawHook(0x1300, win_DrawCasteWindow);
     win_SetWinDrawHook(0x1900, win_DrawYardWindow);
     win_SetWinDrawHook(0x500, win_DrawInfoWindow);
-    win_set_state_change_hook(f_00BA_0228);
-    win_set_layout_change_hook(f_00BA_01C3);
-    win_set_before_close_hook(f_00BA_0211);
+    win_set_state_change_hook(app_window_state_changed);
+    win_set_layout_change_hook(app_window_layout_changed);
+    win_set_before_close_hook(app_before_window_close);
     win_copy_obj_layout_origin(0x1900, 0x100);
     InitMapFunctions();
     if (fd_50F6_10D0 == 0)
@@ -92,7 +92,7 @@ extern void far win_EditChanged(void);
 extern void far f_00F8_00A4(void);
 extern void far f_00F8_0002(void);
 
-void far f_00BA_01C3(int item)
+void far app_window_layout_changed(int item)
 {
     switch (item) {
     case 0x100:
@@ -112,14 +112,14 @@ void far f_00BA_01C3(int item)
 extern void far win_ModeControlClosed(void);
 extern void far win_CasteControlClosed(void);
 
-void far f_00BA_0211(void)
+void far app_before_window_close(void)
 {
     f_00F8_0002();
     win_ModeControlClosed();
     win_CasteControlClosed();
 }
 
-void far f_00BA_0228(void)
+void far app_window_state_changed(void)
 {
     win_CasteControlClosed();
     win_ModeControlClosed();

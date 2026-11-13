@@ -84,7 +84,7 @@ def _window_services():
 def coordinate_case(label, modes, refs, initial, rect, obj=WIN_ID):
     obj_linear = DATA_SEG * 16 + OBJ_OFF + 0x100
     rect_linear = DATA_SEG * 16 + RECT_OFF
-    # f_20E8_0903 treats obj[0..3], origin[0..3], ref[0..3], mode[0..3]
+    # win_set_obj_absolute_rect treats obj[0..3], origin[0..3], ref[0..3], mode[0..3]
     # as four words each. Initialize extra object bytes to expose accidental
     # unrelated writes as part of the full object-state boundary.
     fields = list(initial) + [0x1111] * 4 + list(refs) + list(modes) + [0x5A5A] * 20
@@ -95,7 +95,7 @@ def coordinate_case(label, modes, refs, initial, rect, obj=WIN_ID):
                  behavior.Range("input_rect", rect_linear, 8)],
         callbacks=_window_services(), return_kind="void", callee_pop=4,
         registers=_registers(ax=obj), state={"lock_depth": 0, "recalc": []},
-        metadata={"suite": SUITE, "contract": "f_20E8_0903 origin fields, complete object bytes, input rectangle, ordered recalculations and lock balance",
+        metadata={"suite": SUITE, "contract": "win_set_obj_absolute_rect origin fields, complete object bytes, input rectangle, ordered recalculations and lock balance",
                   "abi": "AX=obj; stack far pointer rect; observed original retf 4",
                   "helper_policy": "win_LockWin/win_UnlockWin/win_ObjAddr/win_Recalc use deterministic synthetic services; callback traces expose all calls; recalc only records the request and does not implement dependency resolution",
                   "validity": "object/window index 1, fixed in-range 4-word object and rectangle"})
@@ -422,7 +422,7 @@ def clip_live_case(label, rects, seed=0x1E57038E, win_ids=None, cache_pressure=F
         registers=_registers(), state={"rect_provider_calls": []}, observe_at_calls=False,
         metadata={"suite": SUITE, "contract": "ordered per-window clip lists and all allocator-backed rectangle bytes after rebuilding the active window stack",
                   "abi": "void far win_rebuild_visible_clips(void); win_GetObjRect fastcall AX=window, stack far rect, callback pop=4",
-                  "helper_policy": "actual original Ralloc allocation/lock/unlock/resize/free, _fmemcpy/_fmemset, and actual original f_1D8E_02BD rectangle subtraction; only win_GetObjRect supplies deterministic window geometry",
+                  "helper_policy": "actual original Ralloc allocation/lock/unlock/resize/free, _fmemcpy/_fmemset, and actual original clip_split_rect_list rectangle subtraction; only win_GetObjRect supplies deterministic window geometry",
                   "validity": {"windows": wins, "rectangles": [list(r) for r in rects], "screen": list(screen),
                               "screen_bounds": "normalized signed rectangles within bounded DOS logical coordinates; zero-width/height and partial/off-screen spans are allowed against the 640x400 clip screen",
                   "allocator": {"segment": f"{arena_seg:04x}", "paragraphs": heap_paras,

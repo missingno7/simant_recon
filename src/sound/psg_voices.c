@@ -30,26 +30,26 @@ unsigned g_7600[] = {
     0xd, 0xd, 0xc, 0xb, 0xb, 0xa, 0x9, 0x9
 };
 
-extern void far f_29F0_002A(int port, char value);
+extern void far snd_port_write_byte(int port, char value);
 
 extern void far snd_regchip_write(int reg, int value);
 extern int far fd_50F6_4B14;
-void far f_29D6_000A(int a, int note, int vol, int chan)
+void far snd_ps1_set_note(int a, int note, int vol, int chan)
 {
     int f;
 
     chan <<= 5;
     f = g_75E8[note % 12] >> note / 12;
     chan += 0x80;
-    f_29F0_002A(0x205, (f & 0xf) + (char)chan);
-    f_29F0_002A(0x205, f >> 4);
+    snd_port_write_byte(0x205, (f & 0xf) + (char)chan);
+    snd_port_write_byte(0x205, f >> 4);
     vol >>= 3;
     vol = 0xf - vol;
-    f_29F0_002A(0x205, vol + (char)chan + 0x10);
+    snd_port_write_byte(0x205, vol + (char)chan + 0x10);
 }
 
 
-void far f_29D6_0082(int a, int note, int vol, int ch)
+void far snd_regchip_set_note(int a, int note, int vol, int ch)
 {
     int n;
     int f;
@@ -65,7 +65,7 @@ void far f_29D6_0082(int a, int note, int vol, int ch)
 }
 
 
-void far f_29D6_00D9(int a, int note, int vol, int ch)
+void far snd_tandy_set_note(int a, int note, int vol, int ch)
 {
     unsigned freq;
     char reg;
@@ -101,19 +101,19 @@ void far f_29D6_00D9(int a, int note, int vol, int ch)
     }
 }
 
-void far f_29D6_0148(int note, int ch)
+void far snd_ps1_silence_voice(int note, int ch)
 {
-    f_29D6_000A(0, note, 0, ch);
+    snd_ps1_set_note(0, note, 0, ch);
 }
 
-void far f_29D6_015D(int a, int ch)
+void far snd_regchip_silence_voice(int a, int ch)
 {
     snd_regchip_write(ch + 8, 0);
     snd_regchip_write(ch * 2, 0);
     snd_regchip_write(ch * 2 + 1, 0);
 }
 
-void far f_29D6_0197(int a, int ch)
+void far snd_tandy_silence_voice(int a, int ch)
 {
-    f_29D6_00D9(0, 0, 0, ch);
+    snd_tandy_set_note(0, 0, 0, ch);
 }

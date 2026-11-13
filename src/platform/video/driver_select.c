@@ -31,34 +31,34 @@ char *g_629A[9] = {
 };
 
 extern void far gfx_reset_driver_callbacks(void);
-extern int far o21_39C7_0000(void);
-extern int far o21_39C7_016D(void);
+extern int far gfx_probe_display_adapters(void);
+extern int far gfx_bios_has_tandy_signature(void);
 extern char near g_5A97;
 extern int far printf(char far *format, ...);
 extern void far exit(int code);
 extern int far sprintf(char far *buf, char far *format, ...);
 extern void far db_SetDataBase(char far *name);
-extern void far f_1B28_0006(void);
+extern void far mouse_load_builtin_cursor_pairs(void);
 extern void far Punt(char far *message);
 extern void far gfx_planar_init_640x350(void);
 extern void far gfx_mono_init_banked_640x400(void);
-extern void far o20_39C7_0160(void);
+extern void far gfx_load_fonts_mono_350_400(void);
 extern void far o20_39C7_0003(void);
 extern void far gfx_tandy_init_tandy(void);
-extern void far o20_39C7_0069(void);
+extern void far gfx_load_fonts_tandy(void);
 extern void far o20_39C7_0001(void);
 extern void far gfx_mono_init_hercules(void);
-extern void far o20_39C7_0008(void);
+extern void far gfx_load_fonts_hercules(void);
 extern void far o20_39C7_0000(void);
 extern void far gfx_planar_init_320x200(void);
-extern void far o20_39C7_01C1(void);
+extern void far gfx_load_font_planar_320(void);
 extern void far o20_39C7_0004(void);
 extern void far gfx_mono_init_ega350_mono(void);
 extern void far gfx_vga8_init_vga256(void);
-extern void far o20_39C7_0212(void);
+extern void far gfx_load_fonts_vga256(void);
 extern void far o20_39C7_0006(void);
 extern void far gfx_mono_init_ega480_mono(void);
-extern void far o20_39C7_00FF(void);
+extern void far gfx_load_fonts_mono_480(void);
 extern void far o20_39C7_0002(void);
 extern void far gfx_planar_init_640x480(void);
 extern void far o20_39C7_0211(void);
@@ -97,7 +97,7 @@ void far gfx_select_driver_resources(char far *dbname)
     int info;
 
     gfx_reset_driver_callbacks();
-    info = o21_39C7_0000();
+    info = gfx_probe_display_adapters();
     display = (char)(info >> 8);
     adapter = info & 0xff;
     mode = -1;
@@ -109,7 +109,7 @@ void far gfx_select_driver_resources(char far *dbname)
             msg = "MDA system detected. Cannot run graphics.";
             break;
         case 2:
-            mode = o21_39C7_016D() ? 2 : 1;
+            mode = gfx_bios_has_tandy_signature() ? 2 : 1;
             break;
         case 4:
             mode = 7;
@@ -159,7 +159,7 @@ void far gfx_select_driver_resources(char far *dbname)
     }
     sprintf(path, "%s%s", g_629A[g_5A97], dbname);
     db_SetDataBase(path);
-    f_1B28_0006();
+    mouse_load_builtin_cursor_pairs();
     switch (g_5A97) {
     case 0:
         gfx_planar_init_640x350();
@@ -171,37 +171,37 @@ void far gfx_select_driver_resources(char far *dbname)
             gfx_mono_init_banked_640x400();
             g_5A97 = 5;
         }
-        o20_39C7_0160();
+        gfx_load_fonts_mono_350_400();
         o20_39C7_0003();
         break;
     case 2:
         gfx_tandy_init_tandy();
-        o20_39C7_0069();
+        gfx_load_fonts_tandy();
         o20_39C7_0001();
         break;
     case 3:
         gfx_mono_init_hercules();
-        o20_39C7_0008();
+        gfx_load_fonts_hercules();
         o20_39C7_0000();
         break;
     case 4:
         gfx_planar_init_320x200();
-        o20_39C7_01C1();
+        gfx_load_font_planar_320();
         o20_39C7_0004();
         break;
     case 5:
         gfx_mono_init_ega350_mono();
-        o20_39C7_0160();
+        gfx_load_fonts_mono_350_400();
         o20_39C7_0003();
         break;
     case 6:
         gfx_vga8_init_vga256();
-        o20_39C7_0212();
+        gfx_load_fonts_vga256();
         o20_39C7_0006();
         break;
     case 7:
         gfx_mono_init_ega480_mono();
-        o20_39C7_00FF();
+        gfx_load_fonts_mono_480();
         o20_39C7_0002();
         break;
     case 8:

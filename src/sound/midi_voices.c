@@ -50,46 +50,46 @@ struct Song {
     int d;
 };
 
-void far f_295C_043E(int dev, int a, int b, int c);
-void far f_295C_04A2(int dev, int a, int b);
-void far f_295C_04FB(int a, int b, int dev);
-void far f_295C_053D(int a, int b, int dev);
+void far snd_midi_note_on(int dev, int a, int b, int c);
+void far snd_midi_percussion_on(int dev, int a, int b);
+void far snd_midi_note_off(int a, int b, int dev);
+void far snd_midi_percussion_off(int a, int b, int dev);
 void far f_295C_0577(void);
-void far f_295C_0578(int dev, int a);
-extern void far f_290D_0193();
-extern void far f_2815_0165();
-extern void far f_29D6_000A();
-extern void far f_29D6_0082();
-extern void far f_29D6_00D9();
-extern void far f_290D_026C();
-extern void far f_2815_024D();
-extern void far f_29D6_0148();
-extern void far f_29D6_015D();
-extern void far f_29D6_0197();
-extern void far f_2815_0275();
+void far snd_midi_select_program(int dev, int a);
+extern void far snd_start_sample_note();
+extern void far snd_opl_set_note_level();
+extern void far snd_ps1_set_note();
+extern void far snd_regchip_set_note();
+extern void far snd_tandy_set_note();
+extern void far snd_stop_sample_voice();
+extern void far snd_opl_clear_voice_pitch();
+extern void far snd_ps1_silence_voice();
+extern void far snd_regchip_silence_voice();
+extern void far snd_tandy_silence_voice();
+extern void far snd_opl_select_instrument();
 
 unsigned g_7502 = 0x7f;
 void (far *g_7504[8])() = {
-    0, f_290D_0193, f_2815_0165, f_29D6_000A, f_29D6_0082, f_29D6_00D9, f_295C_043E, f_295C_04A2
+    0, snd_start_sample_note, snd_opl_set_note_level, snd_ps1_set_note, snd_regchip_set_note, snd_tandy_set_note, snd_midi_note_on, snd_midi_percussion_on
 };
 void (far *g_7524[8])() = {
-    0, f_290D_026C, f_2815_024D, f_29D6_0148, f_29D6_015D, f_29D6_0197, f_295C_04FB, f_295C_053D
+    0, snd_stop_sample_voice, snd_opl_clear_voice_pitch, snd_ps1_silence_voice, snd_regchip_silence_voice, snd_tandy_silence_voice, snd_midi_note_off, snd_midi_percussion_off
 };
 void (far *g_7544[8])() = {
-    0, f_295C_0577, f_2815_0275, f_295C_0577, f_295C_0577, f_295C_0577, f_295C_0578, f_295C_0577
+    0, f_295C_0577, snd_opl_select_instrument, f_295C_0577, f_295C_0577, f_295C_0577, snd_midi_select_program, f_295C_0577
 };
 
-void far f_295C_000A(int volume)
+void far snd_set_voice_volume_scale(int volume)
 {
     g_7502 = volume;
 }
 
 extern struct Chan far fd_50F6_4A4E[];
 extern struct Slot far fd_55B3_6B4E[];
-extern void far f_0000_0149(struct Snd far *snd);
-int far f_295C_00C9(int type, int prio);
+extern void far snd_queue_sample_release(struct Snd far *snd);
+int far snd_choose_voice_by_priority(int type, int prio);
 
-void far f_295C_0015(void)
+void far snd_reap_finished_sample_voices(void)
 {
     int i;
     struct Chan far *c;
@@ -100,13 +100,13 @@ void far f_295C_0015(void)
             c->c2 = 0;
             s = fd_55B3_6B4E[c->num].snd;
             if (s && s->state == 1)
-                f_0000_0149(s);
+                snd_queue_sample_release(s);
             fd_55B3_6B4E[c->num].snd = 0;
         }
     }
 }
 
-int far f_295C_00C9(int type, int prio)
+int far snd_choose_voice_by_priority(int type, int prio)
 {
     int i;
     int bestIdx;
@@ -124,7 +124,7 @@ int far f_295C_00C9(int type, int prio)
             c->c2 = 0;
             s = fd_55B3_6B4E[c->num].snd;
             if (s && s->state == 1)
-                f_0000_0149(s);
+                snd_queue_sample_release(s);
             fd_55B3_6B4E[c->num].snd = 0;
         }
         if (c->type == type) {
@@ -143,11 +143,11 @@ int far f_295C_00C9(int type, int prio)
 
 extern struct Drv far fd_50F6_0000[];
 
-void far f_295C_01EC(int prio, int dev, int note, int vel)
+void far snd_start_instrument_note(int prio, int dev, int note, int vel)
 {
     int v;
 
-    v = f_295C_00C9(fd_50F6_0000[dev].count, prio);
+    v = snd_choose_voice_by_priority(fd_50F6_0000[dev].count, prio);
     if (v < 0)
         return;
     vel = (unsigned)vel * g_7502 >> 7;
@@ -161,7 +161,7 @@ void far f_295C_01EC(int prio, int dev, int note, int vel)
     fd_50F6_4A4E[v].c5 = 0;
 }
 
-void far f_295C_02E8(int dev, int note)
+void far snd_stop_instrument_note(int dev, int note)
 {
     int i;
 
@@ -179,11 +179,11 @@ extern struct Song far fd_55B3_0A82[];
 
 void far snd_start_configured_effect(int n)
 {
-    f_295C_01EC(fd_55B3_0A82[n].b, fd_55B3_0A82[n].c, fd_55B3_0A82[n].a, fd_55B3_0A82[n].d);
+    snd_start_instrument_note(fd_55B3_0A82[n].b, fd_55B3_0A82[n].c, fd_55B3_0A82[n].a, fd_55B3_0A82[n].d);
 }
 
-extern unsigned char far f_29F0_0038(int port);
-extern void far f_29F0_002A(int port, int value);
+extern unsigned char far snd_port_read_byte(int port);
+extern void far snd_port_write_byte(int port, int value);
 
 /* CSE-1: the folded unsigned-byte >= 0 check retains the original byte
  * temporary and index spill. STEERED: original eliminated expression unknown. */
@@ -192,81 +192,81 @@ void far snd_stop_assigned_voices(void)
     int i;
     for (i = 0; fd_50F6_4A4E[i].type; i++) {
         if (fd_50F6_4A4E[i].c3 >= 0 && fd_50F6_4A4E[i].c2)
-            f_295C_02E8(fd_50F6_4A4E[i].c3, fd_50F6_4A4E[i].c4);
+            snd_stop_instrument_note(fd_50F6_4A4E[i].c3, fd_50F6_4A4E[i].c4);
     }
 }
 
-void far f_295C_03DC(int value)
+void far snd_mpu_write_data(int value)
 {
-    while (f_29F0_0038(0x331) & 0x40)
+    while (snd_port_read_byte(0x331) & 0x40)
         ;
-    f_29F0_002A(0x330, value);
+    snd_port_write_byte(0x330, value);
 }
 
-void far f_295C_03FF(int value)
+void far snd_mpu_write_command(int value)
 {
-    while (f_29F0_0038(0x331) & 0x40)
+    while (snd_port_read_byte(0x331) & 0x40)
         ;
-    f_29F0_002A(0x331, value);
+    snd_port_write_byte(0x331, value);
     do {
-        while (f_29F0_0038(0x331) & 0x80)
+        while (snd_port_read_byte(0x331) & 0x80)
             ;
-    } while (f_29F0_0038(0x330) != 0xfe);
+    } while (snd_port_read_byte(0x330) != 0xfe);
 }
 
-void far f_295C_043E(int dev, int a, int b, int c)
+void far snd_midi_note_on(int dev, int a, int b, int c)
 {
     int far *info;
 
     if (*(info = fd_50F6_0000[dev].info) != -1) {
         b += info[1];
-        f_295C_03FF(0xd7);
-        f_295C_03DC(c + 0x90);
-        f_295C_03DC(fd_50F6_0000[dev].info[2] + a);
-        f_295C_03DC(b);
+        snd_mpu_write_command(0xd7);
+        snd_mpu_write_data(c + 0x90);
+        snd_mpu_write_data(fd_50F6_0000[dev].info[2] + a);
+        snd_mpu_write_data(b);
     }
 }
 
-void far f_295C_04A2(int dev, int a, int b)
+void far snd_midi_percussion_on(int dev, int a, int b)
 {
     int far *info;
 
     info = fd_50F6_0000[dev].info;
-    f_295C_03FF(0xd7);
+    snd_mpu_write_command(0xd7);
     b += info[1];
-    f_295C_03DC(0x99);
-    f_295C_03DC(info[0]);
-    f_295C_03DC(b);
+    snd_mpu_write_data(0x99);
+    snd_mpu_write_data(info[0]);
+    snd_mpu_write_data(b);
 }
 
-void far f_295C_04FB(int a, int b, int dev)
+void far snd_midi_note_off(int a, int b, int dev)
 {
-    f_295C_03FF(0xd7);
-    f_295C_03DC(b + 0x80);
-    f_295C_03DC(fd_50F6_0000[dev].info[2] + a);
-    f_295C_03DC(0);
+    snd_mpu_write_command(0xd7);
+    snd_mpu_write_data(b + 0x80);
+    snd_mpu_write_data(fd_50F6_0000[dev].info[2] + a);
+    snd_mpu_write_data(0);
 }
 
-void far f_295C_053D(int a, int b, int dev)
+void far snd_midi_percussion_off(int a, int b, int dev)
 {
-    f_295C_03FF(0xd7);
-    f_295C_03DC(0x89);
-    f_295C_03DC(fd_50F6_0000[dev].info[0]);
-    f_295C_03DC(0);
+    snd_mpu_write_command(0xd7);
+    snd_mpu_write_data(0x89);
+    snd_mpu_write_data(fd_50F6_0000[dev].info[0]);
+    snd_mpu_write_data(0);
 }
 
 void far f_295C_0577(void)
 {
 }
 
-void far f_295C_0578(int dev, int a)
+void far snd_midi_select_program(int dev, int a)
 {
     int far *info;
 
     info = fd_50F6_0000[dev].info;
     if (*info != -1) {
-        f_295C_03FF(0xd7);
-        f_295C_03DC(a + 0xc0);
-        f_295C_03DC(*info);
+        snd_mpu_write_command(0xd7);
+        snd_mpu_write_data(a + 0xc0);
+        snd_mpu_write_data(*info);
     }
 }

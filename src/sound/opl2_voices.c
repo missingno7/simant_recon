@@ -19,7 +19,7 @@ int g_6924[] = { 0x157, 0x16b, 0x181, 0x198, 0x1b0, 0x1ca, 0x1e5, 0x202, 0x220, 
 
 extern void far snd_opl_write(char reg, char value);
 
-void far f_2815_000A(char far *p, int voice)
+void far snd_opl_write_instrument(char far *p, int voice)
 {
     char op1;
     char op2;
@@ -39,7 +39,7 @@ void far f_2815_000A(char far *p, int voice)
     snd_opl_write(voice + 0xc0, p[8]);
 }
 
-void far f_2815_0118(void)
+void far snd_opl_reset_voices(void)
 {
     int i;
 
@@ -63,7 +63,7 @@ extern int far fd_55B3_6BA4[];
  * The comparison of the unsigned parameter with zero is always true and produces no
  * code, but the original keeps the two volume additions apart exactly as this test
  * does. That the test was written on this parameter is a hypothesis. */
-void far f_2815_0165(int instr, int note, unsigned vol, int voice)
+void far snd_opl_set_note_level(int instr, int note, unsigned vol, int voice)
 {
     unsigned char far *p;
     int volume;
@@ -89,13 +89,13 @@ void far f_2815_0165(int instr, int note, unsigned vol, int voice)
 }
 
 
-void far f_2815_024D(int a, int voice)
+void far snd_opl_clear_voice_pitch(int a, int voice)
 {
     snd_opl_write(voice + 0xa0, 0);
     snd_opl_write(voice + 0xb0, 0);
 }
 
-void far f_2815_0275(int instr, int voice)
+void far snd_opl_select_instrument(int instr, int voice)
 {
-    f_2815_000A(fd_50F6_0000[instr].p, voice);
+    snd_opl_write_instrument(fd_50F6_0000[instr].p, voice);
 }

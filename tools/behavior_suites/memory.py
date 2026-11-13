@@ -91,7 +91,7 @@ def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contr
     table_end = table_start + MASTER_CAPACITY * 4
     if table_start < end * 16 and table_end > heap_seg * 16:
         raise ValueError("master handle table overlaps the physical heap")
-    # f_171C_0A5C starts at s_2F46-1. Clear every reserved descending slot.
+    # mem_claim_handle_slot starts at s_2F46-1. Clear every reserved descending slot.
     writes = [(handle_seg*16+MASTER_START,b"\0"*(MASTER_CAPACITY*4))]
     for i, (hidx, block) in enumerate(zip(handles, occupied)):
         slot = MASTER_FIRST - 4 * hidx
@@ -144,8 +144,8 @@ def heap_case(label, rows, *, args=(), handles=(), result="s16", extra=(), contr
 
 
 
-TARGETS = ("mem_resize_in_place", "f_171C_0ADC", "f_171C_0CF4", "f_171C_0FBC")
-TRACKED_FUNCTIONS = TARGETS + ("mem_Lock", "mem_Unlock", "f_171C_0BE2", "RallocFree")
+TARGETS = ("mem_resize_in_place", "mem_slide_next_block_down", "mem_compact_region", "mem_allocate_high_block")
+TRACKED_FUNCTIONS = TARGETS + ("mem_Lock", "mem_Unlock", "mem_discard_oldest_soft_block", "RallocFree")
 SEQUENCE_EFFECTS = ["operation return", "allocator and master-table state",
     "heap headers and payload bytes", "handle identity and payload preservation",
     "free-list topology", "lock/unlock/free/reclaim effects", "all nonstack writes",
@@ -184,7 +184,7 @@ def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
     # Master slots descend from s_2F46, as the original _Handle helpers do.
     handles = [0,1]
     direct_move = not (pinned or soft_lock)
-    first_target = "f_171C_0ADC" if direct_move else "f_171C_0CF4"
+    first_target = "mem_slide_next_block_down" if direct_move else "mem_compact_region"
     initial = heap_case(f"{sequence_id}/00-initialize-and-prepare-move", rows,
         args=([0,HEAP_SEG] if direct_move else [0]), handles=handles,
         result=("void" if direct_move else "s16"),
@@ -193,15 +193,15 @@ def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
         content_seed=content_seed)
     operations = [
         (first_target, initial, "move/compact the valid live arena"),
-        ("f_171C_0CF4", None, "compact later fitting blocks; preserve handles and contents"),
+        ("mem_compact_region", None, "compact later fitting blocks; preserve handles and contents"),
         ("mem_Lock", None, "lock the live soft handle through original manager helper"),
         ("mem_Unlock", None, "unlock the same live soft handle through original manager helper"),
         ("mem_resize_in_place", None, "resize the relocated soft handle and split a real free tail"),
-        ("f_171C_0BE2", None, "reclaim the oldest unlocked soft handle into DiscardEntry"),
+        ("mem_discard_oldest_soft_block", None, "reclaim the oldest unlocked soft handle into DiscardEntry"),
         ("RallocFree", None, "free the relocated firm handle through original manager helper"),
-        ("f_171C_0FBC", None, "allocate from the updated free list after reclaim/free"),
+        ("mem_allocate_high_block", None, "allocate from the updated free list after reclaim/free"),
     ]
-    # 0FBC returns a raw Block*, before its f_171C_1D40 caller copies a live
+    # 0FBC returns a raw Block*, before its mem_move_high_and_lock caller copies a live
     # header/payload and installs the handle. That intermediate helper state
     # cannot be fed to another compaction as a completed live allocation.
     plan = [op[0] for op in operations]
@@ -221,13 +221,13 @@ def make_sequence(sequence_id, *, hole=86, soft=50, gap=16, firm=18, tail=32,
     steps=[]
     for index,(target,case,contract) in enumerate(operations):
         if case is None:
-            if target == "f_171C_0CF4": args=[0]; result="s16"
+            if target == "mem_compact_region": args=[0]; result="s16"
             elif target == "mem_Lock": args=[MASTER_FIRST,HANDLE_SEG]; result="farptr"
             elif target == "mem_Unlock": args=[MASTER_FIRST,HANDLE_SEG]; result="farptr"
             elif target == "mem_resize_in_place": args=[MASTER_FIRST,HANDLE_SEG,resize_to,3]; result="s16"
-            elif target == "f_171C_0BE2": args=[0]; result="s16"
+            elif target == "mem_discard_oldest_soft_block": args=[0]; result="s16"
             elif target == "RallocFree": args=[MASTER_FIRST-4,HANDLE_SEG]; result="void"
-            elif target == "f_171C_0FBC": args=[allocation_paras,allocation_type]; result="farptr"
+            elif target == "mem_allocate_high_block": args=[allocation_paras,allocation_type]; result="farptr"
             else: raise ValueError(target)
             case=behavior.Case(label=f"{sequence_id}/{index:02d}-{target}",args=args,
                 observe=initial.observe,return_kind=result,registers={"ds":DG,"ss":DG},
@@ -272,10 +272,10 @@ def completed_allocation_sequence(sequence_id="directed/completed-allocation"):
         ("mem_alloc_handle_block", initial, "farptr"),
         ("mem_alloc_handle_block", [32,0,1,0,0xB200], "farptr"),
         ("RallocFree", [MASTER_FIRST,HANDLE_SEG], "void"),
-        ("f_171C_0CF4", [0], "s16"),
+        ("mem_compact_region", [0], "s16"),
         ("mem_handle_from_pointer", [0,HEAP_SEG+2], "farptr"),
         ("RallocFree", [MASTER_FIRST-4,HANDLE_SEG], "void"),
-        ("f_171C_0CF4", [0], "s16"),
+        ("mem_compact_region", [0], "s16"),
     ]
     steps = []
     for index,(target,args,result) in enumerate(plan):

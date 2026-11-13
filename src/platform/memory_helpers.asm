@@ -16,8 +16,8 @@ _DATA	segment word public 'DATA'
 _DATA	ends
 DGROUP	group	_DATA
 
-	extrn	_o21_39C7_0000:far
-	extrn	_o21_39C7_016D:far
+	extrn	_gfx_probe_display_adapters:far
+	extrn	_gfx_bios_has_tandy_signature:far
 
 HUGE_TEXT	segment word public 'CODE'
 	assume	cs:HUGE_TEXT, ds:DGROUP
@@ -67,10 +67,10 @@ _gfx_probe_tandy_video_area	proc	far
 	mov bp, sp
 	sub sp, 2
 	push di
-	call far ptr _o21_39C7_0000
+	call far ptr _gfx_probe_display_adapters
 	cmp al, 2
 	jne L0088
-	call far ptr _o21_39C7_016D
+	call far ptr _gfx_bios_has_tandy_signature
 	and ax, ax
 	je L0088
 	mov ax, word ptr _g_91A2

@@ -18,7 +18,7 @@ Last gate result: **PASS** (2026-11-13).
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 2 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
-| 7. Names and comments | functions: 950 C and 357 assembly named; data: 527 named | 320 C and 10 assembly functions and 451 data objects keep address-based identifiers; 0 confirmed Windows names not applied yet |
+| 7. Names and comments | functions: 1203 C and 366 assembly named; data: 527 named | 67 C and 1 assembly functions and 451 data objects keep address-based identifiers; 0 confirmed Windows names not applied yet |
 | 8. Reproducibility | `python tools/validate.py` re-proves every claim from the current source and prints separate verdicts for code, data, layout and whole executable | no image is built, so the layout and whole-executable verdicts have nothing to compare yet |
 
 ## What each number proves
@@ -44,7 +44,7 @@ Last gate result: **PASS** (2026-11-13).
 | `root:0250` | `DoCalcTile` | 646 |
 | `root:0250` | `DrawBalloons` | 1060 |
 | `root:23E6` | `f_23E6_0000` | 159 |
-| `root:284A` | `f_284A_0138` | 25 |
+| `root:284A` | `snd_song_read_be16` | 25 |
 
 ## Exact only with a steering construct
 
@@ -59,16 +59,16 @@ They stay here until a natural spelling replaces it.
 | `S16:384C` | `DrawSimPayoff` | 481 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S16:384C` | `ShowIntro` | 625 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S24:39C7` | `drawHistGraph` | 732 | drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown |
-| `root:0250` | `f_0250_129E` | 264 | f_0250_129E=a point local of which only y is read keeps two frame words, and copying y through the later index variable selects the early DI load; the original locals are unknown |
+| `root:0250` | `edit_redraw_changed_tile` | 264 | edit_redraw_changed_tile=a point local of which only y is read keeps two frame words, and copying y through the later index variable selects the early DI load; the original locals are unknown |
 | `root:0798` | `GetTriLatDist` | 294 | three unused locals x, y, j in DrawControlLevels -> identifier count before GetTriLatDist (+5..7 mod 17 after DrawControlLevels selects the dx-w CSE/operand order) |
 | `root:171C` | `RallocSetType` | 228 | volatile int type in RallocSetType -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX |
-| `root:171C` | `f_171C_0CF4` | 490 | a record grouping the scan segment word with a 32-bit result whose high word is the flag reproduces the frame placement; the original local types and grouping are unknown |
+| `root:171C` | `mem_compact_region` | 490 | a record grouping the scan segment word with a 32-bit result whose high word is the flag reproduces the frame placement; the original local types and grouping are unknown |
 | `root:1986` | `FindIndex` | 267 | FindIndex=block layout only: goto into the else block reproduces the original order of the two search branches; the original control structure is unknown |
-| `root:1C62` | `f_1C62_00D5` | 561 | record order only: the key switch leaves the loop through a label on a break inside the loop body (continue; done: break;); a label after the loop gives the same bytes but a /Zi record break at 02CB that the original relocation order excludes; the original loop exit is unknown (worker layout-1c62, 40 label-free spellings change bytes) |
+| `root:1C62` | `ui_show_alert` | 561 | record order only: the key switch leaves the loop through a label on a break inside the loop body (continue; done: break;); a label after the loop gives the same bytes but a /Zi record break at 02CB that the original relocation order excludes; the original loop exit is unknown (worker layout-1c62, 40 label-free spellings change bytes) |
 | `root:2505` | `win_GetArg` | 58 | identifier count only: named temporaries windowIndex/result (with the unnamed win_GetVal forward prototype) keep the original code of every later function; the original identifiers are unknown |
 | `root:259D` | `win_DrawBitMap` | 663 | win_DrawBitMap=FOLD-1: a folded always-true unsigned test before the second packed-picture test leaves the block boundary that splits the pointer reload at 0081 into two word loads; the eliminated original expression is unknown |
 | `root:2662` | `hanim_SetObjectPos` | 598 | named redeclarations of f_2662_0348 and f_2662_059C before f_2662_090D -> identifier count (+7 mod 17) selecting 090D's operand order; 090D's reinsert flag is only read in a constant-folded test (keeps the dead store and frees DI) |
-| `root:293A` | `f_293A_017F` | 171 | LIFE-1: folded unsigned success-flag check retains lifetime through the retry loop; eliminated original expression unknown |
+| `root:293A` | `snd_probe_mpu_reset` | 171 | LIFE-1: folded unsigned success-flag check retains lifetime through the retry loop; eliminated original expression unknown |
 | `root:295C` | `snd_stop_assigned_voices` | 75 | CSE-1: folded unsigned-byte c3 >= 0 check retains the byte CSE temporary and index spill; the eliminated original expression is unknown |
 
 ## Code modules that are not complete translation units

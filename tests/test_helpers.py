@@ -197,11 +197,11 @@ class Variants218D(unittest.TestCase):
 
     def test_one_line_fix(self):
         base = ROOT / "src/window/events.c"
-        if "    cur = start = f_218D_052F();" not in base.read_text(encoding="latin1"):
+        if "    cur = start = win_focus_nearest_object();" not in base.read_text(encoding="latin1"):
             self.skipTest("m218D.c changed")
         spec = write("v218D.json", json.dumps({
-            "swapped": [["    cur = start = f_218D_052F();", "    start = cur = f_218D_052F();"]],
-            "Swapped": [["    cur = start = f_218D_052F();", "    start = cur = f_218D_052F();"]],
+            "swapped": [["    cur = start = win_focus_nearest_object();", "    start = cur = win_focus_nearest_object();"]],
+            "Swapped": [["    cur = start = win_focus_nearest_object();", "    start = cur = win_focus_nearest_object();"]],
             "missing": [["no such text", "x"]]}))
         out_dir = TMP / "v218D"
         code, out = run_main(variants.main, ["--base", str(base), "--spec", str(spec), "--module", "root;218D",
@@ -210,7 +210,7 @@ class Variants218D(unittest.TestCase):
         res = {r["name"]: r for r in json.loads((out_dir / "results.json").read_text())["variants"]}
         self.assertTrue(res["base"]["result"]["exact"])
         bad = [n for n, c in res["swapped"]["result"]["claims"].items() if not c["exact"]]
-        self.assertEqual(bad, ["f_218D_0656"])
+        self.assertEqual(bad, ["win_step_object_focus"])
         self.assertIn("MISSING", res["missing"]["result"]["log"])
         files = [r["file"] for r in res.values() if r["file"]]
         self.assertEqual(len({f.lower() for f in files}), len(files), "names must differ case-insensitively")
