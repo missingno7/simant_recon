@@ -341,7 +341,7 @@ def compare_checkpoint(native,dump,addresses,specs,raw_state):
     return row,exclusions,unavailable
 
 
-def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha):
+def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha,original_directory=None):
     manifest=json.loads((directory/'boundary-manifest.json').read_text())
     if manifest.get('boundary')!='DoAntSim:entry' or manifest.get('executable_sha256')!=exe_sha or \
             manifest.get('input_script_sha256')!=run.get('script_sha256') or \
@@ -349,16 +349,34 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha):
         raise ValueError('DOS/native step provenance differs')
     replay_rows=[l.split(maxsplit=1) for l in (out/'replay.txt').read_text().splitlines()]
     inputs=lambda rows:[r for r in rows if r[1].split()[0] not in ('checkpoint','exit')]
+    original_manifest=None
+    if original_directory:
+        original_manifest=json.loads((original_directory/'boundary-manifest.json').read_text())
+        original_sha=json.loads((ROOT/'layout/oracle.lock.json').read_text())['inputs']['SIMANT.EXE']['sha256']
+        if original_manifest.get('target')!='original' or original_manifest.get('executable_sha256')!=original_sha or \
+                any(original_manifest.get(k)!=manifest.get(k) for k in ('scenario_sha256','input_script_sha256','boundary','steps')):
+            raise ValueError('Original/canonical step provenance differs')
+        oracle_provenance(original_directory,original_sha,executable_name='SIMANT.EXE')
+    for capture,receipt in [(directory,manifest)]+([(original_directory,original_manifest)] if original_directory else []):
+        for field,filename in [('execution_report_sha256','execution-report.json'),('installed_script_sha256','INPUT.SCR')]:
+            if field in receipt and receipt[field]!=sha(capture/filename): raise ValueError('Step capture provenance identity differs: '+filename)
     rows={}
+    first_input_delivery_failure=None
     for step in range(1,manifest['steps']+1):
         dump=directory/f'exec-simstep.{step}.bin';native=out/'checkpoints'/f'step{step}.json'
         if dump.exists() and manifest['snapshots'].get(dump.name)!=sha(dump):
             raise ValueError('DOS step dump identity differs: '+dump.name)
         row,_,_=compare_checkpoint(native,dump,addresses,specs,raw_state)
         if dump.exists():
-            meta=json.loads(dump.with_suffix('.json').read_text())
+            meta_path=dump.with_suffix('.json')
+            if 'metadata' in manifest and manifest['metadata'].get(meta_path.name)!=sha(meta_path): raise ValueError('DOS step metadata identity differs')
+            meta=json.loads(meta_path.read_text())
             if meta.get('hit')!=step or meta.get('dump_address')!='0x00000000': raise ValueError('DOS step observation shape differs')
             memory=dump.read_bytes();base=memory_base(memory,addresses);at=base+specs['Cycle']['dos_address']
+            if 'registers' in meta and 'DoAntSim' in addresses:
+                registers=meta['registers']
+                if int(registers['cs'],16)*16+int(registers['eip'],16)!=base+addresses['DoAntSim']:
+                    raise ValueError('Canonical observation is not at DoAntSim entry')
             cycle=int.from_bytes(memory[at:at+2],'little')
             at=base+specs['GameTime']['dos_address']
             calls=int.from_bytes(memory[at:at+4],'little')
@@ -373,6 +391,43 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha):
                 cycle=[cycle,snapshot['clocks']['cycle']],
                 simulation_calls=[calls,snapshot['clocks']['simulation_calls']],
                 status='COMMON_BOUNDARY' if dos_prefix==native_prefix and cycle==snapshot['clocks']['cycle'] and calls==snapshot['clocks']['simulation_calls'] else 'ALIGNMENT_PREMISE_FAILED')
+        if original_directory:
+            odump=original_directory/dump.name
+            row['three_way']=three_way_checkpoint(native,odump,dump,addresses,specs,raw_state)
+            if row['three_way']['status']=='MISSING':
+                row['status']='MISSING'
+            if odump.exists():
+                if original_manifest['snapshots'].get(odump.name)!=sha(odump): raise ValueError('Original step dump identity differs')
+                ometa_path=odump.with_suffix('.json')
+                if original_manifest['metadata'].get(ometa_path.name)!=sha(ometa_path): raise ValueError('Original step metadata identity differs')
+                ometa=json.loads(ometa_path.read_text())
+                oa={name:r['dos_address'] for name,r in original_layout().items()}
+                om=odump.read_bytes();ob=memory_base(om,oa)
+                entry=json.loads((ROOT/'layout/symbols.json').read_text())['code']['DoAntSim']
+                registers=ometa['registers']
+                if int(registers['cs'],16)*16+int(registers['eip'],16)!=ob+16*entry['seg']+entry['off']:
+                    raise ValueError('Original observation is not at DoAntSim entry')
+                oc=int.from_bytes(om[ob+oa['Cycle']:ob+oa['Cycle']+2],'little')
+                og=int.from_bytes(om[ob+oa['GameTime']:ob+oa['GameTime']+4],'little')
+                row['original_boundary']=dict(ordinal=ometa['hit'],milliseconds=ometa['emulated_ms'],cycle=oc,simulation_calls=og)
+                if row['status']!='MISSING':
+                    prefixes=[inputs([r for r in replay_rows if int(r[0])<=t]) for t in (ometa['emulated_ms'],meta['emulated_ms'])]
+                    prefixes.append(inputs(replay_rows[:snapshot['replay_next']]))
+                    # Compare complete ordered input histories, not counts alone.
+                    aligned=(ometa['hit']==step and ometa['dump_address']=='0x00000000' and
+                             oc==cycle==snapshot['clocks']['cycle'] and og==calls==snapshot['clocks']['simulation_calls'] and
+                             prefixes[0]==prefixes[1]==prefixes[2])
+                    if prefixes[0]!=prefixes[1] or prefixes[1]!=prefixes[2]:
+                        if first_input_delivery_failure is None:first_input_delivery_failure=step
+                    row['alignment'].update(input_prefix_counts=[len(p) for p in prefixes],
+                        input_prefixes_equal=prefixes[0]==prefixes[1]==prefixes[2],
+                        first_prior_input_delivery_failure=first_input_delivery_failure,
+                        input_history_aligned_through_boundary=first_input_delivery_failure is None,
+                        cycle=[oc,cycle,snapshot['clocks']['cycle']],simulation_calls=[og,calls,snapshot['clocks']['simulation_calls']],
+                        status='COMMON_BOUNDARY' if aligned and first_input_delivery_failure is None else 'ALIGNMENT_PREMISE_FAILED')
+                    row['three_way']['alignment']=row['alignment']['status']
+                    row['three_way']['causal_scope']='Seed replay only; unreplayed timing inputs remain a timing-model limitation.'
+            if any(r['verdict']!='ORIGINAL_EQUAL_ALL' for r in row['three_way'].get('symbols',{}).values()): row['status']='DIFFERS'
         rows[str(step)]=row
     return dict(boundary='DoAntSim:entry',checkpoints=rows,
                 first_diverging_step=next((int(n) for n,r in rows.items() if r['status']=='DIFFERS'),None),
@@ -382,7 +437,7 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha):
 
 
 def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=False,dos_steps=None,exe_sha=None,
-            original_dos=None,original_root=ROOT,original_repeats=(),dos_repeats=()):
+            original_dos=None,original_root=ROOT,original_repeats=(),dos_repeats=(),original_steps=None):
     dos,original_dos=dos_directories(dos,original_dos)
     addresses=acceptance.record_addresses(map_path)
     result=dict(schema='simant-native-dos-differential-v2',scenario=scenario['id'],
@@ -393,6 +448,11 @@ def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=F
     if run_path.exists():
         result['run']=json.loads(run_path.read_text())
         result['clock_mapping']=str(result['run']['poll_ns'])+' ns per guarded outer platform poll; DOS computation cost unmodelled'
+        if result['run'].get('clock_inputs'):
+            tape=result['run']['clock_inputs']
+            if sha(out/'clock-inputs.txt')!=tape['tape_sha256'] or tape['native_executable_sha256']!=result['run']['executable_sha256']:
+                raise ValueError('Native replay tape/executable identity differs')
+            result['clock_mapping']+='; original per-site seed read ordinals replayed; other clock reads unreplayed'
     result['dos_provenance']=oracle_provenance(dos,exe_sha,ROOT/scenario['script'])
     result['extra_dos_provenance']=[oracle_provenance(p,exe_sha) for p in extra_dos]
     original_sha=json.loads((original_root/'layout/oracle.lock.json').read_text())['inputs']['SIMANT.EXE']['sha256']
@@ -436,13 +496,28 @@ def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=F
         if first is None and row['status']=='DIFFERS': first=ms
         if missing is None and row['status']=='MISSING': missing=ms
         result['checkpoints'][str(ms)]=row
-    result['steps']=compare_steps(dos_steps,out,addresses,specs,raw_state,result['run'],exe_sha) if dos_steps else dict(
+    result['steps']=compare_steps(dos_steps,out,addresses,specs,raw_state,result['run'],exe_sha,original_steps) if dos_steps else dict(
         status='UNCOMPARED',boundary='DoAntSim:entry',native_entries=len(list((out/'checkpoints').glob('step*.json'))),
         reason='Provide --dos-steps with matching execution-triggered DOS observations; equal milliseconds are diagnostic only.')
     for name in scenario['saves']:
         a=dos/name; b=out/'assets'/name
         if a.is_file() and b.is_file(): result['saves'][name]=save_differences(a.read_bytes(),b.read_bytes())
         else: result['saves'][name]=dict(status='MISSING',present=[a.is_file(),b.is_file()])
+        original_save=original_dos/name if original_dos is not None else None
+        if original_save is not None and original_save.is_file() and a.is_file() and b.is_file():
+            samples=[p.read_bytes() for p in (original_save,a,b)]
+            oreps=[(p/name).read_bytes() for p in original_repeats if (p/name).is_file()]
+            creps=[(p/name).read_bytes() for p in dos_repeats if (p/name).is_file()]
+            detail=three_way_verdict(*samples,oreps,creps)
+            detail['records']={}
+            schema=acceptance.save_schema()
+            if all(len(s)==sum(r[2] for r in schema) for s in samples):
+                for index,offset,length,_,owner in schema:
+                    detail['records'][str(index)]=dict(name=owner,**three_way_verdict(
+                        *[s[offset:offset+length] for s in samples],
+                        [s[offset:offset+length] for s in oreps],[s[offset:offset+length] for s in creps]))
+            detail['alignment']='SAVE_INPUT_TIMELINE_DIAGNOSTIC_ONLY'
+            result['saves'][name]['three_way']=detail
     result['first_diverging_checkpoint']=first
     result['first_missing_checkpoint']=missing
     exit_path=out/'checkpoints/exit.json'
@@ -469,6 +544,8 @@ def main():
     ap.add_argument('--original-repeat',type=Path,action='append',default=[],help='Same-EXE original repeat for nondeterminism controls')
     ap.add_argument('--dos-repeat',type=Path,action='append',default=[],help='Same-EXE canonical repeat for nondeterminism controls')
     ap.add_argument('--dos-steps',type=Path,help='Execution-triggered observations from capture_dos_steps.py')
+    ap.add_argument('--original-steps',type=Path,help='Original execution-triggered observations, independently anchored')
+    ap.add_argument('--clock-inputs',type=Path,help='Replay original seed reads from an original step capture directory')
     ap.add_argument('--saved-game',type=Path,help='Explicit copy of the scenario original save, for isolated checkouts')
     ap.add_argument('--extra-dos',type=Path,action='append',default=[])
     ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/native-acceptance')
@@ -480,6 +557,7 @@ def main():
     ap.add_argument('--raw-state',action='store_true',help='Diagnose all bytes, including the named stack-residue tail')
     ap.add_argument('--step-count',type=int,default=8,help='Observe the first N DoAntSim entries, independently of milliseconds')
     args=ap.parse_args();scenario=json.loads(args.scenario.read_text())
+    if args.original_steps and not args.dos_steps: ap.error('--original-steps requires --dos-steps')
     if not 0<=args.step_count<=64 or not 1<=args.poll_ns<=1000000 or args.timeout<1:
         ap.error('step-count must be 0..64, poll-ns 1..1000000 and timeout positive')
     oracle_root=args.oracle_root.resolve()
@@ -500,6 +578,16 @@ def main():
             shutil.copyfile(source_save,out/'assets/A.ANT')
             (out/'save-input.json').write_text(json.dumps(dict(path=str(source_save),sha256=sha(source_save)),indent=2))
         script=replay(scenario,project,out,checkpoints)
+        clock_receipt=None
+        env=dict(os.environ)
+        # Never inherit an unrelated test tape from the caller's environment.
+        env.pop('SIMANT_TEST_CLOCK_REPLAY',None)
+        if args.clock_inputs:
+            if __package__: from .clock_inputs import seed_tape
+            else: from clock_inputs import seed_tape
+            tape,clock_receipt=seed_tape(args.clock_inputs.resolve(),build/'simant-canonical.exe',out,
+                                       sha(args.scenario),sha(project/scenario['script']))
+            env['SIMANT_TEST_CLOCK_REPLAY']=str(tape)
         span_path=build/'semantic-spans.json'
         span_bindings=json.loads(span_path.read_text())['bindings'] if span_path.is_file() else {}
         cfg=out/'observe.json';cfg.write_text(json.dumps(dict(out=str(out/'checkpoints'),symbols=specs,save_schema=acceptance.save_schema(),step_count=args.step_count,span_bindings=span_bindings)))
@@ -511,7 +599,7 @@ def main():
              *scenario.get('arguments',[])]
         timed_out=False
         with (out/'native.log').open('w') as log:
-            run=subprocess.Popen(cmd,cwd=project,stdout=log,stderr=subprocess.STDOUT)
+            run=subprocess.Popen(cmd,cwd=project,env=env,stdout=log,stderr=subprocess.STDOUT)
             try: run.wait(timeout=args.timeout)
             except subprocess.TimeoutExpired:
                 timed_out=True
@@ -523,8 +611,12 @@ def main():
         (out/'run.json').write_text(json.dumps(dict(command=cmd,returncode=run.returncode,timed_out=timed_out,executable_sha256=sha(build/'simant-canonical.exe'),
                                                   source_arguments=scenario.get('arguments',[]),dos_executable_sha256=receipt['link']['candidate_executable']['sha256'],
                                                   poll_ns=args.poll_ns,scenario_sha256=sha(args.scenario),script_sha256=sha(project/scenario['script'])),indent=2))
+        if clock_receipt:
+            run_path=out/'run.json';run_info=json.loads(run_path.read_text())
+            run_info['clock_inputs']=clock_receipt
+            run_path.write_text(json.dumps(run_info,indent=2)+'\n')
     status=compare(scenario,out,dos,map_path,specs,checkpoints,args.extra_dos,args.raw_state,args.dos_steps,
                    receipt['link']['candidate_executable']['sha256'],original_dos,oracle_root,
-                   args.original_repeat,args.dos_repeat)['status']
+                   args.original_repeat,args.dos_repeat,args.original_steps)['status']
     return 1 if status=='FAIL' else 2 # A matching incomplete subset is never acceptance.
 if __name__=='__main__': raise SystemExit(main())

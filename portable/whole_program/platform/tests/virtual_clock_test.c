@@ -1,4 +1,5 @@
 #include "../sdl3/host_modes.h"
+#include "../sdl3/native_windows.h"
 #include "../pit_clock.h"
 #include <SDL3/SDL.h>
 #include <assert.h>
@@ -6,6 +7,13 @@
 #include <stdlib.h>
 #undef assert
 #define assert(e) do { if (!(e)) { fprintf(stderr,"check failed at %d: %s\n",__LINE__,#e); exit(1); } } while(0)
+
+/* This control exercises the single-window clock host, without modern hosting. */
+int native_windows_translate(SDL_Event *event) { (void)event; return 0; }
+int native_windows_take_deferred(SDL_Event *event) { (void)event; return 0; }
+int native_windows_filter_root(SDL_Event *event) { (void)event; return 0; }
+int native_windows_pointer(float *x, float *y) { (void)x; (void)y; return 0; }
+void native_windows_root_pointer(float *x, float *y) { (void)x; (void)y; }
 
 static void await_event(Host *host, HostEventKind kind, HostEvent *observed)
 {

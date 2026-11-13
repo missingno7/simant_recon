@@ -53,8 +53,8 @@ original names, dumps or native views remain unavailable/`UNATTRIBUTED`, includi
 private names without reviewed original anchors. No original address is inferred
 from canonical placement. Named stack-tail exclusions require a shared sentinel
 position across all compared runs; raw verdicts remain visible. Step observations
-remain explicitly two-way canonical/native; the current step tool does not capture
-original steps. View extents are the canonical observed extents; a mapped original
+can include original steps with `--original-steps`; without it they remain two-way.
+View extents are the canonical observed extents; a mapped original
 raw view does not prove historical ownership/capacity of every byte it spans.
 
 ## Clock and step alignment
@@ -65,6 +65,28 @@ specified `--poll-ns` quantum (default 1 ms); DOS civil time starts at
 1992-01-01 12:00:00. Sound Mode 6 IRQ rendering and ISA timestamps use that same
 clock. Virtual PCM is discarded so device consumption cannot advance source state.
 Source arguments are passed unchanged; the driver supplies no sound/video switch.
+
+`--clock-inputs ORIGINAL_CAPTURE` opts into seed-input replay. The capture contains
+the **original run's own** full DX:AX immediately after each seeding TickCount call,
+at independently disassembled addresses anchored in `layout/symbols.json`. The
+streams are the SeedSRand call site (ordinals 1 and 2) and the SeedRRand call site
+(ordinal 1), in recorded inter-site order. These are per-call-site read ordinals,
+not the global ordinal of all polling reads. `clock_inputs.py` checks the original
+executable/scenario/input identities and hashes of the dump and register metadata,
+then independently binds the native return PCs. No replayed value is derived from
+a candidate's state or chosen by the comparison. The tape and provenance remain
+in `clock-inputs.txt` and `clock-inputs.json`.
+
+Only the platform TickCount return service substitutes these recorded inputs;
+the explicit test option `SIMANT_TEST_CLOCK_REPLAY` enables it. The ordinary clock
+and all game globals remain untouched. The hook rejects reordered, duplicate,
+extra and unconsumed reads. The native driver clears inherited test-tape settings.
+This is **seed-only replay**, not complete clock alignment: deadline reads, pacing,
+BIOS input timestamps, interrupt counters and audio timing remain unreplayed.
+Their differences stay visible and cannot establish a new game-logic defect by
+themselves. `verify_alignment.py REPLAY_DIR CONTROL_DIR` verifies the live positive
+and negative control: all 384 world-seed bytes equal with replay and differ without
+it, using the same native executable, scenario and poll quantum.
 
 Equal milliseconds are diagnostic, **not an equal simulation-step premise**.
 The pinned DOS runner starts its script epoch before the shell's DATE/TIME commands
@@ -82,8 +104,19 @@ python portable/tests/acceptance/capture_dos_steps.py dos/scenarios/new-game-sav
 python portable/tests/acceptance/native_acceptance.py dos/scenarios/new-game-save.json --dos build/current/acceptance/new-game-save/reconstructed --dos-steps build/workers/user/dos-steps --out build/workers/user/native-steps
 ```
 
-Entry ordinal, Cycle, lifetime simulation-call count and applied input-prefix count
-must agree. A missing entry or failed premise is reported explicitly. Clocks remain
+The original side is captured independently with `capture_dos_steps.py --original`
+and a full reference dump from that executable. Its DoAntSim entry comes from the
+original symbol inventory, never the canonical MAP. Both capture modes also retain
+the three seeding reads and normal checkpoint dumps. For example:
+
+```powershell
+python portable/tests/acceptance/capture_dos_steps.py dos/scenarios/quick-game.json --original --reference-dump ORIGINAL/dump-cp60000 --out build/workers/user/original-steps --until-ms 15000
+python portable/tests/acceptance/native_acceptance.py dos/scenarios/quick-game.json --dos DOS_ACCEPTANCE_PARENT --dos-steps CANONICAL_STEPS --original-steps build/workers/user/original-steps --clock-inputs build/workers/user/original-steps --out build/workers/user/native-seed-replay
+```
+
+Entry ordinal, Cycle, lifetime simulation-call count and complete ordered input
+prefix (including expanded 50 ms key releases) must agree across all three runs.
+A missing entry or failed premise is reported explicitly. Clocks remain
 visible and compared; no state is rewritten to force equality. `--until-ms` bounds
 DOS capture to a diagnostic original-input prefix and is never full-scenario
 acceptance. `--step-count` bounds native entries (default 8). GDB reads memory only;
@@ -128,7 +161,7 @@ remains available on the integrated provider.
 ## Controls
 
 ```powershell
-python -m unittest portable.tests.acceptance.test_native_acceptance
+python -m unittest portable.tests.acceptance.test_native_acceptance portable.tests.acceptance.test_clock_inputs
 python portable/tests/acceptance/run_virtual_audio_tests.py --sdk build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32
 python portable/whole_program/platform/tests/run_virtual_clock_tests.py --sdk build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32
 ```
