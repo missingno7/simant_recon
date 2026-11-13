@@ -10,11 +10,17 @@ extern char near fontWidth;
 extern char near gfx_font_height_pixels;
 extern void far gfx_put_fixed_font_char(int x, int y, int c);
 
+/*
+ * Injected key consumed before reading a new BIOS key in text entry.
+ */
 char text_entry_pending_key = 0;
 
 int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags);
 
 /* draws count blanks from (x, y) */
+/*
+ * Erase a count of fixed-font cells beginning at pixel x/y.
+ */
 void far ui_clear_text_cells(int x, int y, int count)
 {
     while (count--) {
@@ -24,6 +30,9 @@ void far ui_clear_text_cells(int x, int y, int count)
 }
 
 /* text-cell to pixel coordinates, then edit */
+/*
+ * Edit text at packed cell coordinates, forwarding the buffer limit and editing flags.
+ */
 void far ui_edit_text_at_cells(int col, int row, char far *text, int maxLen, int flags)
 {
     ui_edit_text_field(col = (col >> 8) + fontWidth * (col & 0xff),

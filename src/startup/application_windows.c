@@ -92,6 +92,9 @@ extern void far win_EditChanged(void);
 extern void far f_00F8_00A4(void);
 extern void far f_00F8_0002(void);
 
+/*
+ * Mirror map/yard window origins and notify dependent views after layout changes.
+ */
 void far app_window_layout_changed(int item)
 {
     switch (item) {
@@ -112,6 +115,9 @@ void far app_window_layout_changed(int item)
 extern void far win_ModeControlClosed(void);
 extern void far win_CasteControlClosed(void);
 
+/*
+ * Run yard and control-window cleanup before a window closes.
+ */
 void far app_before_window_close(void)
 {
     f_00F8_0002();
@@ -119,6 +125,9 @@ void far app_before_window_close(void)
     win_CasteControlClosed();
 }
 
+/*
+ * Refresh control and view state through the application window-state hook.
+ */
 void far app_window_state_changed(void)
 {
     win_CasteControlClosed();

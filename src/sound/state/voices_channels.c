@@ -27,5 +27,11 @@ struct Chan {
     char c5;
 };
 
+/*
+ * Instrument descriptors selected by the active sound-driver setup.
+ */
 struct Voice far snd_instrument_descriptors[56];
+/*
+ * Voice assignments with type, hardware number and playback state.
+ */
 struct Chan far snd_voice_slots[33];

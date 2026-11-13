@@ -34,6 +34,9 @@ extern void far snd_port_write_byte(int port, char value);
 
 extern void far snd_regchip_write(int reg, int value);
 extern int far snd_device_io_base;
+/*
+ * Write PSG pitch and attenuation for a PS/1 voice at port 205h.
+ */
 void far snd_ps1_set_note(int a, int note, int vol, int chan)
 {
     int f;
@@ -49,6 +52,9 @@ void far snd_ps1_set_note(int a, int note, int vol, int chan)
 }
 
 
+/*
+ * Set register-chip pitch one octave down and force level 1Fh, ignoring requested volume.
+ */
 void far snd_regchip_set_note(int a, int note, int vol, int ch)
 {
     int n;
@@ -65,6 +71,9 @@ void far snd_regchip_set_note(int a, int note, int vol, int ch)
 }
 
 
+/*
+ * Write Tandy PSG pitch and attenuation to the configured port.
+ */
 void far snd_tandy_set_note(int a, int note, int vol, int ch)
 {
     unsigned freq;
@@ -101,11 +110,17 @@ void far snd_tandy_set_note(int a, int note, int vol, int ch)
     }
 }
 
+/*
+ * Set maximum PSG attenuation for the PS/1 voice.
+ */
 void far snd_ps1_silence_voice(int note, int ch)
 {
     snd_ps1_set_note(0, note, 0, ch);
 }
 
+/*
+ * Clear the register-chip voice level and pitch registers.
+ */
 void far snd_regchip_silence_voice(int a, int ch)
 {
     snd_regchip_write(ch + 8, 0);
@@ -113,6 +128,9 @@ void far snd_regchip_silence_voice(int a, int ch)
     snd_regchip_write(ch * 2 + 1, 0);
 }
 
+/*
+ * Set maximum PSG attenuation for the Tandy voice.
+ */
 void far snd_tandy_silence_voice(int a, int ch)
 {
     snd_tandy_set_note(0, 0, 0, ch);

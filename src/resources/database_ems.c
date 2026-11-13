@@ -41,12 +41,18 @@ int g_389C = 0;
 int g_389E = 0;
 int g_38A0 = 0;
 
+/*
+ * Release the database EMS handle when present.
+ */
 void far db_free_ems_cache(void)
 {
     if (g_389C)
         ems_free_handle(g_389C);
 }
 
+/*
+ * Initialize the database EMS page cache; require at least eight 16K pages.
+ */
 int far db_init_ems_cache(long size)
 {
     int i;
@@ -85,6 +91,9 @@ int g_38B6 = -1;
 int g_38B8 = -1;
 int g_38BA = -1;
 
+/*
+ * Map a cached 16K database page, reading it from disk on a miss.
+ */
 char far * far db_get_ems_page(int file, int page)
 {
     EmsSlot far *slot;
@@ -202,6 +211,9 @@ plain:
     return read(file, buffer, (unsigned int)count);
 }
 
+/*
+ * Report the database read failure through the DOS error handler.
+ */
 void far db_report_read_error(void)
 {
     DosPunt("Database error");

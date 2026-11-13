@@ -9,4 +9,7 @@
  */
 
 struct Rect { int left; int top; int right; int bottom; };
+/*
+ * Offset of the active clip rectangle list; its far segment follows.
+ */
 struct Rect far * near clip_active_list_offset;

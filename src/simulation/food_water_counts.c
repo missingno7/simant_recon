@@ -69,7 +69,13 @@ extern int far fd_50F6_0F3A;
 extern int far FoodA;
 extern int far FoodB;
 extern int far FoodR;
+/*
+ * Horizontal offsets for the four-direction food-map walk.
+ */
 unsigned char food_walk_dx[4] = { 0, 1, 0, 0xFF };
+/*
+ * Vertical offsets for the four-direction food-map walk.
+ */
 unsigned char food_walk_dy[4] = { 0xFF, 0, 1, 0 };
 extern int far SRand16(void);
 extern int far SRand8(void);

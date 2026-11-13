@@ -25,8 +25,23 @@ typedef struct Block {
     char name[13];
 } Block;
 
+/*
+ * Conventional allocator arena length in sixteen-byte paragraphs.
+ */
 unsigned near mem_conventional_paragraphs;
+/*
+ * Segment of the first allocator block after reserved metadata.
+ */
 unsigned near mem_arena_start_segment;
+/*
+ * Pointer to the first allocator block.
+ */
 Block far * near mem_arena_first_block;
+/*
+ * One-past-end pointer bounding allocator arena walks.
+ */
 Block far * near mem_arena_end_pointer;
+/*
+ * Current free-list block used as a search starting point.
+ */
 Block far * near mem_free_list_cursor;

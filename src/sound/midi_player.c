@@ -14,14 +14,38 @@ struct Song {
     char far * far *data;
 };
 
+/*
+ * Track count read from big-endian song header offset ten.
+ */
 int midi_track_count = 0;
+/*
+ * Tick position of the most recently selected MIDI event.
+ */
 long midi_last_event_ticks = 0;
+/*
+ * Track index whose parser position and status are active.
+ */
 int midi_current_track = 0;
+/*
+ * Song state: zero stopped, one active, two end reached.
+ */
 int midi_playback_state = 0;
+/*
+ * Unsigned note-velocity multiplier, applied with a seven-bit shift.
+ */
 unsigned midi_volume_scale = 0x7f;
 int g_7572 = 0;
+/*
+ * Set while the MIDI service loop is decoding events.
+ */
 int midi_service_active = 0;
+/*
+ * Signed note offset loaded from the song resource header.
+ */
 int midi_note_transpose = 0;
+/*
+ * Song resource number retained for release when stopping.
+ */
 int midi_loaded_song_number = 0;
 
 #define SONGP(off) ((unsigned char _based(g_8DFC) *)(off))
@@ -41,6 +65,9 @@ extern int far snd_load_song_resources(struct Song far *song, int number);
 extern int far WinPrintf(char far *format, ...);
 extern void far snd_control_interrupts_disable(void);
 extern char far * far * far midi_song_data_handle;
+/*
+ * Per-track byte offsets advanced by the MIDI event parser.
+ */
 static int midi_track_offsets[18];
 static _segment g_8DFC;
 extern int far midi_song_data_bytes;
@@ -97,12 +124,18 @@ extern unsigned char far midi_track_status[];
 extern long far midi_tick_delay_scale;
 extern void far snd_stop_instrument_note(int program, int note);
 extern void far snd_start_instrument_note(int bank, int program, int note, int velocity);
+/*
+ * Read two song bytes in big-endian order without changing a track cursor.
+ */
 int far snd_song_read_be16(int off)
 {
     return SONG(off) << 8 | SONG(off + 1);
 }
 
 
+/*
+ * Read four song bytes in big-endian order without changing a track cursor.
+ */
 long far snd_song_read_be32(int off)
 {
     long v;
@@ -116,6 +149,9 @@ long far snd_song_read_be32(int off)
     return v;
 }
 
+/*
+ * Index track payload offsets by walking length-prefixed song chunks.
+ */
 void far snd_song_index_track_chunks(int count, int off)
 {
     int i;
@@ -128,8 +164,14 @@ void far snd_song_index_track_chunks(int count, int off)
     }
 }
 
+/*
+ * Pointer to the active track's mutable byte-offset entry.
+ */
 static int far *midi_active_offset_pointer;
 
+/*
+ * Decode a variable-length quantity and advance the selected track cursor.
+ */
 long far snd_song_read_varlen(void)
 {
     long v;
@@ -148,12 +190,18 @@ long far snd_song_read_varlen(void)
     return v;
 }
 
+/*
+ * Set the song velocity scale; 128 represents unity.
+ */
 void far snd_song_set_volume(unsigned volume)
 {
     midi_volume_scale = volume;
 }
 
 
+/*
+ * Read the song header and initialize track positions, times and status bytes.
+ */
 void far snd_song_initialize_tracks(void)
 {
     long len;
@@ -170,9 +218,15 @@ void far snd_song_initialize_tracks(void)
     }
 }
 
+/*
+ * Pointer to the active track's running-status byte.
+ */
 static unsigned char far *midi_active_status_pointer;
 void far snd_song_set_tempo(unsigned division, long tempo);
 
+/*
+ * Reset the sequencer clock and select track zero with the default tempo.
+ */
 void far snd_song_reset_clock(void)
 {
     midi_last_event_ticks = 0;
@@ -188,6 +242,9 @@ void far f_284A_0324(void)
 }
 
 
+/*
+ * Compute the scheduler scale from division and tempo in microseconds per quarter note.
+ */
 void far snd_song_set_tempo(unsigned division, long tempo)
 {
     long v;
@@ -199,6 +256,9 @@ void far snd_song_set_tempo(unsigned division, long tempo)
     midi_tick_delay_scale = v / 13;
 }
 
+/*
+ * Select the next due track and return its delay; mark playback finished when none remain.
+ */
 int far snd_song_schedule_next_track(void)
 {
     long delta;
@@ -232,6 +292,9 @@ int far snd_song_schedule_next_track(void)
 }
 
 
+/*
+ * Scale song velocity and dispatch a note-on or note-off request.
+ */
 void far snd_song_dispatch_note(int chan, int note, unsigned velocity)
 {
     velocity = midi_volume_scale * velocity >> 7;
@@ -241,13 +304,22 @@ void far snd_song_dispatch_note(int chan, int note, unsigned velocity)
         snd_start_instrument_note(midi_channel_priorities[chan], midi_channel_instruments[chan], note, velocity);
 }
 
+/*
+ * Set the instrument selector for one song channel.
+ */
 void far snd_song_set_channel_instrument(int chan, int program)
 {
     midi_channel_instruments[chan] = program;
 }
 
+/*
+ * Data-byte counts indexed by decoded MIDI channel-message type.
+ */
 int midi_event_data_lengths[] = { 2, 2, 2, 2, 1, 1, 2 };
 
+/*
+ * Dispatch a channel event and advance its data cursor; the literal case 12 is unreachable.
+ */
 void far snd_song_dispatch_channel_event(unsigned status)
 {
     int type;
@@ -271,6 +343,9 @@ void far snd_song_dispatch_channel_event(unsigned status)
     *midi_active_offset_pointer += midi_event_data_lengths[type];
 }
 
+/*
+ * Handle track-end and tempo meta events; skip other meta payloads.
+ */
 void far snd_song_dispatch_meta_event(void)
 {
     long tempo;
@@ -291,11 +366,17 @@ void far snd_song_dispatch_meta_event(void)
     }
 }
 
+/*
+ * Skip a length-prefixed system-exclusive payload in the selected track.
+ */
 void far snd_song_skip_sysex_payload(unsigned char status)
 {
     *midi_active_offset_pointer += (int)snd_song_read_varlen();
 }
 
+/*
+ * Process due song events and return the next timer delay, or -1 when inactive.
+ */
 int far snd_song_process_due_events(void)
 {
     int r;

@@ -8,4 +8,7 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
+/*
+ * Delay passed to WaitedEnough by the dialog key-wait helper.
+ */
 int far dialog_wait_delay;

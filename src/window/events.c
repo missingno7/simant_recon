@@ -38,6 +38,9 @@ extern struct Event far window_previous_event;
 extern long far TickCount(void);
 extern void _fastcall win_UnlockWin(int win);
 
+/*
+ * Dispatch an object event, update selection feedback, and classify repeated clicks.
+ */
 void _fastcall win_dispatch_object_event(struct Event far *ev)
 {
     char far *obj;
@@ -89,6 +92,9 @@ done:
     win_UnlockWin(ev->code);
 }
 
+/*
+ * Clear the remembered proximity object.
+ */
 void far win_reset_proximity_object(void)
 {
     lastProxObj = -1;
@@ -118,6 +124,9 @@ void _fastcall _win_SetProxItem(int obj)
 extern int clip_window_z_order[];
 extern int far hotbox_pointer_hit_id(void);
 
+/*
+ * Update front-window proximity highlighting from a pointer-region event.
+ */
 void _fastcall win_update_proximity_event(struct Event far *ev)
 {
     int obj;
@@ -237,6 +246,9 @@ extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far PointInRect(int far *pt, struct Rect far *rect);
 extern void _fastcall win_ToTop(int win);
 
+/*
+ * Handle a desktop click by dismissing or raising windows according to their flags.
+ */
 void _fastcall win_dispatch_desktop_click(struct Event far *ev)
 {
     int top;
@@ -273,6 +285,10 @@ extern char far * far win_locked_resource_ptr(int win);
 extern void far GetMousePos(struct Pt far *pt);
 extern void far hotbox_center_pointer(int obj);
 
+/*
+ * Return the selectable object under the pointer, or move to a nearest candidate and return
+ * -1.
+ */
 int far win_focus_nearest_object(void)
 {
     unsigned long d;
@@ -317,6 +333,9 @@ int far win_focus_nearest_object(void)
 extern int _fastcall win_object_count(int win);
 extern int _fastcall win_is_obj_selectable(int obj);
 
+/*
+ * Move pointer focus through selectable objects in the front window, wrapping by direction.
+ */
 void _fastcall win_step_object_focus(int dir)
 {
     int start;

@@ -11,6 +11,9 @@ typedef char far * far *Handle;
 extern void far Punt(char far *message);
 extern Handle far Ralloc(long size, int flags, char far *name);
 
+/*
+ * Allocate a hard block and return its data pointer; reject sizes above 65535 bytes.
+ */
 char far * far mem_alloc_pointer(long size, char far *name)
 {
     if (size > 0xffffL)
@@ -20,6 +23,9 @@ char far * far mem_alloc_pointer(long size, char far *name)
 
 extern void far * far _fmemset(void far *dst, int c, unsigned n);
 
+/*
+ * Allocate a hard block and zero the low-word byte count before returning its pointer.
+ */
 char far * far mem_alloc_zeroed_pointer(long size, char far *name)
 {
     Handle h;

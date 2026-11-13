@@ -42,6 +42,9 @@ extern char far *snd_decode_delta_nibbles(unsigned char far *src, char far *dst,
 extern Handle far mem_Unlock(Handle h);
 extern void far mem_Free(Handle h);
 
+/*
+ * Replace a kind-5 compressed resource with its expanded sample allocation.
+ */
 void far snd_expand_sample_resource(Handle far *handle, unsigned far *size, int object, int type)
 {
     Handle h;
@@ -61,6 +64,9 @@ void far snd_expand_sample_resource(Handle far *handle, unsigned far *size, int 
 extern Handle far res_load_firm_object(int object, int kind);
 extern long far mem_Size(Handle h);
 
+/*
+ * Load a sample handle and length; return 1 if it was already loaded, otherwise 0.
+ */
 int far snd_load_sample_resource(struct Sample far *s)
 {
     Handle h;
@@ -79,6 +85,9 @@ extern struct Sample far * far snd_sample_release_list[];
 extern void far db_ReleaseHandle(Handle h);
 extern void far snd_sample_interrupts_enable(void);
 
+/*
+ * Drain deferred sample releases while interrupts are disabled.
+ */
 void far snd_drain_sample_release_queue(void)
 {
     int i;
@@ -100,6 +109,9 @@ void far snd_drain_sample_release_queue(void)
 extern void far Punt(char far *message);
 extern int far midi_service_active;
 
+/*
+ * Queue a sample for release, draining immediately outside sequencer processing.
+ */
 void far snd_queue_sample_release(struct Sample far *s)
 {
     if (g_181C > 38)
@@ -122,6 +134,9 @@ extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
 extern struct Instr far snd_instrument_descriptors[];
 void far snd_release_song_resources(struct Song far *song, int number);
 
+/*
+ * Load song metadata/data and pin its sampled instruments; return -1 on failure.
+ */
 int far snd_load_song_resources(struct Song far *song, int number)
 {
     Handle h;
@@ -191,6 +206,9 @@ void far snd_release_song_resources(struct Song far *song, int number)
 
 extern void far snd_stop_assigned_voices(void);
 
+/*
+ * Stop playback and queue every sampled instrument for release.
+ */
 void far snd_stop_and_release_samples(void)
 {
     int i;

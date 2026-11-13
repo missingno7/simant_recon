@@ -92,6 +92,9 @@ void far win_set_desktop_colours(int a, int b)
 extern char near gfx_font_height_pixels;
 extern char near fontWidth;
 
+/*
+ * Register the hit rectangle for one menu-bar title.
+ */
 void far menu_register_title_hit_rect(int x, int len, int id)
 {
     struct Rect r;

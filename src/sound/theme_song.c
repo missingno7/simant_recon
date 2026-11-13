@@ -26,6 +26,9 @@ struct Song {
 
 extern char dos_version_string[];
 
+/*
+ * Pointer to the DOS version string shown by the event handler.
+ */
 char *version_message_pointer = dos_version_string;
 
 static struct Song g_0068 = {
@@ -36,4 +39,7 @@ static struct Song g_0068 = {
 
 static char g_00A4[16] = "antthme1.mid";
 
+/*
+ * Pointer to the song record loaded and released by the player.
+ */
 struct Song *snd_active_song_record = &g_0068;

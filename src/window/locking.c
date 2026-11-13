@@ -189,6 +189,9 @@ void _fastcall win_UnlockWin(int win)
 
 
 
+/*
+ * Report an already-locked window allocation and trigger the debug breakpoint.
+ */
 void far win_report_already_locked(void)
 {
     WinPrintf("WINLOCKERR!! ALREADY LOCKED!!");

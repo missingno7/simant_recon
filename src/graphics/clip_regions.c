@@ -18,14 +18,29 @@ struct Rect {
     int bottom;
 };
 
+/*
+ * Window ids in front-to-back clipping order, terminated by 0x8000.
+ */
 int clip_window_z_order[32] = { (int)0x8000 };
 Handle g_5742 = 0;
 Handle g_5746 = 0;
+/*
+ * Handle for regions outside windows, or the screen-list sentinel handle.
+ */
 Handle clip_outside_windows_handle = 0;
 extern struct Rect far gfx_screen_clip_list;
+/*
+ * Pointer to screen bounds used as a synthetic whole-screen clip handle.
+ */
 char far *clip_screen_list_pointer = (char far *)&gfx_screen_clip_list;
 int g_5752[2] = { 0 };
+/*
+ * Saved clipping-stack depth; push checks a limit of twenty.
+ */
 int clip_saved_state_depth = 0;
+/*
+ * Accumulated count of rectangles copied by clip_Push, including terminators.
+ */
 int clip_saved_rectangle_total = 0;
 int g_575A[12] = { 0 };
 
@@ -59,6 +74,9 @@ void far clip_reset_temporary_state(void)
 
 void far win_raise_and_reclip(int win);
 
+/*
+ * Raise the window and rebuild its visibility clips.
+ */
 void far clip_raise_window(int win)
 {
     win_raise_and_reclip(win);
@@ -66,6 +84,9 @@ void far clip_raise_window(int win)
 
 void far win_rebuild_visible_clips(void);
 
+/*
+ * Move the window to the bottom of the stacking list and rebuild visibility clips.
+ */
 void far clip_lower_window(int win)
 {
     int i;
@@ -154,6 +175,9 @@ void far clip_SetWin(int win)
         clip_active_list_offset = 0;
 }
 
+/*
+ * Report whether the window clip list contains a visible rectangle.
+ */
 int far clip_window_has_visible_rect(int win)
 {
     Handle h;
@@ -170,6 +194,9 @@ int far clip_window_has_visible_rect(int win)
     return r;
 }
 
+/*
+ * Select the screen area left uncovered by the window stack.
+ */
 void far clip_set_desktop_region(void)
 {
     struct Rect far *p;
@@ -193,6 +220,9 @@ void far clip_set_desktop_region(void)
     }
 }
 
+/*
+ * Reset temporary clipping and select the screen rectangle.
+ */
 void far clip_set_screen_region(void)
 {
     clip_reset_temporary_state();
@@ -205,6 +235,9 @@ void far clip_Off(void)
     clip_active_list_offset = 0;
 }
 
+/*
+ * Count rectangles up to the 0x8000 top-coordinate sentinel.
+ */
 int far clip_count_rects(struct Rect far *r)
 {
     int n;
@@ -335,6 +368,9 @@ void far clip_SubInclude(struct Rect far *r)
     f_1E57_0006(n, 1);
 }
 
+/*
+ * Intersect clipping with a rectangle list, or copy that list when clipping is off.
+ */
 void far clip_intersect_rect_list(struct Rect far *r)
 {
     Handle h;
@@ -409,11 +445,17 @@ void far clip_SubExclude(struct Rect far *r)
     g_5742 = h;
 }
 
+/*
+ * Subtract the rectangle from the current clip region.
+ */
 void far clip_exclude_rect(struct Rect far *r)
 {
     clip_SubExclude(r);
 }
 
+/*
+ * Append the rectangle's separate outside pieces against each current clip rectangle.
+ */
 void far clip_append_rect_remainders(struct Rect far *r)
 {
     Handle h;
@@ -452,6 +494,9 @@ void far clip_append_rect_remainders(struct Rect far *r)
     mem_Free(h);
 }
 
+/*
+ * Expand clipping through the rectangle-remainder helper; pieces are not normalized.
+ */
 void far clip_expand_by_rect(struct Rect far *r)
 {
     clip_append_rect_remainders(r);
@@ -488,6 +533,9 @@ void far clip_Push(void)
 
 /* Pushes the clip state and turns clipping off.  No reference to this function was
  * found; the parameter list is a hypothesis. */
+/*
+ * Save the current clip state, then turn clipping off.
+ */
 void far clip_push_and_disable(void)
 {
     clip_Push();
@@ -519,6 +567,9 @@ void far clip_Pop(void)
     mem_Unlock(g_5742);
 }
 
+/*
+ * Disable clipping for a screen-contained rectangle; otherwise select the screen clip.
+ */
 void far clip_screen_if_rect_outside(struct Rect far *r)
 {
     if (r->top >= gfx_screen_clip_list.top && r->bottom <= gfx_screen_clip_list.bottom &&

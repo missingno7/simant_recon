@@ -8,4 +8,7 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
+/*
+ * Driver mode followed by configured channel counts.
+ */
 int far snd_driver_capabilities[7];

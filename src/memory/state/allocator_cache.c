@@ -10,9 +10,24 @@
  * The definitions are five independent far commons.
  */
 
+/*
+ * Allocator EMS-region start, one paragraph after the page-frame segment.
+ */
 unsigned far mem_ems_arena_start_segment;
+/*
+ * EMS-backed allocator span in paragraphs, initialized to 0xbf8.
+ */
 unsigned far mem_ems_arena_paragraphs;
+/*
+ * Segment threshold separating conventional and EMS allocator blocks.
+ */
 unsigned far mem_ems_boundary_segment;
 /* Both the pointer object and its pointee type are far; the object itself is FAR_BSS. */
+/*
+ * Allocated DiscardEntry template used by discarded handles.
+ */
 char far * far mem_discard_entry_template;
+/*
+ * Mapped 0x4000-byte buffer returned by database EMS reads.
+ */
 char far * far db_ems_page_buffer;

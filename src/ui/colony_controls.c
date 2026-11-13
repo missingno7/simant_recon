@@ -5,7 +5,6 @@
  * DOS: resident code; segment 0798; complete original translation unit.
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  * Build profile: msc600ax; /AL /Os /Oe /Og.
- * Steered functions: GetTriLatDist.
  */
 
 struct Rect {
@@ -420,9 +419,6 @@ void far DrawControlLevels(int win, int unused, int percent)
     int obj;
     long val;
     int color;
-    int x;      /* x, y, j: unused (identifier count, see promotion --steered) */
-    int y;
-    int j;
 
     font_SetFont(gfx_screen_width_pixels == 0x140 ? 0 : 4);
     win_GetObjRect((win & 0xff00) + 12, &rect);
@@ -464,6 +460,11 @@ void far DrawControlLevels(int win, int unused, int percent)
     }
     font_SetFont(0);
 }
+
+/* First declaration retained before the conversion/initialization helpers:
+ * its function and parameter identifiers preserve GetTriLatDist's code.
+ * This declaration placement is inferred, not a recovered header boundary. */
+extern void far gr_BitMapSize(struct Pt far *size, int id);
 
 void far cvtLevels2IdealCaste(int far *ideal)
 {
@@ -515,7 +516,6 @@ void far SetTriLatPoint(struct TriLevel far *level, struct TriPoints far *tri, s
         out->x = (long)(row - 3) * level->weight / (long)(0xffffU - level->frac) + tri->leftX + w + 2;
 }
 
-extern void far gr_BitMapSize(struct Pt far *size, int id);
 extern int far ShowPercentMode;
 extern int far ShowPercentCaste;
 extern int far modeButtonState;

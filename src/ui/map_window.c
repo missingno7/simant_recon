@@ -35,7 +35,13 @@ static int g_2994 = 0;
 int g_2996 = 0;
 static int g_2998 = -1;
 long mapMessage = 0;
+/*
+ * Map/yard message expiry in TickCount units; LONG_MAX means indefinite.
+ */
 long map_message_deadline = 0;
+/*
+ * Forces map and yard refresh after message or view changes.
+ */
 int map_yard_redraw_pending = 0;
 static int g_29A4 = 0;
 
@@ -265,6 +271,9 @@ void far ToggleMapCursor(void)
 }
 
 
+/*
+ * Dispatch the map bitmap operation according to whether its scale multiplier is 64.
+ */
 void far map_dispatch_scaled_bitmap(char far *src, char far *dst, int n)
 {
     if (multiplier == 64)
@@ -274,6 +283,9 @@ void far map_dispatch_scaled_bitmap(char far *src, char far *dst, int n)
 }
 
 
+/*
+ * Notify the map-window change handler after map data changes.
+ */
 void far map_notify_view_changed(void)
 {
     win_MapChanged();

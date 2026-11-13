@@ -11,5 +11,11 @@
  * Functional source ownership; no historical producer or capacity claim.
  */
 
+/*
+ * Left pixel coordinate of each menu-bar title.
+ */
 int far menu_title_x_pixels[5];
+/*
+ * Character count of each menu-bar title.
+ */
 int far menu_title_char_counts[5];

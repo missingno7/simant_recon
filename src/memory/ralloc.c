@@ -124,6 +124,9 @@ Handle far mem_unlock_encoded_handle(Handle h);
 Handle far mem_handle_from_pointer(char far *p);
 char far * far mem_malloc_bridge(unsigned size);
 
+/*
+ * Abort with a location and the last allocation tag.
+ */
 void far mem_abort_with_alloc_context(char far *where)
 {
     Punt("MemPunt @%s after %s", where, (char far *)b_8C62);
@@ -133,12 +136,18 @@ void far f_171C_001E(void)
 {
 }
 
+/*
+ * Release the allocator's EMS handle when present.
+ */
 void far mem_free_ems_heap(void)
 {
     if (s_2F6E)
         ems_free_handle(s_2F6E);
 }
 
+/*
+ * Allocate and map three EMS pages for the movable heap.
+ */
 int far mem_init_ems_heap(void)
 {
     if (s_2F6E)
@@ -163,6 +172,9 @@ int far mem_init_ems_heap(void)
     return 0;
 }
 
+/*
+ * Return the diagnostic label for a block type.
+ */
 char far * far mem_type_name(int type)
 {
     switch (type) {
@@ -237,6 +249,9 @@ Block far * far mem_free_and_coalesce(Block far *b, int merge)
     return b;
 }
 
+/*
+ * Write formatted heap-dump text to a file descriptor.
+ */
 void far mem_dump_printf(int fd, char far *format, ...)
 {
     char buffer[300];
@@ -245,6 +260,9 @@ void far mem_dump_printf(int fd, char far *format, ...)
     write(fd, buffer, _fstrlen(buffer));
 }
 
+/*
+ * Append allocation counters and per-handle/per-location details to ralloc.dmp.
+ */
 void far mem_dump_heap(char far *where)
 {
     int x;
@@ -311,6 +329,9 @@ void far f_171C_0676(void)
 {
 }
 
+/*
+ * Release the DOS heap segment and clear the initialized flag.
+ */
 void far mem_release_dos_heap(void)
 {
     _dos_freemem(mem_arena_start_segment);
@@ -442,6 +463,9 @@ int far mem_resize_in_place(Handle h, unsigned paras, int type)
 }
 
 
+/*
+ * Claim a free master-pointer slot and update handle counters.
+ */
 Handle far mem_claim_handle_slot(void)
 {
     Handle h;
@@ -466,6 +490,9 @@ Handle far mem_claim_handle_slot(void)
 }
 
 
+/*
+ * Slide the following block into this free block and repair the moved free-list entry.
+ */
 void far mem_slide_next_block_down(Block far *b)
 {
     Block far *n;
@@ -495,6 +522,10 @@ void far mem_slide_next_block_down(Block far *b)
 }
 
 
+/*
+ * Discard the oldest eligible unlocked soft block; the argument restricts the scan
+ * boundary.
+ */
 int far mem_discard_oldest_soft_block(int emsOnly)
 {
     Block far *b;
@@ -528,6 +559,10 @@ int far mem_discard_oldest_soft_block(int emsOnly)
 }
 
 
+/*
+ * Compact movable blocks within the selected region; existing compiler steering remains
+ * unresolved.
+ */
 int far mem_compact_region(int emsOnly)
 {
     /* Steering: grouping the scan word with a high-word result reproduces the
@@ -609,6 +644,9 @@ Block far * far mem_find_free_block(unsigned paras, int type, char far *name, in
 }
 
 
+/*
+ * Carve a high-address allocation, compacting or discarding soft blocks if necessary.
+ */
 Block far * far mem_allocate_high_block(unsigned paras, int type)
 {
     int t;
@@ -679,6 +717,9 @@ done:
 }
 
 
+/*
+ * Find address-ordered free-list neighbors without linking their entries back to the block.
+ */
 void far mem_find_free_list_neighbors(Block far *b)
 {
     Block far *cur;
@@ -853,6 +894,9 @@ int far RallocFreed(Handle h)
     return 0;
 }
 
+/*
+ * Discard a block's storage while retaining its handle slot.
+ */
 void far mem_discard_handle(Handle h)
 {
     Block far *b;
@@ -960,6 +1004,9 @@ void far mem_mark_discardable_1c82(Handle h)
     RallocSetType(h, 3);
 }
 
+/*
+ * Return the data pointer only while its handle is locked.
+ */
 char far * far mem_pointer_if_locked(Handle h)
 {
     CHECKH(h);
@@ -968,6 +1015,9 @@ char far * far mem_pointer_if_locked(Handle h)
     return 0L;
 }
 
+/*
+ * Move an unlocked block high when needed, then lock it and return its data pointer.
+ */
 char far * far mem_move_high_and_lock(Handle h)
 {
     char far *p;
@@ -999,6 +1049,9 @@ char far * far mem_move_high_and_lock(Handle h)
     return mem_Lock(h);
 }
 
+/*
+ * Forward allocation type and attribute flags to RallocSetType.
+ */
 void far mem_set_alloc_type(Handle h, int flags)
 {
     RallocSetType(h, flags);
@@ -1140,6 +1193,9 @@ char far * far _frealloc(char far *p, unsigned size)
     return *h;
 }
 
+/*
+ * Forward a pointer resize request to the far reallocation helper.
+ */
 void far * far mem_realloc_pointer_bridge(void far *p, unsigned size)
 {
     return _frealloc(p, size);

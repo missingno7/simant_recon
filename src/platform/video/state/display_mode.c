@@ -11,4 +11,7 @@
 
 /* -1 means "not configured": the driver selector auto-detects the display only while the
  * byte is still -1 (driver_select.c); the original file holds FF here (55B3:5A97). */
+/*
+ * Display-driver mode used to choose raster and tile formats.
+ */
 char near gfx_display_mode = -1;

@@ -9,5 +9,11 @@
  */
 
 typedef char far * far *Handle;
+/*
+ * Handle for the generated map's 0x2000-byte color buffer.
+ */
 Handle far map_generated_image_handle;
+/*
+ * Handle for the 0x400-byte converted map drawing buffer.
+ */
 Handle far map_scanline_image_handle;

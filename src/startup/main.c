@@ -7,6 +7,9 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og.
  */
 
+/*
+ * Resource suffix followed by startup diagnostic and config-path pointers.
+ */
 char far *startup_config_strings[] = {
     "nt",
     "Sorry, not enough memory to run.  Please see your SimAnt addendum for\nmore information on how to free up memory on your system.",
@@ -19,6 +22,9 @@ char g_1CE8 = 0;
 extern int far fd_55B3_38A0;
 extern int far open(char far *name, int mode, ...);
 extern int near errno;
+/*
+ * Diagnostic giving the required increase to CONFIG.SYS FILES.
+ */
 char far dos_files_shortage_format[] =
     "\nSimAnt cannot open enough files to run.  Please increase the 'FILES=n'\n"
     "statement in the CONFIG.SYS file on your boot drive by %d.  If there \n"

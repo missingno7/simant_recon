@@ -24,6 +24,9 @@ struct Bitmap {
     char far *bits;
 };
 
+/*
+ * Pixel bounds used to draw the main map and locate its cursor.
+ */
 struct Rect far map_viewport_rect;
 struct Rect far editTileRect;
 struct Rect far fd_50F6_1104;

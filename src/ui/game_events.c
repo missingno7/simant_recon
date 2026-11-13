@@ -23,6 +23,9 @@ struct KeyCmd {
 };
 
 char fd_55B3_2CBA = 0;
+/*
+ * Queued menu selection consumed and cleared by DoEvent.
+ */
 int ui_pending_menu_item = 0;
 struct KeyCmd g_2CBE[] = {
     { 0x821, 0xfe00 }, { 0x811, 0xfe01 }, { 0x82f, 0xfe02 }, { 0x818, 0xfe03 },
@@ -214,6 +217,9 @@ extern long far RallocMemorySoft(void);
 extern long far startup_free_memory_bytes;
 extern int far sprintf(char far *buf, const char far *fmt, ...);
 
+/*
+ * Show startup, free, discardable and total available memory in bytes.
+ */
 void far ui_show_memory_statistics(void)
 {
     char buf[200];

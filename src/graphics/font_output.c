@@ -172,6 +172,9 @@ void far font_PrintStr(int x, int y, char far *text)
     gfx_text_pen_x.y = y;
 }
 
+/*
+ * Print at the current text pen position.
+ */
 void far font_print_at_pen(char far *text)
 {
     font_PrintStr(gfx_text_pen_x.x, gfx_text_pen_x.y, text);

@@ -10,4 +10,7 @@
  * Mutable minimum signed-byte view; computed alias gate remains open.
  */
 
+/*
+ * Byte used to select the DOS critical-error result.
+ */
 char near dos_critical_error_selector;

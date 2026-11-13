@@ -9,6 +9,15 @@
  */
 
 int far GrassMap[12];
+/*
+ * Rain animation object indices; minus one means no object.
+ */
 int far yard_rain_anim_indices[15];
+/*
+ * Black swarm animation indices; minus one means no object.
+ */
 int far yard_black_swarm_anim_indices[17];
+/*
+ * Red swarm animation indices; minus one means no object.
+ */
 int far yard_red_swarm_anim_indices[17];

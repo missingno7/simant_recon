@@ -76,6 +76,9 @@ void far InvalEuMap(int left, int top, int right, int bottom)
 
 extern void far ems_free_handle(int handle);
 
+/*
+ * Free the tile EMS handle when present; the stored handle is not cleared.
+ */
 void far edit_free_tile_ems(void)
 {
     if (g_19D0)
@@ -261,6 +264,9 @@ void far edit_invalidate_life_cache(void)
 
 extern int far MapPlane;
 
+/*
+ * Save the EMS map and map the four tile pages selected by MapPlane.
+ */
 void far edit_map_tile_ems_for_plane(void)
 {
     if (g_19D0) {
@@ -309,6 +315,9 @@ extern void far gfx_planar_draw_life_hires(int x, int y, int col, int row, char 
 extern void far gfx_tandy_draw_life_tile(int x, int y, char far *tile, char far *life, int mask);
 extern void far gfx_mono_draw_life_tile(int x, int y, char far *tile, char far *life, int n);
 
+/*
+ * Draw the current life image over its ground tile, selecting the active display backend.
+ */
 void far edit_draw_life_and_ground_tile(int x, int y)
 {
     static int masks[3] = { 0, 3, 1 };
@@ -410,6 +419,9 @@ void far edit_compose_life_tile(void)
 extern void (far * near g_917C)(int x, int y, int offset);
 extern void (far * near gfx_put_picture_hook)(int x, int y, char far *p, int w, int h);
 
+/*
+ * Draw the current ground tile at pixel coordinates through the active display backend.
+ */
 void far edit_draw_ground_tile(int x, int y)
 {
     if (edit_current_terrain_tile >= 0x100)
@@ -849,6 +861,10 @@ extern unsigned char far edit_cached_terrain_tiles[30 * 40];
 /* STEERED: the point retains two frame words though only y is read.
  * Copying y through i selects the early DI load; original locals are unknown. */
 
+/*
+ * Recompute a viewport tile and redraw changed imagery, preserving the deferred-cache
+ * sentinel.
+ */
 void far edit_redraw_changed_tile(int x, int y)
 {
     Pnt absolute;
@@ -1243,6 +1259,9 @@ extern int far MowY;
 
 /* OPEN: residue commutative operand order MapPnt.x + EditColumns (original loads the
  * MapPnt member first) - structural, not changed by names or preceding declaration counts. */
+/*
+ * Draw visible foot/mower overlays and invalidate their map tile regions.
+ */
 void far edit_draw_foot_mower_overlays(void)
 {
     int x;
@@ -1642,6 +1661,9 @@ void far DrawLegs(int x, int y, int dir, int frame)
     }
 }
 
+/*
+ * Invalidate the map region three tiles around the spider position.
+ */
 void far edit_invalidate_spider_area(void)
 {
     InvalEuMap((SpidX - MapPnt.x * g_19BE) / g_19BE - 3,

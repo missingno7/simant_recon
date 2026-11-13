@@ -50,10 +50,25 @@ struct Event {
 extern void far input_enqueue_event_args();
 extern void far mouse_default_cursor_thunk();
 
+/*
+ * First color supplied to the desktop mixed-fill operation.
+ */
 int desktop_fill_colour_a = 0x707;
+/*
+ * Second color supplied to the desktop mixed-fill operation.
+ */
 int desktop_fill_colour_b = 0x707;
+/*
+ * Background color shared by normal and selected menu text.
+ */
 int menu_normal_background_colour = 0x101;
+/*
+ * Foreground color for normal menu text and background when selected.
+ */
 int menu_normal_text_colour = 0xb0b;
+/*
+ * Foreground color selected for disabled menu text.
+ */
 int menu_disabled_text_colour = 0xf0f;
 struct Event near input_queue[7];
 int g_5FF0 = 7;
@@ -72,6 +87,9 @@ extern int far vsprintf(char far *buffer, char far *format, char far *args);
 void far menu_set_draw_colours(int mode);
 extern void far GPutStr(int x, int y, char far *text);
 
+/*
+ * Print a formatted menu label, selecting disabled colors from its leading high bit.
+ */
 void far menu_printf_label(int x, int y, int color, char far *format, ...)
 {
     char buf[32];
@@ -89,6 +107,9 @@ void far menu_printf_label(int x, int y, int color, char far *format, ...)
 void far menu_enable(int id);
 void far menu_disable(int id);
 
+/*
+ * Set a menu title or item's enabled state.
+ */
 void far menu_set_enabled(int id, int on)
 {
     if (on)
@@ -134,6 +155,9 @@ void far SetMenuOptionText(int id, char far *text)
 
 extern int far menu_title_x_pixels[];
 
+/*
+ * Enable a menu entry and redraw it immediately when it is a bar title.
+ */
 void far menu_enable(int id)
 {
     char far *p;
@@ -150,6 +174,9 @@ void far menu_enable(int id)
     }
 }
 
+/*
+ * Disable a menu entry and redraw it immediately when it is a bar title.
+ */
 void far menu_disable(int id)
 {
     char far *p;
@@ -168,6 +195,9 @@ void far menu_disable(int id)
 
 extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 
+/*
+ * Select menu drawing colors and pattern for one of four states.
+ */
 void far menu_set_draw_colours(int mode)
 {
     switch (mode) {
@@ -204,6 +234,9 @@ void far input_release_screen_capture(void)
 
 extern void far hotbox_prepend(struct Timer far *t, char far *slot);
 
+/*
+ * Prepend a rectangle and callback to the cursor-region chain.
+ */
 void far input_prepend_cursor_region(struct Rect far *r, void (far *fn)(), int ticks)
 {
     g_6016.r.left = r->left;
@@ -215,6 +248,9 @@ void far input_prepend_cursor_region(struct Rect far *r, void (far *fn)(), int t
     hotbox_prepend(&g_6016, fd_5071_0728);
 }
 
+/*
+ * Remove an identifier from the cursor-region chain.
+ */
 void far input_remove_cursor_region(int ticks)
 {
     hotbox_remove_id(ticks, fd_5071_0728);
@@ -222,6 +258,9 @@ void far input_remove_cursor_region(int ticks)
 
 extern void far hotbox_append(struct Timer far *t, char far *slot);
 
+/*
+ * Replace a cursor-region entry and append it to the chain.
+ */
 void far input_append_cursor_region(struct Rect far *r, void (far *fn)(), int ticks)
 {
     g_6016.r.left = r->left;
@@ -254,6 +293,9 @@ void far input_remove_object_rect(int ticks)
 
 extern char far fd_5071_0060[];
 
+/*
+ * Register a window proximity rectangle in the proximity-region chain.
+ */
 void far input_register_proximity_rect(struct Rect far *r, int ticks)
 {
     g_603A.r.left = r->left;
@@ -265,6 +307,9 @@ void far input_register_proximity_rect(struct Rect far *r, int ticks)
     hotbox_prepend(&g_603A, fd_5071_0060);
 }
 
+/*
+ * Remove a proximity rectangle by identifier.
+ */
 void far input_remove_proximity_rect(int ticks)
 {
     hotbox_remove_id(ticks, fd_5071_0060);
@@ -272,6 +317,9 @@ void far input_remove_proximity_rect(int ticks)
 
 extern int far hotbox_get_rect(int id, char far *slot, struct Rect far *out);
 
+/*
+ * Get the registered object hit rectangle for an identifier.
+ */
 int far input_get_object_hit_rect(int id, struct Rect far *out)
 {
     return hotbox_get_rect(id, fd_5071_03C4, out);
@@ -295,6 +343,9 @@ int far PointInRect(Point far *pt, struct Rect far *r)
 
 extern void far hotbox_contains_pointer(int ticks, char far *slot);
 
+/*
+ * Probe whether the pointer lies in an object's registered hit rectangle.
+ */
 void far input_probe_object_hit_rect(int ticks)
 {
     hotbox_contains_pointer(ticks, fd_5071_03C4);
@@ -383,6 +434,9 @@ extern int far menu_title_char_counts[];
 extern char near fontWidth;
 extern int near gfx_screen_width_pixels;
 
+/*
+ * Calculate menu-bar title positions and optionally paint the bar.
+ */
 int far menu_layout_bar(int draw)
 {
     int i;
@@ -426,6 +480,9 @@ int far menu_layout_bar(int draw)
 extern void far mouse_set_position(int x, int y);
 extern int far menu_track_bar_selection(struct Event far *ev);
 
+/*
+ * Move the pointer to a menu title and begin tracking that menu.
+ */
 void far menu_open_by_index(int menu)
 {
     struct Event ev;
@@ -441,6 +498,9 @@ void far menu_open_by_index(int menu)
 extern int far input_event_count(void);
 extern void far input_pop_event(struct Event far *ev);
 
+/*
+ * Discard the raw queued input events.
+ */
 void far input_discard_queued_events(void)
 {
     struct Event ev;
@@ -452,6 +512,9 @@ void far input_discard_queued_events(void)
 extern int far kbd_poll_bios_key(void);
 extern int far kbd_read_key_code(void);
 
+/*
+ * Consume queued keys until Return is found or no key remains.
+ */
 int far kbd_poll_return_key(void)
 {
     while (kbd_poll_bios_key())
@@ -462,6 +525,9 @@ int far kbd_poll_return_key(void)
 
 extern int _fastcall win_GetEvent(struct Event far *ev);
 
+/*
+ * Wait for a window event or Escape; finish button tracking on an event.
+ */
 int far win_wait_event_or_escape(struct Event far *ev)
 {
     while (!win_GetEvent(ev))
@@ -473,6 +539,9 @@ int far win_wait_event_or_escape(struct Event far *ev)
 
 extern int far gr_BitMapSize(Point far *size, int object);
 
+/*
+ * Register or remove an object hit rectangle sized from a bitmap resource.
+ */
 void far input_set_bitmap_hit_rect(int x, int y, int object, int ticks, int show)
 {
     Point size;

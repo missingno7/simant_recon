@@ -9,4 +9,7 @@
  */
 
 typedef char far * far *Handle;
+/*
+ * Clip-list handles indexed by the high byte of window id.
+ */
 Handle far clip_window_list_handles[45];

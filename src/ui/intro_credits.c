@@ -4,7 +4,6 @@
  * File name and folder are ours, inferred from the DOS routines or storage defined here.
  * DOS: overlay section 16 (S16); segment 384C; complete original translation unit.
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
- * Steered functions: DrawSimPayoff, AboutDialog, ShowIntro.
  */
 
 typedef char far * far *Handle;
@@ -30,8 +29,6 @@ struct Event {
 void far DrawSimPayoff(void);
 void far AboutDialog(void);
 void far ShowIntro(void);
-void far LoadMonoPats(void);
-void far app_cleanup_and_exit(char far *msg, int flag);
 
 static int g_2C2C[6][2] = {
     { 0x4a, 0x48 }, { 0x42, 0x57 }, { 0x40, 0xaf },
@@ -130,7 +127,10 @@ void far DrawSimPayoff(void)
 extern char far * far * far LoadStringAnt(int object);
 extern unsigned long far TickCount(void);
 extern void far DialogClearWait(void);
-extern int far WaitedEnough(long far *timer, int delay);
+/* Prototype spelling is inferred: the unnamed timer and graphics-hook arguments
+ * preserve this TU's declaration-number context without unrelated declarations.
+ * The original header boundaries and parameter names are unknown. */
+extern int far WaitedEnough(long far *, int);
 extern int far win_Events(void);
 extern void far win_FlushEvents(void);
 extern void _fastcall win_DrawObjectNum(int objNum);
@@ -138,11 +138,11 @@ extern void far clip_set_screen_intersection(struct Rect far *r);
 extern void _fastcall win_SetColorFromObjNum(int obj);
 extern void far font_SetFont(int font);
 extern int far font_FontHeight(void);
-extern void (far * near gfx_copy_screen_rect_hook)(int left, int top, int right, int bottom, int x, int y);
+extern void (far * near gfx_copy_screen_rect_hook)(int, int, int, int, int, int);
 extern void _fastcall gr_JustifyStrInRect(int mode, struct Rect far *rect, char far *text);
 extern int near g_3DE2;
 extern int far gfx_text_pen_x;
-extern void (far * near gfx_fill_rect_hook)(int x0, int y0, int x1, int y1, int color);
+extern void (far * near gfx_fill_rect_hook)(int, int, int, int, int);
 extern void far clip_Off(void);
 extern void far free(char far *p);
 extern void far db_PurgeObject(int object, int kind);

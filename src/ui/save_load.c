@@ -897,6 +897,9 @@ extern unsigned char far RevSpider[];
 extern unsigned char far ShowPercentCaste[];
 extern unsigned char far ShowPercentMode[];
 
+/*
+ * Ordered save/load records; a zero count terminates traversal.
+ */
 struct SaveRec far save_record_table[308] = {
     { 1, 8192, (void far *)&MapA },
     { 1, 4096, (void far *)&MapB },

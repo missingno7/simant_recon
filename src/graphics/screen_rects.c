@@ -16,6 +16,9 @@ struct Rect {
 
 extern char far gfx_screen_clip_list[];
 
+/*
+ * Return the shared screen rectangle.
+ */
 char far * far gfx_screen_rect(void)
 {
     return gfx_screen_clip_list;
@@ -35,6 +38,9 @@ extern void far gfx_put_fixed_font_char(int x, int y, int c);
 extern char near gfx_font_height_pixels;
 extern char near fontWidth;
 
+/*
+ * Draw one fixed-font character with an outline of the requested width.
+ */
 void far gfx_draw_outlined_char(int x, int y, int c, int width)
 {
     gfx_put_fixed_font_char(x, y, c);
@@ -48,6 +54,10 @@ void far GTextBox(int left, int top, int right, int bottom, int color)
     gfx_fill_rect_hook(left << 3, CELLY(top), right << 3, CELLY(bottom + 1), color);
 }
 
+/*
+ * Outline a box specified in eight-pixel columns and character rows; bottom row is
+ * inclusive.
+ */
 void far gfx_outline_cell_box(int left, int top, int right, int bottom, int width)
 {
     GBoxOutline(left << 3, gfx_font_height_pixels * top, right << 3, gfx_font_height_pixels * (bottom + 1), width);
@@ -55,6 +65,9 @@ void far gfx_outline_cell_box(int left, int top, int right, int bottom, int widt
 
 extern void (far * near g_9174)(int left, int top, int right, int bottom, int mode);
 
+/*
+ * Draw the driver-specific color/pattern overlay over a rectangle.
+ */
 void far gfx_draw_rect_overlay(struct Rect far *r, int mode)
 {
     g_9174(r->left, r->top, r->right, r->bottom, mode);
@@ -76,6 +89,9 @@ void far GCheckerBox(int left, int top, int right, int bottom)
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
 extern void far font_PrintStr(int x, int y, char far *text);
 
+/*
+ * Print formatted text at packed character-cell coordinates.
+ */
 void far gfx_printf_cells(int x, int y, char far *format, ...)
 {
     char buf[200];
@@ -130,6 +146,9 @@ void far GInvOutline(int left, int top, int right, int bottom, int width)
 
 static struct Rect g_8CCC;
 
+/*
+ * Convert packed character-cell bounds to pixels in a shared result rectangle.
+ */
 struct Rect far * far gfx_cell_rect_to_pixels(struct Rect far *r)
 {
     g_8CCC.left = (r->left & 0xff) * fontWidth;
@@ -190,6 +209,9 @@ char far * far GSaveRect(struct Rect far *r)
 
 void far gfx_restore_rect_with_release(struct Rect far *r, char far *buf, int release);
 
+/*
+ * Restore saved pixels without freeing the buffer; repaint if no buffer exists.
+ */
 void far gfx_restore_rect(struct Rect far *r, char far *buf)
 {
     gfx_restore_rect_with_release(r, buf, 0);
@@ -204,6 +226,10 @@ extern void far GPutPic(int x, int y, char far *image);
 extern void far free(char far *block);
 extern void _fastcall win_redraw_rect(struct Rect far *rect);
 
+/*
+ * Restore saved pixels and optionally free them, or repaint the rectangle if no save
+ * exists.
+ */
 void far gfx_restore_rect_with_release(struct Rect far *r, char far *buf, int release)
 {
     int x;
@@ -219,6 +245,9 @@ void far gfx_restore_rect_with_release(struct Rect far *r, char far *buf, int re
         win_redraw_rect(r);
 }
 
+/*
+ * Free a nonnull saved-rectangle buffer.
+ */
 void far gfx_free_saved_rect(char far *buf)
 {
     if (buf)

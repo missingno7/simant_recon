@@ -14,7 +14,16 @@ struct Pnt far LastEggPnt;
 struct Pnt far CurEggPnt;
 struct Pnt far LastFightPnt;
 struct Pnt far CurFightPnt;
+/*
+ * Up to four complemented keys being matched against cheat entries.
+ */
 char far cheat_key_prefix[4];
 char far * far fd_50F6_0B22;
+/*
+ * Previous terrain tile byte for each visible cache slot.
+ */
 unsigned char far edit_cached_terrain_tiles[1200];
+/*
+ * Previous life tile words; negative sentinels force redraw.
+ */
 int far edit_cached_life_tiles[30][40];

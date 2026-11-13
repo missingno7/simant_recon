@@ -6,7 +6,6 @@
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are
  * HIGH confidence, not confirmed.
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
- * Steered functions: win_GetArg.
  */
 
 extern void far Punt(char far *format, ...);
@@ -68,6 +67,9 @@ void _fastcall RepointObjects(int win)
     }
 }
 
+/*
+ * Test the object types carrying inline text payloads; no caller is known.
+ */
 int _fastcall win_type_has_text_payload(int type)
 {
     switch (type) {
@@ -82,6 +84,9 @@ int _fastcall win_type_has_text_payload(int type)
     return 0;
 }
 
+/*
+ * Compute the variable object-record size in bytes from type and inline text length.
+ */
 int _fastcall win_object_record_size(char far *obj)
 {
     int size;
@@ -195,6 +200,9 @@ char far * _fastcall win_WinAddr(int win)
     return win_locked_resource_ptr(win);
 }
 
+/*
+ * Return whether the window stacking list is nonempty.
+ */
 int far win_any_window_open(void)
 {
     if (clip_window_z_order != (int)0x8000)
@@ -202,6 +210,9 @@ int far win_any_window_open(void)
     return 0;
 }
 
+/*
+ * Calculate a rectangle's integer center point.
+ */
 void _fastcall win_rect_center(struct Pt far *center, struct Rect far *rect)
 {
     center->x = (rect->right + rect->left) / 2;
@@ -272,9 +283,9 @@ int _fastcall win_GetVal(int obj, int kind)
 
 int _fastcall win_GetArg(int win, int idx)
 {
-    /* Byte-equivalent unknown: two named temporaries here and the unnamed forward
-     * prototype of win_GetVal give every function of the file its original code;
-     * which identifiers the original declared is not recovered. */
+    /* Declaration layout is inferred: both temporaries carry real values; together
+     * with the unnamed win_GetVal prototype they preserve later code in this TU.
+     * The original local identities and declaration spelling are unknown. */
     int windowIndex;
     int result;
 
@@ -360,6 +371,9 @@ void _fastcall win_Recalc(int win)
 
 extern void far input_set_bitmap_hit_rect(int x, int y, int id, int mode, int flag);
 
+/*
+ * Register or remove the window frame controls' bitmap-sized hit rectangles.
+ */
 void _fastcall win_set_frame_hit_rects(int flag, char far *w)
 {
     int m;

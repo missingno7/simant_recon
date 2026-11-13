@@ -55,6 +55,7 @@ VIDEO_TEXT      segment word public 'CODE'
                 public  _gfx_bios_has_tandy_signature
 
 ; int far gfx_probe_display_adapters(void): probe all adapters, return Device0 (type | display << 8)
+; Probe display adapters and return the active subsystem/display word.
 _gfx_probe_display_adapters  proc    far
                 push    si
                 push    di
@@ -87,6 +88,7 @@ _gfx_probe_display_adapters  endp
 
 ; PS/2 video BIOS: INT 10h function 1Ah returns the display combination code
 FindPS2         proc    near
+; Translate BIOS display-combination codes into device records at DI.
 _gfx_probe_bios_display_codes  label   near
                 mov     ax, 1A00h
                 int     10h
@@ -121,6 +123,7 @@ FindPS2         endp
 
 ; EGA BIOS: INT 10h function 12h, BL=10h returns the EGA configuration
 FindEGA         proc    near
+; Probe EGA BIOS configuration and record its display type.
 _gfx_probe_ega_adapter  label   near
                 mov     bl, 10h
                 mov     ah, 12h
@@ -144,6 +147,7 @@ FindEGA         endp
 
 ; CGA: a 6845 CRTC at port 3D4h
 FindCGA         proc    near
+; Record a CGA device when the 3D4h CRTC probe succeeds.
 _gfx_probe_cga_adapter  label   near
                 mov     dx, 3D4h
                 call    Find6845
@@ -156,6 +160,7 @@ FindCGA         endp
 
 ; MDA / Hercules: a 6845 CRTC at port 3B4h, then the vertical-sync bit of status port 3BAh
 FindMono        proc    near
+; Probe the monochrome CRTC and distinguish MDA/Hercules status patterns.
 _gfx_probe_mono_adapter  label   near
                 mov     dx, 3B4h
                 call    Find6845
@@ -192,6 +197,7 @@ FindMono        endp
 
 ; DX = CRTC address port: carry set if no 6845 answers (cursor-low register read-back)
 Find6845        proc    near
+; Test CRTC register 0Fh at DX, restore it, and set carry on failure.
 _gfx_probe_crtc_readback  label   near
                 mov     al, 0Fh
                 out     dx, al
@@ -213,6 +219,7 @@ Find6845        endp
 
 ; order Device0/Device1 so that Device0 is the active subsystem
 FindActive      proc    near
+; Order the two DI device words using the active BIOS video mode.
 _gfx_order_active_adapter_first  label   near
                 cmp     word ptr [di+2], 0
                 je      ActiveDone
@@ -238,6 +245,7 @@ FindActive      endp
 
 ; AX = subsystem/display: store it in the first free device word
 FoundDevice     proc    near
+; Store the subsystem/display word in AX in the first available device slot.
 _gfx_record_probed_adapter  label   near
                 lea     bx, [di]
                 cmp     byte ptr [bx], 0
@@ -251,6 +259,7 @@ TandyName       db      'TANDY', 0
 TandyNamePtr    dd      TandyName
 
 ; int far gfx_bios_has_tandy_signature(void): 1 if the BIOS segment F000h contains "TANDY"/"tandy"
+; Return whether the BIOS ROM contains a case variant of TANDY.
 _gfx_bios_has_tandy_signature  proc    far
                 push    ds
                 push    si

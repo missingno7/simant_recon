@@ -22,6 +22,12 @@ typedef char far * far *Handle;
 int far win_numOfWindows;
 int far win_numOfColors;
 int far win_numOfGroups;
+/*
+ * Handle for database EMS page-cache slot records.
+ */
 EmsSlot far * far * far db_ems_slot_list_handle;
 void (far * far gfx_copy_to_buffer_hook)(char far *, char far *, int, int);
+/*
+ * Head handle of the linked stack of saved clipping states.
+ */
 Handle far clip_saved_state_stack;

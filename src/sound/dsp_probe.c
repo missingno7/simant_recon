@@ -7,11 +7,17 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+/*
+ * Sound Blaster base address used for DSP reset and detection.
+ */
 int snd_sb_io_base = 0;
 
 extern void far snd_port_write_byte(int port, char value);
 extern unsigned char far snd_port_read_byte(int port);
 
+/*
+ * Pulse DSP reset and test for AAh; the first status test uses an uninitialized local.
+ */
 int far snd_probe_dsp_reset_ack(void)
 {
     int i;

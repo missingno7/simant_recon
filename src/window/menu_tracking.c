@@ -46,6 +46,9 @@ extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 extern void far GPutStr(int x, int y, char far *s);
 extern void far input_register_object_rect(struct Rect far *r, int v);
 
+/*
+ * Draw a horizontal text button at packed cell coordinates and register its hit area.
+ */
 void far ui_draw_horizontal_button(int x, int y, char far *s, int v)
 {
     int len;
@@ -66,6 +69,9 @@ void far ui_draw_horizontal_button(int x, int y, char far *s, int v)
 
 extern void far gfx_put_fixed_font_char(int x, int y, int c);
 
+/*
+ * Draw a vertical text button at packed cell coordinates and register its hit area.
+ */
 void far ui_draw_vertical_button(int x, int y, char far *s, int v)
 {
     int len;
@@ -176,6 +182,9 @@ extern void far free(char far *block);
 
 
 extern void far hotbox_center_pointer(int item);
+/*
+ * Track a popup menu, update its one-based selection, and restore the covered pixels.
+ */
 int far menu_track_popup(char far *sel, char far * far *items)
 {
     int j;
@@ -406,6 +415,9 @@ other:
 
 
 
+/*
+ * Cycle button focus with plus/minus and center the pointer on the selected identifier.
+ */
 int far ui_step_button_focus(int key, int far *sel, int count, int base)
 {
     int i;

@@ -110,6 +110,9 @@ void _fastcall list_clear_selection(int obj)
     win_UnlockWin(obj);
 }
 
+/*
+ * Set a list line's selection bit without redrawing it.
+ */
 void _fastcall list_set_line_selected(int obj, int line, int sel)
 {
     char far *o;
@@ -405,6 +408,9 @@ struct Event {
     int xE;
 };
 
+/*
+ * Apply a click to list selection and repaint its visible rows.
+ */
 void _fastcall list_process_click(struct Event far *ev)
 {
     char far *o;

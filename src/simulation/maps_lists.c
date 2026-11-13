@@ -10,6 +10,9 @@
  * segment at 0xF89F bytes and opens frame 4DA7 for PherMapRT (FARSEG-1).
  */
 
+/*
+ * World-generation seeds indexed by yard row and column.
+ */
 unsigned char far YMapSeeds[384] = { 0 };
 unsigned char far MapA[8192] = { 0 };
 unsigned char far MapB[4096] = { 0 };
@@ -34,6 +37,9 @@ unsigned char far RlistY[501] = { 0 };
 unsigned char far RlistM[501] = { 0 };
 unsigned char far RlistT[501] = { 0 };
 unsigned char far RlistS[501] = { 0 };
+/*
+ * Snapshot of PherMapA used while averaging neighboring cells.
+ */
 unsigned char far pheromone_diffusion_snapshot[2048] = { 0 };
 unsigned char far PherMapA[2048] = { 0 };
 unsigned char far PherMapF[2048] = { 0 };

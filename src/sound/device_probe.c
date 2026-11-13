@@ -23,8 +23,14 @@ int (far *snd_driver_probe_table[])(void) = {
     snd_probe_assume_present, snd_probe_assume_present, snd_probe_tandy_sound, snd_probe_ps1_sound, snd_probe_opl_timer,
     snd_find_regchip_base, snd_find_blaster_dsp_base, snd_probe_lpt_unavailable, snd_probe_mpu_reset
 };
+/*
+ * Pointer to the mode and channel-count report cells.
+ */
 int far *snd_capabilities_pointer = snd_driver_capabilities;
 
+/*
+ * Return the highest numbered successful sound-device probe.
+ */
 int far snd_probe_preferred_device(void)
 {
     int i;
@@ -40,11 +46,17 @@ int far snd_probe_preferred_device(void)
     return found;
 }
 
+/*
+ * Unconditionally accept the fallback sound probe.
+ */
 int far snd_probe_assume_present(void)
 {
     return 1;
 }
 
+/*
+ * Test the Tandy sound BIOS response or ROM model byte.
+ */
 int far snd_probe_tandy_sound(void)
 {
     char far *p;
@@ -59,6 +71,9 @@ int far snd_probe_tandy_sound(void)
     return *p == 0x21 || base == 0xc4;
 }
 
+/*
+ * Test the BIOS model word and CMOS sound-enable bit for the PS/1 backend.
+ */
 int far snd_probe_ps1_sound(void)
 {
     _asm {
@@ -88,6 +103,9 @@ none:
 extern void far snd_opl_write(char reg, char value);
 extern unsigned char far snd_port_read_byte(int port);
 
+/*
+ * Detect OPL timer operation at port 388h and reset the timers afterwards.
+ */
 int far snd_probe_opl_timer(void)
 {
     int s1;
@@ -111,6 +129,9 @@ int far snd_probe_opl_timer(void)
 extern unsigned far snd_sb_io_base;
 extern int far snd_probe_dsp_reset_ack(void);
 
+/*
+ * Probe DSP bases 210h through 260h and retain the tested base.
+ */
 int far snd_find_blaster_dsp_base(void)
 {
     int found;
@@ -129,6 +150,9 @@ int far snd_find_blaster_dsp_base(void)
 extern int far snd_regchip_detect(void);
 extern int far snd_device_io_base;
 
+/*
+ * Store the detected register-chip base port and report success.
+ */
 int far snd_find_regchip_base(void)
 {
     int port;
@@ -139,6 +163,9 @@ int far snd_find_regchip_base(void)
     return 1;
 }
 
+/*
+ * Reject automatic selection of the LPT backend.
+ */
 int far snd_probe_lpt_unavailable(void)
 {
     return 0;
@@ -146,6 +173,9 @@ int far snd_probe_lpt_unavailable(void)
 
 extern void far snd_port_write_byte(int port, char value);
 
+/*
+ * Probe MPU reset acknowledgement with bounded polling retries.
+ */
 int far snd_probe_mpu_reset(void)
 {
     int i;

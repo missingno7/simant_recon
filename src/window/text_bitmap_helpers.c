@@ -28,6 +28,9 @@ int g_62C0 = 5;
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern void far GRectInv(struct Rect far *rect);
 
+/*
+ * Invert the object's pixel rectangle.
+ */
 void far win_invert_obj_rect(int obj)
 {
     struct Rect r;
@@ -39,6 +42,9 @@ void far win_invert_obj_rect(int obj)
 extern char near fontWidth;
 extern Point far gfx_text_pen_x;
 
+/*
+ * Set the text pen at a column offset from the object's top-left corner.
+ */
 void far win_set_obj_text_pen(int obj, int col)
 {
     struct Rect r;
@@ -106,6 +112,9 @@ void far gr_CenterStrInRectClear(struct Rect far *rect, char far *text)
         gfx_fill_rect_hook(r.right, r.top, rect->right, r.bottom, g_3DE2);
 }
 
+/*
+ * Center text in the object's rectangle using its colors and current clipping.
+ */
 void far win_center_text_unclipped(int obj, char far *text)
 {
     struct Rect r;
@@ -115,6 +124,9 @@ void far win_center_text_unclipped(int obj, char far *text)
     gr_CenterStrInRect(&r, text);
 }
 
+/*
+ * Print text at the object's top-left corner using its colors.
+ */
 void far win_print_obj_text(int obj, char far *text)
 {
     struct Rect r;
@@ -127,6 +139,9 @@ void far win_print_obj_text(int obj, char far *text)
 extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);
 extern void far GRectOutline(struct Rect far *rect, int width);
 
+/*
+ * Set drawing attributes and outline the object rectangle.
+ */
 void far win_outline_obj_rect(int obj, int color, int width)
 {
     struct Rect r;
@@ -141,6 +156,9 @@ extern void (far * near g_917C)(int x, int y, int offset);
 extern char far * far * far ui_icon_bitmap_handle;
 extern void (far * near gfx_put_picture_hook)(int x, int y, char far *p, int w, int h);
 
+/*
+ * Draw a tile at an object's top-left using the selected video mode's tile path.
+ */
 void far gfx_draw_tile_at_obj(int obj, int n)
 {
     struct Rect r;
@@ -157,6 +175,9 @@ void far gfx_draw_tile_at_obj(int obj, int n)
 
 /* Two separate mode tests with identical calls: the 8x8 call of mode 6 is laid out inline
    and cross-jumped into the 16x16 tail; `==6 || ==2` places the shared block last. */
+/*
+ * Draw a tile at pixel coordinates using the selected video mode's tile path.
+ */
 void far gfx_draw_tile_at(int x, int y, int n)
 {
     if (!(gfx_display_mode & 1)) {
@@ -173,6 +194,9 @@ void far gfx_draw_tile_at(int x, int y, int n)
 extern char far * far db_LoadObject(int object, int kind);
 extern void far Punt(char far *format, ...);
 
+/*
+ * Load a required resource; abort with its identifiers if loading fails.
+ */
 char far * far res_load_required_object(int kind, int object)
 {
     char far *p;
@@ -186,6 +210,9 @@ char far * far res_load_required_object(int kind, int object)
 extern int far vsprintf(char far *buffer, char far *format, char far *args);
 extern void far font_print_at_pen(char far *text);
 
+/*
+ * Print formatted text at the current text pen.
+ */
 void far font_printf_at_pen(char far *format, ...)
 {
     char buf[100];
@@ -194,6 +221,9 @@ void far font_printf_at_pen(char far *format, ...)
     font_print_at_pen(buf);
 }
 
+/*
+ * Print formatted text at the object's top-left using its colors.
+ */
 void far win_printf_obj_text(int obj, char far *format, ...)
 {
     struct Rect r;
@@ -215,6 +245,9 @@ void far f_208F_0404(void)
 
 extern void far db_PurgeHandle(char far *handle);
 
+/*
+ * Purge a resource handle through the database cache.
+ */
 void far res_purge_handle(char far *handle)
 {
     db_PurgeHandle(handle);
@@ -256,6 +289,9 @@ static long g_8CE8;
 extern int far dialog_wait_delay;
 extern unsigned long far TickCount(void);
 
+/*
+ * Start the shared timer used by timed-or-key dismissal polling.
+ */
 void far ui_start_dismiss_timer(int delay)
 {
     g_8CE8 = TickCount();
@@ -266,6 +302,9 @@ extern int far kbd_poll_bios_key(void);
 extern int far kbd_read_key_code(void);
 extern int far WaitedEnough(long far *timer, int delay);
 
+/*
+ * Return whether the shared dismissal timer expired or Return/Escape was pressed.
+ */
 int far ui_poll_dismiss_timer(void)
 {
     int key;
@@ -280,6 +319,9 @@ int far ui_poll_dismiss_timer(void)
 
 extern int far fd_1B73_0006;
 
+/*
+ * Start the interrupt countdown and busy-wait for zero.
+ */
 void far timer_wait_countdown(int ticks)
 {
     fd_1B73_0006 = ticks;
@@ -287,16 +329,25 @@ void far timer_wait_countdown(int ticks)
         ;
 }
 
+/*
+ * Set the interrupt-maintained countdown.
+ */
 void far timer_start_countdown(int ticks)
 {
     fd_1B73_0006 = ticks;
 }
 
+/*
+ * Return whether the interrupt countdown has reached zero.
+ */
 int far timer_countdown_done(void)
 {
     return !fd_1B73_0006;
 }
 
+/*
+ * Consume queued keys until Escape is found or no key remains.
+ */
 int far kbd_poll_escape_key(void)
 {
     while (kbd_poll_bios_key())

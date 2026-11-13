@@ -439,6 +439,9 @@ void _fastcall win_DrawTitle(int win)
     win_UnlockWin(win);
 }
 
+/*
+ * Repaint the requested rectangle through the desktop and complete window stack.
+ */
 void _fastcall win_redraw_rect(char far *p)
 {
     int i;

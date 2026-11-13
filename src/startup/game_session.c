@@ -30,6 +30,9 @@ struct Rect {
 
 void far app_cleanup_and_exit(char far *msg, int flag);
 
+/*
+ * Exit with the expired IBM demo diagnostic and status zero.
+ */
 void far app_exit_demo_expired(void)
 {
     app_cleanup_and_exit("SimAnt IBM DEMO version has expired.  Please get an update.", 0);

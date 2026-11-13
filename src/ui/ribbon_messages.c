@@ -24,6 +24,9 @@ extern struct Pt _fastcall win_StringSize(char far *text);
 extern void far font_PrintStr(int x, int y, char far *text);
 extern void far clip_SubExclude(struct Rect far *rect);
 
+/*
+ * Print centered text at pixel y, exclude its bounds from clipping and restore font zero.
+ */
 void far ui_draw_centered_clipped_text(char far *text, struct Rect far *r, int y)
 {
     struct Rect rc;

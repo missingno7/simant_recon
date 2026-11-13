@@ -13,7 +13,7 @@ Last gate result: **PASS** (2026-11-13).
 | Item | State | Open |
 | --- | --- | --- |
 | 1. Code exact | 1,638 of 1,644 game functions | 6 functions, 2,421 bytes; 5 of 122 code modules are not yet complete translation units |
-| 2. No unexplained steering | 17 exact functions depend on a steering construct | 8,830 bytes |
+| 2. No unexplained steering | 12 exact functions depend on a steering construct | 6,715 bytes |
 | 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,330 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 2 functions |
@@ -55,19 +55,14 @@ They stay here until a natural spelling replaces it.
 | --- | --- | ---: | --- |
 | `S09:35F5` | `o09_35F5_03C6` | 2405 | USE-2: folded unsigned path/save/index reads; original eliminated expressions unknown. |
 | `S13:384C` | `InvertPatch` | 261 | InvertPatch=BLOCK-1: a test with an unused assignment starts the basic block the original has between the first stores and the raw offsets; the statement it stands for is unknown |
-| `S16:384C` | `AboutDialog` | 657 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
-| `S16:384C` | `DrawSimPayoff` | 481 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
-| `S16:384C` | `ShowIntro` | 625 | declaration count: module header prototypes (LoadMonoPats, app_cleanup_and_exit with named params) before o16_384C_01E1 -> operand order of idx<n compare (periodic symbol-table effect; +6/7/9-11/13/14 mod 17 all exact) |
 | `S24:39C7` | `drawHistGraph` | 732 | drawHistGraph=a local record grouping count, start and the label buffer keeps the frame homes, and three prototypes lose their parameter names for the identifier count; the original declarations are unknown |
 | `root:0250` | `edit_redraw_changed_tile` | 264 | edit_redraw_changed_tile=a point local of which only y is read keeps two frame words, and copying y through the later index variable selects the early DI load; the original locals are unknown |
-| `root:0798` | `GetTriLatDist` | 294 | three unused locals x, y, j in DrawControlLevels -> identifier count before GetTriLatDist (+5..7 mod 17 after DrawControlLevels selects the dx-w CSE/operand order) |
 | `root:171C` | `RallocSetType` | 228 | volatile int type in RallocSetType -> old type kept in its [bp-6] home instead of CX; natural forms (int/unsigned/char/struct-free, inner scope, extra assignments) all keep it in CX |
 | `root:171C` | `mem_compact_region` | 490 | a record grouping the scan segment word with a 32-bit result whose high word is the flag reproduces the frame placement; the original local types and grouping are unknown |
 | `root:1986` | `FindIndex` | 267 | FindIndex=block layout only: goto into the else block reproduces the original order of the two search branches; the original control structure is unknown |
 | `root:1C62` | `ui_show_alert` | 561 | record order only: the key switch leaves the loop through a label on a break inside the loop body (continue; done: break;); a label after the loop gives the same bytes but a /Zi record break at 02CB that the original relocation order excludes; the original loop exit is unknown (worker layout-1c62, 40 label-free spellings change bytes) |
-| `root:2505` | `win_GetArg` | 58 | identifier count only: named temporaries windowIndex/result (with the unnamed win_GetVal forward prototype) keep the original code of every later function; the original identifiers are unknown |
 | `root:259D` | `win_DrawBitMap` | 663 | win_DrawBitMap=FOLD-1: a folded always-true unsigned test before the second packed-picture test leaves the block boundary that splits the pointer reload at 0081 into two word loads; the eliminated original expression is unknown |
-| `root:2662` | `hanim_SetObjectPos` | 598 | named redeclarations of f_2662_0348 and f_2662_059C before f_2662_090D -> identifier count (+7 mod 17) selecting 090D's operand order; 090D's reinsert flag is only read in a constant-folded test (keeps the dead store and frees DI) |
+| `root:2662` | `hanim_SetObjectPos` | 598 | FOLD: reinsert is initialised to zero and read only in a test the compiler folds away; only this keeps the original dead zero store at BP-8 and the frame of 34 bytes; the Windows build also has an extra dead zero, but no natural source for it was found (worker steer-decl) |
 | `root:293A` | `snd_probe_mpu_reset` | 171 | LIFE-1: folded unsigned success-flag check retains lifetime through the retry loop; eliminated original expression unknown |
 | `root:295C` | `snd_stop_assigned_voices` | 75 | CSE-1: folded unsigned-byte c3 >= 0 check retains the byte CSE temporary and index spill; the eliminated original expression is unknown |
 

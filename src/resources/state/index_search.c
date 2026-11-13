@@ -20,5 +20,11 @@ typedef struct IndexEntry {
     unsigned char flags;
 } IndexEntry;
 
+/*
+ * Index entry currently examined by database binary search.
+ */
 IndexEntry far * far db_index_search_entry;
+/*
+ * Lower bound of the database index binary search.
+ */
 int far db_index_lower_bound;

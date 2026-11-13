@@ -14,18 +14,39 @@ int far WantRFightBalloon;
 unsigned char far fd_50F6_106C;
 int far LessonTemp;
 int far WantRestBalloon;
+/*
+ * Number of queued current message balloons, capped at six.
+ */
 int far message_balloon_count;
 int far StrategicModeR;
 int far BirdX;
 int far TutHowLong;
 int far BirdY;
+/*
+ * Handle to the 256-byte executable block decoded by the introduction.
+ */
 Handle far startup_info_block_handle;
+/*
+ * Open executable descriptor used to read the startup information block.
+ */
 int far startup_executable_fd;
 Handle far yardAnimHandle;
 int far fd_50F6_10DE;
 int far fd_50F6_10E0;
 char far * far * far fd_50F6_10E2;
+/*
+ * Primary life-tile resource handle, with an EMS upload path.
+ */
 Handle far edit_life_tiles_handle;
+/*
+ * Alternate life-tile resource handle selected for the other flip phase.
+ */
 Handle far edit_life_alt_tiles_handle;
+/*
+ * Terrain tile bitmap handle used by direct and composed tile drawing.
+ */
 Handle far edit_terrain_tiles_handle;
+/*
+ * Tile renderer selector: planar 1, Tandy 2, monochrome 3.
+ */
 int far edit_tile_renderer_kind;

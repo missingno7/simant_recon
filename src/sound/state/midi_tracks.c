@@ -14,5 +14,11 @@
  * Resource/consumer proof: evidence/canonical/shipped-resource-domain/review.md.
  */
 
+/*
+ * Per-track running status; 0x2f marks a finished track.
+ */
 unsigned char far midi_track_status[10];
+/*
+ * Accumulated next-event tick position for each song track.
+ */
 long far midi_track_event_ticks[10];

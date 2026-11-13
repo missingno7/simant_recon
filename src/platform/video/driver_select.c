@@ -20,12 +20,18 @@ char *g_623C[9] = {
     "MCGA/VGA Color", "MCGA/VGA mono", "VGA Color"
 };
 int g_6260 = 0;
+/*
+ * Set after display-driver setup; gates cursor and alert graphics.
+ */
 int gfx_driver_initialized = 0;
 long g_6264[13] = {
     0x222e0L, 0x9c40L, 0xea60L, 0xea60L, 0xea60L, 0xea60L, 0x2e630L, 0xea60L,
     0L, 0L, 0x3a98L, 0x7530L, 0x7530L
 };
 int g_6298 = 0;
+/*
+ * Display-mode indexed filename prefixes for graphics resources.
+ */
 char *gfx_resource_prefixes[9] = {
     "hcega", "mono", "tdyga", "mono", "lcega", "mono", "l256", "mono", "hcega"
 };

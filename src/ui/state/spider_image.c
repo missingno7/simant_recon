@@ -18,4 +18,7 @@ typedef struct SpiderImage {
     unsigned char pixels[6272];
 } SpiderImage;
 
+/*
+ * Bitmap header and pixel workspace for the seven-tile spider area.
+ */
 SpiderImage far spider_composite_bitmap;

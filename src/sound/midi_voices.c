@@ -79,6 +79,9 @@ void (far *g_7544[8])() = {
     0, f_295C_0577, snd_opl_select_instrument, f_295C_0577, f_295C_0577, f_295C_0577, snd_midi_select_program, f_295C_0577
 };
 
+/*
+ * Set the voice velocity scale; 128 represents unity.
+ */
 void far snd_set_voice_volume_scale(int volume)
 {
     g_7502 = volume;
@@ -89,6 +92,9 @@ extern struct Slot far fd_55B3_6B4E[];
 extern void far snd_queue_sample_release(struct Snd far *snd);
 int far snd_choose_voice_by_priority(int type, int prio);
 
+/*
+ * Release finished sampled voices and queue their unpinned sample resources.
+ */
 void far snd_reap_finished_sample_voices(void)
 {
     int i;
@@ -106,6 +112,9 @@ void far snd_reap_finished_sample_voices(void)
     }
 }
 
+/*
+ * Choose a voice by priority then age, reaping completed sampled voices during the scan.
+ */
 int far snd_choose_voice_by_priority(int type, int prio)
 {
     int i;
@@ -143,6 +152,9 @@ int far snd_choose_voice_by_priority(int type, int prio)
 
 extern struct Drv far snd_instrument_descriptors[];
 
+/*
+ * Allocate a voice, update its instrument and start the requested note.
+ */
 void far snd_start_instrument_note(int prio, int dev, int note, int vel)
 {
     int v;
@@ -161,6 +173,9 @@ void far snd_start_instrument_note(int prio, int dev, int note, int vel)
     snd_voice_slots[v].c5 = 0;
 }
 
+/*
+ * Stop every voice assigned to the given instrument and note.
+ */
 void far snd_stop_instrument_note(int dev, int note)
 {
     int i;
@@ -196,6 +211,9 @@ void far snd_stop_assigned_voices(void)
     }
 }
 
+/*
+ * Wait for MPU output readiness and send one data byte.
+ */
 void far snd_mpu_write_data(int value)
 {
     while (snd_port_read_byte(0x331) & 0x40)
@@ -203,6 +221,9 @@ void far snd_mpu_write_data(int value)
     snd_port_write_byte(0x330, value);
 }
 
+/*
+ * Send an MPU command and wait without a timeout for FEh acknowledgement.
+ */
 void far snd_mpu_write_command(int value)
 {
     while (snd_port_read_byte(0x331) & 0x40)
@@ -214,6 +235,9 @@ void far snd_mpu_write_command(int value)
     } while (snd_port_read_byte(0x330) != 0xfe);
 }
 
+/*
+ * Send a melodic MIDI note-on with instrument pitch and velocity offsets.
+ */
 void far snd_midi_note_on(int dev, int a, int b, int c)
 {
     int far *info;
@@ -227,6 +251,9 @@ void far snd_midi_note_on(int dev, int a, int b, int c)
     }
 }
 
+/*
+ * Send a MIDI channel-10 percussion note-on using the instrument key.
+ */
 void far snd_midi_percussion_on(int dev, int a, int b)
 {
     int far *info;
@@ -239,6 +266,9 @@ void far snd_midi_percussion_on(int dev, int a, int b)
     snd_mpu_write_data(b);
 }
 
+/*
+ * Send a melodic MIDI note-off with the instrument pitch offset.
+ */
 void far snd_midi_note_off(int a, int b, int dev)
 {
     snd_mpu_write_command(0xd7);
@@ -247,6 +277,9 @@ void far snd_midi_note_off(int a, int b, int dev)
     snd_mpu_write_data(0);
 }
 
+/*
+ * Send a MIDI channel-10 percussion note-off using the instrument key.
+ */
 void far snd_midi_percussion_off(int a, int b, int dev)
 {
     snd_mpu_write_command(0xd7);
@@ -259,6 +292,9 @@ void far f_295C_0577(void)
 {
 }
 
+/*
+ * Send the instrument program change unless its program is -1.
+ */
 void far snd_midi_select_program(int dev, int a)
 {
     int far *info;

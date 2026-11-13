@@ -29,6 +29,9 @@ extern void (far * near g_9158)(int, int, char far *, int, int);
 extern char near gfx_display_mode;
 extern void (far * near g_9150)(int, int, char far *, int, int);
 
+/*
+ * Return the half-open rectangle outcode: top/bottom 0x80/0x40, left/right 0x20/0x10.
+ */
 int far clip_point_outcode(int x, int y, struct Rect far *r)
 {
     int code;
@@ -130,6 +133,9 @@ mark_out:
     return in;
 }
 
+/*
+ * Split a rectangle list against one rectangle and return the selected output end.
+ */
 struct Rect far * far clip_split_rect_list(struct Rect far *c, struct Rect far *list,
                                   struct Rect far *in, struct Rect far *out)
 {
@@ -157,6 +163,9 @@ struct Rect far * far clip_split_rect_list(struct Rect far *c, struct Rect far *
     return res;
 }
 
+/*
+ * Normalize the rectangle and dispatch each visible piece to the supplied drawing callback.
+ */
 void far clip_dispatch_rect(void (far *fn)(int, int, int, int, int), int unused1, int unused2,
                      int left, int top, int right, int bottom, int color)
 {
@@ -187,6 +196,9 @@ void far clip_dispatch_rect(void (far *fn)(int, int, int, int, int), int unused1
     }
 }
 
+/*
+ * Clip line endpoints to the current rectangle list before calling the raw line driver.
+ */
 void far clip_draw_line(char far *port, int x1, int y1, int x2, int y2, int color)
 {
     long slope;
@@ -252,6 +264,9 @@ void far clip_draw_line(char far *port, int x1, int y1, int x2, int y2, int colo
     }
 }
 
+/*
+ * Draw clipped one-bit rows using indexed pieces; restore both horizontal trims to zero.
+ */
 void far clip_blit_mono_indexed(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int i;
@@ -279,6 +294,10 @@ void far clip_blit_mono_indexed(char far *port, int x, int y, char far *bits, in
     gfx_clip_right_pixels = 0;
 }
 
+/*
+ * Draw clipped planar rows, using four planes in color mode; clear horizontal trims
+ * afterwards.
+ */
 void far clip_blit_planar(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int i;
@@ -308,6 +327,9 @@ void far clip_blit_planar(char far *port, int x, int y, char far *bits, int widt
     gfx_clip_right_pixels = 0;
 }
 
+/*
+ * Draw clipped one-bit rows through the monochrome driver and then clear horizontal trims.
+ */
 void far clip_blit_mono(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;
@@ -335,6 +357,9 @@ void far clip_blit_mono(char far *port, int x, int y, char far *bits, int width,
     gfx_clip_right_pixels = 0;
 }
 
+/*
+ * Draw clipped packed four-bit rows and then clear horizontal trims.
+ */
 void far clip_blit_packed4(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;
@@ -362,6 +387,9 @@ void far clip_blit_packed4(char far *port, int x, int y, char far *bits, int wid
     gfx_clip_right_pixels = 0;
 }
 
+/*
+ * Draw clipped byte-per-pixel rows through the native-color driver; clear trims afterwards.
+ */
 void far clip_blit_bytes(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;
@@ -389,6 +417,9 @@ void far clip_blit_bytes(char far *port, int x, int y, char far *bits, int width
     gfx_clip_right_pixels = 0;
 }
 
+/*
+ * Call the monochrome driver for clipped bands with a source stride of width bytes.
+ */
 void far clip_blit_mono_byte_stride(char far *port, int x, int y, char far *bits, int width, int height)
 {
     int tmp;

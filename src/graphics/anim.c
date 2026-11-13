@@ -82,6 +82,12 @@ static int g_67DA = ~7;
 static int g_67DC = 7;
 static int g_67DE = 8;
 
+/* Insertion/removal interface. Prototype position and parameter names, and the
+ * i/n/id declaration order in AddAnimObject, satisfy this TU's code constraints;
+ * the original declaration layout is unknown. */
+int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri);
+void far hanim_RemoveAnimObject(Handle h, int id);
+
 void far hanim_PrintSet(Handle h, char far *name)
 {
     struct AnimSet far *set;
@@ -193,9 +199,9 @@ int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri)
     Handle objsH;
     struct AnimObj far *objs;
     struct AnimObj far *obj;
+    int i;
     int n;
     int id;
-    int i;
     struct Size size;
     int right;
     int max;
@@ -351,14 +357,10 @@ void far hanim_ShowObject(Handle h, int id)
     mem_Unlock(h);
 }
 
-/* The two prototypes below (named parameters) precede hanim_SetObjectPos, which calls both functions.
- * They add seven identifiers before it: hanim_SetObjectPos's operand order (width-mask comparison,
- * pri = y + size.h) is exact only at this identifier count (see promotion --steered). */
-int far hanim_AddAnimObject(Handle h, int x, int y, int pic, int pri);
-void far hanim_RemoveAnimObject(Handle h, int id);
-
 void far hanim_SetObjectPos(int x, int y, int pic, Handle h, int id, int pri)
 {
+    /* STEERED: only the folded read below retains this zero store and its home.
+     * DOS has the store, but neither witness identifies its original purpose. */
     int reinsert;
     struct AnimSet far *set;
     struct AnimObj far *objs;

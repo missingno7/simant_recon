@@ -10,4 +10,7 @@
  * Minimum mutable Handle slot; referent and physical-alias gates remain open.
  */
 
+/*
+ * Handle to the icon pixel collection indexed by icon number.
+ */
 char far * far * far ui_icon_bitmap_handle;

@@ -12,6 +12,9 @@
 
 struct Rect { int left; int top; int right; int bottom; };
 #define RECT_END ((int)0x8000)
+/*
+ * Full-screen clip rectangle followed by its existing terminator.
+ */
 struct Rect near gfx_screen_clip_list[2] = {
     { 0, 0, 349, 639 },
     { RECT_END, RECT_END, RECT_END, RECT_END }

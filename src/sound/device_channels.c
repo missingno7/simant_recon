@@ -65,6 +65,9 @@ extern int far snd_driver_capabilities[];
 extern int far snd_expand_sample_resource(char far * far *handle, int far *size, int object, int type);
 extern void far db_set_recall_hook(int (far *hook)(char far * far *handle, int far *size, int object, int type));
 
+/*
+ * Initialize the selected sound backend, channel tables, timer and sample hook.
+ */
 int far snd_initialize_device_channels(int mode, int flag)
 {
     if (mode != 7 && !snd_driver_probe_table[mode]())
@@ -91,6 +94,9 @@ int far snd_initialize_device_channels(int mode, int flag)
 
 extern struct Chan far snd_voice_slots[];
 
+/*
+ * Reset all 33 channel records and clear device channel counts.
+ */
 void far snd_reset_channel_tables(void)
 {
     int i;
@@ -113,6 +119,9 @@ void far snd_reset_channel_tables(void)
 
 extern struct Voice far snd_instrument_descriptors[];
 
+/*
+ * Copy 56 instrument descriptors into the driver's dispatch table.
+ */
 void far snd_copy_instrument_table(struct Voice far *src)
 {
     int i;
@@ -127,6 +136,9 @@ extern void far snd_stop_assigned_voices(void);
 extern void far snd_stop_and_release_samples(void);
 extern void far snd_restore_bios_timer(int a);
 
+/*
+ * Stop sound resources, shut down the selected backend and restore the timer.
+ */
 void far snd_shutdown_device_channels(void)
 {
     snd_stop_assigned_voices();
@@ -145,6 +157,9 @@ extern int far snd_sample_output_routine;
 extern int far snd_sample_volume_bias;
 extern struct Voice far fd_55B3_0C42[];
 
+/*
+ * Configure sample channels for PC speaker output and its instrument table.
+ */
 int far snd_init_speaker_channels(void)
 {
     int i;
@@ -168,6 +183,9 @@ extern int far snd_based_dac_output_pointer;
 
 extern struct Voice far fd_55B3_1032[];
 extern struct Voice far fd_55B3_1182[];
+/*
+ * Configure sampled output and three Tandy PSG voices from BIOS information.
+ */
 int far snd_init_tandy_channels(void)
 {
     int i;
@@ -213,6 +231,9 @@ notandy:
 
 extern int far snd_port200_output_pointer;
 
+/*
+ * Configure sample output and three PS/1 PSG voices, enabling port 203h.
+ */
 int far snd_init_ps1_channels(void)
 {
     int i;
@@ -239,6 +260,9 @@ extern int far snd_adlib_output_pointer;
 extern int far snd_opl_volume_bias;
 
 extern struct Voice far fd_55B3_0D92[];
+/*
+ * Configure AdLib sample output and seven OPL voices.
+ */
 int far snd_init_adlib_channels(void)
 {
     int i;
@@ -269,6 +293,9 @@ extern int far snd_sb_dsp_write_port;
 extern unsigned char far snd_port_read_byte(int port);
 extern int far snd_sb_output_pointer;
 
+/*
+ * Configure Sound Blaster sample output, OPL channels and DSP speaker enable.
+ */
 int far snd_init_blaster_channels(void)
 {
     unsigned i;
@@ -305,6 +332,9 @@ extern int far snd_port222_output_pointer;
 extern void far snd_regchip_initialize(int port);
 
 extern struct Voice far fd_55B3_1572[];
+/*
+ * Configure register-chip voices and add OPL voices when detected.
+ */
 int far snd_init_regchip_channels(void)
 {
     int i;
@@ -343,6 +373,9 @@ int far snd_init_regchip_channels(void)
 extern int far snd_lpt_output_pointer;
 
 extern struct Voice far fd_55B3_0EE2[];
+/*
+ * Configure sampled output through the BIOS LPT1 port.
+ */
 int far snd_init_lpt_sample_channels(void)
 {
     int i;
@@ -357,6 +390,9 @@ int far snd_init_lpt_sample_channels(void)
         mov es, bx
         mov bx, 408h
         mov ax, es:[bx]
+        /*
+         * BIOS-selected LPT data port used for sample output.
+         */
         mov snd_lpt_dac_port, ax
         mov dx, snd_lpt_dac_port
         add dx, 2
@@ -375,6 +411,9 @@ extern void far snd_mpu_write_data(int c);
 
 extern struct Voice far fd_55B3_12D2[];
 extern struct Voice far fd_55B3_1422[];
+/*
+ * Configure MIDI channels and reset their controllers through the MPU interface.
+ */
 int far snd_init_midi_channels(void)
 {
     int i;
@@ -420,17 +459,26 @@ void far f_277E_0938(void)
 {
 }
 
+/*
+ * Disable the DSP speaker and reset OPL state.
+ */
 void far snd_shutdown_blaster_output(void)
 {
     snd_port_write_byte(snd_sb_dsp_write_port, 0xd3);
     snd_opl_reset_voices();
 }
 
+/*
+ * Reset OPL state through the backend shutdown hook.
+ */
 void far snd_shutdown_opl_output(void)
 {
     snd_opl_reset_voices();
 }
 
+/*
+ * Clear the PC speaker gate and enable bits at port 61h.
+ */
 void far snd_disable_pc_speaker(void)
 {
     _asm {
@@ -440,6 +488,9 @@ void far snd_disable_pc_speaker(void)
     }
 }
 
+/*
+ * Mask DMA channel 1 and write the register-chip shutdown values at 220h/221h.
+ */
 void far snd_shutdown_regchip_output(void)
 {
     _asm {

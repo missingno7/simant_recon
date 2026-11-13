@@ -7,6 +7,9 @@
  * confidence, not confirmed.
  */
 
+/*
+ * Guards one-time sound setup and later sound/music requests.
+ */
 int snd_interface_initialized = 0;
 
 extern int far snd_requested_driver_mode;
@@ -32,11 +35,17 @@ void far snd_init_driver_once(void)
     snd_interface_initialized = 1;
 }
 
+/*
+ * Emit the music-init diagnostic through WinPrintf.
+ */
 void far snd_log_music_init(void)
 {
     WinPrintf("MUSIC INIT!");
 }
 
+/*
+ * Emit the BEEP diagnostic through WinPrintf.
+ */
 void far snd_log_beep(void)
 {
     WinPrintf("BEEP");
@@ -93,6 +102,9 @@ void far f_00DF_0164(void)
 {
 }
 
+/*
+ * Start configured effect 1 when sound is initialized and the music option is enabled.
+ */
 void far snd_start_effect_one_if_music(void)
 {
     if (snd_interface_initialized && OptionStates[1])

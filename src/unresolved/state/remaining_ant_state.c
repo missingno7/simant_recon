@@ -16,6 +16,9 @@ Pnt far CurQueenPnt;
 Pnt far LastRestPnt;
 Pnt far CurRestPnt;
 int far MeMode;
+/*
+ * Simulation phase, wrapped to six bits by the main loop.
+ */
 int far main_cycle_phase;
 int far fd_50F6_0AA6;
 int far LastEggPlane;

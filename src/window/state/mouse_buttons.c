@@ -11,6 +11,15 @@
  * aggregate; original COMDEF-producing file and allocation order are unproven.
  */
 
+/*
+ * Mouse button/modifier word used by input and button polling.
+ */
 int near mouse_button_state;
+/*
+ * Mouse pointer x coordinate in screen pixels.
+ */
 int near mouse_x_pixels;
+/*
+ * Mouse pointer y coordinate in screen pixels.
+ */
 int near mouse_y_pixels;

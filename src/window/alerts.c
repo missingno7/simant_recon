@@ -70,6 +70,9 @@ void far Punt(char far *format, ...)
 extern int far gfx_driver_initialized;
 extern void (far * near g_9178)(void);
 
+/*
+ * Restore text video mode when the graphics driver is active.
+ */
 void far gfx_restore_text_mode(void)
 {
     if (gfx_driver_initialized)
@@ -79,6 +82,9 @@ void far gfx_restore_text_mode(void)
 extern void far input_remove_hooks(void);
 extern void far mouse_remove_absent_stub(void);
 
+/*
+ * Remove input hooks and invoke the mouse cleanup stub.
+ */
 void far input_shutdown_hooks(void)
 {
     input_remove_hooks();
@@ -135,6 +141,10 @@ extern void far gfx_restore_and_free_rect(struct Rect far *r, char far *buf);
 extern void far win_FlushEvents(void);
 extern void far input_noop_050e(void);
 
+/*
+ * Show a Continue alert, optionally expiring after 540 ticks, and restore the covered
+ * screen.
+ */
 void far ui_show_alert(char far *msg, int timed)
 {
     int x;
@@ -211,6 +221,9 @@ extern unsigned int far _fstrlen(char far *s);
 extern char far * far _fstrncpy(char far *dst, char far *src, unsigned int n);
 extern void far GPutStr(int x, int y, char far *text);
 
+/*
+ * Draw newline-separated message lines centered in a cell rectangle.
+ */
 void far ui_draw_centered_message_lines(struct Rect far *r, int line, char far *text)
 {
     int n;
@@ -239,6 +252,9 @@ void far ui_draw_centered_message_lines(struct Rect far *r, int line, char far *
 
 int far ui_choice_prompt(char far *msg, int set);
 
+/*
+ * Ask for Yes/No confirmation and return true only for Yes.
+ */
 int far ui_confirm_action(char far *what)
 {
     char buf[150];
@@ -347,6 +363,9 @@ done:
 
 /* No reference to this function was found.  It calls gfx_restore_text_mode and returns 1; the
  * parameter list is a hypothesis (none is read). */
+/*
+ * Restore text mode if active, then return 1.
+ */
 int far gfx_restore_text_mode_success(void)
 {
     gfx_restore_text_mode();
@@ -375,6 +394,9 @@ static char far *g_567A[] = {
 
 static int g_56B2 = 12;
 
+/*
+ * Select runtime error text or the current DOS critical-error message.
+ */
 char far * far ui_error_text(int err)
 {
     if (err > sys_nerr || err < 0)
@@ -395,12 +417,18 @@ int far WaitedEnough(long far *timer, int delay)
     return result;
 }
 
+/*
+ * Discard all currently queued BIOS characters.
+ */
 void far kbd_drain_bios_chars(void)
 {
     while (kbd_poll_bios_key())
         kbd_read_bios_char();
 }
 
+/*
+ * Save the covered pixels and draw a centered alert frame; return its saved buffer.
+ */
 char far * far ui_save_and_draw_alert_frame(struct Rect far *r, int width, int height, int timed)
 {
     char far *save;

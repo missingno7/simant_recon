@@ -8,7 +8,19 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
+/*
+ * Horizontal pixels per map cell in the miniature map.
+ */
 int near minimap_x_scale;
+/*
+ * Vertical pixels per map cell in the miniature map.
+ */
 int near minimap_y_scale;
+/*
+ * Life-tile identifier used by the editor tile drawing paths.
+ */
 unsigned near edit_current_life_tile;
+/*
+ * Terrain-tile identifier used by the editor tile drawing paths.
+ */
 unsigned char near edit_current_terrain_tile;

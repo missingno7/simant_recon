@@ -44,6 +44,9 @@ extern char far * near gfx_primary_font_offset;
 extern char far * near gfx_secondary_font;
 extern void far db_UnhookObject(int object, int kind);
 
+/*
+ * Load font objects 14h/15h for the Hercules driver.
+ */
 void far gfx_load_fonts_hercules(void)
 {
     gfx_primary_font_offset = *db_LoadObject(0x14, 9);
@@ -55,6 +58,9 @@ void far gfx_load_fonts_hercules(void)
 extern int far printf(char far *format, ...);
 extern void far Punt(char far *fmt, ...);
 
+/*
+ * Load font objects 14h/13h for the Tandy driver.
+ */
 void far gfx_load_fonts_tandy(void)
 {
     char far * far *p;
@@ -72,6 +78,9 @@ void far gfx_load_fonts_tandy(void)
     db_UnhookObject(0x13, 9);
 }
 
+/*
+ * Load font objects 14h/15h for the 480-line monochrome driver.
+ */
 void far gfx_load_fonts_mono_480(void)
 {
     gfx_primary_font_offset = *db_LoadObject(0x14, 9);
@@ -80,6 +89,9 @@ void far gfx_load_fonts_mono_480(void)
     db_UnhookObject(0x15, 9);
 }
 
+/*
+ * Load font objects 14h/15h for the 350/400-line monochrome drivers.
+ */
 void far gfx_load_fonts_mono_350_400(void)
 {
     gfx_primary_font_offset = *db_LoadObject(0x14, 9);
@@ -90,6 +102,9 @@ void far gfx_load_fonts_mono_350_400(void)
 
 extern void far WinPrintf(char far *fmt, ...);
 
+/*
+ * Install font object 13h for the 320-pixel planar driver if available.
+ */
 void far gfx_load_font_planar_320(void)
 {
     char far * far *p;
@@ -106,6 +121,9 @@ void far o20_39C7_0211(void)
 {
 }
 
+/*
+ * Load font objects 14h/13h for the 256-colour VGA driver.
+ */
 void far gfx_load_fonts_vga256(void)
 {
     char far * far *p;

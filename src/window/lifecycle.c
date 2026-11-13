@@ -319,6 +319,9 @@ void _fastcall win_ToTop(int win)
 extern void far clip_lower_window(int win);
 extern void _fastcall win_redraw_rect(struct Rect far *rect);
 
+/*
+ * Lower a window, or close an auto-dismiss front window, then update affected drawing.
+ */
 void _fastcall win_lower_or_dismiss(int win)
 {
     int flag;
@@ -371,11 +374,17 @@ void _fastcall win_set_before_close_hook(void (far *hook)(int))
     g_62F4 = hook;
 }
 
+/*
+ * Install the callback run before window-stack drawing transitions.
+ */
 void _fastcall win_set_before_update_hook(void (far *hook)(void))
 {
     g_62E4 = hook;
 }
 
+/*
+ * Install the callback run after window-stack drawing transitions.
+ */
 void _fastcall win_set_after_update_hook(void (far *hook)(void))
 {
     g_62E8 = hook;
@@ -403,6 +412,9 @@ extern int far win_any_window_open(void);
  * o, and four fewer identifiers before this function than our named prototypes give. The four
  * parameter names left out above (the three hook parameter lists and win_ObjAddr) stand for that
  * count; which original declarations made it up is unknown.
+ */
+/*
+ * Set absolute object bounds by recomputing its layout offsets, including self-references.
  */
 void _fastcall win_set_obj_absolute_rect(int obj, int far *rect)
 {

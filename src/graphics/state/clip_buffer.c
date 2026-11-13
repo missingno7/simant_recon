@@ -11,4 +11,7 @@
  */
 
 struct Rect { int left; int top; int right; int bottom; };
+/*
+ * Mutable rectangle workspace used for clipping operations.
+ */
 struct Rect far clip_rectangle_workspace[256];

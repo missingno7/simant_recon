@@ -364,6 +364,9 @@ void _fastcall win_MakeGroupInvisible(int win, int group)
     win_SetGroupVisibleState(win, group, 0);
 }
 
+/*
+ * Replace the text after the object's last space; do nothing when no space exists.
+ */
 void _fastcall win_replace_obj_text_suffix(int obj, char far *text)
 {
     char far *p;
@@ -471,6 +474,9 @@ int _fastcall win_SetPalette(int id)
     db_ReleaseObject(id, 0xf);
 }
 
+/*
+ * Set the object's primary color-table index; the caller must hold its window lock.
+ */
 void _fastcall win_set_obj_colour_index(int obj, int color)
 {
     win_ObjAddr(obj)[0x26] = color;
@@ -533,6 +539,9 @@ int _fastcall win_is_zoomed(int win)
     return r;
 }
 
+/*
+ * Return whether the object is selectable.
+ */
 int _fastcall win_is_obj_selectable(int obj)
 {
     int r;
@@ -543,6 +552,9 @@ int _fastcall win_is_obj_selectable(int obj)
     return r;
 }
 
+/*
+ * Return the number of objects in a window resource.
+ */
 int _fastcall win_object_count(int win)
 {
     int n;
@@ -579,6 +591,9 @@ int _fastcall win_clear_flag_0040(int win)
     return r;
 }
 
+/*
+ * Copy rectangle bounds with independent offsets for all four edges.
+ */
 void _fastcall win_offset_rect_edges(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b)
 {
     dst->left = src->left + l;
@@ -639,6 +654,9 @@ void far win_ClearObjToEOL(int obj)
     win_UnlockWin(obj);
 }
 
+/*
+ * Fill the object's rectangle using its primary color's color-mode background entry.
+ */
 void far win_clear_obj_rect(int obj)
 {
     struct Rect r;

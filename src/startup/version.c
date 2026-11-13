@@ -12,4 +12,7 @@
  * the original file time is unknown, so the version stamp is spelled out.
  */
 
+/*
+ * DOS build version and timestamp displayed by the event handler.
+ */
 char dos_version_string[] = "Ver 1.00 Fri Dec 06 14:51:14 1991";

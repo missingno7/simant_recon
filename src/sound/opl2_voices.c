@@ -12,13 +12,28 @@ struct Instr {
     unsigned char far *p;
 };
 
+/*
+ * First OPL operator index for each voice.
+ */
 char opl_modulator_indices[] = { 0, 1, 2, 6, 7, 8, 12, 13, 14 };
+/*
+ * Second OPL operator index for each voice.
+ */
 char opl_carrier_indices[] = { 3, 4, 5, 9, 10, 11, 15, 16, 17 };
+/*
+ * OPL operator index to hardware register-offset translation.
+ */
 char opl_operator_register_offsets[] = { 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21 };
+/*
+ * Twelve OPL frequency numbers indexed by note modulo twelve.
+ */
 int opl_semitone_f_numbers[] = { 0x157, 0x16b, 0x181, 0x198, 0x1b0, 0x1ca, 0x1e5, 0x202, 0x220, 0x241, 0x263, 0x287 };
 
 extern void far snd_opl_write(char reg, char value);
 
+/*
+ * Write both operators and feedback settings from an instrument record to an OPL voice.
+ */
 void far snd_opl_write_instrument(char far *p, int voice)
 {
     char op1;
@@ -39,6 +54,9 @@ void far snd_opl_write_instrument(char far *p, int voice)
     snd_opl_write(voice + 0xc0, p[8]);
 }
 
+/*
+ * Reset OPL control state and clear the eight voice high-frequency/key registers.
+ */
 void far snd_opl_reset_voices(void)
 {
     int i;
@@ -63,6 +81,9 @@ extern int far snd_opl_volume_curve[];
  * The comparison of the unsigned parameter with zero is always true and produces no
  * code, but the original keeps the two volume additions apart exactly as this test
  * does. That the test was written on this parameter is a hypothesis. */
+/*
+ * Set OPL carrier attenuation and the instrument-transposed note frequency.
+ */
 void far snd_opl_set_note_level(int instr, int note, unsigned vol, int voice)
 {
     unsigned char far *p;
@@ -89,12 +110,18 @@ void far snd_opl_set_note_level(int instr, int note, unsigned vol, int voice)
 }
 
 
+/*
+ * Clear a voice's OPL frequency and key-on registers.
+ */
 void far snd_opl_clear_voice_pitch(int a, int voice)
 {
     snd_opl_write(voice + 0xa0, 0);
     snd_opl_write(voice + 0xb0, 0);
 }
 
+/*
+ * Load an instrument record into the selected OPL voice.
+ */
 void far snd_opl_select_instrument(int instr, int voice)
 {
     snd_opl_write_instrument(snd_instrument_descriptors[instr].p, voice);

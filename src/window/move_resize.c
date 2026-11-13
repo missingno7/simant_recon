@@ -157,6 +157,9 @@ void _fastcall win_toggle_zoom(int win)
 
 extern void _fastcall win_offset_rect_edges(struct Rect far *dst, struct Rect far *src, int l, int t, int r, int b);
 
+/*
+ * Constrain a move/resize rectangle to window limits and grid increments.
+ */
 void _fastcall win_constrain_drag_rect(int win, int mode, struct Rect far *r)
 {
     struct Rect far *wr;
@@ -226,6 +229,9 @@ extern void _fastcall win_redraw_exposed_windows(struct Rect far *rect);
 extern int far StillDown(void);
 extern void far win_FlushEvents(void);
 
+/*
+ * Track front-window dragging, update its origin, and rebuild drawing and pointer regions.
+ */
 void _fastcall win_track_move(struct Event far *ev)
 {
     int win;
@@ -297,6 +303,9 @@ void _fastcall win_track_move(struct Event far *ev)
 extern int far input_get_object_hit_rect(int id, struct Rect far *r);
 extern void far Punt(char far *fmt, ...);
 
+/*
+ * Track front-window resizing, enforce limits, and rebuild drawing and pointer regions.
+ */
 void _fastcall win_track_resize(struct Event far *ev)
 {
     int win;

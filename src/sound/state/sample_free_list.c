@@ -10,4 +10,7 @@
 
 struct Sample;
 
+/*
+ * Loaded sample pointers visited by deferred sample cleanup.
+ */
 struct Sample far * far snd_sample_release_list[39];

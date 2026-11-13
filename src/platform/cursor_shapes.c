@@ -14,17 +14,38 @@ Handle g_3D06 = 0;
 int g_3D0A = -1;
 int g_3D0C = 0;
 int g_3D0E = 0;
+/*
+ * Custom cursor image handle loaded from resource kind eight.
+ */
 Handle cursor_custom_image_handle = 0;
+/*
+ * Custom cursor mask handle loaded from resource kind seven.
+ */
 Handle cursor_custom_mask_handle = 0;
+/*
+ * Second custom cursor image handle loaded from resource kind eight.
+ */
 Handle cursor_alternate_image_handle = 0;
+/*
+ * Mask paired with the second custom cursor image handle.
+ */
 Handle cursor_alternate_mask_handle = 0;
 
+/*
+ * Six resource-kind-seven cursor mask handles.
+ */
 Handle near cursor_mask_handles[6];
+/*
+ * Six resource-kind-eight cursor image handles.
+ */
 Handle near cursor_image_handles[6];
 
 extern Handle far db_LoadObject(int object, int kind);
 extern void far db_UnhookObject(int object, int kind);
 
+/*
+ * Load and unhook six built-in cursor image/mask pairs once.
+ */
 void far mouse_load_builtin_cursor_pairs(void)
 {
     int i;
@@ -49,10 +70,16 @@ void far f_1B28_0069(void)
 }
 
 extern int far gfx_driver_initialized;
+/*
+ * Most recent requested cursor shape other than shape one.
+ */
 int near cursor_nonwait_shape;
 extern void far mouse_set_cursor_bitmaps(char far *image, char far *mask);
 extern void far mouse_show_cursor(void);
 
+/*
+ * Select a cursor pair and show it; -1 reuses the current pair.
+ */
 int far mouse_select_cursor_shape(int shape)
 {
     Handle mask;

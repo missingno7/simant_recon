@@ -8,4 +8,7 @@
  * Build profile: msc600ax; /AL /Os /Gs.
  */
 
+/*
+ * Most recent save/load pathname; original buffer extent remains uncertain.
+ */
 char far save_last_filename[100];

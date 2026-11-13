@@ -45,5 +45,11 @@ unsigned far triWidthR;
 struct TriPoints far modeVerts;
 struct TriPoints far casteVerts;
 long far leftYSlope;
+/*
+ * Mode triangle point before subtracting half the knob dimensions.
+ */
 struct Pt far mode_knob_center;
+/*
+ * Caste triangle point before subtracting half the knob dimensions.
+ */
 struct Pt far caste_knob_center;

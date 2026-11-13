@@ -18,5 +18,11 @@ struct Event {
     int code;
     int xE;
 };
+/*
+ * Event popped from the input queue and processed by the window dispatcher.
+ */
 struct Event far window_current_event;
+/*
+ * Prior dispatched event used for rapid-repeat detection.
+ */
 struct Event far window_previous_event;

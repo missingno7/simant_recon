@@ -145,6 +145,9 @@ static struct Sample s_whistle = { 0, 0, 0, 0, 5, -4, 0, "whistle.adp", 52 };
 static struct Sample s_keys = { 0, 0, 0, 0, 5, 0, 0, "keys.adp", 53 };
 static struct Sample s_ooohs = { 0, 0, 0, 0, 5, -19, 0, "ooohs.adp", 54 };
 
+/*
+ * Four-parameter sound-effect entries passed to the note starter.
+ */
 struct SfxNote snd_effect_note_table[56] = {
     { 60, 3, 0, 127 }, { 60, 3, 1, 127 }, { 60, 3, 2, 127 }, { 60, 3, 3, 127 }, { 60, 3, 4, 127 }, { 60, 3, 5, 127 },
     { 60, 3, 6, 127 }, { 60, 3, 7, 127 }, { 60, 3, 8, 127 }, { 60, 3, 9, 127 }, { 60, 3, 10, 127 }, { 60, 3, 11, 127 },

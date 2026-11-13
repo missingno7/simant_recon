@@ -9,26 +9,41 @@
  * The C function bodies use MSC inline assembly.
  */
 
+/*
+ * Disable interrupts around sample state changes; does not save FLAGS.
+ */
 void far snd_sample_interrupts_disable(void)
 {
     _asm cli
 }
 
+/*
+ * Enable interrupts after sample state changes; does not restore FLAGS.
+ */
 void far snd_sample_interrupts_enable(void)
 {
     _asm sti
 }
 
+/*
+ * Disable interrupts for sound control updates; does not save FLAGS.
+ */
 void far snd_control_interrupts_disable(void)
 {
     _asm cli
 }
 
+/*
+ * Enable interrupts after sound control updates; does not restore FLAGS.
+ */
 void far snd_control_interrupts_enable(void)
 {
     _asm sti
 }
 
+/*
+ * Write the low byte of value to the specified I/O port.
+ */
 void far snd_port_write_byte(int port, int value)
 {
     _asm {
@@ -38,6 +53,9 @@ void far snd_port_write_byte(int port, int value)
     }
 }
 
+/*
+ * Read one byte from the specified I/O port.
+ */
 unsigned char far snd_port_read_byte(int port)
 {
     unsigned char value;

@@ -92,6 +92,9 @@ extern int far ui_pending_menu_item;
 extern char far fd_55B3_2CBA;
 void far ui_pump_events_edge_scroll(void);
 
+/*
+ * Pump events and edge scrolling at two-tick intervals when no menu action is pending.
+ */
 void far ui_pump_events_periodically(void)
 {
     if (WaitedEnough(&g_8BA4, 2) && ui_pending_menu_item == 0) {
@@ -272,6 +275,9 @@ int far f_00F8_040F(void)
     return 0;
 }
 
+/*
+ * Flush queued window events through the window-system helper.
+ */
 void far ui_flush_window_events(void)
 {
     win_FlushEvents();
@@ -332,6 +338,9 @@ void far OpenMapYard(int unused)
 extern char far *far yardBalloon;
 extern char far *far fd_55B3_2A3A;
 
+/*
+ * Resolve dynamic type-2 objects 30000/30001; other requests return null.
+ */
 char far * far res_lookup_dynamic_balloon(int object, int type)
 {
     if (type == 2) {

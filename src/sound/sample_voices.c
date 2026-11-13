@@ -39,9 +39,15 @@ void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, in
 void far snd_start_sample_note(int instr, int note, int vol, int ch);
 void far snd_stop_sample_voice(int a, int ch);
 
+/*
+ * Signed device-dependent adjustment to sample playback volume.
+ */
 int snd_sample_volume_bias = 0;
 unsigned g_74C2[] = { 0x100, 0x10f, 0x11f, 0x130, 0x142, 0x155, 0x169, 0x17f, 0x196, 0x1ae, 0x1c8, 0x1e3 };
 
+/*
+ * Expand nibble-indexed deltas into cumulative 8-bit samples starting at 80h.
+ */
 char far *snd_decode_delta_nibbles(unsigned char far *src, char far *dst, unsigned n)
 {
     char delta[16];
@@ -73,6 +79,9 @@ extern void far snd_sample_interrupts_enable(void);
 extern unsigned far snd_volume_table_offset;
 extern void far snd_start_sample_timer(void);
 
+/*
+ * Initialize one sampled voice and start its timer; avoid loading inside the sequencer.
+ */
 void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, int ch)
 {
     struct SndChan far *c;
@@ -106,6 +115,9 @@ void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, in
 extern void far snd_queue_sample_release(struct Sample far *s);
 extern struct Instr far snd_instrument_descriptors[];
 
+/*
+ * Convert instrument note and volume into sample step/attenuation and start the voice.
+ */
 void far snd_start_sample_note(int instr, int note, int vol, int ch)
 {
     struct Sample far *s;
@@ -134,6 +146,9 @@ void far snd_start_sample_note(int instr, int note, int vol, int ch)
     snd_start_sample_voice(s, step, (0x7f - vol) >> 4, ch);
 }
 
+/*
+ * Stop a sampled voice and queue its unpinned owner for release.
+ */
 void far snd_stop_sample_voice(int a, int ch)
 {
     struct Sample far *s;

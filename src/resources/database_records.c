@@ -69,6 +69,9 @@ int far f_19A9_0008(char far * far *handle, int far *size, int object, int type)
     return 0;
 }
 
+/*
+ * Install the callback invoked after a database record is recalled.
+ */
 void far db_set_recall_hook(int (far *hook)(char far * far *handle, int far *size, int object, int type))
 {
     g_36F2 = hook;
