@@ -28212,6 +28212,18 @@
    ],
    "name_kind": "recovered"
   },
+  "casteVerts": {
+   "seg": 20726,
+   "off": 14370,
+   "grounding": "UpdateCasteWindow (root:0798 (control-triangle unit)): far address 50F6:3822 passed as the caste triangle points (6 ints)",
+   "history": [
+    {
+     "was": "fd_50F6_3822",
+     "why": "Win16 _casteVerts at 0009:A090: DOS root:0798:00A0 passes 50F6:3822 to InitTriVars with object 130D, then again at 00BB to SetTriLatPoint; Win16 0001:B3C7 selects 130D and B433 writes the apex at PACK:A090, with the other two vertices in the following ten bytes. The same three-vertex geometry distinguishes it from modeVerts. Independent spacing check: Win16 next-symbol distance 12 bytes equals DOS next-registered-base distance 12; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU. See build/workers/communal-rest/decisions.json root:50F6:3822."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "curFontPtr": {
    "seg": 21939,
    "off": 26020,
@@ -28969,21 +28981,6 @@
    "off": 14356,
    "alias_of": "triWidth"
   },
-  "fd_50F6_3816": {
-   "seg": 20726,
-   "off": 14358,
-   "grounding": "UpdateModeWindow (root:0798 (control-triangle unit)): far address 50F6:3816 passed as the mode triangle points (6 ints)"
-  },
-  "fd_50F6_3822": {
-   "seg": 20726,
-   "off": 14370,
-   "grounding": "UpdateCasteWindow (root:0798 (control-triangle unit)): far address 50F6:3822 passed as the caste triangle points (6 ints)"
-  },
-  "fd_50F6_382E": {
-   "seg": 20726,
-   "off": 14382,
-   "grounding": "InitTriVars (root:0798 (control-triangle unit)): long es:[382E] = (half<<8)/height"
-  },
   "fd_50F6_3832": {
    "seg": 20726,
    "off": 14386,
@@ -28998,16 +28995,6 @@
    "seg": 20726,
    "off": 14394,
    "grounding": "o06_35F5_11FF: mov es,[CONST 84E8 = 50F6]; es:[383A] (S06:35F5 InitSimYard/yard sim unit)"
-  },
-  "fd_50F6_3842": {
-   "seg": 20726,
-   "off": 14402,
-   "grounding": "S04 Mini_DrawMapI: win_GetObjRect(0x1401, 50F6:3842) then es:[3844]/[3846]/[3848] -> mini map window rect (Win16 miniMapRect)"
-  },
-  "fd_50F6_384A": {
-   "seg": 20726,
-   "off": 14410,
-   "grounding": "S04 DrawMiniMapCursor: es:[384A]/[384C]/[384E]/[3850] computed then f_1CE2_0410(50F6:384A, 1) -> mini map cursor rect (Win16 miniMapCursorRect)"
   },
   "fd_50F6_3852": {
    "seg": 20726,
@@ -31063,6 +31050,18 @@
     }
    ]
   },
+  "leftYSlope": {
+   "seg": 20726,
+   "off": 14382,
+   "grounding": "InitTriVars (root:0798 (control-triangle unit)): long es:[382E] = (half<<8)/height",
+   "history": [
+    {
+     "was": "fd_50F6_382E",
+     "why": "Win16 _leftYSlope at 0009:9FC0: DOS root:0798:0000..0066 and Win16 0001:B324..B38A derive half width and height from win_GetObjRect, then compute (half_width << 8) / height. DOS 0062/0066 stores DX:AX at 382E/3830; Windows B386/B38A stores it at PACK:9FC0/9FC2. The two-word stored quotient and matched expression independently distinguish this scalar from the vertex arrays. Independent spacing check: Win16 next-symbol distance 4 bytes equals DOS next-registered-base distance 4; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU. See build/workers/communal-rest/decisions.json root:50F6:382E."
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "mapCursorRect": {
    "seg": 20726,
    "off": 14530,
@@ -31107,6 +31106,30 @@
     {
      "was": "fd_50F6_3858",
      "why": "Win16 symbol _mapYsize (evidence/cross_version/data-alignment, tier A): same reference position in DrawMapCursor; 5 shared users among 5 DOS and 8 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "miniMapCursorRect": {
+   "seg": 20726,
+   "off": 14410,
+   "grounding": "S04 DrawMiniMapCursor: es:[384A]/[384C]/[384E]/[3850] computed then f_1CE2_0410(50F6:384A, 1) -> mini map cursor rect (Win16 miniMapCursorRect)",
+   "history": [
+    {
+     "was": "fd_50F6_384A",
+     "why": "Win16 _miniMapCursorRect at 0009:78E0: DrawMiniMapCursor writes all four words at DOS S04:35F5:08E8/0927/0941 and surrounding stores, versus Win16 0003:E87A/E88A/E8B8/E8C8 at PACK:78E0..78E6. The same rectangle is passed with width 1 to the outline routine (DOS 094A..094F, Windows E8DE..E8E1) and again by EraseMiniMapCursor (DOS 0969, Windows E907). Selector-pool relocations resolve to PACK (9). Independent spacing check: Win16 next-symbol distance 8 bytes equals DOS next-registered-base distance 8; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU. See build/workers/communal-rest/decisions.json root:50F6:384A."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "miniMapRect": {
+   "seg": 20726,
+   "off": 14402,
+   "grounding": "S04 Mini_DrawMapI: win_GetObjRect(0x1401, 50F6:3842) then es:[3844]/[3846]/[3848] -> mini map window rect (Win16 miniMapRect)",
+   "history": [
+    {
+     "was": "fd_50F6_3842",
+     "why": "Win16 _miniMapRect at 0009:7EF6: same reference position in DrawMiniMapCursor; used by the same 3 function pairs. Independent spacing check: Win16 next-symbol distance 8 bytes equals DOS next-registered-base distance 8; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU. See build/workers/communal-rest/decisions.json root:50F6:3842."
     }
    ],
    "name_kind": "recovered"
@@ -31178,6 +31201,18 @@
     {
      "was": "fd_3D57_0810",
      "why": "Win16 symbol _modeSetLevels (evidence/cross_version/data-alignment, tier A): save record index 77 of 307, same element size and count; same reference position in initControls; 24 initial bytes agree exactly."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "modeVerts": {
+   "seg": 20726,
+   "off": 14358,
+   "grounding": "UpdateModeWindow (root:0798 (control-triangle unit)): far address 50F6:3816 passed as the mode triangle points (6 ints)",
+   "history": [
+    {
+     "was": "fd_50F6_3816",
+     "why": "Win16 _modeVerts at 0009:80F8: DOS root:0798:00DE passes 50F6:3816 to InitTriVars with object 120D, then again at 00F9 to SetTriLatPoint; Win16 0001:B5BB selects 120D and B627 writes the apex at PACK:80F8, with the other two vertices in the following ten bytes. The six-word geometry produced from width/height is the same in the original instructions. Independent spacing check: Win16 next-symbol distance 12 bytes equals DOS next-registered-base distance 12; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU. See build/workers/communal-rest/decisions.json root:50F6:3816."
     }
    ],
    "name_kind": "recovered"

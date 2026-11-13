@@ -56,7 +56,7 @@ extern unsigned far triWidth;
 extern unsigned far triWidthR;
 extern unsigned far triWidthL;
 extern unsigned far triHeight;
-extern long far fd_50F6_382E;
+extern long far leftYSlope;
 
 void far InitTriVars(int obj, struct TriPoints far *tri)
 {
@@ -69,7 +69,7 @@ void far InitTriVars(int obj, struct TriPoints far *tri)
     triWidthR = half;
     triWidthL = half;
     triHeight = rect.bottom - rect.top;
-    fd_50F6_382E = ((long)half << 8) / (long)triHeight;
+    leftYSlope = ((long)half << 8) / (long)triHeight;
     tri->apexX = half + rect.left;
     tri->apexY = rect.top;
     tri->leftY = tri->rightY = rect.bottom;
@@ -77,7 +77,7 @@ void far InitTriVars(int obj, struct TriPoints far *tri)
     tri->rightX = rect.right;
 }
 
-extern struct TriPoints far fd_50F6_3822;
+extern struct TriPoints far casteVerts;
 void far SetTriLatPoint(struct TriLevel far *level, struct TriPoints far *tri, struct Pt far *out);
 extern struct TriLevel far casteLevels;
 extern struct Pt far fd_50F6_022E;
@@ -85,20 +85,20 @@ void far win_CasteControlClosed(void);
 
 void far win_CasteControlChanged(void)
 {
-    InitTriVars(0x130d, &fd_50F6_3822);
-    SetTriLatPoint(&casteLevels, &fd_50F6_3822, &fd_50F6_022E);
+    InitTriVars(0x130d, &casteVerts);
+    SetTriLatPoint(&casteLevels, &casteVerts, &fd_50F6_022E);
     win_CasteControlClosed();
 }
 
-extern struct TriPoints far fd_50F6_3816;
+extern struct TriPoints far modeVerts;
 extern struct TriLevel far modeLevels;
 extern struct Pt far fd_50F6_0358;
 void far win_ModeControlClosed(void);
 
 void far win_ModeControlChanged(void)
 {
-    InitTriVars(0x120d, &fd_50F6_3816);
-    SetTriLatPoint(&modeLevels, &fd_50F6_3816, &fd_50F6_0358);
+    InitTriVars(0x120d, &modeVerts);
+    SetTriLatPoint(&modeLevels, &modeVerts, &fd_50F6_0358);
     win_ModeControlClosed();
 }
 
@@ -181,7 +181,7 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
             if (_fmemcmp(&last, &msg->pt, 4)) {
                 last = msg->pt;
                 BoundPointToTri(&msg->pt, &rect);
-                GetTriLatDist(&casteLevels, &fd_50F6_3822, &msg->pt);
+                GetTriLatDist(&casteLevels, &casteVerts, &msg->pt);
                 win_DrawCasteWindow(3);
             }
             GetMousePos(&msg->pt);
@@ -249,7 +249,7 @@ void far ProcModeEvent(struct CtlMsg far *msg)
             if (_fmemcmp(&last, &msg->pt, 4)) {
                 last = msg->pt;
                 BoundPointToTri(&msg->pt, &rect);
-                GetTriLatDist(&modeLevels, &fd_50F6_3816, &msg->pt);
+                GetTriLatDist(&modeLevels, &modeVerts, &msg->pt);
                 win_DrawModeWindow(3);
             }
             GetMousePos(&msg->pt);
@@ -344,7 +344,7 @@ void far win_DrawModeWindow(int flags)
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1200, 0, g_1B62);
-    SetTriLatPoint(&modeLevels, &fd_50F6_3816, &fd_50F6_0358);
+    SetTriLatPoint(&modeLevels, &modeVerts, &fd_50F6_0358);
     if (!modeAnimHandle) {
         modeAnimHandle = hanim_MakeAnimSet();
         fd_50F6_37FC = hanim_AddAnimObject(modeAnimHandle, fd_50F6_0358.x - knobSize.x / 2,
@@ -377,7 +377,7 @@ void far win_DrawCasteWindow(int flags)
     if (!(flags & 2))
         return;
     DrawControlLevels(0x1300, 0, g_1B64);
-    SetTriLatPoint(&casteLevels, &fd_50F6_3822, &fd_50F6_022E);
+    SetTriLatPoint(&casteLevels, &casteVerts, &fd_50F6_022E);
     if (!casteAnimHandle) {
         casteAnimHandle = hanim_MakeAnimSet();
         fd_50F6_37FA = hanim_AddAnimObject(casteAnimHandle, fd_50F6_022E.x - knobSize.x / 2,

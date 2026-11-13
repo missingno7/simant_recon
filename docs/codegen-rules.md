@@ -306,7 +306,11 @@ that remain open and the freshly compiled execution controls.
   linker half is a hypothesis. The 45 objects without a name get a bucket and a checksum
   interval that a proposed name must satisfy. Applied 2026-11-13: 35 of the 37 Tier B data-alignment
   proposals fit the run and the Win16 object size and are recorded as CONFIRMED; FracSineTab
-  and EggBalloonIndex fit the run but not the size and stay address-named. The order is unrelated to the relocation
+  and EggBalloonIndex fit the run but not the size and stay address-named. The other far communal data at 50F6 shows
+  no further emission run (10 checksum runs where a shuffle gives 11.5; worker communal-rest,
+  `build/workers/communal-rest/`); five names there were applied on usage plus a size match
+  above 2 bytes, six 2-byte proposals stay open because equal spacing does not discriminate
+  (editHeight and editWidth could also be swapped). The order is unrelated to the relocation
   target order and to the Windows build's order. The other 107 far objects and the 18 near
   ones are outside this fit.
 * **A function definition takes a declaration number too, and unowned bytes can be whole

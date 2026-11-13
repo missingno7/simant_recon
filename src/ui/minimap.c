@@ -85,7 +85,7 @@ extern void far gfx_planar_map128_pack8(char far *src, char far *dst);
 extern void far Windows_MakeTable1x1(char far *src, char far *dst, int mult);
 extern void far WindowsMono_MakeTable2x2b(char far *src, char far *dst, int y);
 extern void far WindowsMono_MakeTable2x2a(char far *src, char far *dst, int y);
-extern struct Rect far fd_50F6_3842;
+extern struct Rect far miniMapRect;
 extern int far fd_50F6_3852;
 extern int far fd_55B3_2996;
 extern char far * far mem_Alloc(long size, int flag, char far *name);
@@ -113,7 +113,7 @@ extern void _fastcall win_Close(int win);
 extern void far OpenMapYard(void);
 extern int _fastcall win_GetEvent(struct Event far *);
 extern void far win_FlushEvents(void);
-extern struct Rect far fd_50F6_384A;
+extern struct Rect far miniMapCursorRect;
 extern int far fd_50F6_10DE;
 extern int far fd_50F6_10E0;
 extern void far f_1CE2_0410(struct Rect far *r, int width);
@@ -261,7 +261,7 @@ void far Mini_DrawMapI(void)
     int y;
     int n;
 
-    win_GetObjRect(0x1401, &fd_50F6_3842);
+    win_GetObjRect(0x1401, &miniMapRect);
     multiplier = 0x80;
     fd_50F6_3852 = 0;
     if (fd_55B3_2996 == 0) {
@@ -292,17 +292,17 @@ void far Mini_DrawMapI(void)
         map_expand_scent_colours(PherMapA);
         break;
     }
-    (*g_9134)(fd_50F6_3842.left, fd_50F6_3842.top, fd_50F6_3842.left + fd_50F6_3852,
-              fd_50F6_3842.bottom, ConvColor(15));
-    (*g_9134)(fd_50F6_3842.right - fd_50F6_3852 - 1, fd_50F6_3842.top, fd_50F6_3842.right,
-              fd_50F6_3842.bottom, ConvColor(15));
+    (*g_9134)(miniMapRect.left, miniMapRect.top, miniMapRect.left + fd_50F6_3852,
+              miniMapRect.bottom, ConvColor(15));
+    (*g_9134)(miniMapRect.right - fd_50F6_3852 - 1, miniMapRect.top, miniMapRect.right,
+              miniMapRect.bottom, ConvColor(15));
     table = mem_Lock(fd_50F6_385A);
     line = mem_Lock(fd_50F6_385E);
     n = 64;
-    y = fd_50F6_3842.top;
+    y = miniMapRect.top;
     for (i = 0; i < n; i++, y += g_8BD4) {
         Mini_MakeTable(table + multiplier * i, line, y);
-        (*g_914C)(fd_50F6_3842.left + fd_50F6_3852, y, line, multiplier * g_8BD2, g_8BD4);
+        (*g_914C)(miniMapRect.left + fd_50F6_3852, y, line, multiplier * g_8BD2, g_8BD4);
     }
     mem_Unlock(fd_50F6_385E);
     mem_Unlock(fd_50F6_385A);
@@ -331,7 +331,7 @@ void far OpenMiniMapWin(void)
         while (f_00F8_02AC())
             ;
         GetMousePos(&pt);
-        if (PointInRect(&pt, &fd_50F6_3842)) {
+        if (PointInRect(&pt, &miniMapRect)) {
             win_Close(0x1400);
             OpenMapYard();
             return;
@@ -339,16 +339,16 @@ void far OpenMiniMapWin(void)
     }
     while (win_IsWinOpen(0x1400)) {
         if (!win_GetEvent(&ev) || !win_IsWinOpen(0x1400) ||
-            !PointInRect((struct Pt far *)&ev.h, &fd_50F6_3842))
+            !PointInRect((struct Pt far *)&ev.h, &miniMapRect))
             continue;
         pt.x = (int)0x8000;
         do {
             if (pt.x != ev.h || pt.y != ev.v) {
                 pt = *(struct Pt far *)&ev.h;
-                x = (ev.h - fd_50F6_3842.left) / g_8BD2;
+                x = (ev.h - miniMapRect.left) / g_8BD2;
                 if (multiplier == 0x40)
                     x -= 0x20;
-                y = (ev.v - fd_50F6_3842.top) / g_8BD4;
+                y = (ev.v - miniMapRect.top) / g_8BD4;
                 if (x >= 0 && x < multiplier) {
                     EraseMiniMapCursor();
                     EraseMapCursor();
@@ -367,16 +367,16 @@ void far OpenMiniMapWin(void)
 
 void far DrawMiniMapCursor(void)
 {
-    fd_50F6_384A.left = MapPnt[0] * g_8BD2 + fd_50F6_3842.left + fd_50F6_3852;
-    fd_50F6_384A.top = MapPnt[1] * g_8BD4 + fd_50F6_3842.top;
-    fd_50F6_384A.bottom = fd_50F6_384A.top + fd_50F6_10DE * g_8BD4;
-    fd_50F6_384A.right = fd_50F6_384A.left + fd_50F6_10E0 * g_8BD2;
-    f_1CE2_0410(&fd_50F6_384A, 1);
+    miniMapCursorRect.left = MapPnt[0] * g_8BD2 + miniMapRect.left + fd_50F6_3852;
+    miniMapCursorRect.top = MapPnt[1] * g_8BD4 + miniMapRect.top;
+    miniMapCursorRect.bottom = miniMapCursorRect.top + fd_50F6_10DE * g_8BD4;
+    miniMapCursorRect.right = miniMapCursorRect.left + fd_50F6_10E0 * g_8BD2;
+    f_1CE2_0410(&miniMapCursorRect, 1);
     miniCursorOn = 1;
 }
 
 void far EraseMiniMapCursor(void)
 {
-    f_1CE2_0410(&fd_50F6_384A, 1);
+    f_1CE2_0410(&miniMapCursorRect, 1);
     miniCursorOn = 0;
 }

@@ -10487,6 +10487,56 @@
     "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
    ],
    "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:3816": {
+   "win16": "_modeVerts",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "original instruction witnesses (usage.json): DOS root:0798:00DE passes 50F6:3816 to InitTriVars with object 120D, then again at 00F9 to SetTriLatPoint; Win16 0001:B5BB selects 120D and B627 writes the apex at PACK:80F8, with the other two vertices in the following ten bytes. The six-word geometry produced from width/height is the same in the original instructions.",
+    "Independent spacing check: Win16 next-symbol distance 12 bytes equals DOS next-registered-base distance 12; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU."
+   ],
+   "reviewer": "worker communal-rest; supervisor 2026-11-13 accepted only objects larger than 2 bytes, where equal spacing discriminates"
+  },
+  "root:50F6:3822": {
+   "win16": "_casteVerts",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "original instruction witnesses (usage.json): DOS root:0798:00A0 passes 50F6:3822 to InitTriVars with object 130D, then again at 00BB to SetTriLatPoint; Win16 0001:B3C7 selects 130D and B433 writes the apex at PACK:A090, with the other two vertices in the following ten bytes. The same three-vertex geometry distinguishes it from modeVerts.",
+    "Independent spacing check: Win16 next-symbol distance 12 bytes equals DOS next-registered-base distance 12; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU."
+   ],
+   "reviewer": "worker communal-rest; supervisor 2026-11-13 accepted only objects larger than 2 bytes, where equal spacing discriminates"
+  },
+  "root:50F6:382E": {
+   "win16": "_leftYSlope",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "original instruction witnesses (usage.json): DOS root:0798:0000..0066 and Win16 0001:B324..B38A derive half width and height from win_GetObjRect, then compute (half_width << 8) / height. DOS 0062/0066 stores DX:AX at 382E/3830; Windows B386/B38A stores it at PACK:9FC0/9FC2. The two-word stored quotient and matched expression independently distinguish this scalar from the vertex arrays.",
+    "Independent spacing check: Win16 next-symbol distance 4 bytes equals DOS next-registered-base distance 4; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU."
+   ],
+   "reviewer": "worker communal-rest; supervisor 2026-11-13 accepted only objects larger than 2 bytes, where equal spacing discriminates"
+  },
+  "root:50F6:3842": {
+   "win16": "_miniMapRect",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data-alignment Tier B: same reference position in DrawMiniMapCursor; used by the same 3 function pairs.",
+    "Independent spacing check: Win16 next-symbol distance 8 bytes equals DOS next-registered-base distance 8; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU."
+   ],
+   "reviewer": "worker communal-rest; supervisor 2026-11-13 accepted only objects larger than 2 bytes, where equal spacing discriminates"
+  },
+  "root:50F6:384A": {
+   "win16": "_miniMapCursorRect",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "original instruction witnesses (usage.json): DrawMiniMapCursor writes all four words at DOS S04:35F5:08E8/0927/0941 and surrounding stores, versus Win16 0003:E87A/E88A/E8B8/E8C8 at PACK:78E0..78E6. The same rectangle is passed with width 1 to the outline routine (DOS 094A..094F, Windows E8DE..E8E1) and again by EraseMiniMapCursor (DOS 0969, Windows E907). Selector-pool relocations resolve to PACK (9).",
+    "Independent spacing check: Win16 next-symbol distance 8 bytes equals DOS next-registered-base distance 8; this is a size-compatible naming anchor, not proof of the original complete object extent or owning TU."
+   ],
+   "reviewer": "worker communal-rest; supervisor 2026-11-13 accepted only objects larger than 2 bytes, where equal spacing discriminates"
   }
  }
 }
