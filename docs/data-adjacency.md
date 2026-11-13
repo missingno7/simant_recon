@@ -354,7 +354,7 @@ The hot-box review says its 18 bytes remain functional debt, whereas the later h
 
 - `55B3:[56FE,5702)` — Four loaded zero bytes immediately before the window stack. No defining object or use is established; zero does not prove padding.
 - `55B3:[5A28,5A2A)` — Two loaded zero bytes. No owner/initializer or complete computed-pointer exclusion is established.
-- `55B3:[5A96,5A97)` and `[5A98,5A9C)` — Five bytes in the shared UI area, split around the known display-mode byte at `5A97`. The display-mode byte itself starts at -1 (original file byte `FF`); it is initialised that way since 2026-11-13, because the driver selector auto-detects the display only while it is -1. Partial typing is reported; original ownership remains unknown.
+- `55B3:[5A96,5A97)` and `[5A98,5A9C)` — Five bytes in the shared UI area, split around the known display-mode byte at `5A97`. The display-mode byte itself starts at -1 (original file byte `FF`, the value the driver selector treats as "auto-detect"); it is initialised that way since 2026-11-13. The initial value is not observable in a normal run: `ReadConfig` sets the byte from the configuration file or exits. Partial typing is reported; original ownership remains unknown.
 - `55B3:[60B0,60C2)` — Eighteen hot-box-shaped bytes between S10's contribution ending at `60B0` and S20's beginning at `60C2`. There is a real far callback relocation at +10 (decimal) to `root:1B73:030F`. Both an appended S10 definition and a separate contribution compile compatibly; neither has independent origin/registration evidence. Small-font reading overlaps `[60B0,60BE)` (T07).
 - `55B3:[8B9D,8B9E)` — One loaded mastering-tail byte, 72h. CRT clearing starts at `8B9E`; it is not zero-fill. A global stack floor above it is not established.
 
