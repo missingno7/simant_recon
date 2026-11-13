@@ -10,26 +10,11 @@
 
 #include "rect.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
-struct Point {
-    int v;
-    int h;
-};
+#include "point.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 struct AlertColors {
     int fill;

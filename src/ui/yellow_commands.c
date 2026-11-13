@@ -17,26 +17,14 @@
  * declaration after 0AE8 decides the compare order in YellowCommandKey.
  */
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 extern int far WinPrintf(char far *format, ...);
 extern int _fastcall win_IsWinInFront(int win);
 extern long far TickCount(void);
 extern int _fastcall win_GetEvent(struct Event far *ev);
 #include "rect.h"
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 extern struct Rect far editTileRect;
 extern int far tileWidth;

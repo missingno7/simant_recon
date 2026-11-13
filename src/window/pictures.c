@@ -9,13 +9,7 @@
 
 #include "rect.h"
 
-struct Pic {
-    int type;
-    char mode;
-    char pad[5];
-    int width;
-    int height;
-};
+#include "picture.h"
 
 extern char far * far db_LoadObject(int object, int kind);
 extern void far db_ReleaseObject(int object, int kind);

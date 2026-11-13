@@ -13,21 +13,9 @@
 
 #include "rect.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 static int curMenu = -1;
 
@@ -399,7 +387,7 @@ done:
     free(buf);
     return result;
 other:
-    input_enqueue_event_args(ev.code, ev.xE, ev.h, ev.v, 0);
+    input_enqueue_event_args(ev.code, ev.payload_segment, ev.h, ev.v, 0);
     goto done;
     }
     if (curMenu != -1)

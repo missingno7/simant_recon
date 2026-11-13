@@ -13,46 +13,13 @@
 
 struct Obj;
 
-struct Win {
-    struct Rect rect;
-    char pad08[0x0c - 0x08];
-    int count;
-    char pad0E[0x18 - 0x0e];
-    int minWidth;
-    int minHeight;
-    unsigned flags;
-    char pad1E[0x20 - 0x1e];
-    int gridX;
-    int gridY;
-    struct Rect zoomRect;
-    struct Obj far *objs[2];
-};
+#include "win.h"
 
-struct Obj {
-    struct Rect rect;
-    int x;
-    int y;
-    int width;
-    int height;
-    char pad10[0x21 - 0x10];
-    char type;
-};
+#include "obj.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 void _fastcall win_constrain_drag_rect(int win, int mode, struct Rect far *r);
 
@@ -249,7 +216,7 @@ void _fastcall win_track_move(struct Event far *ev)
         win_UnlockWin(win);
         return;
     }
-    o = w->objs[1];
+    o = (struct Obj far *)w->objs[1];
     if (o->type != 0x0c && o->type != 0x12) {
         win_UnlockWin(win);
         return;
@@ -277,12 +244,12 @@ void _fastcall win_track_move(struct Event far *ev)
     }
     GRectInvOutline(&r, 2);
     win_constrain_drag_rect(win, 0, &r);
-    o = w->objs[0];
+    o = (struct Obj far *)w->objs[0];
     o->x += r.left - orig.left;
     o->y += r.top - orig.top;
     *win_WinRectAddr(win) = r;
     w = win_WinAddr(win);
-    win_offsets[win >> 8] = *(struct Rect far *)&w->objs[0]->x;
+    win_offsets[win >> 8] = *(struct Rect far *)&((struct Obj far *)w->objs[0])->x;
     win_Recalc(win);
     win_UnlockWin(win);
     win_rebuild_visible_clips();
@@ -356,7 +323,7 @@ void _fastcall win_track_resize(struct Event far *ev)
     }
     GRectInvOutline(&r, 2);
     win_constrain_drag_rect(win, 1, &r);
-    o = w->objs[0];
+    o = (struct Obj far *)w->objs[0];
     o->width += r.right - orig.right;
     o->height += r.bottom - orig.bottom;
     *win_WinRectAddr(win) = r;

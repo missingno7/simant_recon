@@ -7,10 +7,7 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
-struct Instr {
-    int a;
-    unsigned char far *p;
-};
+#include "instr.h"
 
 /*
  * First OPL operator index for each voice.
@@ -84,6 +81,10 @@ extern int far snd_opl_volume_curve[];
 /*
  * Set OPL carrier attenuation and the instrument-transposed note frequency.
  */
+#pragma pack(1)
+#include "fm_patch.h"
+#pragma pack()
+
 void far snd_opl_set_note_level(int instr, int note, unsigned vol, int voice)
 {
     unsigned char far *p;
@@ -94,7 +95,7 @@ void far snd_opl_set_note_level(int instr, int note, unsigned vol, int voice)
     if (vol >= 0)
         volume += snd_opl_volume_bias;
     p = snd_instrument_descriptors[instr].p;
-    volume += *(int far *)(p + 0xd);
+    volume += ((struct FMPatch far *)p)->volume;
     if (volume < 0)
         volume = 0;
     if (volume > 0x7f)
@@ -102,7 +103,7 @@ void far snd_opl_set_note_level(int instr, int note, unsigned vol, int voice)
     level = p[2] & 0x3f;
     level = (unsigned)(0x3f - (unsigned char)snd_opl_volume_curve[volume]) * (level ^ 0x3f) >> 6;
     snd_opl_write(opl_operator_register_offsets[opl_carrier_indices[voice]] + 0x40, (level ^ 0x3f) | (p[2] & 0xc0));
-    note += *(int far *)(p + 0xb) * 12;
+    note += ((struct FMPatch far *)p)->octave * 12;
     if (note >= 0 && note <= 0x7f) {
         snd_opl_write(voice + 0xa0, opl_semitone_f_numbers[note % 12]);
         snd_opl_write(voice + 0xb0, ((note / 12 + 8) << 2) + (opl_semitone_f_numbers[note % 12] >> 8));

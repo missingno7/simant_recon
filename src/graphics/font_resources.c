@@ -113,11 +113,7 @@ struct Font far * far font_DumpFont(struct Font far *font)
 
 extern unsigned far _fstrlen(char far *s);
 
-struct Bitmap {
-    int width;
-    int height;
-    char far *bits;
-};
+#include "bitmap.h"
 
 extern struct Bitmap far out_buffer;
 extern void far ClearBuffer(char far *buf, int size);

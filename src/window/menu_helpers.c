@@ -10,10 +10,8 @@
 
 #include "rect.h"
 
-typedef struct {
-    int x;
-    int y;
-} Point;
+#include "point.h"
+typedef struct Point Point;
 
 struct Timer {
     struct Rect r;
@@ -30,17 +28,7 @@ struct MenuData {
     char far * far *items[16];
 };
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    char modLo;
-    char modHi;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 extern void far input_enqueue_event_args();
 extern void far mouse_default_cursor_thunk();
@@ -485,7 +473,7 @@ void far menu_open_by_index(int menu)
 
     x = fontWidth * 4 + menu_title_x_pixels[menu];
     ev.code = menu;
-    ev.modHi = 0;
+    *((char *)&ev.modifiers + 1) = 0;
     mouse_set_position(x, 1);
     menu_track_bar_selection(&ev);
 }

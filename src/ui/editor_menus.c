@@ -10,21 +10,9 @@
 
 #include "rect.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 extern int far ELayerMode;
 extern int far win_DoProxMenu();

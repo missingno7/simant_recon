@@ -9,21 +9,9 @@
 
 #include "rect.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 static int miniCursorOn = 0;
 static int subMenus[8] = { -1, 0xc00, 0xf00, 0x1000, 0x1100, 0xd00, 0xe00, -1 };

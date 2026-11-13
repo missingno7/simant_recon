@@ -85,7 +85,7 @@ void _fastcall win_load_and_lock_resource(int win, int high)
             else
                 w = mem_Lock(h);
         }
-        if (*(int far *)(w + 0x1c) & 0x800)
+        if (*(int far *)(w + 0x1c) & 0x800) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             mem_set_alloc_type(h, 1);
         if (g_8CF2[n] != w) {
             g_8CF2[n] = w;
@@ -102,24 +102,9 @@ void _fastcall win_load_and_lock_resource(int win, int high)
 #include "rect.h"
 
 
-struct Obj {
-    char pad[0x21];
-    char type;
-    char pad22[0x2a - 0x22];
-    char far * far *h2a;
-    char pad2e[0x34 - 0x2e];
-    char far * far *h34;
-};
+#include "obj.h"
 
-struct Win {
-    struct Rect rect;
-    char pad08[4];
-    int count;
-    char pad0E[0x1c - 0x0e];
-    int flags;
-    char pad1E[0x2c - 0x1e];
-    struct Obj far *objs[1];
-};
+#include "win.h"
 
 extern int far RallocType(struct Win far * far *handle);
 extern void far RallocFree(char far * far *handle);
@@ -149,11 +134,11 @@ void _fastcall win_UnlockWin(int win)
             if (!((*h)->flags & 0x200) && ((*h)->flags & 0x800) && g_644E == 0) {
                 w = *h;
                 for (i = 0; i < w->count; i++) {
-                    obj = w->objs[i];
+                    obj = (struct Obj far *)w->objs[i];
                     switch (obj->type) {
                     case 4:
                     case 10:
-                        p = &obj->h34;
+                        p = &obj->list_handle;
                         if (*p) {
                             RallocFree(*p);
                             *p = 0;
@@ -162,7 +147,7 @@ void _fastcall win_UnlockWin(int win)
                     case 16:
                     case 17:
                     case 18:
-                        p = &obj->h2a;
+                        p = &obj->text_handle;
                         if (*p) {
                             RallocFree(*p);
                             *p = 0;
@@ -174,7 +159,7 @@ void _fastcall win_UnlockWin(int win)
                 mem_mark_discardable_20e2(h);
                 win_handles[n] = 0;
                 g_8CF2[n] = 0;
-                win_offsets[n] = *(struct Rect far *)((char far *)w->objs[0] + 8);
+                win_offsets[n] = *(struct Rect far *)&((struct Obj far *)w->objs[0])->x;
             } else {
                 mem_unlock_encoded_handle(h);
             }

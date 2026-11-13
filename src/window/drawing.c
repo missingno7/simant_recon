@@ -9,11 +9,9 @@
  */
 
 #include "rect.h"
+#include "win.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 struct Sides {
     unsigned char left : 1;
@@ -112,10 +110,10 @@ void _fastcall win_SetColorNum(int color)
 
 void _fastcall win_SetColorFromObj(char far *obj)
 {
-    if (obj[0x24] & 4)
-        colorEntry = win_colors[obj[0x27]];
+    if (obj[0x24] & 4) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        colorEntry = win_colors[obj[0x27]]; /* Known type-dependent palette/bitmap selection; earlier shared tag changes exact code or original declaration context is unresolved. */
     else
-        colorEntry = win_colors[obj[0x26]];
+        colorEntry = win_colors[obj[0x26]]; /* Known type-dependent palette/bitmap selection; earlier shared tag changes exact code or original declaration context is unresolved. */
     if ((gfx_display_mode & 1) == 0)
         (*gfx_set_attributes_hook)(colorEntry[0] * 0x101, colorEntry[2] * 0x101, colorEntry[0] * 0x101);
     else
@@ -188,8 +186,8 @@ void _fastcall win_DrawButtonBorder(char far *obj)
     int i;
 
     rect = (struct Rect far *)obj;
-    entry = win_colors[obj[0x26]];
-    if ((obj[0x24] & 4) == 0) {
+    entry = win_colors[obj[0x26]]; /* Known type-dependent palette/bitmap selection; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if ((obj[0x24] & 4) == 0) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         for (i = 3; i > 0; i--) {
             sides.left = 1;
             sides.right = 1;
@@ -215,19 +213,9 @@ void _fastcall win_DrawButtonBorder(char far *obj)
 /* Unclaimed draft below (win_DrawObjectI): bytes exact, but the FIXUPP order inside the
  * GRectFill and font_SetFont relocation groups differs (the original object had
  * LEDATA record breaks inside this function). */
-struct WinObj {
-    struct Rect rect;
-    int origin[4];
-    int ref[4];
-    int mode[4];
-    char unk20;
-    char type;
-    int size;
-    int flags;
-    int data[3];
-};
+#include "obj.h"
 
-void _fastcall win_DrawObjectI(struct WinObj far *obj)
+void _fastcall win_DrawObjectI(struct Obj far *obj)
 {
     char far * far *h;
     char far *text;
@@ -242,7 +230,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
     }
     switch (obj->type) {
     case 0:
-        win_RectFillOutline(*(char far *)&obj->data[1], rect);
+        win_RectFillOutline(*(char far *)&obj->payload28, rect);
         break;
     case 2:
         win_RectFill(rect);
@@ -256,10 +244,10 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         win_SetColorFromObj((char far *)obj);
     case 9:
     plainText:
-        text = (char far *)obj + 0x2a;
+        text = (char far *)obj + 0x2a; /* Inline List/text payload here; a common Obj payload member is unresolved. */
         goto drawText;
     case 6:
-        win_DrawBitMapAtObj(obj->data[1], (struct Rect far *)obj);
+        win_DrawBitMapAtObj(obj->payload28, (struct Rect far *)obj);
         break;
     case 7:
     case 8:
@@ -270,10 +258,10 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         (*gfx_fill_rect_hook)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
         goto plainText;
     case 13:
-        win_DrawBitMapAtObj(*(int far *)((char far *)obj->data + ((obj->flags & 4) ? 2 : 4)), (struct Rect far *)obj);
+        win_DrawBitMapAtObj(*(int far *)((char far *)&obj->palette + ((obj->flags & 4) ? 2 : 4)), (struct Rect far *)obj);
         break;
     case 15:
-        win_RectOutline(rect, *(char far *)&obj->data[1]);
+        win_RectOutline(rect, *(char far *)&obj->payload28);
         break;
     case 17:
         GRectFill(rect, colorEntry[2] * 0x101);
@@ -281,16 +269,16 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         win_SetColorFromObj((char far *)obj);
     case 16:
     formatText:
-        font_SetFont(*(char far *)&obj->data[1]);
-        if (*(char far * far * far *)&obj->data[2] == 0) {
+        font_SetFont(*(char far *)&obj->payload28);
+        if (obj->text_handle == 0) {
             text = (char far *)obj + 0x2e;
             if (g_6300 != 0 || _fstrchr(text, '%') == 0) {
         drawText:
-                font_SetFont(*(char far *)&obj->data[1]);
+                font_SetFont(*(char far *)&obj->payload28);
                 gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, text);
             }
         } else {
-            h = *(char far * far * far *)&obj->data[2];
+            h = obj->text_handle;
             p = mem_Lock(h);
             gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, p);
             mem_Unlock(h);
@@ -302,18 +290,18 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         (*gfx_fill_rect_hook)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
         goto formatText;
     case 19:
-        win_RectHOutline(rect, *(char far *)&obj->data[1]);
+        win_RectHOutline(rect, *(char far *)&obj->payload28);
         break;
     case 20:
-        win_RectVOutline(rect, *(char far *)&obj->data[1]);
+        win_RectVOutline(rect, *(char far *)&obj->payload28);
         break;
     case 21:
         win_RectFill(rect);
-        win_RectHOutline(rect, *(char far *)&obj->data[1]);
+        win_RectHOutline(rect, *(char far *)&obj->payload28);
         break;
     case 22:
         win_RectFill(rect);
-        win_RectVOutline(rect, *(char far *)&obj->data[1]);
+        win_RectVOutline(rect, *(char far *)&obj->payload28);
         break;
     }
     if (obj->flags & 4) {
@@ -328,7 +316,7 @@ void _fastcall win_DrawObjectI(struct WinObj far *obj)
         clip_Pop();
 }
 
-void _fastcall win_DrawObject(struct WinObj far *obj)
+void _fastcall win_DrawObject(struct Obj far *obj)
 {
     if (obj->flags & 1)
         win_DrawObjectI(obj);
@@ -337,7 +325,7 @@ void _fastcall win_DrawObject(struct WinObj far *obj)
 void _fastcall win_DrawObjectNum(int objNum)
 {
     win_LockWin(objNum);
-    win_DrawObjectI((struct WinObj far *)win_ObjAddr(objNum));
+    win_DrawObjectI((struct Obj far *)win_ObjAddr(objNum));
     win_UnlockWin(objNum);
 }
 
@@ -348,7 +336,7 @@ void _fastcall win_draw_frame_controls(char far *w)
     int m;
 
     rect = *(struct Rect far *)w;
-    m = (*(char far * far *)(w + 0x2c))[0x28];
+    m = (((struct Win far *)w)->objs[0])[0x28];
     rect.bottom -= m;
     if (gfx_screen_width_pixels == 0x140)
         m = m / 2;
@@ -357,17 +345,17 @@ void _fastcall win_draw_frame_controls(char far *w)
     rect.top += m;
     if (gfx_display_mode & 1)
         (*gfx_set_attributes_hook)(0, 0, 0x40);
-    if (*(int far *)(w + 0x1c) & 4) {
+    if (((struct Win far *)w)->flags & 4) {
         win_DrawBitMap(rect.left, rect.top, 0x64);
         gr_BitMapSize(&size, 0x64);
         rect.left += size.x;
     }
-    if (*(int far *)(w + 0x1c) & 8) {
+    if (((struct Win far *)w)->flags & 8) {
         gr_BitMapSize(&size, 0x70);
         win_DrawBitMap(rect.right - size.x, rect.bottom - size.y, 0x70);
     }
-    if (*(int far *)(w + 0x1c) & 0x100) {
-        if (*(int far *)(w + 0x1c) & 0x80) {
+    if (((struct Win far *)w)->flags & 0x100) {
+        if (((struct Win far *)w)->flags & 0x80) {
             gr_BitMapSize(&size, 0x66);
             rect.right -= size.x;
             win_DrawBitMap(rect.right, rect.top, 0x66);
@@ -377,9 +365,9 @@ void _fastcall win_draw_frame_controls(char far *w)
             win_DrawBitMap(rect.right, rect.top, 0x67);
         }
     }
-    if (*(int far *)(w + 0x1c) & 0x10)
+    if (((struct Win far *)w)->flags & 0x10)
         win_DrawBitMap(rect.left, rect.top, 0x65);
-    if (*(int far *)(w + 0x1c) & 0x400) {
+    if (((struct Win far *)w)->flags & 0x400) {
         gr_BitMapSize(&size, 0x69);
         rect.right -= size.x;
         win_DrawBitMap(rect.right, rect.top, 0x69);
@@ -400,19 +388,19 @@ void _fastcall win_DrawWindow(int win)
     win_LockWinHigh(win);
     sprintf(buf, "QQW:%x", win);
     w = win_locked_resource_ptr(win);
-    if ((*(int far *)(w + 0x1c) & 0x20) == 0) {
+    if ((((struct Win far *)w)->flags & 0x20) == 0) {
         if (clip_active_list_offset != 0 && clip_active_list_offset[1] == (int)0x8000)
             goto hooks;
         sprintf(buf, "##W:%x", win);
         if (win_drawHooks[win >> 8])
             (*win_drawHooks[win >> 8])(1);
         sprintf(buf, "**W:%x", win);
-        n = *(int far *)(w + 0xc);
+        n = ((struct Win far *)w)->count;
         for (i = 0; i < n; i++) {
             sprintf(buf, "w:%x, i:%x", win, i);
-            win_DrawObject(((struct WinObj far * far *)(w + 0x2c))[i]);
+            win_DrawObject((struct Obj far *)((struct Win far *)w)->objs[i]); /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
             if (i == 0)
-                *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
+                *(struct Rect far *)w = *(struct Rect far *)((struct Win far *)w)->objs[0];
             sprintf(buf, "xxw:%x, i:%x", win, i);
         }
         sprintf(buf, "zzw:%x, i:%x", win, i);

@@ -11,10 +11,7 @@
 
 #define RECT_END ((int)0x8000)
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 extern struct Rect far * near clip_active_list_offset;
 extern void (far * near g_9170)(int, int, int, int, int);

@@ -19,36 +19,14 @@
 typedef char far * far *Handle;
 
 #pragma pack(1)
-struct Sample {
-    Handle data;
-    unsigned len;
-    unsigned loop;
-    char looped;
-    unsigned char octave;
-    int tune;
-    int loaded;
-    char name[15];
-    int object;
-};
+#include "sample.h"
 
-struct FMPatch {
-    unsigned char reg[11];
-    int octave;
-    int volume;
-};
+#include "fm_patch.h"
 #pragma pack()
 
-struct Instr {
-    int kind;
-    void *p;
-};
+#include "instr.h"
 
-struct SfxNote {
-    int note;
-    int kind;
-    int sound;
-    int volume;
-};
+#include "effect_note.h"
 
 enum { SND_NONE, SND_DAC, SND_FM, SND_PSG3, SND_PSG4, SND_PSG5, SND_MIDI, SND_MIDIDRUM };
 
@@ -148,7 +126,7 @@ static struct Sample s_ooohs = { 0, 0, 0, 0, 5, -19, 0, "ooohs.adp", 54 };
 /*
  * Four-parameter sound-effect entries passed to the note starter.
  */
-struct SfxNote snd_effect_note_table[56] = {
+struct EffectNote snd_effect_note_table[56] = {
     { 60, 3, 0, 127 }, { 60, 3, 1, 127 }, { 60, 3, 2, 127 }, { 60, 3, 3, 127 }, { 60, 3, 4, 127 }, { 60, 3, 5, 127 },
     { 60, 3, 6, 127 }, { 60, 3, 7, 127 }, { 60, 3, 8, 127 }, { 60, 3, 9, 127 }, { 60, 3, 10, 127 }, { 60, 3, 11, 127 },
     { 60, 3, 12, 127 }, { 60, 3, 13, 127 }, { 60, 3, 14, 127 }, { 60, 3, 15, 127 }, { 60, 3, 16, 127 }, { 60, 2, 17, 127 },

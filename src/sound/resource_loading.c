@@ -10,29 +10,12 @@
 typedef char far * far *Handle;
 
 #pragma pack(1)
-struct Sample {
-    Handle data;
-    unsigned len;
-    unsigned loop;
-    char looped;
-    unsigned char octave;
-    int tune;
-    int loaded;
-    char name[15];
-    int object;
-};
+#include "sample.h"
 #pragma pack()
 
-struct Song {
-    int program[14];
-    unsigned bank[14];
-    Handle data;
-};
+#include "song.h"
 
-struct Instr {
-    int kind;
-    struct Sample far *sample;
-};
+#include "instr.h"
 
 int g_181C = 0;
 
@@ -175,12 +158,12 @@ int far snd_load_song_resources(struct Song far *song, int number)
     }
     mem_Size(song->data);
     for (i = 0; i < 14; i++) {
-        if (snd_instrument_descriptors[song->bank[i]].kind == 1) {
-            if (snd_load_sample_resource(snd_instrument_descriptors[song->bank[i]].sample) == -1) {
+        if (snd_instrument_descriptors[song->instrument[i]].kind == 1) {
+            if (snd_load_sample_resource(((struct Sample far *)snd_instrument_descriptors[song->instrument[i]].p)) == -1) {
                 snd_release_song_resources(song, number);
                 return -1;
             }
-            snd_instrument_descriptors[song->bank[i]].sample->loaded = 2;
+            ((struct Sample far *)snd_instrument_descriptors[song->instrument[i]].p)->loaded = 2;
         }
     }
     return 0;
@@ -196,7 +179,7 @@ void far snd_release_song_resources(struct Song far *song, int number)
         song->data = 0;
     }
     for (i = 0; i < 14; i++) {
-        if (snd_instrument_descriptors[song->bank[i]].kind == 1 && (s = snd_instrument_descriptors[song->bank[i]].sample) != 0) {
+        if (snd_instrument_descriptors[song->instrument[i]].kind == 1 && (s = ((struct Sample far *)snd_instrument_descriptors[song->instrument[i]].p)) != 0) {
             if (s->loaded == 2)
                 s->loaded = 1;
             snd_queue_sample_release(s);
@@ -217,7 +200,7 @@ void far snd_stop_and_release_samples(void)
     snd_stop_assigned_voices();
     for (i = 0; i < 56; i++)
         if (snd_instrument_descriptors[i].kind == 1)
-            snd_queue_sample_release(snd_instrument_descriptors[i].sample);
+            snd_queue_sample_release(((struct Sample far *)snd_instrument_descriptors[i].p));
 }
 
 extern int far snd_driver_capabilities[];

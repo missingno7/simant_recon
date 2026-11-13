@@ -6,10 +6,8 @@
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
  */
 
-typedef struct {
-    int x;
-    int y;
-} Point;
+#include "point.h"
+typedef struct Point Point;
 
 /* These prototypes appear here and again before the functions that use them.  Both copies
  * are kept: removing either one changes the code of RunTutor and LessonDone (declaration

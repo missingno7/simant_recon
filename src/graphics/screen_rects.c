@@ -286,7 +286,7 @@ void far GPutPacked(int x, int y, char far *pic)
     char far * far *h;
     struct PackHdr hdr;
 
-    UnpackInit(pic + 4, *(int far *)(pic + 2));
+    UnpackInit(pic + 4, *(int far *)(pic + 2)); /* Packed prefix +02 is passed to UnpackInit; its common record type/units remain unknown. */
     Unpack((char far *)&hdr, 12);
     rem = hdr.height & 7;
     hdr.height &= ~7;

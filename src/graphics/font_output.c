@@ -11,16 +11,9 @@ typedef char far * far *Handle;
 
 #include "rect.h"
 
-struct Bitmap {
-    int width;
-    int height;
-    char far *bits;
-};
+#include "bitmap.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 void far *curFontPtr = 0;
 
@@ -34,6 +27,8 @@ extern int near gfx_screen_width_pixels;
 extern void far invert(char far *bits, int size);
 extern void far * far _fmemcpy(void far *dst, void far *src, unsigned n);
 extern Handle far mem_Unlock(Handle h);
+
+#include "picture.h"
 
 Handle far font_make_display_bitmap(char far *text)
 {
@@ -81,8 +76,8 @@ Handle far font_make_display_bitmap(char far *text)
     }
     *(int far *)p = 0;
     p[2] = (gfx_display_mode & 1) ? 1 : 4;
-    ((int far *)p)[4] = out_buffer.width;
-    ((int far *)p)[5] = out_buffer.height;
+    ((struct Pic far *)p)->width = out_buffer.width;
+    ((struct Pic far *)p)->height = out_buffer.height;
     mem_Unlock(h);
     return h;
 }

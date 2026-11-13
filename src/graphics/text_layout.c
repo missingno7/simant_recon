@@ -9,10 +9,7 @@
 
 #include "rect.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 struct Pt far gfx_measure_text_cells(char far *);
 void far timer_wait_double_ticks(int);

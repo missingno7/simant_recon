@@ -8,14 +8,7 @@
  * Steered functions: snd_stop_assigned_voices.
  */
 
-struct Chan {
-    unsigned char type;
-    unsigned char num;
-    unsigned char c2;
-    unsigned char c3;
-    unsigned char c4;
-    unsigned char c5;
-};
+#include "chan.h"
 
 struct Drv {
     int count;
@@ -43,12 +36,7 @@ struct Snd {
     int state;
 };
 
-struct Song {
-    int a;
-    int b;
-    int c;
-    int d;
-};
+#include "effect_note.h"
 
 void far snd_midi_note_on(int dev, int a, int b, int c);
 void far snd_midi_percussion_on(int dev, int a, int b);
@@ -103,7 +91,7 @@ void far snd_reap_finished_sample_voices(void)
 
     for (i = 0; (c = &snd_voice_slots[i])->type; i++) {
         if (c->type == 1 && fd_55B3_6B4E[c->num].busy == 0) {
-            c->c2 = 0;
+            c->priority = 0;
             s = fd_55B3_6B4E[c->num].snd;
             if (s && s->state == 1)
                 snd_queue_sample_release(s);
@@ -130,20 +118,20 @@ int far snd_choose_voice_by_priority(int type, int prio)
         return -1;
     for (c = snd_voice_slots; c->type; c = &snd_voice_slots[++i]) {
         if (c->type == 1 && fd_55B3_6B4E[c->num].busy == 0) {
-            c->c2 = 0;
+            c->priority = 0;
             s = fd_55B3_6B4E[c->num].snd;
             if (s && s->state == 1)
                 snd_queue_sample_release(s);
             fd_55B3_6B4E[c->num].snd = 0;
         }
         if (c->type == type) {
-            if (c->c2 < best || (c->c2 == best && c->c5 > bestAge)) {
-                best = c->c2;
+            if (c->priority < best || (c->priority == best && c->age > bestAge)) {
+                best = c->priority;
                 bestIdx = i;
-                bestAge = c->c5;
+                bestAge = c->age;
             }
         }
-        c->c5++;
+        c->age++;
     }
     if (prio >= best)
         return bestIdx;
@@ -163,14 +151,14 @@ void far snd_start_instrument_note(int prio, int dev, int note, int vel)
     if (v < 0)
         return;
     vel = (unsigned)vel * g_7502 >> 7;
-    (*g_7524[snd_voice_slots[v].type])(snd_voice_slots[v].c4, snd_voice_slots[v].num, dev);
-    if (snd_voice_slots[v].c3 != dev)
+    (*g_7524[snd_voice_slots[v].type])(snd_voice_slots[v].note, snd_voice_slots[v].num, dev);
+    if (snd_voice_slots[v].instrument != dev)
         (*g_7544[snd_voice_slots[v].type])(dev, snd_voice_slots[v].num);
     (*g_7504[snd_voice_slots[v].type])(dev, note, vel, snd_voice_slots[v].num);
-    snd_voice_slots[v].c2 = prio;
-    snd_voice_slots[v].c3 = dev;
-    snd_voice_slots[v].c4 = note;
-    snd_voice_slots[v].c5 = 0;
+    snd_voice_slots[v].priority = prio;
+    snd_voice_slots[v].instrument = dev;
+    snd_voice_slots[v].note = note;
+    snd_voice_slots[v].age = 0;
 }
 
 /*
@@ -181,20 +169,20 @@ void far snd_stop_instrument_note(int dev, int note)
     int i;
 
     for (i = 0; snd_voice_slots[i].type; i++) {
-        if (snd_voice_slots[i].c4 == note && snd_voice_slots[i].c3 == dev) {
+        if (snd_voice_slots[i].note == note && snd_voice_slots[i].instrument == dev) {
             (*g_7524[snd_instrument_descriptors[dev].count])(note, snd_voice_slots[i].num, dev);
-            snd_voice_slots[i].c4 = 0;
-            snd_voice_slots[i].c2 = 0;
-            snd_voice_slots[i].c5 = 15;
+            snd_voice_slots[i].note = 0;
+            snd_voice_slots[i].priority = 0;
+            snd_voice_slots[i].age = 15;
         }
     }
 }
 
-extern struct Song far snd_effect_note_table[];
+extern struct EffectNote far snd_effect_note_table[];
 
 void far snd_start_configured_effect(int n)
 {
-    snd_start_instrument_note(snd_effect_note_table[n].b, snd_effect_note_table[n].c, snd_effect_note_table[n].a, snd_effect_note_table[n].d);
+    snd_start_instrument_note(snd_effect_note_table[n].priority, snd_effect_note_table[n].instrument, snd_effect_note_table[n].note, snd_effect_note_table[n].volume);
 }
 
 extern unsigned char far snd_port_read_byte(int port);
@@ -206,8 +194,8 @@ void far snd_stop_assigned_voices(void)
 {
     int i;
     for (i = 0; snd_voice_slots[i].type; i++) {
-        if (snd_voice_slots[i].c3 >= 0 && snd_voice_slots[i].c2)
-            snd_stop_instrument_note(snd_voice_slots[i].c3, snd_voice_slots[i].c4);
+        if (snd_voice_slots[i].instrument >= 0 && snd_voice_slots[i].priority)
+            snd_stop_instrument_note(snd_voice_slots[i].instrument, snd_voice_slots[i].note);
     }
 }
 

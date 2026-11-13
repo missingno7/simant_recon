@@ -9,23 +9,11 @@
 
 #include <string.h>
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 #include "rect.h"
 
-struct Pt {
-    int h;
-    int v;
-};
+#include "pt.h"
 
 static int g_2A2A = -1;
 static int g_2A2C = -1;
@@ -215,7 +203,7 @@ void far win_DrawYardWindow(int flags)
                     for (id = 0x1b6c; id <= 0x1b6e; id++) {
                         win_DrawBitMap(r.left, y, id);
                         gr_BitMapSize(&sz, id);
-                        y += sz.v;
+                        y += sz.y;
                     }
                     win_DrawObjectNum(0x1915);
                 } else
@@ -328,7 +316,7 @@ void far DrawSimKid(void)
             y = (y >> 1) + 6;
         else
             x += 4;
-        y += map_viewport_rect.top - sz.v;
+        y += map_viewport_rect.top - sz.y;
         if (g_2A3E != -1)
             hanim_SetObjectPos(x, y, 30000, yardAnimHandle, g_2A3E, 999);
         else
@@ -745,8 +733,8 @@ void far InvertPatch(int x, int y)
 
     clip_Push();
     clip_SetWin(0x1900);
-    pts[4].h = x * 28 - y * 10 + map_viewport_rect.left;
-    pts[4].v = y * 10 + map_viewport_rect.top;
+    pts[4].x = x * 28 - y * 10 + map_viewport_rect.left;
+    pts[4].y = y * 10 + map_viewport_rect.top;
     if (gfx_screen_width_pixels == 320)
         h = 0;
     h = x * 28 - y * 10;
@@ -757,15 +745,15 @@ void far InvertPatch(int x, int y)
         h += map_viewport_rect.left + 4;
         v += map_viewport_rect.top + 10;
         for (i = 0; i < 4; i++) {
-            pts[i].h = g_2A42[i * 2] / 2 + h;
-            pts[i].v = g_2A42[i * 2 + 1] / 2 + v;
+            pts[i].x = g_2A42[i * 2] / 2 + h;
+            pts[i].y = g_2A42[i * 2 + 1] / 2 + v;
         }
     } else {
         h += map_viewport_rect.left;
         v += map_viewport_rect.top;
         for (i = 0; i < 4; i++) {
-            pts[i].h = g_2A42[i * 2] + h;
-            pts[i].v = g_2A42[i * 2 + 1] + v;
+            pts[i].x = g_2A42[i * 2] + h;
+            pts[i].y = g_2A42[i * 2 + 1] + v;
         }
     }
     TrapFill(pts, -1, -1);
@@ -796,15 +784,15 @@ void far DrawSimColonies(int mode)
                     h += map_viewport_rect.left + 4;
                     v += map_viewport_rect.top + 10;
                     for (i = 0; i < 4; i++) {
-                        pts[i].h = (i >= 2 ? 0 : -1) + g_2A42[i * 2] / 2 + h;
-                        pts[i].v = (i >= 2 ? -1 : 1) + g_2A42[i * 2 + 1] / 2 + v;
+                        pts[i].x = (i >= 2 ? 0 : -1) + g_2A42[i * 2] / 2 + h;
+                        pts[i].y = (i >= 2 ? -1 : 1) + g_2A42[i * 2 + 1] / 2 + v;
                     }
                 } else {
                     h += map_viewport_rect.left;
                     v += map_viewport_rect.top;
                     for (i = 0; i < 4; i++) {
-                        pts[i].h = g_2A42[i * 2] + h;
-                        pts[i].v = g_2A42[i * 2 + 1] + v;
+                        pts[i].x = g_2A42[i * 2] + h;
+                        pts[i].y = g_2A42[i * 2 + 1] + v;
                     }
                 }
                 TrapFill(pts, ConvColor(g_2ACA[color]), ConvColor(g_2AD2[color]));

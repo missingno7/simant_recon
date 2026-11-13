@@ -7,10 +7,7 @@
  * Build profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.
  */
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 static char g_6108 = 0;         /* /! option: memory check override */
 int g_610A = -1;

@@ -9,10 +9,7 @@
 
 #include "rect.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 struct TriPoints {
     int apexX;

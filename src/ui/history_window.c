@@ -9,16 +9,7 @@
 
 #include "rect.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    unsigned code;
-    int xE;
-};
+#include "event.h"
 
 extern void far win_Open();
 

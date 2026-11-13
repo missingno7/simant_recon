@@ -18,11 +18,7 @@
 
 typedef char far * far *Handle;
 
-struct Song {
-    int program[14];
-    unsigned bank[14];
-    Handle data;
-};
+#include "song.h"
 
 extern char dos_version_string[];
 

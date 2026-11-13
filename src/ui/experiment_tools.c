@@ -17,10 +17,7 @@
  * inside ConnectAll where the original has it.
  */
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 extern int far MapPlane;
 extern int far ExpLastPnt[2];

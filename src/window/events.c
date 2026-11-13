@@ -7,16 +7,7 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 long g_6364 = -1;
 int lastProxObj = -1;
@@ -47,7 +38,7 @@ void _fastcall win_dispatch_object_event(struct Event far *ev)
 
     win_LockWin(ev->code);
     obj = win_ObjAddr(ev->code);
-    switch (obj[0x21]) {
+    switch (obj[0x21]) { /* Known Obj.type; earlier shared tag changes exact code or original declaration context is unresolved. */
     case 4:
         list_process_click(ev);
         goto check;
@@ -57,20 +48,20 @@ void _fastcall win_dispatch_object_event(struct Event far *ev)
         goto check;
     case 12:
     case 18:
-        if (*(int far *)(win_WinAddr(ev->code) + 0x1c) & 2)
+        if (*(int far *)(win_WinAddr(ev->code) + 0x1c) & 2) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             win_track_move(ev);
         break;
     }
-    if (*(int far *)(obj + 0x24) & 0x800) {
+    if (*(int far *)(obj + 0x24) & 0x800) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         clip_Push();
         clip_set_screen_region();
-        if (*(int far *)(obj + 0x24) & 8) {
-            if (!(*(int far *)(obj + 0x24) & 0x20) || !(*(int far *)(obj + 0x24) & 0x400) || !(*(int far *)(obj + 0x24) & 4))
-                win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
-        } else if (*(int far *)(obj + 0x24) & 1) {
-            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
+        if (*(int far *)(obj + 0x24) & 8) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            if (!(*(int far *)(obj + 0x24) & 0x20) || !(*(int far *)(obj + 0x24) & 0x400) || !(*(int far *)(obj + 0x24) & 4)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+                win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        } else if (*(int far *)(obj + 0x24) & 1) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             timer_wait_countdown(5);
-            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4));
+            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         }
         clip_Pop();
     }
@@ -135,9 +126,9 @@ void _fastcall win_update_proximity_event(struct Event far *ev)
         win_LockWin(clip_window_z_order[0]);
         obj = hotbox_pointer_hit_id();
         if (obj != 0 && (obj & 0xff00) == clip_window_z_order[0] && lastProxObj != obj &&
-            (*(int far *)(win_ObjAddr(obj) + 0x24) & 0x10))
+            (*(int far *)(win_ObjAddr(obj) + 0x24) & 0x10)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             _win_SetProxItem(obj);
-        else if (lastProxObj != -1 && !(*(int far *)(win_ObjAddr(lastProxObj) + 0x24) & 0x400) && obj != lastProxObj)
+        else if (lastProxObj != -1 && !(*(int far *)(win_ObjAddr(lastProxObj) + 0x24) & 0x400) && obj != lastProxObj) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             _win_SetProxItem(-1);
         win_UnlockWin(clip_window_z_order[0]);
     }
@@ -236,6 +227,8 @@ void far win_FlushEvents(void)
 }
 
 #include "rect.h"
+#include "obj.h"
+#include "win.h"
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far PointInRect(int far *pt, struct Rect far *rect);
@@ -256,8 +249,8 @@ void _fastcall win_dispatch_desktop_click(struct Event far *ev)
         return;
     win_GetObjRect(top, &r);
     win_LockWin(top);
-    noClose = (*(unsigned far *)(win_WinAddr(top) + 0x1c) & 0x40) >> 6;
-    if (!PointInRect(&ev->h, &r) && (*(int far *)(win_WinAddr(top) + 0x1c) & 1))
+    noClose = (*(unsigned far *)&((struct Win far *)win_WinAddr(top))->flags & 0x40) >> 6;
+    if (!PointInRect(&ev->h, &r) && (((struct Win far *)win_WinAddr(top))->flags & 1))
         win_Close(top);
     win_UnlockWin(top);
     if (noClose == 0) {
@@ -271,10 +264,7 @@ void _fastcall win_dispatch_desktop_click(struct Event far *ev)
     }
 }
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 extern char far * far win_locked_resource_ptr(int win);
 extern void far GetMousePos(struct Pt far *pt);
@@ -303,9 +293,9 @@ int far win_focus_nearest_object(void)
     win_LockWin(top);
     w = win_locked_resource_ptr(top);
     GetMousePos(&pt);
-    for (i = 1; i < *(int far *)(w + 0xc); i++) {
-        obj = ((char far * far *)(w + 0x2c))[i];
-        if (*(int far *)(obj + 0x24) & 2) {
+    for (i = 1; i < ((struct Win far *)w)->count; i++) {
+        obj = ((struct Win far *)w)->objs[i];
+        if (*(int far *)&((struct Obj far *)obj)->flags & 2) {
             if (PointInRect((int far *)&pt, (struct Rect far *)obj)) {
                 win_UnlockWin(top);
                 return top + i;

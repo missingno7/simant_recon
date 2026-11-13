@@ -40,16 +40,7 @@ void far ui_edit_text_at_cells(int col, int row, char far *text, int maxLen, int
                   text, maxLen, flags);
 }
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 extern int clip_window_z_order;
 extern char g_4366;

@@ -8,23 +8,11 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 #include "rect.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 extern int far font_StringWidth(char far *text);
 extern int far font_FontHeight(void);
@@ -142,7 +130,7 @@ void _fastcall win_GetObjSize(int obj, struct Pt far *size)
 
     win_LockWin(obj);
     w = win_locked_resource_ptr(obj);
-    r = *((struct Rect far * far *)(w + 0x2c))[obj & 0xff];
+    r = *((struct Rect far * far *)(w + 0x2c))[obj & 0xff]; /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
     size->x = r.right - r.left;
     size->y = r.bottom - r.top;
     win_UnlockWin(obj);
@@ -151,14 +139,14 @@ void _fastcall win_GetObjSize(int obj, struct Pt far *size)
 void _fastcall win_get_obj_layout_rect(int obj, struct Rect far *r)
 {
     win_LockWin(obj);
-    *r = *(struct Rect far *)(win_ObjAddr(obj) + 8);
+    *r = *(struct Rect far *)(win_ObjAddr(obj) + 8); /* Known Obj x/y/width/height layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
 void _fastcall win_set_obj_layout_rect(int obj, struct Rect far *r)
 {
     win_LockWin(obj);
-    *(struct Rect far *)(win_ObjAddr(obj) + 8) = *r;
+    *(struct Rect far *)(win_ObjAddr(obj) + 8) = *r; /* Known Obj x/y/width/height layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
@@ -170,13 +158,13 @@ void _fastcall win_SetObjSelectableState(int obj, int state)
     o = (unsigned char far *)win_ObjAddr(obj);
     if (clip_window_z_order[0] == (obj & 0xff00)) {
         if (state == 1) {
-            if (!(o[0x24] & 2))
+            if (!(o[0x24] & 2)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                 input_register_object_rect((char far *)o, obj);
-        } else if (o[0x24] & 2) {
+        } else if (o[0x24] & 2) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             input_remove_object_rect(obj);
         }
     }
-    *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2;
+    *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
@@ -200,18 +188,18 @@ void _fastcall win_SetGroupSelectableState(int win, int group, int state)
     win_LockWin(win);
     objNum = win & 0xff00;
     w = win_locked_resource_ptr(win);
-    for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) {
-        o = ((unsigned char far * far *)(w + 0x2c))[i];
-        if (o[0x20] == group) {
+    for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) { /* Known Win.count; earlier shared tag changes exact code or original declaration context is unresolved. */
+        o = ((unsigned char far * far *)(w + 0x2c))[i]; /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (o[0x20] == group) { /* Known Obj.group; earlier shared tag changes exact code or original declaration context is unresolved. */
             if (clip_window_z_order[0] == win) {
                 if (state == 1) {
-                    if (!(o[0x24] & 2))
+                    if (!(o[0x24] & 2)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                         input_register_object_rect((char far *)o, objNum);
-                } else if (o[0x24] & 2) {
+                } else if (o[0x24] & 2) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                     input_remove_object_rect(objNum);
                 }
             }
-            *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2;
+            *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         }
     }
     win_UnlockWin(win);
@@ -233,7 +221,7 @@ void _fastcall win_ObjInv(int obj)
 
     win_LockWin(obj);
     w = win_locked_resource_ptr(obj);
-    GRectInv(((char far * far *)(w + 0x2c))[obj & 0xff]);
+    GRectInv(((char far * far *)(w + 0x2c))[obj & 0xff]); /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
@@ -243,18 +231,18 @@ void _fastcall win_SetObjSelectedStateI(int obj, int selected)
 
     win_LockWin(obj);
     o = win_ObjAddr(obj);
-    if (win_IsWinOpen(obj) && ((*(unsigned far *)(o + 0x24) & 4) >> 2) != selected) {
-        *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4;
-        if (*(unsigned far *)(o + 0x24) & 1) {
-            if (o[0x21] == 13)
-                win_DrawBitMapAtObj(*(int far *)(o + 0x26 + ((*(unsigned far *)(o + 0x24) & 4) == 0 ? 4 : 2)), o);
-            else if (o[0x21] == 5 || o[0x21] == 17)
+    if (win_IsWinOpen(obj) && ((*(unsigned far *)(o + 0x24) & 4) >> 2) != selected) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (*(unsigned far *)(o + 0x24) & 1) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            if (o[0x21] == 13) /* Known Obj.type; earlier shared tag changes exact code or original declaration context is unresolved. */
+                win_DrawBitMapAtObj(*(int far *)(o + 0x26 + ((*(unsigned far *)(o + 0x24) & 4) == 0 ? 4 : 2)), o); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            else if (o[0x21] == 5 || o[0x21] == 17) /* Known Obj.type; earlier shared tag changes exact code or original declaration context is unresolved. */
                 win_DrawObject(o);
             else
                 GRectInv(o);
         }
     }
-    *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4;
+    *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
@@ -264,8 +252,8 @@ void _fastcall win_SetObjSelectedState(int obj, int selected)
 
     win_LockWin(obj);
     o = (unsigned char far *)win_ObjAddr(obj);
-    if (o[0x24] & 0x20)
-        win_SetGroupSelectedState(obj, o[0x20], 0);
+    if (o[0x24] & 0x20) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        win_SetGroupSelectedState(obj, o[0x20], 0); /* Known Obj.group; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_SetObjSelectedStateI(obj, selected);
     win_UnlockWin(obj);
 }
@@ -289,8 +277,8 @@ void _fastcall win_SetGroupSelectedState(int win, int group, int selected)
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
     objNum = win & 0xff00;
-    for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) {
-        if (((unsigned char far * far *)(w + 0x2c))[i][0x20] == group)
+    for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) { /* Known Win.count; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (((unsigned char far * far *)(w + 0x2c))[i][0x20] == group) /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
             win_SetObjSelectedStateI(objNum, selected);
     }
     win_UnlockWin(win);
@@ -306,14 +294,16 @@ void _fastcall win_MakeGroupUnselected(int win, int group)
     win_SetGroupSelectedState(win, group, 0);
 }
 
+#include "obj.h"
+
 void _fastcall win_SetObjVisibleState(int obj, int visible)
 {
     unsigned char far *o;
 
     o = (unsigned char far *)win_ObjAddr(obj);
-    if ((o[0x24] & 1) != visible) {
-        *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ visible) & 1;
-        if ((o[0x24] & 4) && o[0x21] == 1)
+    if ((*(unsigned char far *)&((struct Obj far *)o)->flags & 1) != visible) {
+        ((struct Obj far *)o)->flags ^= (*(unsigned char far *)&((struct Obj far *)o)->flags ^ visible) & 1;
+        if ((*(unsigned char far *)&((struct Obj far *)o)->flags & 4) && ((struct Obj far *)o)->type == 1)
             GRectInv((char far *)o);
     }
 }
@@ -328,6 +318,8 @@ void _fastcall win_MakeObjInvisible(int obj)
     win_SetObjVisibleState(obj, 0);
 }
 
+#include "win.h"
+
 void _fastcall win_SetGroupVisibleState(int win, int group, int visible)
 {
     char far *w;
@@ -338,11 +330,11 @@ void _fastcall win_SetGroupVisibleState(int win, int group, int visible)
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
     objNum = win;
-    for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) {
-        o = ((unsigned char far * far *)(w + 0x2c))[i];
-        if (o[0x20] == group && (o[0x24] & 1) != visible) {
-            *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ visible) & 1;
-            if ((o[0x24] & 4) && o[0x21] != 13 && o[0x21] != 5)
+    for (i = 0; i < ((struct Win far *)w)->count; i++, objNum++) {
+        o = (unsigned char far *)((struct Win far *)w)->objs[i]; /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (((struct Obj far *)o)->group == group && (*(unsigned char far *)&((struct Obj far *)o)->flags & 1) != visible) { /* Known Obj.group; earlier shared tag changes exact code or original declaration context is unresolved. */
+            ((struct Obj far *)o)->flags ^= (*(unsigned char far *)&((struct Obj far *)o)->flags ^ visible) & 1;
+            if ((*(unsigned char far *)&((struct Obj far *)o)->flags & 4) && ((struct Obj far *)o)->type != 13 && ((struct Obj far *)o)->type != 5)
                 GRectInv((char far *)o);
         }
     }
@@ -383,14 +375,14 @@ void far win_SetObjFormatStr(int obj, ...)
     WinPrintf("\n= %s", (char far *)buf);
     vsprintf(buf, o + 0x2e, (char far *)(&obj + 1));
     len = _fstrlen(buf) + 1;
-    if ((rec = *(char far * far * far *)(o + 0x2a)) != 0) {
+    if ((rec = ((struct Obj far *)o)->text_handle) != 0) {
         if (_fstrlen(*rec) + 1 < len) {
             rec = RallocRealloc(rec, (long)(len + 4), 1);
-            *(char far * far * far *)(o + 0x2a) = rec;
+            ((struct Obj far *)o)->text_handle = rec;
         }
     } else {
         rec = Ralloc((long)(len + 8), 1, "formatStr");
-        *(char far * far * far *)(o + 0x2a) = rec;
+        ((struct Obj far *)o)->text_handle = rec;
     }
     _fstrcpy(mem_Lock(rec), buf);
     mem_Unlock(rec);
@@ -421,14 +413,14 @@ void far win_ObjFormatPrint(int obj, ...)
     WinPrintf("\n= %s", (char far *)buf);
     vsprintf(buf, o + 0x2e, (char far *)(&obj + 1));
     len = _fstrlen(buf) + 1;
-    if ((rec = *(char far * far * far *)(o + 0x2a)) != 0) {
+    if ((rec = ((struct Obj far *)o)->text_handle) != 0) {
         if (_fstrlen(*rec) + 2 < len) {
             rec = RallocRealloc(rec, (long)(len + 4), 1);
-            *(char far * far * far *)(o + 0x2a) = rec;
+            ((struct Obj far *)o)->text_handle = rec;
         }
     } else {
         rec = Ralloc((long)(len + 8), 1, "formatStr");
-        *(char far * far * far *)(o + 0x2a) = rec;
+        ((struct Obj far *)o)->text_handle = rec;
     }
     _fstrcpy(mem_Lock(rec), buf);
     font_SetFont(o[0x28]);
@@ -474,7 +466,7 @@ int _fastcall win_SetPalette(int id)
  */
 void _fastcall win_set_obj_colour_index(int obj, int color)
 {
-    win_ObjAddr(obj)[0x26] = color;
+    ((struct Obj far *)win_ObjAddr(obj))->palette = color;
 }
 
 void _fastcall win_SetObjBitmap(int obj, int bitmap)
@@ -483,9 +475,9 @@ void _fastcall win_SetObjBitmap(int obj, int bitmap)
 
     win_LockWin(obj);
     o = win_ObjAddr(obj);
-    if (o[0x21] != 6)
+    if (((struct Obj far *)o)->type != 6)
         Punt("Attempt to set bitmap on non-bitmap object");
-    *(int far *)(o + 0x28) = bitmap;
+    ((struct Obj far *)o)->payload28 = bitmap;
     win_UnlockWin(obj);
 }
 
@@ -498,7 +490,7 @@ int _fastcall win_IsWinOpen(int win)
     open = 0;
     if ((h = win_handles[win >> 8]) != 0) {
         if ((w = mem_Lock(h)) != 0) {
-            open = (*(unsigned far *)(w + 0x1c) & 0x200) >> 9;
+            open = (*(unsigned far *)&((struct Win far *)w)->flags & 0x200) >> 9;
             mem_Unlock(h);
         } else {
             win_handles[win >> 8] = 0;
@@ -519,7 +511,7 @@ int _fastcall f_22BF_0A34(int win)
     int r;
 
     win_LockWin(win);
-    r = (*(unsigned far *)(win_locked_resource_ptr(win) + 0x1c) & 0x40) >> 6;
+    r = (*(unsigned far *)&((struct Win far *)win_locked_resource_ptr(win))->flags & 0x40) >> 6;
     win_UnlockWin(win);
     return r;
 }
@@ -529,7 +521,7 @@ int _fastcall win_is_zoomed(int win)
     int r;
 
     win_LockWin(win);
-    r = (*(unsigned far *)(win_locked_resource_ptr(win) + 0x1c) & 0x80) >> 7;
+    r = (*(unsigned far *)&((struct Win far *)win_locked_resource_ptr(win))->flags & 0x80) >> 7;
     win_UnlockWin(win);
     return r;
 }
@@ -542,7 +534,7 @@ int _fastcall win_is_obj_selectable(int obj)
     int r;
 
     win_LockWin(obj);
-    r = (*(unsigned far *)(win_ObjAddr(obj) + 0x24) & 2) >> 1;
+    r = (((struct Obj far *)win_ObjAddr(obj))->flags & 2) >> 1;
     win_UnlockWin(obj);
     return r;
 }
@@ -555,7 +547,7 @@ int _fastcall win_object_count(int win)
     int n;
 
     win_LockWin(win);
-    n = *(int far *)(win_locked_resource_ptr(win) + 0xc);
+    n = ((struct Win far *)win_locked_resource_ptr(win))->count;
     win_UnlockWin(win);
     return n;
 }
@@ -567,8 +559,8 @@ int _fastcall win_set_flag_0040(int win)
 
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
-    r = (*(unsigned far *)(w + 0x1c) & 0x40) >> 6;
-    *(unsigned far *)(w + 0x1c) |= 0x40;
+    r = (*(unsigned far *)&((struct Win far *)w)->flags & 0x40) >> 6;
+    *(unsigned far *)&((struct Win far *)w)->flags |= 0x40;
     win_UnlockWin(win);
     return r;
 }
@@ -580,8 +572,8 @@ int _fastcall win_clear_flag_0040(int win)
 
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
-    r = (*(unsigned far *)(w + 0x1c) & 0x40) >> 6;
-    *(unsigned far *)(w + 0x1c) &= ~0x40;
+    r = (*(unsigned far *)&((struct Win far *)w)->flags & 0x40) >> 6;
+    *(unsigned far *)&((struct Win far *)w)->flags &= ~0x40;
     win_UnlockWin(win);
     return r;
 }
@@ -635,7 +627,7 @@ void far win_ClearObjToEOL(int obj)
 
     win_LockWin(obj);
     win_GetObjRect(obj, &r);
-    c = win_ObjAddr(obj)[0x26];
+    c = ((struct Obj far *)win_ObjAddr(obj))->palette;
     if (gfx_display_mode & 1)
         c = win_colors[c][3];
     else
@@ -659,7 +651,7 @@ void far win_clear_obj_rect(int obj)
 
     win_LockWin(obj);
     win_GetObjRect(obj, &r);
-    c = win_ObjAddr(obj)[0x26];
+    c = ((struct Obj far *)win_ObjAddr(obj))->palette;
     c = win_colors[c][2];
     c = (c & 0xf) | (((c & 0xf) << 4) | (c << 8));
     (*gfx_fill_rect_hook)(r.left, r.top, r.right, r.bottom, c);
@@ -730,8 +722,8 @@ void far win_copy_obj_layout_origin(int src, int dst)
 
     win_LockWin(src);
     win_LockWin(dst);
-    o = (int far *)(win_ObjAddr(dst) + 8);
-    r = *(struct Rect far *)(win_ObjAddr(src) + 8);
+    o = (int far *)(win_ObjAddr(dst) + 8); /* Known Obj x/y/width/height layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
+    r = *(struct Rect far *)&((struct Obj far *)win_ObjAddr(src))->x;
     o[0] = r.left;
     o[1] = r.top;
     win_Recalc(dst);

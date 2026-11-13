@@ -8,13 +8,7 @@
 
 typedef char far * far *Handle;
 
-struct Mask {
-    int type;
-    unsigned char flag;
-    unsigned char pad[5];
-    int width;
-    int height;
-};
+#include "picture.h"
 
 unsigned char g_1D0A[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x0f, 0x0f, 0x3f, 0x3f, 0x7f, 0x3f, 0x7f };
 unsigned char g_1D1A[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xf0, 0xf0, 0xfc, 0xfc, 0xfe, 0xfc, 0xfe };
@@ -95,8 +89,8 @@ Handle far MakeBalloon(char far *text, int tail)
     h = Ralloc((long)(bytes + 12), 1, "balloon");
     p = mem_Lock(h);
     ClearBuffer(p + 8, bytes);
-    *(int far *)(p + 8) = widest;
-    *(int far *)(p + 10) = height;
+    ((struct Pic far *)p)->width = widest;
+    ((struct Pic far *)p)->height = height;
     bottom = height - 8;
     cols = (widest >> 3) - 2;
     CopyChar(g_1D0A, 0, 0, p + 8);
@@ -118,12 +112,12 @@ Handle far MakeBalloon(char far *text, int tail)
         CopyChar(g_1D9A, cols - 1, bottom, p + 8);
     else
         CopyChar(g_1DAA, 1, bottom, p + 8);
-    (*(int far *)(p + 10))--;
+    (((struct Pic far *)p)->height)--;
     if (n < 1)
-        (*(int far *)(p + 10))--;
+        (((struct Pic far *)p)->height)--;
     mem_Unlock(h);
     f_171C_2276(buf);
-    rowBytes = *(int far *)(p + 8) / 8;
+    rowBytes = ((struct Pic far *)p)->width / 8;
     if (gfx_display_mode == 2)
         return ConvertMonoMaskToTandy(h);
     if (!(gfx_display_mode & 1))
@@ -144,21 +138,21 @@ extern void far mem_Free(Handle h);
 
 Handle far ConvertMonoMaskToTandy(Handle h)
 {
-    struct Mask far *src;
-    struct Mask far *dst;
+    struct Pic far *src;
+    struct Pic far *dst;
     Handle nh;
     int width;
     int height;
 
-    src = (struct Mask far *)mem_Lock(h);
+    src = (struct Pic far *)mem_Lock(h);
     width = src->width;
     height = src->height;
     nh = Ralloc((long)(src->height * src->width / 2 + 12), 1, "tdyballoon");
-    dst = (struct Mask far *)mem_Lock(nh);
+    dst = (struct Pic far *)mem_Lock(nh);
     dst->width = width;
     dst->height = height;
     dst->type = 3;
-    dst->flag = 4;
+    dst->mode = 4;
     MaskMono2Tandy((char far *)src + 8, (char far *)dst + 8);
     mem_Unlock(h);
     mem_Unlock(nh);
@@ -173,8 +167,8 @@ extern void far invert(char far *, int);
 
 Handle far ConvertMonoMaskToColor(Handle h)
 {
-    struct Mask far *src;
-    struct Mask far *dst;
+    struct Pic far *src;
+    struct Pic far *dst;
     Handle nh;
     int width;
     int height;
@@ -183,14 +177,14 @@ Handle far ConvertMonoMaskToColor(Handle h)
     char far *s;
     char far *d;
 
-    src = (struct Mask far *)mem_Lock(h);
+    src = (struct Pic far *)mem_Lock(h);
     width = src->width;
     height = src->height;
     nh = Ralloc((long)(width / 8 * height * 5 + 12), 1, "clrbln");
-    dst = (struct Mask far *)mem_Lock(nh);
+    dst = (struct Pic far *)mem_Lock(nh);
     dst->width = width;
     dst->height = height;
-    dst->flag = 4;
+    dst->mode = 4;
     dst->type = 3;
     s = (char far *)src + 12;
     d = (char far *)dst + 12;

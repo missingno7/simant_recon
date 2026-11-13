@@ -11,10 +11,7 @@
  * `top` doubles as the scanline counter (no separate y: frame 0x22).
  */
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 extern char near gfx_display_mode;
 extern void (far * near gfx_set_attributes_hook)(int a, int b, int c);

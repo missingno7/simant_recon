@@ -158,23 +158,11 @@ long far CalcScore(int far *scores)
 }
 
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 #include "rect.h"
 
-struct Pt {
-    int h;
-    int v;
-};
+#include "pt.h"
 
 extern void far f_20E8_04B6(int win, ...);
 extern void far f_218D_042B(void);
@@ -461,7 +449,7 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     lineh = font_FontHeight();
     if (picture)
         gr_BitMapSize(&size, picture);
-    h = (picture ? size.v + 2 : 0) + count * lineh + 8;
+    h = (picture ? size.y + 2 : 0) + count * lineh + 8;
     maxw = 50;
     for (i = 0; i < count; i++) {
         w = font_StringWidth(strings[i]);
@@ -476,8 +464,8 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     f_20E8_04B6(0x1e00, r.left, r.top, r.right, r.bottom);
     WinPrintf("Pict=%d", picture);
     if (picture) {
-        win_DrawBitMap((r.left + r.right - size.h) / 2, r.top, picture);
-        r.top += size.v + 2;
+        win_DrawBitMap((r.left + r.right - size.x) / 2, r.top, picture);
+        r.top += size.y + 2;
     }
     if (gfx_screen_width_pixels == 320)
         font_SetFont(3);

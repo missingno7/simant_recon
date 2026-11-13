@@ -519,20 +519,9 @@ void far DisplayCard(int card)
 
 
 
-struct Point {
-    int x;
-    int y;
-};
+#include "point.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    struct Point where;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 extern int _fastcall win_IsWinOpen(int win);
 extern void far win_Open(int win);
@@ -666,8 +655,8 @@ void far ProcInfoEvent(struct Event far *ev)
     if (ev->code != 0x502)
         return;
     found = i = 0;
-    pt.x = ev->where.x - wr.left;
-    pt.y = ev->where.y - wr.top;
+    pt.x = ev->h - wr.left;
+    pt.y = ev->v - wr.top;
     for (; i < g_8C22 && found == 0; i++) {
         if (PointInRect(&pt, &fd_4EE5_0280[i].r)) {
             if (fd_4EE5_0280[i].id == 1) {
@@ -689,7 +678,7 @@ void far ProcInfoEvent(struct Event far *ev)
             found = 1;
         }
     }
-    pt = ev->where;
+    pt = *(struct Point far *)&ev->h;
     for (i = 0; i < g_8C24 && found == 0; i++) {
         if (PointInRect(&pt, &fd_4EE5_0000[i].r)) {
             PopUpInfoWindow((fd_4EE5_0000[i].r.right - fd_4EE5_0000[i].r.left) / 2 + fd_4EE5_0000[i].r.left - wr.left,

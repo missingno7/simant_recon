@@ -9,10 +9,8 @@
 
 #include "rect.h"
 
-typedef struct {
-    int x;
-    int y;
-} Point;
+#include "point.h"
+typedef struct Point Point;
 
 typedef char far * far *Handle;
 

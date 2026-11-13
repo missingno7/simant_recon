@@ -12,10 +12,8 @@
 
 #include "rect.h"
 
-typedef struct {
-    int x;
-    int y;
-} Point;
+#include "point.h"
+typedef struct Point Point;
 
 int g_62BE = 0xa000;
 int g_62C0 = 5;

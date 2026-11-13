@@ -8,10 +8,7 @@
 
 #include "rect.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
 extern int near gfx_screen_width_pixels;
 extern void far font_SetFont(int font);

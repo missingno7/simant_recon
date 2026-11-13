@@ -64,13 +64,7 @@ void far SetPause(int value)
     SetMenuEntries();
 }
 
-struct Event {
-    int what;
-    int where[2];
-    int when[2];
-    int modifiers;
-    int message;
-};
+#include "event.h"
 
 extern void far AboutDialog(void);
 extern void far myBeginSong(int id, int arg);
@@ -96,7 +90,7 @@ void far ProcMenu(struct Event far *ev)
     int item;
     int n;
 
-    item = ev->message & 0xff;
+    item = ev->code & 0xff;
     switch (item) {
     
     case 1:

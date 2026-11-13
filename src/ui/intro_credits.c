@@ -10,16 +10,7 @@ typedef char far * far *Handle;
 
 #include "rect.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 void far DrawSimPayoff(void);
 void far AboutDialog(void);

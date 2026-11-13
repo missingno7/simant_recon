@@ -6,16 +6,7 @@
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  */
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int x6;
-    int h;
-    int v;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 struct KeyCmd {
     int key;
@@ -237,8 +228,8 @@ void far input_translate_special_key(struct Event far *ev)
 {
     int cmd;
 
-    WinPrintf("\nKEYEVENT=%x, %x", ev->code, ev->message);
-    if (ev->message & 4) {
+    WinPrintf("\nKEYEVENT=%x, %x", ev->code, ev->bios_shift_flags);
+    if (ev->bios_shift_flags & 4) {
         switch (ev->code) {
         case 0xfa05:
             YardToMap();
@@ -271,7 +262,7 @@ void far input_translate_special_key(struct Event far *ev)
             return;
         }
         input_enqueue_event_args(cmd, 0, 0, 0, 0);
-    } else if (ev->message & 8) {
+    } else if (ev->bios_shift_flags & 8) {
         switch (ev->code) {
         case 0xfa03:
             YellowCommand(3);

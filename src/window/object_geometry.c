@@ -17,20 +17,9 @@ extern void _fastcall win_UnlockWin(int win);
 
 #include "rect.h"
 
-struct Pt {
-    int x;
-    int y;
-};
+#include "pt.h"
 
-struct Win {
-    struct Rect rect;
-    char pad08[4];
-    int count;
-    char pad0E[0x1c - 0x0e];
-    int flags;
-    char pad1E[0x2c - 0x1e];
-    char far *objs[1];
-};
+#include "win.h"
 
 extern struct Pt _fastcall win_StringSize(char far *text);
 extern void far gr_BitMapSize(struct Pt far *size, int id);
@@ -54,11 +43,11 @@ void _fastcall RepointObjects(int win)
     char far *p;
 
     w = win_locked_resource_ptr(win);
-    n = *(int far *)(w + 0xc);
+    n = ((struct Win far *)w)->count;
     p = w + n * 4 + 0x2c;
     for (i = 0; i < n; i++) {
-        ((char far * far *)(w + 0x2c))[i] = p;
-        p += *(int far *)(p + 0x22);
+        ((struct Win far *)w)->objs[i] = p;
+        p += *(int far *)(p + 0x22); /* Known Obj.record_bytes; earlier shared tag changes exact code or original declaration context is unresolved. */
     }
 }
 
@@ -87,7 +76,7 @@ int _fastcall win_object_record_size(char far *obj)
     int size;
 
     size = 0x28;
-    switch (obj[0x21]) {
+    switch (obj[0x21]) { /* Known Obj.type; earlier shared tag changes exact code or original declaration context is unresolved. */
     case 0:
     case 2:
     case 15:
@@ -126,10 +115,10 @@ struct Pt _fastcall win_AutoSize(char far *obj)
 {
     static struct Pt size;
 
-    switch (obj[0x21]) {
+    switch (obj[0x21]) { /* Known Obj.type; earlier shared tag changes exact code or original declaration context is unresolved. */
     default:
-        size.x = *(int far *)(obj + 4) - *(int far *)obj;
-        size.y = *(int far *)(obj + 6) - *(int far *)(obj + 2);
+        size.x = ((struct Rect far *)obj)->right - ((struct Rect far *)obj)->left;
+        size.y = ((struct Rect far *)obj)->bottom - ((struct Rect far *)obj)->top;
         break;
     case 5:
     case 12:
@@ -139,7 +128,7 @@ struct Pt _fastcall win_AutoSize(char far *obj)
         break;
     case 6:
     case 13:
-        gr_BitMapSize(&size, *(int far *)(obj + 0x28));
+        gr_BitMapSize(&size, *(int far *)(obj + 0x28)); /* Known Obj.payload28 (bitmap id or linked object, according to type); earlier shared tag changes exact code or original declaration context is unresolved. */
         break;
     case 9:
         size = win_StringSize(obj + 0x28);
@@ -170,7 +159,7 @@ void _fastcall win_GetObjRect(int obj, struct Rect far *rect)
 
     win_LockWin(obj);
     w = win_locked_resource_ptr(obj);
-    *rect = *((struct Rect far * far *)(w + 0x2c))[obj & 0xff];
+    *rect = *(struct Rect far *)((struct Win far *)w)->objs[obj & 0xff];
     win_UnlockWin(obj);
 }
 
@@ -178,9 +167,9 @@ char far * _fastcall win_ObjAddr(int obj)
 {
     if (!win_IsWinLocked(obj))
         Punt("\nWINDOW %x NOT LOCKED DURING CALL TO win_ObjAddr!!", obj);
-    if (*(int far *)(win_locked_resource_ptr(obj) + 0xc) <= (unsigned char)obj)
+    if (((struct Win far *)win_locked_resource_ptr(obj))->count <= (unsigned char)obj)
         Punt("Attempt to get obj address outsize window");
-    return ((char far * far *)(win_locked_resource_ptr(obj) + 0x2c))[obj & 0xff];
+    return ((struct Win far *)win_locked_resource_ptr(obj))->objs[obj & 0xff];
 }
 
 char far * _fastcall win_WinObjAddr(int win, int obj)
@@ -223,7 +212,7 @@ int _fastcall _win_CalcObjElement(int axis, int win, char far *obj)
     int v;
     int kind;
 
-    switch (((int far *)(obj + 0x18))[axis]) {
+    switch (((int far *)(obj + 0x18))[axis]) { /* Known Obj.mode[axis]; earlier Obj tag changes exact code. */
     default:
         kbd_read_key_code();
         return 1;
@@ -242,14 +231,14 @@ int _fastcall _win_CalcObjElement(int axis, int win, char far *obj)
     case 4:
         kind = 3;
     get:
-        v = win_GetVal(((int far *)(obj + 0x10))[axis], kind);
+        v = win_GetVal(((int far *)(obj + 0x10))[axis], kind); /* Known Obj.operand[axis]; earlier Obj tag changes exact code. */
         break;
     case 5:
-        v = win_GetArg(win, ((int far *)(obj + 0x10))[axis]);
+        v = win_GetArg(win, ((int far *)(obj + 0x10))[axis]); /* Known Obj.operand[axis]; earlier Obj tag changes exact code. */
         break;
     }
     if (v != (int)0x8000)
-        return v + ((int far *)(obj + 8))[axis];
+        return v + ((int far *)(obj + 8))[axis]; /* Known Obj x/y/width/height layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
     return 0x8000;
 }
 
@@ -266,8 +255,8 @@ int _fastcall win_GetVal(int obj, int kind)
     if ((win >> 8) < win_numOfWindows || win >= 0x2800) {
         win_LockWin(win);
         w = win_locked_resource_ptr(win);
-        if (*(int far *)(w + 0xc) > (idx = obj & 0xff)) {
-            r = ((int far * far *)(w + 0x2c))[idx];
+        if (((struct Win far *)w)->count > (idx = obj & 0xff)) {
+            r = (int far *)((struct Win far *)w)->objs[idx];
             win_UnlockWin(win);
             return r[kind];
         }
@@ -287,7 +276,7 @@ int _fastcall win_GetArg(int win, int idx)
     windowIndex = win >> 8;
     if (win_numOfWindows <= windowIndex && win < 0x2800)
         return 0x8000;
-    result = ((int far *)(win_locked_resource_ptr(win) + 0x10))[idx];
+    result = ((int far *)(win_locked_resource_ptr(win) + 0x10))[idx]; /* Window argument words at +10; their extent and common owning member remain unknown. */
     return result;
 }
 
@@ -330,9 +319,9 @@ void _fastcall win_Recalc(int win)
 
     handle = (char far * far *)win_handles[win >> 8];
     w = mem_Lock(handle);
-    n = *(int far *)(w + 0xc);
+    n = ((struct Win far *)w)->count;
     for (i = 0; i < n; i++) {
-        r = ((struct Rect far * far *)(w + 0x2c))[i];
+        r = (struct Rect far *)((struct Win far *)w)->objs[i];
         r->left = r->right = r->top = r->bottom = 0x8000;
     }
     changed = 1;
@@ -340,8 +329,8 @@ void _fastcall win_Recalc(int win)
         unresolved = 0;
         changed = 0;
         for (i = 0; i < n; i++) {
-            obj = ((char far * far *)(w + 0x2c))[i];
-            if (obj[0x24] & 0x40) {
+            obj = ((struct Win far *)w)->objs[i];
+            if (obj[0x24] & 0x40) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                 size = win_AutoSize(obj);
                 ((int far *)obj)[6] = size.x;
                 ((int far *)obj)[7] = size.y;
@@ -359,8 +348,8 @@ void _fastcall win_Recalc(int win)
         }
     }
     for (i = 0; i < n; i++)
-        win_sort_rect_coords(((struct Rect far * far *)(w + 0x2c))[i]);
-    *(struct Rect far *)w = *((struct Rect far * far *)(w + 0x2c))[0];
+        win_sort_rect_coords((struct Rect far *)((struct Win far *)w)->objs[i]);
+    *(struct Rect far *)w = *(struct Rect far *)((struct Win far *)w)->objs[0];
     mem_Unlock(handle);
 }
 
@@ -376,22 +365,22 @@ void _fastcall win_set_frame_hit_rects(int flag, char far *w)
     struct Rect rect;
 
     rect = *(struct Rect far *)w;
-    m = (*((char far * far *)(w + 0x2c)))[0x28];
+    m = (*((struct Win far *)w)->objs)[0x28];
     rect.left += m;
     rect.right -= m;
     rect.top += m;
     rect.bottom -= m;
-    if (*(int far *)(w + 0x1c) & 4) {
+    if (((struct Win far *)w)->flags & 4) {
         input_set_bitmap_hit_rect(rect.left, rect.top, 0x64, 0xf083, flag);
         gr_BitMapSize(&size, 0x64);
         rect.left += size.x;
     }
-    if (*(int far *)(w + 0x1c) & 8) {
+    if (((struct Win far *)w)->flags & 8) {
         gr_BitMapSize(&size, 0x70);
         input_set_bitmap_hit_rect(rect.right - size.x, rect.bottom - size.y, 0x70, 0xf084, flag);
     }
-    if (*(int far *)(w + 0x1c) & 0x100) {
-        if (*(int far *)(w + 0x1c) & 0x80) {
+    if (((struct Win far *)w)->flags & 0x100) {
+        if (((struct Win far *)w)->flags & 0x80) {
             gr_BitMapSize(&size, 0x66);
             input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x66, 0xf085, flag);
         } else {
@@ -399,9 +388,9 @@ void _fastcall win_set_frame_hit_rects(int flag, char far *w)
             input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x67, 0xf085, flag);
         }
     }
-    if (*(int far *)(w + 0x1c) & 0x10)
+    if (((struct Win far *)w)->flags & 0x10)
         input_set_bitmap_hit_rect(rect.left, rect.top, 0x65, 0xf088, flag);
-    if (*(int far *)(w + 0x1c) & 0x400) {
+    if (((struct Win far *)w)->flags & 0x400) {
         gr_BitMapSize(&size, 0x69);
         input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x69, 0xf082, flag);
     }
@@ -410,6 +399,8 @@ void _fastcall win_set_frame_hit_rects(int flag, char far *w)
 extern void far input_register_object_rect(char far *obj, int objNum);
 extern void far input_register_proximity_rect(char far *w, int id);
 extern void far win_reset_proximity_object(void);
+
+#include "obj.h"
 
 void _fastcall win_activate_pointer_regions(int win)
 {
@@ -426,9 +417,9 @@ void _fastcall win_activate_pointer_regions(int win)
     dirty = 0;
     for (i = 0; i < n; i++) {
         obj = w->objs[i];
-        if (obj[0x24] & 2)
+        if (*(unsigned char far *)&((struct Obj far *)obj)->flags & 2)
             input_register_object_rect(obj, win + i);
-        if (obj[0x24] & 0x10)
+        if (*(unsigned char far *)&((struct Obj far *)obj)->flags & 0x10)
             dirty = 1;
     }
     win_set_frame_hit_rects(1, (char far *)w);
@@ -455,9 +446,9 @@ void _fastcall win_deactivate_pointer_regions(int win)
     n = w->count;
     for (i = 0; i < n; i++) {
         obj = w->objs[i];
-        if (obj[0x24] & 2)
+        if (*(unsigned char far *)&((struct Obj far *)obj)->flags & 2)
             input_remove_object_rect(win + i);
-        if (obj[0x24] & 0x10)
+        if (*(unsigned char far *)&((struct Obj far *)obj)->flags & 0x10)
             dirty = 1;
     }
     win_set_frame_hit_rects(0, (char far *)w);

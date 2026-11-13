@@ -198,10 +198,8 @@ void far SetYardMode(int newMode)
     SetMapTitle();
 }
 
-typedef struct {
-    int x;
-    int y;
-} Point;
+#include "point.h"
+typedef struct Point Point;
 
 extern int far EditRows;
 extern int far EditColumns;
@@ -441,15 +439,7 @@ void far XferPatch(void)
 
 #include "rect.h"
 
-struct Event {
-    int what;
-    int message;
-    int x4;
-    int modifiers;
-    Point where;
-    int code;
-    int xE;
-};
+#include "event.h"
 
 extern void far * far * far WindPromptStrs;
 extern void far EditMessage(void far *, long, int);
@@ -513,7 +503,7 @@ void far PlaceQueenInYard(void)
         done = 0;
         while (!done) {
             if (win_GetEvent(&ev) && ev.code == 0x1902) {
-                pt = ev.where;
+                pt = *(Point *)&ev.h;
                 done = 1;
             } else {
                 GetMousePos(&pt);

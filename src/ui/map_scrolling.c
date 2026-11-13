@@ -8,10 +8,8 @@
  * MapPnt is clamped to 0..hScrollMax/0F38; view centres are remembered per plane.
  */
 
-typedef struct {
-    int x;
-    int y;
-} Point;
+#include "point.h"
+typedef struct Point Point;
 
 int far goStepRight(int n);
 int far goStepLeft(int n);

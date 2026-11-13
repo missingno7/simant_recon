@@ -7,14 +7,7 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs.
  */
 
-struct Chan {
-    char type;
-    char num;
-    char c2;
-    char c3;
-    char c4;
-    char c5;
-};
+#include "chan.h"
 
 struct Voice {
     int a;
@@ -104,10 +97,10 @@ void far snd_reset_channel_tables(void)
     for (i = 0; i < 0x21; i++) {
         snd_voice_slots[i].type = 0;
         snd_voice_slots[i].num = 0;
-        snd_voice_slots[i].c4 = 0;
-        snd_voice_slots[i].c5 = 15;
-        snd_voice_slots[i].c2 = 0;
-        snd_voice_slots[i].c3 = -1;
+        snd_voice_slots[i].note = 0;
+        snd_voice_slots[i].age = 15;
+        snd_voice_slots[i].priority = 0;
+        snd_voice_slots[i].instrument = -1;
     }
     snd_driver_capabilities[1] = 0;
     snd_driver_capabilities[2] = 0;

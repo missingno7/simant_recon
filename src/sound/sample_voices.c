@@ -7,15 +7,9 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
-struct Sample {
-    char far *data;
-    unsigned len;
-    unsigned loop;
-    char looped;
-    unsigned char octave;
-    int tune;
-    int loaded;
-};
+#pragma pack(1)
+#include "sample.h"
+#pragma pack()
 
 struct SndChan {
     unsigned pos;
@@ -29,10 +23,7 @@ struct SndChan {
     struct Sample far *owner;
 };
 
-struct Instr {
-    int a;
-    unsigned char far *p;
-};
+#include "instr.h"
 
 char far *snd_decode_delta_nibbles(unsigned char far *src, char far *dst, unsigned n);
 void far snd_start_sample_voice(struct Sample far *s, unsigned step, int vol, int ch);
