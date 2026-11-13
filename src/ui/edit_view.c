@@ -1032,9 +1032,9 @@ void far DrawEditGraphs(void)
 }
 
 extern char far * far _fstrcpy(char far *dest, char far *src);
-extern char far * far * far fd_50F6_0368;
+extern char far * far * far MiscStrs;
 extern char far * far _fstrcat(char far *dest, char far *src);
-extern char far * far * far fd_50F6_0324;
+extern char far * far * far ScenarioNameStrs;
 extern void far win_SetObjFormatStr(int obj, char far *text);
 extern void _fastcall win_DrawTitle(int obj);
 
@@ -1043,8 +1043,8 @@ void far SetEditWinTitle(void)
     char buf[80];
 
     _fstrcpy(buf, "SimAnt");
-    _fstrcat(buf, fd_50F6_0368[15]);
-    _fstrcat(buf, fd_50F6_0324[CurGameType]);
+    _fstrcat(buf, MiscStrs[15]);
+    _fstrcat(buf, ScenarioNameStrs[CurGameType]);
     win_SetObjFormatStr(1, buf);
     if (win_IsWinOpen(0)) {
         clip_Push();
@@ -1111,10 +1111,10 @@ extern int far fd_3D57_07B2;
 extern long far fd_3D57_098E;
 extern int far SRand64(void);
 extern int far SRand2(void);
-extern int far fd_50F6_0D6E;
+extern int far WantSpiderBalloon;
 extern int far fd_3D57_0992;
-extern int far fd_50F6_0EB4;
-extern char far * far * far fd_50F6_10B4;
+extern int far LastSMode;
+extern char far * far * far SpiderMsgs;
 extern char far Dy8[8];
 extern char far Dx8[8];
 extern int far SRand32(void);
@@ -1220,20 +1220,20 @@ void far DrawSpider(void)
         if (GamePaused == 0 && fd_3D57_098E < TickCount()) {
             fd_3D57_098E = TickCount() + SRand64() + 180;
             if (SRand2() == 0) {
-                fd_50F6_0D6E = 1;
+                WantSpiderBalloon = 1;
                 if (++fd_3D57_0992 >= 5)
                     fd_3D57_0992 = 0;
             } else
-                fd_50F6_0D6E = 0;
+                WantSpiderBalloon = 0;
         }
-        if (SMode == fd_50F6_0EB4 && SMode <= 4) {
-            if (fd_50F6_0D6E)
+        if (SMode == LastSMode && SMode <= 4) {
+            if (WantSpiderBalloon)
                 AddMsgBalloon((Dx8[SpidDir] << 3) + SpidX, (Dy8[SpidDir] << 3) + SpidY, 1, 10,
-                              fd_50F6_10B4[SMode * 5 + fd_3D57_0992]);
+                              SpiderMsgs[SMode * 5 + fd_3D57_0992]);
         } else {
             fd_3D57_098E = TickCount() + SRand32() + 30;
-            fd_50F6_0D6E = 0;
-            fd_50F6_0EB4 = SMode;
+            WantSpiderBalloon = 0;
+            LastSMode = SMode;
         }
     }
 }
@@ -1751,10 +1751,10 @@ void far RestBalloons(int x, int y, int plane)
 }
 
 extern int far fd_50F6_1092;
-extern Pnt far fd_50F6_04C8[];
-extern int far fd_50F6_04F6[];
-extern int far fd_50F6_04E6[];
-extern char far * far fd_50F6_04A6[];
+extern Pnt far CurBalloonPnts[];
+extern int far CurBalloonPlane[];
+extern int far CurBalloonFlags[];
+extern char far * far CurBalloonMsgs[];
 
 void far AddMsgBalloon(int x, int y, int plane, int style, char far *msg)
 {
@@ -1772,37 +1772,37 @@ void far AddMsgBalloon(int x, int y, int plane, int style, char far *msg)
         return;
     if (!BalloonIsVisible(plane, tx, ty))
         return;
-    fd_50F6_04C8[fd_50F6_1092].x = style == 10 ? x : g_19BE * x + 8;
-    fd_50F6_04C8[fd_50F6_1092].y = style == 10 ? y : g_19C0 * y + 8;
-    fd_50F6_04F6[fd_50F6_1092] = plane;
-    fd_50F6_04E6[fd_50F6_1092] = style;
-    fd_50F6_04A6[fd_50F6_1092] = msg;
+    CurBalloonPnts[fd_50F6_1092].x = style == 10 ? x : g_19BE * x + 8;
+    CurBalloonPnts[fd_50F6_1092].y = style == 10 ? y : g_19C0 * y + 8;
+    CurBalloonPlane[fd_50F6_1092] = plane;
+    CurBalloonFlags[fd_50F6_1092] = style;
+    CurBalloonMsgs[fd_50F6_1092] = msg;
     fd_50F6_1092++;
 }
 
-extern int far fd_50F6_1046;
-extern int far fd_50F6_0F3C;
+extern int far WantBFightBalloon;
+extern int far BFightBalloonIndex;
 extern char far * far * far BFightMsgs;
-extern int far fd_50F6_1064;
-extern int far fd_50F6_0FF8;
+extern int far WantRFightBalloon;
+extern int far RFightBalloonIndex;
 extern char far * far * far RFightMsgs;
-extern int far fd_50F6_104A;
-extern long far fd_50F6_050C;
-extern long far fd_50F6_0732;
-extern long far fd_50F6_059A;
-extern long far fd_50F6_0620;
+extern int far WantEggBalloon;
+extern long far BFightBalloonTicks;
+extern long far RFightBalloonTicks;
+extern long far EggBalloonTicks;
+extern long far QueenBalloonTicks;
 extern int far SRand4(void);
 extern int far fd_50F6_0F7A;
 extern char far * far * far EggMsgs;
-extern int far fd_50F6_1062;
-extern int far fd_50F6_0FC0;
+extern int far WantQueenBalloon;
+extern int far QueenBalloonIndex;
 extern char far * far * far QueenMsgs;
-extern int far fd_50F6_107C;
-extern int far fd_50F6_103A;
+extern int far WantRestBalloon;
+extern int far RestBalloonIndex;
 extern char far * far * far RestMsgs;
 extern void far font_SetFont(int font);
 extern Handle far MakeBalloon(char far *msg, int flags);
-extern long far fd_50F6_07C4;
+extern long far RestBalloonTicks;
 extern Handle far mem_Alloc(long size, int flags, char far *name);
 extern void (far * far fd_50F6_37EE)(void far *a, void far *b, void far *c, void far *d);
 
@@ -1817,94 +1817,94 @@ void far DrawCurBalloons(void)
         CurFightPnt = LastFightPnt;
         CurFightPlane = LastFightPlane;
         FightBalloonCnt++;
-        fd_50F6_0732 = 0;
-        fd_50F6_050C = 0;
+        RFightBalloonTicks = 0;
+        BFightBalloonTicks = 0;
     }
     if (FightBalloonCnt > 0) {
         if (GamePaused == 0) {
-            if (fd_50F6_050C < TickCount()) {
-                fd_50F6_050C = TickCount() + SRand32() + 60;
+            if (BFightBalloonTicks < TickCount()) {
+                BFightBalloonTicks = TickCount() + SRand32() + 60;
                 if (SRand2() == 0) {
-                    fd_50F6_1046 = 1;
-                    if (BFightMsgs[++fd_50F6_0F3C] == 0)
-                        fd_50F6_0F3C = 0;
+                    WantBFightBalloon = 1;
+                    if (BFightMsgs[++BFightBalloonIndex] == 0)
+                        BFightBalloonIndex = 0;
                 } else
-                    fd_50F6_1046 = 0;
+                    WantBFightBalloon = 0;
             }
-            if (fd_50F6_0732 < TickCount()) {
-                fd_50F6_0732 = TickCount() + SRand32() + 60;
+            if (RFightBalloonTicks < TickCount()) {
+                RFightBalloonTicks = TickCount() + SRand32() + 60;
                 if (SRand2() == 0) {
-                    fd_50F6_1064 = 1;
-                    if (RFightMsgs[++fd_50F6_0FF8] == 0)
-                        fd_50F6_0FF8 = 0;
+                    WantRFightBalloon = 1;
+                    if (RFightMsgs[++RFightBalloonIndex] == 0)
+                        RFightBalloonIndex = 0;
                 } else
-                    fd_50F6_1064 = 0;
+                    WantRFightBalloon = 0;
             }
         }
-        if (fd_50F6_1046)
-            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 0, BFightMsgs[fd_50F6_0F3C]);
-        if (fd_50F6_1064)
-            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 1, RFightMsgs[fd_50F6_0FF8]);
+        if (WantBFightBalloon)
+            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 0, BFightMsgs[BFightBalloonIndex]);
+        if (WantRFightBalloon)
+            AddMsgBalloon(CurFightPnt.x, CurFightPnt.y, CurFightPlane, 1, RFightMsgs[RFightBalloonIndex]);
     }
     if (EggBalloonCnt == 0 && LastEggPnt.x >= 0 && LastEggPnt.y >= 0) {
         CurEggPnt = LastEggPnt;
         CurEggPlane = LastEggPlane;
         EggBalloonCnt++;
-        fd_50F6_059A = 0;
-        fd_50F6_104A = 0;
+        EggBalloonTicks = 0;
+        WantEggBalloon = 0;
     }
     if (EggBalloonCnt > 0) {
-        if (GamePaused == 0 && fd_50F6_059A < TickCount()) {
-            fd_50F6_059A = TickCount() + SRand32() + 170;
+        if (GamePaused == 0 && EggBalloonTicks < TickCount()) {
+            EggBalloonTicks = TickCount() + SRand32() + 170;
             if (SRand4() == 0) {
-                fd_50F6_104A = 1;
+                WantEggBalloon = 1;
                 if (EggMsgs[++fd_50F6_0F7A] == 0)
                     fd_50F6_0F7A = 0;
             } else
-                fd_50F6_104A = 0;
+                WantEggBalloon = 0;
         }
-        if (fd_50F6_104A)
+        if (WantEggBalloon)
             AddMsgBalloon(CurEggPnt.x, CurEggPnt.y, CurEggPlane, 2, EggMsgs[fd_50F6_0F7A]);
     }
     if (QueenBalloonCnt == 0 && LastQueenPnt.x >= 0 && LastQueenPnt.y >= 0) {
         CurQueenPnt = LastQueenPnt;
         CurQueenPlane = LastQueenPlane;
         QueenBalloonCnt++;
-        fd_50F6_0620 = 0;
-        fd_50F6_1062 = 0;
+        QueenBalloonTicks = 0;
+        WantQueenBalloon = 0;
     }
     if (QueenBalloonCnt > 0) {
-        if (GamePaused == 0 && fd_50F6_0620 < TickCount()) {
-            fd_50F6_0620 = TickCount() + SRand32() + 180;
+        if (GamePaused == 0 && QueenBalloonTicks < TickCount()) {
+            QueenBalloonTicks = TickCount() + SRand32() + 180;
             if (SRand4() == 0) {
-                fd_50F6_1062 = 1;
-                if (QueenMsgs[++fd_50F6_0FC0] == 0)
-                    fd_50F6_0FC0 = 0;
+                WantQueenBalloon = 1;
+                if (QueenMsgs[++QueenBalloonIndex] == 0)
+                    QueenBalloonIndex = 0;
             } else
-                fd_50F6_1062 = 0;
+                WantQueenBalloon = 0;
         }
-        if (fd_50F6_1062)
-            AddMsgBalloon(CurQueenPnt.x, CurQueenPnt.y, CurQueenPlane, 2, QueenMsgs[fd_50F6_0FC0]);
+        if (WantQueenBalloon)
+            AddMsgBalloon(CurQueenPnt.x, CurQueenPnt.y, CurQueenPlane, 2, QueenMsgs[QueenBalloonIndex]);
     }
     if (RestBalloonCnt == 0 && LastRestPnt.x >= 0 && LastRestPnt.y >= 0) {
         CurRestPnt = LastRestPnt;
         CurRestPlane = LastRestPlane;
         RestBalloonCnt++;
-        fd_50F6_07C4 = 0;
-        fd_50F6_107C = 0;
+        RestBalloonTicks = 0;
+        WantRestBalloon = 0;
     }
     if (RestBalloonCnt > 0) {
-        if (GamePaused == 0 && fd_50F6_07C4 < TickCount()) {
-            fd_50F6_07C4 = TickCount() + SRand64() + 120;
+        if (GamePaused == 0 && RestBalloonTicks < TickCount()) {
+            RestBalloonTicks = TickCount() + SRand64() + 120;
             if (SRand2() == 0) {
-                fd_50F6_107C = 1;
-                if (RestMsgs[++fd_50F6_103A] == 0)
-                    fd_50F6_103A = 0;
+                WantRestBalloon = 1;
+                if (RestMsgs[++RestBalloonIndex] == 0)
+                    RestBalloonIndex = 0;
             } else
-                fd_50F6_107C = 0;
+                WantRestBalloon = 0;
         }
-        if (fd_50F6_107C)
-            AddMsgBalloon(CurRestPnt.x, CurRestPnt.y, CurRestPlane, 2, RestMsgs[fd_50F6_103A]);
+        if (WantRestBalloon)
+            AddMsgBalloon(CurRestPnt.x, CurRestPnt.y, CurRestPlane, 2, RestMsgs[RestBalloonIndex]);
     }
 }
 
@@ -1973,14 +1973,14 @@ void far DrawBalloons(void)
         edit_set_viewport_clip();
     balTileRect.left = 500;
     for (i = 0, shown = 0; i < fd_50F6_1092; i++) {
-        if (shown >= 1 || fd_50F6_04A6[i] == 0)
+        if (shown >= 1 || CurBalloonMsgs[i] == 0)
             break;
-        pos = fd_50F6_04C8[i];
-        if (!BalloonIsVisible(fd_50F6_04F6[i], pos.x / g_19BE, pos.y / g_19C0))
+        pos = CurBalloonPnts[i];
+        if (!BalloonIsVisible(CurBalloonPlane[i], pos.x / g_19BE, pos.y / g_19C0))
             continue;
-        WinPrintf("Vis message %s at %d,%d", fd_50F6_04A6[i], pos.x, pos.y);
+        WinPrintf("Vis message %s at %d,%d", CurBalloonMsgs[i], pos.x, pos.y);
         shown++;
-        hs[i] = h = MakeBalloon(fd_50F6_04A6[i], 0);
+        hs[i] = h = MakeBalloon(CurBalloonMsgs[i], 0);
         pic = (int far *)mem_Lock(h);
         by = pos.y - pic[5] - 4;
         bx = pos.x + 4;

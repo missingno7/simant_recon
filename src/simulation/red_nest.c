@@ -12,14 +12,14 @@ extern unsigned char far RlistX[];
 extern unsigned char far RlistY[];
 extern unsigned char far RlistT[];
 extern unsigned char far RlistM[];
-extern int far fd_50F6_0D72[20];
+extern int far TemRModePop[20];
 extern int far SRand256(void);
 extern int far SRand32(void);
 extern int far HealthR;
 extern unsigned char far LifeR[64][64];
 extern long far RAntsExpired;
 extern int far FlyAwayR;
-extern int far fd_50F6_0D40[20];
+extern int far TemBModePop[20];
 extern int far f_0EC1_032C(int x, int y, int ant);
 extern int far GetWinner(int a, int b);
 extern unsigned char far RlistS[];
@@ -137,7 +137,7 @@ void far DoNestAntR(int x, int y, int attr)
     caste = (attr & 0x78) >> 3;
     if (attr & 0x80) {
         t = RlistM[Tindex];
-        fd_50F6_0D72[t]++;
+        TemRModePop[t]++;
         if (SRand256() == 0 && t != 9 && SRand32() > HealthR) {
             RlistT[Tindex] = 0;
             LifeR[x][y] = 0;
@@ -201,7 +201,7 @@ void far DoNestAntR(int x, int y, int attr)
         }
     } else {
         task = RlistM[Tindex];
-        fd_50F6_0D40[task]++;
+        TemBModePop[task]++;
         if (attr < 8) {
             RlistT[Tindex] = 0;
             LifeR[RlistX[Tindex]][RlistY[Tindex]] = 0;

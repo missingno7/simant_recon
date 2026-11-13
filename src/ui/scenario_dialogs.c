@@ -265,8 +265,8 @@ extern char far * far * far WindPromptStrs;
 extern int near g_3DB2;
 extern void far font_SetFont(int font);
 extern void far f_22BF_0D53(int obj, char far *format, ...);
-extern char far * far * far fd_50F6_0368;
-extern char far * far * far fd_50F6_0324;
+extern char far * far * far MiscStrs;
+extern char far * far * far ScenarioNameStrs;
 
 void far ScoreDialog(void)
 {
@@ -291,21 +291,21 @@ void far ScoreDialog(void)
             f_22BF_0D53(0x1802 + i, "%d%%", scores[i]);
     } else {
         for (i = 4; i < 8; i++)
-            f_22BF_0D53(0x1802 + i, fd_50F6_0368[16]);
+            f_22BF_0D53(0x1802 + i, MiscStrs[16]);
     }
     if (g_3DB2 == 320)
         font_SetFont(3);
     else
         font_SetFont(4);
     if (CurGameType == 3) {
-        f_22BF_0D53(0x180a, fd_50F6_0368[17]);
-        f_22BF_0D53(0x180b, fd_50F6_0368[18]);
+        f_22BF_0D53(0x180a, MiscStrs[17]);
+        f_22BF_0D53(0x180b, MiscStrs[18]);
         ev.code = 0;
     } else {
         title[0] = 0;
-        _fstrcat(title, fd_50F6_0368[13]);
-        _fstrcat(title, fd_50F6_0324[CurGameType]);
-        _fstrcat(title, fd_50F6_0368[14]);
+        _fstrcat(title, MiscStrs[13]);
+        _fstrcat(title, ScenarioNameStrs[CurGameType]);
+        _fstrcat(title, MiscStrs[14]);
         f_22BF_0D53(0x180a, title);
         f_22BF_0D53(0x180b, "%ld", OverallScore);
         ev.code = 0;
@@ -509,7 +509,7 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
 
 extern int far BlackWon;
 extern void far f_00DF_00B1(int id, int arg);
-extern char far * far * far fd_50F6_0328;
+extern char far * far * far EndGameRatingStrs;
 extern int far f_00DF_0138(void);
 extern int far SRand2(void);
 extern int far o15_384C_03C6(int a);
@@ -548,9 +548,9 @@ void far EndGameDialog(void)
         font_SetFont(2);
     else
         font_SetFont(4);
-    f_22BF_0D53(0x402, fd_50F6_0324[CurGameType]);
+    f_22BF_0D53(0x402, ScenarioNameStrs[CurGameType]);
     f_22BF_0D53(0x403, "%ld", score);
-    f_22BF_0D53(0x404, fd_50F6_0328[level]);
+    f_22BF_0D53(0x404, EndGameRatingStrs[level]);
     played = 0;
     font_SetFont(0);
     f_00F8_02F7(100);

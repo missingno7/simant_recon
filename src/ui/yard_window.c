@@ -638,14 +638,14 @@ extern int far MapMode;
 extern int far SwarmCentY;
 extern int far SwarmCentX;
 extern int far SwarmCntB;
-extern signed char far fd_50F6_0F46[];
-extern signed char far fd_50F6_0F84[];
+extern signed char far SwarmXB[];
+extern signed char far SwarmYB[];
 int far TooFar(int x, int y);
 extern int far SRand16(void);
 extern int far SwarmCntR;
 extern int far QueenStorageR;
-extern signed char far fd_50F6_0FC6[];
-extern signed char far fd_50F6_1008[];
+extern signed char far SwarmXR[];
+extern signed char far SwarmYR[];
 
 void far DrawSwarm(void)
 {
@@ -657,14 +657,14 @@ void far DrawSwarm(void)
         for (i = 0; i < SwarmCntB; i++) {
             if (i >= 16 || QueenStorageB <= i)
                 break;
-            if (TooFar(fd_50F6_0F46[i], fd_50F6_0F84[i])) {
-                fd_50F6_0F46[i] = SRand16() - 10;
-                fd_50F6_0F84[i] = SRand16() - 10;
+            if (TooFar(SwarmXB[i], SwarmYB[i])) {
+                SwarmXB[i] = SRand16() - 10;
+                SwarmYB[i] = SRand16() - 10;
             }
-            fd_50F6_0F46[i] += SRand1(3) - 1;
-            x = fd_50F6_0F46[i] + SwarmCentX;
-            fd_50F6_0F84[i] += SRand1(3) - 1;
-            y = fd_50F6_0F84[i] + SwarmCentY;
+            SwarmXB[i] += SRand1(3) - 1;
+            x = SwarmXB[i] + SwarmCentX;
+            SwarmYB[i] += SRand1(3) - 1;
+            y = SwarmYB[i] + SwarmCentY;
             if (g_3DB2 == 320) {
                 x = (x >> 1) + 5;
                 y = (y >> 1) + 6;
@@ -684,12 +684,12 @@ void far DrawSwarm(void)
         for (i = 0; i < SwarmCntR; i++) {
             if (i >= 16 || QueenStorageR <= i)
                 break;
-            if (TooFar(fd_50F6_0FC6[i], fd_50F6_1008[i]))
-                fd_50F6_1008[i] = fd_50F6_0FC6[i] = 0;
-            fd_50F6_0FC6[i] += SRand1(3) - 1;
-            x = fd_50F6_0FC6[i] + SwarmCentX;
-            fd_50F6_1008[i] += SRand1(3) - 1;
-            y = fd_50F6_1008[i] + SwarmCentY;
+            if (TooFar(SwarmXR[i], SwarmYR[i]))
+                SwarmYR[i] = SwarmXR[i] = 0;
+            SwarmXR[i] += SRand1(3) - 1;
+            x = SwarmXR[i] + SwarmCentX;
+            SwarmYR[i] += SRand1(3) - 1;
+            y = SwarmYR[i] + SwarmCentY;
             if (g_3DB2 == 320) {
                 x = (x >> 1) + 5;
                 y = (y >> 1) + 6;

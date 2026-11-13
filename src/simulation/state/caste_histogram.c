@@ -11,4 +11,4 @@
  * state or adjacency is established by this functional scratch allocation.
  */
 
-int far fd_50F6_0EB6[32];
+int far TemCensus[32];

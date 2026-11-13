@@ -304,7 +304,9 @@ that remain open and the freshly compiled execution controls.
   ordinals, the order between turns of 64. RTLink/Plus 4.14 and 6.10 allocate communal
   variables in first-encounter order; the release that linked the game is not in hand, so the
   linker half is a hypothesis. The 45 objects without a name get a bucket and a checksum
-  interval that a proposed name must satisfy. The order is unrelated to the relocation
+  interval that a proposed name must satisfy. Applied 2026-11-13: 35 of the 37 Tier B data-alignment
+  proposals fit the run and the Win16 object size and are recorded as CONFIRMED; FracSineTab
+  and EggBalloonIndex fit the run but not the size and stay address-named. The order is unrelated to the relocation
   target order and to the Windows build's order. The other 107 far objects and the 18 near
   ones are outside this fit.
 * **A function definition takes a declaration number too, and unowned bytes can be whole

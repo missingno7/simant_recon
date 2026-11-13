@@ -662,10 +662,10 @@ extern unsigned char far LastRedEgg[];
 extern unsigned char far MapPnt[];
 extern unsigned char far RMapPnt[];
 extern unsigned char far YMapPnt[];
-extern unsigned char far fd_50F6_0F46[];
-extern unsigned char far fd_50F6_0FC6[];
-extern unsigned char far fd_50F6_0F84[];
-extern unsigned char far fd_50F6_1008[];
+extern unsigned char far SwarmXB[];
+extern unsigned char far SwarmXR[];
+extern unsigned char far SwarmYB[];
+extern unsigned char far SwarmYR[];
 extern unsigned char far DeadX[];
 extern unsigned char far DeadY[];
 extern unsigned char far LionListM[];
@@ -681,7 +681,7 @@ extern unsigned char far modeLevels[];
 extern unsigned char far modeSetLevels[];
 extern unsigned char far CastePopB[];
 extern unsigned char far CastePopR[];
-extern unsigned char far fd_50F6_0334[];
+extern unsigned char far GrassMap[];
 extern unsigned char far H_ADead[];
 extern unsigned char far H_BFood[];
 extern unsigned char far H_BHeal[];
@@ -959,10 +959,10 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 4, 1, (void far *)&MapPnt },
     { 4, 1, (void far *)&RMapPnt },
     { 4, 1, (void far *)&YMapPnt },
-    { 1, 50, (void far *)&fd_50F6_0F46 },
-    { 1, 50, (void far *)&fd_50F6_0FC6 },
-    { 1, 50, (void far *)&fd_50F6_0F84 },
-    { 1, 50, (void far *)&fd_50F6_1008 },
+    { 1, 50, (void far *)&SwarmXB },
+    { 1, 50, (void far *)&SwarmXR },
+    { 1, 50, (void far *)&SwarmYB },
+    { 1, 50, (void far *)&SwarmYR },
     { 1, 100, (void far *)&DeadX },
     { 1, 100, (void far *)&DeadY },
     { 1, 10, (void far *)&LionListM },
@@ -978,7 +978,7 @@ struct SaveRec far fd_4E4B_0000[308] = {
     { 2, 12, (void far *)&modeSetLevels },
     { 2, 6, (void far *)&CastePopB },
     { 2, 6, (void far *)&CastePopR },
-    { 2, 12, (void far *)&fd_50F6_0334 },
+    { 2, 12, (void far *)&GrassMap },
     { 2, 64, (void far *)&H_ADead },
     { 2, 64, (void far *)&H_BFood },
     { 2, 64, (void far *)&H_BHeal },

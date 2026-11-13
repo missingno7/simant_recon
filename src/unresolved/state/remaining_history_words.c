@@ -9,7 +9,7 @@
  */
 
 int far CurGameType;
-int far fd_50F6_0EB4;
+int far LastSMode;
 int far EggBalloonCnt;
 int far MeCrazyDir;
 int far MeCrazyRot;
@@ -22,7 +22,7 @@ int far RebornY;
 int far RestBalloonCnt;
 int far SpidY;
 int far hScrollMax;
-int far fd_50F6_0F3C;
+int far BFightBalloonIndex;
 int far YellowDied;
 int far fd_50F6_0F7A;
-int far fd_50F6_0FC0;
+int far QueenBalloonIndex;

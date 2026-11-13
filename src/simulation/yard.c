@@ -166,7 +166,7 @@ extern unsigned char far YMapPopB[12][16];
 extern int far BColoniesKilled;
 extern unsigned char far YMapPopR[12][16];
 extern int far RColoniesKilled;
-extern int far fd_50F6_0334[12];
+extern int far GrassMap[12];
 
 /* InitSimYard */
 void far InitSimYard(void)
@@ -479,8 +479,8 @@ int far NotMowed(int x, int y)
     int bit;
 
     bit = 1 << y;
-    if (fd_50F6_0334[x] & bit) {
-        fd_50F6_0334[x] -= bit;
+    if (GrassMap[x] & bit) {
+        GrassMap[x] -= bit;
         return 1;
     }
     return 0;
@@ -499,11 +499,11 @@ void far InitGrassMap(void)
 {
     int i;
 
-    fd_50F6_0334[0] = 0;
-    fd_50F6_0334[1] = 0;
-    fd_50F6_0334[2] = 0;
+    GrassMap[0] = 0;
+    GrassMap[1] = 0;
+    GrassMap[2] = 0;
     for (i = 3; i < 12; ++i)
-        fd_50F6_0334[i] = -1;
+        GrassMap[i] = -1;
 }
 
 

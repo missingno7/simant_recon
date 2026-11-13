@@ -55,7 +55,7 @@ extern unsigned char far BlistM[];
 extern unsigned char far BlistS[];
 extern int far ListIndexA;
 extern int far ListIndexB;
-extern int far fd_50F6_0D40[20];
+extern int far TemBModePop[20];
 extern int far ListIndexR;
 extern unsigned char far RlistT[];
 extern unsigned char far RlistM[];
@@ -354,7 +354,7 @@ void far UnRecruit(int all)
     int i;
     int type;
 
-    n = fd_50F6_0D40[6];
+    n = TemBModePop[6];
     if (all == 0)
         n = n / 2;
     else

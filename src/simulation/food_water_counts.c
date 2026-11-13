@@ -63,7 +63,7 @@ extern int far ListIndexA;
 extern int far ListIndexB;
 extern int far ListIndexR;
 extern int far CurGameType;
-extern int far fd_50F6_0EB6[32];
+extern int far TemCensus[32];
 extern int far TERRAINset;
 extern int far fd_50F6_0F3A;
 extern int far FoodA;
@@ -99,34 +99,34 @@ void far CountAnts(void)
     CastePopR[0] = 0;
     CastePopB[0] = 0;
     for (i = 0; i < 32; i++)
-        fd_50F6_0EB6[i] = 0;
+        TemCensus[i] = 0;
     for (n = ListIndexA; n > 0; ) {
         v = AlistT[--n];
         if (v)
-            fd_50F6_0EB6[v >> 3]++;
+            TemCensus[v >> 3]++;
     }
     for (n = ListIndexB; n > 0; ) {
         v = BlistT[--n];
         if (v)
-            fd_50F6_0EB6[v >> 3]++;
+            TemCensus[v >> 3]++;
     }
     for (n = ListIndexR; n > 0; ) {
         v = RlistT[--n];
         if (v)
-            fd_50F6_0EB6[v >> 3]++;
+            TemCensus[v >> 3]++;
     }
     if (MeMode == 0) {
         if (MeColor == 0)
-            fd_50F6_0EB6[MeType >> 3]++;
+            TemCensus[MeType >> 3]++;
         else
-            fd_50F6_0EB6[(MeType | 0x80) >> 3]++;
+            TemCensus[(MeType | 0x80) >> 3]++;
     }
-    CastePopB[0] = fd_50F6_0EB6[0];
-    CastePopB[1] = fd_50F6_0EB6[1] + fd_50F6_0EB6[2] + fd_50F6_0EB6[3] + fd_50F6_0EB6[5];
-    CastePopB[2] = fd_50F6_0EB6[6] + fd_50F6_0EB6[7] + fd_50F6_0EB6[9];
-    CastePopB[3] = fd_50F6_0EB6[4];
-    CastePopB[4] = fd_50F6_0EB6[8];
-    if (CastePopB[5] && fd_50F6_0EB6[12] == 0 && JustXfered == 0) {
+    CastePopB[0] = TemCensus[0];
+    CastePopB[1] = TemCensus[1] + TemCensus[2] + TemCensus[3] + TemCensus[5];
+    CastePopB[2] = TemCensus[6] + TemCensus[7] + TemCensus[9];
+    CastePopB[3] = TemCensus[4];
+    CastePopB[4] = TemCensus[8];
+    if (CastePopB[5] && TemCensus[12] == 0 && JustXfered == 0) {
         myBeginSong(0x2b0c, 0x7e);
         o14_384C_0B6A(0, 0x271a, 1);
         if (CurGameType <= 1) {
@@ -135,13 +135,13 @@ void far CountAnts(void)
             BlackWon = 0;
         }
     }
-    CastePopB[5] = fd_50F6_0EB6[12];
-    CastePopR[0] = fd_50F6_0EB6[16];
-    CastePopR[1] = fd_50F6_0EB6[18] + fd_50F6_0EB6[19] + fd_50F6_0EB6[21] + fd_50F6_0EB6[17];
-    CastePopR[2] = fd_50F6_0EB6[23] + fd_50F6_0EB6[22] + fd_50F6_0EB6[25];
-    CastePopR[3] = fd_50F6_0EB6[20];
-    CastePopR[4] = fd_50F6_0EB6[24];
-    if (CastePopR[5] && fd_50F6_0EB6[28] == 0 && JustXfered == 0) {
+    CastePopB[5] = TemCensus[12];
+    CastePopR[0] = TemCensus[16];
+    CastePopR[1] = TemCensus[18] + TemCensus[19] + TemCensus[21] + TemCensus[17];
+    CastePopR[2] = TemCensus[23] + TemCensus[22] + TemCensus[25];
+    CastePopR[3] = TemCensus[20];
+    CastePopR[4] = TemCensus[24];
+    if (CastePopR[5] && TemCensus[28] == 0 && JustXfered == 0) {
         myBeginSong(0x2b0d, 0x7e);
         o14_384C_0B6A(0, 0x271c, 1);
         if (CurGameType <= 1) {
@@ -153,7 +153,7 @@ void far CountAnts(void)
             fd_3D57_0184[SRand1(6)][0] = 0x14;
     }
     BpopT = CastePopB[3] + CastePopB[1] + CastePopB[2] + CastePopB[4] + CastePopB[5];
-    CastePopR[5] = fd_50F6_0EB6[28];
+    CastePopR[5] = TemCensus[28];
     RpopT = CastePopR[5] + CastePopR[4] + CastePopR[1] + CastePopR[3] + CastePopR[2];
     JustXfered = 0;
 }

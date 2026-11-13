@@ -75,10 +75,10 @@ def balloon_queue_cases():
         entries = [(640, 480)] * index + [(80, 80)]
         case.writes.extend([
             (b.symbol_address('fd_50F6_1092'), b.words(index + 1)),
-            (b.symbol_address('fd_50F6_04C8'), b''.join(b.words(x, y) for x, y in entries)),
-            (b.symbol_address('fd_50F6_04F6'), b.words(0) * (index + 1)),
-            (b.symbol_address('fd_50F6_04E6'), b.words(0) * (index + 1)),
-            (b.symbol_address('fd_50F6_04A6'), struct.pack('<HH', *render_small.BALLOON_TEXT) * (index + 1)),
+            (b.symbol_address('CurBalloonPnts'), b''.join(b.words(x, y) for x, y in entries)),
+            (b.symbol_address('CurBalloonPlane'), b.words(0) * (index + 1)),
+            (b.symbol_address('CurBalloonFlags'), b.words(0) * (index + 1)),
+            (b.symbol_address('CurBalloonMsgs'), struct.pack('<HH', *render_small.BALLOON_TEXT) * (index + 1)),
         ])
         yield case
 
@@ -269,10 +269,10 @@ def balloon_width_controls(pair, out):
             if index:
                 case.writes.extend([
                     (b.symbol_address('fd_50F6_1092'), b.words(index + 1)),
-                    (b.symbol_address('fd_50F6_04C8'), b.words(640, 480) * index + b.words(76, 85)),
-                    (b.symbol_address('fd_50F6_04F6'), b.words(0) * (index + 1)),
-                    (b.symbol_address('fd_50F6_04E6'), b.words(0) * (index + 1)),
-                    (b.symbol_address('fd_50F6_04A6'), struct.pack('<HH', *render_small.BALLOON_TEXT) * (index + 1)),
+                    (b.symbol_address('CurBalloonPnts'), b.words(640, 480) * index + b.words(76, 85)),
+                    (b.symbol_address('CurBalloonPlane'), b.words(0) * (index + 1)),
+                    (b.symbol_address('CurBalloonFlags'), b.words(0) * (index + 1)),
+                    (b.symbol_address('CurBalloonMsgs'), struct.pack('<HH', *render_small.BALLOON_TEXT) * (index + 1)),
                 ])
             positive, negative = capture(pair, case), capture(mutant, case)
             expected = expected_low if expected_low < 0x8000 else 0xFFFF0000 | expected_low

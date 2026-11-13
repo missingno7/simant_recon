@@ -55,44 +55,44 @@ void far f_075B_00A6(void)
 
 StrList far LoadStringAnt(int object);
 extern StrList far MwinTitle;
-extern StrList far fd_50F6_0324;
+extern StrList far ScenarioNameStrs;
 extern StrList far WindPromptStrs;
 extern StrList far AdviceStrs;
 extern StrList far HistGraphStrs;
-extern StrList far fd_50F6_106E;
+extern StrList far EggStr;
 extern StrList far CasteStr;
-extern StrList far fd_50F6_1086;
-extern StrList far fd_50F6_1096;
+extern StrList far ModeStr;
+extern StrList far LoadStr;
 extern StrList far BoyMsgs;
-extern StrList far fd_50F6_10B4;
+extern StrList far SpiderMsgs;
 extern StrList far BFightMsgs;
 extern StrList far RFightMsgs;
 extern StrList far EggMsgs;
 extern StrList far QueenMsgs;
 extern StrList far RestMsgs;
-extern StrList far fd_50F6_0328;
-extern StrList far fd_50F6_0368;
+extern StrList far EndGameRatingStrs;
+extern StrList far MiscStrs;
 
 void far PrepareStrings(void)
 {
     MwinTitle = LoadStringAnt(1000);
-    fd_50F6_0324 = LoadStringAnt(1001);
+    ScenarioNameStrs = LoadStringAnt(1001);
     WindPromptStrs = LoadStringAnt(1010);
     AdviceStrs = LoadStringAnt(1020);
     HistGraphStrs = LoadStringAnt(1050);
-    fd_50F6_106E = LoadStringAnt(1100);
+    EggStr = LoadStringAnt(1100);
     CasteStr = LoadStringAnt(1101);
-    fd_50F6_1086 = LoadStringAnt(1102);
-    fd_50F6_1096 = LoadStringAnt(1103);
+    ModeStr = LoadStringAnt(1102);
+    LoadStr = LoadStringAnt(1103);
     BoyMsgs = LoadStringAnt(1200);
-    fd_50F6_10B4 = LoadStringAnt(1210);
+    SpiderMsgs = LoadStringAnt(1210);
     BFightMsgs = LoadStringAnt(1220);
     RFightMsgs = LoadStringAnt(1230);
     EggMsgs = LoadStringAnt(1240);
     QueenMsgs = LoadStringAnt(1250);
     RestMsgs = LoadStringAnt(1260);
-    fd_50F6_0328 = LoadStringAnt(1900);
-    fd_50F6_0368 = LoadStringAnt(1800);
+    EndGameRatingStrs = LoadStringAnt(1900);
+    MiscStrs = LoadStringAnt(1800);
 }
 
 extern Handle far mem_Alloc(long size, int flags, char far *name);

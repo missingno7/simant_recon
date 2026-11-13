@@ -136,7 +136,7 @@ extern void _fastcall win_GetObjSize(int obj, struct Pt far *size);
 extern int near g_3DB2;
 extern int near g_3DB4;
 extern void far win_Open();
-extern char far * far * far fd_50F6_106E;
+extern char far * far * far EggStr;
 extern char far * far * far CasteStr;
 extern void far font_SetFont(int font);
 extern void far win_PrintfAtObj(int obj, char far *format, ...);
@@ -146,7 +146,7 @@ extern int far FindInBList(int x, int y, int t);
 extern unsigned char far BlistM[];
 extern int far FindInRList(int x, int y, int t);
 extern unsigned char far RlistM[];
-extern char far * far * far fd_50F6_1086;
+extern char far * far * far ModeStr;
 /* AntMenu's externs are declared here, and SetMyLife/myBeginSound use unnamed
    parameters: the declaration layout reproduces the original's symbol-table state
    (register choices in MagnifyMenu and AntMenu depend on it). */
@@ -154,7 +154,7 @@ extern int far MeNestStarted;
 extern int far fd_50F6_10E0;
 extern int far fd_50F6_10DE;
 extern void far YellowCommand(int cmd);
-extern char far * far * far fd_50F6_1096;
+extern char far * far * far LoadStr;
 extern void far f_1FD2_057F(void);
 extern int far f_1FD2_0598(void);
 extern void far f_1FD2_05EF(void);
@@ -189,7 +189,7 @@ int far MagnifyMenu(int x, int y, int plane)
     win_Open(0x1d00, wx, wy);
     caste = (t & 0x78) >> 3;
     if (caste == 0)
-        name = fd_50F6_106E[t & 7];
+        name = EggStr[t & 7];
     else
         name = CasteStr[caste];
     font_SetFont(2);
@@ -214,8 +214,8 @@ int far MagnifyMenu(int x, int y, int plane)
             k = 0;
         break;
     }
-    win_PrintfAtObj(0x1d03, fd_50F6_1086[k]);
-    win_PrintfAtObj(0x1d04, fd_50F6_1096[caste]);
+    win_PrintfAtObj(0x1d03, ModeStr[k]);
+    win_PrintfAtObj(0x1d04, LoadStr[caste]);
     font_SetFont(0);
     f_1FD2_057F();
     while (win_IsWinOpen(0x1d00) && f_1FD2_0598())

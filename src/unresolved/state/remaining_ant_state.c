@@ -26,6 +26,6 @@ int far LastQueenPlane;
 int far CurQueenPlane;
 int far LastRestPlane;
 int far MeCrazyCnt;
-int far fd_50F6_0D6E;
+int far WantSpiderBalloon;
 int far CurEditMode;
 CountViews far GameTime;

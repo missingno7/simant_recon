@@ -23038,6 +23038,30 @@
    ],
    "name_kind": "recovered"
   },
+  "BFightBalloonIndex": {
+   "seg": 20726,
+   "off": 3900,
+   "grounding": "DrawCurBalloons: mov es,[7FAC]; inc es:[F3C] message index into 50F6:020A table",
+   "history": [
+    {
+     "was": "fd_50F6_0F3C",
+     "why": "Win16 symbol _BFightBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0F3C): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "BFightBalloonTicks": {
+   "seg": 20726,
+   "off": 1292,
+   "grounding": "DrawCurBalloons: mov es,[7FA8]; long es:[50C]/[50E] timer vs TickCount()",
+   "history": [
+    {
+     "was": "fd_50F6_050C",
+     "why": "Win16 symbol _BFightBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:050C): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "BFightMsgs": {
    "seg": 20726,
    "off": 522,
@@ -23725,6 +23749,54 @@
     {
      "was": "fd_3D57_0C20",
      "why": "Win16 symbol _ColonyUpdateFlag (evidence/cross_version/data-alignment, tier A): save record index 137 of 307, same element size and count; same reference position in PlaceQueenInYard; spacing to mapped neighboring objects agrees."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CurBalloonFlags": {
+   "seg": 20726,
+   "off": 1254,
+   "grounding": "AddMsgBalloon: es:[si+4E6]=style (Win16 CurBalloonFlags)",
+   "history": [
+    {
+     "was": "fd_50F6_04E6",
+     "why": "Win16 symbol _CurBalloonFlags, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04E6): stores a 2-byte parameter at BP+12 in AddMsgBalloon; 1 shared users among 1 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CurBalloonMsgs": {
+   "seg": 20726,
+   "off": 1190,
+   "grounding": "AddMsgBalloon: es:[bx+4A6]/[4A8] = far msg (Win16 CurBalloonMsgs)",
+   "history": [
+    {
+     "was": "fd_50F6_04A6",
+     "why": "Win16 symbol _CurBalloonMsgs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04A6): stores a 4-byte parameter at BP+14 in AddMsgBalloon; 1 shared users among 1 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CurBalloonPlane": {
+   "seg": 20726,
+   "off": 1270,
+   "grounding": "AddMsgBalloon: es:[si+4F6]=plane with si=count*2 (Win16 CurBalloonPlane)",
+   "history": [
+    {
+     "was": "fd_50F6_04F6",
+     "why": "Win16 symbol _CurBalloonPlane, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04F6): stores a 2-byte parameter at BP+10 in AddMsgBalloon; 2 shared users among 2 DOS and 4 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "CurBalloonPnts": {
+   "seg": 20726,
+   "off": 1224,
+   "grounding": "AddMsgBalloon: es:[bx+4C8]/[bx+4CA] = x,y with bx=count*4 (Win16 CurBalloonPnts)",
+   "history": [
+    {
+     "was": "fd_50F6_04C8",
+     "why": "Win16 symbol _CurBalloonPnts, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04C8): same reference position in AddMsgBalloon; 2 shared users among 2 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
     }
    ],
    "name_kind": "recovered"
@@ -24421,6 +24493,18 @@
    ],
    "name_kind": "recovered"
   },
+  "EggBalloonTicks": {
+   "seg": 20726,
+   "off": 1434,
+   "grounding": "DrawCurBalloons: mov es,[7FB6]; long es:[59A]/[59C] egg balloon timer",
+   "history": [
+    {
+     "was": "fd_50F6_059A",
+     "why": "Win16 symbol _EggBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:059A): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "EggMsgs": {
    "seg": 20726,
    "off": 540,
@@ -24429,6 +24513,30 @@
     {
      "was": "fd_50F6_021C",
      "why": "Win16 symbol _EggMsgs (evidence/cross_version/data-alignment, tier A): same reference position in PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "EggStr": {
+   "seg": 20726,
+   "off": 4206,
+   "grounding": "S05 o05_35F5_025C (examine window): mov es,[CONST 8438 = 50F6]; les di,es:[106E]; es:[bx+di] with bx=(t&7)*4 -> far pointer to a table of far name strings (caste 0 names)",
+   "history": [
+    {
+     "was": "fd_50F6_106E",
+     "why": "Win16 symbol _EggStr, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:106E): stores the result of LoadStringAnt with resource 1100 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "EndGameRatingStrs": {
+   "seg": 20726,
+   "off": 808,
+   "grounding": "EndGameDialog (S14:384C:0DE5): mov es,[876E]; les bx,es:[0328]; push es:[bx+di+2]/[bx+di] far string table",
+   "history": [
+    {
+     "was": "fd_50F6_0328",
+     "why": "Win16 symbol _EndGameRatingStrs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0328): stores the result of LoadStringAnt with resource 1900 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
     }
    ],
    "name_kind": "recovered"
@@ -24662,6 +24770,18 @@
     {
      "was": "fd_50F6_0B20",
      "why": "Win16 symbol _GlobalKey (evidence/cross_version/data-alignment, tier A): same reference position in SimRain, SimCat; 2 shared users among 2 DOS and 3 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "GrassMap": {
+   "seg": 20726,
+   "off": 820,
+   "grounding": "o06_35F5_0A5F (InitGrassMap): mov ax,50F6; mov es,ax; es:[0334..0338]=0, es:[si+0334]=-1 for i=3..11 (int[12])",
+   "history": [
+    {
+     "was": "fd_50F6_0334",
+     "why": "Win16 symbol _GrassMap, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0334): save record index 80 of 307, same element size and count; 1 shared users among 1 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
     }
    ],
    "name_kind": "recovered"
@@ -25416,6 +25536,18 @@
    ],
    "name_kind": "recovered"
   },
+  "LastSMode": {
+   "seg": 20726,
+   "off": 3764,
+   "grounding": "DrawSpider: mov es,[7F04]; cmp ax=es:[0EB4] with 50F6:0FB8; es:[0EB4]=es:[0FB8]",
+   "history": [
+    {
+     "was": "fd_50F6_0EB4",
+     "why": "Win16 symbol _LastSMode, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0EB4): same reference position in DrawSpider; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "LastThemeSong": {
    "seg": 20726,
    "off": 552,
@@ -25571,6 +25703,18 @@
      "why": "names3 review (data): CompactListR: DOS bound/adjust 0EAA / Win16 ListIndexR (PACK:72CC = match_position[0x3966]); AddAntToRList: DOS if(0EAA>=500)return; ..; 0EAA++ / Win16 identical with ListIndexR; FindInRList i=0EAA / Win16 ListIndexR; ClearListR: DOS 0EAA=0 / Win16 ListIndexR=0"
     }
    ]
+  },
+  "LoadStr": {
+   "seg": 20726,
+   "off": 4246,
+   "grounding": "o05_35F5_025C: mov es,[CONST 8444]; les bx,es:[1096]; push es:[bx+si+2],es:[bx+si] (si=caste*4) -> far pointer to string table printed at object 1D04",
+   "history": [
+    {
+     "was": "fd_50F6_1096",
+     "why": "Win16 symbol _LoadStr, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1096): stores the result of LoadStringAnt with resource 1103 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "Lx": {
    "seg": 15703,
@@ -26164,6 +26308,18 @@
    ],
    "name_kind": "recovered"
   },
+  "MiscStrs": {
+   "seg": 20726,
+   "off": 872,
+   "grounding": "ScoreDialog/SetDefaultWindPrompt (S14): mov es,[875E]; les bx,es:[0368]; push es:[bx+42]/[bx+40] far string table",
+   "history": [
+    {
+     "was": "fd_50F6_0368",
+     "why": "Win16 symbol _MiscStrs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0368): stores the result of LoadStringAnt with resource 1800 (4 DOS / 4 Win16 bytes); 2 shared users among 3 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "ModeAuto": {
    "seg": 20726,
    "off": 888,
@@ -26200,6 +26356,18 @@
     {
      "was": "fd_50F6_0C2A",
      "why": "Win16 symbol _ModePopR (evidence/cross_version/data-alignment, tier A): save record index 93 of 307, same element size and count; same reference position in TallyModePop; 1 shared users among 1 DOS and 2 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "ModeStr": {
+   "seg": 20726,
+   "off": 4230,
+   "grounding": "o05_35F5_025C: mov es,[CONST 8442]; les si,es:[1086]; push es:[bx+si+2],es:[bx+si] (bx=k*4) -> far pointer to string table printed at object 1D03",
+   "history": [
+    {
+     "was": "fd_50F6_1086",
+     "why": "Win16 symbol _ModeStr, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1086): stores the result of LoadStringAnt with resource 1102 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
     }
    ],
    "name_kind": "recovered"
@@ -26544,6 +26712,30 @@
    ],
    "name_kind": "recovered"
   },
+  "QueenBalloonIndex": {
+   "seg": 20726,
+   "off": 4032,
+   "grounding": "DrawCurBalloons: mov es,[7FC2]; inc es:[FC0] index into 50F6:0234",
+   "history": [
+    {
+     "was": "fd_50F6_0FC0",
+     "why": "Win16 symbol _QueenBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0FC0): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "QueenBalloonTicks": {
+   "seg": 20726,
+   "off": 1568,
+   "grounding": "DrawCurBalloons: mov es,[7FBE]; long es:[620]/[622] queen balloon timer",
+   "history": [
+    {
+     "was": "fd_50F6_0620",
+     "why": "Win16 symbol _QueenBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0620): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "QueenMsgs": {
    "seg": 20726,
    "off": 564,
@@ -26629,6 +26821,30 @@
     {
      "was": "fd_50F6_0AC4",
      "why": "Win16 symbol _RColoniesStarted (evidence/cross_version/data-alignment, tier A): save record index 236 of 307, same element size and count; same reference position in CheatKeys, CalcScore and 1 more function pairs; used by the same 3 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "RFightBalloonIndex": {
+   "seg": 20726,
+   "off": 4088,
+   "grounding": "DrawCurBalloons: mov es,[7FB2]; inc es:[FF8] message index into 50F6:0218",
+   "history": [
+    {
+     "was": "fd_50F6_0FF8",
+     "why": "Win16 symbol _RFightBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0FF8): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "RFightBalloonTicks": {
+   "seg": 20726,
+   "off": 1842,
+   "grounding": "DrawCurBalloons (0250:454D): mov es,[7FA6]; long es:[732]/[734] timer vs TickCount()",
+   "history": [
+    {
+     "was": "fd_50F6_0732",
+     "why": "Win16 symbol _RFightBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0732): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
     }
    ],
    "name_kind": "recovered"
@@ -26814,6 +27030,30 @@
    ],
    "name_kind": "recovered"
   },
+  "RestBalloonIndex": {
+   "seg": 20726,
+   "off": 4154,
+   "grounding": "DrawCurBalloons: mov es,[7FCA]; inc es:[103A] index into 50F6:023A",
+   "history": [
+    {
+     "was": "fd_50F6_103A",
+     "why": "Win16 symbol _RestBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:103A): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "RestBalloonTicks": {
+   "seg": 20726,
+   "off": 1988,
+   "grounding": "DrawCurBalloons: mov es,[7FC6]; long es:[7C4]/[7C6] rest balloon timer",
+   "history": [
+    {
+     "was": "fd_50F6_07C4",
+     "why": "Win16 symbol _RestBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:07C4): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "RestMsgs": {
    "seg": 20726,
    "off": 570,
@@ -26958,6 +27198,18 @@
     {
      "was": "fd_50F6_048E",
      "why": "Win16 symbol _SaveGamePaused (evidence/cross_version/data-alignment, tier A): same reference position in EndTargetMode, EndLifeTransferMode; 4 shared users among 4 DOS and 5 Win16 function pairs."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "ScenarioNameStrs": {
+   "seg": 20726,
+   "off": 804,
+   "grounding": "ScoreDialog (S14:384C:05C6): mov es,[8760]; les si,es:[0324]; push es:[bx+si+2]/[bx+si] far string table indexed by 50F6:0EAC",
+   "history": [
+    {
+     "was": "fd_50F6_0324",
+     "why": "Win16 symbol _ScenarioNameStrs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0324): stores the result of LoadStringAnt with resource 1001 (4 DOS / 4 Win16 bytes); 1 shared users among 4 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
     }
    ],
    "name_kind": "recovered"
@@ -27151,6 +27403,18 @@
    ],
    "name_kind": "recovered"
   },
+  "SpiderMsgs": {
+   "seg": 20726,
+   "off": 4276,
+   "grounding": "DrawSpider: mov es,[7F06]; les si,es:[10B4]; push es:[bx+si+2],es:[bx+si] (far pointer to far string table) passed to AddMsgBalloon",
+   "history": [
+    {
+     "was": "fd_50F6_10B4",
+     "why": "Win16 symbol _SpiderMsgs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:10B4): stores the result of LoadStringAnt with resource 1210 (4 DOS / 4 Win16 bytes); same reference position in PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "Starg": {
    "seg": 20726,
    "off": 4092,
@@ -27284,6 +27548,54 @@
    ],
    "name_kind": "recovered"
   },
+  "SwarmXB": {
+   "seg": 20726,
+   "off": 3910,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0F46; mov es,[8724]; signed char offset array",
+   "history": [
+    {
+     "was": "fd_50F6_0F46",
+     "why": "Win16 symbol _SwarmXB, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0F46): save record index 61 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "SwarmXR": {
+   "seg": 20726,
+   "off": 4038,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0FC6; mov es,[872E]; signed char offset array",
+   "history": [
+    {
+     "was": "fd_50F6_0FC6",
+     "why": "Win16 symbol _SwarmXR, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0FC6): save record index 62 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "SwarmYB": {
+   "seg": 20726,
+   "off": 3972,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0F84; mov es,[8722]; signed char offset array",
+   "history": [
+    {
+     "was": "fd_50F6_0F84",
+     "why": "Win16 symbol _SwarmYB, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0F84): save record index 63 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "SwarmYR": {
+   "seg": 20726,
+   "off": 4104,
+   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,1008; mov es,[872C]; signed char offset array",
+   "history": [
+    {
+     "was": "fd_50F6_1008",
+     "why": "Win16 symbol _SwarmYR, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1008): save record index 64 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
   "TERRAINset": {
    "seg": 20726,
    "off": 3876,
@@ -27294,6 +27606,42 @@
      "why": "worker data identification: Win16 variable of the same role at the same use sites (reports dig/ovl08/simA/sim10F7)"
     }
    ]
+  },
+  "TemBModePop": {
+   "seg": 20726,
+   "off": 3392,
+   "grounding": "f_0894_019B: mov es,[8046] (50F6); int[20] cleared es:[si+0D40] for i<20",
+   "history": [
+    {
+     "was": "fd_50F6_0D40",
+     "why": "Win16 symbol _TemBModePop, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0D40): same reference position in DoNestAntB, DoAntSimA and 1 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs; rival order votes remain; Tier B.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "TemCensus": {
+   "seg": 20726,
+   "off": 3766,
+   "grounding": "f_0BE8_0002: mov es,[DS:80EA] (CONST 50F6); 32-word counter array es:[si*2+0EB6]",
+   "history": [
+    {
+     "was": "fd_50F6_0EB6",
+     "why": "Win16 symbol _TemCensus, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0EB6): same reference position in CountAnts; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "TemRModePop": {
+   "seg": 20726,
+   "off": 3442,
+   "grounding": "f_0894_019B: mov es,[8048] (50F6); int[20] cleared es:[si+0D72] for i<20",
+   "history": [
+    {
+     "was": "fd_50F6_0D72",
+     "why": "Win16 symbol _TemRModePop, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0D72): same reference position in DoAntSimA, DoNestAntR; 4 shared users among 4 DOS and 5 Win16 function pairs; rival order votes remain; Tier B.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
   },
   "TileMassXB": {
    "seg": 20726,
@@ -27528,6 +27876,78 @@
     {
      "was": "fd_3D57_0094",
      "why": "Win16 symbol _UnCarryCaste (evidence/cross_version/data-alignment, tier A): same reference position in YellowDeath, DoLifeExchange; 16 initial bytes agree exactly; spacing to mapped neighboring objects agrees."
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WantBFightBalloon": {
+   "seg": 20726,
+   "off": 4166,
+   "grounding": "DrawCurBalloons: mov es,[7FAA]; es:[1046]=1/0 after SRand2() (fight balloon 0 on flag)",
+   "history": [
+    {
+     "was": "fd_50F6_1046",
+     "why": "Win16 symbol _WantBFightBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1046): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WantEggBalloon": {
+   "seg": 20726,
+   "off": 4170,
+   "grounding": "DrawCurBalloons: mov es,[7FB8]; es:[104A]=1/0 after SRand4()",
+   "history": [
+    {
+     "was": "fd_50F6_104A",
+     "why": "Win16 symbol _WantEggBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:104A): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WantQueenBalloon": {
+   "seg": 20726,
+   "off": 4194,
+   "grounding": "DrawCurBalloons: mov es,[7FC0]; es:[1062]=1/0 after SRand4()",
+   "history": [
+    {
+     "was": "fd_50F6_1062",
+     "why": "Win16 symbol _WantQueenBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1062): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WantRFightBalloon": {
+   "seg": 20726,
+   "off": 4196,
+   "grounding": "DrawCurBalloons: mov es,[7FB0]; es:[1064]=1/0 after SRand2()",
+   "history": [
+    {
+     "was": "fd_50F6_1064",
+     "why": "Win16 symbol _WantRFightBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1064): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WantRestBalloon": {
+   "seg": 20726,
+   "off": 4220,
+   "grounding": "DrawCurBalloons: mov es,[7FC8]; es:[107C]=1/0 after SRand2()",
+   "history": [
+    {
+     "was": "fd_50F6_107C",
+     "why": "Win16 symbol _WantRestBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:107C): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
+    }
+   ],
+   "name_kind": "recovered"
+  },
+  "WantSpiderBalloon": {
+   "seg": 20726,
+   "off": 3438,
+   "grounding": "DrawSpider: mov es,[7F00]; mov es:[0D6E],1/0 after SRand2() (spider balloon on flag)",
+   "history": [
+    {
+     "was": "fd_50F6_0D6E",
+     "why": "Win16 symbol _WantSpiderBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0D6E): same reference position in DrawSpider; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size"
     }
    ],
    "name_kind": "recovered"
@@ -28194,16 +28614,6 @@
    "off": 562,
    "alias_of": "TilesDugR"
   },
-  "fd_50F6_0324": {
-   "seg": 20726,
-   "off": 804,
-   "grounding": "ScoreDialog (S14:384C:05C6): mov es,[8760]; les si,es:[0324]; push es:[bx+si+2]/[bx+si] far string table indexed by 50F6:0EAC"
-  },
-  "fd_50F6_0328": {
-   "seg": 20726,
-   "off": 808,
-   "grounding": "EndGameDialog (S14:384C:0DE5): mov es,[876E]; les bx,es:[0328]; push es:[bx+di+2]/[bx+di] far string table"
-  },
   "fd_50F6_032E": {
    "seg": 20726,
    "off": 814,
@@ -28213,11 +28623,6 @@
    "seg": 20726,
    "off": 816,
    "alias_of": "BpopT"
-  },
-  "fd_50F6_0334": {
-   "seg": 20726,
-   "off": 820,
-   "grounding": "o06_35F5_0A5F (InitGrassMap): mov ax,50F6; mov es,ax; es:[0334..0338]=0, es:[si+0334]=-1 for i=3..11 (int[12])"
   },
   "fd_50F6_0350": {
    "seg": 20726,
@@ -28233,11 +28638,6 @@
    "seg": 20726,
    "off": 860,
    "alias_of": "YardMode"
-  },
-  "fd_50F6_0368": {
-   "seg": 20726,
-   "off": 872,
-   "grounding": "ScoreDialog/SetDefaultWindPrompt (S14): mov es,[875E]; les bx,es:[0368]; push es:[bx+42]/[bx+40] far string table"
   },
   "fd_50F6_0378": {
    "seg": 20726,
@@ -28274,55 +28674,10 @@
    "off": 1182,
    "alias_of": "modeLevels"
   },
-  "fd_50F6_04A6": {
-   "seg": 20726,
-   "off": 1190,
-   "grounding": "AddMsgBalloon: es:[bx+4A6]/[4A8] = far msg (Win16 CurBalloonMsgs)"
-  },
   "fd_50F6_04C0": {
    "seg": 20726,
    "off": 1216,
    "grounding": "main: mov es,[83DC] (CONST 50F6); cmp es:[04C0],ax (worker rootF)"
-  },
-  "fd_50F6_04C8": {
-   "seg": 20726,
-   "off": 1224,
-   "grounding": "AddMsgBalloon: es:[bx+4C8]/[bx+4CA] = x,y with bx=count*4 (Win16 CurBalloonPnts)"
-  },
-  "fd_50F6_04E6": {
-   "seg": 20726,
-   "off": 1254,
-   "grounding": "AddMsgBalloon: es:[si+4E6]=style (Win16 CurBalloonFlags)"
-  },
-  "fd_50F6_04F6": {
-   "seg": 20726,
-   "off": 1270,
-   "grounding": "AddMsgBalloon: es:[si+4F6]=plane with si=count*2 (Win16 CurBalloonPlane)"
-  },
-  "fd_50F6_050C": {
-   "seg": 20726,
-   "off": 1292,
-   "grounding": "DrawCurBalloons: mov es,[7FA8]; long es:[50C]/[50E] timer vs TickCount()"
-  },
-  "fd_50F6_059A": {
-   "seg": 20726,
-   "off": 1434,
-   "grounding": "DrawCurBalloons: mov es,[7FB6]; long es:[59A]/[59C] egg balloon timer"
-  },
-  "fd_50F6_0620": {
-   "seg": 20726,
-   "off": 1568,
-   "grounding": "DrawCurBalloons: mov es,[7FBE]; long es:[620]/[622] queen balloon timer"
-  },
-  "fd_50F6_0732": {
-   "seg": 20726,
-   "off": 1842,
-   "grounding": "DrawCurBalloons (0250:454D): mov es,[7FA6]; long es:[732]/[734] timer vs TickCount()"
-  },
-  "fd_50F6_07C4": {
-   "seg": 20726,
-   "off": 1988,
-   "grounding": "DrawCurBalloons: mov es,[7FC6]; long es:[7C4]/[7C6] rest balloon timer"
   },
   "fd_50F6_0A9C": {
    "seg": 20726,
@@ -28344,25 +28699,10 @@
    "off": 2850,
    "grounding": "o08_35F5_0E67 (fracSIN): mov es,[S08 CONST 8600]; les bx,es:[0B22] (far pointer to sine table)"
   },
-  "fd_50F6_0D40": {
-   "seg": 20726,
-   "off": 3392,
-   "grounding": "f_0894_019B: mov es,[8046] (50F6); int[20] cleared es:[si+0D40] for i<20"
-  },
   "fd_50F6_0D6A": {
    "seg": 20726,
    "off": 3434,
    "alias_of": "ListIndexA"
-  },
-  "fd_50F6_0D6E": {
-   "seg": 20726,
-   "off": 3438,
-   "grounding": "DrawSpider: mov es,[7F00]; mov es:[0D6E],1/0 after SRand2() (spider balloon on flag)"
-  },
-  "fd_50F6_0D72": {
-   "seg": 20726,
-   "off": 3442,
-   "grounding": "f_0894_019B: mov es,[8048] (50F6); int[20] cleared es:[si+0D72] for i<20"
   },
   "fd_50F6_0DA8": {
    "seg": 20726,
@@ -28373,16 +28713,6 @@
    "seg": 20726,
    "off": 3754,
    "alias_of": "ListIndexR"
-  },
-  "fd_50F6_0EB4": {
-   "seg": 20726,
-   "off": 3764,
-   "grounding": "DrawSpider: mov es,[7F04]; cmp ax=es:[0EB4] with 50F6:0FB8; es:[0EB4]=es:[0FB8]"
-  },
-  "fd_50F6_0EB6": {
-   "seg": 20726,
-   "off": 3766,
-   "grounding": "f_0BE8_0002: mov es,[DS:80EA] (CONST 50F6); 32-word counter array es:[si*2+0EB6]"
   },
   "fd_50F6_0F08": {
    "seg": 20726,
@@ -28404,20 +28734,10 @@
    "off": 3898,
    "alias_of": "DROPdir"
   },
-  "fd_50F6_0F3C": {
-   "seg": 20726,
-   "off": 3900,
-   "grounding": "DrawCurBalloons: mov es,[7FAC]; inc es:[F3C] message index into 50F6:020A table"
-  },
   "fd_50F6_0F42": {
    "seg": 20726,
    "off": 3906,
    "alias_of": "SuserX"
-  },
-  "fd_50F6_0F46": {
-   "seg": 20726,
-   "off": 3910,
-   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0F46; mov es,[8724]; signed char offset array"
   },
   "fd_50F6_0F78": {
    "seg": 20726,
@@ -28434,60 +28754,20 @@
    "off": 3966,
    "alias_of": "SuserY"
   },
-  "fd_50F6_0F84": {
-   "seg": 20726,
-   "off": 3972,
-   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0F84; mov es,[8722]; signed char offset array"
-  },
   "fd_50F6_0FB8": {
    "seg": 20726,
    "off": 4024,
    "alias_of": "SMode"
-  },
-  "fd_50F6_0FC0": {
-   "seg": 20726,
-   "off": 4032,
-   "grounding": "DrawCurBalloons: mov es,[7FC2]; inc es:[FC0] index into 50F6:0234"
-  },
-  "fd_50F6_0FC6": {
-   "seg": 20726,
-   "off": 4038,
-   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,0FC6; mov es,[872E]; signed char offset array"
-  },
-  "fd_50F6_0FF8": {
-   "seg": 20726,
-   "off": 4088,
-   "grounding": "DrawCurBalloons: mov es,[7FB2]; inc es:[FF8] message index into 50F6:0218"
   },
   "fd_50F6_0FFC": {
    "seg": 20726,
    "off": 4092,
    "alias_of": "Starg"
   },
-  "fd_50F6_1008": {
-   "seg": 20726,
-   "off": 4104,
-   "grounding": "S13:384C:0EE0 (DrawSwarm): mov bx,si; add bx,1008; mov es,[872C]; signed char offset array"
-  },
-  "fd_50F6_103A": {
-   "seg": 20726,
-   "off": 4154,
-   "grounding": "DrawCurBalloons: mov es,[7FCA]; inc es:[103A] index into 50F6:023A"
-  },
   "fd_50F6_1042": {
    "seg": 20726,
    "off": 4162,
    "alias_of": "Scycle"
-  },
-  "fd_50F6_1046": {
-   "seg": 20726,
-   "off": 4166,
-   "grounding": "DrawCurBalloons: mov es,[7FAA]; es:[1046]=1/0 after SRand2() (fight balloon 0 on flag)"
-  },
-  "fd_50F6_104A": {
-   "seg": 20726,
-   "off": 4170,
-   "grounding": "DrawCurBalloons: mov es,[7FB8]; es:[104A]=1/0 after SRand4()"
   },
   "fd_50F6_104C": {
    "seg": 20726,
@@ -28514,25 +28794,10 @@
    "off": 4192,
    "alias_of": "FoodR"
   },
-  "fd_50F6_1062": {
-   "seg": 20726,
-   "off": 4194,
-   "grounding": "DrawCurBalloons: mov es,[7FC0]; es:[1062]=1/0 after SRand4()"
-  },
-  "fd_50F6_1064": {
-   "seg": 20726,
-   "off": 4196,
-   "grounding": "DrawCurBalloons: mov es,[7FB0]; es:[1064]=1/0 after SRand2()"
-  },
   "fd_50F6_106C": {
    "seg": 20726,
    "off": 4204,
    "grounding": "processExp (S22:3BBD:000A): CONST word 8862, xor byte es:[106C],1"
-  },
-  "fd_50F6_106E": {
-   "seg": 20726,
-   "off": 4206,
-   "grounding": "S05 o05_35F5_025C (examine window): mov es,[CONST 8438 = 50F6]; les di,es:[106E]; es:[bx+di] with bx=(t&7)*4 -> far pointer to a table of far name strings (caste 0 names)"
   },
   "fd_50F6_1072": {
    "seg": 20726,
@@ -28544,16 +28809,6 @@
    "off": 4214,
    "alias_of": "SpidBurpCnt"
   },
-  "fd_50F6_107C": {
-   "seg": 20726,
-   "off": 4220,
-   "grounding": "DrawCurBalloons: mov es,[7FC8]; es:[107C]=1/0 after SRand2()"
-  },
-  "fd_50F6_1086": {
-   "seg": 20726,
-   "off": 4230,
-   "grounding": "o05_35F5_025C: mov es,[CONST 8442]; les si,es:[1086]; push es:[bx+si+2],es:[bx+si] (bx=k*4) -> far pointer to string table printed at object 1D03"
-  },
   "fd_50F6_108A": {
    "seg": 20726,
    "off": 4234,
@@ -28564,11 +28819,6 @@
    "off": 4242,
    "grounding": "AddMsgBalloon (0250:446A): mov es,[7F9C]; cmp es:[1092],6; inc es:[1092] (Win16 CurBalloonCnt)"
   },
-  "fd_50F6_1096": {
-   "seg": 20726,
-   "off": 4246,
-   "grounding": "o05_35F5_025C: mov es,[CONST 8444]; les bx,es:[1096]; push es:[bx+si+2],es:[bx+si] (si=caste*4) -> far pointer to string table printed at object 1D04"
-  },
   "fd_50F6_109A": {
    "seg": 20726,
    "off": 4250,
@@ -28578,11 +28828,6 @@
    "seg": 20726,
    "off": 4270,
    "alias_of": "StargLife"
-  },
-  "fd_50F6_10B4": {
-   "seg": 20726,
-   "off": 4276,
-   "grounding": "DrawSpider: mov es,[7F06]; les si,es:[10B4]; push es:[bx+si+2],es:[bx+si] (far pointer to far string table) passed to AddMsgBalloon"
   },
   "fd_50F6_10BE": {
    "seg": 20726,

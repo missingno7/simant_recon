@@ -11,6 +11,6 @@
 typedef char far * far *StrList;
 StrList far AdviceStrs;
 StrList far HistGraphStrs;
-StrList far fd_50F6_0324;
-StrList far fd_50F6_0328;
-StrList far fd_50F6_0368;
+StrList far ScenarioNameStrs;
+StrList far EndGameRatingStrs;
+StrList far MiscStrs;

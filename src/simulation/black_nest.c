@@ -49,7 +49,7 @@ void far DoAntSimB(void)
 }
 
 extern unsigned char far BlistM[];
-extern int far fd_50F6_0D40[];
+extern int far TemBModePop[];
 extern int far SRand256(void);
 extern int far SRand32(void);
 extern int far fd_50F6_10BE;
@@ -67,7 +67,7 @@ void far DoRestB(int x, int y, int attr);
 extern int far FlyAwayB;
 void far DoDigOutB(int x, int y, int attr);
 void far DoDrownB(int x, int y, int attr);
-extern int far fd_50F6_0D72[];
+extern int far TemRModePop[];
 extern int far f_10F7_003A(int value);
 extern int far MeColor;
 extern void far YellowFight(int list, int index);
@@ -89,7 +89,7 @@ void far DoNestAntB(int x, int y, int attr)
     caste = (attr & 0x78) >> 3;
     if (!(attr & 0x80)) {
         t = BlistM[fd_50F6_0F18];
-        fd_50F6_0D40[t]++;
+        TemBModePop[t]++;
         if (SRand256() == 0 && t != 9 && SRand32() > fd_50F6_10BE) {
             BlistT[fd_50F6_0F18] = 0;
             fd_3E1D_8180[x][y] = 0;
@@ -155,7 +155,7 @@ void far DoNestAntB(int x, int y, int attr)
         }
     } else {
         task = BlistM[fd_50F6_0F18];
-        fd_50F6_0D72[task]++;
+        TemRModePop[task]++;
         if (attr > 0xef) {
             DoNestFightB(x, y);
             return;

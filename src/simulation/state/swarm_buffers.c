@@ -10,7 +10,7 @@
  * No game code or inferred padding is defined here.
  */
 
-unsigned char far fd_50F6_0F46[50];
-unsigned char far fd_50F6_0F84[50];
-unsigned char far fd_50F6_0FC6[50];
-unsigned char far fd_50F6_1008[50];
+unsigned char far SwarmXB[50];
+unsigned char far SwarmYB[50];
+unsigned char far SwarmXR[50];
+unsigned char far SwarmYR[50];

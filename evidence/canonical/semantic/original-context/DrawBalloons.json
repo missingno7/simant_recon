@@ -3,7 +3,7 @@
   "function": "DrawBalloons",
   "module": "root:0250",
   "status": "BEHAVIOR_EXACT_CONFIRMED",
-  "definition_sha256": "bcd987b30d02f5fd0ea825f99f2415ad51517f0e8d85dd3876ebccae2cda1d40",
+  "definition_sha256": "ac23c99e8c8910a29c512134a14800693083680ff186da089f5a6e0bbba6a05e",
   "historical_review": {
     "git_commit": "a1938e61452a63581718aee6659829528c3b8635",
     "path": "work/source-only-dos/static-completeness/DrawBalloons.json",
@@ -4481,6 +4481,222 @@
       ],
       "note": "Lexical identifier rename; semantic review unchanged.",
       "prior_receipt_sha256": "843583ff67bad5eef81688bd0c0cf1fee727448128a8e11fd689ea5e1554d762"
+    },
+    {
+      "operations": [
+        {
+          "new": "ScenarioNameStrs",
+          "kind": "recovered",
+          "why": "Win16 symbol _ScenarioNameStrs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0324): stores the result of LoadStringAnt with resource 1001 (4 DOS / 4 Win16 bytes); 1 shared users among 4 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0324"
+        },
+        {
+          "new": "EndGameRatingStrs",
+          "kind": "recovered",
+          "why": "Win16 symbol _EndGameRatingStrs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0328): stores the result of LoadStringAnt with resource 1900 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0328"
+        },
+        {
+          "new": "GrassMap",
+          "kind": "recovered",
+          "why": "Win16 symbol _GrassMap, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0334): save record index 80 of 307, same element size and count; 1 shared users among 1 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0334"
+        },
+        {
+          "new": "MiscStrs",
+          "kind": "recovered",
+          "why": "Win16 symbol _MiscStrs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0368): stores the result of LoadStringAnt with resource 1800 (4 DOS / 4 Win16 bytes); 2 shared users among 3 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0368"
+        },
+        {
+          "new": "CurBalloonMsgs",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurBalloonMsgs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04A6): stores a 4-byte parameter at BP+14 in AddMsgBalloon; 1 shared users among 1 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_04A6"
+        },
+        {
+          "new": "CurBalloonPnts",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurBalloonPnts, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04C8): same reference position in AddMsgBalloon; 2 shared users among 2 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_04C8"
+        },
+        {
+          "new": "CurBalloonFlags",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurBalloonFlags, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04E6): stores a 2-byte parameter at BP+12 in AddMsgBalloon; 1 shared users among 1 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_04E6"
+        },
+        {
+          "new": "CurBalloonPlane",
+          "kind": "recovered",
+          "why": "Win16 symbol _CurBalloonPlane, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:04F6): stores a 2-byte parameter at BP+10 in AddMsgBalloon; 2 shared users among 2 DOS and 4 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_04F6"
+        },
+        {
+          "new": "BFightBalloonTicks",
+          "kind": "recovered",
+          "why": "Win16 symbol _BFightBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:050C): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_050C"
+        },
+        {
+          "new": "EggBalloonTicks",
+          "kind": "recovered",
+          "why": "Win16 symbol _EggBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:059A): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_059A"
+        },
+        {
+          "new": "QueenBalloonTicks",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0620): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0620"
+        },
+        {
+          "new": "RFightBalloonTicks",
+          "kind": "recovered",
+          "why": "Win16 symbol _RFightBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0732): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0732"
+        },
+        {
+          "new": "RestBalloonTicks",
+          "kind": "recovered",
+          "why": "Win16 symbol _RestBalloonTicks, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:07C4): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_07C4"
+        },
+        {
+          "new": "TemBModePop",
+          "kind": "recovered",
+          "why": "Win16 symbol _TemBModePop, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0D40): same reference position in DoNestAntB, DoAntSimA and 1 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs; rival order votes remain; Tier B.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0D40"
+        },
+        {
+          "new": "WantSpiderBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _WantSpiderBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0D6E): same reference position in DrawSpider; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0D6E"
+        },
+        {
+          "new": "TemRModePop",
+          "kind": "recovered",
+          "why": "Win16 symbol _TemRModePop, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0D72): same reference position in DoAntSimA, DoNestAntR; 4 shared users among 4 DOS and 5 Win16 function pairs; rival order votes remain; Tier B.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0D72"
+        },
+        {
+          "new": "LastSMode",
+          "kind": "recovered",
+          "why": "Win16 symbol _LastSMode, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0EB4): same reference position in DrawSpider; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0EB4"
+        },
+        {
+          "new": "TemCensus",
+          "kind": "recovered",
+          "why": "Win16 symbol _TemCensus, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0EB6): same reference position in CountAnts; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0EB6"
+        },
+        {
+          "new": "BFightBalloonIndex",
+          "kind": "recovered",
+          "why": "Win16 symbol _BFightBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0F3C): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0F3C"
+        },
+        {
+          "new": "SwarmXB",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmXB, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0F46): save record index 61 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0F46"
+        },
+        {
+          "new": "SwarmYB",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmYB, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0F84): save record index 63 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0F84"
+        },
+        {
+          "new": "QueenBalloonIndex",
+          "kind": "recovered",
+          "why": "Win16 symbol _QueenBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0FC0): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0FC0"
+        },
+        {
+          "new": "SwarmXR",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmXR, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0FC6): save record index 62 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0FC6"
+        },
+        {
+          "new": "RFightBalloonIndex",
+          "kind": "recovered",
+          "why": "Win16 symbol _RFightBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:0FF8): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_0FF8"
+        },
+        {
+          "new": "SwarmYR",
+          "kind": "recovered",
+          "why": "Win16 symbol _SwarmYR, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1008): save record index 64 of 307, same element size and count.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_1008"
+        },
+        {
+          "new": "RestBalloonIndex",
+          "kind": "recovered",
+          "why": "Win16 symbol _RestBalloonIndex, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:103A): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_103A"
+        },
+        {
+          "new": "WantBFightBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _WantBFightBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1046): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_1046"
+        },
+        {
+          "new": "WantEggBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _WantEggBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:104A): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_104A"
+        },
+        {
+          "new": "WantQueenBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _WantQueenBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1062): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_1062"
+        },
+        {
+          "new": "WantRFightBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _WantRFightBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1064): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_1064"
+        },
+        {
+          "new": "EggStr",
+          "kind": "recovered",
+          "why": "Win16 symbol _EggStr, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:106E): stores the result of LoadStringAnt with resource 1100 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_106E"
+        },
+        {
+          "new": "WantRestBalloon",
+          "kind": "recovered",
+          "why": "Win16 symbol _WantRestBalloon, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:107C): same reference position in DrawCurBalloons; used by the same 1 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_107C"
+        },
+        {
+          "new": "ModeStr",
+          "kind": "recovered",
+          "why": "Win16 symbol _ModeStr, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1086): stores the result of LoadStringAnt with resource 1102 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_1086"
+        },
+        {
+          "new": "LoadStr",
+          "kind": "recovered",
+          "why": "Win16 symbol _LoadStr, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:1096): stores the result of LoadStringAnt with resource 1103 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_1096"
+        },
+        {
+          "new": "SpiderMsgs",
+          "kind": "recovered",
+          "why": "Win16 symbol _SpiderMsgs, CONFIRMED 2026-11-13 in evidence/cross_version/decisions.json (root:50F6:10B4): stores the result of LoadStringAnt with resource 1210 (4 DOS / 4 Win16 bytes); same reference position in PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs.; fits the 50F6 emission run and the Win16 object size",
+          "old": "fd_50F6_10B4"
+        }
+      ],
+      "note": "Lexical identifier rename; semantic review unchanged.",
+      "prior_receipt_sha256": "c1bc8989b6ed7879180e51d3f5b8f32c5c3480cc7966eaa230606c8c3e7edee5"
     }
   ]
 }

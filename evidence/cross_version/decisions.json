@@ -10102,6 +10102,391 @@
     "Anchor 1: Named win_CenterStrAtObj calls this Rect+string helper in DOS and the named Windows helper; Windows additionally shares it from formatted object-print wrappers.",
     "Anchor 2: Same centering sequence as non-clearing sibling, then two conditional left/right strips filled with background colour through slot3/GBoxFill. Win16 applies right/bottom-minus1 adjustments, a documented platform edge difference."
    ]
+  },
+  "root:50F6:0324": {
+   "win16": "_ScenarioNameStrs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores the result of LoadStringAnt with resource 1001 (4 DOS / 4 Win16 bytes); 1 shared users among 4 DOS and 2 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 193 lies in the window {'in_bucket_7': [130, 255], 'in_bucket_8': [0, 49]} of bucket [7, 8]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0328": {
+   "win16": "_EndGameRatingStrs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores the result of LoadStringAnt with resource 1900 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 2 lies in the window {'in_bucket_7': [130, 255], 'in_bucket_8': [0, 49]} of bucket [7, 8]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0334": {
+   "win16": "_GrassMap",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: save record index 80 of 307, same element size and count; 1 shared users among 1 DOS and 3 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 94 lies in the window [45, 96] of bucket [9, 9]",
+    "object size: Win16 spacing to the next symbol 24 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0368": {
+   "win16": "_MiscStrs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores the result of LoadStringAnt with resource 1800 (4 DOS / 4 Win16 bytes); 2 shared users among 3 DOS and 3 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 120 lies in the window [81, 172] of bucket [11, 11]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:04A6": {
+   "win16": "_CurBalloonMsgs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores a 4-byte parameter at BP+14 in AddMsgBalloon; 1 shared users among 1 DOS and 3 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 43 lies in the window [14, 50] of bucket [21, 21]",
+    "object size: Win16 spacing to the next symbol 24 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:04C8": {
+   "win16": "_CurBalloonPnts",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in AddMsgBalloon; 2 shared users among 2 DOS and 3 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 54 lies in the window [51, 99] of bucket [22, 22]",
+    "object size: Win16 spacing to the next symbol 24 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:04E6": {
+   "win16": "_CurBalloonFlags",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores a 2-byte parameter at BP+12 in AddMsgBalloon; 1 shared users among 1 DOS and 3 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 94 lies in the window [69, 100] of bucket [23, 23]",
+    "object size: Win16 spacing to the next symbol 12 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:04F6": {
+   "win16": "_CurBalloonPlane",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores a 2-byte parameter at BP+10 in AddMsgBalloon; 2 shared users among 2 DOS and 4 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 97 lies in the window {'in_bucket_23': [198, 255], 'in_bucket_24': [0, 101]} of bucket [23, 24]",
+    "object size: Win16 spacing to the next symbol 12 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:050C": {
+   "win16": "_BFightBalloonTicks",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 57 lies in the window {'in_bucket_24': [208, 255], 'in_bucket_25': [0, 130]} of bucket [24, 25]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:059A": {
+   "win16": "_EggBalloonTicks",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 88 lies in the window [17, 131] of bucket [26, 26]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0620": {
+   "win16": "_QueenBalloonTicks",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 3 lies in the window {'in_bucket_26': [232, 255], 'in_bucket_27': [0, 8]} of bucket [26, 27]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0732": {
+   "win16": "_RFightBalloonTicks",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 73 lies in the window [34, 105] of bucket [28, 28]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:07C4": {
+   "win16": "_RestBalloonTicks",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 195 lies in the window [160, 213] of bucket [29, 29]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0D40": {
+   "win16": "_TemBModePop",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DoNestAntB, DoAntSimA and 1 more function pairs; 4 shared users among 4 DOS and 5 Win16 function pairs; rival order votes remain; Tier B.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 60 lies in the window [33, 226] of bucket [44, 44]",
+    "object size: Win16 spacing to the next symbol 40 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0D6E": {
+   "win16": "_WantSpiderBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawSpider; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 8 lies in the window [0, 53] of bucket [45, 45]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0D72": {
+   "win16": "_TemRModePop",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DoAntSimA, DoNestAntR; 4 shared users among 4 DOS and 5 Win16 function pairs; rival order votes remain; Tier B.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 76 lies in the window [53, 152] of bucket [45, 45]",
+    "object size: Win16 spacing to the next symbol 40 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0EB4": {
+   "win16": "_LastSMode",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawSpider; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 172 lies in the window [81, 191] of bucket [46, 46]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0EB6": {
+   "win16": "_TemCensus",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in CountAnts; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 183 lies in the window [81, 191] of bucket [46, 46]",
+    "object size: Win16 spacing to the next symbol 64 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0F3C": {
+   "win16": "_BFightBalloonIndex",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 51 lies in the window [20, 61] of bucket [50, 50]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0F46": {
+   "win16": "_SwarmXB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: save record index 61 of 307, same element size and count.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 36 lies in the window {'in_bucket_50': [242, 255], 'in_bucket_51': [0, 72]} of bucket [50, 51]",
+    "object size: Win16 spacing to the next symbol 50 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0F84": {
+   "win16": "_SwarmYB",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: save record index 63 of 307, same element size and count.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 37 lies in the window {'in_bucket_51': [245, 255], 'in_bucket_52': [0, 71]} of bucket [51, 52]",
+    "object size: Win16 spacing to the next symbol 50 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0FC0": {
+   "win16": "_QueenBalloonIndex",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 253 lies in the window {'in_bucket_52': [153, 255], 'in_bucket_53': [0, 6]} of bucket [52, 53]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0FC6": {
+   "win16": "_SwarmXR",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: save record index 62 of 307, same element size and count.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 52 lies in the window [6, 113] of bucket [53, 53]",
+    "object size: Win16 spacing to the next symbol 50 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:0FF8": {
+   "win16": "_RFightBalloonIndex",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 67 lies in the window [6, 113] of bucket [53, 53]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:1008": {
+   "win16": "_SwarmYR",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: save record index 64 of 307, same element size and count.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 53 lies in the window {'in_bucket_54': [22, 255], 'in_bucket_55': [0, 12]} of bucket [54, 55]",
+    "object size: Win16 spacing to the next symbol 50 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:103A": {
+   "win16": "_RestBalloonIndex",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 189 lies in the window {'in_bucket_54': [22, 255], 'in_bucket_55': [0, 12]} of bucket [54, 55]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:1046": {
+   "win16": "_WantBFightBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 245 lies in the window {'in_bucket_55': [244, 255], 'in_bucket_56': [0, 13]} of bucket [55, 56]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:104A": {
+   "win16": "_WantEggBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 20 lies in the window [13, 21] of bucket [56, 56]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:1062": {
+   "win16": "_WantQueenBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 191 lies in the window {'in_bucket_57': [122, 255], 'in_bucket_58': [0, 75]} of bucket [57, 58]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:1064": {
+   "win16": "_WantRFightBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 5 lies in the window {'in_bucket_57': [122, 255], 'in_bucket_58': [0, 75]} of bucket [57, 58]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:106E": {
+   "win16": "_EggStr",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores the result of LoadStringAnt with resource 1100 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 204 lies in the window [191, 245] of bucket [58, 58]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:107C": {
+   "win16": "_WantRestBalloon",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: same reference position in DrawCurBalloons; used by the same 1 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 127 lies in the window [105, 144] of bucket [59, 59]",
+    "object size: Win16 spacing to the next symbol 2 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:1086": {
+   "win16": "_ModeStr",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores the result of LoadStringAnt with resource 1102 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 30 lies in the window {'in_bucket_59': [192, 255], 'in_bucket_60': [0, 60]} of bucket [59, 60]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:1096": {
+   "win16": "_LoadStr",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores the result of LoadStringAnt with resource 1103 (4 DOS / 4 Win16 bytes); 1 shared users among 2 DOS and 2 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 25 lies in the window [13, 75] of bucket [61, 61]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
+  },
+  "root:50F6:10B4": {
+   "win16": "_SpiderMsgs",
+   "confidence": "CONFIRMED",
+   "reviewed": "2026-11-13",
+   "evidence": [
+    "data alignment Tier B: stores the result of LoadStringAnt with resource 1210 (4 DOS / 4 Win16 bytes); same reference position in PrepareStrings; 2 shared users among 2 DOS and 3 Win16 function pairs.",
+    "emission run (rule COMDEF-1, tools/research/communal_runs.py): with this name the named far data at 50F6:01FE..10C1 keeps exactly 64 checksum runs; checksum 1 lies in the window {'in_bucket_62': [252, 255], 'in_bucket_63': [0, 27]} of bucket [62, 63]",
+    "object size: Win16 spacing to the next symbol 4 bytes equals the DOS spacing to the next registered address"
+   ],
+   "reviewer": "supervisor 2026-11-13 (emission-run and size anchors added to the Tier B alignment row)"
   }
  }
 }

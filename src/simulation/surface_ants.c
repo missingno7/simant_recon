@@ -35,8 +35,8 @@ extern Point far LastQueenPnt;
 extern Point far LastEggPnt;
 extern int far IsGameOver;
 extern int far gGameNeedsSaving;
-extern int far fd_50F6_0D40[20];
-extern int far fd_50F6_0D72[20];
+extern int far TemBModePop[20];
+extern int far TemRModePop[20];
 extern int far FlyAwayB;
 extern int far FlyAwayR;
 extern int far ModePopB[6];
@@ -245,8 +245,8 @@ void far ClrModePop(void)
     int i;
 
     for (i = 0; i < 20; i++) {
-        fd_50F6_0D40[i] = 0;
-        fd_50F6_0D72[i] = 0;
+        TemBModePop[i] = 0;
+        TemRModePop[i] = 0;
     }
     if (FlyAwayB)
         --FlyAwayB;
@@ -256,19 +256,19 @@ void far ClrModePop(void)
 
 void far TallyModePop(void)
 {
-    ModePopB[0] = fd_50F6_0D40[2] + fd_50F6_0D40[3];
-    ModePopB[1] = fd_50F6_0D40[4] + fd_50F6_0D40[5];
-    ModePopB[2] = fd_50F6_0D40[1];
-    ModePopB[3] = fd_50F6_0D40[7];
-    ModePopB[4] = fd_50F6_0D40[12];
-    ModePopB[5] = fd_50F6_0D40[6];
-    ModePopR[0] = fd_50F6_0D72[2] + fd_50F6_0D72[3];
-    ModePopR[1] = fd_50F6_0D72[4] + fd_50F6_0D72[5];
-    ModePopR[2] = fd_50F6_0D72[1];
-    ModePopR[3] = fd_50F6_0D72[7];
-    ModePopR[4] = fd_50F6_0D72[12];
-    ModePopR[5] = fd_50F6_0D72[6];
-    if (fd_50F6_0D72[19] < 1)
+    ModePopB[0] = TemBModePop[2] + TemBModePop[3];
+    ModePopB[1] = TemBModePop[4] + TemBModePop[5];
+    ModePopB[2] = TemBModePop[1];
+    ModePopB[3] = TemBModePop[7];
+    ModePopB[4] = TemBModePop[12];
+    ModePopB[5] = TemBModePop[6];
+    ModePopR[0] = TemRModePop[2] + TemRModePop[3];
+    ModePopR[1] = TemRModePop[4] + TemRModePop[5];
+    ModePopR[2] = TemRModePop[1];
+    ModePopR[3] = TemRModePop[7];
+    ModePopR[4] = TemRModePop[12];
+    ModePopR[5] = TemRModePop[6];
+    if (TemRModePop[19] < 1)
         MakeRedInitiator();
 }
 
@@ -316,9 +316,9 @@ void far DoAntSimA(void)
             continue;
         mode = AlistM[Tindex];
         if (t & 0x80)
-            fd_50F6_0D72[mode]++;
+            TemRModePop[mode]++;
         else
-            fd_50F6_0D40[mode]++;
+            TemBModePop[mode]++;
         switch (mode) {
         case 0:
             DoRandAntA(Tindex);

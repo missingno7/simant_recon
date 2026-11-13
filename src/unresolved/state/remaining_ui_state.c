@@ -9,11 +9,11 @@
  */
 
 typedef char far * far *Handle;
-int far fd_50F6_1062;
-int far fd_50F6_1064;
+int far WantQueenBalloon;
+int far WantRFightBalloon;
 unsigned char far fd_50F6_106C;
 int far LessonTemp;
-int far fd_50F6_107C;
+int far WantRestBalloon;
 int far fd_50F6_1092;
 int far StrategicModeR;
 int far BirdX;
