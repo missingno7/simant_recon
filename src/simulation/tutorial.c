@@ -11,6 +11,10 @@ typedef struct {
     int y;
 } Point;
 
+/* These prototypes appear here and again before the functions that use them.  Both copies
+ * are kept: removing either one changes the code of RunTutor and LessonDone (declaration
+ * numbers, docs/codegen-rules.md).  A header with the prototypes plus local ones would give
+ * this shape; the original file structure is unknown. */
 void far Feedback(void);
 void far RunTutor(void);
 void far GiveLesson(int lesson);

@@ -630,8 +630,6 @@ void far DoEditUpdateDraw(void)
 extern int _fastcall win_IsWinOpen(int win);
 void far edit_render_viewport(void);
 void far DrawEditGraphs(void);
-void far edit_render_viewport(void);
-void far DrawEditGraphs(void);
 
 void far UpdateEdit(void)
 {
@@ -1094,7 +1092,6 @@ void far PreDrawSpider(void)
     fd_50F6_37D4 = SpidY / 16 - y - 3;
 }
 
-void far DrawEditGraphs(void);
 extern void far anim_bitmap_to_buffer(int x, int y, Pnt far *buf, int id);
 void far DrawLegs(int x, int y, int dir, int frame);
 void far DrawPalps(int x, int y, int dir);

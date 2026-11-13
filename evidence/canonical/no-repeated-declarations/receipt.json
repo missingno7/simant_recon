@@ -1,0 +1,842 @@
+{
+  "schema": "simant-canonical-publication-v1",
+  "prior_commit": "13fc8f2",
+  "scope": "Repeated file-scope declarations removed from four modules that hold behaviour-registered functions (S12:384C, S15:384C, root:284A, root:0250); the first copy of each stays. All exact claims stay exact; registered definitions are unchanged.",
+  "historical_comparisons": {
+    "S12:384C": {
+      "object_sha256": "776cf4ef6f1ae43c5dabe3f5fb8adccfc36bcbb53281031543dddc458648749b",
+      "contribution_sha256": "37869ce202d0adf7da38fec22c5570edaa301036d5fa72af213ca1daf993b020",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "DeinitMapFunctions": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "InitMapFunctions": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 75,
+            "relocations": 12,
+            "reloc_order": "GROUPED"
+          },
+          "ProcMapEvent": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 49,
+            "relocations": 20,
+            "reloc_order": "GROUPED"
+          },
+          "OpenMapWindow": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "EraseMapCursor": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 10,
+            "relocations": 7,
+            "reloc_order": "GROUPED"
+          },
+          "ToggleMapCursor": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "o12_384C_03D0": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "o12_384C_0425": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "map_expand_scent_colours": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 13,
+            "relocations": 3,
+            "reloc_order": "EXACT"
+          },
+          "map_generate_nest_colours": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 37,
+            "relocations": 10,
+            "reloc_order": "GROUPED"
+          },
+          "DrawMapData": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 24,
+            "relocations": 13,
+            "reloc_order": "GROUPED"
+          },
+          "DrawMap": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 4,
+            "reloc_order": "GROUPED"
+          },
+          "win_DrawMapWindow": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 14,
+            "relocations": 6,
+            "reloc_order": "GROUPED"
+          },
+          "DrawMapSpider": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 14,
+            "relocations": 4,
+            "reloc_order": "GROUPED"
+          },
+          "DrawMapFoot": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 40,
+            "relocations": 5,
+            "reloc_order": "GROUPED"
+          },
+          "MapToYellowAnt": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 8,
+            "relocations": 8,
+            "reloc_order": "GROUPED"
+          },
+          "map_generate_surface_colours": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 51,
+            "relocations": 8,
+            "reloc_order": "GROUPED"
+          },
+          "map_render_immediate": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 126,
+            "relocations": 30,
+            "reloc_order": "GROUPED"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 86,
+            "reloc_order": "GROUPED",
+            "start": 385440,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          },
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 156,
+            "reloc_order": "EXACT",
+            "start": 361662,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "scaffold": [],
+        "inplace_drafts": [
+          "DrawMapCursor"
+        ]
+      }
+    },
+    "S15:384C": {
+      "object_sha256": "18827f79c6426bd2c033549c5c547c763f39d8ea6195a70eacba699c32ef293f",
+      "contribution_sha256": "e14b876f753f327cfced1d5aa740efe301ef6ce86d2f2ea80e36bf48be09b8c8",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "o15_384C_0000": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "LoadMonoPats": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 7,
+            "reloc_order": "GROUPED"
+          },
+          "bios_probe_reset_disks": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "MenuQuit": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "SetDefaultWindows": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 9,
+            "reloc_order": "GROUPED"
+          },
+          "NewGame": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 46,
+            "relocations": 16,
+            "reloc_order": "GROUPED"
+          },
+          "app_cleanup_and_exit": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 17,
+            "relocations": 10,
+            "reloc_order": "GROUPED"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 213,
+            "reloc_order": "EXACT",
+            "start": 362118,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 24,
+            "reloc_order": "GROUPED",
+            "start": 385704,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "scaffold": [],
+        "inplace_drafts": [
+          "ui_prompt_save_discard_cancel"
+        ]
+      }
+    },
+    "root:0250": {
+      "object_sha256": "a495230d13082aeb1668b8c44fdf4ecd47cfd1fc127e672f121169d72578dbc8",
+      "contribution_sha256": "1cea8321d5c474f591e46010099df469daa1a69fe5a6812253ea5aece60d1ccc",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "edit_scroll_delta": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "ZapEuMapAt": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 8,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "InvalEuMap": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_0250_0114": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "edit_alloc_tile_ems": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 27,
+            "relocations": 11,
+            "reloc_order": "GROUPED"
+          },
+          "edit_release_life_tiles": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "edit_load_terrain_tiles": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 24,
+            "relocations": 8,
+            "reloc_order": "GROUPED"
+          },
+          "OverlayTileSet": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "LoadTiles": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 56,
+            "relocations": 17,
+            "reloc_order": "GROUPED"
+          },
+          "edit_invalidate_life_cache": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "f_0250_05EB": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 10,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "edit_restore_tile_ems_map": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "edit_prepare_life_tiles": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 15,
+            "relocations": 5,
+            "reloc_order": "GROUPED"
+          },
+          "f_0250_0721": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 50,
+            "relocations": 8,
+            "reloc_order": "GROUPED"
+          },
+          "edit_compose_life_tile": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 50,
+            "relocations": 8,
+            "reloc_order": "GROUPED"
+          },
+          "f_0250_0ADB": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 15,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "edit_copy_ground_tile": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 14,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "ProcEditEvent": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 37,
+            "relocations": 16,
+            "reloc_order": "GROUPED"
+          },
+          "edit_scroll_and_redraw": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 3,
+            "reloc_order": "EXACT"
+          },
+          "win_EditChanged": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 18,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "OpenEditWindow": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "ForceUpdateEdit": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 3,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "DoEditUpdateDraw": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "UpdateEdit": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 6,
+            "relocations": 4,
+            "reloc_order": "GROUPED"
+          },
+          "UpdateEditWindow": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_0250_0ED2": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "win_DrawEditWindow": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 10,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "BoundEditPosition": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "CenterEdit": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 12,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "SetEditWinTitle": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 17,
+            "relocations": 10,
+            "reloc_order": "GROUPED"
+          },
+          "PreDrawSpider": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 36,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "ed_MoveTo": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 4,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "ed_LineTo": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 8,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "DrawPalps": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 182,
+            "relocations": 3,
+            "reloc_order": "GROUPED"
+          },
+          "DrawLegs": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 961,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "f_0250_41CA": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 14,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "EggBalloons": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 16,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "FightBalloons": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 16,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "QueenBalloons": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 16,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "RestBalloons": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 16,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "AddMsgBalloon": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 18,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "EditMsgBalloon": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 5,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "PreDrawBalloons": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "edit_set_viewport_clip": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 9,
+            "relocations": 6,
+            "reloc_order": "GROUPED"
+          },
+          "DrawEditGraphs": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 28,
+            "relocations": 16,
+            "reloc_order": "WITHIN_GROUP_PENDING"
+          },
+          "edit_render_viewport": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 69,
+            "relocations": 11,
+            "reloc_order": "GROUPED"
+          },
+          "BalloonIsVisible": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_0250_1E80": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 47,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "DrawCurBalloons": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 255,
+            "relocations": 21,
+            "reloc_order": "WITHIN_GROUP_PENDING"
+          },
+          "DrawSpider": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 132,
+            "relocations": 12,
+            "reloc_order": "GROUPED"
+          },
+          "f_0250_129E": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 32,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 326,
+            "reloc_order": "GROUPED",
+            "start": 383420,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          },
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 274,
+            "reloc_order": "EXACT",
+            "start": 357614,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "_BSS": {
+            "exact": true,
+            "reasons": [],
+            "size": 28,
+            "kind": "BSS",
+            "start": 386782,
+            "align": "word"
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "scaffold": [],
+        "inplace_drafts": [
+          "DoCalcTile",
+          "DrawBalloons"
+        ]
+      }
+    },
+    "root:284A": {
+      "object_sha256": "0f3cb991e1d86b6f605f2253981d6d2dde5660de9b0d1dbfc36ac2bf38fe797f",
+      "contribution_sha256": "863d256c59b0170d54e3cbf855680465385812865ca5c19dfc6bf2e734e2096a",
+      "comparison": {
+        "compile_ok": true,
+        "claims": {
+          "snd_service_and_test_stopped": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "snd_load_and_start_song": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 30,
+            "relocations": 6,
+            "reloc_order": "GROUPED"
+          },
+          "StopSong": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 8,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_0151": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_0199": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_01D5": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 5,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_024B": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 1,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_0256": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 20,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_02E4": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 13,
+            "relocations": 1,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_0324": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 0,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_0325": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 7,
+            "relocations": 4,
+            "reloc_order": "GROUPED"
+          },
+          "f_284A_038F": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 42,
+            "relocations": 3,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_04C9": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 9,
+            "relocations": 2,
+            "reloc_order": "GROUPED"
+          },
+          "f_284A_0521": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_0537": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 11,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_0673": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 2,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_05C5": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 16,
+            "relocations": 2,
+            "reloc_order": "EXACT"
+          },
+          "f_284A_067F": {
+            "exact": true,
+            "reasons": [],
+            "fixups": 16,
+            "relocations": 0,
+            "reloc_order": "EXACT"
+          }
+        },
+        "exact": true,
+        "opaque_data": [],
+        "opaque_unmarked_bytes": 0,
+        "data": {
+          "_DATA": {
+            "exact": true,
+            "reasons": [],
+            "size": 76,
+            "reloc_order": "EXACT",
+            "start": 381078,
+            "class": "DATA",
+            "align": "word",
+            "far": false
+          },
+          "CONST": {
+            "exact": true,
+            "reasons": [],
+            "size": 20,
+            "reloc_order": "GROUPED",
+            "start": 386518,
+            "class": "CONST",
+            "align": "word",
+            "far": false
+          },
+          "_BSS": {
+            "exact": true,
+            "reasons": [],
+            "size": 46,
+            "kind": "BSS",
+            "start": 387336,
+            "align": "word"
+          }
+        },
+        "data_only": false,
+        "communals": [],
+        "scaffold": [],
+        "inplace_drafts": [
+          "f_284A_0138"
+        ]
+      }
+    }
+  }
+}

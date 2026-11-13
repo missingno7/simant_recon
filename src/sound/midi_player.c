@@ -153,9 +153,6 @@ void far f_284A_024B(unsigned volume)
     g_7570 = volume;
 }
 
-extern int far fd_50F6_4B2E;
-extern long far fd_50F6_4B42[];
-extern unsigned char far fd_50F6_4B30[];
 
 void far f_284A_0256(void)
 {
@@ -190,7 +187,6 @@ void far f_284A_0324(void)
 {
 }
 
-extern long far fd_50F6_4B8A;
 
 void far f_284A_0325(unsigned division, long tempo)
 {
@@ -235,8 +231,6 @@ int far f_284A_038F(void)
     return 0;
 }
 
-extern void far f_295C_02E8(int program, int note);
-extern void far f_295C_01EC(int bank, int program, int note, int velocity);
 
 void far f_284A_04C9(int chan, int note, unsigned velocity)
 {

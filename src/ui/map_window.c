@@ -264,7 +264,6 @@ void far ToggleMapCursor(void)
         DrawMapCursor();
 }
 
-extern int far multiplier;
 
 void far o12_384C_03D0(char far *src, char far *dst, int n)
 {
@@ -274,26 +273,12 @@ void far o12_384C_03D0(char far *src, char far *dst, int n)
         (*fd_50F6_38B8)(src, dst, multiplier, n);
 }
 
-extern void far win_MapChanged(void);
 
 void far o12_384C_0425(void)
 {
     win_MapChanged();
 }
 
-extern int far MapMode;
-extern char far * far * far fd_50F6_385A;
-extern char far * far mem_Lock(char far * far *handle);
-extern void far mem_Unlock(char far * far *handle);
-extern unsigned char far LifeA[128][64];
-extern unsigned char far MapA[128][64];
-extern int far TERRAINset;
-extern unsigned char far LTab[];
-extern unsigned char far HTab[];
-extern unsigned char far CTab[];
-extern unsigned char far bw_LTab[];
-extern unsigned char far bw_HTab[];
-extern unsigned char far bw_CTab[];
 
 void far map_generate_surface_colours(void)
 {
@@ -381,12 +366,6 @@ void far map_expand_scent_colours(unsigned char far *src)
     mem_Unlock(fd_50F6_385A);
 }
 
-extern unsigned char far LifeR[64][64];
-extern unsigned char far MapR[64][64];
-extern unsigned char far LifeB[64][64];
-extern unsigned char far MapB[64][64];
-extern unsigned char far bw_CTabR[];
-extern unsigned char far CTabR[];
 
 void far map_generate_nest_colours(void)
 {
@@ -452,14 +431,6 @@ void far map_generate_nest_colours(void)
     mem_Unlock(fd_50F6_385A);
 }
 
-extern int far BpopT;
-extern int far RpopT;
-extern int far HealthR;
-extern int near g_3DB2;
-extern void far font_SetFont(int font);
-extern void far win_PrintfAtObj(int obj, char far *format, ...);
-extern int far HealthB;
-extern void far win_DrawHBar(int obj, long fraction);
 
 void far DrawMapData(void)
 {
@@ -483,29 +454,10 @@ void far DrawMapData(void)
     win_DrawHBar(0x11e, ((long)RpopT << 16) / maxPop);
 }
 
-extern void far MapToYard(void);
-extern char far * far * far fd_50F6_385E;
-extern void far Punt(char far *msg);
-extern unsigned char far PherMapBN[];
-extern unsigned char far PherMapBT[];
-extern unsigned char far PherMapRN[];
-extern unsigned char far PherMapRT[];
-extern unsigned char far PherMapA[];
-extern int far ConvColor(int color);
 extern void (far * near g_9134)(int left, int top, int right, int bottom, int color);
-extern long far TickCount(void);
-extern void _fastcall win_SetColorNum(int color);
-extern void far f_15D9_0006(long msg, struct Rect far *rect, int y);
-extern void far clip_SubInclude(struct Rect far *rect);
-extern int far SpidOn;
-extern int far MapPlane;
-extern int far SpidX;
-extern int far SpidY;
 extern void (far * near g_914C)(int x, int y, char far *image, int width, int height);
-extern int far SpidDir;
 void far DrawMapSpider(int x, int y, int kind);
 void far DrawMapFoot(void);
-extern void far mem_Free(char far * far *handle);
 
 void far map_render_immediate(void)
 {
@@ -611,7 +563,6 @@ void far map_render_immediate(void)
 }
 
 
-extern void far clip_Off(void);
 
 void far DrawMap(void)
 {
@@ -623,10 +574,6 @@ void far DrawMap(void)
     }
 }
 
-extern int far CurGameType;
-extern int far CurExpTool;
-extern void _fastcall win_SetColorFromObjNum(int obj);
-extern void _fastcall win_DrawBitMapAtObjNum(int obj, int id);
 
 void far win_DrawMapWindow(int flags)
 {
@@ -647,7 +594,6 @@ void far win_DrawMapWindow(int flags)
     }
 }
 
-extern int _fastcall win_DrawBitMap(int x, int y, int id);
 
 void far DrawMapSpider(int x, int y, int kind)
 {
@@ -676,13 +622,6 @@ void far DrawMapSpider(int x, int y, int kind)
     }
 }
 
-extern int far FootHere;
-extern int far FootX;
-extern int far FootY;
-extern int far BoyDir;
-extern int far BoyHere;
-extern int far MowX;
-extern int far MowY;
 
 void far DrawMapFoot(void)
 {
@@ -722,13 +661,6 @@ void far DrawMapFoot(void)
     newMapForce = 1;
 }
 
-extern void far AddFood(int count, int sound);
-extern void far myBeginSound(int sound, int a, int b);
-extern void far KillSomeAnts(int side);
-extern void far AddSomeAnts(int side);
-extern void far SubtractFood(void);
-extern void far GotoMyAnt(void);
-extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 
 void far MapToYellowAnt(struct Event far *ev)
 {

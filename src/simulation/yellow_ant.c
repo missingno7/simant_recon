@@ -608,10 +608,6 @@ void far ExitNest(void)
     SetMyLife(MePlane = 1, MeLocX, MeLocY, MeType, MeDir, 0xff);
 }
 
-extern int far LastNewExitB[2];
-extern int far LastNewHoleR[2];
-extern int far LastNewExitR[2];
-extern int far LastNewHoleB[2];
 
 int far GetMyDis(int p1, int x1, int y1, int p2, int x2, int y2)
 {
@@ -641,9 +637,6 @@ int far GetMyDis(int p1, int x1, int y1, int p2, int x2, int y2)
          + GetDis(LastNewExitB[0], LastNewExitB[1], x2, y2);
 }
 
-extern int far TileCanBeMovedOn(int plane, int x, int y, int fromPlane, int fromX, int fromY, int digging);
-extern int far GetLife(int plane, int x, int y);
-extern int far IsClearTile(int plane, int x, int y);
 
 int far GetMyBestDirs(int plane, int x, int y, int a, int b)
 {
@@ -795,7 +788,6 @@ int far CheckMyBestDirs(int far *steps, int plane, int x, int y, int a, int b)
     return dir;
 }
 
-extern int far MeCrazyRot;
 
 int far GetMyNextRandDirs(int plane, int x, int y, int a, int b)
 {

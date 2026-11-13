@@ -188,8 +188,6 @@ void _fastcall win_UnlockWin(int win)
 }
 
 
-extern int far WinPrintf(char far *format, ...);
-extern void far debug_breakpoint(void);
 
 void far f_23AE_035D(void)
 {

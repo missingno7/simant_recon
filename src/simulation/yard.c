@@ -824,7 +824,6 @@ extern char far fd_3D57_0000[];
 extern int far CatX;
 extern int far CatY;
 extern char far fd_3D57_0008[];
-extern int far DogDir;
 extern int far SRand16(void);
 extern unsigned long far f_0BE8_0B83(int x1, int y1, int x2, int y2);
 

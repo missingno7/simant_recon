@@ -4165,7 +4165,7 @@
     "end": 230591
    },
    "source": "src/simulation/yard.c",
-   "source_sha256": "ba3f2282b7d2e4c3b51ee0aa98d8c8cb7a30d83cca4b4c06dd6214d7d02b07b9",
+   "source_sha256": "8eba77c085cd692396e8d2691f78ddab18c0869eb050984436011073832c31cd",
    "claims": [
     {
      "name": "InitSimYard",
@@ -4439,7 +4439,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0a572da071ee56ee13766378ad68d426a8328a230be20149284ce63c1342a803"
+   "object_sha256": "958e6adf765a8733f4c5f99e83653fa83d70c5162f4a60ccdb3d296b262c82b6"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -5422,7 +5422,7 @@
     "end": 223739
    },
    "source": "src/window/menu_tracking.c",
-   "source_sha256": "7065a8617858ea85552488b7d122264c28fc1a2a9aaa0da526b103b010924973",
+   "source_sha256": "da376daabaf81080bcb408c14f5c3fe11b1e450ba13f02d0ae32c3760f7741ef",
    "claims": [
     {
      "name": "o10_35F5_0000",
@@ -5481,7 +5481,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "11078efa976be373050c7d4f6c8d3f8388768eff2b9b89590b957ed60ab4e9a8"
+   "object_sha256": "53e4cfec6931f4a4c9cb391bd3a4cdce55f02706e5d315aeb5feb49243f9533e"
   },
   "S11:35F5": {
    "unit": "S11",
@@ -5691,7 +5691,7 @@
    },
    "lang": "c",
    "source": "src/ui/map_window.c",
-   "source_sha256": "4d7173dc0d1246a4fced0211de643d640049ad0ba8a68a3e8145aa188caa3bf8",
+   "source_sha256": "8cef526a8f2f4b8355212723363b636baab9e15f9ac8d8190d48e002d2ff8ed5",
    "claims": [
     {
      "name": "DeinitMapFunctions",
@@ -5893,7 +5893,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c3eec0348c46c9d9f6f7f798fe283dff7d9c5215e0b32aaa4c51f2d43e8690b5",
+   "object_sha256": "776cf4ef6f1ae43c5dabe3f5fb8adccfc36bcbb53281031543dddc458648749b",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -6391,7 +6391,7 @@
     "end": 236643
    },
    "source": "src/ui/yard_window.c",
-   "source_sha256": "9595453447178c683393ff621e45894e5fd7bbd14dbec091838f2a63a9e3b73a",
+   "source_sha256": "fa2b4b95c4f8566642f24e06fa7aa42cdffecbe0c87b1691e5108f45b81928d0",
    "claims": [
     {
      "name": "ProcYardEvent",
@@ -6660,7 +6660,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f62d149bf468b5085cedcaf611af37008f55af97d29ee3950cc5f4c1ca7f5f4a"
+   "object_sha256": "9236aaafaa0f83087bba542397b33fbc40d143a90b094a06abf0c44319aed29e"
   },
   "S14:384C": {
    "unit": "S14",
@@ -6687,143 +6687,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "layout_inferred": [
-    "font choices written as six if/else statements instead of ?: arguments (same bytes, two /Zi line entries each) so the 52-entry LINNUM flushes give the record breaks the relocation order needs (DrawCastePopUp, PictureDialog, SpiderDialog; source header, worker resF)"
-   ],
-   "extent": {
-    "start": 230592,
-    "end": 235245
-   },
-   "source": "src/ui/scenario_dialogs.c",
-   "source_sha256": "08871def1c474274b6eeec12e3ec946130dc9b264150039e996cf09f05f00d62",
-   "claims": [
-    {
-     "name": "DoScenario",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 1169,
-     "size": 106,
-     "target_sha256": "7ac1ac3bcec4678a289be2be413b188c71ba0b6b181d2a92736187e50ac3efd5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoWinHelp",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 1275,
-     "size": 203,
-     "target_sha256": "46bd30a88c3afb7fa9edd307e159884970dfb6c3994e9ae22a7fc8ccf22ee16f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ScoreDialog",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 1478,
-     "size": 551,
-     "target_sha256": "6c80d3654f226a9d285fe749531ad59597e545da8be2baee66c41b27aa6de30d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SetDefaultWindPrompt",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 2765,
-     "size": 157,
-     "target_sha256": "a0ea068887efe43773933a616174683deda79b8ec19b40c557ea1178c7d816ae",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "PictStrnDialog",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 2922,
-     "size": 156,
-     "target_sha256": "0836e9b6cb0e86310c99e9882362ad95cbb8157a7062397601554d1c557790c5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "EndGameDialog",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 3557,
-     "size": 445,
-     "target_sha256": "da248a7208cff45aee4bdbae7ddce4638bb8d37f132a6a945e76da72a9fee940",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "CustomerIDDialog",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 4325,
-     "size": 328,
-     "target_sha256": "e8c8d22bb03c347677f4b832c077ad13726e8eedad34b7b626e2fac3756b6477",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DrawCastePopUp",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 2029,
-     "size": 736,
-     "target_sha256": "f7919472a55d8c7b2efedf08a2547822289a046e6c62b58297d01c51add859f5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "layout_inferred": "unnamed forward declaration of g_9134 (-5 identifiers before DrawCastePopUp): named vs unnamed prototype parameters chosen by identifier-count windows (source header)"
-    },
-    {
-     "name": "PictureDialog",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 3078,
-     "size": 479,
-     "target_sha256": "7bd28b7bb84557d0dd9595f2b6c2b0682958bd5042c97d334b709db376c37341",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED",
-     "layout_inferred": "unnamed forward declaration of PictureDialog (-4 identifiers before it); which prototypes carry parameter names is a byte-equivalent unknown (source header)"
-    },
-    {
-     "name": "SpiderDialog",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 4002,
-     "size": 323,
-     "target_sha256": "dd0700abf9754b4ca8f541bc513ec5343c939b382ce16a421e47f059ef356519",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "CalcScore",
-     "unit": "S14",
-     "seg": 14412,
-     "off": 0,
-     "size": 1169,
-     "target_sha256": "91425dbb3f97cea1d590fdd4e4e4c6207498a43d9acdb1df56a8eae476796e20",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "layout_inferred": "Separate history-index lifetime and module prototype parameter count inferred from exact code; alternative scopes and name removals also match.",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "dda7aaadb0e9120e43f91baa9b524cf73eea124e6a30085c9c591776c8ec65f3",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -6831,8 +6694,8 @@
      "why": "Displays scenario, score, end game, help and picture dialogs. The file also computes the score and draws caste and spider popups."
     }
    ],
-   "summary": "Displays scenario, score, end game, help and picture dialogs. The file also computes the score and draws caste and spider popups.",
    "windows_group": "SIMANT",
+   "summary": "Displays scenario, score, end game, help and picture dialogs. The file also computes the score and draws caste and spider popups.",
    "file_header": {
     "text": "Displays scenario, score, end game, help and picture dialogs. The file also computes the score\nand draws caste and spider popups.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 14 (S14); segment 384C; complete original translation unit.\nWindows: SIMANT, from recorded function pairs in the Windows symbol inventory.\n\nSource-form evidence (worker resF):\n - Every font choice is written `if (g_3DB2 == 320) font_SetFont(a); else font_SetFont(b);`\n   (six sites).  The two calls are cross-jumped into the same bytes as a `?:` argument, but\n   each if/else adds two /Zi line entries; with all six the 52-entry LINNUM flushes land where\n   the oracle's relocation order needs record breaks (DrawCastePopUp, PictureDialog,\n   SpiderDialog: 0 violations of 115 order constraints).\n - Identifier counts (symbol-table state, periodic mod 17) include local and prototype\n   parameters. The forward prototypes of CalcScore/DoWinHelp/SetDefaultWindPrompt/\n   PictStrnDialog are named (+6, CalcScore operand order), g_9134's and PictureDialog's forward\n   declaration are unnamed (-5 before DrawCastePopUp, -4 before PictureDialog).\n   CalcScore scopes its history index separately from the later matrix index; DialogWaitInit has an unnamed real prototype parameter.\n   Alternative scopes and prototype-name removals also match; these forms are inferred.",
     "name_kind": "descriptive",
@@ -6987,7 +6850,144 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "layout_inferred": [
+    "font choices written as six if/else statements instead of ?: arguments (same bytes, two /Zi line entries each) so the 52-entry LINNUM flushes give the record breaks the relocation order needs (DrawCastePopUp, PictureDialog, SpiderDialog; source header, worker resF)"
+   ],
+   "extent": {
+    "start": 230592,
+    "end": 235245
+   },
+   "source": "src/ui/scenario_dialogs.c",
+   "source_sha256": "6fb56287ba04051c7a20515cb068bf4064bc2962fd6e623a909034eb66868441",
+   "claims": [
+    {
+     "name": "DoScenario",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 1169,
+     "size": 106,
+     "target_sha256": "7ac1ac3bcec4678a289be2be413b188c71ba0b6b181d2a92736187e50ac3efd5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoWinHelp",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 1275,
+     "size": 203,
+     "target_sha256": "46bd30a88c3afb7fa9edd307e159884970dfb6c3994e9ae22a7fc8ccf22ee16f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ScoreDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 1478,
+     "size": 551,
+     "target_sha256": "6c80d3654f226a9d285fe749531ad59597e545da8be2baee66c41b27aa6de30d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetDefaultWindPrompt",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 2765,
+     "size": 157,
+     "target_sha256": "a0ea068887efe43773933a616174683deda79b8ec19b40c557ea1178c7d816ae",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "PictStrnDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 2922,
+     "size": 156,
+     "target_sha256": "0836e9b6cb0e86310c99e9882362ad95cbb8157a7062397601554d1c557790c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EndGameDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 3557,
+     "size": 445,
+     "target_sha256": "da248a7208cff45aee4bdbae7ddce4638bb8d37f132a6a945e76da72a9fee940",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CustomerIDDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 4325,
+     "size": 328,
+     "target_sha256": "e8c8d22bb03c347677f4b832c077ad13726e8eedad34b7b626e2fac3756b6477",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DrawCastePopUp",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 2029,
+     "size": 736,
+     "target_sha256": "f7919472a55d8c7b2efedf08a2547822289a046e6c62b58297d01c51add859f5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "layout_inferred": "unnamed forward declaration of g_9134 (-5 identifiers before DrawCastePopUp): named vs unnamed prototype parameters chosen by identifier-count windows (source header)"
+    },
+    {
+     "name": "PictureDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 3078,
+     "size": 479,
+     "target_sha256": "7bd28b7bb84557d0dd9595f2b6c2b0682958bd5042c97d334b709db376c37341",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED",
+     "layout_inferred": "unnamed forward declaration of PictureDialog (-4 identifiers before it); which prototypes carry parameter names is a byte-equivalent unknown (source header)"
+    },
+    {
+     "name": "SpiderDialog",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 4002,
+     "size": 323,
+     "target_sha256": "dd0700abf9754b4ca8f541bc513ec5343c939b382ce16a421e47f059ef356519",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CalcScore",
+     "unit": "S14",
+     "seg": 14412,
+     "off": 0,
+     "size": 1169,
+     "target_sha256": "91425dbb3f97cea1d590fdd4e4e4c6207498a43d9acdb1df56a8eae476796e20",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "layout_inferred": "Separate history-index lifetime and module prototype parameter count inferred from exact code; alternative scopes and name removals also match.",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "8f53f728d3fa7f8a0fcc430a301a8d3bbbb2a0cfad8e65cf0243da7114695e8d"
   },
   "S15:384C": {
    "unit": "S15",
@@ -7014,7 +7014,7 @@
    },
    "lang": "c",
    "source": "src/startup/game_session.c",
-   "source_sha256": "d8c72e5c73bf56c378462a4a35a25b9a25786f4d06d5aff6190fdd90dbef4321",
+   "source_sha256": "103ef869dcec0120c402298d9992fd4967690f0fb5be71c8398b58f249d6d4ab",
    "claims": [
     {
      "name": "o15_384C_0000",
@@ -7095,7 +7095,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "123b6990ef1f32a3f444c0ee46504ae0a6de7eec1b1746631a60edf63c7f8cfa",
+   "object_sha256": "18827f79c6426bd2c033549c5c547c763f39d8ea6195a70eacba699c32ef293f",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -11328,7 +11328,7 @@
     "end": 251234
    },
    "source": "src/simulation/yellow_ant.c",
-   "source_sha256": "b88b7b6391f4ff140699cc4ef232cf2c9cd61f3813147877512a7e6b2482c02c",
+   "source_sha256": "7e465cf1a02cf9e3028acd45d094cf1aec022239847328dc1be6d698d7639d75",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -11569,7 +11569,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "34d18941bc0258e2b5b1773dfa3039dba377a76c3e3d02d64f922ccba4b76fef"
+   "object_sha256": "ed9162d562a31fc8c8265b898c616e9b43cf5eda69c31719a87f5cc34544caa2"
   },
   "S26:39C7": {
    "unit": "S26",
@@ -15181,7 +15181,7 @@
    "lang": "c",
    "source_origin": "hand-written C",
    "source": "src/ui/edit_view.c",
-   "source_sha256": "d1dcbaada44cd1fd7af0102a1a804806d071489c2fc998b24b1a07e1dce44114",
+   "source_sha256": "6ac928dd0b79312a955d75b7437131148241a81ef94e3ca04f18e7e5387f2ec2",
    "claims": [
     {
      "name": "edit_scroll_delta",
@@ -15750,7 +15750,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "abb01a718eed9d07f0f6e74e96f04b22dc8a793aca1b699387742122b3c93fc9",
+   "object_sha256": "a495230d13082aeb1668b8c44fdf4ecd47cfd1fc127e672f121169d72578dbc8",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -19250,12 +19250,15 @@
      }
     ]
    },
+   "layout_inferred": [
+    "declaration count: RunTutor, GiveLesson and LessonDone are each declared twice (at the top and before their users); removing either copy changes RunTutor (5 bytes) and LessonDone (713 bytes for 723), so both stay; the original file structure is unknown"
+   ],
    "extent": {
     "start": 58090,
     "end": 60433
    },
    "source": "src/simulation/tutorial.c",
-   "source_sha256": "93f4bbddfd4e50594e77dfa884163fef9791a8fac60e9d171dea54491a6d5c62",
+   "source_sha256": "7ebdcde15dfad464e057b075cc1e2da92dcf8853f5d586c932deb6090bedf012",
    "claims": [
     {
      "name": "Feedback",
@@ -19304,7 +19307,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "41b7bd14419100983729120ef745a8e2ed1d6323b2ceb1ec9474520cfc0f4da1"
+   "object_sha256": "c0728025ee99a948f48ad705ad8f461923f5a129c294598d21cf983bee46dd56"
   },
   "root:0EC1": {
    "unit": "root",
@@ -20445,12 +20448,606 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/root/m10F7.c",
+     "why": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives."
+    }
+   ],
+   "windows_group": "SIMONE",
+   "summary": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives.",
+   "file_header": {
+    "text": "Queries and updates life and terrain at map locations. It also implements the yellow ant\ninteractions for carrying, eating, dropping, targeting and exchanging objects or lives.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 10F7; complete original translation unit.\nWindows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
+    "name_kind": "descriptive",
+    "why": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/root:10F7",
+      "summary": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/root:10F7",
+      "module": "root:10F7",
+      "source": "src/simulation/life_tiles.c",
+      "reviewed_source_sha256": "7f126a82534a02ff8843530aa60ea7d13a6c55b15414000c223ec4295e3539cd",
+      "link_facts": {
+       "part": "resident code",
+       "segment": "10F7",
+       "origin": null,
+       "translation_unit": "complete original translation unit",
+       "extent": {
+        "start": 69502,
+        "end": 79921
+       }
+      },
+      "not_exact": [],
+      "steered": [],
+      "profile": "msc600ax",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "IsValidLocation",
+        "dos_address": "root:10F7:000E",
+        "win16": "_IsValidLocation",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 22234,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:000E"
+       },
+       {
+        "function": "IsClearTile",
+        "dos_address": "root:10F7:04EC",
+        "win16": "_IsClearTile",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 23340,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:04EC"
+       },
+       {
+        "function": "IsThisEgg",
+        "dos_address": "root:10F7:06BF",
+        "win16": "_IsThisEgg",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 24264,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:06BF"
+       },
+       {
+        "function": "IsThisGrass",
+        "dos_address": "root:10F7:06E4",
+        "win16": "_IsThisGrass",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 24292,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:06E4"
+       },
+       {
+        "function": "IsThisFood",
+        "dos_address": "root:10F7:070B",
+        "win16": "_IsThisFood",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 24324,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:070B"
+       },
+       {
+        "function": "IsThisPebble",
+        "dos_address": "root:10F7:0731",
+        "win16": "_IsThisPebble",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 24370,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0731"
+       },
+       {
+        "function": "IsItNFood",
+        "dos_address": "root:10F7:0766",
+        "win16": "_IsItNFood",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 24420,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0766"
+       },
+       {
+        "function": "IsItFoodAt",
+        "dos_address": "root:10F7:0787",
+        "win16": "_IsItFoodAt",
+        "group": "SIMONE",
+        "confidence": "HIGH",
+        "win16_segment": 5,
+        "win16_offset": 24446,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0787"
+       },
+       {
+        "function": "ClearLife",
+        "dos_address": "root:10F7:0954",
+        "win16": "_ClearLife",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 25116,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0954"
+       },
+       {
+        "function": "DoMapUpdateDraw",
+        "dos_address": "root:10F7:0B38",
+        "win16": "_DoMapUpdateDraw",
+        "group": "SIMONE",
+        "confidence": "HIGH",
+        "win16_segment": 5,
+        "win16_offset": 26324,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B38"
+       },
+       {
+        "function": "DoEditAndMapUpdateDraw",
+        "dos_address": "root:10F7:0B40",
+        "win16": "_DoEditAndMapUpdateDraw",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 26326,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B40"
+       },
+       {
+        "function": "FindEggAt",
+        "dos_address": "root:10F7:1C84",
+        "win16": "_FindEggAt",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 34978,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1C84"
+       },
+       {
+        "function": "FindLifeAt",
+        "dos_address": "root:10F7:1D31",
+        "win16": "_FindLifeAt",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 35478,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1D31"
+       },
+       {
+        "function": "IsItDigable",
+        "dos_address": "root:10F7:24EE",
+        "win16": "_IsItDigable",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 38342,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:24EE"
+       },
+       {
+        "function": "IsLiftable",
+        "dos_address": "root:10F7:266E",
+        "win16": "_IsLiftable",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 38858,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:266E"
+       },
+       {
+        "function": "IsItAHole",
+        "dos_address": "root:10F7:2821",
+        "win16": "_IsItAHole",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 39754,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2821"
+       },
+       {
+        "function": "IsValidA",
+        "dos_address": "root:10F7:2867",
+        "win16": "_IsValidA",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 39938,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2867"
+       },
+       {
+        "function": "IsValidB",
+        "dos_address": "root:10F7:2894",
+        "win16": "_IsValidB",
+        "group": "SIMONE",
+        "confidence": "HIGH",
+        "win16_segment": 5,
+        "win16_offset": 39974,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2894"
+       },
+       {
+        "function": "GetAntIndex",
+        "dos_address": "root:10F7:005D",
+        "win16": "_GetAntIndex",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 22332,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:005D"
+       },
+       {
+        "function": "SetAntIndex",
+        "dos_address": "root:10F7:01B1",
+        "win16": "_SetAntIndex",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 22602,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:01B1"
+       },
+       {
+        "function": "FindLifeIndex",
+        "dos_address": "root:10F7:02D6",
+        "win16": "_FindLifeIndex",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 22818,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:02D6"
+       },
+       {
+        "function": "FindAntIndex",
+        "dos_address": "root:10F7:03B7",
+        "win16": "_FindAntIndex",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 23036,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:03B7"
+       },
+       {
+        "function": "IsClear3x3",
+        "dos_address": "root:10F7:048E",
+        "win16": "_IsClear3x3",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 23250,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:048E"
+       },
+       {
+        "function": "AddAntToList",
+        "dos_address": "root:10F7:054D",
+        "win16": "_AddAntToList",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 23672,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:054D"
+       },
+       {
+        "function": "SetLife",
+        "dos_address": "root:10F7:05FE",
+        "win16": "_SetLife",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 23832,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:05FE"
+       },
+       {
+        "function": "GetLife",
+        "dos_address": "root:10F7:07C7",
+        "win16": "_GetLife",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 24640,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:07C7"
+       },
+       {
+        "function": "SetMap",
+        "dos_address": "root:10F7:08CE",
+        "win16": "_SetMap",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 24954,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:08CE"
+       },
+       {
+        "function": "ClearMyLife",
+        "dos_address": "root:10F7:09A8",
+        "win16": "_ClearMyLife",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 25374,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:09A8"
+       },
+       {
+        "function": "SetQueenTail",
+        "dos_address": "root:10F7:09FC",
+        "win16": "_SetQueenTail",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 25840,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:09FC"
+       },
+       {
+        "function": "MoveMyLife",
+        "dos_address": "root:10F7:0ACE",
+        "win16": "_MoveMyLife",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 26106,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0ACE"
+       },
+       {
+        "function": "TargetAnt",
+        "dos_address": "root:10F7:0B51",
+        "win16": "_TargetAnt",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 26332,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B51"
+       },
+       {
+        "function": "EndTargetMode",
+        "dos_address": "root:10F7:0B8F",
+        "win16": "_EndTargetMode",
+        "group": "SIMONE",
+        "confidence": "HIGH",
+        "win16_segment": 5,
+        "win16_offset": 26406,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B8F"
+       },
+       {
+        "function": "StartLifeTransfer",
+        "dos_address": "root:10F7:0BB1",
+        "win16": "_StartLifeTransfer",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 26436,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0BB1"
+       },
+       {
+        "function": "EndLifeTransferMode",
+        "dos_address": "root:10F7:0BEF",
+        "win16": "_EndLifeTransferMode",
+        "group": "SIMONE",
+        "confidence": "HIGH",
+        "win16_segment": 5,
+        "win16_offset": 26510,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0BEF"
+       },
+       {
+        "function": "ExchangeLives",
+        "dos_address": "root:10F7:0C11",
+        "win16": "_ExchangeLives",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 26540,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0C11"
+       },
+       {
+        "function": "DropMyFood",
+        "dos_address": "root:10F7:1396",
+        "win16": "_DropMyFood",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 30070,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1396"
+       },
+       {
+        "function": "DropPebble",
+        "dos_address": "root:10F7:15BC",
+        "win16": "_DropPebble",
+        "group": "SIMONE",
+        "confidence": "HIGH",
+        "win16_segment": 5,
+        "win16_offset": 31164,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:15BC"
+       },
+       {
+        "function": "DropMyRock",
+        "dos_address": "root:10F7:1696",
+        "win16": "_DropMyRock",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 31826,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1696"
+       },
+       {
+        "function": "DropMyEgg",
+        "dos_address": "root:10F7:18B0",
+        "win16": "_DropMyEgg",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 33160,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:18B0"
+       },
+       {
+        "function": "PickupMyRock",
+        "dos_address": "root:10F7:1AAE",
+        "win16": "_PickupMyRock",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 34286,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1AAE"
+       },
+       {
+        "function": "EatMyFood",
+        "dos_address": "root:10F7:1E71",
+        "win16": "_EatMyFood",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 36058,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1E71"
+       },
+       {
+        "function": "PickupMyEgg",
+        "dos_address": "root:10F7:1FDF",
+        "win16": "_PickupMyEgg",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 36502,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1FDF"
+       },
+       {
+        "function": "PickupMyFood",
+        "dos_address": "root:10F7:20BF",
+        "win16": "_PickupMyFood",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 36684,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:20BF"
+       },
+       {
+        "function": "DropMyObject",
+        "dos_address": "root:10F7:220C",
+        "win16": "_DropMyObject",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 37356,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:220C"
+       },
+       {
+        "function": "PickupMyObject",
+        "dos_address": "root:10F7:227A",
+        "win16": "_PickupMyObject",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 37456,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:227A"
+       },
+       {
+        "function": "TileCanBeMovedOn",
+        "dos_address": "root:10F7:22CE",
+        "win16": "_TileCanBeMovedOn",
+        "group": "SIMONE",
+        "confidence": "HIGH",
+        "win16_segment": 5,
+        "win16_offset": 37698,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:22CE"
+       },
+       {
+        "function": "IsNotBarrier",
+        "dos_address": "root:10F7:245C",
+        "win16": "_IsNotBarrier",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 38048,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:245C"
+       },
+       {
+        "function": "IsNotObstacle",
+        "dos_address": "root:10F7:2489",
+        "win16": "_IsNotObstacle",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 38086,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2489"
+       },
+       {
+        "function": "IsItYellow",
+        "dos_address": "root:10F7:2548",
+        "win16": "_IsItYellow",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 38582,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2548"
+       },
+       {
+        "function": "IsLessThanHole",
+        "dos_address": "root:10F7:2613",
+        "win16": "_IsLessThanHole",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 38788,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2613"
+       },
+       {
+        "function": "IsSamePlane",
+        "dos_address": "root:10F7:2640",
+        "win16": "_IsSamePlane",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 38826,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2640"
+       },
+       {
+        "function": "TryMyDropOrLift",
+        "dos_address": "root:10F7:26D4",
+        "win16": "_TryMyDropOrLift",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 39134,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:26D4"
+       },
+       {
+        "function": "DoLifeExchange",
+        "dos_address": "root:10F7:0CA8",
+        "win16": "_DoLifeExchange",
+        "group": "SIMONE",
+        "confidence": "CONFIRMED",
+        "win16_segment": 5,
+        "win16_offset": 26690,
+        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0CA8"
+       }
+      ],
+      "groups": [
+       "SIMONE"
+      ]
+     },
+     {
+      "path": "src/simulation/life_tiles.c",
+      "prior_leading_comment": "root:10F7 draft: recovered prefix",
+      "retained_comment": "",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
    "extent": {
     "start": 69502,
     "end": 79921
    },
    "source": "src/simulation/life_tiles.c",
-   "source_sha256": "582753739e20b1a1f9e1081fec5bc7f85a18df171f9a5abcd0becd6e210e941c",
+   "source_sha256": "33f5cb23ac632dfae78d75c08fd321c7984015e9fbaf05056b471cdfa4ff4760",
    "claims": [
     {
      "name": "IsValidLocation",
@@ -21081,601 +21678,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "b5e75e1c382e0c62a8b08589c7b790c00bc5632a8e4fa0def2f3bd8916eea17b",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/root/m10F7.c",
-     "why": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives."
-    }
-   ],
-   "summary": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives.",
-   "windows_group": "SIMONE",
-   "file_header": {
-    "text": "Queries and updates life and terrain at map locations. It also implements the yellow ant\ninteractions for carrying, eating, dropping, targeting and exchanging objects or lives.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 10F7; complete original translation unit.\nWindows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
-    "name_kind": "descriptive",
-    "why": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/root:10F7",
-      "summary": "Queries and updates life and terrain at map locations. It also implements the yellow ant interactions for carrying, eating, dropping, targeting and exchanging objects or lives.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/root:10F7",
-      "module": "root:10F7",
-      "source": "src/simulation/life_tiles.c",
-      "reviewed_source_sha256": "7f126a82534a02ff8843530aa60ea7d13a6c55b15414000c223ec4295e3539cd",
-      "link_facts": {
-       "part": "resident code",
-       "segment": "10F7",
-       "origin": null,
-       "translation_unit": "complete original translation unit",
-       "extent": {
-        "start": 69502,
-        "end": 79921
-       }
-      },
-      "not_exact": [],
-      "steered": [],
-      "profile": "msc600ax",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "IsValidLocation",
-        "dos_address": "root:10F7:000E",
-        "win16": "_IsValidLocation",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 22234,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:000E"
-       },
-       {
-        "function": "IsClearTile",
-        "dos_address": "root:10F7:04EC",
-        "win16": "_IsClearTile",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 23340,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:04EC"
-       },
-       {
-        "function": "IsThisEgg",
-        "dos_address": "root:10F7:06BF",
-        "win16": "_IsThisEgg",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 24264,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:06BF"
-       },
-       {
-        "function": "IsThisGrass",
-        "dos_address": "root:10F7:06E4",
-        "win16": "_IsThisGrass",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 24292,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:06E4"
-       },
-       {
-        "function": "IsThisFood",
-        "dos_address": "root:10F7:070B",
-        "win16": "_IsThisFood",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 24324,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:070B"
-       },
-       {
-        "function": "IsThisPebble",
-        "dos_address": "root:10F7:0731",
-        "win16": "_IsThisPebble",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 24370,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0731"
-       },
-       {
-        "function": "IsItNFood",
-        "dos_address": "root:10F7:0766",
-        "win16": "_IsItNFood",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 24420,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0766"
-       },
-       {
-        "function": "IsItFoodAt",
-        "dos_address": "root:10F7:0787",
-        "win16": "_IsItFoodAt",
-        "group": "SIMONE",
-        "confidence": "HIGH",
-        "win16_segment": 5,
-        "win16_offset": 24446,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0787"
-       },
-       {
-        "function": "ClearLife",
-        "dos_address": "root:10F7:0954",
-        "win16": "_ClearLife",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 25116,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0954"
-       },
-       {
-        "function": "DoMapUpdateDraw",
-        "dos_address": "root:10F7:0B38",
-        "win16": "_DoMapUpdateDraw",
-        "group": "SIMONE",
-        "confidence": "HIGH",
-        "win16_segment": 5,
-        "win16_offset": 26324,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B38"
-       },
-       {
-        "function": "DoEditAndMapUpdateDraw",
-        "dos_address": "root:10F7:0B40",
-        "win16": "_DoEditAndMapUpdateDraw",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 26326,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B40"
-       },
-       {
-        "function": "FindEggAt",
-        "dos_address": "root:10F7:1C84",
-        "win16": "_FindEggAt",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 34978,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1C84"
-       },
-       {
-        "function": "FindLifeAt",
-        "dos_address": "root:10F7:1D31",
-        "win16": "_FindLifeAt",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 35478,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1D31"
-       },
-       {
-        "function": "IsItDigable",
-        "dos_address": "root:10F7:24EE",
-        "win16": "_IsItDigable",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 38342,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:24EE"
-       },
-       {
-        "function": "IsLiftable",
-        "dos_address": "root:10F7:266E",
-        "win16": "_IsLiftable",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 38858,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:266E"
-       },
-       {
-        "function": "IsItAHole",
-        "dos_address": "root:10F7:2821",
-        "win16": "_IsItAHole",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 39754,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2821"
-       },
-       {
-        "function": "IsValidA",
-        "dos_address": "root:10F7:2867",
-        "win16": "_IsValidA",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 39938,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2867"
-       },
-       {
-        "function": "IsValidB",
-        "dos_address": "root:10F7:2894",
-        "win16": "_IsValidB",
-        "group": "SIMONE",
-        "confidence": "HIGH",
-        "win16_segment": 5,
-        "win16_offset": 39974,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2894"
-       },
-       {
-        "function": "GetAntIndex",
-        "dos_address": "root:10F7:005D",
-        "win16": "_GetAntIndex",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 22332,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:005D"
-       },
-       {
-        "function": "SetAntIndex",
-        "dos_address": "root:10F7:01B1",
-        "win16": "_SetAntIndex",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 22602,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:01B1"
-       },
-       {
-        "function": "FindLifeIndex",
-        "dos_address": "root:10F7:02D6",
-        "win16": "_FindLifeIndex",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 22818,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:02D6"
-       },
-       {
-        "function": "FindAntIndex",
-        "dos_address": "root:10F7:03B7",
-        "win16": "_FindAntIndex",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 23036,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:03B7"
-       },
-       {
-        "function": "IsClear3x3",
-        "dos_address": "root:10F7:048E",
-        "win16": "_IsClear3x3",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 23250,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:048E"
-       },
-       {
-        "function": "AddAntToList",
-        "dos_address": "root:10F7:054D",
-        "win16": "_AddAntToList",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 23672,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:054D"
-       },
-       {
-        "function": "SetLife",
-        "dos_address": "root:10F7:05FE",
-        "win16": "_SetLife",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 23832,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:05FE"
-       },
-       {
-        "function": "GetLife",
-        "dos_address": "root:10F7:07C7",
-        "win16": "_GetLife",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 24640,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:07C7"
-       },
-       {
-        "function": "SetMap",
-        "dos_address": "root:10F7:08CE",
-        "win16": "_SetMap",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 24954,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:08CE"
-       },
-       {
-        "function": "ClearMyLife",
-        "dos_address": "root:10F7:09A8",
-        "win16": "_ClearMyLife",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 25374,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:09A8"
-       },
-       {
-        "function": "SetQueenTail",
-        "dos_address": "root:10F7:09FC",
-        "win16": "_SetQueenTail",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 25840,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:09FC"
-       },
-       {
-        "function": "MoveMyLife",
-        "dos_address": "root:10F7:0ACE",
-        "win16": "_MoveMyLife",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 26106,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0ACE"
-       },
-       {
-        "function": "TargetAnt",
-        "dos_address": "root:10F7:0B51",
-        "win16": "_TargetAnt",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 26332,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B51"
-       },
-       {
-        "function": "EndTargetMode",
-        "dos_address": "root:10F7:0B8F",
-        "win16": "_EndTargetMode",
-        "group": "SIMONE",
-        "confidence": "HIGH",
-        "win16_segment": 5,
-        "win16_offset": 26406,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0B8F"
-       },
-       {
-        "function": "StartLifeTransfer",
-        "dos_address": "root:10F7:0BB1",
-        "win16": "_StartLifeTransfer",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 26436,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0BB1"
-       },
-       {
-        "function": "EndLifeTransferMode",
-        "dos_address": "root:10F7:0BEF",
-        "win16": "_EndLifeTransferMode",
-        "group": "SIMONE",
-        "confidence": "HIGH",
-        "win16_segment": 5,
-        "win16_offset": 26510,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0BEF"
-       },
-       {
-        "function": "ExchangeLives",
-        "dos_address": "root:10F7:0C11",
-        "win16": "_ExchangeLives",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 26540,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0C11"
-       },
-       {
-        "function": "DropMyFood",
-        "dos_address": "root:10F7:1396",
-        "win16": "_DropMyFood",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 30070,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1396"
-       },
-       {
-        "function": "DropPebble",
-        "dos_address": "root:10F7:15BC",
-        "win16": "_DropPebble",
-        "group": "SIMONE",
-        "confidence": "HIGH",
-        "win16_segment": 5,
-        "win16_offset": 31164,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:15BC"
-       },
-       {
-        "function": "DropMyRock",
-        "dos_address": "root:10F7:1696",
-        "win16": "_DropMyRock",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 31826,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1696"
-       },
-       {
-        "function": "DropMyEgg",
-        "dos_address": "root:10F7:18B0",
-        "win16": "_DropMyEgg",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 33160,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:18B0"
-       },
-       {
-        "function": "PickupMyRock",
-        "dos_address": "root:10F7:1AAE",
-        "win16": "_PickupMyRock",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 34286,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1AAE"
-       },
-       {
-        "function": "EatMyFood",
-        "dos_address": "root:10F7:1E71",
-        "win16": "_EatMyFood",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 36058,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1E71"
-       },
-       {
-        "function": "PickupMyEgg",
-        "dos_address": "root:10F7:1FDF",
-        "win16": "_PickupMyEgg",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 36502,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:1FDF"
-       },
-       {
-        "function": "PickupMyFood",
-        "dos_address": "root:10F7:20BF",
-        "win16": "_PickupMyFood",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 36684,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:20BF"
-       },
-       {
-        "function": "DropMyObject",
-        "dos_address": "root:10F7:220C",
-        "win16": "_DropMyObject",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 37356,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:220C"
-       },
-       {
-        "function": "PickupMyObject",
-        "dos_address": "root:10F7:227A",
-        "win16": "_PickupMyObject",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 37456,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:227A"
-       },
-       {
-        "function": "TileCanBeMovedOn",
-        "dos_address": "root:10F7:22CE",
-        "win16": "_TileCanBeMovedOn",
-        "group": "SIMONE",
-        "confidence": "HIGH",
-        "win16_segment": 5,
-        "win16_offset": 37698,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:22CE"
-       },
-       {
-        "function": "IsNotBarrier",
-        "dos_address": "root:10F7:245C",
-        "win16": "_IsNotBarrier",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 38048,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:245C"
-       },
-       {
-        "function": "IsNotObstacle",
-        "dos_address": "root:10F7:2489",
-        "win16": "_IsNotObstacle",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 38086,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2489"
-       },
-       {
-        "function": "IsItYellow",
-        "dos_address": "root:10F7:2548",
-        "win16": "_IsItYellow",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 38582,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2548"
-       },
-       {
-        "function": "IsLessThanHole",
-        "dos_address": "root:10F7:2613",
-        "win16": "_IsLessThanHole",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 38788,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2613"
-       },
-       {
-        "function": "IsSamePlane",
-        "dos_address": "root:10F7:2640",
-        "win16": "_IsSamePlane",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 38826,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:2640"
-       },
-       {
-        "function": "TryMyDropOrLift",
-        "dos_address": "root:10F7:26D4",
-        "win16": "_TryMyDropOrLift",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 39134,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:26D4"
-       },
-       {
-        "function": "DoLifeExchange",
-        "dos_address": "root:10F7:0CA8",
-        "win16": "_DoLifeExchange",
-        "group": "SIMONE",
-        "confidence": "CONFIRMED",
-        "win16_segment": 5,
-        "win16_offset": 26690,
-        "decision": "evidence/cross_version/decisions.json#/pairs/root:10F7:0CA8"
-       }
-      ],
-      "groups": [
-       "SIMONE"
-      ]
-     },
-     {
-      "path": "src/simulation/life_tiles.c",
-      "prior_leading_comment": "root:10F7 draft: recovered prefix",
-      "retained_comment": "",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "e424346c2bbc72da9ead6d21bb655b163d46a6d8eb8ab5458073d558d687d743"
   },
   "root:1383": {
    "unit": "root",
@@ -31816,7 +31819,7 @@
     "end": 137436
    },
    "source": "src/window/lifecycle.c",
-   "source_sha256": "e7e1cdbcd437ba63a224eaffb687d8d43774b19fa2aadafc5a30987a2ba59c51",
+   "source_sha256": "5995c20e11fe0bd0f84a11143628149c9dfd77484356f94b4690f91aa924d49e",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -32009,7 +32012,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d7e80c1e72beb4dcb938086c10b6b97062fc5250e89a6aaf6d2d637b360d4342"
+   "object_sha256": "92a23a2aec9438824c66dec9fa62571a6ba1d710b4414cfd4fba9b292566d404"
   },
   "root:218D": {
    "unit": "root",
@@ -33894,7 +33897,7 @@
     "end": 147038
    },
    "source": "src/window/locking.c",
-   "source_sha256": "2648d52fc6dd830e6595749167d8a7dc3281ee7923288cd6daac8c36351ff09f",
+   "source_sha256": "a9f4294de9ced89ca852fc4c51350690348ac1443e99ee55cc4f7a3e18cab4f1",
    "claims": [
     {
      "name": "win_NoWindowsShouldBeLocked",
@@ -33986,7 +33989,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "4363011f29e9d2dafa9254cedd66d77dac2c308f42f6c0cabf8a1c9e8f89f6c3"
+   "object_sha256": "ce5cbdb90caa22c3ef0edf7e2286f85f65f9a9bc3a09682587f5eb3bd852d6e2"
   },
   "root:23E6": {
    "unit": "root",
@@ -36810,7 +36813,7 @@
    },
    "lang": "c",
    "source": "src/sound/midi_player.c",
-   "source_sha256": "f65c9a06551e9bafea9e15a41940bbf9508ad5b6ee84050639e015128081f999",
+   "source_sha256": "01130db8fbde0abd9009d66ccce33453c10116d73ac13c8b346a60f7dccc548a",
    "claims": [
     {
      "name": "snd_service_and_test_stopped",
@@ -37012,7 +37015,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "23cb03f6e2dd1e2250e1c0f73263792ac693d04f26a36a21c089ee275aa3907e",
+   "object_sha256": "0f3cb991e1d86b6f605f2253981d6d2dde5660de9b0d1dbfc36ac2bf38fe797f",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -38307,7 +38310,7 @@
     "end": 171786
    },
    "source": "src/sound/psg_voices.c",
-   "source_sha256": "bd27f04d154148fabdbfb3fb2ea1e4fb80447a2e2da5da5873278f358fc30045",
+   "source_sha256": "4a492fc49ce25583d132b290cdcb1869dbfdcf607e2994f41bfcf4f0afc20f00",
    "claims": [
     {
      "name": "f_29D6_0082",
@@ -38377,7 +38380,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "6ffc0ae0d05b6ba007a38d7b805005476981c592a9c009c6aad5d95d09288634"
+   "object_sha256": "eda873a09b9211179477964111e31d0e6f738439edb9c02fa97884bad473ead5"
   },
   "root:29F0": {
    "unit": "root",

@@ -405,7 +405,6 @@ other:
 }
 
 
-extern void far hotbox_center_pointer(int item);
 
 int far o10_35F5_0A63(int key, int far *sel, int count, int base)
 {

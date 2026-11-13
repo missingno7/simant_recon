@@ -779,9 +779,6 @@ void far InvertPatch(int x, int y)
 
 
 
-extern unsigned char far YMapPopR[12][16];
-extern unsigned char far YMapPopB[12][16];
-extern int far ConvColor(int color);
 
 void far DrawSimColonies(int mode)
 {
@@ -820,7 +817,6 @@ void far DrawSimColonies(int mode)
 }
 
 
-extern void far GRectFill(struct Rect far *rect, int color);
 
 void far DrawColonyBars(int mode)
 {
@@ -871,9 +867,6 @@ void far DrawColonyBars(int mode)
 }
 
 
-extern int far YMapPnt[2];
-extern void far WinPrintf(char far *format, ...);
-extern void far XferPatch(void);
 
 void far YardArea(struct Event far *ev)
 {

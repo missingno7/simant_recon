@@ -54,7 +54,6 @@ extern void far * far * far WindPromptStrs;
 extern int far BpopT;
 extern int far HealthB;
 extern int far MeFoodInType;
-extern int far MeWantFood;
 extern int far MeScent;
 extern int far LastNewHoleB[];
 extern int far MeDis;
@@ -123,7 +122,6 @@ int far mySoundIsDone(void);
 void far myDelay(long);
 void far myBeginSong(unsigned int, unsigned int);
 int far IsItNFood(int);
-int far IsValidB(int, int);
 
 int far IsValidLocation(int map, int index, int out)
 {

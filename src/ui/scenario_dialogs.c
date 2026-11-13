@@ -421,7 +421,6 @@ void far SetDefaultWindPrompt(int mode)
 
 extern int far OptionStates[];
 extern char far * far * far f_075B_0242(int object);
-void far PictureDialog(char far * far *, int, int, int);
 extern void far free(char far * far *block);
 extern void far db_PurgeObject(int object, int kind);
 

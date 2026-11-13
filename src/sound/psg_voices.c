@@ -48,7 +48,6 @@ void far f_29D6_000A(int a, int note, int vol, int chan)
     f_29F0_002A(0x205, vol + (char)chan + 0x10);
 }
 
-extern void far snd_regchip_write(int reg, int value);
 
 void far f_29D6_0082(int a, int note, int vol, int ch)
 {
@@ -65,7 +64,6 @@ void far f_29D6_0082(int a, int note, int vol, int ch)
     snd_regchip_write(ch + 8, vol);
 }
 
-extern int far fd_50F6_4B14;
 
 void far f_29D6_00D9(int a, int note, int vol, int ch)
 {

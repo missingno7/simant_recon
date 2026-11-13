@@ -252,15 +252,6 @@ done:
     return result;
 }
 
-extern void far OpenCasteWindow(void);
-extern void far OpenModeWindow(void);
-extern void far SetEditWinTitle(char far *title);
-extern int far MapPlane;
-extern void far SetMapPlane(int plane);
-extern int _fastcall win_IsWinOpen(int win);
-extern void far YardToMap(void);
-extern void far SetMapTitle(void);
-extern void far OpenEditWindow(void);
 
 void far SetDefaultWindows(void)
 {
@@ -274,26 +265,6 @@ void far SetDefaultWindows(void)
     OpenEditWindow();
 }
 
-extern int far DoScenario(int flag);
-extern int far LoadGame(int a, int b);
-extern int far CurGameType;
-extern int far CurGameTool;
-extern void far EndLifeTransferMode(void);
-extern void far EndTargetMode(void);
-extern void far SetDefaultWindPrompt(int);
-extern int far JustXfered;
-extern int far QueenStorageB;
-extern void far RandYard(void);
-extern int far MePlane;
-extern int far WinPrintf(char far *format, ...);
-extern int far TutLesson;
-extern int far TutGiven;
-extern int _fastcall win_is_zoomed();
-extern void _fastcall win_toggle_zoom();
-extern int far MeLocY;
-extern int far MeLocX;
-extern void far CenterEdit(int x, int y);
-extern void far UpdateEdit(void);
 
 int far NewGame(int flag)
 {

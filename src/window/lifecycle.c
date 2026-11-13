@@ -440,7 +440,6 @@ void _fastcall f_20E8_0903(int obj, int far *rect)
 
 
 
-extern int far f_2505_036E(void);
 
 void far win_close_auto_dismiss(void)
 {

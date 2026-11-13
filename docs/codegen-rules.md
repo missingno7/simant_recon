@@ -335,6 +335,13 @@ that remain open and the freshly compiled execution controls.
   ExitNest in another. One direction local `d` and a separate `oldplane` are exact in DOS
   without the folded attribute test. Negative: the file selector `o09_35F5_03C6` has no
   witness (the Macintosh uses the system file dialog, Windows lacks the affected regions).
+* **Repeated declarations were mostly inert** (2026-11-13). 134 repeated file-scope declarations
+  in 14 files, mostly hoisted blocks copying later declarations (67 in map_window.c, 29 in
+  game_session.c). Removing the later copies left every claim exact in 13 files; they are gone.
+  Removing the earlier copy instead changed code in five of them (yard.c, scenario_dialogs.c,
+  lifecycle.c, locking.c, edit_view.c): where a declaration first appears is an input, how
+  often it repeats is not. In tutorial.c both copies of three prototypes are needed (recorded
+  as layout inferred). Script: build/workers/claude/dups/dups.py (scratch).
 * **White space alone moves line entries** (yard file, S06:35F5, worker yard-layout,
   2026-11-12). An `if` on the line after its `else` usually adds one line entry (21 of 23
   sites; none where the entries merge at one offset), and a single-statement `if` written on
