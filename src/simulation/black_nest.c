@@ -24,6 +24,8 @@
  * spills it to [bp-4] after the y == 0x3f test, as the original does).
  */
 
+#include "strings_ids.h"
+
 extern int far ListIndexB;
 extern int far fd_50F6_0F18;
 extern unsigned char far BlistX[];
@@ -442,7 +444,7 @@ void far SimQueenB(int x, int y, int caste, int attr)
             if (fd_50F6_10BE == 0) {
                 BlistT[fd_50F6_0F18] = 0;
                 fd_3E1D_8180[x][y] = BlistT[fd_50F6_0F18];
-                o14_384C_0B6A(0, 0x271f, 1);
+                o14_384C_0B6A(0, STR_BLACK_QUEEN_STARVED, 1);
                 return;
             }
             if (QueenMoveB(x, y, attr) != 0)

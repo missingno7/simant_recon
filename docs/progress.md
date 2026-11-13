@@ -49,10 +49,10 @@ Validation: **PASS** (2026-11-13)
 | asm_transcribed_bytes | 51,922 |
 | exact_asm_bytes_genuine | 50,441 |
 | exact_asm_bytes_workaround | 0 |
-| data_bytes_opaque_unmarked | 6,333 |
+| data_bytes_opaque_unmarked | 6,273 |
 | runtime_oracle_derived_words | 244 |
 
-Manifest: `f25f522bf32386bd352e09bca9bad1e54df18a056bd01d6f12037319b3612553`
+Manifest: `da4d9faee06b23178a68d0d1f0e8e85a6950a468bc8bb4f8572b68a0d4a57c2a`
 
 Complete TUs with cross-function relocation order pending (record breaks between functions differ; see docs/codegen-rules.md ZI-1): S00:31AD, root:1B73
 

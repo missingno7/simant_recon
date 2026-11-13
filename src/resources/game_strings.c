@@ -7,6 +7,8 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "strings_ids.h"
+
 typedef char far * far *Handle;
 typedef char far * far *StrList;
 
@@ -75,24 +77,24 @@ extern StrList far MiscStrs;
 
 void far PrepareStrings(void)
 {
-    MwinTitle = LoadStringAnt(1000);
-    ScenarioNameStrs = LoadStringAnt(1001);
-    WindPromptStrs = LoadStringAnt(1010);
-    AdviceStrs = LoadStringAnt(1020);
-    HistGraphStrs = LoadStringAnt(1050);
-    EggStr = LoadStringAnt(1100);
-    CasteStr = LoadStringAnt(1101);
-    ModeStr = LoadStringAnt(1102);
-    LoadStr = LoadStringAnt(1103);
-    BoyMsgs = LoadStringAnt(1200);
-    SpiderMsgs = LoadStringAnt(1210);
-    BFightMsgs = LoadStringAnt(1220);
-    RFightMsgs = LoadStringAnt(1230);
-    EggMsgs = LoadStringAnt(1240);
-    QueenMsgs = LoadStringAnt(1250);
-    RestMsgs = LoadStringAnt(1260);
-    EndGameRatingStrs = LoadStringAnt(1900);
-    MiscStrs = LoadStringAnt(1800);
+    MwinTitle = LoadStringAnt(STR_WINDOW_TITLES);
+    ScenarioNameStrs = LoadStringAnt(STR_SCENARIO_NAMES);
+    WindPromptStrs = LoadStringAnt(STR_WINDOW_PROMPTS);
+    AdviceStrs = LoadStringAnt(STR_ADVICE);
+    HistGraphStrs = LoadStringAnt(STR_HISTORY_GRAPH_LABELS);
+    EggStr = LoadStringAnt(STR_EGG_STAGES);
+    CasteStr = LoadStringAnt(STR_CASTE_NAMES);
+    ModeStr = LoadStringAnt(STR_ACTIVITY_NAMES);
+    LoadStr = LoadStringAnt(STR_CARRIED_LOAD_NAMES);
+    BoyMsgs = LoadStringAnt(STR_HUMAN_BALLOONS);
+    SpiderMsgs = LoadStringAnt(STR_SPIDER_BALLOONS);
+    BFightMsgs = LoadStringAnt(STR_BLACK_FIGHT_BALLOONS);
+    RFightMsgs = LoadStringAnt(STR_RED_FIGHT_BALLOONS);
+    EggMsgs = LoadStringAnt(STR_EGG_BALLOONS);
+    QueenMsgs = LoadStringAnt(STR_QUEEN_BALLOONS);
+    RestMsgs = LoadStringAnt(STR_REST_BALLOONS);
+    EndGameRatingStrs = LoadStringAnt(STR_END_GAME_RATINGS);
+    MiscStrs = LoadStringAnt(STR_MISCELLANEOUS);
 }
 
 extern Handle far mem_Alloc(long size, int flags, char far *name);

@@ -19,6 +19,11 @@
  *    Alternative scopes and prototype-name removals also match; these forms are inferred.
  */
 
+#include "audio_ids.h"
+#include "pictures_ids.h"
+#include "strings_ids.h"
+#include "windows_ids.h"
+
 #include <stdio.h>
 #include <string.h>
 long far CalcScore(int far *scores);
@@ -176,18 +181,18 @@ int far DoScenario(void)
 {
     struct Event ev;
 
-    f_20E8_04B6(0x200);
+    f_20E8_04B6(WIN_SCENARIO);
     f_218D_042B();
     do {
         if (f_218D_03F1(&ev) && (ev.code >> 8) == 2) {
-            f_20E8_0635(0x200);
+            f_20E8_0635(WIN_SCENARIO);
             WinPrintf("\nGOT Scenario %x", ev.code);
             return ev.code;
         }
         f_00F8_032A();
     } while (!f_00F8_05C9());
-    f_20E8_0635(0x200);
-    return 0x205;
+    f_20E8_0635(WIN_SCENARIO);
+    return OBJ_SCENARIO_CANCEL;
 }
 
 extern void _fastcall f_23AE_0377(int win);
@@ -259,48 +264,48 @@ void far ScoreDialog(void)
     int i;
 
     OverallScore = CalcScore(scores);
-    f_23AE_0377(0x1800);
+    f_23AE_0377(WIN_SCORE);
     for (i = 0; i < 4; i++)
-        f_22BF_059A(0x1802 + i, scores[i]);
-    f_22BF_059A(0x180c, WindPromptStrs[14]);
+        f_22BF_059A(OBJ_SCORE_FIRST_PERCENT + i, scores[i]);
+    f_22BF_059A(OBJ_SCORE_CONTINUE, WindPromptStrs[14]);
     f_218D_042B();
-    f_20E8_04B6(0x1800);
+    f_20E8_04B6(WIN_SCORE);
     if (gfx_screen_width_pixels == 320)
         font_SetFont(0);
     else
         font_SetFont(4);
     if (CurGameType == 2) {
         for (i = 4; i < 8; i++)
-            f_22BF_0D53(0x1802 + i, "%d%%", scores[i]);
+            f_22BF_0D53(OBJ_SCORE_FIRST_PERCENT + i, "%d%%", scores[i]);
     } else {
         for (i = 4; i < 8; i++)
-            f_22BF_0D53(0x1802 + i, MiscStrs[16]);
+            f_22BF_0D53(OBJ_SCORE_FIRST_PERCENT + i, MiscStrs[16]);
     }
     if (gfx_screen_width_pixels == 320)
         font_SetFont(3);
     else
         font_SetFont(4);
     if (CurGameType == 3) {
-        f_22BF_0D53(0x180a, MiscStrs[17]);
-        f_22BF_0D53(0x180b, MiscStrs[18]);
+        f_22BF_0D53(OBJ_SCORE_OVERALL_TITLE, MiscStrs[17]);
+        f_22BF_0D53(OBJ_SCORE_OVERALL_VALUE, MiscStrs[18]);
         ev.code = 0;
     } else {
         title[0] = 0;
         _fstrcat(title, MiscStrs[13]);
         _fstrcat(title, ScenarioNameStrs[CurGameType]);
         _fstrcat(title, MiscStrs[14]);
-        f_22BF_0D53(0x180a, title);
-        f_22BF_0D53(0x180b, "%ld", OverallScore);
+        f_22BF_0D53(OBJ_SCORE_OVERALL_TITLE, title);
+        f_22BF_0D53(OBJ_SCORE_OVERALL_VALUE, "%ld", OverallScore);
         ev.code = 0;
     }
     font_SetFont(0);
-    while (f_22BF_09B0(0x1800)) {
+    while (f_22BF_09B0(WIN_SCORE)) {
         if (f_218D_03F1(&ev) && !(ev.code & 0x8000))
             break;
     }
-    f_20E8_0635(0x1800);
+    f_20E8_0635(WIN_SCORE);
     f_218D_042B();
-    f_23AE_01DB(0x1800);
+    f_23AE_01DB(WIN_SCORE);
 }
 
 extern int far LessonTemp;
@@ -322,9 +327,9 @@ void far DrawCastePopUp(void)
 
     LessonTemp = 1;
     half = gfx_screen_width_pixels == 320 ? 1 : 2;
-    f_20E8_04B6(0x1700);
+    f_20E8_04B6(WIN_CASTE_POPULATION);
     f_1FD2_057F();
-    win_GetObjRect(0x1702, &r);
+    win_GetObjRect(OBJ_CASTE_POPULATION_CONTENT, &r);
     clip_SubInclude(&r);
     if (gfx_screen_width_pixels == 320)
         font_SetFont(0);
@@ -366,12 +371,12 @@ void far DrawCastePopUp(void)
             y--;
         a = CastePopB[i] * (long)width / max;
         b = CastePopR[i] * (long)width / max;
-        win_SetColorFromObjNum(0x1703);
+        win_SetColorFromObjNum(OBJ_CASTE_POPULATION_BLACK_COLOR);
         sprintf(buf, "%d", CastePopB[i]);
         font_PrintStr(r.left, y, buf);
         if (i)
             (*gfx_fill_rect_hook)(left, half / 2 + y, left + a, h - half + y, _foreColor);
-        win_SetColorFromObjNum(0x1704);
+        win_SetColorFromObjNum(OBJ_CASTE_POPULATION_RED_COLOR);
         sprintf(buf, "%d", CastePopR[i]);
         font_PrintStr(r.left, h + y, buf);
         if (i)
@@ -381,8 +386,8 @@ void far DrawCastePopUp(void)
     f_1FD2_057F();
     do
         f_218D_03E8();
-    while (f_22BF_09B0(0x1700) && f_1FD2_0598());
-    f_20E8_0635(0x1700);
+    while (f_22BF_09B0(WIN_CASTE_POPULATION) && f_1FD2_0598());
+    f_20E8_0635(WIN_CASTE_POPULATION);
 }
 
 
@@ -461,7 +466,7 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
     r.bottom = r.top + h;
     r.left = (gfx_screen_width_pixels - maxw) / 2;
     r.right = r.left + maxw;
-    f_20E8_04B6(0x1e00, r.left, r.top, r.right, r.bottom);
+    f_20E8_04B6(WIN_PICTURE_TEXT_DIALOG, r.left, r.top, r.right, r.bottom);
     WinPrintf("Pict=%d", picture);
     if (picture) {
         win_DrawBitMap((r.left + r.right - size.x) / 2, r.top, picture);
@@ -471,7 +476,7 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
         font_SetFont(3);
     else
         font_SetFont(4);
-    win_SetColorFromObjNum(0x1e01);
+    win_SetColorFromObjNum(OBJ_PICTURE_TEXT_DIALOG_TEXT_COLOR);
     for (i = 0; i < count; i++) {
         r.bottom = r.top + lineh;
         gr_CenterStrInRect(&r, strings[i]);
@@ -479,11 +484,11 @@ void far PictureDialog(char far * far *strings, int count, int picture, int forc
         r.top += lineh;
     }
     f_00F8_02F7(15);
-    while (!f_00F8_05F2() && f_22BF_09B0(0x1e00)) {
+    while (!f_00F8_05F2() && f_22BF_09B0(WIN_PICTURE_TEXT_DIALOG)) {
         if (f_218D_03F1(&ev) && !(ev.code & 0x8000))
             break;
     }
-    f_20E8_0635(0x1e00);
+    f_20E8_0635(WIN_PICTURE_TEXT_DIALOG);
     WinPrintf("PictStrnDialog: %d", picture);
     font_SetFont(0);
 }
@@ -505,11 +510,11 @@ void far EndGameDialog(void)
 
     if (OptionStates[1]) {
         if (BlackWon == 0)
-            f_00DF_00B1(0x271a, 0x7e);
+            f_00DF_00B1(SONG_END_GAME_LOSS, 0x7e);
         else if (CurGameType == 2)
-            f_00DF_00B1(0x2718, 0x7e);
+            f_00DF_00B1(SONG_END_GAME_WIN, 0x7e);
         else
-            f_00DF_00B1(0x2718, 0x7e);
+            f_00DF_00B1(SONG_END_GAME_WIN, 0x7e);
     }
     score = CalcScore(scores);
     s = CurGameType == 2 ? score / 5 : score;
@@ -525,23 +530,23 @@ void far EndGameDialog(void)
         level = 4;
     if (BlackWon == 0)
         level += 5;
-    f_20E8_04B6(0x400);
+    f_20E8_04B6(WIN_END_GAME);
     if (gfx_screen_width_pixels == 320)
         font_SetFont(2);
     else
         font_SetFont(4);
-    f_22BF_0D53(0x402, ScenarioNameStrs[CurGameType]);
-    f_22BF_0D53(0x403, "%ld", score);
-    f_22BF_0D53(0x404, EndGameRatingStrs[level]);
+    f_22BF_0D53(OBJ_END_GAME_GAME_TYPE, ScenarioNameStrs[CurGameType]);
+    f_22BF_0D53(OBJ_END_GAME_SCORE, "%ld", score);
+    f_22BF_0D53(OBJ_END_GAME_RATING, EndGameRatingStrs[level]);
     played = 0;
     font_SetFont(0);
     f_00F8_02F7(100);
-    while (f_22BF_09B0(0x400)) {
+    while (f_22BF_09B0(WIN_END_GAME)) {
         if (f_218D_03E8() || f_00F8_05F2())
-            f_20E8_0635(0x400);
+            f_20E8_0635(WIN_END_GAME);
         if (f_00DF_0138() && !played) {
             played++;
-            f_00DF_00B1(SRand2() + 0x2713, 0x7e);
+            f_00DF_00B1(SRand2() + SONG_ANT_THEME_BASE, 0x7e);
         }
     }
     if (o15_384C_03C6(0) < 0)
@@ -561,13 +566,13 @@ void far SpiderDialog(void)
     long t;
     int bmp, frame;
 
-    f_23AE_0377(0x1a00);
-    bmp = 0x2ee0;
-    f_22BF_0967(0x1a01, bmp);
-    f_20E8_04B6(0x1a00);
-    win_GetObjRect(0x1a01, &r);
+    f_23AE_0377(WIN_ANIMATION_DIALOG);
+    bmp = PIC_SPIDER_DIALOG_BACKGROUND;
+    f_22BF_0967(OBJ_ANIMATION_DIALOG_PICTURE, bmp);
+    f_20E8_04B6(WIN_ANIMATION_DIALOG);
+    win_GetObjRect(OBJ_ANIMATION_DIALOG_PICTURE, &r);
     frame = 0;
-    myBeginSound(0x2d, frame, 0x7e);
+    myBeginSound(SND_SPIDER_DIALOG_EFFECT, frame, 0x7e);
     f_00F8_02BE();
     t = f_00F8_02BE() + 8;
     f_00F8_02F7(8);
@@ -583,20 +588,20 @@ void far SpiderDialog(void)
             frame++;
             if (frame > 3) {
                 frame = 0;
-                myBeginSound(0x2d, frame, 0x7e);
+                myBeginSound(SND_SPIDER_DIALOG_EFFECT, frame, 0x7e);
             }
-            bmp = AnTab[frame] + 0x2ee1;
+            bmp = AnTab[frame] + PIC_SPIDER_DIALOG_FRAME_BASE;
             win_DrawBitMap(r.left, r.top, bmp);
         }
         f_00F8_0265(1L);
     }
-    frame = SRand1(2) ? 0x2740 : 0x273f;
+    frame = SRand1(2) ? STR_DEATH_SPIDER_VENOM : STR_DEATH_SPIDER_DRAINED;
     if (bmp)
         win_DrawBitMap(r.left, r.top, bmp);
-    PictStrnDialog(0, frame, 1);
+    PictStrnDialog(PIC_NONE, frame, 1);
     f_218D_042B();
-    f_23AE_01DB(0x1a00);
-    f_20E8_0635(0x1a00);
+    f_23AE_01DB(WIN_ANIMATION_DIALOG);
+    f_20E8_0635(WIN_ANIMATION_DIALOG);
 }
 
 
@@ -616,8 +621,8 @@ void far CustomerIDDialog(void)
     char far * far *h84;
     char far *strings[6];
 
-    h83 = db_LoadObject(0x83, 10);
-    h84 = db_LoadObject(0x84, 10);
+    h83 = db_LoadObject(TEXT_REGISTERED_TO, 10);
+    h84 = db_LoadObject(TEXT_CUSTOMER_ID, 10);
     strings[0] = mem_Lock(h83);
     strings[1] = mem_Lock(fd_50F6_3836);
     strings[2] = mem_Lock(fd_50F6_3938);
@@ -627,7 +632,7 @@ void far CustomerIDDialog(void)
     f_218D_042B();
     while (kbd_poll_bios_key())
         kbd_read_key_code();
-    PictureDialog(strings, 6, 0, 1);
+    PictureDialog(strings, 6, PIC_NONE, 1);
     mem_Unlock(h83);
     mem_Unlock(h84);
     mem_Unlock(fd_50F6_3836);

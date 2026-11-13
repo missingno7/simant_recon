@@ -7,6 +7,11 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "audio_ids.h"
+#include "flags_ids.h"
+#include "pictures_ids.h"
+#include "windows_ids.h"
+
 #include <string.h>
 
 #include "event.h"
@@ -65,34 +70,34 @@ void far ProcYardEvent(struct Event far *ev)
     int n;
 
     switch (ev->code) {
-    case 0x1902:
+    case OBJ_YARD_VIEWPORT:
         YardArea(ev);
         break;
-    case 0x1907:
+    case OBJ_YARD_PATCH:
         YardToMap();
         break;
-    case 0x1908:
+    case OBJ_YARD_YARD_HOUSE:
         if (YardMode < 2)
             SetYardMode(YardMode ^ 1);
         else
             SetYardMode(0);
         break;
-    case 0x1909:
+    case OBJ_YARD_STRATEGIC:
         SetYardMode(2);
         break;
-    case 0x190a:
+    case OBJ_YARD_GRAPHIC:
         SetYardMode(3);
         break;
-    case 0x190b:
+    case OBJ_YARD_MATING:
         if (CurGameType != 2) {
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
             EditMessage(WindPromptStrs[15], 180L, 1);
         } else {
             n = CastePopB[3] + CastePopB[4];
             if (MeType == 0x40 || MeType == 0x20)
                 n--;
             if (n <= 0) {
-                myBeginSound(1, 0, 0x7e);
+                myBeginSound(SND_REJECT, 0, 0x7e);
                 EditMessage(WindPromptStrs[5], 180L, 1);
             } else {
                 FlyAwayB = 200;
@@ -100,21 +105,21 @@ void far ProcYardEvent(struct Event far *ev)
             }
         }
         break;
-    case 0x190d:
+    case OBJ_YARD_DROP_QUEEN_MODE:
         LayDownQueenMode = 1;
         break;
-    case 0x190e:
+    case OBJ_YARD_PLACE_QUEEN_MODE:
         LayDownQueenMode = 0;
         break;
-    case 0x1910:
-        win_MakeObjSelected(0x190e);
-        win_MakeObjSelected(0x1910);
+    case OBJ_YARD_PLACE_QUEEN:
+        win_MakeObjSelected(OBJ_YARD_PLACE_QUEEN_MODE);
+        win_MakeObjSelected(OBJ_YARD_PLACE_QUEEN);
         PlaceQueenInYard();
         UpdateYard();
-        win_MakeObjUnselected(0x1910);
+        win_MakeObjUnselected(OBJ_YARD_PLACE_QUEEN);
         break;
-    case 0x1911:
-        DoWinHelp(0x1906);
+    case OBJ_YARD_HELP:
+        DoWinHelp(OBJ_YARD_HELP_PICTURE);
         break;
     }
 }
@@ -171,9 +176,9 @@ void far yard_draw_content_totals(void)
 {
     yard_update_message();
     Draw_SimYard(YardMode, 1);
-    win_ObjFormatPrint(0x190c, QueenStorageB);
-    win_ObjFormatPrint(0x1912, ColonyTotalBlack);
-    win_ObjFormatPrint(0x1913, ColonyTotalRed);
+    win_ObjFormatPrint(OBJ_YARD_STORED_QUEENS, QueenStorageB);
+    win_ObjFormatPrint(OBJ_YARD_BLACK_COLONIES, ColonyTotalBlack);
+    win_ObjFormatPrint(OBJ_YARD_RED_COLONIES, ColonyTotalRed);
 }
 
 extern int near gfx_screen_width_pixels;
@@ -196,18 +201,18 @@ void far win_DrawYardWindow(int flags)
             if (YardMode > 2 || map_yard_redraw_pending || !(flags & 4) || YardMode != g_2A54) {
                 if (gfx_screen_width_pixels != 320 && !(gfx_display_mode & 1)) {
                     yard_update_message();
-                    win_DrawObjectNum(0x1914);
-                    win_GetObjRect(0x1914, &r);
+                    win_DrawObjectNum(OBJ_YARD_MESSAGE);
+                    win_GetObjRect(OBJ_YARD_MESSAGE, &r);
                     y = r.bottom;
-                    win_GetObjRect(0x1902, &r);
+                    win_GetObjRect(OBJ_YARD_VIEWPORT, &r);
                     for (id = 0x1b6c; id <= 0x1b6e; id++) {
                         win_DrawBitMap(r.left, y, id);
                         gr_BitMapSize(&sz, id);
                         y += sz.y;
                     }
-                    win_DrawObjectNum(0x1915);
+                    win_DrawObjectNum(OBJ_YARD_MESSAGE_HORIZONTAL_FRAME);
                 } else
-                    win_DrawBitMap(map_viewport_rect.left - ((gfx_display_mode & 1) != 0), map_viewport_rect.top, 0x1b5a);
+                    win_DrawBitMap(map_viewport_rect.left - ((gfx_display_mode & 1) != 0), map_viewport_rect.top, PIC_YARD_DRAW_BACKGROUND);
             }
         }
         g_2A54 = YardMode;
@@ -226,11 +231,11 @@ extern void far clip_Off(void);
 
 void far yard_refresh_message_area(void)
 {
-    if (win_IsWinOpen(0x1900) && map_yard_redraw_pending) {
-        clip_SetWin(0x1900);
+    if (win_IsWinOpen(WIN_YARD) && map_yard_redraw_pending) {
+        clip_SetWin(WIN_YARD);
         EraseYardCursor();
         yard_update_message();
-        win_DrawObjectNum(0x1914);
+        win_DrawObjectNum(OBJ_YARD_MESSAGE);
         DrawYardCursor();
         clip_Off();
         map_yard_redraw_pending = 0;
@@ -239,8 +244,8 @@ void far yard_refresh_message_area(void)
 
 void far DrawYard(void)
 {
-    if (win_IsWinOpen(0x1900)) {
-        clip_SetWin(0x1900);
+    if (win_IsWinOpen(WIN_YARD)) {
+        clip_SetWin(WIN_YARD);
         win_DrawYardWindow(7);
         clip_Off();
     }
@@ -293,9 +298,9 @@ void far DrawSimKid(void)
     x += map_viewport_rect.left;
     y += map_viewport_rect.top;
     if (g_2A2A != -1)
-        hanim_SetObjectPos(x, y, BoyFrame + 0x1f40, yardAnimHandle, g_2A2A, -1);
+        hanim_SetObjectPos(x, y, BoyFrame + PIC_YARD_HUMAN_FRAME_BASE, yardAnimHandle, g_2A2A, -1);
     else
-        g_2A2A = hanim_AddAnimObject(yardAnimHandle, x, y, BoyFrame + 0x1f40, -1);
+        g_2A2A = hanim_AddAnimObject(yardAnimHandle, x, y, BoyFrame + PIC_YARD_HUMAN_FRAME_BASE, -1);
     if (GamePaused == 0 && MacTickCount() > BoyMsgCnt)
         BoyMessOn = 0;
     if (g_2A3E != -1) {
@@ -310,7 +315,7 @@ void far DrawSimKid(void)
         font_SetFont(2);
         g_2A36 = MakeBalloon(BoyMsgs[BoyMsgOffset], 0);
         font_SetFont(0);
-        gr_BitMapSize(&sz, 30000);
+        gr_BitMapSize(&sz, PIC_HUMAN_BALLOON_BUFFER);
         y = BoyY;
         if (gfx_screen_width_pixels == 320)
             y = (y >> 1) + 6;
@@ -318,9 +323,9 @@ void far DrawSimKid(void)
             x += 4;
         y += map_viewport_rect.top - sz.y;
         if (g_2A3E != -1)
-            hanim_SetObjectPos(x, y, 30000, yardAnimHandle, g_2A3E, 999);
+            hanim_SetObjectPos(x, y, PIC_HUMAN_BALLOON_BUFFER, yardAnimHandle, g_2A3E, 999);
         else
-            g_2A3E = hanim_AddAnimObject(yardAnimHandle, x, y, 30000, 999);
+            g_2A3E = hanim_AddAnimObject(yardAnimHandle, x, y, PIC_HUMAN_BALLOON_BUFFER, 999);
     }
 }
 
@@ -350,9 +355,9 @@ void far DrawDog(void)
         x += map_viewport_rect.left;
         y += map_viewport_rect.top;
         if (g_2A30 != -1)
-            hanim_SetObjectPos(x, y, DogFrame + 0x2134, yardAnimHandle, g_2A30, -1);
+            hanim_SetObjectPos(x, y, DogFrame + PIC_YARD_DOG_FRAME_BASE, yardAnimHandle, g_2A30, -1);
         else
-            g_2A30 = hanim_AddAnimObject(yardAnimHandle, x, y, DogFrame + 0x2134, -1);
+            g_2A30 = hanim_AddAnimObject(yardAnimHandle, x, y, DogFrame + PIC_YARD_DOG_FRAME_BASE, -1);
     }
 }
 
@@ -377,9 +382,9 @@ void far DrawSimBird(void)
     x += map_viewport_rect.left;
     y += map_viewport_rect.top;
     if (g_2A2E != -1)
-        hanim_SetObjectPos(x, y, BirdFrame + 0x4e2, yardAnimHandle, g_2A2E, -1);
+        hanim_SetObjectPos(x, y, BirdFrame + PIC_YARD_BIRD_FRAME_BASE, yardAnimHandle, g_2A2E, -1);
     else
-        g_2A2E = hanim_AddAnimObject(yardAnimHandle, x, y, BirdFrame + 0x4e2, -1);
+        g_2A2E = hanim_AddAnimObject(yardAnimHandle, x, y, BirdFrame + PIC_YARD_BIRD_FRAME_BASE, -1);
 }
 
 extern int far CatX;
@@ -408,9 +413,9 @@ void far DrawSimCat(void)
     x += map_viewport_rect.left;
     y += map_viewport_rect.top;
     if (g_2A2C != -1)
-        hanim_SetObjectPos(x, y, CatFrame + 0x514, yardAnimHandle, g_2A2C, -1);
+        hanim_SetObjectPos(x, y, CatFrame + PIC_YARD_CAT_FRAME_BASE, yardAnimHandle, g_2A2C, -1);
     else
-        g_2A2C = hanim_AddAnimObject(yardAnimHandle, x, y, CatFrame + 0x514, -1);
+        g_2A2C = hanim_AddAnimObject(yardAnimHandle, x, y, CatFrame + PIC_YARD_CAT_FRAME_BASE, -1);
 }
 
 void far DrawForSale(void)
@@ -426,9 +431,9 @@ void far DrawForSale(void)
     x += map_viewport_rect.left;
     y += map_viewport_rect.top;
     if (g_2A34 != -1)
-        hanim_SetObjectPos(x, y, 0x4ec, yardAnimHandle, g_2A34, -1);
+        hanim_SetObjectPos(x, y, PIC_YARD_FOR_SALE, yardAnimHandle, g_2A34, -1);
     else
-        g_2A34 = hanim_AddAnimObject(yardAnimHandle, x, y, 0x4ec, -1);
+        g_2A34 = hanim_AddAnimObject(yardAnimHandle, x, y, PIC_YARD_FOR_SALE, -1);
 }
 
 extern int far BoyHere;
@@ -442,7 +447,7 @@ void far DrawMower(void)
     frame = 0;
     if (BoyHere == 3 || BoyHere == 4) {
         if (GamePaused == 0)
-            myBeginSound(0x24, 0, 0x40);
+            myBeginSound(SND_MOWER, 0, 0x40);
         switch (BoyFrame) {
         case 0x67:
         case 0x68:
@@ -479,9 +484,9 @@ void far DrawMower(void)
     h = x + map_viewport_rect.left;
     v = y + map_viewport_rect.top;
     if (g_2A32 != -1)
-        hanim_SetObjectPos(h, v, frame + 0x2260, yardAnimHandle, g_2A32, -1);
+        hanim_SetObjectPos(h, v, frame + PIC_YARD_MOWER_FRAME_BASE, yardAnimHandle, g_2A32, -1);
     else
-        g_2A32 = hanim_AddAnimObject(yardAnimHandle, h, v, frame + 0x2260, -1);
+        g_2A32 = hanim_AddAnimObject(yardAnimHandle, h, v, frame + PIC_YARD_MOWER_FRAME_BASE, -1);
 }
 
 extern Handle far hanim_MakeAnimSet(void);
@@ -590,7 +595,7 @@ void far DrawAnimYardMessage(void)
         font_SetFont(0);
         g_2A40 = hanim_AddAnimObject(yardAnimHandle,
                              (map_viewport_rect.right - out_buffer + map_viewport_rect.left) / 2,
-                             map_viewport_rect.top + 4, 0x7531, 999);
+                             map_viewport_rect.top + 4, PIC_YARD_MESSAGE_BUFFER, 999);
     }
 }
 
@@ -611,9 +616,9 @@ void far DrawRain(void)
         x += map_viewport_rect.left;
         y += map_viewport_rect.top;
         if (yard_rain_anim_indices[i] != -1)
-            hanim_SetObjectPos(x, y, 0x1b5d, yardAnimHandle, yard_rain_anim_indices[i], 0x8000);
+            hanim_SetObjectPos(x, y, PIC_YARD_RAIN, yardAnimHandle, yard_rain_anim_indices[i], 0x8000);
         else
-            yard_rain_anim_indices[i] = hanim_AddAnimObject(yardAnimHandle, x, y, 0x1b5d, 1000);
+            yard_rain_anim_indices[i] = hanim_AddAnimObject(yardAnimHandle, x, y, PIC_YARD_RAIN, 1000);
     }
 }
 
@@ -655,9 +660,9 @@ void far DrawSwarm(void)
             x += map_viewport_rect.left;
             y += map_viewport_rect.top;
             if (yard_black_swarm_anim_indices[i] != -1)
-                hanim_SetObjectPos(x, y, 0x1b5e, yardAnimHandle, yard_black_swarm_anim_indices[i], -1);
+                hanim_SetObjectPos(x, y, PIC_YARD_BLACK_SWARM, yardAnimHandle, yard_black_swarm_anim_indices[i], -1);
             else
-                yard_black_swarm_anim_indices[i] = hanim_AddAnimObject(yardAnimHandle, x, y, 0x1b5e, -1);
+                yard_black_swarm_anim_indices[i] = hanim_AddAnimObject(yardAnimHandle, x, y, PIC_YARD_BLACK_SWARM, -1);
         }
         for (; i < 16; i++)
             if (yard_black_swarm_anim_indices[i] != -1) {
@@ -680,9 +685,9 @@ void far DrawSwarm(void)
             x += map_viewport_rect.left;
             y += map_viewport_rect.top;
             if (yard_red_swarm_anim_indices[i] != -1)
-                hanim_SetObjectPos(x, y, 0x1b5f, yardAnimHandle, yard_red_swarm_anim_indices[i], -1);
+                hanim_SetObjectPos(x, y, PIC_YARD_RED_SWARM, yardAnimHandle, yard_red_swarm_anim_indices[i], -1);
             else
-                yard_red_swarm_anim_indices[i] = hanim_AddAnimObject(yardAnimHandle, x, y, 0x1b5f, -1);
+                yard_red_swarm_anim_indices[i] = hanim_AddAnimObject(yardAnimHandle, x, y, PIC_YARD_RED_SWARM, -1);
         }
         for (; i < 16; i++)
             if (yard_red_swarm_anim_indices[i] != -1) {
@@ -732,7 +737,7 @@ void far InvertPatch(int x, int y)
     int i, v, h;
 
     clip_Push();
-    clip_SetWin(0x1900);
+    clip_SetWin(WIN_YARD);
     pts[4].x = x * 28 - y * 10 + map_viewport_rect.left;
     pts[4].y = y * 10 + map_viewport_rect.top;
     if (gfx_screen_width_pixels == 320)
@@ -868,7 +873,7 @@ void far YardArea(struct Event far *ev)
         EraseYardCursor();
         YMapPnt[0] = x;
         YMapPnt[1] = y;
-        if (ev->modifiers & 0x6000)
+        if (ev->modifiers & EVENT_MOD_DOUBLE_CLICK_MASK)
             XferPatch();
         DrawYardCursor();
     }

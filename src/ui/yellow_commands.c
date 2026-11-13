@@ -17,6 +17,14 @@
  * declaration after 0AE8 decides the compare order in YellowCommandKey.
  */
 
+#include "audio_ids.h"
+#include "events_ids.h"
+#include "flags_ids.h"
+#include "hardware_ids.h"
+#include "pictures_ids.h"
+#include "strings_ids.h"
+#include "windows_ids.h"
+
 #include "event.h"
 
 extern int far WinPrintf(char far *format, ...);
@@ -71,20 +79,20 @@ void far processEdit(struct Event far *ePtr)
     int y;
     int life;
 
-    if ((*(unsigned char far *)0x417L & 8) == 1)
+    if ((*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) == 1)
         shift = 1;
     else
-        shift = (ePtr->modifiers & 0x6000) != 0;
+        shift = (ePtr->modifiers & EVENT_MOD_DOUBLE_CLICK_MASK) != 0;
     WinPrintf("ePtr->mouse_flags=%x", ePtr->modifiers);
-    if (!shift && win_IsWinInFront(0)) {
+    if (!shift && win_IsWinInFront(WIN_EDIT)) {
         t = TickCount() + 6;
         while (TickCount() < t) {
-            if (win_GetEvent(&ev) == 1 && (ev.modifiers & 0x6000) && ev.code == ePtr->code) {
+            if (win_GetEvent(&ev) == 1 && (ev.modifiers & EVENT_MOD_DOUBLE_CLICK_MASK) && ev.code == ePtr->code) {
                 ePtr = &ev;
                 break;
             }
         }
-        shift = (ePtr->modifiers & 0x6000) != 0;
+        shift = (ePtr->modifiers & EVENT_MOD_DOUBLE_CLICK_MASK) != 0;
     }
     x = (ePtr->h - editTileRect.left) / tileWidth + MapPnt.x;
     y = (ePtr->v - editTileRect.top) / tileHeight + MapPnt.y;
@@ -184,7 +192,7 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
     int originX;
     int originY;
 
-    myBeginSound(0x37, 0x8265, 0x3f);
+    myBeginSound(SND_LASER, 0x8265, 0x3f);
     if (MapPlane == 1) {
         if (gfx_display_mode == 2) {
             x2 = (3 * x2) / 4;
@@ -193,8 +201,8 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
             y1 = (3 * y1) / 4;
         }
         clip_Push();
-        if (win_IsWinOpen(0)) {
-            clip_SetWin(0);
+        if (win_IsWinOpen(WIN_EDIT)) {
+            clip_SetWin(WIN_EDIT);
             if (clip_active_list_offset[1] != 0x8000) {
                 edit_set_viewport_clip();
                 originX = MapPnt.x * tileWidth - editTileRect.left;
@@ -211,8 +219,8 @@ void far DoLaserFire(int x1, int y1, int x2, int y2)
                 win_EditChanged();
             }
         }
-        if (win_IsWinOpen(0x100)) {
-            clip_SetWin(0x100);
+        if (win_IsWinOpen(WIN_MAP)) {
+            clip_SetWin(WIN_MAP);
             clip_SubInclude(&map_viewport_rect);
             sx = (x2 / tileWidth) * mapXsize + map_viewport_rect.left;
             sy = (y2 / tileHeight) * mapYsize + map_viewport_rect.top;
@@ -258,7 +266,7 @@ void far processSpider(int x, int y, int mode)
             Starg = idx;
             SMode = 2;
             if (CurGameTool == 11) {
-                myBeginSound(0xf, 0, 0x7e);
+                myBeginSound(SND_COMMAND_ACK, 0, 0x7e);
                 MeSMode = 6;
                 EndTargetMode();
             }
@@ -266,7 +274,7 @@ void far processSpider(int x, int y, int mode)
         }
     }
     if (CurGameTool == 11) {
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         return;
     }
     Starg = -2;
@@ -374,7 +382,7 @@ void far YellowBirth(int plane, int x, int y, int type, int mode)
         f_015B_06A2();
     DoEditAndMapUpdateDraw();
     if (mode != 0) {
-        myBeginSong(0x4e20, 0x7e);
+        myBeginSong(SONG_YELLOW_BIRTH_INITIAL, 0x7e);
         t = TickCount() + 300;
         while (!mySongIsDone()) {
             if (TickCount() >= t || win_Events())
@@ -386,7 +394,7 @@ void far YellowBirth(int plane, int x, int y, int type, int mode)
     }
     win_FlushEvents();
     OptionStates[2] = save;
-    myBeginSound(0x1c, 0, 0x7e);
+    myBeginSound(SND_EGG_ACTION, 0, 0x7e);
     myDelay(45L);
     ResetYellowVars(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A);
     MeNestStarted = 1;
@@ -408,7 +416,7 @@ void far YellowBirth(int plane, int x, int y, int type, int mode)
     if (mode != 0)
         while (!mySongIsDone())
             myDelay(5L);
-    myBeginSound(0x31, 0, 0x7e);
+    myBeginSound(SND_BIRTH_OR_FIGHT, 0, 0x7e);
     if (mode == 0) {
         SetMyLife(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, type, MeDir, 0xff);
     } else {
@@ -435,11 +443,11 @@ void far YellowBirth(int plane, int x, int y, int type, int mode)
     while (!mySoundIsDone())
         myDelay(5L);
     if (mode != 0)
-        myBeginSong(0x4e21, 0x7e);
+        myBeginSong(SONG_YELLOW_BIRTH_REPLACEMENT, 0x7e);
     else
-        myBeginSong(0x2afd, 0x7e);
+        myBeginSong(SONG_YELLOW_BIRTH, 0x7e);
     SetSimCursor(0);
-    YellowDialog(0x238d, mode + 1);
+    YellowDialog(PIC_YELLOW_BIRTH_DIALOG, mode + 1);
 }
 
 extern void far SetDefaultWindPrompt(int mode);
@@ -505,73 +513,73 @@ void far YellowDeath(int cause)
     SetSimCursor(0);
     switch (cause) {
     case 0:
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
-        strn = MeStartedFight ? 0x272e : 0x2730;
-        if (OptionStates[3]) PictStrnDialog(0x23c4, strn, 1);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
+        strn = MeStartedFight ? STR_DEATH_ATTACK_FAILED : STR_DEATH_ENEMY_ATTACK;
+        if (OptionStates[3]) PictStrnDialog(PIC_DEATH_FIGHT_OR_ELECTROCUTION, strn, 1);
         break;
     case 1:
         if (OptionStates[3]) SpiderDialog();
         BAntsEaten++;
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
         AnimYellowFight(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, MeDir, MeType, cause);
         break;
     case 2:
         if (OptionStates[3]) LionDialog();
         BAntsEaten++;
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
         AnimYellowFight(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, MeDir, MeType, cause);
         break;
     case 3:
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         if (OptionStates[3])
-            PictStrnDialog(0, 0x272a, 1);
+            PictStrnDialog(PIC_NONE, STR_DEATH_ANTS, 1);
         BAntsKilled++;
         break;
     case 4:
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         if (OptionStates[3])
-            PictStrnDialog(0, 0x272c, 1);
+            PictStrnDialog(PIC_NONE, STR_DEATH_MADNESS, 1);
         BAntsKilled++;
         break;
     case 5:
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
         if (OptionStates[3])
-            PictStrnDialog(0x23c3, 0x2732, 1);
+            PictStrnDialog(PIC_DEATH_FOOT, STR_DEATH_FOOT, 1);
         BAntsKilled++;
         break;
     case 6:
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
         if (OptionStates[3])
-            PictStrnDialog(0x23c0, 0x2734, 1);
+            PictStrnDialog(PIC_DEATH_MOWER, STR_DEATH_MOWER, 1);
         BAntsKilled++;
         break;
     case 7:
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
         if (OptionStates[3])
-            PictStrnDialog(0x23be, 0x2736, 1);
+            PictStrnDialog(PIC_DEATH_DROWNED, STR_DEATH_DROWNED, 1);
         BAntsKilled++;
         break;
     case 8:
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
         if (OptionStates[3])
-            PictStrnDialog(0x23c2, 0x2738, 1);
+            PictStrnDialog(PIC_DEATH_STARVED, STR_DEATH_STARVED, 1);
         BAntsExpired++;
         break;
     case 9:
-        myBeginSong(SRand1(5) + 0x4e27, 0x7e);
+        myBeginSong(SRand1(5) + SONG_DEATH_VARIATION_BASE, 0x7e);
         if (OptionStates[3])
-            PictStrnDialog(0x23bf, 0x273a, 1);
+            PictStrnDialog(PIC_DEATH_INSECTICIDE, STR_DEATH_INSECTICIDE, 1);
         BAntsKilled++;
         break;
     case 10:
         BAntsKilled++;
         AnimYellowFight(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, MeDir, MeType, 10);
         if (OptionStates[3])
-            PictStrnDialog(0x23c4, 0x273d, 1);
+            PictStrnDialog(PIC_DEATH_FIGHT_OR_ELECTROCUTION, STR_DEATH_ELECTROCUTED, 1);
         break;
     }
     if (cause >= 1 && cause <= 2)
-        YellowDialog(0x238c, 0);
+        YellowDialog(PIC_YELLOW_DEATH_DIALOG, 0);
     UpdateEverything();
     if (MeMode == 0)
         ClearMyLife(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A, MeType, MeDir);
@@ -642,9 +650,9 @@ void far YellowDeath(int cause)
             if (ColonyTotalBlack < 2) {
                 IsGameOver = 1;
                 BlackWon = 0;
-                PictStrnDialog(0, 0x2748, 1);
+                PictStrnDialog(PIC_NONE, STR_NO_BLACK_BREEDERS, 1);
             } else {
-                PictStrnDialog(0, 0x274a, 1);
+                PictStrnDialog(PIC_NONE, STR_SELECT_ANOTHER_COLONY, 1);
                 SpecialXfer();
             }
             return;
@@ -662,7 +670,7 @@ void far YellowDeath(int cause)
         SetMyHealth(100);
         f_015B_06A2();
         DoEditAndMapUpdateDraw();
-        PictStrnDialog(0, 0x274b, 1);
+        PictStrnDialog(PIC_NONE, STR_TRANSFERRED_TO_EXISTING_ANT, 1);
     }
 }
 
@@ -688,11 +696,11 @@ void far SpecialXfer(void)
     int y;
 
     YMapPopB[CurYardPnt[0]][CurYardPnt[1]] = 0;
-    if (!win_IsWinInFront(0x1900)) {
-        if (!win_IsWinOpen(0x1900))
+    if (!win_IsWinInFront(WIN_YARD)) {
+        if (!win_IsWinOpen(WIN_YARD))
             MapToYard();
         else
-            win_ToTop(0x1900);
+            win_ToTop(WIN_YARD);
     }
     f_015B_0273(2);
     ColonyUpdateFlag = 1;
@@ -702,11 +710,11 @@ void far SpecialXfer(void)
     while (!done) {
         if (!win_GetEvent(&ev))
             continue;
-        if (!win_IsWinInFront(0x1900)) {
-            if (!win_IsWinOpen(0x1900))
+        if (!win_IsWinInFront(WIN_YARD)) {
+            if (!win_IsWinOpen(WIN_YARD))
                 MapToYard();
             else
-                win_ToTop(0x1900);
+                win_ToTop(WIN_YARD);
         }
         y = ev.v - map_viewport_rect.top;
         x = ev.h - map_viewport_rect.left;
@@ -718,17 +726,17 @@ void far SpecialXfer(void)
         x = (x - yard_screen_origin[0] + y * 10) / 28;
         if (x >= 0 && y >= 0 && x <= 11 && y <= 15) {
             if (YMapPopB[x][y]) {
-                myBeginSong(0x2afb, 0x7e);
+                myBeginSong(SONG_RETURN_TO_ANT, 0x7e);
                 YMapPnt[0] = x;
                 YMapPnt[1] = y;
                 XferPatch();
                 done = 1;
             } else {
-                myBeginSound(1, 0, 0x7e);
+                myBeginSound(SND_REJECT, 0, 0x7e);
                 EditMessage(WindPromptStrs[19], 120L, 1);
             }
         } else {
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
             EditMessage(WindPromptStrs[10], 120L, 1);
         }
     }
@@ -755,13 +763,13 @@ void far LionDialog(void)
 
     if (OptionStates[3] == 0)
         return;
-    win_LockWin(0x1a00);
-    win_SetObjBitmap(0x1a01, 0x23f0);
-    win_Open(0x1a00);
-    win_GetObjRect(0x1a01, &rect);
+    win_LockWin(WIN_ANIMATION_DIALOG);
+    win_SetObjBitmap(OBJ_ANIMATION_DIALOG_PICTURE, PIC_ANT_LION_DIALOG_FRAME_BASE);
+    win_Open(WIN_ANIMATION_DIALOG);
+    win_GetObjRect(OBJ_ANIMATION_DIALOG_PICTURE, &rect);
     y0 = rect.top;
     x0 = rect.left;
-    myBeginSound(0x26, 0, 0x7e);
+    myBeginSound(SND_ANT_LION_DIALOG, 0, 0x7e);
     while (!mySoundIsDone())
         ;
     frame = 1;
@@ -771,24 +779,24 @@ void far LionDialog(void)
     while (!win_Events()) {
         if (MacTickCount() >= t1)
             break;
-        if (!win_IsWinOpen(0x1a00))
+        if (!win_IsWinOpen(WIN_ANIMATION_DIALOG))
             break;
         if (MacTickCount() >= t2) {
             t2 = MacTickCount() + 30;
             if (gfx_screen_width_pixels == 0x140)
-                win_DrawBitMap(x0, y0, 0x23f0 + frame);
+                win_DrawBitMap(x0, y0, PIC_ANT_LION_DIALOG_FRAME_BASE + frame);
             else
-                win_DrawBitMap(LionTrapPnts[frame].x + x0, LionTrapPnts[frame].y + y0, 0x23f0 + frame);
+                win_DrawBitMap(LionTrapPnts[frame].x + x0, LionTrapPnts[frame].y + y0, PIC_ANT_LION_DIALOG_FRAME_BASE + frame);
             if (frame & 1)
-                myBeginSound(0x25, 0, 0x7e);
+                myBeginSound(SND_FIGHT, 0, 0x7e);
             frame++;
             if (frame > 3)
                 frame = 2;
         }
     }
     win_FlushEvents();
-    win_UnlockWin(0x1a00);
-    win_Close(0x1a00);
+    win_UnlockWin(WIN_ANIMATION_DIALOG);
+    win_Close(WIN_ANIMATION_DIALOG);
 }
 
 extern void far win_PrintfAtObj(int obj, char far *fmt, ...);
@@ -805,28 +813,28 @@ void far YellowDialog(int bitmap, int promptIndex)
 
     if (OptionStates[3] == 0)
         return;
-    win_LockWin(0x1a00);
-    win_SetObjBitmap(0x1a01, bitmap);
-    win_Open(0x1a00);
-    win_GetObjRect(0x1a01, &rect);
+    win_LockWin(WIN_ANIMATION_DIALOG);
+    win_SetObjBitmap(OBJ_ANIMATION_DIALOG_PICTURE, bitmap);
+    win_Open(WIN_ANIMATION_DIALOG);
+    win_GetObjRect(OBJ_ANIMATION_DIALOG_PICTURE, &rect);
     y0 = rect.top;
     x0 = rect.left;
     switch (bitmap) {
-    case 0x238c:
-    case 0x238d:
-        win_PrintfAtObj(0x1a02, WindPromptStrs[promptIndex + 23]);
+    case PIC_YELLOW_DEATH_DIALOG:
+    case PIC_YELLOW_BIRTH_DIALOG:
+        win_PrintfAtObj(OBJ_ANIMATION_DIALOG_PROMPT, WindPromptStrs[promptIndex + 23]);
         myDelay(300L);
         break;
-    case 0x2396:
-        myBeginSound(0x2a, 0, 0x7e);
+    case PIC_YELLOW_DIALOG_EATING:
+        myBeginSound(SND_YELLOW_DIALOG_FIRST_EFFECT, 0, 0x7e);
         myDelay(45L);
         if (gfx_screen_width_pixels == 0x140) {
             YellowEatPnt.x = 0x28;
             YellowEatPnt.y = 0x23;
         }
-        if (win_IsWinOpen(0x1a00))
-            win_DrawBitMap(YellowEatPnt.x + x0, y0 + YellowEatPnt.y, 0x2397);
-        myBeginSound(0x2d, 0, 0x7e);
+        if (win_IsWinOpen(WIN_ANIMATION_DIALOG))
+            win_DrawBitMap(YellowEatPnt.x + x0, y0 + YellowEatPnt.y, PIC_YELLOW_DIALOG_EATING_OVERLAY);
+        myBeginSound(SND_SPIDER_DIALOG_EFFECT, 0, 0x7e);
         myDelay(45L);
         break;
     }
@@ -836,8 +844,8 @@ void far YellowDialog(int bitmap, int promptIndex)
             ;
     }
     win_FlushEvents();
-    win_UnlockWin(0x1a00);
-    win_Close(0x1a00);
+    win_UnlockWin(WIN_ANIMATION_DIALOG);
+    win_Close(WIN_ANIMATION_DIALOG);
 }
 
 extern signed char far Dx8[8];
@@ -872,15 +880,15 @@ void far SetAlarmDropState(int state, int quiet)
             win_SetObjSelectedState(0x10, state);
             MeDropAlarm = 1;
             if (quiet == 0)
-                myBeginSound(0xf, 0, 0x7e);
+                myBeginSound(SND_COMMAND_ACK, 0, 0x7e);
         } else if (quiet == 0)
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
     } else {
         MeDropAlarm = 0;
         win_SetObjSelectedState(0x10, state);
         ELayerMode = -1;
         if (quiet == 0)
-            myBeginSound(0xf, 0, 0x7e);
+            myBeginSound(SND_COMMAND_ACK, 0, 0x7e);
     }
     InvalEuMap(0, 0, EditColumns, EditRows);
 }
@@ -925,7 +933,7 @@ int far YellowCommandKey(int key)
         YellowCommand(6);
         break;
     case 0x88:
-        if (*(unsigned char far *)0x417L & 3) {
+        if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3) {
             f_015B_06A2();
             break;
         }
@@ -947,8 +955,8 @@ int far YellowCommandKey(int key)
         if (MeMode == 1)
             YellowCommand(12);
         break;
-    case 0x847:
-        myBeginSound(0xf, 0, 0x7e);
+    case KEY_EXT_HOME:
+        myBeginSound(SND_COMMAND_ACK, 0, 0x7e);
         f_015B_06A2();
         break;
     default:
@@ -973,23 +981,23 @@ void far YellowCommand(int cmd)
         YellowHelp();
         break;
     case 1:
-        myBeginSong(0x2b05, 0x7e);
+        myBeginSong(SONG_RECRUIT_FIVE, 0x7e);
         Recruit(5);
         break;
     case 2:
-        myBeginSong(0x2b06, 0x7e);
+        myBeginSong(SONG_RECRUIT_TEN, 0x7e);
         Recruit(10);
         break;
     case 3:
-        myBeginSong(0x2b07, 0x7e);
+        myBeginSong(SONG_RECRUIT_THOUSAND, 0x7e);
         Recruit(1000);
         break;
     case 4:
-        myBeginSong(0x2b08, 0x7e);
+        myBeginSong(SONG_RELEASE_RECRUITS, 0x7e);
         UnRecruit(0);
         break;
     case 5:
-        myBeginSong(0x2b09, 0x7e);
+        myBeginSong(SONG_RELEASE_ALL_RECRUITS, 0x7e);
         UnRecruit(1);
         break;
     case 6:
@@ -1000,7 +1008,7 @@ void far YellowCommand(int cmd)
         break;
     case 8:
         if (fd_50F6_048C != 1 || TryMyDropOrLift(fd_50F6_048C, fd_50F6_047C, fd_50F6_048A) == -1)
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
         break;
     case 9:
         if (fd_50F6_048C == 2 && fd_50F6_048A >= 3) {
@@ -1008,7 +1016,7 @@ void far YellowCommand(int cmd)
             YellowBirth(fd_50F6_048C, fd_50F6_047C + Dx8[MeDir ^ 4] * 2,
                         fd_50F6_048A + Dy8[MeDir ^ 4] * 2, 0x10, 1);
         } else
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
         break;
     case 10:
         TargetAnt();
@@ -1016,19 +1024,19 @@ void far YellowCommand(int cmd)
     case 11:
         if (MeSMode == 7) {
             MeSMode = 0;
-            myBeginSound(2, 0x56ee, 0x7e);
+            myBeginSound(SND_ACCEPT, 0x56ee, 0x7e);
         } else {
             MeSMode = 7;
-            myBeginSound(2, 0x2b77, 0x7e);
+            myBeginSound(SND_ACCEPT, 0x2b77, 0x7e);
         }
         break;
     case 12:
         if (MeSMode == 8) {
             MeSMode = 0;
-            myBeginSound(2, 0x56ee, 0x7e);
+            myBeginSound(SND_ACCEPT, 0x56ee, 0x7e);
         } else {
             MeSMode = 8;
-            myBeginSound(0x29, 0, 0x7e);
+            myBeginSound(SND_RAIN, 0, 0x7e);
         }
         break;
     }
@@ -1041,20 +1049,20 @@ void far YellowHelp(void)
 
     if (MeMode == 0) {
         if (MeType == 0x40)
-            bitmap = 0x1197;
+            bitmap = PIC_YELLOW_QUEEN_HELP;
         else
-            bitmap = 0x1195;
+            bitmap = PIC_YELLOW_ANT_HELP;
     } else
-        bitmap = 0x1199;
-    win_LockWin(0x1a00);
-    win_SetObjBitmap(0x1a01, bitmap);
-    win_Open(0x1a00);
+        bitmap = PIC_SPIDER_HELP;
+    win_LockWin(WIN_ANIMATION_DIALOG);
+    win_SetObjBitmap(OBJ_ANIMATION_DIALOG_PICTURE, bitmap);
+    win_Open(WIN_ANIMATION_DIALOG);
     DialogWaitInit(0x1e);
-    while (win_IsWinOpen(0x1a01) && !DialogAbortOrCont()) {
+    while (win_IsWinOpen(OBJ_ANIMATION_DIALOG_PICTURE) && !DialogAbortOrCont()) {
         if (win_GetEvent(&ev) && (ev.code >> 8) == 0x1a)
             break;
     }
-    win_UnlockWin(0x1a00);
-    win_Close(0x1a00);
+    win_UnlockWin(WIN_ANIMATION_DIALOG);
+    win_Close(WIN_ANIMATION_DIALOG);
 }
 

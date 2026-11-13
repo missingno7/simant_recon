@@ -8,6 +8,11 @@
  * Build profile: msc600ax; /AL /Os /Og /Oe.
  */
 
+#include "audio_ids.h"
+#include "hardware_ids.h"
+#include "pictures_ids.h"
+#include "windows_ids.h"
+
 #include "rect.h"
 
 #include "pt.h"
@@ -24,16 +29,16 @@ void far EditScentMenu(void)
 {
     int r;
 
-    r = win_DoProxMenu(0x600, ELayerMode + 1);
+    r = win_DoProxMenu(WIN_SCENT_MENU, ELayerMode + 1);
     if (r == -1)
         return;
     ELayerMode = r - 1;
-    clip_SetWin(0);
+    clip_SetWin(WIN_EDIT);
     win_SetObjSelectedState(0x10, ELayerMode != -1);
     f_0250_0E81();
 }
 
-static int toolMenus[8] = { -1, 0xc00, 0xf00, 0x1000, 0x1100, 0xd00, 0xe00, -1 };
+static int toolMenus[8] = { -1, WIN_WALL_TOOL_MENU, WIN_DIG_TOOL_MENU, WIN_ANT_TOOL_MENU, WIN_FOOD_TOOL_MENU, WIN_SCENT_TOOL_MENU, WIN_KILL_TOOL_MENU, -1 };
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
 extern int far CurGameType;
@@ -68,7 +73,7 @@ void far EditToolsMenu(void)
     win_GetObjRect(7, &r);
     switch (CurGameType) {
     case 1:
-        if (win_DoProxMenu(0xa00, -1, r.right + 2, r.top) < 0)
+        if (win_DoProxMenu(WIN_QUICK_GAME_TOOLS_MENU, -1, r.right + 2, r.top) < 0)
             break;
         SetExpTool(fd_50F6_104C);
         CurGameType = 3;
@@ -76,10 +81,10 @@ void far EditToolsMenu(void)
         MeMode = 2;
         InitSpider();
         SetEditWinTitle(0, 0);
-        myBeginSound(2, 0, 0x7e);
+        myBeginSound(SND_ACCEPT, 0, 0x7e);
         break;
     case 2:
-        win_DoProxMenu(0xb00, -1, r.right + 2, r.top);
+        win_DoProxMenu(WIN_FULL_GAME_TOOLS_MENU, -1, r.right + 2, r.top);
         break;
     case 3:
         WinPrintf("\nITEM=%x, startTool=%x", item = DoExpMenu(r.right + 2, r.top), 7);
@@ -91,17 +96,17 @@ void far EditToolsMenu(void)
             if (fd_50F6_032E == 1)
                 SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
             SetEditWinTitle(0, 0);
-            f_00DF_00B1(0x2afb, 0x7e);
+            f_00DF_00B1(SONG_RETURN_TO_ANT, 0x7e);
         }
         SetExpTool(item);
         clip_Push();
-        clip_SetWin(0);
-        win_DrawBitMapAtObjNum(7, fd_50F6_104C + 0x13ec);
+        clip_SetWin(WIN_EDIT);
+        win_DrawBitMapAtObjNum(7, fd_50F6_104C + PIC_EXPERIMENT_TOOL_ICON_BASE);
         clip_Pop();
-        if (win_IsWinOpen(0x100)) {
+        if (win_IsWinOpen(WIN_MAP)) {
             clip_Push();
-            clip_SetWin(0x100);
-            win_DrawBitMapAtObjNum(0x117, fd_50F6_104C + 0x13ec);
+            clip_SetWin(WIN_MAP);
+            win_DrawBitMapAtObjNum(OBJ_MAP_TOOLS, fd_50F6_104C + PIC_EXPERIMENT_TOOL_ICON_BASE);
             clip_Pop();
         }
         break;
@@ -164,19 +169,19 @@ int far MagnifyMenu(int x, int y, int plane)
         return -1;
     wx = (x - MapPnt[0] + 1) * tileWidth + editTileRect[0];
     wy = (y - MapPnt[1] - 1) * tileHeight + editTileRect[1];
-    win_GetObjSize(0x1d00, &size);
+    win_GetObjSize(WIN_MAGNIFY, &size);
     if (size.x + wx > gfx_screen_width_pixels)
         wx -= tileWidth + size.x;
     if (size.y + wy > gfx_screen_height_pixels)
         wy = gfx_screen_height_pixels - size.y;
-    win_Open(0x1d00, wx, wy);
+    win_Open(WIN_MAGNIFY, wx, wy);
     caste = (t & 0x78) >> 3;
     if (caste == 0)
         name = EggStr[t & 7];
     else
         name = CasteStr[caste];
     font_SetFont(2);
-    win_PrintfAtObj(0x1d02, name);
+    win_PrintfAtObj(OBJ_MAGNIFY_CASTE, name);
     switch (plane) {
     case 1:
         if ((i = FindInAList(x, y)) >= 0)
@@ -197,14 +202,14 @@ int far MagnifyMenu(int x, int y, int plane)
             k = 0;
         break;
     }
-    win_PrintfAtObj(0x1d03, ModeStr[k]);
-    win_PrintfAtObj(0x1d04, LoadStr[caste]);
+    win_PrintfAtObj(OBJ_MAGNIFY_ACTIVITY, ModeStr[k]);
+    win_PrintfAtObj(OBJ_MAGNIFY_LOAD, LoadStr[caste]);
     font_SetFont(0);
     f_1FD2_057F();
-    while (win_IsWinOpen(0x1d00) && f_1FD2_0598())
+    while (win_IsWinOpen(WIN_MAGNIFY) && f_1FD2_0598())
         ;
     f_1FD2_05EF();
-    win_Close(0x1d00);
+    win_Close(WIN_MAGNIFY);
     WinPrintf("tileNum=%d", t);
     return t;
 }
@@ -234,24 +239,24 @@ int far AntMenu(struct Event far *ev)
     WinPrintf("ANTMENU");
     if (MeMode == 0) {
         if (MeType == 0x40 && MeNestStarted == 0)
-            r = win_DoProxMenu(0x800, -1, ev->h, ev->v);
+            r = win_DoProxMenu(WIN_UNNESTED_QUEEN_MENU, -1, ev->h, ev->v);
         else
-            r = win_DoProxMenu(0x700, -1, ev->h, ev->v);
+            r = win_DoProxMenu(WIN_ANT_COMMAND_MENU, -1, ev->h, ev->v);
     } else if (MeMode == 1)
-        r = win_DoProxMenu(0x2000, -1, ev->h, ev->v);
+        r = win_DoProxMenu(WIN_SPIDER_COMMAND_MENU, -1, ev->h, ev->v);
     else
         r = -1;
     if (r >= 0) {
         cmd = r;
         if (MeMode == 1) {
             cmd = spiderCmds[cmd];
-            if (cmd == 11 && (*(char far *)0x417L & 8))
+            if (cmd == 11 && (*(char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8))
                 cmd = 12;
         } else if (MeType == 0x40 && MeNestStarted == 0)
             cmd = antCmds[cmd];
         else {
             cmd = nestCmds[cmd];
-            if (cmd == 2 && (*(char far *)0x417L & 3))
+            if (cmd == 2 && (*(char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3))
                 cmd = 3;
         }
         YellowCommand(cmd);
@@ -293,7 +298,7 @@ extern void far OpenEditWindow(void);
 
 void far DoTab(void)
 {
-    if (win_IsWinInFront(0))
+    if (win_IsWinInFront(WIN_EDIT))
         OpenMapYard();
     else
         OpenEditWindow();

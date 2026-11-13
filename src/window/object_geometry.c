@@ -8,6 +8,10 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "events_ids.h"
+#include "flags_ids.h"
+#include "windows_ids.h"
+
 extern void far Punt(char far *format, ...);
 extern int far WinPrintf(char far *format, ...);
 extern unsigned int far _fstrlen(char far *s);
@@ -159,7 +163,7 @@ void _fastcall win_GetObjRect(int obj, struct Rect far *rect)
 
     win_LockWin(obj);
     w = win_locked_resource_ptr(obj);
-    *rect = *(struct Rect far *)((struct Win far *)w)->objs[obj & 0xff];
+    *rect = *(struct Rect far *)((struct Win far *)w)->objs[obj & OBJ_INDEX_MASK];
     win_UnlockWin(obj);
 }
 
@@ -169,12 +173,12 @@ char far * _fastcall win_ObjAddr(int obj)
         Punt("\nWINDOW %x NOT LOCKED DURING CALL TO win_ObjAddr!!", obj);
     if (((struct Win far *)win_locked_resource_ptr(obj))->count <= (unsigned char)obj)
         Punt("Attempt to get obj address outsize window");
-    return ((struct Win far *)win_locked_resource_ptr(obj))->objs[obj & 0xff];
+    return ((struct Win far *)win_locked_resource_ptr(obj))->objs[obj & OBJ_INDEX_MASK];
 }
 
 char far * _fastcall win_WinObjAddr(int win, int obj)
 {
-    return win_ObjAddr((win & 0xff00) + obj);
+    return win_ObjAddr((win & WIN_ID_MASK) + obj);
 }
 
 char far * _fastcall win_WinAddr(int win)
@@ -251,11 +255,11 @@ int _fastcall win_GetVal(int obj, int kind)
     char far *w;
     int far *r;
 
-    win = obj & 0xff00;
+    win = obj & WIN_ID_MASK;
     if ((win >> 8) < win_numOfWindows || win >= 0x2800) {
         win_LockWin(win);
         w = win_locked_resource_ptr(win);
-        if (((struct Win far *)w)->count > (idx = obj & 0xff)) {
+        if (((struct Win far *)w)->count > (idx = obj & OBJ_INDEX_MASK)) {
             r = (int far *)((struct Win far *)w)->objs[idx];
             win_UnlockWin(win);
             return r[kind];
@@ -330,7 +334,7 @@ void _fastcall win_Recalc(int win)
         changed = 0;
         for (i = 0; i < n; i++) {
             obj = ((struct Win far *)w)->objs[i];
-            if (obj[0x24] & 0x40) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            if (obj[0x24] & OBJ_FLAG_AUTO_SIZE) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                 size = win_AutoSize(obj);
                 ((int far *)obj)[6] = size.x;
                 ((int far *)obj)[7] = size.y;
@@ -371,28 +375,28 @@ void _fastcall win_set_frame_hit_rects(int flag, char far *w)
     rect.top += m;
     rect.bottom -= m;
     if (((struct Win far *)w)->flags & 4) {
-        input_set_bitmap_hit_rect(rect.left, rect.top, 0x64, 0xf083, flag);
+        input_set_bitmap_hit_rect(rect.left, rect.top, 0x64, EVENT_WINDOW_CLOSE, flag);
         gr_BitMapSize(&size, 0x64);
         rect.left += size.x;
     }
     if (((struct Win far *)w)->flags & 8) {
         gr_BitMapSize(&size, 0x70);
-        input_set_bitmap_hit_rect(rect.right - size.x, rect.bottom - size.y, 0x70, 0xf084, flag);
+        input_set_bitmap_hit_rect(rect.right - size.x, rect.bottom - size.y, 0x70, EVENT_WINDOW_RESIZE, flag);
     }
     if (((struct Win far *)w)->flags & 0x100) {
         if (((struct Win far *)w)->flags & 0x80) {
             gr_BitMapSize(&size, 0x66);
-            input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x66, 0xf085, flag);
+            input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x66, EVENT_WINDOW_ZOOM, flag);
         } else {
             gr_BitMapSize(&size, 0x67);
-            input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x67, 0xf085, flag);
+            input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x67, EVENT_WINDOW_ZOOM, flag);
         }
     }
     if (((struct Win far *)w)->flags & 0x10)
         input_set_bitmap_hit_rect(rect.left, rect.top, 0x65, 0xf088, flag);
     if (((struct Win far *)w)->flags & 0x400) {
         gr_BitMapSize(&size, 0x69);
-        input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x69, 0xf082, flag);
+        input_set_bitmap_hit_rect(rect.right -= size.x, rect.top, 0x69, EVENT_WINDOW_LOWER, flag);
     }
 }
 
@@ -410,7 +414,7 @@ void _fastcall win_activate_pointer_regions(int win)
     int n;
     int i;
 
-    win &= 0xff00;
+    win &= WIN_ID_MASK;
     win_LockWin(win);
     w = (struct Win far *)win_locked_resource_ptr(win);
     n = w->count;
@@ -440,7 +444,7 @@ void _fastcall win_deactivate_pointer_regions(int win)
     int n;
     int i;
 
-    win &= 0xff00;
+    win &= WIN_ID_MASK;
     win_LockWin(win);
     w = (struct Win far *)win_locked_resource_ptr(win);
     n = w->count;

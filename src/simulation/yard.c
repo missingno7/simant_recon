@@ -13,6 +13,9 @@
  * FollowCatDir are written on one line, and SimColonies tests CurGameType in a nested if.
  */
 
+#include "audio_ids.h"
+#include "strings_ids.h"
+
 static char dogA[6] = { 3, 4, -3, -4, 0, 0 };  /* 2448 */
 static char dogB[6] = { -3, 0, 3, 0, 0, 0 };  /* 244E */
 static char dogC[4] = { 0, 1, 2, 1 };  /* 2454 */
@@ -1222,10 +1225,10 @@ void far SimColonies(void)
     if (CurGameType != 2)
         return;
     if (ColonyTotalRed == 0 && LastColonyPopR != 0) {
-        myBeginSong(0x4e22, 0x7e);
-        o14_384C_0B6A(0, 0x2744, 1);
+        myBeginSong(SONG_REDS_ELIMINATED, 0x7e);
+        o14_384C_0B6A(0, STR_REDS_ELIMINATED_FROM_YARD, 1);
         if (ForSaleState == 0)
-            o14_384C_0B6A(0, 0x2747, 1);
+            o14_384C_0B6A(0, STR_TAKE_HOUSE_TO_WIN, 1);
     }
     LastColonyPopB = ColonyTotalBlack;
     LastColonyPopR = ColonyTotalRed;
@@ -1234,14 +1237,14 @@ void far SimColonies(void)
         NodeNum = 0;
         BoyHere = 0;
         BoyFrame = -1;
-        myBeginSong(0x4e23, 0x7e);
-        o14_384C_0B6A(0, 0x2746, 1);
+        myBeginSong(SONG_HUMANS_LEAVE_AND_PAYOFF_BASE, 0x7e);
+        o14_384C_0B6A(0, STR_HUMANS_DRIVEN_OUT, 1);
         if (ColonyTotalRed != 0)
-            o14_384C_0B6A(0, 0x2745, 1);
+            o14_384C_0B6A(0, STR_ELIMINATE_REDS_TO_WIN, 1);
     }
     if (ForSaleState != 0 && ColonyTotalRed == 0) {
-        myBeginSong(0x4e25, 0x7e);
-        o14_384C_0B6A(0, 0x2749, 1);
+        myBeginSong(SONG_FULL_GAME_WIN, 0x7e);
+        o14_384C_0B6A(0, STR_FULL_GAME_WON, 1);
         IsGameOver = 1;
         BlackWon = 1;
         DrawSimPayoff();
@@ -1251,7 +1254,7 @@ void far SimColonies(void)
         CastePopB[3] == 0 && CastePopB[4] == 0) {
         IsGameOver = 1;
         BlackWon = 0;
-        o14_384C_0B6A(0, 0x2748, 1);
+        o14_384C_0B6A(0, STR_NO_BLACK_BREEDERS, 1);
     }
 }
 

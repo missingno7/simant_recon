@@ -7,6 +7,9 @@
  * Build profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.
  */
 
+#include "events_ids.h"
+#include "flags_ids.h"
+
 #include <string.h>
 
 #include "rect.h"
@@ -61,14 +64,14 @@ void _fastcall win_toggle_zoom(int win)
         return;
     win_LockWin(win);
     w = win_WinAddr(win);
-    if (!(w->flags & 0x100)) {
+    if (!(w->flags & WIN_FLAG_ZOOM_CONTROL)) {
         win_UnlockWin(win);
         return;
     }
     o = win_ObjAddr(win);
-    if (w->flags & 0x80) {
+    if (w->flags & WIN_FLAG_ZOOMED) {
         *(struct Rect far *)&o->x = w->zoomRect;
-        w->flags &= ~0x80;
+        w->flags &= ~WIN_FLAG_ZOOMED;
         saved = w->rect;
     } else {
         w->zoomRect = *(struct Rect far *)&o->x;
@@ -79,7 +82,7 @@ void _fastcall win_toggle_zoom(int win)
         r.bottom = gfx_screen_height_pixels;
         r.right = gfx_screen_width_pixels;
         win_constrain_drag_rect(win, 1, &r);
-        w->flags |= 0x80;
+        w->flags |= WIN_FLAG_ZOOMED;
         o->x = r.left;
         o->width = r.right - r.left;
         o->y = r.top;
@@ -89,7 +92,7 @@ void _fastcall win_toggle_zoom(int win)
     win_Recalc(win);
     win_rebuild_visible_clips();
     (*g_62EC)(win);
-    if (w->flags & 0x80) {
+    if (w->flags & WIN_FLAG_ZOOMED) {
         clip_SetWin(win);
         clip_expand_by_rect(&saved);
     } else {
@@ -147,10 +150,10 @@ void _fastcall win_constrain_drag_rect(int win, int mode, struct Rect far *r)
     old = *r;
     do {
         done = 0;
-        if (r->left < gfx_screen_width_pixels && !((w->flags & 0x1000) && r->right > gfx_screen_width_pixels) &&
+        if (r->left < gfx_screen_width_pixels && !((w->flags & WIN_FLAG_KEEP_ON_SCREEN) && r->right > gfx_screen_width_pixels) &&
             r->right - r->left < gfx_screen_width_pixels) {
-            if (r->right >= 0 && r->right - r->left >= w->minWidth && !((w->flags & 0x1000) && r->left < 0)) {
-                if (r->top <= gfx_screen_height_pixels && !((w->flags & 0x1000) && r->bottom > gfx_screen_height_pixels)) {
+            if (r->right >= 0 && r->right - r->left >= w->minWidth && !((w->flags & WIN_FLAG_KEEP_ON_SCREEN) && r->left < 0)) {
+                if (r->top <= gfx_screen_height_pixels && !((w->flags & WIN_FLAG_KEEP_ON_SCREEN) && r->bottom > gfx_screen_height_pixels)) {
                     if (r->top > menu_bar_rect.bottom && r->bottom - r->top >= w->minHeight)
                         done = 1;
                     else
@@ -295,7 +298,7 @@ void _fastcall win_track_resize(struct Event far *ev)
         min.x = 0x30;
     if (min.y == 0)
         min.y = 0x30;
-    if (!input_get_object_hit_rect(0xf084, &icon))
+    if (!input_get_object_hit_rect(EVENT_WINDOW_RESIZE, &icon))
         Punt("Couldn't find resize icoN!!");
     clip_set_screen_region();
     if (ev == 0) {

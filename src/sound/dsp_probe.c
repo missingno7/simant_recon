@@ -7,6 +7,8 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "hardware_ids.h"
+
 /*
  * Sound Blaster base address used for DSP reset and detection.
  */
@@ -23,15 +25,15 @@ int far snd_probe_dsp_reset_ack(void)
     int i;
     unsigned char c;
 
-    snd_port_write_byte(snd_sb_io_base + 6, 1);
+    snd_port_write_byte(snd_sb_io_base + SND_BLASTER_RESET_OFFSET, 1);
     for (i = 0; i < 9999; i++)
         ;
-    snd_port_write_byte(snd_sb_io_base + 6, 0);
+    snd_port_write_byte(snd_sb_io_base + SND_BLASTER_RESET_OFFSET, 0);
     for (i = 0; i < 9999; i++)
         ;
     for (i = 0; i < 200 && !(c & 0x80); i++)
-        c = snd_port_read_byte(snd_sb_io_base + 0xe);
-    if (snd_port_read_byte(snd_sb_io_base + 0xa) == 0xaa)
+        c = snd_port_read_byte(snd_sb_io_base + SND_BLASTER_STATUS_OFFSET);
+    if (snd_port_read_byte(snd_sb_io_base + SND_BLASTER_READ_OFFSET) == 0xaa)
         return 1;
     return 0;
 }

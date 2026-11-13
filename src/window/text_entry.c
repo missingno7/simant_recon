@@ -6,6 +6,8 @@
  * Windows: unknown; no confirmed function pair identifies a symbol group.
  */
 
+#include "events_ids.h"
+
 extern char near fontWidth;
 extern char near gfx_font_height_pixels;
 extern void far gfx_put_fixed_font_char(int x, int y, int c);
@@ -125,24 +127,24 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
             goto done;
         if (text_entry_pending_key == 0) {
             if ((key = kbd_read_bios_char()) == 0)
-                key = kbd_read_bios_char() + 0x800;
+                key = kbd_read_bios_char() + KEY_EXTENDED_BIT;
         } else {
             key = text_entry_pending_key;
             text_entry_pending_key = 0;
         }
         switch (key) {
         case 2:
-        case 0x847:
+        case KEY_EXT_HOME:
             x -= pos * fontWidth;
             pos = 0;
             break;
         case 5:
-        case 0x84F:
+        case KEY_EXT_END:
             x += _fstrlen(&buf[pos]) * fontWidth;
             pos = len;
             break;
         case 8:
-        case 0x84B:
+        case KEY_EXT_LEFT:
             if (pos == 0)
                 snd_start_effect_one_if_music();
             else {
@@ -152,7 +154,7 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
             if (key != 8)
                 break;
         case 4:
-        case 0x853:
+        case KEY_EXT_DELETE:
             if (len == 0 || len == pos) {
                 snd_start_effect_one_if_music();
                 break;
@@ -162,7 +164,7 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
             gfx_put_fixed_font_char(x + (--len - pos) * fontWidth, y, ' ');
             break;
         case 9:
-        case 0x852:
+        case KEY_EXT_INSERT:
             if (len >= maxLen - 1 || len == pos) {
                 snd_start_effect_one_if_music();
                 break;
@@ -177,14 +179,14 @@ int far ui_edit_text_field(int x, int y, char far *text, int maxLen, int flags)
             editing = 0;
             break;
         case 11:
-        case 0x893:
+        case KEY_EXT_CLEAR_TO_END:
             if (len == 0)
                 goto cancel;
             ui_clear_text_cells(x, y, len - pos);
             len = pos;
             break;
         case 21:
-        case 0x84D:
+        case KEY_EXT_RIGHT:
             if (len > pos) {
                 x += fontWidth;
                 pos++;

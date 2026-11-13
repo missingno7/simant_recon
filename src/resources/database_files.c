@@ -7,6 +7,8 @@
  * Build profile: msc600ax; /AL /Os /Oeg /Gs /Zi.
  */
 
+#include "hardware_ids.h"
+
 typedef struct {
     long magic;
     int count;
@@ -55,8 +57,8 @@ int far OpenDB(char far *name)
     if (db == -1) Punt("Out of handles.");
     CopyRootName(openDBData[db].name, name);
     sprintf(path, "%s.dat", openDBData[db].name);
-    if ((openDBData[db].file = open(path, 0x8002)) <= 0) {
-        if ((openDBData[db].file = open(path, 0x8102, 0x180)) <= 0)
+    if ((openDBData[db].file = open(path, DOS_OPEN_BINARY_RDWR)) <= 0) {
+        if ((openDBData[db].file = open(path, DOS_OPEN_BINARY_CREATE_RDWR, DOS_CREATE_OWNER_READ_WRITE)) <= 0)
             DosPunt("Cannot create data file.");
         openDBData[db].header.magic = 0x12345678L;
         openDBData[db].header.freeBytes = 0L;

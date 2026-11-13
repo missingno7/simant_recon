@@ -8,6 +8,9 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og.
  */
 
+#include "audio_ids.h"
+#include "strings_ids.h"
+
 extern int far SRand1(int range);
 extern int far SRand2(void);
 extern int far RRand(int range);
@@ -133,10 +136,10 @@ void far CountAnts(void)
     CastePopB[3] = TemCensus[4];
     CastePopB[4] = TemCensus[8];
     if (CastePopB[5] && TemCensus[12] == 0 && JustXfered == 0) {
-        myBeginSong(0x2b0c, 0x7e);
-        o14_384C_0B6A(0, 0x271a, 1);
+        myBeginSong(SONG_BLACK_QUEEN_DIED, 0x7e);
+        o14_384C_0B6A(0, STR_BLACK_QUEEN_DIED, 1);
         if (CurGameType <= 1) {
-            o14_384C_0B6A(0, 0x271b, 1);
+            o14_384C_0B6A(0, STR_DEFEATED_BY_REDS, 1);
             IsGameOver = 1;
             BlackWon = 0;
         }
@@ -148,10 +151,10 @@ void far CountAnts(void)
     CastePopR[3] = TemCensus[20];
     CastePopR[4] = TemCensus[24];
     if (CastePopR[5] && TemCensus[28] == 0 && JustXfered == 0) {
-        myBeginSong(0x2b0d, 0x7e);
-        o14_384C_0B6A(0, 0x271c, 1);
+        myBeginSong(SONG_RED_QUEEN_DIED, 0x7e);
+        o14_384C_0B6A(0, STR_RED_QUEEN_DIED, 1);
         if (CurGameType <= 1) {
-            o14_384C_0B6A(0, 0x271d, 1);
+            o14_384C_0B6A(0, STR_DEFEATED_REDS, 1);
             IsGameOver = 1;
             BlackWon = 1;
         }
@@ -185,7 +188,7 @@ void far DoWater(void)
 
     if (RainOn && !TERRAINset) {
         if (SRand1(50) == 0)
-            myBeginSound(0x29, 0, 0x40);
+            myBeginSound(SND_RAIN, 0, 0x40);
         ClearRainFlag = 1;
         if (SRand1(10) == 0 && WaterTable > 4) {
             --WaterTable;
@@ -638,7 +641,7 @@ void far TryAntTheme(void)
         LastThemeTime = TickCount();
         if (++LastThemeSong > 2)
             LastThemeSong = 0;
-        myBeginSong(LastThemeSong + 0x2713, 0x7e);
+        myBeginSong(LastThemeSong + SONG_ANT_THEME_BASE, 0x7e);
     }
 }
 

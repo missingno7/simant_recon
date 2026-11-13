@@ -6,6 +6,11 @@
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "audio_ids.h"
+#include "pictures_ids.h"
+#include "strings_ids.h"
+#include "windows_ids.h"
+
 typedef char far * far *Handle;
 
 #include "rect.h"
@@ -65,19 +70,19 @@ void far DrawSimPayoff(void)
         f_015B_053C(0);
     DrawYard();
     myDelay(0x96L);
-    win_LockWin(0x1a00);
-    win_SetObjBitmap(0x1a01, 0x3f48);
+    win_LockWin(WIN_ANIMATION_DIALOG);
+    win_SetObjBitmap(OBJ_ANIMATION_DIALOG_PICTURE, PIC_PAYOFF_BACKGROUND);
     if (gfx_screen_width_pixels == 0x140) {
-        win_get_obj_layout_rect(0x1a01, &saved);
+        win_get_obj_layout_rect(OBJ_ANIMATION_DIALOG_PICTURE, &saved);
         bounds = saved;
         bounds.left = 4;
         bounds.top = menu_bar_rect.bottom + 3;
-        win_set_obj_layout_rect(0x1a01, &bounds);
+        win_set_obj_layout_rect(OBJ_ANIMATION_DIALOG_PICTURE, &bounds);
     }
-    win_Open(0x1a00);
-    win_GetObjRect(0x1a01, &rect);
-    win_UnlockWin(0x1a00);
-    song = 0x4e23;
+    win_Open(WIN_ANIMATION_DIALOG);
+    win_GetObjRect(OBJ_ANIMATION_DIALOG_PICTURE, &rect);
+    win_UnlockWin(WIN_ANIMATION_DIALOG);
+    song = SONG_HUMANS_LEAVE_AND_PAYOFF_BASE;
     row = 1;
     nextFrame = MacTickCount() + 0x1eL;
     deadline = MacTickCount() + 0x258L;
@@ -85,7 +90,7 @@ void far DrawSimPayoff(void)
     while (!DialogAbortOrCont()) {
         if (MacTickCount() >= deadline)
             break;
-        if (mySongIsDone() && song < 0x4e25) {
+        if (mySongIsDone() && song < SONG_FULL_GAME_WIN) {
             myBeginSong(song, 0x7e);
             song++;
         }
@@ -98,16 +103,16 @@ void far DrawSimPayoff(void)
                     x += 0x3f;
                     y -= 10;
                 }
-                win_DrawBitMap(x, y, row + 0x3f52);
+                win_DrawBitMap(x, y, row + PIC_PAYOFF_FRAME_BIAS);
             }
             if (++row >= 3)
                 row = 0;
         }
     }
     myDelay(0x12cL);
-    win_Close(0x1a00);
+    win_Close(WIN_ANIMATION_DIALOG);
     if (gfx_screen_width_pixels == 0x140)
-        win_set_obj_layout_rect(0x1a01, &saved);
+        win_set_obj_layout_rect(OBJ_ANIMATION_DIALOG_PICTURE, &saved);
 }
 
 extern char far * far * far LoadStringAnt(int object);
@@ -149,8 +154,8 @@ void far AboutDialog(void)
     int idx;
 
     count = 0;
-    win_Open(0x1f00);
-    list = LoadStringAnt(0x6a4);
+    win_Open(WIN_CREDITS);
+    list = LoadStringAnt(STR_CREDITS);
     for (n = 0; list[n] != 0; n++)
         ;
     for (;;) {
@@ -165,10 +170,10 @@ void far AboutDialog(void)
             }
         }
         count++;
-        win_GetObjRect(0x1f02, &rect);
-        win_DrawObjectNum(0x1f01);
+        win_GetObjRect(OBJ_CREDITS_TEXT, &rect);
+        win_DrawObjectNum(OBJ_CREDITS_BACKGROUND);
         clip_set_screen_intersection(&rect);
-        win_SetColorFromObjNum(0x1f02);
+        win_SetColorFromObjNum(OBJ_CREDITS_TEXT);
         line = 0;
         pix = 0;
         drawn = 0;
@@ -212,13 +217,13 @@ void far AboutDialog(void)
             drawn = 1;
         }
         clip_Off();
-        win_DrawObjectNum(0x1f02);
+        win_DrawObjectNum(OBJ_CREDITS_TEXT);
     }
 out:
     free((char far *)list);
-    db_PurgeObject(0x6a4, 4);
+    db_PurgeObject(STR_CREDITS, 4);
     win_FlushEvents();
-    win_Close(0x1f00);
+    win_Close(WIN_CREDITS);
 }
 
 extern Handle far startup_info_block_handle[];
@@ -239,8 +244,8 @@ void far ShowIntro(void)
     char far *b;
     int i;
 
-    win_Open(0x300);
-    myBeginSong(0x2711, 0x7e);
+    win_Open(WIN_INTRO);
+    myBeginSong(SONG_INTRO, 0x7e);
     DialogWaitInit(0x28);
     if (startup_info_block_handle[0] != 0) {
         fd_50F6_3836 = mem_Alloc(0x28L, 1, "Malloc");
@@ -265,9 +270,9 @@ void far ShowIntro(void)
         mem_Unlock(fd_50F6_3938);
         mem_Unlock(fd_50F6_3836);
     }
-    while (win_IsWinOpen(0x300)) {
+    while (win_IsWinOpen(WIN_INTRO)) {
         if (win_Events() || DialogAbortOrCont())
-            win_Close(0x300);
+            win_Close(WIN_INTRO);
     }
     win_FlushEvents();
 }

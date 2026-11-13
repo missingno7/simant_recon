@@ -8,6 +8,8 @@
  * Loop structure and statement layout are inferred, not recovered or unique.
  */
 
+#include "events_ids.h"
+
 #include "rect.h"
 
 #include "pt.h"
@@ -154,7 +156,7 @@ void far ui_show_alert(char far *msg, int timed)
     x = gfx_center_fixed_text_x(&pr, "Continue") / fontWidth;
     y = r.bottom - 2;
     gfx_set_attributes_hook(g_8CBE->frame, g_8CBE->text, 0xc0);
-    ui_draw_horizontal_button(x, y, "Continue", 0x900);
+    ui_draw_horizontal_button(x, y, "Continue", EVENT_ALERT_BUTTON_BASE);
     gfx_set_attributes_hook(g_8CBE->frame, g_8CBE->text, 0);
     input_capture_screen();
     input_noop_0510();
@@ -186,7 +188,7 @@ void far ui_show_alert(char far *msg, int timed)
 done:
         break;
     }
-    input_remove_object_rect(0x900);
+    input_remove_object_rect(EVENT_ALERT_BUTTON_BASE);
     input_release_screen_capture();
     gfx_restore_and_free_rect(&pr, save);
     while (StillDown())
@@ -311,7 +313,7 @@ int far ui_choice_prompt(char far *msg, int set)
     v = g_557C.bottom - 2;
     gfx_set_attributes_hook(0x404, 0xc0c, 0xc0);
     for (j = 0; j < count; j++) {
-        ui_draw_horizontal_button(h, v, labels[j] + 1, j + 0x900);
+        ui_draw_horizontal_button(h, v, labels[j] + 1, j + EVENT_ALERT_BUTTON_BASE);
         h += widths[j] + 2;
     }
     input_capture_screen();
@@ -325,7 +327,7 @@ int far ui_choice_prompt(char far *msg, int set)
                     goto done;
                 }
             }
-            ui_step_button_focus(c, &sel, count, 0x900);
+            ui_step_button_focus(c, &sel, count, EVENT_ALERT_BUTTON_BASE);
         }
         if (input_event_count()) {
             input_pop_event(&ev);
@@ -335,7 +337,7 @@ int far ui_choice_prompt(char far *msg, int set)
     }
 done:
     for (i = 0; i < count; i++)
-        input_remove_object_rect(i + 0x900);
+        input_remove_object_rect(i + EVENT_ALERT_BUTTON_BASE);
     input_release_screen_capture();
     gfx_restore_and_free_rect(&pr, save);
     return (unsigned char)ev.code;

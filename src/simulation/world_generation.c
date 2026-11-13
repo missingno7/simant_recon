@@ -7,6 +7,8 @@
  * Statement layout is inferred from /Zi record order, not recovered or unique.
  */
 
+#include "audio_ids.h"
+
 extern int far GameSpeed;
 int far MeWarnHealth;
 int far BlkWarnHealth;
@@ -655,7 +657,7 @@ void far AddFood(int count, int sound)
     int x, y, angle, r, i, radius, cx, cy;
 
     if (sound == 1)
-        myBeginSound(0x20, 0, 0x7e);
+        myBeginSound(SND_ADD_FOOD, 0, 0x7e);
     if (count < 0) {
         cx = 0x40;
         cy = SRand1(0x30) + 8;

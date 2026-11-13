@@ -7,6 +7,8 @@
  * Steered functions: drawHistGraph.
  */
 
+#include "windows_ids.h"
+
 #include "rect.h"
 
 #include "event.h"
@@ -15,7 +17,7 @@ extern void far win_Open();
 
 void far OpenHistoryWindow(void)
 {
-    win_Open(0x1500);
+    win_Open(WIN_HISTORY);
 }
 
 static int graphColors[4] = { 0x43, 0x46, 0x49, 0x45 };
@@ -39,12 +41,12 @@ void far ProcHistoryEvent(struct Event far *ev)
     int i;
 
     switch (ev->code) {
-    case 0x150d:
-        DoWinHelp(0x150f);
+    case OBJ_HISTORY_HELP:
+        DoWinHelp(OBJ_HISTORY_HELP_PICTURE);
         break;
-    case 0x150e:
-        clip_SetWin(0x1500);
-        win_FillObjRect(0x150e, ConvColor(0));
+    case OBJ_HISTORY_GRAPH:
+        clip_SetWin(WIN_HISTORY);
+        win_FillObjRect(OBJ_HISTORY_GRAPH, ConvColor(0));
         for (i = 0; i < 4; i++)
             if (shownGraphs[i] != (int)0x8000)
                 drawHistGraph(shownGraphs[i], 1, i);
@@ -54,7 +56,7 @@ void far ProcHistoryEvent(struct Event far *ev)
         clip_Off();
         break;
     default:
-        if (ev->code >= 0x1503 && ev->code <= 0x150c)
+        if (ev->code >= OBJ_HISTORY_FIRST_GRAPH_BUTTON && ev->code <= OBJ_HISTORY_LAST_GRAPH_BUTTON)
             ToggleHistButton(ev->code);
         break;
     }
@@ -70,8 +72,8 @@ void far ToggleHistButton(int item)
     int c;
     int bit;
 
-    clip_SetWin(0x1500);
-    g = item - 0x1503;
+    clip_SetWin(WIN_HISTORY);
+    g = item - OBJ_HISTORY_FIRST_GRAPH_BUTTON;
     if (histShown[g]) {
         for (i = 0; i < 4; i++)
             if (shownGraphs[i] == g) {
@@ -85,7 +87,7 @@ void far ToggleHistButton(int item)
         histShown[g] = 1;
         if ((i = shownGraphs[3]) != (int)0x8000) {
             histShown[i] = 0;
-            win_MakeObjUnselected(i + 0x1503);
+            win_MakeObjUnselected(i + OBJ_HISTORY_FIRST_GRAPH_BUTTON);
             freeColors |= 1 << histColor[i];
         }
         _fmemmove(&shownGraphs[1], &shownGraphs[0], 6);
@@ -169,7 +171,7 @@ void far win_DrawHistoryWindow(int flags)
     int i;
 
     if (flags & 2) {
-        win_FillObjRect(0x150e, ConvColor(0));
+        win_FillObjRect(OBJ_HISTORY_GRAPH, ConvColor(0));
         i = 0;
         while (i < 4) {
             if (shownGraphs[i] != (int)0x8000)
@@ -219,7 +221,7 @@ void far drawHistGraph(int graph, int hilite, int slot)
     int th;
 
     color = graphColors[histColor[graph]];
-    win_GetObjRect(0x150e, &r);
+    win_GetObjRect(OBJ_HISTORY_GRAPH, &r);
     width = r.right - r.left - 0x40;
     r.bottom -= 8;
     r.top += 8;
@@ -307,8 +309,8 @@ void far HistUpdate(void)
     if (HistCnt < 0x3f)
         HistCnt++;
     HistStart = (HistStart + 1) & 0x3f;
-    if (win_IsWinOpen(0x1500)) {
-        clip_SetWin(0x1500);
+    if (win_IsWinOpen(WIN_HISTORY)) {
+        clip_SetWin(WIN_HISTORY);
         win_DrawHistoryWindow(3);
         clip_Off();
     }

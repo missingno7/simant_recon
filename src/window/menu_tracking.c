@@ -7,6 +7,9 @@
  * Build profile: msc600ax; /AL /Os /Og /Oe /Gs /Zi.
  */
 
+#include "events_ids.h"
+#include "windows_ids.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -97,7 +100,7 @@ int far menu_track_bar_selection(struct Event far *ev)
     char c;
 
     (*g_9130)();
-    m = ev->code & 0xff;
+    m = ev->code & OBJ_INDEX_MASK;
     if (menu_resource_tables[0][m][0] & 0x80)
         return 0;
     if ((!StillDown() && (char)(ev->modifiers >> 8)) || curMenu == m)
@@ -278,7 +281,7 @@ int far menu_track_popup(char far *sel, char far * far *items)
             down = 1;
         if (input_event_count()) {
             input_pop_event(&ev);
-            if ((char)(ev.code >> 8) == -2 && (ev.code & 0xff) != curMenu)
+            if ((char)(ev.code >> 8) == -2 && (ev.code & OBJ_INDEX_MASK) != curMenu)
                 goto other;
         }
         if (down) {
@@ -295,7 +298,7 @@ int far menu_track_popup(char far *sel, char far * far *items)
             i = -1;
         } else if (kbd_poll_bios_key()) {
             key = kbd_read_key_code();
-            if (!(key & 0x800) && islower(key))
+            if (!(key & KEY_EXTENDED_BIT) && islower(key))
                 key -= 0x20;
             i = cur;
             j = 0;
@@ -304,15 +307,15 @@ retry:
             case 10:
             case 13:
             case ' ':
-            case 0x852:
-            case 0x853:
+            case KEY_EXT_INSERT:
+            case KEY_EXT_DELETE:
                 goto done;
             case 27:
                 cur = -1;
                 goto done;
             default:
                 ;
-                if (key & 0x800)
+                if (key & KEY_EXTENDED_BIT)
                     goto flush;
                 j = t = cur;
                 if (!isalpha(key))

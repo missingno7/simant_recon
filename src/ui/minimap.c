@@ -7,6 +7,11 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "audio_ids.h"
+#include "flags_ids.h"
+#include "pictures_ids.h"
+#include "windows_ids.h"
+
 #include "rect.h"
 
 #include "pt.h"
@@ -14,7 +19,7 @@
 #include "event.h"
 
 static int miniCursorOn = 0;
-static int subMenus[8] = { -1, 0xc00, 0xf00, 0x1000, 0x1100, 0xd00, 0xe00, -1 };
+static int subMenus[8] = { -1, WIN_WALL_TOOL_MENU, WIN_DIG_TOOL_MENU, WIN_ANT_TOOL_MENU, WIN_FOOD_TOOL_MENU, WIN_SCENT_TOOL_MENU, WIN_KILL_TOOL_MENU, -1 };
 
 
 extern void _fastcall win_GetObjRect(int obj, struct Rect far *rect);
@@ -115,11 +120,11 @@ void far MapToolsMenu(void)
     struct Pt size;
     int item;
 
-    win_GetObjRect(0x117, &r);
+    win_GetObjRect(OBJ_MAP_TOOLS, &r);
     switch (CurGameType) {
     case 1:
-        win_GetObjSize(0xa00, &size);
-        if (win_DoProxMenu(0xa00, -1, (r.right - size.x + r.left) / 2, r.top - size.y - 4) < 0)
+        win_GetObjSize(WIN_QUICK_GAME_TOOLS_MENU, &size);
+        if (win_DoProxMenu(WIN_QUICK_GAME_TOOLS_MENU, -1, (r.right - size.x + r.left) / 2, r.top - size.y - 4) < 0)
             break;
         SetExpTool(fd_50F6_104C);
         CurGameType = 3;
@@ -127,14 +132,14 @@ void far MapToolsMenu(void)
         MeMode = 2;
         InitSpider();
         SetEditWinTitle(0, 0);
-        myBeginSound(2, 0, 0x7e);
+        myBeginSound(SND_ACCEPT, 0, 0x7e);
         break;
     case 2:
-        win_GetObjSize(0xb00, &size);
-        win_DoProxMenu(0xb00, -1, (r.right - size.x + r.left) / 2, r.top - size.y - 4);
+        win_GetObjSize(WIN_FULL_GAME_TOOLS_MENU, &size);
+        win_DoProxMenu(WIN_FULL_GAME_TOOLS_MENU, -1, (r.right - size.x + r.left) / 2, r.top - size.y - 4);
         break;
     case 3:
-        win_GetObjSize(0x900, &size);
+        win_GetObjSize(WIN_EXPERIMENT_TOOLS_MENU, &size);
         item = DoExpMenu((r.right - size.x + r.left) / 2, r.top - size.y - 4);
         if (item == -1)
             break;
@@ -144,21 +149,21 @@ void far MapToolsMenu(void)
             if (fd_50F6_032E == 1)
                 SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
             SetEditWinTitle(0, 0);
-            f_00DF_00B1(0x2afb, 0x7e);
+            f_00DF_00B1(SONG_RETURN_TO_ANT, 0x7e);
         }
         SetExpTool(item);
-        if (win_IsWinOpen(0x100)) {
+        if (win_IsWinOpen(WIN_MAP)) {
             clip_Push();
-            clip_SetWin(0x100);
-            win_SetColorFromObjNum(0x117);
-            win_DrawBitMapAtObjNum(0x117, fd_50F6_104C + 0x13ec);
+            clip_SetWin(WIN_MAP);
+            win_SetColorFromObjNum(OBJ_MAP_TOOLS);
+            win_DrawBitMapAtObjNum(OBJ_MAP_TOOLS, fd_50F6_104C + PIC_EXPERIMENT_TOOL_ICON_BASE);
             clip_Pop();
         }
-        if (win_IsWinOpen(0)) {
+        if (win_IsWinOpen(WIN_EDIT)) {
             clip_Push();
-            clip_SetWin(0);
+            clip_SetWin(WIN_EDIT);
             win_SetColorFromObjNum(7);
-            win_DrawBitMapAtObjNum(7, fd_50F6_104C + 0x13ec);
+            win_DrawBitMapAtObjNum(7, fd_50F6_104C + PIC_EXPERIMENT_TOOL_ICON_BASE);
             clip_Pop();
         }
         break;
@@ -201,7 +206,7 @@ void far MapAreaEvent(struct Event far *ev)
                 DrawMapCursor();
             }
         }
-        if (ev->modifiers & 0x6000) {
+        if (ev->modifiers & EVENT_MOD_DOUBLE_CLICK_MASK) {
             OpenEditWindow();
             return;
         }
@@ -244,7 +249,7 @@ void far Mini_DrawMapI(void)
     int y;
     int n;
 
-    win_GetObjRect(0x1401, &miniMapRect);
+    win_GetObjRect(OBJ_MINIMAP_VIEWPORT, &miniMapRect);
     multiplier = 0x80;
     fd_50F6_3852 = 0;
     if (mapMem == 0) {
@@ -307,7 +312,7 @@ void far OpenMiniMapWin(void)
         minimap_x_scale = minimap_y_scale = 2;
     else
         minimap_x_scale = minimap_y_scale = 1;
-    win_Open(0x1400);
+    win_Open(WIN_MINIMAP);
     Mini_DrawMapI();
     DrawMiniMapCursor();
     if (f_00F8_02AC()) {
@@ -315,13 +320,13 @@ void far OpenMiniMapWin(void)
             ;
         GetMousePos(&pt);
         if (PointInRect(&pt, &miniMapRect)) {
-            win_Close(0x1400);
+            win_Close(WIN_MINIMAP);
             OpenMapYard();
             return;
         }
     }
-    while (win_IsWinOpen(0x1400)) {
-        if (!win_GetEvent(&ev) || !win_IsWinOpen(0x1400) ||
+    while (win_IsWinOpen(WIN_MINIMAP)) {
+        if (!win_GetEvent(&ev) || !win_IsWinOpen(WIN_MINIMAP) ||
             !PointInRect((struct Pt far *)&ev.h, &miniMapRect))
             continue;
         pt.x = (int)0x8000;

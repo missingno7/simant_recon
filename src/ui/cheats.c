@@ -6,6 +6,9 @@
  * Windows: unknown; no confirmed function pair identifies a symbol group.
  */
 
+#include "audio_ids.h"
+#include "strings_ids.h"
+
 extern int far cheat_key_count;
 extern char far cheat_key_prefix[];
 extern char far cheat_code_table[][4];
@@ -73,27 +76,27 @@ void far CheatKeys(int key)
     WinPrintf("CHEAT %d", i);
     switch (i) {
     case 0:
-        myBeginSound(10, 0, 0x7e);
+        myBeginSound(SND_FOOD_OR_WALL_ACTION, 0, 0x7e);
         QueenStorageR += 10;
         break;
     case 1:
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         SetMyHealth(100);
         break;
     case 2:
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         SetMyHealth(1);
         break;
     case 3:
-        o14_384C_0B6A(0, 0x2724, 0);
+        o14_384C_0B6A(0, STR_MONEY_IS_WORTHLESS, 0);
         break;
     case 4:
-        o14_384C_0B6A(0, 0x2726, 0);
+        o14_384C_0B6A(0, STR_GLEN_CAMPBELL_RIDDLE, 0);
         UpdateEverything();
         SetSimCursor(6);
         f_00DF_00E0(0);
         SetSimCursor(0);
-        o14_384C_0B6A(0, 0x2728, 0);
+        o14_384C_0B6A(0, STR_ELVIS_MINUS_TWO, 0);
         break;
     case 5:
         for (i = 0; i < 64; i++)
@@ -133,24 +136,24 @@ void far CheatKeys(int key)
     case 15:
         QueenStorageB += 10;
         InvalQueenStorageDisp();
-        myBeginSound(0x29, 0, 0x7e);
+        myBeginSound(SND_RAIN, 0, 0x7e);
         break;
     case 16:
         Invincible = !Invincible;
         if (Invincible)
-            myBeginSound(2, 0, 0x7e);
+            myBeginSound(SND_ACCEPT, 0, 0x7e);
         else
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
         break;
     case 17:
         RevSpider = !RevSpider;
         if (RevSpider)
-            myBeginSound(2, 0, 0x7e);
+            myBeginSound(SND_ACCEPT, 0, 0x7e);
         else
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
         break;
     case 18:
-        myBeginSound(2, 0, 0x7e);
+        myBeginSound(SND_ACCEPT, 0, 0x7e);
         for (i = 0; i < 12; i++)
             for (j = 0; j < 16; j++) {
                 YMapPopB[i][j] += 4;
@@ -158,7 +161,7 @@ void far CheatKeys(int key)
             }
         break;
     case 19:
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         for (i = 0; i < 12; i++)
             for (j = 0; j < 16; j++) {
                 if (SRand2() == 0) {
@@ -177,17 +180,17 @@ void far CheatKeys(int key)
         NeverHungry = !NeverHungry;
         if (NeverHungry) {
             MeHealth = 100;
-            myBeginSound(2, 0, 0x7e);
+            myBeginSound(SND_ACCEPT, 0, 0x7e);
         } else
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
         break;
     case 22:
         AlwaysHealthy = !AlwaysHealthy;
         if (AlwaysHealthy) {
             HealthB = 100;
-            myBeginSound(2, 0, 0x7e);
+            myBeginSound(SND_ACCEPT, 0, 0x7e);
         } else
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
         break;
     }
 }

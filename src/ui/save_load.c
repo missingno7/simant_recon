@@ -7,6 +7,10 @@
  * Steered functions: o09_35F5_03C6.
  */
 
+#include "events_ids.h"
+#include "flags_ids.h"
+#include "windows_ids.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -301,24 +305,24 @@ int far o09_35F5_03C6(char far *name, char far *title, char far *verb, int save)
     h = Ralloc(0xC80L, 0, "File list");
     list = *h;
     _fmemset(list, 0, 4);
-    win_LockWin(0x1600);
-    win_SetObjFormatStr(0x1613, verb);
-    win_SetObjFormatStr(0x1601, title);
-    win_get_obj_layout_rect(0x1602, &r);
+    win_LockWin(WIN_FILE_SELECT);
+    win_SetObjFormatStr(OBJ_FILE_SELECT_ACCEPT, verb);
+    win_SetObjFormatStr(OBJ_FILE_SELECT_TITLE, title);
+    win_get_obj_layout_rect(OBJ_FILE_SELECT_NAME_GROUP_LAYOUT, &r);
     if (save != 1) {
-        win_MakeGroupUnselectable(0x1600, 5);
-        win_MakeGroupInvisible(0x1600, 5);
+        win_MakeGroupUnselectable(WIN_FILE_SELECT, 5);
+        win_MakeGroupInvisible(WIN_FILE_SELECT, 5);
         r2 = r;
         r2.bottom = 0;
-        win_set_obj_layout_rect(0x1602, &r2);
+        win_set_obj_layout_rect(OBJ_FILE_SELECT_NAME_GROUP_LAYOUT, &r2);
     } else {
-        win_MakeGroupSelectable(0x1600, 5);
-        win_MakeGroupVisible(0x1600, 5);
+        win_MakeGroupSelectable(WIN_FILE_SELECT, 5);
+        win_MakeGroupVisible(WIN_FILE_SELECT, 5);
     }
-    win_Open(0x1600);
+    win_Open(WIN_FILE_SELECT);
 redraw:
     if (save == 1)
-        win_DrawObjectNum(0x1603);
+        win_DrawObjectNum(OBJ_FILE_SELECT_NAME_FRAME);
     *name = fname[0] = 0;
     nDirs = nFiles = 0;
     oneFloppy = (*(unsigned char far *)0x00000410L & 0xC0) == 0;
@@ -338,7 +342,7 @@ retry:
             goto retry;
         }
     }
-    win_MakeObjSelected(s_2966 + 0x15CA);
+    win_MakeObjSelected(s_2966 + FILE_DRIVE_LETTER_OBJECT_BIAS);
     WinPrintf("\n<PATH=%s>", path);
     oldDrive = s_2966;
     count = 0;
@@ -346,15 +350,15 @@ retry:
     if (path[_fstrlen(path) - 1] != '\\')
         _fstrcat(path, "\\");
     sprintf(buf, "%s*.*", path);
-    win_print_text_at_obj_offset(0x1606, "", 0, 0);
-    win_ClearObjToEOL(0x1606);
-    win_print_text_at_obj_offset(0x1606, path, 4, 0);
+    win_print_text_at_obj_offset(OBJ_FILE_SELECT_PATH, "", 0, 0);
+    win_ClearObjToEOL(OBJ_FILE_SELECT_PATH);
+    win_print_text_at_obj_offset(OBJ_FILE_SELECT_PATH, path, 4, 0);
     if (save == 1) {
-        win_GetObjRect(0x1603, &r3);
+        win_GetObjRect(OBJ_FILE_SELECT_NAME_FRAME, &r3);
         tmp2 = r3.top;
         y = (r3.bottom + tmp2 - font_FontHeight() + 1) / 2;
         x = r3.left + 4;
-        win_SetColorFromObjNum(0x1604);
+        win_SetColorFromObjNum(OBJ_FILE_SELECT_NAME_INPUT);
         if (ok && *save_last_filename != 0) {
             _fstrcpy(name, _fstrrchr(save_last_filename, '\\') + 1);
             GPutStr(x, y, name);
@@ -413,13 +417,13 @@ first:
         q += 16;
     }
     *p = 0;
-    list_replace_text(0x1609, *h);
-    win_DrawObjectNum(0x1609);
-    win_DrawObjectNum(0x1608);
+    list_replace_text(OBJ_FILE_SELECT_LIST, *h);
+    win_DrawObjectNum(OBJ_FILE_SELECT_LIST);
+    win_DrawObjectNum(OBJ_FILE_SELECT_SCROLLBAR);
     for (;;) {
         if (kbd_poll_bios_key() && ((unsigned)path >= 0)) {
             key = kbd_read_key_code();
-            if (!(key & 0x800) && isalnum(key) && save == 1) {
+            if (!(key & KEY_EXTENDED_BIT) && isalnum(key) && save == 1) {
                 text_entry_pending_key = key;
                 goto edit;
             }
@@ -433,42 +437,42 @@ first:
         if (!win_GetEvent(&ev))
             continue;
         WinPrintf("\nEvent=%x,%x", ev.code, ev.modifiers);
-        if (ev.code >= 0x160B && ev.code <= 0x1612)
+        if (ev.code >= OBJ_FILE_SELECT_DRIVE_A && ev.code <= OBJ_FILE_SELECT_DRIVE_H)
             goto drive;
         switch (ev.code) {
-        case 0x1604:
+        case OBJ_FILE_SELECT_NAME_INPUT:
 edit:
-            list_clear_selection(0x1609);
-            win_DrawObjectNum(0x1603);
-            win_SetColorFromObjNum(0x1604);
+            list_clear_selection(OBJ_FILE_SELECT_LIST);
+            win_DrawObjectNum(OBJ_FILE_SELECT_NAME_FRAME);
+            win_SetColorFromObjNum(OBJ_FILE_SELECT_NAME_INPUT);
             ui_edit_text_field(x, y, name, 9, 0);
             break;
-        case 0x1613:
+        case OBJ_FILE_SELECT_ACCEPT:
             goto accept;
-        case 0x1614:
+        case OBJ_FILE_SELECT_CANCEL:
             goto cancel;
         default:
             WinPrintf("\nDEFAULT:Event=%x,%x", ev.code, ev.modifiers);
-            if (ev.code == 0x1609) {
-                if (ev.modifiers & 0x0A00) {
-                    n = list_line_count(0x1609);
+            if (ev.code == OBJ_FILE_SELECT_LIST) {
+                if (ev.modifiers & EVENT_MOD_CLICK_MASK) {
+                    n = list_line_count(OBJ_FILE_SELECT_LIST);
                     sel = -1;
                     for (i = 0; i < n; i++)
-                        if (list_is_line_selected(0x1609, i)) {
+                        if (list_is_line_selected(OBJ_FILE_SELECT_LIST, i)) {
                             sel = i;
                             break;
                         }
                     if (*name != 0) {
                         *name = 0;
                         if (save == 1)
-                            win_DrawObjectNum(0x1604);
+                            win_DrawObjectNum(OBJ_FILE_SELECT_NAME_INPUT);
                         break;
                     }
                 }
-                if (ev.modifiers & 0x6000) {
-                    n = list_line_count(0x1609);
+                if (ev.modifiers & EVENT_MOD_DOUBLE_CLICK_MASK) {
+                    n = list_line_count(OBJ_FILE_SELECT_LIST);
                     for (i = 0; i < n; i++)
-                        if (list_is_line_selected(0x1609, i)) {
+                        if (list_is_line_selected(OBJ_FILE_SELECT_LIST, i)) {
                             if ((i == sel) && ((unsigned)i >= 0))
                                 goto accept;
                             break;
@@ -481,10 +485,10 @@ edit:
 accept:
         if (*name != 0)
             goto done;
-        n = list_line_count(0x1609);
+        n = list_line_count(OBJ_FILE_SELECT_LIST);
         for (i = 0; i < n; i++)
-            if (list_is_line_selected(0x1609, i)) {
-                _fstrcpy(name, list_line_record(0x1609, i) + 1);
+            if (list_is_line_selected(OBJ_FILE_SELECT_LIST, i)) {
+                _fstrcpy(name, list_line_record(OBJ_FILE_SELECT_LIST, i) + 1);
                 break;
             }
         if (*name == 0)
@@ -498,7 +502,7 @@ accept:
         ok = *name = 0;
         goto redraw;
 drive:
-        s_2966 = ev.code - 0x15CA;
+        s_2966 = ev.code - FILE_DRIVE_LETTER_OBJECT_BIAS;
         ok = *name = 0;
         goto redraw;
     }
@@ -508,9 +512,9 @@ cancel:
 done:
     ok = 1;
 close:
-    win_Close(0x1600);
-    win_set_obj_layout_rect(0x1602, &r);
-    win_UnlockWin(0x1600);
+    win_Close(WIN_FILE_SELECT);
+    win_set_obj_layout_rect(OBJ_FILE_SELECT_NAME_GROUP_LAYOUT, &r);
+    win_UnlockWin(WIN_FILE_SELECT);
     if (*name != 0) {
         WinPrintf("\nFilename:%s", name);
         save_normalize_basename(name);

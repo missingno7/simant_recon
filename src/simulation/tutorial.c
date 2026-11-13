@@ -6,6 +6,10 @@
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "pictures_ids.h"
+#include "strings_ids.h"
+#include "windows_ids.h"
+
 #include "point.h"
 typedef struct Point Point;
 
@@ -100,196 +104,196 @@ void far GiveLesson(int lesson)
 
     switch (lesson) {
     case 1:
-        PictStrnDialog(0, 0x2af8, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_WELCOME, 1);
         break;
     case 2:
-        PictStrnDialog(0x4268, 0x2afa, 1);
+        PictStrnDialog(PIC_TUTORIAL_YELLOW_ANT, STR_TUTORIAL_YOU_ARE_YELLOW_ANT, 1);
         break;
     case 3:
-        PictStrnDialog(0, 0x2afc, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_TRY_DIGGING, 1);
         TimeTemp = TilesDugB + 2;
         break;
     case 4:
-        PictStrnDialog(0, 0x2afe, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_LEARNED_DIGGING, 1);
         TimeTemp = TilesDugB + 10;
         break;
     case 5:
-        PictStrnDialog(0x4269, 0x2b00, 1);
+        PictStrnDialog(PIC_TUTORIAL_GO_OUTSIDE, STR_TUTORIAL_GO_OUTSIDE, 1);
         break;
     case 6:
-        PictStrnDialog(0, 0x2b02, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_SURFACE_VIEW, 1);
         break;
     case 7:
-        PictStrnDialog(0, 0x2b04, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_MOVE_ON_SURFACE, 1);
         LessonTemp = MeLocY + MeLocX;
         TimeTemp = MacTickCount() + 0x258L;
         break;
     case 8:
-        PictStrnDialog(0, 0x2b06, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RECENTER_ON_ANT, 1);
         LessonTemp = 0;
         break;
     case 9:
-        PictStrnDialog(0, 0x2b08, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_SCROLL_SCREEN, 1);
         LessonTemp = MapPnt.y + MapPnt.x;
         TimeTemp = MacTickCount() + 0x258L;
         break;
     case 10:
-        PictStrnDialog(0, 0x2b0a, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_OPEN_MAP, 1);
         break;
     case 11:
-        PictStrnDialog(0x4276, 0x2b0c, 1);
+        PictStrnDialog(PIC_TUTORIAL_MAP_OVERVIEW, STR_TUTORIAL_MAP_OVERVIEW, 1);
         break;
     case 12:
-        PictStrnDialog(0, 0x2b0e, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RETURN_TO_EDIT, 1);
         break;
     case 13:
-        PictStrnDialog(0x426a, 0x2b10, 1);
+        PictStrnDialog(PIC_TUTORIAL_FOOD, STR_TUTORIAL_REACH_FOOD, 1);
         break;
     case 14:
-        PictStrnDialog(0x426a, 0x2b12, 1);
+        PictStrnDialog(PIC_TUTORIAL_FOOD, STR_TUTORIAL_EAT_FOOD, 1);
         SetMyHealth(8);
         break;
     case 15:
-        PictStrnDialog(0, 0x2b14, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_HEALTH_RESTORED, 1);
         break;
     case 16:
-        PictStrnDialog(0, 0x2b16, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_PICK_UP_FOOD, 1);
         break;
     case 17:
-        PictStrnDialog(0x4275, 0x2b18, 1);
+        PictStrnDialog(PIC_TUTORIAL_HEALTH_SETPOINT, STR_TUTORIAL_FOOD_HEALTH_SETPOINT, 1);
         break;
     case 18:
-        PictStrnDialog(0x426b, 0x2b1a, 1);
+        PictStrnDialog(PIC_TUTORIAL_RETURN_TO_NEST, STR_TUTORIAL_RETURN_TO_NEST, 1);
         break;
     case 19:
-        PictStrnDialog(0, 0x2b1c, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_DROP_FOOD, 1);
         break;
     case 20:
-        PictStrnDialog(0, 0x2b1e, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RETURN_TO_SURFACE, 1);
         break;
     case 21:
-        PictStrnDialog(0x426c, 0x2b20, 1);
+        PictStrnDialog(PIC_TUTORIAL_PICK_UP_ROCK, STR_TUTORIAL_PICK_UP_ROCK, 1);
         break;
     case 22:
-        PictStrnDialog(0, 0x2b22, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_DROP_ROCK, 1);
         break;
     case 23:
         AddBlackAnts(10);
-        PictStrnDialog(0, 0x2b24, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_PEBBLE_WALLS, 1);
         break;
     case 24:
-        PictStrnDialog(0, 0x2b26, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RECRUIT_TEN, 1);
         break;
     case 25:
-        PictStrnDialog(0, 0x2b28, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RECRUITED_ANTS, 1);
         break;
     case 26:
-        PictStrnDialog(0, 0x2b2a, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_FOLLOWERS, 1);
         LessonTemp = MeLocY + MeLocX;
         TimeTemp = MacTickCount() + 0x258L;
         break;
     case 27:
-        PictStrnDialog(0, 0x2b2c, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_MOVE_WITH_ALARM, 1);
         LessonTemp = MeLocY + MeLocX;
         break;
     case 28:
-        PictStrnDialog(0, 0x2b2e, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_ALARM_SCENT, 1);
         break;
     case 29:
-        PictStrnDialog(0, 0x2b30, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_EXCHANGE_INTRO, 1);
         break;
     case 30:
-        PictStrnDialog(0, 0x2b32, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_SELECT_EXCHANGE, 1);
         LessonTemp = 0;
         break;
     case 31:
-        PictStrnDialog(0, 0x2b34, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_NOW_CONTROL_OTHER_ANT, 1);
         break;
     case 32:
-        PictStrnDialog(0, 0x2b36, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RETURN_TO_MAP, 1);
         break;
     case 33:
-        PictStrnDialog(0x426d, 0x2b38, 1);
+        PictStrnDialog(PIC_TUTORIAL_OPEN_YARD, STR_TUTORIAL_OPEN_YARD, 1);
         break;
     case 34:
-        PictStrnDialog(0, 0x2b3a, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_CURRENT_PATCH, 1);
         break;
     case 35:
-        PictStrnDialog(0, 0x2b3c, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_YARD_REPRODUCTION, 1);
         break;
     case 36:
-        PictStrnDialog(0x426e, 0x2b3e, 1);
+        PictStrnDialog(PIC_TUTORIAL_OPEN_HOUSE, STR_TUTORIAL_OPEN_HOUSE, 1);
         break;
     case 37:
-        PictStrnDialog(0, 0x2b40, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_HOUSE_OBJECTIVE, 1);
         break;
     case 38:
-        PictStrnDialog(0x426f, 0x2b42, 1);
+        PictStrnDialog(PIC_TUTORIAL_RETURN_TO_PATCH, STR_TUTORIAL_RETURN_TO_PATCH, 1);
         break;
     case 39:
-        PictStrnDialog(0x4270, 0x2b44, 1);
+        PictStrnDialog(PIC_TUTORIAL_BEHAVIOR, STR_TUTORIAL_OPEN_BEHAVIOR, 1);
         break;
     case 40:
-        PictStrnDialog(0x4270, 0x2b46, 1);
+        PictStrnDialog(PIC_TUTORIAL_BEHAVIOR, STR_TUTORIAL_BEHAVIOR_WINDOW, 1);
         break;
     case 41:
-        PictStrnDialog(0x4270, 0x2b48, 1);
+        PictStrnDialog(PIC_TUTORIAL_BEHAVIOR, STR_TUTORIAL_DRAG_BEHAVIOR_KNOB, 1);
         LessonTemp = modeLevels[1] + modeLevels[0];
         break;
     case 42:
-        PictStrnDialog(0, 0x2b4a, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RETURN_TO_MAP_AGAIN, 1);
         break;
     case 43:
-        PictStrnDialog(0x4271, 0x2b4c, 1);
+        PictStrnDialog(PIC_TUTORIAL_HELP, STR_TUTORIAL_OPEN_HELP, 1);
         LessonTemp = 0;
         break;
     case 44:
-        PictStrnDialog(0x4271, 0x2b4e, 1);
+        PictStrnDialog(PIC_TUTORIAL_HELP, STR_TUTORIAL_HELP_BUTTONS, 1);
         break;
     case 45:
-        PictStrnDialog(0x4272, 0x2b50, 1);
+        PictStrnDialog(PIC_TUTORIAL_COLONY_BARS, STR_TUTORIAL_COLONY_BARS, 1);
         break;
     case 46:
-        PictStrnDialog(0x4272, 0x2b52, 1);
+        PictStrnDialog(PIC_TUTORIAL_COLONY_BARS, STR_TUTORIAL_POPULATION_BREAKDOWN, 1);
         LessonTemp = 0;
         break;
     case 47:
-        PictStrnDialog(0x4273, 0x2b54, 1);
+        PictStrnDialog(PIC_TUTORIAL_CASTE, STR_TUTORIAL_OPEN_CASTE, 1);
         break;
     case 48:
-        PictStrnDialog(0x4273, 0x2b56, 1);
+        PictStrnDialog(PIC_TUTORIAL_CASTE, STR_TUTORIAL_CASTE_WINDOW, 1);
         break;
     case 49:
-        PictStrnDialog(0, 0x2b58, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RETURN_TO_EDIT_AGAIN, 1);
         AddBlackAnts(0x50);
         for (row = 0; row < 64; row++)
             for (col = 0; col < 32; col++)
                 PherMapA[row][col] = 0;
         break;
     case 50:
-        PictStrnDialog(0x4274, 0x2b5a, 1);
+        PictStrnDialog(PIC_TUTORIAL_CENTER_ON_ANT, STR_TUTORIAL_CENTER_ON_YELLOW_ANT, 1);
         LessonTemp = 0;
         break;
     case 51:
-        PictStrnDialog(0, 0x2b5c, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_ATTACK_RED_COLONY, 1);
         break;
     case 52:
-        PictStrnDialog(0, 0x2b5e, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_RECRUIT_FIFTY, 1);
         break;
     case 53:
-        PictStrnDialog(0, 0x2b60, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_READY_TO_ATTACK, 1);
         break;
     case 54:
-        PictStrnDialog(0, 0x2b62, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_FIND_RED_NEST, 1);
         break;
     case 55:
         if (LessonTemp == 0)
-            PictStrnDialog(0, 0x2b64, 1);
+            PictStrnDialog(PIC_NONE, STR_TUTORIAL_ENTERED_RED_NEST, 1);
         else
-            PictStrnDialog(0, 0x2b66, 1);
+            PictStrnDialog(PIC_NONE, STR_TUTORIAL_ATTACK_FAILED, 1);
         break;
     case 56:
-        PictStrnDialog(0, 0x2b68, 1);
+        PictStrnDialog(PIC_NONE, STR_TUTORIAL_END, 1);
         break;
     }
 }
@@ -333,11 +337,11 @@ int far LessonDone(int lesson)
     case 9: if (MapPnt.y + MapPnt.x != LessonTemp || MacTickCount() > TimeTemp)
             return 1;
         break;
-    case 10: if (win_IsWinInFront(0x100) != 0)
+    case 10: if (win_IsWinInFront(WIN_MAP) != 0)
             return 1;
         break;
     case 11: return 1;
-    case 12: if (win_IsWinInFront(0) != 0)
+    case 12: if (win_IsWinInFront(WIN_EDIT) != 0)
             return 1;
         break;
     case 13: if (MePlane == 1 && MapA[MeLocX][MeLocY] > 0x47)
@@ -385,7 +389,7 @@ int far LessonDone(int lesson)
             return 1;
         return 0;
     case 31: return 1;
-    case 32: if (win_IsWinInFront(0x100) != 0)
+    case 32: if (win_IsWinInFront(WIN_MAP) != 0)
             return 1;
         break;
     case 33: if (MapPlane == 0)
@@ -400,23 +404,23 @@ int far LessonDone(int lesson)
     case 38: if (MapPlane == 1)
             return 1;
         break;
-    case 39: if (win_IsWinInFront(0x1200) != 0)
+    case 39: if (win_IsWinInFront(WIN_BEHAVIOR) != 0)
             return 1;
         break;
     case 40: return 1;
     case 41: if (modeLevels[1] + modeLevels[0] != LessonTemp)
             return 1;
         break;
-    case 42: if (win_IsWinInFront(0x100) != 0)
+    case 42: if (win_IsWinInFront(WIN_MAP) != 0)
             return 1;
         break;
     case 44: return 1;
     case 45: return 1;
-    case 47: if (win_IsWinInFront(0x1300) != 0)
+    case 47: if (win_IsWinInFront(WIN_CASTE) != 0)
             return 1;
         break;
     case 48: return 1;
-    case 49: if (win_IsWinInFront(0) != 0)
+    case 49: if (win_IsWinInFront(WIN_EDIT) != 0)
             return 1;
         break;
     case 51: return 1;

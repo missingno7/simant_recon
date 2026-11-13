@@ -8,6 +8,8 @@
  * Steered functions: snd_probe_mpu_reset.
  */
 
+#include "hardware_ids.h"
+
 int far snd_probe_assume_present(void);
 int far snd_probe_tandy_sound(void);
 int far snd_probe_ps1_sound(void);
@@ -67,7 +69,7 @@ int far snd_probe_tandy_sound(void)
         int 1Ah
         mov base, ax
     }
-    p = (char far *)0xFC000000L;
+    p = (char far *)SND_TANDY_ROM_PROBE_FARPTR;
     return *p == 0x21 || base == 0xc4;
 }
 
@@ -113,12 +115,12 @@ int far snd_probe_opl_timer(void)
 
     snd_opl_write(4, 0x60);
     snd_opl_write(4, 0x80);
-    s1 = snd_port_read_byte(0x388);
+    s1 = snd_port_read_byte(PORT_OPL_STATUS);
     snd_opl_write(2, 0xff);
     snd_opl_write(4, 0x21);
     for (i = 0; i < 200; i++)
-        snd_port_read_byte(0x388);
-    i = snd_port_read_byte(0x388);
+        snd_port_read_byte(PORT_OPL_STATUS);
+    i = snd_port_read_byte(PORT_OPL_STATUS);
     snd_opl_write(4, 0x60);
     snd_opl_write(4, 0x80);
     if ((s1 & 0xe0) == 0 && (i & 0xe0) == 0xc0)
@@ -137,9 +139,9 @@ int far snd_find_blaster_dsp_base(void)
     int found;
 
     found = 0;
-    snd_sb_io_base = 0x200;
+    snd_sb_io_base = SND_BLASTER_PROBE_INITIAL_BASE;
     while (!found) {
-        if (snd_sb_io_base >= 0x260)
+        if (snd_sb_io_base >= SND_BLASTER_LAST_PROBE_BASE)
             break;
         snd_sb_io_base += 0x10;
         found = snd_probe_dsp_reset_ack();
@@ -185,27 +187,27 @@ int far snd_probe_mpu_reset(void)
 
     ok = 0;
     ready = 0;
-    if (!(snd_port_read_byte(0x331) & 0x80))
-        snd_port_read_byte(0x330);
+    if (!(snd_port_read_byte(PORT_MPU_STATUS_COMMAND) & 0x80))
+        snd_port_read_byte(PORT_MPU_DATA);
     for (i = 0; i < 5000; i++) {
-        if (!(snd_port_read_byte(0x331) & 0x40)) {
+        if (!(snd_port_read_byte(PORT_MPU_STATUS_COMMAND) & 0x40)) {
             ok = 1;
             goto write_ready;
         }
     }
 write_ready:
     if (ok) {
-        snd_port_write_byte(0x331, 0xff);
+        snd_port_write_byte(PORT_MPU_STATUS_COMMAND, 0xff);
         for (tries = 0; tries < 3 && ((unsigned)ok >= 0); tries++) {
             for (i = 0; i < 5000; i++) {
-                if (!(snd_port_read_byte(0x331) & 0x80)) {
+                if (!(snd_port_read_byte(PORT_MPU_STATUS_COMMAND) & 0x80)) {
                     ready = 1;
                     goto read_ready;
                 }
             }
 read_ready:
             if (ready) {
-                if (snd_port_read_byte(0x330) == 0xfe)
+                if (snd_port_read_byte(PORT_MPU_DATA) == 0xfe)
                     return 1;
                 ready = 0;
             }

@@ -6,6 +6,10 @@
  * Windows: SIMTWO, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "audio_ids.h"
+#include "pictures_ids.h"
+#include "strings_ids.h"
+
 extern int far SRand1(int range);
 extern unsigned char far MapA[128][64];
 extern int far SowX[3];
@@ -208,7 +212,7 @@ void far DoAntLions(void)
                         nx = x + Dx8[d] * 2;
                         if (IsClearTile(1, nx, ny = y + Dy8[d] * 2) == 1) {
                             SetMap(1, nx, ny, tile);
-                            myBeginSound(0x1e, 0, 10);
+                            myBeginSound(SND_ROCK_ACTION, 0, 10);
                             break;
                         }
                     }
@@ -255,7 +259,7 @@ void far DoAntLions(void)
                 if (LifeA[LionListX[i] + Dx8[dir]][LionListY[i] + Dy8[dir]] != 0)
                     count++;
             if (count >= 7) {
-                PictStrnDialog(0, 0x2742, 0);
+                PictStrnDialog(PIC_NONE, STR_ANT_LION_KILLED, 0);
                 KillAntLion(i);
                 continue;
             }

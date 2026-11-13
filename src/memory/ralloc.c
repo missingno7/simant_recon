@@ -13,6 +13,8 @@
  * be passed as indexes encoded as 0F0F:index.
  */
 
+#include "hardware_ids.h"
+
 #include <dos.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -276,7 +278,7 @@ void far mem_dump_heap(char far *where)
 
     if (s_2F2A)
         return;
-    fd = open("ralloc.dmp", 0x109, 0x180);
+    fd = open("ralloc.dmp", DOS_OPEN_APPEND_CREATE_WRONLY, DOS_CREATE_OWNER_READ_WRITE);
     time(&now);
     mem_dump_printf(fd, "\n\nRalloc dump at %s, %s", where, asctime(localtime(&now)));
     mem_dump_printf(fd, "\nFree Space:  %ld,  Used Space:  %ld, Total Space: %ld \n",

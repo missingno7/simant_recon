@@ -7,6 +7,9 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og.
  */
 
+#include "pictures_ids.h"
+#include "windows_ids.h"
+
 #include "rect.h"
 
 #include "pt.h"
@@ -76,7 +79,7 @@ void far win_CasteControlClosed(void);
 
 void far win_CasteControlChanged(void)
 {
-    InitTriVars(0x130d, &casteVerts);
+    InitTriVars(OBJ_CASTE_TRIANGLE, &casteVerts);
     SetTriLatPoint(&casteLevels, &casteVerts, &caste_knob_center);
     win_CasteControlClosed();
 }
@@ -88,7 +91,7 @@ void far win_ModeControlClosed(void);
 
 void far win_ModeControlChanged(void)
 {
-    InitTriVars(0x120d, &modeVerts);
+    InitTriVars(OBJ_BEHAVIOR_TRIANGLE, &modeVerts);
     SetTriLatPoint(&modeLevels, &modeVerts, &mode_knob_center);
     win_ModeControlClosed();
 }
@@ -98,13 +101,13 @@ extern void far win_Open(int win);
 void far OpenCasteWindow(void)
 {
     win_CasteControlChanged();
-    win_Open(0x1300);
+    win_Open(WIN_CASTE);
 }
 
 void far OpenModeWindow(void)
 {
     win_ModeControlChanged();
-    win_Open(0x1200);
+    win_Open(WIN_BEHAVIOR);
 }
 
 extern void far clip_SetWin(int win);
@@ -131,43 +134,43 @@ void far ProcCasteEvent(struct CtlMsg far *msg)
     struct Rect rect;
     struct Pt last;
 
-    clip_SetWin(0x1300);
-    switch (msg->code - 0x1303) {
+    clip_SetWin(WIN_CASTE);
+    switch (msg->code - OBJ_CASTE_HELP) {
     case 0:
-        DoWinHelp(0x130e);
+        DoWinHelp(OBJ_CASTE_HELP_PICTURE);
         break;
     case 1:
         if (CasteAuto == 0) {
             CasteAuto = 1;
-            win_MakeGroupInvisible(0x1300, 4);
+            win_MakeGroupInvisible(WIN_CASTE, 4);
         }
         break;
     case 3:
     case 4:
     case 5:
-        win_MakeObjSelected(0x1305);
+        win_MakeObjSelected(OBJ_CASTE_MANUAL);
         _fmemcpy(&casteSetLevels[casteSet], &casteLevels, 6);
-        casteSet = msg->code - 0x1306;
+        casteSet = msg->code - OBJ_CASTE_FIRST_PRESET;
         _fmemcpy(&casteLevels, &casteSetLevels[casteSet], 6);
-        clip_SetWin(0x1300);
+        clip_SetWin(WIN_CASTE);
         win_DrawCasteWindow(3);
     case 2:
         if (CasteAuto) {
             CasteAuto = 0;
-            win_MakeGroupVisible(0x1300, 4);
+            win_MakeGroupVisible(WIN_CASTE, 4);
         }
         break;
     case 10:
-        win_GetObjRect(0x130d, &rect);
+        win_GetObjRect(OBJ_CASTE_TRIANGLE, &rect);
         if (!IsPointInIsoTri(&msg->pt, &rect))
             break;
         if (CasteAuto) {
             CasteAuto = 0;
-            win_MakeObjSelected(0x1305);
-            win_MakeGroupVisible(0x1300, 4);
+            win_MakeObjSelected(OBJ_CASTE_MANUAL);
+            win_MakeGroupVisible(WIN_CASTE, 4);
         }
         last.x = -1;
-        clip_SetWin(0x1300);
+        clip_SetWin(WIN_CASTE);
         do {
             if (_fmemcmp(&last, &msg->pt, 4)) {
                 last = msg->pt;
@@ -199,43 +202,43 @@ void far ProcModeEvent(struct CtlMsg far *msg)
     struct Rect rect;
     struct Pt last;
 
-    clip_SetWin(0x1200);
-    switch (msg->code - 0x1203) {
+    clip_SetWin(WIN_BEHAVIOR);
+    switch (msg->code - OBJ_BEHAVIOR_HELP) {
     case 0:
-        DoWinHelp(0x120e);
+        DoWinHelp(OBJ_BEHAVIOR_HELP_PICTURE);
         break;
     case 1:
         if (ModeAuto == 0) {
             ModeAuto = 1;
-            win_MakeGroupInvisible(0x1200, 4);
+            win_MakeGroupInvisible(WIN_BEHAVIOR, 4);
         }
         break;
     case 3:
     case 4:
     case 5:
-        win_MakeObjSelected(0x1205);
+        win_MakeObjSelected(OBJ_BEHAVIOR_MANUAL);
         _fmemcpy(&modeSetLevels[modeSet], &modeLevels, 6);
-        modeSet = msg->code - 0x1206;
+        modeSet = msg->code - OBJ_BEHAVIOR_FIRST_PRESET;
         _fmemcpy(&modeLevels, &modeSetLevels[modeSet], 6);
-        clip_SetWin(0x1200);
+        clip_SetWin(WIN_BEHAVIOR);
         win_DrawModeWindow(3);
     case 2:
         if (ModeAuto) {
             ModeAuto = 0;
-            win_MakeGroupVisible(0x1200, 4);
+            win_MakeGroupVisible(WIN_BEHAVIOR, 4);
         }
         break;
     case 10:
-        win_GetObjRect(0x120d, &rect);
+        win_GetObjRect(OBJ_BEHAVIOR_TRIANGLE, &rect);
         if (!IsPointInIsoTri(&msg->pt, &rect))
             break;
         if (ModeAuto) {
             ModeAuto = 0;
-            win_MakeObjSelected(0x1205);
-            win_MakeGroupVisible(0x1200, 4);
+            win_MakeObjSelected(OBJ_BEHAVIOR_MANUAL);
+            win_MakeGroupVisible(WIN_BEHAVIOR, 4);
         }
         last.x = -1;
-        clip_SetWin(0x1200);
+        clip_SetWin(WIN_BEHAVIOR);
         do {
             if (_fmemcmp(&last, &msg->pt, 4)) {
                 last = msg->pt;
@@ -330,19 +333,19 @@ void far win_DrawModeWindow(int flags)
 {
     if (flags & 1) {
         if (!modeAnimHandle)
-            clip_SetWin(0x1200);
+            clip_SetWin(WIN_BEHAVIOR);
     }
     if (!(flags & 2))
         return;
-    DrawControlLevels(0x1200, 0, g_1B62);
+    DrawControlLevels(WIN_BEHAVIOR, 0, g_1B62);
     SetTriLatPoint(&modeLevels, &modeVerts, &mode_knob_center);
     if (!modeAnimHandle) {
         modeAnimHandle = hanim_MakeAnimSet();
         mode_knob_anim_index = hanim_AddAnimObject(modeAnimHandle, mode_knob_center.x - knobSize.x / 2,
-                                   mode_knob_center.y - knobSize.y / 2, 0x578, 0);
+                                   mode_knob_center.y - knobSize.y / 2, PIC_TRIANGLE_KNOB, 0);
     } else
         hanim_SetObjectPos(mode_knob_center.x - knobSize.x / 2, mode_knob_center.y - knobSize.y / 2,
-                    0x8000, modeAnimHandle, mode_knob_anim_index, 0x8000);
+                    PIC_KEEP_CURRENT, modeAnimHandle, mode_knob_anim_index, 0x8000);
     hanim_RenderAnimSet(modeAnimHandle);
 }
 
@@ -363,19 +366,19 @@ void far win_DrawCasteWindow(int flags)
 {
     if (flags & 1) {
         if (!casteAnimHandle)
-            clip_SetWin(0x1300);
+            clip_SetWin(WIN_CASTE);
     }
     if (!(flags & 2))
         return;
-    DrawControlLevels(0x1300, 0, g_1B64);
+    DrawControlLevels(WIN_CASTE, 0, g_1B64);
     SetTriLatPoint(&casteLevels, &casteVerts, &caste_knob_center);
     if (!casteAnimHandle) {
         casteAnimHandle = hanim_MakeAnimSet();
         fd_50F6_37FA = hanim_AddAnimObject(casteAnimHandle, caste_knob_center.x - knobSize.x / 2,
-                                   caste_knob_center.y - knobSize.y / 2, 0x578, 0);
+                                   caste_knob_center.y - knobSize.y / 2, PIC_TRIANGLE_KNOB, 0);
     } else
         hanim_SetObjectPos(caste_knob_center.x - knobSize.x / 2, caste_knob_center.y - knobSize.y / 2,
-                    0x8000, casteAnimHandle, fd_50F6_37FA, 0x8000);
+                    PIC_KEEP_CURRENT, casteAnimHandle, fd_50F6_37FA, 0x8000);
     hanim_RenderAnimSet(casteAnimHandle);
 }
 
@@ -413,10 +416,10 @@ void far DrawControlLevels(int win, int unused, int percent)
     int color;
 
     font_SetFont(gfx_screen_width_pixels == 0x140 ? 0 : 4);
-    win_GetObjRect((win & 0xff00) + 12, &rect);
+    win_GetObjRect((win & WIN_ID_MASK) + 12, &rect);
     w = (rect.right - rect.left) / 5;
     h = rect.bottom - rect.top;
-    if (win == 0x1200) {
+    if (win == WIN_BEHAVIOR) {
         levels = (unsigned far *)&modeLevels;
         colors = g_1B4A;
         total = (long)ModePopB[2] + ModePopB[1] + ModePopB[0];
@@ -426,7 +429,7 @@ void far DrawControlLevels(int win, int unused, int percent)
         total = CastePopB;
     }
     for (i = 0; i < 3; i++) {
-        obj = (win & 0xff00) + i + 9;
+        obj = (win & WIN_ID_MASK) + i + 9;
         if (percent) {
             val = (100L * levels[i] + 0x3fff) / 0xffff;
             win_PrintfAtObj(obj, "%-ld%%", val);
@@ -520,8 +523,8 @@ void far initControls(void)
     struct Rect rect;
     int i;
 
-    gr_BitMapSize(&knobSize, 0x578);
-    win_GetObjRect(0x120d, &rect);
+    gr_BitMapSize(&knobSize, PIC_TRIANGLE_KNOB);
+    win_GetObjRect(OBJ_BEHAVIOR_TRIANGLE, &rect);
     ModeAuto = 1;
     CasteAuto = 1;
     ShowPercentMode = 1;

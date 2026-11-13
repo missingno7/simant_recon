@@ -7,6 +7,8 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "pictures_ids.h"
+
 extern int far TERRAINset;
 extern int far CurGndTileID;
 extern void far OverlayTileSet(int a, int b);
@@ -61,8 +63,8 @@ void far MakeMap(int x, int y)
 void far MakeHousePatch(int n)
 {
     if (TERRAINset != 1) {
-        CurGndTileID = 0x3e9;
-        OverlayTileSet(0, 0x3e9);
+        CurGndTileID = TILESET_HOUSE;
+        OverlayTileSet(0, TILESET_HOUSE);
     }
     InitAntLions(0);
     InitPillar();
@@ -399,8 +401,8 @@ void far MakeYardPatch(void)
     int row, col, i, t;
 
     if (TERRAINset != 0) {
-        CurGndTileID = 0x3e8;
-        OverlayTileSet(0, 0x3e8);
+        CurGndTileID = TILESET_YARD;
+        OverlayTileSet(0, TILESET_YARD);
     }
     for (row = 0; row < 128; row++)
         for (col = 0; col < 64; col++)

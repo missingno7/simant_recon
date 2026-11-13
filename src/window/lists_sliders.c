@@ -8,6 +8,8 @@
  * Functions not yet exact: f_23E6_0000.
  */
 
+#include "flags_ids.h"
+
 #include "rect.h"
 
 struct List {
@@ -421,8 +423,8 @@ void _fastcall list_process_click(struct Event far *ev)
     line = (ev->v - ((struct Rect far *)o)->top) / h + list->top;
     sel = list_is_line_selected(ev->code, line);
     WinPrintf("\nSS=%d, line=%d", sel, line);
-    if (*(int far *)(o + 0x24) & 0x20) {
-        if ((*(int far *)(o + 0x24) & 0x400) && sel)
+    if (*(int far *)(o + 0x24) & OBJ_FLAG_EXCLUSIVE_GROUP) {
+        if ((*(int far *)(o + 0x24) & OBJ_FLAG_STICKY_SELECTION) && sel)
             return;
         list_clear_selection(ev->code);
     }

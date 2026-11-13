@@ -8,6 +8,8 @@
  * Functions not yet exact: ui_prompt_save_discard_cancel.
  */
 
+#include "windows_ids.h"
+
 typedef char far * far *Handle;
 
 struct Event {
@@ -257,7 +259,7 @@ void far SetDefaultWindows(void)
     OpenModeWindow();
     SetEditWinTitle(0L);
     SetMapPlane(MapPlane);
-    if (!win_IsWinOpen(0x100))
+    if (!win_IsWinOpen(WIN_MAP))
         YardToMap();
     SetMapTitle();
     OpenEditWindow();
@@ -271,24 +273,24 @@ int far NewGame(int flag)
     gGameNeedsSaving = 0;
     for (;;) {
         r = DoScenario(flag);
-        if (r == 0x205)
+        if (r == OBJ_SCENARIO_CANCEL)
             return -1;
-        if (r == 0x207) {
+        if (r == OBJ_SCENARIO_LOAD_GAME) {
             if (LoadGame(0, 0) == 0)
                 continue;
             r = 1;
         } else {
             switch (r) {
-            case 0x202:
+            case OBJ_SCENARIO_QUICK_GAME:
                 r = 1;
                 break;
-            case 0x203:
+            case OBJ_SCENARIO_FULL_GAME:
                 r = 2;
                 break;
-            case 0x204:
+            case OBJ_SCENARIO_EXPERIMENTAL:
                 r = 3;
                 break;
-            case 0x206:
+            case OBJ_SCENARIO_TUTORIAL:
                 r = 0;
                 break;
             }
@@ -309,7 +311,7 @@ int far NewGame(int flag)
                     TutLesson = 1;
                     TutGiven = 0;
                     if (flag == 0)
-                        win_Open(0);
+                        win_Open(WIN_EDIT);
                 }
             }
         }

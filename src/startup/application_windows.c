@@ -6,6 +6,8 @@
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "windows_ids.h"
+
 typedef char far * far *Handle;
 
 struct WinFileHeader {
@@ -51,17 +53,17 @@ void far InitApplicationWindows(void)
     int n;
 
     win_LoadAllWindows();
-    win_SetWinDrawHook(0, win_DrawEditWindow);
-    win_SetWinDrawHook(0x100, win_DrawMapWindow);
-    win_SetWinDrawHook(0x1500, win_DrawHistoryWindow);
-    win_SetWinDrawHook(0x1200, win_DrawModeWindow);
-    win_SetWinDrawHook(0x1300, win_DrawCasteWindow);
-    win_SetWinDrawHook(0x1900, win_DrawYardWindow);
-    win_SetWinDrawHook(0x500, win_DrawInfoWindow);
+    win_SetWinDrawHook(WIN_EDIT, win_DrawEditWindow);
+    win_SetWinDrawHook(WIN_MAP, win_DrawMapWindow);
+    win_SetWinDrawHook(WIN_HISTORY, win_DrawHistoryWindow);
+    win_SetWinDrawHook(WIN_BEHAVIOR, win_DrawModeWindow);
+    win_SetWinDrawHook(WIN_CASTE, win_DrawCasteWindow);
+    win_SetWinDrawHook(WIN_YARD, win_DrawYardWindow);
+    win_SetWinDrawHook(WIN_INFO, win_DrawInfoWindow);
     win_set_state_change_hook(app_window_state_changed);
     win_set_layout_change_hook(app_window_layout_changed);
     win_set_before_close_hook(app_before_window_close);
-    win_copy_obj_layout_origin(0x1900, 0x100);
+    win_copy_obj_layout_origin(WIN_YARD, WIN_MAP);
     InitMapFunctions();
     if (startup_executable_fd == 0)
         return;
@@ -98,11 +100,11 @@ extern void far f_00F8_0002(void);
 void far app_window_layout_changed(int item)
 {
     switch (item) {
-    case 0x100:
-        win_copy_obj_layout_origin(0x100, 0x1900);
+    case WIN_MAP:
+        win_copy_obj_layout_origin(WIN_MAP, WIN_YARD);
         break;
-    case 0x1900:
-        win_copy_obj_layout_origin(0x1900, 0x100);
+    case WIN_YARD:
+        win_copy_obj_layout_origin(WIN_YARD, WIN_MAP);
         break;
     }
     win_CasteControlChanged();

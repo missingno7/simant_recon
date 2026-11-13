@@ -7,6 +7,8 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "flags_ids.h"
+
 extern void far Punt(char far *format, ...);
 
 static int g_644C = 0;
@@ -85,7 +87,7 @@ void _fastcall win_load_and_lock_resource(int win, int high)
             else
                 w = mem_Lock(h);
         }
-        if (*(int far *)(w + 0x1c) & 0x800) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (*(int far *)(w + 0x1c) & WIN_FLAG_DISCARD_CLOSED) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             mem_set_alloc_type(h, 1);
         if (g_8CF2[n] != w) {
             g_8CF2[n] = w;
@@ -131,7 +133,7 @@ void _fastcall win_UnlockWin(int win)
         if (RallocType(h) == 5)
             Punt("Attemp to unlock when discarded win %x", win);
         if (--g_8DA6[n] == 0) {
-            if (!((*h)->flags & 0x200) && ((*h)->flags & 0x800) && g_644E == 0) {
+            if (!((*h)->flags & WIN_FLAG_OPEN) && ((*h)->flags & WIN_FLAG_DISCARD_CLOSED) && g_644E == 0) {
                 w = *h;
                 for (i = 0; i < w->count; i++) {
                     obj = (struct Obj far *)w->objs[i];

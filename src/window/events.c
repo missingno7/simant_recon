@@ -7,6 +7,10 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "events_ids.h"
+#include "flags_ids.h"
+#include "windows_ids.h"
+
 #include "event.h"
 
 long g_6364 = -1;
@@ -48,27 +52,27 @@ void _fastcall win_dispatch_object_event(struct Event far *ev)
         goto check;
     case 12:
     case 18:
-        if (*(int far *)(win_WinAddr(ev->code) + 0x1c) & 2) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (*(int far *)(win_WinAddr(ev->code) + 0x1c) & WIN_FLAG_TITLE_DRAG) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             win_track_move(ev);
         break;
     }
-    if (*(int far *)(obj + 0x24) & 0x800) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if (*(int far *)(obj + 0x24) & OBJ_FLAG_CLICK_FEEDBACK) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         clip_Push();
         clip_set_screen_region();
-        if (*(int far *)(obj + 0x24) & 8) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
-            if (!(*(int far *)(obj + 0x24) & 0x20) || !(*(int far *)(obj + 0x24) & 0x400) || !(*(int far *)(obj + 0x24) & 4)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
-                win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
-        } else if (*(int far *)(obj + 0x24) & 1) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
-            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (*(int far *)(obj + 0x24) & OBJ_FLAG_TOGGLE_SELECT) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            if (!(*(int far *)(obj + 0x24) & OBJ_FLAG_EXCLUSIVE_GROUP) || !(*(int far *)(obj + 0x24) & OBJ_FLAG_STICKY_SELECTION) || !(*(int far *)(obj + 0x24) & OBJ_FLAG_SELECTED)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+                win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & OBJ_FLAG_SELECTED)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        } else if (*(int far *)(obj + 0x24) & OBJ_FLAG_VISIBLE) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & OBJ_FLAG_SELECTED)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             timer_wait_countdown(5);
-            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & 4)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            win_SetObjSelectedState(ev->code, !(*(int far *)(obj + 0x24) & OBJ_FLAG_SELECTED)); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         }
         clip_Pop();
     }
 check:
     if (window_previous_event.code == window_current_event.code && TickCount() - 10 < g_6364) {
-        if (((window_previous_event.modifiers ^ window_current_event.modifiers) & 0x0a00) == 0) {
-            window_current_event.modifiers &= ~0x0a00;
+        if (((window_previous_event.modifiers ^ window_current_event.modifiers) & EVENT_MOD_CLICK_MASK) == 0) {
+            window_current_event.modifiers &= ~EVENT_MOD_CLICK_MASK;
             if (window_previous_event.modifiers & 0x0800)
                 window_current_event.modifiers |= 0x4000;
             if (window_previous_event.modifiers & 0x0200)
@@ -125,10 +129,10 @@ void _fastcall win_update_proximity_event(struct Event far *ev)
     if ((char)(clip_window_z_order[0] >> 8) == (unsigned char)ev->code) {
         win_LockWin(clip_window_z_order[0]);
         obj = hotbox_pointer_hit_id();
-        if (obj != 0 && (obj & 0xff00) == clip_window_z_order[0] && lastProxObj != obj &&
-            (*(int far *)(win_ObjAddr(obj) + 0x24) & 0x10)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (obj != 0 && (obj & WIN_ID_MASK) == clip_window_z_order[0] && lastProxObj != obj &&
+            (*(int far *)(win_ObjAddr(obj) + 0x24) & OBJ_FLAG_PROXIMITY)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             _win_SetProxItem(obj);
-        else if (lastProxObj != -1 && !(*(int far *)(win_ObjAddr(lastProxObj) + 0x24) & 0x400) && obj != lastProxObj) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        else if (lastProxObj != -1 && !(*(int far *)(win_ObjAddr(lastProxObj) + 0x24) & OBJ_FLAG_STICKY_SELECTION) && obj != lastProxObj) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             _win_SetProxItem(-1);
         win_UnlockWin(clip_window_z_order[0]);
     }
@@ -153,42 +157,42 @@ void far win_translate_pending_event(void)
     if (g_8CEC != 0 || !input_event_count())
         return;
     input_pop_event(&window_current_event);
-    if (window_current_event.code == (int)0xff00) {
+    if (window_current_event.code == (int)EVENT_DESKTOP_CLICK) {
         win_dispatch_desktop_click(&window_current_event);
     } else if ((char)(window_current_event.code >> 8) == (char)0xfb) {
         win_update_proximity_event(&window_current_event);
     } else {
         if (clip_window_z_order[0] != (int)0x8000) {
             switch (window_current_event.code) {
-            case 0xf081:
+            case EVENT_WINDOW_MOVE:
                 win_track_move(0L);
                 break;
-            case 0xf082:
+            case EVENT_WINDOW_LOWER:
                 win_lower_or_dismiss(clip_window_z_order[0]);
                 win_FlushEvents();
                 return;
-            case 0xf083:
+            case EVENT_WINDOW_CLOSE:
                 win_Close(clip_window_z_order[0]);
                 win_FlushEvents();
                 return;
-            case 0xf084:
+            case EVENT_WINDOW_RESIZE:
                 win_track_resize(0L);
                 return;
-            case 0xf085:
+            case EVENT_WINDOW_ZOOM:
                 win_toggle_zoom(clip_window_z_order[0]);
                 win_FlushEvents();
                 return;
-            case 0xf086:
+            case EVENT_FOCUS_NEXT:
                 if (clip_window_z_order[0] != (int)0x8000)
                     win_step_object_focus(1);
                 break;
-            case 0xf087:
+            case EVENT_FOCUS_PREVIOUS:
                 if (clip_window_z_order[0] != (int)0x8000)
                     win_step_object_focus(-1);
                 break;
             default:
                 if (!(window_current_event.code & 0x8000)) {
-                    if ((window_current_event.code & 0xff00) != clip_window_z_order[0])
+                    if ((window_current_event.code & WIN_ID_MASK) != clip_window_z_order[0])
                         return;
                     win_dispatch_object_event(&window_current_event);
                 }

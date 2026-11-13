@@ -8,6 +8,8 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "flags_ids.h"
+
 #include "rect.h"
 #include "win.h"
 
@@ -110,7 +112,7 @@ void _fastcall win_SetColorNum(int color)
 
 void _fastcall win_SetColorFromObj(char far *obj)
 {
-    if (obj[0x24] & 4) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if (obj[0x24] & OBJ_FLAG_SELECTED) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         colorEntry = win_colors[obj[0x27]]; /* Known type-dependent palette/bitmap selection; earlier shared tag changes exact code or original declaration context is unresolved. */
     else
         colorEntry = win_colors[obj[0x26]]; /* Known type-dependent palette/bitmap selection; earlier shared tag changes exact code or original declaration context is unresolved. */
@@ -187,7 +189,7 @@ void _fastcall win_DrawButtonBorder(char far *obj)
 
     rect = (struct Rect far *)obj;
     entry = win_colors[obj[0x26]]; /* Known type-dependent palette/bitmap selection; earlier shared tag changes exact code or original declaration context is unresolved. */
-    if ((obj[0x24] & 4) == 0) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if ((obj[0x24] & OBJ_FLAG_SELECTED) == 0) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         for (i = 3; i > 0; i--) {
             sides.left = 1;
             sides.right = 1;
@@ -224,7 +226,7 @@ void _fastcall win_DrawObjectI(struct Obj far *obj)
 
     rect = (struct Rect far *)obj;
     win_SetColorFromObj((char far *)obj);
-    if (obj->flags & 0x200) {
+    if (obj->flags & OBJ_FLAG_CLIP_CONTENT) {
         clip_Push();
         clip_SubInclude((char far *)obj);
     }
@@ -258,7 +260,7 @@ void _fastcall win_DrawObjectI(struct Obj far *obj)
         (*gfx_fill_rect_hook)(rect->left, rect->bottom - 1, rect->right, rect->bottom, colorEntry[0] * 0x101);
         goto plainText;
     case 13:
-        win_DrawBitMapAtObj(*(int far *)((char far *)&obj->palette + ((obj->flags & 4) ? 2 : 4)), (struct Rect far *)obj);
+        win_DrawBitMapAtObj(*(int far *)((char far *)&obj->palette + ((obj->flags & OBJ_FLAG_SELECTED) ? 2 : 4)), (struct Rect far *)obj);
         break;
     case 15:
         win_RectOutline(rect, *(char far *)&obj->payload28);
@@ -275,12 +277,12 @@ void _fastcall win_DrawObjectI(struct Obj far *obj)
             if (g_6300 != 0 || _fstrchr(text, '%') == 0) {
         drawText:
                 font_SetFont(*(char far *)&obj->payload28);
-                gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, text);
+                gr_JustifyStrInRect(((unsigned)obj->flags & OBJ_FLAG_JUSTIFY_MASK) >> 7, rect, text);
             }
         } else {
             h = obj->text_handle;
             p = mem_Lock(h);
-            gr_JustifyStrInRect(((unsigned)obj->flags & 0x180) >> 7, rect, p);
+            gr_JustifyStrInRect(((unsigned)obj->flags & OBJ_FLAG_JUSTIFY_MASK) >> 7, rect, p);
             mem_Unlock(h);
         }
         font_SetFont(0);
@@ -304,7 +306,7 @@ void _fastcall win_DrawObjectI(struct Obj far *obj)
         win_RectVOutline(rect, *(char far *)&obj->payload28);
         break;
     }
-    if (obj->flags & 4) {
+    if (obj->flags & OBJ_FLAG_SELECTED) {
         switch (obj->type) {
         case 1:
         case 6:
@@ -312,7 +314,7 @@ void _fastcall win_DrawObjectI(struct Obj far *obj)
             break;
         }
     }
-    if (obj->flags & 0x200)
+    if (obj->flags & OBJ_FLAG_CLIP_CONTENT)
         clip_Pop();
 }
 

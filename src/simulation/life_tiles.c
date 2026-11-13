@@ -7,6 +7,10 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "audio_ids.h"
+#include "hardware_ids.h"
+#include "pictures_ids.h"
+
 extern signed char far Dx8[];
 extern signed char far Dy8[];
 extern unsigned char far LifeA[128][64];
@@ -337,14 +341,14 @@ void far SetLife(int plane, int x, int y, int value)
             LifeB[x][y] = value;
             if (value > 0 && IsItDigable(plane, x, y) == 1) {
                 DigMyTile(plane, x, y);
-                myBeginSound(0x13, 0, 0x3f);
+                myBeginSound(SND_DIG, 0, 0x3f);
             }
             break;
         case 3:
             LifeR[x][y] = value;
             if (value > 0 && IsItDigable(plane, x, y) == 1) {
                 DigMyTile(plane, x, y);
-                myBeginSound(0x13, 0, 0x3f);
+                myBeginSound(SND_DIG, 0, 0x3f);
             }
             break;
         }
@@ -567,15 +571,15 @@ void far ExchangeLives(int a, int b, int c)
     if (DoLifeExchange(a, b, c) == 1) {
         EndLifeTransferMode();
         if (MeType == 0x60) {
-            myBeginSound(0xf, 0, 0x7e);
+            myBeginSound(SND_COMMAND_ACK, 0, 0x7e);
             DoEditUpdateDraw();
             while (!mySoundIsDone())
                 myDelay(5L);
-            myBeginSong(0x2afe, 0x7e);
+            myBeginSong(SONG_BODY_EXCHANGE, 0x7e);
         } else
-            myBeginSound(0xf, 0, 0x7e);
+            myBeginSound(SND_COMMAND_ACK, 0, 0x7e);
     } else
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
 }
 
 int far DoLifeExchange(int plane, int x, int y)
@@ -668,12 +672,12 @@ int far DoLifeExchange(int plane, int x, int y)
         }
         newLife = (u << 3) | MeDir | (life & 0x80);
         if (life & 0x80) {
-            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3))
+            if (!(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) || !(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3))
                 goto fail;
         }
         c = (life & 0x78) >> 3;
         if (c <= 0 || c > 0xd || c == 0xa || c == 0xb) {
-            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3) || !fd_3D57_0798)
+            if (!(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) || !(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3) || !fd_3D57_0798)
                 goto fail;
         }
         if (c == 5 || c == 9)
@@ -704,12 +708,12 @@ int far DoLifeExchange(int plane, int x, int y)
         int c;
 
         if (life & 0x80) {
-            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3))
+            if (!(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) || !(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3))
                 goto fail;
         }
         c = (life & 0x78) >> 3;
         if (c <= 0 || c > 0xd || c == 0xa || c == 0xb) {
-            if (!(*(unsigned char far *)0x417L & 8) || !(*(unsigned char far *)0x417L & 3) || !fd_3D57_0798)
+            if (!(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) || !(*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3) || !fd_3D57_0798)
                 goto fail;
         }
         if (c == 5 || c == 9)
@@ -799,9 +803,9 @@ int far DropMyFood(int plane, int x, int y, int tx, int ty)
             else
                 FoodR++;
         }
-        if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8)))
+        if (!((*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3) && (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8)))
             MeType &= 0xf7;
-        myBeginSound(0x1d, 0, 0x7e);
+        myBeginSound(SND_FOOD_ACTION, 0, 0x7e);
     }
     return done;
 }
@@ -881,11 +885,11 @@ int far DropMyRock(int plane, int x, int y, int tx, int ty)
     if (done) {
         MeDir = d;
         DropPebble(plane, nx, ny);
-        if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8))) {
+        if (!((*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3) && (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8))) {
             if (MeType == 0x28 || MeType == 0x48)
                 MeType -= 0x18;
         }
-        myBeginSound(0x1e, 0, 0x7e);
+        myBeginSound(SND_ROCK_ACTION, 0, 0x7e);
     }
     return done;
 }
@@ -933,12 +937,12 @@ int far DropMyEgg(int plane, int x, int y, int tx, int ty)
         done = AddAntToList(plane, nx, ny, MeEggCarried, 8, 0);
     if (done) {
         MeDir = d;
-        if (!((*(unsigned char far *)0x417L & 3) && (*(unsigned char far *)0x417L & 8))) {
+        if (!((*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3) && (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8))) {
             MeType = 0x10;
             MeEggCarried = 0xfd;
         }
         SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
-        myBeginSound(0x1c, 0, 0x7e);
+        myBeginSound(SND_EGG_ACTION, 0, 0x7e);
     }
     return done;
 }
@@ -994,7 +998,7 @@ int far PickupMyRock(int plane, int x, int y)
             MeType = 0x28;
         else
             MeType = 0x48;
-        myBeginSound(0x1e, 0, 0x7e);
+        myBeginSound(SND_ROCK_ACTION, 0, 0x7e);
     }
     return done;
 }
@@ -1069,11 +1073,11 @@ void far EatMyFood(int kind)
 {
     switch (kind) {
     case 0:
-        myBeginSound(0x2c, 0, 0x7e);
+        myBeginSound(SND_EAT, 0, 0x7e);
         o14_384C_0ACD(1);
         break;
     case 1:
-        o22_39C7_188D(0x2396, -1);
+        o22_39C7_188D(PIC_YELLOW_DIALOG_EATING, -1);
         EditMsgDelay = 0L;
         EditMessage(WindPromptStrs[11], 120L, 0);
         break;
@@ -1081,10 +1085,10 @@ void far EatMyFood(int kind)
         EditMessage(WindPromptStrs[12], 120L, 0);
         break;
     case 3:
-        myBeginSound(0x2c, 0, 0x7e);
+        myBeginSound(SND_EAT, 0, 0x7e);
         while (!mySoundIsDone())
             myDelay(5L);
-        myBeginSound(10, 0, 0x7e);
+        myBeginSound(SND_FOOD_OR_WALL_ACTION, 0, 0x7e);
         EditMsgDelay = 0L;
         EditMessage(WindPromptStrs[13], 180L, 0);
         break;
@@ -1113,7 +1117,7 @@ int far PickupMyEgg(int plane, int x, int y)
             if (x != MeLocX || y != MeLocY)
                 SetLife(plane, x, y, 0);
             if (MeHealth >= 10) {
-                myBeginSound(0x1c, 0, 0x7e);
+                myBeginSound(SND_EGG_ACTION, 0, 0x7e);
                 MeEggCarried = egg;
                 MeType = 8;
             } else
@@ -1161,7 +1165,7 @@ int far PickupMyFood(int plane, int x, int y)
     if (eat)
         MeFoodInType = 0;
     else {
-        myBeginSound(0x1d, 0, 0x7e);
+        myBeginSound(SND_FOOD_ACTION, 0, 0x7e);
         MeType += 8;
     }
     return 1;

@@ -7,6 +7,8 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "hardware_ids.h"
+
 int g_75E8[] = {
     0x1ddd, 0x1c31, 0x1a9c, 0x191b, 0x17b4, 0x165e, 0x151f, 0x13ee,
     0x12cf, 0x11c1, 0x10c1, 0xfd1
@@ -44,11 +46,11 @@ void far snd_ps1_set_note(int a, int note, int vol, int chan)
     chan <<= 5;
     f = g_75E8[note % 12] >> note / 12;
     chan += 0x80;
-    snd_port_write_byte(0x205, (f & 0xf) + (char)chan);
-    snd_port_write_byte(0x205, f >> 4);
+    snd_port_write_byte(PORT_PS1_PSG, (f & 0xf) + (char)chan);
+    snd_port_write_byte(PORT_PS1_PSG, f >> 4);
     vol >>= 3;
     vol = 0xf - vol;
-    snd_port_write_byte(0x205, vol + (char)chan + 0x10);
+    snd_port_write_byte(PORT_PS1_PSG, vol + (char)chan + 0x10);
 }
 
 

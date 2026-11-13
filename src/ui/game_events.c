@@ -6,6 +6,9 @@
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "events_ids.h"
+#include "windows_ids.h"
+
 #include "event.h"
 
 struct KeyCmd {
@@ -19,14 +22,14 @@ char fd_55B3_2CBA = 0;
  */
 int ui_pending_menu_item = 0;
 struct KeyCmd g_2CBE[] = {
-    { 0x821, 0xfe00 }, { 0x811, 0xfe01 }, { 0x82f, 0xfe02 }, { 0x818, 0xfe03 },
-    { 0x81f, 0xfe04 }, { 0x83c, 0xfe00 }, { 0x83d, 0xfe01 }, { 0x83e, 0xfe02 },
-    { 0x83f, 0xfe03 }, { 0x840, 0xfe04 }, { 0x29, 0xfd41 }, { 0x21, 0xfd43 },
-    { 0x40, 0xfd44 }, { 0x23, 0xfd45 }, { 0x24, 0xfd46 }, { 0x0e, 0xfd03 },
-    { 0x13, 0xfd05 }, { 0x01, 0xfd06 }, { 0x0c, 0xfd04 }, { 0x05, 0xfd11 },
-    { 0x0d, 0xfd12 }, { 0x02, 0xfd13 }, { 0x03, 0xfd14 }, { 0x14, 0xfd17 },
-    { 0x07, 0xfd31 }, { 0x0a, 0xfd32 }, { 0x0b, 0xfd33 }, { 0x18, 0xfd08 },
-    { 0x11, 0xfd08 }, { 0x19, 0xfd21 }, { 0, 0 }
+    { 0x821, EVENT_MENU_BAR_BASE }, { 0x811, EVENT_MENU_BAR_WINDOW }, { 0x82f, EVENT_MENU_BAR_VIEW }, { 0x818, EVENT_MENU_BAR_OPTIONS },
+    { 0x81f, EVENT_MENU_BAR_SPEED }, { 0x83c, EVENT_MENU_BAR_BASE }, { 0x83d, EVENT_MENU_BAR_WINDOW }, { 0x83e, EVENT_MENU_BAR_VIEW },
+    { 0x83f, EVENT_MENU_BAR_OPTIONS }, { 0x840, EVENT_MENU_BAR_SPEED }, { 0x29, EVENT_MENU_PAUSE }, { 0x21, EVENT_MENU_SLOW },
+    { 0x40, EVENT_MENU_NORMAL }, { 0x23, EVENT_MENU_FAST }, { 0x24, EVENT_MENU_ULTRA }, { 0x0e, EVENT_MENU_NEW },
+    { 0x13, EVENT_MENU_SAVE }, { 0x01, EVENT_MENU_SAVE_AS }, { 0x0c, EVENT_MENU_LOAD }, { 0x05, EVENT_MENU_EDIT },
+    { 0x0d, EVENT_MENU_MAP }, { 0x02, EVENT_MENU_BEHAVIOR }, { 0x03, EVENT_MENU_CASTE }, { 0x14, EVENT_MENU_STATUS },
+    { 0x07, EVENT_MENU_AUTOTRACK }, { 0x0a, EVENT_MENU_MUSIC }, { 0x0b, EVENT_MENU_SOUND_EFFECTS }, { 0x18, EVENT_MENU_QUIT },
+    { 0x11, EVENT_MENU_QUIT }, { 0x19, EVENT_MENU_YARD }, { 0, 0 }
 };
 int g_2D3A = 0;
 
@@ -68,17 +71,17 @@ int far DoEvent(void)
     win_NoWindowsShouldBeLocked();
     if (ui_pending_menu_item) {
         switch (ui_pending_menu_item) {
-        case 4:
+        case MENU_CMD_LOAD:
             if (LoadGame(0L) == 0 && CurGameType == -1 && NewGame(1) < 0)
                 MenuQuit();
             break;
-        case 5:
+        case MENU_CMD_SAVE:
             SaveGame(1);
             break;
-        case 6:
+        case MENU_CMD_SAVE_AS:
             SaveGame(0);
             break;
-        case 8:
+        case MENU_CMD_QUIT:
             MenuQuit();
             break;
         }
@@ -88,35 +91,35 @@ int far DoEvent(void)
         win_GetEvent(&ev);
         win_close_auto_dismiss();
         WinPrintf("\nEVENT=%x", ev.code);
-        switch (ev.code & 0xff00) {
-        case 0:
+        switch (ev.code & WIN_ID_MASK) {
+        case WIN_EDIT:
             ProcEditEvent(&ev);
             break;
-        case 0x100:
+        case WIN_MAP:
             ProcMapEvent(&ev);
             break;
-        case 0x500:
+        case WIN_INFO:
             ProcInfoEvent(&ev);
             break;
-        case 0x1200:
+        case WIN_BEHAVIOR:
             ProcModeEvent(&ev);
             break;
-        case 0x1300:
+        case WIN_CASTE:
             ProcCasteEvent(&ev);
             break;
-        case 0x1500:
+        case WIN_HISTORY:
             ProcHistoryEvent(&ev);
             break;
-        case 0x1900:
+        case WIN_YARD:
             ProcYardEvent(&ev);
             break;
-        case 0xfa00:
+        case EVENT_KEY_SCAN_BASE:
             input_translate_special_key(&ev);
             break;
-        case 0xfd00:
+        case EVENT_MENU_COMMAND_BASE:
             ProcMenu(&ev);
             break;
-        case 0xfe00:
+        case EVENT_MENU_BAR_BASE:
             input_capture_screen();
             (*g_9130)();
             menu_track_bar_selection(&ev);
@@ -231,32 +234,32 @@ void far input_translate_special_key(struct Event far *ev)
     WinPrintf("\nKEYEVENT=%x, %x", ev->code, ev->bios_shift_flags);
     if (ev->bios_shift_flags & 4) {
         switch (ev->code) {
-        case 0xfa05:
+        case EVENT_SCAN_PATCH_SHORTCUT:
             YardToMap();
             return;
-        case 0xfa06:
-            cmd = 0xfd22;
+        case EVENT_SCAN_HOUSE_SHORTCUT:
+            cmd = EVENT_MENU_HOUSE;
             break;
-        case 0xfa07:
-            cmd = 0xfd23;
+        case EVENT_SCAN_STRATEGIC_SHORTCUT:
+            cmd = EVENT_MENU_STRATEGIC;
             break;
-        case 0xfa08:
-            cmd = 0xfd24;
+        case EVENT_SCAN_GRAPHIC_SHORTCUT:
+            cmd = EVENT_MENU_GRAPHIC;
             break;
-        case 0xfa09:
-            cmd = 0xfd26;
+        case EVENT_SCAN_SURFACE_SHORTCUT:
+            cmd = EVENT_MENU_SURFACE;
             break;
-        case 0xfa0a:
-            cmd = 0xfd27;
+        case EVENT_SCAN_BLACK_NEST_SHORTCUT:
+            cmd = EVENT_MENU_BLACK_NEST;
             break;
-        case 0xfa0b:
-            cmd = 0xfd28;
+        case EVENT_SCAN_RED_NEST_SHORTCUT:
+            cmd = EVENT_MENU_RED_NEST;
             break;
-        case 0xfa17:
-            cmd = 0xfd16;
+        case EVENT_SCAN_INFO_SHORTCUT:
+            cmd = EVENT_MENU_INFO;
             break;
-        case 0xfa23:
-            cmd = 0xfd15;
+        case EVENT_SCAN_HISTORY_SHORTCUT:
+            cmd = EVENT_MENU_HISTORY;
             break;
         default:
             return;
@@ -264,7 +267,7 @@ void far input_translate_special_key(struct Event far *ev)
         input_enqueue_event_args(cmd, 0, 0, 0, 0);
     } else if (ev->bios_shift_flags & 8) {
         switch (ev->code) {
-        case 0xfa03:
+        case EVENT_SCAN_RECRUIT_THOUSAND_SHORTCUT:
             YellowCommand(3);
             break;
         }
@@ -273,7 +276,7 @@ void far input_translate_special_key(struct Event far *ev)
         case 0xfa0e:
             YellowCommandKey(0x88);
             break;
-        case 0xfa0f:
+        case EVENT_SCAN_TAB_SHORTCUT:
             DoTab();
             break;
         }

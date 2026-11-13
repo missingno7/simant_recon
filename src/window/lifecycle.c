@@ -8,6 +8,9 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "flags_ids.h"
+#include "windows_ids.h"
+
 #include "rect.h"
 
 void far f_20E8_0000(void);
@@ -164,11 +167,11 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     rect = *(struct Rect far *)w;
     if (clip_window_z_order[0] != 0)
         win_deactivate_pointer_regions(clip_window_z_order[0]);
-    if (*(int far *)(w + 0x1c) & 0x200) { /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if (*(int far *)(w + 0x1c) & WIN_FLAG_OPEN) { /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         (*g_62E4)();
         (*g_62F4)(from);
         clip_KillWin(from);
-        *(int far *)(w + 0x1c) &= ~0x200; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        *(int far *)(w + 0x1c) &= ~WIN_FLAG_OPEN; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         (*g_62E0)(from);
     }
     win_UnlockWin(from);
@@ -185,7 +188,7 @@ void far win_Swap(int from, int to, int unused, int p0, int p1, int p2, int p3)
     ((int far *)(w + 0x10))[3] = p3;
     win_Recalc(to);
     (*g_62E0)(to);
-    *(int far *)(win_locked_resource_ptr(to) + 0x1c) |= 0x200; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    *(int far *)(win_locked_resource_ptr(to) + 0x1c) |= WIN_FLAG_OPEN; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
     if (clip_window_z_order[0] != (int)0x8000)
         win_deactivate_pointer_regions(clip_window_z_order[0]);
     win_raise_and_reclip(to);
@@ -222,7 +225,7 @@ void far win_Open(int win, ...)
         ((int far *)(w + 0x10))[3] = (&win)[4];
         win_Recalc(win);
         w = win_locked_resource_ptr(win);
-        if (*(int far *)(w + 0x1c) & 0x1000) { /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (*(int far *)(w + 0x1c) & WIN_FLAG_KEEP_ON_SCREEN) { /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             dx = dy = 0;
             win_GetObjRect(win, &r);
             if (r.bottom > gfx_screen_height_pixels)
@@ -240,7 +243,7 @@ void far win_Open(int win, ...)
             win_Recalc(win);
         }
         (*g_62E0)(win);
-        *(int far *)(win_locked_resource_ptr(win) + 0x1c) |= 0x200; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        *(int far *)(win_locked_resource_ptr(win) + 0x1c) |= WIN_FLAG_OPEN; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         if (clip_window_z_order[0] != (int)0x8000)
             win_deactivate_pointer_regions(clip_window_z_order[0]);
         win_raise_and_reclip(win);
@@ -263,7 +266,7 @@ void _fastcall win_Close(int win)
 
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
-    if (*(int far *)(w + 0x1c) & 0x200) { /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if (*(int far *)(w + 0x1c) & WIN_FLAG_OPEN) { /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         (*g_62E4)();
         (*g_62F4)(win);
         if (clip_window_z_order[0] == win) {
@@ -274,8 +277,8 @@ void _fastcall win_Close(int win)
         } else {
             clip_KillWin(win);
         }
-        *(int far *)(w + 0x1c) &= ~0x200; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
-        if (*(int far *)(w + 0x1c) & 0x1000) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        *(int far *)(w + 0x1c) &= ~WIN_FLAG_OPEN; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (*(int far *)(w + 0x1c) & WIN_FLAG_KEEP_ON_SCREEN) /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             *(struct Rect far *)(((char far * far *)(w + 0x2c))[0] + 8) = win_offsets[(char)(win >> 8)]; /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
         (*g_62E0)(win);
         r = *(struct Rect far *)w;
@@ -299,7 +302,7 @@ void _fastcall win_ToTop(int win)
     if (top != win) {
         if (top != (int)0x8000) {
             win_LockWin(top);
-            flag = *(int far *)(win_WinAddr(top) + 0x1c) & 1; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            flag = *(int far *)(win_WinAddr(top) + 0x1c) & WIN_FLAG_AUTO_DISMISS; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             win_UnlockWin(top);
             if (flag)
                 win_Close(top);
@@ -322,7 +325,7 @@ void _fastcall win_lower_or_dismiss(int win)
 
     win_LockWin(win);
     win_locked_resource_ptr(win);
-    flag = *(int far *)(win_WinAddr(clip_window_z_order[0]) + 0x1c) & 1; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    flag = *(int far *)(win_WinAddr(clip_window_z_order[0]) + 0x1c) & WIN_FLAG_AUTO_DISMISS; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(win);
     (*g_62E4)();
     if (clip_window_z_order[0] == win) {
@@ -342,7 +345,7 @@ void _fastcall win_lower_or_dismiss(int win)
     }
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
-    *(int far *)(w + 0x1c) |= 0x200; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    *(int far *)(w + 0x1c) |= WIN_FLAG_OPEN; /* Known Win.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
     r = *(struct Rect far *)w;
     win_UnlockWin(win);
     (*g_62E0)(win);
@@ -418,7 +421,7 @@ void _fastcall win_set_obj_absolute_rect(int obj, int far *rect)
     int far *ref;
     int i;
 
-    win = obj & 0xff00;
+    win = obj & WIN_ID_MASK;
     win_LockWin(win);
     o = win_ObjAddr(obj);
     origin = o + 4;

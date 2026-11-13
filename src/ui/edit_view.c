@@ -8,6 +8,9 @@
  * Steered functions: edit_redraw_changed_tile.
  */
 
+#include "pictures_ids.h"
+#include "windows_ids.h"
+
 struct Event {
     int what;
     int message;
@@ -177,10 +180,10 @@ extern int far Barrier;
 void far OverlayTileSet(int type, int id)
 {
     if (type == 0) {
-        if (id == 0x3e9) {
+        if (id == TILESET_HOUSE) {
             edit_load_terrain_tiles(1);
             Barrier = 0x90;
-        } else if (id == 0x3e8) {
+        } else if (id == TILESET_YARD) {
             edit_load_terrain_tiles(0);
             Barrier = 0x50;
         }
@@ -476,7 +479,7 @@ extern void far clip_Off(void);
 
 void far ProcEditEvent(struct Event far *event)
 {
-    clip_SetWin(0);
+    clip_SetWin(WIN_EDIT);
     switch (event->code) {
     case 4:
     case 21:
@@ -620,7 +623,7 @@ extern void far win_Open(int win, ...);
 
 void far OpenEditWindow(void)
 {
-    win_Open(0);
+    win_Open(WIN_EDIT);
 }
 
 void far ForceUpdateEdit(void)
@@ -640,8 +643,8 @@ void far DrawEditGraphs(void);
 
 void far UpdateEdit(void)
 {
-    if (win_IsWinOpen(0)) {
-        clip_SetWin(0);
+    if (win_IsWinOpen(WIN_EDIT)) {
+        clip_SetWin(WIN_EDIT);
         edit_render_viewport();
         DrawEditGraphs();
         clip_Off();
@@ -671,9 +674,9 @@ void far win_DrawEditWindow(int flags)
         edit_render_viewport();
         win_EditChanged();
         if (CurGameType == 3)
-            id = CurExpTool + 0x13ec;
+            id = CurExpTool + PIC_EXPERIMENT_TOOL_ICON_BASE;
         else
-            id = 0x13f3;
+            id = PIC_NORMAL_TOOL_ICON;
         win_SetColorFromObjNum(7);
         win_DrawBitMapAtObjNum(7, id);
     }
@@ -1055,9 +1058,9 @@ void far SetEditWinTitle(void)
     _fstrcat(buf, MiscStrs[15]);
     _fstrcat(buf, ScenarioNameStrs[CurGameType]);
     win_SetObjFormatStr(1, buf);
-    if (win_IsWinOpen(0)) {
+    if (win_IsWinOpen(WIN_EDIT)) {
         clip_Push();
-        clip_SetWin(0);
+        clip_SetWin(WIN_EDIT);
         win_DrawTitle(1);
         clip_Pop();
     }
@@ -1210,16 +1213,16 @@ void far DrawSpider(void)
             lx += modx;
             ly += mody;
         }
-        anim_bitmap_to_buffer(lx, ly, &spider_composite_bitmap, Scycle + 0x41a);
+        anim_bitmap_to_buffer(lx, ly, &spider_composite_bitmap, Scycle + PIC_SPIDER_CYCLE_FRAME_BASE);
     } else {
         lx = BodX[SpidDir] + 0x30;
         ly = BodY[SpidDir] + 0x30;
         if (gfx_display_mode == 2) {
-            anim_bitmap_to_buffer(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &spider_composite_bitmap, SpidDir + 1000);
+            anim_bitmap_to_buffer(lx = lx * 3 / 4 + modx, ly = ly * 3 / 4 + mody, &spider_composite_bitmap, SpidDir + PIC_SPIDER_DIRECTION_FRAME_BASE);
             DrawLegs((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir, Scycle & 7);
             DrawPalps((modx + 0x24) * 4 / 3, (mody + 0x24) * 4 / 3, SpidDir);
         } else {
-            anim_bitmap_to_buffer(modx + lx, mody + ly, &spider_composite_bitmap, SpidDir + 1000);
+            anim_bitmap_to_buffer(modx + lx, mody + ly, &spider_composite_bitmap, SpidDir + PIC_SPIDER_DIRECTION_FRAME_BASE);
             DrawLegs(modx + 0x30, mody + 0x30, SpidDir, Scycle & 7);
             DrawPalps(modx + 0x30, mody + 0x30, SpidDir);
         }

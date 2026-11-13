@@ -7,6 +7,12 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "audio_ids.h"
+#include "hardware_ids.h"
+#include "pictures_ids.h"
+#include "strings_ids.h"
+#include "windows_ids.h"
+
 extern int far ListIndexA;
 extern int far fd_3D57_0798;
 extern void far AddBlackAnts(int count);
@@ -96,7 +102,7 @@ void far SetEditMode(int value)
     CurEditMode = value;
 }
 
-static int g_1960[5] = { 0x109, 0x10a, 0x10c, 0x10d, 0x10b };
+static int g_1960[5] = { OBJ_MAP_BLACK_NEST_SCENT, OBJ_MAP_BLACK_TRAIL_SCENT, OBJ_MAP_RED_NEST_SCENT, OBJ_MAP_RED_TRAIL_SCENT, OBJ_MAP_ALARM_SCENT };
 
 extern int far MapMode;
 extern int far YardMode;
@@ -131,12 +137,12 @@ void far SetMapModeAnt(int mode)
         if (mode >= 4 && mode <= 8)
             win_MakeObjSelected(g_1960[mode - 4]);
         else
-            win_MakeGroupUnselected(0x100, 2);
+            win_MakeGroupUnselected(WIN_MAP, 2);
         break;
     }
 }
 
-static int g_1984[4] = { 0x1908, 0x1908, 0x1909, 0x190a };
+static int g_1984[4] = { OBJ_YARD_YARD_HOUSE, OBJ_YARD_YARD_HOUSE, OBJ_YARD_STRATEGIC, OBJ_YARD_GRAPHIC };
 
 extern int far OldMapPlane;
 extern int far WinPrintf(char far *format, ...);
@@ -163,34 +169,34 @@ void far SetYardMode(int newMode)
         WinPrintf("\nYardmode=%d, newMode=%d", YardMode, newMode);
         if (newMode != 0 && newMode != 1) {
             YardMode = newMode;
-            win_LockWin(0x1900);
-            win_MakeObjInvisible(0x1903);
+            win_LockWin(WIN_YARD);
+            win_MakeObjInvisible(OBJ_YARD_BACKGROUND);
             if (gfx_screen_width_pixels != 0x140)
-                win_MakeObjInvisible(0x190f);
-            win_UnlockWin(0x1900);
+                win_MakeObjInvisible(OBJ_YARD_AUX_BITMAP);
+            win_UnlockWin(WIN_YARD);
             win_YardClosed();
         } else {
             YardMode = newMode;
-            win_LockWin(0x1900);
-            win_MakeObjVisible(0x1903);
+            win_LockWin(WIN_YARD);
+            win_MakeObjVisible(OBJ_YARD_BACKGROUND);
             if (gfx_screen_width_pixels != 0x140)
-                win_MakeObjVisible(0x190f);
-            win_UnlockWin(0x1900);
+                win_MakeObjVisible(OBJ_YARD_AUX_BITMAP);
+            win_UnlockWin(WIN_YARD);
             win_YardClosed();
-            win_SetObjBitmap(0x1903, newMode + 7000);
-            if (win_IsWinOpen(0x1900)) {
+            win_SetObjBitmap(OBJ_YARD_BACKGROUND, newMode + PIC_YARD_MODE_BACKGROUND_BASE);
+            if (win_IsWinOpen(WIN_YARD)) {
                 clip_Push();
-                clip_SetWin(0x1900);
-                win_DrawObjectNum(0x1903);
+                clip_SetWin(WIN_YARD);
+                win_DrawObjectNum(OBJ_YARD_BACKGROUND);
                 if (gfx_screen_width_pixels != 0x140)
-                    win_DrawObjectNum(0x190f);
+                    win_DrawObjectNum(OBJ_YARD_AUX_BITMAP);
                 clip_Pop();
             }
         }
-        if (!win_IsWinOpen(0x1900) && win_IsWinOpen(0x100))
-            win_Swap(0x100, 0x1900);
+        if (!win_IsWinOpen(WIN_YARD) && win_IsWinOpen(WIN_MAP))
+            win_Swap(WIN_MAP, WIN_YARD);
         clip_Push();
-        clip_SetWin(0x1900);
+        clip_SetWin(WIN_YARD);
         win_MakeObjSelected(g_1984[YardMode]);
         clip_Pop();
         DrawYard();
@@ -236,30 +242,30 @@ void far SetMapPlaneLocation(int plane, int x, int y)
     win = obj = 0;
     switch (MapPlane) {
     case 0:
-        obj = 0x105;
+        obj = OBJ_MAP_YARD;
         break;
     case 1:
         win = 8;
-        obj = 0x106;
+        obj = OBJ_MAP_SURFACE;
         break;
     case 2:
         win = 9;
-        obj = 0x107;
+        obj = OBJ_MAP_BLACK_NEST;
         break;
     case 3:
         win = 10;
-        obj = 0x108;
+        obj = OBJ_MAP_RED_NEST;
         break;
     }
     if (win) {
-        clip_SetWin(0);
+        clip_SetWin(WIN_EDIT);
         win_MakeObjSelected(win);
         clip_Off();
     }
     if (obj) {
-        clip_SetWin(0x100);
+        clip_SetWin(WIN_MAP);
         win_MakeObjSelected(obj);
-        win_MakeGroupUnselected(0x100, 2);
+        win_MakeGroupUnselected(WIN_MAP, 2);
         clip_Off();
     }
 }
@@ -336,7 +342,7 @@ void far GotoMyAnt(void)
 {
     LessonTemp = 1;
     if (CurGameType == 3)
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
     else
         GotoMapPoint(MePlane, MeLocX, MeLocY);
 }
@@ -348,7 +354,7 @@ extern int far SpidX;
 void far GotoSpider(void)
 {
     if (SpidOn == 0)
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
     else
         GotoMapPoint(1, SpidX >> 4, SpidY >> 4);
 }
@@ -407,16 +413,16 @@ void far XferPatch(void)
     if (x == CurYardPnt.x && CurYardPnt.y == y)
         return;
     if (CurGameType != 2) {
-        myBeginSound(1, 0, 0x7e);
-        PictStrnDialog(0, 0x2710, 1);
+        myBeginSound(SND_REJECT, 0, 0x7e);
+        PictStrnDialog(PIC_NONE, STR_TRANSFER_FULL_GAME_ONLY, 1);
     } else if (ColonyTotalBlack <= 1 && BpopT <= 1) {
-        myBeginSound(1, 0, 0x7e);
-        PictStrnDialog(0, 0x2712, 1);
+        myBeginSound(SND_REJECT, 0, 0x7e);
+        PictStrnDialog(PIC_NONE, STR_TRANSFER_POPULATION_TOO_LOW, 1);
     } else if (YMapPopB[x][y] < 1 && (MeType != 0x40 || MeNestStarted != 0)) {
-        myBeginSound(1, 0, 0x7e);
-        PictStrnDialog(0, 0x2714, 1);
+        myBeginSound(SND_REJECT, 0, 0x7e);
+        PictStrnDialog(PIC_NONE, STR_NO_BLACK_COLONY, 1);
     } else {
-        myBeginSong(0x2afa, 0x7e);
+        myBeginSong(SONG_PATCH_TRANSFER, 0x7e);
         CurYardPnt.x = x;
         CurYardPnt.y = y;
         DrawMap();
@@ -431,9 +437,9 @@ void far XferPatch(void)
         if (YMapPopR[x][y] == 0)
             HealthR = 0;
         if ((x << 4) + y > 0x24)
-            PictStrnDialog(0, 0x2716, 0);
+            PictStrnDialog(PIC_NONE, STR_TRANSFER_TO_YARD, 0);
         else
-            PictStrnDialog(0, 0x2717, 0);
+            PictStrnDialog(PIC_NONE, STR_TRANSFER_TO_HOUSE, 0);
     }
 }
 
@@ -468,7 +474,7 @@ void far PlaceQueenInYard(void)
 
     patchX = -1;
     if (QueenStorageB < 1) {
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         if (CurGameType != 2)
             EditMessage(WindPromptStrs[16], 180L, 1);
         else
@@ -502,13 +508,13 @@ void far PlaceQueenInYard(void)
         lastY = lastX = -1;
         done = 0;
         while (!done) {
-            if (win_GetEvent(&ev) && ev.code == 0x1902) {
+            if (win_GetEvent(&ev) && ev.code == OBJ_YARD_VIEWPORT) {
                 pt = *(Point *)&ev.h;
                 done = 1;
             } else {
                 GetMousePos(&pt);
             }
-            if (!win_IsWinInFront(0x1900))
+            if (!win_IsWinInFront(WIN_YARD))
                 goto out;
             y = pt.y - map_viewport_rect.y;
             x = pt.x - map_viewport_rect.x;
@@ -542,7 +548,7 @@ void far PlaceQueenInYard(void)
             patchX = -1;
         }
         if (r.left <= x && r.right >= x && y >= r.top && y <= r.bottom) {
-            myBeginSong(0x2afb, 0x7e);
+            myBeginSong(SONG_RETURN_TO_ANT, 0x7e);
             QueenStorageB--;
             YMapPopB[x][y]++;
             BColoniesStarted++;
@@ -554,11 +560,11 @@ void far PlaceQueenInYard(void)
             UpdateYard();
         } else {
             EditMessage(WindPromptStrs[10], 120L, 1);
-            myBeginSound(1, 0, 0x7e);
-            if (*(char far *)0x00000417L & 3)
+            myBeginSound(SND_REJECT, 0, 0x7e);
+            if (*(char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3)
                 myDelay(30L);
         }
-    } while (*(char far *)0x00000417L & 3);
+    } while (*(char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3);
     return;
 out:
     EditMessage(0L, -2L, 1);
@@ -623,21 +629,21 @@ void far MysteryButton(void)
         break;
     case 11:
         if (Invincible = !Invincible)
-            myBeginSound(2, 0, 0x7e);
+            myBeginSound(SND_ACCEPT, 0, 0x7e);
         else
-            myBeginSound(1, 0, 0x7e);
+            myBeginSound(SND_REJECT, 0, 0x7e);
         break;
     case 12:
         RevSpider = !RevSpider;
         break;
     case 13:
-        PictStrnDialog(0, 0x2726, 0);
+        PictStrnDialog(PIC_NONE, STR_GLEN_CAMPBELL_RIDDLE, 0);
         f_00DF_00E0(1);
-        PictStrnDialog(0, 0x2728, 0);
+        PictStrnDialog(PIC_NONE, STR_ELVIS_MINUS_TWO, 0);
         break;
     case 14:
         MeSMode = 8;
-        myBeginSound(2, 0x2b77, 0x7e);
+        myBeginSound(SND_ACCEPT, 0x2b77, 0x7e);
         break;
     }
 }

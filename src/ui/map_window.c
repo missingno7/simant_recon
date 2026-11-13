@@ -8,6 +8,11 @@
  * Functions not yet exact: DrawMapCursor.
  */
 
+#include "audio_ids.h"
+#include "hardware_ids.h"
+#include "pictures_ids.h"
+#include "windows_ids.h"
+
 #include <string.h>
 
 struct Event {
@@ -118,27 +123,27 @@ extern void far DrawCastePopUp(void);
 void far ProcMapEvent(struct Event far *ev)
 {
     switch (ev->code) {
-    case 0x102: MapAreaEvent(ev); break;
-    case 0x105: MapToYard(); break;
-    case 0x106: ClearMapScentButtons(); SetMapPlane(1); break;
-    case 0x107: ClearMapScentButtons(); SetMapPlane(2); break;
-    case 0x108: ClearMapScentButtons(); SetMapPlane(3); win_ToTop(0x100); break;
-    case 0x109: SetMapModeAnt(4); win_ToTop(0x100); break;
-    case 0x10a: SetMapModeAnt(5); break;
-    case 0x10b: SetMapModeAnt(8); break;
-    case 0x10c: SetMapModeAnt(6); break;
-    case 0x10d: SetMapModeAnt(7); break;
+    case OBJ_MAP_VIEWPORT: MapAreaEvent(ev); break;
+    case OBJ_MAP_YARD: MapToYard(); break;
+    case OBJ_MAP_SURFACE: ClearMapScentButtons(); SetMapPlane(1); break;
+    case OBJ_MAP_BLACK_NEST: ClearMapScentButtons(); SetMapPlane(2); break;
+    case OBJ_MAP_RED_NEST: ClearMapScentButtons(); SetMapPlane(3); win_ToTop(WIN_MAP); break;
+    case OBJ_MAP_BLACK_NEST_SCENT: SetMapModeAnt(4); win_ToTop(WIN_MAP); break;
+    case OBJ_MAP_BLACK_TRAIL_SCENT: SetMapModeAnt(5); break;
+    case OBJ_MAP_ALARM_SCENT: SetMapModeAnt(8); break;
+    case OBJ_MAP_RED_NEST_SCENT: SetMapModeAnt(6); break;
+    case OBJ_MAP_RED_TRAIL_SCENT: SetMapModeAnt(7); break;
     case 0x10e: g_2994 = !g_2994; break;
-    case 0x10f: OpenModeWindow(); break;
-    case 0x110: MapToYellowAnt(ev); break;
-    case 0x111: OpenCasteWindow(); break;
-    case 0x112: MysteryButton(); break;
-    case 0x113: OpenHistoryWindow(); break;
-    case 0x114: ScoreDialog(); break;
-    case 0x115: OpenInfoWindow(); break;
-    case 0x116: LessonTemp = 1; DoWinHelp(0x103); break;
-    case 0x117: MapToolsMenu(); break;
-    case 0x118: DrawCastePopUp(); break;
+    case OBJ_MAP_BEHAVIOR: OpenModeWindow(); break;
+    case OBJ_MAP_YELLOW_ANT: MapToYellowAnt(ev); break;
+    case OBJ_MAP_CASTE: OpenCasteWindow(); break;
+    case OBJ_MAP_MYSTERY: MysteryButton(); break;
+    case OBJ_MAP_HISTORY: OpenHistoryWindow(); break;
+    case OBJ_MAP_SCORE: ScoreDialog(); break;
+    case OBJ_MAP_INFO: OpenInfoWindow(); break;
+    case OBJ_MAP_HELP: LessonTemp = 1; DoWinHelp(OBJ_MAP_HELP_PICTURE); break;
+    case OBJ_MAP_TOOLS: MapToolsMenu(); break;
+    case OBJ_MAP_CASTE_POPULATION: DrawCastePopUp(); break;
     }
 }
 
@@ -146,7 +151,7 @@ extern void far win_Open(int win, ...);
 
 void far OpenMapWindow(void)
 {
-    win_Open(0x100);
+    win_Open(WIN_MAP);
 }
 
 extern int _fastcall win_IsWinOpen(int win);
@@ -248,10 +253,10 @@ void far DrawMapCursor(void)
 
 void far EraseMapCursor(void)
 {
-    if (!win_IsWinOpen(0x100) || g_298E != 1)
+    if (!win_IsWinOpen(WIN_MAP) || g_298E != 1)
         return;
     clip_Push();
-    clip_SetWin(0x100);
+    clip_SetWin(WIN_MAP);
     GRectInvOutline(&mapCursorRect, 2);
     g_298E = 0;
     clip_Pop();
@@ -451,14 +456,14 @@ void far DrawMapData(void)
         popMax = RpopT;
     redHealth = RpopT == 0 ? 0 : HealthR;
     font_SetFont(gfx_screen_width_pixels == 320 ? 0 : 3);
-    win_PrintfAtObj(0x119, "%-d", BpopT);
-    win_PrintfAtObj(0x11a, "%-d", RpopT);
+    win_PrintfAtObj(OBJ_MAP_BLACK_POPULATION_TEXT, "%-d", BpopT);
+    win_PrintfAtObj(OBJ_MAP_RED_POPULATION_TEXT, "%-d", RpopT);
     font_SetFont(0);
-    win_DrawHBar(0x11b, ((long)HealthB << 16) / 100);
+    win_DrawHBar(OBJ_MAP_BLACK_HEALTH_BAR, ((long)HealthB << 16) / 100);
     maxPop = popMax;
-    win_DrawHBar(0x11d, ((long)BpopT << 16) / maxPop);
-    win_DrawHBar(0x11c, ((long)redHealth << 16) / 100);
-    win_DrawHBar(0x11e, ((long)RpopT << 16) / maxPop);
+    win_DrawHBar(OBJ_MAP_BLACK_POPULATION_BAR, ((long)BpopT << 16) / maxPop);
+    win_DrawHBar(OBJ_MAP_RED_HEALTH_BAR, ((long)redHealth << 16) / 100);
+    win_DrawHBar(OBJ_MAP_RED_POPULATION_BAR, ((long)RpopT << 16) / maxPop);
 }
 
 extern void (far * near gfx_fill_rect_hook)(int left, int top, int right, int bottom, int color);
@@ -573,8 +578,8 @@ void far map_render_immediate(void)
 
 void far DrawMap(void)
 {
-    if (win_IsWinOpen(0x100)) {
-        clip_SetWin(0x100);
+    if (win_IsWinOpen(WIN_MAP)) {
+        clip_SetWin(WIN_MAP);
         map_render_immediate();
         DrawMapData();
         clip_Off();
@@ -591,12 +596,12 @@ void far win_DrawMapWindow(int flags)
             MapToYard();
         else {
             win_MapChanged();
-            clip_SetWin(0x100);
+            clip_SetWin(WIN_MAP);
             DrawMapData();
             map_render_immediate();
-            id = CurGameType == 3 ? CurExpTool + 0x13ec : 0x13f3;
-            win_SetColorFromObjNum(0x117);
-            win_DrawBitMapAtObjNum(0x117, id);
+            id = CurGameType == 3 ? CurExpTool + PIC_EXPERIMENT_TOOL_ICON_BASE : PIC_NORMAL_TOOL_ICON;
+            win_SetColorFromObjNum(OBJ_MAP_TOOLS);
+            win_DrawBitMapAtObjNum(OBJ_MAP_TOOLS, id);
         }
     }
 }
@@ -614,7 +619,7 @@ void far DrawMapSpider(int x, int y, int kind)
         x = x * 4 - 3;
         ys = y * 4 - 3;
     }
-    win_DrawBitMap(x + map_viewport_rect.left, ys + map_viewport_rect.top, kind + 0x44c);
+    win_DrawBitMap(x + map_viewport_rect.left, ys + map_viewport_rect.top, kind + PIC_MAP_SPIDER_FRAME_BASE);
     y -= 2;
     if (fd_50F6_10E2) {
         p = (unsigned char far *)mem_Lock(fd_50F6_10E2);
@@ -643,7 +648,7 @@ void far DrawMapFoot(void)
         x >>= 1;
         y >>= 1;
     }
-    win_DrawBitMap(x + map_viewport_rect.left, y + map_viewport_rect.top, BoyDir + 0x4b0);
+    win_DrawBitMap(x + map_viewport_rect.left, y + map_viewport_rect.top, BoyDir + PIC_MAP_FOOT_FRAME_BASE);
     if (BoyHere == 3 || BoyHere == 4) {
         x = MowX << 2;
         y = MowY << 2;
@@ -651,7 +656,7 @@ void far DrawMapFoot(void)
             x >>= 1;
             y >>= 1;
         }
-        win_DrawBitMap(x + map_viewport_rect.left, y + map_viewport_rect.top, (BoyDir & 1) + 0x4ba);
+        win_DrawBitMap(x + map_viewport_rect.left, y + map_viewport_rect.top, (BoyDir & 1) + PIC_MAP_FOOT_ALTERNATE_BASE);
     }
     y = FootY;
     if (fd_50F6_10E2) {
@@ -674,17 +679,17 @@ void far MapToYellowAnt(struct Event far *ev)
     struct Rect r;
     int side;
 
-    if (*(unsigned char far *)0x00000417L & 4) {
-        if (*(unsigned char far *)0x00000417L & 3) {
-            win_GetObjRect(0x110, &r);
+    if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 4) {
+        if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 3) {
+            win_GetObjRect(OBJ_MAP_YELLOW_ANT, &r);
             side = (r.left + r.right) / 2;
             side = ev->h >= side ? 0 : 1;
-            if (*(unsigned char far *)0x00000417L & 8)
+            if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8)
                 KillSomeAnts(side);
             else
                 AddSomeAnts(side);
-        } else if (*(unsigned char far *)0x00000417L & 8) {
-            myBeginSound(0x20, 0, 0x7e);
+        } else if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) {
+            myBeginSound(SND_ADD_FOOD, 0, 0x7e);
             SubtractFood();
         } else
             AddFood(0x96, 1);

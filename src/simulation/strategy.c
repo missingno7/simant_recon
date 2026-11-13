@@ -7,6 +7,8 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "audio_ids.h"
+
 extern int far ChaseSpid;
 extern int far MePlane;
 extern int far SRand1(int range);
@@ -244,7 +246,7 @@ int far GstrR(void)
 void far StartAttack(void)
 {
     JustToBeMean = SRand1(100) + 30;
-    myBeginSong(0x2b0a, 0x3f);
+    myBeginSong(SONG_START_ATTACK, 0x3f);
     EditMessage(AdviceStrs[5], 120L, 0);
 }
 

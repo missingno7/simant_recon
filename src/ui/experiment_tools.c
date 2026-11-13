@@ -17,6 +17,10 @@
  * inside ConnectAll where the original has it.
  */
 
+#include "audio_ids.h"
+#include "hardware_ids.h"
+#include "windows_ids.h"
+
 #include "pt.h"
 
 extern int far MapPlane;
@@ -56,7 +60,7 @@ void far processExp(int x, int y, int shift)
         while (myButton() == 1) {
             GetMousePos(&pt);
             main_cycle_phase++;
-            if (win_IsWinInFront(0x100)) {
+            if (win_IsWinInFront(WIN_MAP)) {
                 nx = (pt.x - map_viewport_rect[0]) / mapXsize;
                 ny = (pt.y - map_viewport_rect[1]) / mapYsize;
                 if (MapPlane > 1)
@@ -128,10 +132,10 @@ extern void far DrawMap(void);
 
 void far ReDrawMapEdit(int flags)
 {
-    if (win_IsWinInFront(0)) {
+    if (win_IsWinInFront(WIN_EDIT)) {
         UpdateEdit();
         f_0250_0ED2();
-        if (!f_22BF_09B0(0x100))
+        if (!f_22BF_09B0(WIN_MAP))
             return;
         if (flags & 3)
             return;
@@ -142,7 +146,7 @@ void far ReDrawMapEdit(int flags)
 
     MakeDMap(1);
     DrawMap();
-    if (!f_22BF_09B0(0))
+    if (!f_22BF_09B0(WIN_EDIT))
         return;
     if (flags & 3)
         return;
@@ -171,7 +175,7 @@ void far DropWall(int fromX, int fromY, int tx, int ty)
     y = fromY;
 
     while (IsValidA(x, y)) {
-        if (*(unsigned char far *)0x417L & 8) {
+        if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) {
             if (MapA[x][y] > 0x50 && MapA[x][y] < 0x68)
                 MapA[x][y] = SRand1(16);
             ConnectAll(x, y);
@@ -179,11 +183,11 @@ void far DropWall(int fromX, int fromY, int tx, int ty)
             if (MapA[x][y] < 0x50 && LifeA[x][y] == 0)
                 MapA[x][y] = 0x60;
             ConnectAll(x, y);
-            myBeginSound(0x28, 0, 0x7e);
+            myBeginSound(SND_WALL_REMOVE, 0, 0x7e);
         } else {
             if (MapA[x][y] < 0x50 && LifeA[x][y] == 0)
                 MapA[x][y] = SRand1(3) + 0x51;
-            myBeginSound(10, SRand1(10000) + 2000, 0x7e);
+            myBeginSound(SND_FOOD_OR_WALL_ACTION, SRand1(10000) + 2000, 0x7e);
         }
         dir = GetDir(x, y, tx, ty);
         if (Dx9[dir])
@@ -219,7 +223,7 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
 
 
     fill = ExpSubStates[2];
-    if (*(unsigned char far *)0x417L & 8)
+    if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8)
         fill ^= 1;
     x = fromX;
     y = fromY;
@@ -228,9 +232,9 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
             switch (MapPlane) {
             case 1:
                 if (DigMyNewHole(x, y)) {
-                    myBeginSound(0x13, 0, 0x7e);
+                    myBeginSound(SND_DIG, 0, 0x7e);
                 } else {
-                    myBeginSound(1, 0, 0x7e);
+                    myBeginSound(SND_REJECT, 0, 0x7e);
                     EditMessage(WindPromptStrs[22], 120L, 1);
                 }
                 break;
@@ -240,7 +244,7 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
                 DigTileB(x, y);
                 if (y == 1)
                     MakeNewHoleB(x);
-                myBeginSound(0x13, 0, 0x7e);
+                myBeginSound(SND_DIG, 0, 0x7e);
                 break;
             case 3:
                 if (!IsItDigable(3, x, y) || y == 0)
@@ -248,13 +252,13 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
                 DigTileR(x, y);
                 if (y == 1)
                     MakeNewHoleR(x);
-                myBeginSound(0x13, 0, 0x7e);
+                myBeginSound(SND_DIG, 0, 0x7e);
                 break;
             }
         } else {
             switch (MapPlane) {
             case 1:
-                myBeginSound(1, 0, 0x7e);
+                myBeginSound(SND_REJECT, 0, 0x7e);
                 EditMessage(WindPromptStrs[21], 180L, 1);
                 break;
             case 2:
@@ -263,7 +267,7 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
                 if (LifeB[x][y])
                     ClearLifeB(x, y);
                 FillDirtB(x, y);
-                myBeginSound(0x12, 0, 0x7e);
+                myBeginSound(SND_NEST_ENTRANCE, 0, 0x7e);
                 break;
             case 3:
                 if (IsItDigable(3, x, y) || y == 0)
@@ -271,7 +275,7 @@ void far ExpDig(int fromX, int fromY, int tx, int ty)
                 if (LifeR[x][y])
                     ClearLifeR(x, y);
                 FillDirtR(x, y);
-                myBeginSound(0x12, 0, 0x7e);
+                myBeginSound(SND_NEST_ENTRANCE, 0, 0x7e);
                 break;
             }
         }
@@ -361,7 +365,7 @@ void far ExpAddAnt(int x, int y)
         break;
     }
 
-    myBeginSound(0x1c, 0, 0x7e);
+    myBeginSound(SND_EGG_ACTION, 0, 0x7e);
 }
 
 int far IncFoodHere(int x, int y);
@@ -374,9 +378,9 @@ void far ExpAddFood(int x, int y)
 
     if (ExpSubStates[4] == 0) {
         if (IncFoodHere(x, y))
-            myBeginSound(0x1d, 0, 0x7e);
+            myBeginSound(SND_FOOD_ACTION, 0, 0x7e);
     } else {
-        myBeginSound(0x20, 0, 0x7e);
+        myBeginSound(SND_ADD_FOOD, 0, 0x7e);
         for (i = 0; i < 20; i++) {
             fx = SRand1(9) + x - 4;
             fy = SRand1(9) + y - 4;
@@ -400,7 +404,7 @@ void far ExpIncSmell(int x, int y)
         sx = x >> 1;
         sy = y >> 1;
         v = GetSM(sx, sy);
-        if (*(unsigned char far *)0x417L & 8)
+        if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8)
             v -= 40;
         else
             v += 70;
@@ -410,7 +414,7 @@ void far ExpIncSmell(int x, int y)
             v = 255;
         SetSM(sx, sy, v);
         SmoothMany(sx, sy);
-        myBeginSound(0x1b, 0, 0x7e);
+        myBeginSound(SND_SCENT_TOOL, 0, 0x7e);
     }
 }
 
@@ -439,11 +443,11 @@ void far ExpKillAnts(int x, int y)
         if (n == 1) {
             kx = x;
             ky = y;
-            myBeginSound(9, 0, 0x7e);
+            myBeginSound(SND_EXPERIMENT_KILL, 0, 0x7e);
         } else {
             kx = SRand1(9) + x - 4;
             ky = SRand1(9) + y - 4;
-            myBeginSound(9, SRand1(1000) + 0x278f, 0x7e);
+            myBeginSound(SND_EXPERIMENT_KILL, SRand1(1000) + 0x278f, 0x7e);
         }
         if (IsValidLocation(MapPlane, kx, ky)) {
             switch (MapPlane) {
@@ -506,7 +510,7 @@ int far IncFoodHere(int x, int y)
     else
         base = 0x10;
     v = GetMap(MapPlane, x, y);
-    if (*(unsigned char far *)0x417L & 8) {
+    if (*(unsigned char far *)BIOS_KEYBOARD_FLAGS_FARPTR & 8) {
         if (base > v)
             return 0;
         if (base + 3 < v)

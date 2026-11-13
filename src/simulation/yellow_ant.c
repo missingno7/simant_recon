@@ -24,6 +24,9 @@
  * unknown.
  */
 
+#include "audio_ids.h"
+#include "windows_ids.h"
+
 extern int far MeCrazyCnt;
 extern int far MeCrazyDir;
 
@@ -226,7 +229,7 @@ void far DoAntMoveY(void)
     else
         MePlane = 2;
     SetMyLife(MePlane, MeLocX, MeLocY, MeType, MeDir, 0xff);
-    myBeginSound(1, 0, 0x7e);
+    myBeginSound(SND_REJECT, 0, 0x7e);
     GotoMyAnt();
     if (MePlane == 3)
         EditMessage(WindPromptStrs[4], 360L, 0);
@@ -241,7 +244,7 @@ done:
     if (result == 0)
         return;
     if (result == -2) {
-        myBeginSound(1, 0, 0x7e);
+        myBeginSound(SND_REJECT, 0, 0x7e);
         GotoMyAnt();
     } else if (MeCmd == 3) {
         MeStartedFight = 1;
@@ -354,7 +357,7 @@ void far AnimYellowFight(int plane, int x, int y, int dir, int type, int kind)
     svDir = dir;
     if (kind == 0)
         count = 6;
-    else if (win_IsWinInFront(0))
+    else if (win_IsWinInFront(WIN_EDIT))
         count = OptionStates[1] ? 0x40 : 0x20;
     else
         count = 8;
@@ -371,9 +374,9 @@ void far AnimYellowFight(int plane, int x, int y, int dir, int type, int kind)
         t = MacTickCount() + 6;
         f_00DF_015C();
         if (kind == 0 && SRand2())
-            myBeginSound(0x25, 0x32c8, 0x7e);
+            myBeginSound(SND_FIGHT, 0x32c8, 0x7e);
         if (kind == 10) {
-            myBeginSound(0x31, 0x55f0, 0x7f);
+            myBeginSound(SND_BIRTH_OR_FIGHT, 0x55f0, 0x7f);
             MapA[x][y] = SRand2() ? tile - 3 : tile;
         }
         if (kind != 0 && kind < 10 && OptionStates[1] != 0 && mySongIsDone())
@@ -423,7 +426,7 @@ void far AnimYellowInsane(int plane, int x, int y, int dir, int type)
     svY = y;
     svType = MeType;
     svDir = dir;
-    count = win_IsWinInFront(0) ? 0x20 : 8;
+    count = win_IsWinInFront(WIN_EDIT) ? 0x20 : 8;
     t = MacTickCount();
     for (i = 0; i < count; i++) {
         while (MacTickCount() <= t)

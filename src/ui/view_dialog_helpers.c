@@ -7,6 +7,9 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "pictures_ids.h"
+#include "windows_ids.h"
+
 #include "rect.h"
 
 #include "point.h"
@@ -30,15 +33,15 @@ void far win_YardClosed(void)
 {
     if (yardAnimHandle) {
         clip_Push();
-        clip_SetWin(0x1900);
+        clip_SetWin(WIN_YARD);
         hanim_RemoveAllAnimObjects(yardAnimHandle);
         hanim_RenderAnimSet(yardAnimHandle);
         hanim_RemoveAnimSet(yardAnimHandle);
         clip_Pop();
         yardAnimHandle = 0;
     }
-    if (win_IsWinOpen(0x1902)) {
-        win_GetObjRect(0x1902, &map_viewport_rect);
+    if (win_IsWinOpen(OBJ_YARD_VIEWPORT)) {
+        win_GetObjRect(OBJ_YARD_VIEWPORT, &map_viewport_rect);
         map_viewport_rect.left++;
         EraseYardCursor();
     }
@@ -49,9 +52,9 @@ extern int far map_yard_redraw_pending;
 
 void far win_MapChanged(void)
 {
-    if (win_IsWinOpen(0x100)) {
+    if (win_IsWinOpen(WIN_MAP)) {
         EraseMapCursor();
-        win_GetObjRect(0x102, &map_viewport_rect);
+        win_GetObjRect(OBJ_MAP_VIEWPORT, &map_viewport_rect);
         map_yard_redraw_pending = 1;
     }
 }
@@ -64,17 +67,17 @@ extern void _fastcall win_DrawTitle(int win);
 
 void far SetMapTitle(void)
 {
-    win_SetObjFormatStr(0x101, MwinTitle[MapMode]);
-    win_SetObjFormatStr(0x1901, MwinTitle[YardMode + 9]);
-    if (win_IsWinOpen(0x100)) {
+    win_SetObjFormatStr(OBJ_MAP_TITLE, MwinTitle[MapMode]);
+    win_SetObjFormatStr(OBJ_YARD_TITLE, MwinTitle[YardMode + 9]);
+    if (win_IsWinOpen(WIN_MAP)) {
         clip_Push();
-        clip_SetWin(0x100);
-        win_DrawTitle(0x101);
+        clip_SetWin(WIN_MAP);
+        win_DrawTitle(OBJ_MAP_TITLE);
         clip_Pop();
-    } else if (win_IsWinOpen(0x1900)) {
+    } else if (win_IsWinOpen(WIN_YARD)) {
         clip_Push();
-        clip_SetWin(0x1900);
-        win_DrawTitle(0x1901);
+        clip_SetWin(WIN_YARD);
+        win_DrawTitle(OBJ_YARD_TITLE);
         clip_Pop();
     }
 }
@@ -135,7 +138,7 @@ extern void _fastcall win_MakeGroupUnselected(int win, int group);
 
 void far ClearMapScentButtons(void)
 {
-    win_MakeGroupUnselected(0x100, 2);
+    win_MakeGroupUnselected(WIN_MAP, 2);
 }
 
 extern unsigned long far TickCount(void);
@@ -294,24 +297,24 @@ extern void far win_Open(int win);
 void far YardToMap(void)
 {
     ClearMapScentButtons();
-    if (!win_IsWinOpen(0x100)) {
-        if (win_IsWinOpen(0x1900)) {
+    if (!win_IsWinOpen(WIN_MAP)) {
+        if (win_IsWinOpen(WIN_YARD)) {
             SetMapPlane(1);
-            win_Swap(0x1900, 0x100);
+            win_Swap(WIN_YARD, WIN_MAP);
         } else {
-            win_Open(0x100);
+            win_Open(WIN_MAP);
         }
     }
 }
 
 void far MapToYard(void)
 {
-    if (!win_IsWinOpen(0x1900)) {
-        if (win_IsWinOpen(0x100)) {
+    if (!win_IsWinOpen(WIN_YARD)) {
+        if (win_IsWinOpen(WIN_MAP)) {
             SetMapPlane(0);
-            win_Swap(0x100, 0x1900);
+            win_Swap(WIN_MAP, WIN_YARD);
         } else {
-            win_Open(0x1900);
+            win_Open(WIN_YARD);
         }
     }
 }
@@ -320,10 +323,10 @@ extern void _fastcall win_ToTop(int win);
 
 void far OpenMapYard(int unused)
 {
-    if (win_IsWinOpen(0x100))
-        win_ToTop(0x100);
-    else if (win_IsWinOpen(0x1900))
-        win_ToTop(0x1900);
+    if (win_IsWinOpen(WIN_MAP))
+        win_ToTop(WIN_MAP);
+    else if (win_IsWinOpen(WIN_YARD))
+        win_ToTop(WIN_YARD);
     else
         YardToMap();
 }
@@ -338,9 +341,9 @@ char far * far res_lookup_dynamic_balloon(int object, int type)
 {
     if (type == 2) {
         switch (object) {
-        case 30000:
+        case PIC_HUMAN_BALLOON_BUFFER:
             return yardBalloon;
-        case 30001:
+        case PIC_YARD_MESSAGE_BUFFER:
             return fd_55B3_2A3A;
         }
     }

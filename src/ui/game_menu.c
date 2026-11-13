@@ -6,6 +6,10 @@
  * Windows: SIMANT, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "audio_ids.h"
+#include "events_ids.h"
+#include "windows_ids.h"
+
 extern int far GameSpeed;
 extern void far SetMenuItemState(int id, int state);
 extern int far GamePaused;
@@ -58,7 +62,7 @@ void far SetPause(int value)
             EditMessage(WindPromptStrs[17], -2L, 1);
     } else
         EditMessage(0L, -2L, 1);
-    clip_SetWin(0);
+    clip_SetWin(WIN_EDIT);
     win_SetObjSelectedState(0xf, value);
     clip_Off();
     SetMenuEntries();
@@ -93,81 +97,81 @@ void far ProcMenu(struct Event far *ev)
     item = ev->code & 0xff;
     switch (item) {
     
-    case 1:
+    case MENU_CMD_ABOUT:
         AboutDialog();
         break;
-    case 3:
-        myBeginSong(0x2711, 0x7e);
+    case MENU_CMD_NEW:
+        myBeginSong(SONG_INTRO, 0x7e);
         NewGame(0);
         break;
-    case 4:
-    case 5:
-    case 6:
-    case 8:
+    case MENU_CMD_LOAD:
+    case MENU_CMD_SAVE:
+    case MENU_CMD_SAVE_AS:
+    case MENU_CMD_QUIT:
         ui_pending_menu_item = item;
         break;
-    case 0x11:
+    case MENU_CMD_EDIT:
         OpenEditWindow();
         break;
-    case 0x12:
+    case MENU_CMD_MAP:
         OpenMapYard();
         break;
-    case 0x13:
+    case MENU_CMD_BEHAVIOR:
         OpenModeWindow();
         break;
-    case 0x14:
+    case MENU_CMD_CASTE:
         OpenCasteWindow();
         break;
-    case 0x15:
+    case MENU_CMD_HISTORY:
         OpenHistoryWindow();
         break;
-    case 0x16:
+    case MENU_CMD_INFO:
         OpenInfoWindow();
         break;
-    case 0x17:
+    case MENU_CMD_STATUS:
         ScoreDialog();
         break;
-    case 0x21:
-    case 0x22:
-    case 0x23:
-    case 0x24:
+    case MENU_CMD_YARD:
+    case MENU_CMD_HOUSE:
+    case MENU_CMD_STRATEGIC:
+    case MENU_CMD_GRAPHIC:
         n = item - 0x21;
         if (n != YardMode)
             SetYardMode(n);
         if (MapPlane != 0)
             SetMapPlane(0);
-        if (!win_IsWinOpen(0x1900))
+        if (!win_IsWinOpen(WIN_YARD))
             MapToYard();
         break;
-    case 0x26:
+    case MENU_CMD_SURFACE:
         SetMapPlane(1);
         break;
-    case 0x27:
+    case MENU_CMD_BLACK_NEST:
         SetMapPlane(2);
         break;
-    case 0x28:
+    case MENU_CMD_RED_NEST:
         SetMapPlane(3);
         break;
-    case 0x32:
+    case MENU_CMD_MUSIC:
         StopSong();
     toggle:
         OptionStates[item - 0x31] = !OptionStates[item - 0x31];
         SetMenuEntries();
         break;
-    case 0x41:
+    case MENU_CMD_PAUSE:
         GamePaused ^= 1;
         SetPause(GamePaused);
         break;
-    case 0x43:
+    case MENU_CMD_SLOW:
         n = 0;
         goto speed;
-    case 0x44:
+    case MENU_CMD_NORMAL:
         n = 1;
         goto speed;
-    case 0x45:
+    case MENU_CMD_FAST:
         n = 2;
         goto speed;
-    case 0x46:
+    case MENU_CMD_ULTRA:
         n = 3;
     speed:
         GameSpeed = n;

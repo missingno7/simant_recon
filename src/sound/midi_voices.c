@@ -8,6 +8,8 @@
  * Steered functions: snd_stop_assigned_voices.
  */
 
+#include "hardware_ids.h"
+
 #include "chan.h"
 
 struct Drv {
@@ -204,9 +206,9 @@ void far snd_stop_assigned_voices(void)
  */
 void far snd_mpu_write_data(int value)
 {
-    while (snd_port_read_byte(0x331) & 0x40)
+    while (snd_port_read_byte(PORT_MPU_STATUS_COMMAND) & 0x40)
         ;
-    snd_port_write_byte(0x330, value);
+    snd_port_write_byte(PORT_MPU_DATA, value);
 }
 
 /*
@@ -214,13 +216,13 @@ void far snd_mpu_write_data(int value)
  */
 void far snd_mpu_write_command(int value)
 {
-    while (snd_port_read_byte(0x331) & 0x40)
+    while (snd_port_read_byte(PORT_MPU_STATUS_COMMAND) & 0x40)
         ;
-    snd_port_write_byte(0x331, value);
+    snd_port_write_byte(PORT_MPU_STATUS_COMMAND, value);
     do {
-        while (snd_port_read_byte(0x331) & 0x80)
+        while (snd_port_read_byte(PORT_MPU_STATUS_COMMAND) & 0x80)
             ;
-    } while (snd_port_read_byte(0x330) != 0xfe);
+    } while (snd_port_read_byte(PORT_MPU_DATA) != 0xfe);
 }
 
 /*

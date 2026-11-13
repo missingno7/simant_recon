@@ -8,6 +8,9 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs /Zi.
  */
 
+#include "flags_ids.h"
+#include "windows_ids.h"
+
 #include "pt.h"
 
 #include "rect.h"
@@ -130,7 +133,7 @@ void _fastcall win_GetObjSize(int obj, struct Pt far *size)
 
     win_LockWin(obj);
     w = win_locked_resource_ptr(obj);
-    r = *((struct Rect far * far *)(w + 0x2c))[obj & 0xff]; /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
+    r = *((struct Rect far * far *)(w + 0x2c))[obj & OBJ_INDEX_MASK]; /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
     size->x = r.right - r.left;
     size->y = r.bottom - r.top;
     win_UnlockWin(obj);
@@ -156,15 +159,15 @@ void _fastcall win_SetObjSelectableState(int obj, int state)
 
     win_LockWin(obj);
     o = (unsigned char far *)win_ObjAddr(obj);
-    if (clip_window_z_order[0] == (obj & 0xff00)) {
+    if (clip_window_z_order[0] == (obj & WIN_ID_MASK)) {
         if (state == 1) {
-            if (!(o[0x24] & 2)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            if (!(o[0x24] & OBJ_FLAG_SELECTABLE)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                 input_register_object_rect((char far *)o, obj);
-        } else if (o[0x24] & 2) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        } else if (o[0x24] & OBJ_FLAG_SELECTABLE) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             input_remove_object_rect(obj);
         }
     }
-    *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & OBJ_FLAG_SELECTABLE; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
@@ -186,20 +189,20 @@ void _fastcall win_SetGroupSelectableState(int win, int group, int state)
     unsigned char far *o;
 
     win_LockWin(win);
-    objNum = win & 0xff00;
+    objNum = win & WIN_ID_MASK;
     w = win_locked_resource_ptr(win);
     for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) { /* Known Win.count; earlier shared tag changes exact code or original declaration context is unresolved. */
         o = ((unsigned char far * far *)(w + 0x2c))[i]; /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
         if (o[0x20] == group) { /* Known Obj.group; earlier shared tag changes exact code or original declaration context is unresolved. */
             if (clip_window_z_order[0] == win) {
                 if (state == 1) {
-                    if (!(o[0x24] & 2)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+                    if (!(o[0x24] & OBJ_FLAG_SELECTABLE)) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                         input_register_object_rect((char far *)o, objNum);
-                } else if (o[0x24] & 2) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+                } else if (o[0x24] & OBJ_FLAG_SELECTABLE) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
                     input_remove_object_rect(objNum);
                 }
             }
-            *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & 2; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+            *(unsigned far *)(o + 0x24) ^= (o[0x24] ^ (state << 1)) & OBJ_FLAG_SELECTABLE; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         }
     }
     win_UnlockWin(win);
@@ -221,7 +224,7 @@ void _fastcall win_ObjInv(int obj)
 
     win_LockWin(obj);
     w = win_locked_resource_ptr(obj);
-    GRectInv(((char far * far *)(w + 0x2c))[obj & 0xff]); /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
+    GRectInv(((char far * far *)(w + 0x2c))[obj & OBJ_INDEX_MASK]); /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
@@ -231,18 +234,18 @@ void _fastcall win_SetObjSelectedStateI(int obj, int selected)
 
     win_LockWin(obj);
     o = win_ObjAddr(obj);
-    if (win_IsWinOpen(obj) && ((*(unsigned far *)(o + 0x24) & 4) >> 2) != selected) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
-        *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
-        if (*(unsigned far *)(o + 0x24) & 1) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if (win_IsWinOpen(obj) && ((*(unsigned far *)(o + 0x24) & OBJ_FLAG_SELECTED) >> 2) != selected) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & OBJ_FLAG_SELECTED; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+        if (*(unsigned far *)(o + 0x24) & OBJ_FLAG_VISIBLE) { /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             if (o[0x21] == 13) /* Known Obj.type; earlier shared tag changes exact code or original declaration context is unresolved. */
-                win_DrawBitMapAtObj(*(int far *)(o + 0x26 + ((*(unsigned far *)(o + 0x24) & 4) == 0 ? 4 : 2)), o); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+                win_DrawBitMapAtObj(*(int far *)(o + 0x26 + ((*(unsigned far *)(o + 0x24) & OBJ_FLAG_SELECTED) == 0 ? 4 : 2)), o); /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
             else if (o[0x21] == 5 || o[0x21] == 17) /* Known Obj.type; earlier shared tag changes exact code or original declaration context is unresolved. */
                 win_DrawObject(o);
             else
                 GRectInv(o);
         }
     }
-    *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & 4; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    *(unsigned far *)(o + 0x24) ^= (*(unsigned far *)(o + 0x24) ^ (selected << 2)) & OBJ_FLAG_SELECTED; /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_UnlockWin(obj);
 }
 
@@ -252,7 +255,7 @@ void _fastcall win_SetObjSelectedState(int obj, int selected)
 
     win_LockWin(obj);
     o = (unsigned char far *)win_ObjAddr(obj);
-    if (o[0x24] & 0x20) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
+    if (o[0x24] & OBJ_FLAG_EXCLUSIVE_GROUP) /* Known Obj.flags; earlier shared tag changes exact code or original declaration context is unresolved. */
         win_SetGroupSelectedState(obj, o[0x20], 0); /* Known Obj.group; earlier shared tag changes exact code or original declaration context is unresolved. */
     win_SetObjSelectedStateI(obj, selected);
     win_UnlockWin(obj);
@@ -276,7 +279,7 @@ void _fastcall win_SetGroupSelectedState(int win, int group, int selected)
 
     win_LockWin(win);
     w = win_locked_resource_ptr(win);
-    objNum = win & 0xff00;
+    objNum = win & WIN_ID_MASK;
     for (i = 0; i < *(int far *)(w + 0xc); i++, objNum++) { /* Known Win.count; earlier shared tag changes exact code or original declaration context is unresolved. */
         if (((unsigned char far * far *)(w + 0x2c))[i][0x20] == group) /* Known Win.objs and/or Obj layout overlay; earlier shared tag changes exact code or original declaration context is unresolved. */
             win_SetObjSelectedStateI(objNum, selected);

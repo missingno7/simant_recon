@@ -7,6 +7,10 @@
  * HIGH confidence, not confirmed.
  */
 
+#include "audio_ids.h"
+#include "pictures_ids.h"
+#include "strings_ids.h"
+
 extern int far SpidBurpCnt;
 extern int far EatCnt;
 extern int far SCorpseBase;
@@ -165,7 +169,7 @@ void far MoveSpider(void)
         if (r > 8) {
             KillSpider();
             if (MeMode != 1) {
-                PictStrnDialog(0, 0x273e, 0);
+                PictStrnDialog(PIC_NONE, STR_SPIDER_KILLED, 0);
                 if (SpidRevenge < 5)
                     SpidRevenge++;
                 if (SpidRevenge < 3)
@@ -277,9 +281,9 @@ void far MoveSpider(void)
             d = GetDir(x, y, AlistX[Starg], AlistY[Starg]);
         SpidDir = TurnTab[SpidDir][d - 1];
         if (Starg < 0)
-            myBeginSound(0x2f, 0, 0x7e);
+            myBeginSound(SND_SPIDER_MOVE, 0, 0x7e);
         else
-            myBeginSound(0x2f, 0, -5);
+            myBeginSound(SND_SPIDER_MOVE, 0, -5);
         if (RevSpider) {
             SpidX -= 5 * SpX[SpidDir];
             SpidY -= 5 * SpY[SpidDir];
@@ -338,13 +342,13 @@ void far MoveSpider(void)
         if (EatCnt > 0) {
             EatCnt--;
             if (EatCnt % 10 == 0 && SRand2())
-                myBeginSound(0x2c, (SRand256() << 3) + 0x2777, -5);
+                myBeginSound(SND_EAT, (SRand256() << 3) + 0x2777, -5);
             break;
         }
         if (--SpidBurpCnt == 0) {
             SpidBurpCnt = 10;
             if (OptionStates[5] && !SRand2())
-                myBeginSound(10, 0, 10);
+                myBeginSound(SND_FOOD_OR_WALL_ACTION, 0, 10);
         }
         DeadAntHere(d, r, SCorpseBase);
     done:

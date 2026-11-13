@@ -6,6 +6,9 @@
  * Windows: SIMANT1, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "audio_ids.h"
+#include "strings_ids.h"
+
 extern int far Tindex;
 extern int far ListIndexR;
 extern unsigned char far RlistX[];
@@ -452,7 +455,7 @@ void far SimQueenR(int x, int y, int caste, int attr)
         if (SRand64() == 0) {
             if (HealthR == 0) {
                 LifeR[x][y] = RlistT[Tindex] = 0;
-                o14_384C_0B6A(0, 0x2720, 1);
+                o14_384C_0B6A(0, STR_RED_QUEEN_STARVED, 1);
                 return;
             }
             if (QueenMoveR(x, y, attr))
@@ -785,7 +788,7 @@ void far DoDigInR(int x, int y, int attr, int caste)
         if (DigTileThemR(nx, ny)) {
             RlistT[Tindex] += 0x18;
             RlistM[Tindex] = 5;
-            myBeginSound(0x12, 0, 0);
+            myBeginSound(SND_NEST_ENTRANCE, 0, 0);
         } else {
             RlistM[Tindex] = 0;
             return;

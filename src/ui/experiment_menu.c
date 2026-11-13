@@ -6,13 +6,16 @@
  * Windows: ANTEDIT, from recorded function pairs in the Windows symbol inventory.
  */
 
+#include "events_ids.h"
+#include "windows_ids.h"
+
 #include "rect.h"
 
 #include "pt.h"
 
 #include "event.h"
 
-static int subMenus[8] = { -1, 0xc00, 0xf00, 0x1000, 0x1100, 0xd00, 0xe00, -1 };
+static int subMenus[8] = { -1, WIN_WALL_TOOL_MENU, WIN_DIG_TOOL_MENU, WIN_ANT_TOOL_MENU, WIN_FOOD_TOOL_MENU, WIN_SCENT_TOOL_MENU, WIN_KILL_TOOL_MENU, -1 };
 
 extern void far win_Open();
 extern int far fd_50F6_104C;
@@ -50,26 +53,26 @@ int far DoExpMenu(int x, int y)
     int n;
 
     result = openSub = -1;
-    win_Open(0x900, x, y);
-    _win_SetProxItem(fd_50F6_104C + 0x902);
+    win_Open(WIN_EXPERIMENT_TOOLS_MENU, x, y);
+    _win_SetProxItem(fd_50F6_104C + OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL);
     cur = fd_50F6_104C;
     f_1FD2_057F();
     do {
-    if (!win_IsWinOpen(0x900))
+    if (!win_IsWinOpen(WIN_EXPERIMENT_TOOLS_MENU))
         goto release;
-    if (!win_IsWinInFront(0x900)) {
+    if (!win_IsWinInFront(WIN_EXPERIMENT_TOOLS_MENU)) {
         GetMousePos(&pt);
-        for (i = 0x902; i <= 0x909; i++) {
+        for (i = OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL; i <= OBJ_EXPERIMENT_TOOLS_MENU_LAST_TOOL; i++) {
             win_GetObjRect(i, &r);
-            if (PointInRect(&pt, &r) && cur + 0x902 != i) {
+            if (PointInRect(&pt, &r) && cur + OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL != i) {
     WinPrintf("\nL: item=%x, openSub=%x", i, openSub);
     if (openSub != -1) {
         win_Close(openSub);
-        win_ObjInv(cur + 0x902);
+        win_ObjInv(cur + OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL);
         openSub = -1;
     }
-    win_ObjInv(cur + 0x902);
-    cur = i - 0x902;
+    win_ObjInv(cur + OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL);
+    cur = i - OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL;
     _win_SetProxItem(i);
     goto open;
             }
@@ -93,10 +96,10 @@ int far DoExpMenu(int x, int y)
             fd_3D57_07B6[cur] = n - 2;
         WinPrintf("\nLast sub state = %x", n);
     }
-    if (ev.code == 0xff00)
+    if (ev.code == EVENT_DESKTOP_CLICK)
         goto accept;
     else {
-        if ((ev.code & 0xff00) == clip_window_z_order)
+        if ((ev.code & WIN_ID_MASK) == clip_window_z_order)
             goto proxy;
         if ((char)ev.code != 9)
             goto next;
@@ -115,7 +118,7 @@ int far DoExpMenu(int x, int y)
         if (subMenus[cur] == -1 || subMenus[cur] == openSub)
             goto next;
         openSub = subMenus[cur];
-        win_GetObjRect(cur + 0x902, &r);
+        win_GetObjRect(cur + OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL, &r);
         i = subMenus[cur];
         win_GetObjSize(i, &size);
         if (size.x + r.right + 1 >= gfx_screen_width_pixels)
@@ -130,10 +133,10 @@ int far DoExpMenu(int x, int y)
         result = cur;
         goto release;
     proxy:
-        if (ev.code >= 0x900) {
-            if (ev.code < 0xa00) {
-                if (ev.code >= 0x902)
-                    result = ev.code - 0x902;
+        if (ev.code >= WIN_EXPERIMENT_TOOLS_MENU) {
+            if (ev.code < WIN_QUICK_GAME_TOOLS_MENU) {
+                if (ev.code >= OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL)
+                    result = ev.code - OBJ_EXPERIMENT_TOOLS_MENU_FIRST_TOOL;
             } else
                 result = cur;
         } else
@@ -150,7 +153,7 @@ int far DoExpMenu(int x, int y)
     close:
         if (openSub != -1)
             win_Close(openSub);
-        win_Close(0x900);
+        win_Close(WIN_EXPERIMENT_TOOLS_MENU);
         return result;
     }
     } while (1);

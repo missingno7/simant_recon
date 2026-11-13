@@ -3396,7 +3396,7 @@
     "end": 223464
    },
    "source": "src/ui/minimap.c",
-   "source_sha256": "f008e96e459d85a13a5f2bc9a56f63529b0eb77c25043c8de7960ee5f25071c3",
+   "source_sha256": "2d570b50a74f4128271fcf4095c2d08be1e1b574f771bd1b95f07bbca409979d",
    "claims": [
     {
      "name": "MapToolsMenu",
@@ -3488,7 +3488,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ea9afbb57b6a595755c4bf350059a2de63b7b91521932d80de74e282d235b53e"
+   "object_sha256": "84aef1d2919efff2e19b823bf99d5f75c3aa1be325e1883a3455ab1bcd029683"
   },
   "S05:35F5": {
    "unit": "S05",
@@ -3642,7 +3642,7 @@
     "end": 222772
    },
    "source": "src/ui/editor_menus.c",
-   "source_sha256": "3c7b6f62abb3d2e1bb9182af19dccb7ba67256cba4972ddd4821167b2292414e",
+   "source_sha256": "36669559da607a854ca4414431f47e2a3b6fc629f3bf3417cc24c8047e0f3ed4",
    "claims": [
     {
      "name": "EditScentMenu",
@@ -3842,7 +3842,7 @@
     "end": 223516
    },
    "source": "src/ui/experiment_menu.c",
-   "source_sha256": "c8d2868223d2257f74f01eb54b7f8498cc306763eb9402d5b1789739167041ba",
+   "source_sha256": "c6489f5b3adc2327cb71a93a846c71581146aaf07b69049176ef49c62be433ae",
    "claims": [
     {
      "name": "DoExpMenu",
@@ -3858,7 +3858,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "44fbd43cb5b233563de60118e4cb9771924089dc3f6842f92cc532985b8cf7ad"
+   "object_sha256": "69494709b7a4cf805968565a357d0a342084fea78957a85a539dc02bc1d2c05d"
   },
   "S06:35F5": {
    "unit": "S06",
@@ -4176,7 +4176,7 @@
     "end": 230591
    },
    "source": "src/simulation/yard.c",
-   "source_sha256": "9d66e5cec147a023d02091646d4cf048c0601e2aa2c4e161acca0d7b9bade12c",
+   "source_sha256": "596a7763cd1077c76198d803ec9ff0211b60abcb0ed7bf75a7184a667040aaca",
    "claims": [
     {
      "name": "InitSimYard",
@@ -4450,7 +4450,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "c6d4fb8c842976f3813cf3ff6eb602310c32b5a47d16bb7c66d6158fc765e35c"
+   "object_sha256": "dde9444bd3ada611c9f289a0e2083356025f0652db215353a369c087bb51af1e"
   },
   "S07:35F5": {
    "unit": "S07",
@@ -4476,27 +4476,7 @@
     }
    },
    "lang": "c",
-   "extent": {
-    "start": 221008,
-    "end": 222182
-   },
-   "source": "src/ui/cheats.c",
-   "source_sha256": "5ca290369f7d0dfe824dde60e2f59308e9548679401c463eb249559d68d5f439",
-   "claims": [
-    {
-     "name": "CheatKeys",
-     "unit": "S07",
-     "seg": 13813,
-     "off": 0,
-     "size": 1174,
-     "target_sha256": "e2bf7ceb6c8d9cd9cb0844d7f1e874128183927ea786928d7458f171407f81a6",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "3b003b46a30d553064063446c5929f7460964bc76e4e28ee4977904ee7edcff4",
+   "source_origin": "hand-written C",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -4504,8 +4484,8 @@
      "why": "Handles cheat key commands. The handler changes game state and reports the selected cheat number."
     }
    ],
-   "summary": "Handles cheat key commands. The handler changes game state and reports the selected cheat number.",
    "windows_group": "unknown",
+   "summary": "Handles cheat key commands. The handler changes game state and reports the selected cheat number.",
    "file_header": {
     "text": "Handles cheat key commands. The handler changes game state and reports the selected cheat\nnumber.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 7 (S07); segment 35F5; complete original translation unit.\nWindows: unknown; no confirmed function pair identifies a symbol group.",
     "name_kind": "descriptive",
@@ -4557,7 +4537,28 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 221008,
+    "end": 222182
+   },
+   "source": "src/ui/cheats.c",
+   "source_sha256": "0d6ceee872be57940227b69665abb735f42d378de3193f03a6e79780ac816ba7",
+   "claims": [
+    {
+     "name": "CheatKeys",
+     "unit": "S07",
+     "seg": 13813,
+     "off": 0,
+     "size": 1174,
+     "target_sha256": "e2bf7ceb6c8d9cd9cb0844d7f1e874128183927ea786928d7458f171407f81a6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "6c0c7102b86321b5bdae3b5b19331ee56095cfabe19eb5cf6ebb3734c208e369"
   },
   "S08:35F5": {
    "unit": "S08",
@@ -4775,7 +4776,7 @@
     "end": 226061
    },
    "source": "src/simulation/world_generation.c",
-   "source_sha256": "7bdf9192898827a0b6009e973196fab85c63e13ad1678faa4bf1c3d250d1309e",
+   "source_sha256": "6eb5a32c327d12788fe62d629464df8845e2d56cfbc3f020aae7b2ce4fa3c1eb",
    "claims": [
     {
      "name": "InitSimVars",
@@ -4983,7 +4984,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ee2e4fe983d6c322857ae316502ba171c4638f1baa1feff2c46a339a82c2dcdb"
+   "object_sha256": "334c1d3c9d3bf8c5389e3151d752a4f2250f45ccf037f17267f538a88f2094bb"
   },
   "S09:35F5": {
    "unit": "S09",
@@ -5141,7 +5142,7 @@
     "end": 225002
    },
    "source": "src/ui/save_load.c",
-   "source_sha256": "54f8593151edbfbd6b4d8690b7b61a9221bef780e5551ed9776d91a67d34e379",
+   "source_sha256": "98aa84272b51d3da4a67fef8ff6e083aef91bab30410aaaa383c89b92209e820",
    "claims": [
     {
      "name": "LoadGame",
@@ -5212,7 +5213,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5d2b35f489da9325246e445430f6a8ac6d34e94d5a149bad2e03a20da391d25d"
+   "object_sha256": "dd0c5d5ddc4738e4c23bfdfe77ef8a54013587c33bebc669bcde1abf91d13ac3"
   },
   "S09:36EE": {
    "unit": "S09",
@@ -5305,7 +5306,7 @@
     "end": 226233
    },
    "source": "src/window/text_entry.c",
-   "source_sha256": "5dc8bb2ba6c6b320fef641bad91f6e2819f9c2f5803f33edbb7564530a82b0f1",
+   "source_sha256": "7945674cafb6a3c35833f9682644234087c9e1bbdac7de1373a267b7c4508e9f",
    "claims": [
     {
      "name": "ui_clear_text_cells",
@@ -5342,7 +5343,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9f40d1ee18dabf7ac0e63307da832b4951512b0283422aa88656a6cac66039da"
+   "object_sha256": "ca72c299ac0fda1b279081754402e246ce1142986209dc776cd338b92d1f1690"
   },
   "S10:35F5": {
    "unit": "S10",
@@ -5434,7 +5435,7 @@
     "end": 223739
    },
    "source": "src/window/menu_tracking.c",
-   "source_sha256": "ad882ef3f03127bb5e10a5f67aa23ff67ad2e8bf5684342158736762bcc868f8",
+   "source_sha256": "6562bc78c99cc523638975974b2cad11215cf554e307e47b77dbd432ab2947fb",
    "claims": [
     {
      "name": "ui_draw_horizontal_button",
@@ -5493,7 +5494,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "31a8bf506c88044200d8ad477272f41060bbbd6edefa654e493e7b5b9844069d"
+   "object_sha256": "26c9e0f636bfe67a05c609223fe2735ffba97eb1cccbec4a9e894be98522587a"
   },
   "S11:35F5": {
    "unit": "S11",
@@ -5629,7 +5630,7 @@
     "end": 221878
    },
    "source": "src/ui/game_menu.c",
-   "source_sha256": "2ca108cde572ef6fce784e8c469c1373a6eb85fe10eece9abedd221126fcce77",
+   "source_sha256": "ba8bafcf22e617de4837776d940ed8d78398f40cf730887ce285070323eebf17",
    "claims": [
     {
      "name": "PauseGame",
@@ -5677,7 +5678,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "47afd4478a82b5666f6c658ef55043b30416568006d8576a244ecfc4211db0de"
+   "object_sha256": "3b020233ad53d6712b13fa7fb587ac2d6f2c174aefc10f7b2bb34cbd22779b48"
   },
   "S12:384C": {
    "unit": "S12",
@@ -5898,7 +5899,7 @@
     ]
    },
    "source": "src/ui/map_window.c",
-   "source_sha256": "78cb355d89fd96bc430e9c0224698e97d5a05cb21e59c301ddccb631905f48a9",
+   "source_sha256": "9969d5b4d55e8cfe2270b18bef5f18a9d50b431907d0a7121c959be8e4d42924",
    "claims": [
     {
      "name": "DeinitMapFunctions",
@@ -6100,7 +6101,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "2077ced3032f94498c70198e84496924abae28843c2d42e313ab3df1374e9a48"
+   "object_sha256": "00e318424fa1fe14221456eb15d3983284760846815218c95f0d3580fdf79749"
   },
   "S13:384C": {
    "unit": "S13",
@@ -6405,7 +6406,7 @@
     "end": 236643
    },
    "source": "src/ui/yard_window.c",
-   "source_sha256": "be57b0b54b547520ab8243a2f7af49d5b1c07332130a71b511d142547f6689a1",
+   "source_sha256": "32f83fd882761487aefbab306223e6b2fcbad193d27b67243e22b0846350d2b4",
    "claims": [
     {
      "name": "ProcYardEvent",
@@ -6674,7 +6675,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "70e2cd19e47a0f3711992a244ba1e6b1d435371b993d0fbf86307f35fd45b11c"
+   "object_sha256": "d7d0b5391e4a18642ffa179ffbd3930817d078d6d014e3eea4fde03ef1e8ac06"
   },
   "S14:384C": {
    "unit": "S14",
@@ -6873,7 +6874,7 @@
     "end": 235245
    },
    "source": "src/ui/scenario_dialogs.c",
-   "source_sha256": "6edd3dac2bc4dd5dc1617bd65180dfb06758aebb90fe8fc106d0f405d390ba74",
+   "source_sha256": "962c1a3f710e0206f26dcfd24b704ca3adbb65ebd89b656e920bc9070b871d46",
    "claims": [
     {
      "name": "DoScenario",
@@ -7001,7 +7002,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f43febf30c40d301ca67ea5661108bf19bb011d96b4ce445ace8fa02af25d740"
+   "object_sha256": "fe87af761cb421b7f5651339490a5603abc6d35e52ffd2eb80201ea1e8fed62b"
   },
   "S15:384C": {
    "unit": "S15",
@@ -7122,7 +7123,7 @@
     ]
    },
    "source": "src/startup/game_session.c",
-   "source_sha256": "df955157cd5e62791023ca1e0ad12d21edff87a014869a14e36f5e8c1d3daa8c",
+   "source_sha256": "b606a8e61d42aa94e92c942c8c6dcd5316eda6c0943daf2bb6b21f2a3f7fe5a6",
    "claims": [
     {
      "name": "app_exit_demo_expired",
@@ -7203,7 +7204,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ad73ee7b1e994dead47f40da0b6629358ec961416f3f4e84b650ead1c36be9c9"
+   "object_sha256": "4e1e131a4a2d3007caf8f5a82435e33316992ef0d74cb8fde8d47bef7d4dcdbc"
   },
   "S16:384C": {
    "unit": "S16",
@@ -7326,7 +7327,7 @@
     "end": 232355
    },
    "source": "src/ui/intro_credits.c",
-   "source_sha256": "a2c9d56c6fb6f7beac965fa400166991390ae9d53b82bd7331e2996250f4dc96",
+   "source_sha256": "fbde5e9d8cdf4cb1b1bd094e16be81f54ba9cf6713f748eb949433651fc675ac",
    "claims": [
     {
      "name": "DrawSimPayoff",
@@ -7381,7 +7382,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0ef9f10a2293887036ea0e24963b4ea177fafbf9f6bfd6a16de04b13c5fbc389"
+   "object_sha256": "a72af5eea814e8ef5ac719e87129f17b40f56d024d7cce4d2cde4c7d34b195f1"
   },
   "S17:384C": {
    "unit": "S17",
@@ -7557,269 +7558,7 @@
     }
    },
    "lang": "c",
-   "extent": {
-    "start": 230592,
-    "end": 234951
-   },
-   "source": "src/simulation/map_patches.c",
-   "source_sha256": "e0f9d6359c1a4aeab0ec82a9b0dbad02af1f99a079ab17f0e43a1c56b1b01bcc",
-   "claims": [
-    {
-     "name": "MakeMap",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 0,
-     "size": 43,
-     "target_sha256": "5fb7cb870781cd4e639cd1bab455f0ec32db67adc49f56554f5370016a4c85ab",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeHousePatch",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 43,
-     "size": 491,
-     "target_sha256": "154409a56a5b83398b6fd26c4b7b80456756ba332c6925d7f2639e04a0f592cc",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "FloorTiles",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 534,
-     "size": 282,
-     "target_sha256": "e07db825140645ef57ec5eaed6163a19d742ed9d5ef436bb89d7cb5f5deaa4a4",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "CarpetFloorL",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 816,
-     "size": 153,
-     "target_sha256": "e935611c8317dfa5a9f137364cc5478d51e98f3f78ec08c90ea8b9df23d45230",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeLint2",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 969,
-     "size": 84,
-     "target_sha256": "3b4ff0a92c4011d58563898b2a12cff360fa339e1678faa8ef5e138e0a3002a4",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "CarpetFloorR",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 1053,
-     "size": 150,
-     "target_sha256": "5ce9d2d5b2694440e3bbff9526e5da89d231dda0ae22f9956d274b38202ef7f0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeKitchenWall",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 1203,
-     "size": 258,
-     "target_sha256": "f0d21412b7a711f6c4da24da75305782a84e2e7228d03710ddb452ec8f1b601c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeSink",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 1461,
-     "size": 418,
-     "target_sha256": "73ac54cc8276c8477adef2e299c7d2b51ca77911f15dfa5af7b064473b290e45",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "TileFrame1",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 1879,
-     "size": 160,
-     "target_sha256": "49519eba31e99f2ce7593549bc815d137781e5543f5bc229e71c046869425e94",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "TileFrame2",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2039,
-     "size": 160,
-     "target_sha256": "bc36b39400b41502b92f0ba46f8e5602a35882aa31e07da697c88a0615af005b",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeOutletV",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2199,
-     "size": 122,
-     "target_sha256": "c5fb5b76d170017741431caf2a378ca6544c1b96cd655c28733068a602620ca0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakePlugV",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2321,
-     "size": 73,
-     "target_sha256": "27974d36fa1b1c489f36f95d4781e643b94c75e45d8cf0247da4cdfff15ca738",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeOutletH",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2394,
-     "size": 122,
-     "target_sha256": "f471c756395cb76d0b3b417abe84c52b476cd371a050c04519ce156f7cd8cb57",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakePlugH",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2516,
-     "size": 70,
-     "target_sha256": "e538179a12a0b3459362574dc374f94846b0eaaccf2a02598f4044436e0607f6",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeKnob",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2586,
-     "size": 73,
-     "target_sha256": "ca8b71e296b1caf19683798f30677039762a17fcd7a8392151dd7c36999c461a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakePenny",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2659,
-     "size": 72,
-     "target_sha256": "621d372f3e24f8072dd6f32df5c0d4058e61bda186873bf91d5e2e85f089fb75",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeClip",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2731,
-     "size": 76,
-     "target_sha256": "144b03445fc0dfb7c6baa44fe0e675f47b8a060743a8580b705daec05525ccd1",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "FillMap",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2807,
-     "size": 61,
-     "target_sha256": "5f43a8c5ed1e3022050ebc394ee734666a4e285b9bc4d67bfcb1815110fe002a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "FillMapLegs",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 2868,
-     "size": 223,
-     "target_sha256": "2947269f68bce7c1933dfa7a90db8ab7fddd1b1b0b54219ce0ce2e62d64f3f4c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "MakeYardPatch",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 3091,
-     "size": 458,
-     "target_sha256": "67145022c48cd1dc15df177ae811d482fbf5f5a5d2ce395b4354407f5e37893d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "AddRocks",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 3549,
-     "size": 457,
-     "target_sha256": "c2e21f16ce61458a8757813add2838e41ae5383b4576a135e329ba074fef715f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "AddRock5",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 4006,
-     "size": 176,
-     "target_sha256": "0d30bf5084226bdba9ad4fcb2b553a50b1978088c92186c9938107b1f7d2e6f1",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "AddRock3",
-     "unit": "S18",
-     "seg": 14412,
-     "off": 4182,
-     "size": 177,
-     "target_sha256": "5fb582873c9425789f7e2e46a52bbb7f15bddf7320533db01db6f372a1c54008",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "9e854250b938ee2641174e2f5836a4e3fe1fc94cba04c4b90f6e137537848eb3",
+   "source_origin": "hand-written C",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -7827,8 +7566,8 @@
      "why": "Builds house and yard patches from map cells. It lays out floors, household fixtures, rocks and yard terrain."
     }
    ],
-   "summary": "Builds house and yard patches from map cells. It lays out floors, household fixtures, rocks and yard terrain.",
    "windows_group": "SIMONE",
+   "summary": "Builds house and yard patches from map cells. It lays out floors, household fixtures, rocks and yard terrain.",
    "file_header": {
     "text": "Builds house and yard patches from map cells. It lays out floors, household fixtures, rocks\nand yard terrain.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 18 (S18); segment 384C; complete original translation unit.\nWindows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
     "name_kind": "descriptive",
@@ -8113,7 +7852,270 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 230592,
+    "end": 234951
+   },
+   "source": "src/simulation/map_patches.c",
+   "source_sha256": "bb1f9e42e1be50918f7e39447408e1222689cc950b5773ece401f42f90287e14",
+   "claims": [
+    {
+     "name": "MakeMap",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 0,
+     "size": 43,
+     "target_sha256": "5fb7cb870781cd4e639cd1bab455f0ec32db67adc49f56554f5370016a4c85ab",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeHousePatch",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 43,
+     "size": 491,
+     "target_sha256": "154409a56a5b83398b6fd26c4b7b80456756ba332c6925d7f2639e04a0f592cc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FloorTiles",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 534,
+     "size": 282,
+     "target_sha256": "e07db825140645ef57ec5eaed6163a19d742ed9d5ef436bb89d7cb5f5deaa4a4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "CarpetFloorL",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 816,
+     "size": 153,
+     "target_sha256": "e935611c8317dfa5a9f137364cc5478d51e98f3f78ec08c90ea8b9df23d45230",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeLint2",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 969,
+     "size": 84,
+     "target_sha256": "3b4ff0a92c4011d58563898b2a12cff360fa339e1678faa8ef5e138e0a3002a4",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CarpetFloorR",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 1053,
+     "size": 150,
+     "target_sha256": "5ce9d2d5b2694440e3bbff9526e5da89d231dda0ae22f9956d274b38202ef7f0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeKitchenWall",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 1203,
+     "size": 258,
+     "target_sha256": "f0d21412b7a711f6c4da24da75305782a84e2e7228d03710ddb452ec8f1b601c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeSink",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 1461,
+     "size": 418,
+     "target_sha256": "73ac54cc8276c8477adef2e299c7d2b51ca77911f15dfa5af7b064473b290e45",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "TileFrame1",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 1879,
+     "size": 160,
+     "target_sha256": "49519eba31e99f2ce7593549bc815d137781e5543f5bc229e71c046869425e94",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "TileFrame2",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2039,
+     "size": 160,
+     "target_sha256": "bc36b39400b41502b92f0ba46f8e5602a35882aa31e07da697c88a0615af005b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeOutletV",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2199,
+     "size": 122,
+     "target_sha256": "c5fb5b76d170017741431caf2a378ca6544c1b96cd655c28733068a602620ca0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakePlugV",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2321,
+     "size": 73,
+     "target_sha256": "27974d36fa1b1c489f36f95d4781e643b94c75e45d8cf0247da4cdfff15ca738",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeOutletH",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2394,
+     "size": 122,
+     "target_sha256": "f471c756395cb76d0b3b417abe84c52b476cd371a050c04519ce156f7cd8cb57",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakePlugH",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2516,
+     "size": 70,
+     "target_sha256": "e538179a12a0b3459362574dc374f94846b0eaaccf2a02598f4044436e0607f6",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeKnob",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2586,
+     "size": 73,
+     "target_sha256": "ca8b71e296b1caf19683798f30677039762a17fcd7a8392151dd7c36999c461a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakePenny",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2659,
+     "size": 72,
+     "target_sha256": "621d372f3e24f8072dd6f32df5c0d4058e61bda186873bf91d5e2e85f089fb75",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeClip",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2731,
+     "size": 76,
+     "target_sha256": "144b03445fc0dfb7c6baa44fe0e675f47b8a060743a8580b705daec05525ccd1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FillMap",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2807,
+     "size": 61,
+     "target_sha256": "5f43a8c5ed1e3022050ebc394ee734666a4e285b9bc4d67bfcb1815110fe002a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FillMapLegs",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 2868,
+     "size": 223,
+     "target_sha256": "2947269f68bce7c1933dfa7a90db8ab7fddd1b1b0b54219ce0ce2e62d64f3f4c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "MakeYardPatch",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 3091,
+     "size": 458,
+     "target_sha256": "67145022c48cd1dc15df177ae811d482fbf5f5a5d2ce395b4354407f5e37893d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "AddRocks",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 3549,
+     "size": 457,
+     "target_sha256": "c2e21f16ce61458a8757813add2838e41ae5383b4576a135e329ba074fef715f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "AddRock5",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 4006,
+     "size": 176,
+     "target_sha256": "0d30bf5084226bdba9ad4fcb2b553a50b1978088c92186c9938107b1f7d2e6f1",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "AddRock3",
+     "unit": "S18",
+     "seg": 14412,
+     "off": 4182,
+     "size": 177,
+     "target_sha256": "5fb582873c9425789f7e2e46a52bbb7f15bddf7320533db01db6f372a1c54008",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "bf371716ef2424a32fac8e3f5bb02054391b583332fd523acb3ae2352cd29f90"
   },
   "S19:384C": {
    "unit": "S19",
@@ -8219,7 +8221,7 @@
     "end": 231712
    },
    "source": "src/ui/game_events.c",
-   "source_sha256": "45c392e3282a9003008f419fa0536a9ec352f50e84d57899b36396453ecb1163",
+   "source_sha256": "269bce94ce88cd95294d53b1cebf0567d947f26c4e923175e432730912aaf4b8",
    "claims": [
     {
      "name": "DoEvent",
@@ -8267,7 +8269,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a3782b7f6c72cef2e02cf7fe8aa81a1d93c6d0d7596a7ed35f4e52d7743da7a1"
+   "object_sha256": "8e0c87338aceeb19c7ade255414cfab3b178789d88b610c945baf2e5fd0c63f6"
   },
   "S20:39C7": {
    "unit": "S20",
@@ -9144,7 +9146,7 @@
     "end": 244698
    },
    "source": "src/ui/yellow_commands.c",
-   "source_sha256": "e116167a878c4128b198a7c4c4f2ac4bd2ea9da122f976d3982190a03da35f72",
+   "source_sha256": "2aef7a33f2575255e731277fe86d2d1d1e2524ec83b8a234d231156dc0c477cb",
    "claims": [
     {
      "name": "processEdit",
@@ -9315,7 +9317,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d0c1bdfd1d6b9fd97ef64bf6ecbca7375d4823d1d6916a7a3d2b98068f417f7c"
+   "object_sha256": "64fe499dc852b7509282a0bb49ffe578148b6ae5a3ed02979d4478857921c438"
   },
   "S22:3BBD": {
    "unit": "S22",
@@ -9641,7 +9643,7 @@
     "end": 249366
    },
    "source": "src/ui/experiment_tools.c",
-   "source_sha256": "28c9d8b527594f3a0e7937db6294faf75fec2c0afd46667aad9637007f0862a0",
+   "source_sha256": "adb2b335f1c4864dc5dd09525c110f3f677647b366de00253b1e970c3eba085c",
    "claims": [
     {
      "name": "processExp",
@@ -9900,7 +9902,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "1c0b4a74f868015aa14d5d4c90f12b4694c07715cf32a7b199081f491dca19b3"
+   "object_sha256": "6d3d75484d2613e900f857d15828f2146525db1971de4d8ebe6493aa0aa2b4c6"
   },
   "S23:39C7": {
    "unit": "S23",
@@ -10088,7 +10090,7 @@
     "end": 241018
    },
    "source": "src/ui/info_cards.c",
-   "source_sha256": "d37d63c989256ae6b74252cf1c0beb76486449cdc00267b6b6c34985ec31c17f",
+   "source_sha256": "18af3779789d8aba5fdd3d1d8f4b02ee52b8e71d8c3e6950635189e6771a9d56",
    "claims": [
     {
      "name": "XFlipLong",
@@ -10193,7 +10195,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "3d3bc8e07d980da1de6bebb391991c758df826a654e8dce368e32e96b01bb0a5"
+   "object_sha256": "588dabd84ec663099f5be5d5e91e92928559ebf9c0cc6c2947ef53c9754c7ee9"
   },
   "S24:39C7": {
    "unit": "S24",
@@ -10363,7 +10365,7 @@
     "end": 238459
    },
    "source": "src/ui/history_window.c",
-   "source_sha256": "2cd212ddc1221361f26cdae0d9704dc6c005f569d095899628ce7292f1305174",
+   "source_sha256": "b418d7c7d005f7349b8062cff31911e89502c3173a587170bf60d774e274d58a",
    "claims": [
     {
      "name": "OpenHistoryWindow",
@@ -10445,7 +10447,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "03b8ed063a3ae9ad33535d6fb6331e4e9cc249a322764bb3670fcfb8b4fc2695"
+   "object_sha256": "b3ca6152db6802f35d41fc221128ce704783a837eb6cf301c5146d57897f38d3"
   },
   "S25:39C7": {
    "unit": "S25",
@@ -10467,12 +10469,336 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
+   "source_name_kind": "descriptive",
+   "source_path_history": [
+    {
+     "was": "src/S25/m39C7.c",
+     "why": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment."
+    }
+   ],
+   "windows_group": "SIMANT1",
+   "summary": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment.",
+   "file_header": {
+    "text": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding,\ndigging, eggs, the queen and recruitment.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 25 (S25); segment 39C7; complete original translation unit.\nWindows: SIMANT1, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600a; /AL /Os /Oe /Og /Zi.\n\nBuilt /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function\nrelocation-order constraints are violated, under /Zi none.  Line layout: the seven\n\"map = list = value\" stores are written as two statements (the file's own style, e.g.\n\"BlistT[..] = ..; LifeB[x][y] = BlistT[..];\"); byte-identical either way, but the\nextra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis\ncall, as its within-group relocation order requires (FORBID (0CDC,0D54]).\nWorker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds\nreferences to dir, REG-3, and puts dir in SI); its final store is two statements like the\nothers, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both\nare byte-identical to the one-line forms; their three extra /Zi line entries put the sixth\nflush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside\nGetOutB's FORBID (1CFC,1DC0].  DoDigInB writes the DigTileThemB test as\n\"if (DigTileThemB(..)) {..} else {..; return;}\" like its red twin DoDigInR (root:0F3F); the\nnegated early-return form compiles to the same instructions except that dir then loses DI\nin the first region (allocation: the if/else form puts the GetEnterDirB result in DI and\nspills it to [bp-4] after the y == 0x3f test, as the original does).",
+    "name_kind": "descriptive",
+    "why": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment. File name and folder are our inferred organization.",
+    "evidence": [
+     {
+      "path": "build/workers/module-names/proposal.json#/S25:39C7",
+      "summary": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment.",
+      "name_kind": "descriptive",
+      "organization": "inferred"
+     },
+     {
+      "path": "layout/manifest.json#/modules/S25:39C7",
+      "module": "S25:39C7",
+      "source": "src/simulation/black_nest.c",
+      "reviewed_source_sha256": "afa356d3e7de447a1ebb9dbf9f07181e05a97085a148064ed6f90d2e5533ebf1",
+      "link_facts": {
+       "part": "overlay section 25 (S25)",
+       "segment": "39C7",
+       "origin": null,
+       "translation_unit": "complete original translation unit",
+       "extent": {
+        "start": 236656,
+        "end": 244295
+       }
+      },
+      "not_exact": [],
+      "steered": [],
+      "profile": "msc600a",
+      "flags": [
+       "/AL",
+       "/Os",
+       "/Oe",
+       "/Og",
+       "/Zi"
+      ]
+     },
+     {
+      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
+      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
+      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
+      "pairs": [
+       {
+        "function": "DoAntSimB",
+        "dos_address": "S25:39C7:0000",
+        "win16": "_DoAntSimB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 11598,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0000"
+       },
+       {
+        "function": "DoNestAntB",
+        "dos_address": "S25:39C7:006D",
+        "win16": "_DoNestAntB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 11694,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:006D"
+       },
+       {
+        "function": "RaidInB",
+        "dos_address": "S25:39C7:038F",
+        "win16": "_RaidInB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 13604,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:038F"
+       },
+       {
+        "function": "RaidOutB",
+        "dos_address": "S25:39C7:0460",
+        "win16": "_RaidOutB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 13840,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0460"
+       },
+       {
+        "function": "DoRestB",
+        "dos_address": "S25:39C7:04E5",
+        "win16": "_DoRestB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 13950,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:04E5"
+       },
+       {
+        "function": "DoDrownB",
+        "dos_address": "S25:39C7:0590",
+        "win16": "_DoDrownB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 14244,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0590"
+       },
+       {
+        "function": "DoRandB",
+        "dos_address": "S25:39C7:0677",
+        "win16": "_DoRandB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 14454,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0677"
+       },
+       {
+        "function": "DoRecruitN",
+        "dos_address": "S25:39C7:06E2",
+        "win16": "_DoRecruitN",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 14700,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:06E2"
+       },
+       {
+        "function": "DoNestFightB",
+        "dos_address": "S25:39C7:0746",
+        "win16": "_DoNestFightB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 14932,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0746"
+       },
+       {
+        "function": "CheckNestFightB",
+        "dos_address": "S25:39C7:0853",
+        "win16": "_CheckNestFightB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 15266,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0853"
+       },
+       {
+        "function": "DropFoodB",
+        "dos_address": "S25:39C7:090A",
+        "win16": "_DropFoodB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 15420,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:090A"
+       },
+       {
+        "function": "SimEggB",
+        "dos_address": "S25:39C7:0980",
+        "win16": "_SimEggB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 15520,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0980"
+       },
+       {
+        "function": "SimQueenB",
+        "dos_address": "S25:39C7:0AB0",
+        "win16": "_SimQueenB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 15810,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0AB0"
+       },
+       {
+        "function": "MakeNewTailB",
+        "dos_address": "S25:39C7:0EC2",
+        "win16": "_MakeNewTailB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 16970,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0EC2"
+       },
+       {
+        "function": "KillTailB",
+        "dos_address": "S25:39C7:0F30",
+        "win16": "_KillTailB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 17072,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0F30"
+       },
+       {
+        "function": "LostHeadB",
+        "dos_address": "S25:39C7:0F76",
+        "win16": "_LostHeadB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 17118,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0F76"
+       },
+       {
+        "function": "LostTailB",
+        "dos_address": "S25:39C7:0FE7",
+        "win16": "_LostTailB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 17212,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0FE7"
+       },
+       {
+        "function": "TryMoveDirB",
+        "dos_address": "S25:39C7:105B",
+        "win16": "_TryMoveDirB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 17310,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:105B"
+       },
+       {
+        "function": "TryEatFoodB",
+        "dos_address": "S25:39C7:13EF",
+        "win16": "_TryEatFoodB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 18374,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:13EF"
+       },
+       {
+        "function": "EatFoodB",
+        "dos_address": "S25:39C7:14A8",
+        "win16": "_EatFoodB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 18500,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:14A8"
+       },
+       {
+        "function": "StealFoodB",
+        "dos_address": "S25:39C7:154F",
+        "win16": "_StealFoodB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 18612,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:154F"
+       },
+       {
+        "function": "DecEatB",
+        "dos_address": "S25:39C7:15B4",
+        "win16": "_DecEatB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 18680,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:15B4"
+       },
+       {
+        "function": "LeaveNestB",
+        "dos_address": "S25:39C7:1BBB",
+        "win16": "_LeaveNestB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 20830,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:1BBB"
+       },
+       {
+        "function": "GetBestDir",
+        "dos_address": "S25:39C7:0CBD",
+        "win16": "_GetBestDir",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 16478,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0CBD"
+       },
+       {
+        "function": "QueenMoveB",
+        "dos_address": "S25:39C7:0DAF",
+        "win16": "_QueenMoveB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 16724,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0DAF"
+       },
+       {
+        "function": "GetOutB",
+        "dos_address": "S25:39C7:1C81",
+        "win16": "_GetOutB",
+        "group": "SIMANT1",
+        "confidence": "CONFIRMED",
+        "win16_segment": 6,
+        "win16_offset": 21002,
+        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:1C81"
+       }
+      ],
+      "groups": [
+       "SIMANT1"
+      ]
+     },
+     {
+      "path": "src/simulation/black_nest.c",
+      "prior_leading_comment": "Overlay section S25, code frame 39C7: black colony nest simulation (DoAntSimB unit).\nBuilt /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function\nrelocation-order constraints are violated, under /Zi none.  Line layout: the seven\n\"map = list = value\" stores are written as two statements (the file's own style, e.g.\n\"BlistT[..] = ..; fd_3E1D_8180[x][y] = BlistT[..];\"); byte-identical either way, but the\nextra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis\ncall, as its within-group relocation order requires (FORBID (0CDC,0D54]).\nWorker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds\nreferences to dir, REG-3, and puts dir in SI); its final store is two statements like the\nothers, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both\nare byte-identical to the one-line forms; their three extra /Zi line entries put the sixth\nflush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside\nGetOutB's FORBID (1CFC,1DC0].  DoDigInB writes the DigTileThemB test as\n\"if (DigTileThemB(..)) {..} else {..; return;}\" like its red twin DoDigInR (root:0F3F); the\nnegated early-return form compiles to the same instructions except that dir then loses DI\nin the first region (allocation: the if/else form puts the GetEnterDirB result in DI and\nspills it to [bp-4] after the y == 0x3f test, as the original does).",
+      "retained_comment": "Built /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function\nrelocation-order constraints are violated, under /Zi none.  Line layout: the seven\n\"map = list = value\" stores are written as two statements (the file's own style, e.g.\n\"BlistT[..] = ..; LifeB[x][y] = BlistT[..];\"); byte-identical either way, but the\nextra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis\ncall, as its within-group relocation order requires (FORBID (0CDC,0D54]).\nWorker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds\nreferences to dir, REG-3, and puts dir in SI); its final store is two statements like the\nothers, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both\nare byte-identical to the one-line forms; their three extra /Zi line entries put the sixth\nflush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside\nGetOutB's FORBID (1CFC,1DC0].  DoDigInB writes the DigTileThemB test as\n\"if (DigTileThemB(..)) {..} else {..; return;}\" like its red twin DoDigInR (root:0F3F); the\nnegated early-return form compiles to the same instructions except that dir then loses DI\nin the first region (allocation: the if/else form puts the GetEnterDirB result in DI and\nspills it to [bp-4] after the y == 0x3f test, as the original does).",
+      "comment_review": "Retain technical evidence; general header facts are stated above."
+     }
+    ]
+   },
    "extent": {
     "start": 236656,
     "end": 244295
    },
    "source": "src/simulation/black_nest.c",
-   "source_sha256": "1b17639f387e9005092ad34b79514250525abee70fee4240cd469bc0d273c24c",
+   "source_sha256": "df517edc94de68de793a38095ad10889fc90b1da9fc13b16ad09c842db3d995c",
    "claims": [
     {
      "name": "DoAntSimB",
@@ -10809,331 +11135,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "8832551dd37041c9324ca3f366c098145a95d45204d05db3993ad022f54e03d2",
-   "source_name_kind": "descriptive",
-   "source_path_history": [
-    {
-     "was": "src/S25/m39C7.c",
-     "why": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment."
-    }
-   ],
-   "summary": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment.",
-   "windows_group": "SIMANT1",
-   "file_header": {
-    "text": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding,\ndigging, eggs, the queen and recruitment.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: overlay section 25 (S25); segment 39C7; complete original translation unit.\nWindows: SIMANT1, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600a; /AL /Os /Oe /Og /Zi.\n\nBuilt /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function\nrelocation-order constraints are violated, under /Zi none.  Line layout: the seven\n\"map = list = value\" stores are written as two statements (the file's own style, e.g.\n\"BlistT[..] = ..; LifeB[x][y] = BlistT[..];\"); byte-identical either way, but the\nextra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis\ncall, as its within-group relocation order requires (FORBID (0CDC,0D54]).\nWorker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds\nreferences to dir, REG-3, and puts dir in SI); its final store is two statements like the\nothers, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both\nare byte-identical to the one-line forms; their three extra /Zi line entries put the sixth\nflush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside\nGetOutB's FORBID (1CFC,1DC0].  DoDigInB writes the DigTileThemB test as\n\"if (DigTileThemB(..)) {..} else {..; return;}\" like its red twin DoDigInR (root:0F3F); the\nnegated early-return form compiles to the same instructions except that dir then loses DI\nin the first region (allocation: the if/else form puts the GetEnterDirB result in DI and\nspills it to [bp-4] after the y == 0x3f test, as the original does).",
-    "name_kind": "descriptive",
-    "why": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment. File name and folder are our inferred organization.",
-    "evidence": [
-     {
-      "path": "build/workers/module-names/proposal.json#/S25:39C7",
-      "summary": "Advances ants in the black colony nest. It includes nest entry and exit, fighting, feeding, digging, eggs, the queen and recruitment.",
-      "name_kind": "descriptive",
-      "organization": "inferred"
-     },
-     {
-      "path": "layout/manifest.json#/modules/S25:39C7",
-      "module": "S25:39C7",
-      "source": "src/simulation/black_nest.c",
-      "reviewed_source_sha256": "afa356d3e7de447a1ebb9dbf9f07181e05a97085a148064ed6f90d2e5533ebf1",
-      "link_facts": {
-       "part": "overlay section 25 (S25)",
-       "segment": "39C7",
-       "origin": null,
-       "translation_unit": "complete original translation unit",
-       "extent": {
-        "start": 236656,
-        "end": 244295
-       }
-      },
-      "not_exact": [],
-      "steered": [],
-      "profile": "msc600a",
-      "flags": [
-       "/AL",
-       "/Os",
-       "/Oe",
-       "/Og",
-       "/Zi"
-      ]
-     },
-     {
-      "path": "D:/Prog/simantw_recon/evidence/symbols/inventory.json",
-      "sha256": "b0effa8ba7e5d1ee17dbae5e31635d1ed5aadd646d9d600af007ab31883ad759",
-      "scope": "CONFIRMED and HIGH decisions; confidence retained for each pair. No pair does not establish DOS-only code or data.",
-      "pairs": [
-       {
-        "function": "DoAntSimB",
-        "dos_address": "S25:39C7:0000",
-        "win16": "_DoAntSimB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 11598,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0000"
-       },
-       {
-        "function": "DoNestAntB",
-        "dos_address": "S25:39C7:006D",
-        "win16": "_DoNestAntB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 11694,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:006D"
-       },
-       {
-        "function": "RaidInB",
-        "dos_address": "S25:39C7:038F",
-        "win16": "_RaidInB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 13604,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:038F"
-       },
-       {
-        "function": "RaidOutB",
-        "dos_address": "S25:39C7:0460",
-        "win16": "_RaidOutB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 13840,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0460"
-       },
-       {
-        "function": "DoRestB",
-        "dos_address": "S25:39C7:04E5",
-        "win16": "_DoRestB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 13950,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:04E5"
-       },
-       {
-        "function": "DoDrownB",
-        "dos_address": "S25:39C7:0590",
-        "win16": "_DoDrownB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 14244,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0590"
-       },
-       {
-        "function": "DoRandB",
-        "dos_address": "S25:39C7:0677",
-        "win16": "_DoRandB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 14454,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0677"
-       },
-       {
-        "function": "DoRecruitN",
-        "dos_address": "S25:39C7:06E2",
-        "win16": "_DoRecruitN",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 14700,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:06E2"
-       },
-       {
-        "function": "DoNestFightB",
-        "dos_address": "S25:39C7:0746",
-        "win16": "_DoNestFightB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 14932,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0746"
-       },
-       {
-        "function": "CheckNestFightB",
-        "dos_address": "S25:39C7:0853",
-        "win16": "_CheckNestFightB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 15266,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0853"
-       },
-       {
-        "function": "DropFoodB",
-        "dos_address": "S25:39C7:090A",
-        "win16": "_DropFoodB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 15420,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:090A"
-       },
-       {
-        "function": "SimEggB",
-        "dos_address": "S25:39C7:0980",
-        "win16": "_SimEggB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 15520,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0980"
-       },
-       {
-        "function": "SimQueenB",
-        "dos_address": "S25:39C7:0AB0",
-        "win16": "_SimQueenB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 15810,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0AB0"
-       },
-       {
-        "function": "MakeNewTailB",
-        "dos_address": "S25:39C7:0EC2",
-        "win16": "_MakeNewTailB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 16970,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0EC2"
-       },
-       {
-        "function": "KillTailB",
-        "dos_address": "S25:39C7:0F30",
-        "win16": "_KillTailB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 17072,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0F30"
-       },
-       {
-        "function": "LostHeadB",
-        "dos_address": "S25:39C7:0F76",
-        "win16": "_LostHeadB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 17118,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0F76"
-       },
-       {
-        "function": "LostTailB",
-        "dos_address": "S25:39C7:0FE7",
-        "win16": "_LostTailB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 17212,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0FE7"
-       },
-       {
-        "function": "TryMoveDirB",
-        "dos_address": "S25:39C7:105B",
-        "win16": "_TryMoveDirB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 17310,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:105B"
-       },
-       {
-        "function": "TryEatFoodB",
-        "dos_address": "S25:39C7:13EF",
-        "win16": "_TryEatFoodB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 18374,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:13EF"
-       },
-       {
-        "function": "EatFoodB",
-        "dos_address": "S25:39C7:14A8",
-        "win16": "_EatFoodB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 18500,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:14A8"
-       },
-       {
-        "function": "StealFoodB",
-        "dos_address": "S25:39C7:154F",
-        "win16": "_StealFoodB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 18612,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:154F"
-       },
-       {
-        "function": "DecEatB",
-        "dos_address": "S25:39C7:15B4",
-        "win16": "_DecEatB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 18680,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:15B4"
-       },
-       {
-        "function": "LeaveNestB",
-        "dos_address": "S25:39C7:1BBB",
-        "win16": "_LeaveNestB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 20830,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:1BBB"
-       },
-       {
-        "function": "GetBestDir",
-        "dos_address": "S25:39C7:0CBD",
-        "win16": "_GetBestDir",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 16478,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0CBD"
-       },
-       {
-        "function": "QueenMoveB",
-        "dos_address": "S25:39C7:0DAF",
-        "win16": "_QueenMoveB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 16724,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:0DAF"
-       },
-       {
-        "function": "GetOutB",
-        "dos_address": "S25:39C7:1C81",
-        "win16": "_GetOutB",
-        "group": "SIMANT1",
-        "confidence": "CONFIRMED",
-        "win16_segment": 6,
-        "win16_offset": 21002,
-        "decision": "evidence/cross_version/decisions.json#/pairs/S25:39C7:1C81"
-       }
-      ],
-      "groups": [
-       "SIMANT1"
-      ]
-     },
-     {
-      "path": "src/simulation/black_nest.c",
-      "prior_leading_comment": "Overlay section S25, code frame 39C7: black colony nest simulation (DoAntSimB unit).\nBuilt /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function\nrelocation-order constraints are violated, under /Zi none.  Line layout: the seven\n\"map = list = value\" stores are written as two statements (the file's own style, e.g.\n\"BlistT[..] = ..; fd_3E1D_8180[x][y] = BlistT[..];\"); byte-identical either way, but the\nextra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis\ncall, as its within-group relocation order requires (FORBID (0CDC,0D54]).\nWorker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds\nreferences to dir, REG-3, and puts dir in SI); its final store is two statements like the\nothers, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both\nare byte-identical to the one-line forms; their three extra /Zi line entries put the sixth\nflush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside\nGetOutB's FORBID (1CFC,1DC0].  DoDigInB writes the DigTileThemB test as\n\"if (DigTileThemB(..)) {..} else {..; return;}\" like its red twin DoDigInR (root:0F3F); the\nnegated early-return form compiles to the same instructions except that dir then loses DI\nin the first region (allocation: the if/else form puts the GetEnterDirB result in DI and\nspills it to [bp-4] after the y == 0x3f test, as the original does).",
-      "retained_comment": "Built /AL /Os /Oe /Og /Zi (like the sibling S25:3BA4): under /Zd 27 cross-function\nrelocation-order constraints are violated, under /Zi none.  Line layout: the seven\n\"map = list = value\" stores are written as two statements (the file's own style, e.g.\n\"BlistT[..] = ..; LifeB[x][y] = BlistT[..];\"); byte-identical either way, but the\nextra /Zi line entries put the fourth 52-entry flush before GetBestDir's first GetDis\ncall, as its within-group relocation order requires (FORBID (0CDC,0D54]).\nWorker resI: QueenMoveB (0DAF) writes its y<3 test as one condition (the nested form adds\nreferences to dir, REG-3, and puts dir in SI); its final store is two statements like the\nothers, and TryMoveDirB (105B) tests its three trophallaxis conditions as nested ifs.  Both\nare byte-identical to the one-line forms; their three extra /Zi line entries put the sixth\nflush at 12FB (DoNestingB NEED (12E3,131E], FORBID (12FE,132D]) and the ninth outside\nGetOutB's FORBID (1CFC,1DC0].  DoDigInB writes the DigTileThemB test as\n\"if (DigTileThemB(..)) {..} else {..; return;}\" like its red twin DoDigInR (root:0F3F); the\nnegated early-return form compiles to the same instructions except that dir then loses DI\nin the first region (allocation: the if/else form puts the GetEnterDirB result in DI and\nspills it to [bp-4] after the y == 0x3f test, as the original does).",
-      "comment_review": "Retain technical evidence; general header facts are stated above."
-     }
-    ]
-   }
+   "object_sha256": "2027cc6b1b6ed0e200d13dd800f05342fc8e9d792554ae9fcddc9d8bd693bf28"
   },
   "S25:3BA4": {
    "unit": "S25",
@@ -11364,7 +11366,7 @@
     "end": 251234
    },
    "source": "src/simulation/yellow_ant.c",
-   "source_sha256": "7e465cf1a02cf9e3028acd45d094cf1aec022239847328dc1be6d698d7639d75",
+   "source_sha256": "b83a21727495112442251bbea806c6bda9496514c46c39ff0354260972bd8eae",
    "claims": [
     {
      "name": "DoAntSimY",
@@ -11605,7 +11607,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ed9162d562a31fc8c8265b898c616e9b43cf5eda69c31719a87f5cc34544caa2"
+   "object_sha256": "2f4f43f624c943bb89875555a8595182c9ce4472b6e3e42ad04991008a425184"
   },
   "S26:39C7": {
    "unit": "S26",
@@ -11700,7 +11702,7 @@
     "end": 238892
    },
    "source": "src/window/move_resize.c",
-   "source_sha256": "82ef9627014171f43ebfa225ed1fc637613af194768b109314b50e27bf1c0afc",
+   "source_sha256": "a689160934f4b67e931e6ad2e7d144e651de63784bc8cece226c2108c839309c",
    "claims": [
     {
      "name": "win_toggle_zoom",
@@ -11748,7 +11750,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "22bef984d72ea2978e4d86d3ad61f5b2025622d8b1b5a1b6381e052afb379323"
+   "object_sha256": "81bd518aeeaaced57081dad5de2253ab59925f79dee3ec70b0a5ade5d8588095"
   },
   "data:3D57": {
    "unit": "data",
@@ -13344,7 +13346,7 @@
     "end": 3561
    },
    "source": "src/startup/application_windows.c",
-   "source_sha256": "f66eed1c42b503b0a614e416fb9b1fa1c8ce34eab73b1df772932e41082caf8d",
+   "source_sha256": "659c12726a5fc3ed0b81be71790b5a144486e2db726674296a8783fc0a8ce20c",
    "claims": [
     {
      "name": "InitApplicationStuff",
@@ -13403,7 +13405,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "68c567d0d1c31c8b44ddcf5e0a5fdcafcff3bf9b1e5206e20b5882e7e2aef37b"
+   "object_sha256": "f1dccabe890c074447df5364f6fb9d1d207fb17648fe00117eb4295b408ae59b"
   },
   "root:00DE": {
    "unit": "root",
@@ -14086,7 +14088,7 @@
     "end": 5565
    },
    "source": "src/ui/view_dialog_helpers.c",
-   "source_sha256": "2bc94adef2604b3e486c6f8a3b29e235c6fc3ac6b3191d1934699b0cbe2f26b8",
+   "source_sha256": "60e8da8f4f1889e8e1f86e89764656650023709dec4009c81a25b051e8d88d6c",
    "claims": [
     {
      "name": "ABS",
@@ -14530,7 +14532,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "a94c1b9002169763e15f36448cafebe6e0168d42e3ef557518e80d1d162db690"
+   "object_sha256": "029be7747e7d086f85444a669346eddc2cd3c37d7b09ac165f37ac879ff9b454"
   },
   "root:015B": {
    "unit": "root",
@@ -14786,7 +14788,7 @@
     "end": 9279
    },
    "source": "src/ui/view_commands.c",
-   "source_sha256": "bd7132af72317ed0c66a0f39a3985ac6329e1f1fb8c88357104714c5b8379aed",
+   "source_sha256": "f3707936bc32306f11339b6c64e4181a691f4863e194547e271e3d507d1978d6",
    "claims": [
     {
      "name": "SetEditMode",
@@ -15010,7 +15012,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "15bd5525ecae321150b5a9235394fbf45129daa432d529accacfbcaaef1a404e"
+   "object_sha256": "38be7981c87ef1a8720100ca43490a00002d99b3856e020896ae05b3fed8bd05"
   },
   "root:0244": {
    "unit": "root",
@@ -15611,7 +15613,7 @@
     ]
    },
    "source": "src/ui/edit_view.c",
-   "source_sha256": "aa589cf02538afaab8ece39cb5de17ff9cb1f6e9d88b3f16d87d4f3fb1084984",
+   "source_sha256": "f93dc7c09d5d3d30798d69f3afe2ad7a9a2556580171f4399801540888224738",
    "claims": [
     {
      "name": "edit_scroll_delta",
@@ -16180,7 +16182,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f9912e9f06024dcf1a3374c58d7e25fa8ea219674378f1e3368b4dad48c75067"
+   "object_sha256": "48bad5a99e59b3b852f0a3449b4f565f09673de0cb55571ea77568915acd6556"
   },
   "root:075B": {
    "unit": "root",
@@ -16206,71 +16208,7 @@
     }
    },
    "lang": "c",
-   "extent": {
-    "start": 30128,
-    "end": 30956
-   },
-   "source": "src/resources/game_strings.c",
-   "source_sha256": "3fb7528f55989edd526ec2516fba3f793f8d47400da86385167e65e7b3927452",
-   "claims": [
-    {
-     "name": "initStuff",
-     "unit": "root",
-     "seg": 1883,
-     "off": 0,
-     "size": 166,
-     "target_sha256": "bfe956d0e3c702ebc1d85c1680007851cb25a8b05a8bd7106fd2adc1d52f431f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "f_075B_00A6",
-     "unit": "root",
-     "seg": 1883,
-     "off": 166,
-     "size": 8,
-     "target_sha256": "424dadfcf7b504a3a2053a972f7c12740b8fd864fbbf3e4585bdfd8180c3e6c5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "PrepareStrings",
-     "unit": "root",
-     "seg": 1883,
-     "off": 174,
-     "size": 404,
-     "target_sha256": "85770265a16868274c68d67fec952c889fbcd695e40e111959025b0a1da34242",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "LoadStringAnt",
-     "unit": "root",
-     "seg": 1883,
-     "off": 578,
-     "size": 242,
-     "target_sha256": "9f0f9178851d6cfafded7903e620f98b714c5934da430700ffba2f0a50f36775",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "f_075B_0334",
-     "unit": "root",
-     "seg": 1883,
-     "off": 820,
-     "size": 8,
-     "target_sha256": "424dadfcf7b504a3a2053a972f7c12740b8fd864fbbf3e4585bdfd8180c3e6c5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "925bfae62e346c82ddd9876a523907c4e2bd5af7993af22c024db7ad4f60b27c",
+   "source_origin": "hand-written C",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -16278,8 +16216,8 @@
      "why": "Loads startup resources and prepares game string lists. It provides the resource string lookup used by the interface and simulation messages."
     }
    ],
-   "summary": "Loads startup resources and prepares game string lists. It provides the resource string lookup used by the interface and simulation messages.",
    "windows_group": "SIMONE",
+   "summary": "Loads startup resources and prepares game string lists. It provides the resource string lookup used by the interface and simulation messages.",
    "file_header": {
     "text": "Loads startup resources and prepares game string lists. It provides the resource string lookup\nused by the interface and simulation messages.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 075B; complete original translation unit.\nWindows: SIMONE, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
     "name_kind": "descriptive",
@@ -16354,7 +16292,72 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 30128,
+    "end": 30956
+   },
+   "source": "src/resources/game_strings.c",
+   "source_sha256": "de2cbcc7204e8c58601391dae5a591e7296003b0218bf68dff663d1ed7a7d7f7",
+   "claims": [
+    {
+     "name": "initStuff",
+     "unit": "root",
+     "seg": 1883,
+     "off": 0,
+     "size": 166,
+     "target_sha256": "bfe956d0e3c702ebc1d85c1680007851cb25a8b05a8bd7106fd2adc1d52f431f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_075B_00A6",
+     "unit": "root",
+     "seg": 1883,
+     "off": 166,
+     "size": 8,
+     "target_sha256": "424dadfcf7b504a3a2053a972f7c12740b8fd864fbbf3e4585bdfd8180c3e6c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "PrepareStrings",
+     "unit": "root",
+     "seg": 1883,
+     "off": 174,
+     "size": 404,
+     "target_sha256": "85770265a16868274c68d67fec952c889fbcd695e40e111959025b0a1da34242",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "LoadStringAnt",
+     "unit": "root",
+     "seg": 1883,
+     "off": 578,
+     "size": 242,
+     "target_sha256": "9f0f9178851d6cfafded7903e620f98b714c5934da430700ffba2f0a50f36775",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_075B_0334",
+     "unit": "root",
+     "seg": 1883,
+     "off": 820,
+     "size": 8,
+     "target_sha256": "424dadfcf7b504a3a2053a972f7c12740b8fd864fbbf3e4585bdfd8180c3e6c5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "e216ad97f7107d2face0536de2c6322442bfdd7c7a088a2360d36b236d0c576f"
   },
   "root:078E": {
    "unit": "root",
@@ -16747,7 +16750,7 @@
     "end": 35149
    },
    "source": "src/ui/colony_controls.c",
-   "source_sha256": "76d71fb7bb698fec90fa5dd92175b78ebe6c732d77b11b0af079bf1bc3e1d9ff",
+   "source_sha256": "2e96314a80693f20e4da536d0a9df88296bc447da44db7d0c820212ee099ca5a",
    "claims": [
     {
      "name": "InitTriVars",
@@ -17711,225 +17714,7 @@
     }
    },
    "lang": "c",
-   "extent": {
-    "start": 44444,
-    "end": 48769
-   },
-   "source": "src/simulation/yard_creatures.c",
-   "source_sha256": "f5bcd1b74d2a10b91722de8b17987f29f863358f9ef1ae88ded1a34f75858e66",
-   "claims": [
-    {
-     "name": "InitSow",
-     "unit": "root",
-     "seg": 2777,
-     "off": 12,
-     "size": 176,
-     "target_sha256": "f3a3e49bcf29f7a500877fb0e0020e8ffc2176e51cd695e997b12a0b3737a19a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoSow",
-     "unit": "root",
-     "seg": 2777,
-     "off": 188,
-     "size": 386,
-     "target_sha256": "cce1244cdbf7be74b8402decab3ff4d1d93c0f48d5beb637cdb6706d3bcb0eed",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "InitAntLions",
-     "unit": "root",
-     "seg": 2777,
-     "off": 574,
-     "size": 72,
-     "target_sha256": "18433daf94df7b2fc4f91fe98f2a9e885a74eb6d479085a9c035ae19f53dc8aa",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "AddRandAntLion",
-     "unit": "root",
-     "seg": 2777,
-     "off": 646,
-     "size": 134,
-     "target_sha256": "bf0211a90f040947c0d519eb4f0c5f0eb18d105bcefad67b7eac99f024f8466c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "AddAntLion",
-     "unit": "root",
-     "seg": 2777,
-     "off": 780,
-     "size": 199,
-     "target_sha256": "37ecd7eb4cfe837aedeb45d25480d8b10306587ee0f9f942ad6e9abc35b420f2",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoAntLions",
-     "unit": "root",
-     "seg": 2777,
-     "off": 979,
-     "size": 1002,
-     "target_sha256": "e52e9314c351d0d76aed3ccd15d3c269f0ade8614a48cb0ba3c890e04f0582af",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SetAntLion",
-     "unit": "root",
-     "seg": 2777,
-     "off": 1981,
-     "size": 63,
-     "target_sha256": "19fe17849de82b735c09b003e6febefd6449a2b63aa6f07c1f7b624b7c57ce25",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "FindInLionList",
-     "unit": "root",
-     "seg": 2777,
-     "off": 2044,
-     "size": 60,
-     "target_sha256": "1e3e572e2a959257bd64df13a28e81108e0c5364815bcafdcc7cd2093ccb7564",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "KillAntLion",
-     "unit": "root",
-     "seg": 2777,
-     "off": 2104,
-     "size": 164,
-     "target_sha256": "107ce12de2691b3641be18db30a2370d2aba3343abc6cf4fa5e6031cecc284c3",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "InitPillar",
-     "unit": "root",
-     "seg": 2777,
-     "off": 2268,
-     "size": 96,
-     "target_sha256": "95cb14dc83ac699a8c2181c5472f91d33a663236b83c6bbd4408dbd42a1674d2",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DoPillar",
-     "unit": "root",
-     "seg": 2777,
-     "off": 2364,
-     "size": 1007,
-     "target_sha256": "f1172730099b07405285c9c119b6b9f6283a56f7073cc018a99ab4799295521b",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "StorePillarMap",
-     "unit": "root",
-     "seg": 2777,
-     "off": 3371,
-     "size": 140,
-     "target_sha256": "589860b796a0ee3674c6d4edf020063ee60ee986f6a9d3d6d4aaa616953249aa",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "ReplacePillarMap",
-     "unit": "root",
-     "seg": 2777,
-     "off": 3511,
-     "size": 88,
-     "target_sha256": "138cadc08a66310c62362585eca42fa96ac2d4db6aeebd21cc3dc9b82297e41d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakeAPill",
-     "unit": "root",
-     "seg": 2777,
-     "off": 3599,
-     "size": 267,
-     "target_sha256": "313413b37e1a89f256a0f6060f75c00b454fb1b0d2ba6e42ede1be071a00bf5b",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "PlacePillTile",
-     "unit": "root",
-     "seg": 2777,
-     "off": 3866,
-     "size": 52,
-     "target_sha256": "9fecd6bdd0c85adeae44705014f64e0bd382a4b1bdd17753f966433803ab2c9d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "IsPillDead",
-     "unit": "root",
-     "seg": 2777,
-     "off": 3972,
-     "size": 108,
-     "target_sha256": "672cfcc3f44dc720054d1c97d5f16927bde729d10b0d6eaf1bf1a24099d487ba",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "MakePillFood",
-     "unit": "root",
-     "seg": 2777,
-     "off": 4080,
-     "size": 180,
-     "target_sha256": "22008a2dd35f13292d093d187031bab9498448fb843457110a07fad32207bdac",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "PillFoodTile",
-     "unit": "root",
-     "seg": 2777,
-     "off": 4260,
-     "size": 77,
-     "target_sha256": "1077c85ea2cf2771a6b74740957c2daf1beef1ca650a4620575b658ec1808b70",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "PillGetLife",
-     "unit": "root",
-     "seg": 2777,
-     "off": 3918,
-     "size": 54,
-     "target_sha256": "2ec97b6f82d7e104a3bb4f1aafa8a279e74e6766b95ba26846621c644bbc63be",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "020fcff660cba2de358655cd3a80794137bb04ffe0469fdee039581c1986c6e1",
+   "source_origin": "hand-written C",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -17937,8 +17722,8 @@
      "why": "Simulates sowing, ant lions and the pill bug. It maintains creature lists, movement and the pill bug tile map."
     }
    ],
-   "summary": "Updates the moving surface creatures tracked by the Sow arrays, ant lions and the pill bug. It maintains creature lists, movement and the pill bug tile map.",
    "windows_group": "SIMTWO",
+   "summary": "Updates the moving surface creatures tracked by the Sow arrays, ant lions and the pill bug. It maintains creature lists, movement and the pill bug tile map.",
    "file_header": {
     "text": "Updates the moving surface creatures tracked by the Sow arrays, ant lions and the pill bug. It\nmaintains creature lists, movement and the pill bug tile map.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 0AD9; complete original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory.",
     "name_kind": "descriptive",
@@ -18183,7 +17968,226 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 44444,
+    "end": 48769
+   },
+   "source": "src/simulation/yard_creatures.c",
+   "source_sha256": "95a844aa025d12a399fd87d23346ba2c518dc22b96bed8fb9d73a56930530cb5",
+   "claims": [
+    {
+     "name": "InitSow",
+     "unit": "root",
+     "seg": 2777,
+     "off": 12,
+     "size": 176,
+     "target_sha256": "f3a3e49bcf29f7a500877fb0e0020e8ffc2176e51cd695e997b12a0b3737a19a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoSow",
+     "unit": "root",
+     "seg": 2777,
+     "off": 188,
+     "size": 386,
+     "target_sha256": "cce1244cdbf7be74b8402decab3ff4d1d93c0f48d5beb637cdb6706d3bcb0eed",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "InitAntLions",
+     "unit": "root",
+     "seg": 2777,
+     "off": 574,
+     "size": 72,
+     "target_sha256": "18433daf94df7b2fc4f91fe98f2a9e885a74eb6d479085a9c035ae19f53dc8aa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "AddRandAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 646,
+     "size": 134,
+     "target_sha256": "bf0211a90f040947c0d519eb4f0c5f0eb18d105bcefad67b7eac99f024f8466c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "AddAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 780,
+     "size": 199,
+     "target_sha256": "37ecd7eb4cfe837aedeb45d25480d8b10306587ee0f9f942ad6e9abc35b420f2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoAntLions",
+     "unit": "root",
+     "seg": 2777,
+     "off": 979,
+     "size": 1002,
+     "target_sha256": "e52e9314c351d0d76aed3ccd15d3c269f0ade8614a48cb0ba3c890e04f0582af",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 1981,
+     "size": 63,
+     "target_sha256": "19fe17849de82b735c09b003e6febefd6449a2b63aa6f07c1f7b624b7c57ce25",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "FindInLionList",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2044,
+     "size": 60,
+     "target_sha256": "1e3e572e2a959257bd64df13a28e81108e0c5364815bcafdcc7cd2093ccb7564",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "KillAntLion",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2104,
+     "size": 164,
+     "target_sha256": "107ce12de2691b3641be18db30a2370d2aba3343abc6cf4fa5e6031cecc284c3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "InitPillar",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2268,
+     "size": 96,
+     "target_sha256": "95cb14dc83ac699a8c2181c5472f91d33a663236b83c6bbd4408dbd42a1674d2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoPillar",
+     "unit": "root",
+     "seg": 2777,
+     "off": 2364,
+     "size": 1007,
+     "target_sha256": "f1172730099b07405285c9c119b6b9f6283a56f7073cc018a99ab4799295521b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "StorePillarMap",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3371,
+     "size": 140,
+     "target_sha256": "589860b796a0ee3674c6d4edf020063ee60ee986f6a9d3d6d4aaa616953249aa",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "ReplacePillarMap",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3511,
+     "size": 88,
+     "target_sha256": "138cadc08a66310c62362585eca42fa96ac2d4db6aeebd21cc3dc9b82297e41d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakeAPill",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3599,
+     "size": 267,
+     "target_sha256": "313413b37e1a89f256a0f6060f75c00b454fb1b0d2ba6e42ede1be071a00bf5b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "PlacePillTile",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3866,
+     "size": 52,
+     "target_sha256": "9fecd6bdd0c85adeae44705014f64e0bd382a4b1bdd17753f966433803ab2c9d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "IsPillDead",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3972,
+     "size": 108,
+     "target_sha256": "672cfcc3f44dc720054d1c97d5f16927bde729d10b0d6eaf1bf1a24099d487ba",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "MakePillFood",
+     "unit": "root",
+     "seg": 2777,
+     "off": 4080,
+     "size": 180,
+     "target_sha256": "22008a2dd35f13292d093d187031bab9498448fb843457110a07fad32207bdac",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "PillFoodTile",
+     "unit": "root",
+     "seg": 2777,
+     "off": 4260,
+     "size": 77,
+     "target_sha256": "1077c85ea2cf2771a6b74740957c2daf1beef1ca650a4620575b658ec1808b70",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "PillGetLife",
+     "unit": "root",
+     "seg": 2777,
+     "off": 3918,
+     "size": 54,
+     "target_sha256": "2ec97b6f82d7e104a3bb4f1aafa8a279e74e6766b95ba26846621c644bbc63be",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "30d052bb6883dae3f69e564bb03ed0077fcb15cb88c0ae160891b8b337ed84b5"
   },
   "root:0BE8": {
    "unit": "root",
@@ -18497,7 +18501,7 @@
     "end": 52655
    },
    "source": "src/simulation/food_water_counts.c",
-   "source_sha256": "c1bcb84c3828b5cdb618fadece0d921635bdcc110ed1880318a3cd37a44b79d9",
+   "source_sha256": "700277338453dc391a07a1ffb8d9c6e0de363bb08fd30c6894a39170e04c3319",
    "claims": [
     {
      "name": "IsItDirt",
@@ -18913,7 +18917,7 @@
     "end": 57072
    },
    "source": "src/simulation/spider.c",
-   "source_sha256": "6c0dc09b0905ffafdf503b1f4a1ec42e1e1868486b3674b58bde751b641f7c0d",
+   "source_sha256": "58942077d35d30187fc2bc1e1ab497cb5df6c0058e8c82d43bb0d1f645063b75",
    "claims": [
     {
      "name": "InitSpider",
@@ -19000,7 +19004,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "29535026dbbf081e1a5c0adfee9a453915ab62aa469f455c3a67fb0b3933d635"
+   "object_sha256": "239485b54a3bfd2dd4ac326210904e323a4994e498c96bb0d9632a886d8bfa18"
   },
   "root:0DEF": {
    "unit": "root",
@@ -19311,7 +19315,7 @@
     "end": 60433
    },
    "source": "src/simulation/tutorial.c",
-   "source_sha256": "3f94a0ec2c0a5c34ddbbe592a713e89e83db69b62112d886225649bbfda86adf",
+   "source_sha256": "62ddbbdfdca2f8b06a513905b7a7c2d25e989e1659202d97d4904d4db041cc14",
    "claims": [
     {
      "name": "Feedback",
@@ -19360,7 +19364,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e91c1d621bed2a1ad3971c28baae59bb8af62766fc3c7e71ef5f1e8003163c44"
+   "object_sha256": "9089c4d8b622808983ba93b868d783d5226cb944937d14c70b546b50ffc8e454"
   },
   "root:0EC1": {
    "unit": "root",
@@ -19838,324 +19842,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "extent": {
-    "start": 62456,
-    "end": 69501
-   },
-   "source": "src/simulation/red_nest.c",
-   "source_sha256": "23714a97017c1cb80b8edd90a9dce4b09a53da264e3cea095905f6e46d750b81",
-   "claims": [
-    {
-     "name": "DoAntSimR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 8,
-     "size": 109,
-     "target_sha256": "24c153c4828e2ece828adaabce8a83589aa449979f494e4a009694b0bc6e893c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "RaidInR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 944,
-     "size": 209,
-     "target_sha256": "e8f8c422a4e856f93ffd3f92e63e1e719f0bd1a22cc387965a957b78bbc0d246",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "StayInR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 1153,
-     "size": 232,
-     "target_sha256": "0fa5248c04dacd21425b1dd0b6598478fe66746497c795b6aa8012ed68717d84",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "RaidOutR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 1385,
-     "size": 133,
-     "target_sha256": "88f5c884e842f7042311805be38768dcf1dda60c000383a494de00bf79a612b0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoRestR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 1518,
-     "size": 172,
-     "target_sha256": "5efa07d548ebc0886b8b681a5d2f985221cc2bf845222a79201e8b51fd40a0f0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoDrownR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 1690,
-     "size": 231,
-     "target_sha256": "ca8ad0fa425ea71c89b175c0fe955d9e3e81664ca1856532d43c7e349b221719",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoRandR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 1921,
-     "size": 108,
-     "target_sha256": "05b1bd6b01a8de207e8b2fbad099863403ddb37fe201092f4be0d4c57a65f0ce",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoNestFightR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 2029,
-     "size": 265,
-     "target_sha256": "836d7119876e5ce772e53d53ca276ae165fa0794d02d1f4b7abec3a8afadcd5e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "CheckNestFightR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 2294,
-     "size": 186,
-     "target_sha256": "1d9b1189f76d10241bf03873027bf41991fee4932999e479a5ae792255374d4c",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DropFoodR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 2480,
-     "size": 118,
-     "target_sha256": "a0fcd4a117ce4b114688c4aa1705c2052386e9656bb3be4a90d24080e0ca918e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "SimEggR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 2598,
-     "size": 249,
-     "target_sha256": "3395027237b69fda24429589ececf15439b1fffc7b6d0f5516d3293cf5a42b64",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SimQueenR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 2847,
-     "size": 508,
-     "target_sha256": "a63a31f77198b97bf82f8ae45373ba475503e29c835361d8e42668970c08dd10",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "QueenMoveR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 3355,
-     "size": 277,
-     "target_sha256": "d47c650bcd5da3b317ec920c7126e5a8523ab1d7b0da2d8374cddcb6c3106a46",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "MakeNewTailR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 3632,
-     "size": 110,
-     "target_sha256": "8dc6b8f47ae6d521bade55588a36ed8736791bb6a9a0aeced363bb5f149f4335",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "KillTailR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 3742,
-     "size": 70,
-     "target_sha256": "8822155a1f5a487688ac9e16f8d963b621ce0ed4161af14a1b18e1c03d9b2f20",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "LostHeadR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 3812,
-     "size": 113,
-     "target_sha256": "00dd2713927f95f19f411f0df81812dbbda95034cab305b4ec4c26d4332cc97b",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "LostTailR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 3925,
-     "size": 116,
-     "target_sha256": "742ad9eeb16bd566fc23e7718f329473b4d1a0ccc969ab1c72642ecbc784028e",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "TryMoveDirR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 4041,
-     "size": 216,
-     "target_sha256": "154a21b4de16bed9131220bfd62d09b8aa44f9af7f54a170379f83990168328f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "TryEatFoodR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 4727,
-     "size": 185,
-     "target_sha256": "6f60ab0e9cc78a33f88c69176979bbcfd0fe2e69ead34da3893aec3bb54c4842",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "EatFoodR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 4912,
-     "size": 167,
-     "target_sha256": "8990d350eab7eb783840cbfcd38cff9a859576dbc5e8e48dd1543e2ba9269bec",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "StealFoodR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 5079,
-     "size": 101,
-     "target_sha256": "707462ebffe6f533dac230fcd3e5ee063b7c71b8fc4b3a106174fe463c23a1ca",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DecEatR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 5180,
-     "size": 56,
-     "target_sha256": "e62e9f68f7ae0246e042944c7415bc899a0fe9a9e9201ac5711222ce5fcbe6a8",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DoFoodInR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 5236,
-     "size": 392,
-     "target_sha256": "9300500bcab688d37645929ea18a17f5a03472630a88602d2b8f6da0745726b3",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoDigOutR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 6251,
-     "size": 460,
-     "target_sha256": "8a01ec265e4ea8dbd9b7a3b58ea91bbffe3af9b1dee00e64df5b157907c2d9a2",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetOutR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 6711,
-     "size": 342,
-     "target_sha256": "7fb531968433ee820aaf4a051672b89d9e3935d1f76ec3de78cd7759998e7d65",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoNestAntR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 117,
-     "size": 827,
-     "target_sha256": "5060cf69931c88ff0c522c26bce1302fe997b36db0f5aa3e466b6300b2043b44",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoNestingR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 4257,
-     "size": 470,
-     "target_sha256": "6570e7040a26723137350e43d6a1f9dc4f3aef98f547d51189082b3c17d09296",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "DoDigInR",
-     "unit": "root",
-     "seg": 3903,
-     "off": 5628,
-     "size": 623,
-     "target_sha256": "c766398ed3f5c2df9fdd424bc2f53de4cd4c0349cdd228e33c4c6917e6dc5536",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "9c9af3837ba54952e218e858ef1bb7ad9b83a7563923b89cdcd5c85eec29c8ac",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -20163,8 +19849,8 @@
      "why": "Advances ants in the red colony nest. It handles nest movement, fights, food, eggs, the queen, tail following and digging."
     }
    ],
-   "summary": "Advances ants in the red colony nest. It handles nest movement, fights, food, eggs, the queen, tail following and digging.",
    "windows_group": "SIMANT1",
+   "summary": "Advances ants in the red colony nest. It handles nest movement, fights, food, eggs, the queen, tail following and digging.",
    "file_header": {
     "text": "Advances ants in the red colony nest. It handles nest movement, fights, food, eggs, the queen,\ntail following and digging.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 0F3F; complete original translation unit.\nWindows: SIMANT1, from recorded function pairs in the Windows symbol inventory.",
     "name_kind": "descriptive",
@@ -20479,7 +20165,325 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "extent": {
+    "start": 62456,
+    "end": 69501
+   },
+   "source": "src/simulation/red_nest.c",
+   "source_sha256": "625003a11dc577c554e416c2f5852e9fe1c98f4d691d298ae3fb8316db58687f",
+   "claims": [
+    {
+     "name": "DoAntSimR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 8,
+     "size": 109,
+     "target_sha256": "24c153c4828e2ece828adaabce8a83589aa449979f494e4a009694b0bc6e893c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "RaidInR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 944,
+     "size": 209,
+     "target_sha256": "e8f8c422a4e856f93ffd3f92e63e1e719f0bd1a22cc387965a957b78bbc0d246",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "StayInR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1153,
+     "size": 232,
+     "target_sha256": "0fa5248c04dacd21425b1dd0b6598478fe66746497c795b6aa8012ed68717d84",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "RaidOutR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1385,
+     "size": 133,
+     "target_sha256": "88f5c884e842f7042311805be38768dcf1dda60c000383a494de00bf79a612b0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoRestR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1518,
+     "size": 172,
+     "target_sha256": "5efa07d548ebc0886b8b681a5d2f985221cc2bf845222a79201e8b51fd40a0f0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoDrownR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1690,
+     "size": 231,
+     "target_sha256": "ca8ad0fa425ea71c89b175c0fe955d9e3e81664ca1856532d43c7e349b221719",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoRandR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 1921,
+     "size": 108,
+     "target_sha256": "05b1bd6b01a8de207e8b2fbad099863403ddb37fe201092f4be0d4c57a65f0ce",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoNestFightR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2029,
+     "size": 265,
+     "target_sha256": "836d7119876e5ce772e53d53ca276ae165fa0794d02d1f4b7abec3a8afadcd5e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CheckNestFightR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2294,
+     "size": 186,
+     "target_sha256": "1d9b1189f76d10241bf03873027bf41991fee4932999e479a5ae792255374d4c",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DropFoodR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2480,
+     "size": 118,
+     "target_sha256": "a0fcd4a117ce4b114688c4aa1705c2052386e9656bb3be4a90d24080e0ca918e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "SimEggR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2598,
+     "size": 249,
+     "target_sha256": "3395027237b69fda24429589ececf15439b1fffc7b6d0f5516d3293cf5a42b64",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SimQueenR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 2847,
+     "size": 508,
+     "target_sha256": "a63a31f77198b97bf82f8ae45373ba475503e29c835361d8e42668970c08dd10",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "QueenMoveR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3355,
+     "size": 277,
+     "target_sha256": "d47c650bcd5da3b317ec920c7126e5a8523ab1d7b0da2d8374cddcb6c3106a46",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "MakeNewTailR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3632,
+     "size": 110,
+     "target_sha256": "8dc6b8f47ae6d521bade55588a36ed8736791bb6a9a0aeced363bb5f149f4335",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "KillTailR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3742,
+     "size": 70,
+     "target_sha256": "8822155a1f5a487688ac9e16f8d963b621ce0ed4161af14a1b18e1c03d9b2f20",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "LostHeadR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3812,
+     "size": 113,
+     "target_sha256": "00dd2713927f95f19f411f0df81812dbbda95034cab305b4ec4c26d4332cc97b",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "LostTailR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 3925,
+     "size": 116,
+     "target_sha256": "742ad9eeb16bd566fc23e7718f329473b4d1a0ccc969ab1c72642ecbc784028e",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "TryMoveDirR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 4041,
+     "size": 216,
+     "target_sha256": "154a21b4de16bed9131220bfd62d09b8aa44f9af7f54a170379f83990168328f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "TryEatFoodR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 4727,
+     "size": 185,
+     "target_sha256": "6f60ab0e9cc78a33f88c69176979bbcfd0fe2e69ead34da3893aec3bb54c4842",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "EatFoodR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 4912,
+     "size": 167,
+     "target_sha256": "8990d350eab7eb783840cbfcd38cff9a859576dbc5e8e48dd1543e2ba9269bec",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "StealFoodR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 5079,
+     "size": 101,
+     "target_sha256": "707462ebffe6f533dac230fcd3e5ee063b7c71b8fc4b3a106174fe463c23a1ca",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DecEatR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 5180,
+     "size": 56,
+     "target_sha256": "e62e9f68f7ae0246e042944c7415bc899a0fe9a9e9201ac5711222ce5fcbe6a8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DoFoodInR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 5236,
+     "size": 392,
+     "target_sha256": "9300500bcab688d37645929ea18a17f5a03472630a88602d2b8f6da0745726b3",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoDigOutR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 6251,
+     "size": 460,
+     "target_sha256": "8a01ec265e4ea8dbd9b7a3b58ea91bbffe3af9b1dee00e64df5b157907c2d9a2",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetOutR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 6711,
+     "size": 342,
+     "target_sha256": "7fb531968433ee820aaf4a051672b89d9e3935d1f76ec3de78cd7759998e7d65",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoNestAntR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 117,
+     "size": 827,
+     "target_sha256": "5060cf69931c88ff0c522c26bce1302fe997b36db0f5aa3e466b6300b2043b44",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoNestingR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 4257,
+     "size": 470,
+     "target_sha256": "6570e7040a26723137350e43d6a1f9dc4f3aef98f547d51189082b3c17d09296",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "DoDigInR",
+     "unit": "root",
+     "seg": 3903,
+     "off": 5628,
+     "size": 623,
+     "target_sha256": "c766398ed3f5c2df9fdd424bc2f53de4cd4c0349cdd228e33c4c6917e6dc5536",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "9ae540ad56012f65cb933f3d2f3c8f848527110045b55352313abb0bc2b6c319"
   },
   "root:10F7": {
    "unit": "root",
@@ -21100,7 +21104,7 @@
     "end": 79921
    },
    "source": "src/simulation/life_tiles.c",
-   "source_sha256": "33f5cb23ac632dfae78d75c08fd321c7984015e9fbaf05056b471cdfa4ff4760",
+   "source_sha256": "636186c3e105bcf0cf433d71957d23df3e861595df41f401822c97dd4b075f60",
    "claims": [
     {
      "name": "IsValidLocation",
@@ -21731,7 +21735,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e424346c2bbc72da9ead6d21bb655b163d46a6d8eb8ab5458073d558d687d743"
+   "object_sha256": "7e898c6fdfcac539f4a17e2410c464b660fbca01698cc0daa9a36a0a700d1de0"
   },
   "root:1383": {
    "unit": "root",
@@ -21753,261 +21757,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "layout_inferred": [
-    "one-line 'if (...) return ...;' statements chosen for the LINNUM flush positions (records.py FORBID intervals, e.g. GetForageDir (0B72,0C0E])"
-   ],
-   "extent": {
-    "start": 79922,
-    "end": 84326
-   },
-   "source": "src/simulation/strategy.c",
-   "source_sha256": "c61678bc24968691aed030c9efe7ef06be77ce81d61e71adeddad9c43964c80b",
-   "claims": [
-    {
-     "name": "GetStrategy",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2,
-     "size": 297,
-     "target_sha256": "b14be7c92a45b698d859c898c00328f5551123d62f90b3a0f5e79405bd616eb9",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GstrB",
-     "unit": "root",
-     "seg": 4995,
-     "off": 299,
-     "size": 205,
-     "target_sha256": "0531e5df2b8f63fa62c5cfe5a398c9988b78295ad5ecf3e7ccb07e6e89d26690",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SetCasteProd",
-     "unit": "root",
-     "seg": 4995,
-     "off": 504,
-     "size": 254,
-     "target_sha256": "ee46775bfe2b841610de5fccc3d59e11127213e83c19a68acfd1a4bb5543b37a",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "SetModeProd",
-     "unit": "root",
-     "seg": 4995,
-     "off": 758,
-     "size": 189,
-     "target_sha256": "3c8a5164a3daae17002609332d5c2419eb45f842d735acd104408b139cac7f06",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GstrR",
-     "unit": "root",
-     "seg": 4995,
-     "off": 947,
-     "size": 338,
-     "target_sha256": "6f2ac875d9e970f73afa429ae68a549a7a727206725e20439189e909153cbd68",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "StartAttack",
-     "unit": "root",
-     "seg": 4995,
-     "off": 1285,
-     "size": 78,
-     "target_sha256": "754aafe87307e34ba28676a6000225c04aade7c8d9efc5f36224547be0285df0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "ForceModeA",
-     "unit": "root",
-     "seg": 4995,
-     "off": 1363,
-     "size": 246,
-     "target_sha256": "30c17494333c96ba95d298b01750037385e8e96d66a1a90593cb42a8a04b0623",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "ForceModeB",
-     "unit": "root",
-     "seg": 4995,
-     "off": 1609,
-     "size": 185,
-     "target_sha256": "7cbee59d7bd623eb78731dcfd46475b0953a8d434077ad82c598a778cff43550",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "Recruit",
-     "unit": "root",
-     "seg": 4995,
-     "off": 1794,
-     "size": 211,
-     "target_sha256": "62cf7bf8e44ac92b047acfe17dca8536e7a5e633afae05f272366d4f1eab88fe",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "UnRecruit",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2005,
-     "size": 223,
-     "target_sha256": "a1450bb96ced5d90f9c5a3bf0e45a26a8dbc4b6f8a16d9be0d18fce0c9f25ac9",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "RecruitRed",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2228,
-     "size": 131,
-     "target_sha256": "f847b2845739eefcefa99a92f8c60f78c419776dab8fc0f2a9153790f791f267",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "UnRecruitRed",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2359,
-     "size": 63,
-     "target_sha256": "ddc4ecbcc295cfb2d06078465686a4570aeabcf389d67270f350f4e8b2cdeea0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "GetNewMode",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2422,
-     "size": 37,
-     "target_sha256": "db9e8333508ecb940d78b36303d8eae7fd71ac6fc4ef36418f606695f7168107",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "GetNewModeB",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2459,
-     "size": 149,
-     "target_sha256": "a232992252fd5f26e95c52788b30203c12ef29d29dc25bc0c4f7a955f2ca4f81",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetNewModeR",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2608,
-     "size": 101,
-     "target_sha256": "38d33c9e60a6874956cf659cc15c573086c2d3b2c690bc196376497cd2439ae0",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetForageDir",
-     "unit": "root",
-     "seg": 4995,
-     "off": 2709,
-     "size": 405,
-     "target_sha256": "0e648bff9cd363cad5420ce5cfb7f2ac02c6d14b6d75c4ba62bcb275a489eb53",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetNestDir",
-     "unit": "root",
-     "seg": 4995,
-     "off": 3114,
-     "size": 418,
-     "target_sha256": "c6f612150dcda915cb9b045f1512df28a3a399aad538aec2088d7d23eab42cfd",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetAlarmDir",
-     "unit": "root",
-     "seg": 4995,
-     "off": 3532,
-     "size": 189,
-     "target_sha256": "a26f310809084bc59ff155da567127a177b55ce6396eac3675550b72db17854f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetRandDir",
-     "unit": "root",
-     "seg": 4995,
-     "off": 3721,
-     "size": 67,
-     "target_sha256": "dc8a92811d90434476ee01b42b59ce718fb5e7846b92ee0ffef46e1692f43e87",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetDefendDir",
-     "unit": "root",
-     "seg": 4995,
-     "off": 3788,
-     "size": 258,
-     "target_sha256": "02a1b848bdba104cf66c2e8873f459a6744acc98f6987974cc456f867c4de7d8",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetRedDefendDir",
-     "unit": "root",
-     "seg": 4995,
-     "off": 4046,
-     "size": 218,
-     "target_sha256": "f045a9acc609439d8830b46c8eabb7973ac051eb2155665fce34df0ee258f607",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "Bounce",
-     "unit": "root",
-     "seg": 4995,
-     "off": 4264,
-     "size": 142,
-     "target_sha256": "dd633ea9db9e5e31afebff874317ee6e9e2b71910d2e3faedbaa1f48e2d6b8a5",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "80ddfeb0b03861680a647b0cb6c1d5171e5d4e35717bd9e6937eac8a2752f522",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -22015,8 +21764,8 @@
      "why": "Selects colony strategy, caste production and ant activity modes. It recruits ants and chooses movement directions for foraging, defence, alarms and nest return."
     }
    ],
-   "summary": "Selects colony strategy, caste production and ant activity modes. It recruits ants and chooses movement directions for foraging, defence, alarms and nest return.",
    "windows_group": "SIMTWO",
+   "summary": "Selects colony strategy, caste production and ant activity modes. It recruits ants and chooses movement directions for foraging, defence, alarms and nest return.",
    "file_header": {
     "text": "Selects colony strategy, caste production and ant activity modes. It recruits ants and chooses\nmovement directions for foraging, defence, alarms and nest return.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 1383; complete original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory. Some pairs are\nHIGH confidence, not confirmed.",
     "name_kind": "descriptive",
@@ -22271,7 +22020,262 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "layout_inferred": [
+    "one-line 'if (...) return ...;' statements chosen for the LINNUM flush positions (records.py FORBID intervals, e.g. GetForageDir (0B72,0C0E])"
+   ],
+   "extent": {
+    "start": 79922,
+    "end": 84326
+   },
+   "source": "src/simulation/strategy.c",
+   "source_sha256": "280e0d16ca581f64be9c8ffbf642c5d022aa8d70a584db6450f5caf7b2ddd180",
+   "claims": [
+    {
+     "name": "GetStrategy",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2,
+     "size": 297,
+     "target_sha256": "b14be7c92a45b698d859c898c00328f5551123d62f90b3a0f5e79405bd616eb9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GstrB",
+     "unit": "root",
+     "seg": 4995,
+     "off": 299,
+     "size": 205,
+     "target_sha256": "0531e5df2b8f63fa62c5cfe5a398c9988b78295ad5ecf3e7ccb07e6e89d26690",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetCasteProd",
+     "unit": "root",
+     "seg": 4995,
+     "off": 504,
+     "size": 254,
+     "target_sha256": "ee46775bfe2b841610de5fccc3d59e11127213e83c19a68acfd1a4bb5543b37a",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "SetModeProd",
+     "unit": "root",
+     "seg": 4995,
+     "off": 758,
+     "size": 189,
+     "target_sha256": "3c8a5164a3daae17002609332d5c2419eb45f842d735acd104408b139cac7f06",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GstrR",
+     "unit": "root",
+     "seg": 4995,
+     "off": 947,
+     "size": 338,
+     "target_sha256": "6f2ac875d9e970f73afa429ae68a549a7a727206725e20439189e909153cbd68",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "StartAttack",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1285,
+     "size": 78,
+     "target_sha256": "754aafe87307e34ba28676a6000225c04aade7c8d9efc5f36224547be0285df0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "ForceModeA",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1363,
+     "size": 246,
+     "target_sha256": "30c17494333c96ba95d298b01750037385e8e96d66a1a90593cb42a8a04b0623",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "ForceModeB",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1609,
+     "size": 185,
+     "target_sha256": "7cbee59d7bd623eb78731dcfd46475b0953a8d434077ad82c598a778cff43550",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "Recruit",
+     "unit": "root",
+     "seg": 4995,
+     "off": 1794,
+     "size": 211,
+     "target_sha256": "62cf7bf8e44ac92b047acfe17dca8536e7a5e633afae05f272366d4f1eab88fe",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "UnRecruit",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2005,
+     "size": 223,
+     "target_sha256": "a1450bb96ced5d90f9c5a3bf0e45a26a8dbc4b6f8a16d9be0d18fce0c9f25ac9",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "RecruitRed",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2228,
+     "size": 131,
+     "target_sha256": "f847b2845739eefcefa99a92f8c60f78c419776dab8fc0f2a9153790f791f267",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "UnRecruitRed",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2359,
+     "size": 63,
+     "target_sha256": "ddc4ecbcc295cfb2d06078465686a4570aeabcf389d67270f350f4e8b2cdeea0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetNewMode",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2422,
+     "size": 37,
+     "target_sha256": "db9e8333508ecb940d78b36303d8eae7fd71ac6fc4ef36418f606695f7168107",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "GetNewModeB",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2459,
+     "size": 149,
+     "target_sha256": "a232992252fd5f26e95c52788b30203c12ef29d29dc25bc0c4f7a955f2ca4f81",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetNewModeR",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2608,
+     "size": 101,
+     "target_sha256": "38d33c9e60a6874956cf659cc15c573086c2d3b2c690bc196376497cd2439ae0",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetForageDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 2709,
+     "size": 405,
+     "target_sha256": "0e648bff9cd363cad5420ce5cfb7f2ac02c6d14b6d75c4ba62bcb275a489eb53",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetNestDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3114,
+     "size": 418,
+     "target_sha256": "c6f612150dcda915cb9b045f1512df28a3a399aad538aec2088d7d23eab42cfd",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetAlarmDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3532,
+     "size": 189,
+     "target_sha256": "a26f310809084bc59ff155da567127a177b55ce6396eac3675550b72db17854f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetRandDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3721,
+     "size": 67,
+     "target_sha256": "dc8a92811d90434476ee01b42b59ce718fb5e7846b92ee0ffef46e1692f43e87",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetDefendDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 3788,
+     "size": 258,
+     "target_sha256": "02a1b848bdba104cf66c2e8873f459a6744acc98f6987974cc456f867c4de7d8",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetRedDefendDir",
+     "unit": "root",
+     "seg": 4995,
+     "off": 4046,
+     "size": 218,
+     "target_sha256": "f045a9acc609439d8830b46c8eabb7973ac051eb2155665fce34df0ee258f607",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "Bounce",
+     "unit": "root",
+     "seg": 4995,
+     "off": 4264,
+     "size": 142,
+     "target_sha256": "dd633ea9db9e5e31afebff874317ee6e9e2b71910d2e3faedbaa1f48e2d6b8a5",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "5337ccc1323c5a14aacc821b60bdd865e10bfad9dfc6c69647ec52c0433ab119"
   },
   "root:1496": {
    "unit": "root",
@@ -23323,7 +23327,7 @@
     "end": 90779
    },
    "source": "src/startup/main.c",
-   "source_sha256": "f0a1772c8c5fee5ded2a93f0f66abe06b86533cbfff7cf19f7ab4cb24e715bf0",
+   "source_sha256": "90b066abdfe7515735382be42c38b167d158965b01bb60d83aaa69b20208f83c",
    "claims": [
     {
      "name": "main",
@@ -24163,7 +24167,7 @@
     "end": 103638
    },
    "source": "src/memory/ralloc.c",
-   "source_sha256": "939c126d6955f5973929e9cac2341d458d6a5dfb6c350118a41f5b769d010bd9",
+   "source_sha256": "1fab26dae270bdc44f87efa27c5dfad1132d5375391c2fcef9d9da24483605ca",
    "claims": [
     {
      "name": "mem_carve_free_block",
@@ -24840,7 +24844,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9ef8b3bfd8668d926ab8aad6eab18ebff90465023d293aa020f0749817dab7dd"
+   "object_sha256": "68b5af266b2216bd3e44198bb889bd90f0861a2c79af161f3dae9a516120f39a"
   },
   "root:194D": {
    "unit": "root",
@@ -25626,7 +25630,7 @@
     "end": 105112
    },
    "source": "src/resources/database_index.c",
-   "source_sha256": "b897f35d2484230d1e105c4ccd51b827abfe6327d99969cc2163a2881060370c",
+   "source_sha256": "233cf5e10a7c3273a5546b6f262cef68d17c11d1adf11d11123bc1ca1892fd10",
    "claims": [
     {
      "name": "OpenIndex",
@@ -25708,7 +25712,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "5ae0ed6df5d6e5adcb5ddfbd99dd2ccd098d7f09e98997959b5dd98787513f2f"
+   "object_sha256": "eb764f0d7a70596f6a365af9aa69582d7b8523757f3eac7e69c81d4a95752608"
   },
   "root:19A9": {
    "unit": "root",
@@ -26109,85 +26113,6 @@
    },
    "lang": "c",
    "source_origin": "hand-written C",
-   "layout_inferred": [
-    "one-line 'if (db == -1) Punt(\"Out of handles.\");' (one fewer /Zi line entry) moves the flush from 0287 to 02AB, clearing DosPunt's forbidden interval (0283,02A9] (worker zifix)"
-   ],
-   "extent": {
-    "start": 107142,
-    "end": 107829
-   },
-   "source": "src/resources/database_files.c",
-   "source_sha256": "4010a01e8abbc5430ac54e2b46b723873ac00cb689ee2c83ccc22e067c8f3019",
-   "claims": [
-    {
-     "name": "OpenDB",
-     "unit": "root",
-     "seg": 6696,
-     "off": 6,
-     "size": 322,
-     "target_sha256": "88b98a5221a450a103b758cc1dc5bf9741be6d8d7b6e3f67583ac447369c2481",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "f_1A28_0148",
-     "unit": "root",
-     "seg": 6696,
-     "off": 328,
-     "size": 1,
-     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "CloseDB",
-     "unit": "root",
-     "seg": 6696,
-     "off": 329,
-     "size": 107,
-     "target_sha256": "f64d0fbf3f45385d6dbd7e9856f8457f088bbd3aa173972281d401c4c5255f2d",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "CopyRootName",
-     "unit": "root",
-     "seg": 6696,
-     "off": 436,
-     "size": 112,
-     "target_sha256": "cbef578cd5472984f0f51bff6365b2ef9eaa22f2ca3ba839c2fe5ef52fa6083f",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "GROUPED"
-    },
-    {
-     "name": "GetFreeHandle",
-     "unit": "root",
-     "seg": 6696,
-     "off": 548,
-     "size": 83,
-     "target_sha256": "7b2a3868a94aab6253969278218da7a559746fce37bf293cfc196e8d511b05fc",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    },
-    {
-     "name": "DosPunt",
-     "unit": "root",
-     "seg": 6696,
-     "off": 631,
-     "size": 62,
-     "target_sha256": "634072603928a3645e9fa95cfe56e75e28685680c3e1bb27e67b5e03cf848904",
-     "kind": "C",
-     "provenance": "EXACT_NATURAL",
-     "reloc_order": "EXACT"
-    }
-   ],
-   "scaffold": [],
-   "object_sha256": "da103296f4c37eaf1bf2143167fe4f4687ae5d09e5fb7142036bb136e24c43d6",
    "source_name_kind": "descriptive",
    "source_path_history": [
     {
@@ -26195,8 +26120,8 @@
      "why": "Opens and closes the database data files and manages file handles. It also formats DOS file errors for the application."
     }
    ],
-   "summary": "Opens and closes the database data files and manages file handles. It also formats DOS file errors for the application.",
    "windows_group": "SIMTWO",
+   "summary": "Opens and closes the database data files and manages file handles. It also formats DOS file errors for the application.",
    "file_header": {
     "text": "Opens and closes the database data files and manages file handles. It also formats DOS file\nerrors for the application.\nFile name and folder are ours, inferred from the DOS routines or storage defined here.\nDOS: resident code; segment 1A28; complete original translation unit.\nWindows: SIMTWO, from recorded function pairs in the Windows symbol inventory.\nBuild profile: msc600ax; /AL /Os /Oeg /Gs /Zi.",
     "name_kind": "descriptive",
@@ -26301,7 +26226,86 @@
       "comment_review": "Retain technical evidence; general header facts are stated above."
      }
     ]
-   }
+   },
+   "layout_inferred": [
+    "one-line 'if (db == -1) Punt(\"Out of handles.\");' (one fewer /Zi line entry) moves the flush from 0287 to 02AB, clearing DosPunt's forbidden interval (0283,02A9] (worker zifix)"
+   ],
+   "extent": {
+    "start": 107142,
+    "end": 107829
+   },
+   "source": "src/resources/database_files.c",
+   "source_sha256": "22074a15d50b4f769f97f8879b6ecaf284005b13ed3c6c0f5682ca6ceca5c9c9",
+   "claims": [
+    {
+     "name": "OpenDB",
+     "unit": "root",
+     "seg": 6696,
+     "off": 6,
+     "size": 322,
+     "target_sha256": "88b98a5221a450a103b758cc1dc5bf9741be6d8d7b6e3f67583ac447369c2481",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "f_1A28_0148",
+     "unit": "root",
+     "seg": 6696,
+     "off": 328,
+     "size": 1,
+     "target_sha256": "383e5d7d58caa41ce723cf16af471b38f6ee9065c032d07fa6bef1678cb72f1d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "CloseDB",
+     "unit": "root",
+     "seg": 6696,
+     "off": 329,
+     "size": 107,
+     "target_sha256": "f64d0fbf3f45385d6dbd7e9856f8457f088bbd3aa173972281d401c4c5255f2d",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "CopyRootName",
+     "unit": "root",
+     "seg": 6696,
+     "off": 436,
+     "size": 112,
+     "target_sha256": "cbef578cd5472984f0f51bff6365b2ef9eaa22f2ca3ba839c2fe5ef52fa6083f",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "GROUPED"
+    },
+    {
+     "name": "GetFreeHandle",
+     "unit": "root",
+     "seg": 6696,
+     "off": 548,
+     "size": 83,
+     "target_sha256": "7b2a3868a94aab6253969278218da7a559746fce37bf293cfc196e8d511b05fc",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    },
+    {
+     "name": "DosPunt",
+     "unit": "root",
+     "seg": 6696,
+     "off": 631,
+     "size": 62,
+     "target_sha256": "634072603928a3645e9fa95cfe56e75e28685680c3e1bb27e67b5e03cf848904",
+     "kind": "C",
+     "provenance": "EXACT_NATURAL",
+     "reloc_order": "EXACT"
+    }
+   ],
+   "scaffold": [],
+   "object_sha256": "6a72041ad4f7826a0bc3d3babe3038de96aa95447cd4d591c2a6195db0ba24f6"
   },
   "root:1A53": {
    "unit": "root",
@@ -28488,7 +28492,7 @@
     "end": 118315
    },
    "source": "src/window/alerts.c",
-   "source_sha256": "d1f42dff2a6cfef9ab9d67753599a73e168b5be6fcaa9972aea5c03f3b27ce9f",
+   "source_sha256": "b97d0a209afff71bd57dde0ef51724e02f6d2c7d00e8bcf33f2bc357f2e94b92",
    "claims": [
     {
      "name": "Punt",
@@ -28647,7 +28651,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "db267c63abc605794d93f6ac178634207b8bd360079eff34c9102d89b0679ad8"
+   "object_sha256": "be7e4165d4e552a1df1b80b0aacfc87a1cfab15e599d8151f41c899aebf257b3"
   },
   "root:1CE2": {
    "unit": "root",
@@ -31884,7 +31888,7 @@
     "end": 137436
    },
    "source": "src/window/lifecycle.c",
-   "source_sha256": "67e9ffbe84ec2ec3d13c170b9d714d4c16d5b5ad745024b6b9ddbe3674d1d4e1",
+   "source_sha256": "5188fd2573ee3c5c5b8ea70dcb39c1c81142d79c87f1a4e8ff1a426cbce9f53b",
    "claims": [
     {
      "name": "f_20E8_0000",
@@ -32077,7 +32081,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "d600706b518c247fc3563996eb1dd60d71b9fd3ec7e4c61203fd145d764d6941"
+   "object_sha256": "2d3565f21c1bb4ab64439550d1d0e3998a915baa14fd42fbc80cf93ae9aeaf6b"
   },
   "root:218D": {
    "unit": "root",
@@ -32230,7 +32234,7 @@
     "end": 139170
    },
    "source": "src/window/events.c",
-   "source_sha256": "2b988e22f8b217a3cc73ea05d30841eeed9f004efca8ef8e1ceaacf7867d83b1",
+   "source_sha256": "e9dac9fffe7f9666dbf5141769b5f7dba66c9fb6fd9a6ad5ec3401904df0b9d4",
    "claims": [
     {
      "name": "win_dispatch_object_event",
@@ -32366,7 +32370,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "e393e659a74e68de8e9a783f928dc2348e03ce49c74c226b711e1d077595ebbd"
+   "object_sha256": "2f2a071eb8c06b0d0c8c776602e37e4534ba078c8494cbba8387671e42cec909"
   },
   "root:21FA": {
    "unit": "root",
@@ -32629,7 +32633,7 @@
     "end": 142329
    },
    "source": "src/window/drawing.c",
-   "source_sha256": "078b26021648fd1b8e98ef4b2749fc93c1c0f9ff8a9924b1028122c851fa7365",
+   "source_sha256": "de65b55ef676479d66ff959cd1a7cd74f75e2b0a007e319ad2428b355afc0388",
    "claims": [
     {
      "name": "gr_JustifyStrInRect",
@@ -32843,7 +32847,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "4590a0ad0b13a4c91da6e887c8bf57f0df1c6725901ba2b2b91838fbdbe57759"
+   "object_sha256": "416ef8ee8b83b3362ac1c0ff8cfd6bf0e7d89ba1e2a9e2bf7c67139ab39c827e"
   },
   "root:22BF": {
    "unit": "root",
@@ -33281,7 +33285,7 @@
     "end": 146148
    },
    "source": "src/window/object_attributes.c",
-   "source_sha256": "788c725ba507dfa235d44ff78b0eeae0b404876c44bd6e4f2fb9c4baceecb77c",
+   "source_sha256": "fc0a883f456b8bfdf9349906f1f6ff4fc6084a409de66294e45a7a695e2b23a6",
    "claims": [
     {
      "name": "win_StringSize",
@@ -33803,7 +33807,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0dafc8147f423106862bb40594a5cc28991b1ee6cf56d3ba6b6071d07eebf879"
+   "object_sha256": "12565cd6207fc59f5666f32b56dec5072645dbf806299adb2798833bb826579b"
   },
   "root:23AE": {
    "unit": "root",
@@ -33963,7 +33967,7 @@
     "end": 147038
    },
    "source": "src/window/locking.c",
-   "source_sha256": "8a58f5be4e5410fca1908f829aaf2f702c729c4b8b5c82516b6ba9d47723ef27",
+   "source_sha256": "3998affc50c5ec2b29ea4cd803d4608a22476945c3f4958996f15757b3dbd41b",
    "claims": [
     {
      "name": "win_NoWindowsShouldBeLocked",
@@ -34055,7 +34059,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "923ba54a46822b6869874f2234ff0f785a5888b9cbed22228934c53a0246fe23"
+   "object_sha256": "507cd82561edf176a0f8a05600baff1d6e9c5ca86f00e7b0a7e51b182d2992f4"
   },
   "root:23E6": {
    "unit": "root",
@@ -34145,7 +34149,7 @@
     ]
    },
    "source": "src/window/lists_sliders.c",
-   "source_sha256": "9d62afdeb7406ceec642b6a863d8a1ac66c14bcfa7a4ba91035f12e7e38c2238",
+   "source_sha256": "f6457a865d5a3b1103a6c39daa9d519fc42ebd341fdf3576f0f5ac62341bd3fd",
    "claims": [
     {
      "name": "list_is_line_selected",
@@ -34303,7 +34307,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "ebffe0a57a9e3bbe8833df682115f52da242f391a3eaaabba32d5394cafbe9b8"
+   "object_sha256": "00aaf3254ba702936b74c1675b88f2134c0fcbe2f6098e23fcedf53a56926474"
   },
   "root:24AB": {
    "unit": "root",
@@ -34926,7 +34930,7 @@
     "end": 154078
    },
    "source": "src/window/object_geometry.c",
-   "source_sha256": "8b961103489741fcfb4434e7ea4c2c3f5aec9f2387e46a00c36c5f4c68edcd18",
+   "source_sha256": "bca321c1f732ea65d0121ca5a74c8afc8eee85c97e92f28ac3f7088f35920baf",
    "claims": [
     {
      "name": "win_locked_resource_ptr",
@@ -35156,7 +35160,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "0f900e4608fd4472cb23411d9f73a13249afaeca1503f9a5601fe792dd6c2f6d"
+   "object_sha256": "7f9557c1cdb3a4fdaa63d30849a795cb4f623cf9718c2aba2723164a83f96169"
   },
   "root:259D": {
    "unit": "root",
@@ -36398,7 +36402,7 @@
     "end": 164186
    },
    "source": "src/sound/device_channels.c",
-   "source_sha256": "dc41d368a34ff04f785a29ff0f5c69bb22d6f5b8c2bbe64ca7f0e73567548b58",
+   "source_sha256": "9133d298a732f7ed8f3f67771ddf07e2ef0d016e9faf5ebd750843bb63f5f7b3",
    "claims": [
     {
      "name": "snd_initialize_device_channels",
@@ -37623,7 +37627,7 @@
     "end": 169418
    },
    "source": "src/sound/device_probe.c",
-   "source_sha256": "36d2760e5d2a81094ffb2d09114a9a44e418d1d983b55e0bba4766bd465d3d8b",
+   "source_sha256": "caf414ca36bcf0847caf3150e8e9efff0c64fa45288ab5915d782f7d37227a9b",
    "claims": [
     {
      "name": "snd_probe_preferred_device",
@@ -37728,7 +37732,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "f2134f489f2c73b4a0ce4507c66231f445dc863592114fc8142f8bd86482d149"
+   "object_sha256": "f0c7ba6c7636eb5b943b6f8bbf4235ae6830980b56d29aaedec739c6d5c4b48d"
   },
   "root:295C": {
    "unit": "root",
@@ -37825,7 +37829,7 @@
     "end": 170880
    },
    "source": "src/sound/midi_voices.c",
-   "source_sha256": "4cba6c6185ec11ecf5aa1f5adecb34a12bb4926278a26f062b00bbee72136d98",
+   "source_sha256": "f6fd0fad0295bcbf3a81dc70999135fd0ccfc872c92ecd74b48add99493f2b87",
    "claims": [
     {
      "name": "snd_reap_finished_sample_voices",
@@ -37995,7 +37999,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "803afc29f893eea0124bbaa03be5a6e8b0f8216bf6dba2226e10d0c830e838ab"
+   "object_sha256": "3df91af9a4e85a7a1083e3edffb1707db07cacf05260c4e4d9647961224ff486"
   },
   "root:29B8": {
    "unit": "root",
@@ -38085,7 +38089,7 @@
     "end": 170999
    },
    "source": "src/sound/dsp_probe.c",
-   "source_sha256": "d9f75f2394cc3097d2f7f9fe9556e25c36b66beaf5c1847c71009cf195c5ef8d",
+   "source_sha256": "2db7d160168ffea62325a1afd5c252888a5f927ab78b28dc0bd122a070536d5a",
    "claims": [
     {
      "name": "snd_probe_dsp_reset_ack",
@@ -38100,7 +38104,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "08d41e55f232e84e93d4dc359e3f5183e0b22ff009e30a06c1ff0242b2192b9a"
+   "object_sha256": "943ecb9d241bda400a644286b82a264148ec7a196c3ef9ff849e8b4bf0b8188d"
   },
   "root:29BF": {
    "unit": "root",
@@ -38398,7 +38402,7 @@
     "end": 171786
    },
    "source": "src/sound/psg_voices.c",
-   "source_sha256": "3200b24e7411b48af121da4d21d2d7ceeb8ff3563f33f871e903f684b7df0c81",
+   "source_sha256": "9b1782393df76aab13dbb19aefc0d90b9d4bb3e48e25b45c6c76ca7a0ab9b97b",
    "claims": [
     {
      "name": "snd_regchip_set_note",
@@ -38468,7 +38472,7 @@
     }
    ],
    "scaffold": [],
-   "object_sha256": "9e52bf4c6e661f6b2d87bf7ca66dae274fb61ba73b99882bc94247c40eef22f7"
+   "object_sha256": "1c02a67bb2c9fb5db52ad6567fd95406a7967af6e0a5d09360bf6c11272193c7"
   },
   "root:29F0": {
    "unit": "root",

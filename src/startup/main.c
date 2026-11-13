@@ -7,6 +7,8 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og.
  */
 
+#include "windows_ids.h"
+
 /*
  * Resource suffix followed by startup diagnostic and config-path pointers.
  */
@@ -128,8 +130,8 @@ void main(int argc, char far * far *argv)
             DoAntSim();
         }
         if (GameSpeed != 3 || (main_cycle_phase & 3) == 0) {
-            if (win_IsWinOpen(0x100)) {
-                if (fd_50F6_0AA6 >= 0 && !win_IsWinInFront(0x100) && GameSpeed != 3) {
+            if (win_IsWinOpen(WIN_MAP)) {
+                if (fd_50F6_0AA6 >= 0 && !win_IsWinInFront(WIN_MAP) && GameSpeed != 3) {
                     if (fd_50F6_04C0 == 0) {
                         if (fd_50F6_0AA6 & 1)
                             DrawMap();
@@ -141,13 +143,13 @@ void main(int argc, char far * far *argv)
                     fd_50F6_0AA6 = 0;
                 }
             }
-            if (win_IsWinOpen(0x1900)) {
+            if (win_IsWinOpen(WIN_YARD)) {
                 if (WaitedEnough(&stamp, 0x48) || YardMode <= 2)
                     UpdateYard();
                 else if (YardMode > 1)
                     yard_refresh_message_area();
             }
-            if (win_IsWinOpen(0)) {
+            if (win_IsWinOpen(WIN_EDIT)) {
                 UpdateEdit();
                 f_0250_0ED2();
             }

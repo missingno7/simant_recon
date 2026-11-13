@@ -7,6 +7,8 @@
  * Build profile: msc600ax; /AL /Os /Oe /Og /Gs.
  */
 
+#include "hardware_ids.h"
+
 #include "chan.h"
 
 struct Voice {
@@ -190,7 +192,7 @@ int far snd_init_tandy_channels(void)
         snd_voice_slots[snd_voice_build_index].type = 1;
         snd_voice_slots[snd_voice_build_index].num = i;
     }
-    bios = (char far *)0xF000FFFEL;
+    bios = (char far *)BIOS_MODEL_BYTE_FARPTR;
     fd_50F6_4A4A = snd_sample_volume_bias = 0;
     base = 0xc4;
     _asm {
@@ -208,7 +210,7 @@ notandy:
     }
     snd_driver_capabilities[4] = 3;
     if (*bios == 0xfc)
-        snd_device_io_base = 0x1e0;
+        snd_device_io_base = SND_TANDY_AT_IO_BASE;
     else
         snd_device_io_base = 0xc0;
     if (fd_50F6_4A4A) {
@@ -241,7 +243,7 @@ int far snd_init_ps1_channels(void)
         snd_voice_slots[snd_voice_build_index].num = i;
     }
     snd_driver_capabilities[3] = 3;
-    snd_port_write_byte(0x203, 1);
+    snd_port_write_byte(PORT_PS1_INITIALIZE, 1);
     snd_sample_output_routine = snd_port200_output_pointer;
     snd_sample_volume_bias = 0;
     return 1;
@@ -305,7 +307,7 @@ int far snd_init_blaster_channels(void)
     }
     snd_driver_capabilities[2] = 8;
     snd_sample_volume_bias = -10;
-    if (snd_sb_io_base < 0x210) {
+    if (snd_sb_io_base < SND_BLASTER_FIRST_PROBE_BASE) {
         snd_find_blaster_dsp_base();
         snd_sb_dsp_write_port = snd_sb_io_base + 12;
         while (snd_port_read_byte(snd_sb_dsp_write_port) & 0x80)
@@ -345,7 +347,7 @@ int far snd_init_regchip_channels(void)
     if (snd_device_io_base == 0)
         snd_find_regchip_base();
     if (snd_device_io_base == 0)
-        snd_device_io_base = 0x220;
+        snd_device_io_base = SND_REGCHIP_DEFAULT_IO_BASE;
     fd_50F6_4A46 = snd_device_io_base + 2;
     if (snd_probe_opl_timer()) {
         snd_copy_instrument_table(fd_55B3_0D92);

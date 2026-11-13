@@ -8,6 +8,8 @@
  * Nested-test and statement layout is inferred from /Zi relocation order, not recovered.
  */
 
+#include "windows_ids.h"
+
 int g_2E04[16] = { 0 };
 int g_2E24 = 0;
 int g_2E26 = 0x80;
@@ -409,17 +411,17 @@ void far DisplayCard(int card)
         for (cur = p; *cur; cur++)
             if (*cur == '_')
                 *cur = ' ';
-        win_SetObjFormatStr(0x501, p);
+        win_SetObjFormatStr(OBJ_INFO_TITLE, p);
         mem_Unlock(h2);
         db_PurgeObject(card, 0x13);
-        win_DrawTitle(0x501);
+        win_DrawTitle(OBJ_INFO_TITLE);
     }
-    win_GetObjRect(0x502, &r);
-    clip_SetWin(0x500);
+    win_GetObjRect(OBJ_INFO_CONTENT, &r);
+    clip_SetWin(WIN_INFO);
     clip_SubInclude(&r);
     size = mem_Size(h1);
     base = mem_Lock(h1);
-    win_SetColorFromObjNum(0x502);
+    win_SetColorFromObjNum(OBJ_INFO_CONTENT);
     g_8C22 = 0;
     while (off < size) {
         _fmemcpy(hdr, &base[off], 4);
@@ -430,7 +432,7 @@ void far DisplayCard(int card)
             off += 12;
             FlipWords((unsigned char far *)&pic, 12);
             win_DrawBitMap(pic.left + r.left, pic.top + r.top, pic.id);
-            win_SetColorFromObjNum(0x502);
+            win_SetColorFromObjNum(OBJ_INFO_CONTENT);
             for (k = 0; k < pic.nLinks; k++) {
                 _fmemcpy(&fd_4EE5_0280[g_8C22], &base[off], 10);
                 off += 10;
@@ -533,14 +535,14 @@ void far OpenInfoWindow(void)
 {
     struct Event ev;
 
-    if (win_IsWinOpen(0x500) == 0) {
+    if (win_IsWinOpen(WIN_INFO) == 0) {
         g_2E26 = 0x80;
         g_2E04[0] = 0x80;
         g_2E24 = 0;
     }
-    win_Open(0x500);
+    win_Open(WIN_INFO);
     if (gfx_screen_width_pixels == 0x140) {
-        while (win_IsWinOpen(0x500)) {
+        while (win_IsWinOpen(WIN_INFO)) {
             if (win_GetEvent(&ev))
                 ProcInfoEvent(&ev);
         }
@@ -574,7 +576,7 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
 
     top -= 4;
     bottom += 4;
-    win_GetObjRect(0x502, &wr);
+    win_GetObjRect(OBJ_INFO_CONTENT, &wr);
     clip_Push();
     clip_SubInclude(&wr);
     halfW = (wr.right - wr.left) / 2;
@@ -622,7 +624,7 @@ void far PopUpInfoWindow(int x, int top, int bottom, int rez)
             frame.top = wr.bottom - k - 8;
         }
         bits = GSaveRect(&frame);
-        win_SetColorFromObjNum(0x502);
+        win_SetColorFromObjNum(OBJ_INFO_CONTENT);
         if (gfx_display_mode & 1)
             _foreColor = 0x80;
         GBoxFillOutline(frame.left, frame.top, frame.right, frame.bottom, 1);
@@ -651,8 +653,8 @@ void far ProcInfoEvent(struct Event far *ev)
     int found;
     int prev;
 
-    win_GetObjRect(0x502, &wr);
-    if (ev->code != 0x502)
+    win_GetObjRect(OBJ_INFO_CONTENT, &wr);
+    if (ev->code != OBJ_INFO_CONTENT)
         return;
     found = i = 0;
     pt.x = ev->h - wr.left;
@@ -663,14 +665,14 @@ void far ProcInfoEvent(struct Event far *ev)
                 prev = g_2E04[(g_2E24 - 1) & 0xf];
                 if (prev) {
                     g_2E26 = prev;
-                    win_DrawWindow(0x500);
+                    win_DrawWindow(WIN_INFO);
                     g_2E24--;
                 }
             } else if (fd_4EE5_0280[i].id > 0) {
                 g_2E04[++g_2E24 & 0xf] = fd_4EE5_0280[i].id;
                 g_2E26 = fd_4EE5_0280[i].id;
                 g_2E04[(g_2E24 + 1) & 0xf] = 0;
-                win_DrawWindow(0x500);
+                win_DrawWindow(WIN_INFO);
             } else {
                 PopUpInfoWindow((fd_4EE5_0280[i].r.right - fd_4EE5_0280[i].r.left) / 2 + fd_4EE5_0280[i].r.left,
                                 fd_4EE5_0280[i].r.top, fd_4EE5_0280[i].r.bottom, -fd_4EE5_0280[i].id);

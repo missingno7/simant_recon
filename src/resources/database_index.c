@@ -9,6 +9,8 @@
  * Steered functions: FindIndex.
  */
 
+#include "hardware_ids.h"
+
 typedef struct {
     char far *data;
     int id;
@@ -57,7 +59,7 @@ void far OpenIndex(char far *path, int db)
     IndexEntry far *index;
 
     sprintf(name, "%s.ndx", path);
-    fd = openDBData[db].indexFile = open(name, 0x8002);
+    fd = openDBData[db].indexFile = open(name, DOS_OPEN_BINARY_RDWR);
     if (fd <= 0)
         DosPunt("Index file missing");
     read(fd, &openDBData[db].indexHeader, 20);
