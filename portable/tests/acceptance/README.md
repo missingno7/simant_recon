@@ -88,6 +88,62 @@ themselves. `verify_alignment.py REPLAY_DIR CONTROL_DIR` verifies the live posit
 and negative control: all 384 world-seed bytes equal with replay and differ without
 it, using the same native executable, scenario and poll quantum.
 
+### All-read clock and ordinal-input diagnostics
+
+`--full-inputs ORIGINAL_CAPTURE` uses the original's full TickCount returns
+(therefore every MacTickCount consumer), BIOS queue timestamps, and IRQ countdown
+reads. `full_inputs.py` binds clock calls against each immutable original section
+and independently disassembles the native call sites. Per-site RLE retains every
+returned value and read ordinal, including millions of busy-wait reads. No clock
+sample is inferred from a candidate or from a desired SaveRec value.
+
+Build the optional read-only compact DOS observer in scratch, then supply its
+receipt to `capture_dos_steps.py --compact-observer`. The installed baseline
+emulator objects are unchanged; `build_observer.py` replaces only the emulator's
+observation translation unit and records its build inputs. `dos/run.py` checks the
+explicit scratch runner receipt and retains its usual executable/resource receipts.
+No guest code, register, memory, interrupt schedule or input script is patched.
+
+The default pump ordinal counts window-pump entry (`f_1B28_0069`) **and completed**
+`input_event_count` reads in one monotonic sequence from launch. A read completed
+before a transition keeps its already sampled count. Single-boundary
+`--pump-source window|queue` modes are diagnostic controls. Actual original
+delivery is observed at `kbd_process_scan` and `mouse_event_callback`, separately
+from script submission. Each transition carries this ordinal, the completed clock
+read count within its pump interval, DoAntSim entry ordinal, and inside/outside
+phase. The two counters never reset: startup/modal step zero is distinguished by
+its pump/read coordinates. Unpaired keyboard scans and unsupported key bindings
+fail rather than being silently dropped. Unpaired pointer callbacks remain in the
+raw trace; this observer does not infer their origin or inject them as scripted input.
+
+Native ordinal events join the normal `host_poll_event` translation and downstream
+input adapters before SDL's polling-batch sentinel. Only host storage is written;
+the test never writes a canonical game global. GDB records actual host admission,
+not merely event enqueue. The explicit environment options are
+`SIMANT_TEST_FULL_CLOCK`, `SIMANT_TEST_PUMP_INPUT`, and `SIMANT_TEST_PUMP_SOURCE`;
+the driver clears inherited settings. `--clock-control-read N` is a labelled
+negative control using the real host return at one read while consuming its tape
+record. `--until-ms` bounds a timed diagnostic control without retiming its inputs.
+
+The tape stops at the requested final DoAntSim entry; the next clock read ends the
+bounded native run. Missing entries, unconsumed streams, unknown/extra site reads,
+late event ordinals/phases, per-site prefix counts and the full order digest remain
+explicit failures. RLE is lossless **within each site stream**; the FNV order digest
+is a cross-stream diagnostic, not a retained global-order tape or cryptographic
+proof. A per-site replay must not be described as globally ordered replay when
+that diagnostic differs. Audio/device IRQ progress and private counter storage
+are still observed separately; this facility does not claim whole-game timing
+equivalence or held-key repeat coverage.
+
+The initial investigation is `build/workers/clock-all/RESULT.md`. Its bounded runs
+have equal projected SaveRec records but retain failed strict pump/order premises.
+
+```powershell
+python portable/tests/acceptance/build_observer.py --out build/workers/clock-all/recheck-observer
+python portable/tests/acceptance/capture_dos_steps.py dos/scenarios/quick-game.json --original --reference-dump build/workers/time-align/qg-prefix-original/exec-simstep.1.bin --compact-observer build/workers/clock-all/recheck-observer/observer-build.json --out build/workers/clock-all/recheck-original --until-ms 15000 --steps 8 --host-seconds 300
+python -m unittest portable.tests.acceptance.test_full_inputs portable.tests.acceptance.test_clock_inputs portable.tests.acceptance.test_native_acceptance
+```
+
 Equal milliseconds are diagnostic, **not an equal simulation-step premise**.
 The pinned DOS runner starts its script epoch before the shell's DATE/TIME commands
 and executable startup. At fixed 200,000 cycles, startup/drawing work also consumes

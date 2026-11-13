@@ -188,7 +188,7 @@ uint32_t timer_bios_tick_count(void)
     uint32_t ticks;
     if (portable_input_time_read_ticks(require_active(), &ticks) != PORTABLE_INPUT_TIME_OK)
         abort();
-    return ticks;
+    return portable_test_observed_clock('B', __builtin_return_address(0), ticks);
 }
 
 int16_t input_return_zero(void)
@@ -211,6 +211,7 @@ void mem_exchange_byte_ranges(uint8_t *destination, uint8_t *source, uint16_t co
 int16_t kbd_poll_bios_key(void)
 {
     int16_t available;
+    if (portable_test_before_poll) portable_test_before_poll();
     if (portable_input_time_key_available(require_active(), &available) != PORTABLE_INPUT_TIME_OK)
         abort();
     return available;

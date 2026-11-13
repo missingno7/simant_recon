@@ -10,6 +10,8 @@ from pathlib import Path
 from save_projection import project_save
 
 config = json.loads(Path(CONFIG_PATH).read_text())
+simulation_entry_ordinal=0
+input_deliveries=[]
 out = Path(config['out'])
 out.mkdir(parents=True, exist_ok=True)
 definitions = {}
@@ -106,6 +108,23 @@ def snapshot(label,ms):
                       clocks=clocks,symbols=symbols,save_records=records,
                       stack=gdb.execute('bt 20',to_string=True),save_projection=projection,save_projection_errors=errors,
                       replay_next=int(gdb.parse_and_eval('app.replay_next')))
+        try:
+            result['pump_ordinal']=int(value('test_pumps'))
+            result['ordinal_input_count']=int(value('test_inputs'))
+            result['clock_read_count']=int(value('test_reads'))
+            result['clock_read_hash']=int(value('test_hash'))
+            if config.get('clock_sites'):
+                streams=value('test_streams');counts={}
+                for i in range(int(value('test_stream_count'))):
+                    stream=streams[i];remaining=0;head=stream['head'];seen=set()
+                    while int(head):
+                        if int(head) in seen or len(seen)>100000:raise ValueError('Invalid test stream list')
+                        seen.add(int(head));run=head.dereference();remaining+=int(run['count']);head=run['next']
+                    kind=chr(int(stream['original_kind']));pc=int(stream['original_pc'])
+                    total=next(b['total_reads'] for b in config['clock_sites'] if b['original_kind']==kind and b['original_pc']==pc)
+                    counts[f'{kind}:{pc}']=total-remaining
+                result['clock_site_reads']=counts
+        except Exception:pass
         (out/(label+'.json')).write_text(json.dumps(result,indent=2)+'\n')
         print('Observed native checkpoint',ms,flush=True)
 
@@ -129,9 +148,22 @@ class SimulationBoundary(gdb.Breakpoint):
         super().__init__('*DoAntSim')
         self.hits=0
     def stop(self):
+        global simulation_entry_ordinal
         self.hits+=1
+        simulation_entry_ordinal=self.hits
         snapshot('step'+str(self.hits),int(value('virtual_ns'))//1000000)
         if self.hits>=config['step_count']: self.enabled=False
+        return False
+
+class InputDelivery(gdb.Breakpoint):
+    def stop(self):
+        stack=gdb.execute('bt 30',to_string=True)
+        input_deliveries.append(dict(sequence=int(value('test_inputs')),pump=int(value('test_pumps')),
+            clock_reads=int(value('test_reads')),step=simulation_entry_ordinal,
+            phase=1 if re.search(r'\bin DoAntSim \(',stack) else 0,
+            cycle=int.from_bytes(bytes.fromhex(read_symbol('Cycle',config['symbols']['Cycle'])['data']),'little'),
+            game_time=int.from_bytes(bytes.fromhex(read_symbol('GameTime',config['symbols']['GameTime'])['data']),'little'),stack=stack))
+        (out/'input-deliveries.json').write_text(json.dumps(input_deliveries,indent=2)+'\n')
         return False
 
 class DumpState(gdb.Command):
@@ -148,6 +180,8 @@ gdb.execute('set print elements 0')
 gdb.execute('set breakpoint pending on')
 Checkpoint('portable_native_checkpoint')
 if config.get('step_count',0): SimulationBoundary()
+import re
+InputDelivery('portable_test_input_delivered')
 Failure('exit')
 Failure('abort')
 Failure('_exit')

@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "input_time.h"
 
 typedef char **Handle;
 
@@ -446,6 +447,7 @@ int sim_window_hosting_map_cursor_shown(void) { return s.map_cursor_owned && s.m
  * window actions run here, where Win16 dispatched window messages. */
 void __wrap_f_1B28_0069(void)
 {
+    if (portable_test_window_pump) portable_test_window_pump();
     __real_f_1B28_0069();
     if (s.enabled && s.pump) s.pump();
 }

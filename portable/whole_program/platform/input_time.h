@@ -78,4 +78,28 @@ int16_t kbd_read_key_code(void);
 void kbd_restore_ctrl_break_vector(void);
 void kbd_install_ctrl_break_vector(const uint16_t *new_vector_words);
 
+/* Test-only input observations. Inactive unless explicitly enabled by the
+ * acceptance driver; declarations live in this pinned input-service interface. */
+#ifdef SIMANT_TEST_OBSERVER_IMPLEMENTATION
+#define SIMANT_OBSERVER_WEAK
+#else
+#define SIMANT_OBSERVER_WEAK __attribute__((weak))
+#endif
+uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) SIMANT_OBSERVER_WEAK;
+void portable_test_pump(void) SIMANT_OBSERVER_WEAK;
+void portable_test_window_pump(void) SIMANT_OBSERVER_WEAK;
+void portable_test_before_poll(void) SIMANT_OBSERVER_WEAK;
+#undef SIMANT_OBSERVER_WEAK
+uint64_t portable_test_pump_ordinal(void);
+unsigned portable_test_input_count(void);
+void portable_test_input_delivered(unsigned sequence);
+static inline uint32_t portable_test_observed_clock(char kind,void *pc,uint32_t fallback)
+{
+#ifdef SIMANT_TEST_OBSERVER_IMPLEMENTATION
+    return portable_test_clock_read(kind,pc,fallback);
+#else
+    return portable_test_clock_read ? portable_test_clock_read(kind,pc,fallback) : fallback;
+#endif
+}
+
 #endif

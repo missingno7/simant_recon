@@ -1,0 +1,97 @@
+"""Execute the actual full-clock and SDL input hooks, including rejection lanes."""
+import os,shutil,subprocess,tempfile,unittest
+from pathlib import Path
+from .native_acceptance import ROOT
+from .full_inputs import parse_trace
+from .capture_dos_steps import countdown_points
+
+class FullInputControls(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp=tempfile.TemporaryDirectory();cls.out=Path(cls.tmp.name)
+        sdk=ROOT/'build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32'
+        cls.sdk=sdk;cls.exe=cls.out/'control.exe'
+        source=cls.out/'control.c'
+        source.write_text('''#include "portable/whole_program/platform/sdl3/host_modes.h"
+#include "portable/whole_program/platform/input_time.h"
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int native_windows_translate(SDL_Event *e) { (void)e;return 0; }
+int native_windows_take_deferred(SDL_Event *e) { (void)e;return 0; }
+int native_windows_filter_root(SDL_Event *e) { (void)e;return 0; }
+int native_windows_pointer(float *x,float *y) { (void)x;(void)y;return 0; }
+void native_windows_root_pointer(float *x,float *y) { (void)x;(void)y; }
+static void rejected(int s) { (void)s;_Exit(23); }
+int main(int argc,char **argv) {
+    signal(SIGABRT,rejected);
+    if (argc>1 && !strcmp(argv[1],"pump")) {
+        HostEvent e;Host *h;
+        host_virtual_clock_configure(1);
+        SDL_SetHintWithPriority(SDL_HINT_VIDEO_DRIVER,"dummy",SDL_HINT_OVERRIDE);
+        h=host_create_dimensions("input control",1,640,480);if (!h)return 20;
+        while (host_poll_event(h,&e)>0) {}
+        portable_test_pump();if (portable_test_input_count())return 21;
+        portable_test_pump();if (portable_test_input_count())return 22;
+        while (host_poll_event(h,&e)>0) if (e.kind==HOST_EVENT_KEY_DOWN) {
+            if (portable_test_input_count()!=1)return 25;
+            portable_test_pump();
+            for (int i=0;i<100;i++) if (host_poll_event(h,&e)>0 && e.kind==HOST_EVENT_KEY_UP) {host_destroy(h);return 0;}
+        }
+        return 24;
+    }
+    void *pc=(void *)((uintptr_t)portable_test_clock_read+13);
+    if (argc>1 && !strcmp(argv[1],"wrong"))pc=(void *)((uintptr_t)pc+1);
+    uint32_t a=portable_test_observed_clock('T',pc,99);
+    if (argc>1 && !strcmp(argv[1],"short"))return 0;
+    uint32_t b=portable_test_observed_clock('T',pc,99);
+    uint32_t c=portable_test_observed_clock('C',NULL,99);
+    printf("%u %u %u\\n",a,b,c);return 0;
+}
+''')
+        cc=shutil.which('gcc') or 'C:/msys64/mingw64/bin/gcc.exe'
+        run=subprocess.run([cc,'-std=c11','-Wall','-Wextra','-Werror','-O0','-I'+str(ROOT),'-I'+str(sdk/'include'),
+            str(source),str(ROOT/'portable/whole_program/platform/sdl3/host.c'),'-L'+str(sdk/'lib'),'-lSDL3','-o',str(cls.exe)],capture_output=True,text=True,timeout=60)
+        if run.returncode:raise RuntimeError(run.stdout+run.stderr)
+    @classmethod
+    def tearDownClass(cls):cls.tmp.cleanup()
+    def run_hook(self,clock=None,events=None,mode=None):
+        env=dict(os.environ,PATH=str(self.sdk/'bin')+os.pathsep+os.environ.get('PATH',''))
+        for name in ('SIMANT_TEST_FULL_CLOCK','SIMANT_TEST_PUMP_INPUT','SIMANT_TEST_PUMP_SOURCE','SIMANT_TEST_CLOCK_CONTROL_READ'):env.pop(name,None)
+        for name,value,filename in [('SIMANT_TEST_FULL_CLOCK',clock,'clock.txt'),('SIMANT_TEST_PUMP_INPUT',events,'events.txt')]:
+            if value is not None:
+                p=self.out/filename;p.write_text(value);env[name]=str(p)
+        return subprocess.run([str(self.exe)]+([mode] if mode else []),env=env,capture_output=True,text=True,timeout=15)
+    def test_actual_cross_translation_unit_hook_and_rle(self):
+        r=self.run_hook('T 13 T 100 7 2\nC 0 C 0 2 1\nX\n')
+        self.assertEqual(r.returncode,0,r.stderr);self.assertEqual(r.stdout.strip(),'7 7 2')
+        r=self.run_hook();self.assertEqual(r.returncode,0);self.assertEqual(r.stdout.strip(),'99 99 99')
+    def test_missing_wrong_pc_and_invalid_count_rejected(self):
+        good='T 13 T 100 7 2\nC 0 C 0 2 1\nX\n'
+        for tape,mode in [(good,'short'),(good,'wrong'),('T 13 T 100 7 0\nX\n',None),('T 13 T 100 7 2\n',None)]:
+            r=self.run_hook(tape,mode=mode);self.assertEqual(r.returncode,23,r.stderr)
+    def test_inputs_use_normal_sdl_boundary_at_exact_ordinal(self):
+        r=self.run_hook(events='2 0 0 0 keydown enter 0 0\n3 0 0 0 keyup enter 0 0\n',mode='pump')
+        self.assertEqual(r.returncode,0,r.stderr)
+    def test_bounded_trace_keeps_counts_and_phase(self):
+        p=self.out/'trace.txt';p.write_text('# test\nR T 100 7 2\nI 5 10 0 0 key_down enter\nS 6 11 1 1 2 99\nR T 100 8 1\n')
+        r,i,b=parse_trace(p,1)
+        self.assertEqual(r,[('T',256,7,2)]);self.assertEqual(i[0]['pump'],10);self.assertEqual(i[0]['clock_reads'],2)
+        self.assertEqual(b[0]['clock_reads'],2);self.assertEqual(b[0]['clock_hash'],99)
+        with self.assertRaises(ValueError):parse_trace(p,2)
+    def test_actual_irq_delivery_replaces_scheduled_submission(self):
+        p=self.out/'irq.txt';p.write_text('I 5 9 0 0 key_down enter\nR T 100 7 2\nD K 5.3 10 0 0 2 7196 0 0 0\nS 6 11 1 1 2 99\n')
+        _,i,_=parse_trace(p,1)
+        self.assertEqual((i[0]['milliseconds'],i[0]['pump'],i[0]['clock_reads']),(5.3,10,2))
+        p.write_text(p.read_text().replace('7196','40092'))
+        with self.assertRaises(ValueError):parse_trace(p,1)
+    def test_small_decimal_es_countdown_operand_and_independent_segment(self):
+        m=bytearray(0x2000)
+        for at in (0x1000,0x1100):m[at:at+7]=bytes.fromhex('26 83 3e 06 00 00 cb')
+        m[0x1203:0x1205]=(0x1234).to_bytes(2,'little')
+        points=countdown_points(m,0,dict(timer_wait_countdown=0x1000,timer_countdown_done=0x1100),dict(SeedSRand=0x1205))
+        self.assertEqual(points,[('C',0x1000),('C',0x1100),('D',0x12346)])
+        m[0x1103]=8
+        with self.assertRaises(ValueError):countdown_points(m,0,dict(timer_wait_countdown=0x1000,timer_countdown_done=0x1100),dict(SeedSRand=0x1205))
+if __name__=='__main__':unittest.main()

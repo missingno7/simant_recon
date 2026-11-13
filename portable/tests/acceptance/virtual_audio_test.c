@@ -7,6 +7,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+/* Inactive modern-window hooks for this isolated audio host fixture. */
+int native_windows_take_deferred(SDL_Event *event) { (void)event; return 0; }
+int native_windows_filter_root(SDL_Event *event) { (void)event; return 0; }
+int native_windows_translate(SDL_Event *event) { (void)event; return 0; }
+int native_windows_pointer(float *x,float *y) { (void)x; (void)y; return 0; }
+void native_windows_root_pointer(float *x,float *y) { (void)x; (void)y; }
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x);exit(1); } } while(0)
 /* Test-owned source boundary fixtures, without game algorithms. */
 PortableWholeAudioRuntimeSample snd_sample_channel_records[4];

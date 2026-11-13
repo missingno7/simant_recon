@@ -267,25 +267,33 @@ static PortableM1B73Events *require_events(void)
 uint32_t TickCount(void)
 {
     PortableM1B73Events *events = require_events();
+    if (portable_test_before_poll) portable_test_before_poll();
     if (portable_input_time_host_refresh_clock(events->input_host) !=
         PORTABLE_INPUT_TIME_OK)
         abort();
-    return clock_replay_value(__builtin_return_address(0),
-                              sim_timing_tick_count(events->clock));
+    return portable_test_observed_clock('T', __builtin_return_address(0),
+        clock_replay_value(__builtin_return_address(0),sim_timing_tick_count(events->clock)));
 }
 
 int16_t input_event_count(void)
 {
     PortableM1B73Events *events = require_events();
+    int16_t count;
+    if (portable_test_before_poll) portable_test_before_poll();
     if (portable_input_time_host_refresh_clock(events->input_host) !=
         PORTABLE_INPUT_TIME_OK)
         abort();
-    return signed_word(portable_m1b73_event_count(events));
+    count=signed_word(portable_m1b73_event_count(events));
+    /* The ordinal denotes a completed read. A transition delivered after
+     * that read must not retroactively change its sampled queue count. */
+    if (portable_test_pump) portable_test_pump();
+    return count;
 }
 
 int16_t input_pop_event(void *event_record)
 {
     PortableM1B73Events *events = require_events();
+    if (portable_test_before_poll) portable_test_before_poll();
     if (event_record == NULL)
         abort();
     if (portable_input_time_host_refresh_clock(events->input_host) !=

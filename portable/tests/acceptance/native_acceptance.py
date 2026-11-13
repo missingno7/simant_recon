@@ -362,6 +362,9 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha,original_d
             if field in receipt and receipt[field]!=sha(capture/filename): raise ValueError('Step capture provenance identity differs: '+filename)
     rows={}
     first_input_delivery_failure=None
+    full_inputs=run.get('full_inputs')
+    delivery_path=out/'checkpoints/input-deliveries.json'
+    delivery_rows=json.loads(delivery_path.read_text()) if delivery_path.is_file() else []
     for step in range(1,manifest['steps']+1):
         dump=directory/f'exec-simstep.{step}.bin';native=out/'checkpoints'/f'step{step}.json'
         if dump.exists() and manifest['snapshots'].get(dump.name)!=sha(dump):
@@ -386,6 +389,7 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha,original_d
             snapshot=json.loads(native.read_text())
             dos_prefix=sum(int(r[0])<=meta['emulated_ms'] for r in inputs(replay_rows))
             native_prefix=len(inputs(replay_rows[:snapshot['replay_next']]))
+            if full_inputs:native_prefix=snapshot['ordinal_input_count']
             row['alignment']=dict(boundary='DoAntSim:entry',ordinal=step,dos_ms=meta['emulated_ms'],
                 native_ms=snapshot['milliseconds'],input_prefix_counts=[dos_prefix,native_prefix],
                 cycle=[cycle,snapshot['clocks']['cycle']],
@@ -413,6 +417,7 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha,original_d
                 if row['status']!='MISSING':
                     prefixes=[inputs([r for r in replay_rows if int(r[0])<=t]) for t in (ometa['emulated_ms'],meta['emulated_ms'])]
                     prefixes.append(inputs(replay_rows[:snapshot['replay_next']]))
+                    if full_inputs:prefixes[-1]=inputs(replay_rows)[:snapshot['ordinal_input_count']]
                     # Compare complete ordered input histories, not counts alone.
                     aligned=(ometa['hit']==step and ometa['dump_address']=='0x00000000' and
                              oc==cycle==snapshot['clocks']['cycle'] and og==calls==snapshot['clocks']['simulation_calls'] and
@@ -427,6 +432,32 @@ def compare_steps(directory,out,addresses,specs,raw_state,run,exe_sha,original_d
                         status='COMMON_BOUNDARY' if aligned and first_input_delivery_failure is None else 'ALIGNMENT_PREMISE_FAILED')
                     row['three_way']['alignment']=row['alignment']['status']
                     row['three_way']['causal_scope']='Seed replay only; unreplayed timing inputs remain a timing-model limitation.'
+                    if full_inputs:
+                        boundary=full_inputs['boundaries'][step-1]
+                        audit=dict(original_pump_ordinal=boundary['pump'],native_pump_ordinal=snapshot['pump_ordinal'],
+                            original_clock_reads=boundary['clock_reads'],native_clock_reads=snapshot['clock_read_count'],
+                            original_clock_order_digest=boundary['clock_hash'],native_clock_order_digest=snapshot['clock_read_hash'])
+                        audit['original_site_reads']=boundary.get('site_reads')
+                        audit['native_site_reads']=snapshot.get('clock_site_reads')
+                        original_counts=audit['original_site_reads'] or {};native_counts=audit['native_site_reads'] or {}
+                        audit['site_reads_equal']=all(original_counts.get(k,0)==native_counts.get(k,0) for k in original_counts.keys()|native_counts.keys())
+                        audit['global_order_equal']=audit['original_clock_order_digest']==audit['native_clock_order_digest']
+                        delivered=delivery_rows[:snapshot['ordinal_input_count']]
+                        expected=full_inputs['inputs'][:snapshot['ordinal_input_count']]
+                        delivery_audit=[dict(sequence=i+1,original=[e['pump'],e['step'],e['phase']],
+                            native=[d['pump'],d['step'],d['phase']],
+                            original_clock_reads=e['clock_reads'],native_clock_reads=d['clock_reads'],
+                            equal=(e['pump'],e['step'],e['phase'])==(d['pump'],d['step'],d['phase']))
+                            for i,(e,d) in enumerate(zip(expected,delivered))]
+                        audit['input_deliveries']=delivery_audit
+                        audit['input_delivery_ordinals_and_phases_equal']=(len(expected)==len(delivered) and all(d['equal'] for d in delivery_audit))
+                        audit['equal']=(audit['original_pump_ordinal']==audit['native_pump_ordinal'] and
+                            audit['original_clock_reads']==audit['native_clock_reads'] and
+                            audit['global_order_equal'] and audit['site_reads_equal'] and audit['input_delivery_ordinals_and_phases_equal'])
+                        row['alignment']['full_input_audit']=audit
+                        if not audit['equal']:row['alignment']['status']='ALIGNMENT_PREMISE_FAILED'
+                        row['three_way']['alignment']=row['alignment']['status']
+                        row['three_way']['causal_scope']='Original per-site primitive clock read ordinals and pump-ordinal transitions; full read count/order digest checked at this entry. Audio IRQ/presentation runtime remains observed separately.'
             if any(r['verdict']!='ORIGINAL_EQUAL_ALL' for r in row['three_way'].get('symbols',{}).values()): row['status']='DIFFERS'
         rows[str(step)]=row
     return dict(boundary='DoAntSim:entry',checkpoints=rows,
@@ -453,6 +484,11 @@ def compare(scenario,out,dos,map_path,specs,checkpoints,extra_dos=(),raw_state=F
             if sha(out/'clock-inputs.txt')!=tape['tape_sha256'] or tape['native_executable_sha256']!=result['run']['executable_sha256']:
                 raise ValueError('Native replay tape/executable identity differs')
             result['clock_mapping']+='; original per-site seed read ordinals replayed; other clock reads unreplayed'
+        if result['run'].get('full_inputs'):
+            tape=result['run']['full_inputs']
+            if sha(out/'full-clock-inputs.txt')!=tape['clock_tape_sha256'] or sha(out/'pump-inputs.txt')!=tape['input_tape_sha256'] or tape['native_executable_sha256']!=result['run']['executable_sha256']:
+                raise ValueError('Full observer input identities differ')
+            result['clock_mapping']+='; original TickCount/BIOS stamp/countdown return streams by read ordinal; original pump inputs; bounded at final entry'
     result['dos_provenance']=oracle_provenance(dos,exe_sha,ROOT/scenario['script'])
     result['extra_dos_provenance']=[oracle_provenance(p,exe_sha) for p in extra_dos]
     original_sha=json.loads((original_root/'layout/oracle.lock.json').read_text())['inputs']['SIMANT.EXE']['sha256']
@@ -546,6 +582,9 @@ def main():
     ap.add_argument('--dos-steps',type=Path,help='Execution-triggered observations from capture_dos_steps.py')
     ap.add_argument('--original-steps',type=Path,help='Original execution-triggered observations, independently anchored')
     ap.add_argument('--clock-inputs',type=Path,help='Replay original seed reads from an original step capture directory')
+    ap.add_argument('--full-inputs',type=Path,help='Replay compact original clock returns and pump-ordinal inputs through the final observed step entry')
+    ap.add_argument('--clock-control-read',type=int,help='Negative control: use the real host return at this one original primitive-read ordinal')
+    ap.add_argument('--until-ms',type=int,help='Bound a timed native diagnostic input prefix; never full-scenario acceptance')
     ap.add_argument('--saved-game',type=Path,help='Explicit copy of the scenario original save, for isolated checkouts')
     ap.add_argument('--extra-dos',type=Path,action='append',default=[])
     ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/native-acceptance')
@@ -578,19 +617,44 @@ def main():
             shutil.copyfile(source_save,out/'assets/A.ANT')
             (out/'save-input.json').write_text(json.dumps(dict(path=str(source_save),sha256=sha(source_save)),indent=2))
         script=replay(scenario,project,out,checkpoints)
+        if args.until_ms:
+            if args.full_inputs:ap.error('--until-ms is for timed diagnostic prefixes, not ordinal replay')
+            rows=[l for l in script.read_text().splitlines() if int(l.split()[0])<args.until_ms and l.split()[1]!='exit']
+            script.write_text('\n'.join(rows+[str(args.until_ms)+' exit'])+'\n')
         clock_receipt=None
         env=dict(os.environ)
         # Never inherit an unrelated test tape from the caller's environment.
         env.pop('SIMANT_TEST_CLOCK_REPLAY',None)
+        env.pop('SIMANT_TEST_FULL_CLOCK',None)
+        env.pop('SIMANT_TEST_PUMP_INPUT',None)
+        env.pop('SIMANT_TEST_PUMP_SOURCE',None)
+        env.pop('SIMANT_TEST_CLOCK_CONTROL_READ',None)
+        if args.clock_control_read:
+            if not args.full_inputs:ap.error('--clock-control-read requires --full-inputs')
+            env['SIMANT_TEST_CLOCK_CONTROL_READ']=str(args.clock_control_read)
         if args.clock_inputs:
             if __package__: from .clock_inputs import seed_tape
             else: from clock_inputs import seed_tape
             tape,clock_receipt=seed_tape(args.clock_inputs.resolve(),build/'simant-canonical.exe',out,
                                        sha(args.scenario),sha(project/scenario['script']))
             env['SIMANT_TEST_CLOCK_REPLAY']=str(tape)
+        full_receipt=None
+        if args.full_inputs:
+            if args.clock_inputs:ap.error('--full-inputs and --clock-inputs are exclusive')
+            if __package__:from .full_inputs import full_tape
+            else:from full_inputs import full_tape
+            clocks,events,full_receipt=full_tape(args.full_inputs.resolve(),build/'simant-canonical.exe',out,
+                sha(args.scenario),sha(project/scenario['script']),args.step_count)
+            env['SIMANT_TEST_FULL_CLOCK']=str(clocks)
+            env['SIMANT_TEST_PUMP_INPUT']=str(events)
+            env['SIMANT_TEST_PUMP_SOURCE']=full_receipt['pump_source']
+            # Preserve the original replay.txt for ordered-history comparison.
+            # The ordinary timed driver has no transitions in ordinal mode.
+            script=out/'ordinal-replay.txt';script.write_text('18446744073709551615 exit\n')
         span_path=build/'semantic-spans.json'
         span_bindings=json.loads(span_path.read_text())['bindings'] if span_path.is_file() else {}
-        cfg=out/'observe.json';cfg.write_text(json.dumps(dict(out=str(out/'checkpoints'),symbols=specs,save_schema=acceptance.save_schema(),step_count=args.step_count,span_bindings=span_bindings)))
+        cfg=out/'observe.json';cfg.write_text(json.dumps(dict(out=str(out/'checkpoints'),symbols=specs,save_schema=acceptance.save_schema(),step_count=args.step_count,span_bindings=span_bindings,
+            clock_sites=full_receipt['bindings'] if full_receipt else [])))
         (out/'symbol-inventory.json').write_text(json.dumps(specs,indent=2)+'\n')
         gdbscript=out/'observe.gdb'
         gdbscript.write_text('python\nimport sys\nsys.path.insert(0,'+repr(str(TOOL_DIR))+')\nCONFIG_PATH='+repr(str(cfg))+'\nexec(compile(open('+repr(str(TOOL_DIR/'observe_gdb.py'))+').read(), "observe_gdb.py", "exec"))\nend\n')
@@ -610,10 +674,14 @@ def main():
                 run.wait(timeout=30)
         (out/'run.json').write_text(json.dumps(dict(command=cmd,returncode=run.returncode,timed_out=timed_out,executable_sha256=sha(build/'simant-canonical.exe'),
                                                   source_arguments=scenario.get('arguments',[]),dos_executable_sha256=receipt['link']['candidate_executable']['sha256'],
-                                                  poll_ns=args.poll_ns,scenario_sha256=sha(args.scenario),script_sha256=sha(project/scenario['script'])),indent=2))
+                                                  poll_ns=args.poll_ns,until_ms=args.until_ms,scenario_sha256=sha(args.scenario),script_sha256=sha(project/scenario['script'])),indent=2))
         if clock_receipt:
             run_path=out/'run.json';run_info=json.loads(run_path.read_text())
             run_info['clock_inputs']=clock_receipt
+            run_path.write_text(json.dumps(run_info,indent=2)+'\n')
+        if full_receipt:
+            full_receipt['negative_control_read']=args.clock_control_read
+            run_path=out/'run.json';run_info=json.loads(run_path.read_text());run_info['full_inputs']=full_receipt
             run_path.write_text(json.dumps(run_info,indent=2)+'\n')
     status=compare(scenario,out,dos,map_path,specs,checkpoints,args.extra_dos,args.raw_state,args.dos_steps,
                    receipt['link']['candidate_executable']['sha256'],original_dos,oracle_root,
