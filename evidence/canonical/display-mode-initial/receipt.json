@@ -1,0 +1,6 @@
+{
+  "schema": "simant-canonical-publication-v1",
+  "prior_commit": "c5b26d3",
+  "scope": "The display-mode byte g_5A97 becomes an initialised near byte -1 instead of a communal (zero). Evidence: the original executable holds FF at 55B3:5A97 inside initialised file data (worker communal-order, build/workers/communal-order/RESULT.md), and the driver selector auto-detects the display only while the byte is -1. Placement and owning file stay unproven. No other source changes.",
+  "historical_comparisons": {}
+}

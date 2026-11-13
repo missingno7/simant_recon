@@ -14,7 +14,7 @@ Last gate result: **PASS** (2026-11-13).
 | --- | --- | --- |
 | 1. Code exact | 1,637 of 1,643 game functions | 6 functions, 2,421 bytes; 5 of 122 code modules are not yet complete translation units |
 | 2. No unexplained steering | 17 exact functions depend on a steering construct | 8,830 bytes |
-| 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,331 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
+| 3. Data: one owner, type, size | 113,900 initialised bytes exact | 73 storage units of our own (411 objects, 16,330 bytes) without a proven owning file; uninitialised far data sizes unverified for 14,928 of 19,408 bytes; 6,333 exact bytes with no known meaning; 113 bytes unresolved |
 | 4. Layout assumptions explained | 79 dependencies on neighbouring data, residue or undeclared results are catalogued in [data-adjacency.md](data-adjacency.md) | none is yet confirmed by a reproduced layout; 30 unattributed bytes in 5 ranges |
 | 5. Layout reproduced | not reproduced: the working DOS build orders data its own way | relocation order inside a group unproven for 2 functions |
 | 6. Whole executable | not built | the linker release is not in hand (bracketed to RTLink/Plus 5.00 or 4.15, see [toolchain](toolchain-fingerprint.md)); its 17,001-byte overlay manager is not reproduced |
@@ -104,7 +104,7 @@ use, not original sizes.
 | `database-index-state` | 2 | 6 |
 | `database-record-state` | 2 | 504 |
 | `dead-ant-coordinate-rings` | 2 | 200 |
-| `display-mode-selector` | 1 | 1 |
+| `display-mode-selector` | 1 | 0 |
 | `driver-callback-table` | 1 | 100 |
 | `event-records` | 2 | 32 |
 | `experiment-anchor` | 1 | 4 |

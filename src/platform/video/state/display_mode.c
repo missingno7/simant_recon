@@ -6,6 +6,9 @@
  * storage; original placement, owning file and completeness are unproven.
  * Windows: unknown; this storage file has no functions to pair.
  * Build profile: msc600ax; /AL /Os /Gs.
+ * The initial value -1 is the original file byte and the sentinel the driver selector tests.
  */
 
-char near g_5A97;
+/* -1 means "not configured": the driver selector auto-detects the display only while the
+ * byte is still -1 (driver_select.c); the original file holds FF here (55B3:5A97). */
+char near g_5A97 = -1;

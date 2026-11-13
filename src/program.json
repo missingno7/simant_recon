@@ -19383,22 +19383,24 @@
         "/Os",
         "/Gs"
       ],
-      "source_sha256": "6473a7248074112d2e3ccf9dec278dc2fac47a5f664cbb218ab2dd88cec923e9",
+      "source_sha256": "e584517175a80a84f95902ccbd2857a436a5e48ac95e94412a430fef3bfcd0ce",
       "unit": "root",
       "storage_contract": {
         "status": "PASS",
         "data_only": true,
-        "live_initialized_bytes": 0,
+        "live_initialized_bytes": 1,
         "code_bytes": 0,
-        "communals": [
+        "communals": [],
+        "publics": [
           {
             "name": "_g_5A97",
-            "kind": "near",
-            "length": 1
+            "segment": "_DATA",
+            "offset": 0
           }
         ],
-        "publics": [],
-        "fixups": []
+        "fixups": [],
+        "recipe": "original_file_byte_and_tested_sentinel",
+        "value_sha256": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89"
       },
       "summary": "Defines the current DOS display mode selector. The driver selector sets it and drawing code uses it to choose pixel and font formats.",
       "windows_group": "unknown",
