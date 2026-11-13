@@ -111,6 +111,14 @@ links (10,680 relocations) exactly in both releases. Model, routine addresses an
 `evidence/toolchain/rtlink-order/`. Not shown: that the missing 4.15/5.00 release uses the
 same rule, and the original input stream it would need (every registered name of every
 object and library member, in processing order). Communal allocation uses a separate list.
+The rule is not fixed across releases: 4.00 hashes a twelve-byte key (16-bit flags and
+secondary, 32-bit frame and target numbers); 4.14 and 6.10 hash the eight-byte key above.
+With the right width each release is predicted exactly on further synthetic links (worker
+rtl-decode, 728 of 728 entries); with the wrong width 4.00 gets 0 of 74. Which width the
+missing release uses is unknown; it lies between 4.14 and 6.10, which agree. Predicting a
+whole real program (and so decoding the original's symbol order) needs a complete model of
+the linker's input processing (library search, aliases, vector directives, every fixup form
+and descriptor conversion), which does not exist yet.
 
 The gate therefore requires the exact relocation set and the exact within-group order
 (an object property) and records `reloc_order: GROUPED` when only the between-group order
