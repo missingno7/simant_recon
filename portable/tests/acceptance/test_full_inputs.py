@@ -1,7 +1,7 @@
 """Execute the actual full-clock and SDL input hooks, including rejection lanes."""
 import os,shutil,subprocess,tempfile,unittest
 from pathlib import Path
-from .native_acceptance import ROOT
+from .state_schema import ROOT
 from .full_inputs import parse_trace
 from .capture_dos_steps import countdown_points
 

@@ -1,10 +1,10 @@
-"""Capture original/canonical DoAntSim entries and seed clock returns read-only."""
+"""Record original/canonical step fingerprints, clock streams and input positions."""
 import argparse,json,subprocess,sys,time
 from pathlib import Path
 if __package__:
-    from .native_acceptance import ROOT,acceptance,memory_base,sha
+    from .state_schema import ROOT,acceptance,memory_base,sha
 else:
-    from native_acceptance import ROOT,acceptance,memory_base,sha
+    from state_schema import ROOT,acceptance,memory_base,sha
 
 
 def capture_addresses(original, exe):
@@ -60,12 +60,13 @@ def main():
     ap.add_argument('--saved-game',type=Path)
     ap.add_argument('--out',type=Path,required=True)
     ap.add_argument('--steps',type=int,default=8)
-    ap.add_argument('--until-ms',type=int,help='Optional diagnostic input-prefix bound; never full-scenario acceptance')
     ap.add_argument('--host-seconds',type=int,default=600)
-    ap.add_argument('--compact-observer',type=Path,help='Read-only compact observer build receipt; capture all clock returns and pump ordinals')
-    ap.add_argument('--pump-source',choices=('both','window','queue'),default='both',help='Ordinal boundaries: window event pump entry and completed queue read (single-boundary modes are diagnostic controls)')
+    ap.add_argument('--compact-observer',type=Path,required=True,help='Read-only compact observer build receipt')
+    ap.add_argument('--state-schema',type=Path,required=True,help='Ordered step fingerprint views (step_state.py)')
+    ap.add_argument('--dump-every',type=int,default=256)
+    ap.add_argument('--cycles',type=int,default=10000)
     args=ap.parse_args()
-    if not 1<=args.steps<=64 or not 1<=args.host_seconds<=7200: ap.error('Bound steps to 1..64 and host seconds to 1..7200')
+    if not 1<=args.steps<=20000 or not 1<=args.host_seconds<=7200: ap.error('Bound steps to 1..20000 and host seconds to 1..7200')
     report=None if args.original else json.loads(args.build_report.read_text())
     scenario=json.loads(args.scenario.read_text())
     exe=ROOT/'assets/SIMANT.EXE' if args.original else ROOT/report['link']['candidate_executable']['path']
@@ -82,25 +83,12 @@ def main():
     out.parent.mkdir(parents=True,exist_ok=True)
     original=(ROOT/scenario['script']).read_text()
     lines=[l for l in original.splitlines() if l.strip() and not l.lstrip().startswith('#')]
-    if args.until_ms:
-        lines=[l for l in lines if int(l.split()[0])<args.until_ms and l.split()[1]!='exit']
-        lines.append(f'{args.until_ms} exit')
-    lines += [f'0 on_exec lin {base+addresses["DoAntSim"]:X} {args.steps} dump 0 A0000 simstep']
-    lines += [f'{ms} dump 0 A0000 cp{ms}' for ms in scenario.get('checkpoints',[]) or [14000,22000,40000,49000]
-              if args.until_ms is None or ms<args.until_ms]
-    # Metadata records returned DX:AX before the caller changes either word.
-    # Exactly two SeedSRand calls (direct initStuff, then SeedRRand) and one
-    # SeedRRand read are expected in the normal launch, not arbitrary max hits.
-    for name,hits in [('SeedSRand',2),('SeedRRand',1)]:
-        lines.append(f'0 on_exec lin {sites[name]:X} {hits} dump 46C 4 seed-{name}')
-    for name in ('main','snd_init_driver_once','snd_start_sample_timer'):
-        lines.append(f'0 on_exec lin {base+addresses[name]:X} 1 dump 46C 4 startup-{name}')
-    for ms in (0,250,500,750,1000,1250,1500,2000,5000,7000,9000,14000):
-        if args.until_ms is None or ms<args.until_ms: lines.append(f'{ms} dump 46C 4 clock{ms}')
+    # One binding frame, then compact fingerprints and periodic state frames.
+    lines += [f'0 on_exec lin {base+addresses["DoAntSim"]:X} 1 dump 0 A0000 simstep']
     lines.sort(key=lambda l:int(l.split()[0]))
     script=out.with_suffix('.scr');script.write_text('\n'.join(lines)+'\n')
     command=[sys.executable,str(ROOT/'dos/run.py'),
-             '--out',str(out),'--seconds',str(args.host_seconds),'--fixed-clock','--input-script',str(script)]
+             '--out',str(out),'--seconds',str(args.host_seconds),'--fixed-clock','--input-script',str(script),'--cycles',str(args.cycles)]
     command+=['--original'] if args.original else ['--build-report',str(args.build_report.resolve())]
     compact_spec=None
     if args.compact_observer:
@@ -112,13 +100,25 @@ def main():
             ins=list(decoder.disasm(memory[start:start+32],start))
             ret=next(i.address for i in ins if i.mnemonic=='retf')
             points.append((kind,ret))
-        if args.pump_source in ('both','queue'):
-            start=base+addresses['input_event_count']
-            pump_pc=next(i.address for i in decoder.disasm(memory[start:start+16],start) if i.mnemonic=='retf')
-            points.append(('P',pump_pc))
-        if args.pump_source in ('both','window'):points.append(('P',base+addresses['f_1B28_0069']))
+        start=base+addresses['input_event_count']
+        pump_pc=next(i.address for i in decoder.disasm(memory[start:start+16],start) if i.mnemonic=='retf')
+        points.append(('P',pump_pc))
+        points.append(('W',base+addresses['f_1B28_0069']))
         points.append(('S',base+addresses['DoAntSim']))
+        for name,kind in [('kbd_poll_bios_key','A'),('kbd_read_bios_char','G')]:
+            start=base+addresses[name]
+            ret=next(i.address for i in decoder.disasm(memory[start:start+80],start) if i.mnemonic=='retf')
+            points.append((kind,ret))
         points += [('K',base+addresses['kbd_process_scan']),('M',base+addresses['mouse_event_callback'])]
+        points.append(('Y',base+addresses['kbd_int15_scan_hook']))
+        from capstone.x86 import X86_OP_MEM,X86_OP_REG,X86_REG_CS,X86_REG_BL
+        start=base+addresses['kbd_disable_mouse_emulation']
+        flags=[op.mem.disp for ins in decoder.disasm(memory[start:start+32],start)
+               if ins.mnemonic=='mov' and len(ins.operands)==2 and ins.operands[1].type==X86_OP_REG and ins.operands[1].reg==X86_REG_BL for op in ins.operands[:1]
+               if op.type==X86_OP_MEM and op.mem.segment==X86_REG_CS]
+        if len(flags)!=1:raise ValueError('Keyboard-hook flag binding is not unique')
+        tick_segment=int.from_bytes(memory[sites['SeedSRand']-2:sites['SeedSRand']],'little')
+        points.append(('O',tick_segment*16+flags[0]))
         start=base+addresses['input_enqueue_event']
         stamps=[i.address for i in decoder.disasm(memory[start:start+200],start)
                 if i.mnemonic=='mov' and i.op_str=='bx, word ptr es:[0x6c]']
@@ -128,6 +128,13 @@ def main():
         points+=countdown_points(memory,base,addresses,sites)
         compact_spec=out.with_suffix('.observer')
         compact_spec.write_text(str(out/'observer.txt')+'\n'+''.join(f'{k} {pc:X}\n' for k,pc in points))
+        if args.state_schema:
+            state=json.loads(args.state_schema.read_text())
+            side='original_address' if args.original else 'canonical_address'
+            with compact_spec.open('a') as config:
+                config.write(f'L {args.steps} {args.dump_every}\n')
+                for item in state['items']:
+                    config.write(f'H {base+item[side]:X} {item["bytes"]} {int(item["sentinel"])}\n')
         command += ['--capture-observer',str(args.compact_observer.resolve()),'--observer-config',str(compact_spec)]
     for arg in scenario.get('arguments',[]): command+=['--argument',arg]
     if scenario.get('saved_game'): command+=['--saved-game',str((args.saved_game or ROOT/scenario['saved_game']).resolve())]
@@ -138,15 +145,17 @@ def main():
                   target='original' if args.original else 'canonical_dos',seed_return_sites=sites,
                   host_elapsed_seconds=time.monotonic()-started,
                   scenario_sha256=sha(args.scenario),input_script_sha256=sha(ROOT/scenario['script']),
-                  observation_script_sha256=sha(script),until_ms=args.until_ms,
+                  observation_script_sha256=sha(script),
                   execution_report_sha256=sha(out/'execution-report.json'),
                   installed_script_sha256=sha(out/'INPUT.SCR'),
-                  scope='Original inputs plus read-only observations; prefix-only if until_ms is set.',
+                  scope='Original input script; read-only step hashes, periodic frames, all per-site clock values and actual input positions.',
                   command=command,returncode=run.returncode,
                   snapshots={p.name:sha(p) for p in sorted(out.glob('exec-*.bin'))},
                   metadata={p.name:sha(p) for p in sorted(out.glob('exec-*.json'))})
+    if args.state_schema:
+        manifest['state_schema_sha256']=sha(args.state_schema)
     if compact_spec:
-        manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,pump_source=args.pump_source,
+        manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,pump_source='both',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
     (out/'boundary-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

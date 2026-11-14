@@ -12,7 +12,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 ABI = ROOT / "portable" / "canonical_native_abi"
-ALLOWED_BUILD_ROOTS = {"current", "deps", "workers", "scratch", "locks"}
+ALLOWED_BUILD_ROOTS = {"current", "deps", "workers", "scratch", "locks", "reference"}
 REQUIRED_ENTRY_POINTS = {
     "dos/build.py", "portable/build.py", "tools/validate.py",
     "tools/context.py", "tools/search.py", "tools/promote.py",

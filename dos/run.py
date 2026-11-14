@@ -19,6 +19,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from dos import build, diagnostic
 
+
+def observation_path(path):
+    """Stored references are isolated outputs, alongside disposable captures."""
+    resolved=path.resolve()
+    if resolved.is_relative_to(ROOT/'build/reference'):
+        return resolved
+    return diagnostic.experimental_path(path)
+
 RESOURCES = ('FONT1', 'FONT2', 'FONT3', 'FONT4', 'HCEGANT.DAT', 'HCEGANT.NDX',
              'SHARED.DAT', 'SHARED.NDX', 'SOUND.DAT', 'SOUND.NDX', 'SIMANT.CFG', 'INSTALL.EXE')
 
@@ -57,7 +65,7 @@ def input_script(path, out):
     """
     path = Path(path).resolve()
     if not path.is_relative_to(ROOT / 'dos/scenarios'):
-        path = diagnostic.experimental_path(path)
+        path = observation_path(path)
     lines, last = [], -1
     for number, raw in enumerate(Path(path).read_text().splitlines(), 1):
         line = raw.split('#', 1)[0].strip()
@@ -228,7 +236,7 @@ def main(argv=None):
         saved_game = saved_game_input(args.saved_game) if args.saved_game else None
     except (ValueError, OSError) as error:
         parser.error(str(error))
-    out = diagnostic.experimental_path(args.out)
+    out = observation_path(args.out)
     build.prepare_output(out, ROOT / 'build/current/dos-runtime')
     report = {'schema': 'simant-dos-execution-v1',
         'target': 'ORIGINAL_ORACLE' if args.original else 'DIAGNOSTIC_DOS',
@@ -280,7 +288,7 @@ def main(argv=None):
             observer_exe = diagnostic.experimental_path(Path(observer['executable']))
             runner = {**runner, 'path': str(observer_exe)}
             report['runner'] = build.read_pin(observer_exe, observer['sha256'])[1]
-            config_path = diagnostic.experimental_path(args.observer_config)
+            config_path = observation_path(args.observer_config)
             report['capture_observer'] = {'receipt': build.read_pin(observer_path)[1],
                 'config': build.read_pin(config_path)[1], 'scope': observer['scope']}
         if args.input_script:

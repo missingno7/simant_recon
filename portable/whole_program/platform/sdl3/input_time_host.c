@@ -323,6 +323,10 @@ PortableInputTimeStatus portable_input_time_host_refresh_clock(
     if (binding->refreshing)
         return ingest_host_events(binding) < 0 ? PORTABLE_INPUT_TIME_PROVIDER_FAILED :
                                                 PORTABLE_INPUT_TIME_OK;
+    /* Tape acceleration: pending recorded input always uses the full
+     * historical refresh. No event is ingested on a shortened path. */
+    if (portable_test_refresh_mode && portable_test_refresh_mode()==1)
+        return PORTABLE_INPUT_TIME_OK;
     now = host_time_ns();
     /* Cap real-time refresh work at 1 kHz. Virtual mode instead consumes one
      * configured quantum at each eligible outer refresh, never SDL wall time. */

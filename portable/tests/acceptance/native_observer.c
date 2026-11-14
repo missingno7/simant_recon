@@ -1,0 +1,200 @@
+/* Read-only step observer, linked only by step_check.py. Environment gates it.
+ * Offsets come from this executable's DWARF, not a presumed native layout. */
+#include <inttypes.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+extern uint32_t portable_test_clock_read(char, void *, uint32_t);
+extern void portable_test_step_boundary(unsigned, unsigned);
+extern void portable_test_diagnostics(FILE *);
+extern void __real_DoAntSim(void);
+extern int32_t __real_MacTickCount(void);
+
+typedef struct Slice {
+  int64_t delta;
+  unsigned bytes;
+} Slice;
+typedef struct View {
+  unsigned verdict, bytes, sentinel, count;
+  Slice *slices;
+  uint8_t *data;
+} View;
+static View *views;
+static unsigned count, step, limit, active;
+static FILE *expected, *actual, *result;
+static char dump_path[2048];
+static unsigned state_clock;
+
+int portable_test_clock_is_stateful(void) { return state_clock; }
+
+int32_t __wrap_MacTickCount(void) {
+  static int loaded, disabled;
+  static int64_t pacing[8];
+  static unsigned pacing_count;
+  if (!loaded) {
+    loaded = 1;
+    disabled = getenv("SIMANT_TEST_DISABLE_CLOCK") != NULL;
+    const char *text = getenv("SIMANT_TEST_PACING_CALLS");
+    while (text && *text) {
+      char *end;
+      if (pacing_count == 8)
+        abort();
+      pacing[pacing_count++] = strtoll(text, &end, 10);
+      if (*end && *end != ',')
+        abort();
+      text = *end ? end + 1 : end;
+    }
+  }
+  int64_t caller = (int64_t)(uintptr_t)__builtin_return_address(0) -
+                   (int64_t)(uintptr_t)portable_test_clock_read;
+  unsigned previous = state_clock;
+  state_clock = disabled && step > 0;
+  for (unsigned i = 0; i < pacing_count; ++i)
+    if (caller == pacing[i])
+      state_clock = 0;
+  int32_t value = __real_MacTickCount();
+  state_clock = previous;
+  return value;
+}
+
+static void load(void) {
+  static unsigned loaded;
+  const char *path;
+  char line[2048];
+  FILE *config;
+  if (loaded++)
+    return;
+  path = getenv("SIMANT_TEST_STEP_CONFIG");
+  if (!path)
+    return;
+  config = fopen(path, "r");
+  if (!config)
+    abort();
+  FILE **files[] = {&expected, &actual, &result};
+  for (unsigned i = 0; i < 3; ++i) {
+    if (!fgets(line, sizeof(line), config))
+      abort();
+    line[strcspn(line, "\r\n")] = 0;
+    *files[i] = fopen(line, i ? "wb" : "rb");
+    if (!*files[i])
+      abort();
+  }
+  if (!fgets(dump_path, sizeof(dump_path), config))
+    abort();
+  dump_path[strcspn(dump_path, "\r\n")] = 0;
+  if (fscanf(config, "%u %u", &count, &limit) != 2 || !count || !limit)
+    abort();
+  views = calloc(count, sizeof(*views));
+  if (!views)
+    abort();
+  for (unsigned i = 0; i < count; ++i) {
+    View *v = &views[i];
+    if (fscanf(config, "%u %u %u %u", &v->verdict, &v->bytes, &v->sentinel,
+               &v->count) != 4 ||
+        !v->count || !v->bytes)
+      abort();
+    v->slices = calloc(v->count, sizeof(*v->slices));
+    v->data = malloc(v->bytes);
+    if (!v->slices || !v->data)
+      abort();
+    unsigned total = 0;
+    for (unsigned j = 0; j < v->count; ++j) {
+      if (fscanf(config, "%" SCNd64 " %u", &v->slices[j].delta,
+                 &v->slices[j].bytes) != 2)
+        abort();
+      total += v->slices[j].bytes;
+    }
+    if (total != v->bytes)
+      abort();
+  }
+  fclose(config);
+  active = 1;
+}
+
+void portable_test_replay_error(const char *message) {
+  load();
+  if (!active)
+    abort();
+  fprintf(result,
+          "{\"steps_compared\":%u,\"missing_step\":%u,\"replay_error\":\"%s\",",
+          step, step + 1, message);
+  portable_test_diagnostics(result);
+  fputs("}\n", result);
+  fclose(actual);
+  fclose(expected);
+  fclose(result);
+  fflush(NULL);
+  _Exit(12);
+}
+
+static uint32_t fingerprint(View *v) {
+  unsigned length = v->bytes;
+  if (v->sentinel) {
+    for (unsigned i = 0; i + 1 < length; i += 2)
+      if (v->data[i] == 0 && v->data[i + 1] == 128) {
+        length = i + 2;
+        break;
+      }
+  }
+  uint32_t hash = 2166136261u;
+  for (unsigned i = 0; i < length; ++i)
+    hash = (hash ^ v->data[i]) * 16777619u;
+  return hash;
+}
+
+static void finish(unsigned differs) {
+  fprintf(result, "{\"steps_compared\":%u,\"first_differing_step\":%u,", step,
+          differs ? step : 0);
+  portable_test_diagnostics(result);
+  fputs("}\n", result);
+  fclose(result);
+  fclose(actual);
+  fclose(expected);
+  {
+    FILE *dump = fopen(dump_path, "wb");
+    if (!dump)
+      abort();
+    for (unsigned i = 0; i < count; ++i)
+      if (fwrite(views[i].data, 1, views[i].bytes, dump) != views[i].bytes)
+        abort();
+    fclose(dump);
+  }
+  /* Bounded at this entry. Clock/input tails beyond the first difference
+   * are intentionally unconsumed; they remain in the immutable reference. */
+  fflush(NULL);
+  _Exit(differs ? 10 : 0);
+}
+
+void __wrap_DoAntSim(void) {
+  load();
+  if (!active) {
+    __real_DoAntSim();
+    return;
+  }
+  ++step;
+  portable_test_step_boundary(step, 1);
+  unsigned differs = 0;
+  for (unsigned i = 0; i < count; ++i) {
+    View *v = &views[i];
+    unsigned offset = 0;
+    for (unsigned j = 0; j < v->count; ++j) {
+      uintptr_t at = (uintptr_t)portable_test_clock_read + v->slices[j].delta;
+      memcpy(v->data + offset, (const void *)at, v->slices[j].bytes);
+      offset += v->slices[j].bytes;
+    }
+    uint32_t hash = fingerprint(v), reference;
+    if (fread(&reference, sizeof(reference), 1, expected) != 1)
+      abort();
+    if (fwrite(&hash, sizeof(hash), 1, actual) != 1)
+      abort();
+    if (v->verdict && hash != reference)
+      differs = 1;
+  }
+  fflush(actual);
+  if (differs || step == limit)
+    finish(differs);
+  __real_DoAntSim();
+  portable_test_step_boundary(step, 0);
+}

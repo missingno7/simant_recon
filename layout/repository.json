@@ -136,8 +136,8 @@
       "role": "Refresh the port's pins on canonical sources after a reconstruction change"
     },
     {
-      "path": "portable/tests/acceptance/native_acceptance.py",
-      "role": "Deterministic native/canonical DOS differential observations"
+      "path": "portable/tests/acceptance/step_check.py",
+      "role": "Step check: native runs replaying each stored DOS reference's clock and input tapes, compared per simulation step"
     },
     {
       "path": "portable/tests/acceptance/capture_dos_steps.py",
@@ -1123,6 +1123,7 @@
         "portable/whole_program/platform/m1b73_mouse.c",
         "portable/whole_program/platform/sdl3/input_time_host.c",
         "portable/whole_program/platform/sdl3/host.c",
+        "portable/whole_program/platform/sdl3/test_observer.inc",
         "portable/whole_program/platform/sdl3/m1b73_application_input.c"
       ],
       "builder_site": "portable/build.py:platform service inventory",
@@ -1329,6 +1330,7 @@
     }
   ],
   "role_roots": {
+    "portable/whole_program/platform/sdl3/test_observer.inc": "Option-gated step-check hooks included by sdl3/host.c (clock and input tape replay, state observer); inert without the test options",
     "tools/": "Reconstruction workflow and diagnostics (CLI or imported helper)",
     "tests/": "Permanent acceptance/negative controls",
     "evidence/": "Reviewed proof, toolchain facts or explicit unresolved investigation",

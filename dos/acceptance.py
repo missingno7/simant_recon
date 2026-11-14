@@ -1,14 +1,8 @@
-"""Original-vs-reconstructed DOS acceptance at saved-game state boundaries.
+"""Bounded original/canonical DOS saved-file and sound-output diagnostics.
 
-Runs one scenario (dos/scenarios/*.json naming an emulated-time input script)
-under the pinned acceptance DOSBox-X with fixed cycles and a fixed guest
-clock, for the original oracle and for a reconstructed executable, then
-compares every saved game byte for byte, reporting differing records by the
-canonical S09 SaveRec schema. Input arrives at identical emulated times, so
-any difference, including timer-derived fields, is a behavioural difference.
-
-A PASS is a bounded observation for the recorded scenario; it is not closure
-by itself and grants no acceptance outside that scenario.
+Step-based game-state checks use portable/tests/acceptance/step_check.py and
+stored references. This explicit legacy runner remains for actual SaveGame
+files and hardware OUT command streams; it does not compare equal-time memory.
 """
 from __future__ import annotations
 
@@ -83,10 +77,9 @@ DUMP_BYTES = 0xA0000
 
 
 def scripted_input(scenario: dict, out: Path) -> Path:
-    """The scenario script, plus a conventional-memory dump at each checkpoint."""
+    """The scenario script, plus optional hardware sound observations."""
     lines = [line for line in (ROOT / scenario["script"]).read_text().splitlines()
              if line.strip() and not line.lstrip().startswith("#")]
-    lines += [f"{ms} dump 0 {DUMP_BYTES:X} cp{ms}" for ms in scenario.get("checkpoints", [])]
     if scenario.get("sound"):
         lines += [f"0 io_watch {lo} {hi} {name} out" for name, (lo, hi) in SOUND_PORTS.items()]
     lines.sort(key=lambda line: int(line.split()[0]))
@@ -138,19 +131,11 @@ def run_once(scenario: dict, out: Path, build_report: Path | None) -> dict:
     if build_report is not None:
         receipt = json.loads(Path(build_report).read_text())
         map_path = (ROOT / receipt["link"]["candidate_executable"]["path"]).with_name("SOURCE.MAP")
-    addresses = record_addresses(map_path)
-    checkpoints = {}
-    for ms in scenario.get("checkpoints", []):
-        dump = out / f"dump-cp{ms}"
-        checkpoints[f"cp{ms}"] = virtual_save(dump.read_bytes(), addresses) if dump.is_file() else None
-        # Retain the raw checkpoint for named-state DOS/native comparison.
-        # The virtual save remains the original DOS acceptance gate.
     sound = {name: port_writes(out / f"io-{name}") for name in SOUND_PORTS
              if scenario.get("sound") and (out / f"io-{name}").is_file()}
     return {"report": report, "map": map_path, "sound": sound,
             "saves": {name: (out / name).read_bytes() if (out / name).is_file() else None
-                      for name in scenario["saves"]},
-            "checkpoints": checkpoints}
+                      for name in scenario["saves"]}}
 
 
 def main(argv=None) -> int:
@@ -181,8 +166,6 @@ def main(argv=None) -> int:
         passed &= report.get("status") == "EMULATOR_EXITED" and not faults
     comparisons = [(name, runs["original"]["saves"][name], runs["reconstructed"]["saves"][name])
                    for name in scenario["saves"]]
-    comparisons += [(name, runs["original"]["checkpoints"][name], runs["reconstructed"]["checkpoints"][name])
-                    for name in runs["original"]["checkpoints"]]
     if runs["reconstructed"]["map"] is not None:
         result["reconstructed_map_sha256"] = build.digest(runs["reconstructed"]["map"].read_bytes())
     if scenario.get("sound"):

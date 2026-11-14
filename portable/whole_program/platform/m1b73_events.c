@@ -3,73 +3,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
-/* BEGIN TEST CLOCK INPUTS: opt-in SIMANT_TEST_CLOCK_REPLAY. */
-/* Original DX:AX returns, ordered per seed call site. Native return PCs are
- * independently disassembled offsets from SeedSRand, so ASLR is immaterial. */
-#include <stdio.h>
-#include <inttypes.h>
-
-extern void SeedSRand(void) __attribute__((weak));
-typedef struct ClockReplayRead {
-    char site;
-    int64_t pc_delta;
-    unsigned ordinal;
-    uint32_t value;
-} ClockReplayRead;
-static ClockReplayRead clock_reads[256];
-static size_t clock_read_count, clock_read_next;
-static int clock_replay_loaded;
-static unsigned clock_site_ordinals[2];
-
-static void clock_replay_complete(void)
-{
-    if (clock_read_next != clock_read_count) {
-        fprintf(stderr,"Clock replay incomplete: %zu/%zu\n",clock_read_next,clock_read_count);
-        abort();
-    }
-}
-
-static uint32_t clock_replay_value(void *return_pc, uint32_t fallback)
-{
-    size_t i;
-    int64_t delta;
-    if (!clock_replay_loaded) {
-        const char *path=getenv("SIMANT_TEST_CLOCK_REPLAY");
-        clock_replay_loaded=1;
-        if (path) {
-            FILE *file=fopen(path,"r");
-            char line[200],extra;
-            if (!file || !SeedSRand) abort();
-            while (fgets(line,sizeof(line),file)) {
-                ClockReplayRead *r;
-                if (line[0]=='#' || line[0]=='\n') continue;
-                if (clock_read_count==256) abort();
-                r=&clock_reads[clock_read_count];
-                if (sscanf(line,"%c %" SCNd64 " %u %" SCNu32 " %c",
-                           &r->site,&r->pc_delta,&r->ordinal,&r->value,&extra)!=4 ||
-                    (r->site!='S' && r->site!='R') || !r->ordinal) abort();
-                ++clock_read_count;
-            }
-            if (ferror(file) || !clock_read_count) abort();
-            fclose(file);
-            if (atexit(clock_replay_complete)) abort();
-        }
-    }
-    if (!clock_read_count) return fallback;
-    delta=(int64_t)(uintptr_t)return_pc-(int64_t)(uintptr_t)SeedSRand;
-    for (i=0;i<clock_read_count;++i) if (clock_reads[i].pc_delta==delta) {
-        ClockReplayRead *r;
-        unsigned ordinal=++clock_site_ordinals[clock_reads[i].site=='R'];
-        if (clock_read_next==clock_read_count) abort();
-        r=&clock_reads[clock_read_next++];
-        if (r->pc_delta!=delta || r->ordinal!=ordinal) abort();
-        fprintf(stderr,"Clock replay %c %u: original=%" PRIu32 " host=%" PRIu32 "\n",
-                r->site,ordinal,r->value,fallback);
-        return r->value;
-    }
-    return fallback;
-}
-/* END TEST CLOCK INPUTS */
 
 _Static_assert(sizeof(PortableM1B73Event) == 16,
                "DOS Event ABI is eight 16-bit words");
@@ -272,7 +205,7 @@ uint32_t TickCount(void)
         PORTABLE_INPUT_TIME_OK)
         abort();
     return portable_test_observed_clock('T', __builtin_return_address(0),
-        clock_replay_value(__builtin_return_address(0),sim_timing_tick_count(events->clock)));
+        sim_timing_tick_count(events->clock));
 }
 
 int16_t input_event_count(void)

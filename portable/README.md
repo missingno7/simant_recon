@@ -15,6 +15,7 @@ python portable/tests/runtime/run.py --report build/current/portable/report.json
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow save
 python portable/tests/runtime/run_load.py --report build/current/portable/report.json
 python portable/tests/audio/run.py
+python portable/tests/acceptance/step_check.py
 ```
 
 Default output is recreated after moving the previous result to ignored `to_delete/`.
