@@ -300,15 +300,69 @@ void __wrap_DoAntSim(void) {
   portable_test_step_boundary(step, 0);
 }
 
+#ifdef SIMANT_TEST_SOUND_SERVICES
+#include "sound_services.inc"
+static const struct SoundService { unsigned id;void (*function)(void); } sound_services[] = {
+#define SOUND_SERVICE(id,symbol) {id,symbol},
+#include "sound_services.inc"
+#undef SOUND_SERVICE
+};
+extern int portable_whole_audio_isr_active(void) __attribute__((weak));
+extern void portable_test_sound_entry(unsigned);
+extern void portable_test_sound_call(unsigned,unsigned,void *);
+extern void __real_snd_expand_sample_resource(char ***,uint16_t *,int16_t,int16_t);
+void __wrap_snd_expand_sample_resource(char ***handle,uint16_t *size,int16_t object,int16_t type) {
+  if (!portable_whole_audio_isr_active || !portable_whole_audio_isr_active()) {
+    portable_test_sound_call((uint16_t)object,(uint16_t)type,__builtin_return_address(0));
+    if (type==5) portable_test_sound_entry(SOUND_SAMPLE_RESOURCE_ID);
+  }
+  __real_snd_expand_sample_resource(handle,size,object,type);
+}
+static struct SoundSlot { void *function;unsigned id; } sound_slots[256];
+static unsigned sound_slots_ready;
+static unsigned sound_slot(void *function) {
+  uintptr_t address=(uintptr_t)function;
+  return (unsigned)((address>>4)^(address>>16))&255;
+}
+static unsigned sound_id(void *function) {
+  if (!sound_slots_ready) {
+    sound_slots_ready=1;
+    for (unsigned i=0;i<sizeof(sound_services)/sizeof(*sound_services);++i) {
+      void *entry=(void *)sound_services[i].function;
+      if (!entry) continue;
+      unsigned at=sound_slot(entry);
+      while (sound_slots[at].function) {
+        if (sound_slots[at].function==entry) abort(); /* Ambiguous function identity. */
+        at=(at+1)&255;
+      }
+      sound_slots[at].function=entry;sound_slots[at].id=sound_services[i].id;
+    }
+  }
+  unsigned at=sound_slot(function);
+  while (sound_slots[at].function) {
+    if (sound_slots[at].function==function) return sound_slots[at].id;
+    at=(at+1)&255;
+  }
+  return 0;
+}
+#endif
+
 /* GCC entry instrumentation covers internal calls within a translation unit,
  * which the linker's --wrap does not intercept. Bodies and arguments stay
- * canonical; only these two source boundaries advance the observer. */
+ * canonical; the input boundaries and reviewed foreground sound entries advance
+ * the observer. Sound ISR calls are filtered by actual execution context. */
 extern void portable_test_before_poll(void) __attribute__((weak));
 extern void portable_test_input_sample(unsigned, unsigned) __attribute__((weak));
 extern int16_t StillDown(void) __attribute__((weak));
 extern int16_t edit_scroll_and_redraw(int16_t, int16_t) __attribute__((weak));
 __attribute__((no_instrument_function)) void __cyg_profile_func_enter(void *function, void *caller) {
   (void)caller;
+#ifdef SIMANT_TEST_SOUND_SERVICES
+  if (portable_whole_audio_isr_active && portable_whole_audio_isr_active()) return;
+  unsigned sound=sound_id(function);
+  if (sound==SOUND_SAMPLE_RESOURCE_ID) return; /* Typed wrapper qualifies the generic hook. */
+  if (sound) { portable_test_sound_entry(sound);return; }
+#endif
   unsigned kind;
   if (function==(void *)edit_scroll_and_redraw) kind=246;
   else return;

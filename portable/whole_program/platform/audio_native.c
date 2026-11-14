@@ -61,18 +61,21 @@ void snd_restore_bios_timer(int16_t divisor) {
 }
 /* m283E_0020 emits index, 10 status reads, data, 40 status reads. Preserve
  * the complete guest I/O order; no host register-to-note approximation. */
-void snd_opl_write(uint8_t reg,uint8_t value) {
+void snd_opl_write_regs(uint8_t reg,uint8_t value) {
     unsigned i;dos_audio_host_out8(0x388,reg);
     for(i=0;i<10;++i) dos_audio_host_in8(0x388);
     dos_audio_host_out8(0x389,value);
     for(i=0;i<40;++i) dos_audio_host_in8(0x388);
 }
+void snd_opl_write(uint8_t reg,uint8_t value) {
+    snd_opl_write_regs(reg,value);
+}
 void snd_opl_probe_tone(void) {
-    snd_opl_write(0x20,0x21);snd_opl_write(0x60,0xf0);
-    snd_opl_write(0x80,0xf0);snd_opl_write(0xc0,1);
-    snd_opl_write(0xe0,0);snd_opl_write(0x43,0x3f);
-    snd_opl_write(0xb0,1);snd_opl_write(0xa0,0x8f);
-    snd_opl_write(0xb0,0x2e);
+    snd_opl_write_regs(0x20,0x21);snd_opl_write_regs(0x60,0xf0);
+    snd_opl_write_regs(0x80,0xf0);snd_opl_write_regs(0xc0,1);
+    snd_opl_write_regs(0xe0,0);snd_opl_write_regs(0x43,0x3f);
+    snd_opl_write_regs(0xb0,1);snd_opl_write_regs(0xa0,0x8f);
+    snd_opl_write_regs(0xb0,0x2e);
     /* Mode 4 uses the canonical 0x952-PIT-count delay. It remains outside
      * the Sound Blaster profile until the PIT-latch poll is hosted. */
     unavailable("AdLib-only reset PIT delay");

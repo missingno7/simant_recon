@@ -161,8 +161,7 @@ def main() -> int:
     references = verify_references()
     include_dir = args.include_dir
     if include_dir is None:
-        candidates = [ROOT / "build/workers/font-dac/native",
-                      ROOT / "build/current/portable"]
+        candidates = [ROOT / "build/current/portable"]
         include_dir = next((path for path in candidates
                             if (path / "canonical_graphics_data.h").is_file()), None)
     elif not include_dir.is_absolute():

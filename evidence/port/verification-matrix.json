@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "6e38b19 plus audio (contract v8: sound ISR schedule replay, per-entry device command comparison)",
+ "source": "8390221 plus audio v9 (sound-driver entries as service boundaries) with independent audio verdict",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -26,7 +26,7 @@
   "random-17 (2000)": "seeded random input; equal in game state for all 2000 entries in both lanes",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run",
   "frames (all scenarios)": "all 152 checkpoint frames, attribute maps and DAC exactly equal in every scenario and lane",
-  "audio (all scenarios)": "ISR execution counts equal in every lane; audio progress differs at entry 1 only in midi_service_countdown (2-3 pre-reset ticks replayed after the foreground song reset), command streams first differ at entries 4-18 (note-off phase); new-game-save full raw streams identical (12,527 writes per lane); later DSP direct-DAC differences open (worker audio, v9)"
+  "audio (all scenarios)": "audio verdict independent of state/frames; 5 lanes equal (new-game-save, experiment, load-from-save canonical), 8 differ (OPL/DSP write interleaving from interrupt placement; direct-DAC sample bytes at ant-commands original 598, full-game canonical 618, interactive-play original 832), 5 incomplete (IRQ inside a sound routine, outside the tested placement domain). Next: content comparison with a small tick tolerance (worker audio-content)"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
  "subsystems": [
@@ -161,9 +161,9 @@
    "original_dos": "dos/acceptance.py records DSP and OPL write streams; original = canonical DOS (34,193 and 37,438 writes, timing within 1.4 ms) on quick-game",
    "canonical_dos": "same",
    "native": "sound ISR executed on the replayed DOS schedule; per-entry OPL/DSP/DMA command comparison; audio suite PASS",
-   "known_divergence": "ISR ticks between a service and the foreground song reset/start are replayed after it (countdown phase 2-3 ticks); later DSP direct-DAC stream differences not yet triaged",
-   "first_open_question": "are audio progress and command streams equal once foreground sound-driver entries are service boundaries?",
-   "next": "worker audio (v9)"
+   "known_divergence": "remaining differences are interrupt placement (OPL/DSP interleaving, IRQ inside the voice reaper) except direct-DAC sample bytes in three lanes, which may be content",
+   "first_open_question": "do native sample bytes and OPL note events equal DOS by content within a few timer ticks?",
+   "next": "worker audio-content (content comparison, sample-byte check, simplify replay)"
   },
   {
    "id": "memory-semantics",
@@ -199,6 +199,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test harness",
+   "summary": "contract v9: foreground sound-driver entries are service boundaries (ISR ticks drained before them); audio verdict independent: a sound-call order mismatch marks audio incomplete and replay continues for state and frames (all 18 lanes complete)"
+  },
+  {
+   "commit": "8390221",
    "layer": "test harness",
    "summary": "contract v8: sound ISR completion schedule recorded and replayed through the converted ISR; raw OPL/DSP/DMA writes compared per entry; schedule-off control returns the entry-1 differences"
   },

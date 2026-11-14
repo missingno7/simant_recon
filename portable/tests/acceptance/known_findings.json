@@ -1,672 +1,613 @@
 {
- "about": "Open step-check findings on a fresh build/current/portable, pinned exactly. scenarios: game-state outcome per lane (unlisted: ORIGINAL_EQUAL_ALL). frames: checkpoint frame signatures (unlisted: FRAME_EQUAL). audio: first audio-progress difference and exact per-entry device-command signature per lane (unlisted: AUDIO_EQUAL); audio does not stop the state comparison. Any change in either direction fails the upper-layer test; a fix updates this file in the same commit. Attribution: evidence/port/verification-matrix.json.",
+ "about": "Independent state, frame and audio verdicts for service-samples-v9 with audio-only-filter-v1. Unlisted state/frame/audio findings must be equal. Sound-order divergence makes audio incomplete from that entry; it never fails state/frames. Non-sound order and input positions remain strict. Exact current measured signatures are pinned below; see evidence/canonical/native-audio-schedule/receipt.json. The owner maintains the verification matrix separately.",
  "scenarios": {},
  "frames": {},
  "audio": {
   "ant-commands": {
    "original": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 598,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 10,
+     "first_differing_entry": 598,
      "entries_compared": 1000,
      "requested_entries": 1000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 4188,
+     "coordinate_drift_writes": 1,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 986,
+      "write_index": 442,
       "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
+       "service_ordinal": 73050545,
+       "step": 985,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
+       "service_ordinal": 73050546,
+       "step": 985,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "7c32be7fa5fa6ae4298c32f0b47df6c76472c3503f36b5302b55ca3ff1b6e34c"
+     "rows_sha256": "e351293244e8977d8c9d0ac2ca604f1eefb930436f204e089d6991459dd1935f"
     }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 704,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 6,
+     "first_differing_entry": 704,
      "entries_compared": 1000,
      "requested_entries": 1000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 4312,
+     "coordinate_drift_writes": 4,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 687,
+      "write_index": 1116,
       "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
+       "service_ordinal": 53320010,
+       "step": 686,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
+       "service_ordinal": 53320011,
+       "step": 686,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "7c8211e72e84763227e7dbbda435c3e3d4f694185724a4c220e40023852af207"
-    }
-   }
-  },
-  "experiment": {
-   "original": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
-    "commands": {
-     "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 18,
-     "entries_compared": 1000,
-     "requested_entries": 1000,
-     "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 13594,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "5697db98829d482b17581319a70c4b22d8805496cca0d725a0e75a6815b7c69e"
-    }
-   },
-   "canonical": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
-    "commands": {
-     "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 18,
-     "entries_compared": 1000,
-     "requested_entries": 1000,
-     "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 11842,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "b8bd0fdfc294ec991adc78cca04854a1d0aa1020fe3035ff4aa73ef87eb4fc45"
+     "rows_sha256": "e9d6d0d14976745b17d28cdafec310a5978ae648009f3939e1c3bbdec0745620"
     }
    }
   },
   "full-game": {
    "original": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
+    "status": "AUDIO_INCOMPLETE",
+    "first_differing_step": 178,
     "views": [
      "midi_service_countdown"
     ],
+    "progress": {
+     "status": "AUDIO_PROGRESS_INCOMPLETE",
+     "first_differing_entry": 383,
+     "views": [
+      "midi_service_countdown"
+     ],
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "replay_complete": true,
+     "valid_through_entry": 177
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 10,
+     "replay_complete": false,
+     "first_differing_entry": 383,
      "entries_compared": 1000,
      "requested_entries": 1000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 11960,
+     "coordinate_drift_writes": 4949,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 178,
+      "write_index": 6096,
       "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
+       "service_ordinal": 10748783,
+       "step": 177,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
+       "service_ordinal": 10748786,
+       "step": 177,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "99ad195741d15b1dec0b03ff02ad476f7fe791b0ce73c641f75a78794bb68fd8"
-    }
+     "rows_sha256": "b34601ed533895f47b6ad5e610c233643d9d24e21b651bb3e1c731f42979ed9a"
+    },
+    "sound_order_failure": {
+     "entry": 178,
+     "phase": 0,
+     "service_ordinal": 10748744,
+     "expected_id": 66,
+     "actual_id": 19,
+     "expected_function": "snd_queue_sample_release",
+     "actual_function": "snd_drain_sample_release_queue",
+     "expected_service": 245,
+     "actual_service": 245,
+     "reason": "Foreground sound order diverged; subsequent sound markers filtered; non-sound services remain strict"
+    },
+    "valid_through_entry": 177
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 618,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 10,
+     "first_differing_entry": 618,
      "entries_compared": 1000,
      "requested_entries": 1000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 10321,
+     "coordinate_drift_writes": 1,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 732,
+      "write_index": 1648,
       "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
+       "service_ordinal": 51248988,
+       "step": 731,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
+       "service_ordinal": 51248989,
+       "step": 731,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "590cdd08385255e0ef4cc5ba92416143012558579b108fc35200d35ab8c1a0f6"
+     "rows_sha256": "c8da2c8fc87a7a1c85b8d850084832788ba15062f64b230c19f3d8c3088d32d1"
     }
    }
   },
   "interactive-play": {
    "original": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
+    "status": "AUDIO_INCOMPLETE",
+    "first_differing_step": 832,
     "views": [
      "midi_service_countdown"
     ],
+    "progress": {
+     "status": "AUDIO_PROGRESS_INCOMPLETE",
+     "first_differing_entry": 1001,
+     "views": [
+      "midi_service_countdown"
+     ],
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "replay_complete": true,
+     "valid_through_entry": 1000
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 10,
+     "replay_complete": false,
+     "first_differing_entry": 832,
      "entries_compared": 2000,
      "requested_entries": 2000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 4988,
+     "coordinate_drift_writes": 19,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 817,
+      "write_index": 978,
       "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
+       "service_ordinal": 52186709,
+       "step": 816,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
+       "service_ordinal": 52186710,
+       "step": 816,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "6648906f76cbe175b09347b4011a66655694bb3d7d6e100326b9833f024fdae6"
-    }
+     "rows_sha256": "7520b66d8d359aa6e84991931d6112e46efb19b75c9186680051a48eec83a130"
+    },
+    "sound_order_failure": {
+     "entry": 1001,
+     "phase": 1,
+     "service_ordinal": 64732046,
+     "expected_id": 20,
+     "actual_id": 85,
+     "expected_function": "snd_expand_sample_resource",
+     "actual_function": "snd_sample_interrupts_enable",
+     "expected_service": 245,
+     "actual_service": 245,
+     "reason": "Foreground sound order diverged; subsequent sound markers filtered; non-sound services remain strict"
+    },
+    "valid_through_entry": 1000
    },
    "canonical": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
+    "status": "AUDIO_INCOMPLETE",
+    "first_differing_step": 678,
     "views": [
      "midi_service_countdown"
     ],
+    "progress": {
+     "status": "AUDIO_PROGRESS_INCOMPLETE",
+     "first_differing_entry": 684,
+     "views": [
+      "midi_service_countdown"
+     ],
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "replay_complete": true,
+     "valid_through_entry": 677
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 6,
+     "replay_complete": false,
+     "first_differing_entry": 684,
      "entries_compared": 2000,
      "requested_entries": 2000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 18407,
+     "coordinate_drift_writes": 25654,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 679,
+      "write_index": 680,
       "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
+       "service_ordinal": 45300795,
+       "step": 678,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
+       "service_ordinal": 45300800,
+       "step": 678,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "22e39a0b441474514309ad151472fc86d35de31fdb4f903f934f9516d99909de"
-    }
+     "rows_sha256": "c2300b105629cf3676cb626582cb846c7383009f5a3949055170257a1e2f603b"
+    },
+    "sound_order_failure": {
+     "entry": 678,
+     "phase": 0,
+     "service_ordinal": 45293226,
+     "expected_id": 66,
+     "actual_id": 19,
+     "expected_function": "snd_queue_sample_release",
+     "actual_function": "snd_drain_sample_release_queue",
+     "expected_service": 245,
+     "actual_service": 245,
+     "reason": "Foreground sound order diverged; subsequent sound markers filtered; non-sound services remain strict"
+    },
+    "valid_through_entry": 677
    }
   },
   "load-from-save": {
    "original": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 992,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 10,
+     "first_differing_entry": 992,
      "entries_compared": 1000,
      "requested_entries": 1000,
      "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 10314,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "498907434e1451e0fc749f4c452c47aef7457d1c29aaf8db193f97ebfd7e9a79"
+     "coordinates_status": "ORDINAL_UNALIGNED",
+     "coordinate_drift_writes": 0,
+     "first_coordinate_drift": null,
+     "rows_sha256": "79b2476a13c0012e8dac21e5cc232bdc1b03811d0a289d12036fb9ee644635c5"
     }
    },
    "canonical": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "status": "AUDIO_EQUAL",
+    "first_differing_step": null,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "replay_complete": true
+    },
     "commands": {
-     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "status": "AUDIO_COMMANDS_EQUAL",
      "replay_complete": true,
-     "first_differing_entry": 6,
+     "first_differing_entry": null,
      "entries_compared": 1000,
      "requested_entries": 1000,
      "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 10448,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "7ceb5d2defcebcec9c5491803e727da69570a6c6933653f862c4e2a58761b935"
+     "coordinates_status": "ORDINAL_EQUAL",
+     "coordinate_drift_writes": 0,
+     "first_coordinate_drift": null,
+     "rows_sha256": "997cb2f2f9f0eeb0454e5540061f11e46964590751b18a4de574fa770f0796b0"
     }
    }
   },
   "long-run": {
    "original": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 2099,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 3000,
+     "requested_entries": 3000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 10,
+     "first_differing_entry": 2099,
      "entries_compared": 3000,
      "requested_entries": 3000,
      "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 23856,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "c3bd31365c340c50ff0235ed654f9938a5a817500b162159491f38b9cd7a141e"
+     "coordinates_status": "ORDINAL_UNALIGNED",
+     "coordinate_drift_writes": 0,
+     "first_coordinate_drift": null,
+     "rows_sha256": "0b239cb83a33aa1b79e3d0eabd4d20d5bfdddb63f0bf97c635bec9ae0df299a9"
     }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 2099,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 3000,
+     "requested_entries": 3000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 6,
+     "first_differing_entry": 2099,
      "entries_compared": 3000,
      "requested_entries": 3000,
      "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 21751,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "97d3b66b23cd015964e6dc05e3d84ae01516f601861774642ccd06b71331a3db"
-    }
-   }
-  },
-  "new-game-save": {
-   "original": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
-    "commands": {
-     "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 4,
-     "entries_compared": 64,
-     "requested_entries": 64,
-     "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 11186,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "595ed78e80c683cfc1ef561995cd82c8ca817d35c269d3f43fdf7fddcf415db0"
-    }
-   },
-   "canonical": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
-    "commands": {
-     "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 4,
-     "entries_compared": 64,
-     "requested_entries": 64,
-     "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 11198,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "da0bf71e89e5bea00aa9a32aa4df42fbc0f007708941136793e351ff44e1802d"
+     "coordinates_status": "ORDINAL_UNALIGNED",
+     "coordinate_drift_writes": 0,
+     "first_coordinate_drift": null,
+     "rows_sha256": "63b16a6dee417d56d77ba1c3d4ee9f20b283bf801ff7d48de1db2f85edf56444"
     }
    }
   },
   "quick-game": {
    "original": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 1760,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 10,
+     "first_differing_entry": 1760,
      "entries_compared": 2000,
      "requested_entries": 2000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 23956,
+     "coordinate_drift_writes": 1,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 1770,
+      "write_index": 272,
       "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
+       "service_ordinal": 117105129,
+       "step": 1769,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
+       "service_ordinal": 117105130,
+       "step": 1769,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "51bc3c466f285b3eb236f4b7b7a39287c896ad5192f705ef81b51b696a8bfda7"
+     "rows_sha256": "8a7d2f3120f88c534effcc75c616d0f6643dfe2c67eec3ff944a2bd7bcdddbbb"
     }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
-    "views": [
-     "midi_service_countdown"
-    ],
+    "first_differing_step": 1917,
+    "views": [],
+    "progress": {
+     "status": "AUDIO_PROGRESS_EQUAL",
+     "first_differing_entry": null,
+     "views": [],
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "replay_complete": true
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
      "replay_complete": true,
-     "first_differing_entry": 6,
+     "first_differing_entry": 1917,
      "entries_compared": 2000,
      "requested_entries": 2000,
      "capture_complete": true,
-     "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 21512,
-     "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
-      "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      },
-      "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
-       "phase": 0,
-       "port": "0388",
-       "value": "A0"
-      }
-     },
-     "rows_sha256": "f7dc796d9d0d2e0f65cde0c6f7536ddd4dea90fb887c85d9428589f9dae2cf36"
+     "coordinates_status": "ORDINAL_UNALIGNED",
+     "coordinate_drift_writes": 0,
+     "first_coordinate_drift": null,
+     "rows_sha256": "72ecd16b14efcea1368a306c1966566a5de0e95142e911a827c0cae81fa9af72"
     }
    }
   },
   "random-17": {
    "original": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
+    "status": "AUDIO_INCOMPLETE",
+    "first_differing_step": 1130,
     "views": [
      "midi_service_countdown"
     ],
+    "progress": {
+     "status": "AUDIO_PROGRESS_INCOMPLETE",
+     "first_differing_entry": 1146,
+     "views": [
+      "midi_service_countdown"
+     ],
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "replay_complete": true,
+     "valid_through_entry": 1129
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 10,
+     "replay_complete": false,
+     "first_differing_entry": 1130,
      "entries_compared": 2000,
      "requested_entries": 2000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 7968,
+     "coordinate_drift_writes": 5089,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 1116,
+      "write_index": 2754,
       "dos": {
-       "service_ordinal": 1626764,
-       "step": 0,
+       "service_ordinal": 61803225,
+       "step": 1115,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1626761,
-       "step": 0,
+       "service_ordinal": 61803226,
+       "step": 1115,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "ed6e74821f3b9e27fe5d8523b108e5c52b5d87d4e93c57ccfaf1925a7d9481d4"
-    }
+     "rows_sha256": "07f0e34ff17a9b29f07a5ed01cf010b69af6bd7f0dfce8a9c8624c3c87ce9155"
+    },
+    "sound_order_failure": {
+     "entry": 1130,
+     "phase": 1,
+     "service_ordinal": 63195840,
+     "expected_id": 20,
+     "actual_id": 85,
+     "expected_function": "snd_expand_sample_resource",
+     "actual_function": "snd_sample_interrupts_enable",
+     "expected_service": 245,
+     "actual_service": 245,
+     "reason": "Foreground sound order diverged; subsequent sound markers filtered; non-sound services remain strict"
+    },
+    "valid_through_entry": 1129
    },
    "canonical": {
-    "status": "AUDIO_DIFFERENCE",
-    "first_differing_step": 1,
+    "status": "AUDIO_INCOMPLETE",
+    "first_differing_step": 1073,
     "views": [
      "midi_service_countdown"
     ],
+    "progress": {
+     "status": "AUDIO_PROGRESS_INCOMPLETE",
+     "first_differing_entry": 1138,
+     "views": [
+      "midi_service_countdown"
+     ],
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "replay_complete": true,
+     "valid_through_entry": 1072
+    },
     "commands": {
      "status": "AUDIO_COMMANDS_DIFFERENCE",
-     "replay_complete": true,
-     "first_differing_entry": 6,
+     "replay_complete": false,
+     "first_differing_entry": 1073,
      "entries_compared": 2000,
      "requested_entries": 2000,
      "capture_complete": true,
      "coordinates_status": "ORDINAL_DRIFT",
-     "coordinate_drift_writes": 10160,
+     "coordinate_drift_writes": 12622,
      "first_coordinate_drift": {
-      "entry": 1,
-      "write_index": 29,
+      "entry": 1074,
+      "write_index": 612,
       "dos": {
-       "service_ordinal": 1627406,
-       "step": 0,
+       "service_ordinal": 59100786,
+       "step": 1073,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       },
       "native": {
-       "service_ordinal": 1627403,
-       "step": 0,
+       "service_ordinal": 59100789,
+       "step": 1073,
        "phase": 0,
-       "port": "0388",
-       "value": "A0"
+       "port": "022C",
+       "value": "10"
       }
      },
-     "rows_sha256": "0cdc6d8fd3bced8b31ff2bda9df1ad7d92b6690b5839242a2e28d25a61dd8e40"
-    }
+     "rows_sha256": "be05586ccbbc2937e66a1bedad5ac78962ae42064fbd37952284fd57c67cf610"
+    },
+    "sound_order_failure": {
+     "entry": 1073,
+     "phase": 1,
+     "service_ordinal": 58935442,
+     "expected_id": 20,
+     "actual_id": 85,
+     "expected_function": "snd_expand_sample_resource",
+     "actual_function": "snd_sample_interrupts_enable",
+     "expected_service": 245,
+     "actual_service": 245,
+     "reason": "Foreground sound order diverged; subsequent sound markers filtered; non-sound services remain strict"
+    },
+    "valid_through_entry": 1072
    }
   }
  }

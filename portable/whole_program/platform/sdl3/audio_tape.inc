@@ -1,7 +1,8 @@
 /* Acceptance-only sound schedule. Coordinates are observed DOS service counts,
  * never derived from expected playback state. Ordinary play has no tape. */
 extern void portable_whole_audio_replay_interrupt(unsigned) __attribute__((weak));
-static FILE *test_audio_timer, *test_audio_commands;
+static FILE *test_audio_timer, *test_audio_commands, *test_sound,*test_sound_calls;
+static uint64_t test_sound_entries;
 static uint64_t test_audio_at, test_audio_ticks, test_audio_runs;
 static unsigned test_audio_fast;
 static int test_audio_ready, test_audio_busy;
@@ -14,6 +15,10 @@ static void test_audio_next(void) {
   test_audio_ready=1;
 }
 static void test_audio_close(void) {
+  if (test_sound_calls) {
+    fprintf(test_sound_calls,"E %" PRIu64 " %u %u\n",test_services,test_step,test_phase);
+    fclose(test_sound_calls);test_sound_calls=NULL;
+  }
   if (test_audio_commands) {
     fprintf(test_audio_commands,"E %" PRIu64 " %u %u\n",test_services,test_step,test_phase);
     fclose(test_audio_commands);test_audio_commands=NULL;
@@ -25,6 +30,13 @@ static void test_audio_load(void) {
     test_audio_timer=fopen(path,"r");if (!test_audio_timer) abort();
     test_audio_next();
   }
+  path=getenv("SIMANT_TEST_SOUND_CALLS");
+  if (path) {
+    test_sound_calls=fopen(path,"w");if (!test_sound_calls) abort();
+    fputs("SIMANT_SOUND_CALLS 1\n",test_sound_calls);
+  }
+  path=getenv("SIMANT_TEST_SOUND_SERVICES");
+  if (path && !(test_sound=fopen(path,"rb"))) abort();
   path=getenv("SIMANT_TEST_AUDIO_COMMANDS");
   if (path) {
     test_audio_commands=fopen(path,"w");if (!test_audio_commands) abort();
@@ -36,7 +48,7 @@ static void test_audio_drain(void) {
   if (test_audio_busy) return;
   test_audio_busy=1;
   while (test_audio_ready && test_audio_at<=test_services) {
-    if (test_audio_at!=test_services) { fprintf(stderr,"Missed audio timer boundary\n");abort(); }
+    if (test_audio_at!=test_services && !test_sound_detached) { fprintf(stderr,"Missed audio timer boundary\n");abort(); }
     unsigned fast=test_audio_fast;
     test_audio_next();
     if (!getenv("SIMANT_TEST_DISABLE_AUDIO_TIMER")) {
@@ -52,4 +64,10 @@ void portable_test_audio_write(uint16_t port,uint8_t value) {
   if (test_audio_commands && ((port>=0x388 && port<=0x38b) ||
       (port>=0x220 && port<=0x22f) || port<=0xf || (port>=0x80 && port<=0x8f)))
     fprintf(test_audio_commands,"W %" PRIu64 " %u %u %X %X\n",test_services,test_step,test_phase,port,value);
+}
+
+void portable_test_sound_call(unsigned object,unsigned type,void *caller) {
+  test_load();
+  if (test_sound_calls)
+    fprintf(test_sound_calls,"C %" PRIu64 " %u %u %u %u %" PRIXPTR "\n",test_services,test_step,test_phase,object,type,(uintptr_t)caller);
 }

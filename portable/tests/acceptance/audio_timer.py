@@ -162,8 +162,11 @@ def timer_binding(memory, base, addresses):
                 and direct_mem(previous.operands[0], X86_REG_CS, 1)
                 and previous.operands[0].mem.disp == busy.mem.disp):
             raise ValueError('Sound timer completion does not release its nesting operand')
+    rejected=[ins.address for ins in bodies['snd_timer_reentrant_exit'] if ins.mnemonic=='iret']
+    if len(rejected)!=1:raise ValueError('Ambiguous fast busy-guard IRET')
     current_vector = int.from_bytes(memory[0x20:0x22], 'little') + 16 * int.from_bytes(memory[0x22:0x24], 'little')
     return dict(entries=[(kind, locations[name]) for kind, name in ENTRIES],
+                reentrant_iret=rejected[0],completion_classification='Actual busy-exit IRET only; nested depth does not imply rejection',
                 completions=sorted(irets + chains), irets=irets, chains=chains,
                 code_frame=code_frame, old_vector=code_frame + old_vector,
                 observed_int8=current_vector,

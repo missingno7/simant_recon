@@ -138,6 +138,40 @@ int main(int argc,char **argv){
                     self.assertEqual((out/'frame.2').read_bytes(),b'\x02\x04\x08')
                     self.assertFalse((out/'frame.3').is_file())
 
+    def test_sound_order_failure_keeps_other_verdicts_independent(self):
+        """Real replay: a bad sound ID detaches audio; other services stay strict."""
+        from .step_check import test_build, run_lane
+        build=Path(os.environ.get('SIMANT_STEP_TEST_BUILD',ROOT/'build/current/portable'))
+        if not (build/'report.json').is_file() or not (ROOT/'assets/SIMANT.EXE').is_file():
+            self.skipTest('Native build or game assets absent')
+        scenario=ROOT/'dos/scenarios/new-game-save.json'
+        references={}
+        for path in (ROOT/'build/reference/new-game-save').glob('*v9/manifest.json'):
+            row=json.loads(path.read_text())
+            if row.get('complete'):references[row['target']]=path.parent
+        if set(references)!={'original','canonical'}:
+            self.skipTest('Both v9 references are needed')
+        out=Path(os.environ.get('SIMANT_STEP_TEST_OUT',ROOT/'build/current/tests/steps'))/'sound-controls'
+        scratch=Path(os.environ.get('SIMANT_STEP_SCRATCH_ROOT',ROOT/'build/scratch/steps'))
+        exe=test_build(build,out/'test-build')
+        for target,reference in references.items():
+            for control in ('sound-order','service-order'):
+                with self.subTest(target=target,control=control):
+                    row=run_lane(scenario,reference,build,exe,out/target/control,60,control,8,scratch)
+                    self.assertTrue(row['diagnostics']['sound_order_detached'])
+                    self.assertEqual(row['audio']['status'],'AUDIO_INCOMPLETE')
+                    self.assertEqual(row['audio']['sound_order_failure']['entry'],1)
+                    if control=='sound-order':
+                        self.assertEqual(row['status'],'REFERENCE_EQUAL')
+                        self.assertEqual(row['steps_compared'],8)
+                        self.assertEqual(row['frames']['status'],'FRAME_EQUAL')
+                        self.assertTrue(row['frames']['replay_complete'])
+                        self.assertNotIn('service_order_failure',row)
+                    else:
+                        self.assertEqual(row['status'],'INCOMPLETE')
+                        self.assertIn('service_order_failure',row)
+                        self.assertFalse(row['frames']['replay_complete'])
+
     def test_stored_step_scenarios(self):
         """The driver runs every stored scenario against build/current/portable (or reports
         it absent) and never launches a DOS recorder. Each scenario must give exactly the

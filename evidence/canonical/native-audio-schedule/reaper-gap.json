@@ -1,0 +1,661 @@
+{
+  "schema": "simant-foreground-reaper-interrupt-gap-v1",
+  "verdict": "AUDIO_PLACEMENT_OUTSIDE_TESTED_DOMAIN",
+  "summary": "A real fast ISR finishes channel 1 after entry into unmasked snd_reap_finished_sample_voices and before its busy predicate. Entry-only replay waits until the next foreground service and changes whether release is queued.",
+  "inputs": [
+    {
+      "path": "src/sound/midi_voices.c",
+      "sha256": "f6fd0fad0295bcbf3a81dc70999135fd0ccfc872c92ecd74b48add99493f2b87"
+    },
+    {
+      "path": "src/sound/sample_timer.asm",
+      "sha256": "02bd58d8375ae47761ee26b8799c4974f8457a3fa0cae47d05d42f81002c7eac"
+    },
+    {
+      "path": "src/sound/resource_loading.c",
+      "sha256": "9a8ead1290c50aa9098b38091450eb4063cdfaea6a17d3c3ee8482331beaf0a1"
+    },
+    {
+      "path": "src/sound/sample_voices.c",
+      "sha256": "4ce6de55365bbdc09f15b455e958c6501bd8544f3ba123f5be61976ad74a4616"
+    },
+    {
+      "path": "include/chan.h",
+      "sha256": "ad0894aceaed58ae0ac4303371b17c2a12b6c358fa053e534f93a8b8e27b2792"
+    },
+    {
+      "path": "include/sample.h",
+      "sha256": "6457ccd7b82eeae8f6dff6654f7621da5f8af4475b09207a7e0bfb3a23e076ca"
+    },
+    {
+      "path": "layout/symbols.json",
+      "sha256": "c9e56df5dd5792a77e8a99199f30bcf2dd0741e5fdd32650dff63fad88b8fafe"
+    },
+    {
+      "path": "src/program.json",
+      "sha256": "7c3a742196df2588b693a5df370aefa04a9b31413ce7657abd04a21aaaa18c10"
+    },
+    {
+      "path": "layout/manifest.json",
+      "sha256": "da4d9faee06b23178a68d0d1f0e8e85a6950a468bc8bb4f8572b68a0d4a57c2a"
+    },
+    {
+      "path": "build/current/dos/link/SOURCE.MAP",
+      "sha256": "76d4f1f9591cbf3b759b37b566411511f34d3d805eb22b73165c884ca1a13b62"
+    },
+    {
+      "path": "build/current/dos/link/SOURCE.EXE",
+      "sha256": "d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4"
+    },
+    {
+      "path": "evidence/canonical/native-audio-schedule/foreground-census.json",
+      "sha256": "70b09dbf836a074aa8c58983446e0704c4e8215c70bdb19cab54148ab0245fd6"
+    }
+  ],
+  "decisive_case": {
+    "scenario": "interactive-play",
+    "lane": "canonical",
+    "probe_snapshot": {
+      "path": "build\\workers\\audio\\v9\\reaper-gap\\canonical-probe2\\exec-sample-clear.13.bin",
+      "sha256": "96f28b40db969cc313c91db93d983a6a695dde15ce2fe2301179996268eb3320",
+      "metadata_path": "build\\workers\\audio\\v9\\reaper-gap\\canonical-probe2\\exec-sample-clear.13.json",
+      "metadata_sha256": "60bc759e7a993beb8ca9361419a81f5f68dd75daa8f81f82745eeaa3b570cc82"
+    },
+    "read_only_trigger": {
+      "armed_emulated_ms": 0,
+      "pc": 200390,
+      "max_hits": 64,
+      "dump": "0..0xFFFFF",
+      "binding": "Unique consecutive MOV word [SI+2],0 / MOV word [SI+4],0 in independently MAP-bound canonical sample timer"
+    },
+    "capture": {
+      "hit": 13,
+      "time_ms": 131955.6987,
+      "clear_pc": 200390,
+      "hardware_return_pc": 202777,
+      "hardware_return_ip": 41,
+      "hardware_return_cs": 12671,
+      "hardware_flags": 29186,
+      "interrupted_if_enabled": true,
+      "inside_reaper": true,
+      "irq_ss": 23596,
+      "irq_sp": 39258,
+      "foreground_es": 22498,
+      "foreground_ds": 23596,
+      "foreground_si": 16576,
+      "foreground_bx": 16576,
+      "bp": 39290,
+      "channel_linear": 400734,
+      "sample_pointer_before_clear": 379970,
+      "owner_pointer": 379970,
+      "owner_loaded": 1,
+      "channel_position": 465,
+      "channel_end": 464,
+      "channel_flags": 0,
+      "capture_sha256": "96f28b40db969cc313c91db93d983a6a695dde15ce2fe2301179996268eb3320"
+    },
+    "shared_values": {
+      "runtime_base": 33344,
+      "voice_base": 376544,
+      "channel_base": 400714,
+      "midi_service_active": 0,
+      "voices": [
+        {
+          "index": 0,
+          "bytes": [
+            1,
+            0,
+            0,
+            47,
+            60,
+            1
+          ]
+        },
+        {
+          "index": 1,
+          "bytes": [
+            1,
+            1,
+            3,
+            47,
+            60,
+            0
+          ]
+        }
+      ],
+      "channels": [
+        {
+          "index": 0,
+          "address": 400714,
+          "busy_far_words": [
+            0,
+            0
+          ],
+          "owner_far_words": [
+            0,
+            0
+          ],
+          "owner_physical": 0,
+          "owner_loaded": null
+        },
+        {
+          "index": 1,
+          "address": 400734,
+          "busy_far_words": [
+            2434,
+            23596
+          ],
+          "owner_far_words": [
+            2434,
+            23596
+          ],
+          "owner_physical": 379970,
+          "owner_loaded": 1
+        }
+      ]
+    },
+    "irq_saved_frame": {
+      "register_save_bytes": 12,
+      "hardware_frame_sp": 39270,
+      "recorded_timer_entry_ss": 23596,
+      "recorded_timer_entry_sp": 39270,
+      "match": true
+    },
+    "foreground_instruction_at_interrupt": {
+      "pc": 169433,
+      "runtime_pc": 202777,
+      "bytes": "8e46fc",
+      "instruction": "mov",
+      "operands": "es, word ptr [bp - 4]"
+    },
+    "later_predicate_instructions": [
+      {
+        "pc": 169436,
+        "runtime_pc": 202780,
+        "bytes": "26803c01",
+        "instruction": "cmp",
+        "operands": "byte ptr es:[si], 1"
+      },
+      {
+        "pc": 169454,
+        "runtime_pc": 202798,
+        "bytes": "268b878e5a",
+        "instruction": "mov",
+        "operands": "ax, word ptr es:[bx + 0x5a8e]"
+      },
+      {
+        "pc": 169459,
+        "runtime_pc": 202803,
+        "bytes": "260b878c5a",
+        "instruction": "or",
+        "operands": "ax, word ptr es:[bx + 0x5a8c]"
+      },
+      {
+        "pc": 169464,
+        "runtime_pc": 202808,
+        "bytes": "7557",
+        "instruction": "jne",
+        "operands": "0x29651"
+      }
+    ],
+    "source_alias": "fd_55B3_6B4E busy DWORD is sample_channel_records.snd at record+2; ISR clears the same two words.",
+    "observer": {
+      "executable_sha256": "2341c104858524ef6c9951ddd9500aa77dbd9d4efbe8cb5301d90e57bee05389",
+      "same_as_reference": true
+    },
+    "unchanged_execution_prefixes": {
+      ".order": {
+        "bytes": 45310978,
+        "sha256": "4dd8833c4959d888a2b826e438c8f5e1b46ab8b8c62e41032a157050c58d088a",
+        "accepted_prefix_bytes": 45310978,
+        "reference_prefix_equal": true
+      },
+      ".sound": {
+        "bytes": 18507892,
+        "sha256": "fbda040e4b5de7e9e3c3d4484d48d52bf88617013e7e835750f61e1a6e9e37d9",
+        "accepted_prefix_bytes": 18507892,
+        "reference_prefix_equal": true
+      },
+      ".timer": {
+        "bytes": 2503923,
+        "sha256": "806ec4bf5adc0c871656cf7a440442cf829d2bcf2a9df58f2ee9fbb0aae2c163",
+        "accepted_prefix_bytes": 2503920,
+        "reference_prefix_equal": true
+      },
+      ".audio": {
+        "bytes": 558958,
+        "sha256": "9aaf0722a765ba7e1512f27acb7feca572cca9599c605c8d0065e6a1dd9d8039",
+        "accepted_prefix_bytes": 558940,
+        "reference_prefix_equal": true
+      }
+    }
+  },
+  "cases": [
+    {
+      "scenario": "interactive-play",
+      "lane": "canonical",
+      "status": "INCOMPLETE",
+      "completed_checkpoints": 677,
+      "requested_checkpoints": 2000,
+      "failure_service_counter": 45293226,
+      "native_error": "Observer sound order mismatch at 45293226: expected=66 actual=19",
+      "layer": "acceptance interrupt placement inside unmasked foreground reaper",
+      "confidence": "direct interrupted-PC proof",
+      "predecessor_entry": {
+        "ordinal": 45293224,
+        "id": 67,
+        "name": "snd_reap_finished_sample_voices"
+      },
+      "interior_irq_executions": [
+        {
+          "entry_pc": 200201,
+          "entry_ordinal": 45293225,
+          "ss": 23596,
+          "sp": 39270,
+          "completion_ordinal": 45293225,
+          "kind": 1
+        }
+      ],
+      "following_dos_services": [
+        {
+          "ordinal": 45293224,
+          "id": 67,
+          "name": "snd_reap_finished_sample_voices"
+        },
+        {
+          "ordinal": 45293225,
+          "id": 66,
+          "name": "snd_queue_sample_release"
+        },
+        {
+          "ordinal": 45293226,
+          "id": 19,
+          "name": "snd_drain_sample_release_queue"
+        },
+        {
+          "ordinal": 45293227,
+          "id": 84,
+          "name": "snd_sample_interrupts_disable"
+        }
+      ],
+      "command_first_differing_checkpoint": null,
+      "command_checkpoints_compared": 677,
+      "game_first_differing_checkpoint": null,
+      "reference_manifest": {
+        "path": "build\\reference\\interactive-play\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v9\\manifest.json",
+        "sha256": "3d2af84fed86b61a84a53454d0158a7eec6d5d0d8a6791db39942f21ccca8a2e"
+      },
+      "native_result": {
+        "path": "build\\workers\\audio\\v9\\ready-steps\\interactive-play\\canonical\\result.json",
+        "sha256": "92b6e9d03ed21c4991dde79c156522fa4fe7be328e3961e002ffa58a721b127d"
+      },
+      "native_log": {
+        "path": "build/workers/audio/v9/ready-steps/interactive-play/canonical/native.log",
+        "sha256": "524dd0dca154b876177c299cdb08f3ac86bd717505d388623223932d926c638b"
+      }
+    },
+    {
+      "scenario": "interactive-play",
+      "lane": "original",
+      "status": "INCOMPLETE",
+      "completed_checkpoints": 1000,
+      "requested_checkpoints": 2000,
+      "failure_service_counter": 64732046,
+      "native_error": "Observer sound order mismatch at 64732046: expected=20 actual=85",
+      "layer": "resource cache retention/loading branch; earlier cause unresolved",
+      "confidence": "Direct native loaded=0 and nonnull kind-5 cache lookup, compared with recorded DOS miss/PCM expansion.",
+      "predecessor_entry": {
+        "ordinal": 64732044,
+        "id": 35,
+        "name": "snd_load_sample_resource"
+      },
+      "interior_irq_executions": [
+        {
+          "entry_pc": 200213,
+          "entry_ordinal": 64732045,
+          "ss": 24023,
+          "sp": 41750,
+          "completion_ordinal": 64732045,
+          "kind": 1
+        },
+        {
+          "entry_pc": 201044,
+          "entry_ordinal": 64732045,
+          "ss": 24023,
+          "sp": 41750,
+          "completion_ordinal": 64732045,
+          "kind": 0
+        }
+      ],
+      "following_dos_services": [
+        {
+          "ordinal": 64732044,
+          "id": 35,
+          "name": "snd_load_sample_resource"
+        },
+        {
+          "ordinal": 64732045,
+          "id": 20,
+          "name": "snd_expand_sample_resource"
+        },
+        {
+          "ordinal": 64732046,
+          "id": 17,
+          "name": "snd_decode_delta_nibbles"
+        },
+        {
+          "ordinal": 64732047,
+          "id": 85,
+          "name": "snd_sample_interrupts_enable"
+        }
+      ],
+      "command_first_differing_checkpoint": 832,
+      "command_checkpoints_compared": 1000,
+      "game_first_differing_checkpoint": null,
+      "reference_manifest": {
+        "path": "build\\reference\\interactive-play\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v9\\manifest.json",
+        "sha256": "c5d854e5c94d5cda7cfdfe01032d12c2fe3ff6a080267c2423475a26c9a48256"
+      },
+      "native_result": {
+        "path": "build\\workers\\audio\\v9\\ready-steps\\interactive-play\\original\\result.json",
+        "sha256": "3bf4d117f5364ca381a866288a1d1388b5b0a9c9896eea0d22611d21e5235adb"
+      },
+      "native_log": {
+        "path": "build/workers/audio/v9/ready-steps/interactive-play/original/native.log",
+        "sha256": "bea3cb2f3769d65451113e3f08b2f3af17334a4d30c90479cb2eafa685bf78aa"
+      },
+      "native_resource_probe": {
+        "artifact_receipt": {
+          "path": "build\\workers\\audio\\v9\\reaper-gap\\native-load2\\receipt.json",
+          "sha256": "58b45e1c2ec7fee662e804e16d36c6cb7ccfa33506d48108d0b9f847bf730803"
+        },
+        "log": {
+          "path": "build\\workers\\audio\\v9\\reaper-gap\\native-load2\\gdb.log",
+          "sha256": "2a784d79e23e1bb6997d9098d6ced331e94752babc65a7ae0267818860fd22f4"
+        },
+        "read_only": true,
+        "before_function_prologue_args_from": "Win64 RCX Sample pointer, typed PortableWholeAudioSample; not premature debugger argument locations",
+        "observations": [
+          "NATIVE_LOAD_ENTRY service=64732044 s=0x7ff72f8f7000 loaded=0 object=23 data=(nil)",
+          "NATIVE_FIRM_ENTRY service=64732045 object=23 kind=5",
+          "NATIVE_CACHE_RETURN service=64732045 returned=0x2847510 object=23 kind=5",
+          "NATIVE_ENABLE_ENTRY service=64732045 sample_loaded=1 data=0x2847510"
+        ],
+        "loaded_at_entry": 0,
+        "resource_object": 23,
+        "resource_kind": 5,
+        "nonnull_cache_handle": "0x2847510",
+        "loaded_before_enable": 1,
+        "logical_stack": [
+          "MakeBark",
+          "myBeginSound",
+          "snd_start_configured_effect",
+          "snd_start_instrument_note",
+          "snd_start_sample_note",
+          "snd_start_sample_voice",
+          "snd_load_sample_resource",
+          "res_load_firm_object",
+          "db_LoadObject",
+          "ch_LookUpId"
+        ],
+        "reproduced_same_native_result": true,
+        "reproduced_identical_audio_command_file": true,
+        "limits": "The earlier reason native retained the cached PCM handle while DOS reloaded it is not proved."
+      },
+      "dos_resource_callback": {
+        "record": "C 64732045 1000 1 23 5 21FD1",
+        "object": 23,
+        "type": 5,
+        "diagnostic_artifact": {
+          "path": "build\\reference\\interactive-play\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v9\\capture\\observer.txt.sound-calls",
+          "sha256": "c1ad4b5e8c00416e49fc7fb80e39e75e4aa6d8181260902bd21aa3586532f975"
+        }
+      }
+    },
+    {
+      "scenario": "full-game",
+      "lane": "original",
+      "status": "INCOMPLETE",
+      "completed_checkpoints": 177,
+      "requested_checkpoints": 1000,
+      "failure_service_counter": 10748744,
+      "native_error": "Observer sound order mismatch at 10748744: expected=66 actual=19",
+      "layer": "acceptance interrupt placement inside unmasked foreground reaper",
+      "confidence": "matching reaper-body interval; interrupted PC not measured",
+      "predecessor_entry": {
+        "ordinal": 10748742,
+        "id": 67,
+        "name": "snd_reap_finished_sample_voices"
+      },
+      "interior_irq_executions": [
+        {
+          "entry_pc": 200213,
+          "entry_ordinal": 10748743,
+          "ss": 24023,
+          "sp": 41936,
+          "completion_ordinal": 10748743,
+          "kind": 1
+        }
+      ],
+      "following_dos_services": [
+        {
+          "ordinal": 10748742,
+          "id": 67,
+          "name": "snd_reap_finished_sample_voices"
+        },
+        {
+          "ordinal": 10748743,
+          "id": 66,
+          "name": "snd_queue_sample_release"
+        },
+        {
+          "ordinal": 10748744,
+          "id": 19,
+          "name": "snd_drain_sample_release_queue"
+        },
+        {
+          "ordinal": 10748745,
+          "id": 84,
+          "name": "snd_sample_interrupts_disable"
+        }
+      ],
+      "command_first_differing_checkpoint": null,
+      "command_checkpoints_compared": 177,
+      "game_first_differing_checkpoint": null,
+      "reference_manifest": {
+        "path": "build\\reference\\full-game\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v9\\manifest.json",
+        "sha256": "e3f96bd935dfa8dbc267dfe70f5b6df457e91b1e5133d49479f0b93abe56c743"
+      },
+      "native_result": {
+        "path": "build\\workers\\audio\\v9\\ready-steps\\full-game\\original\\result.json",
+        "sha256": "fba08c9427162ccea3a0468ef255aa5879a2157db637f5824db802a373883f0f"
+      },
+      "native_log": {
+        "path": "build/workers/audio/v9/ready-steps/full-game/original/native.log",
+        "sha256": "13543756c88fe65b9f6fdc73a60f99dafa33f212267bdff6e30749054376f5cc"
+      }
+    },
+    {
+      "scenario": "random-17",
+      "lane": "original",
+      "status": "INCOMPLETE",
+      "completed_checkpoints": 1129,
+      "requested_checkpoints": 2000,
+      "failure_service_counter": 63195840,
+      "native_error": "Observer sound order mismatch at 63195840: expected=20 actual=85",
+      "layer": "sample resource-loading branch; underlying cause unresolved",
+      "confidence": "source call-path and interior timer observations only; loaded/cache branch not yet measured",
+      "predecessor_entry": {
+        "ordinal": 63195838,
+        "id": 35,
+        "name": "snd_load_sample_resource"
+      },
+      "interior_irq_executions": [
+        {
+          "entry_pc": 201044,
+          "entry_ordinal": 63195839,
+          "ss": 24023,
+          "sp": 41576,
+          "completion_ordinal": 63195839,
+          "kind": 0
+        }
+      ],
+      "following_dos_services": [
+        {
+          "ordinal": 63195838,
+          "id": 35,
+          "name": "snd_load_sample_resource"
+        },
+        {
+          "ordinal": 63195839,
+          "id": 20,
+          "name": "snd_expand_sample_resource"
+        },
+        {
+          "ordinal": 63195840,
+          "id": 17,
+          "name": "snd_decode_delta_nibbles"
+        },
+        {
+          "ordinal": 63195841,
+          "id": 85,
+          "name": "snd_sample_interrupts_enable"
+        }
+      ],
+      "command_first_differing_checkpoint": null,
+      "command_checkpoints_compared": 1129,
+      "game_first_differing_checkpoint": null,
+      "reference_manifest": {
+        "path": "build\\reference\\random-17\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v9\\manifest.json",
+        "sha256": "706f603c20baf58cec16dfa73a085889a18b57b544a685e8c7e161c536a0b73d"
+      },
+      "native_result": {
+        "path": "build\\workers\\audio\\v9\\ready-steps\\random-17\\original\\result.json",
+        "sha256": "e5e0cc23ac6d68a30187e8ed0612132e6f34dfdb8d6513c162ad1ff3ec9d148a"
+      },
+      "native_log": {
+        "path": "build/workers/audio/v9/ready-steps/random-17/original/native.log",
+        "sha256": "9d5767b15b1231f2546d2092cd86c40b7832c12700783aa0c6873aac8f877170"
+      },
+      "dos_resource_callback": {
+        "record": "C 63195839 1129 1 28 5 21FD1",
+        "object": 28,
+        "type": 5,
+        "diagnostic_artifact": {
+          "path": "build\\reference\\random-17\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v9\\capture\\observer.txt.sound-calls",
+          "sha256": "fdaa9850d17d5059de8b8d42004c8e9bad59436a3c5295931d391c80603a69cf"
+        }
+      }
+    },
+    {
+      "scenario": "random-17",
+      "lane": "canonical",
+      "status": "INCOMPLETE",
+      "completed_checkpoints": 1072,
+      "requested_checkpoints": 2000,
+      "failure_service_counter": 58935442,
+      "native_error": "Observer sound order mismatch at 58935442: expected=20 actual=85",
+      "layer": "sample resource-loading branch; underlying cause unresolved",
+      "confidence": "source call-path and interior timer observations only; loaded/cache branch not yet measured",
+      "predecessor_entry": {
+        "ordinal": 58935440,
+        "id": 35,
+        "name": "snd_load_sample_resource"
+      },
+      "interior_irq_executions": [
+        {
+          "entry_pc": 200201,
+          "entry_ordinal": 58935441,
+          "ss": 23596,
+          "sp": 38872,
+          "completion_ordinal": 58935441,
+          "kind": 1
+        },
+        {
+          "entry_pc": 200201,
+          "entry_ordinal": 58935441,
+          "ss": 23596,
+          "sp": 38838,
+          "completion_ordinal": 58935441,
+          "kind": 2
+        },
+        {
+          "entry_pc": 200201,
+          "entry_ordinal": 58935441,
+          "ss": 23596,
+          "sp": 38856,
+          "completion_ordinal": 58935441,
+          "kind": 1
+        },
+        {
+          "entry_pc": 200201,
+          "entry_ordinal": 58935441,
+          "ss": 23596,
+          "sp": 38856,
+          "completion_ordinal": 58935441,
+          "kind": 1
+        }
+      ],
+      "following_dos_services": [
+        {
+          "ordinal": 58935440,
+          "id": 35,
+          "name": "snd_load_sample_resource"
+        },
+        {
+          "ordinal": 58935441,
+          "id": 20,
+          "name": "snd_expand_sample_resource"
+        },
+        {
+          "ordinal": 58935442,
+          "id": 17,
+          "name": "snd_decode_delta_nibbles"
+        },
+        {
+          "ordinal": 58935443,
+          "id": 85,
+          "name": "snd_sample_interrupts_enable"
+        }
+      ],
+      "command_first_differing_checkpoint": null,
+      "command_checkpoints_compared": 1072,
+      "game_first_differing_checkpoint": null,
+      "reference_manifest": {
+        "path": "build\\reference\\random-17\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v9\\manifest.json",
+        "sha256": "0e0c6c377d56bd70d53ed696d105a872077bb41084603f59c82857eb7b6b738a"
+      },
+      "native_result": {
+        "path": "build\\workers\\audio\\v9\\ready-steps\\random-17\\canonical\\result.json",
+        "sha256": "5ae9f7db14b3cda4954b7354f31711b8f0927fa11842df4b6d9f0328b93f5f19"
+      },
+      "native_log": {
+        "path": "build/workers/audio/v9/ready-steps/random-17/canonical/native.log",
+        "sha256": "5cc671aa57890108774783bb9a28f672cddb976d3a5a41a69816034038ebbede"
+      },
+      "dos_resource_callback": {
+        "record": "C 58935441 1072 1 45 5 21FCB",
+        "object": 45,
+        "type": 5,
+        "diagnostic_artifact": {
+          "path": "build\\reference\\random-17\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v9\\capture\\observer.txt.sound-calls",
+          "sha256": "71c6aa29d7dd627a07158608943992a42837782309e333703a992bbced5a1e57"
+        }
+      }
+    }
+  ],
+  "limits": [
+    "No canonical or native game-body repair follows from this acceptance-scheduling proof.",
+    "No IRQ was moved earlier to force a desired branch; no game state was injected.",
+    "The other reaper lane has matching entry/IRQ/queue ordering, but no separate interrupted-PC capture.",
+    "All type-5 expansion calls remain required; unmeasured cache outcomes and earlier lifecycle divergence must not be guessed or suppressed.",
+    "The first probe failed because workspace disk was full and is excluded; only canonical-probe2 supplies the accepted proof."
+  ],
+  "reproduction": {
+    "script": "build/workers/audio/v9/reaper-gap/canonical.scr",
+    "observer_configuration": "build/workers/audio/v9/reaper-gap/canonical-2.observer",
+    "observer_receipt": "build/workers/audio/v9/reaper-gap/observer-build.json",
+    "command": "python dos/run.py --build-report build/current/dos/build-report.json --out FRESH_OUTPUT --seconds 1200 --fixed-clock --cycles 10000 --input-script build/workers/audio/v9/reaper-gap/canonical.scr --capture-observer build/workers/audio/v9/reaper-gap/observer-build.json --observer-config FRESH_CONFIGURATION_WITH_L_679_256"
+  },
+  "current_policy": "audio-only-filter-v1: historical strict stops below diagnose sound placement only. The current replay records the first sound mismatch as audio incomplete, filters sound markers, and continues state/frames with strict non-sound service checks. No instruction-level repair or new placement investigation is made."
+}

@@ -265,12 +265,12 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     contract=manifest['compact_observer'].get('order_contract')
     if contract:
         source=directory/'observer.txt.order'
-        if contract!='service-samples-v8' or sha(source)!=manifest['compact_observer']['order_sha256']:
+        if contract!='service-samples-v9' or sha(source)!=manifest['compact_observer']['order_sha256']:
             raise ValueError('Unbound global service sequence')
         sites={int(v[1]):(v[2],int(v[3],16)) for line in trace.read_text().splitlines()
                if (v:=line.split()) and v[0]=='O'}
         indices={key:i for i,key in enumerate(bindings)}
-        if len(bindings)>246:raise ValueError('Clock site IDs overlap reserved service IDs')
+        if len(bindings)>245:raise ValueError('Clock site IDs overlap reserved service IDs')
         mapping=bytearray(range(256))
         for i,key in sites.items():
             if key in indices:mapping[i]=indices[key]
@@ -279,7 +279,7 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
         limit=boundary['clock_reads']+boundary['pump']+boundary['queries']+2*boundary['step']-boundary['phase']
         order=source.read_bytes()[:limit]
         if len(order)!=limit:raise ValueError('Incomplete global service sequence')
-        if any(i<246 and (i not in sites or sites[i] not in indices) for i in set(order)):
+        if any(i<245 and (i not in sites or sites[i] not in indices) for i in set(order)):
             raise ValueError('Global sequence contains an unbound clock site')
         order_path.write_bytes(order.translate(bytes(mapping)))
     receipt=dict(schema='simant-original-full-inputs-v1',original_manifest_sha256=sha(directory/'boundary-manifest.json'),

@@ -1,90 +1,167 @@
-# Sound ISR schedule and exact command streams
+# Foreground sound services and exact audio streams (v9)
 
-Contract **service-samples-v8** retains every existing state/audio view and the
-v7 indexed-frame format. References are re-recorded in the pinned US keyboard
-environment for each executable; no v7 observation is retimed or relabelled.
+V9 observes every reviewed foreground operation that can access the sound
+ISR's shared state. The original and canonical DOS lanes bind their own
+executable instructions independently. Native executes the existing canonical
+sound code and readable hardware ISR projection; there is no copied sequencer,
+private voice model, countdown adjustment or desired-output selection.
 
-`portable/tests/acceptance/audio_timer.py` independently binds both fast ISR
-entries, the slow entry, all four IRETs and both saved-INT08 tail jumps. Original
-bindings use original symbols/instructions; canonical bindings use its own MAP,
-selector operands and INT08 vector-installation writes. Completion is recorded
-only for a tracked hardware entry with the same SS:SP. The software slow-timer
-installer path is not counted. Nested fast entries retain the canonical busy
-early exit and are counted separately.
+The frozen [census](foreground-census.json) and its
+[per-function review](foreground-census.md) enumerate 115 stable entry IDs
+(95 C and 20 ASM), direct and dispatch-table paths, complete extents, native
+projection coverage and IF protection. Eight ISR-only C helpers, four IRQ
+entry/exit labels and one code-segment data extent are explicit exclusions.
+Nine unavailable hardware leaves remain explicit coverage failures if reached.
 
-The sidecar records every completion with the number of foreground services
-already completed. Native invokes the existing ISR translation immediately
-before the next sampled service, once per recorded execution, in completion
-order. Nested fast entries execute the busy-guard exit without sample or
-sequencer effects. Autonomous SDL IRQ scheduling is disabled only with a tape;
-ordinary play still uses the SDL clock. Fast/slow disagreement is diagnostic,
-never repaired by overwriting native driver state.
+A foreground entry appends service 245 to the chronological order and one ID
+byte to `.sound`. It increments the existing service/query coordinate. Native
+drains all recorded ISR completions due before that entry, then checks both
+the marker order and exact function ID before executing its body. Every nested
+foreground call is observed. ISR-origin calls are excluded by actual ISR
+context, not IF: the source can execute STI inside the handler. Compiler entry
+instrumentation covers whole unchanged canonical C modules and port/IF helpers,
+including within-TU calls. The native OPL C wrapper and register leaf retain
+the source's separate calls.
 
-The schedule comes solely from independently observed instructions and service
-counts. Expected audio state, fingerprints, note data and native results do not
-select it. It is replay, not fitted agreement. The schedule-off control consumes
-the identical tape without executing it and restores the previous first-entry
-MIDI/voice and command differences.
+The entry must first match its complete bound relocated procedure in live DOS
+memory. This rejects DOSBox internal COM stubs at the future game address
+8240 before load; it does not use a timed arming delay. Bindings include original
+symbols/whole procedure bytes, or independent canonical MAP/OMF/CodeView or
+reachable extents and fixups. Source data and code are never patched.
 
-## Precision limit demonstrated at song startup
+## Shared-state qualification of the generic resource hook
 
-The service interval can contain both an interruptible resource-loading phase
-and a later critical section resetting sound state. DOS executes two original
-or three canonical slow IRQs before `snd_load_and_start_song` resets the
-countdown to five. Replaying them at the next keyboard-scan service moves them
-after that reset. First-checkpoint countdown is therefore DOS 13/native 11
-(original) and DOS 14/native 11 (canonical).
+`snd_expand_sample_resource` is also installed as the callback for every
+DBRecall. Only `type == 5` reaches sample work. Every other 16-bit type follows
+a stack-argument guard and return with no sound-state access, nested calls or
+I/O. Both actual DOS procedures and all 65,536 type words are checked by the
+reviewed guard proof. DOS uses SS:SP+14; a typed native observation wrapper
+qualifies the same argument before calling the unchanged canonical body.
 
-Read-only watches and instruction probes establish the order in both
-executables; their complete service, timer and command prefixes still equal
-the references. The responsible foreground code is
-`src/sound/midi_player.c:snd_song_reset_clock` (store 99) and
-`snd_load_and_start_song` (store 5); the replay placement is
-`platform/sdl3/test_observer.inc:test_service` -> `audio_tape.inc:test_audio_drain`.
-This is a demonstrated acceptance-scheduling limit. It does not establish a
-canonical reconstruction defect or an error in the translated sequencer.
-The chained input timer/BIOS and arbitrary CPU/PIC interleavings are not replayed.
+All calls, including non-PCM calls, remain in hash-pinned `.sound-calls`
+diagnostics. Only the shared-state PCM path consumes ordering ID 20. No function
+or view is removed; the argument predicate is independent of expected state,
+resource number, output, timing or a comparison result. The diagnostic parser
+also checks that PCM calls agree with the checked ID stream.
 
-In both 64-entry new-game-save lanes all **12,527** raw port/value writes remain
-identical in order when entries are concatenated. Per-entry comparison still
-fails: the A0=00/B0=00 transaction crosses from DOS entry 5 into native entry 4.
-It is never shifted, trimmed or normalized for acceptance. Full concrete PCs,
-times, command lines, hashes and controls are retained in
-`build/workers/audio/triage/RESULT.md`.
+A conservative trial exposed a genuine graphics cache difference: DOS recalled
+bitmap 111 for SaveGame's second slider arrow; native already held it in cache.
+Their generic type-2 sound-hook invocation counts differed despite equal drawing
+and audio. Exact DOS stack/code and native cache-return witnesses are in
+`build/workers/audio/v9/chain/` and `v9/native-chain/`. Those trial references were
+retired and all references re-recorded under the proved shared-state predicate.
+The eighteen v9 captures remain unchanged. Runtime filtering after audio
+placement coverage is lost never rewrites or relabels a stored reference.
 
-## Device observation and verdict
+## ISR completion classification
 
-DOS `.audio` and native `audio-commands.txt` retain every byte OUT to OPL
-388..38B, SB 220..22F, low DMA 00..0F and DMA pages 80..8F, with completed-service
-ordinal, entry and phase. Missing/truncated streams cannot compare equal.
-Exact raw port/value order in every interval ending at a simulation entry
-participates in the audio verdict alongside all playback-progress views.
-OPL register/value, DSP command/argument and DMA programming/start decoding is
-diagnostic only. Separate ordinal/phase drift remains visible even when raw
-commands within an entry agree. This does not compare PCM, DMA memory or elapsed
-host time. Mode 6 uses the direct DAC; generic DMA remains unsupported.
+`.timer` retains every completed fast/slow hardware entry at its service ordinal.
+Kind 2 means the actual independently bound `snd_timer_reentrant_exit` IRET was
+executed. Other fast completions are kind 1; slow completions are kind 0.
 
-Final per-lane observations and verification-matrix facts are in
-`build/workers/audio/RESULT.md`; tracked signatures are in
-`portable/tests/acceptance/known_findings.json`. The matrix itself is left for
-the owner to edit.
+Nesting alone cannot establish rejection. The normal fast epilogue executes
+`DEC busy` immediately before IRET while IF is enabled. An IRQ in that window
+has a nested hardware frame but sees busy zero and runs the full mixer. The old
+v8 depth-only classifier skipped such full executions, producing a one-sample
+and later countdown lag. V9 records the actual exit PC rather than inferring
+that result from depth. This is an execution observation, not sampling or fitting
+playback state. Independent original/canonical instruction and machine-code
+controls are in `build/workers/audio/v9/late-timer/`. A late-PIC probe did not
+preserve the rare phase and is explicitly not positive dynamic proof.
 
-Controls: `test_audio_timer.py`, `test_audio_commands.py`,
-`run_virtual_audio_tests.py`, `portable/tests/audio/run.py`, and the full
-`step_check.py` corpus with the schedule-off contrast.
+Native invokes the existing ISR body once per recorded full execution and its
+busy guard for an observed rejected execution. It checks fast/slow identity
+without overwriting native mode. A tape suppresses autonomous SDL IRQ scheduling;
+ordinary play keeps the SDL clock. Schedule-off consumes the same events while
+executing none and restores entry-1 MIDI/voice differences.
 
-## Final corpus outcome
+## Device streams and limits
 
-All 18 US lanes retain audio differences: the first progress difference is the
-countdown at entry 1, and the first exact per-entry command difference is an OPL
-pitch-clear transaction at entry 4, 6, 10 or 18. All 26,128 game-state rows and
-152 checkpoint frames are equal. `receipt.json` pins the per-lane facts; current
-`known_findings.json` pins both progress and exact command signatures.
+Both lanes record every byte OUT to OPL 388..38B, SB 220..22F, low DMA 00..0F and
+DMA pages 80..8F with service ordinal, entry and phase. Exact raw port/value order
+within each entry interval participates in the audio verdict alongside every
+playback-progress view. No writes or state views are masked, dropped, trimmed,
+deduplicated or shifted. Missing/truncated streams or incomplete replay cannot
+report equality. Decoded OPL/DSP/DMA commands, per-device subsequences and
+service-coordinate drift are diagnostic; they never replace the raw comparison.
+Mode 6 uses direct DAC, not DMA. Generic DMA remains unsupported.
 
-Later global command histories also differ outside new-game-save, including
-cross-device ordering and DSP bytes. They are retained as open findings;
-service batching across sample start/reload is a candidate and the translated
-mixer/data boundary is not excluded. The emitter paths and exact first windows
-are in `build/workers/audio/commands/LANE-TRIAGE.md` and `lane-triage.json`.
-The audio verification row remains open; source reconstruction damage and full
-native music/effect equivalence are not established by this run.
+An ISR between instructions **inside** a foreground function remains outside
+entry precision. The census gives a protection classification and reason for
+every function. CLI/STI set IF rather than save or nest FLAGS. Start-song resource
+loading precedes CLI; sample-note start writes before masking; a nested queue
+helper's STI can precede stop-voice's final pointer clears. Even otherwise masked
+updates can have an interruptible prologue. OPL index/data writes are unmasked:
+DOS can place a DSP IRQ between them while native's next-entry replay places it
+after the transaction. The chained input/BIOS bodies, arbitrary CPU/PIC placement,
+other hardware profiles, DMA memory and PCM/time identity are not proved.
+
+Final outcomes and first differences per lane are pinned in `receipt.json` and
+`portable/tests/acceptance/known_findings.json`. The working report and exact
+matrix-row facts are `build/workers/audio/RESULT.md`; the matrix itself is left
+to the owner. Historical v8 measurements remain in `receipt-v8.json`.
+
+Controls: `test_sound_services.py`, `test_sound_calls.py`, `test_audio_timer.py`,
+`test_audio_commands.py`, the virtual audio/clock and ordinary audio suites,
+and the full scenario checker with the schedule-off contrast.
+
+## Independent verdicts after sound divergence
+
+Sound-call order is an audio observation. Its first marker or function-ID
+mismatch records the entry, phase, ordinal, expected/actual IDs and service
+markers, then sets audio coverage incomplete. It never invokes the state/frame
+replay-error handler or the global order-control bypass.
+
+Subsequent native sound entries are ignored and recorded marker245/ID pairs are
+skipped. All other markers, primitive values and input positions remain strictly
+checked. Recorded ordinals stay intact. Inputs in a skipped sound-only interval
+map to the preceding completed non-sound boundary; due sound IRQ completions wait
+for the next actual non-sound service, as in v8. Both projections follow only the
+filtered stream. Delaying those inputs until the next service entry would move
+some past the foreground input test and is not the accepted implementation.
+
+Raw command/progress observations continue after detachment, but cannot claim
+covered audio equality there. The audio signature retains its valid-through entry
+and first mismatch details, plus any earlier raw command difference. The exact
+reaper hardware return-PC evidence is retained in [reaper-gap.md](reaper-gap.md)
+as a placement class outside the tested domain. It is not pursued or repaired.
+
+Controls modify disposable replay inputs only: `sound-order` corrupts the first
+driver ID, producing audio incomplete with complete state/frames; `service-order`
+also corrupts the next non-sound marker and must still fail replay after audio
+detachment. `audio-timer` retains the earlier schedule-off control.
+
+The final fresh-build run completes all 18 state/frame lanes: 26,128 entries
+and all 152 checkpoints equal. Audio is 5 equal, 8 different and 5 incomplete.
+A second run reproduces the exact signatures; all 52 acceptance tests pass,
+including the sound-only and subsequent non-sound controls. All eighteen DOS
+reference manifests are unchanged. No DOS re-recording was performed.
+
+## Final independent lane results
+
+| Scenario / lane | State | Frames | Audio | First audio entry / layer | Sound coverage ends |
+|---|---|---|---|---|---|
+| ant-commands/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 598 / DIRECT_DAC_SAMPLE_PRODUCTION | - |
+| ant-commands/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 704 / OPL_DSP_ORDERING | - |
+| experiment/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_EQUAL | - / NONE | - |
+| experiment/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_EQUAL | - / NONE | - |
+| full-game/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_INCOMPLETE | 178 / SOUND_PLACEMENT_OUTSIDE_DOMAIN | 178 |
+| full-game/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 618 / DIRECT_DAC_SAMPLE_PRODUCTION | - |
+| interactive-play/original | EQUAL 2000/2000 | EQUAL 19/19 | AUDIO_INCOMPLETE | 832 / DIRECT_DAC_SAMPLE_PRODUCTION | 1001 |
+| interactive-play/canonical | EQUAL 2000/2000 | EQUAL 19/19 | AUDIO_INCOMPLETE | 678 / SOUND_PLACEMENT_OUTSIDE_DOMAIN | 678 |
+| load-from-save/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 992 / OPL_DSP_ORDERING | - |
+| load-from-save/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_EQUAL | - / NONE | - |
+| long-run/original | EQUAL 3000/3000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 2099 / OPL_DSP_ORDERING | - |
+| long-run/canonical | EQUAL 3000/3000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 2099 / OPL_DSP_ORDERING | - |
+| new-game-save/original | EQUAL 64/64 | EQUAL 2/2 | AUDIO_EQUAL | - / NONE | - |
+| new-game-save/canonical | EQUAL 64/64 | EQUAL 2/2 | AUDIO_EQUAL | - / NONE | - |
+| quick-game/original | EQUAL 2000/2000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 1760 / OPL_DSP_ORDERING | - |
+| quick-game/canonical | EQUAL 2000/2000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 1917 / OPL_DSP_ORDERING | - |
+| random-17/original | EQUAL 2000/2000 | EQUAL 9/9 | AUDIO_INCOMPLETE | 1130 / SOUND_RESOURCE_CALL_ORDER_COVERAGE | 1130 |
+| random-17/canonical | EQUAL 2000/2000 | EQUAL 9/9 | AUDIO_INCOMPLETE | 1073 / SOUND_RESOURCE_CALL_ORDER_COVERAGE | 1073 |
+
+The first audio entry may precede sound detachment: interactive original has a
+DAC-byte difference at832, then incomplete placement coverage from1001. The
+exact signature and first command writes are in [stream-triage.json](stream-triage.json).
+Post-detachment hashes/writes remain observed but do not establish covered audio
+equivalence. Non-sound order and all state/frame checks continue strictly.

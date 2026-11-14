@@ -1,0 +1,132 @@
+[
+  {
+    "target": "original",
+    "entry_linear": 166869,
+    "enabled_by": {
+      "pc": 166887,
+      "opcode": "fb",
+      "instruction": "sti"
+    },
+    "full_fast_exit": [
+      {
+        "pc": 167164,
+        "opcode": "07",
+        "instruction": "pop",
+        "operands": "es"
+      },
+      {
+        "pc": 167165,
+        "opcode": "1f",
+        "instruction": "pop",
+        "operands": "ds"
+      },
+      {
+        "pc": 167166,
+        "opcode": "5e",
+        "instruction": "pop",
+        "operands": "si"
+      },
+      {
+        "pc": 167167,
+        "opcode": "5a",
+        "instruction": "pop",
+        "operands": "dx"
+      },
+      {
+        "pc": 167168,
+        "opcode": "5b",
+        "instruction": "pop",
+        "operands": "bx"
+      },
+      {
+        "pc": 167169,
+        "opcode": "58",
+        "instruction": "pop",
+        "operands": "ax"
+      },
+      {
+        "pc": 167170,
+        "opcode": "2efe0e0c00",
+        "instruction": "dec",
+        "operands": "byte ptr cs:[0xc]"
+      },
+      {
+        "pc": 167175,
+        "opcode": "cf",
+        "instruction": "iret",
+        "operands": ""
+      }
+    ],
+    "reentrant_exit": {
+      "pc": 166868,
+      "opcode": "cf"
+    },
+    "busy_operand_cs_offset": 12,
+    "window": "Normal fast epilogue has IF enabled; after DEC busy, before IRET, busy is zero and SP has returned to hardware-entry SP. A new IRQ pushes 6 bytes and can run full mixer while outer entry remains tracked."
+  },
+  {
+    "target": "canonical",
+    "entry_linear": 166857,
+    "enabled_by": {
+      "pc": 166875,
+      "opcode": "fb",
+      "instruction": "sti"
+    },
+    "full_fast_exit": [
+      {
+        "pc": 167152,
+        "opcode": "07",
+        "instruction": "pop",
+        "operands": "es"
+      },
+      {
+        "pc": 167153,
+        "opcode": "1f",
+        "instruction": "pop",
+        "operands": "ds"
+      },
+      {
+        "pc": 167154,
+        "opcode": "5e",
+        "instruction": "pop",
+        "operands": "si"
+      },
+      {
+        "pc": 167155,
+        "opcode": "5a",
+        "instruction": "pop",
+        "operands": "dx"
+      },
+      {
+        "pc": 167156,
+        "opcode": "5b",
+        "instruction": "pop",
+        "operands": "bx"
+      },
+      {
+        "pc": 167157,
+        "opcode": "58",
+        "instruction": "pop",
+        "operands": "ax"
+      },
+      {
+        "pc": 167158,
+        "opcode": "2efe0e1000",
+        "instruction": "dec",
+        "operands": "byte ptr cs:[0x10]"
+      },
+      {
+        "pc": 167163,
+        "opcode": "cf",
+        "instruction": "iret",
+        "operands": ""
+      }
+    ],
+    "reentrant_exit": {
+      "pc": 166856,
+      "opcode": "cf"
+    },
+    "busy_operand_cs_offset": 16,
+    "window": "Normal fast epilogue has IF enabled; after DEC busy, before IRET, busy is zero and SP has returned to hardware-entry SP. A new IRQ pushes 6 bytes and can run full mixer while outer entry remains tracked."
+  }
+]

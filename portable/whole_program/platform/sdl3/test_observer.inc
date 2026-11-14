@@ -26,6 +26,15 @@ static unsigned test_raw_ids[128], test_raw_sequence;
 static unsigned test_raw_head, test_raw_count;
 static int test_injecting, test_admitting;
 static uint64_t test_services, test_queries;
+/* Audio can lose function placement without losing the input/state replay.
+ * Keep DOS ordinals: skipped sound markers still occupy their recorded slots. */
+static int test_sound_detached;
+static unsigned test_sound_skipping;
+static unsigned test_sound_failure_entry, test_sound_failure_phase;
+static uint64_t test_sound_failure_at, test_sound_ignored, test_sound_skipped;
+static int test_sound_expected_id, test_sound_actual_id;
+static int test_sound_expected_service, test_sound_actual_service;
+static void test_load(void);
 #include "audio_tape.inc"
 extern int portable_input_time_host_interrupt(void) __attribute__((weak));
 static int test_queue_raw(const SDL_Event *event) {
@@ -192,7 +201,41 @@ static void test_load(void) {
   }
   test_next_input();
 }
+static int test_expected_service(void) {
+  return test_service_at<test_service_size ? test_service_data[test_service_at] : -1;
+}
+static int test_expected_sound(void) {
+  int id=fgetc(test_sound);
+  if (id!=EOF && ungetc(id,test_sound)==EOF) abort();
+  return id;
+}
+static void test_sound_detach(int expected_id,int actual_id,int expected_service,int actual_service) {
+  if (test_sound_detached) return;
+  test_sound_detached=1;
+  test_sound_failure_entry=test_step+1;test_sound_failure_phase=test_phase;
+  test_sound_failure_at=test_services+1;
+  test_sound_expected_id=expected_id;test_sound_actual_id=actual_id;
+  test_sound_expected_service=expected_service;test_sound_actual_service=actual_service;
+  fprintf(stderr,"Observer audio sound order mismatch at %" PRIu64 ": entry=%u expected=%d actual=%d expected_service=%d actual_service=%d; filtering sound services only\n",
+      test_sound_failure_at,test_sound_failure_entry,expected_id,actual_id,expected_service,actual_service);
+}
+static void test_skip_sound(void) {
+  ++test_sound_skipping;
+  while (test_expected_service()==245) {
+    if (fgetc(test_sound)==EOF) abort();
+    ++test_service_at;++test_services;++test_queries;++test_sound_skipped;
+    /* Retain recorded input coordinates even when their sound-only slot is
+     * crossed at this non-sound boundary. This never drains audio on its own. */
+    portable_test_before_poll();
+  }
+  --test_sound_skipping;
+}
 static void test_service(unsigned index) {
+  if (index!=245 && test_service_data && !test_control_changed) {
+    if (!test_sound_detached && test_expected_service()==245)
+      test_sound_detach(test_expected_sound(),-1,245,(int)index);
+    if (test_sound_detached) test_skip_sound();
+  }
   test_audio_drain();
   ++test_services;
   if (test_service_data && !test_control_changed) {
@@ -205,6 +248,28 @@ static void test_service(unsigned index) {
       abort();
     }
   }
+}
+/* Foreground driver entry: the previous interval's real ISR executions must
+ * finish before the source function touches shared sound state. */
+void portable_test_sound_entry(unsigned id) {
+  test_load();
+  if (!test_service_data) return;
+  if (!test_sound) abort();
+  ++test_sound_entries;
+  if (test_sound_detached) { ++test_sound_ignored;return; }
+  if (test_expected_service()!=245) {
+    test_sound_detach(-1,(int)id,test_expected_service(),245);
+    ++test_sound_ignored;portable_test_before_poll();return;
+  }
+  int expected=test_expected_sound();
+  if (expected!=(int)id) {
+    test_sound_detach(expected,(int)id,245,245);
+    ++test_sound_ignored;portable_test_before_poll();return;
+  }
+  test_service(245);
+  ++test_queries;
+  if (fgetc(test_sound)!=expected) abort();
+  portable_test_before_poll();
 }
 uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) {
   unsigned i;
@@ -376,6 +441,12 @@ void portable_test_before_poll(void) {
     if (!portable_input_time_host_interrupt || portable_input_time_host_interrupt() < 0) abort();
   }
   test_admitting = 0;
+  /* Project inputs in an ignored sound-only interval onto the preceding
+   * completed non-sound service, as in v8. Waiting until the next service's
+   * entry can move an input past that service's foreground state test.
+   * Keep original ordinals/counters while crossing each recorded sound slot.
+   * Audio deliberately waits for the next actual non-sound service. */
+  if (test_sound_detached && !test_sound_skipping) test_skip_sound();
 }
 
 /* Step observer glue: no canonical game state is written. */
@@ -389,12 +460,18 @@ void portable_test_step_boundary(unsigned step, unsigned phase) {
 }
 int portable_test_reference_end(void) {
   test_load();
-  return (!test_audio_timer || !test_audio_ready) && !test_remaining && !test_input_ready && !test_raw_count &&
+  return (test_sound_detached || !test_sound || fgetc(test_sound)==EOF) && (!test_audio_timer || !test_audio_ready) && !test_remaining && !test_input_ready && !test_raw_count &&
          test_inputs==test_queued &&
          (!test_service_data || test_service_at==test_service_size);
 }
 void portable_test_diagnostics(FILE *f) {
   test_audio_close();
+  fprintf(f,"\"foreground_sound_entries\":%" PRIu64 ",",test_sound_entries);
+  fprintf(f,"\"sound_order_detached\":%d,\"sound_order_failure_entry\":%u,\"sound_order_failure_phase\":%u,\"sound_order_failure_ordinal\":%" PRIu64 ","
+      "\"sound_order_expected_id\":%d,\"sound_order_actual_id\":%d,\"sound_order_expected_service\":%d,\"sound_order_actual_service\":%d,"
+      "\"sound_services_ignored\":%" PRIu64 ",\"sound_services_skipped\":%" PRIu64 ",",
+      test_sound_detached,test_sound_failure_entry,test_sound_failure_phase,test_sound_failure_at,
+      test_sound_expected_id,test_sound_actual_id,test_sound_expected_service,test_sound_actual_service,test_sound_ignored,test_sound_skipped);
   fprintf(f,"\"audio_timer_executions\":%" PRIu64 ",\"audio_timer_events_consumed\":%" PRIu64 ",",test_audio_runs,test_audio_ticks);
   fprintf(f,
           "\"pump_count\":%" PRIu64 ",\"clock_reads\":%" PRIu64

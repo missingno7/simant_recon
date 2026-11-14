@@ -11,6 +11,9 @@
 static PortableWholeAudioProvider *replay_provider;
 extern uint8_t portable_canonical_volume_tables[2048];
 extern int16_t snd_song_process_due_events(void);
+int portable_whole_audio_isr_active(void) {
+    return replay_provider && replay_provider->in_render;
+}
 int portable_whole_audio_provider_init(PortableWholeAudioProvider *p) {
     memset(p,0,sizeof(*p));replay_provider=p;p->mix_divider=16;p->devices=sim_isa_audio_create();
     return p->devices!=NULL;
@@ -81,7 +84,7 @@ static void interrupt(PortableWholeAudioProvider *p,unsigned reentrant) {
 void portable_whole_audio_replay_interrupt(unsigned fast) {
     PortableWholeAudioProvider *p=replay_provider;
     if(!p || !p->armed || p->in_render) { fprintf(stderr,"Audio replay has no armed timer\n");abort(); }
-    /* A nested fast IRQ runs the original busy early exit: PIC acknowledgement
+    /* An observed busy-exit IRQ runs the original early guard: PIC acknowledgement
      * only, with no channel/sequencer/device-write effects. Its nesting is
      * observed schedule input, not inferred from expected sound state. */
     if(fast<2 && (unsigned)p->fast!=fast) {

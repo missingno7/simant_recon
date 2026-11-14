@@ -68,10 +68,18 @@ Primary license references: [Nuked-OPL3](https://github.com/nukeykt/Nuked-OPL3/b
 ## Per-entry acceptance supersedes the bounded window
 
 The earlier sound-duration comparison above remains a bounded observation.
-Contract v8 now records the independently bound DOS sound ISR completions and
-raw device OUTs with service/entry coordinates, runs the existing native ISR
-translation at the next sampled service, and compares every command per entry
-in both executable lanes. Its remaining countdown/command phase differences
-are retained in the audio verdict; the bounded window never closed those gaps.
-See [the v8 schedule review](../native-audio-schedule/README.md) and the exact
-final signatures in `portable/tests/acceptance/known_findings.json`.
+Contract v9 records independently bound DOS sound ISR completions and 115
+foreground-capable driver entries, replaying due executions before the native
+entry and checking service/function order. Every raw device OUT is compared per
+entry alongside unchanged playback-progress views. A live type-5 argument guard
+qualifies the generic resource callback; other resource calls remain diagnostics.
+
+The current independent-verdict policy completes all 18 state/frame lanes with
+26,128 entries and all 152 checkpoints equal. Audio is 5 equal, 8 different and
+5 incomplete. A first sound-call mismatch invalidates audio coverage, then sound
+markers are filtered while non-sound services remain strict and IRQs drain at the
+next non-sound service. OPL subsequences match and DMA writes are absent through
+the still-covered audio intervals. The captured reaper IRQ is explicitly outside
+the tested instruction-placement domain; it never fails state/frame replay.
+See [the schedule review](../native-audio-schedule/README.md) and exact signatures
+in `portable/tests/acceptance/known_findings.json`.
