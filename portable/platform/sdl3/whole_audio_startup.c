@@ -9,18 +9,19 @@ static uint64_t bus_time(PortableSdl3WholeAudio *a) {
         fprintf(stderr,"Audio synchronization failed\n");exit(72);
     }
     uint64_t now=a->provider.in_render ? a->provider.time_ns : host_time_ns()-a->clock_origin_ns;
-    if(a->bus_ns<now) a->bus_ns=now;
-    return a->bus_ns;
+    /* ideal-v1: I/O is synchronous at the current machine instant. Polling a
+     * ready direct-DAC device cannot create a second, provider-local clock. */
+    a->bus_ns=now;
+    return now;
 }
 static void out8(void *context,uint16_t port,uint8_t value) {
     PortableSdl3WholeAudio *a=context;
     uint64_t now=bus_time(a);sim_isa_audio_out(a->provider.devices,port,value,now);
-    a->bus_ns+=1000; // one microsecond ISA transaction floor, not a game delay
 }
 static uint8_t in8(void *context,uint16_t port) {
     PortableSdl3WholeAudio *a=context;
     uint64_t now=bus_time(a);uint8_t v=sim_isa_audio_in(a->provider.devices,port,now);
-    a->bus_ns+=1000;return v;
+    return v;
 }
 static void configure(void *context,uint16_t divisor,uint16_t chain,unsigned channels) {
     PortableSdl3WholeAudio *a=context;
@@ -30,12 +31,10 @@ static void start(void *context) {
     PortableSdl3WholeAudio *a=context;
     if(!a->provider.in_render) bus_time(a);
     portable_whole_audio_provider_start(&a->provider);
-    if(a->source_timer_observer) a->source_timer_observer(a->source_timer_observer_context,a->provider.divisor,a->provider.chain);
 }
 static void stop(void *context) {
     PortableSdl3WholeAudio *a=context;
     portable_whole_audio_provider_stop(&a->provider);
-    if(a->source_timer_observer) a->source_timer_observer(a->source_timer_observer_context,0,0);
 }
 static void enable_interrupts(void *context) {
     PortableSdl3WholeAudio *a=context;

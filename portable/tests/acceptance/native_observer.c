@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "event_context_rule.h"
 
 #ifdef SIMANT_TEST_KEY_ALIASES
 /* DOS recipe tokens have no spaces. SDL's modifier/Escape names do.
@@ -76,13 +77,14 @@ typedef struct Slice {
   unsigned bytes;
 } Slice;
 typedef struct View {
-  unsigned verdict, bytes, sentinel, count;
+  unsigned verdict, bytes, sentinel, count, event_records;
   Slice *slices;
   uint8_t *data;
 } View;
 static View *views;
 static unsigned count, step, limit, active, first_difference;
 static FILE *expected, *actual, *result;
+static FILE *context_actual;
 static char dump_path[2048];
 static unsigned state_clock;
 static unsigned state_entries(void) { return first_difference ? first_difference : step; }
@@ -150,6 +152,7 @@ static void load(void) {
   static unsigned loaded;
   const char *path;
   char line[2048];
+  char actual_path[2048];
   FILE *config;
   if (loaded++)
     return;
@@ -164,6 +167,8 @@ static void load(void) {
     if (!fgets(line, sizeof(line), config))
       abort();
     line[strcspn(line, "\r\n")] = 0;
+    if (!i && getenv("SIMANT_TEST_IDEAL")) continue;
+    if (i==1) snprintf(actual_path,sizeof(actual_path),"%s",line);
     *files[i] = fopen(line, i ? "wb" : "rb");
     if (!*files[i])
       abort();
@@ -196,6 +201,17 @@ static void load(void) {
     if (total != v->bytes)
       abort();
   }
+  unsigned context_count;
+  if(fscanf(config," KEYBOARD_CONTEXT %u",&context_count)==1) {
+    if(!getenv("SIMANT_TEST_IDEAL") || !context_count || context_count>count) abort();
+    for(unsigned n=0;n<context_count;++n) {
+      unsigned index,records;
+      if(fscanf(config,"%u %u",&index,&records)!=2 || index>=count || !records || views[index].bytes!=16*records) abort();
+      views[index].event_records=records;
+    }
+    char path[2200];snprintf(path,sizeof(path),"%s.keyboard-context-v1",actual_path);
+    context_actual=fopen(path,"wb");if(!context_actual) abort();
+  }
   fclose(config);
   active = 1;
 }
@@ -210,7 +226,8 @@ void portable_test_replay_error(const char *message) {
   portable_test_diagnostics(result);
   fputs("}\n", result);
   fclose(actual);
-  fclose(expected);
+  if(context_actual) fclose(context_actual);
+  if (expected) fclose(expected);
   fclose(result);
   fflush(NULL);
   _Exit(12);
@@ -228,6 +245,14 @@ static uint32_t fingerprint(View *v) {
   uint32_t hash = 2166136261u;
   for (unsigned i = 0; i < length; ++i)
     hash = (hash ^ v->data[i]) * 16777619u;
+  return hash;
+}
+
+static uint32_t context_fingerprint(View *v) {
+  if(!v->event_records) return fingerprint(v);
+  uint32_t hash=2166136261u;
+  for(unsigned at=0;at<v->bytes;++at)
+    if(simant_event_context_includes(v->data,v->event_records,at)) hash=(hash^v->data[at])*16777619u;
   return hash;
 }
 
@@ -250,7 +275,8 @@ static void finish(unsigned differs) {
   fputs("}\n", result);
   fclose(result);
   fclose(actual);
-  fclose(expected);
+  if(context_actual) fclose(context_actual);
+  if (expected) fclose(expected);
   if (!first_difference) dump_state();
   /* State stops at its first difference. With checkpoint capture enabled,
    * services/input and pictures continue independently to the requested end. */
@@ -279,14 +305,20 @@ void __wrap_DoAntSim(void) {
       offset += v->slices[j].bytes;
     }
     uint32_t hash = fingerprint(v), reference;
-    if (fread(&reference, sizeof(reference), 1, expected) != 1)
+    reference=hash;
+    if (expected && fread(&reference, sizeof(reference), 1, expected) != 1)
       abort();
     if (fwrite(&hash, sizeof(hash), 1, actual) != 1)
       abort();
+    if(context_actual) {
+      uint32_t observed=context_fingerprint(v);
+      if(fwrite(&observed,sizeof(observed),1,context_actual)!=1) abort();
+    }
     if (v->verdict==1 && hash != reference)
       differs = 1;
   }
   fflush(actual);
+  if(context_actual) fflush(context_actual);
   /* Same read-only bytes as the hash row, before any simulation/input work.
    * Keep exact checkpoint bytes for auditing separate diagnostic views too. */
   if (checkpoint && !first_difference) {

@@ -1,0 +1,93 @@
+--- src/hardware/keyboard.cpp
++++ src/hardware/keyboard.cpp
+@@ -304,7 +304,7 @@
+ 
+     if (machine == MCH_PCJR && keyb.used > 0) {
+         keyb.scheduled=true;
+-        PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++        PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+     }
+ }
+ 
+@@ -334,7 +334,7 @@
+     }
+ 
+     keyb.buf8042[keyb.buf8042_len++] = data;
+-    PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++    PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+ }
+ 
+ void KEYBOARD_AddBuffer(uint16_t data) {
+@@ -350,12 +350,12 @@
+     if (!keyb.scheduled) {
+         if (machine == MCH_PCJR) {
+             keyb.scheduled=true;
+-            PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++            PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+         }
+         else {
+             if (!keyb.p60changed) {
+                 keyb.scheduled=true;
+-                PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++                PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+ 	    }
+         }
+     }
+@@ -398,7 +398,7 @@
+     keyb.auxchanged=false;
+     if (!keyb.scheduled && keyb.used && !(machine == MCH_PCJR)) {
+         keyb.scheduled=true;
+-        PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++        PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+     }
+     return keyb.p60data;
+ }
+@@ -713,7 +713,7 @@
+         keyb.cb_irq1 = (val >> 0) & 1;
+         if (keyb.used && !keyb.scheduled && !keyb.p60changed && keyb.active) {
+             keyb.scheduled=true;
+-            PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++            PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+         }
+         break;
+     }
+@@ -787,7 +787,7 @@
+             keyb.auxactive=true;
+             if (keyb.used && !keyb.scheduled && !keyb.p60changed) {
+                 keyb.scheduled=true;
+-                PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++                PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+             }
+             LOG(LOG_KEYBOARD,LOG_NORMAL)("AUX Activated");
+         }
+@@ -808,7 +808,7 @@
+         keyb.active=true;
+         if (keyb.used && !keyb.scheduled && !keyb.p60changed) {
+             keyb.scheduled=true;
+-            PIC_AddEvent(KEYBOARD_TransferBuffer,KEYDELAY);
++            PIC_AddEvent(KEYBOARD_TransferBuffer,IdealActive?0:KEYDELAY);
+         }
+         LOG(LOG_KEYBOARD,LOG_NORMAL)("Activated");
+         break;
+@@ -1883,6 +1883,12 @@
+     }
+ }
+ 
++extern bool CompactDeferRepeat(unsigned key);
++bool CompactRepeatReady(unsigned key) {
++    return keyb.active && keyb.scanning && !keyb.reset &&
++        (unsigned)keyb.repeat.key==key && !keyb.repeat.wait;
++}
++void CompactDeliverRepeat(unsigned key) { KEYBOARD_AddKey((KBD_KEYS)key,true); }
+ static void KEYBOARD_TickHandler(void) {
+     if (keyb.reset)
+         return;
+@@ -1894,7 +1900,7 @@
+         }
+         else if (keyb.repeat.wait) {
+             keyb.repeat.wait--;
+-            if (!keyb.repeat.wait) KEYBOARD_AddKey(keyb.repeat.key,true);
++            if (!keyb.repeat.wait && !CompactDeferRepeat((unsigned)keyb.repeat.key)) KEYBOARD_AddKey(keyb.repeat.key,true);
+         }
+     }
+ }

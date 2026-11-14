@@ -1482,5 +1482,466 @@
     "capture_errors": {}
    }
   }
+ },
+ "ideal-v1": {
+  "status": "partial",
+  "evidence": "evidence/canonical/native-ideal-clock/results.json",
+  "state_equal_lanes": 2,
+  "frame_equal_lanes": 16,
+  "exact_audio_equal_lanes": 0,
+  "lanes": {
+   "ant-commands:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 77,
+    "first_state_views": [
+     "fd_50F6_0AA6",
+     "main_cycle_phase",
+     "main_iteration_count"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "ant-commands:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 77,
+    "first_state_views": [
+     "fd_50F6_0AA6",
+     "main_cycle_phase",
+     "main_iteration_count"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "experiment:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 72,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "experiment:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 72,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "full-game:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 72,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "full-game:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 72,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "interactive-play:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 135,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "interactive-play:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 135,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "load-from-save:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 177,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "load-from-save:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 177,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "long-run:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 624,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "long-run:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 624,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "new-game-save:canonical": {
+    "state": "STATE_EQUAL",
+    "first_state_entry": null,
+    "first_state_views": [],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 39
+   },
+   "new-game-save:original": {
+    "state": "STATE_EQUAL",
+    "first_state_entry": null,
+    "first_state_views": [],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 39
+   },
+   "quick-game:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 1083,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "quick-game:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 1083,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_EQUAL",
+    "first_frame_entry": null,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "random-17:canonical": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 244,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_DIFFERENCE",
+    "first_frame_entry": 2000,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   },
+   "random-17:original": {
+    "state": "STATE_DIFFERENCE",
+    "first_state_entry": 244,
+    "first_state_views": [
+     "window_current_event"
+    ],
+    "frames": "FRAME_DIFFERENCE",
+    "first_frame_entry": 2000,
+    "audio": "AUDIO_COMMANDS_DIFFERENCE",
+    "first_audio_entry": 11
+   }
+  },
+  "retirement": "Retirement condition not met: current v10 machinery and upper-layer test retained; no categories, bytes or pixels masked."
+ },
+ "ideal_v1_sound_off": {
+  "contract": "ideal-v1",
+  "variant": "sound-off",
+  "clock_admission": "direct-bda-v2",
+  "evidence": "evidence/canonical/native-ideal-clock/sound-off.md",
+  "state_equal_lanes": 12,
+  "frame_equal_lanes": 18,
+  "entries": 26128,
+  "frames": 152,
+  "retired": [],
+  "lanes": [
+   {
+    "scenario": "ant-commands",
+    "target": "original",
+    "state": "STATE_DIFFERENCE",
+    "entries": 1000,
+    "equal_entries": 876,
+    "first_difference": {
+     "entry": 877,
+     "views": [
+      {
+       "name": "yard_rain_anim_indices",
+       "category": "game_state",
+       "reference_hash": 4013534074,
+       "native_hash": 1315650518
+      }
+     ]
+    },
+    "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "ant-commands",
+    "target": "canonical",
+    "state": "STATE_DIFFERENCE",
+    "entries": 1000,
+    "equal_entries": 876,
+    "first_difference": {
+     "entry": 877,
+     "views": [
+      {
+       "name": "yard_rain_anim_indices",
+       "category": "game_state",
+       "reference_hash": 2022379576,
+       "native_hash": 2803335354
+      }
+     ]
+    },
+    "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "experiment",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "experiment",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "full-game",
+    "target": "original",
+    "state": "STATE_DIFFERENCE",
+    "entries": 1000,
+    "equal_entries": 876,
+    "first_difference": {
+     "entry": 877,
+     "views": [
+      {
+       "name": "yard_rain_anim_indices",
+       "category": "game_state",
+       "reference_hash": 4045725806,
+       "native_hash": 3868643994
+      }
+     ]
+    },
+    "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "full-game",
+    "target": "canonical",
+    "state": "STATE_DIFFERENCE",
+    "entries": 1000,
+    "equal_entries": 876,
+    "first_difference": {
+     "entry": 877,
+     "views": [
+      {
+       "name": "yard_rain_anim_indices",
+       "category": "game_state",
+       "reference_hash": 2481827770,
+       "native_hash": 1106466492
+      }
+     ]
+    },
+    "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "interactive-play",
+    "target": "original",
+    "state": "STATE_DIFFERENCE",
+    "entries": 2000,
+    "equal_entries": 1589,
+    "first_difference": {
+     "entry": 877,
+     "views": [
+      {
+       "name": "yard_rain_anim_indices",
+       "category": "game_state",
+       "reference_hash": 4192896312,
+       "native_hash": 1279887572
+      }
+     ]
+    },
+    "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "interactive-play",
+    "target": "canonical",
+    "state": "STATE_DIFFERENCE",
+    "entries": 2000,
+    "equal_entries": 1589,
+    "first_difference": {
+     "entry": 877,
+     "views": [
+      {
+       "name": "yard_rain_anim_indices",
+       "category": "game_state",
+       "reference_hash": 2146568792,
+       "native_hash": 1889667924
+      }
+     ]
+    },
+    "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "load-from-save",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "load-from-save",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "long-run",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 3000,
+    "equal_entries": 3000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "long-run",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 3000,
+    "equal_entries": 3000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "new-game-save",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 64,
+    "equal_entries": 64,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "new-game-save",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 64,
+    "equal_entries": 64,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "quick-game",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "quick-game",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "random-17",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   },
+   {
+    "scenario": "random-17",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "layer": null,
+    "frames": "FRAME_EQUAL"
+   }
+  ]
  }
 }

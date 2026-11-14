@@ -28,8 +28,12 @@ PortableSdl3WholeAudioStatus portable_sdl3_whole_audio_pump(PortableSdl3WholeAud
         for(size_t i=0;i<count;++i) portable_whole_audio_provider_render_frame(&a->provider,&samples[2*i]);
         if(!host_virtual_clock_enabled() && !portable_sdl3_audio_queue_frames(&a->output,samples,count)) return PORTABLE_SDL3_WHOLE_AUDIO_SDL_ERROR;
     }
+    /* IRQs between the last PCM frame and the service endpoint belong to this
+     * transaction too. PCM consumption never decides timer delivery. */
+    portable_whole_audio_provider_advance(&a->provider,ns);
     return PORTABLE_SDL3_WHOLE_AUDIO_OK;
 }
 void portable_sdl3_whole_audio_set_source_timer_observer(PortableSdl3WholeAudio *a,PortableSdl3SourceTimerObserver o,void *c) {
     a->source_timer_observer=o;a->source_timer_observer_context=c;
+    a->provider.timer_observer=o;a->provider.timer_observer_context=c;
 }

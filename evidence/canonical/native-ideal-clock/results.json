@@ -1,0 +1,2874 @@
+{
+  "status": "partial",
+  "contract": "ideal-v1",
+  "totals": {
+    "lanes": 18,
+    "entries": 26128,
+    "state_equal": 2,
+    "frame_equal": 16,
+    "audio_equal": 0,
+    "checkpoints": 152,
+    "recording_lane_seconds": 595.8999306001933,
+    "checking_lane_seconds": 1507.1130248000845
+  },
+  "lanes": [
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 76,
+      "first_difference": {
+        "entry": 77,
+        "views": [
+          {
+            "name": "fd_50F6_0AA6",
+            "category": "game_state",
+            "reference_hash": 3950255460,
+            "native_hash": 292984781
+          },
+          {
+            "name": "main_cycle_phase",
+            "category": "game_state",
+            "reference_hash": 3012680272,
+            "native_hash": 630802827
+          },
+          {
+            "name": "main_iteration_count",
+            "category": "game_state",
+            "reference_hash": 549390937,
+            "native_hash": 3573022236
+          }
+        ]
+      },
+      "seconds": 68.728934499959,
+      "recording_seconds": 28.440783599973656,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-a/ant-commands/canonical/result.json",
+      "result_sha256": "365b9098fd51b78710e78ac0d851eb477b29989f5f09a12c5222cfc7f95fc138"
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 76,
+      "first_difference": {
+        "entry": 77,
+        "views": [
+          {
+            "name": "fd_50F6_0AA6",
+            "category": "game_state",
+            "reference_hash": 3950255460,
+            "native_hash": 292984781
+          },
+          {
+            "name": "main_cycle_phase",
+            "category": "game_state",
+            "reference_hash": 3012680272,
+            "native_hash": 630802827
+          },
+          {
+            "name": "main_iteration_count",
+            "category": "game_state",
+            "reference_hash": 549390937,
+            "native_hash": 3573022236
+          }
+        ]
+      },
+      "seconds": 68.6259317000513,
+      "recording_seconds": 28.321821900026407,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-a/ant-commands/original/result.json",
+      "result_sha256": "0b0a15fa4bac3733266bc003783dfd97ad9d3adfa63346f9b538b591c25ba837"
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 202,
+      "first_difference": {
+        "entry": 72,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2129001133,
+            "native_hash": 1541640411
+          }
+        ]
+      },
+      "seconds": 62.30780420004157,
+      "recording_seconds": 24.702336099988315,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 28,
+          "dos": {
+            "tick": 70897,
+            "service_ordinal": 33032,
+            "step": 28,
+            "phase": 1,
+            "entry": 28,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3950255460,
+              3576599751,
+              2953952445,
+              338923185,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              1731070293,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1652827374,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 70865,
+            "service_ordinal": 5416,
+            "step": 28,
+            "phase": 1,
+            "entry": 28,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3950255460,
+              3576599751,
+              2953952445,
+              338923185,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              1731070293,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1652827374,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-a/experiment/canonical/result.json",
+      "result_sha256": "c32f7c1923b3e8be0680d08d972dfb103455a7c3279b4235fd270042c3f9b897"
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 202,
+      "first_difference": {
+        "entry": 72,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 630971785,
+            "native_hash": 989983675
+          }
+        ]
+      },
+      "seconds": 64.20219179999549,
+      "recording_seconds": 24.685390099999495,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 28,
+          "dos": {
+            "tick": 70897,
+            "service_ordinal": 33032,
+            "step": 28,
+            "phase": 1,
+            "entry": 28,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3950255460,
+              3576599751,
+              2953952445,
+              338923185,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              1731070293,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1652827374,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 70865,
+            "service_ordinal": 5416,
+            "step": 28,
+            "phase": 1,
+            "entry": 28,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3950255460,
+              3576599751,
+              2953952445,
+              338923185,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              1731070293,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1652827374,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-a/experiment/original/result.json",
+      "result_sha256": "30626a53242fc3d6bbfb41148f813823e06d78b8cff6e6ef85a7df77a4dca679"
+    },
+    {
+      "scenario": "full-game",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 788,
+      "first_difference": {
+        "entry": 72,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2129001133,
+            "native_hash": 1541640411
+          }
+        ]
+      },
+      "seconds": 61.458846600027755,
+      "recording_seconds": 20.107786800013855,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 8,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4264,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A1",
+            "decoded": {
+              "raw_indices": [
+                1843
+              ],
+              "service_ordinal": 4264,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 161
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 7,
+          "dos": {
+            "tick": 51745,
+            "service_ordinal": 25315,
+            "step": 7,
+            "phase": 1,
+            "entry": 7,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              1568378015,
+              3576599751,
+              2953952445,
+              1884125263,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              4119164483,
+              2911028820,
+              396118670,
+              2374983655,
+              3181516312,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3614921541,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 51713,
+            "service_ordinal": 3999,
+            "step": 7,
+            "phase": 1,
+            "entry": 7,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              1568378015,
+              3576599751,
+              2953952445,
+              1884125263,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              3481467866,
+              2911028820,
+              396118670,
+              2374983655,
+              3181516312,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3614921541,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-a/full-game/canonical/result.json",
+      "result_sha256": "37378b0a430e3c9c95c4689c6b08f631ea92cd5101db6b8baf648336cf772aef"
+    },
+    {
+      "scenario": "full-game",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 788,
+      "first_difference": {
+        "entry": 72,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 630971785,
+            "native_hash": 989983675
+          }
+        ]
+      },
+      "seconds": 61.46288160001859,
+      "recording_seconds": 20.026802000007592,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 8,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4264,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A1",
+            "decoded": {
+              "raw_indices": [
+                1843
+              ],
+              "service_ordinal": 4264,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 161
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 7,
+          "dos": {
+            "tick": 51745,
+            "service_ordinal": 25315,
+            "step": 7,
+            "phase": 1,
+            "entry": 7,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              1568378015,
+              3576599751,
+              2953952445,
+              1884125263,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              4119164483,
+              2911028820,
+              396118670,
+              2374983655,
+              3181516312,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3614921541,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 51713,
+            "service_ordinal": 3999,
+            "step": 7,
+            "phase": 1,
+            "entry": 7,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              1568378015,
+              3576599751,
+              2953952445,
+              1884125263,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              3481467866,
+              2911028820,
+              396118670,
+              2374983655,
+              3181516312,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3614921541,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-a/full-game/original/result.json",
+      "result_sha256": "be948ba20c0aae1d5add1ab0ff87a86ea14d78965ab9eae31fa9b92d1abe84ff"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "requested_entries": 2000,
+      "equal_entries": 1716,
+      "first_difference": {
+        "entry": 135,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 1029824233,
+            "native_hash": 1934154067
+          }
+        ]
+      },
+      "seconds": 97.98047459998634,
+      "recording_seconds": 34.554925100004766,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 19,
+        "requested_frames": 19,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 2000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/interactive-play/canonical/result.json",
+      "result_sha256": "35ce1fa1affda5a6b792d891b3e50a0583b033bf110851e18a9e0a7f287c6501"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "requested_entries": 2000,
+      "equal_entries": 1901,
+      "first_difference": {
+        "entry": 135,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 1441271349,
+            "native_hash": 185190035
+          }
+        ]
+      },
+      "seconds": 97.60023650003131,
+      "recording_seconds": 33.99289140000474,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 19,
+        "requested_frames": 19,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 2000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/interactive-play/original/result.json",
+      "result_sha256": "a9600da1d02cf7bc2823768bcf6febc22af93227152a3ead2c92d344df28df94"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 885,
+      "first_difference": {
+        "entry": 177,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 978222284,
+            "native_hash": 1936156951
+          }
+        ]
+      },
+      "seconds": 61.41671369998949,
+      "recording_seconds": 24.132964199990965,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/load-from-save/canonical/result.json",
+      "result_sha256": "17327d85d7218b3200ae4c7563285bb2c9e5625a694f8e4fdf6a0f110f34e353"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "requested_entries": 1000,
+      "equal_entries": 885,
+      "first_difference": {
+        "entry": 177,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 3813826952,
+            "native_hash": 2772026283
+          }
+        ]
+      },
+      "seconds": 60.66829529998358,
+      "recording_seconds": 23.5594817000092,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 5,
+        "requested_frames": 5,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 1000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/load-from-save/original/result.json",
+      "result_sha256": "7fc0af76450ced7199e4b6a4ca2d6b7d1891304fbb4a3e83e0203f5b1d89e43c"
+    },
+    {
+      "scenario": "long-run",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 3000,
+      "requested_entries": 3000,
+      "equal_entries": 2974,
+      "first_difference": {
+        "entry": 624,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2560384020,
+            "native_hash": 795404287
+          }
+        ]
+      },
+      "seconds": 161.48178729997016,
+      "recording_seconds": 50.48503820004407,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 13,
+        "requested_frames": 13,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 3000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/long-run/canonical/result.json",
+      "result_sha256": "9591bae69055f730f83610707e3d9c76d62e198d4c821cbaa666c1a55960f780"
+    },
+    {
+      "scenario": "long-run",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 3000,
+      "requested_entries": 3000,
+      "equal_entries": 2974,
+      "first_difference": {
+        "entry": 624,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 1900495328,
+            "native_hash": 2469112227
+          }
+        ]
+      },
+      "seconds": 161.42221150000114,
+      "recording_seconds": 50.60370590002276,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 13,
+        "requested_frames": 13,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 3000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/long-run/original/result.json",
+      "result_sha256": "ca9a4a77f423ffbf54c296799cc82daa28183f40aee366e06a809b3c1498cecb"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 64,
+      "requested_entries": 64,
+      "equal_entries": 64,
+      "first_difference": null,
+      "seconds": 14.447967000014614,
+      "recording_seconds": 4.36770590004744,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 2,
+        "requested_frames": 2,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 64,
+        "first_differing_entry": 39,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 3584,
+          "dos": null,
+          "native": {
+            "service_ordinal": 15711,
+            "step": 38,
+            "phase": 0,
+            "port": "0388",
+            "value": "A6",
+            "decoded": {
+              "raw_indices": [
+                11269
+              ],
+              "service_ordinal": 15711,
+              "entry": 39,
+              "step": 38,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 166
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 103425,
+            "service_ordinal": 45834,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              4238481243,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1568378015,
+              2911028820,
+              396118670,
+              2374983655,
+              2734803945,
+              3829235236,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3446990090,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 103393,
+            "service_ordinal": 7738,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              4238481243,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              930681398,
+              2911028820,
+              396118670,
+              2374983655,
+              2734803945,
+              3829235236,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3446990090,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/probe-new-canonical/result.json",
+      "result_sha256": "f278b662cb729d2145562d13afa71d15dc3634e925e4753f30a699a56fa55aba"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 64,
+      "requested_entries": 64,
+      "equal_entries": 64,
+      "first_difference": null,
+      "seconds": 14.117999400012195,
+      "recording_seconds": 4.462929800036363,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 2,
+        "requested_frames": 2,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 64,
+        "first_differing_entry": 39,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 3584,
+          "dos": null,
+          "native": {
+            "service_ordinal": 15711,
+            "step": 38,
+            "phase": 0,
+            "port": "0388",
+            "value": "A6",
+            "decoded": {
+              "raw_indices": [
+                11269
+              ],
+              "service_ordinal": 15711,
+              "entry": 39,
+              "step": 38,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 166
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 103425,
+            "service_ordinal": 45834,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              4238481243,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1568378015,
+              2911028820,
+              396118670,
+              2374983655,
+              2734803945,
+              3829235236,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3446990090,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 103393,
+            "service_ordinal": 7738,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              4238481243,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              930681398,
+              2911028820,
+              396118670,
+              2374983655,
+              2734803945,
+              3829235236,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              3446990090,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/probe-new-original/result.json",
+      "result_sha256": "ac438d1e6850de8a631a73fdb6b88fece3829a09f0a2a11cce6c33e3fa281994"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "requested_entries": 2000,
+      "equal_entries": 1997,
+      "first_difference": {
+        "entry": 1083,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2714840482,
+            "native_hash": 1052043118
+          }
+        ]
+      },
+      "seconds": 110.29150649998337,
+      "recording_seconds": 34.00369939999655,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 13,
+        "requested_frames": 13,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 2000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/quick-game/canonical/result.json",
+      "result_sha256": "aaf427dbb23f9b0f5cafdcdf4dddbdd363ca83d3ed98de27bb4d88f108f0e1d6"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "requested_entries": 2000,
+      "equal_entries": 1997,
+      "first_difference": {
+        "entry": 1083,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 8001106,
+            "native_hash": 1052043118
+          }
+        ]
+      },
+      "seconds": 110.66860879998421,
+      "recording_seconds": 33.6084841999691,
+      "frames": {
+        "status": "FRAME_EQUAL",
+        "frames_compared": 13,
+        "requested_frames": 13,
+        "first_differing_entry": null,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 2000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/quick-game/original/result.json",
+      "result_sha256": "b98a6d3f9e3043ab2927f933daa6c2f8b87dc997a0cd762d00a0ba181b15061e"
+    },
+    {
+      "scenario": "random-17",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "requested_entries": 2000,
+      "equal_entries": 1729,
+      "first_difference": {
+        "entry": 244,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2372081996,
+            "native_hash": 3330016663
+          }
+        ]
+      },
+      "seconds": 115.05521000002045,
+      "recording_seconds": 77.98229890002403,
+      "frames": {
+        "status": "FRAME_DIFFERENCE",
+        "frames_compared": 9,
+        "requested_frames": 9,
+        "first_differing_entry": 2000,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 2000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/random-17/canonical/result.json",
+      "result_sha256": "a093fc85a2355bca057c8e7ff6854e28d525ceccf1cb497d900c3c411a704ff9"
+    },
+    {
+      "scenario": "random-17",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "requested_entries": 2000,
+      "equal_entries": 1729,
+      "first_difference": {
+        "entry": 244,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2355033864,
+            "native_hash": 1874656555
+          }
+        ]
+      },
+      "seconds": 115.17542380001396,
+      "recording_seconds": 77.86088540003402,
+      "frames": {
+        "status": "FRAME_DIFFERENCE",
+        "frames_compared": 9,
+        "requested_frames": 9,
+        "first_differing_entry": 2000,
+        "missing_entries": []
+      },
+      "audio": {
+        "status": "AUDIO_COMMANDS_DIFFERENCE",
+        "entries_compared": 2000,
+        "first_differing_entry": 11,
+        "capture_complete": true,
+        "first_difference": {
+          "write_index": 40,
+          "dos": null,
+          "native": {
+            "service_ordinal": 4272,
+            "step": 10,
+            "phase": 0,
+            "port": "0388",
+            "value": "A0",
+            "decoded": {
+              "raw_indices": [
+                1875
+              ],
+              "service_ordinal": 4272,
+              "entry": 11,
+              "step": 10,
+              "phase": 0,
+              "kind": "opl_select",
+              "bank": 0,
+              "register": 160
+            }
+          }
+        }
+      },
+      "audio_content_diagnostic": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "MUSIC_CHECKPOINT_PLACEMENT",
+          "entry": 35,
+          "dos": {
+            "tick": 77281,
+            "service_ordinal": 35594,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              2674862226,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          },
+          "native": {
+            "tick": 77249,
+            "service_ordinal": 5886,
+            "step": 35,
+            "phase": 1,
+            "entry": 35,
+            "hashes": [
+              292984781,
+              3013597787,
+              4219902936,
+              3312558843,
+              3576599751,
+              2953952445,
+              3247655955,
+              714838017,
+              292984781,
+              3950255460,
+              292984781,
+              1099590421,
+              2911028820,
+              396118670,
+              2374983655,
+              2190936063,
+              2308321343,
+              1868256586,
+              598192135,
+              3951024668,
+              1889742218,
+              618893673,
+              1906196061,
+              292984781,
+              2708936177,
+              3008339846,
+              3950255460,
+              3317316584,
+              292984781,
+              3103001300,
+              1568378015,
+              3507319682,
+              1741671275,
+              3485852103,
+              2374983655,
+              1306598928,
+              3312558843
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/check-b/random-17/original/result.json",
+      "result_sha256": "1ce12b434447758a5f82e356d68de9267360b43b6b90fea45cd522890ff84a7c"
+    }
+  ],
+  "final_build_changed_inputs_from_corpus_build": [
+    "portable/platform.json"
+  ],
+  "retired": [],
+  "limits": [
+    "Foreground-dependent CH is not represented by the constant executable profile",
+    "Pause/modal timing still changes outer-loop count and later BirdDelay",
+    "Random-input lane has a final frame difference",
+    "Native active hardware DMA, AdLib PIT-latch waits and arbitrary PIC-mask/status-only drivers remain unsupported or unproved"
+  ]
+}

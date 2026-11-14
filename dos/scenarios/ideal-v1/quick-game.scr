@@ -1,0 +1,82 @@
+# clock: bios-ticks
+# ideal-v1: ceil(ms * 14318180 / (12 * 65536 * 1000)); key up is quantized independently.
+# Startup dialogs (registration, intro), then Select-a-Game > Quick Game (mouse).
+92 keydown enter
+92 keyup enter
+128 keydown enter
+129 keyup enter
+164 keydown enter
+165 keyup enter
+219 mouse_move -1280 -960
+221 mouse_move 740 330
+224 mouse_button 0 down
+225 mouse_button 0 up
+# Dismiss the Quick Game intro and any event dialog periodically.
+292 keydown enter
+293 keyup enter
+365 keydown enter
+366 keyup enter
+547 keydown enter
+548 keyup enter
+820 keydown enter
+821 keyup enter
+1093 keydown enter
+1094 keyup enter
+1366 keydown enter
+1367 keyup enter
+1639 keydown enter
+1640 keyup enter
+1912 keydown enter
+1913 keyup enter
+# Save As A.ANT via File > Save As (mouse), type name, confirm.
+2185 mouse_move -1280 -960
+2187 mouse_move 48 16
+2191 mouse_button 0 down
+2192 mouse_button 0 up
+2200 mouse_move 36 184
+2203 mouse_button 0 down
+2204 mouse_button 0 up
+2240 keydown a
+2241 keyup a
+2276 keydown enter
+2277 keyup enter
+2313 keydown enter
+2314 keyup enter
+2367 keydown enter
+2368 keyup enter
+# Keep simulating; dismiss event dialogs.
+2914 keydown enter
+2914 keyup enter
+3278 keydown enter
+3279 keyup enter
+3642 keydown enter
+3643 keyup enter
+4006 keydown enter
+4007 keyup enter
+4370 keydown enter
+4371 keyup enter
+4734 keydown enter
+4735 keyup enter
+5098 keydown enter
+5099 keyup enter
+# Save As B.ANT the same way.
+5462 mouse_move -1280 -960
+5464 mouse_move 48 16
+5468 mouse_button 0 down
+5469 mouse_button 0 up
+5477 mouse_move 36 184
+5481 mouse_button 0 down
+5482 mouse_button 0 up
+5517 keydown b
+5518 keyup b
+5553 keydown enter
+5554 keyup enter
+5590 keydown enter
+5591 keyup enter
+5645 keydown enter
+5645 keyup enter
+5827 keydown enter
+5827 keyup enter
+6191 keydown enter
+6192 keyup enter
+7283 exit 

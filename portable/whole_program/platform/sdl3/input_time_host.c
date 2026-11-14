@@ -6,6 +6,7 @@
 #include <string.h>
 
 static PortableInputTimeHost *active_host_binding;
+extern int portable_whole_audio_isr_active(void) __attribute__((weak));
 
 static int delivery_enabled(const PortableInputTimeHost *binding)
 {
@@ -205,7 +206,8 @@ static int ingest_host_events(PortableInputTimeHost *binding)
 {
     HostEvent event;
     int polled;
-    if (binding->ingesting || !delivery_enabled(binding))
+    if (binding->ingesting || !delivery_enabled(binding) ||
+        (portable_whole_audio_isr_active && portable_whole_audio_isr_active()))
         return 1;
     binding->ingesting = 1;
     do {
@@ -534,11 +536,17 @@ int portable_input_time_host_refresh_from_sdl_monotonic(
 {
     PortableSdlMonotonicClockRefresh *refresh =
         (PortableSdlMonotonicClockRefresh *)context;
-    uint64_t now_ns;
+    if (refresh && refresh->advance_devices &&
+        !refresh->advance_devices(refresh->device_context)) return 0;
+    return portable_input_time_host_refresh_at(refresh, clock, host_time_ns());
+}
+
+int portable_input_time_host_refresh_at(
+    PortableSdlMonotonicClockRefresh *refresh, SimTimingClock *clock, uint64_t now_ns)
+{
     if (refresh == NULL || clock == NULL || !refresh->initialized)
         return 0;
     SimTimingClock next_game, next_bios;
-    now_ns = host_time_ns();
     if (now_ns < refresh->last_ns)
         return 0;
     if (refresh->game_clock != NULL || refresh->bios_clock != NULL) {
@@ -548,7 +556,6 @@ int portable_input_time_host_refresh_from_sdl_monotonic(
             return 0;
         next_game = *refresh->game_clock;
         next_bios = *refresh->bios_clock;
-        next_bios.tick_count_enabled = 1;
         if (sim_timing_advance_nanoseconds(&next_game,
                     now_ns - refresh->last_ns) != SIM_TIMING_OK ||
             sim_timing_advance_nanoseconds(&next_bios,
@@ -573,6 +580,8 @@ void portable_sdl_monotonic_clock_refresh_init(
     refresh->game_clock = NULL;
     refresh->bios_clock = NULL;
     refresh->initialized = 1;
+    refresh->advance_devices = NULL;
+    refresh->device_context = NULL;
 }
 
 void portable_sdl_monotonic_clock_refresh_init_clocks(
@@ -586,6 +595,8 @@ void portable_sdl_monotonic_clock_refresh_init_clocks(
     refresh->bios_clock = bios_clock;
     refresh->initialized = game_clock != NULL && bios_clock != NULL &&
                            game_clock != bios_clock;
+    refresh->advance_devices = NULL;
+    refresh->device_context = NULL;
 }
 
 int portable_input_time_host_poll_event(PortableInputTimeHost *binding,

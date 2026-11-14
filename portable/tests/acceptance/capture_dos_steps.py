@@ -86,7 +86,10 @@ def main():
     ap.add_argument('--state-schema',type=Path,required=True,help='Ordered step fingerprint views (step_state.py)')
     ap.add_argument('--dump-every',type=int,default=256)
     ap.add_argument('--cycles',type=int,default=10000)
+    ap.add_argument('--sound-off',action='store_true')
     args=ap.parse_args()
+    ideal=json.loads(args.compact_observer.read_text()).get('contract')=='ideal-v1'
+    if args.sound_off and not ideal:ap.error('--sound-off variant requires ideal-v1')
     if not 1<=args.steps<=20000 or not 1<=args.host_seconds<=7200: ap.error('Bound steps to 1..20000 and host seconds to 1..7200')
     report=None if args.original else json.loads(args.build_report.read_text())
     scenario=json.loads(args.scenario.read_text())
@@ -103,11 +106,14 @@ def main():
     if out.exists(): raise ValueError('Explicit DOS observation output must be fresh')
     out.parent.mkdir(parents=True,exist_ok=True)
     original=(ROOT/scenario['script']).read_text()
+    if ideal:
+        original=(ROOT/'dos/scenarios/ideal-v1'/Path(scenario['script']).name).read_text()
+        if not original.startswith('# clock: bios-ticks'):raise ValueError('ideal-v1 requires a tick script')
     lines=[l for l in original.splitlines() if l.strip() and not l.lstrip().startswith('#')]
     # One binding frame, then compact fingerprints and periodic state frames.
     lines += [f'0 on_exec lin {base+addresses["DoAntSim"]:X} 1 dump 0 100000 simstep']
     lines.sort(key=lambda l:int(l.split()[0]))
-    script=out.with_suffix('.scr');script.write_text('\n'.join(lines)+'\n')
+    script=out.with_suffix('.scr');script.write_text(('# clock: bios-ticks\n' if ideal else '')+'\n'.join(lines)+'\n')
     command=[sys.executable,str(ROOT/'dos/run.py'),
              '--out',str(out),'--seconds',str(args.host_seconds),'--fixed-clock','--input-script',str(script),'--cycles',str(args.cycles)]
     command+=['--original'] if args.original else ['--build-report',str(args.build_report.resolve())]
@@ -216,8 +222,28 @@ def main():
                 for item in state['items']:
                     config.write(f'H {base+item[side]:X} {item["bytes"]} {int(item["sentinel"])}\n')
                     if item['category']=='audio':config.write(f'AUDIO {base+item[side]:X} {item["bytes"]}\n')
+                if args.sound_off:
+                    from sound_off import context_views
+                    for view in context_views(state).values():config.write(f'KEYBOARD_CONTEXT {view["index"]} {view["records"]}\n')
         command += ['--capture-observer',str(args.compact_observer.resolve()),'--observer-config',str(compact_spec)]
+        if ideal:
+            rule=out.with_suffix('.clock')
+            clock=['1000000',f'A {base+addresses["main"]:X} attach',
+                   'QUEUE '+' '.join(f'{base+addresses[n]:X}' for n in ('g_5FF0','g_5FF4','g_5FF6'))]
+            for name,service in [('TickCount','TickCount'),('timer_bios_tick_count','host_ticks'),('input_event_count','input_event_count'),('kbd_scan_state','kbd_scan_state'),('kbd_scroll_lock_state','kbd_scroll_lock_state'),('mouse_refresh_cursor','mouse_refresh_cursor'),('mouse_initialize_driver','portable_input_time_host_get_input_state')]:
+                clock.append(f'{"M" if name=="mouse_initialize_driver" else "R"} {base+addresses[name]:X} {service}')
+            clock.append(f'E {base+addresses["input_enqueue_event"]:X} host_ticks')
+            from portable.tests.acceptance.modifier_reads import bind as bind_modifiers
+            modifier_reads=bind_modifiers(args.original,exe,base)
+            for read in modifier_reads:
+                clock.append('B {pc:X} {segment} {base} {index} {displacement:X} {signature}'.format(**read))
+            for kind,pc in points:
+                if kind=='C':clock.append(f'R {pc:X} portable_m1b73_source_countdown_get')
+                if kind=='F':clock.append(f'F {pc:X} bios')
+            rule.write_text('\n'.join(clock)+'\n')
+            command+=['--ideal-clock',str(rule)]
     for arg in scenario.get('arguments',[]): command+=['--argument',arg]
+    if args.sound_off:command+=['--sound-off']
     if scenario.get('saved_game'): command+=['--saved-game',str((args.saved_game or ROOT/scenario['saved_game']).resolve())]
     started=time.monotonic()
     run=subprocess.run(command,cwd=ROOT,timeout=args.host_seconds+60)
@@ -242,12 +268,13 @@ def main():
         if actual!=bios_entry or len(stub)!=6 or stub[:3]!=bytes.fromhex('fb fe 38') or stub[5]!=0xcf:
             raise ValueError('Captured BIOS INT16 callback differs from its bound vector/CB_INT16 opcode')
         manifest['audio_content']=content
+        if ideal:manifest['modifier_byte_reads']=modifier_reads
         manifest['sound_timer']=sound_timer
         manifest['foreground_sound']=foreground_sound
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
             peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
         manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,admission_after=after,pump_source='both',
-            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v10',
+            order_sha256=sha(out/'observer.txt.order'),order_contract='ideal-v1' if ideal else 'service-samples-v10',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
         from frame_check import frame_manifest

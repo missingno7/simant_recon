@@ -292,7 +292,12 @@
     "mouse_interval_regression": "portable/tests/mouse_services/run.py; portable/tests/input_irq/run.py",
     "clock_model": "portable/whole_program/platform/README.md#ideal-machine-clock-native-clock-v1",
     "clock_regression": "portable/tests/idle_yield/run.py",
-    "clock_limits": "The independent DOS ideal-clock recorder is not implemented. Default input/clock poll costs are model parameters, not a recovered DOS CPU rate. GameSpeed 3 unpaced machine time can outrun physical audio output. Unsupported pure device-status waits retain their existing hardware boundary limits."
+    "clock_limits": "Direct modifier-byte reads at physical0000:0417 charge Q on both sides; DOS candidates are independently bound to original or compiled canonical instructions and qualified by live address. Source animation IDs retain allocator/ABI-dependent uninitialized contents and still fail strict raw state. Active DMA, AdLib PIT-latch waiting, arbitrary mask/status-only drivers and GameSpeed3 wall-tempo remain separate limits. The native fast/slow timer repair is retained.",
+    "ideal_contract": "portable/tests/acceptance/ideal/README.md",
+    "ideal_regression": "portable/tests/acceptance/ideal_rule_check.py; portable/tests/acceptance/ideal_check.py",
+    "timer_transition": "Timestamped progress/reload/old-INT08/restore notifications split every Q. Fast214/306 first1; slow3424/19 first(remaining>>4)+1; rational fractions survive Q partitioning. ISA bus/status/reset is synchronous at device time, with no local I/O charge.",
+    "sound_off_gameplay": "Shipped SIMANT.CFG Sound Mode: 0 on DOS/native, unchanged BIOS-tick recipes. keyboard-context-v1 omits only h/v for FAxx and F081..F087 in explicit Event views, retaining raw observations and full mouse/object comparison. Corrected DOS direct 0000:0417 modifier-read admission matches native. All18 frame lanes and12/18 state lanes equal; the six remaining state differences are rain-animation IDs from the uninitialized AnimSet.nextId allocator payload. No retirement in this round.",
+    "sound_off_evidence": "evidence/canonical/native-ideal-clock/sound-off.md"
   },
   "native_input_interrupts": {
     "authority": "src/platform/input_timer.asm",

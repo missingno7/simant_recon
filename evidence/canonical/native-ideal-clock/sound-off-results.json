@@ -1,0 +1,1088 @@
+{
+  "contract": "ideal-v1",
+  "variant": "sound-off",
+  "clock_admission": "direct-bda-v2",
+  "status": "PARTIAL_RAW_STATE_DIFFERENCE",
+  "date": "2026-11-14",
+  "totals": {
+    "lanes": 18,
+    "state_equal_lanes": 12,
+    "frame_equal_lanes": 18,
+    "entries": 26128,
+    "equal_entries": 24810,
+    "frame_checkpoints": 152,
+    "sound_off_confirmed_lanes": 18
+  },
+  "seconds": {
+    "recording_wall_jobs3": 239.72165220003808,
+    "recording_lane_total": 595.0979479001253,
+    "recording_process_total": 641.4690007999307,
+    "check_lane_total": 1340.5526257000747,
+    "observer_build": 185.56861219997518
+  },
+  "observer": {
+    "sha256": "fbb98bca2306f796c423201b2ae80039f4dcfc344ffc7d84aee9f774519c7c83",
+    "receipt": "build/workers/ideal-check/sound-off/emulator-v2/observer-build.json"
+  },
+  "reference_root": "build/reference/sound-off",
+  "native_build": "build/workers/ideal-check/final-native",
+  "configuration": {
+    "selector": "SIMANT.CFG Sound Mode: 0",
+    "display": "V",
+    "original_sha256": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+    "selected_sha256": "f4c9800c63f2a358990ea3030b3890d20895bcb904802fd27663a96d77cd7ca8",
+    "script_changes": []
+  },
+  "keyboard_context": {
+    "contract": "keyboard-context-v1",
+    "proof": "evidence/canonical/native-input-irq/normal-words.md",
+    "header_sha256": "3fc60ca99fa0c3129c32f796506906be2c0757b18f7850db3ede666e6fc19025",
+    "omitted": "Only bytes8..11 of FA00..FAFF and F081..F087 in current/previous Event and input_queue[7]",
+    "raw_retained": true
+  },
+  "fixed_rule_mismatch": {
+    "description": "DOS recorder omitted direct physical0000:0417 foreground modifier-byte reads already charged natively",
+    "first_native_read": 25328,
+    "pc_original": "0x41EC7",
+    "function": "processEdit",
+    "regression": {
+      "status": "PASS",
+      "rows": [
+        {
+          "control": "negative-before-fix",
+          "reference": "D:\\Prog\\simant_recon\\build\\reference\\ant-commands\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-ideal-v1-sound-off\\capture\\observer.txt.ideal",
+          "compared_reads": 57317,
+          "first_difference": 25328
+        },
+        {
+          "control": "negative-before-fix",
+          "reference": "D:\\Prog\\simant_recon\\build\\reference\\ant-commands\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-ideal-v1-sound-off\\capture\\observer.txt.ideal",
+          "compared_reads": 57317,
+          "first_difference": 25328
+        },
+        {
+          "control": "fixed",
+          "reference": "D:\\Prog\\simant_recon\\build\\reference\\sound-off\\ant-commands\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-ideal-v1-sound-off\\capture\\observer.txt.ideal",
+          "compared_reads": 57317,
+          "first_difference": null
+        },
+        {
+          "control": "fixed",
+          "reference": "D:\\Prog\\simant_recon\\build\\reference\\sound-off\\ant-commands\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-ideal-v1-sound-off\\capture\\observer.txt.ideal",
+          "compared_reads": 57317,
+          "first_difference": null
+        }
+      ]
+    }
+  },
+  "remaining_difference": {
+    "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+    "view": "yard_rain_anim_indices",
+    "first_entry": 877,
+    "source": "src/graphics/anim.c:hanim_MakeAnimSet leaves nextId untouched; hanim_AddAnimObject reads and increments it",
+    "original_initial_nextId": [
+      342,
+      86,
+      65535,
+      1,
+      0,
+      14,
+      4
+    ],
+    "canonical_initial_nextId": [
+      342,
+      86,
+      65535,
+      1,
+      3,
+      22,
+      1025
+    ],
+    "native_plain_gdb_initial_nextId": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "dos_allocation_observations": "build/workers/ideal-check/sound-off/animation-initial-values.json",
+    "native_observations": "build/workers/ideal-check/sound-off/gdb-animation/gdb.log",
+    "original_canonical_late_id_delta": 1021,
+    "limitations": "IDs are used for object lookup/removal. No new exemption, zero initialization or replayed allocator payload is applied."
+  },
+  "audio": "No sound-on equivalence claim; all lanes select no-sound and emit zero device writes. Existing audio-content comparison remains available separately.",
+  "retirement": "NONE; owner forbids retirement this round and strict state parity is not met.",
+  "lanes": [
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "equal_entries": 876,
+      "seconds": 60.620418999984395,
+      "recording_seconds": 29.183822499995586,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 4013534074,
+            "native_hash": 1315650518
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+      "all_differing_views": [
+        "yard_rain_anim_indices"
+      ],
+      "result": "build/workers/ideal-check/sound-off/check-v2-a/ant-commands/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "equal_entries": 876,
+      "seconds": 60.739180899981875,
+      "recording_seconds": 29.17520820000209,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 2022379576,
+            "native_hash": 2803335354
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+      "all_differing_views": [
+        "yard_rain_anim_indices"
+      ],
+      "result": "build/workers/ideal-check/sound-off/check-v2-a/ant-commands/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "seconds": 56.32346010004403,
+      "recording_seconds": 27.562077399983536,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-a/experiment/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "seconds": 55.735801699978765,
+      "recording_seconds": 26.578617900027893,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-a/experiment/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "full-game",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "equal_entries": 876,
+      "seconds": 54.417727799969725,
+      "recording_seconds": 19.445762899995316,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 4045725806,
+            "native_hash": 3868643994
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+      "all_differing_views": [
+        "yard_rain_anim_indices"
+      ],
+      "result": "build/workers/ideal-check/sound-off/check-v2-a/full-game/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "full-game",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "equal_entries": 876,
+      "seconds": 54.56726500001969,
+      "recording_seconds": 19.609551200002898,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 2481827770,
+            "native_hash": 1106466492
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+      "all_differing_views": [
+        "yard_rain_anim_indices"
+      ],
+      "result": "build/workers/ideal-check/sound-off/check-v2-a/full-game/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "equal_entries": 1589,
+      "seconds": 84.73809180001263,
+      "recording_seconds": 35.123762400005944,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 4192896312,
+            "native_hash": 1279887572
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 19,
+      "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+      "all_differing_views": [
+        "yard_rain_anim_indices"
+      ],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/interactive-play/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 2000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 2000,
+      "equal_entries": 1589,
+      "seconds": 84.71548870002152,
+      "recording_seconds": 35.508187800005544,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 2146568792,
+            "native_hash": 1889667924
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 19,
+      "layer": "ALLOCATOR_ABI_UNINITIALIZED_SOURCE_STATE",
+      "all_differing_views": [
+        "yard_rain_anim_indices"
+      ],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/interactive-play/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 2000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "seconds": 55.21271260001231,
+      "recording_seconds": 24.626461800013203,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/load-from-save/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "seconds": 54.9035220000078,
+      "recording_seconds": 24.906551900028717,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 5,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/load-from-save/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 1000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "long-run",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 3000,
+      "equal_entries": 3000,
+      "seconds": 141.60370959999273,
+      "recording_seconds": 50.51414980000118,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 13,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/long-run/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 3000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "long-run",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 3000,
+      "equal_entries": 3000,
+      "seconds": 141.83807840000372,
+      "recording_seconds": 49.94631930004107,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 13,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/long-run/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 3000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 64,
+      "equal_entries": 64,
+      "seconds": 12.556637200003024,
+      "recording_seconds": 4.131669800030068,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 2,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/new-game-save/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 64,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 64,
+      "equal_entries": 64,
+      "seconds": 12.561132999951951,
+      "recording_seconds": 4.239934999961406,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 2,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/new-game-save/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 64,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "quick-game",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "seconds": 98.22114340000553,
+      "recording_seconds": 32.90479459997732,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 13,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/quick-game/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 2000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "quick-game",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "seconds": 96.62499290000414,
+      "recording_seconds": 32.602237900020555,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 13,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-b/quick-game/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 2000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "random-17",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "seconds": 107.51748160005081,
+      "recording_seconds": 74.60498250002274,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 9,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-c/random-17/original/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 2000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    },
+    {
+      "scenario": "random-17",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "seconds": 107.65578000003006,
+      "recording_seconds": 74.43385500001023,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF",
+      "frame_checkpoints": 9,
+      "layer": null,
+      "all_differing_views": [],
+      "result": "build/workers/ideal-check/sound-off/check-v2-c/random-17/canonical/result.json",
+      "sound_off_verification": {
+        "game_globals": {
+          "snd_requested_driver_mode": {
+            "dos": "0000",
+            "native": "0000"
+          },
+          "snd_interface_initialized": {
+            "dos": "0000",
+            "native": "0000"
+          }
+        },
+        "dos_pit_divisor": 65536,
+        "dos_pit_entries": 2000,
+        "sound_isrs": 0,
+        "audio_writes": {
+          "dos": 0,
+          "native": 0
+        }
+      }
+    }
+  ],
+  "fresh_suites": [
+    {
+      "name": "database",
+      "code": 0,
+      "seconds": 5.673879199952353,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/native_database/run.py",
+        "--conversion",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sdb"
+      ]
+    },
+    {
+      "name": "rng",
+      "code": 0,
+      "seconds": 2.103514400019776,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/native_rng/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native\\report.json",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\srng"
+      ]
+    },
+    {
+      "name": "simulation",
+      "code": 0,
+      "seconds": 10.329430299985688,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/native_simulation/run.py",
+        "--native-build",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\ssim",
+        "--random-count",
+        "128"
+      ]
+    },
+    {
+      "name": "vga",
+      "code": 0,
+      "seconds": 21.03190669999458,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/runtime/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native\\report.json",
+        "--flow",
+        "vga",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sv"
+      ]
+    },
+    {
+      "name": "save",
+      "code": 0,
+      "seconds": 25.837900800048374,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/runtime/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native\\report.json",
+        "--flow",
+        "save",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\ss"
+      ]
+    },
+    {
+      "name": "load",
+      "code": 0,
+      "seconds": 36.21707180002704,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/runtime/run_load.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native\\report.json",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sl"
+      ]
+    },
+    {
+      "name": "audio",
+      "code": 0,
+      "seconds": 3.54333910002606,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/audio/run.py",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\saudio"
+      ]
+    },
+    {
+      "name": "diagnostics",
+      "code": 0,
+      "seconds": 5.522891699976753,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/diagnostics/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native\\report.json",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sdiag"
+      ]
+    },
+    {
+      "name": "acceptance",
+      "code": 0,
+      "seconds": 248.75043690000894,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "portable/tests/acceptance",
+        "-t",
+        ".",
+        "-p",
+        "test_*.py"
+      ]
+    }
+  ],
+  "additional_fresh_checks": [
+    {
+      "name": "evaluation-tests",
+      "code": 0,
+      "seconds": 7.711823799996637,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "-m",
+        "unittest",
+        "portable.tests.evaluation_order.test_evaluation_order"
+      ]
+    },
+    {
+      "name": "evaluation-census",
+      "code": 0,
+      "seconds": 7.745206899999175,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/evaluation_order/census.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native\\report.json",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\eval-census"
+      ]
+    },
+    {
+      "name": "evaluation-production",
+      "code": 0,
+      "seconds": 2.4464051999966614,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/evaluation_order/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\final-native\\report.json",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\sound-off\\eval-production"
+      ]
+    },
+    {
+      "name": "semantic-spans",
+      "code": 0,
+      "seconds": 7.777120699989609,
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "tests/test_semantic_spans.py"
+      ]
+    }
+  ],
+  "fresh_sound_off_recheck": [
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "equal_entries": 876,
+      "seconds": 56.037279599986505,
+      "recording_seconds": 29.183822499995586,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 4013534074,
+            "native_hash": 3347645370
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF"
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "entries": 1000,
+      "equal_entries": 876,
+      "seconds": 56.10855659999652,
+      "recording_seconds": 29.17520820000209,
+      "first_difference": {
+        "entry": 877,
+        "views": [
+          {
+            "name": "yard_rain_anim_indices",
+            "category": "game_state",
+            "reference_hash": 2022379576,
+            "native_hash": 3347645370
+          }
+        ]
+      },
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF"
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "seconds": 52.170128000027034,
+      "recording_seconds": 27.562077399983536,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF"
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "seconds": 52.10639309999533,
+      "recording_seconds": 26.578617900027893,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "audio": "SOUND_OFF_CONFIRMED",
+      "audio_content": "NOT_REQUESTED_SOUND_OFF"
+    }
+  ]
+}

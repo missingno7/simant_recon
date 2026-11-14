@@ -31,7 +31,7 @@ def test_build(build, out):
     sound_contract=service_manifest()
     profiled=[r for r in report['canonical_TUs'] if r.get('compile') and (r['module'] in ('root:0250','root:1FD2','root:29F0') or r['source'].startswith('src/sound/'))]
     if not {'root:0250','root:1FD2','root:29F0'}<={r['module'] for r in profiled}:raise ValueError('Missing input or sound translation units')
-    inputs={str(p):sha(p) for p in [HERE/'native_audio_content.inc',HERE/'audio_content.py',build/'simant-canonical.exe',build/'report.json',HERE/'step_check.py',HERE/'native_observer.c',HERE/'sound_services.py',ROOT/'evidence/canonical/native-audio-schedule/foreground-census.json',
+    inputs={str(p):sha(p) for p in [HERE/'event_context_rule.h',HERE/'native_audio_content.inc',HERE/'audio_content.py',build/'simant-canonical.exe',build/'report.json',HERE/'step_check.py',HERE/'native_observer.c',HERE/'sound_services.py',ROOT/'evidence/canonical/native-audio-schedule/foreground-census.json',
             ROOT/'portable/whole_program/platform/sdl3/host.c',
             ROOT/'portable/whole_program/platform/sdl3/test_observer.inc',ROOT/'portable/whole_program/platform/sdl3/audio_tape.inc',
             ROOT/'portable/whole_program/platform/sdl3/input_time_host.c',

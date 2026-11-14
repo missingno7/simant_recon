@@ -82,6 +82,7 @@ void __wrap_exit(int status)
 }
 static void close_diagnostics(void) { simant_diagnostics_close(exit_status, exit_reason); }
 static void idle(void *context);
+static int advance_audio_devices(void *context);
 static void request_quit(void *context);
 static void fail(const char *where);
 
@@ -437,6 +438,8 @@ static int install_video(void *context, SimGraphicsDriver *graphics,
             fail("source input binding");
         }
         portable_m1b73_sdl_application_input_set_idle_hook(&a->input, idle, a);
+        a->input.input_host.monotonic_refresh.advance_devices = advance_audio_devices;
+        a->input.input_host.monotonic_refresh.device_context = a;
         portable_input_time_host_set_interrupt_guard(&a->input.input_host,
             portable_whole_audio_interrupts_enabled);
         portable_m1b73_sdl_application_input_set_quit_hook(&a->input, request_quit, a);
@@ -468,25 +471,45 @@ static void request_quit(void *context)
     exit_reason = "window closed";
     exit(0); /* Native window close; atexit releases borrowed bindings first. */
 }
-static void source_timer_changed(void *context, uint16_t divisor, uint16_t reload)
+static int source_timer_active;
+static int advance_audio_devices(void *context)
 {
     Application *a = context;
-    uint32_t pit_divisor = divisor ? divisor : 65536u;
-    uint32_t chain = reload ? reload : 1u;
+    return !a->audio.active || portable_sdl3_whole_audio_pump(&a->audio) == PORTABLE_SDL3_WHOLE_AUDIO_OK;
+}
+static void source_timer_changed(void *context, uint64_t ns, unsigned event,
+                                 uint32_t divisor, uint16_t reload, uint16_t remaining)
+{
+    Application *a = context;
+    PortableSdlMonotonicClockRefresh *refresh = &a->input.input_host.monotonic_refresh;
+    uint8_t game_enabled = a->game_clock.tick_count_enabled;
     if (a->cleaned) return;
-    /* Account for elapsed time under the old source rate before changing it.
-     * Both counters retain their values and the private enable flag. */
-    if (!portable_input_time_host_refresh_from_sdl_monotonic(
-            &a->input.input_host.monotonic_refresh, &a->game_clock) ||
-        sim_timing_clock_configure_rate(&a->game_clock, 14318180, 12,
-            pit_divisor, chain) != SIM_TIMING_OK ||
-        sim_timing_clock_configure_rate(&a->bios_clock, 14318180, 12,
-            pit_divisor, chain) != SIM_TIMING_OK) fail("source PIT rate transition");
-    /* snd_start_sample_timer arms g_74A3=1 before the first interrupt. The old INT08
-     * chain runs after that one interrupt, then every g_74A5 interrupts. */
-    if (divisor && reload) {
-        a->game_clock.pit_fraction = (uint64_t)(reload - 1u) * divisor;
-        a->bios_clock.pit_fraction = a->game_clock.pit_fraction;
+    /* The real translated ISR owns chaining while armed. Advance phase at each
+     * device instant; count only its actual old-INT08 calls (including the
+     * fast-to-slow branch which returns without chaining). */
+    if (source_timer_active) a->game_clock.tick_count_enabled = a->bios_clock.tick_count_enabled = 0;
+    if (refresh->initialized && !portable_input_time_host_refresh_at(refresh,&a->game_clock,ns))
+        fail("source PIT timeline");
+    a->game_clock.tick_count_enabled = game_enabled;
+    a->bios_clock.tick_count_enabled = 1;
+    if (event == 2) {
+        if (game_enabled) a->game_clock.tick_count = (a->game_clock.tick_count + 1) & UINT32_MAX;
+        a->bios_clock.tick_count = (a->bios_clock.tick_count + 1) % 0x1800b0u;
+    } else if (event == 1 || event == 3) {
+        SimTimingClock *clocks[] = {&a->game_clock,&a->bios_clock};
+        source_timer_active = event == 1;
+        for (unsigned i=0;i<2;++i) {
+            SimTimingClock *clock=clocks[i];
+            uint64_t fraction=clock->ns_fraction;
+            if (sim_timing_clock_configure_rate(clock,14318180,12,
+                    source_timer_active?divisor:65536u,source_timer_active?reload:1u)!=SIM_TIMING_OK)
+                fail("source PIT rate transition");
+            clock->ns_fraction=fraction;
+            /* The first slow chain can have 20 IRQs although its reload is
+             * 19. The provider retains that transient explicitly; this field
+             * is the periodic phase, modulo the new chain period. */
+            if (source_timer_active) clock->pit_fraction=(uint64_t)((reload-remaining%reload)%reload)*divisor;
+        }
     }
 }
 static void idle(void *context)

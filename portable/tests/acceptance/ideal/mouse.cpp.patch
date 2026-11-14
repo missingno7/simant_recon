@@ -1,0 +1,41 @@
+--- src/ints/mouse.cpp
++++ src/ints/mouse.cpp
+@@ -457,7 +457,7 @@
+ 
+     if (mouse.events) {
+         mouse.timer_in_progress = true;
+-        PIC_AddEvent(MOUSE_Limit_Events,MOUSE_DELAY);
++        PIC_AddEvent(MOUSE_Limit_Events,IdealActive?0:MOUSE_DELAY);
+ 
+         if (MOUSE_IRQ != 0) {
+             if (!IS_PC98_ARCH && MouseInterruptEnabled())
+@@ -483,7 +483,7 @@
+     }
+     if (!mouse.timer_in_progress) {
+         mouse.timer_in_progress = true;
+-        PIC_AddEvent(MOUSE_Limit_Events,MOUSE_DELAY);
++        PIC_AddEvent(MOUSE_Limit_Events,IdealActive?0:MOUSE_DELAY);
+ 
+         if (MOUSE_IRQ != 0) {
+             if (!IS_PC98_ARCH && MouseInterruptEnabled())
+@@ -2315,7 +2315,7 @@
+     if (mouse.events) {
+         if (!mouse.timer_in_progress) {
+             mouse.timer_in_progress = true;
+-            PIC_AddEvent(MOUSE_Limit_Events,MOUSE_DELAY);
++            PIC_AddEvent(MOUSE_Limit_Events,IdealActive?0:MOUSE_DELAY);
+         }
+     }
+     return CBRET_NONE;
+@@ -2920,3 +2920,11 @@
+ 	}
+ } dummy;
+ }
++
++/* Acceptance v7: copy driver state only; no INT33 calls or cursor mutation. */
++void CompactMouseFrame(uint32_t words[8], uint16_t masks[32]) {
++    words[0]=mouse.hidden;words[1]=(uint32_t)(int32_t)POS_X;words[2]=(uint32_t)(int32_t)POS_Y;
++    words[3]=(uint32_t)(int32_t)mouse.hotx;words[4]=(uint32_t)(int32_t)mouse.hoty;
++    words[5]=mouse.inhibit_draw;words[6]=mouse.background;words[7]=mouse.page;
++    for (unsigned i=0;i<16;++i) { masks[i]=mouse.screenMask[i];masks[16+i]=mouse.cursorMask[i]; }
++}

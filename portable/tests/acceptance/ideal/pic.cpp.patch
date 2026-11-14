@@ -1,0 +1,83 @@
+--- src/hardware/pic.cpp
++++ src/hardware/pic.cpp
+@@ -651,6 +651,8 @@
+     }
+ }
+ 
++bool IdealActive=false;
++pic_tickindex_t IdealFraction=0;
+ static bool InEventService = false;
+ static pic_tickindex_t srv_lag = 0;
+ 
+@@ -662,6 +664,7 @@
+ }
+ 
+ void PIC_AddEvent(PIC_EventHandler handler,pic_tickindex_t delay,Bitu val) {
++    if (IdealActive && handler==PIC_IRQCheckDelayed) delay=0;
+     if (GCC_UNLIKELY(!pic_queue.free_entry)) {
+         LOG(LOG_PIC,LOG_ERROR)("Event queue full");
+         return;
+@@ -729,7 +732,34 @@
+ //#define DEBUG_CPU_CYCLE_OVERRUN
+ //#define DEBUG_PIC_IRQCHECK_VS_IRR
+ 
++extern bool IdealDispatchAllowed();
++unsigned long long IdealSlices=0;
++long long IdealSliceMin=0,IdealSliceMax=0;
++static void IdealCPUBudget() {
++    CPU_Cycles=CPU_CycleMax;CPU_CycleLeft=0;
++    long long budget=(long long)CPU_Cycles;
++    if(!IdealSlices || budget<IdealSliceMin) IdealSliceMin=budget;
++    if(!IdealSlices || budget>IdealSliceMax) IdealSliceMax=budget;
++    ++IdealSlices;
++}
+ bool PIC_RunQueue(void) {
++    if (IdealActive) {
++        if(!IdealDispatchAllowed()) { IdealCPUBudget();return true; }
++        InEventService=true;
++        unsigned count=0;
++        if (pic_queue.next_entry && pic_queue.next_entry->index<=IdealFraction+1e-10) {
++            if (++count>100000) abort();
++            PICEntry *entry=pic_queue.next_entry;
++            pic_queue.next_entry=entry->next;srv_lag=entry->index;
++            if(entry->pic_event) entry->pic_event(entry->value);
++            entry->next=pic_queue.free_entry;pic_queue.free_entry=entry;
++        }
++        InEventService=false;
++        if(PIC_IRQCheck) PIC_runIRQs();
++        IdealCPUBudget();
++        return true;
++    }
++
+ #if C_DEBUG
+     bool IsDebuggerActive(void);
+     bool IsDebuggerRunwatch(void);
+@@ -1483,3 +1513,28 @@
+ } dummy;
+ }
+ 
++
++/* Move only to the next event or millisecond. The caller runs any IRQ body
++ * to completion before moving again. CPU budgets never advance this clock. */
++double IdealNext(double target) {
++    double next=target;
++    if (next>(double)PIC_Ticks+1) next=(double)PIC_Ticks+1;
++    if (pic_queue.next_entry) {
++        double due=(double)PIC_Ticks+pic_queue.next_entry->index;
++        if(due<next) next=due;
++    }
++    if(next<(double)PIC_FullIndex()) next=PIC_FullIndex();
++    return next;
++}
++void IdealMove(double target) {
++    double next=IdealNext(target);
++    if(next<(double)PIC_FullIndex()-1e-8) { LOG_MSG("IDEAL backwards %.12f -> %.12f",(double)PIC_FullIndex(),next);abort(); }
++    if(next>=(double)PIC_Ticks+1) { IdealFraction=0;TIMER_AddTick(); }
++    else IdealFraction=next-(double)PIC_Ticks;
++}
++void IdealStart() {
++    double fraction=PIC_TickIndex();
++    for(PICEntry *entry=pic_queue.next_entry;entry;entry=entry->next) entry->index-=fraction;
++    PIC_Ticks=0;IdealFraction=0;IdealActive=true;
++}
++

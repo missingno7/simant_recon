@@ -23,6 +23,8 @@ struct PortableSdlMonotonicClockRefresh {
     SimTimingClock *game_clock;
     SimTimingClock *bios_clock;
     uint8_t initialized;
+    int (*advance_devices)(void *);
+    void *device_context;
 };
 
 typedef struct PortableInputTimeHost {
@@ -89,6 +91,8 @@ void portable_input_time_host_set_interrupt_guard(
     PortableInputTimeHost *binding, int (*enabled)(void));
 int portable_input_time_host_refresh_from_sdl_monotonic(
     void *context, SimTimingClock *clock);
+int portable_input_time_host_refresh_at(
+    PortableSdlMonotonicClockRefresh *refresh, SimTimingClock *clock, uint64_t now_ns);
 void portable_sdl_monotonic_clock_refresh_init(
     PortableSdlMonotonicClockRefresh *refresh);
 void portable_sdl_monotonic_clock_refresh_init_clocks(

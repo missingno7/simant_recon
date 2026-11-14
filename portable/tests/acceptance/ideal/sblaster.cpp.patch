@@ -1,0 +1,11 @@
+--- src/hardware/sblaster.cpp
++++ src/hardware/sblaster.cpp
+@@ -1494,7 +1494,7 @@
+ 	} else if (((val&1)==0) && (dsp.state==DSP_S_RESET)) {   // reset off
+ 		dsp.state=DSP_S_RESET_WAIT;
+ 		PIC_RemoveEvents(DSP_FinishReset);
+-		PIC_AddEvent(DSP_FinishReset,20.0f/1000.0f,(card_index << CARD_INDEX_BIT));  // 20 microseconds
++		if(IdealActive) DSP_FinishReset(card_index << CARD_INDEX_BIT); else PIC_AddEvent(DSP_FinishReset,20.0f/1000.0f,(card_index << CARD_INDEX_BIT));  // 20 microseconds
+ 	}
+ 	dsp.write_busy = 0;
+ }

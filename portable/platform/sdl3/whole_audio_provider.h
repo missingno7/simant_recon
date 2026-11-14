@@ -8,7 +8,7 @@ typedef enum PortableSdl3WholeAudioStatus {
     PORTABLE_SDL3_WHOLE_AUDIO_SDL_ERROR,
     PORTABLE_SDL3_WHOLE_AUDIO_PROVIDER_ERROR
 } PortableSdl3WholeAudioStatus;
-typedef void (*PortableSdl3SourceTimerObserver)(void *,uint16_t,uint16_t);
+typedef void (*PortableSdl3SourceTimerObserver)(void *,uint64_t,unsigned,uint32_t,uint16_t,uint16_t);
 typedef struct PortableSdl3WholeAudio {
     PortableSdl3Audio output;
     PortableWholeAudioProvider provider;

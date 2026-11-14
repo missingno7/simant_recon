@@ -1,0 +1,98 @@
+--- src/hardware/timer.cpp
++++ src/hardware/timer.cpp
+@@ -80,6 +80,7 @@
+ 	val=temp;
+ }
+ 
++#define IDEAL_PIT_RATE (IdealActive ? (14318180.0/12.0) : (double)PIT_TICK_RATE)
+ struct PIT_Block {
+     struct read_counter_result {
+         uint16_t          counter = 0xFFFFu;
+@@ -129,9 +130,9 @@
+ 
+         cntr_cur = new_cntr;
+         if (mode == 2)
+-            delay = ((pic_tickindex_t)(1000ul * (cntr_cur-1u))) / PIT_TICK_RATE; /* counts down to ONE, not ZERO */
++            delay = ((pic_tickindex_t)(1000ul * (cntr_cur-1u))) / IDEAL_PIT_RATE; /* counts down to ONE, not ZERO */
+         else
+-            delay = ((pic_tickindex_t)(1000ul * cntr_cur)) / PIT_TICK_RATE;
++            delay = ((pic_tickindex_t)(1000ul * cntr_cur)) / IDEAL_PIT_RATE;
+ 
+         /* Make sure the new counter value is returned if read back even if the gate is off!
+          * Some games like to constantly reprogram PIT 2 with precise event timey stuff and
+@@ -161,9 +162,9 @@
+ 
+         /* NTS: Remember, the counter counts DOWN, not up, so the delay is how long it takes to get there */
+         if (mode == 2)
+-            c_delay = ((pic_tickindex_t)(1000ull * (0xFFFFu - counter))) / PIT_TICK_RATE; /* counts down to ONE, not ZERO */
++            c_delay = ((pic_tickindex_t)(1000ull * (0xFFFFu - counter))) / IDEAL_PIT_RATE; /* counts down to ONE, not ZERO */
+         else
+-            c_delay = ((pic_tickindex_t)(1000ull * (0x10000u - counter))) / PIT_TICK_RATE;
++            c_delay = ((pic_tickindex_t)(1000ull * (0x10000u - counter))) / IDEAL_PIT_RATE;
+ 
+         start = (t - c_delay);
+     }
+@@ -342,11 +343,11 @@
+ 
+                     /* Counter keeps on counting after passing terminal count */
+                     if (bcd) {
+-                        tmp = pic_tickfmod(index,((pic_tickindex_t)(1000ul *   10000ul)) / PIT_TICK_RATE);
+-                        ret.counter = (uint16_t)(((unsigned long)(cntr_cur - ((tmp * PIT_TICK_RATE) / 1000.0))) %   10000ul);
++                        tmp = pic_tickfmod(index,((pic_tickindex_t)(1000ul *   10000ul)) / IDEAL_PIT_RATE);
++                        ret.counter = (uint16_t)(((unsigned long)(cntr_cur - ((tmp * IDEAL_PIT_RATE) / 1000.0))) %   10000ul);
+                     } else {
+-                        tmp = pic_tickfmod(index,((pic_tickindex_t)(1000ul * 0x10000ul)) / PIT_TICK_RATE);
+-                        ret.counter = (uint16_t)(((unsigned long)(cntr_cur - ((tmp * PIT_TICK_RATE) / 1000.0))) % 0x10000ul);
++                        tmp = pic_tickfmod(index,((pic_tickindex_t)(1000ul * 0x10000ul)) / IDEAL_PIT_RATE);
++                        ret.counter = (uint16_t)(((unsigned long)(cntr_cur - ((tmp * IDEAL_PIT_RATE) / 1000.0))) % 0x10000ul);
+                     }
+ 
+                     if (index > delay)
+@@ -362,7 +363,7 @@
+                     ret.cycle = 1;
+                 }
+                 else {
+-                    ret.counter = (uint16_t)(cntr_cur - (index * (PIT_TICK_RATE / 1000.0)));
++                    ret.counter = (uint16_t)(cntr_cur - (index * (IDEAL_PIT_RATE / 1000.0)));
+                     ret.cycle = 0;
+                 }
+                 break;
+@@ -441,7 +442,7 @@
+ 			finaldelay = pit[0].delay * 0.95;
+ 		}
+ 
+-		PIC_AddEvent(PIT0_Event,finaldelay);
++		PIC_AddEvent(PIT0_Event,IdealActive?pit[0].delay:finaldelay);
+ 	}
+ }
+ 
+@@ -1072,7 +1073,7 @@
+ 			div = 65535;
+ 		}
+ 		else {
+-			div = (unsigned int)PIT_TICK_RATE / (unsigned int)freq;
++			div = (unsigned int)IDEAL_PIT_RATE / (unsigned int)freq;
+ 			if (div > 65535) div = 65535;
+ 		}
+ 
+@@ -1222,7 +1223,7 @@
+         else
+             PIT_TICK_RATE = PIT_TICK_RATE_PC98_8MHZ;
+ 
+-        LOG_MSG("PC-98 PIT master clock rate %luHz",PIT_TICK_RATE);
++        LOG_MSG("PC-98 PIT master clock rate %luHz",IDEAL_PIT_RATE);
+     }
+ }
+ 
+@@ -1283,3 +1284,11 @@
+     }
+ } dummy;
+ }
++
++void IdealResetPITPhase() {
++    double now=PIC_FullIndex();
++    pit[0].track_time(now);
++    pit[0].latch_next_counter();pit[0].start=pit[0].now=now;pit[0].cycle_base=0;
++    PIC_RemoveEvents(PIT0_Event);PIC_DeActivateIRQ(0);
++    PIC_AddEvent(PIT0_Event,pit[0].delay);
++}

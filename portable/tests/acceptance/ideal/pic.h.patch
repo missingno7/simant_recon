@@ -1,0 +1,18 @@
+--- include/pic.h
++++ include/pic.h
+@@ -57,11 +57,15 @@
+ 
+ pic_tickindex_t PIC_GetCurrentEventTime(void);
+ 
++extern bool IdealActive;
++extern pic_tickindex_t IdealFraction;
+ static INLINE pic_tickindex_t PIC_TickIndex(void) {
++    if (IdealActive) return IdealFraction;
+ 	return ((pic_tickindex_t)(CPU_CycleMax-CPU_CycleLeft-CPU_Cycles)) / ((pic_tickindex_t)CPU_CycleMax);
+ }
+ 
+ static INLINE Bits PIC_TickIndexND(void) {
++    if (IdealActive) return (Bits)(IdealFraction*CPU_CycleMax);
+ 	return CPU_CycleMax-CPU_CycleLeft-CPU_Cycles;
+ }
+ 

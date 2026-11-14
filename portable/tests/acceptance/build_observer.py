@@ -15,7 +15,12 @@ def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--out',type=Path,required=True)
-    a=ap.parse_args(); out=a.out.resolve();out.mkdir(parents=True,exist_ok=True)
+    ap.add_argument('--contract',choices=('service-samples-v10','ideal-v1'),default='service-samples-v10')
+    a=ap.parse_args()
+    if a.contract=='ideal-v1':
+        from ideal_build import build
+        return build(a.out)
+    out=a.out.resolve();out.mkdir(parents=True,exist_ok=True)
     obj=SOURCE/'obj/dosbox-x/x64/Release SDL2'
     logs=obj/'dosbox-x.tlog'
     source=SOURCE/'src/dosbox.cpp'; text=source.read_text()
@@ -39,6 +44,7 @@ def main():
     patched=out/'dosbox.cpp';patched.write_text(text)
     compact_source=(HERE/'compact_observer.inc').read_bytes()
     (out/'compact_observer.inc').write_bytes(compact_source)
+    (out/'event_context_rule.h').write_bytes((HERE/'event_context_rule.h').read_bytes())
     clines=(logs/'CL.command.1.tlog').read_text(encoding='utf-16').splitlines()
     core_source=SOURCE/'src/cpu/core_normal.cpp'
     core=core_source.read_text().replace('#include "acceptance.h"',

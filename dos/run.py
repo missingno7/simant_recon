@@ -255,7 +255,9 @@ def main(argv=None):
     parser.add_argument('--fixed-clock', action='store_true', help='set guest DOS date/time to a fixed value before launch')
     parser.add_argument('--capture-observer', type=Path, help='Explicit scratch observer build receipt (v5 holds synthetic input at service boundaries)')
     parser.add_argument('--observer-config', type=Path, help='Compact service/admission specification (requires --capture-observer)')
+    parser.add_argument('--ideal-clock', type=Path, help='ideal-v1 service entries for an ideal observer and tick script')
     parser.add_argument('--saved-game', type=Path, help='copy an explicit worker/scratch .ANT save into the guest drive')
+    parser.add_argument('--sound-off',action='store_true',help='Stage shipped SIMANT.CFG Sound Mode: 0; never alter original assets')
     args = parser.parse_args(argv)
     # Scripted acceptance runs end with their own emulated-time `exit`; the
     # host limit is only a safety net there.
@@ -297,6 +299,11 @@ def main(argv=None):
             raw, pin = pinned_resource(resource, oracle)
             report['inputs'].append(pin)
             (out / resource).write_bytes(raw)
+        if args.sound_off:
+            from portable.tests.acceptance.sound_off import select_config,configuration_receipt
+            config=out/'SIMANT.CFG';raw=config.read_bytes()
+            report['sound_configuration']=configuration_receipt(raw)
+            config.write_bytes(select_config(raw))
         if saved_game:
             save_name, save_raw, save_pin = saved_game
             (out / save_name).write_bytes(save_raw)
@@ -317,11 +324,15 @@ def main(argv=None):
         report['runner'] = build.read_pin(runner['path'], runner['sha256'])[1]
         if bool(args.capture_observer) != bool(args.observer_config):
             raise ValueError('--capture-observer and --observer-config must be supplied together')
+        if args.ideal_clock and not args.capture_observer:
+            raise ValueError('--ideal-clock requires an ideal-v1 observer')
         if args.capture_observer:
             observer_path = diagnostic.experimental_path(args.capture_observer)
             observer = json.loads(observer_path.read_text())
+            if args.ideal_clock and observer.get('contract')!='ideal-v1':
+                raise ValueError('--ideal-clock cannot be mixed with a legacy observer')
             if observer.get('schema') not in ('simant-read-only-observer-build-v1',
-                    'simant-boundary-observer-build-v6', 'simant-boundary-observer-build-v7', 'simant-boundary-observer-build-v8', 'simant-boundary-observer-build-v9', 'simant-boundary-observer-build-v10'):
+                    'simant-boundary-observer-build-v6', 'simant-boundary-observer-build-v7', 'simant-boundary-observer-build-v8', 'simant-boundary-observer-build-v9', 'simant-boundary-observer-build-v10', 'simant-ideal-observer-build-v1'):
                 raise ValueError('Unknown observer receipt')
             observer_exe = diagnostic.experimental_path(Path(observer['executable']))
             runner = {**runner, 'path': str(observer_exe)}
@@ -331,7 +342,14 @@ def main(argv=None):
                 'config': build.read_pin(config_path)[1], 'scope': observer['scope']}
             report['input_contract'] = ('service-samples-v'+observer['schema'].rsplit('-v',1)[1]
                 if observer['schema'].startswith('simant-boundary-observer-build-v') else 'emulated-time-v4')
+            if observer['schema']=='simant-ideal-observer-build-v1':
+                if not args.ideal_clock:raise ValueError('ideal-v1 requires --ideal-clock')
+                report['input_contract']='ideal-v1'
+                ideal_path=observation_path(args.ideal_clock)
+                report['ideal_clock']=build.read_pin(ideal_path)[1]
         if args.input_script:
+            if args.ideal_clock and not args.input_script.read_text().startswith('# clock: bios-ticks'):
+                raise ValueError('ideal-v1 requires # clock: bios-ticks')
             script = input_script(args.input_script, out)
             (out / 'INPUT.SCR').write_text('\n'.join(script) + '\n')
             report['input_script'] = {'source': str(args.input_script), 'events': len(script),
@@ -374,6 +392,9 @@ def main(argv=None):
             conf += ['[log]', 'logfile=' + str(out / 'dosbox-runtime.log'),
                      'vga=debug', 'int10=debug', 'files=debug', 'exec=debug', 'fileio=true']
             report['trace_scope'] = 'DOSBox-X video mode, executable and DOS file I/O logs; no guest code changes'
+        if args.ideal_clock:
+            conf += ['[dos]', 'hard drive data rate limit=0', 'floppy drive data rate limit=0']
+            conf += ['[sblaster]', 'dsp write busy delay=0', 'dsp busy cycle duty=0', 'instant direct dac=true']
         conf += ['[autoexec]', f'mount c "{out}"', 'c:', 'call RUN.BAT', 'exit']
         path = out / 'dosbox.conf'
         path.write_text('\n'.join(conf) + '\n')
@@ -383,6 +404,8 @@ def main(argv=None):
         if not args.prepare_only:
             env = dict(os.environ)
             env.pop('SIMANT_CAPTURE_OBSERVER', None)
+            env.pop('SIMANT_IDEAL', None)
+            if args.ideal_clock:env['SIMANT_IDEAL']=str(ideal_path)
             if args.capture_observer:
                 env['SIMANT_CAPTURE_OBSERVER'] = str(config_path)
             if not args.visible:

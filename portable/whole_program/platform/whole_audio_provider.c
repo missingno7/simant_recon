@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 extern void portable_test_audio_mix(unsigned,unsigned) __attribute__((weak));
+extern void portable_test_audio_tick(unsigned) __attribute__((weak));
+extern void portable_test_audio_progress(unsigned) __attribute__((weak));
 static PortableWholeAudioProvider *replay_provider;
 extern uint8_t portable_canonical_volume_tables[2048];
 extern int16_t snd_song_process_due_events(void);
@@ -31,13 +33,27 @@ static void next_interrupt(PortableWholeAudioProvider *p,unsigned factor) {
     p->irq_ns+=numerator/UINT64_C(14318180);
     p->irq_fraction=numerator%UINT64_C(14318180);
 }
+static void timer_event(PortableWholeAudioProvider *p,unsigned event) {
+    if(p->timer_observer) p->timer_observer(p->timer_observer_context,p->time_ns,event,
+        p->fast?p->divisor:(uint32_t)p->divisor*16,
+        p->fast?p->chain:p->chain>>4,p->chain_remaining);
+}
 void portable_whole_audio_provider_start(PortableWholeAudioProvider *p) {
     /* m03CC reloads PIT0 and reinstalls the fast ISR on every sample start. */
-    p->fast=1;p->armed=1;
+    p->fast=1;p->armed=1;p->chain_remaining=1;
     ++p->timer_generation;
     p->irq_ns=p->time_ns;p->irq_fraction=0;next_interrupt(p,1);
+    timer_event(p,1);
 }
-void portable_whole_audio_provider_stop(PortableWholeAudioProvider *p) { p->armed=0;p->pending_irq=0; }
+void portable_whole_audio_provider_stop(PortableWholeAudioProvider *p) {
+    timer_event(p,3);p->armed=0;p->pending_irq=0;
+}
+static void chain_timer(PortableWholeAudioProvider *p) {
+    if(--p->chain_remaining==0) {
+        p->chain_remaining=p->fast?p->chain:p->chain>>4;
+        timer_event(p,2);
+    }
+}
 static void sequencer(void) {
     midi_service_countdown=(int16_t)((uint16_t)midi_service_countdown-1);
     if(midi_service_countdown==0) midi_service_countdown=snd_song_process_due_events();
@@ -48,7 +64,7 @@ static void interrupt(PortableWholeAudioProvider *p,unsigned reentrant) {
     if(reentrant) return;
     unsigned contributions[4]={128,128,128,128};
     unsigned ch,sum=0;int active=0,skip=0;
-    if(!p->fast) { sequencer();return; }
+    if(!p->fast) { sequencer();chain_timer(p);return; }
     for(ch=0;ch<p->channels;++ch) {
         PortableWholeAudioRuntimeSample *c=&snd_sample_channel_records[ch];
         unsigned sample=128;
@@ -80,7 +96,11 @@ static void interrupt(PortableWholeAudioProvider *p,unsigned reentrant) {
     if(--p->mix_divider==0) { p->mix_divider=16;sequencer(); }
     /* STD marks at least one live sample. Original L0148 switches to slow
      * PIT/ISR only when DF remains clear and the divider did not hit zero. */
-    else if(!active) p->fast=0;
+    else if(!active) {
+        p->fast=0;p->chain_remaining=(p->chain_remaining>>4)+1;
+        timer_event(p,1);return; /* L0428 returns without decrementing g_74A3. */
+    }
+    chain_timer(p);
 }
 /* Run the existing translated canonical ISR at a recorded service boundary.
  * The observed fast/slow identity is checked, never installed as native state. */
@@ -108,13 +128,23 @@ void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,in
     ++p->frame_cursor;
     uint64_t target=(p->frame_cursor/48000)*UINT64_C(1000000000)+
                     (p->frame_cursor%48000)*UINT64_C(1000000000)/48000;
+    portable_whole_audio_provider_advance(p,target);
+    p->in_render=1;sim_isa_audio_render(p->devices,stereo,target);p->in_render=0;
+}
+void portable_whole_audio_provider_advance(PortableWholeAudioProvider *p,uint64_t target) {
+    if(target<p->time_ns) return;
     p->in_render=1;
     while(!getenv("SIMANT_TEST_AUDIO_TIMER") && p->armed && p->irq_ns<=target) {
         unsigned generation=p->timer_generation;
         p->time_ns=p->irq_ns;
-        if(portable_whole_audio_interrupts_enabled()) interrupt(p,0);
+        timer_event(p,0);
+        if(portable_whole_audio_interrupts_enabled()) {
+            if(portable_test_audio_tick) portable_test_audio_tick(p->fast?1:0);
+            interrupt(p,0);
+            if(portable_test_audio_progress) portable_test_audio_progress(0);
+        }
         else p->pending_irq=1;
         if(generation==p->timer_generation) next_interrupt(p,p->fast?1:16);
     }
-    p->time_ns=target;sim_isa_audio_render(p->devices,stereo,target);p->in_render=0;
+    p->time_ns=target;timer_event(p,0);p->in_render=0;
 }

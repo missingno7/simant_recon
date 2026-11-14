@@ -298,6 +298,14 @@ int portable_m1b73_queue_runtime_scan_transition(
      * prove the 320-wide domain. Tapes supply actual handler-entry words. */
     if (portable_test_irq_context)
         portable_test_irq_context(&cx, &dx);
+    /* ideal-v1's per-executable load profile supplies the wrapper's DGROUP,
+     * constant for the entire run. No event coordinates/register tape. */
+    if (getenv("SIMANT_TEST_IDEAL_DGROUP")) {
+        char *end;
+        unsigned long segment=strtoul(getenv("SIMANT_TEST_IDEAL_DGROUP"),&end,0);
+        if (*end || segment>65535) abort();
+        dx=(uint16_t)segment;
+    }
     carry = portable_m1b73_queue_runtime_scan_byte(runtime,
         (uint8_t)(scan | (event->kind == HOST_EVENT_KEY_UP ? 0x80 : 0)), cx, dx);
     if (carry < 0)

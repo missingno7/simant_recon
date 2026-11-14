@@ -48,6 +48,11 @@ def frame_manifest(directory,limit,interval,script):
     for line in (directory/'observer.txt').read_text().splitlines():
         p=line.split()
         if p and p[0]=='S':times.append((int(p[3]),float(p[1])))
+    if script.startswith('# clock: bios-ticks'):
+        times=[]
+        for line in (directory/'observer.txt.ideal').read_text().splitlines():
+            p=line.split()
+            if p and p[0]=='S':times.append((int(p[1]),int(p[3])))
     comments=[]
     entries={1,limit,*range(interval,limit+1,interval)}
     for ms,text in comment_checkpoints(script):

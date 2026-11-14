@@ -63,6 +63,11 @@ the adapter's own CLI. The 40:6C word stamp inside `_input_enqueue_event` uses
 the BIOS domain too (native `timer_bios_tick_count`); a DOS recorder must use
 the saved entry flags/origin for that compound service, rather than treating
 its internal CLI as an independent game read. IRQ-origin stamps do not charge.
+The modifier-byte row includes direct scalar reads of physical0000:0417 through
+BIOS_KEYBOARD_FLAGS_FARPTR. Native `dos_keyboard_modifiers` and the DOS recorder
+both charge those reads; INT16 AH02/12 is not their only admitted form. The DOS
+instruction census uses live effective-address qualification, so unrelated
+far-byte accesses in the same function consume no time.
 
 The input reads are explicit clocking boundaries too: source held-button,
 tracking and modal loops can wait without reading TickCount. Excluding these
@@ -82,12 +87,15 @@ Hardware domains are the private INT08 TickCount (with its enable flag), the
 always-on BIOS IRQ0 count, and the countdown (decrement 5 per BIOS tick, floor
 zero). PIT input is the existing rational 14,318,180 / 12 Hz model. The BIOS
 rate is divisor 65536; the canonical sound driver programs divisor 214 and chains
-the old INT08 every 306 interrupts, retaining its one-interrupt first-chain phase.
-PIT writes retain the existing counter/phase transition semantics. Sound sample
+the old INT08 every 306 interrupts, with first remaining1. Its inactive-sample
+branch programs divisor3424, chain19 and first remaining `(remaining>>4)+1`.
+The provider reports reprogramming and actual old-INT08 calls at their device
+timestamps. Logical clocks retain fractional phases; Q splits at these instants,
+including IRQs after the last complete PCM frame. Sound sample
 IRQ/mixer/sequencer work and ISA device timestamps derive from the same machine
-time; SDL only consumes output PCM. OPL/device bus accesses retain their existing
-provider-local I/O costs and status contracts; this change does not make those
-independent hardware contracts equivalent to DOS. Unsupported MPU/AdLib-only
+time; SDL only consumes output PCM. Bus accesses consume zero time; direct-DAC
+busy and reset acknowledgement are synchronous, as in the DOS ideal recorder.
+Unsupported MPU/AdLib-only
 hardware waits remain unsupported as before.
 
 In ordinary play, each admitted read is paced against a fixed host epoch before
@@ -116,8 +124,10 @@ Real input is admitted through the same ingestion path at a read boundary.
 
 DOS clock-tape mode remains a separate verification adapter: its existing
 refresh-mode guard returns before this rule, pacing, audio pumping and application
-idle. It retains captured values and service/IRQ ordering. The DOS side of
-native-clock-v1 is not implemented here, and the current tapes remain necessary.
+idle. It retains captured values and service/IRQ ordering. The DOS implementation
+is now tracked in the [ideal-v1 recorder](../../tests/acceptance/ideal/README.md).
+It executes guest instructions and real PIC/IRQ handlers on frozen device time.
+The untaped corpus still has state differences, so the tapes remain necessary.
 Passing this clock fixture does not prove whole-game DOS/native equivalence.
 
 ```powershell

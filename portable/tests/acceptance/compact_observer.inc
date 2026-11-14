@@ -1,9 +1,16 @@
 #include <unordered_map>
+#include "event_context_rule.h"
 /* DOSBox-X v6 observation and synthetic-input timing extension.
  * State capture is read-only. Only script scheduling and foreground CPU budget
  * change: the real devices/PIC/interrupt code deliver while foreground waits. */
+#ifdef SIMANT_IDEAL_BUILD
+static bool IdealBefore(uint32_t);
+static bool IdealYield();
+static void IdealStats();
+static void IdealCheckpoint();
+#endif
 struct CompactPoint { char kind; uint32_t address, after; };
-struct CompactView { uint32_t address, bytes, sentinel; };
+struct CompactView { uint32_t address, bytes, sentinel, event_records; };
 static std::vector<CompactView> compact_views;
 static uint32_t compact_limit=0,compact_interval=256;
 static std::vector<uint32_t> compact_frame_times;
@@ -51,6 +58,7 @@ static void CompactScreen(const std::string &path) {
 }
 static std::string compact_output;
 static FILE *compact_fingerprints=NULL, *compact_order=NULL;
+static FILE *compact_context_fingerprints=NULL;
 static FILE *compact_audio_timer=NULL, *compact_audio_commands=NULL;
 static uint64_t CompactOrdinal();
 static uint64_t compact_step;
@@ -196,6 +204,9 @@ static bool CompactDefer(Bitu index) {
  * PIC_RunQueue and actual IRQ bodies still run, including IRQ0 while waiting.
  * IF is never forced. A masked/unhandled device is an explicit failure. */
 bool CompactYield(void) {
+#ifdef SIMANT_IDEAL_BUILD
+    if (IdealYield()) return true;
+#endif
     if (!compact_file) return false;
     const uint32_t pc=SegPhys(cs)+reg_eip;
     if (CompactHeld()) {
@@ -239,6 +250,9 @@ bool CompactYield(void) {
     return false;
 }
 static void CompactBoundary(uint32_t after) {
+#ifdef SIMANT_IDEAL_BUILD
+    if (getenv("SIMANT_IDEAL")) return;
+#endif
     if (!compact_holding) compact_after=after;
 }
 static void CompactFlush() {
@@ -251,6 +265,9 @@ static void CompactFlush() {
 }
 static void CompactClose() {
     if (!compact_file) return;
+#ifdef SIMANT_IDEAL_BUILD
+    IdealStats();
+#endif
     CompactFlush();
     if(compact_content) { CompactContentHead('E');fputc('\n',compact_content);fclose(compact_content);compact_content=NULL; }
     if (compact_audio_timer) { fputs("E\n",compact_audio_timer);fclose(compact_audio_timer);compact_audio_timer=NULL; }
@@ -262,6 +279,7 @@ static void CompactClose() {
             (unsigned long long)compact_step,compact_phase);
     fclose(compact_file); compact_file = NULL;
     if (compact_fingerprints) { fclose(compact_fingerprints); compact_fingerprints=NULL; }
+    if (compact_context_fingerprints) { fclose(compact_context_fingerprints); compact_context_fingerprints=NULL; }
     if (compact_order) { fclose(compact_order); compact_order=NULL; }
     if (compact_sound) { fclose(compact_sound); compact_sound=NULL; }
     if (compact_sound_calls) {
@@ -295,7 +313,18 @@ static void CompactInit() {
     fputs("SIMANT_AUDIO_COMMANDS 1\n",compact_audio_commands);
     DOSBOX_AcceptanceIOWatchArmed=true;
     while (fgets(line,sizeof(line),spec)) {
-        CompactView v;
+        CompactView v={};
+        if(!strncmp(line,"KEYBOARD_CONTEXT ",17)) {
+            unsigned index,records;
+            if(sscanf(line,"KEYBOARD_CONTEXT %u %u",&index,&records)!=2 || index>=compact_views.size() ||
+                !records || compact_views[index].bytes!=records*16) abort();
+            compact_views[index].event_records=records;
+            if(!compact_context_fingerprints) {
+                compact_context_fingerprints=fopen((compact_output+".hash.keyboard-context-v1").c_str(),"wb");
+                if(!compact_context_fingerprints) abort();
+            }
+            continue;
+        }
         if(!strncmp(line,"AUDIO ",6)) {
             if(sscanf(line,"AUDIO %x %u",&v.address,&v.bytes)!=2) abort();
             compact_audio_views.push_back(v);continue;
@@ -486,9 +515,16 @@ static void CompactInstruction(uint32_t pc) {
                 (unsigned long long)compact_pump,(unsigned long long)compact_step,
                 compact_phase,(unsigned long long)compact_reads,(unsigned long long)compact_hash,(unsigned long long)compact_queries);
             if (p.kind=='S' && compact_fingerprints) {
+#ifdef SIMANT_IDEAL_BUILD
+                IdealCheckpoint();
+#endif
                 FILE *dump=NULL;
                 bool extra=false;
-                while (!compact_frame_times.empty() && PIC_FullIndex()-acceptance_start_time>=compact_frame_times.front()) {
+                double frame_time=PIC_FullIndex()-acceptance_start_time;
+#ifdef SIMANT_IDEAL_BUILD
+                if(getenv("SIMANT_IDEAL")) frame_time=(uint32_t)(mem_readd(0x46c)-0x1800b0u/2u);
+#endif
+                while (!compact_frame_times.empty() && frame_time>=compact_frame_times.front()) {
                     extra=true;compact_frame_times.erase(compact_frame_times.begin());
                 }
                 if (compact_step==1 || compact_step%compact_interval==0 || compact_step==compact_limit || extra) {
@@ -498,16 +534,24 @@ static void CompactInstruction(uint32_t pc) {
                     CompactScreen(compact_output+suffix);
                 }
                 for (size_t j=0;j<compact_views.size();++j) {
-                    const CompactView &v=compact_views[j];uint32_t hash=2166136261u;
+                    const CompactView &v=compact_views[j];uint32_t hash=2166136261u,context_hash=2166136261u;
+                    std::vector<uint8_t> event_data;
+                    if(v.event_records) {
+                        event_data.resize(v.bytes);
+                        for(uint32_t k=0;k<v.bytes;++k) event_data[k]=mem_readb(v.address+k);
+                    }
                     uint32_t length=v.bytes;
                     if (v.sentinel) for (uint32_t k=0;k+1<length;k+=2)
                         if (mem_readw(v.address+k)==0x8000) { length=k+2;break; }
                     for (uint32_t k=0;k<v.bytes;++k) {
                         uint8_t b=mem_readb(v.address+k);
                         if (k<length) hash=(hash^b)*16777619u;
+                        if(k<length && (!v.event_records || simant_event_context_includes(&event_data[0],v.event_records,k)))
+                            context_hash=(context_hash^b)*16777619u;
                         if (dump) fwrite(&b,1,1,dump);
                     }
                     fwrite(&hash,4,1,compact_fingerprints);
+                    if(compact_context_fingerprints) fwrite(&context_hash,4,1,compact_context_fingerprints);
                 }
                 if (dump) fclose(dump);
                 if (compact_step==compact_limit) {

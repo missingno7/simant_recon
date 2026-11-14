@@ -1,0 +1,10 @@
+--- src/hardware/mixer.cpp
++++ src/hardware/mixer.cpp
+@@ -807,6 +807,7 @@
+ }
+ 
+ static void SDLCALL MIXER_CallBack(void * userdata, Uint8 *stream, int len) {
++    if(getenv("SIMANT_IDEAL")) { memset(stream,0,len);return; }
+     (void)userdata;//UNUSED
+     int32_t volscale1 = (int32_t)(mixer.mastervol[0] * (1 << MIXER_VOLSHIFT));
+     int32_t volscale2 = (int32_t)(mixer.mastervol[1] * (1 << MIXER_VOLSHIFT));

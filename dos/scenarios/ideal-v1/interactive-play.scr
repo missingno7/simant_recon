@@ -1,0 +1,360 @@
+# clock: bios-ticks
+# ideal-v1: ceil(ms * 14318180 / (12 * 65536 * 1000)); key up is quantized independently.
+# Startup > Quick Game.
+92 keydown enter
+92 keyup enter
+128 keydown enter
+129 keyup enter
+164 keydown enter
+165 keyup enter
+219 mouse_move -1280 -960
+221 mouse_move 740 330
+224 mouse_button 0 down
+227 mouse_button 0 up
+292 keydown enter
+293 keyup enter
+365 keydown enter
+366 keyup enter
+# Ctrl+E; Home; walk; double-click near the queen (follow attempt); double-click soil to dig.
+383 keydown lctrl
+385 keydown e
+386 keyup e
+388 keyup lctrl
+419 keydown home
+420 keyup home
+456 mouse_move -1280 -960
+457 mouse_move 528 422
+461 mouse_button 0 down
+464 mouse_button 0 up
+510 mouse_move -1280 -960
+512 mouse_move 636 422
+516 mouse_button 0 down
+518 mouse_button 0 up
+520 mouse_button 0 down
+521 mouse_button 0 up
+547 mouse_move -1280 -960
+549 mouse_move 560 454
+552 mouse_button 0 down
+555 mouse_button 0 up
+556 mouse_button 0 down
+558 mouse_button 0 up
+# Physical 1/2/3/4/0 keys: DOS CZ layout translates these; not recruitment.
+638 keydown 1
+639 keyup 1
+692 keydown 2
+693 keyup 2
+747 keydown 3
+748 keyup 3
+802 keydown 4
+802 keyup 4
+856 keydown 0
+857 keyup 0
+893 keydown 0
+894 keyup 0
+# Ctrl+8 surface; Ctrl+M map; double-click food region opens edit.
+929 keydown lctrl
+931 keydown 8
+932 keyup 8
+934 keyup lctrl
+965 keydown home
+966 keyup home
+1020 keydown lctrl
+1022 keydown m
+1023 keyup m
+1026 keyup lctrl
+1075 mouse_move -1280 -960
+1077 mouse_move 596 564
+1080 mouse_button 0 down
+1083 mouse_button 0 up
+1084 mouse_button 0 down
+1086 mouse_button 0 up
+# Double-click food at world (58,49); yellow ant travels from nest to surface.
+1184 mouse_move -1280 -960
+1186 mouse_move 596 482
+1189 mouse_button 0 down
+1192 mouse_button 0 up
+1193 mouse_button 0 down
+1195 mouse_button 0 up
+# Double-click adjacent ground to drop carried food.
+1876 mouse_move -1280 -960
+1878 mouse_move 628 482
+1881 mouse_button 0 down
+1884 mouse_button 0 up
+1885 mouse_button 0 down
+1887 mouse_button 0 up
+# Map click; edit mini-map; key while mini-map is open; mini-map click and outside close.
+2040 keydown lctrl
+2041 keydown m
+2042 keyup m
+2045 keyup lctrl
+2094 mouse_move -1280 -960
+2096 mouse_move 660 240
+2100 mouse_button 0 down
+2102 mouse_button 0 up
+2149 keydown lctrl
+2151 keydown e
+2152 keyup e
+2154 keyup lctrl
+2203 mouse_move -1280 -960
+2205 mouse_move 78 98
+2209 mouse_button 0 down
+2212 mouse_button 0 up
+2240 keydown 1
+2241 keyup 1
+2295 mouse_move -1280 -960
+2296 mouse_move 240 160
+2300 mouse_button 0 down
+2303 mouse_button 0 up
+2349 mouse_move -1280 -960
+2351 mouse_move 480 400
+2355 mouse_button 0 down
+2357 mouse_button 0 up
+# Physical Ctrl+Y (Yard shortcut attempt; CZ layout differs); edit; Info link/back/close.
+2404 keydown lctrl
+2406 keydown y
+2406 keyup y
+2409 keyup lctrl
+2495 keydown lctrl
+2497 keydown e
+2498 keyup e
+2500 keyup lctrl
+2549 keydown lctrl
+2551 keydown i
+2552 keyup i
+2555 keyup lctrl
+2604 mouse_move -1280 -960
+2606 mouse_move 700 562
+2609 mouse_button 0 down
+2612 mouse_button 0 up
+2659 mouse_move -1280 -960
+2660 mouse_move 880 872
+2664 mouse_button 0 down
+2667 mouse_button 0 up
+2713 mouse_move -1280 -960
+2715 mouse_move 572 470
+2719 mouse_button 0 down
+2721 mouse_button 0 up
+# Move edit title by (40,20), resize its lower-right handle by (80,30).
+2768 keydown lctrl
+2770 keydown e
+2771 keyup e
+2773 keyup lctrl
+2823 mouse_move -1280 -960
+2824 mouse_move 400 64
+2828 mouse_button 0 down
+2833 mouse_move 80 40
+2841 mouse_button 0 up
+2877 mouse_move -1280 -960
+2879 mouse_move 896 780
+2883 mouse_button 0 down
+2888 mouse_move 160 60
+2895 mouse_button 0 up
+# View menu; Options > AutoTrack.
+2950 keydown f4
+2951 keyup f4
+3005 keydown esc
+3005 keyup esc
+3059 keydown f5
+3060 keyup f5
+3096 mouse_move -1280 -960
+3097 mouse_move 490 60
+3101 mouse_button 0 down
+3104 mouse_button 0 up
+# Speed Slow, Normal, Fast, Ultra (GameSpeed 3), then Normal.
+3132 keydown f6
+3133 keyup f6
+3150 mouse_move -1280 -960
+3152 mouse_move 640 116
+3156 mouse_button 0 down
+3158 mouse_button 0 up
+3187 keydown f6
+3188 keyup f6
+3205 mouse_move -1280 -960
+3207 mouse_move 640 144
+3210 mouse_button 0 down
+3213 mouse_button 0 up
+3241 keydown f6
+3242 keyup f6
+3259 mouse_move -1280 -960
+3261 mouse_move 640 172
+3265 mouse_button 0 down
+3268 mouse_button 0 up
+3296 keydown f6
+3297 keyup f6
+3314 mouse_move -1280 -960
+3316 mouse_move 640 200
+3320 mouse_button 0 down
+3322 mouse_button 0 up
+3369 keydown f6
+3370 keyup f6
+3387 mouse_move -1280 -960
+3389 mouse_move 640 144
+3392 mouse_button 0 down
+3395 mouse_button 0 up
+3460 keydown enter
+3461 keyup enter
+3551 keydown enter
+3552 keyup enter
+3642 keydown enter
+3643 keyup enter
+3733 keydown enter
+3734 keyup enter
+3824 keydown enter
+3825 keyup enter
+3915 keydown enter
+3916 keyup enter
+4006 keydown enter
+4007 keyup enter
+4097 keydown enter
+4098 keyup enter
+4188 keydown enter
+4189 keyup enter
+4279 keydown enter
+4280 keyup enter
+4370 keydown enter
+4371 keyup enter
+4461 keydown enter
+4462 keyup enter
+4552 keydown enter
+4553 keyup enter
+4643 keydown enter
+4644 keyup enter
+4734 keydown enter
+4735 keyup enter
+4825 keydown enter
+4826 keyup enter
+4916 keydown enter
+4917 keyup enter
+5007 keydown enter
+5008 keyup enter
+5098 keydown enter
+5099 keyup enter
+5189 keydown enter
+5190 keyup enter
+5280 keydown enter
+5281 keyup enter
+5371 keydown enter
+5372 keyup enter
+5462 keydown enter
+5463 keyup enter
+5553 keydown enter
+5554 keyup enter
+5645 keydown enter
+5645 keyup enter
+5736 keydown enter
+5736 keyup enter
+5827 keydown enter
+5827 keyup enter
+5918 keydown enter
+5919 keyup enter
+6009 keydown enter
+6010 keyup enter
+6100 keydown enter
+6101 keyup enter
+6191 keydown enter
+6192 keyup enter
+6282 keydown enter
+6283 keyup enter
+6373 keydown enter
+6374 keyup enter
+6464 keydown enter
+6465 keyup enter
+6555 keydown enter
+6556 keyup enter
+6646 keydown enter
+6647 keyup enter
+6737 keydown enter
+6738 keyup enter
+6828 keydown enter
+6829 keyup enter
+6919 keydown enter
+6920 keyup enter
+7010 keydown enter
+7011 keyup enter
+7101 keydown enter
+7102 keyup enter
+7192 keydown enter
+7193 keyup enter
+7283 keydown enter
+7284 keyup enter
+7374 keydown enter
+7375 keyup enter
+7465 keydown enter
+7466 keyup enter
+7556 keydown enter
+7557 keyup enter
+7647 keydown enter
+7648 keyup enter
+7738 keydown enter
+7739 keyup enter
+7829 keydown enter
+7830 keyup enter
+7920 keydown enter
+7921 keyup enter
+8011 keydown enter
+8012 keyup enter
+8102 keydown enter
+8103 keyup enter
+8193 keydown enter
+8194 keyup enter
+8284 keydown enter
+8285 keyup enter
+8375 keydown enter
+8376 keyup enter
+8467 keydown enter
+8467 keyup enter
+8558 keydown enter
+8558 keyup enter
+8649 keydown enter
+8650 keyup enter
+8740 keydown enter
+8741 keyup enter
+8831 keydown enter
+8832 keyup enter
+8922 keydown enter
+8923 keyup enter
+9013 keydown enter
+9014 keyup enter
+9104 keydown enter
+9105 keyup enter
+9195 keydown enter
+9196 keyup enter
+9286 keydown enter
+9287 keyup enter
+9377 keydown enter
+9378 keyup enter
+9468 keydown enter
+9469 keyup enter
+9559 keydown enter
+9560 keyup enter
+9650 keydown enter
+9651 keyup enter
+9741 keydown enter
+9742 keyup enter
+9832 keydown enter
+9833 keyup enter
+9923 keydown enter
+9924 keyup enter
+10014 keydown enter
+10015 keyup enter
+10105 keydown enter
+10106 keyup enter
+10196 keydown enter
+10197 keyup enter
+10287 keydown enter
+10288 keyup enter
+10378 keydown enter
+10379 keyup enter
+10469 keydown enter
+10470 keyup enter
+10560 keydown enter
+10561 keyup enter
+10651 keydown enter
+10652 keyup enter
+10742 keydown enter
+10743 keyup enter
+10833 keydown enter
+10834 keyup enter
+10924 keydown enter
+10925 keyup enter
+11106 exit 

@@ -13,13 +13,19 @@ except ImportError:
     from step_state import schema, read_hashes
 
 
-def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None, scratch_root=None, host_seconds=1200):
+def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None, scratch_root=None, host_seconds=1200, sound_off=False):
     scenario = json.loads(scenario_path.read_text())
     exe = ROOT/'assets/SIMANT.EXE' if target=='original' else ROOT/json.loads(report.read_text())['link']['candidate_executable']['path']
-    directory = out or ROOT/'build/reference'/scenario['id']/(sha(exe)+'-service-samples-v10')
-    script = ROOT/scenario['script']
     observer_build=json.loads(observer.read_text())
-    if observer_build.get('schema')!='simant-boundary-observer-build-v10':
+    ideal=observer_build.get('contract')=='ideal-v1'
+    contract='ideal-v1' if ideal else 'service-samples-v10'
+    variant='sound-off' if sound_off else 'sound-on'
+    if sound_off and not ideal:raise ValueError('sound-off comparison variant requires ideal-v1')
+    reference_root=ROOT/'build/reference'/('sound-off' if sound_off else '')
+    directory = out or reference_root/scenario['id']/(sha(exe)+'-'+contract+('-sound-off' if sound_off else ''))
+    script = ROOT/scenario['script']
+    if ideal:script=ROOT/'dos/scenarios/ideal-v1'/script.name
+    if not ideal and observer_build.get('schema')!='simant-boundary-observer-build-v10':
         raise ValueError('Checkpoint recording requires a v10 observer build')
     observer_source=Path(__file__).with_name('compact_observer.inc').resolve()
     if observer_build.get('inputs',{}).get(str(observer_source))!=sha(observer_source):
@@ -34,11 +40,14 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
             from .step_check import validate_reference
         except ImportError:
             from step_check import validate_reference
-        validate_reference(directory, scenario_path)
+        if ideal:
+            from portable.tests.acceptance.ideal_reference import validate
+            validate(directory,scenario_path)
+        else:validate_reference(directory, scenario_path)
         manifest=json.loads((directory/'manifest.json').read_text())
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
             boundary=json.loads((directory/'capture/boundary-manifest.json').read_text())
-            if boundary['compact_observer'].get('order_contract')!='service-samples-v10':
+            if boundary['compact_observer'].get('order_contract')!=contract:
                 raise ValueError('Reference needs atomic service/input coordinates; retire it with tools/workspace.py and record again: '+str(directory))
             print(scenario['id']+' '+target+': cached reference', flush=True)
             return directory
@@ -47,6 +56,9 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         raise ValueError('Incomplete or occupied reference directory: '+str(directory))
     directory.mkdir(parents=True)
     state=schema(build, report)
+    if sound_off:
+        from portable.tests.acceptance.sound_off import context_receipt
+        state['event_context_rule']=context_receipt(state)
     state_path=directory/'schema.json';state_path.write_text(json.dumps(state,indent=2)+'\n')
     scratch=scratch_root or ROOT/'build/scratch/steps'
     scratch.mkdir(parents=True,exist_ok=True)
@@ -55,7 +67,8 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         bootstrap_script=bootstrap.with_suffix('.scr')
         # One ordinary timed memory observation establishes relocated addresses.
         # It is not a state checkpoint and never contributes a verdict.
-        lines=[l for l in script.read_text().splitlines() if l.strip() and not l.startswith('#') and int(l.split()[0])<14000 and l.split()[1]!='exit']
+        bootstrap_source=ROOT/scenario['script']
+        lines=[l for l in bootstrap_source.read_text().splitlines() if l.strip() and not l.startswith('#') and int(l.split()[0])<14000 and l.split()[1]!='exit']
         bootstrap_script.write_text('\n'.join(lines+['14000 dump 0 A0000 binding','14001 exit'])+'\n')
         cmd=[sys.executable,str(ROOT/'dos/run.py'),'--out',str(bootstrap),'--seconds','120','--fixed-clock','--cycles','10000','--input-script',str(bootstrap_script)]
         cmd+=['--original'] if target=='original' else ['--build-report',str(report)]
@@ -68,6 +81,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
          '--steps',str(count),'--host-seconds',str(host_seconds),'--dump-every',str(scenario.get('dump_every',256)),
          '--cycles',str(cycles or scenario.get('cycles',10000))]
     cmd+=['--original'] if target=='original' else ['--build-report',str(report)]
+    if sound_off:cmd+=['--sound-off']
     start=time.perf_counter()
     with (directory/'record.log').open('w') as log:
         run=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT,timeout=host_seconds+60)
@@ -78,12 +92,15 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         from .full_inputs import parse_trace
     except ImportError:
         from full_inputs import parse_trace
-    parse_trace(capture/'observer.txt',len(rows),require_quiet=True)
+    if not ideal:parse_trace(capture/'observer.txt',len(rows),require_quiet=True)
     boundary=json.loads((capture/'boundary-manifest.json').read_text())
     execution=json.loads((capture/'execution-report.json').read_text())
     if execution.get('keyboard_layout') != dict(language='us', layout='us'):
         raise ValueError('Reference effective keyboard layout is not pinned US')
-    manifest=dict(schema='simant-step-reference-v1',input_contract='service-samples-v10',target=target,**identity,steps=len(rows),requested_steps=count,
+    if ideal:
+        from portable.tests.acceptance.ideal_reference import machine_profile
+        machine_profile(capture,exe,target=='original')
+    manifest=dict(schema='simant-step-reference-v1',input_contract=contract,target=target,**identity,steps=len(rows),requested_steps=count,
                   schema_identity=state['identity'],speed=scenario.get('speed','normal (1)'),cycles=cycles or scenario.get('cycles',10000),
                   recording_seconds=elapsed,seconds_per_step=elapsed/max(1,len(rows)),command=cmd,
                   observer_sha256=sha(observer),observer_build=observer_build,
@@ -95,6 +112,14 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
                   files={p.relative_to(directory).as_posix():sha(p) for p in
                          [state_path,capture/'observer.txt',capture/'observer.txt.order',capture/'observer.txt.hash',capture/'observer.txt.timer',capture/'observer.txt.audio',capture/'observer.txt.sound',capture/'observer.txt.sound-calls',capture/'observer.txt.content',*capture.glob('observer.txt.frame.*'),*capture.glob('observer.txt.screen.*')]},
                   frames=boundary['frames'])
+    if ideal:
+        manifest['files'].update({p.relative_to(directory).as_posix():sha(p) for p in [directory/'machine-profile.json',capture/'observer.txt.ideal']})
+    if sound_off:
+        manifest['variant']=variant
+        manifest['clock_admission']='direct-bda-v2'
+        manifest['sound_configuration']=execution['sound_configuration']
+        manifest['event_context_rule']=state['event_context_rule']
+        manifest['files']['capture/observer.txt.hash.keyboard-context-v1']=sha(capture/'observer.txt.hash.keyboard-context-v1')
     (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(f'{scenario["id"]} {target}: {len(rows)}/{count} steps, {elapsed:.3f}s ({elapsed/max(1,len(rows)):.4f}s/step)',flush=True)
     if not manifest['complete']: raise RuntimeError('Recording ended before requested simulation entry; see '+str(directory/'record.log'))
@@ -114,6 +139,7 @@ def main():
     ap.add_argument('--host-seconds',type=int,default=1200,help='Host recording bound; does not change guest cycles or script timing')
     ap.add_argument('--cycles',type=int,help='Explicit recording-performance control; stored in the receipt')
     ap.add_argument('--scratch-root',type=Path,help='Worker directory for disposable binding captures')
+    ap.add_argument('--sound-off',action='store_true',help='Shipped Sound Mode: 0, with keyboard-context-v1 observation')
     a=ap.parse_args()
     scenarios=a.scenario or sorted((ROOT/'dos/scenarios').glob('*.json'))
     targets=('original','canonical') if a.target=='all' else (a.target,)
@@ -122,6 +148,6 @@ def main():
         for target in targets:
             record(scenario_path.resolve(),target,a.build.resolve(),a.observer.resolve(),a.dos_report.resolve(),
                    a.out.resolve() if a.out else None,a.binding_dump.resolve() if a.binding_dump else None,a.steps,a.cycles,
-                   a.scratch_root.resolve() if a.scratch_root else None,a.host_seconds)
+                   a.scratch_root.resolve() if a.scratch_root else None,a.host_seconds,a.sound_off)
 
 if __name__=='__main__':main()

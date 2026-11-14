@@ -1,0 +1,93 @@
+--- src/dosbox.cpp
++++ src/dosbox.cpp
+@@ -438,6 +438,7 @@
+ 
+ static Uint32 SDL_ticks_last = 0,SDL_ticks_next = 0;
+ 
++extern bool IdealActive;
+ static Bitu Normal_Loop(void) {
+     bool saved_allow = dosbox_allow_nonrecursive_page_fault;
+     Bits ret;
+@@ -474,7 +475,9 @@
+     }
+ 
+     try {
++        unsigned ideal_slices=0;
+         while (1) {
++            if(IdealActive && ++ideal_slices%128==0) { GFX_Events();return 0; }
+             if (PIC_RunQueue()) {
+                 /* now is the time to check for the NMI (Non-maskable interrupt) */
+                 CPU_Check_NMI();
+@@ -1596,8 +1599,11 @@
+     AcceptanceCloseIOWatches();
+ }
+ 
++static bool CompactAudioActive();
++static void CompactAudioWrite(uint32_t,uint32_t,uint32_t,bool);
+ void DOSBOX_AcceptanceRecordIO(uint32_t port, uint32_t value,
+                                uint32_t width, bool output) {
++    CompactAudioWrite(port,value,width,output);
+     if (!DOSBOX_AcceptanceIOWatchArmed ||
+         !DOSBOX_AcceptanceCpuInstructionActive || width == 0)
+         return;
+@@ -1658,7 +1664,7 @@
+             any_open = true;
+             break;
+         }
+-    DOSBOX_AcceptanceIOWatchArmed = any_open;
++    DOSBOX_AcceptanceIOWatchArmed = any_open || CompactAudioActive();
+ }
+ 
+ static bool AcceptanceWriteTriggerDump(const AcceptanceTrigger &trigger,
+@@ -1723,7 +1729,14 @@
+     return true;
+ }
+ 
++static void IdealAbort(const char *file,unsigned line) { LOG_MSG("IDEAL abort %s:%u pc=%X now=%.9f",file,line,SegPhys(cs)+reg_eip,(double)PIC_FullIndex());fflush(NULL);abort(); }
++#define abort() IdealAbort(__FILE__,__LINE__)
++#include "compact_observer.inc"
++#include "ideal/ideal_clock.inc"
++#undef abort
+ void DOSBOX_AcceptanceOnInstruction(void) {
++    if (IdealBefore(SegPhys(cs)+reg_eip)) return;
++    if (!CompactHeld()) CompactInstruction(SegPhys(cs)+reg_eip);
+     bool still_armed = false;
+     const uint16_t current_segment = SegValue(cs);
+     const uint32_t current_ip = reg_eip;
+@@ -1741,12 +1754,15 @@
+         ++trigger.hits;
+         AcceptanceWriteTriggerDump(trigger, trigger.hits);
+     }
+-    DOSBOX_AcceptanceExecArmed = still_armed;
++    DOSBOX_AcceptanceExecArmed = still_armed || compact_file != NULL;
+ }
+ /* END SIMANT ACCEPTANCE OBSERVATIONS */
+ 
+ static void AcceptanceRunEvent(Bitu event_index) {
++    static bool compact_initialized=false;
++    if (!compact_initialized) { compact_initialized=true; CompactInit(); }
+     if (event_index >= acceptance_events.size()) return;
++    if (CompactDefer(event_index)) return;
+     const AcceptanceEvent &event = acceptance_events[(size_t)event_index];
+     const double emulated_ms = PIC_FullIndex() - acceptance_start_time;
+     if (acceptance_log_file != NULL) {
+@@ -1754,6 +1770,7 @@
+         fflush(acceptance_log_file);
+     }
+ 
++    CompactInput(event,emulated_ms);
+     switch (event.action) {
+     case ACCEPT_KEY_DOWN:
+     case ACCEPT_KEY_UP:
+@@ -1843,8 +1860,10 @@
+     acceptance_start_time = PIC_FullIndex();
+     acceptance_pending = acceptance_events.size();
+     LOG_MSG("ACCEPTANCE: loaded %u events from '%s'", (unsigned)acceptance_events.size(), script_path);
+-    for (size_t i = 0; i < acceptance_events.size(); ++i)
++    for (size_t i = 0; i < acceptance_events.size(); ++i) {
++        if(getenv("SIMANT_IDEAL") && acceptance_events[i].at_ms) continue;
+         PIC_AddEvent(AcceptanceRunEvent, (pic_tickindex_t)acceptance_events[i].at_ms, (Bitu)i);
++    }
+ }
+ /* END SIMANT ACCEPTANCE SCRIPT */
+ 
