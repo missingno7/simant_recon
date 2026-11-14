@@ -51,6 +51,27 @@ def countdown_points(memory,base,addresses,sites):
     return points+[('D',16*tick_cs+countdown.pop())]
 
 
+def sample_admission_points(memory,points,decoder):
+    """Atomic samples finish before admission; FE38 is an emulator opcode."""
+    after={}
+    for kind,pc in points:
+        if kind=='F':
+            # CB_INT16: FE 38 <callback word>; the next instruction is IRET.
+            # Bootstrap binds only conventional memory. The mandatory first
+            # step frame later binds the full BIOS stub before acceptance.
+            if pc+4<len(memory):
+                if memory[pc:pc+2]!=bytes.fromhex('fe38') or memory[pc+4]!=0xcf:
+                    raise ValueError('Unbound atomic BIOS callback extent')
+            elif len(memory)!=0xa0000 or pc<0xf0000:
+                raise ValueError('BIOS callback outside the bound memory domain')
+            after[pc]=pc+4
+        elif kind in ('P','C','V','c','d'):
+            ins=next(decoder.disasm(memory[pc:pc+15],pc),None)
+            if ins is None:raise ValueError('Unbound service sample instruction')
+            after[pc]=pc+ins.size
+    return after
+
+
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('scenario',type=Path)
@@ -130,7 +151,7 @@ def main():
                      if i.mnemonic=='mov' and len(i.operands)==2 and i.operands[0].type==X86_OP_REG
                      and i.operands[0].reg==X86_REG_AL and i.operands[1].type==X86_OP_MEM]
             if len(samples)!=1:raise ValueError('Input operand sample is ambiguous: '+name)
-            points.append((kind,samples[0]))
+            points.append((kind, next(i.address for i in decoder.disasm(memory[start:start+length],start) if i.mnemonic=='retf') if kind=='b' else samples[0]))
         points.append(('a',base+addresses['edit_scroll_and_redraw']))
         points += [('K',base+addresses['kbd_process_scan']),('M',base+addresses['mouse_event_callback'])]
         points.append(('Y',base+addresses['kbd_int15_scan_hook']))
@@ -149,8 +170,12 @@ def main():
         points.append(('V',stamps[0]))
         # Countdown reads in the two source helpers, before the instruction.
         points+=countdown_points(memory,base,addresses,sites)
+        # Each atomic operand finishes before admission. FE38 BIOS callbacks
+        # finish in the host before their following IRET. Other points are
+        # cached returns, entries or read-only binding metadata.
+        after=sample_admission_points(memory,points,decoder)
         compact_spec=out.with_suffix('.observer')
-        compact_spec.write_text(str(out/'observer.txt')+'\n'+''.join(f'{k} {pc:X}\n' for k,pc in points))
+        compact_spec.write_text(str(out/'observer.txt')+'\n'+''.join(f'{k} {pc:X} {after.get(pc,0):X}\n' for k,pc in points))
         if args.state_schema:
             state=json.loads(args.state_schema.read_text())
             side='original_address' if args.original else 'canonical_address'
@@ -185,8 +210,8 @@ def main():
             raise ValueError('Captured BIOS INT16 callback differs from its bound vector/CB_INT16 opcode')
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
             peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
-        manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,pump_source='both',
-            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v4',
+        manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,admission_after=after,pump_source='both',
+            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v5',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
     (out/'boundary-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

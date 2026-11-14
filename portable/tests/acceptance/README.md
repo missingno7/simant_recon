@@ -39,7 +39,7 @@ or `--target canonical` selects one. `--out SCRATCH` records an explicit repeat;
 `--steps` and `--cycles` are measured recording controls, stored in its manifest.
 Compatible references are reused. An older service contract requires explicit
 retirement with `tools/workspace.py` and recording again. References live at
-`build/reference/<scenario>/<executable-sha256>-service-samples-v4/`. Original assets and generated
+`build/reference/<scenario>/<executable-sha256>-service-samples-v5/`. Original assets and generated
 references stay ignored.
 
 Recipes with `saved_game` also require `saved_game_sha256`: recording validates
@@ -62,13 +62,11 @@ unsupported combinations and legacy INT16 filtering.
 [`keyboard-environment.conf`](../../../dos/scenarios/keyboard-environment.conf)
 onto the selected toolchain runner entry (also when replaced by the observer).
 It captures `KEYB`'s effective-layout query and refuses a non-US environment.
-Every new reference manifest records that result and environment pin; record
-and check both reject unproved layouts. Ten legacy CZ243 captures are retained
-with per-recipe proofs that every key under its held modifiers is neutral
-between measured US/CZ243 BIOS controls. Their manifests preserve CZ243 and pin
-the old host log and proof; they are never relabelled US. The eight sensitive
-captures (interactive-play, load-from-save, full-game, random-17, both lanes)
-were retired and recorded in US. Details: `build/workers/keys/RESULT.md`.
+Every v5 reference records that result and environment pin; record and check
+both require proved US. All eighteen references were re-recorded under US for
+v5. Historical CZ243 captures and their neutrality proofs are retired, with
+provenance in `build/workers/keys/RESULT.md` and the v4 retirement inventory in
+`build/workers/quiet-inputs/v4-inventory.json`.
 
 `key_bios_probe.py --layout us|cz243 --out build/workers/NAME` regenerates the
 standalone BIOS experiment. `key_bios_us.json` and `key_bios_cz.json` retain 582
@@ -118,29 +116,56 @@ and 254/255 queue sample/window pump. Per-site RLE separately preserves every
 clock value. No clock value is interpolated, inferred from native state or
 selected to obtain equality.
 
-Each actual DOS key IRQ or pointer callback records completed clock, pump and
-input-query counts plus simulation entry/phase. The query count includes held-input samples and scroll-call boundaries. Its
-single service ordinal is
-`clock_reads + pumps + queries + 2*step - phase`. Native admits the recorded
-transition at that ordinal through normal SDL translation and the normal
-keyboard/mouse adapter. An atomic read caches its result before advancing the
-service counter and admitting input; delivery cannot alter a result already
-sampled. Entry-only observations admit at the body's next legal input yield.
-The state snapshot completes before admitting inputs recorded after entry. Any enqueue stamp caused by delivery belongs to the same
-chronological stream and is checked before the interrupted service resumes.
-A missed boundary, wrong service, extra read, wrong phase or wrong
-input coordinate stops replay. Positive completion requires consumed clock,
-service and input tapes. A first state difference intentionally leaves the
-remaining reference available for investigation.
+V5 (`service-samples-v5`) holds each scripted key or mouse transition from
+its scheduled emulated time until the next eligible recorded service boundary.
+Atomic providers complete their sample first; that cached result cannot change.
+Entry boundaries admit before their bodies. StillDown (247) is a completed
+result at RETF / native function exit, after its nested scan samples.
+DoAntSim's entry snapshot finishes before admitting transitions after that entry.
+At an IF-disabled boundary the transition stays pending until a later eligible
+boundary; IF is never forced.
 
-The v4 tapes also retain AX/BX/CX/DX at scan-processor entry (or INT15/AH=4F
+The foreground then waits at that exact PC and stack depth while normal device
+latency, PIC arbitration, BIOS INT 9, IRQ12 / PS/2 and guest handlers run. The
+hold ends only after actual handler entry and return to that foreground PC and
+stack. No software call substitutes for an IRQ. Due transitions are serialized
+there in script order, including nested enqueue stamps. Hardware typematic
+expiry is held too. Due script transitions run first; a due release cancels an
+expired repeat through the real keyboard release path. A still-held repeat
+uses KEYBOARD_AddKey and the same PIC / INT 9 path and is recorded explicitly.
+The keyboard repeat scheduler is the only device timing hook; repeat rates,
+BIOS handlers, scan generation and queue handling remain the real ones. `U raise` / `U return`
+records prove the hold; `I` retains the scheduled time and `D` the actual handler
+registers and completed-service coordinates. A missing handler fails recording.
+
+Each actual key IRQ or pointer callback records completed clock, pump and query
+counts plus simulation entry/phase. The single ordinal is
+`clock_reads + pumps + queries + 2*step - phase`. Native admits through the normal
+SDL adapter at precisely this boundary. The parser refuses a v5 IRQ whose
+coordinates differ from its hold, and checks refuse v4 references. A missed
+boundary, wrong service, phase or input coordinate fails replay. Positive
+completion requires consumed clock, service and input tapes; a first state
+difference leaves the remaining tape for investigation.
+
+This tests synthetic player actions at service boundaries. It does **not** test
+an input arriving mid-raster or between unsampled pointer comparisons and menu
+mutations. Those outcomes depend on DOS CPU speed and interrupt placement, and
+are outside the faithful port's behavioural contract: native has no matching
+intra-raster interrupt position. No state view is excluded to obtain equality.
+The explicit v4-style early/late IRQ control is retained by
+`python portable/tests/mouse_services/run.py --build build/current/portable`;
+its unchanged edge-scroll body still produces different outcomes within one
+service interval. Evidence and all eighteen v5 lanes are recorded in
+`build/workers/quiet-inputs/RESULT.md`.
+
+The v5 tapes also retain AX/BX/CX/DX at scan-processor entry (or INT15/AH=4F
 while the hook is disabled) and pointer-callback entry. Keyboard admission now
 supplies captured CX/DX to the ordinary native scan projection through an
 optional test hook. Each staged raw SDL event carries its own pair; the
 projection still constructs and queues every Event, including its BIOS stamp.
 Physical pointer coordinates retain their existing translation. Missing or
 out-of-word keyboard context is a coverage error, never a native-zero fallback.
-No recorder change or new DOS capture is needed for these v4 references.
+A v4 reference is refused; its timing cannot be upgraded from expected state.
 
 These are handler-entry words, not necessarily raw interrupted foreground
 registers: the DOS IRQ wrapper loads DX with DGROUP before kbd_process_scan.
@@ -157,8 +182,9 @@ source INT16 return PCs. Observing the later game-function RETF is incorrect:
 a key can arrive after the BIOS sampled an empty queue but before RETF. Queue
 count uses its MOV instruction for the same reason. The first-megabyte frame
 binds the INT16 vector, STI/FE38/IRET callback stub and source INT16 instructions.
-The observer reads guest state and never writes guest code, registers, clocks,
-input queues, RNG state or saved records.
+State observation never writes guest code, registers, clocks, input queues,
+RNG state or saved records. The v5 recorder changes only synthetic-input timing
+and pauses foreground instruction execution while the actual devices deliver.
 
 Clock count alone does not locate inputs relative to non-clock input queries.
 Pump/read fences and per-site position barriers are absent. In tape mode the
@@ -168,7 +194,7 @@ or running an application idle/presentation callback inside a sampled read.
 No tape option means ordinary platform refresh, audio and presentation.
 `platform/sdl3/test_observer.inc` keeps the optional host hooks together.
 GCC entry instrumentation on the two unchanged converted input-reader TUs
-observes StillDown and edit_scroll_and_redraw, including calls within the same
+observes StillDown exit and edit_scroll_and_redraw entry, including calls within the same
 TU that linker wrapping cannot intercept. Their source hashes and compiler
 flag are retained in the observer build receipt; bodies and arguments remain
 canonical. Only the separate observation/comparison object uses `-O2 -fno-lto`;

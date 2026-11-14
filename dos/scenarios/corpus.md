@@ -14,8 +14,9 @@ Original resources, saves, video and references remain ignored.
 | experiment | 1000 | Explicit Experimental icon, Add Food and Barriers tools, painting by click/drag, map and edit |
 | random-17 | 2000 | Seeded mouse moves, single/double/right clicks, keys and window/view shortcuts |
 
-The source save for load-from-save is the original executable's existing
-quick-game reference A.ANT. Its recipe pins the SHA-256. Both DOS runs and
+The source save for load-from-save is the original executable's retained
+quick-game A.ANT, now stored independently at `build/reference/setup/A.ANT` so
+retiring a recording does not retire the recipe's immutable input. Its recipe pins the SHA-256. Both DOS runs and
 native receive disposable copies of that same file. The source is never saved
 over. Loading pauses the game; the script clicks Pause to resume.
 
@@ -34,9 +35,10 @@ by `dos/run.py` to its selected toolchain runner. Each new manifest records the
 effective DOS layout from a `KEYB` query and the environment pin. The first
 captures used host-selected CZ/cz243 (`key 1` became `+`, Ctrl+Y was swapped).
 Both lanes of interactive-play, load-from-save, full-game and random-17 were
-re-recorded because their physical digits and/or Y differ. The other ten
-captures retain their actual CZ layout with checked per-key neutrality proofs
-against the measured US/CZ243 BIOS controls; missing layout evidence is refused.
+re-recorded because their physical digits and/or Y differ. V5 re-records all eighteen captures under pinned US and admits synthetic
+transitions at completed service boundaries; every v4 capture is retired.
+The earlier ten CZ captures had per-key neutrality proofs; those historical
+proofs do not relabel their effective layout.
 See `portable/tests/acceptance/README.md` and `build/workers/keys/RESULT.md`.
 
 The earlier action QA above describes the retired CZ captures. The mouse Ant

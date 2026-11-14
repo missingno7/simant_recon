@@ -1,99 +1,45 @@
 {
- "about": "Open findings exactly as the complete US-environment/neutral-proof run reports on build/workers/keys/native-current. Unlisted scenarios are ORIGINAL_EQUAL_ALL. Each lane pins the first state difference or incomplete prefix; later progress requires updating this file. Lane evidence and attribution: build/workers/keys/RESULT.md and all-lanes-current/*/result.json.",
+ "about": "Open port findings of the stored step scenarios, exactly as step_check.py reports them on build/current/portable. A scenario not listed must be ORIGINAL_EQUAL_ALL. The upper-layer test fails on any change: an earlier stop is a regression, a later one means a finding was fixed and this file is updated in the same commit. Findings and their layers are in evidence/port/verification-matrix.json. ant-commands and interactive-play currently depend on native stack residue in mains uninitialised stamp (WaitedEnough); see evidence/port/verification-matrix.json.",
  "scenarios": {
-  "ant-commands": {
-   "verdict": "PORT_INTRODUCED",
-   "lanes": {
-    "original": {
-     "status": "INCOMPLETE",
-     "steps_compared": 100
-    },
-    "canonical": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 66,
-     "first": [
-      "g_434E",
-      "g_4352"
-     ]
-    }
-   }
-  },
-  "experiment": {
+  "full-game": {
    "verdict": "UNATTRIBUTED",
    "lanes": {
     "original": {
      "status": "INCOMPLETE",
-     "steps_compared": 94
+     "steps_compared": 177
     },
     "canonical": {
      "status": "INCOMPLETE",
-     "steps_compared": 94
-    }
-   }
-  },
-  "full-game": {
-   "verdict": "PORT_INTRODUCED",
-   "lanes": {
-    "original": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 100,
-     "first": [
-      "g_434E",
-      "g_4352"
-     ]
-    },
-    "canonical": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 100,
-     "first": [
-      "g_434E",
-      "g_4352"
-     ]
+     "steps_compared": 177
     }
    }
   },
   "interactive-play": {
-   "verdict": "PORT_INTRODUCED",
+   "verdict": "RECONSTRUCTION_INTRODUCED",
    "lanes": {
     "original": {
      "status": "STATE_DIFFERENCE",
-     "steps_compared": 317,
+     "steps_compared": 926,
      "first": [
-      "g_434E",
       "g_4352"
      ]
     },
     "canonical": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 318,
-     "first": [
-      "g_434E",
-      "g_4352"
-     ]
+     "status": "REFERENCE_EQUAL",
+     "steps_compared": 2000
     }
    }
   },
   "random-17": {
-   "verdict": "PORT_INTRODUCED",
+   "verdict": "UNATTRIBUTED",
    "lanes": {
     "original": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 76,
-     "first": [
-      "g_434E",
-      "g_4352"
-     ]
+     "status": "INCOMPLETE",
+     "steps_compared": 1108
     },
     "canonical": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 184,
-     "first": [
-      "MapPnt",
-      "edit_cached_life_tiles",
-      "edit_cached_terrain_tiles",
-      "edit_current_terrain_tile",
-      "save:58:MapPnt"
-     ]
+     "status": "INCOMPLETE",
+     "steps_compared": 1113
     }
    }
   }

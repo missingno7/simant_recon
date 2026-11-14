@@ -255,12 +255,12 @@ extern int16_t edit_scroll_and_redraw(int16_t, int16_t) __attribute__((weak));
 __attribute__((no_instrument_function)) void __cyg_profile_func_enter(void *function, void *caller) {
   (void)caller;
   unsigned kind;
-  if (function==(void *)StillDown) kind=247;
-  else if (function==(void *)edit_scroll_and_redraw) kind=246;
+  if (function==(void *)edit_scroll_and_redraw) kind=246;
   else return;
   if (portable_test_before_poll) portable_test_before_poll();
   if (portable_test_input_sample) portable_test_input_sample(kind,0);
 }
 __attribute__((no_instrument_function)) void __cyg_profile_func_exit(void *function, void *caller) {
-  (void)function;(void)caller;
+  (void)caller;
+  if (function==(void *)StillDown && portable_test_input_sample) portable_test_input_sample(247,0);
 }

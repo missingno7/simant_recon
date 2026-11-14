@@ -13,11 +13,24 @@ class InputCoverageError(ValueError):
         self.step=step
         super().__init__(message)
 
-def parse_trace(path,steps):
+def parse_trace(path,steps,require_quiet=False):
     records=[];inputs=[];pending=[];boundaries=[];reads=0;saw_delivery=False;site_reads={}
+    quiet=None;quiet_delivered=False;quiet_context=None;quiet_time=0
     for line in path.read_text().splitlines():
         p=line.split()
         if not p or p[0]=='#':continue
+        if p[:2]==['U','raise']:
+            if quiet is not None:raise ValueError('Overlapping boundary holds')
+            quiet=tuple(map(int,p[7:12]));quiet_delivered=False
+            quiet_context=p[4:7];quiet_time=float(p[2])
+            if quiet_time<float(p[3]):raise ValueError('Transition raised before its scheduled time')
+            continue
+        if p[:2]==['U','return']:
+            if quiet is None or not quiet_delivered:raise ValueError('Boundary hold lacks actual IRQ delivery')
+            if p[3:6]!=quiet_context or float(p[2])<quiet_time:
+                raise ValueError('Boundary hold returned to a different foreground context')
+            quiet=None
+            continue
         if p[0]=='R':
             kind,pc,value,count=p[1:]
             if kind not in 'TBCV' or int(count)<=0 or not 0<=int(value)<2**32:raise ValueError('Invalid clock record')
@@ -50,6 +63,11 @@ def parse_trace(path,steps):
                 mask=ax&127
                 expected=1 if op[0]=='mouse_move' else (2 if op[2]=='down' else 4)<<(2*int(op[1]))
                 if not mask&expected:continue
+            if require_quiet:
+                actual=(int(p[3]),int(p[4]),int(p[5]),int(p[6]),int(p[12]))
+                if quiet is None or actual!=quiet:
+                    raise ValueError('IRQ was not delivered at its held service boundary: '+str((actual,quiet)))
+                quiet_delivered=True
             pending.remove(item)
             item.update(scheduled_milliseconds=item['milliseconds'],milliseconds=float(p[2]),pump=int(p[3]),
                 clock_reads=int(p[6]),step=int(p[4]),phase=int(p[5]),delivery_kind=kind,
@@ -60,6 +78,7 @@ def parse_trace(path,steps):
             boundaries.append(dict(milliseconds=float(p[1]),pump=int(p[2]),step=int(p[3]),phase=int(p[4]),inputs=len(inputs) if saw_delivery else len(pending),clock_runs=len(records),clock_reads=int(p[5]),clock_hash=int(p[6]),queries=int(p[7]) if len(p)>7 else 0))
             boundaries[-1]['site_reads']=dict(site_reads)
             if int(p[3])==steps:break
+    if require_quiet and quiet is not None:raise ValueError('Unfinished boundary hold')
     if len(boundaries)!=steps:raise ValueError('Missing compact simulation boundaries')
     if saw_delivery and pending:
         first=min(pending,key=lambda v:v['step'])
@@ -167,7 +186,7 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
         dos_calls,canonical_addresses=canonical_clock_calls(directory,manifest)
     functions=sorted((base+r['seg']*16+r['off'],n) for n,r in symbols.items() if not r.get('alias_of'))
     addresses={n:a for a,n in functions}
-    records,inputs,boundaries=parse_trace(trace,steps)
+    records,inputs,boundaries=parse_trace(trace,steps,require_quiet=True)
     decoder=Cs(CS_ARCH_X86,CS_MODE_16)
     # Overlay areas overlap. Bind against each immutable original section,
     # rather than assigning a runtime PC to the nearest unrelated symbol.
@@ -219,7 +238,7 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     contract=manifest['compact_observer'].get('order_contract')
     if contract:
         source=directory/'observer.txt.order'
-        if contract!='service-samples-v4' or sha(source)!=manifest['compact_observer']['order_sha256']:
+        if contract!='service-samples-v5' or sha(source)!=manifest['compact_observer']['order_sha256']:
             raise ValueError('Unbound global service sequence')
         sites={int(v[1]):(v[2],int(v[3],16)) for line in trace.read_text().splitlines()
                if (v:=line.split()) and v[0]=='O'}

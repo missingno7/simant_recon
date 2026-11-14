@@ -77,6 +77,8 @@ def test_build(build, out):
 def validate_reference(directory, scenario):
     manifest=json.loads((directory/'manifest.json').read_text())
     recipe=json.loads(scenario.read_text())
+    if manifest.get('input_contract')!='service-samples-v5':
+        raise ValueError('Reference input contract must be service-samples-v5; v4 timing is refused')
     # Absolute import also works when this file is invoked as a script.
     sys.path.insert(0,str(ROOT))
     from portable.tests.acceptance.keyboard_environment import validate_keyboard
@@ -93,7 +95,26 @@ def validate_reference(directory, scenario):
     execution=directory/'capture/execution-report.json'
     if sha(execution)!=json.loads(boundary.read_text())['execution_report_sha256']:
         raise ValueError('Changed execution receipt')
-    inputs=json.loads(execution.read_text())['inputs']
+    execution_data=json.loads(execution.read_text())
+    if (json.loads(boundary.read_text())['compact_observer'].get('order_contract')!='service-samples-v5' or
+        execution_data.get('input_contract')!='service-samples-v5' or
+        manifest.get('keyboard_layout')!=dict(language='us',layout='us')):
+        raise ValueError('Reference needs v5 boundary timing and pinned US keyboard')
+    # Bind admission endpoints independently, including DOSBox's FE38 opcode
+    # which is not an x86 instruction for a generic disassembler.
+    try:
+        from .capture_dos_steps import sample_admission_points
+    except ImportError:
+        from capture_dos_steps import sample_admission_points
+    from capstone import Cs,CS_ARCH_X86,CS_MODE_16
+    compact=json.loads(boundary.read_text())['compact_observer']
+    memory=(directory/'capture/exec-simstep.1.bin').read_bytes()
+    expected_after=sample_admission_points(memory,compact['points'],Cs(CS_ARCH_X86,CS_MODE_16))
+    if expected_after!={int(k):v for k,v in compact.get('admission_after',{}).items()}:
+        raise ValueError('Reference service admission endpoints differ')
+    if any(memory[pc]!=0xcb for kind,pc in compact['points'] if kind=='b'):
+        raise ValueError('StillDown must sample its cached return in v5')
+    inputs=execution_data['inputs']
     for item in inputs:
         source=ROOT/item['path']
         if item['path'].startswith('assets/') or manifest['target']=='canonical' and item['path'].endswith('build-report.json'):
@@ -279,18 +300,24 @@ def main():
     exe=None;failed=False
     for path in scenarios:
         refs={'original':a.original,'canonical':a.canonical}
+        incompatible=[]
         if refs['original'] is None:
             for p in (a.reference_root/path.stem).glob('*/manifest.json'):
                 m=json.loads(p.read_text())
                 boundary=p.parent/'capture/boundary-manifest.json'
                 if (m['target'] in refs and boundary.is_file() and
-                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v4'):
+                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v5'):
                     refs[m['target']]=p.parent
-        if not all(refs.values()):print(path.stem+': no reference');continue
+                else:incompatible.append(p.parent)
+        if not all(refs.values()):
+            if incompatible:
+                print(path.stem+': refused v4 references; record service-samples-v5',flush=True);failed=True
+            else:print(path.stem+': no reference')
+            continue
         try:
             for ref in refs.values():validate_reference(ref,path)
         except (ValueError,FileNotFoundError) as error:
-            print(path.stem+': no reference ('+str(error)+')');continue
+            print(path.stem+': invalid reference ('+str(error)+')');failed=True;continue
         if exe is None:exe=test_build(a.build.resolve(),a.out.resolve()/'test-build')
         lanes={}
         for target,ref in refs.items():

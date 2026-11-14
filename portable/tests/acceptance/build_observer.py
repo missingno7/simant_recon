@@ -1,6 +1,6 @@
-"""Relink the pinned DOSBox observer with compact, read-only capture hooks.
+"""Relink the pinned DOSBox observer with compact capture and boundary-timed script delivery.
 
-Uses installed unchanged emulator objects; replaces only dosbox.cpp. All outputs
+Uses installed unchanged emulator objects; replaces dosbox.cpp, the normal CPU core, and the keyboard repeat scheduler. All outputs
 and compiler/linker auxiliary files are in the explicit scratch directory.
 """
 import argparse, hashlib, json, re, subprocess
@@ -20,21 +20,49 @@ def main():
     logs=obj/'dosbox-x.tlog'
     source=SOURCE/'src/dosbox.cpp'; text=source.read_text()
     marker='void DOSBOX_AcceptanceOnInstruction(void) {'
-    text=text.replace(marker,'#include "compact_observer.inc"\n'+marker+'\n    CompactInstruction(SegPhys(cs)+reg_eip);',1)
+    text=text.replace(marker,'#include "compact_observer.inc"\n'+marker+'\n    if (!CompactHeld()) CompactInstruction(SegPhys(cs)+reg_eip);',1)
     text=text.replace('DOSBOX_AcceptanceExecArmed = still_armed;','DOSBOX_AcceptanceExecArmed = still_armed || compact_file != NULL;',1)
     text=text.replace('switch (event.action) {','CompactInput(event,emulated_ms);\n    switch (event.action) {',1)
     # Start after the acceptance scheduler has established its epoch.
     pos=text.index('static void AcceptanceRunEvent(Bitu event_index) {')
     text=text[:pos]+text[pos:].replace('if (event_index >= acceptance_events.size()) return;',
         'static bool compact_initialized=false;\n    if (!compact_initialized) { compact_initialized=true; CompactInit(); }\n    if (event_index >= acceptance_events.size()) return;',1)
+    pos=text.index('static void AcceptanceRunEvent(Bitu event_index) {')
+    tail=text[pos:]
+    tail=tail.replace('const AcceptanceEvent &event =',
+        'if (CompactDefer(event_index)) return;\n    const AcceptanceEvent &event =',1)
+    text=text[:pos]+tail
     patched=out/'dosbox.cpp';patched.write_text(text)
     (out/'compact_observer.inc').write_bytes((HERE/'compact_observer.inc').read_bytes())
     clines=(logs/'CL.command.1.tlog').read_text(encoding='utf-16').splitlines()
-    compile_args=next(clines[i+1] for i,l in enumerate(clines[:-1]) if l.upper().endswith('OBSERVATION-SRC\\SRC\\DOSBOX.CPP'))
-    compile_args=re.sub(r'/Fo"[^"]*"',lambda m:'/Fo"'+str(out/'dosbox.obj')+'"',compile_args,flags=re.I)
-    compile_args=re.sub(r'/Fd"[^"]*"',lambda m:'/Fd"'+str(out/'compiler.pdb')+'"',compile_args,flags=re.I)
-    compile_args=compile_args[:compile_args.upper().rfind(' C:\\TOOLS\\')]+ ' "'+str(patched)+'"'
-    (out/'compile.rsp').write_text(compile_args)
+    core_source=SOURCE/'src/cpu/core_normal.cpp'
+    core=core_source.read_text().replace('#include "acceptance.h"',
+        '#include "acceptance.h"\nextern bool CompactYield(void);')
+    core=core.replace('DOSBOX_AcceptanceOnInstruction();',
+        'DOSBOX_AcceptanceOnInstruction();\n        if (CompactYield()) return CBRET_NONE;',1)
+    (out/'core_normal.cpp').write_text(core)
+    keyboard_source=SOURCE/'src/hardware/keyboard.cpp'
+    keyboard=keyboard_source.read_text(encoding='utf-8')
+    marker='static void KEYBOARD_TickHandler(void) {'
+    keyboard=keyboard.replace(marker,'''extern bool CompactDeferRepeat(unsigned key);
+bool CompactRepeatReady(unsigned key) {
+    return keyb.active && keyb.scanning && !keyb.reset &&
+        (unsigned)keyb.repeat.key==key && !keyb.repeat.wait;
+}
+void CompactDeliverRepeat(unsigned key) { KEYBOARD_AddKey((KBD_KEYS)key,true); }
+'''+marker,1)
+    keyboard=keyboard.replace('if (!keyb.repeat.wait) KEYBOARD_AddKey(keyb.repeat.key,true);',
+        'if (!keyb.repeat.wait && !CompactDeferRepeat((unsigned)keyb.repeat.key)) KEYBOARD_AddKey(keyb.repeat.key,true);',1)
+    (out/'keyboard.cpp').write_text(keyboard,encoding='utf-8')
+    for stem in ('dosbox','core_normal','keyboard'):
+        compile_args=next(clines[i+1] for i,l in enumerate(clines[:-1])
+            if l.upper().endswith('OBSERVATION-SRC\\SRC\\'+('CPU\\' if stem=='core_normal' else 'HARDWARE\\' if stem=='keyboard' else '')+stem.upper()+'.CPP'))
+        compile_args=re.sub(r'/Fo"[^"]*"',lambda m:'/Fo"'+str(out/(stem+'.obj'))+'"',compile_args,flags=re.I)
+        compile_args=re.sub(r'/Fd"[^"]*"',lambda m:'/Fd"'+str(out/'compiler.pdb')+'"',compile_args,flags=re.I)
+        compile_args=compile_args[:compile_args.upper().rfind(' C:\\TOOLS\\')]+ ' "'+str(out/(stem+'.cpp'))+'"'
+        # core_normal includes implementation headers relative to src/cpu.
+        compile_args+=' /I"'+str(SOURCE/'src/cpu')+'"'
+        (out/(stem+'.rsp')).write_text(compile_args)
     link=(logs/'link.command.1.tlog').read_text(encoding='utf-16').splitlines()
     start=max(i for i,l in enumerate(link) if l.startswith('^'))
     link='\n'.join(link[start+1:])
@@ -42,17 +70,19 @@ def main():
         link=re.sub('/'+option+r':"[^"]*"',lambda m:'/'+option+':"'+str(out/filename)+'"',link,flags=re.I)
     link=re.sub(r'/NATVIS:\S+','',link,flags=re.I)
     link=re.sub(r'"[^"\n]*\\DOSBOX\.OBJ"',lambda m:'"'+str(out/'dosbox.obj')+'"',link,flags=re.I)
+    link=re.sub(r'"[^"\n]*\\CORE_NORMAL\.OBJ"',lambda m:'"'+str(out/'core_normal.obj')+'"',link,flags=re.I)
+    link=re.sub(r'"[^"\n]*\\KEYBOARD\.OBJ"',lambda m:'"'+str(out/'keyboard.obj')+'"',link,flags=re.I)
     (out/'link.rsp').write_text(link)
     vc=Path('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat')
-    (out/'build.cmd').write_text('@echo off\ncall "'+str(vc)+'"\ncl @compile.rsp\nif errorlevel 1 exit /b 1\nlink @link.rsp\n')
+    (out/'build.cmd').write_text('@echo off\ncall "'+str(vc)+'"\ncl @dosbox.rsp\nif errorlevel 1 exit /b 1\ncl @core_normal.rsp\nif errorlevel 1 exit /b 1\ncl @keyboard.rsp\nif errorlevel 1 exit /b 1\nlink @link.rsp\n')
     run=subprocess.run(['cmd','/c',str(out/'build.cmd')],cwd=out,capture_output=True,text=True,timeout=600)
     (out/'build.log').write_text(run.stdout+run.stderr)
     if run.returncode: raise RuntimeError((run.stdout+run.stderr)[-5000:])
-    inputs=[source,SOURCE/'src/cpu/callback.cpp',SOURCE/'src/ints/bios_keyboard.cpp',HERE/'compact_observer.inc',HERE/'build_observer.py']+sorted(obj.glob('*.obj'))
-    receipt=dict(schema='simant-read-only-observer-build-v1',executable=str(out/'dosbox-x.exe'),
+    inputs=[source,core_source,SOURCE/'src/hardware/pic.cpp',SOURCE/'src/ints/mouse.cpp',SOURCE/'src/hardware/keyboard.cpp',SOURCE/'src/cpu/callback.cpp',SOURCE/'src/ints/bios_keyboard.cpp',HERE/'compact_observer.inc',HERE/'build_observer.py']+sorted(obj.glob('*.obj'))
+    receipt=dict(schema='simant-boundary-observer-build-v5',executable=str(out/'dosbox-x.exe'),
         sha256=sha(out/'dosbox-x.exe'),inputs={str(p):sha(p) for p in inputs},
-        patched_source_sha256=sha(patched),compiler_response_sha256=sha(out/'compile.rsp'),linker_response_sha256=sha(out/'link.rsp'),
-        scope='Read-only compact clock returns, pump/step ordinals and scheduled host-input observations; no guest mutation.')
+        patched_source_sha256=sha(patched),core_source_sha256=sha(out/'core_normal.cpp'),keyboard_source_sha256=sha(out/'keyboard.cpp'),compiler_response_sha256={n:sha(out/(n+'.rsp')) for n in ('dosbox','core_normal','keyboard')},linker_response_sha256=sha(out/'link.rsp'),
+        scope='service-samples-v5: read-only state observations; synthetic transitions held at completed service boundaries through real PIC/IRQ delivery; no guest code or result mutation.')
     (out/'observer-build.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps({k:v for k,v in receipt.items() if k!='inputs'},indent=2))
 if __name__=='__main__': main()

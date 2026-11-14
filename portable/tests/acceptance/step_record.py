@@ -16,7 +16,7 @@ except ImportError:
 def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None, scratch_root=None):
     scenario = json.loads(scenario_path.read_text())
     exe = ROOT/'assets/SIMANT.EXE' if target=='original' else ROOT/json.loads(report.read_text())['link']['candidate_executable']['path']
-    directory = out or ROOT/'build/reference'/scenario['id']/(sha(exe)+'-service-samples-v4')
+    directory = out or ROOT/'build/reference'/scenario['id']/(sha(exe)+'-service-samples-v5')
     script = ROOT/scenario['script']
     observer_build=json.loads(observer.read_text())
     observer_source=Path(__file__).with_name('compact_observer.inc').resolve()
@@ -36,7 +36,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         manifest=json.loads((directory/'manifest.json').read_text())
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
             boundary=json.loads((directory/'capture/boundary-manifest.json').read_text())
-            if boundary['compact_observer'].get('order_contract')!='service-samples-v4':
+            if boundary['compact_observer'].get('order_contract')!='service-samples-v5':
                 raise ValueError('Reference needs atomic service/input coordinates; retire it with tools/workspace.py and record again: '+str(directory))
             print(scenario['id']+' '+target+': cached reference', flush=True)
             return directory
@@ -72,11 +72,16 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     elapsed=time.perf_counter()-start
     capture=directory/'capture'
     rows=read_hashes(capture/'observer.txt.hash',len(state['items']))
+    try:
+        from .full_inputs import parse_trace
+    except ImportError:
+        from full_inputs import parse_trace
+    parse_trace(capture/'observer.txt',len(rows),require_quiet=True)
     boundary=json.loads((capture/'boundary-manifest.json').read_text())
     execution=json.loads((capture/'execution-report.json').read_text())
     if execution.get('keyboard_layout') != dict(language='us', layout='us'):
         raise ValueError('Reference effective keyboard layout is not pinned US')
-    manifest=dict(schema='simant-step-reference-v1',target=target,**identity,steps=len(rows),requested_steps=count,
+    manifest=dict(schema='simant-step-reference-v1',input_contract='service-samples-v5',target=target,**identity,steps=len(rows),requested_steps=count,
                   schema_identity=state['identity'],speed=scenario.get('speed','normal (1)'),cycles=cycles or scenario.get('cycles',10000),
                   recording_seconds=elapsed,seconds_per_step=elapsed/max(1,len(rows)),command=cmd,
                   observer_sha256=sha(observer),observer_build=observer_build,

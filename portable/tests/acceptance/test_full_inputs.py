@@ -98,6 +98,39 @@ int main(int argc,char **argv) {
         if order is not None:
             p=self.out/'order.bin';p.write_bytes(order);env['SIMANT_TEST_SERVICE_ORDER']=str(p)
         return subprocess.run([str(self.exe)]+([mode] if mode else []),env=env,capture_output=True,text=True,timeout=15)
+    def test_v5_atomic_sample_and_bios_callback_admission_points(self):
+        from capstone import Cs,CS_ARCH_X86,CS_MODE_16
+        from .capture_dos_steps import sample_admission_points
+        memory=bytes.fromhex('a1 34 12 fe 38 08 00 cf')
+        decoder=Cs(CS_ARCH_X86,CS_MODE_16)
+        self.assertEqual(sample_admission_points(memory,[('P',0),('F',3)],decoder),{0:3,3:7})
+        self.assertEqual(sample_admission_points(bytes(0xa0000),[('F',0xfcfc1)],decoder),{0xfcfc1:0xfcfc5})
+        with self.assertRaisesRegex(ValueError,'callback extent'):
+            sample_admission_points(bytes.fromhex('fe38 0800 90'),[('F',0)],decoder)
+
+    def test_v5_hold_requires_real_delivery_at_same_boundary(self):
+        trace=self.out/'quiet.txt'
+        body=('U raise 10.1 10 1234 100 200 2 0 0 0 3\n'
+              'I 10 2 0 0 key_down enter\n'
+              'D K 10.2 2 0 0 0 28 0 17 19 R 3\n'
+              'U return 10.3 1234 100 200\n'
+              'S 11 2 1 1 0 0 3\n')
+        trace.write_text(body)
+        self.assertEqual(len(parse_trace(trace,1,require_quiet=True)[1]),1)
+        for bad in (body.replace(' R 3',' R 4'),
+                    body.replace('U raise 10.1 10 1234 100 200 2 0 0 0 3\n',''),
+                    body.replace('D K 10.2 2 0 0 0 28 0 17 19 R 3\n','')):
+            trace.write_text(bad)
+            with self.assertRaises(ValueError):parse_trace(trace,1,require_quiet=True)
+
+    def test_v4_reference_is_refused_before_replay(self):
+        import json
+        from .step_check import validate_reference
+        directory=self.out/'old';directory.mkdir(exist_ok=True)
+        (directory/'manifest.json').write_text(json.dumps({'input_contract':'service-samples-v4'}))
+        with self.assertRaisesRegex(ValueError,'v4 timing is refused'):
+            validate_reference(directory,ROOT/'dos/scenarios/new-game-save.json')
+
     def test_actual_cross_translation_unit_hook_and_rle(self):
         r=self.run_hook('T 13 T 100 7 2\nC 0 C 0 2 1\nX\n')
         self.assertEqual(r.returncode,0,r.stderr);self.assertEqual(r.stdout.strip(),'7 7 2')

@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "e1a142d plus keys (US layout pinned for recordings, native BIOS key translation) and mouse (admission-phase evidence)",
+ "source": "7de339b plus quiet-inputs (contract v5: scripted inputs raised at recorded service boundaries on DOS)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -11,19 +11,19 @@
  },
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
-  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt.",
+  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt. Since contract v5 the DOS recorder holds each scripted input until the next recorded service boundary and raises it there, so native placement is exact; inputs arriving mid-raster (outcome depends on CPU speed) are outside the tested domain.",
   "Open findings are pinned per lane in portable/tests/acceptance/known_findings.json; the upper-layer test fails on any change in either direction."
  ],
  "scenarios": {
   "new-game-save (64 entries)": "equal in game state for all 64 entries in both lanes (native = original DOS, native = canonical DOS).",
   "quick-game (2000 entries)": "equal in game state for all 2000 entries in both lanes.",
   "long-run (3000 entries, unattended)": "equal in game state for all 3000 entries in both lanes, about 10 s per lane.",
-  "interactive-play (2000 entries)": "equal through 316 / 317 (original / canonical), then cursor hide/show counters: the mouse IRQ landed inside a raster routine on DOS, native admits it at the previous service boundary (test-harness admission granularity, worker quiet-inputs)",
-  "ant-commands (1000)": "canonical equal through 65 (cursor counters), original through 100 (the corner callback interrupted MacTickCount after the edge comparison on DOS; native admits it before); both admission granularity (worker quiet-inputs)",
+  "interactive-play (2000 entries)": "canonical lane equal for 2000 entries on the current build; original lane equal through 925, then g_4352 one cursor-show call fewer natively (labelled RECONSTRUCTION_INTRODUCED by the rule: canonical equal, original differs; not triaged). Depends on main's uninitialised stamp (worker uninit).",
+  "ant-commands (1000)": "equal for 1000 entries in both lanes on the current build; with other native stack residue it stops at 103/104 in WaitedEnough (main's uninitialised stamp; worker uninit)",
   "load-from-save (1000)": "equal in game state for all 1000 entries in both lanes",
-  "full-game (1000)": "equal through 99 in both lanes; cursor counters from a mouse IRQ inside the picture rasterizer on DOS (admission granularity)",
-  "experiment (1000)": "equal through 94; on DOS the release IRQ arrived after the proximity row changed (FB11 -> FB09), native admits it before, so no FB09/0400 enqueue (admission granularity; a platform control shows the row produces exactly that event)",
-  "random-17 (2000)": "original equal through 75 (cursor counters, admission granularity); canonical through 183, then MapPnt and edit view caches (not yet triaged)",
+  "full-game (1000)": "equal through 177 in both lanes; then YellowBirth polls mySongIsDone, which completes on DOS at 44278 ms but not natively in tape mode (song status not replayed; worker tape-devices)",
+  "experiment (1000)": "equal in game state for all 1000 entries in both lanes",
+  "random-17 (2000)": "equal through 1108 / 1113; then the native retained host-input queue (512 entries) overflows in tape mode (test integration; worker tape-devices)",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
@@ -49,14 +49,14 @@
    "domain": "shipped window resources; mouse and keyboard through menus, file dialogs and message boxes used by the scenarios",
    "level": {
     "isolated": 3,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "scenarios drive menus and Save As dialogs on the original",
    "canonical_dos": "same",
    "native": "runtime flows (logo click, save, load) PASS",
-   "known_divergence": "experiment release and cursor hide/show counts: admission granularity, not a port service defect (platform controls in portable/tests/mouse_services)",
-   "first_open_question": "see input",
-   "next": "worker quiet-inputs"
+   "known_divergence": "interactive-play original lane: one cursor-show call fewer at entry 926 (not triaged)",
+   "first_open_question": "which caller makes the extra DOS cursor-show call at interactive-play 926, and why only in the original lane?",
+   "next": "triage after uninit"
   },
   {
    "id": "timing-rng",
@@ -136,17 +136,17 @@
   {
    "id": "input",
    "name": "Mouse, keyboard and input queue",
-   "domain": "scenario inputs; IRQ projection",
+   "domain": "scenario inputs delivered at service boundaries (v5); IRQ projection",
    "level": {
     "isolated": 2,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "input_irq oracle matrix from original instruction execution",
    "canonical_dos": "-",
    "native": "input_irq PASS: 2,304 rows; BIOS key translation matches 582 measured US BIOS cases (portable/tests/acceptance/test_key_bios.py)",
-   "known_divergence": "normal-play IRQ context words proven unobservable in 640-wide modes, 320-wide open; mouse IRQs landing mid-raster on DOS cannot be placed by service-ordinal admission",
-   "first_open_question": "do the mouse-heavy scenarios agree once scripted inputs are delivered at service boundaries on DOS?",
-   "next": "worker quiet-inputs"
+   "known_divergence": "normal-play IRQ context words proven unobservable in 640-wide modes, 320-wide open; inputs landing mid-raster are outside the tested domain",
+   "first_open_question": "-",
+   "next": "keep covered"
   },
   {
    "id": "audio",
@@ -159,9 +159,9 @@
    "original_dos": "dos/acceptance.py records DSP and OPL write streams; original = canonical DOS (34,193 and 37,438 writes, timing within 1.4 ms) on quick-game",
    "canonical_dos": "same",
    "native": "audio suite PASS; evidence/canonical/native-audio-device/review.md",
-   "known_divergence": "native command stream not yet compared against the DOS streams in a scenario",
+   "known_divergence": "song completion is not replayed in tape mode (full-game stops at 177); native command stream not yet compared with the DOS streams",
    "first_open_question": "native DSP/OPL command stream versus DOS after alignment",
-   "next": "compare native SIMANT_AUDIO_TRACE with the DOS streams"
+   "next": "worker tape-devices (device status replay), then stream comparison"
   },
   {
    "id": "memory-semantics",
@@ -174,9 +174,9 @@
    "original_dos": "allocator fixtures against bounded original execution; word-intermediate witnesses",
    "canonical_dos": "-",
    "native": "integer semantics census; word_intermediates; semantic spans tests PASS",
-   "known_divergence": "platform.json native-heap-history, native-index-adjacency (FindIndex), native-integer-expressions",
-   "first_open_question": "does any of these show up in an aligned scenario?",
-   "next": "only when a scenario divergence points here"
+   "known_divergence": "platform.json native-heap-history, native-index-adjacency (FindIndex), native-integer-expressions; uninitialised local read in main (stamp -> WaitedEnough) observed in two scenarios",
+   "first_open_question": "which other uninitialised-local reads have an effect?",
+   "next": "worker uninit (census and per-site DOS values)"
   },
   {
    "id": "modes",
@@ -197,6 +197,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test harness",
+   "summary": "contract v5: DOS recorder raises each scripted input at the next recorded service boundary, native admits at the same boundary; all 18 references re-recorded; experiment, ant-commands, load-from-save equal for their whole length"
+  },
+  {
+   "commit": "7de339b",
    "layer": "test environment + platform",
    "summary": "DOS recordings pin a US keyboard (the host's Czech layout had leaked in); 8 references re-recorded, 10 kept with layout-neutrality proofs; native BIOS key words follow the US BIOS tables (582 measured cases) from physical scancodes; load-from-save now equal for 1000 entries"
   },

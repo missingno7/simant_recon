@@ -298,10 +298,9 @@ void portable_test_input_sample(unsigned kind, unsigned value) {
   if (test_order_output) fprintf(test_order_output,"S %u\n",kind);
   test_service(kind);
   ++test_queries;
-  /* The sampled value is already cached locally by these providers. Delivery
-   * now cannot retroactively change it. Entry-only probes (246/247) precede
-   * their bodies and instead admit at the body's next legal input yield. */
-  if (kind>=248) portable_test_before_poll();
+  /* v5: atomic providers have cached their result; entry-only 246 precedes
+   * the body. StillDown (247) is observed at exit with its result cached. */
+  portable_test_before_poll();
 }
 void portable_test_before_poll(void) {
   test_load();

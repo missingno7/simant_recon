@@ -253,8 +253,8 @@ def main(argv=None):
     parser.add_argument('--input-script', type=Path,
                         help='emulated-time input/dump script for the pinned acceptance runner (exclusive with --key)')
     parser.add_argument('--fixed-clock', action='store_true', help='set guest DOS date/time to a fixed value before launch')
-    parser.add_argument('--capture-observer', type=Path, help='Explicit scratch read-only observer build receipt')
-    parser.add_argument('--observer-config', type=Path, help='Read-only compact observation specification (requires --capture-observer)')
+    parser.add_argument('--capture-observer', type=Path, help='Explicit scratch observer build receipt (v5 holds synthetic input at service boundaries)')
+    parser.add_argument('--observer-config', type=Path, help='Compact service/admission specification (requires --capture-observer)')
     parser.add_argument('--saved-game', type=Path, help='copy an explicit worker/scratch .ANT save into the guest drive')
     args = parser.parse_args(argv)
     # Scripted acceptance runs end with their own emulated-time `exit`; the
@@ -320,14 +320,15 @@ def main(argv=None):
         if args.capture_observer:
             observer_path = diagnostic.experimental_path(args.capture_observer)
             observer = json.loads(observer_path.read_text())
-            if observer.get('schema') != 'simant-read-only-observer-build-v1':
-                raise ValueError('Unknown read-only observer receipt')
+            if observer.get('schema') not in ('simant-read-only-observer-build-v1', 'simant-boundary-observer-build-v5'):
+                raise ValueError('Unknown observer receipt')
             observer_exe = diagnostic.experimental_path(Path(observer['executable']))
             runner = {**runner, 'path': str(observer_exe)}
             report['runner'] = build.read_pin(observer_exe, observer['sha256'])[1]
             config_path = observation_path(args.observer_config)
             report['capture_observer'] = {'receipt': build.read_pin(observer_path)[1],
                 'config': build.read_pin(config_path)[1], 'scope': observer['scope']}
+            report['input_contract'] = 'service-samples-v5' if observer['schema']=='simant-boundary-observer-build-v5' else 'emulated-time-v4'
         if args.input_script:
             script = input_script(args.input_script, out)
             (out / 'INPUT.SCR').write_text('\n'.join(script) + '\n')
