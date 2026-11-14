@@ -15,7 +15,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 FIXTURES = ROOT / "portable/tests/runtime/fixtures/bios-fonts"
 DOSBOX_X = FIXTURES / "dosbox-x-v2026.08.31"
-STAGING = FIXTURES / "dosbox-staging-v0.83.0"
 
 
 def sha256(path: Path) -> str:
@@ -47,8 +46,11 @@ def main() -> int:
 
     rom = DOSBOX_X / "c000-rom-capture.bin"
     current = ROOT / "portable/runtime/bios-reference/font-8x14.bin"
-    old = STAGING / "font-8x14.bin"
-    expected = DOSBOX_X / "font-MakeImage-File.dos.bin"
+    negative = out / "font-negative-control.bin"
+    wrong_font = bytearray(current.read_bytes())
+    wrong_font[ord("F") * 14 + 4] ^= 1
+    negative.write_bytes(wrong_font)
+    expected = DOSBOX_X / "font-MakeImage-File.us-derived.bin"
     sources = [ROOT / "portable/tests/runtime/bios_font_compare.c",
                ROOT / "portable/whole_program/text_bitmap.c"]
     executable = out / "bios-font-compare.exe"
@@ -60,7 +62,7 @@ def main() -> int:
     if compiled.returncode:
         (out / "compile.log").write_text(compiled.stdout, encoding="utf-8")
         fail(f"font regression compile failed; see {out / 'compile.log'}")
-    result = subprocess.run([str(executable), str(rom), str(current), str(old),
+    result = subprocess.run([str(executable), str(rom), str(current), str(negative),
                              str(expected)], cwd=ROOT, text=True,
                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (out / "test.log").write_text(result.stdout, encoding="utf-8")
@@ -70,9 +72,11 @@ def main() -> int:
         "production_core": "portable/whole_program/text_bitmap.c",
         "oracle_capture": "portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/c000-rom-capture.bin",
         "oracle_rom_sha256": sha256(rom),
-        "oracle_render_sha256": sha256(expected),
+        "us_bank_derived_render_sha256": sha256(expected),
+        "render_fixture_method": "row-major glyph-row projection from the captured US 8x14 bank",
         "current_font_sha256": sha256(current),
-        "old_negative_font_sha256": sha256(old),
+        "negative_font_sha256": sha256(negative),
+        "negative_control": "one flipped bit in the US F glyph must change rendered output",
         "result": "PASS" if result.returncode == 0 else "FAIL",
         "output": result.stdout.strip(),
     }

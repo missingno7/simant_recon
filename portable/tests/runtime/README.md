@@ -44,13 +44,22 @@ the cached scan-query implementation fails the `center-after` negative control.
 Use `--case center-after`, `--repeat 2`, or `--visible` for focused reruns.
 
 The BIOS font regression compiles the production text-bitmap projection and
-compares the fixed ` File` output with the direct DOSBox-X return-state capture.
-It cross-checks that capture against the pinned 8x14 ROM bank and requires the
-prior DOSBox Staging table to fail as a negative control. Give every run a fresh
-output directory:
+compares the fixed ` File` output with a row-major fixture derived from the
+captured US 8x14 bank. The bank is checked against the pinned ROM slice and
+DOSBox-X static initializer; a one-bit change to the `F` glyph is the negative
+control. This verifies the projection against the captured DOS bank, not against
+a separate DOS bitmap capture. Give every run a fresh output directory:
 
 ```powershell
 python portable/tests/runtime/bios_font_regression.py --out build/workers/p2-r4/font-regression
+```
+
+The US BIOS-font and mode-12h DAC regression checks both font bank hashes and
+the native palette initialization from the pinned DAC defaults. It compiles the
+palette provider and requires a deliberately altered DAC table to fail:
+
+```powershell
+python portable/tests/runtime/bios_defaults_regression.py --out build/workers/NAME/bios-defaults
 ```
 
 Passing confirms this bounded current UI/file path. It does not establish

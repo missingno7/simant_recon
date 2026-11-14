@@ -6,8 +6,9 @@
 #include "portable/platform/host.h"
 
 /* One presentation palette. The indexed framebuffer still belongs to the
- * graphics driver. Source attribute/DAC writes update this borrowed projection.
- * VGA entries stay unreadable until written by the actual source palette call. */
+ * graphics driver. Source attribute/DAC writes update this borrowed projection;
+ * mode 12h starts with captured BIOS defaults in slots 16..255: RGB6 table
+ * values in 16..63 and zero values in the remaining slots. */
 typedef struct SimSdlPaletteHost {
     HostPalette presentation;
     uint8_t attribute[17];

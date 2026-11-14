@@ -1,27 +1,45 @@
 {
   "schema": "bios-font-oracle-capture-fixture-v1",
-  "source": "DOSBox-X v2026.08.31 pinned acceptance runner",
-  "runner_sha256": "e5b9a81acb208bab48cb01a7dac9691cd06674fac877abce54e4693ece6dbff9",
-  "canonical_dos_executable_sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
-  "layout": "CZ / cz243",
+  "source": "DOSBox-X v2026.08.31 v7 observer build; US reference environment",
+  "capture_runner": "build/workers/frames/observer/dosbox-x.exe",
+  "capture_runner_sha256": "780a26c16666ee31d5408a8af3c479e076d71603ad02dfb84babd5c87989a398",
+  "reference_manifest_sha256": "0b7c255581120b34f7f64e46e8d66652b480299009e3276801a1f567566c1d2d",
+  "dos_reference_target": "original",
+  "dos_executable_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "layout": "US / us",
   "rom_capture": {
     "path": "c000-rom-capture.bin",
     "physical_range": "C0000-C7FFF",
     "bytes": 32768,
-    "sha256": "a3744eaf25671eed3c2526d53afa4451c552c795c78b8be96e2495bb3bf70b79",
-    "captured_at": "CS:IP 27DF:0008, emulated time 4944.143 ms"
+    "sha256": "2c0523026b2b4ab5d2939e9827a2a8fc5236d978281144a86d68a54a15cfe31e",
+    "derived_from": "build/reference/new-game-save/aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v7/capture/exec-simstep.1.bin",
+    "source_capture_sha256": "67b8893fab5e054e79dfa180922fe8d9bc813e363d363e629433e3fabdaaa904",
+    "source_range": "physical 00000-FFFFF (1048576 bytes)",
+    "captured_at": "v7 original DOS checkpoint at DoAntSim entry 1; slice C0000-C7FFF"
   },
   "render_fixture": {
-    "path": "font-MakeImage-File.dos.bin",
+    "path": "font-MakeImage-File.us-derived.bin",
     "text_bytes": [32, 70, 105, 108, 101],
     "bytes": 70,
-    "sha256": "142599c2e4b1abdba867acc3eff9398a077b1d0d9c5af94e252ccb106f1ce5ea",
-    "captured_from": "build/workers/p2-diff/round3/dos-boundaries/exec-text-return-2.1.bin",
-    "capture_sha256": "67dc574df99753e861d8934d91d73b02504078b7eeec92313afc024e01881fa5",
-    "capture_physical_range": "00000-A0000",
-    "bitmap_offset": "0x60D60 (40x14 header, then 70 pixels)",
-    "capture_registers": "emulated time 4944.231880 ms, CS:IP 27DF:015E",
-    "cross_check": "Captured 70 pixels are byte-equal to the expected rendering computed from the captured C000:09E9 active BIOS font rows and src/graphics/bitmap_text.asm L007F-L0093's movsb/stride order."
+    "sha256": "ce2adcdd02178fa09db458470668225fdc0befdec335dd967ef30600a8b8bffd",
+    "derived_from": "font-8x14.bin",
+    "source_bank_sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1",
+    "method": "Row-major glyph rows for the five text bytes, following src/graphics/bitmap_text.asm L007F-L0093's movsb/stride order.",
+    "independent_dos_bitmap_capture": false,
+    "cross_check": "Every byte is derived from the US active DOS C000:09E9 bank, which matches the pinned static int10_font_14 initializer. This fixture does not claim to be a separate DOS bitmap capture."
+  },
+  "mode_12_dac_defaults": {
+    "path": "portable/runtime/bios-reference/mode-12-dac-defaults-16-63.bin",
+    "bytes": 144,
+    "first_entry": 16,
+    "last_entry": 63,
+    "sha256": "28cdbd836a89aa8ce339911091e974c7af2fefeab8831ee8a4e27af74d9f3e75",
+    "captured_from": "build/reference/new-game-save/aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v7/capture/observer.txt.screen.1",
+    "capture_sha256": "77482c7884ae601ed2023751630f2f63c9f72ed852c771ebc989856584e019ca",
+    "capture_bytes": 308448,
+    "mode": "0x12",
+    "entry": 1,
+    "extraction": "SAF7 bytes 160..303 (RGB6); captured validity bytes for slots 16..63 are all 1"
   },
   "license": "GPL-2.0-or-later; upstream source and COPYING are preserved under portable/runtime/bios-reference/dosbox-x-v2026.08.31/"
 }

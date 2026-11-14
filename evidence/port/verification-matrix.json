@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "7b95908 plus frames (contract v7: checkpoint frames and palette) and the cursor-counter classification",
+ "source": "2435601 plus font-dac (US BIOS font banks, mode 12h DAC defaults)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -25,7 +25,7 @@
   "experiment (1000)": "equal in game state for all 1000 entries in both lanes",
   "random-17 (2000)": "seeded random input; equal in game state for all 2000 entries in both lanes",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run",
-  "frames (all scenarios)": "152 checkpoint frames compared; every scenario differs from entry 1 only by the native BIOS font bank (captured under the Czech codepage overlay; 851 menu/title pixels) and DAC entries 16..63 left zero natively (BIOS defaults on DOS; invisible in 4-bit scanout). Worker font-dac."
+  "frames (all scenarios)": "152 checkpoint frames, palette and attribute map compared exactly: seven scenarios equal at every checkpoint; ant-commands (canonical 256, original 512) and interactive-play (canonical 1280, original 1792) differ in the Yard view (dog animation frame, human and balloon offset by a few pixels) while game state is equal (worker presentation)"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
  "subsystems": [
@@ -122,17 +122,17 @@
   {
    "id": "graphics",
    "name": "Graphics, sprites, VGA and palette",
-   "domain": "VGA 640x480",
+   "domain": "VGA 640x480 mode 12h; checkpoint frames of the 9 corpus scenarios",
    "level": {
     "isolated": 3,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "v7 references hold indexed frames, attribute map and DAC at checkpoints",
    "canonical_dos": "-",
-   "native": "frames compared exactly at 152 checkpoints; differences only from the BIOS font bank and DAC 16..63",
-   "known_divergence": "native BIOS font captured under the Czech codepage overlay; DAC 16..63 not initialised to BIOS defaults",
-   "first_open_question": "are frames equal once font and DAC come from the US environment?",
-   "next": "worker font-dac"
+   "native": "frames, attribute map and all 256 DAC entries exactly equal at every checkpoint in 7 of 9 scenarios",
+   "known_divergence": "Yard view animation (dog frame, human/balloon position) in ant-commands and interactive-play; presentation views differing from entry 1 not yet audited; platform.json native-font-output-domain",
+   "first_open_question": "what drives the Yard dog/human animation, and why does native differ while game state is equal?",
+   "next": "worker presentation"
   },
   {
    "id": "input",
@@ -198,6 +198,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "platform",
+   "summary": "native BIOS 8x8/8x14 font banks from the US DOS environment (equal to DOSBox-X static initializers; the Czech codepage overlay had leaked in) and DAC 16..63 initialised to the mode 12h BIOS defaults; frames equal at every checkpoint in 7 of 9 scenarios"
+  },
+  {
+   "commit": "2435601",
    "layer": "test harness",
    "summary": "contract v7: checkpoint frames and palette compared exactly (152 frames, about 60 s for all lanes); cursor call counters reclassified as presentation cadence with an instruction census; verdict policy follows the tracked runtime_views.json; all 9 scenarios equal in game state in both lanes"
   },

@@ -229,7 +229,7 @@
     },
     {
       "gate": "SEMANTIC/PORT-BLOCKING",
-      "detail": "Font bitmap native group is source-owned1280 bytes; larger output remains unsupported without source storage proof.",
+      "detail": "The BIOS font provider now pins the US DOSBox-X 8x8 and 8x14 banks. Separately, the source font bitmap destination is proven for 1280 bytes; larger source output remains unsupported without storage proof.",
       "id": "native-font-output-domain",
       "status": "OPEN"
     },
@@ -309,6 +309,24 @@
     "regression": "portable/tests/acceptance/test_key_bios.py",
     "scope": "582 measured US make/break cases covering all Shift/Ctrl/Alt combinations of digits, letters, punctuation and ordinary special keys, with NumLock cleared as in game polling. Ctrl+Alt+Del reset, arbitrary keyboard-controller timing and non-US layouts are outside this contract."
   },
+  "native_bios_fonts": {
+    "provider": "portable/runtime/bios-reference",
+    "environment": "DOSBox-X v2026.08.31, pinned US / us DOS environment without a codepage overlay",
+    "banks": {
+      "8x8": {
+        "physical_address": "C01E9",
+        "bytes": 2048,
+        "sha256": "75c79a7e7fa423dda67ec6d6d76cec86b63f85677726368750c75b0920ddf319"
+      },
+      "8x14": {
+        "physical_address": "C09E9",
+        "bytes": 3584,
+        "sha256": "657ca6588b6bf729f0ed71a3d3c781a465bd30cdfb11eb5fc7e27594c0717ea1"
+      }
+    },
+    "evidence": "portable/runtime/bios-reference/manifest.json and portable/tests/runtime/fixtures/bios-fonts/dosbox-x-v2026.08.31/provenance.json",
+    "scope": "Both captured banks equal the pinned DOSBox-X static initializers. This identifies the DOSBox-X acceptance environment, not a physical PC BIOS."
+  },
   "native_heap_boundary": "src/memory/ralloc.c",
   "assembly_profile": "masm510",
   "assembly_metadata": "Current source assembler OFFSET fixups plus admitted DOS DATA placement; never original image bytes.",
@@ -369,6 +387,14 @@
   "native_vga_boundary": {
     "memory": "One four-plane 64 KiB CPU aperture owned by SimGraphicsDriver; presentation decodes visible rows only.",
     "registers": "Map mask, set/reset, enable set/reset, data rotate/logic, read map, read/write modes, bit mask and latches.",
+    "default_palette": {
+      "mode": "0x12",
+      "environment": "DOSBox-X v2026.08.31, pinned US / us DOS environment",
+      "slots_16_63": "Pinned captured RGB6 defaults in portable/runtime/bios-reference/mode-12-dac-defaults-16-63.bin; the game writes slots 0..15.",
+      "slots_64_255": "Captured raw values are zero and initialized as known entries.",
+      "evidence": "portable/runtime/bios-reference/manifest.json:palette_capture",
+      "regression": "portable/tests/runtime/bios_defaults_regression.py"
+    },
     "source": [
       "src/platform/video/planar_raster.asm",
       "src/platform/video/planar_sprites.asm"
