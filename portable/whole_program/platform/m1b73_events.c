@@ -226,7 +226,6 @@ int16_t input_event_count(void)
 int16_t input_pop_event(void *event_record)
 {
     PortableM1B73Events *events = require_events();
-    if (portable_test_before_poll) portable_test_before_poll();
     if (event_record == NULL)
         abort();
     if (portable_input_time_host_refresh_clock(events->input_host) !=
@@ -256,10 +255,9 @@ void input_enqueue_event_args(int16_t bx, int16_t es, int16_t ax,
 }
 
 void portable_m1b73_event_enqueue_four_word_command(
-    int16_t bx, int16_t es, int16_t ax, int16_t cx)
+    int16_t bx, int16_t es, int16_t ax, int16_t cx, int16_t caller_word)
 {
-    /* The four source callsites enqueue command events whose Event.v is not
-     * read by their reachable consumers. The fifth DOS stack word is not
-     * represented by C; normalize only this unobserved field to zero. */
-    input_enqueue_event_args(bx, es, ax, cx, 0);
+    /* The projection supplies the saved caller SI read by DOS at BP+0Eh.
+     * Per-site frame evidence and remaining context limits accompany it. */
+    input_enqueue_event_args(bx, es, ax, cx, caller_word);
 }

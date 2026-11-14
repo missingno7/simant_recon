@@ -24,22 +24,47 @@ int native_windows_filter_root(SDL_Event *e) { (void)e;return 0; }
 int native_windows_pointer(float *x,float *y) { (void)x;(void)y;return 0; }
 void native_windows_root_pointer(float *x,float *y) { (void)x;(void)y; }
 static void rejected(int s) { (void)s;_Exit(23); }
+static Host *control_host;
+static unsigned down_seen,up_seen;
+int portable_input_time_host_interrupt(void) {
+    HostEvent e;
+    while (host_poll_event(control_host,&e)>0) {
+        if (e.kind==HOST_EVENT_KEY_DOWN) {
+            if (e.key!=0x1c0d)return -1;
+            ++down_seen;
+            if (portable_test_clock_read('B',(void *)((uintptr_t)portable_test_clock_read+14),99)!=11)return -1;
+        }
+        if (e.kind==HOST_EVENT_KEY_UP) ++up_seen;
+    }
+    return 1;
+}
 int main(int argc,char **argv) {
     signal(SIGABRT,rejected);
-    if (argc>1 && !strcmp(argv[1],"pump")) {
-        HostEvent e;Host *h;
+    if (argc>1 && !strcmp(argv[1],"unclocked")) {
+        HostEvent e;
         host_virtual_clock_configure(1);
         SDL_SetHintWithPriority(SDL_HINT_VIDEO_DRIVER,"dummy",SDL_HINT_OVERRIDE);
-        h=host_create_dimensions("input control",1,640,480);if (!h)return 20;
-        while (host_poll_event(h,&e)>0) {}
-        portable_test_pump();if (portable_test_input_count())return 21;
-        portable_test_pump();if (portable_test_input_count())return 22;
-        while (host_poll_event(h,&e)>0) if (e.kind==HOST_EVENT_KEY_DOWN) {
-            if (portable_test_input_count()!=1)return 25;
-            portable_test_pump();
-            for (int i=0;i<100;i++) if (host_poll_event(h,&e)>0 && e.kind==HOST_EVENT_KEY_UP) {host_destroy(h);return 0;}
-        }
-        return 24;
+        control_host=host_create_dimensions("input control",1,640,480);if (!control_host)return 20;
+        while (host_poll_event(control_host,&e)>0) {}
+        portable_test_input_sample(249,0);
+        portable_test_before_poll();
+        if (down_seen!=1 || up_seen)return 21;
+        portable_test_input_sample(246,0);
+        portable_test_before_poll();
+        if (up_seen!=1)return 22;
+        host_destroy(control_host);return 0;
+    }
+    if (argc>1 && !strcmp(argv[1],"services")) {
+        HostEvent e;
+        host_virtual_clock_configure(1);
+        SDL_SetHintWithPriority(SDL_HINT_VIDEO_DRIVER,"dummy",SDL_HINT_OVERRIDE);
+        control_host=host_create_dimensions("input control",1,640,480);if (!control_host)return 20;
+        while (host_poll_event(control_host,&e)>0) {}
+        void *pc=(void *)((uintptr_t)portable_test_clock_read+13);
+        if (portable_test_clock_read('T',pc,99)!=7 || down_seen!=1 || up_seen)return 21;
+        if (portable_test_clock_read('T',pc,99)!=7 || down_seen!=1 || up_seen!=1)return 22;
+        if (portable_test_clock_read('C',NULL,99)!=2 || up_seen!=1)return 24;
+        host_destroy(control_host);return 0;
     }
     void *pc=(void *)((uintptr_t)portable_test_clock_read+13);
     if (argc>1 && !strcmp(argv[1],"wrong"))pc=(void *)((uintptr_t)pc+1);
@@ -56,12 +81,14 @@ int main(int argc,char **argv) {
         if run.returncode:raise RuntimeError(run.stdout+run.stderr)
     @classmethod
     def tearDownClass(cls):cls.tmp.cleanup()
-    def run_hook(self,clock=None,events=None,mode=None):
+    def run_hook(self,clock=None,events=None,mode=None,order=None):
         env=dict(os.environ,PATH=str(self.sdk/'bin')+os.pathsep+os.environ.get('PATH',''))
-        for name in ('SIMANT_TEST_FULL_CLOCK','SIMANT_TEST_PUMP_INPUT','SIMANT_TEST_PUMP_SOURCE','SIMANT_TEST_CLOCK_CONTROL_READ'):env.pop(name,None)
-        for name,value,filename in [('SIMANT_TEST_FULL_CLOCK',clock,'clock.txt'),('SIMANT_TEST_PUMP_INPUT',events,'events.txt')]:
+        for name in ('SIMANT_TEST_FULL_CLOCK','SIMANT_TEST_SERVICE_INPUT','SIMANT_TEST_CLOCK_CONTROL_READ','SIMANT_TEST_SERVICE_ORDER'):env.pop(name,None)
+        for name,value,filename in [('SIMANT_TEST_FULL_CLOCK',clock,'clock.txt'),('SIMANT_TEST_SERVICE_INPUT',events,'events.txt')]:
             if value is not None:
                 p=self.out/filename;p.write_text(value);env[name]=str(p)
+        if order is not None:
+            p=self.out/'order.bin';p.write_bytes(order);env['SIMANT_TEST_SERVICE_ORDER']=str(p)
         return subprocess.run([str(self.exe)]+([mode] if mode else []),env=env,capture_output=True,text=True,timeout=15)
     def test_actual_cross_translation_unit_hook_and_rle(self):
         r=self.run_hook('T 13 T 100 7 2\nC 0 C 0 2 1\nX\n')
@@ -71,9 +98,21 @@ int main(int argc,char **argv) {
         good='T 13 T 100 7 2\nC 0 C 0 2 1\nX\n'
         for tape,mode in [(good,'short'),(good,'wrong'),('T 13 T 100 7 0\nX\n',None),('T 13 T 100 7 2\n',None)]:
             r=self.run_hook(tape,mode=mode);self.assertEqual(r.returncode,23,r.stderr)
-    def test_inputs_use_normal_sdl_boundary_at_exact_ordinal(self):
-        r=self.run_hook(events='2 0 0 0 keydown enter 0 0\n3 0 0 0 keyup enter 0 0\n',mode='pump')
+    def test_input_after_sample_preserves_nested_bios_stamp(self):
+        tape='T 13 T 100 7 2\nB 14 V 0 11 1\nC 0 C 0 2 1\nX\n'
+        events='1 0 0 keydown enter 0 0\n3 0 0 keyup enter 0 0\n'
+        r=self.run_hook(tape,events,mode='services',order=bytes([0,1,0,2]))
         self.assertEqual(r.returncode,0,r.stderr)
+        r=self.run_hook(tape,events,mode='services',order=bytes([0,0,1,2]))
+        self.assertEqual(r.returncode,23,r.stderr)
+        self.assertIn('service order mismatch at 2',r.stderr)
+    def test_unclocked_input_samples_advance_admission(self):
+        tape='B 14 V 0 11 1\nX\n'
+        events='1 0 0 keydown enter 0 0\n3 0 0 keyup enter 0 0\n'
+        r=self.run_hook(tape,events,mode='unclocked',order=bytes([249,0,246]))
+        self.assertEqual(r.returncode,0,r.stderr)
+        r=self.run_hook(tape,events,mode='unclocked',order=bytes([249,246,0]))
+        self.assertEqual(r.returncode,23,r.stderr)
     def test_bounded_trace_keeps_counts_and_phase(self):
         p=self.out/'trace.txt';p.write_text('# test\nR T 100 7 2\nI 5 10 0 0 key_down enter\nS 6 11 1 1 2 99\nR T 100 8 1\n')
         r,i,b=parse_trace(p,1)

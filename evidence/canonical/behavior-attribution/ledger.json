@@ -1688,7 +1688,7 @@
     },
     {
       "id": "native-event-omitted-word",
-      "description": "Native supplies zero for the unprovided fifth Event.v word in four-word enqueue calls.",
+      "description": "Three canonical four-word enqueue sites pass the saved incoming SI as Event.v; the unreferenced periodic-pump entry retains an explicit unbound-SI normalization.",
       "classification": "PORT_DEVIATION_DOCUMENTED",
       "status": "open",
       "scope": "portable/platform.json:preview_limitations:native-event-omitted-word",
@@ -1696,27 +1696,32 @@
         "level": "PROVEN",
         "paths": [
           "portable/platform.json",
-          "layout/repository.json",
-          "evidence/canonical/event-omitted-word/"
+          "portable/canonical_native_abi/m1b73_event_source.py",
+          "portable/canonical_native_abi/integer_frontend.py",
+          "portable/tests/event_omitted_word/",
+          "evidence/canonical/event-omitted-word/caller-frames.json",
+          "evidence/canonical/event-omitted-word/caller_frames.py",
+          "evidence/canonical/event-omitted-word/review.md",
+          "portable/tests/event_omitted_word/run.py"
         ],
         "commits": [],
         "original_exe": {
           "path": "assets/SIMANT.EXE",
           "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
-          "observation": "Original instructions/runtime controls are detailed by the linked exception evidence where available. Raw queued v difference proved with1212/ABCD caller-frame contrasts; coordinate consumers exist, complete event/observer closure is open."
+          "observation": "Original enqueue reads BP+0Eh. Synthetic 1212h/ABCDh caller-frame contrasts change only the omitted queued v; explicit fifth-zero controls remain equal. Coordinate observers exist, including the S04 modal loop."
         },
         "canonical_dos": {
           "path": "build/current/dos/link/SOURCE.EXE",
           "sha256": "a553c992c0f8d303d30f7f23d2f9545f8f22154842a2fe5bb3c7d3c727531a2e",
-          "observation": "Shared source contract retained; no general original/canonical physical-state equality granted beyond the cited controls."
+          "observation": "Fresh whole-module verification of S10:35F5, S19:384C, root:15F8 and root:00F8 is exact, with manifest-equal object hashes. All three omitted words are saved incoming SI, not uninitialised locals: S10 inherits 4*m; S19 inherits DoEvent SI, which is main frames or Ctrl-scroll dy on the bound main path."
         },
         "native": {
-          "observation": "Four-word DOS enqueue calls inherit an unprovided fifth Event.v word; native supplies zero. Original-instruction controls prove differing queued v under caller-stack contrast, while explicit fifth-zero controls remain equal. Coordinate observers exist; full interleaving/observer closure remains required. See evidence/canonical/event-omitted-word/."
+          "observation": "All three canonical four-word sites pass the saved caller SI explicitly. Final production fixture checks seven caller contexts; site-disabled controls pass zeros. The live canonical quick-game prefix matches all game views through entry 21 (Event.v=20, code FD12); forwarding-zero control first differs there only in Event.v. Final canonical step checks reach quick-game 657 (MapPnt/cache), new-game-save 36 (FA1C IRQ Event.v), long-run 320 (input-phase-invalid). The unreferenced periodic entry retains explicit unbound incoming-SI zero normalization. Reproducible runner: portable/tests/event_omitted_word/run.py; session receipts: build/workers/event-v/RESULT.md."
         }
       },
       "related_items": [],
-      "exception_reason": "Host ABI cannot preserve unspecified DOS caller-stack residue.",
-      "observability": "Raw queued v difference proved with1212/ABCD caller-frame contrasts; coordinate consumers exist, complete event/observer closure is open."
+      "exception_reason": "Only entry through ui_pump_events_periodically lacks an incoming-SI source contract. It has no references in the current source inventory; its own instructions preserve, but do not define, incoming SI. Zero is not claimed equivalent in that context.",
+      "observability": "Event.v remains observable game state. Main/menu contexts are preserved by explicit arguments; periodic external-entry context remains open."
     },
     {
       "id": "native-input-hardware-context",

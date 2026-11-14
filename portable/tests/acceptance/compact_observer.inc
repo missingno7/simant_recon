@@ -6,7 +6,7 @@ struct CompactView { uint32_t address, bytes, sentinel; };
 static std::vector<CompactView> compact_views;
 static uint32_t compact_limit=0,compact_interval=256;
 static std::string compact_output;
-static FILE *compact_fingerprints=NULL;
+static FILE *compact_fingerprints=NULL, *compact_order=NULL;
 static bool compact_key_visible=false;
 static std::vector<CompactPoint> compact_points;
 static FILE *compact_file = NULL;
@@ -14,9 +14,10 @@ static uint64_t compact_pump = 0, compact_step = 0;
 static unsigned compact_phase = 0;
 static char compact_anchor='R';
 static uint32_t compact_return = 0, compact_countdown = 0;
-static uint32_t compact_keyboard_hook=0;
+static uint32_t compact_keyboard_hook=0,compact_peek_return=0,compact_read_return=0;
 struct CompactStream { char kind; uint32_t caller,value; uint64_t count,total; };
 static std::vector<CompactStream> compact_streams;
+static uint64_t compact_queries=0;
 static uint64_t compact_reads=0,compact_hash=1469598103934665603ull;
 static void CompactFlush() {
     for (size_t i=0;i<compact_streams.size();++i) {
@@ -33,6 +34,7 @@ static void CompactClose() {
             (unsigned long long)compact_step,compact_phase);
     fclose(compact_file); compact_file = NULL;
     if (compact_fingerprints) { fclose(compact_fingerprints); compact_fingerprints=NULL; }
+    if (compact_order) { fclose(compact_order); compact_order=NULL; }
 }
 static void CompactInit() {
     const char *path = getenv("SIMANT_CAPTURE_OBSERVER");
@@ -44,6 +46,8 @@ static void CompactInit() {
     compact_file = fopen(output,"wb");
     compact_output=output;
     if (!compact_file) abort();
+    compact_order=fopen((compact_output+".order").c_str(),"wb");
+    if (!compact_order) abort();
     while (fgets(line,sizeof(line),spec)) {
         CompactView v;
         if (line[0]=='H') {
@@ -56,6 +60,16 @@ static void CompactInit() {
         }
         CompactPoint p;
         if (sscanf(line,"%c %x",&p.kind,&p.address)!=2) abort();
+        if (p.kind=='p') { compact_peek_return=p.address;continue; }
+        if (p.kind=='q') { compact_read_return=p.address;continue; }
+        if (p.kind=='F' && !p.address) {
+            uint32_t entry=mem_readw(0x58)+16u*mem_readw(0x5a);
+            /* Pinned callback.cpp: CB_INT16 = STI; FE38 callback-id; IRET.
+             * The callback samples the BIOS ring atomically in host code. */
+            if (mem_readb(entry)!=0xfb || mem_readw(entry+1)!=0x38fe || mem_readb(entry+5)!=0xcf) abort();
+            p.address=entry+1;
+            fprintf(compact_file,"B %X %u\n",p.address,(unsigned)mem_readw(entry+3));
+        }
         if (p.kind=='D') { compact_countdown=p.address; continue; }
         if (p.kind=='O') { compact_keyboard_hook=p.address; continue; }
         compact_points.push_back(p);
@@ -79,7 +93,7 @@ static void CompactInput(const AcceptanceEvent &event, double ms) {
 static void CompactInstruction(uint32_t pc) {
     if (!compact_file) return;
     if (compact_return && pc==compact_return) {
-        CompactFlush();compact_phase=0;compact_return=0;
+        CompactFlush();compact_phase=0;compact_return=0;fputc(251,compact_order);
         fprintf(compact_file,"E %.6f %llu %llu 0\n",PIC_FullIndex()-acceptance_start_time,
             (unsigned long long)compact_pump,(unsigned long long)compact_step);
     }
@@ -105,28 +119,40 @@ static void CompactInstruction(uint32_t pc) {
         if (p.kind=='Y' && (!compact_keyboard_hook || mem_readb(compact_keyboard_hook) || reg_ah!=0x4f)) continue;
         if (p.kind=='K' || p.kind=='M' || p.kind=='Y') {
             CompactFlush();
-            fprintf(compact_file,"D %c %.6f %llu %llu %u %llu %u %u %u %u %c\n",p.kind=='Y'?'K':p.kind,
+            fprintf(compact_file,"D %c %.6f %llu %llu %u %llu %u %u %u %u %c %llu\n",p.kind=='Y'?'K':p.kind,
                 PIC_FullIndex()-acceptance_start_time,(unsigned long long)compact_pump,
                 (unsigned long long)compact_step,compact_phase,(unsigned long long)compact_reads,
-                (unsigned)reg_ax,(unsigned)reg_bx,(unsigned)reg_cx,(unsigned)reg_dx,compact_anchor);
+                (unsigned)reg_ax,(unsigned)reg_bx,(unsigned)reg_cx,(unsigned)reg_dx,compact_anchor,(unsigned long long)compact_queries);
             for (size_t j=0;j<compact_streams.size();++j) {
                 const CompactStream &s=compact_streams[j];
                 fprintf(compact_file,"J %c %X %llu\n",s.kind,s.caller,(unsigned long long)s.total);
             }
             continue;
         }
-        if (p.kind=='P' || p.kind=='W') { ++compact_pump;compact_anchor=p.kind=='P'?'Q':'W';continue; }
+        if (p.kind=='a' || p.kind=='b' || p.kind=='c' || p.kind=='d') {
+            ++compact_queries;fputc(p.kind=='a'?246:p.kind=='b'?247:p.kind=='c'?248:249,compact_order);continue;
+        }
+        if (p.kind=='F') {
+            uint32_t stack=SegPhys(ss)+reg_sp;
+            uint32_t caller=mem_readw(stack)+16u*mem_readw(stack+2);
+            bool peek=caller==compact_peek_return && reg_ah==1;
+            bool pop=caller==compact_read_return && reg_ah==0 && mem_readw(0x41a)!=mem_readw(0x41c);
+            if (peek || pop) { ++compact_queries;fputc(peek?252:253,compact_order); }
+            continue;
+        }
+        if (p.kind=='P' || p.kind=='W') { ++compact_pump;compact_anchor=p.kind=='P'?'Q':'W';fputc(p.kind=='P'?254:255,compact_order);continue; }
         if (p.kind=='S' || p.kind=='E') {
             CompactFlush();
             if (p.kind=='S') {
+                fputc(250,compact_order);
                 ++compact_step; compact_phase=1;
                 compact_return=mem_readw(SegPhys(ss)+reg_sp)+16u*mem_readw(SegPhys(ss)+reg_sp+2);
             }
             else compact_phase=0;
-            fprintf(compact_file,"%c %.6f %llu %llu %u %llu %llu\n",p.kind,
+            fprintf(compact_file,"%c %.6f %llu %llu %u %llu %llu %llu\n",p.kind,
                 PIC_FullIndex()-acceptance_start_time,
                 (unsigned long long)compact_pump,(unsigned long long)compact_step,
-                compact_phase,(unsigned long long)compact_reads,(unsigned long long)compact_hash);
+                compact_phase,(unsigned long long)compact_reads,(unsigned long long)compact_hash,(unsigned long long)compact_queries);
             if (p.kind=='S' && compact_fingerprints) {
                 FILE *dump=NULL;
                 if (compact_step==1 || compact_step%compact_interval==0 || compact_step==compact_limit) {
@@ -165,7 +191,13 @@ static void CompactInstruction(uint32_t pc) {
         compact_hash=(compact_hash^((uint64_t)caller^((uint64_t)(unsigned char)p.kind<<32)^((uint64_t)value<<8)))*1099511628211ull;
         size_t index=0;
         while (index<compact_streams.size() && (compact_streams[index].kind!=p.kind || compact_streams[index].caller!=caller)) ++index;
-        if (index==compact_streams.size()) { CompactStream s={p.kind,caller,value,0,0};compact_streams.push_back(s); }
+        if (index==compact_streams.size()) {
+            if (index>=246) abort();
+            CompactStream s={p.kind,caller,value,0,0};compact_streams.push_back(s);
+            fprintf(compact_file,"O %u %c %X\n",(unsigned)index,p.kind,caller);
+        }
+        const unsigned char site=(unsigned char)index;
+        if (fwrite(&site,1,1,compact_order)!=1) abort();
         CompactStream &s=compact_streams[index];
         if (s.count && s.value!=value) {
             fprintf(compact_file,"R %c %X %u %llu\n",s.kind,s.caller,s.value,(unsigned long long)s.count);

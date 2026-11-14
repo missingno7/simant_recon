@@ -23,7 +23,7 @@ def words(*values):
 
 image = exe.load()
 assert image.sha256 == "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
-entry = functions.get("f_1B73_030F")
+entry = functions.get("input_enqueue_event_args")
 queue = b.symbol("input_queue")
 queue_address = queue["seg"] * 16 + queue["off"]
 capacity, count, write, read = (b.symbol_address(n) for n in
@@ -74,5 +74,5 @@ print(json.dumps({
     "entry": {k: entry[k] for k in ("name", "unit", "seg", "off", "size") if k in entry},
     "event_v_offset": 10, "event_code_offset": 12, "runs": runs,
     "scope": "Original enqueue instructions with explicit synthetic caller frames; no whole-game interleaving or human-playtest causal claim.",
-    "disposition": "Keep native-event-omitted-word open; zero is not an equivalent raw-state lowering."
+    "disposition": "Zero is not an equivalent raw-state lowering. caller_frames.py binds the real caller words; review.md records the remaining unbound periodic-entry context."
 }, indent=2))

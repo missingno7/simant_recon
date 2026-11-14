@@ -16,12 +16,15 @@ except ImportError:
 def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None):
     scenario = json.loads(scenario_path.read_text())
     exe = ROOT/'assets/SIMANT.EXE' if target=='original' else ROOT/json.loads(report.read_text())['link']['candidate_executable']['path']
-    directory = out or ROOT/'build/reference'/scenario['id']/sha(exe)
+    directory = out or ROOT/'build/reference'/scenario['id']/(sha(exe)+'-service-samples-v4')
     script = ROOT/scenario['script']
     identity = dict(executable_sha256=sha(exe), scenario_sha256=sha(scenario_path), script_sha256=sha(script))
     if (directory/'manifest.json').is_file():
         manifest=json.loads((directory/'manifest.json').read_text())
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
+            boundary=json.loads((directory/'capture/boundary-manifest.json').read_text())
+            if boundary['compact_observer'].get('order_contract')!='service-samples-v4':
+                raise ValueError('Reference needs atomic service/input coordinates; retire it with tools/workspace.py and record again: '+str(directory))
             print(scenario['id']+' '+target+': cached reference', flush=True)
             return directory
         raise ValueError('Reference identity changed; move the old reference with tools/workspace.py before recording: '+str(directory))
@@ -30,7 +33,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     directory.mkdir(parents=True)
     state=schema(build, report)
     state_path=directory/'schema.json';state_path.write_text(json.dumps(state,indent=2)+'\n')
-    scratch=ROOT/'build/workers/step-tests'
+    scratch=ROOT/'build/workers/admission'
     if binding_dump is None:
         bootstrap=scratch/(scenario['id']+'-'+target+'-binding-'+str(time.time_ns()))
         bootstrap_script=bootstrap.with_suffix('.scr')
@@ -64,7 +67,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
                   complete=run.returncode==0 and len(rows)==count,
                   boundary_manifest_sha256=sha(capture/'boundary-manifest.json'),
                   files={p.relative_to(directory).as_posix():sha(p) for p in
-                         [state_path,capture/'observer.txt',capture/'observer.txt.hash',*capture.glob('observer.txt.frame.*')]})
+                         [state_path,capture/'observer.txt',capture/'observer.txt.order',capture/'observer.txt.hash',*capture.glob('observer.txt.frame.*')]})
     (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(f'{scenario["id"]} {target}: {len(rows)}/{count} steps, {elapsed:.3f}s ({elapsed/max(1,len(rows)):.4f}s/step)',flush=True)
     if not manifest['complete']: raise RuntimeError('Recording ended before requested simulation entry; see '+str(directory/'record.log'))
@@ -75,7 +78,7 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('scenario',type=Path,nargs='*')
     ap.add_argument('--target',choices=('original','canonical','all'),default='all')
-    ap.add_argument('--build',type=Path,default=ROOT/'build/workers/step-tests/native')
+    ap.add_argument('--build',type=Path,default=ROOT/'build/workers/admission/native-final')
     ap.add_argument('--observer',type=Path,required=True)
     ap.add_argument('--dos-report',type=Path,default=ROOT/'build/current/dos/build-report.json')
     ap.add_argument('--out',type=Path,help='Fresh scratch/reference path for one scenario/target (repeat control)')

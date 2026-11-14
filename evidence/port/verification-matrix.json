@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
- "updated": "2026-11-13",
- "source": "d48ab1e (canonical-source-stable-for-port plus port fixes)",
+ "updated": "2026-11-14",
+ "source": "b6e52f5 plus event-v (caller-frame fifth enqueue word) and admission (single service-ordinal replay)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -11,12 +11,12 @@
  },
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
-  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock tape and input tape; the canonical lane (native vs canonical DOS, same tape) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry; pump counts and clock-read order are diagnostics."
+  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry."
  ],
  "scenarios": {
-  "new-game-save (64 entries)": "canonical lane equal through entry 35, then replay stalls in the save flow (input admission); original lane replay fails before entry 1 (admission). 8-entry historical prefix equal three ways.",
-  "quick-game (2000 entries)": "canonical lane equal through entry 20; entry 21 window_current_event Event.v DOS 20 / native 0 (known native-event-omitted-word: stack word the asm reads but the caller does not pass); original lane replay fails before entry 1 (admission). 8-entry historical prefix equal three ways.",
-  "long-run (3000 entries, unattended)": "same as quick-game: canonical lane equal through entry 20, entry 21 Event.v; original lane replay fails before entry 1.",
+  "new-game-save (64 entries)": "original lane equal through 38, canonical through 35; first difference window_current_event Event.v of a queued keyboard-IRQ Enter (FA1Ch): DOS holds the interrupted DX, native 0 (platform.json native-input-hardware-context). 8-entry prefixes equal.",
+  "quick-game (2000 entries)": "original lane equal through 658, canonical through 659; first difference the same keyboard-IRQ Event.v (interrupted DX). 8-entry prefixes equal.",
+  "long-run (3000 entries, unattended)": "equal in game state for all 3000 entries in both lanes (original and canonical): native = original DOS and native = canonical DOS, about 10 s per lane.",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in all three scenarios; quick-game window_current_event differs from entry 1703 between repeats (observation setup differed; cause not isolated)"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
@@ -47,54 +47,54 @@
    "original_dos": "scenarios drive menus and Save As dialogs on the original",
    "canonical_dos": "same",
    "native": "runtime flows (logo click, save, load) PASS",
-   "known_divergence": "native-event-omitted-word observed at entry 21 of quick-game/long-run (canonical lane); platform.json native-window-optional-words, native-window-object-domain",
-   "first_open_question": "which caller-frame word does DOS read as the fifth enqueue word at each four-word call site?",
-   "next": "worker event-v"
+   "known_divergence": "keyboard-IRQ Event.v holds the interrupted DX on DOS, native 0 (platform.json native-input-hardware-context), first difference in new-game-save and quick-game; native-event-omitted-word fixed except the unreferenced periodic-pump entry",
+   "first_open_question": "which consumers read Event.v/h of IRQ key and mouse events, and is the DOS value observable in play?",
+   "next": "worker irq-context: replay the interrupted registers in the step check as interrupt input; consumer analysis for normal play"
   },
   {
    "id": "timing-rng",
    "name": "Simulation timing and deterministic RNG",
-   "domain": "SRand/RRand/C rand sequences; simulation pacing",
+   "domain": "SRand/RRand/C rand sequences; simulation pacing; unattended 3000-step run",
    "level": {
     "isolated": 2,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "native_rng suite compares against the original DOS lane",
    "canonical_dos": "-",
    "native": "native_rng PASS: 3,096 trace rows, no mismatch, negative control",
-   "known_divergence": "none in game state through entry 8; native makes one fewer event pump and interleaves busy-wait clock reads differently (machine-speed effects, diagnostic only); audio IRQ clock not replayed",
-   "first_open_question": "does game state stay equal over thousands of steps?",
-   "next": "worker admission: input admission keyed to the global clock-read ordinal so every lane runs its whole reference"
+   "known_divergence": "none in game state over 3000 steps (long-run, both lanes)",
+   "first_open_question": "-",
+   "next": "keep covered by the step check"
   },
   {
    "id": "simulation",
    "name": "Ant movement, behaviour, AI and colony simulation",
-   "domain": "function-level fixtures; scenario level pending alignment",
+   "domain": "function-level fixtures; unattended Quick Game run of 3000 simulation steps",
    "level": {
     "isolated": 2,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "native_simulation fixtures compare with the original DOS lane",
    "canonical_dos": "-",
    "native": "native_simulation PASS: 194 cases including mutation controls",
-   "known_divergence": "none observed in game state through entry 20 (canonical lane, 2000- and 3000-entry runs stop at Event.v at 21)",
-   "first_open_question": "first divergence in a long unattended run",
-   "next": "after event-v and admission: run all lanes to the end"
+   "known_divergence": "none in game state over 3000 steps (long-run, both lanes); quick-game and new-game-save equal until the IRQ Event.v difference",
+   "first_open_question": "divergences under player input past step 659",
+   "next": "continue the interactive lanes after irq-context"
   },
   {
    "id": "world-rules",
    "name": "Terrain, food, populations and game rules",
-   "domain": "Full Game and Quick Game",
+   "domain": "Quick Game, unattended 3000 steps",
    "level": {
     "isolated": 2,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "quick-game checkpoints",
    "canonical_dos": "quick-game checkpoints equal to original",
-   "native": "differs from seed on",
-   "known_divergence": "none observed in game state through entry 20 (canonical lane, 2000- and 3000-entry runs stop at Event.v at 21)",
-   "first_open_question": "first divergence in a long unattended run",
-   "next": "after event-v and admission: run all lanes to the end"
+   "native": "equal in game state to original and canonical DOS for 3000 steps (long-run)",
+   "known_divergence": "none observed over 3000 steps",
+   "first_open_question": "Full Game and load-from-save",
+   "next": "add load-from-save and experiment-mode scenarios"
   },
   {
    "id": "save-load",
@@ -137,9 +137,9 @@
    "original_dos": "input_irq oracle matrix from original instruction execution",
    "canonical_dos": "-",
    "native": "input_irq PASS: 2,304 rows",
-   "known_divergence": "platform.json native-input-hardware-context; inputs now reach the same step on all three",
-   "first_open_question": "-",
-   "next": "worker admission: input admission keyed to the global clock-read ordinal so every lane runs its whole reference"
+   "known_divergence": "platform.json native-input-hardware-context: interrupted CX/DX not supplied by SDL (observed as Event.v in new-game-save 39/36 and quick-game 659/660)",
+   "first_open_question": "is the interrupted-register value read by any consumer in play?",
+   "next": "worker irq-context"
   },
   {
    "id": "audio",
@@ -190,6 +190,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "projection + test harness",
+   "summary": "fifth enqueue word passed from the caller frame at all three four-word sites (receipts, negative control); inputs admitted at their recorded position in one chronological service order (atomic BIOS samples, queue samples, pumps, simulation boundaries) instead of pump/read fences; long-run equal 3000/3000 in both lanes"
+  },
+  {
+   "commit": "b6e52f5",
    "layer": "test harness",
    "summary": "step-based scenario tests: references recorded once per DOS executable, compiled native observer, native check in seconds; GDB and equal-millisecond comparison retired"
   },

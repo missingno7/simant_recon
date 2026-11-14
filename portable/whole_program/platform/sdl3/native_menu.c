@@ -29,7 +29,7 @@ void native_menu_pump(void)
 {
     unsigned i;
     for (i = 0; i < command_count; ++i)
-        portable_m1b73_event_enqueue_four_word_command((int16_t)(uint16_t)commands[i], 0, 0, 0);
+        portable_m1b73_event_enqueue_four_word_command((int16_t)(uint16_t)commands[i], 0, 0, 0, 0);
     command_count = 0;
 }
 

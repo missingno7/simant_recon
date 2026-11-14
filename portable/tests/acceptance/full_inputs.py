@@ -49,11 +49,11 @@ def parse_trace(path,steps):
             pending.remove(item)
             item.update(scheduled_milliseconds=item['milliseconds'],milliseconds=float(p[2]),pump=int(p[3]),
                 clock_reads=int(p[6]),step=int(p[4]),phase=int(p[5]),delivery_kind=kind,
-                registers=dict(ax=ax,bx=bx,cx=cx,dx=dx),position=dict(site_reads),anchor=p[11] if len(p)>11 else None)
+                registers=dict(ax=ax,bx=bx,cx=cx,dx=dx),position=dict(site_reads),anchor=p[11] if len(p)>11 else None,queries=int(p[12]) if len(p)>12 else 0)
             inputs.append(item)
         elif p[0]=='S':
             if int(p[5])!=reads:raise ValueError('Boundary read ordinal differs from complete preceding streams')
-            boundaries.append(dict(milliseconds=float(p[1]),pump=int(p[2]),step=int(p[3]),phase=int(p[4]),inputs=len(inputs) if saw_delivery else len(pending),clock_runs=len(records),clock_reads=int(p[5]),clock_hash=int(p[6])))
+            boundaries.append(dict(milliseconds=float(p[1]),pump=int(p[2]),step=int(p[3]),phase=int(p[4]),inputs=len(inputs) if saw_delivery else len(pending),clock_runs=len(records),clock_reads=int(p[5]),clock_hash=int(p[6]),queries=int(p[7]) if len(p)>7 else 0))
             boundaries[-1]['site_reads']=dict(site_reads)
             if int(p[3])==steps:break
     if len(boundaries)!=steps:raise ValueError('Missing compact simulation boundaries')
@@ -161,9 +161,6 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     symbols=json.loads((ROOT/'layout/symbols.json').read_text())['code']
     if target=='canonical_dos':
         dos_calls,canonical_addresses=canonical_clock_calls(directory,manifest)
-    window_pc=base+(canonical_addresses['f_1B28_0069'] if target=='canonical_dos' else symbols['f_1B28_0069']['seg']*16+symbols['f_1B28_0069']['off'])
-    pump_points=[('P',p[1]) for p in manifest['compact_observer']['points'] if p[0] in ('P','W')]
-    pump_source='both' if len(pump_points)==2 and ('P',window_pc) in pump_points else 'window' if ('P',window_pc) in pump_points else 'queue'
     functions=sorted((base+r['seg']*16+r['off'],n) for n,r in symbols.items() if not r.get('alias_of'))
     addresses={n:a for a,n in functions}
     records,inputs,boundaries=parse_trace(trace,steps)
@@ -214,11 +211,32 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
         binding['total_reads']=sum(n for k,p,v,n in records if (k,p)==(kind,pc))
     clock_path.write_text('# Exact original primitive reads; kind native-PC-delta value repeat-count\n'+''.join(
         f'{bindings[k,p]["kind"]} {bindings[k,p]["native_delta"]} {k} {p} {v} {n}\n' for k,p,v,n in records)+'X\n')
+    order_path=None
+    contract=manifest['compact_observer'].get('order_contract')
+    if contract:
+        source=directory/'observer.txt.order'
+        if contract!='service-samples-v4' or sha(source)!=manifest['compact_observer']['order_sha256']:
+            raise ValueError('Unbound global service sequence')
+        sites={int(v[1]):(v[2],int(v[3],16)) for line in trace.read_text().splitlines()
+               if (v:=line.split()) and v[0]=='O'}
+        indices={key:i for i,key in enumerate(bindings)}
+        if len(bindings)>246:raise ValueError('Clock site IDs overlap reserved service IDs')
+        mapping=bytearray(range(256))
+        for i,key in sites.items():
+            if key in indices:mapping[i]=indices[key]
+        order_path=out/'service-order.bin'
+        boundary=boundaries[-1]
+        limit=boundary['clock_reads']+boundary['pump']+boundary['queries']+2*boundary['step']-boundary['phase']
+        order=source.read_bytes()[:limit]
+        if len(order)!=limit:raise ValueError('Incomplete global service sequence')
+        if any(i<246 and (i not in sites or sites[i] not in indices) for i in set(order)):
+            raise ValueError('Global sequence contains an unbound clock site')
+        order_path.write_bytes(order.translate(bytes(mapping)))
     receipt=dict(schema='simant-original-full-inputs-v1',original_manifest_sha256=sha(directory/'boundary-manifest.json'),
         trace_sha256=sha(trace),native_executable_sha256=sha(exe),scenario_sha256=scenario_sha,input_script_sha256=script_sha,
-        clock_tape_sha256=sha(clock_path),steps=steps,pump_source=pump_source,
+        clock_tape_sha256=sha(clock_path),service_order=str(order_path) if order_path else None,steps=steps,
         clock_reads=sum(r[3] for r in records),clock_runs=len(records),inputs=inputs,boundaries=boundaries,
         bindings=[dict(original_kind=k,original_pc=p,**v) for (k,p),v in bindings.items()],native_disassembly=texts,
-        scope='Original per-site/read-ordinal values through the requested entry. Input positions include step, inside/outside phase, completed-site ordinals and service boundary; pump counts/order digest are diagnostics.')
+        scope='Captured per-site/read-ordinal clock values and exact chronological service order. Actual IRQs are admitted at their recorded service positions; state/clock values are never selected from native results.')
     (out/'full-inputs.json').write_text(json.dumps(receipt,indent=2)+'\n')
     return clock_path,None,receipt

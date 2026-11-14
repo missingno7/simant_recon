@@ -84,7 +84,7 @@ def main():
     original=(ROOT/scenario['script']).read_text()
     lines=[l for l in original.splitlines() if l.strip() and not l.lstrip().startswith('#')]
     # One binding frame, then compact fingerprints and periodic state frames.
-    lines += [f'0 on_exec lin {base+addresses["DoAntSim"]:X} 1 dump 0 A0000 simstep']
+    lines += [f'0 on_exec lin {base+addresses["DoAntSim"]:X} 1 dump 0 100000 simstep']
     lines.sort(key=lambda l:int(l.split()[0]))
     script=out.with_suffix('.scr');script.write_text('\n'.join(lines)+'\n')
     command=[sys.executable,str(ROOT/'dos/run.py'),
@@ -101,7 +101,9 @@ def main():
             ret=next(i.address for i in ins if i.mnemonic=='retf')
             points.append((kind,ret))
         start=base+addresses['input_event_count']
-        pump_pc=next(i.address for i in decoder.disasm(memory[start:start+16],start) if i.mnemonic=='retf')
+        sample=next(decoder.disasm(memory[start:start+4],start))
+        if sample.mnemonic!='mov' or not sample.op_str.startswith('ax, word ptr ['):raise ValueError('Queue count sample binding differs')
+        pump_pc=sample.address
         points.append(('P',pump_pc))
         points.append(('W',base+addresses['f_1B28_0069']))
         points.append(('S',base+addresses['DoAntSim']))
@@ -109,6 +111,27 @@ def main():
             start=base+addresses[name]
             ret=next(i.address for i in decoder.disasm(memory[start:start+80],start) if i.mnemonic=='retf')
             points.append((kind,ret))
+        # Actual INT16 callback sample, not the later public-function RETF.
+        bios_entry=int.from_bytes(memory[0x58:0x5a],'little')+16*int.from_bytes(memory[0x5a:0x5c],'little')
+        if bios_entry<0xf0000:raise ValueError('Unbound BIOS INT16 callback vector')
+        points.append(('F',bios_entry+1))
+        for name,kind in [('kbd_poll_bios_key','p'),('kbd_read_bios_char','q')]:
+            start=base+addresses[name]
+            calls=[i.address+2 for i in decoder.disasm(memory[start:start+34],start)
+                   if i.mnemonic=='int' and i.op_str=='0x16']
+            if len(calls)!=1:raise ValueError('Expected one source INT16 in '+name)
+            points.append((kind,calls[0]))
+        # Input operands read while source loops execute without clock reads.
+        # Each routine has exactly one byte MOV into AL before its RETF.
+        from capstone.x86 import X86_OP_REG,X86_OP_MEM,X86_REG_AL
+        for name,kind,length in [('StillDown','b',61),('kbd_scan_state','c',16),('kbd_scroll_lock_state','d',14)]:
+            start=base+addresses[name]
+            samples=[i.address for i in decoder.disasm(memory[start:start+length],start)
+                     if i.mnemonic=='mov' and len(i.operands)==2 and i.operands[0].type==X86_OP_REG
+                     and i.operands[0].reg==X86_REG_AL and i.operands[1].type==X86_OP_MEM]
+            if len(samples)!=1:raise ValueError('Input operand sample is ambiguous: '+name)
+            points.append((kind,samples[0]))
+        points.append(('a',base+addresses['edit_scroll_and_redraw']))
         points += [('K',base+addresses['kbd_process_scan']),('M',base+addresses['mouse_event_callback'])]
         points.append(('Y',base+addresses['kbd_int15_scan_hook']))
         from capstone.x86 import X86_OP_MEM,X86_OP_REG,X86_REG_CS,X86_REG_BL
@@ -155,7 +178,15 @@ def main():
     if args.state_schema:
         manifest['state_schema_sha256']=sha(args.state_schema)
     if compact_spec:
+        captured=(out/'exec-simstep.1.bin').read_bytes()
+        actual=int.from_bytes(captured[0x58:0x5a],'little')+16*int.from_bytes(captured[0x5a:0x5c],'little')
+        stub=captured[actual:actual+6]
+        if actual!=bios_entry or len(stub)!=6 or stub[:3]!=bytes.fromhex('fb fe 38') or stub[5]!=0xcf:
+            raise ValueError('Captured BIOS INT16 callback differs from its bound vector/CB_INT16 opcode')
+        manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
+            peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
         manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,pump_source='both',
+            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v4',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
     (out/'boundary-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

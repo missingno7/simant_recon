@@ -4,12 +4,14 @@
 #define SIMANT_TEST_OBSERVER_IMPLEMENTATION
 #include "../input_time.h"
 
-static FILE *test_clock_file, *test_input_file;
-static int test_loaded, test_clock_done, test_window_source;
-static int test_fast_refresh, test_disable_clock, test_step_mode;
+static FILE *test_clock_file, *test_input_file, *test_order_output;
+static unsigned char *test_service_data;
+static size_t test_service_at, test_service_size;
+static int test_loaded, test_clock_done;
+static int test_disable_clock, test_step_mode, test_control_changed;
 static uint64_t test_pumps;
 static unsigned test_inputs, test_queued;
-static uint64_t test_input_pump, test_input_reads;
+static uint64_t test_input_service;
 static unsigned test_input_step, test_input_phase;
 static unsigned test_step, test_phase;
 static char test_input_op[24], test_input_arg[40];
@@ -20,7 +22,9 @@ static Host *test_host;
 static SDL_Event test_raw[128];
 static unsigned test_raw_ids[128], test_raw_sequence;
 static unsigned test_raw_head, test_raw_count;
-static int test_injecting;
+static int test_injecting, test_admitting;
+static uint64_t test_services, test_queries;
+extern int portable_input_time_host_interrupt(void) __attribute__((weak));
 static int test_queue_raw(const SDL_Event *event) {
   if (test_raw_count == 128)
     abort();
@@ -61,7 +65,8 @@ static void test_finish(void) {
   if (test_step_mode)
     return;
   if ((test_clock_file && (!test_clock_done || test_remaining)) ||
-      test_input_ready || test_raw_count || test_inputs != test_queued) {
+      test_input_ready || test_raw_count || test_inputs != test_queued ||
+      (test_service_data && test_service_at!=test_service_size)) {
     fprintf(stderr,
             "Observer tape incomplete: clock=%" PRIu64 " input=%d pump=%" PRIu64
             "\n",
@@ -82,10 +87,9 @@ static void test_next_input(void) {
   test_input_ready = 0;
   if (!test_input_file || !test_line(test_input_file, line, sizeof(line)))
     return;
-  if (sscanf(line, "%" SCNu64 " %" SCNu64 " %u %u %23s %39s %d %d %c",
-             &test_input_pump, &test_input_reads, &test_input_step,
-             &test_input_phase, test_input_op, test_input_arg, &test_input_a,
-             &test_input_b, &extra) != 8)
+  if (sscanf(line, "%" SCNu64 " %u %u %23s %39s %d %d %c",
+             &test_input_service, &test_input_step, &test_input_phase,
+             test_input_op, test_input_arg, &test_input_a, &test_input_b, &extra) != 7)
     abort();
   test_input_ready = 1;
 }
@@ -94,19 +98,10 @@ static void test_load(void) {
   if (test_loaded)
     return;
   test_loaded = 1;
-  test_fast_refresh = getenv("SIMANT_TEST_FAST_REFRESH") != NULL;
   test_disable_clock = getenv("SIMANT_TEST_DISABLE_CLOCK") != NULL;
   test_step_mode = getenv("SIMANT_TEST_STEP_CONFIG") != NULL;
   clock_path = getenv("SIMANT_TEST_FULL_CLOCK");
-  input_path = getenv("SIMANT_TEST_PUMP_INPUT");
-  if (getenv("SIMANT_TEST_PUMP_SOURCE")) {
-    if (!strcmp(getenv("SIMANT_TEST_PUMP_SOURCE"), "window"))
-      test_window_source = 1;
-    else if (!strcmp(getenv("SIMANT_TEST_PUMP_SOURCE"), "both"))
-      test_window_source = 2;
-    else if (strcmp(getenv("SIMANT_TEST_PUMP_SOURCE"), "queue"))
-      abort();
-  }
+  input_path = getenv("SIMANT_TEST_SERVICE_INPUT");
   if (getenv("SIMANT_TEST_CLOCK_CONTROL_READ")) {
     char *end;
     test_control_read =
@@ -170,7 +165,32 @@ static void test_load(void) {
     abort();
   if ((clock_path || input_path) && atexit(test_finish))
     abort();
+  if (getenv("SIMANT_TEST_ORDER_OUTPUT")) test_order_output=fopen(getenv("SIMANT_TEST_ORDER_OUTPUT"), "wb");
+  if (getenv("SIMANT_TEST_SERVICE_ORDER")) {
+    FILE *order=fopen(getenv("SIMANT_TEST_SERVICE_ORDER"), "rb");
+    int64_t length;
+    if (!order || _fseeki64(order,0,SEEK_END) || (length=_ftelli64(order))<=0 ||
+        (uint64_t)length>SIZE_MAX || _fseeki64(order,0,SEEK_SET)) abort();
+    test_service_size=(size_t)length;
+    test_service_data=malloc(test_service_size);
+    if (!test_service_data || fread(test_service_data,1,test_service_size,order)!=test_service_size ||
+        fgetc(order)!=EOF || ferror(order)) abort();
+    fclose(order);
+  }
   test_next_input();
+}
+static void test_service(unsigned index) {
+  ++test_services;
+  if (test_service_data && !test_control_changed) {
+    int expected=test_service_at<test_service_size ? test_service_data[test_service_at++] : -1;
+    if (expected!=(int)index) {
+      fprintf(stderr,"Observer service order mismatch at %" PRIu64 ": expected=%d actual=%u reads=%" PRIu64 " pumps=%" PRIu64 "\n",
+              test_services,expected,index,test_reads,test_pumps);
+      if (test_order_output) fflush(test_order_output);
+      if (portable_test_replay_error) portable_test_replay_error("Global service order differs");
+      abort();
+    }
+  }
 }
 uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) {
   unsigned i;
@@ -185,6 +205,8 @@ uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) {
     return fallback;
   if (!test_remaining)
     exit(0);
+  portable_test_before_poll();
+
   for (i = 0; i < test_stream_count &&
               (test_streams[i].kind != kind || test_streams[i].pc != delta);
        ++i) {
@@ -194,11 +216,14 @@ uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) {
             "Observer extra clock read: %c %" PRId64 " (%" PRIu64
             " total reads left) pump=%" PRIu64 "\n",
             kind, delta, test_remaining, test_pumps);
+    if (test_order_output) fflush(test_order_output);
     if (portable_test_replay_error)
       portable_test_replay_error("No recorded value for native clock read");
     abort();
   }
+  test_service(i);
   stream = &test_streams[i];
+  if (test_order_output) { fprintf(test_order_output,"%c %u\n",stream->original_kind,stream->original_pc); }
   ++stream->completed;
   run = stream->head;
   value = run->value;
@@ -213,6 +238,7 @@ uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) {
               " host=%" PRIu32 "\n",
               test_reads, value, fallback);
     value = fallback;
+    test_control_changed = 1;
   }
   test_hash =
       (test_hash ^ ((uint64_t)stream->original_pc ^
@@ -223,13 +249,14 @@ uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) {
     stream->head = run->next;
     free(run);
   }
+  portable_test_before_poll();
   return value;
 }
 uint64_t portable_test_pump_ordinal(void) { return test_pumps; }
 unsigned portable_test_input_count(void) { return test_inputs; }
 __attribute__((noinline)) void
 portable_test_input_delivered(unsigned sequence) {
-  fprintf(stderr, "Observer phase %u %u %u\n", sequence, test_step, test_phase);
+  fprintf(stderr, "Observer phase %u %u %u %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 "\n", sequence, test_step, test_phase,test_queries,test_services,test_reads,test_pumps);
   for (unsigned i = 0; i < test_stream_count; ++i)
     fprintf(stderr, "Observer position %u %c %u %" PRIu64 "\n", sequence,
             test_streams[i].original_kind, test_streams[i].original_pc,
@@ -238,24 +265,43 @@ portable_test_input_delivered(unsigned sequence) {
 
 void portable_test_pump(void) {
   test_load();
-  if (test_window_source == 1)
-    return;
+  test_service(254);
   ++test_pumps;
+  if (test_order_output) fputs("Q 0\n",test_order_output);
   portable_test_before_poll();
 }
 
 void portable_test_window_pump(void) {
   test_load();
-  if (!test_window_source)
-    return;
+  portable_test_before_poll();
+  test_service(255);
   ++test_pumps;
+  if (test_order_output) fputs("W 0\n",test_order_output);
   portable_test_before_poll();
 }
 
+void portable_test_input_sample(unsigned kind, unsigned value) {
+  (void)value;
+  test_load();
+  if (!test_clock_file && !test_input_file && !test_service_data) return;
+  if (test_order_output) fprintf(test_order_output,"S %u\n",kind);
+  test_service(kind);
+  ++test_queries;
+  /* The sampled value is already cached locally by these providers. Delivery
+   * now cannot retroactively change it. Entry-only probes (246/247) precede
+   * their bodies and instead admit at the body's next legal input yield. */
+  if (kind>=248) portable_test_before_poll();
+}
 void portable_test_before_poll(void) {
   test_load();
-  while (test_input_ready && test_input_pump <= test_pumps &&
-         test_input_reads <= test_reads) {
+  if (test_admitting) return;
+  test_admitting = 1;
+  while (test_input_ready && test_input_service <= test_services) {
+    if (test_service_data && !test_control_changed &&
+        test_input_service != test_services) {
+      if (portable_test_replay_error) portable_test_replay_error("Missed input service boundary");
+      abort();
+    }
     SDL_Event raw = {0};
     if (!strcmp(test_input_op, "keydown") || !strcmp(test_input_op, "keyup")) {
       const char *name = !strcmp(test_input_arg, "enter")  ? "Return"
@@ -302,26 +348,38 @@ void portable_test_before_poll(void) {
     }
     fprintf(stderr,
             "Observer queued input %u pump=%" PRIu64 " reads=%" PRIu64
-            " original=%" PRIu64 "/%" PRIu64 " step=%u phase=%u %s %s\n",
-            ++test_queued, test_pumps, test_reads, test_input_pump,
-            test_input_reads, test_input_step, test_input_phase, test_input_op,
+            " service=%" PRIu64 " step=%u phase=%u %s %s\n",
+            ++test_queued, test_pumps, test_reads, test_input_service,
+            test_input_step, test_input_phase, test_input_op,
             test_input_arg);
     test_next_input();
+    if (!portable_input_time_host_interrupt || portable_input_time_host_interrupt() < 0) abort();
   }
+  test_admitting = 0;
 }
 
 /* Step observer glue: no canonical game state is written. */
 void portable_test_step_boundary(unsigned step, unsigned phase) {
+  test_load();
+  portable_test_before_poll();
+  test_service(phase ? 250 : 251);
   test_step = step;
   test_phase = phase;
+  if (!phase) portable_test_before_poll();
+}
+int portable_test_reference_end(void) {
+  test_load();
+  return !test_remaining && !test_input_ready && !test_raw_count &&
+         test_inputs==test_queued &&
+         (!test_service_data || test_service_at==test_service_size);
 }
 void portable_test_diagnostics(FILE *f) {
   fprintf(f,
           "\"pump_count\":%" PRIu64 ",\"clock_reads\":%" PRIu64
-          ",\"clock_order_digest\":%" PRIu64 ",\"inputs_delivered\":%u",
-          test_pumps, test_reads, test_hash, test_inputs);
+          ",\"clock_order_digest\":%" PRIu64 ",\"inputs_delivered\":%u,\"service_samples\":%" PRIu64 ",\"input_queries\":%" PRIu64,
+          test_pumps, test_reads, test_hash, test_inputs,test_services,test_queries);
 }
 int portable_test_refresh_mode(void) {
   test_load();
-  return test_fast_refresh && test_clock_file && !test_raw_count ? 1 : 0;
+  return test_clock_file != NULL ? 1 : 0;
 }

@@ -125,6 +125,13 @@ static int ingest_host_events(PortableInputTimeHost *binding)
     } while (1);
 }
 
+/* Deliver the host queue through the ordinary IRQ adapter without an idle hook.
+ * Clock-tape admission uses this boundary; production refresh remains unchanged. */
+int portable_input_time_host_interrupt(void)
+{
+    return active_host_binding ? ingest_host_events(active_host_binding) : -1;
+}
+
 static int host_ticks(void *context, uint32_t *ticks)
 {
     PortableInputTimeHost *binding = (PortableInputTimeHost *)context;
@@ -317,14 +324,16 @@ PortableInputTimeStatus portable_input_time_host_refresh_clock(
      * deliver host interrupts while the existing source IF flag is clear. */
     if (binding->ingesting || !delivery_enabled(binding))
         return PORTABLE_INPUT_TIME_OK;
+    if (portable_test_before_poll) portable_test_before_poll();
     /* The application callback polls retained events after advancing clocks
      * and injecting due replays. Nested services may drain those events within
      * this refresh, but never enter the clock/idle callback a second time. */
     if (binding->refreshing)
         return ingest_host_events(binding) < 0 ? PORTABLE_INPUT_TIME_PROVIDER_FAILED :
                                                 PORTABLE_INPUT_TIME_OK;
-    /* Tape acceleration: pending recorded input always uses the full
-     * historical refresh. No event is ingested on a shortened path. */
+    /* Captured service inputs replace host time and interrupt scheduling.
+     * Their adapter admits IRQ transitions directly; do not advance a second
+     * host timeline or run an application idle callback inside a sampled read. */
     if (portable_test_refresh_mode && portable_test_refresh_mode()==1)
         return PORTABLE_INPUT_TIME_OK;
     now = host_time_ns();

@@ -8,7 +8,9 @@
 
 extern uint32_t portable_test_clock_read(char, void *, uint32_t);
 extern void portable_test_step_boundary(unsigned, unsigned);
+extern void portable_test_before_poll(void) __attribute__((weak));
 extern void portable_test_diagnostics(FILE *);
+extern int portable_test_reference_end(void) __attribute__((weak));
 extern void __real_DoAntSim(void);
 extern int32_t __real_MacTickCount(void);
 
@@ -145,6 +147,8 @@ static uint32_t fingerprint(View *v) {
 }
 
 static void finish(unsigned differs) {
+  if (!differs && portable_test_reference_end && !portable_test_reference_end())
+    portable_test_replay_error("Reference ended with unconsumed service inputs");
   fprintf(result, "{\"steps_compared\":%u,\"first_differing_step\":%u,", step,
           differs ? step : 0);
   portable_test_diagnostics(result);
@@ -195,6 +199,27 @@ void __wrap_DoAntSim(void) {
   fflush(actual);
   if (differs || step == limit)
     finish(differs);
+  if (portable_test_before_poll) portable_test_before_poll();
   __real_DoAntSim();
   portable_test_step_boundary(step, 0);
+}
+
+/* GCC entry instrumentation covers internal calls within a translation unit,
+ * which the linker's --wrap does not intercept. Bodies and arguments stay
+ * canonical; only these two source boundaries advance the observer. */
+extern void portable_test_before_poll(void) __attribute__((weak));
+extern void portable_test_input_sample(unsigned, unsigned) __attribute__((weak));
+extern int16_t StillDown(void) __attribute__((weak));
+extern int16_t edit_scroll_and_redraw(int16_t, int16_t) __attribute__((weak));
+__attribute__((no_instrument_function)) void __cyg_profile_func_enter(void *function, void *caller) {
+  (void)caller;
+  unsigned kind;
+  if (function==(void *)StillDown) kind=247;
+  else if (function==(void *)edit_scroll_and_redraw) kind=246;
+  else return;
+  if (portable_test_before_poll) portable_test_before_poll();
+  if (portable_test_input_sample) portable_test_input_sample(kind,0);
+}
+__attribute__((no_instrument_function)) void __cyg_profile_func_exit(void *function, void *caller) {
+  (void)function;(void)caller;
 }

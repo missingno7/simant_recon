@@ -844,6 +844,9 @@ def preprocess(source, filename, cc, include_dirs):
 
 
 def convert(source, filename, cc, include_dirs, lower=True, canonical_source=None, sequence_effects=True):
+    input_digest=hashlib.sha256(source.encode('latin1')).hexdigest()
+    from . import m1b73_event_source
+    source,event_caller_receipt=m1b73_event_source.adapt_caller_context(source,canonical_source)
     preprocessed,command=preprocess(source,filename,cc,include_dirs)
     tree=c_parser.CParser().parse(preprocessed,filename=str(filename))
     analysis=Analyzer(filename,instruction_sites(canonical_source));analysis.walk(tree)
@@ -871,10 +874,11 @@ def convert(source, filename, cc, include_dirs, lower=True, canonical_source=Non
     counts=Counter(r['status'] for r in analysis.records)
     categories=Counter(c for r in analysis.records for c in r['categories'])
     receipt={'schema':'msc16-declaration-expressions-v1','frontend':'pycparser '+pycparser.__version__+' + GCC preprocessing',
-             'input_sha256':hashlib.sha256(source.encode('latin1')).hexdigest(),
+             'input_sha256':input_digest,
              'output_sha256':hashlib.sha256(output.encode('latin1')).hexdigest(),
              'counts':dict(counts),'categories':dict(categories),'expressions':analysis.records,
              'evaluation_order':evaluation_receipt,
+             'event_caller_frames':event_caller_receipt,
              'open_domain_expressions':sum(any(c.endswith('-domain') for c in r['categories']) for r in analysis.records),
              'premises':['MinGW GCC signed char; Windows LLP64; int16 storage/casts are signed short',
                          'MSC usual arithmetic conversion and C90 literal candidate sequence',

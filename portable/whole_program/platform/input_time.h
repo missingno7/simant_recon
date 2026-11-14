@@ -90,6 +90,7 @@ void portable_test_pump(void) SIMANT_OBSERVER_WEAK;
 void portable_test_window_pump(void) SIMANT_OBSERVER_WEAK;
 void portable_test_before_poll(void) SIMANT_OBSERVER_WEAK;
 int portable_test_refresh_mode(void) SIMANT_OBSERVER_WEAK;
+void portable_test_input_sample(unsigned kind, unsigned value) SIMANT_OBSERVER_WEAK;
 void portable_test_replay_error(const char *message) __attribute__((weak));
 int portable_test_clock_is_stateful(void) __attribute__((weak));
 #undef SIMANT_OBSERVER_WEAK

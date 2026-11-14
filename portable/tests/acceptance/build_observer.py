@@ -48,7 +48,7 @@ def main():
     run=subprocess.run(['cmd','/c',str(out/'build.cmd')],cwd=out,capture_output=True,text=True,timeout=600)
     (out/'build.log').write_text(run.stdout+run.stderr)
     if run.returncode: raise RuntimeError((run.stdout+run.stderr)[-5000:])
-    inputs=[source,HERE/'compact_observer.inc',HERE/'build_observer.py']+sorted(obj.glob('*.obj'))
+    inputs=[source,SOURCE/'src/cpu/callback.cpp',SOURCE/'src/ints/bios_keyboard.cpp',HERE/'compact_observer.inc',HERE/'build_observer.py']+sorted(obj.glob('*.obj'))
     receipt=dict(schema='simant-read-only-observer-build-v1',executable=str(out/'dosbox-x.exe'),
         sha256=sha(out/'dosbox-x.exe'),inputs={str(p):sha(p) for p in inputs},
         patched_source_sha256=sha(patched),compiler_response_sha256=sha(out/'compile.rsp'),linker_response_sha256=sha(out/'link.rsp'),

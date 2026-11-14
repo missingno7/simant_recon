@@ -38,6 +38,12 @@ class Controls(unittest.TestCase):
 #include <stdlib.h>
 #include <inttypes.h>
 static uint8_t state[4]={1,2,7,4};
+static unsigned input_samples[256];
+void portable_test_before_poll(void){}
+void portable_test_input_sample(unsigned kind,unsigned value){(void)value;++input_samples[kind];}
+int16_t StillDown(void){return 1;}
+int16_t edit_scroll_and_redraw(int16_t x,int16_t y){return x+y;}
+static int internal_input_calls(void){return StillDown()+edit_scroll_and_redraw(2,3);}
 uint32_t portable_test_clock_read(char k,void *p,uint32_t v){return v;}
 void portable_test_step_boundary(unsigned s,unsigned p){}
 void portable_test_diagnostics(FILE *f){fputs("\"pump_count\":999",f);}
@@ -45,6 +51,7 @@ int32_t __real_MacTickCount(void){return 0;}
 void __real_DoAntSim(void){++state[0];++state[2];}
 extern void __wrap_DoAntSim(void);
 int main(int argc,char **argv){
+    if(internal_input_calls()!=6 || input_samples[247]!=1 || input_samples[246]!=1)return 98;
     FILE *f=fopen(argv[1],"w");
     fprintf(f,"%s\n%s\n%s\n%s\n2 3\n1 2 0 2\n%" PRId64 " 1\n%" PRId64 " 1\n0 1 0 1\n%" PRId64 " 1\n",
       argv[2],argv[3],argv[4],argv[5],
@@ -55,7 +62,7 @@ int main(int argc,char **argv){
     for(int i=0;i<5;++i)__wrap_DoAntSim();return 99;
 }
 ''')
-            subprocess.run(['C:/msys64/mingw64/bin/gcc.exe','-std=c11',str(source),
+            subprocess.run(['C:/msys64/mingw64/bin/gcc.exe','-std=c11','-finstrument-functions',str(source),
                             str(Path(__file__).with_name('native_observer.c')),'-o',str(exe)],
                            check=True,capture_output=True,timeout=30)
             for negative in (False,True):
@@ -79,12 +86,13 @@ int main(int argc,char **argv){
     def test_stored_step_scenarios(self):
         """The driver runs every stored scenario (or reports it absent) and never launches a
         DOS recorder. Findings (exit 1 with one line per scenario) are reported, not failed:
-        they are tracked in evidence/port/verification-matrix.json. A crash fails."""
+        they remain in each lane result. A replay failure or crash fails."""
         command=[os.sys.executable,str(Path(__file__).with_name('step_check.py'))]
-        run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=60)
+        run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=180)
         print(run.stdout,end='')
         self.assertIn(run.returncode,(0,1),run.stderr+run.stdout)
         self.assertNotIn('Traceback',run.stderr)
+        self.assertNotIn('INCOMPLETE',run.stdout)
         self.assertTrue(run.stdout.strip(),run.stderr)
 
 
