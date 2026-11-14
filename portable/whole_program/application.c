@@ -67,8 +67,19 @@ typedef struct Application {
     int test_input;
     int replay_tick_units;
     uint32_t started_bios_ticks;
+    int headless_unpaced;
+    uint64_t presentations, omitted_presentations;
 } Application;
 static Application app;
+/* Read-only performance receipt for the acceptance observer. */
+void portable_native_performance(FILE *f)
+{
+    fprintf(f, "\"machine_ns\":%llu,\"audio_pumps\":%llu,\"audio_rendered_frames\":%llu,\"silent_audio_advances\":%llu,\"physical_audio_open\":%u,\"presentations\":%llu,\"omitted_presentations\":%llu,",
+        (unsigned long long)host_time_ns(), (unsigned long long)app.audio.pump_calls,
+        (unsigned long long)app.audio.rendered_frames,
+        (unsigned long long)app.audio.silent_advances, app.audio.output.stream != NULL,
+        (unsigned long long)app.presentations, (unsigned long long)app.omitted_presentations);
+}
 static int exit_status;
 static const char *exit_reason = "source main returned";
 extern void __real_exit(int status) __attribute__((noreturn));
@@ -605,8 +616,18 @@ static void idle(void *context)
                 scanout_height != a->graphics.framebuffer.height ||
                 memcmp(&scanout_palette, palette, sizeof(scanout_palette)) ||
                 memcmp(scanout_planes, a->graphics.vga.planes, sizeof(scanout_planes))) {
-                if (portable_m1b73_sdl_application_input_present(&a->input) !=
-                        PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
+                if (a->headless_unpaced) {
+                    /* Keep presentation's internal event refresh at the same
+                     * boundary. Only the derived pixel/RGB/SDL output is
+                     * omitted; checkpoint observers read the VGA aperture. */
+                    if (portable_input_time_host_refresh_clock(&a->input.input_host) !=
+                            PORTABLE_INPUT_TIME_OK) fail("headless presentation refresh");
+                    ++a->omitted_presentations;
+                } else {
+                    if (portable_m1b73_sdl_application_input_present(&a->input) !=
+                            PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
+                    ++a->presentations;
+                }
                 memcpy(scanout_planes, a->graphics.vga.planes, sizeof(scanout_planes));
                 scanout_palette = *palette;
                 scanout_width = a->graphics.framebuffer.width;
@@ -750,6 +771,10 @@ int main(int argc, char **argv)
     source_argv[source_argc] = NULL;
     portable_machine_clock_configure(virtual_quantum_ns != 0,
         virtual_quantum_ns ? virtual_quantum_ns : UINT64_C(1000000));
+    /* Smoke screenshots and injected diagnostic F12 tests require a real
+     * presented frame even with the SDL dummy driver. Ordinary play keeps
+     * its existing path. */
+    app.headless_unpaced = headless && virtual_quantum_ns && !smoke_ms && !app.test_input;
     if (!explicit_seed) app.seed = 0; /* 046C:0000 RAM policy, not BIOS time. */
     simant_diagnostics_launch(assets, app.seed);
     if (test_crash == 1) simant_diagnostics_test_crash();

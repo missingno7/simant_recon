@@ -87,10 +87,27 @@ def bounding_boxes(mask):
     return box,bands
 
 
-def compare_pair(dos_path,native_path,out,entry):
+def compare_pair(dos_path,native_path,out,entry,hash_first=False):
     import numpy as np
     from PIL import Image
     d,n=read_screen(dos_path),read_screen(native_path)
+    signatures={}
+    if hash_first:
+        # Exactly the existing verdict fields, in a fixed order. Header,
+        # validity and INT33 applicability remain validated/diagnostic as
+        # before. Never hash rendered RGB alone: unused DAC and pixel indices
+        # must still matter. Byte equality also guards against hash collision.
+        semantic=lambda s:b''.join(s[key].tobytes() for key in ('attribute','dac','rgb','pixels'))
+        left,right=semantic(d),semantic(n)
+        a,b=hashlib.sha256(left).hexdigest(),hashlib.sha256(right).hexdigest()
+        signatures=dict(semantic_sha256=dict(dos=a,native=b))
+        if a==b and left==right:
+            return dict(entry=entry,pixel_count=0,bounding_box=None,bounding_boxes=[],
+                visible_pixel_count=0,visible_bounding_box=None,palette_indices=[],
+                projected_palette_indices=[],attribute_indices=[],
+                native_unwritten_dac_indices=np.flatnonzero(n['valid']==0).tolist(),status='FRAME_EQUAL',
+                dos_sha256=hashlib.sha256(dos_path.read_bytes()).hexdigest(),
+                native_sha256=hashlib.sha256(native_path.read_bytes()).hexdigest(),**signatures)
     changed=d['pixels']!=n['pixels']
     rgb_d=d['rgb'][d['pixels']];rgb_n=n['rgb'][n['pixels']]
     visible=np.any(rgb_d!=rgb_n,axis=2)
@@ -116,14 +133,15 @@ def compare_pair(dos_path,native_path,out,entry):
         row['png_triple']=names
     row['dos_sha256']=hashlib.sha256(dos_path.read_bytes()).hexdigest()
     row['native_sha256']=hashlib.sha256(native_path.read_bytes()).hexdigest()
+    row.update(signatures)
     return row
 
 
-def compare_frames(reference,out,entries):
+def compare_frames(reference,out,entries,hash_first=False):
     rows=[];missing=[]
     for s in entries:
         path=out/f'native.screen.{s}'
-        if path.is_file():rows.append(compare_pair(reference/'capture'/f'observer.txt.screen.{s}',path,out,s))
+        if path.is_file():rows.append(compare_pair(reference/'capture'/f'observer.txt.screen.{s}',path,out,s,hash_first=hash_first))
         else:missing.append(s)
     first=next((r for r in rows if r['status']!='FRAME_EQUAL'),None)
     result=dict(status='FRAME_DIFFERENCE' if first else 'FRAME_INCOMPLETE' if missing else 'FRAME_EQUAL',

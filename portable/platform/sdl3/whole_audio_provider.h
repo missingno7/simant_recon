@@ -16,6 +16,8 @@ typedef struct PortableSdl3WholeAudio {
     PortableSdl3SourceTimerObserver source_timer_observer;
     void *source_timer_observer_context;
     int active;
+    /* Diagnostic counters; never inputs to the device or machine clock. */
+    uint64_t pump_calls, rendered_frames, silent_advances;
 } PortableSdl3WholeAudio;
 int portable_sdl3_whole_audio_open(PortableSdl3WholeAudio *audio);
 void portable_sdl3_whole_audio_close(PortableSdl3WholeAudio *audio);

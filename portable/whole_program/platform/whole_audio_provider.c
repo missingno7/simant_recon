@@ -12,6 +12,14 @@ extern void portable_test_audio_mix(unsigned,unsigned) __attribute__((weak));
 extern void portable_test_audio_tick(unsigned) __attribute__((weak));
 extern void portable_test_audio_progress(unsigned) __attribute__((weak));
 static PortableWholeAudioProvider *replay_provider;
+/* SIMANT_TEST_AUDIO_TIMER selects the step check's recorded ISR schedule. It is
+ * read once: getenv on every rendered frame (48,000 per second) cost about two
+ * thirds of native run time in profiling (build/workers/check-speed). */
+static int audio_timer_replay(void) {
+    static int cached=-1;
+    if(cached<0) cached=getenv("SIMANT_TEST_AUDIO_TIMER")!=NULL;
+    return cached;
+}
 extern uint8_t portable_canonical_volume_tables[2048];
 extern int16_t snd_song_process_due_events(void);
 int portable_whole_audio_isr_active(void) {
@@ -119,7 +127,7 @@ void portable_whole_audio_replay_interrupt(unsigned fast) {
 void portable_whole_audio_provider_enable_interrupts(PortableWholeAudioProvider *p) {
     /* PIC IRQ0 coalesces edges while IF is clear. Source callbacks cannot
      * reenter the private sequencer stack in this single-thread projection. */
-    if(!getenv("SIMANT_TEST_AUDIO_TIMER") && p->armed && p->pending_irq && !p->in_render) {
+    if(!audio_timer_replay() && p->armed && p->pending_irq && !p->in_render) {
         p->pending_irq=0;p->in_render=1;interrupt(p,0);p->in_render=0;
     }
 }
@@ -134,7 +142,7 @@ void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,in
 void portable_whole_audio_provider_advance(PortableWholeAudioProvider *p,uint64_t target) {
     if(target<p->time_ns) return;
     p->in_render=1;
-    while(!getenv("SIMANT_TEST_AUDIO_TIMER") && p->armed && p->irq_ns<=target) {
+    while(!audio_timer_replay() && p->armed && p->irq_ns<=target) {
         unsigned generation=p->timer_generation;
         p->time_ns=p->irq_ns;
         timer_event(p,0);

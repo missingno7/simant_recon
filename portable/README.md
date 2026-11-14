@@ -33,6 +33,33 @@ See the [identity proof](../evidence/canonical/native-ideal-clock/animation-iden
 [retirement proposal](../evidence/canonical/native-ideal-clock/tape-retirement-proposal.md).
 No tape machinery is retired in this round.
 
+The sound-off check runs unpaced, opens no playback device and renders no PCM.
+Headless deterministic runs omit derived screen conversion/upload while keeping
+the same internal input refresh; checkpoint images still read every pixel of the
+source VGA aperture. Each entry retains all 1,032 binary view fingerprints and
+the raw keyboard/animation diagnostics. Native locations are resolved once per
+invocation, and every pinned DOS reference is validated independently.
+`timings.json` separates observer build/preparation and lane phases; each lane's
+`result.json` includes observer counters, steps/s and simulated-time/wall-time.
+Add `--sample-native` for an optional Windows native sampler. All children and
+sampler threads are joined. `--scratch-root PATH` selects a short disposable
+asset directory when the default path exceeds the original file-dialog domain.
+
+A mismatch reports the first entry and named view. Rerun with `--dump-entry N`
+to write `native.frame.N` with the complete bytes of every view. Compare a pair
+of full dumps with:
+
+```powershell
+python portable/tests/acceptance/inspect_ideal_dump.py DOS_FRAME NATIVE_FRAME --schema CHECK_OUTPUT/native-views.json --field VIEW_NAME
+```
+
+If the reference has no full dump at N, record a diagnostic DOS prefix ending
+at N into fresh scratch output with `step_record.py --steps N`; never replace
+the pinned reference. These raw byte diagnostics do not apply the two reviewed
+observer projections. Entry timestamps are retained as a separate diagnostic:
+the unchanged Save scenario already has one transient DOS/native poll-phase
+difference, so timestamp equality is not a new gameplay verdict.
+
 Default output is recreated after moving the previous result to ignored `to_delete/`.
 Explicit experiment output must be fresh. Defaults use MinGW GCC under `C:/msys64/mingw64`
 and the local SDL3 SDK under `build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32`;
