@@ -57,12 +57,12 @@ def test_build(build, out):
         response=response.replace(Path(unit['object']).as_posix(),obj.as_posix())
     (out/'objects.rsp').write_text(response)
     observer_object=out/'native_observer.o'
-    observer_compile=[report['application_link']['command'][0],'-std=c11','-O2','-g','-fno-lto','-DSIMANT_TEST_KEY_ALIASES','-c',str(HERE/'native_observer.c'),'-o',str(observer_object)]
+    observer_compile=[report['application_link']['command'][0],'-std=c11','-O2','-g','-fno-lto','-DSIMANT_TEST_KEY_ALIASES','-DSIMANT_TEST_DEVICE_SERVICES','-c',str(HERE/'native_observer.c'),'-o',str(observer_object)]
     subprocess.run(observer_compile,check=True,capture_output=True,timeout=60)
     command=report['application_link']['command'][:]
     command=[('-Wl,@'+str(out/'objects.rsp')) if arg=='-Wl,@application-objects.rsp' else arg for arg in command]
     command[command.index('-o')+1]=str(exe)
-    command[1:1]=[str(observer_object),'-Wl,--wrap=DoAntSim','-Wl,--wrap=MacTickCount',
+    command[1:1]=[str(observer_object),'-Wl,--wrap=DoAntSim','-Wl,--wrap=MacTickCount','-Wl,--wrap=snd_service_and_test_stopped','-Wl,--wrap=snd_port_read_byte',
                    '-Wl,--wrap=SDL_GetKeyFromName','-Wl,--wrap=SDL_GetScancodeFromKey']
     run=subprocess.run(command,cwd=build,capture_output=True,text=True,timeout=120)
     (out/'link.log').write_text(run.stdout+run.stderr)
@@ -77,8 +77,8 @@ def test_build(build, out):
 def validate_reference(directory, scenario):
     manifest=json.loads((directory/'manifest.json').read_text())
     recipe=json.loads(scenario.read_text())
-    if manifest.get('input_contract')!='service-samples-v5':
-        raise ValueError('Reference input contract must be service-samples-v5; v4 timing is refused')
+    if manifest.get('input_contract')!='service-samples-v6':
+        raise ValueError('Reference input contract must be service-samples-v6; pre-v6 timing is refused')
     # Absolute import also works when this file is invoked as a script.
     sys.path.insert(0,str(ROOT))
     from portable.tests.acceptance.keyboard_environment import validate_keyboard
@@ -96,10 +96,10 @@ def validate_reference(directory, scenario):
     if sha(execution)!=json.loads(boundary.read_text())['execution_report_sha256']:
         raise ValueError('Changed execution receipt')
     execution_data=json.loads(execution.read_text())
-    if (json.loads(boundary.read_text())['compact_observer'].get('order_contract')!='service-samples-v5' or
-        execution_data.get('input_contract')!='service-samples-v5' or
+    if (json.loads(boundary.read_text())['compact_observer'].get('order_contract')!='service-samples-v6' or
+        execution_data.get('input_contract')!='service-samples-v6' or
         manifest.get('keyboard_layout')!=dict(language='us',layout='us')):
-        raise ValueError('Reference needs v5 boundary timing and pinned US keyboard')
+        raise ValueError('Reference needs v6 boundary timing and pinned US keyboard')
     # Bind admission endpoints independently, including DOSBox's FE38 opcode
     # which is not an x86 instruction for a generic disassembler.
     try:
@@ -113,7 +113,25 @@ def validate_reference(directory, scenario):
     if expected_after!={int(k):v for k,v in compact.get('admission_after',{}).items()}:
         raise ValueError('Reference service admission endpoints differ')
     if any(memory[pc]!=0xcb for kind,pc in compact['points'] if kind=='b'):
-        raise ValueError('StillDown must sample its cached return in v5')
+        raise ValueError('StillDown must sample its cached return in v6')
+    try:
+        from .device_services import SERVICES, return_points
+        from .capture_dos_steps import capture_addresses
+    except ImportError:
+        from device_services import SERVICES, return_points
+        from capture_dos_steps import capture_addresses
+    # The query census is mandatory even when a lane never calls a provider.
+    # Resolve names afresh in this executable, then bind every reachable RETF.
+    executable=ROOT/'assets/SIMANT.EXE'
+    if manifest['target']=='canonical':
+        pin=next(p for p in execution_data['inputs'] if p['path'].endswith('build-report.json'))
+        executable=ROOT/json.loads((ROOT/pin['path']).read_text())['link']['candidate_executable']['path']
+    addresses=capture_addresses(manifest['target']=='original',executable)
+    runtime_base=json.loads(boundary.read_text())['runtime_base']
+    for kind,(name,_) in SERVICES.items():
+        returns,_=return_points(memory,runtime_base+addresses[name])
+        if returns!=[pc for k,pc in compact['points'] if k==kind]:
+            raise ValueError('Reference device-query RETF census differs: '+name)
     inputs=execution_data['inputs']
     for item in inputs:
         source=ROOT/item['path']
@@ -187,6 +205,7 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
     if os.environ.get('SIMANT_ADMISSION_TRACE'):env['SIMANT_TEST_ORDER_OUTPUT']=str(out/'native.order')
     if disable=='input':env.pop('SIMANT_TEST_SERVICE_INPUT')
     if disable=='clock':env['SIMANT_TEST_DISABLE_CLOCK']='1'
+    if disable=='devices':env['SIMANT_TEST_DISABLE_DEVICES']='1'
     if disable=='irq-context':env['SIMANT_TEST_DISABLE_IRQ_CONTEXT']='1'
     if disable=='clock':
         import re
@@ -291,7 +310,7 @@ def main():
     ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/steps')
     ap.add_argument('--timeout',type=int,default=30)
     ap.add_argument('--steps',type=int,help='Explicit prefix control; default is the complete reference')
-    ap.add_argument('--disable',choices=('clock','input','irq-context'))
+    ap.add_argument('--disable',choices=('clock','input','irq-context','devices'))
     ap.add_argument('--scratch-root',type=Path,help='Short worker directory for disposable native assets')
     a=ap.parse_args();scenarios=a.scenario or sorted((ROOT/'dos/scenarios').glob('*.json'))
     if not (ROOT/'assets/SIMANT.EXE').is_file() or not (a.build/'report.json').is_file():
@@ -306,12 +325,12 @@ def main():
                 m=json.loads(p.read_text())
                 boundary=p.parent/'capture/boundary-manifest.json'
                 if (m['target'] in refs and boundary.is_file() and
-                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v5'):
+                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v6'):
                     refs[m['target']]=p.parent
                 else:incompatible.append(p.parent)
         if not all(refs.values()):
             if incompatible:
-                print(path.stem+': refused v4 references; record service-samples-v5',flush=True);failed=True
+                print(path.stem+': refused pre-v6 references; record service-samples-v6',flush=True);failed=True
             else:print(path.stem+': no reference')
             continue
         try:

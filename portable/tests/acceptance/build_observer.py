@@ -79,10 +79,10 @@ void CompactDeliverRepeat(unsigned key) { KEYBOARD_AddKey((KBD_KEYS)key,true); }
     (out/'build.log').write_text(run.stdout+run.stderr)
     if run.returncode: raise RuntimeError((run.stdout+run.stderr)[-5000:])
     inputs=[source,core_source,SOURCE/'src/hardware/pic.cpp',SOURCE/'src/ints/mouse.cpp',SOURCE/'src/hardware/keyboard.cpp',SOURCE/'src/cpu/callback.cpp',SOURCE/'src/ints/bios_keyboard.cpp',HERE/'compact_observer.inc',HERE/'build_observer.py']+sorted(obj.glob('*.obj'))
-    receipt=dict(schema='simant-boundary-observer-build-v5',executable=str(out/'dosbox-x.exe'),
+    receipt=dict(schema='simant-boundary-observer-build-v6',executable=str(out/'dosbox-x.exe'),
         sha256=sha(out/'dosbox-x.exe'),inputs={str(p):sha(p) for p in inputs},
         patched_source_sha256=sha(patched),core_source_sha256=sha(out/'core_normal.cpp'),keyboard_source_sha256=sha(out/'keyboard.cpp'),compiler_response_sha256={n:sha(out/(n+'.rsp')) for n in ('dosbox','core_normal','keyboard')},linker_response_sha256=sha(out/'link.rsp'),
-        scope='service-samples-v5: read-only state observations; synthetic transitions held at completed service boundaries through real PIC/IRQ delivery; no guest code or result mutation.')
+        scope='service-samples-v6: read-only state observations; synthetic transitions held at completed service boundaries through real PIC/IRQ delivery; no guest code or result mutation.')
     (out/'observer-build.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps({k:v for k,v in receipt.items() if k!='inputs'},indent=2))
 if __name__=='__main__': main()

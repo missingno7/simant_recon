@@ -75,6 +75,10 @@ int main(int argc,char **argv) {
     }
     void *pc=(void *)((uintptr_t)portable_test_clock_read+13);
     if (argc>1 && !strcmp(argv[1],"wrong"))pc=(void *)((uintptr_t)pc+1);
+    if (argc>1 && !strcmp(argv[1],"devices")) {
+        uint32_t value=portable_test_clock_read('h',pc,0);
+        printf("%u\\n",value);return 0;
+    }
     uint32_t a=portable_test_observed_clock('T',pc,99);
     if (argc>1 && !strcmp(argv[1],"short"))return 0;
     uint32_t b=portable_test_observed_clock('T',pc,99);
@@ -98,6 +102,23 @@ int main(int argc,char **argv) {
         if order is not None:
             p=self.out/'order.bin';p.write_bytes(order);env['SIMANT_TEST_SERVICE_ORDER']=str(p)
         return subprocess.run([str(self.exe)]+([mode] if mode else []),env=env,capture_output=True,text=True,timeout=15)
+    def test_device_order_and_real_answer_without_tape(self):
+        self.assertEqual(self.run_hook(mode='devices').stdout.strip(),'0')
+        tape='h 13 h 123 1 1\nX\n'
+        good=self.run_hook(tape,mode='devices',order=bytes([0]))
+        self.assertEqual(good.returncode,0,good.stderr)
+        self.assertEqual(good.stdout.strip(),'1')
+        self.assertEqual(self.run_hook(tape,mode='devices',order=bytes([254])).returncode,23)
+
+    def test_device_queries_bind_all_reachable_retf_instructions(self):
+        from .device_services import return_points
+        # conditional return: both independently reachable RETFs, no scan into data
+        returns,instructions=return_points(bytes.fromhex('85c0 7401 cb cb 90'),0)
+        self.assertEqual(returns,[4,5])
+        self.assertNotIn(6,instructions)
+        for raw in ('c3','ff e0'):
+            with self.assertRaises(ValueError):return_points(bytes.fromhex(raw),0)
+
     def test_v5_atomic_sample_and_bios_callback_admission_points(self):
         from capstone import Cs,CS_ARCH_X86,CS_MODE_16
         from .capture_dos_steps import sample_admission_points
@@ -128,7 +149,7 @@ int main(int argc,char **argv) {
         from .step_check import validate_reference
         directory=self.out/'old';directory.mkdir(exist_ok=True)
         (directory/'manifest.json').write_text(json.dumps({'input_contract':'service-samples-v4'}))
-        with self.assertRaisesRegex(ValueError,'v4 timing is refused'):
+        with self.assertRaisesRegex(ValueError,'pre-v6 timing is refused'):
             validate_reference(directory,ROOT/'dos/scenarios/new-game-save.json')
 
     def test_actual_cross_translation_unit_hook_and_rle(self):

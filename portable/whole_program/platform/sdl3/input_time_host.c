@@ -209,6 +209,13 @@ static int ingest_host_events(PortableInputTimeHost *binding)
         return 1;
     binding->ingesting = 1;
     do {
+        /* Apply backpressure before removing another SDL event. The consumer
+         * can drain a full retained FIFO and resume without losing an IRQ or
+         * failing on a large ordinary SDL batch. */
+        if (binding->event_count == PORTABLE_INPUT_TIME_HOST_EVENT_CAPACITY) {
+            binding->ingesting = 0;
+            return 1;
+        }
         polled = host_poll_event(binding->host, &event);
         if (polled < 0) {
             binding->host_closed = 1;
@@ -280,7 +287,21 @@ static int ingest_host_events(PortableInputTimeHost *binding)
  * Clock-tape admission uses this boundary; production refresh remains unchanged. */
 int portable_input_time_host_interrupt(void)
 {
-    return active_host_binding ? ingest_host_events(active_host_binding) : -1;
+    PortableInputTimeHost *binding = active_host_binding;
+    int result, full;
+    if (!binding) return -1;
+    do {
+        result = ingest_host_events(binding);
+        full = binding->event_count == PORTABLE_INPUT_TIME_HOST_EVENT_CAPACITY;
+        /* This entry is tape admission's counterpart of application.c's
+         * drain_host_observations: the ordinary observer already dispatched
+         * every event. Release only the retained host copies, with no idle,
+         * clock, presentation, BIOS-key or canonical event-queue operation. */
+        binding->event_head = (uint16_t)((binding->event_head + binding->event_count) %
+                                       PORTABLE_INPUT_TIME_HOST_EVENT_CAPACITY);
+        binding->event_count = 0;
+    } while (result > 0 && full && !binding->ingesting && delivery_enabled(binding));
+    return result;
 }
 
 static int host_ticks(void *context, uint32_t *ticks)

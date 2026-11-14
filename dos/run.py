@@ -320,7 +320,7 @@ def main(argv=None):
         if args.capture_observer:
             observer_path = diagnostic.experimental_path(args.capture_observer)
             observer = json.loads(observer_path.read_text())
-            if observer.get('schema') not in ('simant-read-only-observer-build-v1', 'simant-boundary-observer-build-v5'):
+            if observer.get('schema') not in ('simant-read-only-observer-build-v1', 'simant-boundary-observer-build-v6'):
                 raise ValueError('Unknown observer receipt')
             observer_exe = diagnostic.experimental_path(Path(observer['executable']))
             runner = {**runner, 'path': str(observer_exe)}
@@ -328,7 +328,7 @@ def main(argv=None):
             config_path = observation_path(args.observer_config)
             report['capture_observer'] = {'receipt': build.read_pin(observer_path)[1],
                 'config': build.read_pin(config_path)[1], 'scope': observer['scope']}
-            report['input_contract'] = 'service-samples-v5' if observer['schema']=='simant-boundary-observer-build-v5' else 'emulated-time-v4'
+            report['input_contract'] = 'service-samples-v6' if observer['schema']=='simant-boundary-observer-build-v6' else 'emulated-time-v4'
         if args.input_script:
             script = input_script(args.input_script, out)
             (out / 'INPUT.SCR').write_text('\n'.join(script) + '\n')

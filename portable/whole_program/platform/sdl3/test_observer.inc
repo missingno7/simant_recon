@@ -240,6 +240,13 @@ uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) {
   value = run->value;
   --test_remaining;
   ++test_reads;
+  if ((kind == 'h' || kind == 'j') && getenv("SIMANT_TEST_DISABLE_DEVICES") &&
+      value != fallback) {
+    fprintf(stderr, "Observer device control %c read %" PRIu64 ": tape=%" PRIu32
+                    " host=%" PRIu32 "\n", kind, test_reads, value, fallback);
+    value = fallback;
+    test_control_changed = 1;
+  }
   if (test_reads == test_control_read ||
       (test_disable_clock && portable_test_clock_is_stateful &&
        portable_test_clock_is_stateful())) {
@@ -298,7 +305,7 @@ void portable_test_input_sample(unsigned kind, unsigned value) {
   if (test_order_output) fprintf(test_order_output,"S %u\n",kind);
   test_service(kind);
   ++test_queries;
-  /* v5: atomic providers have cached their result; entry-only 246 precedes
+  /* v6: atomic providers have cached their result; entry-only 246 precedes
    * the body. StillDown (247) is observed at exit with its result cached. */
   portable_test_before_poll();
 }

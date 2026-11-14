@@ -1,19 +1,6 @@
 {
- "about": "Open port findings of the stored step scenarios, exactly as step_check.py reports them on build/current/portable. A scenario not listed must be ORIGINAL_EQUAL_ALL. The upper-layer test fails on any change: an earlier stop is a regression, a later one means a finding was fixed and this file is updated in the same commit. Findings and their layers are in evidence/port/verification-matrix.json. ant-commands and interactive-play currently depend on native stack residue in mains uninitialised stamp (WaitedEnough); see evidence/port/verification-matrix.json.",
+ "about": "Open findings exactly as the v6 default step_check.py reports on the fresh build/current/portable, including the concurrent main stamp conversion. Unlisted scenarios must be ORIGINAL_EQUAL_ALL. The unchanged original-only interactive-play cursor-show counter difference and its proof limits are documented in build/workers/tape-devices/RESULT.md.",
  "scenarios": {
-  "full-game": {
-   "verdict": "UNATTRIBUTED",
-   "lanes": {
-    "original": {
-     "status": "INCOMPLETE",
-     "steps_compared": 177
-    },
-    "canonical": {
-     "status": "INCOMPLETE",
-     "steps_compared": 177
-    }
-   }
-  },
   "interactive-play": {
    "verdict": "RECONSTRUCTION_INTRODUCED",
    "lanes": {
@@ -27,19 +14,6 @@
     "canonical": {
      "status": "REFERENCE_EQUAL",
      "steps_compared": 2000
-    }
-   }
-  },
-  "random-17": {
-   "verdict": "UNATTRIBUTED",
-   "lanes": {
-    "original": {
-     "status": "INCOMPLETE",
-     "steps_compared": 1108
-    },
-    "canonical": {
-     "status": "INCOMPLETE",
-     "steps_compared": 1113
     }
    }
   }

@@ -89,6 +89,30 @@ int main(int argc,char **argv){
         if((n==0 && count) || (n==1 && (!count || value!=0x0300)))return 8;
     }
     if(down_seen!=2 || up_seen!=2)return 9;
+    /* A burst larger than the retained FIFO is backpressured in ordinary
+     * polling and completely dispatched/drained by tape interrupt admission. */
+    binding.event_count=0;binding.event_head=0;
+    for(unsigned mode=0;mode<2;++mode){
+        int target=up_seen+2000;
+        for(unsigned n=0;n<2000;++n){
+            SDL_Event e={0};e.type=SDL_EVENT_KEY_UP;e.key.scancode=SDL_SCANCODE_A;
+            e.key.key=SDLK_A;if(!SDL_PushEvent(&e))return 10;
+        }
+        if(mode){
+            active_host_binding=&binding;
+            if(portable_input_time_host_interrupt()<0 || binding.event_count)return 11;
+            active_host_binding=NULL;
+        }else{
+            while(up_seen<target){
+                if(ingest_host_events(&binding)<0)return 12;
+                HostEvent e;
+                while(binding.event_count){
+                    if(portable_input_time_host_poll_event(&binding,&e)!=1)return 13;
+                }
+            }
+        }
+        if(up_seen!=target)return 14;
+    }
     host_destroy(host);host_shutdown();
     return 0;
 }

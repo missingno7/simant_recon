@@ -847,6 +847,8 @@ def convert(source, filename, cc, include_dirs, lower=True, canonical_source=Non
     input_digest=hashlib.sha256(source.encode('latin1')).hexdigest()
     from . import m1b73_event_source
     source,event_caller_receipt=m1b73_event_source.adapt_caller_context(source,canonical_source)
+    from . import uninitialised_locals
+    source,automatic_storage_receipt=uninitialised_locals.adapt_reference_residue(source,canonical_source)
     preprocessed,command=preprocess(source,filename,cc,include_dirs)
     tree=c_parser.CParser().parse(preprocessed,filename=str(filename))
     analysis=Analyzer(filename,instruction_sites(canonical_source));analysis.walk(tree)
@@ -879,6 +881,7 @@ def convert(source, filename, cc, include_dirs, lower=True, canonical_source=Non
              'counts':dict(counts),'categories':dict(categories),'expressions':analysis.records,
              'evaluation_order':evaluation_receipt,
              'event_caller_frames':event_caller_receipt,
+             'automatic_storage':automatic_storage_receipt,
              'open_domain_expressions':sum(any(c.endswith('-domain') for c in r['categories']) for r in analysis.records),
              'premises':['MinGW GCC signed char; Windows LLP64; int16 storage/casts are signed short',
                          'MSC usual arithmetic conversion and C90 literal candidate sequence',

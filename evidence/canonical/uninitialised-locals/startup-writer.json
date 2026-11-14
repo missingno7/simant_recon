@@ -1,0 +1,370 @@
+{
+  "schema": "startup-register-save-writer-v1",
+  "crt_scans": [
+    {
+      "target": "original",
+      "frame_sha256": "092e132e4310dfbc34d6ff45eace4ae2f2e691197743c302dc9e2877bdbeca6a",
+      "instructions": [
+        {
+          "pc": "0x322e9",
+          "instruction": "mov es, word ptr [0x7740]"
+        },
+        {
+          "pc": "0x322ed",
+          "instruction": "mov cx, word ptr es:[0x2c]"
+        },
+        {
+          "pc": "0x322f2",
+          "instruction": "jcxz 0x32332"
+        },
+        {
+          "pc": "0x322f4",
+          "instruction": "mov es, cx"
+        },
+        {
+          "pc": "0x322f6",
+          "instruction": "xor di, di"
+        },
+        {
+          "pc": "0x322f8",
+          "instruction": "cmp byte ptr es:[di], 0"
+        },
+        {
+          "pc": "0x322fc",
+          "instruction": "je 0x32332"
+        },
+        {
+          "pc": "0x322fe",
+          "instruction": "mov cx, 0xd"
+        },
+        {
+          "pc": "0x32301",
+          "instruction": "mov si, 0x771e"
+        },
+        {
+          "pc": "0x32304",
+          "instruction": "repe cmpsb byte ptr [si], byte ptr es:[di]"
+        },
+        {
+          "pc": "0x32306",
+          "instruction": "je 0x32313"
+        },
+        {
+          "pc": "0x32308",
+          "instruction": "mov cx, 0x7fff"
+        },
+        {
+          "pc": "0x3230b",
+          "instruction": "xor ax, ax"
+        },
+        {
+          "pc": "0x3230d",
+          "instruction": "repne scasb al, byte ptr es:[di]"
+        },
+        {
+          "pc": "0x3230f",
+          "instruction": "jne 0x32332"
+        },
+        {
+          "pc": "0x32311",
+          "instruction": "jmp 0x322f8"
+        },
+        {
+          "pc": "0x32313",
+          "instruction": "push es"
+        },
+        {
+          "pc": "0x32314",
+          "instruction": "push ds"
+        },
+        {
+          "pc": "0x32315",
+          "instruction": "pop es"
+        },
+        {
+          "pc": "0x32316",
+          "instruction": "pop ds"
+        },
+        {
+          "pc": "0x32317",
+          "instruction": "mov si, di"
+        },
+        {
+          "pc": "0x32319",
+          "instruction": "mov di, 0x7749"
+        },
+        {
+          "pc": "0x3231c",
+          "instruction": "mov cl, 4"
+        },
+        {
+          "pc": "0x3231e",
+          "instruction": "lodsb al, byte ptr [si]"
+        },
+        {
+          "pc": "0x3231f",
+          "instruction": "sub al, 0x41"
+        },
+        {
+          "pc": "0x32321",
+          "instruction": "jb 0x32330"
+        },
+        {
+          "pc": "0x32323",
+          "instruction": "shl al, cl"
+        },
+        {
+          "pc": "0x32325",
+          "instruction": "xchg dx, ax"
+        },
+        {
+          "pc": "0x32326",
+          "instruction": "lodsb al, byte ptr [si]"
+        },
+        {
+          "pc": "0x32327",
+          "instruction": "sub al, 0x41"
+        },
+        {
+          "pc": "0x32329",
+          "instruction": "jb 0x32330"
+        },
+        {
+          "pc": "0x3232b",
+          "instruction": "or al, dl"
+        },
+        {
+          "pc": "0x3232d",
+          "instruction": "stosb byte ptr es:[di], al"
+        },
+        {
+          "pc": "0x3232e",
+          "instruction": "jmp 0x3231e"
+        },
+        {
+          "pc": "0x32330",
+          "instruction": "push ss"
+        },
+        {
+          "pc": "0x32331",
+          "instruction": "pop ds"
+        },
+        {
+          "pc": "0x32332",
+          "instruction": "mov bx, 4"
+        },
+        {
+          "pc": "0x32335",
+          "instruction": "and byte ptr [bx + 0x7749], 0xbf"
+        },
+        {
+          "pc": "0x3233a",
+          "instruction": "mov ax, 0x4400"
+        },
+        {
+          "pc": "0x3233d",
+          "instruction": "int 0x21"
+        }
+      ]
+    },
+    {
+      "target": "canonical",
+      "frame_sha256": "3eb9b168868d5ae2ed77e8f777991a79a67b21d98664f4d7d9bb9488b187aa6d",
+      "instructions": [
+        {
+          "pc": "0x3230f",
+          "instruction": "mov es, word ptr [0x7720]"
+        },
+        {
+          "pc": "0x32313",
+          "instruction": "mov cx, word ptr es:[0x2c]"
+        },
+        {
+          "pc": "0x32318",
+          "instruction": "jcxz 0x32358"
+        },
+        {
+          "pc": "0x3231a",
+          "instruction": "mov es, cx"
+        },
+        {
+          "pc": "0x3231c",
+          "instruction": "xor di, di"
+        },
+        {
+          "pc": "0x3231e",
+          "instruction": "cmp byte ptr es:[di], 0"
+        },
+        {
+          "pc": "0x32322",
+          "instruction": "je 0x32358"
+        },
+        {
+          "pc": "0x32324",
+          "instruction": "mov cx, 0xd"
+        },
+        {
+          "pc": "0x32327",
+          "instruction": "mov si, 0x76fe"
+        },
+        {
+          "pc": "0x3232a",
+          "instruction": "repe cmpsb byte ptr [si], byte ptr es:[di]"
+        },
+        {
+          "pc": "0x3232c",
+          "instruction": "je 0x32339"
+        },
+        {
+          "pc": "0x3232e",
+          "instruction": "mov cx, 0x7fff"
+        },
+        {
+          "pc": "0x32331",
+          "instruction": "xor ax, ax"
+        },
+        {
+          "pc": "0x32333",
+          "instruction": "repne scasb al, byte ptr es:[di]"
+        },
+        {
+          "pc": "0x32335",
+          "instruction": "jne 0x32358"
+        },
+        {
+          "pc": "0x32337",
+          "instruction": "jmp 0x3231e"
+        },
+        {
+          "pc": "0x32339",
+          "instruction": "push es"
+        },
+        {
+          "pc": "0x3233a",
+          "instruction": "push ds"
+        },
+        {
+          "pc": "0x3233b",
+          "instruction": "pop es"
+        },
+        {
+          "pc": "0x3233c",
+          "instruction": "pop ds"
+        },
+        {
+          "pc": "0x3233d",
+          "instruction": "mov si, di"
+        },
+        {
+          "pc": "0x3233f",
+          "instruction": "mov di, 0x7729"
+        },
+        {
+          "pc": "0x32342",
+          "instruction": "mov cl, 4"
+        },
+        {
+          "pc": "0x32344",
+          "instruction": "lodsb al, byte ptr [si]"
+        },
+        {
+          "pc": "0x32345",
+          "instruction": "sub al, 0x41"
+        },
+        {
+          "pc": "0x32347",
+          "instruction": "jb 0x32356"
+        },
+        {
+          "pc": "0x32349",
+          "instruction": "shl al, cl"
+        },
+        {
+          "pc": "0x3234b",
+          "instruction": "xchg dx, ax"
+        },
+        {
+          "pc": "0x3234c",
+          "instruction": "lodsb al, byte ptr [si]"
+        },
+        {
+          "pc": "0x3234d",
+          "instruction": "sub al, 0x41"
+        },
+        {
+          "pc": "0x3234f",
+          "instruction": "jb 0x32356"
+        },
+        {
+          "pc": "0x32351",
+          "instruction": "or al, dl"
+        },
+        {
+          "pc": "0x32353",
+          "instruction": "stosb byte ptr es:[di], al"
+        },
+        {
+          "pc": "0x32354",
+          "instruction": "jmp 0x32344"
+        },
+        {
+          "pc": "0x32356",
+          "instruction": "push ss"
+        },
+        {
+          "pc": "0x32357",
+          "instruction": "pop ds"
+        },
+        {
+          "pc": "0x32358",
+          "instruction": "mov bx, 4"
+        },
+        {
+          "pc": "0x3235b",
+          "instruction": "and byte ptr [bx + 0x7729], 0xbf"
+        },
+        {
+          "pc": "0x32360",
+          "instruction": "mov ax, 0x4400"
+        },
+        {
+          "pc": "0x32363",
+          "instruction": "int 0x21"
+        }
+      ]
+    }
+  ],
+  "canonical_object": {
+    "module": "root:15F8",
+    "source": "src/startup/main.c",
+    "profile": "msc600ax",
+    "flags": [
+      "/AL",
+      "/Os",
+      "/Oe",
+      "/Og"
+    ],
+    "object_sha256": "b18286fa7145638abc07097c9b2777cab0c791f1b82746a84792b04c31a3ede7"
+  },
+  "dos_handler": {
+    "source": "C:\\tools\\dosbox-x-2026.08.31-simant-acceptance-observation-src\\src\\dos\\dos.cpp",
+    "source_sha256": "673621cd63b37c42488a347445875e7b0bf0c53f7aa614231701c45c3863fe10",
+    "excerpt_first_line": 1053,
+    "excerpt": [
+      "    if (((reg_ah != 0x50) && (reg_ah != 0x51) && (reg_ah != 0x62) && (reg_ah != 0x64)) && (reg_ah<0x6c)) {",
+      "        DOS_PSP psp(dos.psp());",
+      "        psp.SetStack(RealMake(SegValue(ss),reg_sp-18));",
+      "        /* Save registers */",
+      "        real_writew(SegValue(ss), reg_sp - 18, reg_ax);",
+      "        real_writew(SegValue(ss), reg_sp - 16, reg_bx);",
+      "        real_writew(SegValue(ss), reg_sp - 14, reg_cx);",
+      "        real_writew(SegValue(ss), reg_sp - 12, reg_dx);",
+      "        real_writew(SegValue(ss), reg_sp - 10, reg_si);",
+      "        real_writew(SegValue(ss), reg_sp - 8, reg_di);",
+      "        real_writew(SegValue(ss), reg_sp - 6, reg_bp);",
+      "        real_writew(SegValue(ss), reg_sp - 4, SegValue(ds));",
+      "        real_writew(SegValue(ss), reg_sp - 2, SegValue(es));"
+    ]
+  },
+  "reason": "Before INT SP=A4CEh. Hardware INT pushes 6 bytes. DOS writes BX at callback SP-16=A4B8h and CX at callback SP-14=A4BAh. After five main argument words, far call and saved BP, main BP=A4C2h, so these are BP-0Ah and BP-8. Canonical has the same relative arithmetic with its independent frame offsets."
+}

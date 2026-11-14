@@ -442,6 +442,13 @@
       "reason": "Sequences unsequenced side-effecting operands (calls, stores, increments) in the order MSC 6.00AX used, taken per site from the compiled canonical objects (evidence/canonical/native-evaluation-order/contracts.json); C leaves the order unspecified and GCC chooses differently. No canonical source change.",
       "blocker_ids": [],
       "deletion_condition": "Keep while the native compiler may order unsequenced operands differently from MSC; extend the contract when a new site appears (the census check rejects uncovered sites)."
+    },
+    {
+      "module": "uninitialised_locals",
+      "classification": "GENERIC_LOWERING",
+      "reason": "Gives automatic locals that the canonical code reads before writing the value DOS has in that stack slot, per site with evidence (main's stamp: CRT-saved BX/CX of the reference environment, evidence/canonical/uninitialised-locals/stamp-origin.json); native stack residue is otherwise arbitrary. No canonical source change; the census check rejects new unclassified sites.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep while canonical code reads uninitialised automatic storage whose DOS residue affects behaviour."
     }
   ],
   "passes": [

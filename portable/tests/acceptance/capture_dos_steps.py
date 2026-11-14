@@ -121,6 +121,10 @@ def main():
             ins=list(decoder.disasm(memory[start:start+32],start))
             ret=next(i.address for i in ins if i.mnemonic=='retf')
             points.append((kind,ret))
+        from device_services import SERVICES, return_points
+        for kind,(name,_) in SERVICES.items():
+            returns,_=return_points(memory,base+addresses[name])
+            points += [(kind,pc) for pc in returns]
         start=base+addresses['input_event_count']
         sample=next(decoder.disasm(memory[start:start+4],start))
         if sample.mnemonic!='mov' or not sample.op_str.startswith('ax, word ptr ['):raise ValueError('Queue count sample binding differs')
@@ -211,7 +215,7 @@ def main():
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
             peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
         manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,admission_after=after,pump_source='both',
-            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v5',
+            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v6',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
     (out/'boundary-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

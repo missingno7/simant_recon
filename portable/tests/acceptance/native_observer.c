@@ -55,6 +55,22 @@ extern int portable_test_reference_end(void) __attribute__((weak));
 extern void __real_DoAntSim(void);
 extern int32_t __real_MacTickCount(void);
 
+#ifdef SIMANT_TEST_DEVICE_SERVICES
+/* Keep the canonical service's side effects, then sample its completed answer.
+ * With no tape portable_test_clock_read returns the real host answer. */
+extern int16_t __real_snd_service_and_test_stopped(void);
+int16_t __wrap_snd_service_and_test_stopped(void) {
+  int16_t value = __real_snd_service_and_test_stopped();
+  return (int16_t)portable_test_clock_read('h', __builtin_return_address(0),
+                                         (uint16_t)value);
+}
+extern uint8_t __real_snd_port_read_byte(int16_t);
+uint8_t __wrap_snd_port_read_byte(int16_t port) {
+  uint8_t value = __real_snd_port_read_byte(port);
+  return (uint8_t)portable_test_clock_read('j', __builtin_return_address(0), value);
+}
+#endif
+
 typedef struct Slice {
   int64_t delta;
   unsigned bytes;

@@ -33,7 +33,8 @@ def parse_trace(path,steps,require_quiet=False):
             continue
         if p[0]=='R':
             kind,pc,value,count=p[1:]
-            if kind not in 'TBCV' or int(count)<=0 or not 0<=int(value)<2**32:raise ValueError('Invalid clock record')
+            if kind not in 'TBCVhj' or int(count)<=0 or not 0<=int(value)<2**32:raise ValueError('Invalid clock record')
+            if kind=='h' and int(value)>1 or kind=='j' and int(value)>255:raise ValueError('Invalid device answer')
             records.append((kind,int(pc,16),int(value),int(count)))
             reads+=int(count)
             key=f'{kind}:{int(pc,16)}';site_reads[key]=site_reads.get(key,0)+int(count)
@@ -86,7 +87,7 @@ def parse_trace(path,steps,require_quiet=False):
     if not saw_delivery:inputs=pending # Parsing legacy captures is diagnostic only.
     return records,inputs,boundaries
 
-def canonical_clock_calls(directory, manifest):
+def canonical_clock_calls(directory, manifest, service="TickCount"):
     """Bind canonical calls from its own OMF fixups and CodeView extents."""
     sys.path.insert(0,str(ROOT/'tools'))
     from omf import OmfReader
@@ -123,13 +124,13 @@ def canonical_clock_calls(directory, manifest):
                     raw=bytes(obj.segments[segment])[start:start+size]
                     calls=sorted(f['offset'] for f in obj.linker_fixups if f['segment']==segment
                                  and start<f['offset']<start+size and f['target_kind']=='external'
-                                 and f['target']=='_TickCount' and f['loc']=='pointer32')
+                                 and f['target']=='_'+service and f['loc']=='pointer32')
                     for index,offset in enumerate(calls):
                         if raw[offset-start-1]!=0x9a:raise ValueError('Canonical clock fixup is not a far CALL')
                         pc=base+addresses[name]+offset-start+4
                         result.setdefault(pc,[]).append(dict(name=name,index=index,count=len(calls),
                             unit=module['key'],function_sha256=hashlib.sha256(raw).hexdigest(),
-                            evidence='own CodeView procedure length + OMF TickCount pointer32 fixup + MAP public'))
+                            evidence='own CodeView procedure length + OMF '+service+' pointer32 fixup + MAP public'))
             at+=length+1
         if not debug:
             # Some pinned MSC profiles omit CodeView. Establish call ownership by
@@ -143,7 +144,7 @@ def canonical_clock_calls(directory, manifest):
                 raw=bytes(obj.segments[segment]);pending=[start];seen=set();calls=[]
                 other_starts={p['offset'] for p in obj.publics if p['segment']==segment and p['offset']!=start}
                 fixes={f['offset']:f for f in obj.linker_fixups if f['segment']==segment and f['target_kind']=='external'
-                       and f['target']=='_TickCount' and f['loc']=='pointer32'}
+                       and f['target']=='_'+service and f['loc']=='pointer32'}
                 while pending:
                     at=pending.pop()
                     if at in seen or at in other_starts or not 0<=at<len(raw):continue
@@ -162,12 +163,16 @@ def canonical_clock_calls(directory, manifest):
                     pc=base+addresses[name]+offset-start
                     result.setdefault(pc,[]).append(dict(name=name,index=index,count=len(calls),unit=module['key'],
                         object_sha256=module['object']['sha256'],function_sha256=None,
-                        evidence='own OMF public + reachable instruction CFG + TickCount pointer32 fixup + MAP public'))
+                        evidence='own OMF public + reachable instruction CFG + '+service+' pointer32 fixup + MAP public'))
     return result,addresses
 
 
 def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     from capstone import Cs,CS_ARCH_X86,CS_MODE_16
+    try:
+        from .device_services import SERVICES, return_points
+    except ImportError:
+        from device_services import SERVICES, return_points
     manifest=json.loads((directory/'boundary-manifest.json').read_text())
     oracle=json.loads((ROOT/'layout/oracle.lock.json').read_text())['inputs']['SIMANT.EXE']['sha256']
     target=manifest.get('target')
@@ -184,6 +189,7 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     symbols=json.loads((ROOT/'layout/symbols.json').read_text())['code']
     if target=='canonical_dos':
         dos_calls,canonical_addresses=canonical_clock_calls(directory,manifest)
+        device_calls = {k: canonical_clock_calls(directory,manifest,n)[0] for k,(n,_) in SERVICES.items()}
     functions=sorted((base+r['seg']*16+r['off'],n) for n,r in symbols.items() if not r.get('alias_of'))
     addresses={n:a for a,n in functions}
     records,inputs,boundaries=parse_trace(trace,steps,require_quiet=True)
@@ -194,7 +200,9 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     import exe as original_exe
     import functions as original_functions
     image=original_exe.load()
-    if target=='original':dos_calls={}
+    if target=='original':
+        dos_calls={}
+        device_calls={k:{} for k in SERVICES}
     function_rows=original_functions.by_address()
     for name,symbol in symbols.items():
         if target!='original':break
@@ -209,6 +217,11 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
             if len(raw)==5 and raw[0]==0x9a and int.from_bytes(raw[1:3],'little')+16*int.from_bytes(raw[3:5],'little')==addresses['TickCount']-base:
                 calls.append(base+ins.address+ins.size)
         for index,pc in enumerate(calls):dos_calls.setdefault(pc,[]).append(dict(name=name,index=index,count=len(calls),unit=f['unit'],function_sha256=hashlib.sha256(raw_function).hexdigest()))
+        for kind,(service,_) in SERVICES.items():
+            points=[base+i.address+i.size for i in decoder.disasm(raw_function,at)
+                    if len(i.bytes)==5 and i.bytes[0]==0x9a and int.from_bytes(i.bytes[1:3],'little')+16*int.from_bytes(i.bytes[3:5],'little')==addresses[service]-base]
+            for index,pc in enumerate(points):
+                device_calls[kind].setdefault(pc,[]).append(dict(name=name,index=index,count=len(points),unit=f['unit'],function_sha256=hashlib.sha256(raw_function).hexdigest()))
     texts={};bindings={}
     def native_calls(name,target):
         if name not in texts:texts[name]=subprocess.check_output([OBJDUMP,'-d','--disassemble='+name,str(exe)],text=True)
@@ -223,6 +236,20 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
             calls=native_calls('portable_m1b73_event_enqueue_registers','timer_bios_tick_count')
             if len(calls)!=1:raise ValueError('Native event stamp binding differs')
             bindings[kind,pc]=dict(native_delta=calls[0]-anchor,kind='B',name='input_enqueue_event:BIOS timestamp');continue
+        if kind in SERVICES:
+            service,_=SERVICES[kind]
+            candidates=device_calls[kind].get(pc,[])
+            if len(candidates)!=1:raise ValueError('Device return call site ambiguous: '+str((kind,pc,candidates)))
+            candidate=candidates[0];name=candidate['name']
+            native=native_calls(name,'__wrap_'+service)
+            if len(native)!=candidate['count']:raise ValueError('Device call-site count differs: '+name)
+            entry=(canonical_addresses if target=='canonical_dos' else addresses)[service]
+            if target=='canonical_dos':entry+=base
+            returns,instructions=return_points(memory,entry)
+            actual=[p for k,p in manifest['compact_observer']['points'] if k==kind]
+            if actual!=returns:raise ValueError('Device RETF binding differs')
+            bindings[kind,pc]=dict(native_delta=native[candidate['index']]-anchor,kind=kind,service=service,returns=returns,instructions=instructions,**candidate)
+            continue
         candidates=dos_calls.get(pc,[])
         if kind!='T' or len(candidates)!=1:raise ValueError('DOS return PC is ambiguous/unbound: '+str((kind,hex(pc),candidates)))
         candidate=candidates[0];name=candidate['name']
@@ -238,7 +265,7 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     contract=manifest['compact_observer'].get('order_contract')
     if contract:
         source=directory/'observer.txt.order'
-        if contract!='service-samples-v5' or sha(source)!=manifest['compact_observer']['order_sha256']:
+        if contract!='service-samples-v6' or sha(source)!=manifest['compact_observer']['order_sha256']:
             raise ValueError('Unbound global service sequence')
         sites={int(v[1]):(v[2],int(v[3],16)) for line in trace.read_text().splitlines()
                if (v:=line.split()) and v[0]=='O'}

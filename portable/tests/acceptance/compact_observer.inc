@@ -1,4 +1,4 @@
-/* DOSBox-X v5 observation and synthetic-input timing extension.
+/* DOSBox-X v6 observation and synthetic-input timing extension.
  * State capture is read-only. Only script scheduling and foreground CPU budget
  * change: the real devices/PIC/interrupt code deliver while foreground waits. */
 struct CompactPoint { char kind; uint32_t address, after; };
@@ -174,7 +174,7 @@ static void CompactInit() {
         if (!compact_fingerprints) abort();
     }
     atexit(CompactClose);
-    fprintf(compact_file,"# simant-compact-observer-v5 per-site ordinal RLE\n");
+    fprintf(compact_file,"# simant-compact-observer-v6 per-site ordinal RLE\n");
     DOSBOX_AcceptanceExecArmed = true;
 }
 static void CompactInput(const AcceptanceEvent &event, double ms) {
@@ -281,6 +281,8 @@ static void CompactInstruction(uint32_t pc) {
         uint32_t stack = SegPhys(ss) + reg_sp;
         uint32_t caller = mem_readw(stack) + 16u * mem_readw(stack+2);
         uint32_t value = (uint32_t)reg_ax | ((uint32_t)reg_dx<<16);
+        if (p.kind=='h') value=reg_ax;
+        if (p.kind=='j') value=reg_al;
         if (p.kind=='C') { value=mem_readw(compact_countdown); caller=0; }
         if (p.kind=='V') { value=mem_readw(0x46c); caller=0; }
         DOSBOX_AcceptanceSuppressMemoryWatch = old;

@@ -379,5 +379,13 @@
     ],
     "scope": "Ordinary shipped VGA inputs. Tested RAM blends, tile clip/copy, capture, uploads and plane readback retain original effects. Whole-game frame identity, complete raw-entry register epilogues, arbitrary register preconditions, row-table adjacency outside normal clipped inputs, CPU/IRQ residue and malformed resources are not claimed.",
     "evidence": "evidence/canonical/native-vga-aperture/README.md"
+  },
+  "uninitialised_automatic_storage": {
+    "conversion": "portable/canonical_native_abi/uninitialised_locals.py",
+    "evidence": "evidence/canonical/uninitialised-locals/stamp-origin.json",
+    "census": "evidence/canonical/uninitialised-locals/census.json",
+    "regression": "python -m unittest portable.tests.uninitialised_locals.test_uninitialised_locals",
+    "policy": "Preserve evidenced DOS automatic-storage inputs in conversion; main stamp uses the pinned reference environment. Other census candidates retain individual classifications and open limitations.",
+    "status": "partial-triage"
   }
 }
