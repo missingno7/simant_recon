@@ -185,6 +185,11 @@ def main():
             side='original_address' if args.original else 'canonical_address'
             with compact_spec.open('a') as config:
                 config.write(f'L {args.steps} {args.dump_every}\n')
+                # First simulation entry after each commented script section
+                # begins. No synthetic draw or extra game call is requested.
+                from frame_check import comment_checkpoints
+                for ms,comment in comment_checkpoints(original):
+                    config.write(f'J {ms}\n')
                 for item in state['items']:
                     config.write(f'H {base+item[side]:X} {item["bytes"]} {int(item["sentinel"])}\n')
         command += ['--capture-observer',str(args.compact_observer.resolve()),'--observer-config',str(compact_spec)]
@@ -215,9 +220,11 @@ def main():
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
             peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
         manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,admission_after=after,pump_source='both',
-            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v6',
+            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v7',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
+        from frame_check import frame_manifest
+        manifest['frames']=frame_manifest(out,args.steps,args.dump_every,original)
     (out/'boundary-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(json.dumps(manifest,indent=2))
     return run.returncode

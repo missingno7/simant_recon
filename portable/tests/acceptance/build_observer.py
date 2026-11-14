@@ -54,14 +54,26 @@ void CompactDeliverRepeat(unsigned key) { KEYBOARD_AddKey((KBD_KEYS)key,true); }
     keyboard=keyboard.replace('if (!keyb.repeat.wait) KEYBOARD_AddKey(keyb.repeat.key,true);',
         'if (!keyb.repeat.wait && !CompactDeferRepeat((unsigned)keyb.repeat.key)) KEYBOARD_AddKey(keyb.repeat.key,true);',1)
     (out/'keyboard.cpp').write_text(keyboard,encoding='utf-8')
-    for stem in ('dosbox','core_normal','keyboard'):
+    mouse_source=SOURCE/'src/ints/mouse.cpp'
+    mouse=mouse_source.read_text(encoding='utf-8')
+    mouse+='''
+/* Acceptance v7: copy driver state only; no INT33 calls or cursor mutation. */
+void CompactMouseFrame(uint32_t words[8], uint16_t masks[32]) {
+    words[0]=mouse.hidden;words[1]=(uint32_t)(int32_t)POS_X;words[2]=(uint32_t)(int32_t)POS_Y;
+    words[3]=(uint32_t)(int32_t)mouse.hotx;words[4]=(uint32_t)(int32_t)mouse.hoty;
+    words[5]=mouse.inhibit_draw;words[6]=mouse.background;words[7]=mouse.page;
+    for (unsigned i=0;i<16;++i) { masks[i]=mouse.screenMask[i];masks[16+i]=mouse.cursorMask[i]; }
+}
+'''
+    (out/'mouse.cpp').write_text(mouse,encoding='utf-8')
+    for stem in ('dosbox','core_normal','keyboard','mouse'):
         compile_args=next(clines[i+1] for i,l in enumerate(clines[:-1])
-            if l.upper().endswith('OBSERVATION-SRC\\SRC\\'+('CPU\\' if stem=='core_normal' else 'HARDWARE\\' if stem=='keyboard' else '')+stem.upper()+'.CPP'))
+            if l.upper().endswith('OBSERVATION-SRC\\SRC\\'+('CPU\\' if stem=='core_normal' else 'HARDWARE\\' if stem=='keyboard' else 'INTS\\' if stem=='mouse' else '')+stem.upper()+'.CPP'))
         compile_args=re.sub(r'/Fo"[^"]*"',lambda m:'/Fo"'+str(out/(stem+'.obj'))+'"',compile_args,flags=re.I)
         compile_args=re.sub(r'/Fd"[^"]*"',lambda m:'/Fd"'+str(out/'compiler.pdb')+'"',compile_args,flags=re.I)
         compile_args=compile_args[:compile_args.upper().rfind(' C:\\TOOLS\\')]+ ' "'+str(out/(stem+'.cpp'))+'"'
         # core_normal includes implementation headers relative to src/cpu.
-        compile_args+=' /I"'+str(SOURCE/'src/cpu')+'"'
+        compile_args+=' /I"'+str(SOURCE/'src/cpu')+'" /I"'+str(SOURCE/'src/ints')+'"'
         (out/(stem+'.rsp')).write_text(compile_args)
     link=(logs/'link.command.1.tlog').read_text(encoding='utf-16').splitlines()
     start=max(i for i,l in enumerate(link) if l.startswith('^'))
@@ -72,17 +84,18 @@ void CompactDeliverRepeat(unsigned key) { KEYBOARD_AddKey((KBD_KEYS)key,true); }
     link=re.sub(r'"[^"\n]*\\DOSBOX\.OBJ"',lambda m:'"'+str(out/'dosbox.obj')+'"',link,flags=re.I)
     link=re.sub(r'"[^"\n]*\\CORE_NORMAL\.OBJ"',lambda m:'"'+str(out/'core_normal.obj')+'"',link,flags=re.I)
     link=re.sub(r'"[^"\n]*\\KEYBOARD\.OBJ"',lambda m:'"'+str(out/'keyboard.obj')+'"',link,flags=re.I)
+    link=re.sub(r'"[^"\n]*\\MOUSE\.OBJ"',lambda m:'"'+str(out/'mouse.obj')+'"',link,flags=re.I)
     (out/'link.rsp').write_text(link)
     vc=Path('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat')
-    (out/'build.cmd').write_text('@echo off\ncall "'+str(vc)+'"\ncl @dosbox.rsp\nif errorlevel 1 exit /b 1\ncl @core_normal.rsp\nif errorlevel 1 exit /b 1\ncl @keyboard.rsp\nif errorlevel 1 exit /b 1\nlink @link.rsp\n')
+    (out/'build.cmd').write_text('@echo off\ncall "'+str(vc)+'"\n'+''.join('cl @'+n+'.rsp\nif errorlevel 1 exit /b 1\n' for n in ('dosbox','core_normal','keyboard','mouse'))+'link @link.rsp\n')
     run=subprocess.run(['cmd','/c',str(out/'build.cmd')],cwd=out,capture_output=True,text=True,timeout=600)
     (out/'build.log').write_text(run.stdout+run.stderr)
     if run.returncode: raise RuntimeError((run.stdout+run.stderr)[-5000:])
     inputs=[source,core_source,SOURCE/'src/hardware/pic.cpp',SOURCE/'src/ints/mouse.cpp',SOURCE/'src/hardware/keyboard.cpp',SOURCE/'src/cpu/callback.cpp',SOURCE/'src/ints/bios_keyboard.cpp',HERE/'compact_observer.inc',HERE/'build_observer.py']+sorted(obj.glob('*.obj'))
-    receipt=dict(schema='simant-boundary-observer-build-v6',executable=str(out/'dosbox-x.exe'),
+    receipt=dict(schema='simant-boundary-observer-build-v7',executable=str(out/'dosbox-x.exe'),
         sha256=sha(out/'dosbox-x.exe'),inputs={str(p):sha(p) for p in inputs},
-        patched_source_sha256=sha(patched),core_source_sha256=sha(out/'core_normal.cpp'),keyboard_source_sha256=sha(out/'keyboard.cpp'),compiler_response_sha256={n:sha(out/(n+'.rsp')) for n in ('dosbox','core_normal','keyboard')},linker_response_sha256=sha(out/'link.rsp'),
-        scope='service-samples-v6: read-only state observations; synthetic transitions held at completed service boundaries through real PIC/IRQ delivery; no guest code or result mutation.')
+        patched_source_sha256=sha(patched),core_source_sha256=sha(out/'core_normal.cpp'),keyboard_source_sha256=sha(out/'keyboard.cpp'),mouse_source_sha256=sha(out/'mouse.cpp'),compiler_response_sha256={n:sha(out/(n+'.rsp')) for n in ('dosbox','core_normal','keyboard','mouse')},linker_response_sha256=sha(out/'link.rsp'),
+        scope='service-samples-v7: read-only state observations; synthetic transitions held at completed service boundaries through real PIC/IRQ delivery; no guest code or result mutation.')
     (out/'observer-build.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps({k:v for k,v in receipt.items() if k!='inputs'},indent=2))
 if __name__=='__main__': main()

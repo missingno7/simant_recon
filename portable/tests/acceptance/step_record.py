@@ -16,9 +16,11 @@ except ImportError:
 def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None, scratch_root=None):
     scenario = json.loads(scenario_path.read_text())
     exe = ROOT/'assets/SIMANT.EXE' if target=='original' else ROOT/json.loads(report.read_text())['link']['candidate_executable']['path']
-    directory = out or ROOT/'build/reference'/scenario['id']/(sha(exe)+'-service-samples-v6')
+    directory = out or ROOT/'build/reference'/scenario['id']/(sha(exe)+'-service-samples-v7')
     script = ROOT/scenario['script']
     observer_build=json.loads(observer.read_text())
+    if observer_build.get('schema')!='simant-boundary-observer-build-v7':
+        raise ValueError('Checkpoint recording requires a v7 observer build')
     observer_source=Path(__file__).with_name('compact_observer.inc').resolve()
     if observer_build.get('inputs',{}).get(str(observer_source))!=sha(observer_source):
         raise ValueError('Compact observer source changed; rebuild the observer before recording')
@@ -36,7 +38,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         manifest=json.loads((directory/'manifest.json').read_text())
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
             boundary=json.loads((directory/'capture/boundary-manifest.json').read_text())
-            if boundary['compact_observer'].get('order_contract')!='service-samples-v6':
+            if boundary['compact_observer'].get('order_contract')!='service-samples-v7':
                 raise ValueError('Reference needs atomic service/input coordinates; retire it with tools/workspace.py and record again: '+str(directory))
             print(scenario['id']+' '+target+': cached reference', flush=True)
             return directory
@@ -81,7 +83,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     execution=json.loads((capture/'execution-report.json').read_text())
     if execution.get('keyboard_layout') != dict(language='us', layout='us'):
         raise ValueError('Reference effective keyboard layout is not pinned US')
-    manifest=dict(schema='simant-step-reference-v1',input_contract='service-samples-v6',target=target,**identity,steps=len(rows),requested_steps=count,
+    manifest=dict(schema='simant-step-reference-v1',input_contract='service-samples-v7',target=target,**identity,steps=len(rows),requested_steps=count,
                   schema_identity=state['identity'],speed=scenario.get('speed','normal (1)'),cycles=cycles or scenario.get('cycles',10000),
                   recording_seconds=elapsed,seconds_per_step=elapsed/max(1,len(rows)),command=cmd,
                   observer_sha256=sha(observer),observer_build=observer_build,
@@ -91,7 +93,8 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
                   complete=run.returncode==0 and len(rows)==count,
                   boundary_manifest_sha256=sha(capture/'boundary-manifest.json'),
                   files={p.relative_to(directory).as_posix():sha(p) for p in
-                         [state_path,capture/'observer.txt',capture/'observer.txt.order',capture/'observer.txt.hash',*capture.glob('observer.txt.frame.*')]})
+                         [state_path,capture/'observer.txt',capture/'observer.txt.order',capture/'observer.txt.hash',*capture.glob('observer.txt.frame.*'),*capture.glob('observer.txt.screen.*')]},
+                  frames=boundary['frames'])
     (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(f'{scenario["id"]} {target}: {len(rows)}/{count} steps, {elapsed:.3f}s ({elapsed/max(1,len(rows)):.4f}s/step)',flush=True)
     if not manifest['complete']: raise RuntimeError('Recording ended before requested simulation entry; see '+str(directory/'record.log'))

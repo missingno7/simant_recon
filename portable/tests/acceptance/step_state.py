@@ -86,6 +86,36 @@ def read_hashes(path, count):
     return [values[i:i+count] for i in range(0, len(values), count)]
 
 
+def bind_reference_policy(current, reference):
+    """Verify a reference against freshly resolved locations; take the verdict
+    policy from the current runtime_views.json.
+
+    Every view is fingerprinted at every entry whatever its category, so the
+    category only decides the verdict. The reference's identity is checked with
+    the policy it was recorded under; the verdict then follows the tracked,
+    reviewed classification. Views whose category differs from the recorded one
+    are listed in current['policy_changes'] so the change stays visible.
+    Layout/order/width/sentinel changes still require new observations.
+    """
+    if len(current['items'])!=len(reference['items']):raise ValueError('Reference schema changed')
+    policy=[]
+    for live,stored in zip(current['items'],reference['items']):
+        fields=set(live)-{'slices','canonical_address','verdict','category'}
+        if any(live[k]!=stored[k] for k in fields):raise ValueError('Reference schema changed')
+        policy.append((live['verdict'],live['category']))
+        live['verdict']=stored['verdict'];live['category']=stored['category']
+    stable=[{k:v for k,v in item.items() if k not in ('slices','canonical_address')} for item in current['items']]
+    current['identity']=hashlib.sha256(json.dumps(stable,sort_keys=True).encode()).hexdigest()
+    if current['identity']!=reference['identity']:raise ValueError('Invalid reference policy identity')
+    changes=[]
+    for live,(verdict,category) in zip(current['items'],policy):
+        if (verdict,category)!=(live['verdict'],live['category']):
+            changes.append(dict(name=live['name'],recorded=live['category'],current=category))
+        live['verdict'],live['category']=verdict,category
+    current['policy_changes']=changes
+    return current
+
+
 def split_frame(path, items):
     raw = path.read_bytes()
     if len(raw) != sum(i['bytes'] for i in items):

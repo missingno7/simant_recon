@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "7ba4668 plus uninit (main stamp, census) and tape-devices (contract v6: device status replay)",
+ "source": "7b95908 plus frames (contract v7: checkpoint frames and palette) and the cursor-counter classification",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -11,20 +11,21 @@
  },
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
-  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt. Since contract v5 the DOS recorder holds each scripted input until the next recorded service boundary and raises it there, so native placement is exact; inputs arriving mid-raster (outcome depends on CPU speed) are outside the tested domain. Since v6, device-status answers that depend on hardware timing (sound driver: song/sample done) are recorded in the service order and replayed like clock reads.",
+  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt. Since contract v5 the DOS recorder holds each scripted input until the next recorded service boundary and raises it there, so native placement is exact; inputs arriving mid-raster (outcome depends on CPU speed) are outside the tested domain. Since v6, device-status answers that depend on hardware timing (sound driver: song/sample done) are recorded in the service order and replayed like clock reads. Since v7, the indexed 640x480 frame, attribute map and full 256-entry DAC are recorded at checkpoint entries (entry 1, every 256, the last) and compared exactly with native; the game's software cursor is part of both frames.",
   "Open findings are pinned per lane in portable/tests/acceptance/known_findings.json; the upper-layer test fails on any change in either direction."
  ],
  "scenarios": {
   "new-game-save (64 entries)": "equal in game state for all 64 entries in both lanes (native = original DOS, native = canonical DOS).",
   "quick-game (2000 entries)": "equal in game state for all 2000 entries in both lanes.",
   "long-run (3000 entries, unattended)": "equal in game state for all 3000 entries in both lanes, about 10 s per lane.",
-  "interactive-play (2000 entries)": "canonical lane equal for 2000 entries; original lane equal through 925, then g_4352: the original DOS makes one more mouse_show_cursor call than the canonical DOS (922 vs 921) and native matches canonical; original/canonical DOS boundary (worker entry926)",
+  "interactive-play (2000 entries)": "equal in game state for all 2000 entries in both lanes",
   "ant-commands (1000)": "equal in game state for all 1000 entries in both lanes",
   "load-from-save (1000)": "equal in game state for all 1000 entries in both lanes",
   "full-game (1000)": "equal in game state for all 1000 entries in both lanes",
   "experiment (1000)": "equal in game state for all 1000 entries in both lanes",
   "random-17 (2000)": "seeded random input; equal in game state for all 2000 entries in both lanes",
-  "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run"
+  "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run",
+  "frames (all scenarios)": "152 checkpoint frames compared; every scenario differs from entry 1 only by the native BIOS font bank (captured under the Czech codepage overlay; 851 menu/title pixels) and DAC entries 16..63 left zero natively (BIOS defaults on DOS; invisible in 4-bit scanout). Worker font-dac."
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
  "subsystems": [
@@ -54,9 +55,9 @@
    "original_dos": "scenarios drive menus and Save As dialogs on the original",
    "canonical_dos": "same",
    "native": "runtime flows (logo click, save, load) PASS",
-   "known_divergence": "interactive-play: original DOS makes one more cursor-show call than canonical DOS at 926 (native = canonical)",
-   "first_open_question": "which caller, and is it reconstruction or DOS timing?",
-   "next": "worker entry926"
+   "known_divergence": "none in game state over the corpus; cursor call counters g_434E/g_4352 are presentation cadence (IRQ0 timer restore placement; never read: evidence/canonical/native-input-irq/cursor-counters.md)",
+   "first_open_question": "-",
+   "next": "keep covered"
   },
   {
    "id": "timing-rng",
@@ -84,7 +85,7 @@
    "original_dos": "native_simulation fixtures compare with the original DOS lane",
    "canonical_dos": "-",
    "native": "native_simulation PASS: 194 cases including mutation controls",
-   "known_divergence": "none in game state over the corpus (9 scenarios, 14,064 entries per lane)",
+   "known_divergence": "none in game state over the corpus (9 scenarios, 14,064 entries per lane, both lanes)",
    "first_open_question": "longer and more varied play; tutorial",
    "next": "input-heavy and long interactive scenarios"
   },
@@ -126,12 +127,12 @@
     "isolated": 3,
     "scenario": 5
    },
-   "original_dos": "no frame comparison exists",
+   "original_dos": "v7 references hold indexed frames, attribute map and DAC at checkpoints",
    "canonical_dos": "-",
-   "native": "runtime VGA flow; BIOS font regression; F12 indexed capture",
-   "known_divergence": "platform.json native-font-output-domain",
-   "first_open_question": "do indexed frames and the palette match DOS at checkpoints?",
-   "next": "worker frames"
+   "native": "frames compared exactly at 152 checkpoints; differences only from the BIOS font bank and DAC 16..63",
+   "known_divergence": "native BIOS font captured under the Czech codepage overlay; DAC 16..63 not initialised to BIOS defaults",
+   "first_open_question": "are frames equal once font and DAC come from the US environment?",
+   "next": "worker font-dac"
   },
   {
    "id": "input",
@@ -197,6 +198,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test harness",
+   "summary": "contract v7: checkpoint frames and palette compared exactly (152 frames, about 60 s for all lanes); cursor call counters reclassified as presentation cadence with an instruction census; verdict policy follows the tracked runtime_views.json; all 9 scenarios equal in game state in both lanes"
+  },
+  {
+   "commit": "7b95908",
    "layer": "projection + test harness",
    "summary": "main's uninitialised stamp gets the DOS reference-environment value (CRT-saved BX/CX, environment scan); census of uninitialised-local reads with a no-new-site check; contract v6 replays sound-driver status; native retained input queue drained in tape mode; 8 of 9 scenarios equal for their whole length"
   },

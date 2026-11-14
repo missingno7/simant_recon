@@ -11,11 +11,11 @@ import tempfile
 from pathlib import Path
 try:
     from .state_schema import ROOT, sha, differences
-    from .step_state import schema, read_hashes, split_frame
+    from .step_state import schema, read_hashes, split_frame, bind_reference_policy
     from .full_inputs import full_tape, InputCoverageError
 except ImportError:
     from state_schema import ROOT, sha, differences
-    from step_state import schema, read_hashes, split_frame
+    from step_state import schema, read_hashes, split_frame, bind_reference_policy
     from full_inputs import full_tape, InputCoverageError
 
 HERE=Path(__file__).resolve().parent
@@ -46,6 +46,7 @@ def test_build(build, out):
         host=next(r for r in report['native_services'] if r['source'].endswith(filename))
         obj=out/(Path(host['source']).stem+'.o')
         command=host['compile']['command'][:]
+        if filename=='/sdl3/host.c':command+=['-DSIMANT_TEST_FRAMES']
         command[command.index('-o')+1]=str(obj)
         subprocess.run(command,check=True,capture_output=True,timeout=60)
         response=response.replace(Path(host['object']).as_posix(),obj.as_posix())
@@ -77,8 +78,19 @@ def test_build(build, out):
 def validate_reference(directory, scenario):
     manifest=json.loads((directory/'manifest.json').read_text())
     recipe=json.loads(scenario.read_text())
-    if manifest.get('input_contract')!='service-samples-v6':
-        raise ValueError('Reference input contract must be service-samples-v6; pre-v6 timing is refused')
+    if manifest.get('input_contract')!='service-samples-v7':
+        raise ValueError('Reference input contract must be service-samples-v7; pre-v7 timing is refused')
+    try:
+        from .frame_check import frame_manifest
+    except ImportError:
+        from frame_check import frame_manifest
+    frames=manifest.get('frames')
+    if not isinstance(frames,dict) or frames.get('contract')!='indexed-vga-v7':
+        raise ValueError('Reference lacks v7 checkpoint observations')
+    if frames!=frame_manifest(directory/'capture',manifest['steps'],frames['interval'],(ROOT/recipe['script']).read_text()):
+        raise ValueError('Reference checkpoint coverage/cursor rule differs')
+    if any(f'capture/observer.txt.screen.{entry}' not in manifest['files'] for entry in frames['entries']):
+        raise ValueError('Reference checkpoint has no hash pin')
     # Absolute import also works when this file is invoked as a script.
     sys.path.insert(0,str(ROOT))
     from portable.tests.acceptance.keyboard_environment import validate_keyboard
@@ -96,8 +108,8 @@ def validate_reference(directory, scenario):
     if sha(execution)!=json.loads(boundary.read_text())['execution_report_sha256']:
         raise ValueError('Changed execution receipt')
     execution_data=json.loads(execution.read_text())
-    if (json.loads(boundary.read_text())['compact_observer'].get('order_contract')!='service-samples-v6' or
-        execution_data.get('input_contract')!='service-samples-v6' or
+    if (json.loads(boundary.read_text())['compact_observer'].get('order_contract')!='service-samples-v7' or
+        execution_data.get('input_contract')!='service-samples-v7' or
         manifest.get('keyboard_layout')!=dict(language='us',layout='us')):
         raise ValueError('Reference needs v6 boundary timing and pinned US keyboard')
     # Bind admission endpoints independently, including DOSBox's FE38 opcode
@@ -178,7 +190,8 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
         from .native_schema import symbols_for
     else:
         from native_schema import symbols_for
-    state=schema(build,executable=exe);items=state['items'];count=len(items)
+    state=bind_reference_policy(schema(build,executable=exe),json.loads((reference/'schema.json').read_text()))
+    items=state['items'];count=len(items)
     if state['identity']!=manifest['schema_identity']:raise ValueError('Reference schema changed')
     expected=read_hashes(reference/'capture/observer.txt.hash',count)
     stop=min(manifest['steps'],max_steps or manifest['steps']);gap=None
@@ -201,6 +214,15 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
     env={k:v for k,v in os.environ.items() if not k.startswith('SIMANT_TEST_')}
     env.update(SIMANT_TEST_STEP_CONFIG=str(config),SIMANT_TEST_FULL_CLOCK=str(clocks),
                SIMANT_TEST_SERVICE_INPUT=str(events))
+    try:
+        from .frame_check import compare_frames
+    except ImportError:
+        from frame_check import compare_frames
+    checkpoints=[s for s in manifest['frames']['entries'] if s<=stop]
+    palette_address,_,_=symbols_for(exe).expression('app.palette')
+    frame_config=out/'frames.config'
+    frame_config.write_text(str(out)+'\n'+f'{palette_address-anchor} {len(checkpoints)}\n'+' '.join(map(str,checkpoints))+'\n')
+    env['SIMANT_TEST_FRAME_CONFIG']=str(frame_config)
     if tape.get('service_order'):env['SIMANT_TEST_SERVICE_ORDER']=tape['service_order']
     if os.environ.get('SIMANT_ADMISSION_TRACE'):env['SIMANT_TEST_ORDER_OUTPUT']=str(out/'native.order')
     if disable=='input':env.pop('SIMANT_TEST_SERVICE_INPUT')
@@ -241,6 +263,7 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
         native_seconds=elapsed,command=command,exit_code=code,timed_out=timed_out,
         negative_control=disable,excluded=state['excluded'])
     if gap:result['input_coverage_gap']=gap
+    result['policy_changes']=state['policy_changes']
     if (out/'native-result.json').is_file() and (out/'native-result.json').stat().st_size:result['diagnostics']=json.loads((out/'native-result.json').read_text())
     for step,native in enumerate(actual,1):
         for item,e,n in zip(items,expected[step-1],native):
@@ -290,6 +313,12 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
     if phase_errors or position_errors:result['status']='INCOMPLETE'
     service_error=re.search(r'Observer service order mismatch at ([^\n]+)',(out/'native.log').read_text())
     if service_error:result['service_order_failure']=service_error[1]
+    result['frames']=compare_frames(reference,out,checkpoints)
+    result['frames']['replay_complete']=(code in (0,10) and not timed_out and
+        result.get('diagnostics',{}).get('frame_entry_reached')==stop and
+        not result.get('diagnostics',{}).get('replay_error'))
+    result['frames']['native_host_cursor_visible']=[bool(int(x)) for x in re.findall(r'Observer host cursor visible=(\d+)',(out/'native.log').read_text())]
+    (out/'frames.json').write_text(json.dumps(result['frames'],indent=2)+'\n')
     (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     return result
 
@@ -301,6 +330,70 @@ def attribute(original,canonical):
     return 'UNATTRIBUTED'
 
 
+def attribute_frames(original,canonical):
+    def lane(frame):
+        status={'FRAME_DIFFERENCE':'STATE_DIFFERENCE','FRAME_EQUAL':'REFERENCE_EQUAL'}.get(frame.get('status'),'INCOMPLETE')
+        if status=='REFERENCE_EQUAL' and not frame.get('replay_complete'):status='INCOMPLETE'
+        return dict(status=status)
+    return attribute(lane(original),lane(canonical))
+
+
+def check_scenario(path,refs,a,exe):
+    """One isolated scenario; shared observer executable is read-only.
+
+    Process workers keep PE/DWARF readers, service binding caches and SDL
+    processes independent. Each owns its scenario output and disposable assets.
+    """
+    lanes={}
+    for target,ref in refs.items():
+        try:lanes[target]=run_lane(path.resolve(),ref.resolve(),a.build.resolve(),exe,a.out.resolve()/path.stem/target,a.timeout,a.disable,a.steps,
+                                 a.scratch_root.resolve() if a.scratch_root else None)
+        except (ValueError,FileNotFoundError) as error:lanes[target]=dict(status='INCOMPLETE',steps_compared=0,tape_error=str(error))
+    verdict=attribute(lanes['original'],lanes['canonical'])
+    frame_verdict=attribute_frames(lanes['original'].get('frames',{}),lanes['canonical'].get('frames',{}))
+    row=dict(scenario=path.stem,verdict=verdict,frame_verdict=frame_verdict,lanes=lanes)
+    destination=a.out.resolve()/path.stem;destination.mkdir(parents=True,exist_ok=True)
+    (destination/'result.json').write_text(json.dumps(row,indent=2)+'\n')
+    detail=[]
+    for target,lane in lanes.items():
+        names=','.join(d['name'] for d in lane.get('game_differences',[])[:5]) or '-'
+        if lane['status']=='INCOMPLETE':
+            failure=lane.get('replay_failure',{})
+            cause=('clock='+failure['name']+'['+str(failure.get('call_index','?'))+']') if failure.get('name') else 'timeout' if lane.get('timed_out') else 'service order: '+lane['service_order_failure'] if lane.get('service_order_failure') else 'input/binding coverage'
+            detail.append(f'{target}={lane["steps_compared"]}/{lane.get("reference_steps","?")} INCOMPLETE missing={lane.get("first_missing_step","?")} {cause}')
+        else:
+            detail.append(f'{target}={lane["steps_compared"]}/{lane.get("reference_steps","?")} {lane["status"]} first={lane.get("first_differing_step") or "-"} {names}')
+        if 'frames' in lane:
+            f=lane['frames'];detail[-1]+=f' frames={f["frames_compared"]}/{f["requested_frames"]} {f["status"]} first={f["first_differing_entry"] or "-"}'
+
+    line=path.stem+': '+verdict+' frames='+frame_verdict+' '+ '; '.join(detail)
+    failed=verdict!='ORIGINAL_EQUAL_ALL' or any(l.get('frames',{}).get('status')!='FRAME_EQUAL' or not l.get('frames',{}).get('replay_complete') for l in lanes.values())
+    return line,failed
+
+
+def worker_job(path):
+    """File-backed IPC also works where Windows named pipes are restricted."""
+    job=json.loads(path.read_text());options=job['options']
+    for key in ('build','reference_root','original','canonical','out','scratch_root'):
+        if options.get(key) is not None:options[key]=Path(options[key])
+    result=check_scenario(Path(job['scenario']),{k:Path(v) for k,v in job['references'].items()},
+                          argparse.Namespace(**options),Path(job['executable']))
+    path.with_name('process-result.json').write_text(json.dumps(result)+'\n')
+
+
+def process_scenario(path,refs,a,exe):
+    destination=a.out.resolve()/path.stem;destination.mkdir(parents=True,exist_ok=True)
+    job=destination/'process-job.json'
+    options={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items() if k!='scenario'}
+    job.write_text(json.dumps(dict(scenario=str(path.resolve()),references={k:str(v.resolve()) for k,v in refs.items()},
+                                   options=options,executable=str(exe)))+'\n')
+    command=[sys.executable,'-c','from pathlib import Path; import sys; from portable.tests.acceptance.step_check import worker_job; worker_job(Path(sys.argv[1]))',str(job)]
+    with (destination/'process.log').open('w') as log:
+        run=subprocess.run(command,cwd=ROOT,stdout=log,stderr=subprocess.STDOUT)
+    if run.returncode:raise RuntimeError('Scenario worker failed; see '+str(destination/'process.log'))
+    return json.loads(job.with_name('process-result.json').read_text())
+
+
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('scenario',type=Path,nargs='*')
@@ -309,6 +402,7 @@ def main():
     ap.add_argument('--original',type=Path);ap.add_argument('--canonical',type=Path)
     ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/steps')
     ap.add_argument('--timeout',type=int,default=30)
+    ap.add_argument('--jobs',type=int,default=3,choices=range(1,9),help='Independent scenario processes; --jobs 1 is the sequential control')
     ap.add_argument('--steps',type=int,help='Explicit prefix control; default is the complete reference')
     ap.add_argument('--disable',choices=('clock','input','irq-context','devices'))
     ap.add_argument('--scratch-root',type=Path,help='Short worker directory for disposable native assets')
@@ -316,7 +410,7 @@ def main():
     if not (ROOT/'assets/SIMANT.EXE').is_file() or not (a.build/'report.json').is_file():
         for p in scenarios:print(p.stem+': no reference (assets/native build absent)')
         return 0
-    exe=None;failed=False
+    failed=False;jobs=[]
     for path in scenarios:
         refs={'original':a.original,'canonical':a.canonical}
         incompatible=[]
@@ -325,40 +419,33 @@ def main():
                 m=json.loads(p.read_text())
                 boundary=p.parent/'capture/boundary-manifest.json'
                 if (m['target'] in refs and boundary.is_file() and
-                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v6'):
+                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v7'):
                     refs[m['target']]=p.parent
                 else:incompatible.append(p.parent)
         if not all(refs.values()):
             if incompatible:
-                print(path.stem+': refused pre-v6 references; record service-samples-v6',flush=True);failed=True
+                print(path.stem+': refused pre-v7 references; record service-samples-v7',flush=True);failed=True
             else:print(path.stem+': no reference')
             continue
-        try:
-            for ref in refs.values():validate_reference(ref,path)
-        except (ValueError,FileNotFoundError) as error:
-            print(path.stem+': invalid reference ('+str(error)+')');failed=True;continue
-        if exe is None:exe=test_build(a.build.resolve(),a.out.resolve()/'test-build')
-        lanes={}
-        for target,ref in refs.items():
-            try:lanes[target]=run_lane(path.resolve(),ref.resolve(),a.build.resolve(),exe,a.out.resolve()/path.stem/target,a.timeout,a.disable,a.steps,
-                                     a.scratch_root.resolve() if a.scratch_root else None)
-            except ValueError as error:lanes[target]=dict(status='INCOMPLETE',steps_compared=0,tape_error=str(error))
-        verdict=attribute(lanes['original'],lanes['canonical'])
-        row=dict(scenario=path.stem,verdict=verdict,lanes=lanes)
-        destination=a.out.resolve()/path.stem;destination.mkdir(parents=True,exist_ok=True)
-        (destination/'result.json').write_text(json.dumps(row,indent=2)+'\n')
-        detail=[]
-        for target,lane in lanes.items():
-            names=','.join(d['name'] for d in lane.get('game_differences',[])[:5]) or '-'
-            if lane['status']=='INCOMPLETE':
-                failure=lane.get('replay_failure',{})
-                cause=('clock='+failure['name']+'['+str(failure.get('call_index','?'))+']') if failure.get('name') else 'timeout' if lane.get('timed_out') else 'service order: '+lane['service_order_failure'] if lane.get('service_order_failure') else 'input/binding coverage'
-                detail.append(f'{target}={lane["steps_compared"]}/{lane.get("reference_steps","?")} INCOMPLETE missing={lane.get("first_missing_step","?")} {cause}')
-            else:
-                detail.append(f'{target}={lane["steps_compared"]}/{lane.get("reference_steps","?")} {lane["status"]} first={lane.get("first_differing_step") or "-"} {names}')
-
-        print(path.stem+': '+verdict+' '+ '; '.join(detail),flush=True)
-        failed|=verdict!='ORIGINAL_EQUAL_ALL'
+        # run_lane performs the complete mandatory validation before replay.
+        # Repeating it here serializes all DOS binding/OMF work unnecessarily.
+        jobs.append((path,refs))
+    if jobs:
+        exe=test_build(a.build.resolve(),a.out.resolve()/'test-build')
+        if a.jobs==1 or len(jobs)==1:
+            results=[check_scenario(path,refs,a,exe) for path,refs in jobs]
+            for line,differs in results:print(line,flush=True);failed|=differs
+        else:
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=min(a.jobs,len(jobs))) as pool:
+                # Start long scenarios first; retain the requested print order.
+                def work(job):
+                    return max(min(a.steps or 20000,json.loads((ref/'manifest.json').read_text())['steps']) for ref in job[1].values())
+                futures={i:pool.submit(process_scenario,path,refs,a,exe)
+                         for i,(path,refs) in sorted(enumerate(jobs),key=lambda pair:-work(pair[1]))}
+                for i in range(len(jobs)):
+                    future=futures[i]
+                    line,differs=future.result();print(line,flush=True);failed|=differs
     return int(failed)
 
 if __name__=='__main__':raise SystemExit(main())

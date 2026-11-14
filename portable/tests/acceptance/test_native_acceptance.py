@@ -93,6 +93,7 @@ void portable_test_step_boundary(unsigned s,unsigned p){}
 void portable_test_diagnostics(FILE *f){fputs("\"pump_count\":999",f);}
 int32_t __real_MacTickCount(void){return 0;}
 void __real_DoAntSim(void){++state[0];++state[2];}
+void portable_test_screen(FILE *f,const void *p){(void)p;fputc(state[0],f);}
 extern void __wrap_DoAntSim(void);
 int main(int argc,char **argv){
     if(internal_input_calls()!=6 || input_samples[247]!=1 || input_samples[246]!=1)return 98;
@@ -109,13 +110,17 @@ int main(int argc,char **argv){
             subprocess.run(['C:/msys64/mingw64/bin/gcc.exe','-std=c11','-finstrument-functions',str(source),
                             str(Path(__file__).with_name('native_observer.c')),'-o',str(exe)],
                            check=True,capture_output=True,timeout=30)
-            for negative in (False,True):
+            for negative,frames in ((False,False),(True,False),(True,True)):
                 expected=out/'expected';actual=out/'actual';result=out/'result';frame=out/'frame';config=out/'config'
                 hashes=[]
                 for i in range(3):
                     hashes += [fingerprint(bytes([9 if negative and i==1 else i+1,4])),fingerprint(b'\x07')]
                 expected.write_bytes(struct.pack('<6I',*hashes))
                 env=dict(os.environ,SIMANT_TEST_STEP_CONFIG=str(config))
+                if frames:
+                    frame_config=out/'frames.config'
+                    frame_config.write_text(str(out)+'\n0 3\n1 2 3\n')
+                    env['SIMANT_TEST_FRAME_CONFIG']=str(frame_config)
                 run=subprocess.run([str(exe),str(config),str(expected),str(actual),str(result),str(frame)],
                                    env=env,capture_output=True,timeout=10)
                 self.assertEqual(run.returncode,10 if negative else 0)
@@ -126,20 +131,27 @@ int main(int argc,char **argv){
                 self.assertEqual(len(read_hashes(actual,2)),row['steps_compared'])
                 if negative:
                     self.assertEqual(frame.read_bytes(),b'\x02\x04\x08')
+                if frames:
+                    self.assertEqual(row['frame_entry_reached'],3)
+                    self.assertEqual([(out/f'native.screen.{i}').read_bytes() for i in (1,2,3)],[b'\x01',b'\x02',b'\x03'])
 
     def test_stored_step_scenarios(self):
         """The driver runs every stored scenario against build/current/portable (or reports
         it absent) and never launches a DOS recorder. Each scenario must give exactly the
         outcome pinned in known_findings.json (unlisted ones must be equal in both lanes):
         an earlier stop is a regression, a later one a fix that must update the file."""
-        out=ROOT/'build/current/tests/steps'
+        out=Path(os.environ.get('SIMANT_STEP_TEST_OUT',ROOT/'build/current/tests/steps'))
         command=[os.sys.executable,str(Path(__file__).with_name('step_check.py')),'--out',str(out)]
+        if os.environ.get('SIMANT_STEP_SCRATCH_ROOT'):
+            command+=['--scratch-root',os.environ['SIMANT_STEP_SCRATCH_ROOT']]
         run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=300)
         print(run.stdout,end='')
         self.assertIn(run.returncode,(0,1),run.stderr+run.stdout)
         self.assertNotIn('Traceback',run.stderr)
         self.assertTrue(run.stdout.strip(),run.stderr)
         known=json.loads(Path(__file__).with_name('known_findings.json').read_text())['scenarios']
+        frame_known=json.loads(Path(__file__).with_name('known_findings.json').read_text()).get('frames',{})
+        from .frame_check import frame_signature
         for line in run.stdout.splitlines():
             scenario=line.split(':',1)[0]
             if 'no reference' in line:continue
@@ -154,6 +166,9 @@ int main(int argc,char **argv){
                 self.assertEqual(actual,known[scenario],scenario)
             else:
                 self.assertEqual(row['verdict'],'ORIGINAL_EQUAL_ALL',line)
+            observed_frames={target:frame_signature(lane['frames']) for target,lane in row['lanes'].items()}
+            if scenario in frame_known:self.assertEqual(observed_frames,frame_known[scenario],scenario+' frames')
+            else:self.assertTrue(all(f['status']=='FRAME_EQUAL' for f in observed_frames.values()),scenario+' unpinned frame finding')
 
 
 if __name__=='__main__':unittest.main()

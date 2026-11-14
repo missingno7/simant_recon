@@ -5,6 +5,49 @@ struct CompactPoint { char kind; uint32_t address, after; };
 struct CompactView { uint32_t address, bytes, sentinel; };
 static std::vector<CompactView> compact_views;
 static uint32_t compact_limit=0,compact_interval=256;
+static std::vector<uint32_t> compact_frame_times;
+#include "vga.h"
+extern void CompactMouseFrame(uint32_t words[8], uint16_t masks[32]);
+/* Read host-owned planar RAM: CPU aperture reads would change VGA latches.
+ * DOSBox vga_draw.cpp M_EGA: interleaved planes, start*4<<addr_shift,
+ * address_add=scan_len*(8<<addr_shift). No redraw, guest IO or CPU writes. */
+static void CompactScreen(const std::string &path) {
+    if (vga.mode!=M_EGA || vga.draw.width!=640 || vga.draw.height!=480 ||
+        vga.config.hlines_skip || vga.draw.address_line_total!=1 ||
+        vga.config.line_compare<479) { LOG_MSG("Unsupported checkpoint VGA mode");abort(); }
+    uint32_t h[24]={0x37464153,640,480,0x12,(uint32_t)vga.config.real_start,
+        (uint32_t)(vga.draw.address_add/4),vga.config.pel_panning,vga.config.addr_shift,
+        (uint32_t)vga.config.line_compare,vga.attr.color_plane_enable,vga.dac.bits,
+        vga.dac.pel_mask,vga.attr.color_select,vga.attr.mode_control};
+    uint16_t masks[32]={0};CompactMouseFrame(h+14,masks);
+    h[22]=vga.draw.bytes_skip;h[23]=vga.config.hlines_skip;
+    uint8_t attr[16],dac[768],valid[256],rgb[48];
+    memset(valid,1,sizeof(valid));
+    for (unsigned i=0;i<256;++i) {
+        dac[i*3]=vga.dac.rgb[i].red;dac[i*3+1]=vga.dac.rgb[i].green;dac[i*3+2]=vga.dac.rgb[i].blue;
+    }
+    for (unsigned i=0;i<16;++i) {
+        attr[i]=vga.attr.palette[i];
+        unsigned index=vga.dac.combine[i]&vga.dac.pel_mask;
+        for (unsigned c=0;c<3;++c) {
+            uint8_t b=dac[index*3+c];rgb[i*3+c]=vga.dac.bits==6 ? (b<<2)|(b>>4) : b;
+        }
+    }
+    std::vector<uint8_t> pixels(640*480);
+    const uint32_t start=(vga.config.real_start+vga.draw.bytes_skip)*4u<<vga.config.addr_shift;
+    const uint32_t mask=vga.draw.linear_mask;
+    for (unsigned y=0;y<480;++y) for (unsigned x=0;x<640;++x) {
+        unsigned px=x+vga.config.pel_panning;
+        uint32_t addr=(start+y*vga.draw.address_add+(px/8)*4u)&mask;
+        unsigned color=0;
+        for (unsigned p=0;p<4;++p) color|=((vga.mem.linear[addr+p]>>(7-(px&7)))&1)<<p;
+        pixels[y*640+x]=(uint8_t)(color&vga.attr.color_plane_enable);
+    }
+    FILE *f=fopen(path.c_str(),"wb");if (!f) abort();
+    fwrite(h,sizeof(h),1,f);fwrite(attr,1,16,f);fwrite(dac,1,768,f);
+    fwrite(valid,1,256,f);fwrite(rgb,1,48,f);fwrite(masks,1,64,f);
+    fwrite(&pixels[0],1,pixels.size(),f);if (fclose(f)) abort();
+}
 static std::string compact_output;
 static FILE *compact_fingerprints=NULL, *compact_order=NULL;
 static bool compact_key_visible=false;
@@ -144,6 +187,10 @@ static void CompactInit() {
     if (!compact_order) abort();
     while (fgets(line,sizeof(line),spec)) {
         CompactView v;
+        if (line[0]=='J') {
+            uint32_t ms;if (sscanf(line,"J %u",&ms)!=1) abort();
+            compact_frame_times.push_back(ms);continue;
+        }
         if (line[0]=='H') {
             if (sscanf(line,"H %x %u %u",&v.address,&v.bytes,&v.sentinel)!=3 || !v.bytes) abort();
             compact_views.push_back(v); continue;
@@ -174,7 +221,7 @@ static void CompactInit() {
         if (!compact_fingerprints) abort();
     }
     atexit(CompactClose);
-    fprintf(compact_file,"# simant-compact-observer-v6 per-site ordinal RLE\n");
+    fprintf(compact_file,"# simant-compact-observer-v7 per-site ordinal RLE\n");
     DOSBOX_AcceptanceExecArmed = true;
 }
 static void CompactInput(const AcceptanceEvent &event, double ms) {
@@ -253,9 +300,15 @@ static void CompactInstruction(uint32_t pc) {
                 compact_phase,(unsigned long long)compact_reads,(unsigned long long)compact_hash,(unsigned long long)compact_queries);
             if (p.kind=='S' && compact_fingerprints) {
                 FILE *dump=NULL;
-                if (compact_step==1 || compact_step%compact_interval==0 || compact_step==compact_limit) {
+                bool extra=false;
+                while (!compact_frame_times.empty() && PIC_FullIndex()-acceptance_start_time>=compact_frame_times.front()) {
+                    extra=true;compact_frame_times.erase(compact_frame_times.begin());
+                }
+                if (compact_step==1 || compact_step%compact_interval==0 || compact_step==compact_limit || extra) {
                     char suffix[80];sprintf(suffix,".frame.%llu",(unsigned long long)compact_step);
                     dump=fopen((compact_output+suffix).c_str(),"wb");if (!dump) abort();
+                    sprintf(suffix,".screen.%llu",(unsigned long long)compact_step);
+                    CompactScreen(compact_output+suffix);
                 }
                 for (size_t j=0;j<compact_views.size();++j) {
                     const CompactView &v=compact_views[j];uint32_t hash=2166136261u;

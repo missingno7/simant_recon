@@ -81,10 +81,36 @@ typedef struct View {
   uint8_t *data;
 } View;
 static View *views;
-static unsigned count, step, limit, active;
+static unsigned count, step, limit, active, first_difference;
 static FILE *expected, *actual, *result;
 static char dump_path[2048];
 static unsigned state_clock;
+static unsigned state_entries(void) { return first_difference ? first_difference : step; }
+
+extern void portable_test_screen(FILE *, const void *) __attribute__((weak));
+static void capture_screen(void) {
+  static unsigned loaded, entries[4096], total, next;
+  static int64_t palette_delta;
+  static char directory[2048];
+  if (!loaded++) {
+    const char *path=getenv("SIMANT_TEST_FRAME_CONFIG");
+    if (!path) return;
+    FILE *f=fopen(path,"r");
+    if (!f || !portable_test_screen || !fgets(directory,sizeof(directory),f)) abort();
+    directory[strcspn(directory,"\r\n")]=0;
+    if (fscanf(f,"%" SCNd64 " %u",&palette_delta,&total)!=2 || total>4096) abort();
+    for (unsigned i=0;i<total;++i)
+      if (fscanf(f,"%u",entries+i)!=1 || !entries[i] || (i && entries[i]<=entries[i-1])) abort();
+    fclose(f);
+  }
+  if (next<total && entries[next]==step) {
+    char path[2200];snprintf(path,sizeof(path),"%s/native.screen.%u",directory,step);
+    FILE *f=fopen(path,"wb");if (!f) abort();
+    portable_test_screen(f,(const void *)((uintptr_t)portable_test_clock_read+palette_delta));
+    if (fclose(f)) abort();
+    ++next;
+  }
+}
 
 int portable_test_clock_is_stateful(void) { return state_clock; }
 
@@ -178,7 +204,7 @@ void portable_test_replay_error(const char *message) {
     abort();
   fprintf(result,
           "{\"steps_compared\":%u,\"missing_step\":%u,\"replay_error\":\"%s\",",
-          step, step + 1, message);
+          state_entries(), step + 1, message);
   portable_test_diagnostics(result);
   fputs("}\n", result);
   fclose(actual);
@@ -203,27 +229,28 @@ static uint32_t fingerprint(View *v) {
   return hash;
 }
 
+static void dump_state(void) {
+  FILE *dump = fopen(dump_path, "wb");
+  if (!dump) abort();
+  for (unsigned i = 0; i < count; ++i)
+    if (fwrite(views[i].data, 1, views[i].bytes, dump) != views[i].bytes) abort();
+  if (fclose(dump)) abort();
+}
+
 static void finish(unsigned differs) {
-  if (!differs && portable_test_reference_end && !portable_test_reference_end())
+  if ((!differs || getenv("SIMANT_TEST_FRAME_CONFIG")) &&
+      portable_test_reference_end && !portable_test_reference_end())
     portable_test_replay_error("Reference ended with unconsumed service inputs");
-  fprintf(result, "{\"steps_compared\":%u,\"first_differing_step\":%u,", step,
-          differs ? step : 0);
+  fprintf(result, "{\"steps_compared\":%u,\"first_differing_step\":%u,\"frame_entry_reached\":%u,",
+          state_entries(), differs ? first_difference : 0, step);
   portable_test_diagnostics(result);
   fputs("}\n", result);
   fclose(result);
   fclose(actual);
   fclose(expected);
-  {
-    FILE *dump = fopen(dump_path, "wb");
-    if (!dump)
-      abort();
-    for (unsigned i = 0; i < count; ++i)
-      if (fwrite(views[i].data, 1, views[i].bytes, dump) != views[i].bytes)
-        abort();
-    fclose(dump);
-  }
-  /* Bounded at this entry. Clock/input tails beyond the first difference
-   * are intentionally unconsumed; they remain in the immutable reference. */
+  if (!first_difference) dump_state();
+  /* State stops at its first difference. With checkpoint capture enabled,
+   * services/input and pictures continue independently to the requested end. */
   fflush(NULL);
   _Exit(differs ? 10 : 0);
 }
@@ -236,8 +263,9 @@ void __wrap_DoAntSim(void) {
   }
   ++step;
   portable_test_step_boundary(step, 1);
+  capture_screen();
   unsigned differs = 0;
-  for (unsigned i = 0; i < count; ++i) {
+  for (unsigned i = 0; !first_difference && i < count; ++i) {
     View *v = &views[i];
     unsigned offset = 0;
     for (unsigned j = 0; j < v->count; ++j) {
@@ -254,8 +282,9 @@ void __wrap_DoAntSim(void) {
       differs = 1;
   }
   fflush(actual);
-  if (differs || step == limit)
-    finish(differs);
+  if (differs) { first_difference=step;dump_state(); }
+  if (step == limit || (first_difference && !getenv("SIMANT_TEST_FRAME_CONFIG")))
+    finish(first_difference);
   if (portable_test_before_poll) portable_test_before_poll();
   __real_DoAntSim();
   portable_test_step_boundary(step, 0);

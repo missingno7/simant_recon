@@ -3808,12 +3808,12 @@
     "reason": "Simulation/control storage or unproven influence: conservatively part of the state verdict."
   },
   "g_434E": {
-    "category": "game_state",
-    "reason": "Simulation/control storage or unproven influence: conservatively part of the state verdict."
+    "category": "runtime",
+    "reason": "Cursor hide call counter: input_timer.asm mouse_hide_cursor only increments it; no instruction in either executable reads it (instruction census in evidence/canonical/native-input-irq/cursor-counters.md). Its value depends on where IRQ0 (timer_input_interrupt cursor restore) lands inside foreground hide intervals; presentation cadence, reported separately."
   },
   "g_4352": {
-    "category": "game_state",
-    "reason": "Simulation/control storage or unproven influence: conservatively part of the state verdict."
+    "category": "runtime",
+    "reason": "Cursor show call counter: mouse_show_cursor increments it on every call, including the IRQ0 timer restore; never read (same census). Presentation cadence, reported separately."
   },
   "g_4356": {
     "category": "runtime",

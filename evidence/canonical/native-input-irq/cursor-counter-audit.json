@@ -1,0 +1,68 @@
+{
+  "original_sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11",
+  "instructions_examined": 123287,
+  "direct_dgroup_references": [
+    {
+      "unit": "root",
+      "function": "mouse_show_cursor",
+      "address": "0x1b80a",
+      "instruction": "inc word ptr [0x4352]",
+      "bytes": "ff065243"
+    },
+    {
+      "unit": "root",
+      "function": "mouse_show_cursor",
+      "address": "0x1b810",
+      "instruction": "inc word ptr [0x4354]",
+      "bytes": "ff065443"
+    },
+    {
+      "unit": "root",
+      "function": "mouse_hide_cursor",
+      "address": "0x1b8e3",
+      "instruction": "inc word ptr [0x434e]",
+      "bytes": "ff064e43"
+    },
+    {
+      "unit": "root",
+      "function": "mouse_hide_cursor",
+      "address": "0x1b8e9",
+      "instruction": "inc word ptr [0x4350]",
+      "bytes": "ff065043"
+    }
+  ],
+  "address_immediate_candidates": [],
+  "canonical_source_references": [
+    {
+      "path": "src/platform/input_timer.asm",
+      "line": 82,
+      "text": "_g_434E\t\tdd\t0\t\t; event counters"
+    },
+    {
+      "path": "src/platform/input_timer.asm",
+      "line": 83,
+      "text": "_g_4352\t\tdd\t0"
+    },
+    {
+      "path": "src/platform/input_timer.asm",
+      "line": 325,
+      "text": "\tinc word ptr _g_4352"
+    },
+    {
+      "path": "src/platform/input_timer.asm",
+      "line": 327,
+      "text": "\tinc word ptr _g_4352+2"
+    },
+    {
+      "path": "src/platform/input_timer.asm",
+      "line": 415,
+      "text": "\tinc word ptr _g_434E"
+    },
+    {
+      "path": "src/platform/input_timer.asm",
+      "line": 417,
+      "text": "\tinc word ptr _g_434E+2"
+    }
+  ],
+  "conclusion": "Only the four INC words access these two counters directly in the indexed original functions. Their flags carry the counter increment only; no ordinary canonical reader or address materialization was found. This supports a presentation call-counter classification proposal; arbitrary dynamic aliasing is not proven absent by this census."
+}

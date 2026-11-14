@@ -39,7 +39,7 @@ or `--target canonical` selects one. `--out SCRATCH` records an explicit repeat;
 `--steps` and `--cycles` are measured recording controls, stored in its manifest.
 Compatible references are reused. An older service contract requires explicit
 retirement with `tools/workspace.py` and recording again. References live at
-`build/reference/<scenario>/<executable-sha256>-service-samples-v6/`. Original assets and generated
+`build/reference/<scenario>/<executable-sha256>-service-samples-v7/`. Original assets and generated
 references stay ignored.
 
 Recipes with `saved_game` also require `saved_game_sha256`: recording validates
@@ -62,9 +62,8 @@ unsupported combinations and legacy INT16 filtering.
 [`keyboard-environment.conf`](../../../dos/scenarios/keyboard-environment.conf)
 onto the selected toolchain runner entry (also when replaced by the observer).
 It captures `KEYB`'s effective-layout query and refuses a non-US environment.
-Every v6 reference records that result and environment pin; record and check
-both require proved US. All eighteen references were re-recorded under US for
-v6. Historical CZ243 captures and their neutrality proofs are retired, with
+Every v7 reference records that result and environment pin; record and check
+both require proved US. All eighteen references are recorded under US for v7. Historical CZ243 captures and their neutrality proofs are retired, with
 provenance in `build/workers/keys/RESULT.md` and the v4 retirement inventory in
 `build/workers/quiet-inputs/v4-inventory.json`.
 
@@ -121,7 +120,7 @@ sites bind to immutable original code or independent canonical OMF fixups;
 native call sites bind to the observer wrappers by instruction disassembly. No clock value is interpolated, inferred from native state or
 selected to obtain equality.
 
-V6 (`service-samples-v6`) holds each scripted key or mouse transition from
+V6 timing (retained by `service-samples-v7`) holds each scripted key or mouse transition from
 its scheduled emulated time until the next eligible recorded service boundary.
 Atomic providers complete their sample first; that cached result cannot change.
 Entry boundaries admit before their bodies. StillDown (247) is a completed
@@ -149,7 +148,7 @@ counts plus simulation entry/phase. The single ordinal is
 `clock_reads` field counts all sampled-return reads, including h/j device
 answers; it is not elapsed time. Native admits through the normal
 SDL adapter at precisely this boundary. The parser refuses a v6 IRQ whose
-coordinates differ from its hold, and checks refuse pre-v6 references. A missed
+coordinates differ from its hold, and checks refuse pre-v7 references. A missed
 boundary, wrong service, phase or input coordinate fails replay. Positive
 completion requires consumed clock, service and input tapes; a first state
 difference leaves the remaining tape for investigation.
@@ -172,7 +171,7 @@ optional test hook. Each staged raw SDL event carries its own pair; the
 projection still constructs and queues every Event, including its BIOS stamp.
 Physical pointer coordinates retain their existing translation. Missing or
 out-of-word keyboard context is a coverage error, never a native-zero fallback.
-A pre-v6 reference is refused; its timing cannot be upgraded from expected state.
+A pre-v7 reference is refused; its timing cannot be upgraded from expected state.
 
 These are handler-entry words, not necessarily raw interrupted foreground
 registers: the DOS IRQ wrapper loads DX with DGROUP before kbd_process_scan.
@@ -281,3 +280,80 @@ queues. IRQ dispatch already consumes each event before its retained copy is
 released. Tape admission releases those copies just as ordinary application
 idle does. Ordinary ingestion stops polling SDL while this FIFO is full, so a
 large batch resumes after draining instead of aborting. No buffer was enlarged.
+
+
+## Checkpoint pictures (v7)
+
+V7 retains v6 service/input timing and per-entry state fingerprints unchanged,
+and adds read-only VGA scanout at the same DoAntSim entry, before admitting
+post-entry transitions. Capture entry 1, every 256 entries, the last entry,
+and the first entry at/after the first command of each commented script section.
+The manifest lists those comment times and actual entries (or null when the
+bounded scenario ends first). No extra drawing or presentation is requested.
+
+`observer.txt.screen.ENTRY` is SAF7: 24 little-endian u32 metadata words,
+16 attribute-map bytes, 256 RGB DAC entries in the recorded DAC bit depth,
+256 validity bytes, 16 projected RGB8 colors, 32 INT33 mask words and
+640x480 indexed pixels (one byte per pixel). `frame_check.py` defines the
+header fields and validates the complete extent. The whole file is hash-pinned.
+DOS reads interleaved host VGA planes directly, avoiding CPU aperture reads
+that would disturb latches. It applies retrace-latched display start, page,
+stride, address shift, byte skip, panning and plane-enable registers. Unsupported
+modes, split screens and preset/doubled scanlines fail closed. Native copies its
+single aperture and DWARF-bound app.palette; no sync, poll, draw or write occurs.
+F12 captures the last completed presentation and is deliberately not used here.
+
+The game draws its own software cursor into both apertures through the source
+cursor draw/restore callbacks. The separate INT33 driver's cursor is hidden or
+inhibited at every recorded checkpoint; v7 verifies and retains its actual
+visibility, position, hotspot and shape masks. A visible INT33 driver is an
+explicit coverage error. Compare the entire picture including the game cursor;
+**no rectangle or other pixels are masked**. Cursor source state is already
+included in the per-entry state views.
+
+Each lane reports `frames` beside its game-state verdict and writes `frames.json`.
+A frame difference never stops simulation/state comparison. State comparison retains its first-difference boundary and exact snapshot, while
+frame/service replay continues to the requested end; any missing checkpoints
+and incomplete service tail are explicit.
+Every differing checkpoint includes indexed/visible pixel counts, half-open
+bounding boxes, DAC/attribute/projected-palette indices and a PNG triple
+`frame-ENTRY-{dos,native,diff}.png`. Magenta marks RGB differences and amber
+index-only differences. Unused DAC differences still fail exact comparison.
+Native unwritten DAC slots are reported explicitly, including differences from
+DOS BIOS defaults; no expected palette bytes are supplied to native.
+`known_findings.json` pins frame signatures (including a digest of every
+checkpoint row and both raw frame hashes) separately from state signatures;
+controls reject both improvements and regressions until the pins are reviewed.
+
+Run `python -m unittest portable.tests.acceptance.test_frames` for frame format,
+truncation, exact-pixel/cursor and unused-DAC negative controls. NumPy and Pillow
+are required for comparison and review PNGs. Full triage and timing evidence:
+`build/workers/frames/RESULT.md`.
+
+Every view is fingerprinted at every entry whatever its category; the category
+only decides the verdict. A reference's identity is verified against the policy
+it was recorded under, then the verdict follows the current `runtime_views.json`,
+the tracked and reviewed classification. Views whose category changed since
+recording are listed as `policy_changes` in each lane result. Native storage
+locations are resolved afresh; names, ordering, extents, sentinels and original
+addresses must match exactly, or the reference must be recorded again.
+Reclassifying a view needs evidence in its `reason` (for the cursor call
+counters: `evidence/canonical/native-input-irq/cursor-counters.md`).
+
+The host/system mouse pointer is a separate SDL/OS overlay, outside the indexed
+texture and F12 bitmap. The read-only hook logs SDL_CursorVisible independently
+(`native_host_cursor_visible`); no overlay is painted into or erased from either
+reference. The current host has no SDL_HideCursor call. These headless checkpoint
+checks prove the game software cursor in scanout, not final OS composition or
+absence of an extra system pointer in an ordinary window.
+
+INT33-only metadata words in native SAF7 files are UINT32_MAX (not applicable),
+rather than fabricated driver state. The separate host visibility query is
+reported in JSON; the game cursor itself is present in indexed pixels.
+
+Checks run three independent scenario processes by default (`--jobs 1` is the
+sequential control; `--jobs N`, 1..8, selects the bound). The observer executable
+is linked once and then read-only. Each process owns its PE/DWARF readers,
+scenario output and disposable asset directory. Lines remain in scenario order;
+all child processes are joined before exit. This changes no service/input tape,
+state stopping rule or checkpoint pixel/palette comparison.
