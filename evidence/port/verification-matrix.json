@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "6aaa8ac plus presentation (Yard position-table adjacency, view audit) and the separate audio verdict",
+ "source": "6e38b19 plus audio (contract v8: sound ISR schedule replay, per-entry device command comparison)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -11,7 +11,7 @@
  },
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
-  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt. Since contract v5 the DOS recorder holds each scripted input until the next recorded service boundary and raises it there, so native placement is exact; inputs arriving mid-raster (outcome depends on CPU speed) are outside the tested domain. Since v6, device-status answers that depend on hardware timing (sound driver: song/sample done) are recorded in the service order and replayed like clock reads. Since v7, the indexed 640x480 frame, attribute map and full 256-entry DAC are recorded at checkpoint entries (entry 1, every 256, the last) and compared exactly with native; the game's software cursor is part of both frames. Each lane has three verdicts: game state (stops at the first difference), checkpoint frames, and audio (MIDI/voice progress views, does not stop the state comparison).",
+  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt. Since contract v5 the DOS recorder holds each scripted input until the next recorded service boundary and raises it there, so native placement is exact; inputs arriving mid-raster (outcome depends on CPU speed) are outside the tested domain. Since v6, device-status answers that depend on hardware timing (sound driver: song/sample done) are recorded in the service order and replayed like clock reads. Since v7, the indexed 640x480 frame, attribute map and full 256-entry DAC are recorded at checkpoint entries (entry 1, every 256, the last) and compared exactly with native; the game's software cursor is part of both frames. Each lane has three verdicts: game state (stops at the first difference), checkpoint frames, and audio (MIDI/voice progress views, does not stop the state comparison). Since v8 the sound timer ISR completions are recorded in the service order and native executes its converted ISR exactly that many times at the same boundary; raw OPL/DSP/DMA OUT streams are compared per entry in the audio verdict.",
   "Open findings are pinned per lane in portable/tests/acceptance/known_findings.json; the upper-layer test fails on any change in either direction."
  ],
  "scenarios": {
@@ -26,7 +26,7 @@
   "random-17 (2000)": "seeded random input; equal in game state for all 2000 entries in both lanes",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run",
   "frames (all scenarios)": "all 152 checkpoint frames, attribute maps and DAC exactly equal in every scenario and lane",
-  "audio (all scenarios)": "audio verdict differs in every lane from entry 1: native does not yet run the sound timer ISR on the tape clock, so playback stays near song start (worker audio)"
+  "audio (all scenarios)": "ISR execution counts equal in every lane; audio progress differs at entry 1 only in midi_service_countdown (2-3 pre-reset ticks replayed after the foreground song reset), command streams first differ at entries 4-18 (note-off phase); new-game-save full raw streams identical (12,527 writes per lane); later DSP direct-DAC differences open (worker audio, v9)"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
  "subsystems": [
@@ -160,10 +160,10 @@
    },
    "original_dos": "dos/acceptance.py records DSP and OPL write streams; original = canonical DOS (34,193 and 37,438 writes, timing within 1.4 ms) on quick-game",
    "canonical_dos": "same",
-   "native": "audio suite PASS; evidence/canonical/native-audio-device/review.md",
-   "known_divergence": "audio verdict differs from entry 1 in every lane (sound timer ISR not run on the tape clock natively); command streams not compared",
-   "first_open_question": "does native audio progress equal DOS once the sound timer schedule is replayed?",
-   "next": "worker audio"
+   "native": "sound ISR executed on the replayed DOS schedule; per-entry OPL/DSP/DMA command comparison; audio suite PASS",
+   "known_divergence": "ISR ticks between a service and the foreground song reset/start are replayed after it (countdown phase 2-3 ticks); later DSP direct-DAC stream differences not yet triaged",
+   "first_open_question": "are audio progress and command streams equal once foreground sound-driver entries are service boundaries?",
+   "next": "worker audio (v9)"
   },
   {
    "id": "memory-semantics",
@@ -199,6 +199,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test harness",
+   "summary": "contract v8: sound ISR completion schedule recorded and replayed through the converted ISR; raw OPL/DSP/DMA writes compared per entry; schedule-off control returns the entry-1 differences"
+  },
+  {
+   "commit": "6e38b19",
    "layer": "projection + test harness",
    "summary": "Yard sprite offsets: DrawSimKid/DrawDog read across five adjacent signed-byte tables; native lays them out without padding (all 152 frames equal); audit of every differing non-verdict view; separate audio verdict per lane"
   },

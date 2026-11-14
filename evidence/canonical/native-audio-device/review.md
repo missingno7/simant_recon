@@ -64,3 +64,14 @@ distribution terms include relinking arrangements (section 6); it was not
 selected. The BSD-3-Clause ymfm subset avoids introducing that dependency.
 Primary license references: [Nuked-OPL3](https://github.com/nukeykt/Nuked-OPL3/blob/master/LICENSE),
 [ymfm](https://github.com/aaronsgiles/ymfm/blob/81aec25ccbb98f4873a255f7551ac4dadac59b4a/LICENSE).
+
+## Per-entry acceptance supersedes the bounded window
+
+The earlier sound-duration comparison above remains a bounded observation.
+Contract v8 now records the independently bound DOS sound ISR completions and
+raw device OUTs with service/entry coordinates, runs the existing native ISR
+translation at the next sampled service, and compares every command per entry
+in both executable lanes. Its remaining countdown/command phase differences
+are retained in the audio verdict; the bounded window never closed those gaps.
+See [the v8 schedule review](../native-audio-schedule/README.md) and the exact
+final signatures in `portable/tests/acceptance/known_findings.json`.

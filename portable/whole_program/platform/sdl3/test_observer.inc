@@ -26,6 +26,7 @@ static unsigned test_raw_ids[128], test_raw_sequence;
 static unsigned test_raw_head, test_raw_count;
 static int test_injecting, test_admitting;
 static uint64_t test_services, test_queries;
+#include "audio_tape.inc"
 extern int portable_input_time_host_interrupt(void) __attribute__((weak));
 static int test_queue_raw(const SDL_Event *event) {
   if (test_raw_count == 128)
@@ -109,6 +110,7 @@ static void test_load(void) {
   if (test_loaded)
     return;
   test_loaded = 1;
+  test_audio_load();
   test_disable_clock = getenv("SIMANT_TEST_DISABLE_CLOCK") != NULL;
   test_step_mode = getenv("SIMANT_TEST_STEP_CONFIG") != NULL;
   clock_path = getenv("SIMANT_TEST_FULL_CLOCK");
@@ -191,6 +193,7 @@ static void test_load(void) {
   test_next_input();
 }
 static void test_service(unsigned index) {
+  test_audio_drain();
   ++test_services;
   if (test_service_data && !test_control_changed) {
     int expected=test_service_at<test_service_size ? test_service_data[test_service_at++] : -1;
@@ -386,11 +389,13 @@ void portable_test_step_boundary(unsigned step, unsigned phase) {
 }
 int portable_test_reference_end(void) {
   test_load();
-  return !test_remaining && !test_input_ready && !test_raw_count &&
+  return (!test_audio_timer || !test_audio_ready) && !test_remaining && !test_input_ready && !test_raw_count &&
          test_inputs==test_queued &&
          (!test_service_data || test_service_at==test_service_size);
 }
 void portable_test_diagnostics(FILE *f) {
+  test_audio_close();
+  fprintf(f,"\"audio_timer_executions\":%" PRIu64 ",\"audio_timer_events_consumed\":%" PRIu64 ",",test_audio_runs,test_audio_ticks);
   fprintf(f,
           "\"pump_count\":%" PRIu64 ",\"clock_reads\":%" PRIu64
           ",\"clock_order_digest\":%" PRIu64 ",\"inputs_delivered\":%u,\"service_samples\":%" PRIu64 ",\"input_queries\":%" PRIu64,

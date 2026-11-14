@@ -50,6 +50,10 @@ static void CompactScreen(const std::string &path) {
 }
 static std::string compact_output;
 static FILE *compact_fingerprints=NULL, *compact_order=NULL;
+static FILE *compact_audio_timer=NULL, *compact_audio_commands=NULL;
+static bool CompactAudioActive() { return compact_audio_commands!=NULL; }
+struct CompactTimerEntry { unsigned kind;uint16_t ss,sp; };
+static std::vector<CompactTimerEntry> compact_timers;
 static bool compact_key_visible=false;
 static std::vector<CompactPoint> compact_points;
 static FILE *compact_file = NULL;
@@ -62,6 +66,14 @@ struct CompactStream { char kind; uint32_t caller,value; uint64_t count,total; }
 static std::vector<CompactStream> compact_streams;
 static uint64_t compact_queries=0;
 static uint64_t compact_reads=0,compact_hash=1469598103934665603ull;
+static uint64_t CompactOrdinal() { return compact_reads+compact_pump+compact_queries+2*compact_step-compact_phase; }
+static void CompactAudioWrite(uint32_t port,uint32_t value,uint32_t width,bool output) {
+    if (!compact_audio_commands || !output || !DOSBOX_AcceptanceCpuInstructionActive) return;
+    if (!((port>=0x388 && port<=0x38b) || (port>=0x220 && port<=0x22f) || port<=0xf || (port>=0x80 && port<=0x8f))) return;
+    if (width!=1) { LOG_MSG("Unsupported audio OUT width");abort(); }
+    fprintf(compact_audio_commands,"W %llu %llu %u %X %X\n",(unsigned long long)CompactOrdinal(),
+        (unsigned long long)compact_step,compact_phase,port,value&255);
+}
 static void AcceptanceRunEvent(Bitu event_index);
 static std::vector<Bitu> compact_due;
 static bool compact_dispatch=false, compact_holding=false, compact_delivered=false;
@@ -167,6 +179,11 @@ static void CompactFlush() {
 static void CompactClose() {
     if (!compact_file) return;
     CompactFlush();
+    if (compact_audio_timer) { fputs("E\n",compact_audio_timer);fclose(compact_audio_timer);compact_audio_timer=NULL; }
+    if (compact_audio_commands) {
+        fprintf(compact_audio_commands,"E %llu %llu %u\n",(unsigned long long)CompactOrdinal(),(unsigned long long)compact_step,compact_phase);
+        fclose(compact_audio_commands);compact_audio_commands=NULL;
+    }
     fprintf(compact_file,"Z %llu %llu %u\n",(unsigned long long)compact_pump,
             (unsigned long long)compact_step,compact_phase);
     fclose(compact_file); compact_file = NULL;
@@ -185,6 +202,11 @@ static void CompactInit() {
     if (!compact_file) abort();
     compact_order=fopen((compact_output+".order").c_str(),"wb");
     if (!compact_order) abort();
+    compact_audio_timer=fopen((compact_output+".timer").c_str(),"w");
+    compact_audio_commands=fopen((compact_output+".audio").c_str(),"w");
+    if (!compact_audio_timer || !compact_audio_commands) abort();
+    fputs("SIMANT_AUDIO_COMMANDS 1\n",compact_audio_commands);
+    DOSBOX_AcceptanceIOWatchArmed=true;
     while (fgets(line,sizeof(line),spec)) {
         CompactView v;
         if (line[0]=='J') {
@@ -221,7 +243,7 @@ static void CompactInit() {
         if (!compact_fingerprints) abort();
     }
     atexit(CompactClose);
-    fprintf(compact_file,"# simant-compact-observer-v7 per-site ordinal RLE\n");
+    fprintf(compact_file,"# simant-compact-observer-v8 per-site ordinal RLE\n");
     DOSBOX_AcceptanceExecArmed = true;
 }
 static void CompactInput(const AcceptanceEvent &event, double ms) {
@@ -242,6 +264,23 @@ static void CompactInstruction(uint32_t pc) {
     for (size_t i=0;i<compact_points.size();++i) {
         const CompactPoint &p=compact_points[i];
         if (pc!=p.address) continue;
+        if (p.kind=='t' || p.kind=='u') {
+            CompactTimerEntry entry={compact_timers.empty()?(p.kind=='t'?1u:0u):2u,SegValue(ss),reg_sp};
+            if (!compact_timers.empty() && p.kind!='t') { LOG_MSG("Unexpected nested slow ISR");abort(); }
+            compact_timers.push_back(entry);
+            fprintf(compact_audio_timer,"# entry %X %llu %u %u\n",pc,(unsigned long long)CompactOrdinal(),(unsigned)entry.ss,(unsigned)entry.sp);
+            continue;
+        }
+        if (p.kind=='x') {
+            if (!compact_timers.empty()) {
+                const CompactTimerEntry &entry=compact_timers.back();
+                if (entry.ss==SegValue(ss) && entry.sp==reg_sp) {
+                    fprintf(compact_audio_timer,"T %llu %u\n",(unsigned long long)CompactOrdinal(),entry.kind);
+                    compact_timers.pop_back();
+                }
+            }
+            continue;
+        }
         if (p.kind=='G') { compact_key_visible=false;continue; }
         if (p.kind=='A') {
             if (!reg_ax) { compact_key_visible=false;continue; }

@@ -17,4 +17,6 @@ void portable_whole_audio_provider_start(PortableWholeAudioProvider *p);
 void portable_whole_audio_provider_stop(PortableWholeAudioProvider *p);
 void portable_whole_audio_provider_enable_interrupts(PortableWholeAudioProvider *p);
 void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,int16_t stereo[2]);
+/* Acceptance schedule: slow, fast, or nested fast busy exit. */
+void portable_whole_audio_replay_interrupt(unsigned kind);
 #endif

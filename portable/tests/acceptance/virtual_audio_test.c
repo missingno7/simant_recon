@@ -53,6 +53,27 @@ int main(void) {
     Result small=exercise(1000000,100),large=exercise(100000000,1);
     CHECK(small.frames==large.frames && small.time==large.time && small.irq==large.irq &&
           small.fraction==large.fraction && small.calls==large.calls && small.divider==large.divider);
+    /* A tape replaces autonomous IRQ scheduling, even while SDL time advances.
+     * Explicit replay runs the same channel/sequencer ISR projection. */
+    PortableSdl3WholeAudio a;
+    CHECK(!_putenv_s("SIMANT_TEST_AUDIO_TIMER","schedule-control"));
+    host_virtual_clock_configure(100000000);
+    sequencer_calls=0;midi_service_countdown=1;
+    CHECK(portable_sdl3_whole_audio_open(&a));
+    CHECK(portable_sdl3_whole_audio_bind_source_services(&a));
+    snd_select_two_channel_timer(214,306);snd_start_sample_timer();
+    host_virtual_clock_poll();
+    CHECK(portable_sdl3_whole_audio_pump(&a)==PORTABLE_SDL3_WHOLE_AUDIO_OK);
+    CHECK(sequencer_calls==0 && midi_service_countdown==1);
+    portable_whole_audio_replay_interrupt(1);
+    CHECK(!a.provider.fast && sequencer_calls==0);
+    portable_whole_audio_replay_interrupt(2);
+    CHECK(sequencer_calls==0 && midi_service_countdown==1);
+    portable_whole_audio_replay_interrupt(0);
+    CHECK(sequencer_calls==1 && midi_service_countdown==2);
+    snd_restore_bios_timer(0);portable_sdl3_whole_audio_unbind_source_services();
+    portable_sdl3_whole_audio_close(&a);
+    CHECK(!_putenv_s("SIMANT_TEST_AUDIO_TIMER",""));
     printf("PASS: virtual Sound Mode 6 PIT/IRQ and ISA clock, %u sequencer calls; wall delay and pump chunking controls\n",small.calls);
     return 0;
 }

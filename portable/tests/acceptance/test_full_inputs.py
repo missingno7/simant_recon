@@ -149,7 +149,7 @@ int main(int argc,char **argv) {
         from .step_check import validate_reference
         directory=self.out/'old';directory.mkdir(exist_ok=True)
         (directory/'manifest.json').write_text(json.dumps({'input_contract':'service-samples-v4'}))
-        with self.assertRaisesRegex(ValueError,'pre-v7 timing is refused'):
+        with self.assertRaisesRegex(ValueError,'pre-v8 timing is refused'):
             validate_reference(directory,ROOT/'dos/scenarios/new-game-save.json')
 
     def test_actual_cross_translation_unit_hook_and_rle(self):

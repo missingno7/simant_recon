@@ -115,7 +115,9 @@ def main():
     if args.compact_observer:
         from capstone import Cs,CS_ARCH_X86,CS_MODE_16
         memory=reference.read_bytes(); decoder=Cs(CS_ARCH_X86,CS_MODE_16);decoder.detail=True
-        points=[]
+        from audio_timer import timer_binding
+        sound_timer=timer_binding(memory,base,addresses)
+        points=sound_timer['entries']+[('x',pc) for pc in sound_timer['completions']]
         for name,kind in [('TickCount','T'),('timer_bios_tick_count','B')]:
             start=base+addresses[name]
             ins=list(decoder.disasm(memory[start:start+32],start))
@@ -217,10 +219,11 @@ def main():
         stub=captured[actual:actual+6]
         if actual!=bios_entry or len(stub)!=6 or stub[:3]!=bytes.fromhex('fb fe 38') or stub[5]!=0xcf:
             raise ValueError('Captured BIOS INT16 callback differs from its bound vector/CB_INT16 opcode')
+        manifest['sound_timer']=sound_timer
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
             peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
         manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,admission_after=after,pump_source='both',
-            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v7',
+            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v8',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
         from frame_check import frame_manifest

@@ -28,11 +28,11 @@ def test_build(build, out):
     if len(profiled)!=2:raise ValueError('Missing input-reader/scroll translation units')
     inputs={str(p):sha(p) for p in [build/'simant-canonical.exe',build/'report.json',HERE/'step_check.py',HERE/'native_observer.c',
             ROOT/'portable/whole_program/platform/sdl3/host.c',
-            ROOT/'portable/whole_program/platform/sdl3/test_observer.inc',
+            ROOT/'portable/whole_program/platform/sdl3/test_observer.inc',ROOT/'portable/whole_program/platform/sdl3/audio_tape.inc',
             ROOT/'portable/whole_program/platform/sdl3/input_time_host.c',
             ROOT/'portable/whole_program/platform/m1b73_events.c',
             ROOT/'portable/whole_program/platform/m1b73_queue_runtime.c',
-            ROOT/'portable/whole_program/platform/input_time.h',ROOT/'portable/whole_program/platform/input_time.c',ROOT/'portable/whole_program/platform/m1b73_main_input.c']}
+            ROOT/'portable/whole_program/platform/audio_native.c',ROOT/'portable/whole_program/platform/whole_audio_provider.c',ROOT/'portable/whole_program/platform/input_time.h',ROOT/'portable/whole_program/platform/input_time.c',ROOT/'portable/whole_program/platform/m1b73_main_input.c']}
     inputs.update({r['generated']:sha(Path(r['generated'])) for r in profiled})
     exe=out/'simant-step.exe';receipt=out/'observer-build.json'
     if receipt.is_file() and exe.is_file():
@@ -42,7 +42,7 @@ def test_build(build, out):
     # Refresh the optional platform hooks. The two profiled whole TUs below
     # keep their exact generated source; GCC adds entry/exit observations.
     response=(build/'application-objects.rsp').read_text()
-    for filename in ('/sdl3/host.c','/sdl3/input_time_host.c','/m1b73_events.c','/input_time.c','/m1b73_main_input.c','/m1b73_queue_runtime.c'):
+    for filename in ('/sdl3/host.c','/sdl3/input_time_host.c','/m1b73_events.c','/input_time.c','/m1b73_main_input.c','/m1b73_queue_runtime.c','/audio_native.c','/whole_program/platform/whole_audio_provider.c'):
         host=next(r for r in report['native_services'] if r['source'].endswith(filename))
         obj=out/(Path(host['source']).stem+'.o')
         command=host['compile']['command'][:]
@@ -78,8 +78,8 @@ def test_build(build, out):
 def validate_reference(directory, scenario):
     manifest=json.loads((directory/'manifest.json').read_text())
     recipe=json.loads(scenario.read_text())
-    if manifest.get('input_contract')!='service-samples-v7':
-        raise ValueError('Reference input contract must be service-samples-v7; pre-v7 timing is refused')
+    if manifest.get('input_contract')!='service-samples-v8':
+        raise ValueError('Reference input contract must be service-samples-v8; pre-v8 timing is refused')
     try:
         from .frame_check import frame_manifest
     except ImportError:
@@ -108,8 +108,8 @@ def validate_reference(directory, scenario):
     if sha(execution)!=json.loads(boundary.read_text())['execution_report_sha256']:
         raise ValueError('Changed execution receipt')
     execution_data=json.loads(execution.read_text())
-    if (json.loads(boundary.read_text())['compact_observer'].get('order_contract')!='service-samples-v7' or
-        execution_data.get('input_contract')!='service-samples-v7' or
+    if (json.loads(boundary.read_text())['compact_observer'].get('order_contract')!='service-samples-v8' or
+        execution_data.get('input_contract')!='service-samples-v8' or
         manifest.get('keyboard_layout')!=dict(language='us',layout='us')):
         raise ValueError('Reference needs v6 boundary timing and pinned US keyboard')
     # Bind admission endpoints independently, including DOSBox's FE38 opcode
@@ -144,6 +144,19 @@ def validate_reference(directory, scenario):
         returns,_=return_points(memory,runtime_base+addresses[name])
         if returns!=[pc for k,pc in compact['points'] if k==kind]:
             raise ValueError('Reference device-query RETF census differs: '+name)
+    try:
+        from .audio_timer import timer_binding
+    except ImportError:
+        from audio_timer import timer_binding
+    bound=timer_binding(memory,runtime_base,addresses)
+    for kind,pc in bound['entries']+[('x',pc) for pc in bound['completions']]:
+        if [kind,pc] not in compact['points']:
+            raise ValueError('Reference omits a bound sound ISR observation')
+    if any('capture/observer.txt.'+suffix not in manifest['files'] for suffix in ('timer','audio')):
+        raise ValueError('Reference audio sidecars are not hash pinned')
+    saved=json.loads(boundary.read_text()).get('sound_timer')
+    if json.loads(json.dumps(bound))!=saved:
+        raise ValueError('Sound timer instruction/IVT bindings differ')
     inputs=execution_data['inputs']
     for item in inputs:
         source=ROOT/item['path']
@@ -223,10 +236,21 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
     frame_config=out/'frames.config'
     frame_config.write_text(str(out)+'\n'+f'{palette_address-anchor} {len(checkpoints)}\n'+' '.join(map(str,checkpoints))+'\n')
     env['SIMANT_TEST_FRAME_CONFIG']=str(frame_config)
+    timer=out/'audio-timer.txt'
+    # Prefix solely by the recorded chronological service extent.
+    service_limit=Path(tape['service_order']).stat().st_size
+    try:
+        from .audio_timer import timer_tape
+    except ImportError:
+        from audio_timer import timer_tape
+    timer_tape(reference/'capture/observer.txt.timer',timer,service_limit)
+    env['SIMANT_TEST_AUDIO_TIMER']=str(timer)
+    env['SIMANT_TEST_AUDIO_COMMANDS']=str(out/'audio-commands.txt')
     if tape.get('service_order'):env['SIMANT_TEST_SERVICE_ORDER']=tape['service_order']
     if os.environ.get('SIMANT_ADMISSION_TRACE'):env['SIMANT_TEST_ORDER_OUTPUT']=str(out/'native.order')
     if disable=='input':env.pop('SIMANT_TEST_SERVICE_INPUT')
     if disable=='clock':env['SIMANT_TEST_DISABLE_CLOCK']='1'
+    if disable=='audio-timer':env['SIMANT_TEST_DISABLE_AUDIO_TIMER']='1'
     if disable=='devices':env['SIMANT_TEST_DISABLE_DEVICES']='1'
     if disable=='irq-context':env['SIMANT_TEST_DISABLE_IRQ_CONTEXT']='1'
     if disable=='clock':
@@ -321,6 +345,18 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
     result['frames']['replay_complete']=(code in (0,10) and not timed_out and
         result.get('diagnostics',{}).get('frame_entry_reached')==stop and
         not result.get('diagnostics',{}).get('replay_error'))
+    try:
+        from .audio_commands import compare_commands, command_signature
+    except ImportError:
+        from audio_commands import compare_commands, command_signature
+    commands=compare_commands(reference/'capture/observer.txt.audio',out/'audio-commands.txt',
+                              out,entries=stop,replay_complete=result['frames']['replay_complete'])
+    result['audio']['commands']=command_signature(commands)
+    if commands['status']!='AUDIO_COMMANDS_EQUAL':
+        result['audio']['status']='AUDIO_DIFFERENCE' if commands['status']=='AUDIO_COMMANDS_DIFFERENCE' else 'AUDIO_INCOMPLETE'
+        first=commands.get('first_differing_entry')
+        if first is not None:
+            result['audio']['first_differing_step']=min(result['audio']['first_differing_step'] or first,first)
     result['frames']['native_host_cursor_visible']=[bool(int(x)) for x in re.findall(r'Observer host cursor visible=(\d+)',(out/'native.log').read_text())]
     (out/'frames.json').write_text(json.dumps(result['frames'],indent=2)+'\n')
     (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
@@ -408,10 +444,10 @@ def main():
     ap.add_argument('--reference-root',type=Path,default=ROOT/'build/reference')
     ap.add_argument('--original',type=Path);ap.add_argument('--canonical',type=Path)
     ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/steps')
-    ap.add_argument('--timeout',type=int,default=30)
+    ap.add_argument('--timeout',type=int,default=60)
     ap.add_argument('--jobs',type=int,default=3,choices=range(1,9),help='Independent scenario processes; --jobs 1 is the sequential control')
     ap.add_argument('--steps',type=int,help='Explicit prefix control; default is the complete reference')
-    ap.add_argument('--disable',choices=('clock','input','irq-context','devices'))
+    ap.add_argument('--disable',choices=('clock','input','irq-context','devices','audio-timer'))
     ap.add_argument('--scratch-root',type=Path,help='Short worker directory for disposable native assets')
     a=ap.parse_args();scenarios=a.scenario or sorted((ROOT/'dos/scenarios').glob('*.json'))
     if not (ROOT/'assets/SIMANT.EXE').is_file() or not (a.build/'report.json').is_file():
@@ -426,12 +462,12 @@ def main():
                 m=json.loads(p.read_text())
                 boundary=p.parent/'capture/boundary-manifest.json'
                 if (m['target'] in refs and boundary.is_file() and
-                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v7'):
+                    json.loads(boundary.read_text())['compact_observer'].get('order_contract')=='service-samples-v8'):
                     refs[m['target']]=p.parent
                 else:incompatible.append(p.parent)
         if not all(refs.values()):
             if incompatible:
-                print(path.stem+': refused pre-v7 references; record service-samples-v7',flush=True);failed=True
+                print(path.stem+': refused pre-v8 references; record service-samples-v8',flush=True);failed=True
             else:print(path.stem+': no reference')
             continue
         # run_lane performs the complete mandatory validation before replay.

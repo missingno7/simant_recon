@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdatomic.h>
+extern void portable_test_audio_write(uint16_t,uint8_t) __attribute__((weak));
 static PortableWholeAudioHost host;
 static int armed, interrupts = 1;
 static _Noreturn void unavailable(const char *service) {
@@ -27,6 +28,7 @@ void dos_audio_host_interrupt_enable(void) {
 }
 void dos_audio_host_out8(uint16_t port,uint8_t value) {
     if(!host.out8) unavailable("OUT before host binding");
+    if(portable_test_audio_write) portable_test_audio_write(port,value);
     host.out8(host.context,port,value);
 }
 uint8_t dos_audio_host_in8(uint16_t port) {

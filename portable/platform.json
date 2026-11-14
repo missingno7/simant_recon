@@ -157,6 +157,8 @@
     "portable/whole_program/platform/startup_preflight.h",
     "portable/whole_program/platform/unsupported_video_profiles.h",
     "portable/whole_program/platform/whole_audio_provider.h",
+    "portable/whole_program/platform/sdl3/audio_tape.inc",
+    "portable/whole_program/platform/sdl3/test_observer.inc",
     "portable/whole_program/state/asm_display_data_v1.h",
     "portable/whole_program/state/asm_shared_state.h",
     "portable/whole_program/state/font_pointer_state_v1.h",
@@ -377,12 +379,22 @@
     "trace": "SIMANT_AUDIO_TRACE existing directory; io-sb_dsp/io-opl DOS OUT format",
     "limitations": [
       "Generic SB DMA and device IRQs are unimplemented and fail closed; canonical mode 6 uses PIT IRQ0 and direct DAC command 10h.",
-      "Host monotonic scheduling is not cycle-accurate DOS CPU execution; trace timing requires explicit comparison tolerance.",
+      "Ordinary host monotonic scheduling is not cycle-accurate DOS CPU execution; v8 acceptance separately replays observed sound ISR completions at service boundaries and compares exact command order per entry.",
       "Other audio modes are unsupported; source startup time and full timer-chain/menu/save ABI equivalence are not claimed."
     ],
     "source_selection": "Canonical CFG selection retained; platform no longer forces /s1. Explicit /s6 or /s0 accepted.",
-    "validation_and_limits": "Sound Blaster mode 6 uses canonical C and a readable m28BC ISR projection, existing channel owners and source volume-table directives. OPL3/OPL2-compatibility synthesis is ymfm BSD-3-Clause; SB direct U8 DAC/reset/mute and IRQ0 cadence are hosted. A bounded fresh sound-duration window matches all 5 DSP and 13476 OPL port/value writes from the original new-game-save oracle. First-musical-command-relative OPL timing is within 2 ms; absolute startup differs by about one second. Generic SB DMA/device IRQs, other device profiles, complete BIOS INT08 chain phase/reentry, and menu/save option cross-owner ABI views remain unproved/unsupported. Static music/effect reads in m00DF map mechanically to canonical 07AA owner words; no ordinary owner or game branch is introduced.",
-    "classification": "TRUE_PLATFORM_BOUNDARY; unsupported hardware profiles fail explicitly, no semantic exception or ordinary source modification"
+    "validation_and_limits": "Sound Blaster mode 6 uses canonical C and a readable m28BC ISR projection, existing channel owners and source volume-table directives. OPL3/OPL2-compatibility synthesis is ymfm BSD-3-Clause; SB direct U8 DAC/reset/mute and IRQ0 cadence are hosted. The earlier bounded command-window observation is retained in native-audio-device/review.md. V8 acceptance records and replays independently observed sound ISR completions and compares complete per-entry command streams in both DOS lanes; residual countdown phase and command-entry differences remain explicit findings. Generic SB DMA/device IRQs, other device profiles, complete BIOS INT08 chain/CPU phase, PCM identity and menu/save cross-owner ABI equivalence remain unproved/unsupported. Static music/effect reads in m00DF map mechanically to canonical 07AA owner words; no ordinary owner or game branch is introduced.",
+    "classification": "TRUE_PLATFORM_BOUNDARY; unsupported hardware profiles fail explicitly, no semantic exception or ordinary source modification",
+    "step_acceptance": {
+      "contract": "service-samples-v8",
+      "recording": "Independently bound fast/slow sound ISR entries and matching SS:SP IRET/old-INT08 tail exits; completed executions retain their chronological service ordinal. Nested fast entries retain the canonical busy early exit.",
+      "replay": "With SIMANT_TEST_AUDIO_TIMER, run the existing converted sample/sequencer ISR at the next sampled service for every recorded completion; suppress autonomous SDL-clock IRQs. No tape retains ordinary SDL scheduling. Observed fast/slow identities are checked, never installed as playback state.",
+      "commands": "DOS observer.txt.audio and native audio-commands.txt retain every byte OUT to OPL 388..38B, SB 220..22F, low DMA 00..0F and DMA pages 80..8F with service ordinal, entry and phase. Exact raw port/value order per entry participates in the audio verdict; service-coordinate drift is retained separately. DSP commands, OPL register/value and DMA programming/start diagnostics never normalize the raw stream.",
+      "negative_control": "step_check.py --disable audio-timer consumes the schedule without running its ISR executions.",
+      "limits": "Service-boundary replay does not locate an IRQ between foreground instructions sharing sound state. Foreground song initialization can reset the countdown after DOS ticks but before the next service, whereas replay executes those ticks afterward. The chained input timer/BIOS bodies and CPU/PIC phase are not replayed; command equality does not prove PCM or wall-time equality.",
+      "evidence": "evidence/canonical/native-audio-schedule/README.md",
+      "regression": "portable/tests/acceptance/test_audio_timer.py; test_audio_commands.py; run_virtual_audio_tests.py; step_check.py"
+    }
   },
   "native_vga_boundary": {
     "memory": "One four-plane 64 KiB CPU aperture owned by SimGraphicsDriver; presentation decodes visible rows only.",

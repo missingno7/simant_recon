@@ -9,14 +9,14 @@ Historical measurements and first-divergence evidence for this expansion are in
 `step_check.py` replays stored DOS references in a compiled native observer.
 It starts neither DOSBox-X nor GDB. Each scenario has independent original and
 canonical lanes; native consumes that executable's own clocks, device answers and actual IRQ
-transitions and compares only with its state observations.
+transitions and compares its state, checkpoint frames and audio observations.
 
 ```powershell
 python portable/tests/acceptance/step_check.py
 ```
 
 The command prints one stable line per scenario. Missing references, assets or
-builds report `no reference` and exit 0. A state difference or incomplete replay
+builds report `no reference` and exit 0. A state, frame or audio difference, or incomplete replay,
 exits 1. `--build`, `--out`, `--original`, `--canonical`, `--reference-root`,
 `--steps` and `--timeout` select explicit builds, outputs, references and controls.
 The default build is `build/current/portable` (built as in `portable/README.md`);
@@ -39,7 +39,7 @@ or `--target canonical` selects one. `--out SCRATCH` records an explicit repeat;
 `--steps` and `--cycles` are measured recording controls, stored in its manifest.
 Compatible references are reused. An older service contract requires explicit
 retirement with `tools/workspace.py` and recording again. References live at
-`build/reference/<scenario>/<executable-sha256>-service-samples-v7/`. Original assets and generated
+`build/reference/<scenario>/<executable-sha256>-service-samples-v8/`. Original assets and generated
 references stay ignored.
 
 Recipes with `saved_game` also require `saved_game_sha256`: recording validates
@@ -62,8 +62,8 @@ unsupported combinations and legacy INT16 filtering.
 [`keyboard-environment.conf`](../../../dos/scenarios/keyboard-environment.conf)
 onto the selected toolchain runner entry (also when replaced by the observer).
 It captures `KEYB`'s effective-layout query and refuses a non-US environment.
-Every v7 reference records that result and environment pin; record and check
-both require proved US. All eighteen references are recorded under US for v7. Historical CZ243 captures and their neutrality proofs are retired, with
+Every v8 reference records that result and environment pin; record and check
+both require proved US. All eighteen references are recorded under US for v8. Historical CZ243 captures and their neutrality proofs are retired, with
 provenance in `build/workers/keys/RESULT.md` and the v4 retirement inventory in
 `build/workers/quiet-inputs/v4-inventory.json`.
 
@@ -120,7 +120,7 @@ sites bind to immutable original code or independent canonical OMF fixups;
 native call sites bind to the observer wrappers by instruction disassembly. No clock value is interpolated, inferred from native state or
 selected to obtain equality.
 
-V6 timing (retained by `service-samples-v7`) holds each scripted key or mouse transition from
+V6 timing (retained by `service-samples-v8`) holds each scripted key or mouse transition from
 its scheduled emulated time until the next eligible recorded service boundary.
 Atomic providers complete their sample first; that cached result cannot change.
 Entry boundaries admit before their bodies. StillDown (247) is a completed
@@ -148,7 +148,7 @@ counts plus simulation entry/phase. The single ordinal is
 `clock_reads` field counts all sampled-return reads, including h/j device
 answers; it is not elapsed time. Native admits through the normal
 SDL adapter at precisely this boundary. The parser refuses a v6 IRQ whose
-coordinates differ from its hold, and checks refuse pre-v7 references. A missed
+coordinates differ from its hold, and checks refuse pre-v8 references. A missed
 boundary, wrong service, phase or input coordinate fails replay. Positive
 completion requires consumed clock, service and input tapes; a first state
 difference leaves the remaining tape for investigation.
@@ -171,7 +171,7 @@ optional test hook. Each staged raw SDL event carries its own pair; the
 projection still constructs and queues every Event, including its BIOS stamp.
 Physical pointer coordinates retain their existing translation. Missing or
 out-of-word keyboard context is a coverage error, never a native-zero fallback.
-A pre-v7 reference is refused; its timing cannot be upgraded from expected state.
+A pre-v8 reference is refused; its timing cannot be upgraded from expected state.
 
 These are handler-entry words, not necessarily raw interrupted foreground
 registers: the DOS IRQ wrapper loads DX with DGROUP before kbd_process_scan.
@@ -220,10 +220,13 @@ pictures, attribute map and DAC, exact. **Audio**: the views classified `audio`
 (MIDI/voice playback progress and driver state), per entry, reported as
 `audio=AUDIO_EQUAL|AUDIO_DIFFERENCE first=N`; an audio difference does not stop
 the state comparison, because game logic sees audio only through the
-device-status queries the tape replays (contract v6). Today every lane differs in
-audio from entry 1: native does not yet run the sound timer ISR on the tape clock,
-so its playback stays near song start while DOS has advanced
-([`native-presentation-audit`](../../../evidence/canonical/native-presentation-audit/README.md)).
+device-status queries the tape replays (contract v6). V8 additionally replays observed sound-timer executions and compares every
+raw sound-device OUT per interval ending at an entry. Audio-progress views
+remain in the verdict without reclassification. The schedule-off control
+restores the previous seven first-entry MIDI/voice differences and a first-entry
+command difference. Final per-lane signatures and first differences are pinned
+in `known_findings.json`; detailed attribution is in
+[`native-audio-schedule`](../../../evidence/canonical/native-audio-schedule/README.md).
 Address-valued sound selectors (output routine pointers, the volume-table offset)
 are `runtime` views. All 152 checkpoint pictures are equal after the Yard
 position-table adjacency repair
@@ -376,3 +379,49 @@ is linked once and then read-only. Each process owns its PE/DWARF readers,
 scenario output and disposable asset directory. Lines remain in scenario order;
 all child processes are joined before exit. This changes no service/input tape,
 state stopping rule or checkpoint pixel/palette comparison.
+
+## Sound execution and device commands (v8)
+
+V8 retains the v7 indexed frame encoding and foreground service/input ordinal.
+The hash-pinned `observer.txt.timer` sidecar records a row for every completed
+sound ISR execution: `T completed-service-ordinal kind`, where kind is slow (0),
+fast (1), or the nested fast busy early exit (2). Entry comments retain the
+bound instruction PC and hardware-entry SS:SP. Completion requires the same
+SS:SP at a bound IRET or tail jump to the saved INT08 vector. A software
+PUSHF/CALL into the slow installer is not a hardware entry. Original entries
+bind to their own symbols/instructions; canonical entries bind to their own MAP,
+selector operands and vector-installation instructions. Reference validation
+repeats these bindings and pins both audio sidecars.
+
+Immediately before the next sampled service, native runs the existing converted
+canonical sound ISR for each captured completion at the preceding ordinal, in
+completion order. Nested fast entries execute the source busy guard without
+sample/sequencer effects. A present tape suppresses autonomous audio-clock IRQs;
+ordinary play continues to use the SDL clock. The native fast/slow identity is a
+diagnostic assertion, never an expected-state assignment. No fingerprint,
+countdown, song offset, note or desired result chooses the schedule. This is
+replay of independently recorded executions, not fitted agreement.
+
+This rule cannot reproduce a timer landing between foreground instructions
+that access the same sound state. In the startup interval, DOS can decrement
+the old countdown before `snd_load_and_start_song` resets it to five; replay
+moves those ticks after that reset, before the next keyboard-scan service.
+The resulting countdown phase and per-entry note-write shifts remain audio
+findings. It also does not execute the chained input timer or BIOS handler,
+reproduce CPU/PIC interleavings, or establish PCM/time equality.
+
+`observer.txt.audio` and native `audio-commands.txt` retain `W ordinal step phase
+port value` for every byte OUT to OPL 388..38B, SB 220..22F, low DMA 00..0F and
+DMA pages 80..8F. A completion trailer is mandatory. No writes are trimmed,
+masked, deduplicated or replaced by decoded notes. Compare exact port/value
+order within every interval ending at a simulation entry, including startup and
+empty intervals. The audio verdict includes both progress views and command
+comparison; missing/truncated/incomplete streams cannot report audio equality.
+`audio-commands.json` retains all entry signatures, the first raw difference
+with OPL/DSP/DMA decoding, and separate service/phase drift diagnostics. Mode 6
+uses direct DAC output; generic DMA remains unsupported and fails explicitly.
+
+```powershell
+python portable/tests/acceptance/step_check.py --disable audio-timer --steps 8 --out build/current/tests/steps-audio-control
+python -m unittest portable.tests.acceptance.test_audio_timer portable.tests.acceptance.test_audio_commands
+```

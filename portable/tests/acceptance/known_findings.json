@@ -1,5 +1,5 @@
 {
- "about": "Open step-check findings on a fresh build/current/portable, pinned exactly. scenarios: game-state outcome per lane (unlisted: ORIGINAL_EQUAL_ALL). frames: checkpoint frame signatures (unlisted: FRAME_EQUAL). audio: first audio-progress difference per lane (unlisted: AUDIO_EQUAL); audio does not stop the state comparison. Any change in either direction fails the upper-layer test; a fix updates this file in the same commit. Attribution: evidence/port/verification-matrix.json.",
+ "about": "Open step-check findings on a fresh build/current/portable, pinned exactly. scenarios: game-state outcome per lane (unlisted: ORIGINAL_EQUAL_ALL). frames: checkpoint frame signatures (unlisted: FRAME_EQUAL). audio: first audio-progress difference and exact per-entry device-command signature per lane (unlisted: AUDIO_EQUAL); audio does not stop the state comparison. Any change in either direction fails the upper-layer test; a fix updates this file in the same commit. Attribution: evidence/port/verification-matrix.json.",
  "scenarios": {},
  "frames": {},
  "audio": {
@@ -8,27 +8,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 4188,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "7c32be7fa5fa6ae4298c32f0b47df6c76472c3503f36b5302b55ca3ff1b6e34c"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 6,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 4312,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "7c8211e72e84763227e7dbbda435c3e3d4f694185724a4c220e40023852af207"
+    }
    }
   },
   "experiment": {
@@ -36,27 +82,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 18,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 13594,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "5697db98829d482b17581319a70c4b22d8805496cca0d725a0e75a6815b7c69e"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 18,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 11842,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "b8bd0fdfc294ec991adc78cca04854a1d0aa1020fe3035ff4aa73ef87eb4fc45"
+    }
    }
   },
   "full-game": {
@@ -64,27 +156,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 11960,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "99ad195741d15b1dec0b03ff02ad476f7fe791b0ce73c641f75a78794bb68fd8"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 10321,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "590cdd08385255e0ef4cc5ba92416143012558579b108fc35200d35ab8c1a0f6"
+    }
    }
   },
   "interactive-play": {
@@ -92,27 +230,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 4988,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "6648906f76cbe175b09347b4011a66655694bb3d7d6e100326b9833f024fdae6"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 6,
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 18407,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "22e39a0b441474514309ad151472fc86d35de31fdb4f903f934f9516d99909de"
+    }
    }
   },
   "load-from-save": {
@@ -120,27 +304,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 10314,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "498907434e1451e0fc749f4c452c47aef7457d1c29aaf8db193f97ebfd7e9a79"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 6,
+     "entries_compared": 1000,
+     "requested_entries": 1000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 10448,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "7ceb5d2defcebcec9c5491803e727da69570a6c6933653f862c4e2a58761b935"
+    }
    }
   },
   "long-run": {
@@ -148,27 +378,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 3000,
+     "requested_entries": 3000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 23856,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "c3bd31365c340c50ff0235ed654f9938a5a817500b162159491f38b9cd7a141e"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 6,
+     "entries_compared": 3000,
+     "requested_entries": 3000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 21751,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "97d3b66b23cd015964e6dc05e3d84ae01516f601861774642ccd06b71331a3db"
+    }
    }
   },
   "new-game-save": {
@@ -176,27 +452,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 4,
+     "entries_compared": 64,
+     "requested_entries": 64,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 11186,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "595ed78e80c683cfc1ef561995cd82c8ca817d35c269d3f43fdf7fddcf415db0"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 4,
+     "entries_compared": 64,
+     "requested_entries": 64,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 11198,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "da0bf71e89e5bea00aa9a32aa4df42fbc0f007708941136793e351ff44e1802d"
+    }
    }
   },
   "quick-game": {
@@ -204,27 +526,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 23956,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "51bc3c466f285b3eb236f4b7b7a39287c896ad5192f705ef81b51b696a8bfda7"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 6,
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 21512,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "f7dc796d9d0d2e0f65cde0c6f7536ddd4dea90fb887c85d9428589f9dae2cf36"
+    }
    }
   },
   "random-17": {
@@ -232,27 +600,73 @@
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 10,
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 7968,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1626764,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1626761,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "ed6e74821f3b9e27fe5d8523b108e5c52b5d87d4e93c57ccfaf1925a7d9481d4"
+    }
    },
    "canonical": {
     "status": "AUDIO_DIFFERENCE",
     "first_differing_step": 1,
     "views": [
-     "midi_current_track",
-     "midi_last_event_ticks",
-     "midi_service_countdown",
-     "midi_tick_delay_scale",
-     "midi_track_event_ticks",
-     "midi_track_status",
-     "snd_voice_slots"
-    ]
+     "midi_service_countdown"
+    ],
+    "commands": {
+     "status": "AUDIO_COMMANDS_DIFFERENCE",
+     "replay_complete": true,
+     "first_differing_entry": 6,
+     "entries_compared": 2000,
+     "requested_entries": 2000,
+     "capture_complete": true,
+     "coordinates_status": "ORDINAL_DRIFT",
+     "coordinate_drift_writes": 10160,
+     "first_coordinate_drift": {
+      "entry": 1,
+      "write_index": 29,
+      "dos": {
+       "service_ordinal": 1627406,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      },
+      "native": {
+       "service_ordinal": 1627403,
+       "step": 0,
+       "phase": 0,
+       "port": "0388",
+       "value": "A0"
+      }
+     },
+     "rows_sha256": "0cdc6d8fd3bced8b31ff2bda9df1ad7d92b6690b5839242a2e28d25a61dd8e40"
+    }
    }
   }
  }

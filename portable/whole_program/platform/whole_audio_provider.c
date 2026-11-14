@@ -8,13 +8,15 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+static PortableWholeAudioProvider *replay_provider;
 extern uint8_t portable_canonical_volume_tables[2048];
 extern int16_t snd_song_process_due_events(void);
 int portable_whole_audio_provider_init(PortableWholeAudioProvider *p) {
-    memset(p,0,sizeof(*p));p->mix_divider=16;p->devices=sim_isa_audio_create();
+    memset(p,0,sizeof(*p));replay_provider=p;p->mix_divider=16;p->devices=sim_isa_audio_create();
     return p->devices!=NULL;
 }
 void portable_whole_audio_provider_close(PortableWholeAudioProvider *p) {
+    if(replay_provider==p) replay_provider=NULL;
     sim_isa_audio_destroy(p->devices);memset(p,0,sizeof(*p));
 }
 void portable_whole_audio_provider_configure(PortableWholeAudioProvider *p,uint16_t divisor,uint16_t chain,unsigned channels) {
@@ -36,7 +38,10 @@ static void sequencer(void) {
     midi_service_countdown=(int16_t)((uint16_t)midi_service_countdown-1);
     if(midi_service_countdown==0) midi_service_countdown=snd_song_process_due_events();
 }
-static void interrupt(PortableWholeAudioProvider *p) {
+static void interrupt(PortableWholeAudioProvider *p,unsigned reentrant) {
+    /* Fast entry's busy guard acknowledges a nested IRQ without advancing
+     * channels or the sequencer. Normal host callbacks cannot nest. */
+    if(reentrant) return;
     unsigned ch,sum=0;int active=0,skip=0;
     if(!p->fast) { sequencer();return; }
     for(ch=0;ch<p->channels;++ch) {
@@ -71,11 +76,25 @@ static void interrupt(PortableWholeAudioProvider *p) {
      * PIT/ISR only when DF remains clear and the divider did not hit zero. */
     else if(!active) p->fast=0;
 }
+/* Run the existing translated canonical ISR at a recorded service boundary.
+ * The observed fast/slow identity is checked, never installed as native state. */
+void portable_whole_audio_replay_interrupt(unsigned fast) {
+    PortableWholeAudioProvider *p=replay_provider;
+    if(!p || !p->armed || p->in_render) { fprintf(stderr,"Audio replay has no armed timer\n");abort(); }
+    /* A nested fast IRQ runs the original busy early exit: PIC acknowledgement
+     * only, with no channel/sequencer/device-write effects. Its nesting is
+     * observed schedule input, not inferred from expected sound state. */
+    if(fast<2 && (unsigned)p->fast!=fast) {
+        static unsigned reports;
+        if(reports++<8) fprintf(stderr,"Audio timer mode differs: DOS=%u native=%u\n",fast,(unsigned)p->fast);
+    }
+    p->in_render=1;interrupt(p,fast==2);p->in_render=0;
+}
 void portable_whole_audio_provider_enable_interrupts(PortableWholeAudioProvider *p) {
     /* PIC IRQ0 coalesces edges while IF is clear. Source callbacks cannot
      * reenter the private sequencer stack in this single-thread projection. */
-    if(p->armed && p->pending_irq && !p->in_render) {
-        p->pending_irq=0;p->in_render=1;interrupt(p);p->in_render=0;
+    if(!getenv("SIMANT_TEST_AUDIO_TIMER") && p->armed && p->pending_irq && !p->in_render) {
+        p->pending_irq=0;p->in_render=1;interrupt(p,0);p->in_render=0;
     }
 }
 void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,int16_t stereo[2]) {
@@ -84,10 +103,10 @@ void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,in
     uint64_t target=(p->frame_cursor/48000)*UINT64_C(1000000000)+
                     (p->frame_cursor%48000)*UINT64_C(1000000000)/48000;
     p->in_render=1;
-    while(p->armed && p->irq_ns<=target) {
+    while(!getenv("SIMANT_TEST_AUDIO_TIMER") && p->armed && p->irq_ns<=target) {
         unsigned generation=p->timer_generation;
         p->time_ns=p->irq_ns;
-        if(portable_whole_audio_interrupts_enabled()) interrupt(p);
+        if(portable_whole_audio_interrupts_enabled()) interrupt(p,0);
         else p->pending_irq=1;
         if(generation==p->timer_generation) next_interrupt(p,p->fast?1:16);
     }

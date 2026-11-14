@@ -321,7 +321,7 @@ def main(argv=None):
             observer_path = diagnostic.experimental_path(args.capture_observer)
             observer = json.loads(observer_path.read_text())
             if observer.get('schema') not in ('simant-read-only-observer-build-v1',
-                    'simant-boundary-observer-build-v6', 'simant-boundary-observer-build-v7'):
+                    'simant-boundary-observer-build-v6', 'simant-boundary-observer-build-v7', 'simant-boundary-observer-build-v8'):
                 raise ValueError('Unknown observer receipt')
             observer_exe = diagnostic.experimental_path(Path(observer['executable']))
             runner = {**runner, 'path': str(observer_exe)}

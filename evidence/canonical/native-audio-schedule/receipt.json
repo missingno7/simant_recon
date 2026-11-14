@@ -1,0 +1,925 @@
+{
+  "contract": "service-samples-v8",
+  "native_build_sha256": "6f8d665a1a03d7fde96b3eab469af0249510284bea785bd8d58415ecf15bd6b2",
+  "native_executable_sha256": "9253e33b4c8bc951d69263d130f81fbace0a9a745864cf81063b386b8870084a",
+  "scenarios": 9,
+  "lanes": 18,
+  "state_entries": 26128,
+  "checkpoint_frames": 152,
+  "audio_equal_lanes": 0,
+  "first_audio_view": "midi_service_countdown",
+  "first_audio_entry": 1,
+  "complete_sound_isr_executions": 2709750,
+  "lanes_summary": [
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "reference": "build\\reference\\ant-commands\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "634c324a7e96f9506811b76e9e4f8c4622919f3eda1dc1033114e1b1f3787d8e",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 4188,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "7c32be7fa5fa6ae4298c32f0b47df6c76472c3503f36b5302b55ca3ff1b6e34c"
+        }
+      },
+      "sound_isr_executions": 173934,
+      "native_seconds": 16.940262800024357,
+      "final_result": "build\\workers\\audio\\upper\\ant-commands\\original\\result.json",
+      "final_result_sha256": "04c6bd493e2d565d00f20b169d057cbc04ed599afb0c418a791f88ecf210cce9",
+      "actual_sound_isr_executions": 173934
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "reference": "build\\reference\\ant-commands\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "2ca0102ccbbf3512484e220c966fff4fcde07f778915b7244e2d6cd4fbb390d2",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 6,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 4312,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "7c8211e72e84763227e7dbbda435c3e3d4f694185724a4c220e40023852af207"
+        }
+      },
+      "sound_isr_executions": 282238,
+      "native_seconds": 15.191213099984452,
+      "final_result": "build\\workers\\audio\\upper\\ant-commands\\canonical\\result.json",
+      "final_result_sha256": "fdff41834849cebab35e40481ca4063c04353480fe73dbbedf8ff6b22b262571",
+      "actual_sound_isr_executions": 282238
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "reference": "build\\reference\\experiment\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "f0b008df5ecccdd352326c9fba6f7fbadfe576baa9024cd631398c1d77ef6fab",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 18,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 13594,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "5697db98829d482b17581319a70c4b22d8805496cca0d725a0e75a6815b7c69e"
+        }
+      },
+      "sound_isr_executions": 73225,
+      "native_seconds": 10.81280539999716,
+      "final_result": "build\\workers\\audio\\upper\\experiment\\original\\result.json",
+      "final_result_sha256": "dc6ce3ec5515013116370691e0a798321606da8ec64c85b3cd4f380ba91f700d",
+      "actual_sound_isr_executions": 73225
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "reference": "build\\reference\\experiment\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "2e92019fd2209411de1977a204afac8e82a9fadb4b838a0c4fe7131b8b9280fb",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 18,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 11842,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "b8bd0fdfc294ec991adc78cca04854a1d0aa1020fe3035ff4aa73ef87eb4fc45"
+        }
+      },
+      "sound_isr_executions": 73221,
+      "native_seconds": 10.945299400016665,
+      "final_result": "build\\workers\\audio\\upper\\experiment\\canonical\\result.json",
+      "final_result_sha256": "01c7082315c2d2e433bbb731b87d2be71824779513f08db0c58cdc5285eac31b",
+      "actual_sound_isr_executions": 73221
+    },
+    {
+      "scenario": "full-game",
+      "target": "original",
+      "reference": "build\\reference\\full-game\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "aab6b4ea883d4d234e28b9eb479de1d710e87f54a801e5812cc9181614da6250",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 11960,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "99ad195741d15b1dec0b03ff02ad476f7fe791b0ce73c641f75a78794bb68fd8"
+        }
+      },
+      "sound_isr_executions": 102825,
+      "native_seconds": 15.788691699970514,
+      "final_result": "build\\workers\\audio\\upper\\full-game\\original\\result.json",
+      "final_result_sha256": "330631138b6fef914e6e91a520d2cbde0608a3b05e2c0da5f2d7d7fdaa14c724",
+      "actual_sound_isr_executions": 102825
+    },
+    {
+      "scenario": "full-game",
+      "target": "canonical",
+      "reference": "build\\reference\\full-game\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "8f8017d2d58ef059aa36533c3933e7607a7bb95427f037e310b75731eb2d63e4",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 10321,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "590cdd08385255e0ef4cc5ba92416143012558579b108fc35200d35ab8c1a0f6"
+        }
+      },
+      "sound_isr_executions": 102814,
+      "native_seconds": 15.52458560001105,
+      "final_result": "build\\workers\\audio\\upper\\full-game\\canonical\\result.json",
+      "final_result_sha256": "9e6cd0c9b691083dce7e32ebd60e610b69c2addb7871d16a99b8eb8709b658b0",
+      "actual_sound_isr_executions": 102814
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "original",
+      "reference": "build\\reference\\interactive-play\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "0534a959be3b7553a601160a9f54bad09c0616ddfa1f7fba81bb3b197e4d32fb",
+      "status": "REFERENCE_EQUAL",
+      "entries": 2000,
+      "frames": 19,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 2000,
+          "requested_entries": 2000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 4988,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "6648906f76cbe175b09347b4011a66655694bb3d7d6e100326b9833f024fdae6"
+        }
+      },
+      "sound_isr_executions": 248756,
+      "native_seconds": 14.852781999972649,
+      "final_result": "build\\workers\\audio\\upper\\interactive-play\\original\\result.json",
+      "final_result_sha256": "e1f1fb45bab41d516583acfab3467312d01d19a7ef95da9e5745d6b91b36f735",
+      "actual_sound_isr_executions": 248756
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "canonical",
+      "reference": "build\\reference\\interactive-play\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "63547868e3ea7a31aebcc5b265ae6f11ee82507b2a3a8af81d741e7288a7fe1f",
+      "status": "REFERENCE_EQUAL",
+      "entries": 2000,
+      "frames": 19,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 6,
+          "entries_compared": 2000,
+          "requested_entries": 2000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 18407,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "22e39a0b441474514309ad151472fc86d35de31fdb4f903f934f9516d99909de"
+        }
+      },
+      "sound_isr_executions": 227384,
+      "native_seconds": 26.802472100011073,
+      "final_result": "build\\workers\\audio\\upper\\interactive-play\\canonical\\result.json",
+      "final_result_sha256": "e13debbd82531ceec335dfcf59cca21b1111b8f4f0941c6321279db4400e3594",
+      "actual_sound_isr_executions": 227384
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "original",
+      "reference": "build\\reference\\load-from-save\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "b33379cf3fed92060bbab8c9fc52929f70a19eb6e28c28c1daf25d63364b7588",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 10314,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "498907434e1451e0fc749f4c452c47aef7457d1c29aaf8db193f97ebfd7e9a79"
+        }
+      },
+      "sound_isr_executions": 89527,
+      "native_seconds": 16.418594699993264,
+      "final_result": "build\\workers\\audio\\upper\\load-from-save\\original\\result.json",
+      "final_result_sha256": "0b987673b623769c65e3a9af1f443f3dff2a2cc0590d0a054cf749e5b4637a57",
+      "actual_sound_isr_executions": 89527
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "canonical",
+      "reference": "build\\reference\\load-from-save\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "244b56e40b7974858e13de1d10bd224aca6fa786d2b2ac93f63e47d1e2bc7917",
+      "status": "REFERENCE_EQUAL",
+      "entries": 1000,
+      "frames": 5,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 6,
+          "entries_compared": 1000,
+          "requested_entries": 1000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 10448,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "7ceb5d2defcebcec9c5491803e727da69570a6c6933653f862c4e2a58761b935"
+        }
+      },
+      "sound_isr_executions": 66851,
+      "native_seconds": 16.635067600000184,
+      "final_result": "build\\workers\\audio\\upper\\load-from-save\\canonical\\result.json",
+      "final_result_sha256": "57415d5e84d4f04ac07c26d564b44d69284f14a5d6fcc02aad1f8b8568b83516",
+      "actual_sound_isr_executions": 66851
+    },
+    {
+      "scenario": "long-run",
+      "target": "original",
+      "reference": "build\\reference\\long-run\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "f2862cf22d084b43a548e6cfa27bbb5947dc051b036cf81543bafa448cf49d66",
+      "status": "REFERENCE_EQUAL",
+      "entries": 3000,
+      "frames": 13,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 3000,
+          "requested_entries": 3000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 23856,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "c3bd31365c340c50ff0235ed654f9938a5a817500b162159491f38b9cd7a141e"
+        }
+      },
+      "sound_isr_executions": 287953,
+      "native_seconds": 43.02371989999665,
+      "final_result": "build\\workers\\audio\\upper\\long-run\\original\\result.json",
+      "final_result_sha256": "2efc09ace8994d17a4e6a722362af65ad7d89d10ba0abbdb00e6d6445f278d14",
+      "actual_sound_isr_executions": 287953
+    },
+    {
+      "scenario": "long-run",
+      "target": "canonical",
+      "reference": "build\\reference\\long-run\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "01d9b29b672da4c1909b1bf9d96991818b70de51d83b155847d5905caddaf98c",
+      "status": "REFERENCE_EQUAL",
+      "entries": 3000,
+      "frames": 13,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 6,
+          "entries_compared": 3000,
+          "requested_entries": 3000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 21751,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "97d3b66b23cd015964e6dc05e3d84ae01516f601861774642ccd06b71331a3db"
+        }
+      },
+      "sound_isr_executions": 287927,
+      "native_seconds": 42.768360499991104,
+      "final_result": "build\\workers\\audio\\upper\\long-run\\canonical\\result.json",
+      "final_result_sha256": "64d638c37e48e3a79db9487a78b88fe693999428cc17fcc2c021e58ae01a8b6d",
+      "actual_sound_isr_executions": 287927
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "original",
+      "reference": "build\\reference\\new-game-save\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "f3cc3f9be8cb8ef737f309a2e744e9906ca1fc28b743fcec4fbc90f4d2d8563a",
+      "status": "REFERENCE_EQUAL",
+      "entries": 64,
+      "frames": 2,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 4,
+          "entries_compared": 64,
+          "requested_entries": 64,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 11186,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "595ed78e80c683cfc1ef561995cd82c8ca817d35c269d3f43fdf7fddcf415db0"
+        }
+      },
+      "sound_isr_executions": 14803,
+      "native_seconds": 2.214478899957612,
+      "final_result": "build\\workers\\audio\\upper\\new-game-save\\original\\result.json",
+      "final_result_sha256": "40febfe1d6d1902671c2ece68e0ffcd96361aa4d372821f06782109bb3697e55",
+      "actual_sound_isr_executions": 14803
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "canonical",
+      "reference": "build\\reference\\new-game-save\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "331f756f54db5c941cf1afb0934222cd5eeec23f46d866dad6c73461501d9597",
+      "status": "REFERENCE_EQUAL",
+      "entries": 64,
+      "frames": 2,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 4,
+          "entries_compared": 64,
+          "requested_entries": 64,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 11198,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "da0bf71e89e5bea00aa9a32aa4df42fbc0f007708941136793e351ff44e1802d"
+        }
+      },
+      "sound_isr_executions": 14803,
+      "native_seconds": 2.228652899968438,
+      "final_result": "build\\workers\\audio\\upper\\new-game-save\\canonical\\result.json",
+      "final_result_sha256": "5cee05393bcac770f0ab82575f0ccb312013b795a44804b719225e604a85c7ed",
+      "actual_sound_isr_executions": 14803
+    },
+    {
+      "scenario": "quick-game",
+      "target": "original",
+      "reference": "build\\reference\\quick-game\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "2b547099ff732b31608ddf24a0ac2d78362a38c0cb2ebfca9339a0c4fc1cd9a1",
+      "status": "REFERENCE_EQUAL",
+      "entries": 2000,
+      "frames": 13,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 2000,
+          "requested_entries": 2000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 23956,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "51bc3c466f285b3eb236f4b7b7a39287c896ad5192f705ef81b51b696a8bfda7"
+        }
+      },
+      "sound_isr_executions": 158538,
+      "native_seconds": 31.5207500999677,
+      "final_result": "build\\workers\\audio\\upper\\quick-game\\original\\result.json",
+      "final_result_sha256": "c72d67619e15af89a1f6aaffb4b9bc159d64bb578db07dee71c1e8203dd114af",
+      "actual_sound_isr_executions": 158538
+    },
+    {
+      "scenario": "quick-game",
+      "target": "canonical",
+      "reference": "build\\reference\\quick-game\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "bc1adf0265417fffb74e24703c38eab09cdef9e362b2dc04a7c53cc02b3d145e",
+      "status": "REFERENCE_EQUAL",
+      "entries": 2000,
+      "frames": 13,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 6,
+          "entries_compared": 2000,
+          "requested_entries": 2000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 21512,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "f7dc796d9d0d2e0f65cde0c6f7536ddd4dea90fb887c85d9428589f9dae2cf36"
+        }
+      },
+      "sound_isr_executions": 143296,
+      "native_seconds": 31.239016900013667,
+      "final_result": "build\\workers\\audio\\upper\\quick-game\\canonical\\result.json",
+      "final_result_sha256": "f4b0f26cef6f73dcd207fbb897bfdc9ede20ce9e91de528e206c71fbda1503fd",
+      "actual_sound_isr_executions": 143296
+    },
+    {
+      "scenario": "random-17",
+      "target": "original",
+      "reference": "build\\reference\\random-17\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v8",
+      "manifest_sha256": "f688b357b42cdc90a8b829483765889fee3b56834af741cb2a5dbd1e696ef2ec",
+      "status": "REFERENCE_EQUAL",
+      "entries": 2000,
+      "frames": 9,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 10,
+          "entries_compared": 2000,
+          "requested_entries": 2000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 7968,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1626764,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1626761,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "ed6e74821f3b9e27fe5d8523b108e5c52b5d87d4e93c57ccfaf1925a7d9481d4"
+        }
+      },
+      "sound_isr_executions": 191495,
+      "native_seconds": 27.020360799971968,
+      "final_result": "build\\workers\\audio\\upper\\random-17\\original\\result.json",
+      "final_result_sha256": "cc0e9a812456ccd438ce6f876045abf9652cfe19dda0982a0336b30d6c03a1f3",
+      "actual_sound_isr_executions": 191495
+    },
+    {
+      "scenario": "random-17",
+      "target": "canonical",
+      "reference": "build\\reference\\random-17\\d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v8",
+      "manifest_sha256": "7b0aa9eb593a86b1c864d61f394d500acac38713c5e3ac658212a893592c87e7",
+      "status": "REFERENCE_EQUAL",
+      "entries": 2000,
+      "frames": 9,
+      "audio": {
+        "status": "AUDIO_DIFFERENCE",
+        "first_differing_step": 1,
+        "views": [
+          "midi_service_countdown"
+        ],
+        "commands": {
+          "status": "AUDIO_COMMANDS_DIFFERENCE",
+          "replay_complete": true,
+          "first_differing_entry": 6,
+          "entries_compared": 2000,
+          "requested_entries": 2000,
+          "capture_complete": true,
+          "coordinates_status": "ORDINAL_DRIFT",
+          "coordinate_drift_writes": 10160,
+          "first_coordinate_drift": {
+            "entry": 1,
+            "write_index": 29,
+            "dos": {
+              "service_ordinal": 1627406,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            },
+            "native": {
+              "service_ordinal": 1627403,
+              "step": 0,
+              "phase": 0,
+              "port": "0388",
+              "value": "A0"
+            }
+          },
+          "rows_sha256": "0cdc6d8fd3bced8b31ff2bda9df1ad7d92b6690b5839242a2e28d25a61dd8e40"
+        }
+      },
+      "sound_isr_executions": 170160,
+      "native_seconds": 28.98007220000727,
+      "final_result": "build\\workers\\audio\\upper\\random-17\\canonical\\result.json",
+      "final_result_sha256": "4ae5823aab5f948edb149f69a0324e82c2d314b75073d06555e9ef87040e128c",
+      "actual_sound_isr_executions": 170160
+    }
+  ],
+  "limitations": "Service-interval/foreground interleavings; later stream/mixer causes remain unproved; no PCM/DMA-memory equality; no complete timer chain claim.",
+  "verification": {
+    "acceptance_tests": 40,
+    "acceptance_tests_passed": true,
+    "exact_isr_count_lanes": 18,
+    "actual_sound_isr_executions": 2709750,
+    "upper_verification_sha256": "b6d44f9a2e3562403b5cf8c6c298e19114499895e1d1453566c26ac2f28cb5ad",
+    "known_findings_sha256": "b5125d563d78ce56c4fd3c2bffd283059127b2337304152600b73df83c106320",
+    "fresh_suites_sha256": "f695901a6acd8fc679bf42ce8cb2a9eec9fad47adff8690a629e157140f1e5c8"
+  }
+}
