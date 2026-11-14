@@ -88,13 +88,13 @@ static unsigned state_clock;
 static unsigned state_entries(void) { return first_difference ? first_difference : step; }
 
 extern void portable_test_screen(FILE *, const void *) __attribute__((weak));
-static void capture_screen(void) {
+static unsigned capture_screen(void) {
   static unsigned loaded, entries[4096], total, next;
   static int64_t palette_delta;
   static char directory[2048];
   if (!loaded++) {
     const char *path=getenv("SIMANT_TEST_FRAME_CONFIG");
-    if (!path) return;
+    if (!path) return 0;
     FILE *f=fopen(path,"r");
     if (!f || !portable_test_screen || !fgets(directory,sizeof(directory),f)) abort();
     directory[strcspn(directory,"\r\n")]=0;
@@ -109,7 +109,9 @@ static void capture_screen(void) {
     portable_test_screen(f,(const void *)((uintptr_t)portable_test_clock_read+palette_delta));
     if (fclose(f)) abort();
     ++next;
+    return 1;
   }
+  return 0;
 }
 
 int portable_test_clock_is_stateful(void) { return state_clock; }
@@ -229,13 +231,14 @@ static uint32_t fingerprint(View *v) {
   return hash;
 }
 
-static void dump_state(void) {
-  FILE *dump = fopen(dump_path, "wb");
+static void dump_state_to(const char *path) {
+  FILE *dump = fopen(path, "wb");
   if (!dump) abort();
   for (unsigned i = 0; i < count; ++i)
     if (fwrite(views[i].data, 1, views[i].bytes, dump) != views[i].bytes) abort();
   if (fclose(dump)) abort();
 }
+static void dump_state(void) { dump_state_to(dump_path); }
 
 static void finish(unsigned differs) {
   if ((!differs || getenv("SIMANT_TEST_FRAME_CONFIG")) &&
@@ -263,7 +266,7 @@ void __wrap_DoAntSim(void) {
   }
   ++step;
   portable_test_step_boundary(step, 1);
-  capture_screen();
+  unsigned checkpoint = capture_screen();
   unsigned differs = 0;
   for (unsigned i = 0; !first_difference && i < count; ++i) {
     View *v = &views[i];
@@ -282,6 +285,13 @@ void __wrap_DoAntSim(void) {
       differs = 1;
   }
   fflush(actual);
+  /* Same read-only bytes as the hash row, before any simulation/input work.
+   * Keep exact checkpoint bytes for auditing separate diagnostic views too. */
+  if (checkpoint && !first_difference) {
+    char path[2200];
+    snprintf(path, sizeof(path), "%s.%u", dump_path, step);
+    dump_state_to(path);
+  }
   if (differs) { first_difference=step;dump_state(); }
   if (step == limit || (first_difference && !getenv("SIMANT_TEST_FRAME_CONFIG")))
     finish(first_difference);

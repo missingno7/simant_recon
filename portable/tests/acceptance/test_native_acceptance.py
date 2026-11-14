@@ -134,6 +134,9 @@ int main(int argc,char **argv){
                 if frames:
                     self.assertEqual(row['frame_entry_reached'],3)
                     self.assertEqual([(out/f'native.screen.{i}').read_bytes() for i in (1,2,3)],[b'\x01',b'\x02',b'\x03'])
+                    self.assertEqual((out/'frame.1').read_bytes(),b'\x01\x04\x07')
+                    self.assertEqual((out/'frame.2').read_bytes(),b'\x02\x04\x08')
+                    self.assertFalse((out/'frame.3').is_file())
 
     def test_stored_step_scenarios(self):
         """The driver runs every stored scenario against build/current/portable (or reports
@@ -142,6 +145,8 @@ int main(int argc,char **argv){
         an earlier stop is a regression, a later one a fix that must update the file."""
         out=Path(os.environ.get('SIMANT_STEP_TEST_OUT',ROOT/'build/current/tests/steps'))
         command=[os.sys.executable,str(Path(__file__).with_name('step_check.py')),'--out',str(out)]
+        if os.environ.get('SIMANT_STEP_TEST_BUILD'):
+            command+=['--build',os.environ['SIMANT_STEP_TEST_BUILD']]
         if os.environ.get('SIMANT_STEP_SCRATCH_ROOT'):
             command+=['--scratch-root',os.environ['SIMANT_STEP_SCRATCH_ROOT']]
         run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=300)
@@ -151,6 +156,7 @@ int main(int argc,char **argv){
         self.assertTrue(run.stdout.strip(),run.stderr)
         known=json.loads(Path(__file__).with_name('known_findings.json').read_text())['scenarios']
         frame_known=json.loads(Path(__file__).with_name('known_findings.json').read_text()).get('frames',{})
+        audio_known=json.loads(Path(__file__).with_name('known_findings.json').read_text()).get('audio',{})
         from .frame_check import frame_signature
         for line in run.stdout.splitlines():
             scenario=line.split(':',1)[0]
@@ -169,6 +175,9 @@ int main(int argc,char **argv){
             observed_frames={target:frame_signature(lane['frames']) for target,lane in row['lanes'].items()}
             if scenario in frame_known:self.assertEqual(observed_frames,frame_known[scenario],scenario+' frames')
             else:self.assertTrue(all(f['status']=='FRAME_EQUAL' for f in observed_frames.values()),scenario+' unpinned frame finding')
+            observed_audio={target:lane['audio'] for target,lane in row['lanes'].items()}
+            if scenario in audio_known:self.assertEqual(observed_audio,audio_known[scenario],scenario+' audio')
+            else:self.assertTrue(all(a['status']=='AUDIO_EQUAL' for a in observed_audio.values()),scenario+' unpinned audio finding')
 
 
 if __name__=='__main__':unittest.main()

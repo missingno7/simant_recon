@@ -314,6 +314,10 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
     service_error=re.search(r'Observer service order mismatch at ([^\n]+)',(out/'native.log').read_text())
     if service_error:result['service_order_failure']=service_error[1]
     result['frames']=compare_frames(reference,out,checkpoints)
+    audio={n:d for n,d in result['separate_differences'].items() if d.get('category')=='audio'}
+    first_audio=min((d['step'] for d in audio.values()),default=None)
+    result['audio']=dict(status='AUDIO_DIFFERENCE' if audio else 'AUDIO_EQUAL',first_differing_step=first_audio,
+                         views=sorted(n for n,d in audio.items() if d['step']==first_audio))
     result['frames']['replay_complete']=(code in (0,10) and not timed_out and
         result.get('diagnostics',{}).get('frame_entry_reached')==stop and
         not result.get('diagnostics',{}).get('replay_error'))
@@ -365,9 +369,12 @@ def check_scenario(path,refs,a,exe):
             detail.append(f'{target}={lane["steps_compared"]}/{lane.get("reference_steps","?")} {lane["status"]} first={lane.get("first_differing_step") or "-"} {names}')
         if 'frames' in lane:
             f=lane['frames'];detail[-1]+=f' frames={f["frames_compared"]}/{f["requested_frames"]} {f["status"]} first={f["first_differing_entry"] or "-"}'
+        if 'audio' in lane:
+            a=lane['audio'];detail[-1]+=f' audio={a["status"]} first={a["first_differing_step"] or "-"}'
 
     line=path.stem+': '+verdict+' frames='+frame_verdict+' '+ '; '.join(detail)
     failed=verdict!='ORIGINAL_EQUAL_ALL' or any(l.get('frames',{}).get('status')!='FRAME_EQUAL' or not l.get('frames',{}).get('replay_complete') for l in lanes.values())
+    failed|=any(l.get('audio',{}).get('status')!='AUDIO_EQUAL' for l in lanes.values())
     return line,failed
 
 

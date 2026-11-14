@@ -1,0 +1,61 @@
+{
+  "source": "src/ui/yard_window.c",
+  "source_sha256": "32f83fd882761487aefbab306223e6b2fcbad193d27b67243e22b0846350d2b4",
+  "extent": 116,
+  "initializer_sha256": "f44220b74012c3a287580cd0ef0f97e63ffb5d0d1f8e99bcf02ace3da472284c",
+  "captures": [
+    {
+      "target": "original",
+      "path": "build/reference/ant-commands/aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v7/capture/exec-simstep.1.bin",
+      "sha256": "6557b00a680977fbc807772234d37e8395ae843ffb02b333cbc21bc2a8569a39",
+      "runtime_base": 33344,
+      "position": 395206,
+      "equal": true
+    },
+    {
+      "target": "canonical",
+      "path": "build/reference/ant-commands/d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v7/capture/exec-simstep.1.bin",
+      "sha256": "754119da33895636339ecb561df0501c5ff40721552cd2cf8308d351fa1a29dc",
+      "runtime_base": 33344,
+      "position": 406444,
+      "equal": true
+    }
+  ],
+  "regression": "python -m unittest portable.tests.acceptance.test_yard_positions",
+  "baseline_native_executable": {
+    "path": "build/workers/presentation/native/simant-canonical.exe",
+    "sha256": "72f07ef2794d741a26730dacd0a0d5ac79f07f7be28cc478f91e9a3a9b4dae0f"
+  },
+  "position_table_layout": [
+    {
+      "name": "kidX",
+      "bytes": 12,
+      "DOS_offset": 0,
+      "native_offset": 0
+    },
+    {
+      "name": "kidY",
+      "bytes": 44,
+      "DOS_offset": 12,
+      "native_offset": 24
+    },
+    {
+      "name": "dogWalkX",
+      "bytes": 12,
+      "DOS_offset": 56,
+      "native_offset": 72
+    },
+    {
+      "name": "dogWalkY",
+      "bytes": 8,
+      "DOS_offset": 68,
+      "native_offset": 88
+    },
+    {
+      "name": "catOfs",
+      "bytes": 40,
+      "DOS_offset": 76,
+      "native_offset": 120
+    }
+  ]
+}

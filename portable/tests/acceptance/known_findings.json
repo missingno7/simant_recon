@@ -1,153 +1,258 @@
 {
- "about": "Open step-check findings on a fresh build/current/portable, pinned exactly. scenarios: game-state outcomes per lane (an unlisted scenario must be ORIGINAL_EQUAL_ALL in both lanes). frames: checkpoint frame signatures per lane (an unlisted scenario must be FRAME_EQUAL); the signature pins every checkpoint through its digest. Any change in either direction fails the upper-layer test; a fix updates this file in the same commit. Attribution: evidence/port/verification-matrix.json.",
+ "about": "Open step-check findings on a fresh build/current/portable, pinned exactly. scenarios: game-state outcome per lane (unlisted: ORIGINAL_EQUAL_ALL). frames: checkpoint frame signatures (unlisted: FRAME_EQUAL). audio: first audio-progress difference per lane (unlisted: AUDIO_EQUAL); audio does not stop the state comparison. Any change in either direction fails the upper-layer test; a fix updates this file in the same commit. Attribution: evidence/port/verification-matrix.json.",
  "scenarios": {},
- "frames": {
+ "frames": {},
+ "audio": {
   "ant-commands": {
    "original": {
-    "status": "FRAME_DIFFERENCE",
-    "frames_compared": 5,
-    "replay_complete": true,
-    "native_host_cursor_visible": [
-     true,
-     true,
-     true,
-     true,
-     true
-    ],
-    "checkpoint_digest": "290bf890a815fd558ab187a0c83ea86b4fcc4a0e24b8bc92479ecf994c090d87",
-    "requested_frames": 5,
-    "missing_entries": [],
-    "first": {
-     "entry": 512,
-     "pixel_count": 133,
-     "bounding_box": [
-      389,
-      140,
-      407,
-      157
-     ],
-     "visible_pixel_count": 133,
-     "palette_indices": [],
-     "projected_palette_indices": [],
-     "attribute_indices": []
-    }
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
    },
    "canonical": {
-    "status": "FRAME_DIFFERENCE",
-    "frames_compared": 5,
-    "replay_complete": true,
-    "native_host_cursor_visible": [
-     true,
-     true,
-     true,
-     true,
-     true
-    ],
-    "checkpoint_digest": "969bd5db5bed9eaaaf2cd1827e82ad274f9c425bca3cb16b9aaf96cd210dd104",
-    "requested_frames": 5,
-    "missing_entries": [],
-    "first": {
-     "entry": 256,
-     "pixel_count": 662,
-     "bounding_box": [
-      354,
-      222,
-      440,
-      282
-     ],
-     "visible_pixel_count": 662,
-     "palette_indices": [],
-     "projected_palette_indices": [],
-     "attribute_indices": []
-    }
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   }
+  },
+  "experiment": {
+   "original": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   },
+   "canonical": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   }
+  },
+  "full-game": {
+   "original": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   },
+   "canonical": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
    }
   },
   "interactive-play": {
    "original": {
-    "status": "FRAME_DIFFERENCE",
-    "frames_compared": 19,
-    "replay_complete": true,
-    "native_host_cursor_visible": [
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true
-    ],
-    "checkpoint_digest": "5425baf569104e214f24d57a04fd1a77c663f18ae78ed459ecd461b847f9391d",
-    "requested_frames": 19,
-    "missing_entries": [],
-    "first": {
-     "entry": 1792,
-     "pixel_count": 748,
-     "bounding_box": [
-      241,
-      190,
-      326,
-      249
-     ],
-     "visible_pixel_count": 748,
-     "palette_indices": [],
-     "projected_palette_indices": [],
-     "attribute_indices": []
-    }
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
    },
    "canonical": {
-    "status": "FRAME_DIFFERENCE",
-    "frames_compared": 19,
-    "replay_complete": true,
-    "native_host_cursor_visible": [
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true,
-     true
-    ],
-    "checkpoint_digest": "55bdb420be2ba8d60f670106c7f939a4f66c4e40e41d440371456318a4ff737a",
-    "requested_frames": 19,
-    "missing_entries": [],
-    "first": {
-     "entry": 1280,
-     "pixel_count": 218,
-     "bounding_box": [
-      290,
-      209,
-      300,
-      238
-     ],
-     "visible_pixel_count": 218,
-     "palette_indices": [],
-     "projected_palette_indices": [],
-     "attribute_indices": []
-    }
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   }
+  },
+  "load-from-save": {
+   "original": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   },
+   "canonical": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   }
+  },
+  "long-run": {
+   "original": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   },
+   "canonical": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   }
+  },
+  "new-game-save": {
+   "original": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   },
+   "canonical": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   }
+  },
+  "quick-game": {
+   "original": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   },
+   "canonical": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   }
+  },
+  "random-17": {
+   "original": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
+   },
+   "canonical": {
+    "status": "AUDIO_DIFFERENCE",
+    "first_differing_step": 1,
+    "views": [
+     "midi_current_track",
+     "midi_last_event_ticks",
+     "midi_service_countdown",
+     "midi_tick_delay_scale",
+     "midi_track_event_ticks",
+     "midi_track_status",
+     "snd_voice_slots"
+    ]
    }
   }
  }

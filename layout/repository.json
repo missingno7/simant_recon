@@ -449,6 +449,13 @@
       "reason": "Gives automatic locals that the canonical code reads before writing the value DOS has in that stack slot, per site with evidence (main's stamp: CRT-saved BX/CX of the reference environment, evidence/canonical/uninitialised-locals/stamp-origin.json); native stack residue is otherwise arbitrary. No canonical source change; the census check rejects new unclassified sites.",
       "blocker_ids": [],
       "deletion_condition": "Keep while canonical code reads uninitialised automatic storage whose DOS residue affects behaviour."
+    },
+    {
+      "module": "yard_offsets",
+      "classification": "GENERIC_LOWERING",
+      "reason": "S13 DrawSimKid/DrawDog index the signed-byte position tables kidX..catOfs past their declared ends (frames 20, 23, 100..103 read kidY/catOfs); DOS places the five tables back to back, native alignment padding did not. Groups the canonical declarations in DOS order without padding and reads them through a signed-char view of the group (evidence/canonical/native-yard-offsets/README.md). No canonical source change.",
+      "blocker_ids": [],
+      "deletion_condition": "Keep while canonical Yard drawing reads across the position-table boundaries."
     }
   ],
   "passes": [

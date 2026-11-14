@@ -2,8 +2,8 @@
 
 The expanded interactive corpus and its action/keyboard-layout limits are in
 [`dos/scenarios/corpus.md`](../../../dos/scenarios/corpus.md).
-New findings are retained as failing lanes; the original three recipes remain
-equal. Measurements and first-divergence evidence for this expansion are in
+Current findings are retained as failing lanes in `known_findings.json`.
+Historical measurements and first-divergence evidence for this expansion are in
 `build/workers/corpus/RESULT.md`.
 
 `step_check.py` replays stored DOS references in a compiled native observer.
@@ -214,9 +214,24 @@ delivery. Unpaired or unsupported scans are explicit coverage failures.
 
 ## State verdicts and controls
 
+Each lane has three verdicts. **State**: every view classified `game_state`,
+per entry; the observer stops at the first difference. **Frames**: the checkpoint
+pictures, attribute map and DAC, exact. **Audio**: the views classified `audio`
+(MIDI/voice playback progress and driver state), per entry, reported as
+`audio=AUDIO_EQUAL|AUDIO_DIFFERENCE first=N`; an audio difference does not stop
+the state comparison, because game logic sees audio only through the
+device-status queries the tape replays (contract v6). Today every lane differs in
+audio from entry 1: native does not yet run the sound timer ISR on the tape clock,
+so its playback stays near song start while DOS has advanced
+([`native-presentation-audit`](../../../evidence/canonical/native-presentation-audit/README.md)).
+Address-valued sound selectors (output routine pointers, the volume-table offset)
+are `runtime` views. All 152 checkpoint pictures are equal after the Yard
+position-table adjacency repair
+([`native-yard-offsets`](../../../evidence/canonical/native-yard-offsets/README.md)).
+
 Every SaveRec and every available view classified as game state in
 `runtime_views.json` participates in the verdict. Unproven influence stays game
-state. Presentation, audio and runtime views are separate diagnostics; address,
+state. Presentation and runtime views are separate diagnostics, audio views the audio verdict; address,
 handle and callback views remain excluded. The live pending input-queue view is
 an explicit coverage gap; its raw backing storage remains reported.
 
@@ -231,11 +246,8 @@ The observer stops at the first game-state difference. It reports names,
 hashes, a native frame and byte differences from the nearest retained DOS frame.
 A frame from another entry is labelled and is not exact expected bytes for the
 differing entry. The admission report retains the earlier Event.v findings and
-their original evidence. With handler-register replay, repeated complete checks
-now give `ORIGINAL_EQUAL_ALL` in all three scenarios: new-game-save 64/64,
-quick-game 2000/2000 and long-run 3000/3000 in each executable's own lane.
-There is no next first difference inside these finite tapes. Results per
-scenario are tracked in `evidence/port/verification-matrix.json`.
+their original evidence. All nine scenarios are equal in state and frames in
+both lanes; open findings are pinned in `known_findings.json`.
 
 ```powershell
 python -m unittest portable.tests.acceptance.test_native_acceptance portable.tests.acceptance.test_full_inputs
@@ -302,6 +314,13 @@ stride, address shift, byte skip, panning and plane-enable registers. Unsupporte
 modes, split screens and preset/doubled scanlines fail closed. Native copies its
 single aperture and DWARF-bound app.palette; no sync, poll, draw or write occurs.
 F12 captures the last completed presentation and is deliberately not used here.
+
+The native observer also writes `native.frame.ENTRY` at each picture checkpoint
+while state comparison is active. It contains the exact already-read view bytes
+behind that entry's fingerprint row, including separate diagnostics. It invokes
+no game code and stops emitting state frames after the first verdict difference;
+subsequent picture capture remains independent. This permits byte-level audits
+of unused tails and opaque IDs without a new DOS observation or state mutation.
 
 The game draws its own software cursor into both apertures through the source
 cursor draw/restore callbacks. The separate INT33 driver's cursor is hidden or

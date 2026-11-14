@@ -2493,7 +2493,7 @@
   },
   "clip_rectangle_workspace": {
     "category": "presentation",
-    "reason": "Raster, clipping, glyph or drawing workspace; display state is reported separately."
+    "reason": "Raster, clipping, glyph or drawing workspace; display state is reported separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "clip_saved_rectangle_total": {
     "category": "presentation",
@@ -2517,7 +2517,7 @@
   },
   "clip_window_z_order": {
     "category": "presentation",
-    "reason": "Raster, clipping, glyph or drawing workspace; display state is reported separately."
+    "reason": "Raster, clipping, glyph or drawing workspace; display state is reported separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "curFontPtr": {
     "category": "presentation",
@@ -2993,7 +2993,7 @@
   },
   "db_index_lower_bound": {
     "category": "runtime",
-    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately."
+    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "db_index_search_entry": {
     "category": "runtime",
@@ -3197,7 +3197,7 @@
   },
   "fd_50F6_37FA": {
     "category": "presentation",
-    "reason": "Caste knob animation object index (colony_controls.c); changes drawing only."
+    "reason": "Caste knob animation object index (colony_controls.c); changes drawing only. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "fd_50F6_3836": {
     "category": "game_state",
@@ -3801,7 +3801,7 @@
   },
   "g_4332": {
     "category": "presentation",
-    "reason": "Mouse cursor hide/refresh latch (input_timer.asm); controls drawing the software cursor."
+    "reason": "Mouse cursor hide/refresh latch (input_timer.asm); controls drawing the software cursor. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "g_433E": {
     "category": "game_state",
@@ -3813,7 +3813,7 @@
   },
   "g_4352": {
     "category": "runtime",
-    "reason": "Cursor show call counter: mouse_show_cursor increments it on every call, including the IRQ0 timer restore; never read (same census). Presentation cadence, reported separately."
+    "reason": "Cursor show call counter: mouse_show_cursor increments it on every call, including the IRQ0 timer restore; never read (same census). Presentation cadence, reported separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "g_4356": {
     "category": "runtime",
@@ -4379,11 +4379,11 @@
   },
   "mem_arena_start_segment": {
     "category": "runtime",
-    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately."
+    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "mem_conventional_paragraphs": {
     "category": "runtime",
-    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately."
+    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "mem_discard_entry_template": {
     "category": "runtime",
@@ -4399,7 +4399,7 @@
   },
   "mem_ems_boundary_segment": {
     "category": "runtime",
-    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately."
+    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "mem_free_list_cursor": {
     "category": "runtime",
@@ -4443,7 +4443,7 @@
   },
   "midi_current_track": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "midi_event_data_lengths": {
     "category": "audio",
@@ -4455,7 +4455,7 @@
   },
   "midi_last_event_ticks": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "midi_loaded_song_number": {
     "category": "audio",
@@ -4467,7 +4467,7 @@
   },
   "midi_playback_state": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "midi_service_active": {
     "category": "audio",
@@ -4475,7 +4475,7 @@
   },
   "midi_service_countdown": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "midi_song_data_bytes": {
     "category": "audio",
@@ -4487,7 +4487,7 @@
   },
   "midi_tick_delay_scale": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "midi_track_count": {
     "category": "audio",
@@ -4495,11 +4495,11 @@
   },
   "midi_track_event_ticks": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "midi_track_status": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "midi_volume_scale": {
     "category": "audio",
@@ -4551,7 +4551,7 @@
   },
   "mode_knob_anim_index": {
     "category": "presentation",
-    "reason": "Mode knob animation object index; changes drawing only."
+    "reason": "Mode knob animation object index; changes drawing only. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "mode_knob_center": {
     "category": "game_state",
@@ -5139,7 +5139,7 @@
   },
   "save_last_filename": {
     "category": "presentation",
-    "reason": "File selector filename buffer, including unused tail; reported with UI state."
+    "reason": "File selector filename buffer, including unused tail; reported with UI state. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "save_record_table": {
     "category": "game_state",
@@ -5150,12 +5150,12 @@
     "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
   },
   "snd_adlib_output_pointer": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_based_dac_output_pointer": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_capabilities_pointer": {
     "category": "audio",
@@ -5202,8 +5202,8 @@
     "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
   },
   "snd_lpt_output_pointer": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_opl_volume_bias": {
     "category": "audio",
@@ -5214,12 +5214,12 @@
     "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
   },
   "snd_port200_output_pointer": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_port222_output_pointer": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_sample_channel_count": {
     "category": "audio",
@@ -5230,8 +5230,8 @@
     "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
   },
   "snd_sample_output_routine": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_sample_release_list": {
     "category": "audio",
@@ -5250,12 +5250,12 @@
     "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
   },
   "snd_sb_output_pointer": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_speaker_output_pointer": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_voice_build_index": {
     "category": "audio",
@@ -5263,11 +5263,11 @@
   },
   "snd_voice_slots": {
     "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
   },
   "snd_volume_table_offset": {
-    "category": "audio",
-    "reason": "Sound driver, voice, MIDI or device progress; reported independently of simulation state."
+    "category": "runtime",
+    "reason": "Address-valued selector (symbolic near-code or DGROUP OFFSET), not playback state: the canonical DOS layout places it four bytes differently, the original lane is equal (evidence/canonical/native-presentation-audit/README.md)."
   },
   "source_bitmap_width": {
     "category": "presentation",
@@ -5299,7 +5299,7 @@
   },
   "startup_free_memory_bytes": {
     "category": "runtime",
-    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately."
+    "reason": "Host resource, allocator, file or service bookkeeping; raw differences are retained separately. Per-view source/byte/output-relevance audit: evidence/canonical/native-presentation-audit/README.md and audit.json."
   },
   "startup_info_block_handle": {
     "category": "runtime",

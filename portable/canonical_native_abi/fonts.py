@@ -19,6 +19,9 @@ def adapt(unit: str, source: str) -> tuple[str, dict | None]:
         source = source.replace(old, 'mem_malloc(sizeof(struct Font), "FontHeader")')
         changes.extend(['common Font definition; 26-byte wire-read prefix retained', 'runtime FontHeader allocation 0x2a -> sizeof(struct Font), native pointers'])
     if unit == 'src/ui/yard_window.c':
+        from .yard_offsets import adapt as yard_position_views
+        source = yard_position_views(source)
+        changes.append('DOS-adjacent signed-byte Yard position tables, complete-object character view')
         old = 'extern int far out_buffer;'
         if source.count(old) != 1:
             raise ValueError('S13 Bitmap width view changed')
