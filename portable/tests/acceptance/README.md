@@ -1,5 +1,11 @@
 # Step-based scenario observations
 
+The expanded interactive corpus and its action/keyboard-layout limits are in
+[`dos/scenarios/corpus.md`](../../../dos/scenarios/corpus.md).
+New findings are retained as failing lanes; the original three recipes remain
+equal. Measurements and first-divergence evidence for this expansion are in
+`build/workers/corpus/RESULT.md`.
+
 `step_check.py` replays stored DOS references in a compiled native observer.
 It starts neither DOSBox-X nor GDB. Each scenario has independent original and
 canonical lanes; native consumes that executable's own clocks and actual IRQ
@@ -13,16 +19,19 @@ The command prints one stable line per scenario. Missing references, assets or
 builds report `no reference` and exit 0. A state difference or incomplete replay
 exits 1. `--build`, `--out`, `--original`, `--canonical`, `--reference-root`,
 `--steps` and `--timeout` select explicit builds, outputs, references and controls.
-Default build selection prefers `build/workers/admission/native-final`, then
-`build/current/portable`. Default output is `build/workers/admission/check`.
+The default build is `build/current/portable` (built as in `portable/README.md`);
+the default output is `build/current/tests/steps`. The upper-layer test runs this
+command and fails when any scenario's outcome differs from `known_findings.json`
+(open findings, pinned per lane; unlisted scenarios must be equal in both lanes).
+A fix updates that file in the same commit.
 Prior output is retired with `tools/workspace.py`. Checks never record.
 
 ## Record references
 
 ```powershell
-python portable/build.py --out build/workers/admission/native-final
-python portable/tests/acceptance/build_observer.py --out build/workers/admission/observer
-python portable/tests/acceptance/step_record.py --build build/workers/admission/native-final --observer build/workers/admission/observer/observer-build.json
+python portable/build.py --out build/current/portable
+python portable/tests/acceptance/build_observer.py --out build/current/observer
+python portable/tests/acceptance/step_record.py --observer build/current/observer/observer-build.json
 ```
 
 Recording defaults to every scenario and both executables. `--target original`
@@ -32,6 +41,21 @@ Compatible references are reused. An older service contract requires explicit
 retirement with `tools/workspace.py` and recording again. References live at
 `build/reference/<scenario>/<executable-sha256>-service-samples-v4/`. Original assets and generated
 references stay ignored.
+
+Recipes with `saved_game` also require `saved_game_sha256`: recording validates
+that immutable setup input, and native checks install a disposable copy before
+launch. `--scratch-root build/workers/corpus` on record/check keeps binding
+captures and short native asset paths in that worker. The recorder rejects an
+observer built from a different `compact_observer.inc`; rebuild it or select
+the current pinned observer. For video QA, `dos/run.py --capture-directory`
+can place captures outside the guest drive so a CAPTURE directory does not
+change File > Open's list rows.
+
+The acceptance-only observer link translates DOS recipe modifier/Escape names
+to SDL names and supplies SDL's held-modifier field from the recorded physical
+transitions. The existing platform still constructs and projects each SDL
+event. It does not translate DOS keyboard layouts or supply expected game
+state. Number-key layout differences therefore remain observable failures.
 
 Recipes request 64 entries for new-game-save, 2,000 for quick-game (including
 A/B Save As inputs), and 3,000 for unattended long-run, at normal game speed.
@@ -50,7 +74,7 @@ addresses and extents come from PE DWARF. Required readers are `capstone`,
 `pefile` and `pyelftools`. Unresolved bindings remain failures.
 
 ```powershell
-python portable/tests/acceptance/step_repeat.py REFERENCE REPEAT --out build/workers/admission/repeat-result.json
+python portable/tests/acceptance/step_repeat.py REFERENCE REPEAT --out build/current/tests/repeat-result.json
 ```
 
 Only same-executable DOS repeats establish `ORIGINAL_DOS_NONDETERMINISTIC`.
@@ -159,8 +183,8 @@ differing entry. The admission report retains the earlier Event.v findings and
 their original evidence. With handler-register replay, repeated complete checks
 now give `ORIGINAL_EQUAL_ALL` in all three scenarios: new-game-save 64/64,
 quick-game 2000/2000 and long-run 3000/3000 in each executable's own lane.
-There is no next first difference inside these finite tapes. Current
-measurements and controls are in `build/workers/irq-context/RESULT.md`.
+There is no next first difference inside these finite tapes. Results per
+scenario are tracked in `evidence/port/verification-matrix.json`.
 
 ```powershell
 python -m unittest portable.tests.acceptance.test_native_acceptance portable.tests.acceptance.test_full_inputs
@@ -183,7 +207,7 @@ controls check distinct context words on successive raw events, disabled
 replay, malformed words and the unchanged nested enqueue stamp/order.
 
 ```powershell
-python portable/tests/acceptance/step_check.py --disable irq-context --out build/workers/irq-context/control
-python portable/tests/acceptance/step_check.py --steps 8 --out build/workers/irq-context/prefix
-python portable/tests/acceptance/step_check.py --steps 8 --disable clock --out build/workers/irq-context/clock-control
+python portable/tests/acceptance/step_check.py --disable irq-context --out build/current/tests/steps-control
+python portable/tests/acceptance/step_check.py --steps 8 --out build/current/tests/steps-prefix
+python portable/tests/acceptance/step_check.py --steps 8 --disable clock --out build/current/tests/steps-clock-control
 ```

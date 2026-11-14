@@ -1,0 +1,119 @@
+{
+ "about": "Open port findings of the stored step scenarios, exactly as step_check.py reports them on build/current/portable. A scenario not listed must be ORIGINAL_EQUAL_ALL. The upper-layer test fails on any change: an earlier stop is a regression, a later one means a finding was fixed and this file is updated in the same commit. Findings and their layers are in evidence/port/verification-matrix.json.",
+ "scenarios": {
+  "ant-commands": {
+   "verdict": "PORT_INTRODUCED",
+   "lanes": {
+    "original": {
+     "status": "INCOMPLETE",
+     "steps_compared": 100
+    },
+    "canonical": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 66,
+     "first": [
+      "g_434E",
+      "g_4352"
+     ]
+    }
+   }
+  },
+  "experiment": {
+   "verdict": "UNATTRIBUTED",
+   "lanes": {
+    "original": {
+     "status": "INCOMPLETE",
+     "steps_compared": 94
+    },
+    "canonical": {
+     "status": "INCOMPLETE",
+     "steps_compared": 94
+    }
+   }
+  },
+  "full-game": {
+   "verdict": "PORT_INTRODUCED",
+   "lanes": {
+    "original": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 100,
+     "first": [
+      "g_434E",
+      "g_4352"
+     ]
+    },
+    "canonical": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 100,
+     "first": [
+      "g_434E",
+      "g_4352"
+     ]
+    }
+   }
+  },
+  "interactive-play": {
+   "verdict": "PORT_INTRODUCED",
+   "lanes": {
+    "original": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 134,
+     "first": [
+      "AlistM",
+      "save:7:AlistM"
+     ]
+    },
+    "canonical": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 135,
+     "first": [
+      "AlistM",
+      "save:7:AlistM"
+     ]
+    }
+   }
+  },
+  "load-from-save": {
+   "verdict": "PORT_INTRODUCED",
+   "lanes": {
+    "original": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 152,
+     "first": [
+      "AlistM",
+      "AlistS",
+      "save:7:AlistM",
+      "save:9:AlistS"
+     ]
+    },
+    "canonical": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 152,
+     "first": [
+      "AlistM",
+      "AlistS",
+      "save:7:AlistM",
+      "save:9:AlistS"
+     ]
+    }
+   }
+  },
+  "random-17": {
+   "verdict": "UNATTRIBUTED",
+   "lanes": {
+    "original": {
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 76,
+     "first": [
+      "g_434E",
+      "g_4352"
+     ]
+    },
+    "canonical": {
+     "status": "INCOMPLETE",
+     "steps_compared": 124
+    }
+   }
+  }
+ }
+}

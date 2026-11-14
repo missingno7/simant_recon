@@ -6,6 +6,47 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef SIMANT_TEST_KEY_ALIASES
+/* DOS recipe tokens have no spaces. SDL's modifier/Escape names do.
+ * A ~suffix supplies SDL modifiers derived from the physical input tape.
+ * The existing host constructs and admits the SDL event through its adapter.
+ * The production platform and SDL event projection stay untouched. */
+extern uint32_t __real_SDL_GetKeyFromName(const char *);
+extern int __real_SDL_GetScancodeFromKey(uint32_t, uint16_t *);
+static unsigned replay_has_modifiers;
+static uint16_t replay_modifiers;
+uint32_t __wrap_SDL_GetKeyFromName(const char *name) {
+  char token[64];
+  const char *suffix = strchr(name, '~');
+  replay_has_modifiers = suffix != NULL;
+  if (suffix) {
+    char *end;
+    size_t length = (size_t)(suffix - name);
+    unsigned long bits = strtoul(suffix + 1, &end, 10);
+    if (!length || length >= sizeof(token) || end == suffix + 1 || *end || bits & ~65ul)
+      abort();
+    memcpy(token, name, length);token[length] = 0;name = token;
+    replay_modifiers = (uint16_t)bits;
+  }
+  const char *sdl_name = !strcmp(name, "lctrl")    ? "Left Ctrl"
+                         : !strcmp(name, "lshift") ? "Left Shift"
+                         : !strcmp(name, "esc")    ? "Escape"
+                         : !strcmp(name, "enter")  ? "Return"
+                         : !strcmp(name, "kp_5")   ? "Keypad 5"
+                                                   : name;
+  return __real_SDL_GetKeyFromName(sdl_name);
+}
+int __wrap_SDL_GetScancodeFromKey(uint32_t key, uint16_t *modifiers) {
+  int scan = __real_SDL_GetScancodeFromKey(key, modifiers);
+  if (replay_has_modifiers) {
+    if (!modifiers) abort();
+    *modifiers |= replay_modifiers;
+    replay_has_modifiers = 0;
+  }
+  return scan;
+}
+#endif
+
 extern uint32_t portable_test_clock_read(char, void *, uint32_t);
 extern void portable_test_step_boundary(unsigned, unsigned);
 extern void portable_test_before_poll(void) __attribute__((weak));

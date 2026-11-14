@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "6818824 plus irq-context (handler-entry CX/DX replayed as interrupt input in the step check)",
+ "source": "fb66aa3 plus corpus (six new scenarios) and irq-normal (640-wide proof)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -11,13 +11,20 @@
  },
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
-  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt."
+  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt.",
+  "Open findings are pinned per lane in portable/tests/acceptance/known_findings.json; the upper-layer test fails on any change in either direction."
  ],
  "scenarios": {
   "new-game-save (64 entries)": "equal in game state for all 64 entries in both lanes (native = original DOS, native = canonical DOS).",
   "quick-game (2000 entries)": "equal in game state for all 2000 entries in both lanes.",
   "long-run (3000 entries, unattended)": "equal in game state for all 3000 entries in both lanes, about 10 s per lane.",
-  "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in all three scenarios; quick-game window_current_event differs from entry 1703 between repeats (observation setup differed; cause not isolated)"
+  "interactive-play (2000 entries)": "equal through 133 / 134 (original / canonical lane); then AlistM: a number key reached DOS as '+' because DOSBox-X auto-selected the host's Czech layout while native maps US; recording environment and key translation (worker keys)",
+  "ant-commands (1000)": "canonical lane equal through 65, then cursor hide/show counters g_434E/g_4352; original lane equal through 100, then a service-order difference after a pointer move to the corner (edge scroll); port (worker mouse)",
+  "load-from-save (1000)": "loads the original quick-game A.ANT; equal through 151 in both lanes, then AlistM/AlistS from the same number-key layout difference (worker keys)",
+  "full-game (1000)": "equal through 99 in both lanes, then cursor hide/show counters (worker mouse)",
+  "experiment (1000)": "equal through 94 in both lanes, then native does not enqueue the FB09/0400 proximity release after a button release over Add Food (worker mouse)",
+  "random-17 (2000)": "seeded random input; original lane equal through 75 (cursor counters), canonical through 124 (native pushes a BIOS word for Ctrl+8 that DOS does not; worker keys)",
+  "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
  "subsystems": [
@@ -42,14 +49,14 @@
    "domain": "shipped window resources; mouse and keyboard through menus, file dialogs and message boxes used by the scenarios",
    "level": {
     "isolated": 3,
-    "scenario": 4
+    "scenario": 5
    },
    "original_dos": "scenarios drive menus and Save As dialogs on the original",
    "canonical_dos": "same",
    "native": "runtime flows (logo click, save, load) PASS",
-   "known_divergence": "normal play: native supplies CX/DX zero where DOS queues the scan wrapper's DGROUP residue in keyboard-IRQ events; OpenMiniMapWin and SpecialXfer read h/v of any event unfiltered (evidence/canonical/native-input-irq/interrupted-registers.md). Whether that changes play is undecided. Unreferenced periodic-pump fifth word still zero.",
-   "first_open_question": "does a key press inside the OpenMiniMapWin or SpecialXfer modal loop behave the same with native zero as with DOS residue?",
-   "next": "decide the two unfiltered readers; corpus scenarios with more window interaction"
+   "known_divergence": "experiment: missing FB09/0400 proximity release enqueue; cursor hide/show call counts differ in full-game, ant-commands, random-17",
+   "first_open_question": "which native path makes the extra cursor hide/show calls?",
+   "next": "worker mouse"
   },
   {
    "id": "timing-rng",
@@ -108,8 +115,8 @@
    "canonical_dos": "same",
    "native": "runtime save and load flows PASS; new-game-save scenario equal in game state for 64 entries through Save As",
    "known_divergence": "save_last_filename RECONSTRUCTION_INTRODUCED in quick-game (not yet examined)",
-   "first_open_question": "does a load-from-original-save scenario agree three ways? (removes the seed question)",
-   "next": "add a scenario that loads a saved game and continues"
+   "first_open_question": "load-from-save is equal through 151; continues after the keyboard fix",
+   "next": "after worker keys"
   },
   {
    "id": "graphics",
@@ -132,14 +139,14 @@
    "domain": "scenario inputs; IRQ projection",
    "level": {
     "isolated": 2,
-    "scenario": 4
+    "scenario": 5
    },
    "original_dos": "input_irq oracle matrix from original instruction execution",
    "canonical_dos": "-",
    "native": "input_irq PASS: 2,304 rows",
-   "known_divergence": "platform.json native-input-hardware-context: normal play supplies zero CX/DX context (DOS: scan wrapper residue); replayed in the step check",
-   "first_open_question": "see windows-events",
-   "next": "more input-heavy scenarios"
+   "known_divergence": "number keys under the recording host's Czech layout (environment), Ctrl+digit BIOS word, corner-pointer edge scroll; normal-play IRQ context words proven unobservable in 640-wide modes (evidence/canonical/native-input-irq/normal-words.md), 320-wide open",
+   "first_open_question": "native key translation against the US BIOS tables",
+   "next": "workers keys and mouse"
   },
   {
    "id": "audio",
@@ -174,22 +181,27 @@
   {
    "id": "modes",
    "name": "Full Game, Quick Game, experiments, tutorial",
-   "domain": "Full Game start; Quick Game run",
+   "domain": "Quick Game, Full Game start, Experimental mode, load of an original save",
    "level": {
     "isolated": 3,
     "scenario": 5
    },
-   "original_dos": "two scenarios: new-game-save (Full Game start), quick-game",
+   "original_dos": "scenarios new-game-save, quick-game, long-run, interactive-play, ant-commands, load-from-save, full-game, experiment, random-17",
    "canonical_dos": "same",
-   "native": "same scenarios run to completion",
-   "known_divergence": "no scenario for experiment mode or the tutorial",
+   "native": "Quick Game equal for 3000 unattended steps; other modes equal until input-service findings (see scenarios)",
+   "known_divergence": "no tutorial scenario",
    "first_open_question": "-",
-   "next": "add experiment-mode and tutorial scenarios once alignment works"
+   "next": "tutorial scenario after the input findings"
   }
  ],
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test harness",
+   "summary": "six new scenarios (interactive play, ant commands, load from an original save, Full Game, Experimental, seeded random input), 12 DOS references; open findings pinned in known_findings.json; step check defaults to build/current/portable"
+  },
+  {
+   "commit": "fb66aa3",
    "layer": "test harness",
    "summary": "handler-entry CX/DX of keyboard IRQs replayed from the DOS tape (register-coverage pinned, negative control restores the four former stops); all three corpus scenarios equal in game state for their whole length in both lanes"
   },

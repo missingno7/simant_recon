@@ -1,0 +1,244 @@
+# Startup > Quick Game.
+5000 key enter
+7000 key enter
+9000 key enter
+12000 mouse_move -1280 -960
+12100 mouse_move 740 330
+12300 mouse_button 0 down
+12450 mouse_button 0 up
+16000 key enter
+20000 key enter
+# Ctrl+E; Home; walk; double-click near the queen (follow attempt); double-click soil to dig.
+21000 keydown lctrl
+21100 key e
+21300 keyup lctrl
+23000 key home
+25000 mouse_move -1280 -960
+25100 mouse_move 528 422
+25300 mouse_button 0 down
+25450 mouse_button 0 up
+28000 mouse_move -1280 -960
+28100 mouse_move 636 422
+28300 mouse_button 0 down
+28450 mouse_button 0 up
+28520 mouse_button 0 down
+28600 mouse_button 0 up
+30000 mouse_move -1280 -960
+30100 mouse_move 560 454
+30300 mouse_button 0 down
+30450 mouse_button 0 up
+30520 mouse_button 0 down
+30600 mouse_button 0 up
+# Physical 1/2/3/4/0 keys: DOS CZ layout translates these; not recruitment.
+35000 key 1
+38000 key 2
+41000 key 3
+44000 key 4
+47000 key 0
+49000 key 0
+# Ctrl+8 surface; Ctrl+M map; double-click food region opens edit.
+51000 keydown lctrl
+51100 key 8
+51300 keyup lctrl
+53000 key home
+56000 keydown lctrl
+56100 key m
+56300 keyup lctrl
+59000 mouse_move -1280 -960
+59100 mouse_move 596 564
+59300 mouse_button 0 down
+59450 mouse_button 0 up
+59520 mouse_button 0 down
+59600 mouse_button 0 up
+# Double-click food at world (58,49); yellow ant travels from nest to surface.
+65000 mouse_move -1280 -960
+65100 mouse_move 596 482
+65300 mouse_button 0 down
+65450 mouse_button 0 up
+65520 mouse_button 0 down
+65600 mouse_button 0 up
+# Double-click adjacent ground to drop carried food.
+103000 mouse_move -1280 -960
+103100 mouse_move 628 482
+103300 mouse_button 0 down
+103450 mouse_button 0 up
+103520 mouse_button 0 down
+103600 mouse_button 0 up
+# Map click; edit mini-map; key while mini-map is open; mini-map click and outside close.
+112000 keydown lctrl
+112100 key m
+112300 keyup lctrl
+115000 mouse_move -1280 -960
+115100 mouse_move 660 240
+115300 mouse_button 0 down
+115450 mouse_button 0 up
+118000 keydown lctrl
+118100 key e
+118300 keyup lctrl
+121000 mouse_move -1280 -960
+121100 mouse_move 78 98
+121300 mouse_button 0 down
+121450 mouse_button 0 up
+123000 key 1
+126000 mouse_move -1280 -960
+126100 mouse_move 240 160
+126300 mouse_button 0 down
+126450 mouse_button 0 up
+129000 mouse_move -1280 -960
+129100 mouse_move 480 400
+129300 mouse_button 0 down
+129450 mouse_button 0 up
+# Physical Ctrl+Y (Yard shortcut attempt; CZ layout differs); edit; Info link/back/close.
+132000 keydown lctrl
+132100 key y
+132300 keyup lctrl
+137000 keydown lctrl
+137100 key e
+137300 keyup lctrl
+140000 keydown lctrl
+140100 key i
+140300 keyup lctrl
+143000 mouse_move -1280 -960
+143100 mouse_move 700 562
+143300 mouse_button 0 down
+143450 mouse_button 0 up
+146000 mouse_move -1280 -960
+146100 mouse_move 880 872
+146300 mouse_button 0 down
+146450 mouse_button 0 up
+149000 mouse_move -1280 -960
+149100 mouse_move 572 470
+149300 mouse_button 0 down
+149450 mouse_button 0 up
+# Move edit title by (40,20), resize its lower-right handle by (80,30).
+152000 keydown lctrl
+152100 key e
+152300 keyup lctrl
+155000 mouse_move -1280 -960
+155100 mouse_move 400 64
+155300 mouse_button 0 down
+155600 mouse_move 80 40
+156000 mouse_button 0 up
+158000 mouse_move -1280 -960
+158100 mouse_move 896 780
+158300 mouse_button 0 down
+158600 mouse_move 160 60
+159000 mouse_button 0 up
+# View menu; Options > AutoTrack.
+162000 key f4
+165000 key esc
+168000 key f5
+170000 mouse_move -1280 -960
+170100 mouse_move 490 60
+170300 mouse_button 0 down
+170450 mouse_button 0 up
+# Speed Slow, Normal, Fast, Ultra (GameSpeed 3), then Normal.
+172000 key f6
+173000 mouse_move -1280 -960
+173100 mouse_move 640 116
+173300 mouse_button 0 down
+173450 mouse_button 0 up
+175000 key f6
+176000 mouse_move -1280 -960
+176100 mouse_move 640 144
+176300 mouse_button 0 down
+176450 mouse_button 0 up
+178000 key f6
+179000 mouse_move -1280 -960
+179100 mouse_move 640 172
+179300 mouse_button 0 down
+179450 mouse_button 0 up
+181000 key f6
+182000 mouse_move -1280 -960
+182100 mouse_move 640 200
+182300 mouse_button 0 down
+182450 mouse_button 0 up
+185000 key f6
+186000 mouse_move -1280 -960
+186100 mouse_move 640 144
+186300 mouse_button 0 down
+186450 mouse_button 0 up
+190000 key enter
+195000 key enter
+200000 key enter
+205000 key enter
+210000 key enter
+215000 key enter
+220000 key enter
+225000 key enter
+230000 key enter
+235000 key enter
+240000 key enter
+245000 key enter
+250000 key enter
+255000 key enter
+260000 key enter
+265000 key enter
+270000 key enter
+275000 key enter
+280000 key enter
+285000 key enter
+290000 key enter
+295000 key enter
+300000 key enter
+305000 key enter
+310000 key enter
+315000 key enter
+320000 key enter
+325000 key enter
+330000 key enter
+335000 key enter
+340000 key enter
+345000 key enter
+350000 key enter
+355000 key enter
+360000 key enter
+365000 key enter
+370000 key enter
+375000 key enter
+380000 key enter
+385000 key enter
+390000 key enter
+395000 key enter
+400000 key enter
+405000 key enter
+410000 key enter
+415000 key enter
+420000 key enter
+425000 key enter
+430000 key enter
+435000 key enter
+440000 key enter
+445000 key enter
+450000 key enter
+455000 key enter
+460000 key enter
+465000 key enter
+470000 key enter
+475000 key enter
+480000 key enter
+485000 key enter
+490000 key enter
+495000 key enter
+500000 key enter
+505000 key enter
+510000 key enter
+515000 key enter
+520000 key enter
+525000 key enter
+530000 key enter
+535000 key enter
+540000 key enter
+545000 key enter
+550000 key enter
+555000 key enter
+560000 key enter
+565000 key enter
+570000 key enter
+575000 key enter
+580000 key enter
+585000 key enter
+590000 key enter
+595000 key enter
+600000 key enter
+610000 exit

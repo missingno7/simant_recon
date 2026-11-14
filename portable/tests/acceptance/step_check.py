@@ -57,12 +57,13 @@ def test_build(build, out):
         response=response.replace(Path(unit['object']).as_posix(),obj.as_posix())
     (out/'objects.rsp').write_text(response)
     observer_object=out/'native_observer.o'
-    observer_compile=[report['application_link']['command'][0],'-std=c11','-O2','-g','-fno-lto','-c',str(HERE/'native_observer.c'),'-o',str(observer_object)]
+    observer_compile=[report['application_link']['command'][0],'-std=c11','-O2','-g','-fno-lto','-DSIMANT_TEST_KEY_ALIASES','-c',str(HERE/'native_observer.c'),'-o',str(observer_object)]
     subprocess.run(observer_compile,check=True,capture_output=True,timeout=60)
     command=report['application_link']['command'][:]
     command=[('-Wl,@'+str(out/'objects.rsp')) if arg=='-Wl,@application-objects.rsp' else arg for arg in command]
     command[command.index('-o')+1]=str(exe)
-    command[1:1]=[str(observer_object),'-Wl,--wrap=DoAntSim','-Wl,--wrap=MacTickCount']
+    command[1:1]=[str(observer_object),'-Wl,--wrap=DoAntSim','-Wl,--wrap=MacTickCount',
+                   '-Wl,--wrap=SDL_GetKeyFromName','-Wl,--wrap=SDL_GetScancodeFromKey']
     run=subprocess.run(command,cwd=build,capture_output=True,text=True,timeout=120)
     (out/'link.log').write_text(run.stdout+run.stderr)
     if run.returncode:raise RuntimeError('Observer link failed: '+run.stderr[-3000:])
@@ -78,6 +79,10 @@ def validate_reference(directory, scenario):
     recipe=json.loads(scenario.read_text())
     if manifest['scenario_sha256']!=sha(scenario) or manifest['script_sha256']!=sha(ROOT/recipe['script']):
         raise ValueError('Stale reference scenario/script: '+str(directory))
+    if recipe.get('saved_game'):
+        saved_hash=sha(ROOT/recipe['saved_game'])
+        if saved_hash!=recipe['saved_game_sha256'] or saved_hash!=manifest.get('saved_game_sha256'):
+            raise ValueError('Reference saved game identity differs')
     if not manifest['complete']:raise ValueError('Incomplete reference: '+str(directory))
     boundary=directory/'capture/boundary-manifest.json'
     if sha(boundary)!=manifest['boundary_manifest_sha256']:raise ValueError('Changed capture receipt')
@@ -96,11 +101,16 @@ def validate_reference(directory, scenario):
 
 def step_inputs(receipt, destination):
     """Encode each actual IRQ at its completed global service position."""
-    lines=[]
+    lines=[];modifiers=0
     for event in receipt['inputs']:
         op=event['description'].split();a=b=0;arg='-'
         if op[0] in ('key_down','key_up'):
             operation=op[0].replace('_','');arg=op[1]
+            # SDL keyboard events carry the held modifier state. Derive it
+            # solely from the recorded physical transitions, never game state.
+            bit={'lshift':1,'lctrl':64}.get(arg,0)
+            if bit:modifiers=(modifiers|bit) if op[0]=='key_down' else (modifiers&~bit)
+            if modifiers or bit:arg+=f'~{modifiers}'
         elif op[0]=='mouse_move':operation=op[0];a,b=map(int,op[1:3])
         elif op[0]=='mouse_button':operation=op[0];a=int(op[1]);arg=op[2]
         else:raise ValueError('Unsupported transition: '+str(op))
@@ -114,7 +124,7 @@ def step_inputs(receipt, destination):
 
 
 def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=None,
-             max_steps=None):
+             max_steps=None, scratch_root=None):
     """Compare native only with the executable whose own inputs it replays."""
     recipe=json.loads(scenario_path.read_text());manifest=validate_reference(reference,scenario_path)
     if out.exists():
@@ -163,11 +173,16 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
              '--assets','{assets}','--input-script',str(replay),*recipe.get('arguments',[])]
     # The original FileSelect path domain is 67 characters, including filename.
     # Keep disposable resources short even when diagnostic output is deeply nested.
-    with tempfile.TemporaryDirectory(prefix='a',dir=ROOT/'build/workers/admission') as resource_dir:
+    resource_root=scratch_root or ROOT/'build/scratch/steps'
+    resource_root.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='a',dir=resource_root) as resource_dir:
         assets=Path(resource_dir).resolve()
-        if not assets.is_relative_to(ROOT/'build/workers/admission') or len(str(assets/'a.ant'))>67:
+        if not assets.is_relative_to(resource_root) or len(str(assets/'a.ant'))>67:
             raise ValueError('Disposable assets exceed original FileSelect path domain')
         shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
+        if recipe.get('saved_game'):
+            saved=ROOT/recipe['saved_game']
+            shutil.copyfile(saved,assets/saved.name)
         command[command.index('{assets}')]=str(assets)
         start=time.perf_counter();timed_out=False
         with (out/'native.log').open('w') as log:
@@ -245,15 +260,14 @@ def attribute(original,canonical):
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('scenario',type=Path,nargs='*')
-    default=ROOT/'build/workers/admission/native-final'
-    if not (default/'report.json').is_file():default=ROOT/'build/current/portable'
-    ap.add_argument('--build',type=Path,default=default)
+    ap.add_argument('--build',type=Path,default=ROOT/'build/current/portable')
     ap.add_argument('--reference-root',type=Path,default=ROOT/'build/reference')
     ap.add_argument('--original',type=Path);ap.add_argument('--canonical',type=Path)
-    ap.add_argument('--out',type=Path,default=ROOT/'build/workers/admission/check')
+    ap.add_argument('--out',type=Path,default=ROOT/'build/current/tests/steps')
     ap.add_argument('--timeout',type=int,default=30)
     ap.add_argument('--steps',type=int,help='Explicit prefix control; default is the complete reference')
     ap.add_argument('--disable',choices=('clock','input','irq-context'))
+    ap.add_argument('--scratch-root',type=Path,help='Short worker directory for disposable native assets')
     a=ap.parse_args();scenarios=a.scenario or sorted((ROOT/'dos/scenarios').glob('*.json'))
     if not (ROOT/'assets/SIMANT.EXE').is_file() or not (a.build/'report.json').is_file():
         for p in scenarios:print(p.stem+': no reference (assets/native build absent)')
@@ -276,7 +290,8 @@ def main():
         if exe is None:exe=test_build(a.build.resolve(),a.out.resolve()/'test-build')
         lanes={}
         for target,ref in refs.items():
-            try:lanes[target]=run_lane(path.resolve(),ref.resolve(),a.build.resolve(),exe,a.out.resolve()/path.stem/target,a.timeout,a.disable,a.steps)
+            try:lanes[target]=run_lane(path.resolve(),ref.resolve(),a.build.resolve(),exe,a.out.resolve()/path.stem/target,a.timeout,a.disable,a.steps,
+                                     a.scratch_root.resolve() if a.scratch_root else None)
             except ValueError as error:lanes[target]=dict(status='INCOMPLETE',steps_compared=0,tape_error=str(error))
         verdict=attribute(lanes['original'],lanes['canonical'])
         row=dict(scenario=path.stem,verdict=verdict,lanes=lanes)

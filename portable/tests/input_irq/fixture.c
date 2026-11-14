@@ -117,6 +117,26 @@ static void record(unsigned i, uint16_t ax, uint16_t cx, uint16_t dx,
 }
 static int scan(uint8_t raw)
 { return portable_m1b73_queue_runtime_scan_byte(&runtime,raw,0x0300,0x5c2d); }
+static void test_normal_context(void)
+{
+    HostEvent event = {0};
+    reset();
+    event.kind = HOST_EVENT_KEY_DOWN;
+    event.key = 0x1e61;
+    assert(portable_m1b73_queue_runtime_scan_transition(&runtime, &event) == 1);
+    record(0, 0, 2, 0, 0xfa1e, 0, 0);
+    reset();
+    event.extended = 1;
+    assert(portable_m1b73_queue_runtime_scan_transition(&runtime, &event) == 1);
+    record(0, 0, 0, 0, 0xfa1e, 0, 0);
+    reset();
+    event.extended = 0;
+    event.key = 0x1970;
+    input.bios_keyboard_flags = 4;
+    assert(portable_m1b73_queue_runtime_scan_transition(&runtime, &event) == 1);
+    record(0, 0, 2, 0, 0xfa19, 0, 4);
+    record(1, 0x8081, 4, 0, 0xf081, 0, 4);
+}
 static void add_key(HostEventKind kind, uint16_t key, uint8_t mods)
 {
     HostEvent *e=&pending[pending_count++];
@@ -416,6 +436,7 @@ int main(int argc, char **argv)
     if (argc==2 && strcmp(argv[1],"--matrix")==0) matrix();
     else {
         test_keys(); test_mouse(); test_cursor(); test_bios(); test_ring(); test_service_delivery();
+        test_normal_context();
         puts("PASS input IRQ: make/break, all event words, commands, mouse, cursor, BIOS, ring, guarded service delivery");
     }
     portable_m1b73_queue_runtime_unbind(&runtime);

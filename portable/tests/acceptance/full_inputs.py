@@ -40,7 +40,11 @@ def parse_trace(path,steps):
                     raise InputCoverageError(item['step'],'Missing scan delivery for '+item['description']+
                         ' at submitted step '+str(item['step'])+'; next observed scan has the opposite direction')
                 # Bind the keys in the supported scenario prefixes to DOS scan set 1.
-                expected={'enter':0x1c,'kp_5':0x4c,'space':0x39,'f2':0x3c,'down':0x50,'a':0x1e,'b':0x30,'lshift':0x2a,'4':0x05}.get(op[1])
+                expected={'enter':0x1c,'kp_5':0x4c,'space':0x39,'f2':0x3c,'down':0x50,
+                    'a':0x1e,'b':0x30,'c':0x2e,'e':0x12,'h':0x23,'i':0x17,'l':0x26,'m':0x32,'y':0x15,
+                    'lshift':0x2a,'lctrl':0x1d,'0':0x0b,'1':0x02,'2':0x03,'3':0x04,'4':0x05,
+                    '6':0x07,'8':0x09,'9':0x0a,'home':0x47,'esc':0x01,'tab':0x0f,
+                    'f3':0x3d,'f4':0x3e,'f5':0x3f,'f6':0x40}.get(op[1])
                 if expected is None or scan&127!=expected:raise InputCoverageError(item['step'],'Missing or unbound scan delivery: '+str((op,scan)))
             else:
                 mask=ax&127

@@ -11,6 +11,50 @@ from .step_state import fingerprint, read_hashes, split_frame
 
 
 class Controls(unittest.TestCase):
+    def test_recipe_key_names_and_held_modifiers(self):
+        """Real SDL lookup/scans with recipe aliases and physical held state."""
+        with tempfile.TemporaryDirectory() as directory:
+            out=Path(directory);source=out/'keys.c';exe=out/'keys.exe'
+            sdk=ROOT/'build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32'
+            source.write_text(r'''
+#include <SDL3/SDL.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <signal.h>
+#include <stdlib.h>
+uint32_t portable_test_clock_read(char k,void *p,uint32_t v){return v;}
+void portable_test_step_boundary(unsigned s,unsigned p){}
+void portable_test_diagnostics(FILE *f){}
+void __real_DoAntSim(void){}
+int32_t __real_MacTickCount(void){return 0;}
+int16_t StillDown(void){return 0;}
+int16_t edit_scroll_and_redraw(int16_t x,int16_t y){return 0;}
+static void rejected(int s){_Exit(23);}
+int main(int argc,char **argv){
+  signal(SIGABRT,rejected);
+  if(argc>1){SDL_GetKeyFromName(argv[1]);return 99;}
+  const char *names[]={"lctrl~64","e~64","e~64","lctrl~0","lshift~1","4~1","lshift~0","esc","enter"};
+  const SDL_Keycode keys[]={SDLK_LCTRL,SDLK_E,SDLK_E,SDLK_LCTRL,SDLK_LSHIFT,SDLK_4,SDLK_LSHIFT,SDLK_ESCAPE,SDLK_RETURN};
+  const SDL_Keymod mods[]={SDL_KMOD_LCTRL,SDL_KMOD_LCTRL,SDL_KMOD_LCTRL,0,SDL_KMOD_LSHIFT,SDL_KMOD_LSHIFT,0,0,0};
+  for(unsigned i=0;i<sizeof(keys)/sizeof(*keys);++i){
+    SDL_Keymod mod=0;SDL_Keycode key=SDL_GetKeyFromName(names[i]);
+    SDL_Scancode scan=SDL_GetScancodeFromKey(key,&mod);
+    if(key!=keys[i] || scan==SDL_SCANCODE_UNKNOWN || mod!=mods[i])return 10+i;
+  }
+  return 0;
+}
+''')
+            compiled=subprocess.run(['C:/msys64/mingw64/bin/gcc.exe','-std=c11','-DSIMANT_TEST_KEY_ALIASES',
+                '-I'+str(sdk/'include'),str(source),str(Path(__file__).with_name('native_observer.c')),
+                '-Wl,--wrap=SDL_GetKeyFromName','-Wl,--wrap=SDL_GetScancodeFromKey',
+                '-L'+str(sdk/'lib'),'-lSDL3','-o',str(exe)],capture_output=True,text=True,timeout=30)
+            self.assertEqual(compiled.returncode,0,compiled.stdout+compiled.stderr)
+            import shutil
+            shutil.copyfile(sdk/'bin/SDL3.dll',out/'SDL3.dll')
+            self.assertEqual(subprocess.run([str(exe)],capture_output=True,timeout=10).returncode,0)
+            for bad in ('e~2','e~','e~64extra','e~65536'):
+                self.assertEqual(subprocess.run([str(exe),bad],capture_output=True,timeout=10).returncode,23)
+
     def test_schema_and_fingerprint(self):
         self.assertEqual(len(acceptance.save_schema()),307)
         self.assertEqual(sum(r[2] for r in acceptance.save_schema()),48386)
@@ -84,16 +128,32 @@ int main(int argc,char **argv){
                     self.assertEqual(frame.read_bytes(),b'\x02\x04\x08')
 
     def test_stored_step_scenarios(self):
-        """The driver runs every stored scenario (or reports it absent) and never launches a
-        DOS recorder. Findings (exit 1 with one line per scenario) are reported, not failed:
-        they remain in each lane result. A replay failure or crash fails."""
-        command=[os.sys.executable,str(Path(__file__).with_name('step_check.py'))]
-        run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=180)
+        """The driver runs every stored scenario against build/current/portable (or reports
+        it absent) and never launches a DOS recorder. Each scenario must give exactly the
+        outcome pinned in known_findings.json (unlisted ones must be equal in both lanes):
+        an earlier stop is a regression, a later one a fix that must update the file."""
+        out=ROOT/'build/current/tests/steps'
+        command=[os.sys.executable,str(Path(__file__).with_name('step_check.py')),'--out',str(out)]
+        run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=300)
         print(run.stdout,end='')
         self.assertIn(run.returncode,(0,1),run.stderr+run.stdout)
         self.assertNotIn('Traceback',run.stderr)
-        self.assertNotIn('INCOMPLETE',run.stdout)
         self.assertTrue(run.stdout.strip(),run.stderr)
+        known=json.loads(Path(__file__).with_name('known_findings.json').read_text())['scenarios']
+        for line in run.stdout.splitlines():
+            scenario=line.split(':',1)[0]
+            if 'no reference' in line:continue
+            row=json.loads((out/scenario/'result.json').read_text())
+            actual={'verdict':row['verdict'],'lanes':{}}
+            for target,lane in row['lanes'].items():
+                entry={'status':lane['status'],'steps_compared':lane['steps_compared']}
+                if lane['status']=='STATE_DIFFERENCE':
+                    entry['first']=sorted({d['name'] for d in lane.get('game_differences',[])})
+                actual['lanes'][target]=entry
+            if scenario in known:
+                self.assertEqual(actual,known[scenario],scenario)
+            else:
+                self.assertEqual(row['verdict'],'ORIGINAL_EQUAL_ALL',line)
 
 
 if __name__=='__main__':unittest.main()

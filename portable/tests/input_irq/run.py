@@ -53,10 +53,14 @@ def main():
                    and hashlib.sha256(raw).hexdigest() == expected['csv_sha256']
                    and hashlib.sha256((ROOT/expected['source']).read_bytes()).hexdigest() == expected['source_sha256'])
     (out/'matrix.csv').write_bytes(raw)
-    receipt = {'passed':run.returncode==0 and matrix_pass, 'command':command, 'exit_code':run.returncode,
+    from normal_words import check
+    normal_words = check()
+    (out/'normal-words.json').write_text(json.dumps(normal_words,indent=2)+'\n')
+    receipt = {'passed':run.returncode==0 and matrix_pass and normal_words['passed'], 'command':command, 'exit_code':run.returncode,
                'output':run.stdout+run.stderr,
                'canonical_instruction_matrix':{'passed':matrix_pass,'rows':expected['rows'],
                    'sha256':hashlib.sha256(raw).hexdigest(),'expected_sha256':expected['csv_sha256']},
+               'normal_words': normal_words,
                'source_pins':{str(s):hashlib.sha256(s.read_bytes()).hexdigest() for s in sources},
                'scope':'Actual native IRQ projection, all five register words and ring headers; controlled hardware and interrupted register words. SDL/cycle interleavings are separate observations.'}
     (out/'report.json').write_text(json.dumps(receipt,indent=2)+'\n')

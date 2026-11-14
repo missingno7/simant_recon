@@ -13,12 +13,20 @@ except ImportError:
     from step_state import schema, read_hashes
 
 
-def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None):
+def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None, scratch_root=None):
     scenario = json.loads(scenario_path.read_text())
     exe = ROOT/'assets/SIMANT.EXE' if target=='original' else ROOT/json.loads(report.read_text())['link']['candidate_executable']['path']
     directory = out or ROOT/'build/reference'/scenario['id']/(sha(exe)+'-service-samples-v4')
     script = ROOT/scenario['script']
+    observer_build=json.loads(observer.read_text())
+    observer_source=Path(__file__).with_name('compact_observer.inc').resolve()
+    if observer_build.get('inputs',{}).get(str(observer_source))!=sha(observer_source):
+        raise ValueError('Compact observer source changed; rebuild the observer before recording')
     identity = dict(executable_sha256=sha(exe), scenario_sha256=sha(scenario_path), script_sha256=sha(script))
+    if scenario.get('saved_game'):
+        identity['saved_game_sha256']=sha(ROOT/scenario['saved_game'])
+        if identity['saved_game_sha256']!=scenario['saved_game_sha256']:
+            raise ValueError('Scenario saved game identity differs')
     if (directory/'manifest.json').is_file():
         manifest=json.loads((directory/'manifest.json').read_text())
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
@@ -33,7 +41,8 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     directory.mkdir(parents=True)
     state=schema(build, report)
     state_path=directory/'schema.json';state_path.write_text(json.dumps(state,indent=2)+'\n')
-    scratch=ROOT/'build/workers/admission'
+    scratch=scratch_root or ROOT/'build/scratch/steps'
+    scratch.mkdir(parents=True,exist_ok=True)
     if binding_dump is None:
         bootstrap=scratch/(scenario['id']+'-'+target+'-binding-'+str(time.time_ns()))
         bootstrap_script=bootstrap.with_suffix('.scr')
@@ -62,7 +71,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     manifest=dict(schema='simant-step-reference-v1',target=target,**identity,steps=len(rows),requested_steps=count,
                   schema_identity=state['identity'],speed=scenario.get('speed','normal (1)'),cycles=cycles or scenario.get('cycles',10000),
                   recording_seconds=elapsed,seconds_per_step=elapsed/max(1,len(rows)),command=cmd,
-                  observer_sha256=sha(observer),observer_build=json.loads(observer.read_text()),
+                  observer_sha256=sha(observer),observer_build=observer_build,
                   source_identity=json.loads(report.read_text()).get('input_pins') if target!='original' else None,
                   complete=run.returncode==0 and len(rows)==count,
                   boundary_manifest_sha256=sha(capture/'boundary-manifest.json'),
@@ -78,13 +87,14 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('scenario',type=Path,nargs='*')
     ap.add_argument('--target',choices=('original','canonical','all'),default='all')
-    ap.add_argument('--build',type=Path,default=ROOT/'build/workers/admission/native-final')
+    ap.add_argument('--build',type=Path,default=ROOT/'build/current/portable')
     ap.add_argument('--observer',type=Path,required=True)
     ap.add_argument('--dos-report',type=Path,default=ROOT/'build/current/dos/build-report.json')
     ap.add_argument('--out',type=Path,help='Fresh scratch/reference path for one scenario/target (repeat control)')
     ap.add_argument('--binding-dump',type=Path)
     ap.add_argument('--steps',type=int)
     ap.add_argument('--cycles',type=int,help='Explicit recording-performance control; stored in the receipt')
+    ap.add_argument('--scratch-root',type=Path,help='Worker directory for disposable binding captures')
     a=ap.parse_args()
     scenarios=a.scenario or sorted((ROOT/'dos/scenarios').glob('*.json'))
     targets=('original','canonical') if a.target=='all' else (a.target,)
@@ -92,6 +102,7 @@ def main():
     for scenario_path in scenarios:
         for target in targets:
             record(scenario_path.resolve(),target,a.build.resolve(),a.observer.resolve(),a.dos_report.resolve(),
-                   a.out.resolve() if a.out else None,a.binding_dump.resolve() if a.binding_dump else None,a.steps,a.cycles)
+                   a.out.resolve() if a.out else None,a.binding_dump.resolve() if a.binding_dump else None,a.steps,a.cycles,
+                   a.scratch_root.resolve() if a.scratch_root else None)
 
 if __name__=='__main__':main()

@@ -167,7 +167,7 @@ def pinned_resource(name, oracle):
 
 def saved_game_input(path):
     """Stage explicit runtime user data, never an executable/storage provider."""
-    path = diagnostic.experimental_path(path)
+    path = observation_path(path)
     if not re.fullmatch(r'[A-Za-z0-9_]{1,8}\.ANT', path.name, re.I):
         raise ValueError('saved game must have a DOS 8.3 .ANT filename')
     raw, pin = build.read_pin(path)
@@ -215,6 +215,8 @@ def main(argv=None):
     parser.add_argument('--key-delay', type=float, default=5, help='seconds before scheduled keys begin (0..30)')
     parser.add_argument('--key-pace', type=float, default=2, help='seconds between scheduled keys (0..10)')
     parser.add_argument('--capture-video', action='store_true', help='record guest video through DOSBox-X DX-CAPTURE')
+    parser.add_argument('--capture-directory', type=Path,
+                        help='explicit fresh capture directory outside the guest drive (keeps file-dialog listings unchanged)')
     parser.add_argument('--capture-sound', action='store_true',
                         help='record OPL register writes (DROv2) and mixed audio (WAV) through DX-CAPTURE')
     parser.add_argument('--cycles', type=int, help='fixed emulated CPU cycles per ms (default: pinned runner value)')
@@ -237,6 +239,9 @@ def main(argv=None):
     except (ValueError, OSError) as error:
         parser.error(str(error))
     out = observation_path(args.out)
+    captures = observation_path(args.capture_directory) if args.capture_directory else out / 'capture'
+    if args.capture_directory and (not (args.capture_video or args.capture_sound) or captures.is_relative_to(out)):
+        parser.error('--capture-directory requires capture and must be outside the guest drive')
     build.prepare_output(out, ROOT / 'build/current/dos-runtime')
     report = {'schema': 'simant-dos-execution-v1',
         'target': 'ORIGINAL_ORACLE' if args.original else 'DIAGNOSTIC_DOS',
@@ -309,7 +314,7 @@ def main(argv=None):
         if args.capture_video or args.capture_sound:
             launch = ('DX-CAPTURE ' + ('/V ' if args.capture_video else '/-V ') +
                       ('/A /O ' if args.capture_sound else '/-A ') + '/-M ' + launch)
-            (out / 'capture').mkdir()
+            captures.mkdir(parents=True)
         batch += ['echo STARTED>STARTED.TXT', launch + ' > GAME.LOG']
         # DOSBox-X's COMMAND.COM does not expand %ERRORLEVEL%; IF ERRORLEVEL
         # is the DOS command contract used by the historical tools.
@@ -329,7 +334,7 @@ def main(argv=None):
             if section == 'dosbox' and args.input_script:
                 conf += ['acceptance script=' + str(out / 'INPUT.SCR'), 'acceptance log=' + str(out / 'INPUT.LOG')]
             if section == 'dosbox' and (args.capture_video or args.capture_sound):
-                conf += ['captures=' + str(out / 'capture'), 'show recorded filename=false']
+                conf += ['captures=' + str(captures), 'show recorded filename=false']
         if args.trace_runtime:
             conf += ['[log]', 'logfile=' + str(out / 'dosbox-runtime.log'),
                      'vga=debug', 'int10=debug', 'files=debug', 'exec=debug', 'fileio=true']
@@ -365,9 +370,9 @@ def main(argv=None):
                 input_log = out / 'INPUT.LOG'
                 report['keyboard_log'] = input_log.read_text(encoding='latin1') if input_log.is_file() else None
             if args.capture_video:
-                report['video_captures'] = [build.read_pin(p)[1] for p in sorted((out / 'capture').glob('*.avi'))]
+                report['video_captures'] = [build.read_pin(p)[1] for p in sorted(captures.glob('*.avi'))]
             if args.capture_sound:
-                report['sound_captures'] = [build.read_pin(p)[1] for p in sorted((out / 'capture').glob('*'))
+                report['sound_captures'] = [build.read_pin(p)[1] for p in sorted(captures.glob('*'))
                                             if p.suffix.lower() in ('.dro', '.wav')]
                 report['video_scope'] = 'Guest video only; no audio recording. A time-limited emulator kill may leave an unfinalized AVI. Inspect decoded screen states; elapsed time is not gameplay equivalence.'
             trace = out / 'dosbox-runtime.log'

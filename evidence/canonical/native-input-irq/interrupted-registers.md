@@ -85,23 +85,27 @@ are not event consumers.
 
 ## What is established about normal play
 
-The values are **not globally unread**: OpenMiniMapWin and SpecialXfer are
-normal game paths, and their original instructions read them without a code
-filter. Their conditional effects above are established by original code, not
-inferred from an Event field name. This prevents treating the discrepancy as a
-proven irrelevant representation or removing it from state comparison.
+The unfiltered reads are real, but zero is not a behavioral counterexample in
+all coordinate domains. The original instructions and shipped HCEGANT resources
+now prove that both readers reject every conventional-memory DGROUP word
+(including cleared DL) and native zero in 640-wide EGA/VGA, across all reachable
+window positions and all horizontal words. OpenMiniMapWin continues; SpecialXfer
+plays reject and shows prompt 10. The adapter retains zero as a representation
+within that domain. Raw words still differ and are compared with register replay.
 
-It is **undecided** whether ordinary native zero residue versus the DOS
-wrapper's actual segment residue changes visible play in these loops across
-all shipped modes/window placements. In the captured runs scan-entry DX is
-far above screen height when hooks are enabled; an arbitrary low foreground
-DX counterexample would be invalid because the wrapper overwrites it. The
-map rectangle guard can reject both representations; the yard arithmetic can
-reject both as well. We have not established all reachable rectangle/origin
-bounds and 16-bit intermediate values for these modal states, nor captured a
-normal-play counterexample. An unguarded reader proves dependence on its
-arguments, not that a particular hardware trajectory reaches a different
-branch. This limitation remains OPEN. No absence-of-consumers claim is made.
+The full range, geometry, word arithmetic, branch table and executable proof
+are in [normal-words.md](normal-words.md) and `normal-words-proof.json`.
+`portable/tests/input_irq/normal_words.py` exercises the original instructions
+and finite interval proof; `input_irq/run.py` runs it alongside the actual native
+adapter controls and 2304-step scan matrix. Valid pointer controls reach the
+other branches. No production pointer callback or event consumer changes.
+
+The all-display-resource question remains OPEN: the 320-wide doubling has a
+hardware-representable high-segment alias that can produce a valid cell for
+controlled coordinates. Local low-resolution resource files are absent, and
+native rejects those profiles, so their reachable origins remain undecided.
+A controlled arithmetic witness is not a normal-play capture. No global
+unused-field claim or universal all-mode rejection claim is made.
 
 ## Acceptance replay rule and result
 
@@ -130,4 +134,4 @@ and therefore no next layer to attribute. Eight-entry prefixes are equal;
 clock-disabled controls still diverge at entry 2. `--disable irq-context`
 restores the four Event.v stops at 39/36 and 659/660 (platform representation);
 long-run remains equal. This does not establish DOS/native equivalence outside
-the recorded scenarios or close the normal-play hardware-context limitation.
+the recorded scenarios or close the remaining all-display-resource hardware-context limitation.
