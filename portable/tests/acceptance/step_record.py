@@ -21,7 +21,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     contract='ideal-v1' if ideal else 'service-samples-v10'
     variant='sound-off' if sound_off else 'sound-on'
     if sound_off and not ideal:raise ValueError('sound-off comparison variant requires ideal-v1')
-    reference_root=ROOT/'build/reference'/('sound-off' if sound_off else '')
+    reference_root=ROOT/'build/reference'/('sound-off-identity' if sound_off else '')
     directory = out or reference_root/scenario['id']/(sha(exe)+'-'+contract+('-sound-off' if sound_off else ''))
     script = ROOT/scenario['script']
     if ideal:script=ROOT/'dos/scenarios/ideal-v1'/script.name
@@ -58,7 +58,10 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     state=schema(build, report)
     if sound_off:
         from portable.tests.acceptance.sound_off import context_receipt
+        from portable.tests.acceptance.animation_identity import extend_schema,identity_receipt
+        state=extend_schema(state)
         state['event_context_rule']=context_receipt(state)
+        state['animation_identity_rule']=identity_receipt(state)
     state_path=directory/'schema.json';state_path.write_text(json.dumps(state,indent=2)+'\n')
     scratch=scratch_root or ROOT/'build/scratch/steps'
     scratch.mkdir(parents=True,exist_ok=True)
@@ -119,7 +122,10 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         manifest['clock_admission']='direct-bda-v2'
         manifest['sound_configuration']=execution['sound_configuration']
         manifest['event_context_rule']=state['event_context_rule']
+        manifest['animation_identity_rule']=state['animation_identity_rule']
         manifest['files']['capture/observer.txt.hash.keyboard-context-v1']=sha(capture/'observer.txt.hash.keyboard-context-v1')
+        for name in ('observer.txt.hash.ideal-state-v2','observer.txt.anim-ids'):
+            manifest['files']['capture/'+name]=sha(capture/name)
     (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(f'{scenario["id"]} {target}: {len(rows)}/{count} steps, {elapsed:.3f}s ({elapsed/max(1,len(rows)):.4f}s/step)',flush=True)
     if not manifest['complete']: raise RuntimeError('Recording ended before requested simulation entry; see '+str(directory/'record.log'))

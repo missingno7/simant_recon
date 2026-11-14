@@ -225,6 +225,8 @@ def main():
                 if args.sound_off:
                     from sound_off import context_views
                     for view in context_views(state).values():config.write(f'KEYBOARD_CONTEXT {view["index"]} {view["records"]}\n')
+                    from portable.tests.acceptance.animation_identity import identity_views
+                    for view in identity_views(state).values():config.write(f'IDENTITY_PATTERN {view["index"]} {view["slots"]}\n')
         command += ['--capture-observer',str(args.compact_observer.resolve()),'--observer-config',str(compact_spec)]
         if ideal:
             rule=out.with_suffix('.clock')

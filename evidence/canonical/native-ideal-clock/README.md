@@ -1,10 +1,12 @@
 # Shared ideal-machine integration,2026-11-14
 
-Status: **partial; tapes retained**. The latest owner-approved
-[sound-off run](sound-off.md) has12/18 strict state lanes and18/18 frame lanes
-equal; the remaining rain IDs depend on uninitialized allocation payload.
-It also fixes DOS admission of direct keyboard-modifier byte reads. The
-measurements below are the retained earlier sound-on experiment.
+Status: **sound-off state/frame parity; tapes retained**. The latest owner-approved
+[identity-pattern run](identity-results.json) has18/18 state and18/18 frame lanes
+equal, with eight additional scalar holders and raw ID diagnostics. The
+[proof](animation-identity.md) and [retirement proposal](tape-retirement-proposal.md)
+record the boundary and next review. The [earlier raw sound-off run](sound-off.md)
+also fixed DOS admission of direct keyboard-modifier byte reads. Measurements
+below are the retained earlier sound-on experiment; audio remains separate.
 The production timer now follows source
 fast/slow programming at exact device instants, including chain phase and the
 last partial PCM frame. ISA bus/status/reset uses the shared zero-latency clock.

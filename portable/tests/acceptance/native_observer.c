@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "event_context_rule.h"
+#include "animation_identity.h"
 
 #ifdef SIMANT_TEST_KEY_ALIASES
 /* DOS recipe tokens have no spaces. SDL's modifier/Escape names do.
@@ -77,7 +78,7 @@ typedef struct Slice {
   unsigned bytes;
 } Slice;
 typedef struct View {
-  unsigned verdict, bytes, sentinel, count, event_records;
+  unsigned verdict, bytes, sentinel, count, event_records, identity_slots;
   Slice *slices;
   uint8_t *data;
 } View;
@@ -85,6 +86,7 @@ static View *views;
 static unsigned count, step, limit, active, first_difference;
 static FILE *expected, *actual, *result;
 static FILE *context_actual;
+static FILE *identity_actual,*identity_raw;
 static char dump_path[2048];
 static unsigned state_clock;
 static unsigned state_entries(void) { return first_difference ? first_difference : step; }
@@ -201,16 +203,27 @@ static void load(void) {
     if (total != v->bytes)
       abort();
   }
-  unsigned context_count;
-  if(fscanf(config," KEYBOARD_CONTEXT %u",&context_count)==1) {
+  unsigned context_count;char rule[64];
+  while(fscanf(config," %63s %u",rule,&context_count)==2) {
     if(!getenv("SIMANT_TEST_IDEAL") || !context_count || context_count>count) abort();
     for(unsigned n=0;n<context_count;++n) {
       unsigned index,records;
-      if(fscanf(config,"%u %u",&index,&records)!=2 || index>=count || !records || views[index].bytes!=16*records) abort();
-      views[index].event_records=records;
+      if(fscanf(config,"%u %u",&index,&records)!=2 || index>=count || !records) abort();
+      if(!strcmp(rule,"KEYBOARD_CONTEXT")) {
+        if(views[index].bytes!=16*records) abort();views[index].event_records=records;
+      } else if(!strcmp(rule,"IDENTITY_PATTERN")) {
+        if(records>17 || views[index].bytes!=2*records) abort();views[index].identity_slots=records;
+      } else abort();
     }
-    char path[2200];snprintf(path,sizeof(path),"%s.keyboard-context-v1",actual_path);
-    context_actual=fopen(path,"wb");if(!context_actual) abort();
+    char path[2200];
+    if(!strcmp(rule,"KEYBOARD_CONTEXT")) {
+      snprintf(path,sizeof(path),"%s.keyboard-context-v1",actual_path);
+      context_actual=fopen(path,"wb");if(!context_actual) abort();
+    } else {
+      snprintf(path,sizeof(path),"%s.ideal-state-v2",actual_path);identity_actual=fopen(path,"wb");
+      snprintf(path,sizeof(path),"%s.anim-ids",actual_path);identity_raw=fopen(path,"w");
+      if(!identity_actual || !identity_raw) abort();
+    }
   }
   fclose(config);
   active = 1;
@@ -227,6 +240,8 @@ void portable_test_replay_error(const char *message) {
   fputs("}\n", result);
   fclose(actual);
   if(context_actual) fclose(context_actual);
+  if(identity_actual) fclose(identity_actual);
+  if(identity_raw) fclose(identity_raw);
   if (expected) fclose(expected);
   fclose(result);
   fflush(NULL);
@@ -276,6 +291,8 @@ static void finish(unsigned differs) {
   fclose(result);
   fclose(actual);
   if(context_actual) fclose(context_actual);
+  if(identity_actual) fclose(identity_actual);
+  if(identity_raw) fclose(identity_raw);
   if (expected) fclose(expected);
   if (!first_difference) dump_state();
   /* State stops at its first difference. With checkpoint capture enabled,
@@ -314,11 +331,22 @@ void __wrap_DoAntSim(void) {
       uint32_t observed=context_fingerprint(v);
       if(fwrite(&observed,sizeof(observed),1,context_actual)!=1) abort();
     }
+    if(identity_actual) {
+      uint32_t observed=v->identity_slots ? simant_anim_identity_hash(v->data,v->identity_slots) : context_fingerprint(v);
+      if(fwrite(&observed,sizeof(observed),1,identity_actual)!=1) abort();
+      if(v->identity_slots) {
+        fprintf(identity_raw,"%u %u",step,i);
+        for(unsigned j=0;j<v->identity_slots;++j) fprintf(identity_raw," %04X",simant_anim_word(v->data,j));
+        fputc('\n',identity_raw);
+      }
+    }
     if (v->verdict==1 && hash != reference)
       differs = 1;
   }
   fflush(actual);
   if(context_actual) fflush(context_actual);
+  if(identity_actual) fflush(identity_actual);
+  if(identity_raw) fflush(identity_raw);
   /* Same read-only bytes as the hash row, before any simulation/input work.
    * Keep exact checkpoint bytes for auditing separate diagnostic views too. */
   if (checkpoint && !first_difference) {

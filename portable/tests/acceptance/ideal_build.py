@@ -34,7 +34,7 @@ def apply_patch(source,patch):
 def build(out):
     out=out.resolve();out.mkdir(parents=True,exist_ok=False);(out/'include').mkdir();(out/'ideal').mkdir()
     patches=HERE/'ideal';pins=json.loads((patches/'source-pins.json').read_text())
-    own_inputs={str(p.resolve()):sha(p) for p in [Path(__file__),HERE/'compact_observer.inc',HERE/'event_context_rule.h',HERE/'build_observer.py',*patches.glob('*')] if p.is_file()}
+    own_inputs={str(p.resolve()):sha(p) for p in [Path(__file__),HERE/'compact_observer.inc',HERE/'event_context_rule.h',HERE/'animation_identity.h',HERE/'build_observer.py',*patches.glob('*')] if p.is_file()}
     inputs={}
     for path,expected in pins.items():
         source=SOURCE/path
@@ -45,6 +45,7 @@ def build(out):
     for name in ('ideal_clock.inc','native_clock_v1.h'):(out/'ideal'/name).write_bytes((patches/name).read_bytes())
     (out/'compact_observer.inc').write_bytes((HERE/'compact_observer.inc').read_bytes())
     (out/'event_context_rule.h').write_bytes((HERE/'event_context_rule.h').read_bytes())
+    (out/'animation_identity.h').write_bytes((HERE/'animation_identity.h').read_bytes())
     obj=SOURCE/'obj/dosbox-x/x64/Release SDL2';logs=obj/'dosbox-x.tlog'
     clines=(logs/'CL.command.1.tlog').read_text(encoding='utf-16').splitlines()
     # Compiler include dependency logs identify every consumer of the changed

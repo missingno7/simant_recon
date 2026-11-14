@@ -1943,5 +1943,214 @@
     "frames": "FRAME_EQUAL"
    }
   ]
+ },
+ "ideal_v1_sound_off_identity": {
+  "contract": "ideal-v1",
+  "variant": "sound-off",
+  "observer": "keyboard-context-v1 + anim-id-pattern-v1",
+  "status": "PARITY",
+  "totals": {
+   "lanes_completed": 18,
+   "lanes_requested": 18,
+   "state_equal_lanes": 18,
+   "frame_equal_lanes": 18,
+   "entries": 26128,
+   "equal_entries": 26128,
+   "frames": 152
+  },
+  "seconds": {
+   "observer_build": 189.92192140000407,
+   "native_build": 31.763912599999458,
+   "recording_wall": 247.0269479000126,
+   "recording_lane_total": 606.4787392000435,
+   "checking_lane_total": 1327.5901112000574,
+   "checking_wall": 483.46971289999783
+  },
+  "evidence": "evidence/canonical/native-ideal-clock/animation-identity.md",
+  "new_scalar_views": 8,
+  "identity_holders": 11,
+  "no_tapes_retired": true,
+  "lanes": [
+   {
+    "scenario": "ant-commands",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "ant-commands",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "experiment",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "experiment",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "full-game",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "full-game",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "interactive-play",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 19
+   },
+   {
+    "scenario": "interactive-play",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 19
+   },
+   {
+    "scenario": "load-from-save",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "load-from-save",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 1000,
+    "equal_entries": 1000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 5
+   },
+   {
+    "scenario": "long-run",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 3000,
+    "equal_entries": 3000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 13
+   },
+   {
+    "scenario": "long-run",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 3000,
+    "equal_entries": 3000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 13
+   },
+   {
+    "scenario": "new-game-save",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 64,
+    "equal_entries": 64,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 2
+   },
+   {
+    "scenario": "new-game-save",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 64,
+    "equal_entries": 64,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 2
+   },
+   {
+    "scenario": "quick-game",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 13
+   },
+   {
+    "scenario": "quick-game",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 13
+   },
+   {
+    "scenario": "random-17",
+    "target": "original",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 9
+   },
+   {
+    "scenario": "random-17",
+    "target": "canonical",
+    "state": "STATE_EQUAL",
+    "entries": 2000,
+    "equal_entries": 2000,
+    "first_difference": null,
+    "frames": "FRAME_EQUAL",
+    "frame_checkpoints": 9
+   }
+  ]
  }
 }

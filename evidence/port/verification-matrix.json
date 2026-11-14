@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "2df1664 plus the native ideal-machine clock (native-clock-v1) and audio content comparison",
+ "source": "7e6b32b plus animation-identity observer rule; tape-free sound-off parity",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -12,7 +12,8 @@
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
   "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt. Since contract v5 the DOS recorder holds each scripted input until the next recorded service boundary and raises it there, so native placement is exact; inputs arriving mid-raster (outcome depends on CPU speed) are outside the tested domain. Since v6, device-status answers that depend on hardware timing (sound driver: song/sample done) are recorded in the service order and replayed like clock reads. Since v7, the indexed 640x480 frame, attribute map and full 256-entry DAC are recorded at checkpoint entries (entry 1, every 256, the last) and compared exactly with native; the game's software cursor is part of both frames. Each lane has three verdicts: game state (stops at the first difference), checkpoint frames, and audio (MIDI/voice progress views, does not stop the state comparison). Since v8 the sound timer ISR completions are recorded in the service order and native executes its converted ISR exactly that many times at the same boundary; raw OPL/DSP/DMA OUT streams are compared per entry in the audio verdict.",
-  "Open findings are pinned per lane in portable/tests/acceptance/known_findings.json; the upper-layer test fails on any change in either direction."
+  "Open findings are pinned per lane in portable/tests/acceptance/known_findings.json; the upper-layer test fails on any change in either direction.",
+  "Tape-free check (ideal-v1): DOSBox-X and the port run the same ideal-machine clock rule, scenarios are scripted in game ticks, a constant per-executable profile replaces per-event tapes. With the shipped Sound Mode 0 on both sides all 18 lanes are equal in game state (26,128 entries) and at all 152 checkpoint frames (portable/tests/acceptance/ideal_check.py). Retirement of the tape machinery is proposed in evidence/canonical/native-ideal-clock/tape-retirement-proposal.md."
  ],
  "scenarios": {
   "new-game-save (64 entries)": "equal in game state for all 64 entries in both lanes (native = original DOS, native = canonical DOS).",
@@ -26,7 +27,8 @@
   "random-17 (2000)": "seeded random input; equal in game state for all 2000 entries in both lanes",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run",
   "frames (all scenarios)": "all 152 checkpoint frames, attribute maps and DAC exactly equal in every scenario and lane",
-  "audio (all scenarios)": "audio compared by content (notes, instruments, sample identity and bytes, small tick tolerance): 9 lanes equal, 9 differ; every analysed difference is interrupt placement on DOS (sample IRQ during a heap block move plays half-moved bytes, reaper/OPL placement), no port audio bug found"
+  "audio (all scenarios)": "audio compared by content (notes, instruments, sample identity and bytes, small tick tolerance): 9 lanes equal, 9 differ; every analysed difference is interrupt placement on DOS (sample IRQ during a heap block move plays half-moved bytes, reaper/OPL placement), no port audio bug found",
+  "tape-free sound-off (all scenarios)": "all 18 lanes equal in game state and checkpoint frames with no clock, service, ISR, device or register tapes; keyboard-event h/v and animation IDs compared by the documented observer rules (normal-words.md, animation-identity.md); native check about 8 min with three processes (to be profiled)"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
  "subsystems": [
@@ -199,6 +201,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test harness",
+   "summary": "animation-identity observer rule (11 yard ID holders compared by identity pattern; IDs are unique within their set and only compared by equality or with -1; hanim_MakeAnimSet leaves nextId as heap residue): tape-free sound-off check equal in all 18 lanes"
+  },
+  {
+   "commit": "7e6b32b",
    "layer": "platform + test harness",
    "summary": "native ideal-machine clock (each game clock read costs 1 ms of game time; paced against host time in play, unpaced with --deterministic): idle CPU 100% -> about 30% of a core, input wake 0.5 ms, deterministic replays identical; audio verdict by content"
   },

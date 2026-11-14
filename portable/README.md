@@ -19,16 +19,18 @@ python portable/tests/acceptance/step_check.py
 ```
 
 An additional [tape-free ideal-v1 check](tests/acceptance/ideal/README.md) records
-DOS and runs native on the shared program-read clock. Its current state
-differences keep `step_check.py` as the upper-layer regression; no tape machinery
+DOS and runs native on the shared program-read clock. Pending the owner's
+retirement review, `step_check.py` remains the upper-layer regression; no tape machinery
 has been retired. Run `portable/tests/acceptance/ideal_check.py --build BUILD
 --out FRESH_OUTPUT --jobs 3` against the stored `-ideal-v1` references.
 The owner-approved gameplay variant adds `--sound-off` on record and check:
 both executions read the shipped `SIMANT.CFG` no-sound selector, and the narrow
-keyboard-context observer rule preserves full mouse/object comparison. Audio is
-verified separately. Its current raw animation-ID differences and the proposed
-next boundary are described in
-[the sound-off findings](../evidence/canonical/native-ideal-clock/sound-off.md).
+keyboard-context rule preserves full mouse/object comparison. The audited yard
+ID identity-pattern view retains raw words as diagnostics and adds eight scalar
+holders. All18 sound-off state/frame lanes now pass. Audio is verified separately.
+See the [identity proof](../evidence/canonical/native-ideal-clock/animation-identity.md),
+[lane table](../evidence/canonical/native-ideal-clock/identity-results.json), and
+[retirement proposal](../evidence/canonical/native-ideal-clock/tape-retirement-proposal.md).
 No tape machinery is retired in this round.
 
 Default output is recreated after moving the previous result to ignored `to_delete/`.

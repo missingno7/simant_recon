@@ -16,6 +16,7 @@ from portable.tests.acceptance.frame_check import compare_frames
 from portable.tests.acceptance.audio_commands import compare_commands,read_commands
 from portable.tests.acceptance.audio_content import compare_content
 from portable.tests.acceptance.sound_off import select_config,context_receipt,context_views
+from portable.tests.acceptance.animation_identity import extend_schema,identity_views
 
 def native_script(source,destination):
     lines=['# clock: bios-ticks']
@@ -35,7 +36,9 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None):
     manifest=validate(reference,scenario);recipe=json.loads(scenario.read_text())
     sound_off=manifest.get('variant')=='sound-off'
     out=out.resolve();out.mkdir(parents=True,exist_ok=False)
-    state=bind_reference_policy(schema(build,executable=exe),json.loads((reference/'schema.json').read_text()))
+    state=schema(build,executable=exe)
+    if sound_off:state=extend_schema(state)
+    state=bind_reference_policy(state,json.loads((reference/'schema.json').read_text()))
     items=state['items'];count=len(items);stop=min(steps or manifest['steps'],manifest['steps'])
     profile=json.loads((reference/'machine-profile.json').read_text())
     syms=symbols_for(exe);anchor=syms.addresses['portable_test_clock_read']
@@ -52,6 +55,9 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None):
         with config.open('a') as target:
             target.write(f'KEYBOARD_CONTEXT {len(context)}\n')
             for view in context.values():target.write(f'{view["index"]} {view["records"]}\n')
+            identities=identity_views(state)
+            target.write(f'IDENTITY_PATTERN {len(identities)}\n')
+            for view in identities.values():target.write(f'{view["index"]} {view["slots"]}\n')
     checkpoints=[s for s in manifest['frames']['entries'] if s<=stop]
     palette=syms.expression('app.palette')[0]
     frames=out/'frames.config';frames.write_text(str(out)+'\n'+f'{palette-anchor} {len(checkpoints)}\n'+' '.join(map(str,checkpoints))+'\n')
@@ -88,8 +94,8 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None):
     actual=read_hashes(out/'native.hash',count) if (out/'native.hash').exists() else []
     raw_expected,raw_actual=expected,actual
     if sound_off:
-        expected=read_hashes(reference/'capture/observer.txt.hash.keyboard-context-v1',count)
-        actual=read_hashes(out/'native.hash.keyboard-context-v1',count)
+        expected=read_hashes(reference/'capture/observer.txt.hash.ideal-state-v2',count)
+        actual=read_hashes(out/'native.hash.ideal-state-v2',count)
     first=None;separate={};equal=0;rows=[]
     for entry,(left,right) in enumerate(zip(expected[:stop],actual),1):
         changed=[]
@@ -110,14 +116,17 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None):
     if sound_off:
         result['variant']='sound-off'
         result['event_context_rule']=manifest['event_context_rule']
+        result['animation_identity_rule']=manifest['animation_identity_rule']
         result['sound_configuration']=manifest['sound_configuration']
         result['raw_event_differences']={}
         for entry,(left,right) in enumerate(zip(raw_expected[:stop],raw_actual),1):
             for item,a,b,qualified_a,qualified_b in zip(items,left,right,expected[entry-1],actual[entry-1]):
-                if item['name'] not in context:
+                if item['name'] not in context and item['name'] not in identities:
                     if a!=qualified_a or b!=qualified_b:raise ValueError('Observer rule changed an unlisted view')
-                elif a!=b:
+                elif item['name'] in context and a!=b:
                     result['raw_event_differences'].setdefault(item['name'],dict(entry=entry,raw_reference_hash=a,raw_native_hash=b,qualified_equal=qualified_a==qualified_b))
+        from portable.tests.acceptance.animation_identity import compare_raw
+        result['raw_animation_ids']=compare_raw(reference/'capture/observer.txt.anim-ids',out/'native.hash.anim-ids',identities,stop)
         first_dos=split_frame(reference/'capture/observer.txt.frame.1',items)
         first_native=split_frame(out/'native.frame.1',items)
         globals_={}
@@ -153,7 +162,7 @@ def main():
     ap.add_argument('--steps',type=int);ap.add_argument('--jobs',type=int,default=1,choices=range(1,5))
     ap.add_argument('--sound-off',action='store_true',help='Select separately recorded Sound Mode: 0 references and keyboard-context-v1')
     a=ap.parse_args();a.build=a.build.resolve();a.out=a.out.resolve();a.out.mkdir(parents=True,exist_ok=False)
-    if a.sound_off and a.reference_root.resolve()==(ROOT/'build/reference').resolve():a.reference_root=a.reference_root/'sound-off'
+    if a.sound_off and a.reference_root.resolve()==(ROOT/'build/reference').resolve():a.reference_root=a.reference_root/'sound-off-identity'
     exe=test_build(a.build,a.out/'test-build');jobs=[]
     for path in a.scenario or sorted((ROOT/'dos/scenarios').glob('*.json')):
         refs={}

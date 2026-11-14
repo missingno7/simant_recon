@@ -1,5 +1,6 @@
 #include <unordered_map>
 #include "event_context_rule.h"
+#include "animation_identity.h"
 /* DOSBox-X v6 observation and synthetic-input timing extension.
  * State capture is read-only. Only script scheduling and foreground CPU budget
  * change: the real devices/PIC/interrupt code deliver while foreground waits. */
@@ -10,7 +11,7 @@ static void IdealStats();
 static void IdealCheckpoint();
 #endif
 struct CompactPoint { char kind; uint32_t address, after; };
-struct CompactView { uint32_t address, bytes, sentinel, event_records; };
+struct CompactView { uint32_t address, bytes, sentinel, event_records, identity_slots; };
 static std::vector<CompactView> compact_views;
 static uint32_t compact_limit=0,compact_interval=256;
 static std::vector<uint32_t> compact_frame_times;
@@ -59,6 +60,7 @@ static void CompactScreen(const std::string &path) {
 static std::string compact_output;
 static FILE *compact_fingerprints=NULL, *compact_order=NULL;
 static FILE *compact_context_fingerprints=NULL;
+static FILE *compact_identity_fingerprints=NULL,*compact_identity_raw=NULL;
 static FILE *compact_audio_timer=NULL, *compact_audio_commands=NULL;
 static uint64_t CompactOrdinal();
 static uint64_t compact_step;
@@ -280,6 +282,8 @@ static void CompactClose() {
     fclose(compact_file); compact_file = NULL;
     if (compact_fingerprints) { fclose(compact_fingerprints); compact_fingerprints=NULL; }
     if (compact_context_fingerprints) { fclose(compact_context_fingerprints); compact_context_fingerprints=NULL; }
+    if (compact_identity_fingerprints) { fclose(compact_identity_fingerprints); compact_identity_fingerprints=NULL; }
+    if (compact_identity_raw) { fclose(compact_identity_raw); compact_identity_raw=NULL; }
     if (compact_order) { fclose(compact_order); compact_order=NULL; }
     if (compact_sound) { fclose(compact_sound); compact_sound=NULL; }
     if (compact_sound_calls) {
@@ -314,6 +318,18 @@ static void CompactInit() {
     DOSBOX_AcceptanceIOWatchArmed=true;
     while (fgets(line,sizeof(line),spec)) {
         CompactView v={};
+        if(!strncmp(line,"IDENTITY_PATTERN ",17)) {
+            unsigned index,slots;
+            if(sscanf(line,"IDENTITY_PATTERN %u %u",&index,&slots)!=2 || index>=compact_views.size() ||
+                !slots || slots>17 || compact_views[index].bytes!=slots*2) abort();
+            compact_views[index].identity_slots=slots;
+            if(!compact_identity_fingerprints) {
+                compact_identity_fingerprints=fopen((compact_output+".hash.ideal-state-v2").c_str(),"wb");
+                compact_identity_raw=fopen((compact_output+".anim-ids").c_str(),"w");
+                if(!compact_identity_fingerprints || !compact_identity_raw) abort();
+            }
+            continue;
+        }
         if(!strncmp(line,"KEYBOARD_CONTEXT ",17)) {
             unsigned index,records;
             if(sscanf(line,"KEYBOARD_CONTEXT %u %u",&index,&records)!=2 || index>=compact_views.size() ||
@@ -536,7 +552,7 @@ static void CompactInstruction(uint32_t pc) {
                 for (size_t j=0;j<compact_views.size();++j) {
                     const CompactView &v=compact_views[j];uint32_t hash=2166136261u,context_hash=2166136261u;
                     std::vector<uint8_t> event_data;
-                    if(v.event_records) {
+                    if(v.event_records || v.identity_slots) {
                         event_data.resize(v.bytes);
                         for(uint32_t k=0;k<v.bytes;++k) event_data[k]=mem_readb(v.address+k);
                     }
@@ -552,6 +568,16 @@ static void CompactInstruction(uint32_t pc) {
                     }
                     fwrite(&hash,4,1,compact_fingerprints);
                     if(compact_context_fingerprints) fwrite(&context_hash,4,1,compact_context_fingerprints);
+                    if(compact_identity_fingerprints) {
+                        uint32_t observed=context_hash;
+                        if(v.identity_slots) {
+                            observed=simant_anim_identity_hash(&event_data[0],v.identity_slots);
+                            fprintf(compact_identity_raw,"%llu %u",(unsigned long long)compact_step,(unsigned)j);
+                            for(unsigned k=0;k<v.identity_slots;++k) fprintf(compact_identity_raw," %04X",simant_anim_word(&event_data[0],k));
+                            fputc('\n',compact_identity_raw);
+                        }
+                        fwrite(&observed,4,1,compact_identity_fingerprints);
+                    }
                 }
                 if (dump) fclose(dump);
                 if (compact_step==compact_limit) {

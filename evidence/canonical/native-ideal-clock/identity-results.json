@@ -1,0 +1,2457 @@
+{
+  "contract": "ideal-v1",
+  "variant": "sound-off",
+  "observer": "keyboard-context-v1 + anim-id-pattern-v1",
+  "status": "PARITY",
+  "totals": {
+    "lanes_completed": 18,
+    "lanes_requested": 18,
+    "state_equal_lanes": 18,
+    "frame_equal_lanes": 18,
+    "entries": 26128,
+    "equal_entries": 26128,
+    "frames": 152
+  },
+  "reference_root": "build/reference/sound-off-identity",
+  "native_build": "build/workers/ideal-check/identity/native",
+  "previous_raw_result": "evidence/canonical/native-ideal-clock/sound-off-results.json",
+  "evidence": "evidence/canonical/native-ideal-clock/animation-identity.md",
+  "new_scalar_views": 8,
+  "identity_holders": 11,
+  "views_per_entry": 1032,
+  "observer_build": "1858f95515b4dc657d64f435a134e5d368513a70695a8f5aa254ad51d307463e",
+  "seconds": {
+    "observer_build": 189.92192140000407,
+    "native_build": 31.763912599999458,
+    "recording_wall": 247.0269479000126,
+    "recording_lane_total": 606.4787392000435,
+    "checking_lane_total": 1327.5901112000574,
+    "checking_wall": 483.46971289999783
+  },
+  "no_tapes_retired": true,
+  "audio": "All lanes select shipped no-sound; sound-on content equivalence remains separate and open.",
+  "lanes": [
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 29.10393219999969,
+      "seconds": 58.24430050002411,
+      "raw_identity_control": {
+        "equal_entries": 156,
+        "first_difference": {
+          "entry": 157,
+          "views": [
+            "S13:384C::g_2A30",
+            "S13:384C::g_2A32"
+          ]
+        }
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 156,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 280,
+          "raw_different_entries": 124,
+          "first_difference": {
+            "entry": 877,
+            "dos": [
+              1169,
+              1168,
+              1167,
+              1166,
+              1165,
+              1164,
+              1163,
+              1162,
+              1161,
+              1160,
+              1159,
+              1158,
+              1157,
+              1156,
+              -1
+            ],
+            "native": [
+              1565,
+              1564,
+              1563,
+              1562,
+              1561,
+              1560,
+              1559,
+              1558,
+              1557,
+              1556,
+              1555,
+              1554,
+              1553,
+              1552,
+              -1
+            ]
+          }
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 156,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 544,
+          "raw_different_entries": 544,
+          "first_difference": {
+            "entry": 356,
+            "dos": [
+              135
+            ],
+            "native": [
+              531
+            ]
+          }
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 123,
+          "raw_different_entries": 123,
+          "first_difference": {
+            "entry": 811,
+            "dos": [
+              988
+            ],
+            "native": [
+              1384
+            ]
+          }
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 844,
+          "raw_different_entries": 844,
+          "first_difference": {
+            "entry": 157,
+            "dos": [
+              0
+            ],
+            "native": [
+              162
+            ]
+          }
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 844,
+          "raw_different_entries": 844,
+          "first_difference": {
+            "entry": 157,
+            "dos": [
+              1
+            ],
+            "native": [
+              163
+            ]
+          }
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 125,
+          "raw_different_entries": 125,
+          "first_difference": {
+            "entry": 491,
+            "dos": [
+              356
+            ],
+            "native": [
+              752
+            ]
+          }
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/ant-commands/original/result.json"
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 29.122353000042494,
+      "seconds": 58.29007719998481,
+      "raw_identity_control": {
+        "equal_entries": 156,
+        "first_difference": {
+          "entry": 157,
+          "views": [
+            "S13:384C::g_2A30",
+            "S13:384C::g_2A32"
+          ]
+        }
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 156,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 280,
+          "raw_different_entries": 124,
+          "first_difference": {
+            "entry": 877,
+            "dos": [
+              2190,
+              2189,
+              2188,
+              2187,
+              2186,
+              2185,
+              2184,
+              2183,
+              2182,
+              2181,
+              2180,
+              2179,
+              2178,
+              2177,
+              -1
+            ],
+            "native": [
+              1743,
+              1742,
+              1741,
+              1740,
+              1739,
+              1738,
+              1737,
+              1736,
+              1735,
+              1734,
+              1733,
+              1732,
+              1731,
+              1730,
+              -1
+            ]
+          }
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 156,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 544,
+          "raw_different_entries": 544,
+          "first_difference": {
+            "entry": 356,
+            "dos": [
+              1156
+            ],
+            "native": [
+              709
+            ]
+          }
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 123,
+          "raw_different_entries": 123,
+          "first_difference": {
+            "entry": 811,
+            "dos": [
+              2009
+            ],
+            "native": [
+              1562
+            ]
+          }
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 844,
+          "raw_different_entries": 844,
+          "first_difference": {
+            "entry": 157,
+            "dos": [
+              3
+            ],
+            "native": [
+              0
+            ]
+          }
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 844,
+          "raw_different_entries": 844,
+          "first_difference": {
+            "entry": 157,
+            "dos": [
+              4
+            ],
+            "native": [
+              1
+            ]
+          }
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 125,
+          "raw_different_entries": 125,
+          "first_difference": {
+            "entry": 491,
+            "dos": [
+              1377
+            ],
+            "native": [
+              930
+            ]
+          }
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/ant-commands/canonical/result.json"
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 27.359399000008125,
+      "seconds": 54.33726389997173,
+      "raw_identity_control": {
+        "equal_entries": 1000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/experiment/original/result.json"
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 27.028410899976734,
+      "seconds": 53.339151600026526,
+      "raw_identity_control": {
+        "equal_entries": 1000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/experiment/canonical/result.json"
+    },
+    {
+      "scenario": "full-game",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 19.63259559997823,
+      "seconds": 52.31402380001964,
+      "raw_identity_control": {
+        "equal_entries": 305,
+        "first_difference": {
+          "entry": 306,
+          "views": [
+            "S13:384C::g_2A30",
+            "S13:384C::g_2A32"
+          ]
+        }
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 305,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 429,
+          "raw_different_entries": 124,
+          "first_difference": {
+            "entry": 877,
+            "dos": [
+              9133,
+              9132,
+              9131,
+              9130,
+              9129,
+              9128,
+              9127,
+              9126,
+              9125,
+              9124,
+              9123,
+              9122,
+              9121,
+              9120,
+              -1
+            ],
+            "native": [
+              1289,
+              1288,
+              1287,
+              1286,
+              1285,
+              1284,
+              1283,
+              1282,
+              1281,
+              1280,
+              1279,
+              1278,
+              1277,
+              1276,
+              -1
+            ]
+          }
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 305,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 79,
+          "raw_different_entries": 79,
+          "first_difference": {
+            "entry": 385,
+            "dos": [
+              8441
+            ],
+            "native": [
+              597
+            ]
+          }
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 237,
+          "raw_different_entries": 237,
+          "first_difference": {
+            "entry": 338,
+            "dos": [
+              8345
+            ],
+            "native": [
+              21
+            ]
+          }
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 695,
+          "raw_different_entries": 695,
+          "first_difference": {
+            "entry": 306,
+            "dos": [
+              8317
+            ],
+            "native": [
+              0
+            ]
+          }
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 695,
+          "raw_different_entries": 695,
+          "first_difference": {
+            "entry": 306,
+            "dos": [
+              8318
+            ],
+            "native": [
+              1
+            ]
+          }
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 31,
+          "raw_different_entries": 31,
+          "first_difference": {
+            "entry": 880,
+            "dos": [
+              9141
+            ],
+            "native": [
+              1297
+            ]
+          }
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 166,
+          "raw_different_entries": 166,
+          "first_difference": {
+            "entry": 833,
+            "dos": [
+              9032
+            ],
+            "native": [
+              1188
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/full-game/original/result.json"
+    },
+    {
+      "scenario": "full-game",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 19.96993250004016,
+      "seconds": 52.294894099992234,
+      "raw_identity_control": {
+        "equal_entries": 305,
+        "first_difference": {
+          "entry": 306,
+          "views": [
+            "S13:384C::g_2A30",
+            "S13:384C::g_2A32"
+          ]
+        }
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 305,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 429,
+          "raw_different_entries": 124,
+          "first_difference": {
+            "entry": 877,
+            "dos": [
+              715,
+              714,
+              713,
+              712,
+              711,
+              710,
+              709,
+              708,
+              707,
+              706,
+              705,
+              704,
+              703,
+              702,
+              -1
+            ],
+            "native": [
+              1289,
+              1288,
+              1287,
+              1286,
+              1285,
+              1284,
+              1283,
+              1282,
+              1281,
+              1280,
+              1279,
+              1278,
+              1277,
+              1276,
+              -1
+            ]
+          }
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 305,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 79,
+          "raw_different_entries": 79,
+          "first_difference": {
+            "entry": 385,
+            "dos": [
+              23
+            ],
+            "native": [
+              597
+            ]
+          }
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 237,
+          "raw_different_entries": 237,
+          "first_difference": {
+            "entry": 338,
+            "dos": [
+              46
+            ],
+            "native": [
+              577
+            ]
+          }
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 695,
+          "raw_different_entries": 695,
+          "first_difference": {
+            "entry": 306,
+            "dos": [
+              18
+            ],
+            "native": [
+              578
+            ]
+          }
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 695,
+          "raw_different_entries": 695,
+          "first_difference": {
+            "entry": 306,
+            "dos": [
+              19
+            ],
+            "native": [
+              579
+            ]
+          }
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 31,
+          "raw_different_entries": 31,
+          "first_difference": {
+            "entry": 880,
+            "dos": [
+              723
+            ],
+            "native": [
+              1297
+            ]
+          }
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 166,
+          "raw_different_entries": 166,
+          "first_difference": {
+            "entry": 833,
+            "dos": [
+              614
+            ],
+            "native": [
+              1188
+            ]
+          }
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/full-game/canonical/result.json"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 19,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 35.86571579996962,
+      "seconds": 85.14964210003382,
+      "raw_identity_control": {
+        "equal_entries": 670,
+        "first_difference": {
+          "entry": 671,
+          "views": [
+            "S13:384C::g_2A2A",
+            "S13:384C::g_2A30",
+            "S13:384C::g_2A32"
+          ]
+        }
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 670,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 1081,
+          "raw_different_entries": 411,
+          "first_difference": {
+            "entry": 877,
+            "dos": [
+              616,
+              615,
+              614,
+              613,
+              612,
+              611,
+              610,
+              609,
+              608,
+              607,
+              606,
+              605,
+              604,
+              603,
+              -1
+            ],
+            "native": [
+              77,
+              76,
+              75,
+              74,
+              73,
+              72,
+              71,
+              70,
+              69,
+              68,
+              67,
+              66,
+              65,
+              64,
+              -1
+            ]
+          }
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 670,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 2000,
+          "non_sentinel_entries": 1142,
+          "raw_different_entries": 1142,
+          "first_difference": {
+            "entry": 671,
+            "dos": [
+              2832
+            ],
+            "native": [
+              401
+            ]
+          }
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 2000,
+          "non_sentinel_entries": 61,
+          "raw_different_entries": 61,
+          "first_difference": {
+            "entry": 677,
+            "dos": [
+              2847
+            ],
+            "native": [
+              416
+            ]
+          }
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 2000,
+          "non_sentinel_entries": 1330,
+          "raw_different_entries": 1330,
+          "first_difference": {
+            "entry": 671,
+            "dos": [
+              2831
+            ],
+            "native": [
+              400
+            ]
+          }
+        },
+        "S13:384C::g_2A32": {
+          "entries": 2000,
+          "non_sentinel_entries": 1324,
+          "raw_different_entries": 1324,
+          "first_difference": {
+            "entry": 671,
+            "dos": [
+              2833
+            ],
+            "native": [
+              402
+            ]
+          }
+        },
+        "S13:384C::g_2A34": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 2000,
+          "non_sentinel_entries": 489,
+          "raw_different_entries": 489,
+          "first_difference": {
+            "entry": 674,
+            "dos": [
+              2840
+            ],
+            "native": [
+              409
+            ]
+          }
+        },
+        "S13:384C::g_2A40": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/interactive-play/original/result.json"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 19,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 36.23103560000891,
+      "seconds": 84.9466139000142,
+      "raw_identity_control": {
+        "equal_entries": 1240,
+        "first_difference": {
+          "entry": 671,
+          "views": [
+            "S13:384C::g_2A2A",
+            "S13:384C::g_2A30",
+            "S13:384C::g_2A32"
+          ]
+        }
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 670,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 1081,
+          "raw_different_entries": 182,
+          "first_difference": {
+            "entry": 1819,
+            "dos": [
+              6223,
+              6222,
+              6221,
+              6220,
+              6219,
+              6218,
+              6217,
+              6216,
+              6215,
+              6214,
+              6213,
+              6212,
+              6211,
+              6210,
+              -1
+            ],
+            "native": [
+              785,
+              784,
+              783,
+              782,
+              781,
+              780,
+              779,
+              778,
+              777,
+              776,
+              775,
+              774,
+              773,
+              772,
+              -1
+            ]
+          }
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 670,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 2000,
+          "non_sentinel_entries": 1142,
+          "raw_different_entries": 691,
+          "first_difference": {
+            "entry": 671,
+            "dos": [
+              2832
+            ],
+            "native": [
+              1
+            ]
+          }
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 2000,
+          "non_sentinel_entries": 61,
+          "raw_different_entries": 43,
+          "first_difference": {
+            "entry": 677,
+            "dos": [
+              2847
+            ],
+            "native": [
+              16
+            ]
+          }
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 2000,
+          "non_sentinel_entries": 1330,
+          "raw_different_entries": 760,
+          "first_difference": {
+            "entry": 671,
+            "dos": [
+              2831
+            ],
+            "native": [
+              0
+            ]
+          }
+        },
+        "S13:384C::g_2A32": {
+          "entries": 2000,
+          "non_sentinel_entries": 1324,
+          "raw_different_entries": 754,
+          "first_difference": {
+            "entry": 671,
+            "dos": [
+              2833
+            ],
+            "native": [
+              2
+            ]
+          }
+        },
+        "S13:384C::g_2A34": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 2000,
+          "non_sentinel_entries": 489,
+          "raw_different_entries": 120,
+          "first_difference": {
+            "entry": 674,
+            "dos": [
+              2840
+            ],
+            "native": [
+              9
+            ]
+          }
+        },
+        "S13:384C::g_2A40": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/interactive-play/canonical/result.json"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 25.23448990000179,
+      "seconds": 54.95944010000676,
+      "raw_identity_control": {
+        "equal_entries": 1000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/load-from-save/original/result.json"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 1000,
+      "equal_entries": 1000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 5,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 25.622050900012255,
+      "seconds": 54.99708040000405,
+      "raw_identity_control": {
+        "equal_entries": 1000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 1000,
+          "non_sentinel_entries": 1000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 1000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/load-from-save/canonical/result.json"
+    },
+    {
+      "scenario": "long-run",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 3000,
+      "equal_entries": 3000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 13,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 51.75180139997974,
+      "seconds": 141.65287839999655,
+      "raw_identity_control": {
+        "equal_entries": 3000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 3000,
+          "non_sentinel_entries": 3000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 3000,
+          "non_sentinel_entries": 3000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 3000,
+          "non_sentinel_entries": 3000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/long-run/original/result.json"
+    },
+    {
+      "scenario": "long-run",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 3000,
+      "equal_entries": 3000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 13,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 51.62934589997167,
+      "seconds": 141.83466749999207,
+      "raw_identity_control": {
+        "equal_entries": 3000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 3000,
+          "non_sentinel_entries": 3000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 3000,
+          "non_sentinel_entries": 3000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 3000,
+          "non_sentinel_entries": 3000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 3000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/long-run/canonical/result.json"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 64,
+      "equal_entries": 64,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 2,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 4.212089400039986,
+      "seconds": 12.583840999985114,
+      "raw_identity_control": {
+        "equal_entries": 64,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 64,
+          "non_sentinel_entries": 64,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 64,
+          "non_sentinel_entries": 64,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 64,
+          "non_sentinel_entries": 64,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/new-game-save/original/result.json"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 64,
+      "equal_entries": 64,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 2,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 4.277421600010712,
+      "seconds": 12.38278949999949,
+      "raw_identity_control": {
+        "equal_entries": 64,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 64,
+          "non_sentinel_entries": 64,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 64,
+          "non_sentinel_entries": 64,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 64,
+          "non_sentinel_entries": 64,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 64,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/new-game-save/canonical/result.json"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 13,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 34.06319189997157,
+      "seconds": 98.35109169996576,
+      "raw_identity_control": {
+        "equal_entries": 2000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/quick-game/original/result.json"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 13,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 33.41331180004636,
+      "seconds": 98.38501500000712,
+      "raw_identity_control": {
+        "equal_entries": 2000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/quick-game/canonical/result.json"
+    },
+    {
+      "scenario": "random-17",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 9,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 76.17518500000006,
+      "seconds": 106.93569030001527,
+      "raw_identity_control": {
+        "equal_entries": 2000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/random-17/original/result.json"
+    },
+    {
+      "scenario": "random-17",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "entries": 2000,
+      "equal_entries": 2000,
+      "first_difference": null,
+      "frames": "FRAME_EQUAL",
+      "frame_checkpoints": 9,
+      "audio": "SOUND_OFF_CONFIRMED",
+      "recording_seconds": 75.7864767999854,
+      "seconds": 106.5916502000182,
+      "raw_identity_control": {
+        "equal_entries": 2000,
+        "first_difference": null
+      },
+      "raw_animation_ids": {
+        "yard_black_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_rain_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "yard_red_swarm_anim_indices": {
+          "entries": 2000,
+          "non_sentinel_entries": 2000,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2A": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2C": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A2E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A30": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A32": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A34": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A3E": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        },
+        "S13:384C::g_2A40": {
+          "entries": 2000,
+          "non_sentinel_entries": 0,
+          "raw_different_entries": 0,
+          "first_difference": null
+        }
+      },
+      "result": "build/workers/ideal-check/identity/check/random-17/canonical/result.json"
+    }
+  ],
+  "fresh_suites": {
+    "seconds": 323.7027902000118,
+    "lanes": [
+      {
+        "name": "database",
+        "code": 0,
+        "seconds": 5.9128629000042565,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/native_database/run.py",
+          "--conversion",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\idb"
+        ]
+      },
+      {
+        "name": "rng",
+        "code": 0,
+        "seconds": 2.1874254000140354,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/native_rng/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\irng"
+        ]
+      },
+      {
+        "name": "simulation",
+        "code": 0,
+        "seconds": 10.722741100005805,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/native_simulation/run.py",
+          "--native-build",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\isim",
+          "--random-count",
+          "128"
+        ]
+      },
+      {
+        "name": "vga",
+        "code": 0,
+        "seconds": 21.03875499998685,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native\\report.json",
+          "--flow",
+          "vga",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\iv"
+        ]
+      },
+      {
+        "name": "save",
+        "code": 0,
+        "seconds": 25.87322840001434,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native\\report.json",
+          "--flow",
+          "save",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\is"
+        ]
+      },
+      {
+        "name": "load",
+        "code": 0,
+        "seconds": 36.250024700013455,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run_load.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\il"
+        ]
+      },
+      {
+        "name": "audio",
+        "code": 0,
+        "seconds": 3.7907726999837905,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/audio/run.py",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\iaudio"
+        ]
+      },
+      {
+        "name": "diagnostics",
+        "code": 0,
+        "seconds": 5.8039476000121795,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/diagnostics/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\idiag"
+        ]
+      },
+      {
+        "name": "evaluation-tests",
+        "code": 0,
+        "seconds": 8.107372700003907,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "-m",
+          "unittest",
+          "portable.tests.evaluation_order.test_evaluation_order"
+        ]
+      },
+      {
+        "name": "evaluation-census",
+        "code": 0,
+        "seconds": 8.350780000037048,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/evaluation_order/census.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\eval-census"
+        ]
+      },
+      {
+        "name": "evaluation-production",
+        "code": 0,
+        "seconds": 2.6501143000205047,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/evaluation_order/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\native\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\ideal-check\\identity\\eval-production"
+        ]
+      },
+      {
+        "name": "semantic-spans",
+        "code": 0,
+        "seconds": 8.316777699976228,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "tests/test_semantic_spans.py"
+        ]
+      },
+      {
+        "name": "acceptance",
+        "code": 0,
+        "seconds": 257.84681030001957,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "portable/tests/acceptance",
+          "-t",
+          ".",
+          "-p",
+          "test_*.py"
+        ]
+      }
+    ]
+  },
+  "animation_identity_rule": {
+    "contract": "anim-id-pattern-v1",
+    "views": {
+      "yard_black_swarm_anim_indices": {
+        "index": 988,
+        "slots": 17,
+        "bytes": 34
+      },
+      "yard_rain_anim_indices": {
+        "index": 989,
+        "slots": 15,
+        "bytes": 30
+      },
+      "yard_red_swarm_anim_indices": {
+        "index": 990,
+        "slots": 17,
+        "bytes": 34
+      },
+      "S13:384C::g_2A2A": {
+        "index": 1024,
+        "slots": 1,
+        "bytes": 2
+      },
+      "S13:384C::g_2A2C": {
+        "index": 1025,
+        "slots": 1,
+        "bytes": 2
+      },
+      "S13:384C::g_2A2E": {
+        "index": 1026,
+        "slots": 1,
+        "bytes": 2
+      },
+      "S13:384C::g_2A30": {
+        "index": 1027,
+        "slots": 1,
+        "bytes": 2
+      },
+      "S13:384C::g_2A32": {
+        "index": 1028,
+        "slots": 1,
+        "bytes": 2
+      },
+      "S13:384C::g_2A34": {
+        "index": 1029,
+        "slots": 1,
+        "bytes": 2
+      },
+      "S13:384C::g_2A3E": {
+        "index": 1030,
+        "slots": 1,
+        "bytes": 2
+      },
+      "S13:384C::g_2A40": {
+        "index": 1031,
+        "slots": 1,
+        "bytes": 2
+      }
+    },
+    "raw_diagnostics": true,
+    "specification": "Per holder: -1 preserved, other valid IDs assigned zero-based ordinals by first appearance; equal IDs share an ordinal; high-bit invalid words retained literally.",
+    "sources": {
+      "src/graphics/anim.c": "2d2796d13ee698322063a13bffffa4d29a5215a5f719ddca182eeaad2d530354",
+      "src/ui/yard_window.c": "32f83fd882761487aefbab306223e6b2fcbad193d27b67243e22b0846350d2b4",
+      "src/ui/view_dialog_helpers.c": "60e8da8f4f1889e8e1f86e89764656650023709dec4009c81a25b051e8d88d6c"
+    },
+    "header_sha256": "8d1ab1e754485a83cd64734f3b12f4a8741ae02449578e589c528e091ee88f64",
+    "evidence": "evidence/canonical/native-ideal-clock/animation-identity.md"
+  },
+  "final_audit": {
+    "status": "PASS",
+    "reference_count": 18,
+    "references": [
+      {
+        "scenario": "ant-commands",
+        "target": "original",
+        "entries": 1000
+      },
+      {
+        "scenario": "ant-commands",
+        "target": "canonical",
+        "entries": 1000
+      },
+      {
+        "scenario": "experiment",
+        "target": "original",
+        "entries": 1000
+      },
+      {
+        "scenario": "experiment",
+        "target": "canonical",
+        "entries": 1000
+      },
+      {
+        "scenario": "full-game",
+        "target": "original",
+        "entries": 1000
+      },
+      {
+        "scenario": "full-game",
+        "target": "canonical",
+        "entries": 1000
+      },
+      {
+        "scenario": "interactive-play",
+        "target": "original",
+        "entries": 2000
+      },
+      {
+        "scenario": "interactive-play",
+        "target": "canonical",
+        "entries": 2000
+      },
+      {
+        "scenario": "load-from-save",
+        "target": "original",
+        "entries": 1000
+      },
+      {
+        "scenario": "load-from-save",
+        "target": "canonical",
+        "entries": 1000
+      },
+      {
+        "scenario": "long-run",
+        "target": "original",
+        "entries": 3000
+      },
+      {
+        "scenario": "long-run",
+        "target": "canonical",
+        "entries": 3000
+      },
+      {
+        "scenario": "new-game-save",
+        "target": "original",
+        "entries": 64
+      },
+      {
+        "scenario": "new-game-save",
+        "target": "canonical",
+        "entries": 64
+      },
+      {
+        "scenario": "quick-game",
+        "target": "original",
+        "entries": 2000
+      },
+      {
+        "scenario": "quick-game",
+        "target": "canonical",
+        "entries": 2000
+      },
+      {
+        "scenario": "random-17",
+        "target": "original",
+        "entries": 2000
+      },
+      {
+        "scenario": "random-17",
+        "target": "canonical",
+        "entries": 2000
+      }
+    ],
+    "state_equal_lanes": 18,
+    "frame_equal_lanes": 18,
+    "entries": 26128,
+    "views_per_entry": 1032,
+    "additional_scalar_views": 8,
+    "identity_holders": 11,
+    "fresh_build_pins_current": true,
+    "suite_drivers": 13,
+    "acceptance_tests": 69,
+    "protected_paths_unchanged": true,
+    "whitespace_check": 0,
+    "python_compile": true,
+    "task_processes": [],
+    "retired": [],
+    "committed": false,
+    "new_files": [
+      "evidence/canonical/native-ideal-clock/animation-identity.md",
+      "evidence/canonical/native-ideal-clock/identity-results.json",
+      "evidence/canonical/native-ideal-clock/tape-retirement-proposal.md",
+      "portable/tests/acceptance/animation_identity.h",
+      "portable/tests/acceptance/animation_identity.py",
+      "portable/tests/acceptance/test_animation_identity.py"
+    ]
+  }
+}

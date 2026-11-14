@@ -63,6 +63,9 @@ def validate(directory,scenario):
             raise ValueError('Pre-fix sound-off reference omits direct BIOS modifier-byte admission; use build/reference/sound-off')
         from .sound_off import context_receipt,configuration_receipt
         state=json.loads((directory/'schema.json').read_text())
+        from .animation_identity import identity_receipt
+        if manifest.get('animation_identity_rule')!=identity_receipt(state) or state.get('animation_identity_rule')!=manifest['animation_identity_rule']:
+            raise ValueError('Missing/changed animation identity observation; use build/reference/sound-off-identity')
         if manifest.get('event_context_rule')!=context_receipt(state) or state.get('event_context_rule')!=manifest['event_context_rule']:
             raise ValueError('Changed or unproved keyboard event observation rule')
         if manifest.get('sound_configuration')!=configuration_receipt((ROOT/'assets/SIMANT.CFG').read_bytes()):

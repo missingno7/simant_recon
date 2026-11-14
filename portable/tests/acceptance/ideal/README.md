@@ -90,10 +90,12 @@ State hashes, full checkpoint scanout and audio are compared after execution.
 Raw port/value audio is exact per entry. The older audio-content tolerance
 comparison remains a separately labelled diagnostic.
 
-The owner-approved sound-off variant uses shipped CFG Sound Mode: 0 on both
-sides and the narrowly typed keyboard-context-v1 rule in the parent README.
-All nine tick scripts stay unchanged. Its result is12/18 strict state lanes
-and18/18 frame lanes equal; remaining rain IDs arise from uninitialized
-AnimSet.nextId allocation payload. They receive no exemption. The sound-off
-evidence records snapshots, positive/negative read-prefix controls, lane costs
-and a contingent separate-audio/retirement plan. Nothing is retired this round.
+The owner-approved sound-off variant uses shipped CFG Sound Mode: 0 and the
+keyboard-context-v1 plus anim-id-pattern-v1 observer rules in the parent README.
+All nine tick scripts stay unchanged. The earlier raw-state run found only
+allocator-derived rain IDs remaining. The owner's follow-up permits a per-entry
+sentinel/equality pattern for11 audited yard holders, with all raw words retained
+as diagnostics and eight additional instruction-bound scalar views. Recordings
+are under build/reference/sound-off-identity. Current lane results and measured
+costs are in evidence/canonical/native-ideal-clock/identity-results.json.
+No clock rule, source ID value or frame comparison changes. Nothing is retired.

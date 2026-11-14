@@ -3,7 +3,7 @@
 The sound-off gameplay lane uses the shipped `SIMANT.CFG` selector
 `Sound Mode: 0` in identical disposable copies on DOS and native. Run the
 ideal-v1 recorder/checker with `--sound-off`. References are stored separately
-under `build/reference/sound-off/<scenario>/<exe-sha>-ideal-v1-sound-off`.
+under `build/reference/sound-off-identity/<scenario>/<exe-sha>-ideal-v1-sound-off`.
 The scripts are unchanged. No original asset is edited and no game sound
 decision is replaced. Checks require zero initialized/requested sound mode,
 PIT divisor65536 at every DOS entry, no sound ISR and no device writes.
@@ -21,13 +21,29 @@ raw, adjacent-record, mouse/object, flags/time and payload negative controls.
 Local Event copies have no global per-entry view; root:1B73::Queue0 is an18-byte
 hot-box queue and is excluded from this Event rule.
 
+`anim-id-pattern-v1` additionally observes the15 rain IDs, the two17-word swarm
+arrays, and eight scalar yard ID holders by sentinel/equality pattern, assigning
+ordinals by first appearance per holder per entry. All remain game_state.
+The [complete use audit](../../../evidence/canonical/native-ideal-clock/animation-identity.md)
+finds only same-set equality/lookup and -1 uses, no arithmetic, ordering or
+SaveRec overlap. Eight previously unbound scalar views now have original
+read/write instruction anchors. Raw hashes/checkpoint state remain unchanged;
+new per-entry .anim-ids diagnostics report all raw words and first differences.
+The combined qualified hash stream is .hash.ideal-state-v2. runtime_views.json
+names each participating holder and cites the source lines. Other animation
+sets receive no rule. Earlier sound-off recordings remain under sound-off.
+
 The corrected recorder admits direct modifier-byte reads at0000:0417 as well as
 INT16 modifier queries. Pre-fix sound-off references are retained as controls;
 current checks refuse them. Sound-on audio verification and the legacy tape
 check remain available. The [sound-off findings](../../../evidence/canonical/native-ideal-clock/sound-off.md)
-report12/18 strict state lanes and18/18 frame lanes equal. Remaining state
-failures are rain IDs from an uninitialized animation counter; they remain
-failures. Nothing is retired in this round.
+report the earlier raw-word12/18 state and18/18 frame result. The current
+identity-pattern run passes18/18 state/frame lanes, with26128 state entries,
+152 checkpoints and eight added scalar views. See
+[identity-results.json](../../../evidence/canonical/native-ideal-clock/identity-results.json)
+and the [retirement proposal](../../../evidence/canonical/native-ideal-clock/tape-retirement-proposal.md).
+The measured new check takes483.47s wall with three workers. Nothing is retired;
+step_check remains the current upper-layer regression pending owner review.
 
 ```powershell
 python portable/tests/acceptance/step_record.py --sound-off --build BUILD --observer OBSERVER/observer-build.json
@@ -511,4 +527,4 @@ none incomplete. The three requested first DAC cases are DOS heap-move IRQ
 glitches, not port sample defects; literal unequal output bytes remain different.
 See the per-lane audio-schedule table and sample-relocation proof. Full normal-play
 audio closure is still open for nine lanes. The direct checker reports those
-findings with exit 1; the 67-test acceptance regression suite passes.
+findings with exit 1; the 69-test acceptance regression suite passes.
