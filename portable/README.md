@@ -76,8 +76,10 @@ also supports offline GDB/addr2line analysis. Forced termination cannot write a 
 After a crash or problem, ZIP the newest diagnostics folder. To approximately
 reproduce a debug session with the same game data and configuration, use the seed
 in `session.log`: `simant-canonical.exe --seed N --input-script input.txt`.
-Host scheduling/audio can differ; this records input rather than a full machine
-snapshot. Debug logs grow during play and can include local paths and config.
+Production uses one [ideal-machine clock](whole_program/platform/README.md#ideal-machine-clock-native-clock-v1).
+`--deterministic` runs the same read rule unpaced; scripts and `--seed` support
+repeatable native regression observations. Physical input remains external, and
+this records input rather than a full machine snapshot. Debug logs grow during play and can include local paths and config.
 
 ```powershell
 python portable/tests/diagnostics/run.py --report build/current/portable/report.json

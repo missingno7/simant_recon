@@ -1,0 +1,316 @@
+{
+  "schema": "simant-audio-content-controls-v1",
+  "tolerance_control": {
+    "reference": "build\\reference\\experiment\\aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v10",
+    "native": "build\\workers\\audio-content\\upper\\experiment\\original",
+    "rows": [
+      {
+        "tolerance": 15,
+        "status": "AUDIO_DIFFERENCE",
+        "first_difference": {
+          "kind": "OPL_PLACEMENT",
+          "entry": 917,
+          "dos": {
+            "tick": 908752,
+            "service_ordinal": 41822923,
+            "step": 916,
+            "phase": 1,
+            "entry": 917,
+            "register": 112,
+            "value": 255
+          },
+          "native": {
+            "tick": 908736,
+            "service_ordinal": 41822923,
+            "step": 916,
+            "phase": 1,
+            "entry": 917,
+            "register": 112,
+            "value": 255
+          },
+          "group": "0:channel:6",
+          "index": 2307,
+          "ticks": 16
+        },
+        "maximum_tick_distance": {
+          "opl": 16,
+          "start": 0,
+          "stop": 0,
+          "output": 12,
+          "progress": 0
+        }
+      },
+      {
+        "tolerance": 16,
+        "status": "AUDIO_EQUAL",
+        "first_difference": null,
+        "maximum_tick_distance": {
+          "opl": 16,
+          "start": 0,
+          "stop": 0,
+          "output": 12,
+          "progress": 0
+        }
+      }
+    ]
+  },
+  "schedule_off": {
+    "original": {
+      "result": {
+        "path": "build/workers/audio-content/schedule-off/new-game-save/original/result.json",
+        "sha256": "da8d7b1cd299fab757c5b7a5c860ff63ac1dbb5e11d986dec470dadf81de9122"
+      },
+      "state": "REFERENCE_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "audio": "AUDIO_DIFFERENCE",
+      "first": 1,
+      "timer": 0
+    },
+    "canonical": {
+      "result": {
+        "path": "build/workers/audio-content/schedule-off/new-game-save/canonical/result.json",
+        "sha256": "5c133daf9e72a61186c136ac725f67999f7b89cbcf64b53bdffbd8da49b5fe1e"
+      },
+      "state": "REFERENCE_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "audio": "AUDIO_DIFFERENCE",
+      "first": 1,
+      "timer": 0
+    }
+  },
+  "without_foreground": {
+    "experiment": {
+      "result": {
+        "path": "build/workers/audio-content/placement-control/experiment/original/result.json",
+        "sha256": "930139f7516c04d935d00b72d788de8cdbda1a4db10f6d1080db2ff625256f7f"
+      },
+      "state": "REFERENCE_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "audio": "AUDIO_DIFFERENCE",
+      "first": {
+        "kind": "OPL_PLACEMENT",
+        "entry": 1,
+        "dos": {
+          "tick": 1233,
+          "service_ordinal": 1626857,
+          "step": 0,
+          "phase": 0,
+          "entry": 1,
+          "register": 160,
+          "value": 0
+        },
+        "native": {
+          "tick": 1201,
+          "service_ordinal": 1626854,
+          "step": 0,
+          "phase": 0,
+          "entry": 1,
+          "register": 160,
+          "value": 0
+        },
+        "group": "0:channel:0",
+        "index": 1,
+        "ticks": 32
+      },
+      "counts": {
+        "dos": {
+          "opl": 18559,
+          "samples": 23,
+          "sample_bytes": 12536
+        },
+        "native": {
+          "opl": 18548,
+          "samples": 23,
+          "sample_bytes": 12520
+        }
+      }
+    },
+    "load-from-save": {
+      "result": {
+        "path": "build/workers/audio-content/placement-control/load-from-save/original/result.json",
+        "sha256": "2d958f4312c68d9ebdface1bb7c4b5c8ce824686c4c0d54335d4cf202b454406"
+      },
+      "state": "REFERENCE_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "audio": "AUDIO_DIFFERENCE",
+      "first": {
+        "kind": "OPL_PLACEMENT",
+        "entry": 1,
+        "dos": {
+          "tick": 1233,
+          "service_ordinal": 1626857,
+          "step": 0,
+          "phase": 0,
+          "entry": 1,
+          "register": 160,
+          "value": 0
+        },
+        "native": {
+          "tick": 1201,
+          "service_ordinal": 1626854,
+          "step": 0,
+          "phase": 0,
+          "entry": 1,
+          "register": 160,
+          "value": 0
+        },
+        "group": "0:channel:0",
+        "index": 1,
+        "ticks": 32
+      },
+      "counts": {
+        "dos": {
+          "opl": 8387,
+          "samples": 46,
+          "sample_bytes": 25704
+        },
+        "native": {
+          "opl": 8356,
+          "samples": 46,
+          "sample_bytes": 25704
+        }
+      }
+    }
+  },
+  "upper_tests": {
+    "command": [
+      "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+      "-m",
+      "unittest",
+      "portable.tests.acceptance.test_native_acceptance",
+      "portable.tests.acceptance.test_full_inputs",
+      "portable.tests.acceptance.test_frames",
+      "portable.tests.acceptance.test_audio_timer",
+      "portable.tests.acceptance.test_audio_commands",
+      "portable.tests.acceptance.test_audio_content",
+      "portable.tests.acceptance.test_key_bios",
+      "portable.tests.acceptance.test_sound_services",
+      "portable.tests.acceptance.test_sound_calls"
+    ],
+    "environment": {
+      "SIMANT_STEP_TEST_BUILD": "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\native-verified",
+      "SIMANT_STEP_TEST_OUT": "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\upper",
+      "SIMANT_STEP_SCRATCH_ROOT": "D:\\Prog\\simant_recon\\build\\workers\\audio-content"
+    },
+    "returncode": 0,
+    "seconds": 256.9530000000377
+  },
+  "port_suites": [
+    {
+      "name": "database",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/native_database/run.py",
+        "--conversion",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\native-verified",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\db"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "rng",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/native_rng/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\native-verified\\report.json",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\rg"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "simulation",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/native_simulation/run.py",
+        "--native-build",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\native-verified",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\sm",
+        "--random-count",
+        "128"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "vga",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/runtime/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\native-verified\\report.json",
+        "--flow",
+        "vga",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\vg"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "save",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/runtime/run.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\native-verified\\report.json",
+        "--flow",
+        "save",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\sv"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "load",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/runtime/run_load.py",
+        "--report",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\native-verified\\report.json",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\ld"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "audio",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/audio/run.py",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\ad"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "virtual-audio",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/tests/acceptance/run_virtual_audio_tests.py",
+        "--sdk",
+        "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\va"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "virtual-clock",
+      "command": [
+        "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+        "portable/whole_program/platform/tests/run_virtual_clock_tests.py",
+        "--sdk",
+        "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32",
+        "--out",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-content\\vc"
+      ],
+      "returncode": 0
+    }
+  ],
+  "retirement": {
+    "path": "build/workers/audio-content/v9-retirement.json",
+    "sha256": "f480b4007d3d254b8434951979c7786127f3a658a71d9590b61d115b389eed58"
+  }
+}

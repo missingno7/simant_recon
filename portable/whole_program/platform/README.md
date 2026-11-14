@@ -22,51 +22,111 @@ whose host asset root is longer than the old 67-byte CWD buffer.
 descriptor. Full current main-loop, Save and Load flows are checked under
 `portable/tests/runtime/`.
 
-## Virtual replay clock
+## Ideal-machine clock (native-clock-v1)
 
-The whole-program host accepts `--deterministic` (1 ms per outer platform poll)
-and `--poll-ns N` (1..1,000,000 ns). Reads of `host_time_ns`, rendering, event
-ingestion, nested refreshes and wall sleeps consume no virtual time. BIOS/modal
-keyboard polling, held mouse/scan queries and TickCount refreshes yield through
-the existing application refresh guard. The original game's seven-MacTick Normal
-and 21-MacTick Slow waits continue to use its canonical code and rational PIT clock.
-Canonical `MacTickCount` is `TickCount * 3`, so these are not seven/21 PIT ticks.
-Fast/Ultra computation-only loops have no emulated CPU cost in this mode.
+Production play and `--deterministic` use one virtual machine time, starting at
+zero nanoseconds. The default read quantum Q is exactly 1,000,000 ns.
+`--poll-ns N` selects Q (1..1,000,000) and unpaced operation; it is an explicit
+experiment with a different read-cost model. Computation, rendering, file I/O,
+host-time reads and internal/nested platform refreshes consume zero machine time.
+No SDL state, presentation deadline, audio queue level, wall time, or GameSpeed
+value is an input to the advance rule.
 
-The civil-time service exposes 1992-01-01 12:00:00 plus elapsed virtual time;
-BIOS ticks begin at the DOS noon count, independently of the game's initially
-zero, separately disabled TickCount. The physical 046C:0000 startup RAM service
-defaults to zero; `--seed N` explicitly overrides it. It is distinct from BIOS
-0000:046C. Audio rendering consumes exactly elapsed virtual PIT sample work,
-without clocking source sequencing from asynchronous SDL queue depth; PCM is
-discarded in deterministic mode. Normal host operation keeps its existing clocks.
+The independently implementable rule is:
 
-Replay files retain `T down/up KEY`, `T move X Y` and absolute
-`T mouse-down/up BUTTON X Y`. Added commands are `T relative DX DY`
-(DOS mickeys at the scenario's 16/16 ratio), `T button-down/up BUTTON` at the
-current source-warped pointer, `T checkpoint` and `T exit`. Multiword SDL key
-names such as `Keypad 5` are accepted. All current DOS scenarios use even mickey
-movements; half-pixel accumulation for arbitrary odd movements is not modeled.
-Equal-time commands preserve file order and ingest preceding input before the
-checkpoint hook. `portable_native_checkpoint(milliseconds)` is a noinline,
-read-only debugger boundary, logging game/BIOS ticks and outer-loop count.
-External observers can read canonical symbols through native debug types;
-pointer-valued fields and host descriptors require explicit exclusions.
+1. At entry to each **game-initiated** read in the table below, with guest IF set,
+   advance machine time by Q. Writes consume no time. A query made by an IRQ or
+   an internal provider callback is not another game-initiated read.
+2. Process all elapsed hardware timer instants in timestamp order, then sample
+   the requested service. Retain fractional phases across reads. With IF clear,
+   the existing interrupt guard defers delivery and the read charges no time.
+3. Return the sample. Repeated reads use exactly the same Q as changed reads.
+   There is no per-site history and no repeat-dependent jump. With default Q,
+   a canonical 18.2 Hz deadline loop needs at most 55 reads per tick. This fixed
+   small-step choice avoids a jump between the multiple reads in WaitedEnough,
+   is cheap to implement in a DOS recorder, and supplies a positive minimum
+   step even in Fast/Ultra loops. Native spelling is only a dispatch key; a DOS
+   recorder can intercept the corresponding guest boundary directly.
 
-This mode is an observation aid, not a complete DOS/native acceptance claim.
-A millisecond of virtual poll time is not a millisecond of DOS computation at
-fixed cycles. Startup phase and input delivery at the same simulation step must
-be measured before declaring checkpoint equality. Source sound/video switches
-and CFG selection pass through unchanged. Both Sound Mode 6 PCM/IRQ scheduling
-and ISA bus timestamps use this clock. Named stack-residue exclusions are reported
-by the acceptance tool; raw bytes remain in every snapshot.
+| Guest read | Native boundary spelling |
+| --- | --- |
+| TickCount; MacTickCount calls it and multiplies by 3 | `TickCount` |
+| BIOS BDA tick dword (0000:046C), INT 1Ah clock domain | `host_ticks` |
+| Interrupt countdown read / zero test / blocking countdown loop | `portable_m1b73_source_countdown_get` |
+| BIOS INT 16h key availability; blocking read retry | `host_key_available`, `host_read_key_blocking` |
+| Canonical input event count | `input_event_count` |
+| Scan table read; Scroll Lock; BIOS keyboard modifiers | `kbd_scan_state`, `kbd_scroll_lock_state`, `dos_keyboard_modifiers` |
+| Physical mouse state read; cursor callback refresh | `portable_input_time_host_get_input_state`, `mouse_refresh_cursor` |
 
-Permanent controls cover wall-delay independence, PIT fraction preservation,
-separate game/BIOS freeze, seven/21-MacTick waits, leap dates and replay pointer state:
+For an atomic assembly adapter, entry IF means its caller's saved IF, before
+the adapter's own CLI. The 40:6C word stamp inside `_input_enqueue_event` uses
+the BIOS domain too (native `timer_bios_tick_count`); a DOS recorder must use
+the saved entry flags/origin for that compound service, rather than treating
+its internal CLI as an independent game read. IRQ-origin stamps do not charge.
+
+The input reads are explicit clocking boundaries too: source held-button,
+tracking and modal loops can wait without reading TickCount. Excluding these
+would freeze tick-scripted releases in those loops. Each is a program-observable
+poll, independently identifiable in DOS. A cached DOS character pushback read
+that never reaches BIOS does not charge a hardware poll. Internal event drains,
+presentation, mouse-show writes and countdown writes do not charge Q.
+
+The pure implementation is `input_time.c:portable_input_time_read_quantum`.
+`portable/tests/idle_yield/rule.c` is a standalone golden-vector fixture (no SDL,
+wall clock or game assets); its synthetic PIT has a 10 ms chained tick and a
+200 us sound IRQ. It is the shared test-vector source for a later DOS recorder.
+The executable polling fixture additionally checks real rational PIT tick values,
+a spinning negative control, and SDL keyboard/mouse wake latency.
+
+Hardware domains are the private INT08 TickCount (with its enable flag), the
+always-on BIOS IRQ0 count, and the countdown (decrement 5 per BIOS tick, floor
+zero). PIT input is the existing rational 14,318,180 / 12 Hz model. The BIOS
+rate is divisor 65536; the canonical sound driver programs divisor 214 and chains
+the old INT08 every 306 interrupts, retaining its one-interrupt first-chain phase.
+PIT writes retain the existing counter/phase transition semantics. Sound sample
+IRQ/mixer/sequencer work and ISA device timestamps derive from the same machine
+time; SDL only consumes output PCM. OPL/device bus accesses retain their existing
+provider-local I/O costs and status contracts; this change does not make those
+independent hardware contracts equivalent to DOS. Unsupported MPU/AdLib-only
+hardware waits remain unsupported as before.
+
+In ordinary play, each admitted read is paced against a fixed host epoch before
+it returns. SDL waits wake for input and leave events for the sole ingestion
+path; delivery does not change Q or the pending read's tick. Reads catch up after
+host delays without skipping virtual quanta or ticks. Audio and presentation are
+serviced at every Q, with Q bounded to 1 ms. GameSpeed 3 bypasses wall pacing,
+retaining the same machine read rule, so computation is not capped by a frame
+or tick wait. Its virtual audio timeline can consequently run ahead of physical
+playback; there is no claim of wall-tempo preservation for that mode.
+`--deterministic` bypasses wall pacing in all speeds and discards presentation
+PCM, retaining the same ISR work. Unchanged single-screen scanouts are compared
+before RGB conversion/upload (including palette changes); hosted windows retain
+their existing refresh path. A one-second repaint covers exposure.
+
+The civil epoch is 1992-01-01 12:00:00 plus machine time in both play and replay;
+BIOS ticks start at DOS noon, independently of the initially zero private clock.
+The physical 046C:0000 RAM seed defaults to zero; `--seed N` overrides it.
+Existing scripts use machine milliseconds. A leading `# clock: bios-ticks`
+directive instead interprets the first column as elapsed BIOS logical ticks
+since launch. Events at equal thresholds retain file order; due events are
+injected at the first admitted poll at or beyond the threshold. A DOS recorder
+can use those same tick thresholds. Replay timestamps printed by the legacy
+logger retain their `ms` label even for the explicitly directed tick script.
+Real input is admitted through the same ingestion path at a read boundary.
+
+DOS clock-tape mode remains a separate verification adapter: its existing
+refresh-mode guard returns before this rule, pacing, audio pumping and application
+idle. It retains captured values and service/IRQ ordering. The DOS side of
+native-clock-v1 is not implemented here, and the current tapes remain necessary.
+Passing this clock fixture does not prove whole-game DOS/native equivalence.
 
 ```powershell
+python portable/tests/idle_yield/run.py --out build/workers/NAME/idle-clock
 python portable/whole_program/platform/tests/run_virtual_clock_tests.py --sdk <SDL3-SDK>
 ```
+
+The latter retains legacy isolated host-clock controls (PIT fraction/freeze,
+civil dates and pointer state), separate from production rule configuration.
 
 ## File semantics
 

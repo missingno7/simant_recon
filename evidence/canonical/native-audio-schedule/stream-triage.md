@@ -1,28 +1,39 @@
-# Independent audio stream findings
+# Full-run audio content findings
 
-The table records the final independent state/frame/audio verdicts. Sound placement is untested from the coverage-ending entry. Raw post-detachment traces remain available, but are not interpreted as covered equivalence.
+All 18 lanes complete with 26,128 state entries and 152 checkpoint frames equal.
+Audio is **9 AUDIO_EQUAL / 9 AUDIO_DIFFERENCE / 0 AUDIO_INCOMPLETE** under
+`audio-content-v1`, with a bound of 16 fast PIT periods (one slow IRQ, 2.87 ms).
+Every row compares the whole requested run. Raw OUT order is diagnostic.
 
-| Scenario / lane | State | Frames | Audio | First audio entry / layer | Sound coverage ends |
-|---|---|---|---|---|---|
-| ant-commands/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 598 / DIRECT_DAC_SAMPLE_PRODUCTION | - |
-| ant-commands/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 704 / OPL_DSP_ORDERING | - |
-| experiment/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_EQUAL | - / NONE | - |
-| experiment/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_EQUAL | - / NONE | - |
-| full-game/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_INCOMPLETE | 178 / SOUND_PLACEMENT_OUTSIDE_DOMAIN | 178 |
-| full-game/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 618 / DIRECT_DAC_SAMPLE_PRODUCTION | - |
-| interactive-play/original | EQUAL 2000/2000 | EQUAL 19/19 | AUDIO_INCOMPLETE | 832 / DIRECT_DAC_SAMPLE_PRODUCTION | 1001 |
-| interactive-play/canonical | EQUAL 2000/2000 | EQUAL 19/19 | AUDIO_INCOMPLETE | 678 / SOUND_PLACEMENT_OUTSIDE_DOMAIN | 678 |
-| load-from-save/original | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_DIFFERENCE | 992 / OPL_DSP_ORDERING | - |
-| load-from-save/canonical | EQUAL 1000/1000 | EQUAL 5/5 | AUDIO_EQUAL | - / NONE | - |
-| long-run/original | EQUAL 3000/3000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 2099 / OPL_DSP_ORDERING | - |
-| long-run/canonical | EQUAL 3000/3000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 2099 / OPL_DSP_ORDERING | - |
-| new-game-save/original | EQUAL 64/64 | EQUAL 2/2 | AUDIO_EQUAL | - / NONE | - |
-| new-game-save/canonical | EQUAL 64/64 | EQUAL 2/2 | AUDIO_EQUAL | - / NONE | - |
-| quick-game/original | EQUAL 2000/2000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 1760 / OPL_DSP_ORDERING | - |
-| quick-game/canonical | EQUAL 2000/2000 | EQUAL 13/13 | AUDIO_DIFFERENCE | 1917 / OPL_DSP_ORDERING | - |
-| random-17/original | EQUAL 2000/2000 | EQUAL 9/9 | AUDIO_INCOMPLETE | 1130 / SOUND_RESOURCE_CALL_ORDER_COVERAGE | 1130 |
-| random-17/canonical | EQUAL 2000/2000 | EQUAL 9/9 | AUDIO_INCOMPLETE | 1073 / SOUND_RESOURCE_CALL_ORDER_COVERAGE | 1073 |
+| Scenario / lane | State entries | Frames | Audio | First entry / content difference |
+|---|---:|---:|---|---|
+| ant-commands/original | 1000 EQUAL | 5 EQUAL | AUDIO_DIFFERENCE | 598 / SAMPLE_OUTPUT_BYTE |
+| ant-commands/canonical | 1000 EQUAL | 5 EQUAL | AUDIO_DIFFERENCE | 749 / SAMPLE_OUTPUT_BYTE |
+| experiment/original | 1000 EQUAL | 5 EQUAL | AUDIO_EQUAL | - |
+| experiment/canonical | 1000 EQUAL | 5 EQUAL | AUDIO_EQUAL | - |
+| full-game/original | 1000 EQUAL | 5 EQUAL | AUDIO_DIFFERENCE | 461 / SAMPLE_START_PLACEMENT |
+| full-game/canonical | 1000 EQUAL | 5 EQUAL | AUDIO_DIFFERENCE | 618 / SAMPLE_OUTPUT_BYTE |
+| interactive-play/original | 2000 EQUAL | 19 EQUAL | AUDIO_DIFFERENCE | 832 / SAMPLE_OUTPUT_BYTE |
+| interactive-play/canonical | 2000 EQUAL | 19 EQUAL | AUDIO_DIFFERENCE | 778 / MUSIC_PROGRESS |
+| load-from-save/original | 1000 EQUAL | 5 EQUAL | AUDIO_EQUAL | - |
+| load-from-save/canonical | 1000 EQUAL | 5 EQUAL | AUDIO_EQUAL | - |
+| long-run/original | 3000 EQUAL | 13 EQUAL | AUDIO_DIFFERENCE | 2359 / SAMPLE_OUTPUT_BYTE |
+| long-run/canonical | 3000 EQUAL | 13 EQUAL | AUDIO_EQUAL | - |
+| new-game-save/original | 64 EQUAL | 2 EQUAL | AUDIO_EQUAL | - |
+| new-game-save/canonical | 64 EQUAL | 2 EQUAL | AUDIO_EQUAL | - |
+| quick-game/original | 2000 EQUAL | 13 EQUAL | AUDIO_EQUAL | - |
+| quick-game/canonical | 2000 EQUAL | 13 EQUAL | AUDIO_EQUAL | - |
+| random-17/original | 2000 EQUAL | 9 EQUAL | AUDIO_DIFFERENCE | 1130 / OPL_PLACEMENT |
+| random-17/canonical | 2000 EQUAL | 9 EQUAL | AUDIO_DIFFERENCE | 1073 / SAMPLE_OUTPUT_BYTE |
 
-First OPL/DSP ordering differences are in the unmasked `snd_opl_write_regs` index/data transaction. First DAC sample differences are produced by `sample_timer.asm:out_sb` / `whole_audio_provider.c:interrupt` before ISA/DSP emulation. The five sound-call mismatches are audio coverage findings, never game-state failures. The captured IRQ inside the reaper is outside the tested domain; resource-call evidence is retained without further investigation.
+The three requested first DAC byte differences are independently proved
+DOS in-flight heap-relocation reads; see [sample-relocation.md](sample-relocation.md).
+Their actual unequal bytes remain differences. Ant canonical at 749 and long-run
+original at 2359 have additional same-position byte differences not separately
+probed here. The other first placement/progress differences follow the existing
+sound-marker scheduling gaps; they are not attributed to a port producer defect.
+No larger tick bound or byte exception is used to make these rows equal.
 
-`stream-triage.json` retains first port/value writes, responsible code, trusted-prefix signatures and device substream hashes, full observed signatures and exact capture identities. Its full post-detachment first write may be later than the coverage loss. No raw data or view is reclassified or removed.
+`stream-triage.json` pins each complete content comparison, raw diagnostic,
+reference, output and sound-order diagnostic. Normal-play audio is not closed
+for all lanes by this result.

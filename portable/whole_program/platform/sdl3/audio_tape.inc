@@ -14,7 +14,15 @@ static void test_audio_next(void) {
   if (tag!='T' || fscanf(test_audio_timer,"%" SCNu64 " %u",&test_audio_at,&test_audio_fast)!=2 || test_audio_fast>2) abort();
   test_audio_ready=1;
 }
+extern void portable_test_audio_progress(unsigned) __attribute__((weak));
+extern void portable_test_audio_tick(unsigned) __attribute__((weak));
+extern void portable_test_audio_content_opl(uint16_t,uint8_t) __attribute__((weak));
+extern void portable_test_audio_content_close(void) __attribute__((weak));
+void portable_test_audio_content_head(FILE *f,char tag,uint64_t tick) {
+  fprintf(f,"%c %" PRIu64 " %" PRIu64 " %u %u",tag,tick,test_services,test_step,test_phase);
+}
 static void test_audio_close(void) {
+  if(portable_test_audio_content_close) portable_test_audio_content_close();
   if (test_sound_calls) {
     fprintf(test_sound_calls,"E %" PRIu64 " %u %u\n",test_services,test_step,test_phase);
     fclose(test_sound_calls);test_sound_calls=NULL;
@@ -25,6 +33,7 @@ static void test_audio_close(void) {
   }
 }
 static void test_audio_load(void) {
+  if (getenv("SIMANT_TEST_DISABLE_SOUND_PLACEMENT")) test_sound_detached=1;
   const char *path=getenv("SIMANT_TEST_AUDIO_TIMER");
   if (path) {
     test_audio_timer=fopen(path,"r");if (!test_audio_timer) abort();
@@ -51,9 +60,11 @@ static void test_audio_drain(void) {
     if (test_audio_at!=test_services && !test_sound_detached) { fprintf(stderr,"Missed audio timer boundary\n");abort(); }
     unsigned fast=test_audio_fast;
     test_audio_next();
+    if(portable_test_audio_tick) portable_test_audio_tick(fast);
     if (!getenv("SIMANT_TEST_DISABLE_AUDIO_TIMER")) {
       if (!portable_whole_audio_replay_interrupt) abort();
       portable_whole_audio_replay_interrupt(fast);
+      if(portable_test_audio_progress) portable_test_audio_progress(0);
       ++test_audio_runs;
     }
     ++test_audio_ticks;
@@ -61,6 +72,7 @@ static void test_audio_drain(void) {
   test_audio_busy=0;
 }
 void portable_test_audio_write(uint16_t port,uint8_t value) {
+  if(portable_test_audio_content_opl) portable_test_audio_content_opl(port,value);
   if (test_audio_commands && ((port>=0x388 && port<=0x38b) ||
       (port>=0x220 && port<=0x22f) || port<=0xf || (port>=0x80 && port<=0x8f)))
     fprintf(test_audio_commands,"W %" PRIu64 " %u %u %X %X\n",test_services,test_step,test_phase,port,value);

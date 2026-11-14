@@ -6,6 +6,21 @@
 
 static PortableInputTime *active_input_time;
 
+uint64_t portable_input_time_read_quantum(const char *service, uint64_t quantum_ns)
+{
+    static const char *const reads[] = {
+        "TickCount", "host_ticks", "portable_m1b73_source_countdown_get",
+        "host_key_available", "host_read_key_blocking", "input_event_count",
+        "kbd_scan_state", "kbd_scroll_lock_state", "dos_keyboard_modifiers",
+        "portable_input_time_host_get_input_state", "mouse_refresh_cursor"
+    };
+    size_t i;
+    if (!service) return 0;
+    for (i = 0; i < sizeof(reads) / sizeof(reads[0]); ++i)
+        if (!strcmp(service, reads[i])) return quantum_ns;
+    return 0;
+}
+
 static PortableInputTimeStatus provider_result(int result)
 {
     return result == 1 ? PORTABLE_INPUT_TIME_OK : PORTABLE_INPUT_TIME_PROVIDER_FAILED;

@@ -1,0 +1,321 @@
+{
+  "schema": "simant-sample-relocation-proof-v1",
+  "analysis": {
+    "path": "build/workers/audio-content/analyze_samples_probes.py",
+    "sha256": "e76553de4840538a6d4aee846d99db88a32212497fd03cbd267c621e79118621"
+  },
+  "rows": [
+    {
+      "lane": "ant-commands/original",
+      "first_entry": 598,
+      "classification": "DOS_IN_FLIGHT_OVERLAPPING_SAMPLE_RELOCATION",
+      "native_port_bug": false,
+      "tick": 754100,
+      "channel": 0,
+      "object": 14,
+      "rate": 256,
+      "volume": 0,
+      "position": 2587,
+      "values": {
+        "dos": 132,
+        "native": 72,
+        "start_payload": 72,
+        "copied_destination": 72
+      },
+      "start_payload_sha256": "e6d705b5e26f3b82fc24432c1a8faca4f48a6f0500cb547e55d743444daf0b11",
+      "memory": {
+        "path": "build/workers/audio-content/mixer-probe/observer.txt.mixer-memory.bin",
+        "sha256": "9a5a856ef39d785c6ff77666a81a36c984c9716cd61779d5a383a5a7a3e4b50f"
+      },
+      "registers": {
+        "path": "build/workers/audio-content/mixer-probe/observer.txt.mixer-registers.json",
+        "sha256": "d4b6b4db64c9f6920c515b612dc3dc1e4dbe660cb1565fca32dc10e718667154"
+      },
+      "reference": {
+        "path": "build/reference/ant-commands/aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v10/manifest.json",
+        "sha256": "fe552c372339d270cef1f0540bfa86018dbfd81d7b76513468e71209dd616207"
+      },
+      "native_capture": {
+        "path": "build/workers/audio-content/upper/ant-commands/original/audio-content.txt",
+        "sha256": "961a58b2d762e7edc7892a64c039f01e15ba6b1affa1cdc23e381f3ab20f1ee9"
+      },
+      "native_observer": {
+        "path": "build/workers/audio-content/upper/test-build/observer-build.json",
+        "sha256": "df2cec7adb25fdca00c7121b65bbcfcff86aaa78282b12440f40f85b261f644b"
+      },
+      "executable": {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+      },
+      "relocation": {
+        "interrupted_runtime_pc": 137016,
+        "interrupted_root_pc": 103672,
+        "instruction": "rep movsw word ptr es:[di], word ptr [si]",
+        "helper_entry": 136982,
+        "caller_return": 130851,
+        "caller_entry": 130780,
+        "copy_source": 575408,
+        "copy_destination": 574080,
+        "bytes": 5232,
+        "copied_bytes": 5064,
+        "old_sample_data": 575440,
+        "new_sample_data": 574112,
+        "overwritten_with_payload_position": 3915,
+        "handle": 450504,
+        "hardware_flags": 29254,
+        "still_points_to_source": true
+      },
+      "probe_capture": {
+        "path": "build/workers/audio-content/mixer-probe/boundary-manifest.json",
+        "sha256": "03c41b4d8d01d619c20711599ba2f48d0f175a9f8ca90bb3cd69bf78fd395fa5"
+      },
+      "probe_execution": {
+        "path": "build/workers/audio-content/mixer-probe/execution-report.json",
+        "sha256": "6913843fd4ebbf050c9c9c8747240a1bdcc4fe367885a6e3417d9e6a8e26fb78"
+      },
+      "observer": {
+        "path": "build/workers/audio-content/mixer-probe-observer/observer-build.json",
+        "sha256": "452afe9f943bb416f50ee82512e4596a40b1769f72508dd39aab999e53aa5c68"
+      },
+      "observer_source": {
+        "path": "build/workers/audio-content/mixer-probe-observer/compact_observer.inc",
+        "sha256": "4e60008dec58ee063583cb37ead691977b4b396768159d01fb5e6a7ff063f69c"
+      },
+      "volume_table": {
+        "address": 412179,
+        "bytes": 2048,
+        "sha256": "0de04833e7d73b349559dff5b31419a77b1fb6ad8cfcd7e0fe2b79d85b40f1f0"
+      },
+      "probe_prefix": {
+        "entries": 600,
+        "state_hashes": true,
+        "service_order": true,
+        "raw_audio": true,
+        "content": true
+      }
+    },
+    {
+      "lane": "full-game/canonical",
+      "first_entry": 618,
+      "classification": "DOS_IN_FLIGHT_OVERLAPPING_SAMPLE_RELOCATION",
+      "native_port_bug": false,
+      "tick": 649111,
+      "channel": 0,
+      "object": 14,
+      "rate": 256,
+      "volume": 0,
+      "position": 2545,
+      "values": {
+        "dos": 20,
+        "native": 148,
+        "start_payload": 148,
+        "copied_destination": 148
+      },
+      "start_payload_sha256": "e6d705b5e26f3b82fc24432c1a8faca4f48a6f0500cb547e55d743444daf0b11",
+      "memory": {
+        "path": "build/workers/audio-content/full-game-pcm-probe/observer.txt.mixer-649111.memory.bin",
+        "sha256": "02a22fce00673d60b358410eea1582e498cece3140b8d5a6b12877265fac8cad"
+      },
+      "registers": {
+        "path": "build/workers/audio-content/full-game-pcm-probe/observer.txt.mixer-649111.registers.json",
+        "sha256": "da4bf2818f19a4f15ace06c1486f6126d97dad05ff180eef6428c37c19e334cb"
+      },
+      "reference": {
+        "path": "build/reference/full-game/d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4-service-samples-v10/manifest.json",
+        "sha256": "0345f8a0e1a8c6a8b489c46d39ee96e4bc2b13beb675fc9f5232dba5860eaa15"
+      },
+      "native_capture": {
+        "path": "build/workers/audio-content/upper/full-game/canonical/audio-content.txt",
+        "sha256": "49deeaf4717ec0c2201ba4b0386e378e248dcdfaaf64ba18ba898f495f3da6ea"
+      },
+      "native_observer": {
+        "path": "build/workers/audio-content/upper/test-build/observer-build.json",
+        "sha256": "df2cec7adb25fdca00c7121b65bbcfcff86aaa78282b12440f40f85b261f644b"
+      },
+      "executable": {
+        "path": "build/current/dos/link/SOURCE.EXE",
+        "sha256": "d301f3c3fc5194289ac393328d4ea0423475117e874492c26e51278b88b6b1a4"
+      },
+      "relocation": {
+        "interrupted_runtime_pc": 137010,
+        "interrupted_root_pc": 103666,
+        "instruction": "rep movsw word ptr es:[di], word ptr [si]",
+        "helper_entry": 136976,
+        "caller_return": 130845,
+        "caller_entry": 130774,
+        "copy_source": 641968,
+        "copy_destination": 640928,
+        "bytes": 5232,
+        "copied_bytes": 4122,
+        "old_sample_data": 642000,
+        "new_sample_data": 640960,
+        "overwritten_with_payload_position": 3585,
+        "handle": 443652,
+        "hardware_flags": 29254,
+        "still_points_to_source": true
+      },
+      "probe_capture": {
+        "path": "build/workers/audio-content/full-game-pcm-probe/boundary-manifest.json",
+        "sha256": "556cab11e1e9a77e43bc7d4ae9b7c2c2e7e4a378323fbd1bbe9871af21af4e77"
+      },
+      "probe_execution": {
+        "path": "build/workers/audio-content/full-game-pcm-probe/execution-report.json",
+        "sha256": "139252efa21b41295373bcf2d0c3751d9b204f6a683edb2b9aa43f9a27b1d9d3"
+      },
+      "observer": {
+        "path": "build/workers/audio-content/samples-probe-observer/observer-build.json",
+        "sha256": "835dd6d26c6e9de012a7427d35c3567481557880646602ec6e6c38dca954411b"
+      },
+      "observer_source": {
+        "path": "build/workers/audio-content/samples-probe-observer/compact_observer.inc",
+        "sha256": "14b44eaf145b6d74518a45b853e05ad21b4519d6cc4197bbf29ec063833521b3"
+      },
+      "volume_table": {
+        "address": 401057,
+        "bytes": 2048,
+        "sha256": "0de04833e7d73b349559dff5b31419a77b1fb6ad8cfcd7e0fe2b79d85b40f1f0"
+      },
+      "probe_prefix": {
+        "entries": 620,
+        "state_hashes": true,
+        "service_order": true,
+        "raw_audio": true,
+        "content": true
+      }
+    },
+    {
+      "lane": "interactive-play/original",
+      "first_entry": 832,
+      "classification": "DOS_IN_FLIGHT_OVERLAPPING_SAMPLE_RELOCATION",
+      "native_port_bug": false,
+      "tick": 828675,
+      "channel": 1,
+      "object": 36,
+      "rate": 256,
+      "volume": 0,
+      "position": 756,
+      "values": {
+        "dos": 126,
+        "native": 123,
+        "start_payload": 123,
+        "copied_destination": 123
+      },
+      "start_payload_sha256": "d809d553151dd4f8141be637378ada54296ed2398d9a3237592e3b524eb72be4",
+      "memory": {
+        "path": "build/workers/audio-content/interactive-play-pcm-probe/observer.txt.mixer-828675.memory.bin",
+        "sha256": "acd00c1b91eecd19c69f56a35d51209386e85fa10365af222ba1b4e61c1a2481"
+      },
+      "registers": {
+        "path": "build/workers/audio-content/interactive-play-pcm-probe/observer.txt.mixer-828675.registers.json",
+        "sha256": "ddcaf2ed7b11658545ba4c4c728a85759ede85a188d34961592458d62d756279"
+      },
+      "reference": {
+        "path": "build/reference/interactive-play/aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11-service-samples-v10/manifest.json",
+        "sha256": "e26683873ca85a8bdb1625035fe05407605da8ffa110ab1120fae755623a0714"
+      },
+      "native_capture": {
+        "path": "build/workers/audio-content/upper/interactive-play/original/audio-content.txt",
+        "sha256": "393298ddb1ae62bd56b599567702ccd703bf618b1db89208d45446ee4b89751f"
+      },
+      "native_observer": {
+        "path": "build/workers/audio-content/upper/test-build/observer-build.json",
+        "sha256": "df2cec7adb25fdca00c7121b65bbcfcff86aaa78282b12440f40f85b261f644b"
+      },
+      "executable": {
+        "path": "assets/SIMANT.EXE",
+        "sha256": "aa0596c6766322a8229ee3c36e57048c92adc82d50fbe2ef37afb8b85fcf4f11"
+      },
+      "relocation": {
+        "interrupted_runtime_pc": 137016,
+        "interrupted_root_pc": 103672,
+        "instruction": "rep movsw word ptr es:[di], word ptr [si]",
+        "helper_entry": 136982,
+        "caller_return": 130851,
+        "caller_entry": 130780,
+        "copy_source": 521408,
+        "copy_destination": 521008,
+        "bytes": 1904,
+        "copied_bytes": 1468,
+        "old_sample_data": 521440,
+        "new_sample_data": 521040,
+        "overwritten_with_payload_position": 1156,
+        "handle": 450616,
+        "hardware_flags": 29254,
+        "still_points_to_source": true
+      },
+      "probe_capture": {
+        "path": "build/workers/audio-content/interactive-play-pcm-probe/boundary-manifest.json",
+        "sha256": "d6a6206e0358640f305061ecb1b804b1579062ce3fe79649bab6689f43ac885e"
+      },
+      "probe_execution": {
+        "path": "build/workers/audio-content/interactive-play-pcm-probe/execution-report.json",
+        "sha256": "1be416f48753aade1c7042cc88dc8458d73537d1abfcaed0f1e97448f0b299f5"
+      },
+      "observer": {
+        "path": "build/workers/audio-content/samples-probe-observer/observer-build.json",
+        "sha256": "835dd6d26c6e9de012a7427d35c3567481557880646602ec6e6c38dca954411b"
+      },
+      "observer_source": {
+        "path": "build/workers/audio-content/samples-probe-observer/compact_observer.inc",
+        "sha256": "14b44eaf145b6d74518a45b853e05ad21b4519d6cc4197bbf29ec063833521b3"
+      },
+      "volume_table": {
+        "address": 412179,
+        "bytes": 2048,
+        "sha256": "0de04833e7d73b349559dff5b31419a77b1fb6ad8cfcd7e0fe2b79d85b40f1f0"
+      },
+      "probe_prefix": {
+        "entries": 834,
+        "state_hashes": true,
+        "service_order": true,
+        "raw_audio": true,
+        "content": true
+      }
+    }
+  ],
+  "native_volume_table": {
+    "executable": {
+      "path": "build/workers/audio-content/native-verified/simant-canonical.exe",
+      "sha256": "f30887240c617cb8fa0f230b9943221158980c2ef7be8705eb6e10077e473fc9"
+    },
+    "address": 5369723296,
+    "bytes": 2048,
+    "sha256": "0de04833e7d73b349559dff5b31419a77b1fb6ad8cfcd7e0fe2b79d85b40f1f0"
+  },
+  "source_pins": [
+    {
+      "path": "src/sound/sample_timer.asm",
+      "sha256": "02bd58d8375ae47761ee26b8799c4974f8457a3fa0cae47d05d42f81002c7eac"
+    },
+    {
+      "path": "src/sound/sample_voices.c",
+      "sha256": "4ce6de55365bbdc09f15b455e958c6501bd8544f3ba123f5be61976ad74a4616"
+    },
+    {
+      "path": "src/sound/resource_loading.c",
+      "sha256": "9a8ead1290c50aa9098b38091450eb4063cdfaea6a17d3c3ee8482331beaf0a1"
+    },
+    {
+      "path": "src/memory/ralloc.c",
+      "sha256": "1fab26dae270bdc44f87efa27c5dfad1132d5375391c2fcef9d9da24483605ca"
+    },
+    {
+      "path": "src/platform/memory_helpers.asm",
+      "sha256": "e4af02e6e41e0329be3ab04ddec1c1b026893f3407b0181705c3a7c880519e1f"
+    },
+    {
+      "path": "portable/whole_program/platform/whole_audio_provider.c",
+      "sha256": "8e4d48fb2ae383434047a3b92bb7c6a3a0f40a784a3f0946e568b5380c36ec6d"
+    }
+  ],
+  "rule": "The live handle still addresses a block whose old storage has already been overwritten by a downward overlapping REP MOVSW. Its copied destination and the unchanged decoded payload contain the native byte. No port decoder, table, mixer or resampler fix is warranted. Actual differing DAC bytes remain content differences, not normalized away.",
+  "observer_volume_table": {
+    "executable": {
+      "path": "build/workers/audio-content/upper/test-build/simant-step.exe",
+      "sha256": "7cb348be043cc99e7a0612080236c4c06e35209883616181477e8470d6c48037"
+    },
+    "address": 5369739680,
+    "bytes": 2048,
+    "sha256": "0de04833e7d73b349559dff5b31419a77b1fb6ad8cfcd7e0fe2b79d85b40f1f0"
+  }
+}

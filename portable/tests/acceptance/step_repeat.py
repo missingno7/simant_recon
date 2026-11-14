@@ -10,8 +10,8 @@ except ImportError:
 
 def compare(first, repeat):
     manifests=[json.loads((p/'manifest.json').read_text()) for p in (first,repeat)]
-    if any(m.get('input_contract')!='service-samples-v9' for m in manifests):
-        raise ValueError('Repeat requires service-samples-v9; pre-v9 timing is refused')
+    if any(m.get('input_contract')!='service-samples-v10' for m in manifests):
+        raise ValueError('Repeat requires service-samples-v10; pre-v10 timing is refused')
     for key in ('keyboard_layout','input_contract','executable_sha256','scenario_sha256','script_sha256','schema_identity','steps'):
         if manifests[0][key]!=manifests[1][key]:raise ValueError('Repeat identity differs: '+key)
     if not all(m.get('complete') for m in manifests):raise ValueError('Repeat capture is incomplete')

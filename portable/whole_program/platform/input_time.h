@@ -98,6 +98,14 @@ int portable_test_clock_is_stateful(void) __attribute__((weak));
 uint64_t portable_test_pump_ordinal(void);
 unsigned portable_test_input_count(void);
 void portable_test_input_delivered(unsigned sequence);
+/* Pure ideal-machine read rule. Only listed guest-facing reads consume time;
+ * internal refresh/presentation callbacks and computation consume none. */
+uint64_t portable_input_time_read_quantum(const char *service, uint64_t quantum_ns);
+void portable_machine_clock_configure(int unpaced, uint64_t quantum_ns);
+int portable_machine_clock_active(void);
+uint64_t portable_machine_clock_quantum(void);
+void portable_machine_clock_advance(uint64_t nanoseconds);
+int portable_machine_clock_pace(void);
 static inline uint32_t portable_test_observed_clock(char kind,void *pc,uint32_t fallback)
 {
 #ifdef SIMANT_TEST_OBSERVER_IMPLEMENTATION

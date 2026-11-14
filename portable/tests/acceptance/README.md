@@ -39,7 +39,7 @@ or `--target canonical` selects one. `--out SCRATCH` records an explicit repeat;
 `--steps` and `--cycles` are measured recording controls, stored in its manifest.
 Compatible references are reused. An older service contract requires explicit
 retirement with `tools/workspace.py` and recording again. References live at
-`build/reference/<scenario>/<executable-sha256>-service-samples-v9/`. Original assets and generated
+`build/reference/<scenario>/<executable-sha256>-service-samples-v10/`. Original assets and generated
 references stay ignored.
 
 Recipes with `saved_game` also require `saved_game_sha256`: recording validates
@@ -62,8 +62,8 @@ unsupported combinations and legacy INT16 filtering.
 [`keyboard-environment.conf`](../../../dos/scenarios/keyboard-environment.conf)
 onto the selected toolchain runner entry (also when replaced by the observer).
 It captures `KEYB`'s effective-layout query and refuses a non-US environment.
-Every v9 reference records that result and environment pin; record and check
-both require proved US. All eighteen references are recorded under US for v9. Historical CZ243 captures and their neutrality proofs are retired, with
+Every v10 reference records that result and environment pin; record and check
+both require proved US. All eighteen references are recorded under US for v10. Historical CZ243 captures and their neutrality proofs are retired, with
 provenance in `build/workers/keys/RESULT.md` and the v4 retirement inventory in
 `build/workers/quiet-inputs/v4-inventory.json`.
 
@@ -120,7 +120,7 @@ sites bind to immutable original code or independent canonical OMF fixups;
 native call sites bind to the observer wrappers by instruction disassembly. No clock value is interpolated, inferred from native state or
 selected to obtain equality.
 
-V6 timing (retained by `service-samples-v9`) holds each scripted key or mouse transition from
+V6 timing (retained by `service-samples-v10`) holds each scripted key or mouse transition from
 its scheduled emulated time until the next eligible recorded service boundary.
 Atomic providers complete their sample first; that cached result cannot change.
 Entry boundaries admit before their bodies. StillDown (247) is a completed
@@ -148,7 +148,7 @@ counts plus simulation entry/phase. The single ordinal is
 `clock_reads` field counts all sampled-return reads, including h/j device
 answers; it is not elapsed time. Native admits through the normal
 SDL adapter at precisely this boundary. The parser refuses a v6 IRQ whose
-coordinates differ from its hold, and checks refuse pre-v9 references. A missed
+coordinates differ from its hold, and checks refuse pre-v10 references. A missed
 boundary, wrong service, phase or input coordinate fails replay. Positive
 completion requires consumed clock, service and input tapes; a first state
 difference leaves the remaining tape for investigation.
@@ -171,7 +171,7 @@ optional test hook. Each staged raw SDL event carries its own pair; the
 projection still constructs and queues every Event, including its BIOS stamp.
 Physical pointer coordinates retain their existing translation. Missing or
 out-of-word keyboard context is a coverage error, never a native-zero fallback.
-A pre-v9 reference is refused; its timing cannot be upgraded from expected state.
+A pre-v10 reference is refused; its timing cannot be upgraded from expected state.
 
 These are handler-entry words, not necessarily raw interrupted foreground
 registers: the DOS IRQ wrapper loads DX with DGROUP before kbd_process_scan.
@@ -220,12 +220,11 @@ pictures, attribute map and DAC, exact. **Audio**: the views classified `audio`
 (MIDI/voice playback progress and driver state), per entry, reported as
 `audio=AUDIO_EQUAL|AUDIO_DIFFERENCE|AUDIO_INCOMPLETE first=N`; an audio difference does not stop
 the state comparison, because game logic sees audio only through the
-device-status queries the tape replays (contract v6). V9 additionally replays observed sound-timer executions at checked foreground driver entries and compares every
-raw sound-device OUT per interval ending at an entry. Audio-progress views
-remain in the verdict without reclassification. The schedule-off control
-restores the previous seven first-entry MIDI/voice differences and a first-entry
-command difference. Final per-lane signatures and first differences are pinned
-in `known_findings.json`; detailed attribution is in
+device-status queries the tape replays (contract v6). V10 retains observed ISR scheduling,
+then compares whole-run **content**, independently of the interleaving of OPL
+writes and sample output. Raw per-entry OUT order is retained as
+`audio_raw_diagnostic` and cannot fail audio by itself. No view is reclassified.
+Detailed per-lane results, tolerance measurements and controls are in
 [`native-audio-schedule`](../../../evidence/canonical/native-audio-schedule/README.md).
 Address-valued sound selectors (output routine pointers, the volume-table offset)
 are `runtime` views. The v8 run established all 152 checkpoint pictures equal after the Yard
@@ -250,10 +249,9 @@ hashes, a native frame and byte differences from the nearest retained DOS frame.
 A frame from another entry is labelled and is not exact expected bytes for the
 differing entry. The admission report retains the earlier Event.v findings and
 their original evidence. V8 completed all nine scenarios with state/frame equality.
-Sound-call order is now an audio-only finding. Its first mismatch invalidates
-audio coverage from that entry while state and checkpoint frames continue.
-Non-sound service order remains strict. Final findings are pinned in
-`known_findings.json` independently for all three verdicts.
+Sound-call order is a scheduling diagnostic. Its first mismatch filters later
+sound markers while every non-sound service remains strict. Content observations
+continue and the full-run comparator decides audio independently of that marker.
 
 ```powershell
 python -m unittest portable.tests.acceptance.test_native_acceptance portable.tests.acceptance.test_full_inputs
@@ -383,101 +381,65 @@ scenario output and disposable asset directory. Lines remain in scenario order;
 all child processes are joined before exit. This changes no service/input tape,
 state stopping rule or checkpoint pixel/palette comparison.
 
-## Sound execution and foreground driver entries (v9)
+## Audio content and scheduling (v10)
 
-V9 retains v8 sound ISR completion capture and v7 indexed frames. It adds 115
-independently bound foreground-capable driver entries from the reviewed
-[`foreground census`](../../../evidence/canonical/native-audio-schedule/foreground-census.md).
-The machine census lists every C/ASM function, complete extent, shared-state
-and dispatch-table evidence, native projection and per-function IF protection.
-Eight ISR-only C helpers, four hardware IRQ labels and one data extent are
-explicit exclusions. Missing native hardware leaves remain explicit coverage
-failures if observed; no unsupported implementation is invented.
+The owner contract is the same music and sounds, in the same order and with the
+same content. Instruction-level interrupt placement is not a port requirement.
+`audio_content.py` compares:
 
-A checked entry appends 245 to `observer.txt.order` and its stable function ID
-to `observer.txt.sound`, incrementing the existing query/service coordinate.
-The full ID stream must match the number of 245 markers; all bytes are pinned.
-Native checks both chronological marker order and exact function identity.
-On the first sound marker/ID mismatch it records audio-only detachment, including
-entry, phase, ordinal, expected/actual IDs and service markers. It does not call
-the state/frame replay-error handler. From then on it filters sound marker245
-and the associated ID bytes from the reference and ignores native sound entries.
-Every other service, primitive value stream and input position stays strict.
-Recorded ordinals remain intact: skipped markers occupy their original slots.
-Inputs in an ignored sound-only interval map to its preceding completed non-sound
-boundary; ISR completions wait until the next actual non-sound service, as in v8.
-This projection is determined by the filtered stream, without expected state.
-Audio is AUDIO_INCOMPLETE even when its raw observed prefix happened to match.
-Every foreground nested call is included. Calls made by the real sound ISR
-are suppressed by the observed DOS ISR stack / native ISR execution flag,
-independently of IF (the real ISR can execute STI). GCC instrumentation observes
-unchanged whole canonical sound modules and port/IF helpers, including within-TU
-calls; the native OPL C/register leaves preserve their distinct source entries.
+* Complete OPL register/value writes in order on each channel, including its
+  operators, plus global controls. Cross-channel and OPL/DAC interleaving is ignored.
+* Each sample start's object, fixed-point playback rate, volume-table row,
+  loop/end metadata and every decoded resource byte (SHA256). Audible start/stop
+  ticks come from its first/last emitted contribution; setup instructions are
+  separate diagnostics. For each voice,
+  emitted positions/bytes must agree in order through the common duration.
+  Interior substitutions/insertions cannot be aligned away. A terminal duration
+  suffix is allowed only within the measured stop/run-end displacement.
+* All existing music-progress views, per entry. Different entry vectors require
+  symmetric equality with independently observed per-tick vectors within the
+  same tolerance. Exact entry hashes and separate-view differences remain retained.
+* DSP reset/speaker controls. Each observed pair of channel contributions must
+  reproduce the actual captured DAC byte. Missing/truncated observations,
+  unsupported device output or incomplete replay cannot report AUDIO_EQUAL.
 
-The generic database hook `snd_expand_sample_resource` also receives graphics
-and window records. Its independently proved entry predicate is `type==5`:
-only this branch reaches sample work. All 65535 other type words follow a stack
-argument guard and return without shared sound-state access, nested calls or I/O.
-Those invocations remain complete `.sound-calls` diagnostics and do not become
-sound ordering services. DOS reads SS:SP+14; the native test link uses the typed
-argument before executing the unchanged canonical body. IDs/functions and all
-state/audio views remain intact. Qualification never depends on expected state,
-resource number, output, countdown or an observed difference.
+The fixed tolerance is 16 fast PIT periods (one slow IRQ, approximately 2.87 ms).
+Ticks count fast PIT periods (divisor 214, approximately 179 microseconds):
+fast/rejected IRQ=1, slow IRQ=16. The fixed tolerance, measured maxima and the
+reason it is sufficient are in the audio-schedule evidence. Content is observed
+from live source state; it is never used as a replay input or a target value.
 
-DOS starts observing an entry only after the complete bound relocated procedure
-matches live guest memory. This excludes prelaunch DOSBox internal COM programs
-which reuse the future game address 8240. It is code-identity binding, not a timed
-arming delay. Original bytes bind independently to the immutable EXE; canonical
-bytes bind to its own EXE, MAP, OMF fixups and CodeView/reachable extents.
+`observer.txt.content` / native `audio-content.txt` retain complete OPL writes,
+voice setup/stop, decoded payloads, per-channel contributions and progress vectors.
+DOS setup/stop sites are bound to that executable's instructions before STI;
+the mixer observation precedes its two-channel sum. Native adds read-only
+callbacks at the equivalent two statements in a test copy of the generated whole
+sample TU; its input and observed copy are pinned in the observer receipt. The
+ordinary build remains canonical and has no such source callbacks. The provider's
+optional weak observation callback reads the contributions it actually produces.
 
-Immediately before every checked foreground entry and every other sampled
-service, native drains the completed sound ISR executions due at that ordinal,
-using the existing canonical ISR projection and current source state. The
-independently bound busy-exit IRET records rejected executions; other
-fast completions execute the full body even when their hardware frames nest.
-Nesting depth alone does not identify a busy exit. The tape suppresses autonomous
-SDL IRQ
-scheduling; ordinary play retains the SDL audio clock. Fast/slow identity is a
-diagnostic check, never installed as expected playback state. No tape is fitted
-from fingerprints or a desired branch. The schedule-off control consumes the
-same events but executes none and restores the previous entry-1 differences.
+V10 retains v8 ISR counts/completions and the v9 foreground sound schedule.
+The no-foreground-entry control changes per-channel OPL content, so the latter
+has not met its deletion condition. All 115 checked entries, source/argument
+qualification and actual-ISR-context filtering remain. The generic resource
+hook's non-PCM branch remains diagnostic. The census and original instruction
+placement evidence remain challengeable history; marker mismatch no longer
+means missing content coverage by itself.
 
-An ISR landing **inside** a function remains outside entry precision. The
-census records fully/partly/unmasked shared operations per function. CLI/STI
-assign IF; they do not save or nest FLAGS. `snd_load_and_start_song` loads
-resources before CLI; `snd_start_sample_note` clears state before masking;
-`stop_sample_voice` can call a nested queue helper whose STI precedes its final
-pointer clears. OPL register writes are unmasked and an IRQ may split their
-index/data OUTs. Even a masked update can have an interruptible prologue before
-CLI. V9 does not execute the chained input/BIOS timer bodies or reproduce arbitrary
-CPU/PIC instruction placement, PCM or DMA-memory identity.
-
-`observer.txt.audio` and native `audio-commands.txt` retain every byte OUT to OPL
-388..38B, SB 220..22F, low DMA 00..0F and DMA pages 80..8F, with completed-service
-ordinal, entry and phase. Exact port/value order within every entry interval
-participates in the audio verdict alongside every playback-progress view.
-No writes are masked, trimmed, deduplicated or shifted. OPL/DSP/DMA decoding and
-separate ordinal/phase drift are diagnostics. Missing/truncated streams, incomplete replay and sound-only detachment cannot
-report audio equality. Raw command comparisons continue after detachment for
-diagnostics, but their schedule coverage remains invalid from the mismatch. `audio-commands.json` retains
-every entry signature and first difference. The separate `audio.progress`
-signature reports its observed first difference, compared/requested entries and completion
-without confusing a later progress difference with an earlier command difference. Mode 6 uses direct DAC; generic DMA
-remains unsupported and fails explicitly.
-
-The final per-lane outcomes, first command differences and layers are pinned
-in `known_findings.json` and documented in
-[`native-audio-schedule`](../../../evidence/canonical/native-audio-schedule/README.md).
-The working report is `build/workers/audio/RESULT.md`.
+Raw DOS `observer.txt.audio` and native `audio-commands.txt` retain every OUT and
+coordinate, with exact diagnostic comparison in `audio-commands.json`.
+`audio-content.json` is the content verdict. References require v10 observations
+and US keyboard proof; checks never synthesize content from older captures.
 
 ```powershell
-python -m unittest portable.tests.acceptance.test_sound_services portable.tests.acceptance.test_sound_calls portable.tests.acceptance.test_audio_timer portable.tests.acceptance.test_audio_commands
+python -m unittest portable.tests.acceptance.test_audio_content portable.tests.acceptance.test_audio_commands portable.tests.acceptance.test_audio_timer portable.tests.acceptance.test_sound_services portable.tests.acceptance.test_sound_calls
 python portable/tests/acceptance/step_check.py --disable audio-timer --steps 8 --out build/current/tests/steps-audio-control
-python portable/tests/acceptance/step_check.py dos/scenarios/new-game-save.json --disable sound-order --steps 8 --out build/current/tests/sound-order-control
-python portable/tests/acceptance/step_check.py dos/scenarios/new-game-save.json --disable service-order --steps 8 --out build/current/tests/service-order-control
+python portable/tests/acceptance/step_check.py --disable sound-placement --out build/current/tests/steps-sound-placement-control
 ```
 
-The compiled real-game control in `test_native_acceptance.py` corrupts the first
-driver ID: audio becomes incomplete while both eight-entry state/frame lanes
-complete. Its paired control also corrupts the next non-sound marker after
-detachment and must still fail replay. Stored references remain untouched.
+Current measured result: all 18 state/frame lanes equal; audio 9 equal, 9 different,
+none incomplete. The three requested first DAC cases are DOS heap-move IRQ
+glitches, not port sample defects; literal unequal output bytes remain different.
+See the per-lane audio-schedule table and sample-relocation proof. Full normal-play
+audio closure is still open for nine lanes. The direct checker reports those
+findings with exit 1; the 61-test known-findings regression suite passes.

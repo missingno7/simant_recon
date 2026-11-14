@@ -117,10 +117,13 @@ def main():
         memory=reference.read_bytes(); decoder=Cs(CS_ARCH_X86,CS_MODE_16);decoder.detail=True
         from audio_timer import timer_binding
         sound_timer=timer_binding(memory,base,addresses)
+        sys.path.insert(0,str(ROOT))
+        from portable.tests.acceptance.audio_content import content_binding
+        content=content_binding(memory,base,addresses)
         from sound_services import sound_binding
         foreground_sound=sound_binding(memory,base,addresses,target='original' if args.original else 'canonical',build_report=args.build_report)
         sound_ids={pc:identifier for kind,pc,identifier in foreground_sound['entries']}
-        points=sound_timer['entries']+[('x',pc) for pc in sound_timer['completions']]+[(kind,pc) for kind,pc,identifier in foreground_sound['entries']]
+        points=[(k,pc) for k,pc,arg in content['points']]+sound_timer['entries']+[('x',pc) for pc in sound_timer['completions']]+[(kind,pc) for kind,pc,identifier in foreground_sound['entries']]
         for name,kind in [('TickCount','T'),('timer_bios_tick_count','B')]:
             start=base+addresses[name]
             ins=list(decoder.disasm(memory[start:start+32],start))
@@ -185,9 +188,11 @@ def main():
         after=sample_admission_points(memory,points,decoder)
         compact_spec=out.with_suffix('.observer')
         sound_functions={row['id']:row for row in foreground_sound['functions']}
-        specification=[]
+        specification=[f'Z {content["channels"]:X} {content["volume"]:X}\n']
+        content_args={pc:arg for k,pc,arg in content["points"]}
         for kind,pc in points:
-            if kind=='s':
+            if kind in ('m','v','w'):specification.append(f'{kind} {pc:X} {content_args[pc]:X}\n')
+            elif kind=='s':
                 identifier=sound_ids[pc];function=sound_functions[identifier]
                 start=base+function['start'];signature=memory[start:start+function['size']].hex()
                 if len(signature)>=1800:raise ValueError('Foreground sound signature exceeds observer line bound')
@@ -210,6 +215,7 @@ def main():
                     config.write(f'J {ms}\n')
                 for item in state['items']:
                     config.write(f'H {base+item[side]:X} {item["bytes"]} {int(item["sentinel"])}\n')
+                    if item['category']=='audio':config.write(f'AUDIO {base+item[side]:X} {item["bytes"]}\n')
         command += ['--capture-observer',str(args.compact_observer.resolve()),'--observer-config',str(compact_spec)]
     for arg in scenario.get('arguments',[]): command+=['--argument',arg]
     if scenario.get('saved_game'): command+=['--saved-game',str((args.saved_game or ROOT/scenario['saved_game']).resolve())]
@@ -235,12 +241,13 @@ def main():
         stub=captured[actual:actual+6]
         if actual!=bios_entry or len(stub)!=6 or stub[:3]!=bytes.fromhex('fb fe 38') or stub[5]!=0xcf:
             raise ValueError('Captured BIOS INT16 callback differs from its bound vector/CB_INT16 opcode')
+        manifest['audio_content']=content
         manifest['sound_timer']=sound_timer
         manifest['foreground_sound']=foreground_sound
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
             peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
         manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,admission_after=after,pump_source='both',
-            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v9',
+            order_sha256=sha(out/'observer.txt.order'),order_contract='service-samples-v10',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
         from frame_check import frame_manifest

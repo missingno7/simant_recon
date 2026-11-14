@@ -20,6 +20,7 @@ struct Host {
     int frame_presented;
 };
 #include "test_observer.inc"
+#include "input_time_host.h"
 
 static int (*event_observer)(void *, const SDL_Event *);
 static void *event_observer_context;
@@ -34,14 +35,43 @@ int host_presented_palette(const Host *host, HostPalette *palette)
     *palette = host->presented_palette;
     return 1;
 }
-static uint64_t virtual_ns, virtual_quantum;
+static uint64_t virtual_ns, virtual_quantum, pace_origin_ns;
+static int clock_unpaced, machine_clock;
 void host_virtual_clock_configure(uint64_t quantum_ns)
 {
     virtual_ns = 0;
     virtual_quantum = quantum_ns;
+    clock_unpaced = quantum_ns != 0;
+    machine_clock = 0;
 }
-int host_virtual_clock_enabled(void) { return virtual_quantum != 0; }
-void host_virtual_clock_poll(void) { virtual_ns += virtual_quantum; }
+void portable_machine_clock_configure(int unpaced, uint64_t quantum_ns)
+{
+    host_virtual_clock_configure(quantum_ns);
+    clock_unpaced = unpaced != 0;
+    machine_clock = 1;
+    pace_origin_ns = SDL_GetTicksNS();
+}
+int portable_machine_clock_active(void) { return machine_clock; }
+uint64_t portable_machine_clock_quantum(void) { return virtual_quantum; }
+/* Existing audio/presentation predicate: true only for unpaced runs. Both
+ * paced and unpaced production use the same virtual machine timeline. */
+int host_virtual_clock_enabled(void) { return clock_unpaced; }
+void host_virtual_clock_poll(void) { if (!machine_clock) virtual_ns += virtual_quantum; }
+void portable_machine_clock_advance(uint64_t nanoseconds) { virtual_ns += nanoseconds; }
+int portable_machine_clock_pace(void)
+{
+    uint64_t now, target;
+    if (!machine_clock || clock_unpaced) return 0;
+    target = pace_origin_ns + virtual_ns;
+    now = SDL_GetTicksNS();
+    while (now < target) {
+        /* NULL leaves the event queued for the sole ingestion path. Waking
+         * cannot change virtual time or the value of the pending read. */
+        if (SDL_WaitEventTimeout(NULL, 1)) return 1;
+        now = SDL_GetTicksNS();
+    }
+    return 0;
+}
 uint64_t host_virtual_dos_elapsed_ms(void) { return virtual_ns / 1000000u; }
 int host_virtual_dos_datetime(HostDosDateTime *value)
 {
@@ -180,7 +210,7 @@ int host_set_top_crop(Host *host, int rows)
            SDL_SetWindowSize(host->window, host->logical_width * host->window_scale,
                              (host->logical_height - rows) * host->window_scale);
 }
-uint64_t host_time_ns(void) { return virtual_quantum ? virtual_ns : SDL_GetTicksNS(); }
+uint64_t host_time_ns(void) { return machine_clock || virtual_quantum ? virtual_ns : SDL_GetTicksNS(); }
 void host_wait_ms(uint32_t milliseconds)
 {
     if (!virtual_quantum) SDL_Delay(milliseconds);

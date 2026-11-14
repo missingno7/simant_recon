@@ -1,3 +1,12 @@
+# Historical v9 sound placement proof
+
+V10 retains the instruction/stack facts below. The AUDIO_INCOMPLETE decisions and
+"current" policy in the historical record describe v9, not the current content
+verdict. V10 compares complete post-gap observations and reports actual content
+or bounded-placement differences; see [README.md](README.md).
+
+## V9 record (historical)
+
 # Sound placement outside the tested domain
 
 The existing v9 evidence proves an IRQ inside an unmasked sound function, a CPU-speed placement class that entry-boundary replay deliberately does not model. This is an **audio coverage limit**, never a state/frame replay failure. Under the current independent-verdict policy the first sound-order mismatch detaches audio and the game/frame replay continues with strictly checked non-sound services. The instruction proof below is retained; no new placement investigation or repair is attempted.

@@ -258,6 +258,7 @@ static void finish(unsigned differs) {
   _Exit(differs ? 10 : 0);
 }
 
+extern void portable_test_audio_content_checkpoint(void) __attribute__((weak));
 void __wrap_DoAntSim(void) {
   load();
   if (!active) {
@@ -266,6 +267,7 @@ void __wrap_DoAntSim(void) {
   }
   ++step;
   portable_test_step_boundary(step, 1);
+  if(portable_test_audio_content_checkpoint) portable_test_audio_content_checkpoint();
   unsigned checkpoint = capture_screen();
   unsigned differs = 0;
   for (unsigned i = 0; !first_difference && i < count; ++i) {
@@ -281,7 +283,7 @@ void __wrap_DoAntSim(void) {
       abort();
     if (fwrite(&hash, sizeof(hash), 1, actual) != 1)
       abort();
-    if (v->verdict && hash != reference)
+    if (v->verdict==1 && hash != reference)
       differs = 1;
   }
   fflush(actual);
@@ -373,3 +375,7 @@ __attribute__((no_instrument_function)) void __cyg_profile_func_exit(void *funct
   (void)caller;
   if (function==(void *)StillDown && portable_test_input_sample) portable_test_input_sample(247,0);
 }
+
+#ifdef SIMANT_TEST_AUDIO_CONTENT
+#include "native_audio_content.inc"
+#endif

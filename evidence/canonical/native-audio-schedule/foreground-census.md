@@ -1,5 +1,9 @@
 # Foreground sound entry census (v9)
 
+V10 retains this frozen scheduling census because the no-entry content control
+fails. IDs and mismatches are scheduling diagnostics, not the audio verdict;
+see [the current contract](README.md).
+
 The frozen machine census is [`foreground-census.json`](foreground-census.json), SHA256
 `70b09dbf836a074aa8c58983446e0704c4e8215c70bdb19cab54148ab0245fd6`.
 

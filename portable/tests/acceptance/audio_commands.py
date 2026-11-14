@@ -10,7 +10,8 @@ A write at step k belongs to the interval ending at entry k+1. Empty intervals
 participate too. Port/value order decides command equality; service coordinates
 are retained and compared separately, since a hosted timer may deliver at the
 next sampled service. No writes, registers, arguments or DMA setup are masked.
-Decoded names are diagnostics; the raw sequence remains the acceptance input.
+This exact raw comparison is diagnostic. audio_content.py supplies the audio verdict;
+complete DAC commands also independently bind its channel-contribution capture.
 """
 from collections import Counter
 from dataclasses import dataclass

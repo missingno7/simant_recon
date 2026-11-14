@@ -482,8 +482,8 @@ PortableInputTimeStatus portable_input_time_host_set_event_observer(
     return PORTABLE_INPUT_TIME_OK;
 }
 
-PortableInputTimeStatus portable_input_time_host_refresh_clock(
-    PortableInputTimeHost *binding)
+PortableInputTimeStatus portable_input_time_host_refresh_service(
+    PortableInputTimeHost *binding, const char *service)
 {
     uint64_t now;
     int refreshed;
@@ -506,13 +506,12 @@ PortableInputTimeStatus portable_input_time_host_refresh_clock(
      * host timeline or run an application idle callback inside a sampled read. */
     if (portable_test_refresh_mode && portable_test_refresh_mode()==1)
         return PORTABLE_INPUT_TIME_OK;
+    if (portable_machine_clock_active())
+        portable_machine_clock_advance(portable_input_time_read_quantum(
+            service, portable_machine_clock_quantum()));
     now = host_time_ns();
-    /* Cap real-time refresh work at 1 kHz. Virtual mode instead consumes one
-     * configured quantum at each eligible outer refresh, never SDL wall time. */
-    if (!host_virtual_clock_enabled() && binding->refresh_initialized &&
-        now >= binding->last_refresh_ns &&
-        now - binding->last_refresh_ns < UINT64_C(1000000))
-        return PORTABLE_INPUT_TIME_OK;
+    /* Legacy isolated fixtures retain their explicit externally advanced clock.
+     * Production play and unpaced replay use the identical read rule above. */
     binding->refreshing = 1;
     binding->last_refresh_ns = now;
     binding->refresh_initialized = 1;
@@ -653,4 +652,10 @@ void portable_input_time_host_set_keyboard_flags(
 {
     if (binding != NULL)
         binding->bios_keyboard_flags = flags;
+}
+
+#undef portable_input_time_host_refresh_clock
+PortableInputTimeStatus portable_input_time_host_refresh_clock(PortableInputTimeHost *binding)
+{
+    return portable_input_time_host_refresh_service(binding, NULL);
 }

@@ -146,11 +146,11 @@ int main(int argc,char **argv){
             self.skipTest('Native build or game assets absent')
         scenario=ROOT/'dos/scenarios/new-game-save.json'
         references={}
-        for path in (ROOT/'build/reference/new-game-save').glob('*v9/manifest.json'):
+        for path in (ROOT/'build/reference/new-game-save').glob('*v10/manifest.json'):
             row=json.loads(path.read_text())
             if row.get('complete'):references[row['target']]=path.parent
         if set(references)!={'original','canonical'}:
-            self.skipTest('Both v9 references are needed')
+            self.skipTest('Both v10 references are needed')
         out=Path(os.environ.get('SIMANT_STEP_TEST_OUT',ROOT/'build/current/tests/steps'))/'sound-controls'
         scratch=Path(os.environ.get('SIMANT_STEP_SCRATCH_ROOT',ROOT/'build/scratch/steps'))
         exe=test_build(build,out/'test-build')
@@ -159,9 +159,10 @@ int main(int argc,char **argv){
                 with self.subTest(target=target,control=control):
                     row=run_lane(scenario,reference,build,exe,out/target/control,60,control,8,scratch)
                     self.assertTrue(row['diagnostics']['sound_order_detached'])
-                    self.assertEqual(row['audio']['status'],'AUDIO_INCOMPLETE')
-                    self.assertEqual(row['audio']['sound_order_failure']['entry'],1)
+                    self.assertEqual(row['audio']['contract'],'audio-content-v1')
+                    self.assertEqual(row['sound_order_failure']['entry'],1)
                     if control=='sound-order':
+                        self.assertIn(row['audio']['status'],('AUDIO_EQUAL','AUDIO_DIFFERENCE'))
                         self.assertEqual(row['status'],'REFERENCE_EQUAL')
                         self.assertEqual(row['steps_compared'],8)
                         self.assertEqual(row['frames']['status'],'FRAME_EQUAL')

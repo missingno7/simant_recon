@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+extern void portable_test_audio_mix(unsigned,unsigned) __attribute__((weak));
 static PortableWholeAudioProvider *replay_provider;
 extern uint8_t portable_canonical_volume_tables[2048];
 extern int16_t snd_song_process_due_events(void);
@@ -45,6 +46,7 @@ static void interrupt(PortableWholeAudioProvider *p,unsigned reentrant) {
     /* Fast entry's busy guard acknowledges a nested IRQ without advancing
      * channels or the sequencer. Normal host callbacks cannot nest. */
     if(reentrant) return;
+    unsigned contributions[4]={128,128,128,128};
     unsigned ch,sum=0;int active=0,skip=0;
     if(!p->fast) { sequencer();return; }
     for(ch=0;ch<p->channels;++ch) {
@@ -63,9 +65,10 @@ static void interrupt(PortableWholeAudioProvider *p,unsigned reentrant) {
             if(row>7) { fprintf(stderr,"Unsupported canonical volume table row %u\n",row);abort(); }
             sample=portable_canonical_volume_tables[row*256+((uint8_t *)*c->snd->data)[c->pos]];
         }
-        sum+=sample;
+        contributions[ch]=sample;sum+=sample;
     }
     if(!skip) {
+        if(portable_test_audio_mix && p->channels==2) portable_test_audio_mix(contributions[0],contributions[1]);
         uint8_t mixed=(uint8_t)(sum/p->channels);
         if(snd_sample_output_routine==snd_sb_output_pointer) {
             while(dos_audio_host_in8((uint16_t)snd_sb_dsp_write_port)&0x80) {}

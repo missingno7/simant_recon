@@ -65,6 +65,8 @@ typedef struct Application {
     size_t replay_count, replay_next, replay_capacity;
     SDL_Keymod replay_modifiers;
     int test_input;
+    int replay_tick_units;
+    uint32_t started_bios_ticks;
 } Application;
 static Application app;
 static int exit_status;
@@ -137,6 +139,10 @@ static void load_replay(const char *path)
     while (fgets(line, sizeof(line), file)) {
         ReplayKey *entry;
         ++number;
+        if (!strncmp(line, "# clock: bios-ticks", 19)) {
+            if (app.replay_count) fail("replay clock directive after input");
+            app.replay_tick_units = 1;
+        }
         if (line[0] == '#' || line[0] == '\n' || line[0] == '\r') continue;
         if (sscanf(line, "%llu %15s", &milliseconds, operation) != 2) {
             fprintf(stderr, "Invalid keyboard replay line %zu\n", number);
@@ -233,14 +239,16 @@ static void load_replay(const char *path)
 static void replay_input(uint64_t now)
 {
     simant_diagnostics_progress("replay_input", app.replay_next, (long)main_iteration_count);
-    uint64_t elapsed = (now - app.started_ns) / 1000000u;
+    uint64_t elapsed = app.replay_tick_units ?
+        (uint32_t)(sim_timing_tick_count(&app.bios_clock) - app.started_bios_ticks) :
+        (now - app.started_ns) / 1000000u;
     while (app.replay_next < app.replay_count &&
             app.replay[app.replay_next].milliseconds <= elapsed) {
         ReplayKey *entry = &app.replay[app.replay_next];
         SDL_Event event = {0};
         /* Preserve script order for equal-time input/checkpoint commands.
          * Ingestion is reentrancy-guarded and consumes no additional time. */
-        if (host_virtual_clock_enabled()) drain_host_observations();
+        if (portable_machine_clock_active() || host_virtual_clock_enabled()) drain_host_observations();
         if (entry->checkpoint) {
             portable_native_checkpoint(entry->milliseconds);
             ++app.replay_next;
@@ -483,7 +491,16 @@ static void source_timer_changed(void *context, uint16_t divisor, uint16_t reloa
 }
 static void idle(void *context)
 {
+    static SimVgaPlanes scanout_planes;
+    static HostPalette scanout_palette;
+    static uint64_t last_scanout;
+    static int scanout_width, scanout_height;
     Application *a = context;
+    extern int16_t GameSpeed;
+    /* Pacing affects only wall time. Fast/Ultra has no source pacing wait;
+     * its hardware reads still consume exactly the same machine quanta. */
+    if (GameSpeed != 3)
+        while (portable_machine_clock_pace()) drain_host_observations();
     uint64_t now = host_time_ns();
     simant_diagnostics_progress("application.idle", a->replay_next, (long)main_iteration_count);
     if (a->test_input > 0 && a->last_present) {
@@ -521,7 +538,7 @@ static void idle(void *context)
             SDL_PushEvent(&event);
         }
     }
-    if (host_virtual_clock_enabled() && a->audio.active &&
+    if ((portable_machine_clock_active() || host_virtual_clock_enabled()) && a->audio.active &&
         portable_sdl3_whole_audio_pump(&a->audio) != PORTABLE_SDL3_WHOLE_AUDIO_OK)
         fail("virtual PIT audio work");
     replay_input(now);
@@ -530,7 +547,7 @@ static void idle(void *context)
     drain_host_observations();
     simant_diagnostics_capture(a->host, (long)main_iteration_count);
     if (a->test_input == -1) simant_diagnostics_test_crash();
-    if (!host_virtual_clock_enabled() && a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
+    if (!portable_machine_clock_active() && !host_virtual_clock_enabled() && a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
             PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
     /* Polling yields after a draw, including held-input tracking. clip_active_list_offset is
      * the current clip list, which those loops retain until release; it is
@@ -545,7 +562,7 @@ static void idle(void *context)
         const uint64_t refresh_ns = 16683217;
         /* Wait in short slices: audio is rendered only up to host time, so
          * the device keeps the same feed cadence while the source waits. */
-        while (a->graphics.vga.written && a->last_present && !host_virtual_clock_enabled() &&
+        while (!portable_machine_clock_active() && a->graphics.vga.written && a->last_present && !host_virtual_clock_enabled() &&
                now - a->last_present < refresh_ns) {
             uint64_t remaining = refresh_ns - (now - a->last_present);
             SDL_DelayPrecise(remaining < 1000000u ? remaining : 1000000u);
@@ -554,8 +571,25 @@ static void idle(void *context)
             now = host_time_ns();
         }
         if (now - a->last_present >= refresh_ns) {
-            if (portable_m1b73_sdl_application_input_present(&a->input) !=
-                    PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
+            const HostPalette *palette = sim_sdl_palette_view(&a->palette);
+            /* Cursor IRQs may store the same pixels again. Avoid converting
+             * and uploading an unchanged single-screen scanout. Hosted plane
+             * sets have separate ownership and retain their existing refresh.
+             * A one-second repaint also covers window-system exposure. */
+            if (!portable_machine_clock_active() || native_windows_active() || !last_scanout ||
+                now - last_scanout >= UINT64_C(1000000000) ||
+                scanout_width != a->graphics.framebuffer.width ||
+                scanout_height != a->graphics.framebuffer.height ||
+                memcmp(&scanout_palette, palette, sizeof(scanout_palette)) ||
+                memcmp(scanout_planes, a->graphics.vga.planes, sizeof(scanout_planes))) {
+                if (portable_m1b73_sdl_application_input_present(&a->input) !=
+                        PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
+                memcpy(scanout_planes, a->graphics.vga.planes, sizeof(scanout_planes));
+                scanout_palette = *palette;
+                scanout_width = a->graphics.framebuffer.width;
+                scanout_height = a->graphics.framebuffer.height;
+                last_scanout = now;
+            }
             a->graphics.vga.written = 0;
             a->last_present = now;
         }
@@ -691,10 +725,9 @@ int main(int argc, char **argv)
     }
     if (source_argc > INT16_MAX) fail("source argument count");
     source_argv[source_argc] = NULL;
-    if (virtual_quantum_ns) {
-        host_virtual_clock_configure(virtual_quantum_ns);
-        if (!explicit_seed) app.seed = 0; /* 046C:0000 RAM policy, not BIOS time. */
-    }
+    portable_machine_clock_configure(virtual_quantum_ns != 0,
+        virtual_quantum_ns ? virtual_quantum_ns : UINT64_C(1000000));
+    if (!explicit_seed) app.seed = 0; /* 046C:0000 RAM policy, not BIOS time. */
     simant_diagnostics_launch(assets, app.seed);
     if (test_crash == 1) simant_diagnostics_test_crash();
     if (test_crash == 2) simant_diagnostics_test_thread_crash();
@@ -733,7 +766,7 @@ int main(int argc, char **argv)
     if (sim_timing_clock_init_bios(&app.game_clock, 14318180, 12) != SIM_TIMING_OK ||
         sim_timing_clock_init_bios(&app.bios_clock, 14318180, 12) != SIM_TIMING_OK ||
         !portable_seed_source_bind(read_seed, &app)) fail("source clocks and seed");
-    if (virtual_quantum_ns) app.bios_clock.tick_count = 0x1800b0u / 2u;
+    app.bios_clock.tick_count = 0x1800b0u / 2u;
     if (!portable_sdl3_whole_audio_open(&app.audio))
         fail("ISA audio startup binding");
     portable_sdl3_whole_audio_set_source_timer_observer(&app.audio,
@@ -742,6 +775,7 @@ int main(int argc, char **argv)
         fail("source audio services");
     if (dos_files_set_root(assets) < 0) fail("asset directory");
     app.started_ns = host_time_ns();
+    app.started_bios_ticks = sim_timing_tick_count(&app.bios_clock);
     simant_diagnostics_start(app.started_ns);
     if (smoke_ms) app.smoke_deadline_ns = app.started_ns + smoke_ms * 1000000u;
     fprintf(stderr, "Entering reconstructed DOS main, seed=%u\n", app.seed);

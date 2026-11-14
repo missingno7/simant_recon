@@ -75,8 +75,14 @@ PortableInputTimeStatus portable_input_time_host_set_clock_refresh(
 PortableInputTimeStatus portable_input_time_host_set_event_observer(
     PortableInputTimeHost *binding,
     int (*observe)(void *context, const HostEvent *event), void *context);
-PortableInputTimeStatus portable_input_time_host_refresh_clock(
-    PortableInputTimeHost *binding);
+/* Retained unclassified refresh ABI for external/older service fixtures. */
+PortableInputTimeStatus portable_input_time_host_refresh_clock(PortableInputTimeHost *binding);
+PortableInputTimeStatus portable_input_time_host_refresh_service(
+    PortableInputTimeHost *binding, const char *service);
+/* Carry the native boundary spelling without changing the canonical callers.
+ * The pure rule maps these to the independently observable guest services. */
+#define portable_input_time_host_refresh_clock(binding) \
+    portable_input_time_host_refresh_service((binding), __func__)
 /* Borrow the platform's existing CLI/STI flag. NULL permits delivery (the
  * default for isolated host-service controls). No new IF owner is introduced. */
 void portable_input_time_host_set_interrupt_guard(

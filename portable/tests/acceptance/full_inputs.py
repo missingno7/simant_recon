@@ -265,7 +265,7 @@ def full_tape(directory,exe,out,scenario_sha,script_sha,steps):
     contract=manifest['compact_observer'].get('order_contract')
     if contract:
         source=directory/'observer.txt.order'
-        if contract!='service-samples-v9' or sha(source)!=manifest['compact_observer']['order_sha256']:
+        if contract!='service-samples-v10' or sha(source)!=manifest['compact_observer']['order_sha256']:
             raise ValueError('Unbound global service sequence')
         sites={int(v[1]):(v[2],int(v[3],16)) for line in trace.read_text().splitlines()
                if (v:=line.split()) and v[0]=='O'}
