@@ -7,6 +7,7 @@ diagnostic mode accepts only the hash-pinned product of dos/diagnostic.py.
 from __future__ import annotations
 
 import argparse
+import configparser
 import json
 import math
 import os
@@ -18,6 +19,35 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from dos import build, diagnostic
+
+
+KEYBOARD_ENVIRONMENT = ROOT / 'dos/scenarios/keyboard-environment.conf'
+KEYBOARD_ENVIRONMENT_SHA256 = '00d7b23f40dc498db1be9ebe4f3c7b5d7ca1402a05a45488aef91aed6bd4868a'
+
+
+def keyboard_runner(runner):
+    """Overlay the pinned reference environment without changing compiler runners."""
+    raw, pin = build.read_pin(KEYBOARD_ENVIRONMENT, KEYBOARD_ENVIRONMENT_SHA256)
+    config = configparser.ConfigParser()
+    config.read_string(raw.decode('ascii'))
+    conf = {section: dict(values) for section, values in runner['conf'].items()}
+    for section in config.sections():
+        conf.setdefault(section, {}).update(config[section])
+    return {**runner, 'conf': conf}, pin
+
+
+def keyboard_layout(log, query=None):
+    """Actual DOS layout from the emulator, not its host/mapper layout lines."""
+    found = re.findall(r'DOS keyboard layout loaded with main language code (\S+) for layout (\S+)', log)
+    # DOS_GetLoadedLayout returns NULL when the foreign-layout mapper is off;
+    # KEYB then emits only PROGRAM_KEYB_INFO. This is US BIOS translation.
+    if query is not None and query.strip() in ('Codepage 437 has been loaded',
+            'Codepage 437 has been loaded for layout us') and not found:
+        return dict(language='us', layout='us')
+    if not found:
+        raise ValueError('DOS keyboard layout is not established by the host log')
+    language, layout = found[-1]
+    return dict(language=language.lower(), layout=layout.lower())
 
 
 def observation_path(path):
@@ -282,6 +312,8 @@ def main(argv=None):
             for line in Path(args.input_script).read_text().splitlines() if not line.lstrip().startswith('#'))
         runner = build.compiler.toolchain()['runners'][
             'dosbox-x-observation' if observing else 'dosbox-x-acceptance' if args.input_script else 'dosbox-x']
+        runner, environment_pin = keyboard_runner(runner)
+        report['keyboard_environment'] = environment_pin
         report['runner'] = build.read_pin(runner['path'], runner['sha256'])[1]
         if bool(args.capture_observer) != bool(args.observer_config):
             raise ValueError('--capture-observer and --observer-config must be supplied together')
@@ -301,7 +333,7 @@ def main(argv=None):
             (out / 'INPUT.SCR').write_text('\n'.join(script) + '\n')
             report['input_script'] = {'source': str(args.input_script), 'events': len(script),
                 'scope': 'Emulated-time scheduled input and memory dumps; deterministic for fixed cycles and guest clock.'}
-        batch = ['@echo off']
+        batch = ['@echo off', 'keyb > KEYBOARD.TXT']
         if args.fixed_clock:
             batch += ['date 01-01-1992', 'time 12:00:00']
             report['guest_clock'] = 'DATE 01-01-1992, TIME 12:00:00 set by the batch before input scheduling and launch'
@@ -362,6 +394,11 @@ def main(argv=None):
                 except subprocess.TimeoutExpired:
                     report['status'] = 'TIME_LIMIT'
             report['guest_started'] = (out / 'STARTED.TXT').is_file()
+            query = (out / 'KEYBOARD.TXT').read_text(encoding='latin1')
+            report['keyboard_layout_query'] = build.read_pin(out / 'KEYBOARD.TXT')[1]
+            report['keyboard_layout'] = keyboard_layout((out / 'host.log').read_text(encoding='latin1'), query)
+            if report['keyboard_layout'] != dict(language='us', layout='us'):
+                raise ValueError('Effective DOS keyboard layout differs from pinned US environment')
             rc = out / 'GAME.RC'
             report['guest_exit_code'] = rc.read_text().strip() if rc.is_file() else None
             game_log = out / 'GAME.LOG'

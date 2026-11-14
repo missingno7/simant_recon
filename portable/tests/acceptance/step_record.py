@@ -28,6 +28,11 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         if identity['saved_game_sha256']!=scenario['saved_game_sha256']:
             raise ValueError('Scenario saved game identity differs')
     if (directory/'manifest.json').is_file():
+        try:
+            from .step_check import validate_reference
+        except ImportError:
+            from step_check import validate_reference
+        validate_reference(directory, scenario_path)
         manifest=json.loads((directory/'manifest.json').read_text())
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
             boundary=json.loads((directory/'capture/boundary-manifest.json').read_text())
@@ -68,10 +73,15 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     capture=directory/'capture'
     rows=read_hashes(capture/'observer.txt.hash',len(state['items']))
     boundary=json.loads((capture/'boundary-manifest.json').read_text())
+    execution=json.loads((capture/'execution-report.json').read_text())
+    if execution.get('keyboard_layout') != dict(language='us', layout='us'):
+        raise ValueError('Reference effective keyboard layout is not pinned US')
     manifest=dict(schema='simant-step-reference-v1',target=target,**identity,steps=len(rows),requested_steps=count,
                   schema_identity=state['identity'],speed=scenario.get('speed','normal (1)'),cycles=cycles or scenario.get('cycles',10000),
                   recording_seconds=elapsed,seconds_per_step=elapsed/max(1,len(rows)),command=cmd,
                   observer_sha256=sha(observer),observer_build=observer_build,
+                  keyboard_layout=execution['keyboard_layout'],
+                  keyboard_environment=execution['keyboard_environment'],
                   source_identity=json.loads(report.read_text()).get('input_pins') if target!='original' else None,
                   complete=run.returncode==0 and len(rows)==count,
                   boundary_manifest_sha256=sha(capture/'boundary-manifest.json'),

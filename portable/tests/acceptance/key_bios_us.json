@@ -1,0 +1,4986 @@
+{
+ "about": "Measured INT16 AH=01/00 output after real set-1 makes/breaks, no game code. Flags are BDA 40:17 with NumLock cleared. Regenerate with key_bios_probe.py; Ctrl+Alt+Del intentionally excluded (reset).",
+ "layout": "us",
+ "runner_path": "C:/tools/dosbox-x-2026.08.31-simant-acceptance/dosbox-x.exe",
+ "runner_sha256": "c127a9a578fbc90231701f369e087f896a3d953ce1c2f653cec88e9476cb40c3",
+ "probe_sha256": "6d311ce641280b841836fddb48ea8c81b65f7e7bba7ea705dc5c42084d2e19bf",
+ "receipt_sha256": "3e4ecd8b01059d7474b1f90a95685dd942355eecc3e8434370ef6eed562828c5",
+ "bios_source": {
+  "path": "C:\\tools\\dosbox-x-2026.08.31-simant-acceptance-src\\src\\ints\\bios_keyboard.cpp",
+  "sha256": "f5e8447c6170bc8f4b8ac0b7e40d14ebbbc7d49fa6a333a8f65a05ab5ac43237"
+ },
+ "cases": [
+  {
+   "key": "1",
+   "modifiers": 0,
+   "words": [
+    561
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "2",
+   "modifiers": 0,
+   "words": [
+    818
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "3",
+   "modifiers": 0,
+   "words": [
+    1075
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "4",
+   "modifiers": 0,
+   "words": [
+    1332
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "5",
+   "modifiers": 0,
+   "words": [
+    1589
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "6",
+   "modifiers": 0,
+   "words": [
+    1846
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "7",
+   "modifiers": 0,
+   "words": [
+    2103
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "8",
+   "modifiers": 0,
+   "words": [
+    2360
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "9",
+   "modifiers": 0,
+   "words": [
+    2617
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "0",
+   "modifiers": 0,
+   "words": [
+    2864
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "a",
+   "modifiers": 0,
+   "words": [
+    7777
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "b",
+   "modifiers": 0,
+   "words": [
+    12386
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "c",
+   "modifiers": 0,
+   "words": [
+    11875
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "d",
+   "modifiers": 0,
+   "words": [
+    8292
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "e",
+   "modifiers": 0,
+   "words": [
+    4709
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "f",
+   "modifiers": 0,
+   "words": [
+    8550
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "g",
+   "modifiers": 0,
+   "words": [
+    8807
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "h",
+   "modifiers": 0,
+   "words": [
+    9064
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "i",
+   "modifiers": 0,
+   "words": [
+    5993
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "j",
+   "modifiers": 0,
+   "words": [
+    9322
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "k",
+   "modifiers": 0,
+   "words": [
+    9579
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "l",
+   "modifiers": 0,
+   "words": [
+    9836
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "m",
+   "modifiers": 0,
+   "words": [
+    12909
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "n",
+   "modifiers": 0,
+   "words": [
+    12654
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "o",
+   "modifiers": 0,
+   "words": [
+    6255
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "p",
+   "modifiers": 0,
+   "words": [
+    6512
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "q",
+   "modifiers": 0,
+   "words": [
+    4209
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "r",
+   "modifiers": 0,
+   "words": [
+    4978
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "s",
+   "modifiers": 0,
+   "words": [
+    8051
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "t",
+   "modifiers": 0,
+   "words": [
+    5236
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "u",
+   "modifiers": 0,
+   "words": [
+    5749
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "v",
+   "modifiers": 0,
+   "words": [
+    12150
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "w",
+   "modifiers": 0,
+   "words": [
+    4471
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "x",
+   "modifiers": 0,
+   "words": [
+    11640
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "y",
+   "modifiers": 0,
+   "words": [
+    5497
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "z",
+   "modifiers": 0,
+   "words": [
+    11386
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "minus",
+   "modifiers": 0,
+   "words": [
+    3117
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "equals",
+   "modifiers": 0,
+   "words": [
+    3389
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 0,
+   "words": [
+    6747
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 0,
+   "words": [
+    7005
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 0,
+   "words": [
+    10043
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "quote",
+   "modifiers": 0,
+   "words": [
+    10279
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "grave",
+   "modifiers": 0,
+   "words": [
+    10592
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "backslash",
+   "modifiers": 0,
+   "words": [
+    11100
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "comma",
+   "modifiers": 0,
+   "words": [
+    13100
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "period",
+   "modifiers": 0,
+   "words": [
+    13358
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "slash",
+   "modifiers": 0,
+   "words": [
+    13615
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "enter",
+   "modifiers": 0,
+   "words": [
+    7181
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "esc",
+   "modifiers": 0,
+   "words": [
+    283
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "bspace",
+   "modifiers": 0,
+   "words": [
+    3592
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "tab",
+   "modifiers": 0,
+   "words": [
+    3849
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "space",
+   "modifiers": 0,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "home",
+   "modifiers": 0,
+   "words": [
+    18176
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "end",
+   "modifiers": 0,
+   "words": [
+    20224
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "up",
+   "modifiers": 0,
+   "words": [
+    18432
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "down",
+   "modifiers": 0,
+   "words": [
+    20480
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "left",
+   "modifiers": 0,
+   "words": [
+    19200
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "right",
+   "modifiers": 0,
+   "words": [
+    19712
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "pageup",
+   "modifiers": 0,
+   "words": [
+    18688
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 0,
+   "words": [
+    20736
+   ],
+   "release_words": [],
+   "flags": 0
+  },
+  {
+   "key": "insert",
+   "modifiers": 0,
+   "words": [
+    20992
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "delete",
+   "modifiers": 0,
+   "words": [
+    21248
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 0,
+   "words": [],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f1",
+   "modifiers": 0,
+   "words": [
+    15104
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f2",
+   "modifiers": 0,
+   "words": [
+    15360
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f3",
+   "modifiers": 0,
+   "words": [
+    15616
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f4",
+   "modifiers": 0,
+   "words": [
+    15872
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f5",
+   "modifiers": 0,
+   "words": [
+    16128
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f6",
+   "modifiers": 0,
+   "words": [
+    16384
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f7",
+   "modifiers": 0,
+   "words": [
+    16640
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f8",
+   "modifiers": 0,
+   "words": [
+    16896
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f9",
+   "modifiers": 0,
+   "words": [
+    17152
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "f10",
+   "modifiers": 0,
+   "words": [
+    17408
+   ],
+   "release_words": [],
+   "flags": 128
+  },
+  {
+   "key": "1",
+   "modifiers": 1,
+   "words": [
+    545
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "2",
+   "modifiers": 1,
+   "words": [
+    832
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "3",
+   "modifiers": 1,
+   "words": [
+    1059
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "4",
+   "modifiers": 1,
+   "words": [
+    1316
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "5",
+   "modifiers": 1,
+   "words": [
+    1573
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "6",
+   "modifiers": 1,
+   "words": [
+    1886
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "7",
+   "modifiers": 1,
+   "words": [
+    2086
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "8",
+   "modifiers": 1,
+   "words": [
+    2346
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "9",
+   "modifiers": 1,
+   "words": [
+    2600
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "0",
+   "modifiers": 1,
+   "words": [
+    2857
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "a",
+   "modifiers": 1,
+   "words": [
+    7745
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "b",
+   "modifiers": 1,
+   "words": [
+    12354
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "c",
+   "modifiers": 1,
+   "words": [
+    11843
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "d",
+   "modifiers": 1,
+   "words": [
+    8260
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "e",
+   "modifiers": 1,
+   "words": [
+    4677
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "f",
+   "modifiers": 1,
+   "words": [
+    8518
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "g",
+   "modifiers": 1,
+   "words": [
+    8775
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "h",
+   "modifiers": 1,
+   "words": [
+    9032
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "i",
+   "modifiers": 1,
+   "words": [
+    5961
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "j",
+   "modifiers": 1,
+   "words": [
+    9290
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "k",
+   "modifiers": 1,
+   "words": [
+    9547
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "l",
+   "modifiers": 1,
+   "words": [
+    9804
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "m",
+   "modifiers": 1,
+   "words": [
+    12877
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "n",
+   "modifiers": 1,
+   "words": [
+    12622
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "o",
+   "modifiers": 1,
+   "words": [
+    6223
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "p",
+   "modifiers": 1,
+   "words": [
+    6480
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "q",
+   "modifiers": 1,
+   "words": [
+    4177
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "r",
+   "modifiers": 1,
+   "words": [
+    4946
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "s",
+   "modifiers": 1,
+   "words": [
+    8019
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "t",
+   "modifiers": 1,
+   "words": [
+    5204
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "u",
+   "modifiers": 1,
+   "words": [
+    5717
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "v",
+   "modifiers": 1,
+   "words": [
+    12118
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "w",
+   "modifiers": 1,
+   "words": [
+    4439
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "x",
+   "modifiers": 1,
+   "words": [
+    11608
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "y",
+   "modifiers": 1,
+   "words": [
+    5465
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "z",
+   "modifiers": 1,
+   "words": [
+    11354
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "minus",
+   "modifiers": 1,
+   "words": [
+    3167
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "equals",
+   "modifiers": 1,
+   "words": [
+    3371
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 1,
+   "words": [
+    6779
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 1,
+   "words": [
+    7037
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 1,
+   "words": [
+    10042
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "quote",
+   "modifiers": 1,
+   "words": [
+    10274
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "grave",
+   "modifiers": 1,
+   "words": [
+    10622
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "backslash",
+   "modifiers": 1,
+   "words": [
+    11132
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "comma",
+   "modifiers": 1,
+   "words": [
+    13116
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "period",
+   "modifiers": 1,
+   "words": [
+    13374
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "slash",
+   "modifiers": 1,
+   "words": [
+    13631
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "enter",
+   "modifiers": 1,
+   "words": [
+    7181
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "esc",
+   "modifiers": 1,
+   "words": [
+    283
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "bspace",
+   "modifiers": 1,
+   "words": [
+    3592
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "tab",
+   "modifiers": 1,
+   "words": [
+    3840
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "space",
+   "modifiers": 1,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "home",
+   "modifiers": 1,
+   "words": [
+    18176
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "end",
+   "modifiers": 1,
+   "words": [
+    20224
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "up",
+   "modifiers": 1,
+   "words": [
+    18432
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "down",
+   "modifiers": 1,
+   "words": [
+    20480
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "left",
+   "modifiers": 1,
+   "words": [
+    19200
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "right",
+   "modifiers": 1,
+   "words": [
+    19712
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "pageup",
+   "modifiers": 1,
+   "words": [
+    18688
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 1,
+   "words": [
+    20736
+   ],
+   "release_words": [],
+   "flags": 130
+  },
+  {
+   "key": "insert",
+   "modifiers": 1,
+   "words": [
+    20992
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "delete",
+   "modifiers": 1,
+   "words": [
+    21248
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 1,
+   "words": [
+    19509
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f1",
+   "modifiers": 1,
+   "words": [
+    21504
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f2",
+   "modifiers": 1,
+   "words": [
+    21760
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f3",
+   "modifiers": 1,
+   "words": [
+    22016
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f4",
+   "modifiers": 1,
+   "words": [
+    22272
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f5",
+   "modifiers": 1,
+   "words": [
+    22528
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f6",
+   "modifiers": 1,
+   "words": [
+    22784
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f7",
+   "modifiers": 1,
+   "words": [
+    23040
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f8",
+   "modifiers": 1,
+   "words": [
+    23296
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f9",
+   "modifiers": 1,
+   "words": [
+    23552
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "f10",
+   "modifiers": 1,
+   "words": [
+    23808
+   ],
+   "release_words": [],
+   "flags": 2
+  },
+  {
+   "key": "1",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "2",
+   "modifiers": 2,
+   "words": [
+    768
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "3",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "4",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "5",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "6",
+   "modifiers": 2,
+   "words": [
+    1822
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "7",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "8",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "9",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "0",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "a",
+   "modifiers": 2,
+   "words": [
+    7681
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "b",
+   "modifiers": 2,
+   "words": [
+    12290
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "c",
+   "modifiers": 2,
+   "words": [
+    11779
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "d",
+   "modifiers": 2,
+   "words": [
+    8196
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "e",
+   "modifiers": 2,
+   "words": [
+    4613
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "f",
+   "modifiers": 2,
+   "words": [
+    8454
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "g",
+   "modifiers": 2,
+   "words": [
+    8711
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "h",
+   "modifiers": 2,
+   "words": [
+    8968
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "i",
+   "modifiers": 2,
+   "words": [
+    5897
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "j",
+   "modifiers": 2,
+   "words": [
+    9226
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "k",
+   "modifiers": 2,
+   "words": [
+    9483
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "l",
+   "modifiers": 2,
+   "words": [
+    9740
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "m",
+   "modifiers": 2,
+   "words": [
+    12813
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "n",
+   "modifiers": 2,
+   "words": [
+    12558
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "o",
+   "modifiers": 2,
+   "words": [
+    6159
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "p",
+   "modifiers": 2,
+   "words": [
+    6416
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "q",
+   "modifiers": 2,
+   "words": [
+    4113
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "r",
+   "modifiers": 2,
+   "words": [
+    4882
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "s",
+   "modifiers": 2,
+   "words": [
+    7955
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "t",
+   "modifiers": 2,
+   "words": [
+    5140
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "u",
+   "modifiers": 2,
+   "words": [
+    5653
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "v",
+   "modifiers": 2,
+   "words": [
+    12054
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "w",
+   "modifiers": 2,
+   "words": [
+    4375
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "x",
+   "modifiers": 2,
+   "words": [
+    11544
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "y",
+   "modifiers": 2,
+   "words": [
+    5401
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "z",
+   "modifiers": 2,
+   "words": [
+    11290
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "minus",
+   "modifiers": 2,
+   "words": [
+    3103
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "equals",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 2,
+   "words": [
+    6683
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 2,
+   "words": [
+    6941
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "quote",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "grave",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "backslash",
+   "modifiers": 2,
+   "words": [
+    11036
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "comma",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "period",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "slash",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "enter",
+   "modifiers": 2,
+   "words": [
+    7178
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "esc",
+   "modifiers": 2,
+   "words": [
+    283
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "bspace",
+   "modifiers": 2,
+   "words": [
+    3711
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "tab",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "space",
+   "modifiers": 2,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "home",
+   "modifiers": 2,
+   "words": [
+    30464
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "end",
+   "modifiers": 2,
+   "words": [
+    29952
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "up",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "down",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "left",
+   "modifiers": 2,
+   "words": [
+    29440
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "right",
+   "modifiers": 2,
+   "words": [
+    29696
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "pageup",
+   "modifiers": 2,
+   "words": [
+    33792
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 2,
+   "words": [
+    30208
+   ],
+   "release_words": [],
+   "flags": 4
+  },
+  {
+   "key": "insert",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "delete",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 2,
+   "words": [],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f1",
+   "modifiers": 2,
+   "words": [
+    24064
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f2",
+   "modifiers": 2,
+   "words": [
+    24320
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f3",
+   "modifiers": 2,
+   "words": [
+    24576
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f4",
+   "modifiers": 2,
+   "words": [
+    24832
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f5",
+   "modifiers": 2,
+   "words": [
+    25088
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f6",
+   "modifiers": 2,
+   "words": [
+    25344
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f7",
+   "modifiers": 2,
+   "words": [
+    25600
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f8",
+   "modifiers": 2,
+   "words": [
+    25856
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f9",
+   "modifiers": 2,
+   "words": [
+    26112
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "f10",
+   "modifiers": 2,
+   "words": [
+    26368
+   ],
+   "release_words": [],
+   "flags": 132
+  },
+  {
+   "key": "1",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "2",
+   "modifiers": 3,
+   "words": [
+    768
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "3",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "4",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "5",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "6",
+   "modifiers": 3,
+   "words": [
+    1822
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "7",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "8",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "9",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "0",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "a",
+   "modifiers": 3,
+   "words": [
+    7681
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "b",
+   "modifiers": 3,
+   "words": [
+    12290
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "c",
+   "modifiers": 3,
+   "words": [
+    11779
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "d",
+   "modifiers": 3,
+   "words": [
+    8196
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "e",
+   "modifiers": 3,
+   "words": [
+    4613
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "f",
+   "modifiers": 3,
+   "words": [
+    8454
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "g",
+   "modifiers": 3,
+   "words": [
+    8711
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "h",
+   "modifiers": 3,
+   "words": [
+    8968
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "i",
+   "modifiers": 3,
+   "words": [
+    5897
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "j",
+   "modifiers": 3,
+   "words": [
+    9226
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "k",
+   "modifiers": 3,
+   "words": [
+    9483
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "l",
+   "modifiers": 3,
+   "words": [
+    9740
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "m",
+   "modifiers": 3,
+   "words": [
+    12813
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "n",
+   "modifiers": 3,
+   "words": [
+    12558
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "o",
+   "modifiers": 3,
+   "words": [
+    6159
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "p",
+   "modifiers": 3,
+   "words": [
+    6416
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "q",
+   "modifiers": 3,
+   "words": [
+    4113
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "r",
+   "modifiers": 3,
+   "words": [
+    4882
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "s",
+   "modifiers": 3,
+   "words": [
+    7955
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "t",
+   "modifiers": 3,
+   "words": [
+    5140
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "u",
+   "modifiers": 3,
+   "words": [
+    5653
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "v",
+   "modifiers": 3,
+   "words": [
+    12054
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "w",
+   "modifiers": 3,
+   "words": [
+    4375
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "x",
+   "modifiers": 3,
+   "words": [
+    11544
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "y",
+   "modifiers": 3,
+   "words": [
+    5401
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "z",
+   "modifiers": 3,
+   "words": [
+    11290
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "minus",
+   "modifiers": 3,
+   "words": [
+    3103
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "equals",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 3,
+   "words": [
+    6683
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 3,
+   "words": [
+    6941
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "quote",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "grave",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "backslash",
+   "modifiers": 3,
+   "words": [
+    11036
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "comma",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "period",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "slash",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "enter",
+   "modifiers": 3,
+   "words": [
+    7178
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "esc",
+   "modifiers": 3,
+   "words": [
+    283
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "bspace",
+   "modifiers": 3,
+   "words": [
+    3711
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "tab",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "space",
+   "modifiers": 3,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "home",
+   "modifiers": 3,
+   "words": [
+    30464
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "end",
+   "modifiers": 3,
+   "words": [
+    29952
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "up",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "down",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "left",
+   "modifiers": 3,
+   "words": [
+    29440
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "right",
+   "modifiers": 3,
+   "words": [
+    29696
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "pageup",
+   "modifiers": 3,
+   "words": [
+    33792
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 3,
+   "words": [
+    30208
+   ],
+   "release_words": [],
+   "flags": 134
+  },
+  {
+   "key": "insert",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "delete",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 3,
+   "words": [],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f1",
+   "modifiers": 3,
+   "words": [
+    24064
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f2",
+   "modifiers": 3,
+   "words": [
+    24320
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f3",
+   "modifiers": 3,
+   "words": [
+    24576
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f4",
+   "modifiers": 3,
+   "words": [
+    24832
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f5",
+   "modifiers": 3,
+   "words": [
+    25088
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f6",
+   "modifiers": 3,
+   "words": [
+    25344
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f7",
+   "modifiers": 3,
+   "words": [
+    25600
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f8",
+   "modifiers": 3,
+   "words": [
+    25856
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f9",
+   "modifiers": 3,
+   "words": [
+    26112
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "f10",
+   "modifiers": 3,
+   "words": [
+    26368
+   ],
+   "release_words": [],
+   "flags": 6
+  },
+  {
+   "key": "1",
+   "modifiers": 4,
+   "words": [
+    30720
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "2",
+   "modifiers": 4,
+   "words": [
+    30976
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "3",
+   "modifiers": 4,
+   "words": [
+    31232
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "4",
+   "modifiers": 4,
+   "words": [
+    31488
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "5",
+   "modifiers": 4,
+   "words": [
+    31744
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "6",
+   "modifiers": 4,
+   "words": [
+    32000
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "7",
+   "modifiers": 4,
+   "words": [
+    32256
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "8",
+   "modifiers": 4,
+   "words": [
+    32512
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "9",
+   "modifiers": 4,
+   "words": [
+    32768
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "0",
+   "modifiers": 4,
+   "words": [
+    33024
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "a",
+   "modifiers": 4,
+   "words": [
+    7680
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "b",
+   "modifiers": 4,
+   "words": [
+    12288
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "c",
+   "modifiers": 4,
+   "words": [
+    11776
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "d",
+   "modifiers": 4,
+   "words": [
+    8192
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "e",
+   "modifiers": 4,
+   "words": [
+    4608
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "f",
+   "modifiers": 4,
+   "words": [
+    8448
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "g",
+   "modifiers": 4,
+   "words": [
+    8704
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "h",
+   "modifiers": 4,
+   "words": [
+    8960
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "i",
+   "modifiers": 4,
+   "words": [
+    5888
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "j",
+   "modifiers": 4,
+   "words": [
+    9216
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "k",
+   "modifiers": 4,
+   "words": [
+    9472
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "l",
+   "modifiers": 4,
+   "words": [
+    9728
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "m",
+   "modifiers": 4,
+   "words": [
+    12800
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "n",
+   "modifiers": 4,
+   "words": [
+    12544
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "o",
+   "modifiers": 4,
+   "words": [
+    6144
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "p",
+   "modifiers": 4,
+   "words": [
+    6400
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "q",
+   "modifiers": 4,
+   "words": [
+    4096
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "r",
+   "modifiers": 4,
+   "words": [
+    4864
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "s",
+   "modifiers": 4,
+   "words": [
+    7936
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "t",
+   "modifiers": 4,
+   "words": [
+    5120
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "u",
+   "modifiers": 4,
+   "words": [
+    5632
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "v",
+   "modifiers": 4,
+   "words": [
+    12032
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "w",
+   "modifiers": 4,
+   "words": [
+    4352
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "x",
+   "modifiers": 4,
+   "words": [
+    11520
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "y",
+   "modifiers": 4,
+   "words": [
+    5376
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "z",
+   "modifiers": 4,
+   "words": [
+    11264
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "minus",
+   "modifiers": 4,
+   "words": [
+    33280
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "equals",
+   "modifiers": 4,
+   "words": [
+    33536
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "quote",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "grave",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "backslash",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "comma",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "period",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "slash",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "enter",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "esc",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "bspace",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "tab",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "space",
+   "modifiers": 4,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "home",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "end",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "up",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "down",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "left",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "right",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "pageup",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 8
+  },
+  {
+   "key": "insert",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "delete",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 4,
+   "words": [],
+   "release_words": [
+    5
+   ],
+   "flags": 136
+  },
+  {
+   "key": "f1",
+   "modifiers": 4,
+   "words": [
+    26624
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f2",
+   "modifiers": 4,
+   "words": [
+    26880
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f3",
+   "modifiers": 4,
+   "words": [
+    27136
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f4",
+   "modifiers": 4,
+   "words": [
+    27392
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f5",
+   "modifiers": 4,
+   "words": [
+    27648
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f6",
+   "modifiers": 4,
+   "words": [
+    27904
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f7",
+   "modifiers": 4,
+   "words": [
+    28160
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f8",
+   "modifiers": 4,
+   "words": [
+    28416
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f9",
+   "modifiers": 4,
+   "words": [
+    28672
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "f10",
+   "modifiers": 4,
+   "words": [
+    28928
+   ],
+   "release_words": [],
+   "flags": 136
+  },
+  {
+   "key": "1",
+   "modifiers": 5,
+   "words": [
+    30720
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "2",
+   "modifiers": 5,
+   "words": [
+    30976
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "3",
+   "modifiers": 5,
+   "words": [
+    31232
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "4",
+   "modifiers": 5,
+   "words": [
+    31488
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "5",
+   "modifiers": 5,
+   "words": [
+    31744
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "6",
+   "modifiers": 5,
+   "words": [
+    32000
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "7",
+   "modifiers": 5,
+   "words": [
+    32256
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "8",
+   "modifiers": 5,
+   "words": [
+    32512
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "9",
+   "modifiers": 5,
+   "words": [
+    32768
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "0",
+   "modifiers": 5,
+   "words": [
+    33024
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "a",
+   "modifiers": 5,
+   "words": [
+    7680
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "b",
+   "modifiers": 5,
+   "words": [
+    12288
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "c",
+   "modifiers": 5,
+   "words": [
+    11776
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "d",
+   "modifiers": 5,
+   "words": [
+    8192
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "e",
+   "modifiers": 5,
+   "words": [
+    4608
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "f",
+   "modifiers": 5,
+   "words": [
+    8448
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "g",
+   "modifiers": 5,
+   "words": [
+    8704
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "h",
+   "modifiers": 5,
+   "words": [
+    8960
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "i",
+   "modifiers": 5,
+   "words": [
+    5888
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "j",
+   "modifiers": 5,
+   "words": [
+    9216
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "k",
+   "modifiers": 5,
+   "words": [
+    9472
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "l",
+   "modifiers": 5,
+   "words": [
+    9728
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "m",
+   "modifiers": 5,
+   "words": [
+    12800
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "n",
+   "modifiers": 5,
+   "words": [
+    12544
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "o",
+   "modifiers": 5,
+   "words": [
+    6144
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "p",
+   "modifiers": 5,
+   "words": [
+    6400
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "q",
+   "modifiers": 5,
+   "words": [
+    4096
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "r",
+   "modifiers": 5,
+   "words": [
+    4864
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "s",
+   "modifiers": 5,
+   "words": [
+    7936
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "t",
+   "modifiers": 5,
+   "words": [
+    5120
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "u",
+   "modifiers": 5,
+   "words": [
+    5632
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "v",
+   "modifiers": 5,
+   "words": [
+    12032
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "w",
+   "modifiers": 5,
+   "words": [
+    4352
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "x",
+   "modifiers": 5,
+   "words": [
+    11520
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "y",
+   "modifiers": 5,
+   "words": [
+    5376
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "z",
+   "modifiers": 5,
+   "words": [
+    11264
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "minus",
+   "modifiers": 5,
+   "words": [
+    33280
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "equals",
+   "modifiers": 5,
+   "words": [
+    33536
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "quote",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "grave",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "backslash",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "comma",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "period",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "slash",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "enter",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "esc",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "bspace",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "tab",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "space",
+   "modifiers": 5,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "home",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "end",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "up",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "down",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "left",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "right",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "pageup",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 138
+  },
+  {
+   "key": "insert",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "delete",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 5,
+   "words": [],
+   "release_words": [
+    5
+   ],
+   "flags": 10
+  },
+  {
+   "key": "f1",
+   "modifiers": 5,
+   "words": [
+    26624
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f2",
+   "modifiers": 5,
+   "words": [
+    26880
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f3",
+   "modifiers": 5,
+   "words": [
+    27136
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f4",
+   "modifiers": 5,
+   "words": [
+    27392
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f5",
+   "modifiers": 5,
+   "words": [
+    27648
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f6",
+   "modifiers": 5,
+   "words": [
+    27904
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f7",
+   "modifiers": 5,
+   "words": [
+    28160
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f8",
+   "modifiers": 5,
+   "words": [
+    28416
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f9",
+   "modifiers": 5,
+   "words": [
+    28672
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "f10",
+   "modifiers": 5,
+   "words": [
+    28928
+   ],
+   "release_words": [],
+   "flags": 10
+  },
+  {
+   "key": "1",
+   "modifiers": 6,
+   "words": [
+    30720
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "2",
+   "modifiers": 6,
+   "words": [
+    30976
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "3",
+   "modifiers": 6,
+   "words": [
+    31232
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "4",
+   "modifiers": 6,
+   "words": [
+    31488
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "5",
+   "modifiers": 6,
+   "words": [
+    31744
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "6",
+   "modifiers": 6,
+   "words": [
+    32000
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "7",
+   "modifiers": 6,
+   "words": [
+    32256
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "8",
+   "modifiers": 6,
+   "words": [
+    32512
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "9",
+   "modifiers": 6,
+   "words": [
+    32768
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "0",
+   "modifiers": 6,
+   "words": [
+    33024
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "a",
+   "modifiers": 6,
+   "words": [
+    7680
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "b",
+   "modifiers": 6,
+   "words": [
+    12288
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "c",
+   "modifiers": 6,
+   "words": [
+    11776
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "d",
+   "modifiers": 6,
+   "words": [
+    8192
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "e",
+   "modifiers": 6,
+   "words": [
+    4608
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "f",
+   "modifiers": 6,
+   "words": [
+    8448
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "g",
+   "modifiers": 6,
+   "words": [
+    8704
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "h",
+   "modifiers": 6,
+   "words": [
+    8960
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "i",
+   "modifiers": 6,
+   "words": [
+    5888
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "j",
+   "modifiers": 6,
+   "words": [
+    9216
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "k",
+   "modifiers": 6,
+   "words": [
+    9472
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "l",
+   "modifiers": 6,
+   "words": [
+    9728
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "m",
+   "modifiers": 6,
+   "words": [
+    12800
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "n",
+   "modifiers": 6,
+   "words": [
+    12544
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "o",
+   "modifiers": 6,
+   "words": [
+    6144
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "p",
+   "modifiers": 6,
+   "words": [
+    6400
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "q",
+   "modifiers": 6,
+   "words": [
+    4096
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "r",
+   "modifiers": 6,
+   "words": [
+    4864
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "s",
+   "modifiers": 6,
+   "words": [
+    7936
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "t",
+   "modifiers": 6,
+   "words": [
+    5120
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "u",
+   "modifiers": 6,
+   "words": [
+    5632
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "v",
+   "modifiers": 6,
+   "words": [
+    12032
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "w",
+   "modifiers": 6,
+   "words": [
+    4352
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "x",
+   "modifiers": 6,
+   "words": [
+    11520
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "y",
+   "modifiers": 6,
+   "words": [
+    5376
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "z",
+   "modifiers": 6,
+   "words": [
+    11264
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "minus",
+   "modifiers": 6,
+   "words": [
+    33280
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "equals",
+   "modifiers": 6,
+   "words": [
+    33536
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "quote",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "grave",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "backslash",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "comma",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "period",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "slash",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "enter",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "esc",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "bspace",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "tab",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "space",
+   "modifiers": 6,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "home",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "end",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "up",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "down",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "left",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "right",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "pageup",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 12
+  },
+  {
+   "key": "insert",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 6,
+   "words": [],
+   "release_words": [
+    5
+   ],
+   "flags": 140
+  },
+  {
+   "key": "f1",
+   "modifiers": 6,
+   "words": [
+    26624
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f2",
+   "modifiers": 6,
+   "words": [
+    26880
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f3",
+   "modifiers": 6,
+   "words": [
+    27136
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f4",
+   "modifiers": 6,
+   "words": [
+    27392
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f5",
+   "modifiers": 6,
+   "words": [
+    27648
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f6",
+   "modifiers": 6,
+   "words": [
+    27904
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f7",
+   "modifiers": 6,
+   "words": [
+    28160
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f8",
+   "modifiers": 6,
+   "words": [
+    28416
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f9",
+   "modifiers": 6,
+   "words": [
+    28672
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "f10",
+   "modifiers": 6,
+   "words": [
+    28928
+   ],
+   "release_words": [],
+   "flags": 140
+  },
+  {
+   "key": "1",
+   "modifiers": 7,
+   "words": [
+    30720
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "2",
+   "modifiers": 7,
+   "words": [
+    30976
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "3",
+   "modifiers": 7,
+   "words": [
+    31232
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "4",
+   "modifiers": 7,
+   "words": [
+    31488
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "5",
+   "modifiers": 7,
+   "words": [
+    31744
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "6",
+   "modifiers": 7,
+   "words": [
+    32000
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "7",
+   "modifiers": 7,
+   "words": [
+    32256
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "8",
+   "modifiers": 7,
+   "words": [
+    32512
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "9",
+   "modifiers": 7,
+   "words": [
+    32768
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "0",
+   "modifiers": 7,
+   "words": [
+    33024
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "a",
+   "modifiers": 7,
+   "words": [
+    7680
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "b",
+   "modifiers": 7,
+   "words": [
+    12288
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "c",
+   "modifiers": 7,
+   "words": [
+    11776
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "d",
+   "modifiers": 7,
+   "words": [
+    8192
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "e",
+   "modifiers": 7,
+   "words": [
+    4608
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "f",
+   "modifiers": 7,
+   "words": [
+    8448
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "g",
+   "modifiers": 7,
+   "words": [
+    8704
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "h",
+   "modifiers": 7,
+   "words": [
+    8960
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "i",
+   "modifiers": 7,
+   "words": [
+    5888
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "j",
+   "modifiers": 7,
+   "words": [
+    9216
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "k",
+   "modifiers": 7,
+   "words": [
+    9472
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "l",
+   "modifiers": 7,
+   "words": [
+    9728
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "m",
+   "modifiers": 7,
+   "words": [
+    12800
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "n",
+   "modifiers": 7,
+   "words": [
+    12544
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "o",
+   "modifiers": 7,
+   "words": [
+    6144
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "p",
+   "modifiers": 7,
+   "words": [
+    6400
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "q",
+   "modifiers": 7,
+   "words": [
+    4096
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "r",
+   "modifiers": 7,
+   "words": [
+    4864
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "s",
+   "modifiers": 7,
+   "words": [
+    7936
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "t",
+   "modifiers": 7,
+   "words": [
+    5120
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "u",
+   "modifiers": 7,
+   "words": [
+    5632
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "v",
+   "modifiers": 7,
+   "words": [
+    12032
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "w",
+   "modifiers": 7,
+   "words": [
+    4352
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "x",
+   "modifiers": 7,
+   "words": [
+    11520
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "y",
+   "modifiers": 7,
+   "words": [
+    5376
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "z",
+   "modifiers": 7,
+   "words": [
+    11264
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "minus",
+   "modifiers": 7,
+   "words": [
+    33280
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "equals",
+   "modifiers": 7,
+   "words": [
+    33536
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "lbracket",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "rbracket",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "semicolon",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "quote",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "grave",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "backslash",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "comma",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "period",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "slash",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "enter",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "esc",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "bspace",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "tab",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "space",
+   "modifiers": 7,
+   "words": [
+    14624
+   ],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "home",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "end",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "up",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "down",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "left",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "right",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "pageup",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "pagedown",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 142
+  },
+  {
+   "key": "insert",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "kp_5",
+   "modifiers": 7,
+   "words": [],
+   "release_words": [
+    5
+   ],
+   "flags": 14
+  },
+  {
+   "key": "f1",
+   "modifiers": 7,
+   "words": [
+    26624
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f2",
+   "modifiers": 7,
+   "words": [
+    26880
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f3",
+   "modifiers": 7,
+   "words": [
+    27136
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f4",
+   "modifiers": 7,
+   "words": [
+    27392
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f5",
+   "modifiers": 7,
+   "words": [
+    27648
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f6",
+   "modifiers": 7,
+   "words": [
+    27904
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f7",
+   "modifiers": 7,
+   "words": [
+    28160
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f8",
+   "modifiers": 7,
+   "words": [
+    28416
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f9",
+   "modifiers": 7,
+   "words": [
+    28672
+   ],
+   "release_words": [],
+   "flags": 14
+  },
+  {
+   "key": "f10",
+   "modifiers": 7,
+   "words": [
+    28928
+   ],
+   "release_words": [],
+   "flags": 14
+  }
+ ]
+}

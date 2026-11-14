@@ -1,5 +1,5 @@
 {
- "about": "Open port findings of the stored step scenarios, exactly as step_check.py reports them on build/current/portable. A scenario not listed must be ORIGINAL_EQUAL_ALL. The upper-layer test fails on any change: an earlier stop is a regression, a later one means a finding was fixed and this file is updated in the same commit. Findings and their layers are in evidence/port/verification-matrix.json.",
+ "about": "Open findings exactly as the complete US-environment/neutral-proof run reports on build/workers/keys/native-current. Unlisted scenarios are ORIGINAL_EQUAL_ALL. Each lane pins the first state difference or incomplete prefix; later progress requires updating this file. Lane evidence and attribution: build/workers/keys/RESULT.md and all-lanes-current/*/result.json.",
  "scenarios": {
   "ant-commands": {
    "verdict": "PORT_INTRODUCED",
@@ -57,49 +57,24 @@
    "lanes": {
     "original": {
      "status": "STATE_DIFFERENCE",
-     "steps_compared": 134,
+     "steps_compared": 317,
      "first": [
-      "AlistM",
-      "save:7:AlistM"
+      "g_434E",
+      "g_4352"
      ]
     },
     "canonical": {
      "status": "STATE_DIFFERENCE",
-     "steps_compared": 135,
+     "steps_compared": 318,
      "first": [
-      "AlistM",
-      "save:7:AlistM"
-     ]
-    }
-   }
-  },
-  "load-from-save": {
-   "verdict": "PORT_INTRODUCED",
-   "lanes": {
-    "original": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 152,
-     "first": [
-      "AlistM",
-      "AlistS",
-      "save:7:AlistM",
-      "save:9:AlistS"
-     ]
-    },
-    "canonical": {
-     "status": "STATE_DIFFERENCE",
-     "steps_compared": 152,
-     "first": [
-      "AlistM",
-      "AlistS",
-      "save:7:AlistM",
-      "save:9:AlistS"
+      "g_434E",
+      "g_4352"
      ]
     }
    }
   },
   "random-17": {
-   "verdict": "UNATTRIBUTED",
+   "verdict": "PORT_INTRODUCED",
    "lanes": {
     "original": {
      "status": "STATE_DIFFERENCE",
@@ -110,8 +85,15 @@
      ]
     },
     "canonical": {
-     "status": "INCOMPLETE",
-     "steps_compared": 124
+     "status": "STATE_DIFFERENCE",
+     "steps_compared": 184,
+     "first": [
+      "MapPnt",
+      "edit_cached_life_tiles",
+      "edit_cached_terrain_tiles",
+      "edit_current_terrain_tile",
+      "save:58:MapPnt"
+     ]
     }
    }
   }

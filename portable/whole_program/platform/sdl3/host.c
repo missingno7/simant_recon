@@ -186,6 +186,73 @@ void host_wait_ms(uint32_t milliseconds)
     if (!virtual_quantum) SDL_Delay(milliseconds);
 }
 
+/* US DOS input follows physical make/break positions, independent of the SDL
+ * key symbol selected by the Windows layout. Text composition is separate. */
+static SDL_Keycode us_physical_key(SDL_Scancode scan)
+{
+    if (scan >= SDL_SCANCODE_A && scan <= SDL_SCANCODE_Z)
+        return SDLK_A + scan - SDL_SCANCODE_A;
+    if (scan >= SDL_SCANCODE_1 && scan <= SDL_SCANCODE_9)
+        return SDLK_1 + scan - SDL_SCANCODE_1;
+    if (scan == SDL_SCANCODE_0) return SDLK_0;
+    if (scan >= SDL_SCANCODE_F1 && scan <= SDL_SCANCODE_F12)
+        return SDLK_F1 + scan - SDL_SCANCODE_F1;
+    switch (scan) {
+        case SDL_SCANCODE_ESCAPE: return SDLK_ESCAPE;
+        case SDL_SCANCODE_BACKSPACE: return SDLK_BACKSPACE;
+        case SDL_SCANCODE_TAB: return SDLK_TAB;
+        case SDL_SCANCODE_RETURN: return SDLK_RETURN;
+        case SDL_SCANCODE_SPACE: return SDLK_SPACE;
+        case SDL_SCANCODE_MINUS: return SDLK_MINUS;
+        case SDL_SCANCODE_EQUALS: return SDLK_EQUALS;
+        case SDL_SCANCODE_LEFTBRACKET: return SDLK_LEFTBRACKET;
+        case SDL_SCANCODE_RIGHTBRACKET: return SDLK_RIGHTBRACKET;
+        case SDL_SCANCODE_SEMICOLON: return SDLK_SEMICOLON;
+        case SDL_SCANCODE_APOSTROPHE: return SDLK_APOSTROPHE;
+        case SDL_SCANCODE_GRAVE: return SDLK_GRAVE;
+        case SDL_SCANCODE_BACKSLASH: return SDLK_BACKSLASH;
+        case SDL_SCANCODE_COMMA: return SDLK_COMMA;
+        case SDL_SCANCODE_PERIOD: return SDLK_PERIOD;
+        case SDL_SCANCODE_SLASH: return SDLK_SLASH;
+        case SDL_SCANCODE_UP: return SDLK_UP;
+        case SDL_SCANCODE_DOWN: return SDLK_DOWN;
+        case SDL_SCANCODE_LEFT: return SDLK_LEFT;
+        case SDL_SCANCODE_RIGHT: return SDLK_RIGHT;
+        case SDL_SCANCODE_HOME: return SDLK_HOME;
+        case SDL_SCANCODE_END: return SDLK_END;
+        case SDL_SCANCODE_PAGEUP: return SDLK_PAGEUP;
+        case SDL_SCANCODE_PAGEDOWN: return SDLK_PAGEDOWN;
+        case SDL_SCANCODE_INSERT: return SDLK_INSERT;
+        case SDL_SCANCODE_DELETE: return SDLK_DELETE;
+        case SDL_SCANCODE_KP_0: return SDLK_KP_0;
+        case SDL_SCANCODE_KP_1: return SDLK_KP_1;
+        case SDL_SCANCODE_KP_2: return SDLK_KP_2;
+        case SDL_SCANCODE_KP_3: return SDLK_KP_3;
+        case SDL_SCANCODE_KP_4: return SDLK_KP_4;
+        case SDL_SCANCODE_KP_5: return SDLK_KP_5;
+        case SDL_SCANCODE_KP_6: return SDLK_KP_6;
+        case SDL_SCANCODE_KP_7: return SDLK_KP_7;
+        case SDL_SCANCODE_KP_8: return SDLK_KP_8;
+        case SDL_SCANCODE_KP_9: return SDLK_KP_9;
+        case SDL_SCANCODE_KP_PERIOD: return SDLK_KP_PERIOD;
+        case SDL_SCANCODE_KP_PLUS: return SDLK_KP_PLUS;
+        case SDL_SCANCODE_KP_MINUS: return SDLK_KP_MINUS;
+        case SDL_SCANCODE_KP_ENTER: return SDLK_KP_ENTER;
+        case SDL_SCANCODE_KP_MULTIPLY: return SDLK_KP_MULTIPLY;
+        case SDL_SCANCODE_KP_DIVIDE: return SDLK_KP_DIVIDE;
+        case SDL_SCANCODE_CAPSLOCK: return SDLK_CAPSLOCK;
+        case SDL_SCANCODE_NUMLOCKCLEAR: return SDLK_NUMLOCKCLEAR;
+        case SDL_SCANCODE_SCROLLLOCK: return SDLK_SCROLLLOCK;
+        case SDL_SCANCODE_LCTRL: return SDLK_LCTRL;
+        case SDL_SCANCODE_RCTRL: return SDLK_RCTRL;
+        case SDL_SCANCODE_LSHIFT: return SDLK_LSHIFT;
+        case SDL_SCANCODE_RSHIFT: return SDLK_RSHIFT;
+        case SDL_SCANCODE_LALT: return SDLK_LALT;
+        case SDL_SCANCODE_RALT: return SDLK_RALT;
+        default: return 0;
+    }
+}
+
 /* Only keys with a direct source DOS representation are emitted. SDL text
  * composition is deliberately separate from this physical game-key boundary. */
 static uint16_t dos_key(const SDL_KeyboardEvent *event)
@@ -194,7 +261,7 @@ static uint16_t dos_key(const SDL_KeyboardEvent *event)
         0x1e,0x30,0x2e,0x20,0x12,0x21,0x22,0x23,0x17,0x24,0x25,0x26,
         0x32,0x31,0x18,0x19,0x10,0x13,0x1f,0x14,0x16,0x2f,0x11,0x2d,0x15,0x2c
     };
-    SDL_Keycode key = event->key;
+    SDL_Keycode key = us_physical_key(event->scancode);
     uint16_t scan = 0, ascii = 0;
     if (key >= SDLK_A && key <= SDLK_Z) {
         scan = letters[key - SDLK_A];
@@ -249,6 +316,8 @@ static uint16_t dos_key(const SDL_KeyboardEvent *event)
         case SDLK_KP_PLUS: scan=0x4e; ascii='+'; break;
         case SDLK_KP_MINUS: scan=0x4a; ascii='-'; break;
         case SDLK_KP_ENTER: scan=0x1c; ascii=13; break;
+        case SDLK_KP_MULTIPLY: scan=0x37; ascii='*'; break;
+        case SDLK_KP_DIVIDE: scan=0x35; ascii='/'; break;
         case SDLK_CAPSLOCK: scan=0x3a; break;
         case SDLK_NUMLOCKCLEAR: scan=0x45; break;
         case SDLK_SCROLLLOCK: scan=0x46; break;
@@ -261,6 +330,8 @@ static uint16_t dos_key(const SDL_KeyboardEvent *event)
         default:
             if (key >= SDLK_F1 && key <= SDLK_F10)
                 scan = (uint16_t)(0x3b + key - SDLK_F1);
+            else if (key == SDLK_F11 || key == SDLK_F12)
+                scan = (uint16_t)(0x57 + key - SDLK_F11);
             break;
     }
     if (event->mod & SDL_KMOD_ALT) ascii=0;
@@ -404,13 +475,14 @@ int host_poll_event(Host *host, HostEvent *event)
                 event->kind=raw.type == SDL_EVENT_KEY_DOWN ?
                            HOST_EVENT_KEY_DOWN : HOST_EVENT_KEY_UP;
                 event->modifiers=dos_modifiers(raw.key.mod);
-                event->extended = raw.key.key == SDLK_RCTRL ||
-                    raw.key.key == SDLK_RALT || raw.key.key == SDLK_KP_ENTER ||
-                    raw.key.key == SDLK_UP || raw.key.key == SDLK_DOWN ||
-                    raw.key.key == SDLK_LEFT || raw.key.key == SDLK_RIGHT ||
-                    raw.key.key == SDLK_HOME || raw.key.key == SDLK_END ||
-                    raw.key.key == SDLK_PAGEUP || raw.key.key == SDLK_PAGEDOWN ||
-                    raw.key.key == SDLK_INSERT || raw.key.key == SDLK_DELETE;
+                event->extended = raw.key.scancode == SDL_SCANCODE_RCTRL ||
+                    raw.key.scancode == SDL_SCANCODE_RALT || raw.key.scancode == SDL_SCANCODE_KP_ENTER ||
+                    raw.key.scancode == SDL_SCANCODE_KP_DIVIDE ||
+                    raw.key.scancode == SDL_SCANCODE_UP || raw.key.scancode == SDL_SCANCODE_DOWN ||
+                    raw.key.scancode == SDL_SCANCODE_LEFT || raw.key.scancode == SDL_SCANCODE_RIGHT ||
+                    raw.key.scancode == SDL_SCANCODE_HOME || raw.key.scancode == SDL_SCANCODE_END ||
+                    raw.key.scancode == SDL_SCANCODE_PAGEUP || raw.key.scancode == SDL_SCANCODE_PAGEDOWN ||
+                    raw.key.scancode == SDL_SCANCODE_INSERT || raw.key.scancode == SDL_SCANCODE_DELETE;
                 if (!event->key) continue;
                 break;
             default: continue;

@@ -29,17 +29,20 @@ the QA run still has MeNestStarted=0. Window dragging snaps: the requested
 (40,20) title drag produces (32,16); resize changes the viewport from
 (64,41,416,362) to (96,57,528,394).
 
-The pinned DOSBox configuration auto-selects the host DOS keyboard layout.
-These captures log CZ/cz243: physical `key 1` produces `+` (0x2B), whereas the
-native replay's US key translation produces `1` (0x31) and calls Recruit(5).
-The physical number-key actions in interactive-play/load-from-save therefore
-test this difference; they are **not** claims of successful DOS recruitment.
-The mouse Ant Menu scenario supplies separate command coverage. Ultra is
-selected through the Speed menu, with raw QA values GameSpeed=3 then 1;
-it does not rely on shifted number shortcuts.
-Physical Ctrl+Y is also layout-sensitive. Yard is independently checked by its
-map toolbar button in ant-commands and full-game, rather than relying on that
-shortcut. Their QA frames show the house and yard with the title "Yard View".
+The recording environment now pins US in `keyboard-environment.conf`, applied
+by `dos/run.py` to its selected toolchain runner. Each new manifest records the
+effective DOS layout from a `KEYB` query and the environment pin. The first
+captures used host-selected CZ/cz243 (`key 1` became `+`, Ctrl+Y was swapped).
+Both lanes of interactive-play, load-from-save, full-game and random-17 were
+re-recorded because their physical digits and/or Y differ. The other ten
+captures retain their actual CZ layout with checked per-key neutrality proofs
+against the measured US/CZ243 BIOS controls; missing layout evidence is refused.
+See `portable/tests/acceptance/README.md` and `build/workers/keys/RESULT.md`.
+
+The earlier action QA above describes the retired CZ captures. The mouse Ant
+Menu supplies separate recruitment coverage. Ultra was selected through the
+Speed menu (GameSpeed=3 then 1). Yard is independently checked by its map toolbar
+button in ant-commands and full-game; those QA frames show "Yard View".
 
 ## Seeded input
 

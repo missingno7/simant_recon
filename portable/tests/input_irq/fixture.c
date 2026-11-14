@@ -288,6 +288,55 @@ static void test_cursor(void)
     for(;i<28;++i) assert(portable_m1b73_queue_runtime_cursor_tick(&runtime));
     assert(g_4364==3 && tick_phase==28);
 }
+/* Corpus controls: FB09 release dispatch is valid with the menu's current
+ * proximity row. A stale submenu row rejects the identical callback. This
+ * distinguishes descriptor filtering from admission before a menu mutation. */
+static void test_proximity_release(void)
+{
+    struct Timer parent = {{62,63,159,206},(void (*)(void))input_enqueue_event_args,
+                           (int16_t)0xfb09,0,0,0,0x1f};
+    struct Timer submenu = {{155,134,204,163},(void (*)(void))input_enqueue_event_args,
+                            (int16_t)0xfb11,0,0,0,0x1f};
+    PortableM1B73Queue *slot = &portable_m1b73_queue_set.queues[1];
+    reset();
+    hotbox_append(&submenu,slot);
+    assert(portable_m1b73_mouse_callback(&mouse,4,0,104,143)==PORTABLE_M1B73_MOUSE_OK);
+    assert(g_5FF2.r.left==0); /* negative: the stale row cannot emit FB09 */
+    hotbox_remove_id((int16_t)0xfb11,slot);
+    hotbox_prepend(&parent,slot);
+    clear_ring();
+    assert(portable_m1b73_mouse_callback(&mouse,4,0,104,143)==PORTABLE_M1B73_MOUSE_OK);
+    record(0,0x0400,104,143,0xfb09,0,0);
+    assert(g_5FF2.r.left==1);
+    clear_ring();
+    assert(portable_m1b73_mouse_callback(&mouse,4,0,160,143)==PORTABLE_M1B73_MOUSE_OK);
+    assert(g_5FF2.r.left==0); /* negative: one pixel beyond the inclusive edge */
+    hotbox_remove_id((int16_t)0xfb09,slot);
+}
+
+static void test_cursor_service_counts(void)
+{
+    uint32_t hides, shows, refreshes;
+    reset();
+    hides=g_434E; shows=g_4352; refreshes=g_4356;
+    mouse_hide_cursor();
+    assert(g_434E==hides); /* hidden already: hide is not counted */
+    mouse_show_cursor(); mouse_show_cursor();
+    assert(g_4352==shows+2 && cursor_show_level==1);
+    mouse_hide_cursor(); mouse_hide_cursor();
+    assert(g_434E==hides+1 && cursor_show_level==0);
+    mouse_show_cursor();
+    hides=g_434E; shows=g_4352;
+    mouse_refresh_cursor();
+    assert(g_4356==refreshes+1 && g_434E==hides && g_4352==shows);
+    cursor_update_lock=1;
+    assert(portable_m1b73_mouse_callback(&mouse,1,0,100,100)==PORTABLE_M1B73_MOUSE_OK);
+    assert(cursor_drawn_flag && g_4356==refreshes+1); /* busy defers drawing */
+    cursor_update_lock=0;
+    assert(portable_m1b73_mouse_callback(&mouse,1,0,101,100)==PORTABLE_M1B73_MOUSE_OK);
+    assert(!cursor_drawn_flag && g_4356==refreshes+2);
+    assert(g_434E==hides && g_4352==shows); /* redraw is not hide/show service */
+}
 static void test_bios(void)
 {
     uint16_t key=0;
@@ -437,6 +486,7 @@ int main(int argc, char **argv)
     else {
         test_keys(); test_mouse(); test_cursor(); test_bios(); test_ring(); test_service_delivery();
         test_normal_context();
+        test_proximity_release(); test_cursor_service_counts();
         puts("PASS input IRQ: make/break, all event words, commands, mouse, cursor, BIOS, ring, guarded service delivery");
     }
     portable_m1b73_queue_runtime_unbind(&runtime);

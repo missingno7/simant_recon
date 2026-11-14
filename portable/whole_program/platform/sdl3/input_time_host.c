@@ -24,6 +24,142 @@ static int push_event(PortableInputTimeHost *binding, const HostEvent *event)
     return 1;
 }
 
+/* US BIOS set-1 relation: normal, Shift, Ctrl, Alt. Zero means no word,
+ * while e.g. 0300 is a valid Ctrl+2 NUL. Provenance and independently measured
+ * INT16 controls: portable/tests/acceptance/key_bios_{probe.py,us.json}.
+ * DOSBox-X 2026.08.31 bios_keyboard.cpp scan_to_scanascii (IBM/Bochs table).
+ * Keep the physical scan in HostEvent: BIOS scan words may be different. */
+static const uint16_t us_bios_words[0x59][4] = {
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 00 */
+    { 0x011b, 0x011b, 0x011b, 0x01f0 }, /* 01 */
+    { 0x0231, 0x0221, 0x0000, 0x7800 }, /* 02 */
+    { 0x0332, 0x0340, 0x0300, 0x7900 }, /* 03 */
+    { 0x0433, 0x0423, 0x0000, 0x7a00 }, /* 04 */
+    { 0x0534, 0x0524, 0x0000, 0x7b00 }, /* 05 */
+    { 0x0635, 0x0625, 0x0000, 0x7c00 }, /* 06 */
+    { 0x0736, 0x075e, 0x071e, 0x7d00 }, /* 07 */
+    { 0x0837, 0x0826, 0x0000, 0x7e00 }, /* 08 */
+    { 0x0938, 0x092a, 0x0000, 0x7f00 }, /* 09 */
+    { 0x0a39, 0x0a28, 0x0000, 0x8000 }, /* 0a */
+    { 0x0b30, 0x0b29, 0x0000, 0x8100 }, /* 0b */
+    { 0x0c2d, 0x0c5f, 0x0c1f, 0x8200 }, /* 0c */
+    { 0x0d3d, 0x0d2b, 0x0000, 0x8300 }, /* 0d */
+    { 0x0e08, 0x0e08, 0x0e7f, 0x0ef0 }, /* 0e */
+    { 0x0f09, 0x0f00, 0x9400, 0x0000 }, /* 0f */
+    { 0x1071, 0x1051, 0x1011, 0x1000 }, /* 10 */
+    { 0x1177, 0x1157, 0x1117, 0x1100 }, /* 11 */
+    { 0x1265, 0x1245, 0x1205, 0x1200 }, /* 12 */
+    { 0x1372, 0x1352, 0x1312, 0x1300 }, /* 13 */
+    { 0x1474, 0x1454, 0x1414, 0x1400 }, /* 14 */
+    { 0x1579, 0x1559, 0x1519, 0x1500 }, /* 15 */
+    { 0x1675, 0x1655, 0x1615, 0x1600 }, /* 16 */
+    { 0x1769, 0x1749, 0x1709, 0x1700 }, /* 17 */
+    { 0x186f, 0x184f, 0x180f, 0x1800 }, /* 18 */
+    { 0x1970, 0x1950, 0x1910, 0x1900 }, /* 19 */
+    { 0x1a5b, 0x1a7b, 0x1a1b, 0x1af0 }, /* 1a */
+    { 0x1b5d, 0x1b7d, 0x1b1d, 0x1bf0 }, /* 1b */
+    { 0x1c0d, 0x1c0d, 0x1c0a, 0x0000 }, /* 1c */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 1d */
+    { 0x1e61, 0x1e41, 0x1e01, 0x1e00 }, /* 1e */
+    { 0x1f73, 0x1f53, 0x1f13, 0x1f00 }, /* 1f */
+    { 0x2064, 0x2044, 0x2004, 0x2000 }, /* 20 */
+    { 0x2166, 0x2146, 0x2106, 0x2100 }, /* 21 */
+    { 0x2267, 0x2247, 0x2207, 0x2200 }, /* 22 */
+    { 0x2368, 0x2348, 0x2308, 0x2300 }, /* 23 */
+    { 0x246a, 0x244a, 0x240a, 0x2400 }, /* 24 */
+    { 0x256b, 0x254b, 0x250b, 0x2500 }, /* 25 */
+    { 0x266c, 0x264c, 0x260c, 0x2600 }, /* 26 */
+    { 0x273b, 0x273a, 0x0000, 0x27f0 }, /* 27 */
+    { 0x2827, 0x2822, 0x0000, 0x28f0 }, /* 28 */
+    { 0x2960, 0x297e, 0x0000, 0x29f0 }, /* 29 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 2a */
+    { 0x2b5c, 0x2b7c, 0x2b1c, 0x2bf0 }, /* 2b */
+    { 0x2c7a, 0x2c5a, 0x2c1a, 0x2c00 }, /* 2c */
+    { 0x2d78, 0x2d58, 0x2d18, 0x2d00 }, /* 2d */
+    { 0x2e63, 0x2e43, 0x2e03, 0x2e00 }, /* 2e */
+    { 0x2f76, 0x2f56, 0x2f16, 0x2f00 }, /* 2f */
+    { 0x3062, 0x3042, 0x3002, 0x3000 }, /* 30 */
+    { 0x316e, 0x314e, 0x310e, 0x3100 }, /* 31 */
+    { 0x326d, 0x324d, 0x320d, 0x3200 }, /* 32 */
+    { 0x332c, 0x333c, 0x0000, 0x33f0 }, /* 33 */
+    { 0x342e, 0x343e, 0x0000, 0x34f0 }, /* 34 */
+    { 0x352f, 0x353f, 0x0000, 0x35f0 }, /* 35 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 36 */
+    { 0x372a, 0x372a, 0x9600, 0x37f0 }, /* 37 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 38 */
+    { 0x3920, 0x3920, 0x3920, 0x3920 }, /* 39 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 3a */
+    { 0x3b00, 0x5400, 0x5e00, 0x6800 }, /* 3b */
+    { 0x3c00, 0x5500, 0x5f00, 0x6900 }, /* 3c */
+    { 0x3d00, 0x5600, 0x6000, 0x6a00 }, /* 3d */
+    { 0x3e00, 0x5700, 0x6100, 0x6b00 }, /* 3e */
+    { 0x3f00, 0x5800, 0x6200, 0x6c00 }, /* 3f */
+    { 0x4000, 0x5900, 0x6300, 0x6d00 }, /* 40 */
+    { 0x4100, 0x5a00, 0x6400, 0x6e00 }, /* 41 */
+    { 0x4200, 0x5b00, 0x6500, 0x6f00 }, /* 42 */
+    { 0x4300, 0x5c00, 0x6600, 0x7000 }, /* 43 */
+    { 0x4400, 0x5d00, 0x6700, 0x7100 }, /* 44 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 45 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 46 */
+    { 0x4700, 0x4737, 0x7700, 0x0007 }, /* 47 */
+    { 0x4800, 0x4838, 0x8d00, 0x0008 }, /* 48 */
+    { 0x4900, 0x4939, 0x8400, 0x0009 }, /* 49 */
+    { 0x4a2d, 0x4a2d, 0x8e00, 0x4af0 }, /* 4a */
+    { 0x4b00, 0x4b34, 0x7300, 0x0004 }, /* 4b */
+    { 0x4cf0, 0x4c35, 0x8f00, 0x0005 }, /* 4c */
+    { 0x4d00, 0x4d36, 0x7400, 0x0006 }, /* 4d */
+    { 0x4e2b, 0x4e2b, 0x9000, 0x4ef0 }, /* 4e */
+    { 0x4f00, 0x4f31, 0x7500, 0x0001 }, /* 4f */
+    { 0x5000, 0x5032, 0x9100, 0x0002 }, /* 50 */
+    { 0x5100, 0x5133, 0x7600, 0x0003 }, /* 51 */
+    { 0x5200, 0x5230, 0x9200, 0x0000 }, /* 52 */
+    { 0x5300, 0x532e, 0x9300, 0x0000 }, /* 53 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 54 */
+    { 0x0000, 0x0000, 0x0000, 0x0000 }, /* 55 */
+    { 0x565c, 0x567c, 0x0000, 0x0000 }, /* 56 */
+    { 0x8500, 0x8700, 0x8900, 0x8b00 }, /* 57 */
+    { 0x8600, 0x8800, 0x8a00, 0x8c00 }, /* 58 */
+};
+
+static uint8_t alt_token;
+
+static uint16_t bios_key_word(const HostEvent *event, uint8_t flags)
+{
+    uint8_t scan = (uint8_t)(event->key >> 8);
+    unsigned column = flags & 8 ? 3 : flags & 4 ? 2 : flags & 3 ? 1 : 0;
+    uint16_t word;
+    if (scan >= 0x59) return 0;
+    if (scan >= 0x47 && scan <= 0x53) {
+        if (event->extended) {
+            if (flags & 8) return (uint16_t)(us_bios_words[scan][0] + 0x5000);
+            return us_bios_words[scan][flags & 4 ? 2 : 0];
+        }
+        if (flags & 8) {
+            if (scan != 0x4a && scan != 0x4e) {
+                alt_token = (uint8_t)(alt_token * 10 + us_bios_words[scan][3]);
+                return 0;
+            }
+        } else if (!(flags & 4)) {
+            column = ((flags & 0x20) != 0) != ((flags & 3) != 0);
+        }
+    }
+    word = us_bios_words[scan][column];
+    if (flags & 0x40) {
+        if ((flags & 3) && (word & 255) >= 'A' && (word & 255) <= 'Z')
+            word = us_bios_words[scan][0];
+        else if (!(flags & 3) && (word & 255) >= 'a' && (word & 255) <= 'z')
+            word = us_bios_words[scan][1];
+    }
+    if (event->extended && scan == 0x1c) {
+        if (flags & 8) return 0xa600;
+    } else if (event->extended && scan == 0x35) {
+        if (flags & 8) return 0xa400;
+        if (flags & 4) return 0x9500;
+        return 0x352f;
+    }
+    return word;
+}
+
 static int push_key(PortableInputTimeHost *binding, uint16_t key)
 {
     uint16_t tail;
@@ -38,11 +174,25 @@ static int push_key(PortableInputTimeHost *binding, uint16_t key)
     return 1;
 }
 
-static int pop_key(PortableInputTimeHost *binding, uint16_t *key)
+static int peek_key(PortableInputTimeHost *binding, uint16_t *key)
 {
+    while (binding->key_count != 0) {
+        uint16_t word = binding->key_words[binding->key_head];
+        if ((word >> 8) <= 0x84 && !((word >> 8) && (word & 255) == 0xf0))
+            break;
+        binding->key_head = (uint16_t)((binding->key_head + 1u) %
+                                       PORTABLE_INPUT_TIME_HOST_KEY_CAPACITY);
+        --binding->key_count;
+    }
     if (binding->key_count == 0)
         return 0;
     *key = binding->key_words[binding->key_head];
+    return 1;
+}
+
+static int pop_key(PortableInputTimeHost *binding, uint16_t *key)
+{
+    if (!peek_key(binding, key)) return 0;
     binding->key_head = (uint16_t)((binding->key_head + 1u) %
                                    PORTABLE_INPUT_TIME_HOST_KEY_CAPACITY);
     --binding->key_count;
@@ -108,14 +258,15 @@ static int ingest_host_events(PortableInputTimeHost *binding)
                 else
                     binding->bios_keyboard_flags_hi &= (uint8_t)~bit;
             }
-            /* Shift/Ctrl/Alt/lock transitions are IRQ scans, not BIOS keys. */
-            if (event.kind == HOST_EVENT_KEY_DOWN && scan != 0x2a &&
-                scan != 0x36 && scan != 0x1d && scan != 0x38 &&
-                scan != 0x3a && scan != 0x45 && scan != 0x46 &&
-                !push_key(binding, event.key)) {
-                binding->host_closed = 1;
-                binding->ingesting = 0;
-                return -1;
+            /* The source scan hook has run above. Only the old BIOS handler
+             * translates and queues a word; unsupported Ctrl combinations
+             * still retain their physical down/up event and scan effects. */
+            if (event.kind == HOST_EVENT_KEY_DOWN) {
+                uint16_t word = bios_key_word(&event, binding->bios_keyboard_flags);
+                if (word != 0) push_key(binding, word);
+            } else if (scan == 0x38 && !(event.modifiers & 8)) {
+                if (alt_token != 0) push_key(binding, alt_token);
+                alt_token = 0;
             }
             if (binding->suppress_bios_key) {
                 binding->key_head = 0;
@@ -157,10 +308,7 @@ static int host_key_available(void *context, uint16_t *key)
     if (portable_input_time_host_refresh_clock(binding) !=
         PORTABLE_INPUT_TIME_OK)
         return -1;
-    if (binding->key_count == 0)
-        return 0;
-    *key = binding->key_words[binding->key_head];
-    return 1;
+    return peek_key(binding, key);
 }
 
 static int host_read_key_blocking(void *context, uint16_t *key)
@@ -201,6 +349,7 @@ static PortableInputTimeStatus input_time_host_init_common(
         bios_clock == NULL)
         return PORTABLE_INPUT_TIME_BAD_ARGUMENT;
     memset(binding, 0, sizeof(*binding));
+    alt_token = 0;
     memset(&services, 0, sizeof(services));
     services.context = binding;
     services.read_logical_bios_ticks = host_ticks;

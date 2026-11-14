@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "fb66aa3 plus corpus (six new scenarios) and irq-normal (640-wide proof)",
+ "source": "e1a142d plus keys (US layout pinned for recordings, native BIOS key translation) and mouse (admission-phase evidence)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -18,12 +18,12 @@
   "new-game-save (64 entries)": "equal in game state for all 64 entries in both lanes (native = original DOS, native = canonical DOS).",
   "quick-game (2000 entries)": "equal in game state for all 2000 entries in both lanes.",
   "long-run (3000 entries, unattended)": "equal in game state for all 3000 entries in both lanes, about 10 s per lane.",
-  "interactive-play (2000 entries)": "equal through 133 / 134 (original / canonical lane); then AlistM: a number key reached DOS as '+' because DOSBox-X auto-selected the host's Czech layout while native maps US; recording environment and key translation (worker keys)",
-  "ant-commands (1000)": "canonical lane equal through 65, then cursor hide/show counters g_434E/g_4352; original lane equal through 100, then a service-order difference after a pointer move to the corner (edge scroll); port (worker mouse)",
-  "load-from-save (1000)": "loads the original quick-game A.ANT; equal through 151 in both lanes, then AlistM/AlistS from the same number-key layout difference (worker keys)",
-  "full-game (1000)": "equal through 99 in both lanes, then cursor hide/show counters (worker mouse)",
-  "experiment (1000)": "equal through 94 in both lanes, then native does not enqueue the FB09/0400 proximity release after a button release over Add Food (worker mouse)",
-  "random-17 (2000)": "seeded random input; original lane equal through 75 (cursor counters), canonical through 124 (native pushes a BIOS word for Ctrl+8 that DOS does not; worker keys)",
+  "interactive-play (2000 entries)": "equal through 316 / 317 (original / canonical), then cursor hide/show counters: the mouse IRQ landed inside a raster routine on DOS, native admits it at the previous service boundary (test-harness admission granularity, worker quiet-inputs)",
+  "ant-commands (1000)": "canonical equal through 65 (cursor counters), original through 100 (the corner callback interrupted MacTickCount after the edge comparison on DOS; native admits it before); both admission granularity (worker quiet-inputs)",
+  "load-from-save (1000)": "equal in game state for all 1000 entries in both lanes",
+  "full-game (1000)": "equal through 99 in both lanes; cursor counters from a mouse IRQ inside the picture rasterizer on DOS (admission granularity)",
+  "experiment (1000)": "equal through 94; on DOS the release IRQ arrived after the proximity row changed (FB11 -> FB09), native admits it before, so no FB09/0400 enqueue (admission granularity; a platform control shows the row produces exactly that event)",
+  "random-17 (2000)": "original equal through 75 (cursor counters, admission granularity); canonical through 183, then MapPnt and edit view caches (not yet triaged)",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in new-game-save, quick-game and long-run"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
@@ -54,9 +54,9 @@
    "original_dos": "scenarios drive menus and Save As dialogs on the original",
    "canonical_dos": "same",
    "native": "runtime flows (logo click, save, load) PASS",
-   "known_divergence": "experiment: missing FB09/0400 proximity release enqueue; cursor hide/show call counts differ in full-game, ant-commands, random-17",
-   "first_open_question": "which native path makes the extra cursor hide/show calls?",
-   "next": "worker mouse"
+   "known_divergence": "experiment release and cursor hide/show counts: admission granularity, not a port service defect (platform controls in portable/tests/mouse_services)",
+   "first_open_question": "see input",
+   "next": "worker quiet-inputs"
   },
   {
    "id": "timing-rng",
@@ -106,17 +106,17 @@
   {
    "id": "save-load",
    "name": "Save, Load and persistent state",
-   "domain": "File > Save As to A.ANT/B.ANT, File > Open of the game's own saves",
+   "domain": "File > Save As to A.ANT/B.ANT; File > Open of an original-made save, continued 1000 steps",
    "level": {
     "isolated": 3,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "saves of both scenarios byte-equal to canonical DOS (307 SaveRec records)",
    "canonical_dos": "same",
-   "native": "runtime save and load flows PASS; new-game-save scenario equal in game state for 64 entries through Save As",
+   "native": "equal in game state to both DOS builds: new-game-save 64 entries, load-from-save 1000 entries",
    "known_divergence": "save_last_filename RECONSTRUCTION_INTRODUCED in quick-game (not yet examined)",
-   "first_open_question": "load-from-save is equal through 151; continues after the keyboard fix",
-   "next": "after worker keys"
+   "first_open_question": "-",
+   "next": "keep covered"
   },
   {
    "id": "graphics",
@@ -143,10 +143,10 @@
    },
    "original_dos": "input_irq oracle matrix from original instruction execution",
    "canonical_dos": "-",
-   "native": "input_irq PASS: 2,304 rows",
-   "known_divergence": "number keys under the recording host's Czech layout (environment), Ctrl+digit BIOS word, corner-pointer edge scroll; normal-play IRQ context words proven unobservable in 640-wide modes (evidence/canonical/native-input-irq/normal-words.md), 320-wide open",
-   "first_open_question": "native key translation against the US BIOS tables",
-   "next": "workers keys and mouse"
+   "native": "input_irq PASS: 2,304 rows; BIOS key translation matches 582 measured US BIOS cases (portable/tests/acceptance/test_key_bios.py)",
+   "known_divergence": "normal-play IRQ context words proven unobservable in 640-wide modes, 320-wide open; mouse IRQs landing mid-raster on DOS cannot be placed by service-ordinal admission",
+   "first_open_question": "do the mouse-heavy scenarios agree once scripted inputs are delivered at service boundaries on DOS?",
+   "next": "worker quiet-inputs"
   },
   {
    "id": "audio",
@@ -197,6 +197,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test environment + platform",
+   "summary": "DOS recordings pin a US keyboard (the host's Czech layout had leaked in); 8 references re-recorded, 10 kept with layout-neutrality proofs; native BIOS key words follow the US BIOS tables (582 measured cases) from physical scancodes; load-from-save now equal for 1000 entries"
+  },
+  {
+   "commit": "e1a142d",
    "layer": "test harness",
    "summary": "six new scenarios (interactive play, ant commands, load from an original save, Full Game, Experimental, seeded random input), 12 DOS references; open findings pinned in known_findings.json; step check defaults to build/current/portable"
   },

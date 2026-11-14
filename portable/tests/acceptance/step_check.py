@@ -77,6 +77,10 @@ def test_build(build, out):
 def validate_reference(directory, scenario):
     manifest=json.loads((directory/'manifest.json').read_text())
     recipe=json.loads(scenario.read_text())
+    # Absolute import also works when this file is invoked as a script.
+    sys.path.insert(0,str(ROOT))
+    from portable.tests.acceptance.keyboard_environment import validate_keyboard
+    validate_keyboard(directory, manifest, recipe)
     if manifest['scenario_sha256']!=sha(scenario) or manifest['script_sha256']!=sha(ROOT/recipe['script']):
         raise ValueError('Stale reference scenario/script: '+str(directory))
     if recipe.get('saved_game'):

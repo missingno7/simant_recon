@@ -54,8 +54,27 @@ change File > Open's list rows.
 The acceptance-only observer link translates DOS recipe modifier/Escape names
 to SDL names and supplies SDL's held-modifier field from the recorded physical
 transitions. The existing platform still constructs and projects each SDL
-event. It does not translate DOS keyboard layouts or supply expected game
-state. Number-key layout differences therefore remain observable failures.
+event. It does not supply expected game state. The platform uses physical SDL
+scancodes and the US BIOS translation relation, including modifier precedence,
+unsupported combinations and legacy INT16 filtering.
+
+`dos/run.py` overlays the hash-pinned
+[`keyboard-environment.conf`](../../../dos/scenarios/keyboard-environment.conf)
+onto the selected toolchain runner entry (also when replaced by the observer).
+It captures `KEYB`'s effective-layout query and refuses a non-US environment.
+Every new reference manifest records that result and environment pin; record
+and check both reject unproved layouts. Ten legacy CZ243 captures are retained
+with per-recipe proofs that every key under its held modifiers is neutral
+between measured US/CZ243 BIOS controls. Their manifests preserve CZ243 and pin
+the old host log and proof; they are never relabelled US. The eight sensitive
+captures (interactive-play, load-from-save, full-game, random-17, both lanes)
+were retired and recorded in US. Details: `build/workers/keys/RESULT.md`.
+
+`key_bios_probe.py --layout us|cz243 --out build/workers/NAME` regenerates the
+standalone BIOS experiment. `key_bios_us.json` and `key_bios_cz.json` retain 582
+cases each with runner/probe/source provenance. No game is involved. Run
+`python -m unittest portable.tests.acceptance.test_key_bios` for the compiled
+production-key-path regression and its spurious-Ctrl+8 negative control.
 
 Recipes request 64 entries for new-game-save, 2,000 for quick-game (including
 A/B Save As inputs), and 3,000 for unattended long-run, at normal game speed.
