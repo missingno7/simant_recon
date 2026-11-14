@@ -26,9 +26,15 @@ void native_windows_root_pointer(float *x,float *y) { (void)x;(void)y; }
 static void rejected(int s) { (void)s;_Exit(23); }
 static Host *control_host;
 static unsigned down_seen,up_seen;
+static int check_context;
 int portable_input_time_host_interrupt(void) {
     HostEvent e;
     while (host_poll_event(control_host,&e)>0) {
+        uint16_t cx=0,dx=0;
+        portable_test_irq_context(&cx,&dx);
+        if (check_context && (cx!=(e.kind==HOST_EVENT_KEY_DOWN ? 770 : 2366) ||
+                              dx!=(e.kind==HOST_EVENT_KEY_DOWN ? 24023 : 23596))) return -1;
+        if (!check_context && (cx || dx)) return -1;
         if (e.kind==HOST_EVENT_KEY_DOWN) {
             if (e.key!=0x1c0d)return -1;
             ++down_seen;
@@ -54,8 +60,9 @@ int main(int argc,char **argv) {
         if (up_seen!=1)return 22;
         host_destroy(control_host);return 0;
     }
-    if (argc>1 && !strcmp(argv[1],"services")) {
+    if (argc>1 && !strncmp(argv[1],"services",8)) {
         HostEvent e;
+        check_context=!strcmp(argv[1],"services-context");
         host_virtual_clock_configure(1);
         SDL_SetHintWithPriority(SDL_HINT_VIDEO_DRIVER,"dummy",SDL_HINT_OVERRIDE);
         control_host=host_create_dimensions("input control",1,640,480);if (!control_host)return 20;
@@ -81,9 +88,10 @@ int main(int argc,char **argv) {
         if run.returncode:raise RuntimeError(run.stdout+run.stderr)
     @classmethod
     def tearDownClass(cls):cls.tmp.cleanup()
-    def run_hook(self,clock=None,events=None,mode=None,order=None):
+    def run_hook(self,clock=None,events=None,mode=None,order=None,disable_context=False):
         env=dict(os.environ,PATH=str(self.sdk/'bin')+os.pathsep+os.environ.get('PATH',''))
-        for name in ('SIMANT_TEST_FULL_CLOCK','SIMANT_TEST_SERVICE_INPUT','SIMANT_TEST_CLOCK_CONTROL_READ','SIMANT_TEST_SERVICE_ORDER'):env.pop(name,None)
+        for name in ('SIMANT_TEST_FULL_CLOCK','SIMANT_TEST_SERVICE_INPUT','SIMANT_TEST_CLOCK_CONTROL_READ','SIMANT_TEST_SERVICE_ORDER','SIMANT_TEST_DISABLE_IRQ_CONTEXT'):env.pop(name,None)
+        if disable_context:env['SIMANT_TEST_DISABLE_IRQ_CONTEXT']='1'
         for name,value,filename in [('SIMANT_TEST_FULL_CLOCK',clock,'clock.txt'),('SIMANT_TEST_SERVICE_INPUT',events,'events.txt')]:
             if value is not None:
                 p=self.out/filename;p.write_text(value);env[name]=str(p)
@@ -113,6 +121,17 @@ int main(int argc,char **argv) {
         self.assertEqual(r.returncode,0,r.stderr)
         r=self.run_hook(tape,events,mode='unclocked',order=bytes([249,246,0]))
         self.assertEqual(r.returncode,23,r.stderr)
+    def test_irq_context_follows_each_raw_event_and_can_be_disabled(self):
+        tape='T 13 T 100 7 2\nB 14 V 0 11 1\nC 0 C 0 2 1\nX\n'
+        events='1 0 0 keydown enter 0 0 770 24023\n3 0 0 keyup enter 0 0 2366 23596\n'
+        order=bytes([0,1,0,2])
+        r=self.run_hook(tape,events,mode='services-context',order=order)
+        self.assertEqual(r.returncode,0,r.stderr)
+        r=self.run_hook(tape,events,mode='services',order=order,disable_context=True)
+        self.assertEqual(r.returncode,0,r.stderr)
+        for bad in (events.replace('770','65536'),events.replace('770 24023','770'),events.replace('770 24023','770 24023 extra')):
+            r=self.run_hook(tape,bad,mode='services-context',order=order)
+            self.assertEqual(r.returncode,23,r.stderr)
     def test_bounded_trace_keeps_counts_and_phase(self):
         p=self.out/'trace.txt';p.write_text('# test\nR T 100 7 2\nI 5 10 0 0 key_down enter\nS 6 11 1 1 2 99\nR T 100 8 1\n')
         r,i,b=parse_trace(p,1)

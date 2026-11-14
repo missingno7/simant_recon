@@ -90,6 +90,25 @@ input coordinate stops replay. Positive completion requires consumed clock,
 service and input tapes. A first state difference intentionally leaves the
 remaining reference available for investigation.
 
+The v4 tapes also retain AX/BX/CX/DX at scan-processor entry (or INT15/AH=4F
+while the hook is disabled) and pointer-callback entry. Keyboard admission now
+supplies captured CX/DX to the ordinary native scan projection through an
+optional test hook. Each staged raw SDL event carries its own pair; the
+projection still constructs and queues every Event, including its BIOS stamp.
+Physical pointer coordinates retain their existing translation. Missing or
+out-of-word keyboard context is a coverage error, never a native-zero fallback.
+No recorder change or new DOS capture is needed for these v4 references.
+
+These are handler-entry words, not necessarily raw interrupted foreground
+registers: the DOS IRQ wrapper loads DX with DGROUP before kbd_process_scan.
+Replaying an independently captured machine-service argument is input replay;
+neither expected hashes nor reference game state select its value. Ordinary
+execution keeps its explicit CX/DX=0. The
+[consumer audit](../../../evidence/canonical/native-input-irq/interrupted-registers.md)
+lists copies, guarded coordinate readers and two unfiltered modal readers.
+It leaves normal-play observability across all modes/placements undecided;
+there is no globally-unused-field claim or state-classification relaxation.
+
 BIOS queries are observed at DOSBox's atomic CB_INT16 callback, filtered by the
 source INT16 return PCs. Observing the later game-function RETF is incorrect:
 a key can arrive after the BIOS sampled an empty queue but before RETF. Queue
@@ -136,7 +155,12 @@ an explicit coverage gap; its raw backing storage remains reported.
 The observer stops at the first game-state difference. It reports names,
 hashes, a native frame and byte differences from the nearest retained DOS frame.
 A frame from another entry is labelled and is not exact expected bytes for the
-differing entry. See `build/workers/admission/RESULT.md` for current findings.
+differing entry. The admission report retains the earlier Event.v findings and
+their original evidence. With handler-register replay, repeated complete checks
+now give `ORIGINAL_EQUAL_ALL` in all three scenarios: new-game-save 64/64,
+quick-game 2000/2000 and long-run 3000/3000 in each executable's own lane.
+There is no next first difference inside these finite tapes. Current
+measurements and controls are in `build/workers/irq-context/RESULT.md`.
 
 ```powershell
 python -m unittest portable.tests.acceptance.test_native_acceptance portable.tests.acceptance.test_full_inputs
@@ -152,3 +176,14 @@ keep their tape. After the deliberate clock perturbation, order equality is no
 longer required of that negative trajectory. It stops on game-state differences
 at entry 2. `--disable input` removes delivery and is not a successful state
 control when entries are missing.
+`--disable irq-context` keeps delivery and clocks but suppresses captured
+CX/DX: new-game-save again stops at original 39 / canonical 36 and quick-game
+at 659 / 660, all on window_current_event; long-run remains equal. Compiled
+controls check distinct context words on successive raw events, disabled
+replay, malformed words and the unchanged nested enqueue stamp/order.
+
+```powershell
+python portable/tests/acceptance/step_check.py --disable irq-context --out build/workers/irq-context/control
+python portable/tests/acceptance/step_check.py --steps 8 --out build/workers/irq-context/prefix
+python portable/tests/acceptance/step_check.py --steps 8 --disable clock --out build/workers/irq-context/clock-control
+```

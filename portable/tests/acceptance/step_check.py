@@ -31,6 +31,7 @@ def test_build(build, out):
             ROOT/'portable/whole_program/platform/sdl3/test_observer.inc',
             ROOT/'portable/whole_program/platform/sdl3/input_time_host.c',
             ROOT/'portable/whole_program/platform/m1b73_events.c',
+            ROOT/'portable/whole_program/platform/m1b73_queue_runtime.c',
             ROOT/'portable/whole_program/platform/input_time.h',ROOT/'portable/whole_program/platform/input_time.c',ROOT/'portable/whole_program/platform/m1b73_main_input.c']}
     inputs.update({r['generated']:sha(Path(r['generated'])) for r in profiled})
     exe=out/'simant-step.exe';receipt=out/'observer-build.json'
@@ -41,7 +42,7 @@ def test_build(build, out):
     # Refresh the optional platform hooks. The two profiled whole TUs below
     # keep their exact generated source; GCC adds entry/exit observations.
     response=(build/'application-objects.rsp').read_text()
-    for filename in ('/sdl3/host.c','/sdl3/input_time_host.c','/m1b73_events.c','/input_time.c','/m1b73_main_input.c'):
+    for filename in ('/sdl3/host.c','/sdl3/input_time_host.c','/m1b73_events.c','/input_time.c','/m1b73_main_input.c','/m1b73_queue_runtime.c'):
         host=next(r for r in report['native_services'] if r['source'].endswith(filename))
         obj=out/(Path(host['source']).stem+'.o')
         command=host['compile']['command'][:]
@@ -104,7 +105,11 @@ def step_inputs(receipt, destination):
         elif op[0]=='mouse_button':operation=op[0];a=int(op[1]);arg=op[2]
         else:raise ValueError('Unsupported transition: '+str(op))
         position=event['pump']+event['clock_reads']+event.get('queries',0)+2*event['step']-event['phase']
-        lines.append(f'{position} {event["step"]} {event["phase"]} {operation} {arg} {a} {b}\n')
+        registers=event.get('registers',{})
+        if event.get('delivery_kind')=='K' and any(k not in registers or not 0<=registers[k]<=65535 for k in ('cx','dx')):
+            raise ValueError('Keyboard IRQ lacks captured CX/DX; re-record reference')
+        cx,dx=(registers['cx'],registers['dx']) if event.get('delivery_kind')=='K' else (0,0)
+        lines.append(f'{position} {event["step"]} {event["phase"]} {operation} {arg} {a} {b} {cx} {dx}\n')
     destination.write_text(''.join(lines))
 
 
@@ -147,6 +152,7 @@ def run_lane(scenario_path, reference, build, exe, out, timeout=180, disable=Non
     if os.environ.get('SIMANT_ADMISSION_TRACE'):env['SIMANT_TEST_ORDER_OUTPUT']=str(out/'native.order')
     if disable=='input':env.pop('SIMANT_TEST_SERVICE_INPUT')
     if disable=='clock':env['SIMANT_TEST_DISABLE_CLOCK']='1'
+    if disable=='irq-context':env['SIMANT_TEST_DISABLE_IRQ_CONTEXT']='1'
     if disable=='clock':
         import re
         text=subprocess.check_output(['C:/msys64/mingw64/bin/objdump.exe','-d','--disassemble=dos_game_main',str(exe)],text=True)
@@ -247,7 +253,7 @@ def main():
     ap.add_argument('--out',type=Path,default=ROOT/'build/workers/admission/check')
     ap.add_argument('--timeout',type=int,default=30)
     ap.add_argument('--steps',type=int,help='Explicit prefix control; default is the complete reference')
-    ap.add_argument('--disable',choices=('clock','input'))
+    ap.add_argument('--disable',choices=('clock','input','irq-context'))
     a=ap.parse_args();scenarios=a.scenario or sorted((ROOT/'dos/scenarios').glob('*.json'))
     if not (ROOT/'assets/SIMANT.EXE').is_file() or not (a.build/'report.json').is_file():
         for p in scenarios:print(p.stem+': no reference (assets/native build absent)')
@@ -267,7 +273,7 @@ def main():
             for ref in refs.values():validate_reference(ref,path)
         except (ValueError,FileNotFoundError) as error:
             print(path.stem+': no reference ('+str(error)+')');continue
-        if exe is None:exe=test_build(a.build.resolve(),ROOT/'build/workers/admission/test-build')
+        if exe is None:exe=test_build(a.build.resolve(),a.out.resolve()/'test-build')
         lanes={}
         for target,ref in refs.items():
             try:lanes[target]=run_lane(path.resolve(),ref.resolve(),a.build.resolve(),exe,a.out.resolve()/path.stem/target,a.timeout,a.disable,a.steps)

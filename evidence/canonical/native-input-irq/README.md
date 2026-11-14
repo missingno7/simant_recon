@@ -1,5 +1,12 @@
 # Canonical keyboard and mouse interrupt contract
 
+The 2026-11-14 [interrupted-register consumer audit](interrupted-registers.md)
+traces FA/F0 words through raw queues, window copies and modal loops, and
+documents tape-only handler-register replay. The earlier no-context limit
+below continues to describe ordinary SDL execution; acceptance tape mode now
+supplies each keyboard transition's independently captured CX/DX. Normal-play
+observability across all modes/window placements remains explicitly undecided.
+
 Authority: `src/platform/input_timer.asm` at 44de644, SHA-256
 `eaf458343b1b00b0dc3ceda81975ce5cb1f8f126c77ff7bfdcc6d150cce492c3`.
 Line references below refer to that unchanged file. `W` and `H` mean gfx_screen_width_pixels

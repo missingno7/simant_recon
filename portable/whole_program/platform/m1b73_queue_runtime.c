@@ -268,6 +268,7 @@ int portable_m1b73_queue_runtime_scan_transition(
     PortableM1B73QueueRuntime *runtime, const HostEvent *event)
 {
     uint8_t scan;
+    uint16_t cx = 0, dx = 0;
     int carry;
     if (runtime == NULL || runtime != active_runtime || !runtime->bound ||
         event == NULL)
@@ -291,11 +292,12 @@ int portable_m1b73_queue_runtime_scan_transition(
             runtime->events->input_host->key_count = 0;
         }
     }
-    /* SDL has no interrupted DOS register/segment context. The explicit
-     * projection below accepts real words for differential controls. Native
-     * zero residue remains a documented raw-state limitation. */
+    /* Ordinary SDL has no DOS register context. Acceptance tapes supply the
+     * captured handler-entry words before the same scan projection runs. */
+    if (portable_test_irq_context)
+        portable_test_irq_context(&cx, &dx);
     carry = portable_m1b73_queue_runtime_scan_byte(runtime,
-        (uint8_t)(scan | (event->kind == HOST_EVENT_KEY_UP ? 0x80 : 0)), 0, 0);
+        (uint8_t)(scan | (event->kind == HOST_EVENT_KEY_UP ? 0x80 : 0)), cx, dx);
     if (carry < 0)
         return -1;
     runtime->events->input_host->suppress_bios_key = (uint8_t)!carry;

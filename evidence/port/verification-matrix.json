@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
  "updated": "2026-11-14",
- "source": "b6e52f5 plus event-v (caller-frame fifth enqueue word) and admission (single service-ordinal replay)",
+ "source": "6818824 plus irq-context (handler-entry CX/DX replayed as interrupt input in the step check)",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -11,12 +11,12 @@
  },
  "notes": [
   "Levels are the highest level reached inside the stated domain; a subsystem can be level 2 for isolated routines and still level 5 at scenario level. Both are given.",
-  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry."
+  "Scenario checks run natively against references recorded once per DOS executable (build/reference/, portable/tests/acceptance/step_check.py, seconds per scenario). Native replays each DOS run's own per-site clock values and its chronological service order (clock reads, BIOS keyboard samples, queue-count samples, pumps, simulation boundaries); each recorded input is admitted at its recorded service position through the ordinary SDL adapter. The canonical lane (native vs canonical DOS) tests the port, the original lane tests the whole chain. Verdicts are game state per DoAntSim entry. The handler-entry CX/DX a keyboard IRQ copies into its event (on DOS the wrapper's DGROUP residue) is replayed from the tape as part of the interrupt."
  ],
  "scenarios": {
-  "new-game-save (64 entries)": "original lane equal through 38, canonical through 35; first difference window_current_event Event.v of a queued keyboard-IRQ Enter (FA1Ch): DOS holds the interrupted DX, native 0 (platform.json native-input-hardware-context). 8-entry prefixes equal.",
-  "quick-game (2000 entries)": "original lane equal through 658, canonical through 659; first difference the same keyboard-IRQ Event.v (interrupted DX). 8-entry prefixes equal.",
-  "long-run (3000 entries, unattended)": "equal in game state for all 3000 entries in both lanes (original and canonical): native = original DOS and native = canonical DOS, about 10 s per lane.",
+  "new-game-save (64 entries)": "equal in game state for all 64 entries in both lanes (native = original DOS, native = canonical DOS).",
+  "quick-game (2000 entries)": "equal in game state for all 2000 entries in both lanes.",
+  "long-run (3000 entries, unattended)": "equal in game state for all 3000 entries in both lanes, about 10 s per lane.",
   "original repeatability": "original recorded twice: all 307 SaveRec records equal at every entry in all three scenarios; quick-game window_current_event differs from entry 1703 between repeats (observation setup differed; cause not isolated)"
  },
  "finish_line": "Port verified faithful for normal play when every corpus scenario (new-game-save, quick-game, an unattended long run, load-from-save, experiment mode) is equal three ways in game state for its whole step count, frames and sound streams are compared at checkpoints, and the native check of all scenarios runs in under a minute as part of the port suites.",
@@ -31,7 +31,7 @@
    },
    "original_dos": "dos/acceptance.py new-game-save and quick-game: startup and menus reach the game identically to canonical DOS",
    "canonical_dos": "same runs; working build links (case-sensitive) and runs",
-   "native": "portable/tests/runtime/run.py --flow vga PASS; diagnostics PASS; 502 to 575 variables equal three ways in quick-game (configuration and static state)",
+   "native": "equal in game state to both DOS builds in all three corpus scenarios",
    "known_divergence": "platform.json native-drive-device-policy (virtual C: drive, documented normalisation)",
    "first_open_question": "none at startup itself",
    "next": "keep covered by every scenario"
@@ -42,14 +42,14 @@
    "domain": "shipped window resources; mouse and keyboard through menus, file dialogs and message boxes used by the scenarios",
    "level": {
     "isolated": 3,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "scenarios drive menus and Save As dialogs on the original",
    "canonical_dos": "same",
    "native": "runtime flows (logo click, save, load) PASS",
-   "known_divergence": "keyboard-IRQ Event.v holds the interrupted DX on DOS, native 0 (platform.json native-input-hardware-context), first difference in new-game-save and quick-game; native-event-omitted-word fixed except the unreferenced periodic-pump entry",
-   "first_open_question": "which consumers read Event.v/h of IRQ key and mouse events, and is the DOS value observable in play?",
-   "next": "worker irq-context: replay the interrupted registers in the step check as interrupt input; consumer analysis for normal play"
+   "known_divergence": "normal play: native supplies CX/DX zero where DOS queues the scan wrapper's DGROUP residue in keyboard-IRQ events; OpenMiniMapWin and SpecialXfer read h/v of any event unfiltered (evidence/canonical/native-input-irq/interrupted-registers.md). Whether that changes play is undecided. Unreferenced periodic-pump fifth word still zero.",
+   "first_open_question": "does a key press inside the OpenMiniMapWin or SpecialXfer modal loop behave the same with native zero as with DOS residue?",
+   "next": "decide the two unfiltered readers; corpus scenarios with more window interaction"
   },
   {
    "id": "timing-rng",
@@ -77,14 +77,14 @@
    "original_dos": "native_simulation fixtures compare with the original DOS lane",
    "canonical_dos": "-",
    "native": "native_simulation PASS: 194 cases including mutation controls",
-   "known_divergence": "none in game state over 3000 steps (long-run, both lanes); quick-game and new-game-save equal until the IRQ Event.v difference",
-   "first_open_question": "divergences under player input past step 659",
-   "next": "continue the interactive lanes after irq-context"
+   "known_divergence": "none in game state over the corpus (3000 unattended steps, 2000 quick-game steps with input, 64 steps of new game and save)",
+   "first_open_question": "divergences under heavier, more varied player input",
+   "next": "input-heavy and long interactive scenarios"
   },
   {
    "id": "world-rules",
    "name": "Terrain, food, populations and game rules",
-   "domain": "Quick Game, unattended 3000 steps",
+   "domain": "Quick Game (2000 and 3000 steps), Full Game start (64 steps)",
    "level": {
     "isolated": 2,
     "scenario": 4
@@ -106,7 +106,7 @@
    },
    "original_dos": "saves of both scenarios byte-equal to canonical DOS (307 SaveRec records)",
    "canonical_dos": "same",
-   "native": "runtime save and load flows PASS; scenario saves differ (seed)",
+   "native": "runtime save and load flows PASS; new-game-save scenario equal in game state for 64 entries through Save As",
    "known_divergence": "save_last_filename RECONSTRUCTION_INTRODUCED in quick-game (not yet examined)",
    "first_open_question": "does a load-from-original-save scenario agree three ways? (removes the seed question)",
    "next": "add a scenario that loads a saved game and continues"
@@ -132,14 +132,14 @@
    "domain": "scenario inputs; IRQ projection",
    "level": {
     "isolated": 2,
-    "scenario": 5
+    "scenario": 4
    },
    "original_dos": "input_irq oracle matrix from original instruction execution",
    "canonical_dos": "-",
    "native": "input_irq PASS: 2,304 rows",
-   "known_divergence": "platform.json native-input-hardware-context: interrupted CX/DX not supplied by SDL (observed as Event.v in new-game-save 39/36 and quick-game 659/660)",
-   "first_open_question": "is the interrupted-register value read by any consumer in play?",
-   "next": "worker irq-context"
+   "known_divergence": "platform.json native-input-hardware-context: normal play supplies zero CX/DX context (DOS: scan wrapper residue); replayed in the step check",
+   "first_open_question": "see windows-events",
+   "next": "more input-heavy scenarios"
   },
   {
    "id": "audio",
@@ -190,6 +190,11 @@
  "fixes": [
   {
    "commit": "(this commit)",
+   "layer": "test harness",
+   "summary": "handler-entry CX/DX of keyboard IRQs replayed from the DOS tape (register-coverage pinned, negative control restores the four former stops); all three corpus scenarios equal in game state for their whole length in both lanes"
+  },
+  {
+   "commit": "6818824",
    "layer": "projection + test harness",
    "summary": "fifth enqueue word passed from the caller frame at all three four-word sites (receipts, negative control); inputs admitted at their recorded position in one chronological service order (atomic BIOS samples, queue samples, pumps, simulation boundaries) instead of pump/read fences; long-run equal 3000/3000 in both lanes"
   },

@@ -16,6 +16,8 @@ static unsigned test_input_step, test_input_phase;
 static unsigned test_step, test_phase;
 static char test_input_op[24], test_input_arg[40];
 static int test_input_a, test_input_b, test_input_ready;
+static unsigned test_input_cx, test_input_dx;
+static uint16_t test_raw_cx[128], test_raw_dx[128], test_irq_cx, test_irq_dx;
 static Host *test_host;
 /* Ordinal inputs join the normal host event boundary before SDL's end-of-poll
  * sentinel. SDL_PushEvent may defer an event to a later polling batch. */
@@ -30,6 +32,8 @@ static int test_queue_raw(const SDL_Event *event) {
     abort();
   test_raw[(test_raw_head + test_raw_count) % 128] = *event;
   test_raw_ids[(test_raw_head + test_raw_count) % 128] = test_queued + 1;
+  test_raw_cx[(test_raw_head + test_raw_count) % 128] = (uint16_t)test_input_cx;
+  test_raw_dx[(test_raw_head + test_raw_count) % 128] = (uint16_t)test_input_dx;
   ++test_raw_count;
   return 1;
 }
@@ -39,6 +43,8 @@ static int test_take_raw(SDL_Event *event) {
     return 0;
   *event = test_raw[test_raw_head];
   test_raw_sequence = test_raw_ids[test_raw_head];
+  test_irq_cx = test_raw_cx[test_raw_head];
+  test_irq_dx = test_raw_dx[test_raw_head];
   test_raw_head = (test_raw_head + 1) % 128;
   --test_raw_count;
   return 1;
@@ -84,12 +90,17 @@ static int test_line(FILE *file, char *line, size_t size) {
 }
 static void test_next_input(void) {
   char line[240], extra;
+  int fields;
   test_input_ready = 0;
   if (!test_input_file || !test_line(test_input_file, line, sizeof(line)))
     return;
-  if (sscanf(line, "%" SCNu64 " %u %u %23s %39s %d %d %c",
+  test_input_cx = test_input_dx = 0;
+  fields = sscanf(line, "%" SCNu64 " %u %u %23s %39s %d %d %u %u %c",
              &test_input_service, &test_input_step, &test_input_phase,
-             test_input_op, test_input_arg, &test_input_a, &test_input_b, &extra) != 7)
+             test_input_op, test_input_arg, &test_input_a, &test_input_b,
+             &test_input_cx, &test_input_dx, &extra);
+  if ((fields != 7 && fields != 9) || test_input_cx > UINT16_MAX ||
+      test_input_dx > UINT16_MAX)
     abort();
   test_input_ready = 1;
 }
@@ -382,4 +393,14 @@ void portable_test_diagnostics(FILE *f) {
 int portable_test_refresh_mode(void) {
   test_load();
   return test_clock_file != NULL ? 1 : 0;
+}
+
+void portable_test_irq_context(uint16_t *cx, uint16_t *dx) {
+  /* Only a currently admitted raw tape event has DOS register provenance.
+   * No tape means the caller's explicit ordinary SDL values remain intact. */
+  if (test_input_file && test_raw_sequence &&
+      !getenv("SIMANT_TEST_DISABLE_IRQ_CONTEXT")) {
+    *cx = test_irq_cx;
+    *dx = test_irq_dx;
+  }
 }
