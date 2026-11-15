@@ -1,3 +1,6 @@
+#include "portable/whole_program/enhanced/runtime.h"
+#include "portable/whole_program/enhanced/assets.h"
+#include "portable/whole_program/enhanced/world.h"
 #include "world_view.h"
 #include "portable/whole_program/platform/graphics_tile_upload.h"
 
@@ -26,6 +29,18 @@ extern void DoCalcTile(int16_t x, int16_t y);
 
 void modern_world_view(ModernWorldView *view)
 {
+    if(enhanced_world_enabled()) {
+        const EnhancedSnapshot *f=enhanced_snapshot();memset(view,0,sizeof(*view));
+        if(!f)return;
+        const EnhancedWorldSnapshot *w=&f->world;
+        view->plane=w->plane;view->columns=w->plane<2?128:64;view->rows=64;
+        view->tile_width=view->tile_height=16;view->terrain_set=w->terrain_set;
+        view->origin_x=w->origin.x;view->origin_y=w->origin.y;
+        memcpy(&view->view_rect,&w->hidden_viewport,sizeof(view->view_rect));
+        view->view_columns=(view->view_rect.right-view->view_rect.left)/16;
+        view->view_rows=(view->view_rect.bottom-view->view_rect.top+15)/16;
+        return;
+    }
     view->plane = MapPlane;
     view->columns = MapPlane < 2 ? 128 : 64;
     view->rows = 64;
@@ -45,6 +60,10 @@ void modern_world_view(ModernWorldView *view)
  * canonical decode and its compositor call. */
 void modern_world_cell(int x, int y, ModernCell *cell)
 {
+    if(enhanced_world_enabled()) {
+        const EnhancedSnapshot *f=enhanced_snapshot();
+        enhanced_world_cell(f?&f->world:NULL,f?f->world.plane:0,x,y,cell);return;
+    }
     uint8_t ground = edit_current_terrain_tile;
     uint16_t life = edit_current_life_tile;
     DoCalcTile((int16_t)(x - MapPnt.x), (int16_t)(y - MapPnt.y));
@@ -70,6 +89,7 @@ static const uint8_t *life_record(unsigned code, int16_t *mask_mode)
 
 uint32_t modern_world_cell_key(const ModernCell *cell)
 {
+    if(enhanced_world_enabled())return (uint32_t)cell->ground|(uint32_t)cell->life<<8;
     int16_t mode;
     uint32_t loaded = cell->life && life_record(cell->life, &mode) != NULL;
     return (uint32_t)cell->ground | (uint32_t)cell->life << 8 | loaded << 24;
@@ -77,6 +97,10 @@ uint32_t modern_world_cell_key(const ModernCell *cell)
 
 int modern_world_cell_pixels(const ModernCell *cell, uint8_t pixels[256])
 {
+    if(enhanced_world_enabled()) {
+        const EnhancedSnapshot *f=enhanced_snapshot();
+        return f && enhanced_asset_cell(f->world.terrain_set,cell->ground,cell->life,pixels);
+    }
     uint8_t ground[128], composed[128];
     const uint8_t *bits = ground, *record;
     int16_t mode = 0;
@@ -100,6 +124,7 @@ int modern_world_cell_pixels(const ModernCell *cell, uint8_t pixels[256])
 
 const char *modern_world_status_message(void)
 {
+    if(enhanced_world_enabled()) {const EnhancedSnapshot *f=enhanced_snapshot();return f&&f->world.status[0]?f->world.status:NULL;}
     return g_19C6;
 }
 
@@ -113,6 +138,12 @@ int modern_world_spider_cells(int *left, int *top)
 
 void modern_overview_view(ModernOverviewView *view)
 {
+    if(enhanced_world_enabled()) {
+        const EnhancedSnapshot *f=enhanced_snapshot();memset(view,0,sizeof(*view));if(!f)return;
+        memcpy(&view->tiles,&f->overview.tiles,sizeof(view->tiles));
+        view->cell_width=f->overview.cell_width;view->cell_height=f->overview.cell_height;
+        view->pad=f->overview.pad;view->multiplier=f->overview.multiplier;return;
+    }
     view->tiles = map_viewport_rect;
     view->cell_width = mapXsize;
     view->cell_height = mapYsize;

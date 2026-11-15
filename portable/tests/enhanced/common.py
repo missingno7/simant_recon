@@ -16,7 +16,7 @@ def check_build(build):
 def probe_link(build,out,observer=None):
     report=check_build(build);out.mkdir(parents=True,exist_ok=False)
     obj=out/'enhanced-probe.o';source=Path(__file__).with_name('probe.c')
-    command=[report['application_link']['command'][0],'-std=c11','-O2','-g','-fno-lto','-I'+str(ROOT),'-c',str(source),'-o',str(obj)]
+    command=[report['application_link']['command'][0],'-std=c11','-O2','-g','-fno-lto','-I'+str(ROOT),'-I'+str(ROOT/'build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/include'),'-c',str(source),'-o',str(obj)]
     if observer:command+=['-DENHANCED_ACCEPTANCE']
     subprocess.run(command,check=True,capture_output=True,timeout=60)
     if observer:
@@ -25,7 +25,7 @@ def probe_link(build,out,observer=None):
     else:command=report['application_link']['command'][:]
     exe=out/'simant-enhanced-test.exe'
     command[command.index('-o')+1]=str(exe)
-    command[1:1]=[str(obj),'-Wl,--wrap=enhanced_execute_next','-Wl,--wrap=modern_world_cell_pixels','-Wl,--wrap=ProcCasteEvent']
+    command[1:1]=[str(obj),'-Wl,--wrap=enhanced_execute_next','-Wl,--wrap=enhanced_world_enabled','-Wl,--wrap=modern_world_cell_pixels','-Wl,--wrap=ProcCasteEvent']
     if observer:command+=['-Wl,--wrap=portable_test_diagnostics','-Wl,--wrap=portable_test_step_boundary']
     result=subprocess.run(command,cwd=build,capture_output=True,text=True,timeout=120)
     (out/'link.log').write_text(result.stdout+result.stderr)

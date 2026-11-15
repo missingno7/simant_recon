@@ -9,6 +9,28 @@
  * but inspectors always advance to the newest publication (no Freeze). */
 typedef struct EnhancedPoint { int16_t x, y; } EnhancedPoint;
 typedef struct EnhancedRect { int16_t left, top, right, bottom; } EnhancedRect;
+typedef struct EnhancedArtPose { int16_t id,x,y,priority; } EnhancedArtPose;
+typedef struct EnhancedLine { int16_t x0,y0,x1,y1,color; } EnhancedLine;
+typedef struct EnhancedOverlayRect { EnhancedRect rect; int16_t color,operation; } EnhancedOverlayRect;
+typedef struct EnhancedBalloon {
+    EnhancedPoint anchor; int16_t plane,style,tail;
+    char text[300];
+} EnhancedBalloon;
+typedef struct EnhancedWorldOverlays {
+    uint64_t serial;
+    uint8_t available;
+    int16_t plane;
+    EnhancedPoint origin;
+    EnhancedRect scope;
+    unsigned art_count,line_count,balloon_count,rect_count;
+    EnhancedArtPose art[4]; EnhancedLine lines[96];
+    EnhancedBalloon balloons[1]; EnhancedOverlayRect rects[4];
+} EnhancedWorldOverlays;
+typedef struct EnhancedYardActors {
+    unsigned count;
+    int16_t ids[96]; EnhancedArtPose poses[96];
+} EnhancedYardActors;
+
 typedef struct EnhancedWorldSnapshot {
     uint8_t surface[128][64], life_surface[128][64];
     uint8_t black[64][64], life_black[64][64];
@@ -21,12 +43,16 @@ typedef struct EnhancedWorldSnapshot {
     int16_t player_plane, player_x, player_y, player_type, player_dir;
     int16_t player_base, player_egg, player_mode;
     int16_t spider_on, spider_x, spider_y;
-    /* Source-selected overlay poses/balloons need phase 1 production hooks. */
+    /* Last complete effectful source draw, retained across modal waits. */
     uint8_t overlays_available;
+    EnhancedWorldOverlays overlays;
+    char status[160];
 } EnhancedWorldSnapshot;
 
 typedef struct EnhancedOverviewSnapshot {
     int16_t map_mode, yard_mode;
+    EnhancedYardActors actors;
+    char message[300],human_balloon[300];
     EnhancedRect tiles;
     int16_t cell_width, cell_height, pad, multiplier;
     EnhancedPoint yard_selection, current_patch;

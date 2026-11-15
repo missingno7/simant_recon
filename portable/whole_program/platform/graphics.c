@@ -1,3 +1,4 @@
+#include "portable/whole_program/enhanced/overlays.h"
 #include "canonical_graphics_data.h"
 extern void (*driver_callback_table[25])();
 #include "graphics.h"
@@ -547,6 +548,7 @@ static void source_g9134_callback_raw(int16_t left, int16_t top,
         s_source_owner->last_status = SIM_GRAPHICS_UNSUPPORTED_MODE;
         return;
     }
+    enhanced_overlay_rect(left,top,right,bottom,color);
     s_source_owner->last_status = sim_graphics_g9134(s_source_owner, left, top,
                                                     right, bottom, color);
     if (!sim_graphics_source_cursor_effects_end())

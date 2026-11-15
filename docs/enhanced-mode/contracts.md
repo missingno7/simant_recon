@@ -1,7 +1,7 @@
-# Phase 0 presentation contracts
+# Presentation contracts (phases 0 and 1)
 
 The approved [design and complete component/action catalogs](../enhanced-mode.md)
-are the authority. This is an opt-in contract preview, not the enhanced UI.
+are the authority. This is an opt-in preview with a phase 1 native world, not the docking workspace.
 Set `SIMANT_ENHANCED_CONTRACTS=1` to enable publication and semantic submissions.
 Classic without that variable does not publish or execute enhanced intents.
 
@@ -13,8 +13,8 @@ overview/yard, panels/allocation, cards/help, history/status and dialog records.
 copies it into caller-owned storage. Reads never call the game, allocate source
 resources, read source time, change a plane, decode via `DoCalcTile`, or consume
 RNG. All three planes and six half-resolution scent maps are copied directly;
-canonical sprite-bank residency is absent from the world model. This is data
-publication only: phase 1 must supply independent immutable art and a renderer.
+canonical sprite-bank residency is absent from the world model. Phase 1 supplies
+[independent immutable art, source-output taps and a renderer](phase1.md).
 
 One engine/UI thread owns publication in phase 0. A pointer remains valid until
 the next source seam; copy if a paint needs longer storage. The two publication
@@ -38,8 +38,8 @@ Snapshot field provenance:
 
 | Family | Canonical inputs and limits |
 |---|---|
-| World | MapA/B/R, LifeA/B/R, PherMap*, MapPlane/MapPnt/editTileRect, terrain/layer, player and spider coordinates. Array order remains `[x][y]`. No copied VGA, sprite bank, cache or art. Overlay poses/balloons remain explicitly unavailable until phase 1 production hooks. |
-| Overview/yard | MapMode/transform, YardMode, YMapPnt/CurYardPnt, YMapPopB/R, queen/colony counts and placement mode. Red population uses the existing proven 32+160-byte semantic span, copying its two named owners. No native recount or isometric conversion. Yard actor/animation capture is phase 1 work. |
+| World | MapA/B/R, LifeA/B/R, PherMap*, MapPlane/MapPnt/editTileRect, terrain/layer, player and spider coordinates. Array order remains `[x][y]`. No copied VGA, sprite bank, cache or art. The completed source draw publishes picture IDs/poses, leg/palp endpoints, the selected balloon/text and rectangle operations. No composite bytes are copied. |
+| Overview/yard | MapMode/transform, YardMode, YMapPnt/CurYardPnt, YMapPopB/R, queen/colony counts and placement mode. Red population uses the existing proven 32+160-byte semantic span, copying its two named owners. No native recount or isometric conversion. Completed source animation sets publish selected picture IDs, positions, priorities and removals; opaque handle tokens resolve through the existing passive provider API. |
 | Panels | Auto/Manual, exact TriLevel words, preset and units selection, population vectors, health/warning values, source options/speed/tool/pause. OptionStates uses the existing six-word semantic span; byte-defined words use memcpy. No conversion or normalization. |
 | Cards/help | Current card and previous ring, observed modal owner. Private draw-produced link tables and immutable text/style catalog are marked unavailable; empty arrays never mean successfully decoded content. No DisplayCard/DoWinHelp call during reading. |
 | History/status | All ten 64-sample source series in documented data order, ring start/count, last OverallScore and copied edit status. No CalcScore. Draw-private graph selection and eight score metrics are explicitly unavailable. Label remapping remains the action catalog's `(g&1)*5+(g>>1)`. |
@@ -131,16 +131,17 @@ real music-enabled death/rebirth path using ordinary `erad` keyboard input, and
 compares actual rendered occupied cells against ground-only rendering while both
 source banks are null. Phase 1 expects entity imagery. One inactive Caste-panel
 click must produce exactly one Manual handler event and leave Auto disabled;
-phase 3 owns that fix. Both are strict XFAILs today. XPASS fails the runner so
-the expected-failure registration must be retired when the fix lands. A missing
+phase 3 owns that fix. The phase 1 rebirth regression is a required PASS, with a hybrid negative control
+and equality of the complete semantic world at that wait. Only the phase 3
+activation regression remains XFAIL; XPASS still fails that registration. A missing
 precondition, timeout, crash or missing observation is an error, never XFAIL.
 The two-click positive control and semantic B01 executor must pass today,
 including one post-flush delivery and rejection of duplicate serials.
 
 `invariance.py` reuses the acceptance native observer, DWARF state schema,
 SaveRec projection, all named raw view fingerprints, fixed validated ideal-machine
-profile and sound-command comparison. Off/on and nineteen extra snapshot-copy
-repaints use one executable, seed and input. It compares every raw view, including
+profile and sound-command comparison. Off/on and nineteen extra snapshot copies plus native cell/overlay
+rasterizations use one executable, seed and input. It compares every raw view, including
 UI/front state and raw stack suffix; it applies no new value masks. The established
 ideal-state-v2 sidecars are diagnostic only for this comparison. Machine boundary
 timestamps and source sound commands also compare. All first and subsequent
@@ -153,12 +154,14 @@ mutation must fail the comparison. Missing observations fail. No enhanced layout
 exists yet, so layout-change coverage is deferred explicitly.
 
 The `contracts` group toggles only publication on the existing chooser-only
-host. The `hybrid` group also toggles the existing modern world presentation,
-using the same established off/on options as `run_modern.py`. If that older
-hosting path changes source UI/clip state, the harness reports the exact views;
+host. The `native-world` group uses the same complete `--windows` arrangement in
+every lane, keeps publication enabled, and toggles only `SIMANT_ENHANCED_WORLD`.
+If that hosting path changes source UI/clip state, the harness reports exact views;
 the six-field historical check is not substituted for a full pass.
 
-The phase 0 run reports raw differences rather than full passive equality.
+The historical phase 0 run reports raw differences rather than full passive equality.
+Current phase 1 receipts and exact differences are in the task result; the harness
+continues to reject full raw equality while any named view differs.
 Repeated off/off runs already differ in `clip_rectangle_workspace`, the unused
 `clip_window_z_order:raw` suffix, `fd_50F6_37FA` and `mode_knob_anim_index`.
 The hybrid compositor comparison additionally differs in `g_4356`,

@@ -18,9 +18,10 @@
  * edit view keeps drawing at game cadence (its draw path consumes the RNG);
  * rendering here never runs game code that writes state. */
 
-/* Draw the map area `area` (client pixels) of the Game Window. `planes` and
- * `left`/`top` locate the hosted canonical edit view (logical screen origin
- * of the planes' window client), used only for not-yet-modern overlays. */
+/* Draw the native canvas `area`. In enhanced preview, all world content is
+ * read from a completed semantic snapshot and immutable assets; planes must
+ * be NULL. The retained hybrid comparison uses planes for legacy overlays.
+ * Enhanced zoom/pan is presentation-only; legacy camera behavior stays below. */
 int modern_game_view_render(SDL_Renderer *renderer, const SDL_FRect *area, int scale,
                             const HostPalette *palette, const SimVgaPlanes *planes);
 /* Linear filtering of zoomed world pixels instead of nearest (pixel-exact). */

@@ -38,7 +38,8 @@ def observe(build,exe,state,out,mode,steps,hosted=False):
     env.update(SIMANT_TEST_IDEAL='1',SIMANT_TEST_IDEAL_DGROUP=str(profile['irq09_dgroup']),
         SIMANT_TEST_STEP_CONFIG=str(config),SIMANT_TEST_AUDIO_COMMANDS=str(out/'audio.txt'),
         SIMANT_TEST_AUDIO_CONTENT=str(out/'content.txt'),SIMANT_TEST_DUMP_ENTRY='3')
-    if mode!='off':env['SIMANT_ENHANCED_CONTRACTS']='1'
+    if mode!='off' or hosted:env['SIMANT_ENHANCED_CONTRACTS']='1'
+    if hosted:env['SIMANT_ENHANCED_WORLD']='0' if mode=='off' else '1'
     if mode=='stress':env['SIMANT_ENHANCED_TEST']='stress'
     script=ROOT/'portable/tests/runtime/windows-quick.txt'
     scratch=ROOT/'build/scratch/enhanced';scratch.mkdir(parents=True,exist_ok=True)
@@ -49,7 +50,7 @@ def observe(build,exe,state,out,mode,steps,hosted=False):
             '--smoke-ms','1000000']
         # Both use the exact same startup owner/pointer transform. Only the
         # world compositor is added in on/stress, as in the existing modern test.
-        if hosted:command+=['--windows' if mode!='off' else '--windows=200']
+        if hosted:command+=['--windows']
         else:command+=['--windows=200']
         with (out/'run.log').open('w') as log:
             run=subprocess.run(command,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=180)
@@ -74,7 +75,7 @@ def main():
     (out/'views.json').write_text(json.dumps(state,indent=2)+'\n')
     groups=[]
     for hosted in (False,True):
-        name='hybrid' if hosted else 'contracts'
+        name='native-world' if hosted else 'contracts'
         lanes={mode:observe(build,exe,state,out/(name+'-'+mode),mode,a.steps,hosted) for mode in ('off','on','stress')}
         lanes['repeat-off']=observe(build,exe,state,out/(name+'-repeat-off'),'off',a.steps,hosted)
         for mode in ('repeat-off','on','stress'):
@@ -95,7 +96,7 @@ def main():
                         first_changed_byte=next(n for n,(a,b) in enumerate(zip(left[field],right[field])) if a!=b),
                         off_prefix=left[field][:64].hex(),other_prefix=right[field][:64].hex()))
             observed=(mode=='repeat-off' or observation.get('enhanced_generation',0)>0) and observation.get('enhanced_copy_errors')==0
-            if mode=='stress':observed=observed and observation.get('enhanced_repaint_copies',0)>0
+            if mode=='stress':observed=observed and observation.get('enhanced_repaint_copies',0)>0 and observation.get('enhanced_repaint_renders',0)>0
             groups.append(dict(group=name,mode=mode,passed=not diffs and audio['status']=='AUDIO_COMMANDS_EQUAL' and clock_equal,
                 differing_entries=len(diffs),first_difference=diffs[0] if diffs else None,
                 all_differences=diffs,existing_projection_differences=semantic,audio=audio,clock_equal=clock_equal,
@@ -106,7 +107,7 @@ def main():
     detector_ok=bool(negative) and negative[0]['entry']==1 and negative[0]['views']==[state['items'][0]['name']]
     result=dict(passed=all(g['passed'] and g['observed'] for g in groups) and detector_ok,groups=groups,negative_control=detector_ok,
         entries=a.steps,views=len(state['items']),save_records=sum(i['name'].startswith('save:') for i in state['items']),
-        exclusions=state['excluded'],layout='No enhanced layout exists in phase 0; no layout-invariance claim.',
+        exclusions=state['excluded'],layout='Phase 1 uses the existing Game Window; no docking/layout-invariance claim.',
         scope='Raw acceptance views, SaveRec projection, RNG, source UI/stack, clock and sound commands; unavailable private views stay explicit.')
     (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k not in ('groups','exclusions')},indent=2))

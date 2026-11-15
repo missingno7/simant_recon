@@ -1,4 +1,5 @@
 #include "runtime.h"
+#include "overlays.h"
 #include "portable/whole_program/window_runtime_owner.h"
 #include "canonical_data_views.h"
 #include <stdlib.h>
@@ -47,6 +48,13 @@ int enhanced_contracts_enabled(void)
     return enabled;
 }
 
+int enhanced_world_enabled(void)
+{
+    static int initialized,enabled;
+    if(!initialized) {const char *p=getenv("SIMANT_ENHANCED_WORLD");enabled=!p || strcmp(p,"0");initialized=1;}
+    return enhanced_contracts_enabled() && enabled;
+}
+
 static int16_t word(const void *p)
 {
     int16_t value;
@@ -92,11 +100,20 @@ static void world_snapshot(EnhancedWorldSnapshot *w)
     w->player_plane=MePlane; w->player_x=MeLocX; w->player_y=MeLocY;
     w->player_type=MeType; w->player_dir=MeDir; w->player_base=MeBase;
     w->player_egg=MeEgg; w->player_mode=MeMode;
+    enhanced_overlay_copy(w);
+    text_copy(w->status,sizeof(w->status),g_19C6,SIZE_MAX);
     w->spider_on=SpidOn; w->spider_x=SpidX; w->spider_y=SpidY;
 }
 
+extern char *mapMessage;
+extern int16_t BoyMessOn,BoyMsgOffset;
+extern char **BoyMsgs;
+
 static void overview_snapshot(EnhancedOverviewSnapshot *o)
 {
+    enhanced_yard_copy(o);
+    text_copy(o->message,sizeof(o->message),mapMessage,SIZE_MAX);
+    if(BoyMessOn && BoyMsgs) text_copy(o->human_balloon,sizeof(o->human_balloon),BoyMsgs[BoyMsgOffset],SIZE_MAX);
     o->map_mode=word(MapMode); o->yard_mode=YardMode; o->tiles=map_viewport_rect;
     o->cell_width=mapXsize; o->cell_height=mapYsize;
     o->pad=map_side_margin_pixels; o->multiplier=multiplier;

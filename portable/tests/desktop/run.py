@@ -13,7 +13,7 @@ def main():
     args=ap.parse_args();out=args.out.resolve();out.mkdir(parents=True,exist_ok=False);sdk=args.sdk.resolve()
     base=['C:/msys64/mingw64/bin/gcc.exe','-std=c11','-Wall','-Wextra','-Werror','-I',str(ROOT),'-I',str(sdk/'include')]
     platform=ROOT/'portable/whole_program/platform';results=[]
-    for name,sources in [('host',[HERE/'host.c',platform/'sdl3/host.c',platform/'input_time.c']),('write',[HERE/'write.c',platform/'drive_directory.c']),('files',[HERE/'files.c',platform/'desktop_files.c'])]:
+    for name,sources in [('host',[HERE/'host.c',platform/'sdl3/host.c',platform/'input_time.c']),('write',[HERE/'write.c',platform/'drive_directory.c']),('files',[HERE/'files.c',platform/'desktop_files.c',HERE/'enhanced_disabled.c'])]:
         command=base+list(map(str,sources))+['-L',str(sdk/'lib'),'-lSDL3','-o',str(out/(name+'.exe'))]
         r=subprocess.run(command,capture_output=True,text=True,timeout=60)
         (out/(name+'-compile.txt')).write_text(r.stdout+r.stderr)

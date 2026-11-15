@@ -1,3 +1,6 @@
+#include "portable/whole_program/enhanced/runtime.h"
+#include "portable/whole_program/enhanced/world.h"
+#include "portable/whole_program/enhanced/assets.h"
 #include "modern_game_view.h"
 #include "portable/whole_program/modern/camera.h"
 
@@ -209,14 +212,16 @@ static void user_moved(void)
     clamp_cameras();
     g.shown.center_x = g.target.center_x;
     g.shown.center_y = g.target.center_y;
-    g.sync = 1;
+    g.sync = enhanced_world_enabled()?0:1;
 }
 
 void modern_game_view_wheel(float vx, float vy, float steps)
 {
     double zoom;
     if (!g.ready || steps == 0) return;
-    zoom = g.target.zoom * pow(1.25, steps);
+    zoom = enhanced_world_enabled() && g.target.zoom>=1 ?
+        floor(g.target.zoom+steps+0.5) : g.target.zoom * pow(1.25, steps);
+    if(enhanced_world_enabled() && zoom<1 && steps<0)zoom=g.target.zoom/2;
     if (zoom < MIN_ZOOM) zoom = MIN_ZOOM;
     if (zoom > MAX_ZOOM) zoom = MAX_ZOOM;
     g.target.center_x = g.shown.center_x;
@@ -250,7 +255,7 @@ void modern_game_view_hold(int held, float vx, float vy)
         to_world(vx, vy, &g.hold_x, &g.hold_y);
     } else if (g.hold_active) {
         g.hold_active = 0;
-        g.sync = 1;      /* back to the edit view centred on the camera */
+        g.sync = enhanced_world_enabled()?0:1; /* legacy camera action only */
     }
 }
 
@@ -383,6 +388,23 @@ static int status_overlay(SDL_Renderer *renderer, const SDL_FRect *area, int sca
     uint8_t canonical[640 * BAND];
     int width, drawn, x, y, left = 640, right = -1, top = BAND, bottom = -1;
     SDL_FRect dst;
+    if(enhanced_world_enabled()) {
+        const char *msg=modern_world_status_message();
+        uint8_t indices[640*BAND];
+        if(!msg)return 1;
+        memset(indices,15,sizeof(indices));
+        int tw=enhanced_font_width(msg),th=enhanced_font_height();
+        if(tw>632)tw=632;
+        enhanced_font_draw(indices,640,BAND,640,4,2,msg,0);
+        for(int yy=0;yy<BAND;++yy)for(int xx=0;xx<640;++xx) {
+            uint8_t *out=g.status_rgba+((size_t)yy*640+xx)*4;
+            memcpy(out,g.palette.rgb[indices[yy*640+xx]],3);out[3]=255;
+        }
+        if(!g.status && !(g.status=SDL_CreateTexture(renderer,SDL_PIXELFORMAT_RGBA32,SDL_TEXTUREACCESS_STREAMING,640,BAND)))return 0;
+        if(!SDL_SetTextureScaleMode(g.status,SDL_SCALEMODE_NEAREST) || !SDL_UpdateTexture(g.status,NULL,g.status_rgba,640*4))return 0;
+        SDL_FRect src={0,0,(float)(tw+8),(float)(th+4)},dst={area->x+(area->w-(tw+8)*scale)/2,area->y+4*scale,(tw+8)*scale,(th+4)*scale};
+        return SDL_RenderTexture(renderer,g.status,&src,&dst);
+    }
     if (planes == NULL || modern_world_status_message() == NULL) return 1;
     modern_world_view(&v);
     width = v.view_rect.right - v.view_rect.left;
@@ -507,8 +529,24 @@ int modern_game_view_render(SDL_Renderer *renderer, const SDL_FRect *area, int s
     if (y0 < 0) y0 = 0;
     if (x1 > g.columns) x1 = g.columns;
     if (y1 > g.rows) y1 = g.rows;
-    update_world(x0, y0, x1, y1);
-    canonical_overlays(planes);
+    if(enhanced_world_enabled()) {
+        const EnhancedSnapshot *f=enhanced_snapshot();
+        /* Restore last generation's semantic overlays before painting the new
+         * source selections. No raster-plane input reaches this branch. */
+        update_world(x0,y0,x1,y1);
+        if(f) {
+            EnhancedRect r=enhanced_world_draw(&f->world,g.indexed,g.columns*16,g.rows*16,WORLD_WIDTH);
+            if(r.right>r.left && r.bottom>r.top) {
+                for(int yy=r.top/16;yy<(r.bottom+15)/16;++yy)
+                    for(int xx=r.left/16;xx<(r.right+15)/16;++xx) {
+                        g.keys[yy*WORLD_COLUMNS+xx]=KEY_OVERLAY;mark_dirty(xx,yy);
+                    }
+            }
+        }
+    } else {
+        update_world(x0, y0, x1, y1);
+        canonical_overlays(planes);
+    }
     if (!upload(palette)) return 0;
     /* The area may extend past the client (under the replaced title strip). */
     {

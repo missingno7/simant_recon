@@ -1,3 +1,5 @@
+#include "portable/whole_program/enhanced/runtime.h"
+#include "portable/whole_program/enhanced/world.h"
 #include "native_windows.h"
 #include "portable/whole_program/enhanced/actions.h"
 #include "../window_hosting.h"
@@ -156,7 +158,7 @@ int native_windows_init(Host *host, SDL_Window *root)
     SDL_SetHint(SDL_HINT_WINDOW_ACTIVATE_WHEN_RAISED, "0");
     sim_window_hosting_set_pump(pump);
     /* The overview indicator shows the modern Game Window's area. */
-    if (sim_window_hosting_is_hosted(0)) sim_window_hosting_own_map_cursor(1);
+    if (sim_window_hosting_is_hosted(0) && !enhanced_contracts_enabled()) sim_window_hosting_own_map_cursor(1);
     if (!native_menu_init(root))
         fprintf(stderr, "Native menu bar unavailable (no native main window)\n");
     return 1;
@@ -200,6 +202,10 @@ static int map_area(const NativeWindow *w, SDL_FRect *area)
     ModernWorldView v;
     int cw, ch;
     if (!w->modern || !w->view.open) return 0;
+    if(enhanced_world_enabled()) {
+        client_size(w,&cw,&ch);area->x=area->y=0;area->w=cw;area->h=ch;
+        return cw>0 && ch>0;
+    }
     modern_world_view(&v);
     if (v.view_rect.right <= v.view_rect.left || v.view_rect.bottom <= v.view_rect.top ||
         v.view_rect.right > w->view.right || v.view_rect.bottom > w->view.bottom ||
@@ -333,6 +339,10 @@ static int render_game_window(NativeWindow *w, const HostPalette *palette)
     Surface *s = &w->surface;
     SDL_FRect target, area;
     const uint8_t *fill;
+    if(enhanced_world_enabled()) {
+        if(!SDL_SetRenderDrawColor(s->renderer,0,0,0,255) || !SDL_RenderClear(s->renderer))return 0;
+        return !map_area(w,&area) || modern_game_view_render(s->renderer,&area,n.scale,palette,NULL);
+    }
     target.x = target.y = 0;
     target.w = (float)(s->width * n.scale);
     target.h = (float)(s->height * n.scale);
@@ -346,6 +356,23 @@ static int render_game_window(NativeWindow *w, const HostPalette *palette)
         return 0;
     return !map_area(w, &area) ||
            modern_game_view_render(s->renderer, &area, n.scale, palette, w->view.planes);
+}
+
+/* Phase 1 replaces the entire yard content with a native asset canvas.
+ * No hosted texture is uploaded beneath it. Controls are phase 3 work. */
+static int render_yard_window(NativeWindow *w,const HostPalette *palette)
+{
+    Surface *s=&w->surface;const EnhancedSnapshot *f=enhanced_snapshot();
+    if(!f)return 1;
+    enhanced_yard_draw(&f->overview,s->indexed,s->width,s->height,s->width);
+    for(int y=0;y<s->height;++y)for(int x=0;x<s->width;++x) {
+        uint8_t *out=s->rgba+((size_t)y*s->width+x)*4;
+        memcpy(out,palette->rgb[s->indexed[(size_t)y*s->width+x]&15],3);out[3]=255;
+    }
+    SDL_FRect target={0,0,(float)(s->width*n.scale),(float)(s->height*n.scale)};
+    return SDL_UpdateTexture(s->texture,NULL,s->rgba,s->width*4) &&
+        SDL_SetRenderDrawColor(s->renderer,0,0,0,255) && SDL_RenderClear(s->renderer) &&
+        SDL_RenderTexture(s->renderer,s->texture,NULL,&target) && SDL_RenderPresent(s->renderer);
 }
 
 static void place(NativeWindow *w, const SimHostedWindowView *view, int strip);
@@ -531,6 +558,8 @@ int native_windows_present(const HostPalette *palette)
         if (w->surface.width <= 0) continue;
         if (w->modern)
             { okay = render_game_window(w, palette) && SDL_RenderPresent(w->surface.renderer); ++hosted_presentations; }
+        else if(enhanced_world_enabled() && view.id==0x1900)
+            okay=render_yard_window(w,palette);
         else
             okay = draw_surface(&w->surface, view.planes, view.left, view.top_y + w->strip, palette,
                                 view.id == 0x100 && has_indicator ? &indicator : NULL);
@@ -781,6 +810,16 @@ static int modern_navigation(SDL_Event *event)
     return 0;
 }
 
+/* A source chooser may close on down before SDL delivers its matching up.
+ * Retain that completed transaction's coordinate origin. Its release is not
+ * a new canvas gesture, even if a differently sized world is now underneath.
+ * Live proximity-menu capture keeps its established retargeting below. */
+static struct ClosedRelease {
+    int valid;
+    SDL_WindowID window;
+    float client_x,client_y,logical_x,logical_y;
+} closed_release[8];
+
 int native_windows_translate(SDL_Event *event)
 {
     Origin o;
@@ -838,6 +877,18 @@ int native_windows_translate(SDL_Event *event)
     if (n.deferred.count && !replaying) {
         defer(&raw);
         return -1;
+    }
+    if(enhanced_contracts_enabled() && sim_window_hosting_is_hosted(0) && event->type==SDL_EVENT_MOUSE_BUTTON_UP && event->button.button<8) {
+        struct ClosedRelease *r=&closed_release[event->button.button];
+        Origin old;
+        if(r->valid && r->window==id && origin_of(id,&old)<0) {
+            event->button.x=r->logical_x+(event->button.x-r->client_x)/(float)n.scale;
+            event->button.y=r->logical_y+(event->button.y-r->client_y)/(float)n.scale;
+            clamp_logical(&event->button.x,&event->button.y);
+            r->valid=0;
+            return 1;
+        }
+        r->valid=0;
     }
     {
         /* A held button keeps delivering to the window where it was pressed
@@ -904,6 +955,8 @@ int native_windows_translate(SDL_Event *event)
             modern_game_view_hold(0, 0, 0);
     }
     to_logical(&o, cx, cy, &event->button.x, &event->button.y, 0);
+    if(enhanced_contracts_enabled() && sim_window_hosting_is_hosted(0) && event->type==SDL_EVENT_MOUSE_BUTTON_DOWN && event->button.button<8)
+        closed_release[event->button.button]=(struct ClosedRelease){1,id,cx,cy,event->button.x,event->button.y};
     return 1;
 }
 
@@ -972,7 +1025,7 @@ static int save_game_window(NativeWindow *w, const char *path)
     SDL_DestroySurface(frame);
     SDL_RenderPresent(w->surface.renderer);
     SDL_snprintf(hosted, sizeof(hosted), "%s.hosted.bmp", path);
-    return okay && save_rgba(w->surface.rgba, w->surface.width, w->surface.height, hosted);
+    return enhanced_world_enabled()?okay:okay && save_rgba(w->surface.rgba, w->surface.width, w->surface.height, hosted);
 }
 
 int native_windows_save_frames(const char *base_path)

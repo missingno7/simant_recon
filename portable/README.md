@@ -325,3 +325,36 @@ those issues or establish complete DOS/native equality.
 Published historical checkpoints live in Git. Current sources and validations
 are described in [the canonical architecture](../docs/canonical-source.md) and
 [the consolidation report](../docs/cleanup.md).
+
+
+### Enhanced phase 1 native world preview
+
+With `SIMANT_ENHANCED_CONTRACTS=1 --windows`, the complete Game Window and yard
+clients use native-owned shipped artwork and semantic snapshots. No hosted
+texture is uploaded beneath either canvas. `SIMANT_ENHANCED_WORLD=0` retains the
+hybrid comparison while keeping publication enabled. Classic without the
+contract variable keeps its existing behavior. This does not create docking,
+command panels or native lifecycle dialogs.
+
+Both terrain sets, both life banks, all 252 HCEGANT/SHARED pictures and FONT2
+are decoded once after the shipped-file verifier, before DOS main. A required
+asset/format failure aborts startup. Music may freely release source sprite
+banks. Source draw producers continue hidden, including their RNG/timer work;
+native repaint reads only completed generations. Nearest-neighbor scaling is
+the default; wheel zoom uses integer steps above 100%, and enhanced zoom/pan
+changes only the presentation camera. `--smooth-zoom` remains optional.
+
+See [phase 1 ownership, source seams and scope](../docs/enhanced-mode/phase1.md).
+Fresh verification and phone-capture commands:
+
+```powershell
+python portable/tests/enhanced/run.py --build BUILD --out FRESH_REGRESSIONS
+python portable/tests/enhanced/invariance.py --build BUILD --out FRESH_INVARIANCE
+python portable/tests/enhanced/capture.py --build BUILD --out FRESH_CAPTURES --regressions FRESH_REGRESSIONS
+```
+
+The first requires rebirth PASS and activation XFAIL. The second retains every
+raw difference, including baseline variability; a nonzero result must be read
+as differences, not silently treated as full invariance. The capture runner
+checks source preconditions, compares independent asset decoding, and writes
+asset-derived PNGs only to ignored scratch.

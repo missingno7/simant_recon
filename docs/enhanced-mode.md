@@ -6,7 +6,8 @@ The component and action catalogs below are retained in full. Organisation and n
 UI choices are ours; the evidence labels distinguish observations from hypotheses.
 
 Phase 0 APIs, implemented routes, limitations and executable checks are documented in
-[the contract guide](enhanced-mode/contracts.md). No native workspace is implemented yet.
+[the contract guide](enhanced-mode/contracts.md). The opt-in [phase 1 native world](enhanced-mode/phase1.md)
+uses immutable shipped assets and semantic snapshots. No docking workspace is implemented yet.
 Investigation references under `build/workers/enhanced-design/` are ignored scratch,
 including every game-art screenshot and resource-derived inventory. Recipes and small
 text traces cited here are retained under `evidence/enhanced-mode/`; rerun recipes in
@@ -51,7 +52,10 @@ The source census is [resource-inventory.json](../build/workers/enhanced-design/
 
 The requested Mac `build/workers/mac-scroll/RESULT.md` **does not exist in the supplied checkout**. The Mac README, asset inventory, pinned ISO, resource parser/tooling, MENU/WIND/DLOG/DITL/CNTL and tutorial strings were inspected instead. Mac scroll-loop details not proved by those inputs remain unsettled. The earlier captures are the current port plus a clearly labelled classic SDL capture. The later Win16 runtime observation below supplements the source/resource research; the Mac executable was not run. Neither is a DOS-oracle screen comparison.
 
-## The current hybrid
+## The retained hybrid comparison
+
+The following describes the historical comparison path. The phase 1 preview replaces
+the complete Game Window and yard clients; see [implementation and limits](enhanced-mode/phase1.md).
 
 `native_windows.c::ensure_window` creates an SDL window for each hosted logical game window. A native caption replaces part of the game's title strip; `upload_surface` converts hosted VGA planes into a client texture. `render_game_window` first draws that texture and then covers the map area with `modern_game_view_render`. Thus even the modern Game Window retains the old control column and DOS grow decoration. Every other ordinary view, list, triangle, dialog and popup is still a VGA client in a native frame.
 

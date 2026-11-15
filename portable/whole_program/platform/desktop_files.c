@@ -1,3 +1,5 @@
+#include "portable/whole_program/enhanced/assets.h"
+#include "portable/whole_program/enhanced/runtime.h"
 #include "desktop_files.h"
 #include <SDL3/SDL.h>
 #include <windows.h>
@@ -90,6 +92,9 @@ int simant_desktop_files(const char *assets, int in_place, const char *user_root
     bad = "SIMANT.CFG";
     if (!path(source, sizeof(source), absolute, bad)) goto failed;
     if (!config_safe(source)) goto failed;
+    if (enhanced_contracts_enabled() && !enhanced_assets_load(absolute)) {
+        bad = enhanced_assets_error(); goto failed;
+    }
     if (in_place) {
         if (strlen(absolute) >= capacity) goto failed;
         strcpy(volume, absolute);

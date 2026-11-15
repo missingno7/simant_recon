@@ -8,6 +8,7 @@
 #include <string.h>
 #include "input_time.h"
 #include "portable/whole_program/enhanced/runtime.h"
+#include "portable/whole_program/enhanced/overlays.h"
 
 typedef char **Handle;
 
@@ -371,6 +372,7 @@ void __wrap_clip_set_screen_region(void) { __real_clip_set_screen_region(); s.co
 void __wrap_clip_set_screen_intersection(struct Rect *r) { __real_clip_set_screen_intersection(r); s.context = CONTEXT_SCREEN; }
 void __wrap_clip_Push(void)
 {
+    enhanced_overlay_push();
     __real_clip_Push();
     if (s.saved_count < 32) {
         s.saved[s.saved_count].context = s.context;
@@ -380,6 +382,7 @@ void __wrap_clip_Push(void)
 }
 void __wrap_clip_Pop(void)
 {
+    enhanced_overlay_pop();
     __real_clip_Pop();
     if (s.saved_count && --s.saved_count < 32) {
         s.context = s.saved[s.saved_count].context;

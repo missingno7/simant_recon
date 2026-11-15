@@ -38,11 +38,12 @@ void modern_world_view(ModernWorldView *view);
 typedef struct ModernCell { uint8_t ground; uint16_t life; } ModernCell;
 /* World tile (x, y), 0 <= y < 64, on the current plane. */
 void modern_world_cell(int x, int y, ModernCell *cell);
-/* 16x16 palette indices, row-major. Returns 0 when the resident tile cache
- * is not bound yet. A life code whose sprite bank is not loaded draws its
- * ground only (non-EMS DOS keeps one of objects 13/14 resident). */
+/* 16x16 palette indices, row-major. Enhanced preview uses immutable native
+ * assets and the published terrain set, independent of canonical residency.
+ * The retained hybrid control uses resident caches and can draw ground-only
+ * when its life bank is absent; it is the rebirth negative control. */
 int modern_world_cell_pixels(const ModernCell *cell, uint8_t pixels[256]);
-/* Stable key for the pixels of a cell (cell codes plus sprite-bank presence). */
+/* Enhanced keys contain semantic codes only; hybrid keys include bank presence. */
 uint32_t modern_world_cell_key(const ModernCell *cell);
 
 /* Edit-view cells the spider composite covered on the last canonical draw

@@ -88,7 +88,10 @@
     "portable/whole_program/platform/sdl3/modern_game_view.c",
     "portable/whole_program/enhanced/snapshot.c",
     "portable/whole_program/enhanced/actions.c",
-    "portable/whole_program/enhanced/seams.c"
+    "portable/whole_program/enhanced/seams.c",
+    "portable/whole_program/enhanced/assets.c",
+    "portable/whole_program/enhanced/overlays.c",
+    "portable/whole_program/enhanced/world.c"
   ],
   "headers": [
     "portable/whole_program/platform/desktop_files.h",
@@ -198,7 +201,10 @@
     "portable/whole_program/enhanced/snapshot.h",
     "portable/whole_program/enhanced/actions.h",
     "portable/whole_program/enhanced/runtime.h",
-    "portable/whole_program/enhanced/catalog.inc"
+    "portable/whole_program/enhanced/catalog.inc",
+    "portable/whole_program/enhanced/assets.h",
+    "portable/whole_program/enhanced/overlays.h",
+    "portable/whole_program/enhanced/world.h"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -218,7 +224,14 @@
     "gfx_restore_and_free_rect",
     "GRectInvOutline",
     "DoEvent",
-    "ui_pump_events_edge_scroll"
+    "ui_pump_events_edge_scroll",
+    "clip_intersect_rect_list",
+    "gfx_buffer_line_target",
+    "gfx_buffer_line",
+    "anim_bitmap_to_buffer",
+    "MakeBalloon",
+    "hanim_RemoveAnimSet",
+    "hanim_RenderAnimSet"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",

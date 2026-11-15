@@ -2,6 +2,10 @@
  * calls, memory patches or game-function calls from debugger/UI callbacks. */
 #include "portable/whole_program/enhanced/actions.h"
 #include "portable/whole_program/enhanced/snapshot.h"
+#include "portable/whole_program/enhanced/world.h"
+#include "portable/whole_program/enhanced/assets.h"
+#include "portable/whole_program/enhanced/runtime.h"
+#include "portable/whole_program/platform/sdl3/native_windows.h"
 #include "portable/whole_program/modern/world_view.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,13 +19,59 @@ extern uint8_t LifeA[], LifeB[], LifeR[], CasteAuto[];
 extern uint8_t OptionStates[];
 extern int16_t snd_interface_initialized;
 static unsigned occupied_seen, missing_seen, rendered_seen, manual_events, music_seen;
-static unsigned copies, submitted, duplicate_result, copy_errors;
+static unsigned copies, submitted, duplicate_result, copy_errors,repairs;
 static int configured;
 static const char *mode;
+static unsigned balloon_peak,captured;
+static void dump_assets(void) {
+    const char *path=getenv("SIMANT_ENHANCED_DUMP_ASSETS");if(!path)return;
+    FILE *out=fopen(path,"wb");if(!out)abort();uint8_t pixels[256];
+    for(unsigned set=0;set<2;++set)for(unsigned ground=0;ground<256;++ground) {
+        uint32_t meta[]={set,ground,0};
+        if(!enhanced_asset_cell(set,ground,0,pixels))abort();
+        fwrite(meta,4,3,out);fwrite(pixels,1,256,out);
+    }
+    for(unsigned set=0;set<2;++set)for(unsigned ground=80;ground<=160;ground+=40)
+        for(unsigned code=256;code<1024;++code) {
+            uint32_t meta[]={set,ground,code};
+            if(!enhanced_asset_cell(set,ground,code,pixels))abort();
+            fwrite(meta,4,3,out);fwrite(pixels,1,256,out);
+        }
+    fclose(out);
+    char pics[2048];snprintf(pics,sizeof(pics),"%s.pictures",path);out=fopen(pics,"wb");if(!out)abort();
+    for(int id=0;id<30000;++id) {const EnhancedArt *a=enhanced_art(id);if(a) {
+        uint32_t meta[]={id,a->width,a->height};fwrite(meta,4,3,out);fwrite(a->pixels,1,a->width*a->height,out);
+    }}
+    fclose(out);
+}
+extern int __real_enhanced_world_enabled(void);
+int __wrap_enhanced_world_enabled(void) {
+    const char *m=getenv("SIMANT_ENHANCED_TEST");
+    if(m && !strcmp(m,"scent")) {const EnhancedSnapshot *f=enhanced_snapshot();if(!f || f->world.world_layer<0)return 0;}
+    return __real_enhanced_world_enabled();
+}
 static void report(void)
 {
+    const EnhancedSnapshot *frame=enhanced_snapshot();
+    unsigned scent_cells=0;
+    if(frame && frame->world.world_layer>=0) {
+        static EnhancedWorldSnapshot plain;plain=frame->world;plain.world_layer=-1;
+        for(int x=0;x<128;++x)for(int y=0;y<64;++y) {
+            ModernCell a,b;enhanced_world_cell(&frame->world,1,x,y,&a);enhanced_world_cell(&plain,1,x,y,&b);
+            scent_cells+=a.ground!=b.ground;
+        }
+    }
+    fprintf(stderr,"ENHANCED_SCENT {\"changed_surface_cells\":%u}\n",scent_cells);
+    dump_assets();
+    fprintf(stderr,"ENHANCED_CAPTURE {\"balloon_peak\":%u,\"captured\":%u}\n",balloon_peak,captured);
     const EnhancedActionLedger *l=enhanced_action_ledger();
     int16_t automatic; memcpy(&automatic,CasteAuto,2);
+    const EnhancedSnapshot *f=enhanced_snapshot();
+    uint64_t hash=UINT64_C(14695981039346656037);
+    if(f)for(size_t i=0;i<sizeof(f->world);++i)hash=(hash^((const uint8_t *)&f->world)[i])*UINT64_C(1099511628211);
+    if(f)fprintf(stderr,"ENHANCED_SCENE {\"world_hash\":\"%016llx\",\"iteration\":%ld,\"plane\":%d,\"layer\":%d,\"generation\":%llu,\"overlay_serial\":%llu,\"art\":%u,\"lines\":%u,\"balloons\":%u,\"yard_actors\":%u,\"repaints\":%u}\n",
+        (unsigned long long)hash,(long)main_iteration_count,f->world.plane,f->world.world_layer,(unsigned long long)f->generation,(unsigned long long)f->world.overlays.serial,
+        f->world.overlays.art_count,f->world.overlays.line_count,f->world.overlays.balloon_count,f->overview.actors.count,repairs);
     fprintf(stderr,"ENHANCED_PROBE {\"occupied\":%u,\"missing\":%u,\"rendered\":%u,\"music_enabled\":%u,\"manual_events\":%u,\"caste_auto\":%d,\"copies\":%u,\"copy_errors\":%u,\"submitted\":%u,\"duplicate_result\":%u,\"delivered\":%" PRIu64 ",\"prepared\":%" PRIu64 ",\"flush_completed\":%" PRIu64 "}\n",
         occupied_seen,missing_seen,rendered_seen,music_seen,manual_events,automatic,copies,copy_errors,
         submitted,duplicate_result,l->delivered,l->prepared,l->flush_completed);
@@ -75,8 +125,8 @@ void __wrap_portable_test_diagnostics(FILE *f)
 {
     __real_portable_test_diagnostics(f);
     const EnhancedSnapshot *s=enhanced_snapshot();
-    fprintf(f,",\"enhanced_generation\":%" PRIu64 ",\"enhanced_repaint_copies\":%u,\"enhanced_copy_errors\":%u",
-        s?s->generation:0,copies,copy_errors);
+    fprintf(f,",\"enhanced_generation\":%" PRIu64 ",\"enhanced_repaint_copies\":%u,\"enhanced_copy_errors\":%u,\"enhanced_repaint_renders\":%u",
+        s?s->generation:0,copies,copy_errors,repairs);
 }
 #endif
 
@@ -85,12 +135,30 @@ void __wrap_enhanced_execute_next(void)
 {
     configure();
     const EnhancedSnapshot *f=enhanced_snapshot();
+    if(f && f->world.overlays.balloon_count>balloon_peak)balloon_peak=f->world.overlays.balloon_count;
+    const char *capture=getenv("SIMANT_ENHANCED_CAPTURE");
+    if(capture && !captured && f && f->world.overlays.balloon_count && f->world.overlays.line_count)
+        captured=native_windows_save_frames(capture);
     if (mode && !strcmp(mode,"stress") && f) {
         static EnhancedSnapshot copy;
         for (unsigned i=0; i<19; ++i) {
             if (!enhanced_snapshot_copy(&copy) || memcmp(f,&copy,sizeof(copy))) ++copy_errors;
+            /* Exercise native cell/asset composition on all three planes and
+             * actual semantic overlay rasterization with private repaint RAM. */
+            static uint8_t raster[2048*1024];
+            uint8_t pixels[256];
+            for(int plane=1;plane<=3;++plane)for(int x=0;x<4;++x) {
+                ModernCell c;enhanced_world_cell(&copy.world,plane,x,16,&c);
+                if(!enhanced_asset_cell(copy.world.terrain_set,c.ground,c.life,pixels))++copy_errors;
+            }
+            enhanced_world_draw(&copy.world,raster,2048,1024,2048);
+            ++repairs;
             ++copies;
         }
+    }
+    if(mode && !strcmp(mode,"spider") && !submitted && f && main_iteration_count>16 && CurGameType>=0 && CurGameTool==-1 && !f->dialogs.modal) {
+        EnhancedIntent intent={.id="N05",.parameter=1,.serial=1,.generation=f->generation};
+        submitted=enhanced_submit(&intent)==ENHANCED_QUEUED;
     }
     if (mode && !strcmp(mode,"executor") && !submitted && f &&
         main_iteration_count>2 && CurGameType>=0 && CurGameTool==-1 &&
