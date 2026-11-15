@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "input_time.h"
+#include "portable/whole_program/enhanced/runtime.h"
 
 typedef char **Handle;
 
@@ -449,6 +450,7 @@ void __wrap_f_1B28_0069(void)
 {
     __real_f_1B28_0069();
     if (s.enabled && s.pump) s.pump();
+    enhanced_source_poll();
 }
 
 /* ---- native window actions, called only from the pump ---- */

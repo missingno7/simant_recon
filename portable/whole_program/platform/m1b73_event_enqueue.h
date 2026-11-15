@@ -9,5 +9,8 @@ void input_enqueue_event_args(int16_t bx, int16_t es, int16_t ax,
                  int16_t cx, int16_t dx);
 void portable_m1b73_event_enqueue_four_word_command(
     int16_t bx, int16_t es, int16_t ax, int16_t cx, int16_t caller_word);
+/* Same source enqueue, with success exposed to durable semantic intents. */
+int portable_m1b73_try_enqueue_command(int16_t code, int16_t payload,
+    int16_t modifiers, int16_t h, int16_t v);
 
 #endif

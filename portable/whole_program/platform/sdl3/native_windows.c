@@ -1,4 +1,5 @@
 #include "native_windows.h"
+#include "portable/whole_program/enhanced/actions.h"
 #include "../window_hosting.h"
 #include "host_modes.h"
 #include "modern_game_view.h"
@@ -114,6 +115,9 @@ static NativeWindow *by_logical_id(int16_t id)
 static void pump(void)
 {
     unsigned i;
+    /* An explicit semantic action owns source front/flush through DoEvent.
+     * Keep legacy queued window operations pending until its tail completes. */
+    if (enhanced_action_lease_active()) return;
     native_menu_pump();
     for (i = 0; i < n.count; ++i) {
         NativeWindow *w = &n.windows[i];

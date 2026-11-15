@@ -248,6 +248,14 @@ void input_enqueue_event_args(int16_t bx, int16_t es, int16_t ax,
         (uint16_t)bx, (uint16_t)es);
 }
 
+int portable_m1b73_try_enqueue_command(int16_t code, int16_t payload,
+    int16_t modifiers, int16_t h, int16_t v)
+{
+    return portable_m1b73_event_enqueue_registers(require_events(),
+        (uint16_t)modifiers, (uint16_t)h, (uint16_t)v,
+        (uint16_t)code, (uint16_t)payload);
+}
+
 void portable_m1b73_event_enqueue_four_word_command(
     int16_t bx, int16_t es, int16_t ax, int16_t cx, int16_t caller_word)
 {

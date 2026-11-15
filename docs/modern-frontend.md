@@ -1,13 +1,12 @@
-# Modern Windows frontend: semantic map and boundaries
+# Existing hybrid frontend (historical implementation notes)
 
-The modern frontend (`--windows`) presents the canonical game through native
-windows. Classic (no `--windows`) stays the DOS presentation and gains no modern
-features. This page records what the canonical source establishes about the
-Game Window (logical window 0, the DOS "edit" view), its camera and the windows
-that depend on it, and the boundaries the modern code is built on. Win16 names
-are used where the shared formulas prove the pairing (simantw_recon
-`tu_antedit_*`, `ToggleMapCursor`, `ScrollEditWindow`); DOS addresses stay the
-source of truth.
+The approved [enhanced-mode design](enhanced-mode.md) supersedes this page's
+frontend recommendations, camera coupling and widget bindings. This page describes
+the existing `--windows` hybrid only, for reproducing its regressions. It is not the
+enhanced-mode architecture. In particular, absent canonical sprite banks currently
+remove native life imagery; that is a phase 1 regression, not desired behaviour.
+Enhanced primary pan is N03, zoom is H05, inspectors are always live H04, and panel
+focus/layout never changes source logical-open/front state.
 
 ## Canonical state the Game Window shows
 

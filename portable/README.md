@@ -1,5 +1,15 @@
 # Canonical SDL3 build
 
+The approved [enhanced Windows design](../docs/enhanced-mode.md) and
+[phase 0 API/verification contracts](../docs/enhanced-mode/contracts.md) now live
+in the repository. `SIMANT_ENHANCED_CONTRACTS=1` enables copied semantic
+publications and the discrete action executor; it does not enable a new UI.
+The existing `--windows` hybrid still has strict phase 1 rebirth and phase 3
+activation-click expected failures. Inspectors in the approved mode are always
+live; native layouts and immutable art remain later phases. Register
+`portable/tests/enhanced/run.py` and `portable/tests/enhanced/invariance.py`
+after the fresh native build, using `--build BUILD --out FRESH_PATH` for each.
+
 `build.py` consumes the complete current `src/program.json` inventory. It
 converts whole canonical C translation units and symbolic assembly data, then
 compiles the explicit platform services in `platform.json`. Lowering classifications and exception deletion conditions

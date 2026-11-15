@@ -85,7 +85,10 @@
     "portable/whole_program/platform/sdl3/native_menu.c",
     "portable/whole_program/modern/world_view.c",
     "portable/whole_program/modern/camera.c",
-    "portable/whole_program/platform/sdl3/modern_game_view.c"
+    "portable/whole_program/platform/sdl3/modern_game_view.c",
+    "portable/whole_program/enhanced/snapshot.c",
+    "portable/whole_program/enhanced/actions.c",
+    "portable/whole_program/enhanced/seams.c"
   ],
   "headers": [
     "portable/whole_program/platform/desktop_files.h",
@@ -191,7 +194,11 @@
     "portable/whole_program/platform/sdl3/native_menu.h",
     "portable/whole_program/modern/world_view.h",
     "portable/whole_program/modern/camera.h",
-    "portable/whole_program/platform/sdl3/modern_game_view.h"
+    "portable/whole_program/platform/sdl3/modern_game_view.h",
+    "portable/whole_program/enhanced/snapshot.h",
+    "portable/whole_program/enhanced/actions.h",
+    "portable/whole_program/enhanced/runtime.h",
+    "portable/whole_program/enhanced/catalog.inc"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -209,7 +216,9 @@
     "f_1B28_0069",
     "GSaveRect",
     "gfx_restore_and_free_rect",
-    "GRectInvOutline"
+    "GRectInvOutline",
+    "DoEvent",
+    "ui_pump_events_edge_scroll"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",
@@ -458,5 +467,14 @@
     "regression": "python -m unittest portable.tests.uninitialised_locals.test_uninitialised_locals",
     "policy": "Preserve evidenced DOS automatic-storage inputs in conversion; main stamp uses the pinned reference environment. Other census candidates retain individual classifications and open limitations.",
     "status": "partial-triage"
+  },
+  "enhanced_mode_contracts": {
+    "status": "phase-0-opt-in",
+    "enable": "SIMANT_ENHANCED_CONTRACTS=1",
+    "design": "docs/enhanced-mode.md",
+    "contracts": "docs/enhanced-mode/contracts.md",
+    "regression": "portable/tests/enhanced/run.py",
+    "invariance": "portable/tests/enhanced/invariance.py",
+    "limits": "No enhanced UI. Gesture/wait-result adapters fail closed. Immutable assets, private link/graph selections and overlay pose hooks remain phase 1 work. Inspectors always live."
   }
 }
