@@ -5,6 +5,10 @@
 /* The existing native alias inventory exports snd_requested_driver_mode as
  * g_610A (the same storage read by converted snd_init_driver_once). */
 extern int16_t g_610A, snd_interface_initialized;
+static void observe_playback(void *context,uint64_t ns,unsigned kind,unsigned channel,unsigned object) {
+    PortableSdl3WholeAudio *a=context;
+    portable_sdl3_audio_trigger(&a->output,ns,kind,channel,object);
+}
 int portable_sdl3_whole_audio_open(PortableSdl3WholeAudio *a) {
     memset(a,0,sizeof(*a));
     if(!portable_whole_audio_provider_init(&a->provider)) return 0;
@@ -35,6 +39,8 @@ PortableSdl3WholeAudioStatus portable_sdl3_whole_audio_pump(PortableSdl3WholeAud
         return PORTABLE_SDL3_WHOLE_AUDIO_OK;
     }
     if(!a->output.stream && !portable_sdl3_audio_open(&a->output,48000)) return PORTABLE_SDL3_WHOLE_AUDIO_SDL_ERROR;
+    if(!portable_sdl3_audio_begin(&a->output,frames)) return PORTABLE_SDL3_WHOLE_AUDIO_SDL_ERROR;
+    a->provider.playback_observer=a->output.observation?observe_playback:NULL;a->provider.playback_observer_context=a;
     portable_whole_audio_provider_set_rendering(&a->provider,1);
     /* All decisions precede block rendering. Neither queue fill nor the SDL
      * consumer can run source callbacks or move the machine clock. */
@@ -45,10 +51,12 @@ PortableSdl3WholeAudioStatus portable_sdl3_whole_audio_pump(PortableSdl3WholeAud
         portable_whole_audio_provider_render(&a->provider,samples,count,a->provider.frame_cursor+1);
         a->provider.frame_cursor+=count;
         a->rendered_frames+=count;
-        if(!portable_sdl3_audio_queue_frames(&a->output,samples,count)) return PORTABLE_SDL3_WHOLE_AUDIO_SDL_ERROR;
+        if(!portable_sdl3_audio_queue_at(&a->output,samples,count,a->provider.frame_cursor-count+1)) return PORTABLE_SDL3_WHOLE_AUDIO_SDL_ERROR;
     }
     /* IRQs between the last PCM frame and the service endpoint belong to this
      * transaction too. PCM consumption never decides timer delivery. */
+    if(!portable_sdl3_audio_service(&a->output)) return PORTABLE_SDL3_WHOLE_AUDIO_SDL_ERROR;
+    portable_sdl3_audio_observe(&a->output,ns);
     return PORTABLE_SDL3_WHOLE_AUDIO_OK;
 }
 void portable_sdl3_whole_audio_set_source_timer_observer(PortableSdl3WholeAudio *a,PortableSdl3SourceTimerObserver o,void *c) {

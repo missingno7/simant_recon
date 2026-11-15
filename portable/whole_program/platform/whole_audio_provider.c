@@ -34,6 +34,8 @@ void portable_whole_audio_provider_set_rendering(PortableWholeAudioProvider *p,i
     } else if(!enabled && p->renderer) { sim_audio_destroy(p->renderer);p->renderer=NULL; }
 }
 void portable_whole_audio_provider_opl(PortableWholeAudioProvider *p,uint8_t reg,uint8_t value) {
+    if(p->playback_observer && reg>=0xb0 && reg<=0xb8 && (value&0x20))
+        p->playback_observer(p->playback_observer_context,p->time_ns,PORTABLE_AUDIO_OPL_KEY_ON,reg-0xb0,value);
     if(p->renderer) sim_audio_opl(p->renderer,p->time_ns,reg,value);
 }
 void portable_whole_audio_provider_sample_enable(PortableWholeAudioProvider *p,int enabled) {
@@ -50,8 +52,16 @@ void portable_whole_audio_provider_sync_samples(PortableWholeAudioProvider *p,in
                 SimAudioVoice v={(uint16_t)c->snd->object,c->snd->len,c->step,c->end,c->start,c->pos,
                     c->frac,c->flags,(uint16_t)(c->voltab-snd_volume_table_offset)>>8,(uint8_t *)*c->snd->data};
                 sim_audio_voice_start(p->renderer,p->time_ns,ch,&v);
+                if(p->playback_observer && (!old->snd || c->snd!=old->snd || (c->pos==0 && old->pos!=0))) {
+                    p->observation_pending|=1u<<ch;
+                    p->playback_observer(p->playback_observer_context,p->time_ns,PORTABLE_AUDIO_SAMPLE_SETUP,ch,(uint16_t)c->snd->object);
+                }
             }
-        } else if(old->snd) sim_audio_voice_stop(p->renderer,p->time_ns,ch);
+        } else if(old->snd) {
+            sim_audio_voice_stop(p->renderer,p->time_ns,ch);
+            p->observation_pending&=~(1u<<ch);
+            if(p->playback_observer) p->playback_observer(p->playback_observer_context,p->time_ns,PORTABLE_AUDIO_SAMPLE_STOP,ch,0);
+        }
         *old=*c;
     }
 }
@@ -138,7 +148,13 @@ static void interrupt(PortableWholeAudioProvider *p) {
             if(c->snd && c->snd->data && *c->snd->data) mask|=1u<<ch;
         }
         sim_audio_positions(p->renderer,p->time_ns,p->channels,positions,volumes,mask);
-        if(!skip) sim_audio_commit(p->renderer,p->time_ns);
+        if(!skip) {
+            sim_audio_commit(p->renderer,p->time_ns);
+            if(p->playback_observer) for(ch=0;ch<p->channels;++ch) if((p->observation_pending&mask)&(1u<<ch)) {
+                p->playback_observer(p->playback_observer_context,p->time_ns,PORTABLE_AUDIO_SAMPLE_EMISSION,ch,(uint16_t)snd_sample_channel_records[ch].snd->object);
+                p->observation_pending&=~(1u<<ch);
+            }
+        }
     }
     if(--p->mix_divider==0) { p->mix_divider=16;sequencer(); }
     /* STD marks at least one live sample. Original L0148 switches to slow

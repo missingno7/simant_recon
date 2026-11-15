@@ -15,6 +15,10 @@ typedef struct PortableWholeAudioProvider {
     /* Timestamped PIT events: advance, reload, old INT08 chain, restore BIOS. */
     void (*timer_observer)(void *, uint64_t, unsigned, uint32_t, uint16_t, uint16_t);
     void *timer_observer_context;
+    /* Optional presentation diagnostics. Never consulted by logical execution. */
+    void (*playback_observer)(void *,uint64_t,unsigned,unsigned,unsigned);
+    void *playback_observer_context;
+    unsigned observation_pending;
 } PortableWholeAudioProvider;
 int portable_whole_audio_provider_init(PortableWholeAudioProvider *p);
 void portable_whole_audio_provider_close(PortableWholeAudioProvider *p);

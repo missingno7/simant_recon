@@ -1,6 +1,12 @@
 #ifndef SIMANT_AUDIO_NATIVE_H
 #define SIMANT_AUDIO_NATIVE_H
 #include <stdint.h>
+enum PortableAudioObservation {
+    PORTABLE_AUDIO_OPL_KEY_ON=1,
+    PORTABLE_AUDIO_SAMPLE_SETUP,
+    PORTABLE_AUDIO_SAMPLE_EMISSION,
+    PORTABLE_AUDIO_SAMPLE_STOP
+};
 typedef struct PortableWholeAudioHost {
     void *context;
     void (*configure_timer)(void *, uint16_t, uint16_t, unsigned);

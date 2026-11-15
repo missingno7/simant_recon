@@ -293,7 +293,7 @@
   },
   "input_time_delivery": {
     "service": "portable/whole_program/platform/sdl3/input_time_host.c:portable_input_time_host_refresh_clock",
-    "contract": "One virtual machine clock in ordinary play and unpaced --deterministic runs. Each listed guest-facing clock/input poll with IF set charges exactly Q=1 ms (or explicit --poll-ns); computation, internal/nested refresh, drawing and host conditions charge none. Timer/audio work derives from machine time. Ordinary reads wait for the fixed host epoch using an event-wakeable high-resolution Windows timer (SDL 3.4 sub-ms timeout truncation must not busy-poll); GameSpeed 3 bypasses wall pacing but retains Q. The pending Q deadline bounds presentation/audio service latency. Physical presentation uses host display-refresh deadlines, including during machine catch-up. PCM submission uses device-duration blocks with four silent priming periods; the consumer callback only counts stream starvation and never advances guest time. Single-screen unchanged planes/palette skip RGB upload; raster/cursor exclusion and hosted-window refresh remain intact.",
+    "contract": "One virtual machine clock in ordinary play and unpaced --deterministic runs. Each listed guest-facing clock/input poll with IF set charges exactly Q=1 ms (or explicit --poll-ns); computation, internal/nested refresh, drawing and host conditions charge none. Timer/audio work derives from machine time. Ordinary reads wait for the fixed host epoch using an event-wakeable high-resolution Windows timer (SDL 3.4 sub-ms timeout truncation must not busy-poll); GameSpeed 3 bypasses wall pacing but retains Q. The pending Q deadline bounds presentation/audio service latency. Physical presentation uses host display-refresh deadlines, including during machine catch-up. PCM submission uses device-duration blocks, a four-period presentation target and a five-period bound; catch-up gates and oldest-prefix drops never feed source timing; the consumer callback only counts stream starvation and never advances guest time. Single-screen unchanged planes/palette skip RGB upload; raster/cursor exclusion and hosted-window refresh remain intact.",
     "evidence": "evidence/canonical/native-edge-scroll/README.md",
     "regression": "portable/tests/runtime/run_edge.py",
     "scope": "Quick Game edge holds and release, exact seed-0 human freeze replay; logo/customer-dialog mouse and key release; title, resize and caste triangle tracking presentation. Arbitrary pure-memory waits and CPU/PIC interrupt interleaving equivalence remain unproved.",
@@ -416,6 +416,15 @@
       "evidence": "evidence/canonical/native-audio-backend/README.md",
       "regression": "portable/tests/acceptance/run.py; test_audio_bindings.py; test_audio_content.py; test_audio_playback.py; test_audio_commands.py; test_timeline_contract.py; run_virtual_audio_tests.py; ideal_rule_check.py; ideal_internal_refresh_check.py",
       "historical_evidence": "evidence/canonical/native-audio-schedule/README.md and foreground-census.json remain challengeable history, with retired reference identities retained in to_delete."
+    },
+    "presentation_queue": {
+      "target_device_periods": 4,
+      "limit_device_periods_including_partial": 5,
+      "startup": "Observe a device period of source/physical rate balance before consumption; revoke an early balance observation if source catch-up resumes.",
+      "recovery": "After a service gap over five periods, pause presentation through catch-up; otherwise an excess atomically replaces only the oldest prefix with the newest four completed blocks, preserving the pending partial block.",
+      "clock_boundary": "Only PCM presentation changes. SDL queue level, wall time, gating and drops never advance or wait on source time or callbacks.",
+      "diagnostics": "SIMANT_AUDIO_QUEUE_TRACE: optional source triggers, actual first sample contribution, queue head brackets, depth, gating, drops and starvation. Queue-head timing excludes hardware/acoustic delay.",
+      "regression": "portable/tests/audio/queue_policy.c; portable/tests/audio/run.py includes no-gate and no-bound failure controls"
     }
   },
   "native_vga_boundary": {

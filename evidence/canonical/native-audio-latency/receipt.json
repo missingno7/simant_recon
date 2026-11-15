@@ -1,0 +1,1715 @@
+{
+  "schema": "native-audio-presentation-latency-v1",
+  "status": "done",
+  "baseline_revision": "5a9ddfa2f05340173a81baad8bfe56a5ec07cc59",
+  "policy": {
+    "target_periods": 4,
+    "limit_periods_including_partial": 5,
+    "mechanism": "Retain latest PCM; gate startup/catch-up; atomically discard oldest queued prefix; no source-clock feedback"
+  },
+  "build": {
+    "report": {
+      "path": "build/workers/audio-backend/latency-verified/report.json",
+      "sha256": "5884163c1298c842682a1391ccfb376afa7e4bc42147e69abac327b89e7ee55a"
+    },
+    "executable": {
+      "path": "build/workers/audio-backend/latency-verified/simant-canonical.exe",
+      "sha256": "d7c319c0c266d795c27700ab68967884d8bbdfa4bd4245dce20da2af303344d4"
+    },
+    "input_stability": {
+      "before_link": true,
+      "at_end": true
+    },
+    "live_drift": []
+  },
+  "measurement_control": {
+    "base_build": "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+    "base_report_sha256": "5884163c1298c842682a1391ccfb376afa7e4bc42147e69abac327b89e7ee55a",
+    "source_sha256": "367ff05d0da4f33e3c5a0ffff1a110825eb158ad20cae2ea5e17e3b4c030daaa",
+    "draft_sha256": "983ac6a52c5f65e9a55f6e0e090f1217c3bcfade4da46709c7e232d22af90ba6",
+    "executable_sha256": "65259c3ff19ed4d942fc7cde62d72e8c3b0dabf01571a7354d7e423a3d49b2b2",
+    "compile": [
+      "C:/msys64/mingw64/bin/gcc.exe",
+      "-O2",
+      "-std=c11",
+      "-flto",
+      "-ffat-lto-objects",
+      "-g",
+      "-fsigned-char",
+      "-fno-builtin",
+      "-fno-strict-aliasing",
+      "-DSIMANT_NATIVE_LITTLE_ENDIAN=1",
+      "-Werror=implicit-function-declaration",
+      "-Werror=implicit-int",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\include",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\whole_program",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+      "-c",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-control-verified\\unbounded-audio.c",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-control-verified\\unbounded-audio.o",
+      "-ID:\\Prog\\simant_recon\\portable\\platform\\sdl3"
+    ],
+    "link": [
+      "C:/msys64/mingw64/bin/gcc.exe",
+      "-O2",
+      "-fno-lto",
+      "-std=c11",
+      "-g",
+      "-fsigned-char",
+      "-fno-strict-aliasing",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\include",
+      "-I",
+      "D:\\Prog\\simant_recon",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+      "-I",
+      "D:\\Prog\\simant_recon\\portable\\whole_program",
+      "-I",
+      "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\include",
+      "D:\\Prog\\simant_recon\\portable\\whole_program\\application.c",
+      "-Wl,@D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-control-verified\\objects.rsp",
+      "-Wl,--wrap=exit",
+      "-Wl,--wrap=clip_SetWin",
+      "-Wl,--wrap=clip_Off",
+      "-Wl,--wrap=clip_set_desktop_region",
+      "-Wl,--wrap=clip_set_screen_region",
+      "-Wl,--wrap=clip_set_screen_intersection",
+      "-Wl,--wrap=clip_Push",
+      "-Wl,--wrap=clip_Pop",
+      "-Wl,--wrap=win_rebuild_visible_clips",
+      "-Wl,--wrap=clip_lower_window",
+      "-Wl,--wrap=win_raise_and_reclip",
+      "-Wl,--wrap=clip_KillWin",
+      "-Wl,--wrap=win_DrawTitle",
+      "-Wl,--wrap=f_1B28_0069",
+      "-Wl,--wrap=GSaveRect",
+      "-Wl,--wrap=gfx_restore_and_free_rect",
+      "-Wl,--wrap=GRectInvOutline",
+      "-Wl,--export-all-symbols",
+      "-static",
+      "-lstdc++",
+      "D:\\Prog\\simant_recon\\build\\deps\\sdl3-sdk\\SDL3-3.4.16\\x86_64-w64-mingw32\\lib\\libSDL3.dll.a",
+      "-o",
+      "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-control-verified\\simant-canonical.exe"
+    ],
+    "changes": "Presentation begin/service are no-ops; original four-period silent priming and first-block start/unbounded append remain. All source events, observer hooks, renderer and game objects are identical."
+  },
+  "source_event_equality": {
+    "count": 1089,
+    "equal": true,
+    "sha256": "b4220a1b55269261667e14b449d80e86c10b4831bb8dc864c53a57491348cf32",
+    "scope": "Ordered game_ns/kind/channel/object of instrumented OPL key-ons and sample setup; all 1089 equal, independent of presentation drops"
+  },
+  "measurement": {
+    "before": {
+      "period_ms": 10.0,
+      "points": 8911,
+      "phases": [
+        {
+          "name": "startup",
+          "points": 67,
+          "queue_ms": [
+            40.0,
+            320.0,
+            330.0
+          ],
+          "queue_and_partial_max_ms": 331.0,
+          "source_span_s": 0.963,
+          "wall_span_s": 0.6980693
+        },
+        {
+          "name": "title",
+          "points": 1037,
+          "queue_ms": [
+            320.0,
+            320.0,
+            330.0
+          ],
+          "queue_and_partial_max_ms": 332.0,
+          "source_span_s": 10.994,
+          "wall_span_s": 10.9942508
+        },
+        {
+          "name": "quick-game",
+          "points": 1238,
+          "queue_ms": [
+            320.0,
+            320.0,
+            330.0
+          ],
+          "queue_and_partial_max_ms": 333.0,
+          "source_span_s": 12.982,
+          "wall_span_s": 12.9819553
+        },
+        {
+          "name": "modal-ant-menu",
+          "points": 2813,
+          "queue_ms": [
+            320.0,
+            320.0,
+            330.0
+          ],
+          "queue_and_partial_max_ms": 333.0,
+          "source_span_s": 28.997,
+          "wall_span_s": 28.9963943
+        },
+        {
+          "name": "minimized",
+          "points": 271,
+          "queue_ms": [
+            320.0,
+            320.0,
+            330.0
+          ],
+          "queue_and_partial_max_ms": 334.0,
+          "source_span_s": 2.79,
+          "wall_span_s": 2.7877433
+        },
+        {
+          "name": "restored",
+          "points": 565,
+          "queue_ms": [
+            320.0,
+            320.0,
+            330.0
+          ],
+          "queue_and_partial_max_ms": 334.0,
+          "source_span_s": 5.798,
+          "wall_span_s": 5.7970092
+        },
+        {
+          "name": "native-move",
+          "points": 0
+        },
+        {
+          "name": "move-recovery",
+          "points": 182,
+          "queue_ms": [
+            950.0,
+            950.0,
+            960.0
+          ],
+          "queue_and_partial_max_ms": 964.0,
+          "source_span_s": 1.895,
+          "wall_span_s": 1.8953804
+        },
+        {
+          "name": "steady-after-move",
+          "points": 650,
+          "queue_ms": [
+            950.0,
+            950.0,
+            960.0
+          ],
+          "queue_and_partial_max_ms": 964.0,
+          "source_span_s": 6.785,
+          "wall_span_s": 6.7850144
+        },
+        {
+          "name": "breakpoint",
+          "points": 0
+        },
+        {
+          "name": "break-recovery",
+          "points": 180,
+          "queue_ms": [
+            1950.0,
+            1950.0,
+            1960.0
+          ],
+          "queue_and_partial_max_ms": 1963.0,
+          "source_span_s": 1.889,
+          "wall_span_s": 1.8889532
+        },
+        {
+          "name": "steady-after-break",
+          "points": 1621,
+          "queue_ms": [
+            1950.0,
+            1950.0,
+            1960.0
+          ],
+          "queue_and_partial_max_ms": 1964.0,
+          "source_span_s": 16.896,
+          "wall_span_s": 16.895812
+        }
+      ],
+      "latency": {
+        "music_key_on": {
+          "triggers": 1076,
+          "arrived": 1052,
+          "discarded": 0,
+          "pending": 24,
+          "lower_ms": {
+            "min": 3.8805,
+            "median": 331.35445000000004,
+            "max": 1963.8693
+          },
+          "upper_ms": {
+            "min": 3.8844,
+            "median": 331.98855000000003,
+            "p95": 1961.993,
+            "max": 1964.421
+          },
+          "bracket_max_ms": 10.0157
+        },
+        "music_key_on_steady": {
+          "triggers": 930,
+          "arrived": 919,
+          "discarded": 0,
+          "pending": 11,
+          "lower_ms": {
+            "min": 322.5579,
+            "median": 330.7342,
+            "max": 1963.8693
+          },
+          "upper_ms": {
+            "min": 322.8086,
+            "median": 331.0189,
+            "p95": 1961.9956,
+            "max": 1964.4024
+          },
+          "bracket_max_ms": 5.4034
+        },
+        "sample_setup_to_first_emission_head": {
+          "triggers": 13,
+          "arrived": 13,
+          "discarded": 0,
+          "pending": 0,
+          "lower_ms": {
+            "min": 326.1085,
+            "median": 958.882,
+            "max": 1962.1482
+          },
+          "upper_ms": {
+            "min": 326.9522,
+            "median": 959.7659,
+            "p95": 1962.5015,
+            "max": 1962.7059
+          },
+          "bracket_max_ms": 1.1107
+        },
+        "sample_setup_to_first_emission_head_steady": {
+          "triggers": 11,
+          "arrived": 11,
+          "discarded": 0,
+          "pending": 0,
+          "lower_ms": {
+            "min": 326.1085,
+            "median": 955.9141,
+            "max": 1962.1482
+          },
+          "upper_ms": {
+            "min": 326.9522,
+            "median": 955.9931,
+            "p95": 963.9625,
+            "max": 1962.5015
+          },
+          "bracket_max_ms": 1.1107
+        }
+      },
+      "resets": [],
+      "ordinary_overflow_resets": [],
+      "starvation": [
+        {
+          "after_seconds": 65.0297897,
+          "before_seconds": 65.9888378,
+          "additional": 63
+        }
+      ],
+      "pacing": {
+        "machine_ns": 95000000000,
+        "audio_pumps": 210371,
+        "audio_rendered_frames": 4560000,
+        "silent_audio_advances": 0,
+        "physical_audio_open": 1,
+        "presentations": 347,
+        "omitted_presentations": 0,
+        "presentation_checks": 18944,
+        "presentation_work_ns": 844191900,
+        "display_refresh_ns": 4166840,
+        "minimum_submission_gap_ns": 4168400,
+        "game_speed": 1,
+        "game_paused": 0,
+        "outer_loops": 2074,
+        "pace_calls": 95091,
+        "wait_calls": 91848,
+        "wait_events": 91,
+        "wait_ns": 90461999200,
+        "wait_short": 88,
+        "poll_calls": 380898,
+        "poll_events": 102,
+        "wait_max_ns": 1008482900,
+        "pace_immediate": 3243,
+        "lag_ns": 1022756189200,
+        "lag_max_ns": 1006916400,
+        "blocked_ns": 90253310200,
+        "pace_elapsed_ns": 90505150300,
+        "pace_cpu_ns": 3687500000,
+        "queued_wakes": 0,
+        "audio_block_frames": 480,
+        "audio_queue_calls": 9500,
+        "audio_queued_frames": 4560000,
+        "audio_underruns": 63,
+        "audio_missing_bytes": 120960,
+        "audio_requests": 9371,
+        "audio_pending_frames": 0,
+        "audio_queue_frames": 94080,
+        "audio_submission_ns": 9014100,
+        "audio_target_frames": 1920,
+        "audio_limit_frames": 2400,
+        "audio_queue_peak_frames": 0,
+        "audio_queue_resets": 0,
+        "audio_overflow_resets": 0,
+        "audio_stall_restarts": 0,
+        "audio_discarded_frames": 0,
+        "audio_gated_frames": 0,
+        "audio_start_delay_ns": 0,
+        "audio_gated": 0,
+        "hosted_uploads": 0,
+        "hosted_reused_uploads": 0,
+        "hosted_upload_ns": 0,
+        "hosted_presentations": 0,
+        "hosted_reused_presentations": 0,
+        "host_ns": 95030361000,
+        "idle_calls": 95000
+      },
+      "session": {
+        "command": [
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-control\\simant-canonical.exe",
+          "--assets",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lb-measured\\a",
+          "--seed",
+          "0",
+          "--smoke-ms",
+          "95000",
+          "--input-script",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lb-measured\\input.txt",
+          "--diagnostics-dir=D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lb-measured\\diagnostics"
+        ],
+        "code": 0,
+        "seconds": 95.1778102000244,
+        "cpu_seconds": 5.03125,
+        "actions": [
+          {
+            "seconds": 55.0114396000281,
+            "action": "minimize",
+            "window": 52432272,
+            "title": "SimAnt",
+            "rect": [
+              1059,
+              549,
+              1927,
+              1226
+            ]
+          },
+          {
+            "seconds": 58.04196010000305,
+            "action": "restore",
+            "window": 52432272,
+            "title": "SimAnt",
+            "rect": [
+              0,
+              1366,
+              158,
+              1392
+            ]
+          },
+          {
+            "seconds": 65.04900100000668,
+            "action": "drag-start",
+            "window": 52432272,
+            "title": "SimAnt",
+            "rect": [
+              1059,
+              549,
+              1927,
+              1226
+            ]
+          },
+          {
+            "seconds": 66.0066304000211,
+            "action": "drag-end",
+            "window": 52432272,
+            "title": "SimAnt",
+            "rect": [
+              1059,
+              549,
+              1927,
+              1226
+            ]
+          },
+          {
+            "seconds": 75.02144959999714,
+            "action": "breakpoint-start",
+            "window": 52432272,
+            "title": "SimAnt",
+            "rect": [
+              1262,
+              549,
+              2130,
+              1226
+            ]
+          },
+          {
+            "seconds": 76.02933190000476,
+            "action": "breakpoint-end",
+            "window": 52432272,
+            "title": "SimAnt",
+            "rect": [
+              1262,
+              549,
+              2130,
+              1226
+            ]
+          }
+        ]
+      },
+      "artifacts": [
+        {
+          "path": "build/workers/audio-backend/lb-measured/queue.jsonl",
+          "sha256": "9f74409732049e471e3247ab6ab29ccd9515caf9ea4aa6f1b77e69d8cf60de75"
+        },
+        {
+          "path": "build/workers/audio-backend/lb-measured/session.json",
+          "sha256": "464750bdc63ed26d48e3685092cc3386f5276d4f678077f3b2ac2dd5583e4084"
+        },
+        {
+          "path": "build/workers/audio-backend/lb-measured/pacing.json",
+          "sha256": "cd5e3a7a77a06c27f20a7bae380970bacfd6dfa85b1c6cc67a27e0aa7e37b23d"
+        }
+      ]
+    },
+    "after": {
+      "period_ms": 10.0,
+      "points": 8926,
+      "phases": [
+        {
+          "name": "startup",
+          "points": 68,
+          "queue_ms": [
+            30.0,
+            40.0,
+            40.0
+          ],
+          "queue_and_partial_max_ms": 47.0,
+          "source_span_s": 0.972,
+          "wall_span_s": 0.7114963
+        },
+        {
+          "name": "title",
+          "points": 1043,
+          "queue_ms": [
+            30.0,
+            40.0,
+            40.0
+          ],
+          "queue_and_partial_max_ms": 48.0,
+          "source_span_s": 10.988,
+          "wall_span_s": 10.9867549
+        },
+        {
+          "name": "quick-game",
+          "points": 1238,
+          "queue_ms": [
+            30.0,
+            40.0,
+            40.0
+          ],
+          "queue_and_partial_max_ms": 49.0,
+          "source_span_s": 12.989,
+          "wall_span_s": 12.988842
+        },
+        {
+          "name": "modal-ant-menu",
+          "points": 2807,
+          "queue_ms": [
+            20.0,
+            40.0,
+            40.0
+          ],
+          "queue_and_partial_max_ms": 49.0,
+          "source_span_s": 28.988,
+          "wall_span_s": 28.9882215
+        },
+        {
+          "name": "minimized",
+          "points": 270,
+          "queue_ms": [
+            20.0,
+            30.0,
+            30.0
+          ],
+          "queue_and_partial_max_ms": 39.0,
+          "source_span_s": 2.788,
+          "wall_span_s": 2.7868021
+        },
+        {
+          "name": "restored",
+          "points": 561,
+          "queue_ms": [
+            20.0,
+            30.0,
+            30.0
+          ],
+          "queue_and_partial_max_ms": 39.0,
+          "source_span_s": 5.792,
+          "wall_span_s": 5.7919516
+        },
+        {
+          "name": "native-move",
+          "points": 0
+        },
+        {
+          "name": "move-recovery",
+          "points": 185,
+          "queue_ms": [
+            30.0,
+            40.0,
+            50.0
+          ],
+          "queue_and_partial_max_ms": 50.0,
+          "source_span_s": 1.894,
+          "wall_span_s": 1.8940238
+        },
+        {
+          "name": "steady-after-move",
+          "points": 655,
+          "queue_ms": [
+            30.0,
+            40.0,
+            50.0
+          ],
+          "queue_and_partial_max_ms": 50.0,
+          "source_span_s": 6.781,
+          "wall_span_s": 6.7811409
+        },
+        {
+          "name": "breakpoint",
+          "points": 0
+        },
+        {
+          "name": "break-recovery",
+          "points": 184,
+          "queue_ms": [
+            30.0,
+            40.0,
+            50.0
+          ],
+          "queue_and_partial_max_ms": 50.0,
+          "source_span_s": 1.893,
+          "wall_span_s": 1.8930811
+        },
+        {
+          "name": "steady-after-break",
+          "points": 1632,
+          "queue_ms": [
+            20.0,
+            30.0,
+            50.0
+          ],
+          "queue_and_partial_max_ms": 50.0,
+          "source_span_s": 16.882,
+          "wall_span_s": 16.8818495
+        }
+      ],
+      "latency": {
+        "music_key_on": {
+          "triggers": 1076,
+          "arrived": 1038,
+          "discarded": 38,
+          "pending": 0,
+          "lower_ms": {
+            "min": 16.467,
+            "median": 39.83985,
+            "max": 49.2232
+          },
+          "upper_ms": {
+            "min": 17.272,
+            "median": 40.0293,
+            "p95": 48.5934,
+            "max": 50.0269
+          },
+          "bracket_max_ms": 2.1269
+        },
+        "music_key_on_steady": {
+          "triggers": 930,
+          "arrived": 929,
+          "discarded": 1,
+          "pending": 0,
+          "lower_ms": {
+            "min": 28.7301,
+            "median": 39.3835,
+            "max": 49.2232
+          },
+          "upper_ms": {
+            "min": 29.4352,
+            "median": 39.9887,
+            "p95": 48.5934,
+            "max": 50.0269
+          },
+          "bracket_max_ms": 2.1269
+        },
+        "sample_setup_to_first_emission_head": {
+          "triggers": 13,
+          "arrived": 13,
+          "discarded": 0,
+          "pending": 0,
+          "lower_ms": {
+            "min": 36.3219,
+            "median": 44.7799,
+            "max": 48.7262
+          },
+          "upper_ms": {
+            "min": 37.0456,
+            "median": 44.9876,
+            "p95": 48.8602,
+            "max": 48.9777
+          },
+          "bracket_max_ms": 0.979
+        },
+        "sample_setup_to_first_emission_head_steady": {
+          "triggers": 11,
+          "arrived": 11,
+          "discarded": 0,
+          "pending": 0,
+          "lower_ms": {
+            "min": 36.3219,
+            "median": 44.165,
+            "max": 48.7262
+          },
+          "upper_ms": {
+            "min": 37.0456,
+            "median": 44.9707,
+            "p95": 48.8602,
+            "max": 48.9777
+          },
+          "bracket_max_ms": 0.979
+        }
+      },
+      "resets": [
+        {
+          "tag": "replace",
+          "wall_ns": 325370700,
+          "reason": 1,
+          "old_frames": 1920,
+          "kept_frames": 1920,
+          "source_end": 14401
+        },
+        {
+          "tag": "replace",
+          "wall_ns": 42802681900,
+          "reason": 3,
+          "old_frames": 2400,
+          "kept_frames": 1920,
+          "source_end": 2053441
+        },
+        {
+          "tag": "replace",
+          "wall_ns": 66043326900,
+          "reason": 2,
+          "old_frames": 0,
+          "kept_frames": 1920,
+          "source_end": 3168961
+        },
+        {
+          "tag": "replace",
+          "wall_ns": 76031771400,
+          "reason": 2,
+          "old_frames": 1920,
+          "kept_frames": 1920,
+          "source_end": 3648001
+        },
+        {
+          "tag": "replace",
+          "wall_ns": 79982762000,
+          "reason": 3,
+          "old_frames": 2400,
+          "kept_frames": 1920,
+          "source_end": 3838081
+        }
+      ],
+      "ordinary_overflow_resets": [
+        {
+          "tag": "replace",
+          "wall_ns": 42802681900,
+          "reason": 3,
+          "old_frames": 2400,
+          "kept_frames": 1920,
+          "source_end": 2053441
+        },
+        {
+          "tag": "replace",
+          "wall_ns": 79982762000,
+          "reason": 3,
+          "old_frames": 2400,
+          "kept_frames": 1920,
+          "source_end": 3838081
+        }
+      ],
+      "starvation": [
+        {
+          "after_seconds": 64.9990927,
+          "before_seconds": 66.012287,
+          "additional": 98
+        }
+      ],
+      "pacing": {
+        "machine_ns": 95000000000,
+        "audio_pumps": 210371,
+        "audio_rendered_frames": 4560000,
+        "silent_audio_advances": 0,
+        "physical_audio_open": 1,
+        "presentations": 343,
+        "omitted_presentations": 0,
+        "presentation_checks": 18858,
+        "presentation_work_ns": 830631700,
+        "display_refresh_ns": 4166840,
+        "minimum_submission_gap_ns": 4168100,
+        "game_speed": 1,
+        "game_paused": 0,
+        "outer_loops": 2074,
+        "pace_calls": 95093,
+        "wait_calls": 91698,
+        "wait_events": 93,
+        "wait_ns": 90489236300,
+        "wait_short": 87,
+        "poll_calls": 380898,
+        "poll_events": 102,
+        "wait_max_ns": 1007164100,
+        "pace_immediate": 3394,
+        "lag_ns": 1069355825800,
+        "lag_max_ns": 1008632900,
+        "blocked_ns": 90262809900,
+        "pace_elapsed_ns": 90531847400,
+        "pace_cpu_ns": 3031250000,
+        "queued_wakes": 0,
+        "audio_block_frames": 480,
+        "audio_queue_calls": 9271,
+        "audio_queued_frames": 4455840,
+        "audio_underruns": 98,
+        "audio_missing_bytes": 188160,
+        "audio_requests": 9364,
+        "audio_pending_frames": 0,
+        "audio_queue_frames": 1440,
+        "audio_submission_ns": 8357700,
+        "audio_target_frames": 1920,
+        "audio_limit_frames": 2400,
+        "audio_queue_peak_frames": 2400,
+        "audio_queue_resets": 5,
+        "audio_overflow_resets": 2,
+        "audio_stall_restarts": 2,
+        "audio_discarded_frames": 960,
+        "audio_gated_frames": 113760,
+        "audio_start_delay_ns": 73920200,
+        "audio_gated": 0,
+        "hosted_uploads": 0,
+        "hosted_reused_uploads": 0,
+        "hosted_upload_ns": 0,
+        "hosted_presentations": 0,
+        "hosted_reused_presentations": 0,
+        "host_ns": 95023017800,
+        "idle_calls": 95000
+      },
+      "session": {
+        "command": [
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\simant-canonical.exe",
+          "--assets",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\la-verified\\a",
+          "--seed",
+          "0",
+          "--smoke-ms",
+          "95000",
+          "--input-script",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\la-verified\\input.txt",
+          "--diagnostics-dir=D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\la-verified\\diagnostics"
+        ],
+        "code": 0,
+        "seconds": 95.11997949995566,
+        "cpu_seconds": 4.375,
+        "actions": [
+          {
+            "seconds": 55.0141592999571,
+            "action": "minimize",
+            "window": 7800216,
+            "title": "SimAnt",
+            "rect": [
+              1059,
+              549,
+              1927,
+              1226
+            ]
+          },
+          {
+            "seconds": 58.04490209999494,
+            "action": "restore",
+            "window": 7800216,
+            "title": "SimAnt",
+            "rect": [
+              0,
+              1366,
+              158,
+              1392
+            ]
+          },
+          {
+            "seconds": 65.01107109995792,
+            "action": "drag-start",
+            "window": 7800216,
+            "title": "SimAnt",
+            "rect": [
+              1059,
+              549,
+              1927,
+              1226
+            ]
+          },
+          {
+            "seconds": 66.01915649999864,
+            "action": "drag-end",
+            "window": 7800216,
+            "title": "SimAnt",
+            "rect": [
+              1059,
+              549,
+              1927,
+              1226
+            ]
+          },
+          {
+            "seconds": 75.00093649997143,
+            "action": "breakpoint-start",
+            "window": 7800216,
+            "title": "SimAnt",
+            "rect": [
+              1273,
+              549,
+              2141,
+              1226
+            ]
+          },
+          {
+            "seconds": 76.00798840000061,
+            "action": "breakpoint-end",
+            "window": 7800216,
+            "title": "SimAnt",
+            "rect": [
+              1273,
+              549,
+              2141,
+              1226
+            ]
+          }
+        ]
+      },
+      "artifacts": [
+        {
+          "path": "build/workers/audio-backend/la-verified/queue.jsonl",
+          "sha256": "c8408c5b5a85c08cd262304f634066f1728d7002d2ae690bae5ec220edb770a1"
+        },
+        {
+          "path": "build/workers/audio-backend/la-verified/session.json",
+          "sha256": "1b55a26928eb6cf1c12b2841281e960270ffcd88f4eda53397c7e506ac45ebee"
+        },
+        {
+          "path": "build/workers/audio-backend/la-verified/pacing.json",
+          "sha256": "66d32a32fd433e162205e68c345a5cdab144972abb5dc8a39bc31247ad25fee1"
+        }
+      ]
+    }
+  },
+  "quiet_ordinary": {
+    "duration_s": 120.14479679998476,
+    "points": 11352,
+    "queue_and_partial_median_ms": 39.0,
+    "queue_and_partial_max_ms": 50.0,
+    "steady_overflow_resets": 0,
+    "underruns": 0,
+    "resets": [
+      {
+        "tag": "replace",
+        "wall_ns": 306168400,
+        "reason": 1,
+        "old_frames": 1920,
+        "kept_frames": 1920,
+        "source_end": 13441
+      },
+      {
+        "tag": "replace",
+        "wall_ns": 313160000,
+        "reason": 3,
+        "old_frames": 2400,
+        "kept_frames": 1920,
+        "source_end": 13921
+      }
+    ],
+    "pacing": {
+      "machine_ns": 120000000000,
+      "audio_pumps": 265485,
+      "audio_rendered_frames": 5760000,
+      "silent_audio_advances": 0,
+      "physical_audio_open": 1,
+      "presentations": 505,
+      "omitted_presentations": 0,
+      "presentation_checks": 25014,
+      "presentation_work_ns": 1299676100,
+      "display_refresh_ns": 4166840,
+      "minimum_submission_gap_ns": 4167300,
+      "game_speed": 1,
+      "game_paused": 0,
+      "outer_loops": 2228,
+      "pace_calls": 120085,
+      "wait_calls": 118425,
+      "wait_events": 85,
+      "wait_ns": 115694307900,
+      "wait_short": 85,
+      "poll_calls": 481094,
+      "poll_events": 106,
+      "wait_max_ns": 2100300,
+      "pace_immediate": 1658,
+      "lag_ns": 35395670200,
+      "lag_max_ns": 258190700,
+      "blocked_ns": 115350146800,
+      "pace_elapsed_ns": 115746721600,
+      "pace_cpu_ns": 4656250000,
+      "queued_wakes": 0,
+      "audio_block_frames": 480,
+      "audio_queue_calls": 11975,
+      "audio_queued_frames": 5750400,
+      "audio_underruns": 0,
+      "audio_missing_bytes": 0,
+      "audio_requests": 11971,
+      "audio_pending_frames": 0,
+      "audio_queue_frames": 1920,
+      "audio_submission_ns": 8646800,
+      "audio_target_frames": 1920,
+      "audio_limit_frames": 2400,
+      "audio_queue_peak_frames": 2400,
+      "audio_queue_resets": 2,
+      "audio_overflow_resets": 1,
+      "audio_stall_restarts": 0,
+      "audio_discarded_frames": 480,
+      "audio_gated_frames": 13440,
+      "audio_start_delay_ns": 63593200,
+      "audio_gated": 0,
+      "hosted_uploads": 0,
+      "hosted_reused_uploads": 0,
+      "hosted_upload_ns": 0,
+      "hosted_presentations": 0,
+      "hosted_reused_presentations": 0,
+      "host_ns": 120023671300,
+      "idle_calls": 120000
+    },
+    "artifacts": [
+      {
+        "path": "build/workers/audio-backend/la-ordinary/session.json",
+        "sha256": "28f69efd79fda7bd401b6ace7a9d77e21c0508d8b05ed652d2b920ef95148933"
+      },
+      {
+        "path": "build/workers/audio-backend/la-ordinary/queue.jsonl",
+        "sha256": "cc8292dd83c1c4533cb12ead736148fdc7a7183d0ae09c1f9dc5f4c077761a42"
+      },
+      {
+        "path": "build/workers/audio-backend/la-ordinary/pacing.json",
+        "sha256": "7cd97c829db91406d92b82d6f64797476e4713a5dfb5a8c93e8eddec1d0a2f0b"
+      }
+    ]
+  },
+  "cpu": [
+    {
+      "label": "concurrent-port-load",
+      "before": {
+        "command": [
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-control-verified\\simant-canonical.exe",
+          "--assets",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-c-verified\\a",
+          "--seed",
+          "0",
+          "--smoke-ms",
+          "25000",
+          "--input-script",
+          "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt",
+          "--diagnostics-dir=D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-c-verified\\diagnostics"
+        ],
+        "code": 0,
+        "wall_seconds": 25.51921020000009,
+        "cpu_seconds": 1.1875,
+        "play_one_core_percent": 2.642373383996618,
+        "pacing": {
+          "machine_ns": 25000000000,
+          "audio_pumps": 54516,
+          "audio_rendered_frames": 1200000,
+          "silent_audio_advances": 0,
+          "physical_audio_open": 1,
+          "presentations": 45,
+          "omitted_presentations": 0,
+          "presentation_checks": 5051,
+          "presentation_work_ns": 140005600,
+          "display_refresh_ns": 4166840,
+          "minimum_submission_gap_ns": 4166900,
+          "game_speed": 1,
+          "game_paused": 0,
+          "outer_loops": 86,
+          "pace_calls": 25009,
+          "wait_calls": 24574,
+          "wait_events": 9,
+          "wait_ns": 24232180100,
+          "wait_short": 10,
+          "poll_calls": 100097,
+          "poll_events": 29,
+          "wait_max_ns": 3221900,
+          "pace_immediate": 435,
+          "lag_ns": 35495731700,
+          "lag_max_ns": 261705800,
+          "blocked_ns": 24164785900,
+          "pace_elapsed_ns": 24243334700,
+          "pace_cpu_ns": 687500000,
+          "queued_wakes": 0,
+          "audio_block_frames": 480,
+          "audio_queue_calls": 2500,
+          "audio_queued_frames": 1200000,
+          "audio_underruns": 0,
+          "audio_missing_bytes": 0,
+          "audio_requests": 2474,
+          "audio_pending_frames": 0,
+          "audio_queue_frames": 14400,
+          "audio_submission_ns": 3152600,
+          "audio_target_frames": 1920,
+          "audio_limit_frames": 2400,
+          "audio_queue_peak_frames": 0,
+          "audio_queue_resets": 0,
+          "audio_overflow_resets": 0,
+          "audio_stall_restarts": 0,
+          "audio_discarded_frames": 0,
+          "audio_gated_frames": 0,
+          "audio_start_delay_ns": 0,
+          "audio_gated": 0,
+          "hosted_uploads": 0,
+          "hosted_reused_uploads": 0,
+          "hosted_upload_ns": 0,
+          "hosted_presentations": 0,
+          "hosted_reused_presentations": 0,
+          "host_ns": 25028416500,
+          "idle_calls": 25000
+        },
+        "artifact": {
+          "path": "build/workers/audio-backend/lcpu-c-verified/cpu.json",
+          "sha256": "904d67b35e9f5e4343e66c4ceee3c4c60d2e46360182fda26d1747fca4023ad3"
+        }
+      },
+      "after": {
+        "command": [
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\simant-canonical.exe",
+          "--assets",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-v-verified\\a",
+          "--seed",
+          "0",
+          "--smoke-ms",
+          "25000",
+          "--input-script",
+          "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt",
+          "--diagnostics-dir=D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-v-verified\\diagnostics"
+        ],
+        "code": 0,
+        "wall_seconds": 25.517770699982066,
+        "cpu_seconds": 1.046875,
+        "play_one_core_percent": 3.843410360710355,
+        "pacing": {
+          "machine_ns": 25000000000,
+          "audio_pumps": 54516,
+          "audio_rendered_frames": 1200000,
+          "silent_audio_advances": 0,
+          "physical_audio_open": 1,
+          "presentations": 45,
+          "omitted_presentations": 0,
+          "presentation_checks": 5065,
+          "presentation_work_ns": 147572200,
+          "display_refresh_ns": 4166840,
+          "minimum_submission_gap_ns": 4167100,
+          "game_speed": 1,
+          "game_paused": 0,
+          "outer_loops": 86,
+          "pace_calls": 25009,
+          "wait_calls": 24549,
+          "wait_events": 9,
+          "wait_ns": 24217095300,
+          "wait_short": 8,
+          "poll_calls": 100097,
+          "poll_events": 29,
+          "wait_max_ns": 2802500,
+          "pace_immediate": 460,
+          "lag_ns": 34058990900,
+          "lag_max_ns": 255743800,
+          "blocked_ns": 24151188800,
+          "pace_elapsed_ns": 24228735000,
+          "pace_cpu_ns": 609375000,
+          "queued_wakes": 0,
+          "audio_block_frames": 480,
+          "audio_queue_calls": 2475,
+          "audio_queued_frames": 1190400,
+          "audio_underruns": 0,
+          "audio_missing_bytes": 0,
+          "audio_requests": 2472,
+          "audio_pending_frames": 0,
+          "audio_queue_frames": 1440,
+          "audio_submission_ns": 3081000,
+          "audio_target_frames": 1920,
+          "audio_limit_frames": 2400,
+          "audio_queue_peak_frames": 2400,
+          "audio_queue_resets": 2,
+          "audio_overflow_resets": 1,
+          "audio_stall_restarts": 0,
+          "audio_discarded_frames": 480,
+          "audio_gated_frames": 13440,
+          "audio_start_delay_ns": 66045400,
+          "audio_gated": 0,
+          "hosted_uploads": 0,
+          "hosted_reused_uploads": 0,
+          "hosted_upload_ns": 0,
+          "hosted_presentations": 0,
+          "hosted_reused_presentations": 0,
+          "host_ns": 25024308200,
+          "idle_calls": 25000
+        },
+        "artifact": {
+          "path": "build/workers/audio-backend/lcpu-v-verified/cpu.json",
+          "sha256": "305a7bcf6e247e630430a94be34d9b3e3c81584e932490e198c5a6190494dd0a"
+        }
+      }
+    },
+    {
+      "label": "quiet",
+      "before": {
+        "command": [
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-control-verified\\simant-canonical.exe",
+          "--assets",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-c-quiet\\a",
+          "--seed",
+          "0",
+          "--smoke-ms",
+          "25000",
+          "--input-script",
+          "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt",
+          "--diagnostics-dir=D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-c-quiet\\diagnostics"
+        ],
+        "code": 0,
+        "wall_seconds": 25.51798270002473,
+        "cpu_seconds": 1.0625,
+        "play_one_core_percent": 2.1619366081547016,
+        "pacing": {
+          "machine_ns": 25000000000,
+          "audio_pumps": 54516,
+          "audio_rendered_frames": 1200000,
+          "silent_audio_advances": 0,
+          "physical_audio_open": 1,
+          "presentations": 44,
+          "omitted_presentations": 0,
+          "presentation_checks": 5154,
+          "presentation_work_ns": 141694300,
+          "display_refresh_ns": 4166840,
+          "minimum_submission_gap_ns": 4170600,
+          "game_speed": 1,
+          "game_paused": 0,
+          "outer_loops": 86,
+          "pace_calls": 25009,
+          "wait_calls": 24605,
+          "wait_events": 9,
+          "wait_ns": 24260084600,
+          "wait_short": 9,
+          "poll_calls": 100096,
+          "poll_events": 29,
+          "wait_max_ns": 1892900,
+          "pace_immediate": 404,
+          "lag_ns": 40843883800,
+          "lag_max_ns": 280633900,
+          "blocked_ns": 24190487000,
+          "pace_elapsed_ns": 24270316400,
+          "pace_cpu_ns": 531250000,
+          "queued_wakes": 0,
+          "audio_block_frames": 480,
+          "audio_queue_calls": 2500,
+          "audio_queued_frames": 1200000,
+          "audio_underruns": 0,
+          "audio_missing_bytes": 0,
+          "audio_requests": 2472,
+          "audio_pending_frames": 0,
+          "audio_queue_frames": 15360,
+          "audio_submission_ns": 2465700,
+          "audio_target_frames": 1920,
+          "audio_limit_frames": 2400,
+          "audio_queue_peak_frames": 0,
+          "audio_queue_resets": 0,
+          "audio_overflow_resets": 0,
+          "audio_stall_restarts": 0,
+          "audio_discarded_frames": 0,
+          "audio_gated_frames": 0,
+          "audio_start_delay_ns": 0,
+          "audio_gated": 0,
+          "hosted_uploads": 0,
+          "hosted_reused_uploads": 0,
+          "hosted_upload_ns": 0,
+          "hosted_presentations": 0,
+          "hosted_reused_presentations": 0,
+          "host_ns": 25022369800,
+          "idle_calls": 25000
+        },
+        "artifact": {
+          "path": "build/workers/audio-backend/lcpu-c-quiet/cpu.json",
+          "sha256": "afc1649437e975e1d0d785db54ce3e67947fc432f6848ee1b3fb71297dab6dac"
+        }
+      },
+      "after": {
+        "command": [
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\simant-canonical.exe",
+          "--assets",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-v-quiet\\a",
+          "--seed",
+          "0",
+          "--smoke-ms",
+          "25000",
+          "--input-script",
+          "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt",
+          "--diagnostics-dir=D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\lcpu-v-quiet\\diagnostics"
+        ],
+        "code": 0,
+        "wall_seconds": 25.51787310000509,
+        "cpu_seconds": 1.140625,
+        "play_one_core_percent": 2.8825031085080868,
+        "pacing": {
+          "machine_ns": 25000000000,
+          "audio_pumps": 54516,
+          "audio_rendered_frames": 1200000,
+          "silent_audio_advances": 0,
+          "physical_audio_open": 1,
+          "presentations": 44,
+          "omitted_presentations": 0,
+          "presentation_checks": 5160,
+          "presentation_work_ns": 146294500,
+          "display_refresh_ns": 4166840,
+          "minimum_submission_gap_ns": 4688800,
+          "game_speed": 1,
+          "game_paused": 0,
+          "outer_loops": 86,
+          "pace_calls": 25009,
+          "wait_calls": 24645,
+          "wait_events": 9,
+          "wait_ns": 24282431900,
+          "wait_short": 8,
+          "poll_calls": 100096,
+          "poll_events": 29,
+          "wait_max_ns": 2479500,
+          "pace_immediate": 364,
+          "lag_ns": 31472039200,
+          "lag_max_ns": 246874200,
+          "blocked_ns": 24208931700,
+          "pace_elapsed_ns": 24292692800,
+          "pace_cpu_ns": 703125000,
+          "queued_wakes": 0,
+          "audio_block_frames": 480,
+          "audio_queue_calls": 2475,
+          "audio_queued_frames": 1188960,
+          "audio_underruns": 0,
+          "audio_missing_bytes": 0,
+          "audio_requests": 2473,
+          "audio_pending_frames": 0,
+          "audio_queue_frames": 1920,
+          "audio_submission_ns": 2351900,
+          "audio_target_frames": 1920,
+          "audio_limit_frames": 2400,
+          "audio_queue_peak_frames": 1920,
+          "audio_queue_resets": 1,
+          "audio_overflow_resets": 0,
+          "audio_stall_restarts": 0,
+          "audio_discarded_frames": 0,
+          "audio_gated_frames": 12960,
+          "audio_start_delay_ns": 62593800,
+          "audio_gated": 0,
+          "hosted_uploads": 0,
+          "hosted_reused_uploads": 0,
+          "hosted_upload_ns": 0,
+          "hosted_presentations": 0,
+          "hosted_reused_presentations": 0,
+          "host_ns": 25022579200,
+          "idle_calls": 25000
+        },
+        "artifact": {
+          "path": "build/workers/audio-backend/lcpu-v-quiet/cpu.json",
+          "sha256": "37a76282a24cc6619c17ebe1803bfcc26fde609db79132af0987824729e4979a"
+        }
+      }
+    }
+  ],
+  "verification": {
+    "acceptance": {
+      "passed": true,
+      "seconds": 211.69594970002072,
+      "results": [
+        {
+          "name": "sound-off",
+          "passed": true,
+          "expected": 18,
+          "equal": 18,
+          "code": 0,
+          "seconds": 30.59400490002008,
+          "command": [
+            "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+            "-m",
+            "portable.tests.acceptance.ideal_check",
+            "--build",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+            "--out",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-acceptance\\sound-off",
+            "--jobs",
+            "3",
+            "--sound-off"
+          ]
+        },
+        {
+          "name": "sound-on",
+          "passed": true,
+          "expected": 18,
+          "equal": 18,
+          "code": 0,
+          "seconds": 70.54108759999508,
+          "command": [
+            "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+            "-m",
+            "portable.tests.acceptance.ideal_check",
+            "--build",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+            "--out",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-acceptance\\sound-on",
+            "--jobs",
+            "3"
+          ]
+        },
+        {
+          "name": "playback",
+          "passed": true,
+          "expected": 22,
+          "equal": 22,
+          "code": 0,
+          "seconds": 110.54274520004401,
+          "command": [
+            "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+            "-m",
+            "portable.tests.acceptance.playback_check",
+            "--build",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+            "--out",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-acceptance\\playback",
+            "--jobs",
+            "3",
+            "--timing-tolerance-ns",
+            "1"
+          ]
+        }
+      ]
+    },
+    "acceptance_artifact": {
+      "path": "build/workers/audio-backend/latency-verified-acceptance/result.json",
+      "sha256": "5450ed1cef69901df7044f359a679f0691758541817faa1cabfe58de8c14fb64"
+    },
+    "deterministic_observers": {
+      "sound-off": {
+        "rendered_frames": [
+          0
+        ],
+        "physical_audio_open": [
+          0
+        ]
+      },
+      "sound-on": {
+        "rendered_frames": [
+          0
+        ],
+        "physical_audio_open": [
+          0
+        ]
+      }
+    },
+    "port_suites": [
+      {
+        "name": "database",
+        "code": 0,
+        "seconds": 6.440175399999134,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/native_database/run.py",
+          "--conversion",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\database"
+        ]
+      },
+      {
+        "name": "rng",
+        "code": 0,
+        "seconds": 2.45187900000019,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/native_rng/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\rng"
+        ]
+      },
+      {
+        "name": "simulation",
+        "code": 0,
+        "seconds": 10.597370900039095,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/native_simulation/run.py",
+          "--native-build",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+          "--random-count",
+          "128",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\simulation"
+        ]
+      },
+      {
+        "name": "audio",
+        "code": 0,
+        "seconds": 6.291225299995858,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/audio/run.py",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\audio"
+        ]
+      },
+      {
+        "name": "virtual-audio",
+        "code": 0,
+        "seconds": 6.285545499995351,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/acceptance/run_virtual_audio_tests.py",
+          "--sdk",
+          "build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\virtual-audio"
+        ]
+      },
+      {
+        "name": "virtual-clock",
+        "code": 0,
+        "seconds": 1.9252473999513313,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/whole_program/platform/tests/run_virtual_clock_tests.py",
+          "--sdk",
+          "build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\virtual-clock"
+        ]
+      },
+      {
+        "name": "clock-rules",
+        "code": 0,
+        "seconds": 9.197870700038038,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/acceptance/ideal_rule_check.py",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\clock-rules"
+        ]
+      },
+      {
+        "name": "pit-edges",
+        "code": 0,
+        "seconds": 1.944895299966447,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "-m",
+          "portable.tests.acceptance.ideal_pit_edge_check",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\pit-edges"
+        ]
+      },
+      {
+        "name": "internal-refresh",
+        "code": 0,
+        "seconds": 4.515342200000305,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/acceptance/ideal_internal_refresh_check.py",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\internal-refresh"
+        ]
+      },
+      {
+        "name": "idle-yield",
+        "code": 0,
+        "seconds": 7.46950280002784,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/idle_yield/run.py",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\idle-yield"
+        ]
+      },
+      {
+        "name": "input-irq",
+        "code": 0,
+        "seconds": 2.6695355000556447,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/input_irq/run.py",
+          "--build",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\input-irq"
+        ]
+      },
+      {
+        "name": "mouse-services",
+        "code": 0,
+        "seconds": 0.7812208000104874,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/mouse_services/run.py",
+          "--build",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\mouse-services"
+        ]
+      },
+      {
+        "name": "vga",
+        "code": 0,
+        "seconds": 20.886329700006172,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\report.json",
+          "--flow",
+          "vga",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\vga"
+        ]
+      },
+      {
+        "name": "save",
+        "code": 0,
+        "seconds": 25.85512900003232,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\report.json",
+          "--flow",
+          "save",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\s5529"
+        ]
+      },
+      {
+        "name": "load",
+        "code": 0,
+        "seconds": 36.201047600014135,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run_load.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\l5529"
+        ]
+      },
+      {
+        "name": "diagnostics",
+        "code": 0,
+        "seconds": 5.334914400009438,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/diagnostics/run.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\diagnostics"
+        ]
+      },
+      {
+        "name": "windows",
+        "code": 0,
+        "seconds": 201.36461789999157,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run_windows.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\windows"
+        ]
+      },
+      {
+        "name": "modern",
+        "code": 0,
+        "seconds": 266.51968379999744,
+        "command": [
+          "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+          "portable/tests/runtime/run_modern.py",
+          "--report",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified\\report.json",
+          "--out",
+          "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\latency-verified-ports\\modern"
+        ]
+      }
+    ],
+    "port_artifact": {
+      "path": "build/workers/audio-backend/latency-verified-ports/result.json",
+      "sha256": "6de1108e23605215fa33407169e75d041cb96d2c2038eae0a98e8df58c950f31"
+    },
+    "audio_controls": {
+      "path": "build/workers/audio-backend/latency-final-controls/queue-policy.txt",
+      "sha256": "c23e58a70a9329bea0839acb1d374a519707d4d000b8c27121eebb1a537e1b25"
+    },
+    "audio_observer_unit_controls": 26,
+    "repository": {
+      "schema": "simant-repository-guard-report-v1",
+      "passed": true,
+      "issues": [],
+      "summary": {
+        "issue_count": 0,
+        "live_blockers": 9,
+        "retained_file_roles": {
+          "inventory/workflow": 466,
+          "Pinned DOS acceptance scenarios and emulated-time input scripts": 33,
+          "Reviewed proof, toolchain facts or explicit unresolved investigation": 426,
+          "Shared C headers of the canonical source, pinned in the C compiler profiles (layout/toolchain.json include_files) and included where each module defined the declarations": 21,
+          "Locked historical metadata/current proof and architecture policy": 6,
+          "Pinned BSD-licensed OPL emulator and redistribution provenance": 2,
+          "Parse-only C frontend declarations; never native runtime includes": 14,
+          "Pinned GCC LTO pre-existing declaration mismatch signatures consumed by portable/build.py": 1,
+          "Pinned native BIOS font resources": 8,
+          "Reviewed canonical DOS cross-owner storage contracts consumed by portable/build.py": 1,
+          "Current native differential/runtime fixtures": 164,
+          "Permanent filesystem/handle service controls": 14,
+          "Permanent acceptance/negative controls": 53,
+          "Reconstruction workflow and diagnostics (CLI or imported helper)": 52
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Queue-head observation brackets, not acoustic or hardware end-to-end latency; no ear test.",
+    "Deliberate native move blocks source production for about one second; starvation is recorded, not concealed.",
+    "Two one-block overflows outside forced stalls occurred in the loaded 95 s run; quiet 120 s run has none after startup.",
+    "38 music onset markers are explicitly discarded during corrections/catch-up; all source events and FM state still execute.",
+    "CPU is bounded Windows process sampling, not a distribution or a claim of exact unchanged CPU usage."
+  ]
+}
