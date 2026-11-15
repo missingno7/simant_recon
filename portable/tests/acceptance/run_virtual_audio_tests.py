@@ -13,7 +13,7 @@ def main():
     files=['portable/tests/acceptance/virtual_audio_test.c','portable/platform/sdl3/audio.c',
            'portable/platform/sdl3/whole_audio_provider.c','portable/platform/sdl3/whole_audio_startup.c',
            'portable/whole_program/platform/sdl3/host.c','portable/whole_program/platform/whole_audio_provider.c',
-           'portable/whole_program/platform/audio_native.c','portable/audio/isa_devices.cpp',
+           'portable/whole_program/platform/audio_native.c','portable/audio/native_renderer.cpp',
            'portable/audio/ymfm/ymfm_opl.cpp','portable/audio/ymfm/ymfm_adpcm.cpp','portable/audio/ymfm/ymfm_pcm.cpp']
     objects=[];commands=[]
     for i,file in enumerate(files):

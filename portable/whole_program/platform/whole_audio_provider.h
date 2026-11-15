@@ -2,8 +2,11 @@
 #define SIMANT_WHOLE_AUDIO_PROVIDER_H
 #include <stdint.h>
 #include <stddef.h>
+#include "audio_state.h"
 typedef struct PortableWholeAudioProvider {
-    void *devices;
+    void *renderer;
+    PortableWholeAudioRuntimeSample observed[4];
+    int sample_enabled;
     uint64_t time_ns, irq_ns, irq_fraction, frame_cursor;
     uint16_t divisor, chain, mix_divider, chain_remaining;
     unsigned channels;
@@ -20,6 +23,11 @@ void portable_whole_audio_provider_start(PortableWholeAudioProvider *p);
 void portable_whole_audio_provider_stop(PortableWholeAudioProvider *p);
 void portable_whole_audio_provider_enable_interrupts(PortableWholeAudioProvider *p);
 void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,int16_t stereo[2]);
+void portable_whole_audio_provider_render(PortableWholeAudioProvider *,int16_t *,size_t,uint64_t);
+void portable_whole_audio_provider_set_rendering(PortableWholeAudioProvider *,int);
+void portable_whole_audio_provider_sync_samples(PortableWholeAudioProvider *,int restart);
+void portable_whole_audio_provider_opl(PortableWholeAudioProvider *,uint8_t,uint8_t);
+void portable_whole_audio_provider_sample_enable(PortableWholeAudioProvider *,int);
 void portable_whole_audio_provider_advance(PortableWholeAudioProvider *p,uint64_t target);
 int portable_whole_audio_isr_active(void);
 #endif

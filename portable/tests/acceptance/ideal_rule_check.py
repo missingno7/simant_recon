@@ -17,7 +17,7 @@ def run(out):
     execute([cxx,'-I'+str(HERE/'ideal'),'-c',str(out/'dos.cpp'),'-o',str(out/'dos.o')])
     execute([cxx,str(out/'golden.o'),str(out/'dos.o'),str(out/'pit.o'),'-o',str(out/'dos.exe')]);execute([str(out/'dos.exe')])
     execute(base+[str(ROOT/'portable/whole_program/platform/input_time.c'),str(pit),str(golden),'-o',str(out/'native.exe')]);execute([str(out/'native.exe')])
-    files=['portable/tests/acceptance/ideal_timer_test.c','portable/whole_program/platform/whole_audio_provider.c','portable/whole_program/platform/audio_native.c','portable/audio/isa_devices.cpp','portable/audio/ymfm/ymfm_opl.cpp','portable/audio/ymfm/ymfm_adpcm.cpp','portable/audio/ymfm/ymfm_pcm.cpp']
+    files=['portable/tests/acceptance/ideal_timer_test.c','portable/whole_program/platform/whole_audio_provider.c','portable/whole_program/platform/audio_native.c','portable/audio/native_renderer.cpp','portable/audio/ymfm/ymfm_opl.cpp','portable/audio/ymfm/ymfm_adpcm.cpp','portable/audio/ymfm/ymfm_pcm.cpp']
     objects=[]
     for i,name in enumerate(files):
         obj=out/f'{i}.o';objects.append(str(obj))

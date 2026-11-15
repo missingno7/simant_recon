@@ -9,7 +9,7 @@ def main():
  out=prepare_output(a.out.absolute(),ROOT/'build/current/tests/audio')
  cc='C:/msys64/mingw64/bin/gcc.exe'
  files=['portable/tests/audio/device_boundary.c','portable/whole_program/platform/whole_audio_provider.c',
-        'portable/whole_program/platform/audio_native.c','portable/audio/isa_devices.cpp',
+        'portable/whole_program/platform/audio_native.c','portable/audio/native_renderer.cpp',
         'portable/audio/ymfm/ymfm_opl.cpp','portable/audio/ymfm/ymfm_adpcm.cpp','portable/audio/ymfm/ymfm_pcm.cpp']
  objects=[]
  for i,f in enumerate(files):
@@ -22,8 +22,12 @@ def main():
  (out/'result.txt').write_text(result.stdout+result.stderr)
  print(result.stdout+result.stderr)
  if result.returncode:return result.returncode
- negative=subprocess.run([str(exe),'--unsupported-dma'],capture_output=True,text=True,timeout=10)
- (out/'unsupported-dma.txt').write_text(negative.stdout+negative.stderr)
- assert negative.returncode==70 and 'Unimplemented SB DSP command 14' in negative.stderr
- print('PASS: unsupported DMA fails explicitly');return 0
+ for argument,message in [('--unsupported-dma','unsupported native audio port/control'),
+                          ('--invalid-position','sample position/volume outside payload'),
+                          ('--invalid-volume','invalid sample start'),
+                          ('--backward-event','events go backwards')]:
+  negative=subprocess.run([str(exe),argument],capture_output=True,text=True,timeout=10)
+  (out/(argument[2:]+'.txt')).write_text(negative.stdout+negative.stderr)
+  assert negative.returncode==70 and message in negative.stderr
+ print('PASS: unsupported DMA, invalid position/volume and backward event fail explicitly');return 0
 if __name__=='__main__':raise SystemExit(main())

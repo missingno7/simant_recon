@@ -236,12 +236,20 @@ int16_t dos_read(int16_t fd, void *buffer, uint16_t count)
 int16_t dos_write(int16_t fd, void *buffer, uint16_t count)
 {
     int hfd = host_fd(fd), n;
+    unsigned written = 0;
     if (hfd < 0) return record_error();
     if (!buffer && count) { errno = EFAULT; return record_error(); }
-    n = host_write(hfd, buffer, (unsigned)count);
-    if (n < 0) return record_error();
+    /* SaveGame checks -1, not a short positive count. Finish partial host
+     * writes or report failure so it retains the dirty flag and removes the
+     * incomplete save. A zero-progress write is a storage failure too. */
+    do {
+        n = host_write(hfd, written ? (unsigned char *)buffer + written : buffer, (unsigned)count - written);
+        if (n < 0) return record_error();
+        if (!n && written < count) { errno = ENOSPC; return record_error(); }
+        written += (unsigned)n;
+    } while (written < count);
     dos_errno = 0;
-    return (int16_t)(uint16_t)n;
+    return (int16_t)count;
 }
 
 int32_t dos_lseek(int16_t fd, int32_t offset, int16_t origin)

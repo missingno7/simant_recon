@@ -1,6 +1,5 @@
 #include "whole_audio_startup.h"
 #include "../../whole_program/platform/audio_native.h"
-#include "../../audio/isa_devices.h"
 #include "../../whole_program/platform/sdl3/host_modes.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,14 +13,18 @@ static uint64_t bus_time(PortableSdl3WholeAudio *a) {
     a->bus_ns=now;
     return now;
 }
-static void out8(void *context,uint16_t port,uint8_t value) {
+static void opl_register(void *context,uint8_t reg,uint8_t value) {
     PortableSdl3WholeAudio *a=context;
-    uint64_t now=bus_time(a);sim_isa_audio_out(a->provider.devices,port,value,now);
+    portable_whole_audio_provider_opl(&a->provider,reg,value);
 }
-static uint8_t in8(void *context,uint16_t port) {
+static void sample_enable(void *context,int enabled) {
     PortableSdl3WholeAudio *a=context;
-    uint64_t now=bus_time(a);uint8_t v=sim_isa_audio_in(a->provider.devices,port,now);
-    return v;
+    portable_whole_audio_provider_sample_enable(&a->provider,enabled);
+}
+static void synchronize(void *context) {
+    PortableSdl3WholeAudio *a=context;
+    bus_time(a);
+    portable_whole_audio_provider_sync_samples(&a->provider,0);
 }
 static void configure(void *context,uint16_t divisor,uint16_t chain,unsigned channels) {
     PortableSdl3WholeAudio *a=context;
@@ -41,9 +44,7 @@ static void enable_interrupts(void *context) {
     portable_whole_audio_provider_enable_interrupts(&a->provider);
 }
 int portable_sdl3_whole_audio_bind_source_services(PortableSdl3WholeAudio *a) {
-    PortableWholeAudioHost host={a,configure,start,stop,out8,in8,enable_interrupts};
-    const char *trace=getenv("SIMANT_AUDIO_TRACE");
-    if(trace && !sim_isa_audio_trace(a->provider.devices,trace)) return 0;
+    PortableWholeAudioHost host={a,configure,start,stop,opl_register,sample_enable,enable_interrupts,synchronize};
     return portable_whole_audio_bind(&host);
 }
 void portable_sdl3_whole_audio_unbind_source_services(void) { portable_whole_audio_unbind(); }

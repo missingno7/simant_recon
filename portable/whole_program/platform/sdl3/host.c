@@ -29,6 +29,7 @@ struct Host {
     HostPalette presented_palette;
     int frame_presented;
     uint64_t refresh_ns;
+    int fullscreen_return;
 };
 #include "test_observer.inc"
 #include "input_time_host.h"
@@ -190,6 +191,20 @@ static int valid_geometry(int width, int height)
 {
     return width == 640 && (height == 350 || height == 480);
 }
+/* Integer scaling must not crop the game when a window is smaller than the
+ * source. Below 1x, fit the entire image and filter it; input uses this exact
+ * renderer transform, including the letterbox and display pixel density. */
+static int update_presentation(Host *host)
+{
+    int width, height;
+    if (!host || !host->texture || !SDL_GetWindowSizeInPixels(host->window, &width, &height)) return 0;
+    int integer = host->integer_scaling && width >= host->logical_width &&
+                  height >= host->logical_height - host->crop_top;
+    return SDL_SetRenderLogicalPresentation(host->renderer, host->logical_width,
+                host->logical_height - host->crop_top, integer ? SDL_LOGICAL_PRESENTATION_INTEGER_SCALE :
+                SDL_LOGICAL_PRESENTATION_LETTERBOX) &&
+           SDL_SetTextureScaleMode(host->texture, integer ? SDL_SCALEMODE_NEAREST : SDL_SCALEMODE_LINEAR);
+}
 
 int host_set_logical_size(Host *host, int width, int height)
 {
@@ -254,7 +269,7 @@ Host *host_create_dimensions(const char *title, int integer_scaling,
     if (!host) { host_destroy(NULL); return NULL; }
     host->integer_scaling = integer_scaling != 0;
     host->window_scale = 1;
-    if (!SDL_CreateWindowAndRenderer(title, width, height, SDL_WINDOW_RESIZABLE,
+    if (!SDL_CreateWindowAndRenderer(title, width, height, SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIGH_PIXEL_DENSITY,
             &host->window, &host->renderer) ||
         !host_set_logical_size(host, width, height)) {
         host_destroy(host);
@@ -568,6 +583,11 @@ int host_poll_event(Host *host, HostEvent *event)
     ++poll_calls;
     while (native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
         ++poll_events;
+        if ((raw.type == SDL_EVENT_WINDOW_RESIZED || raw.type == SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED ||
+             raw.type == SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED) &&
+            raw.window.windowID == SDL_GetWindowID(host->window)) {
+            if (!update_presentation(host)) return -1;
+        }
         if (raw.type == SDL_EVENT_WINDOW_DISPLAY_CHANGED &&
             raw.window.windowID == SDL_GetWindowID(host->window)) {
             const SDL_DisplayMode *mode = SDL_GetCurrentDisplayMode(SDL_GetDisplayForWindow(host->window));
@@ -575,6 +595,36 @@ int host_poll_event(Host *host, HostEvent *event)
                 host->refresh_ns = (uint64_t)(1000000000.0 / mode->refresh_rate + 0.5);
         }
         memset(event, 0, sizeof(*event));
+        if (raw.type == SDL_EVENT_KEY_DOWN || raw.type == SDL_EVENT_KEY_UP) {
+            /* Leave OS chords outside the DOS keyboard. Plain Alt/F10 still
+             * have their original game meaning; composition emits no DOS keys. */
+            if ((raw.key.mod & SDL_KMOD_GUI) ||
+                ((raw.key.mod & SDL_KMOD_ALT) && (raw.key.scancode == SDL_SCANCODE_TAB ||
+                  raw.key.scancode == SDL_SCANCODE_F4 || raw.key.scancode == SDL_SCANCODE_SPACE)) ||
+                ((raw.key.mod & SDL_KMOD_CTRL) && raw.key.scancode == SDL_SCANCODE_ESCAPE)) continue;
+            if (raw.key.scancode == SDL_SCANCODE_RETURN &&
+                ((raw.key.mod & SDL_KMOD_ALT) || host->fullscreen_return)) {
+                if (raw.type == SDL_EVENT_KEY_DOWN && !raw.key.repeat && !host->fullscreen_return) {
+                    host->fullscreen_return = 1;
+                    if (!SDL_SetWindowFullscreen(host->window, !(SDL_GetWindowFlags(host->window) & SDL_WINDOW_FULLSCREEN))) return -1;
+                }
+                if (raw.type == SDL_EVENT_KEY_UP) host->fullscreen_return = 0;
+                continue;
+            }
+        }
+        if (raw.type == SDL_EVENT_WINDOW_FOCUS_LOST && !SDL_GetKeyboardFocus()) {
+            host->fullscreen_return = 0;
+            /* SDL releases keyboard keys on focus loss. Release a captured
+             * pointer too: a missed button-up must not leave a modal dragging
+             * while another application owns input. No pause or timer write. */
+            if (host->replay_state.left_button_down) {
+                host->replay_state.left_button_down = 0;
+                event->kind = HOST_EVENT_MOUSE_UP;
+                event->button = SDL_BUTTON_LEFT;
+                event->x = host->replay_state.x; event->y = host->replay_state.y;
+                return 1;
+            }
+        }
         /* Modern mode: hosted windows convert to logical screen space. */
         hosted = native_windows_translate(&raw);
         if (hosted < 0) continue;

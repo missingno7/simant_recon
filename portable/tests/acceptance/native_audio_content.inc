@@ -45,10 +45,16 @@ void portable_test_sample_boundary(unsigned stop,int ch) {
 }
 void portable_test_audio_mix(unsigned a,unsigned b) {
   for (unsigned ch=0;ch<2;++ch) {
-    if (!content_head('P')) return;
+    if (!content_head('P')) break;
     PortableWholeAudioRuntimeSample *c=&snd_sample_channel_records[ch];
     fprintf(content_file," %u %d %u %u\n",ch,c->snd?(uint16_t)c->snd->object:-1,c->pos,ch?b:a);
   }
+  /* Source-level equivalent of the retired DSP emission: the complete P
+   * contributions still decide playback. Preserve historical OUT diagnostics
+   * for gameplay acceptance, without routing production PCM through them. */
+  extern void portable_test_audio_write(uint16_t,uint8_t);
+  portable_test_audio_write(0x22c,0x10);
+  portable_test_audio_write(0x22c,(a+b)/2);
 }
 void portable_test_audio_content_opl(uint16_t port,uint8_t value) {
   if (!((port>=0x388 && port<=0x38b) || (port>=0x220 && port<=0x22f) || port<=0xf || (port>=0x80 && port<=0x8f))) return;

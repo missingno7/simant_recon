@@ -1,0 +1,853 @@
+{
+  "status": "partial-live-integration-and-diagnostics",
+  "source_revision": "662b078cf7f06dc93abd62122422994410c24b57",
+  "source_boundary": "src untouched; native render-only events; same YMFM in OPL2 compatibility mode",
+  "isolated_build": {
+    "path": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\portable",
+    "report_sha256": "6dfa476cf6cfab6d473c863c43f2c3c9c671d79e9ce8dcd8a05579cb58d41b8d",
+    "executable_sha256": "cc85523f97e9f0cb6e55f9515e430e99b7f0384a660c838867488368dee3e9d6",
+    "input_stability": {
+      "before_link": true,
+      "at_end": true
+    }
+  },
+  "acceptance": {
+    "path": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\acceptance-v3\\result.json",
+    "sha256": "9025175c38f306bd976f0af230d4acd22403aa55a6e2b63284a0db1deca8f552",
+    "result": {
+      "passed": true,
+      "seconds": 239.10241669998504,
+      "results": [
+        {
+          "name": "sound-off",
+          "passed": true,
+          "expected": 18,
+          "equal": 18,
+          "code": 0,
+          "seconds": 31.054332700034138,
+          "command": [
+            "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+            "-m",
+            "portable.tests.acceptance.ideal_check",
+            "--build",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\portable",
+            "--out",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\acceptance-v3\\sound-off",
+            "--jobs",
+            "3",
+            "--sound-off"
+          ]
+        },
+        {
+          "name": "sound-on",
+          "passed": true,
+          "expected": 18,
+          "equal": 18,
+          "code": 0,
+          "seconds": 74.64187449996825,
+          "command": [
+            "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+            "-m",
+            "portable.tests.acceptance.ideal_check",
+            "--build",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\portable",
+            "--out",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\acceptance-v3\\sound-on",
+            "--jobs",
+            "3"
+          ]
+        },
+        {
+          "name": "playback",
+          "passed": true,
+          "expected": 22,
+          "equal": 22,
+          "code": 0,
+          "seconds": 133.38769420003518,
+          "command": [
+            "C:\\Users\\jiriv\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+            "-m",
+            "portable.tests.acceptance.playback_check",
+            "--build",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\portable",
+            "--out",
+            "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\acceptance-v3\\playback",
+            "--jobs",
+            "3",
+            "--timing-tolerance-ns",
+            "1"
+          ]
+        }
+      ]
+    },
+    "observers": {
+      "sound-off": {
+        "rendered_frames": [
+          0
+        ],
+        "physical_audio_open": [
+          0
+        ]
+      },
+      "sound-on": {
+        "rendered_frames": [
+          0
+        ],
+        "physical_audio_open": [
+          0
+        ]
+      }
+    }
+  },
+  "suites": [
+    {
+      "name": "database",
+      "code": 1,
+      "seconds": 0.934242199989967,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\database.log",
+      "retry_passed": true,
+      "retry_report": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\database-v3\\report.json",
+      "retry_sha256": "c2cce60415aa2d92d0e29b5a681fdaaebbaf324f34bd4d6f837c235b47f921a3"
+    },
+    {
+      "name": "rng",
+      "code": 0,
+      "seconds": 2.815842700016219,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\rng.log"
+    },
+    {
+      "name": "simulation",
+      "code": 1,
+      "seconds": 1.3756908000214025,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\simulation.log",
+      "retry_passed": true,
+      "retry_report": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\simulation-v3\\report.json",
+      "retry_sha256": "16360dd2ee1faf0a15cc7145901ae6bef12fb425b1cef49f3ca61ddfcbd81402"
+    },
+    {
+      "name": "audio",
+      "code": 0,
+      "seconds": 4.7023259999696165,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\audio.log"
+    },
+    {
+      "name": "virtual-audio",
+      "code": 0,
+      "seconds": 5.633176899980754,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\virtual-audio.log"
+    },
+    {
+      "name": "virtual-clock",
+      "code": 0,
+      "seconds": 2.1084849999751896,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\virtual-clock.log"
+    },
+    {
+      "name": "clock-rules",
+      "code": 0,
+      "seconds": 8.566898300021421,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\clock-rules.log"
+    },
+    {
+      "name": "pit-edges",
+      "code": 0,
+      "seconds": 0.8107348999474198,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\pit-edges.log"
+    },
+    {
+      "name": "internal-refresh",
+      "code": 0,
+      "seconds": 4.828170299995691,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\internal-refresh.log"
+    },
+    {
+      "name": "idle-yield",
+      "code": 0,
+      "seconds": 7.4231639000354335,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\idle-yield.log"
+    },
+    {
+      "name": "input-irq",
+      "code": 0,
+      "seconds": 2.5690321999718435,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\input-irq.log"
+    },
+    {
+      "name": "mouse-services",
+      "code": 0,
+      "seconds": 0.745983500033617,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\mouse-services.log"
+    },
+    {
+      "name": "vga",
+      "code": 0,
+      "seconds": 21.00639140000567,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\vga.log"
+    },
+    {
+      "name": "save",
+      "code": 1,
+      "seconds": 0.7533239999902435,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\save.log",
+      "retry_passed": true,
+      "retry_report": "build\\workers\\audio-backend\\sv\\report.json",
+      "retry_sha256": "912305fd44f0244762aa5e1aaf3d2bf24e4a1b84dadba60d0672868be5237e57"
+    },
+    {
+      "name": "load",
+      "code": 1,
+      "seconds": 0.7705655000172555,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\load.log",
+      "retry_passed": true,
+      "retry_report": "build\\workers\\audio-backend\\ld\\report.json",
+      "retry_sha256": "544722f3cacb368e1c6c7ee487bc095f063b098627171d707dfb29e6bcdae3b0"
+    },
+    {
+      "name": "diagnostics",
+      "code": 1,
+      "seconds": 0.7466763000120409,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\diagnostics.log"
+    },
+    {
+      "name": "windows",
+      "code": 0,
+      "seconds": 209.30864830000792,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\windows.log"
+    },
+    {
+      "name": "modern",
+      "code": 0,
+      "seconds": 289.42691330000525,
+      "log": "build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\port-suites\\modern.log"
+    }
+  ],
+  "audio_suite": "build/workers/audio-backend/audio-verified/result.txt",
+  "acceptance_unit_controls": 48,
+  "wav": {
+    "reference": "D:\\Prog\\simant_recon\\build\\reference\\sound-on-identity-v1\\quick-game\\original\\capture\\observer.txt.content",
+    "reference_sha256": "6dc3d33911547ca4836998fe9d6106e14a4f6ac33e1c810e430a41a64a11431a",
+    "tables_sha256": "0de04833e7d73b349559dff5b31419a77b1fb6ad8cfcd7e0fe2b79d85b40f1f0",
+    "old_revision": "662b078cf7f06dc93abd62122422994410c24b57",
+    "old_source_sha256": "1463b954f4baaec0b034bdf8b5a3daed79269351d2e1f91bba28c7a60ee30e75",
+    "new_source_sha256": "e42a1db35a109245775d948134c99c3d99061b77964bbec30e61deb6aa67d7d5",
+    "cases": [
+      {
+        "case": "title",
+        "begin_ns": 0,
+        "duration_ns": 4000000000,
+        "frames": 192000,
+        "equal": true,
+        "max_absolute_difference": 0,
+        "rms_old": 336.6496231014896,
+        "rms_new": 336.6496231014896,
+        "rms_error": 0.0,
+        "spectrum_relative_l2": 0.0,
+        "peak_hz": [
+          255.75,
+          255.75
+        ]
+      },
+      {
+        "case": "effect",
+        "begin_ns": 164438000000,
+        "duration_ns": 4000000000,
+        "frames": 192000,
+        "equal": true,
+        "max_absolute_difference": 0,
+        "rms_old": 4363.888428760142,
+        "rms_new": 4363.888428760142,
+        "rms_error": 0.0,
+        "spectrum_relative_l2": 0.0,
+        "peak_hz": [
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "no_ear_test": true
+  },
+  "cpu": {
+    "recipe": "25 s windowed Full Game, mode 6, seed 0; one-core CPU over sampled play interval starting at 12 s",
+    "old": {
+      "command": [
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\old-tree\\build\\workers\\audio-backend\\portable\\simant-canonical.exe",
+        "--assets",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\cpu-old-controlled\\a",
+        "--seed",
+        "0",
+        "--smoke-ms",
+        "25000",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt"
+      ],
+      "code": 0,
+      "wall_seconds": 25.519582099979743,
+      "cpu_seconds": 1.34375,
+      "play_one_core_percent": 3.723103025881237,
+      "samples": [
+        [
+          5.999987479299307e-06,
+          0.0
+        ],
+        [
+          0.5001266999752261,
+          0.40625
+        ],
+        [
+          1.0006212000153027,
+          0.421875
+        ],
+        [
+          1.5011169000063092,
+          0.4375
+        ],
+        [
+          2.0015477999695577,
+          0.453125
+        ],
+        [
+          2.501626799989026,
+          0.453125
+        ],
+        [
+          3.0020594999659806,
+          0.484375
+        ],
+        [
+          3.5026030999724753,
+          0.484375
+        ],
+        [
+          4.003018699993845,
+          0.515625
+        ],
+        [
+          4.503118499997072,
+          0.515625
+        ],
+        [
+          5.003592900000513,
+          0.546875
+        ],
+        [
+          5.504136500007007,
+          0.5625
+        ],
+        [
+          6.004610400006641,
+          0.5625
+        ],
+        [
+          6.505142199981492,
+          0.609375
+        ],
+        [
+          7.005603300000075,
+          0.609375
+        ],
+        [
+          7.506099699996412,
+          0.625
+        ],
+        [
+          8.00643890001811,
+          0.640625
+        ],
+        [
+          8.506655099976342,
+          0.640625
+        ],
+        [
+          9.00706590001937,
+          0.640625
+        ],
+        [
+          9.507631300017238,
+          0.671875
+        ],
+        [
+          10.00805639999453,
+          0.71875
+        ],
+        [
+          10.508330899989232,
+          0.734375
+        ],
+        [
+          11.008621099987067,
+          0.734375
+        ],
+        [
+          11.508987599983811,
+          0.78125
+        ],
+        [
+          12.009129700018093,
+          0.8125
+        ],
+        [
+          12.50936929997988,
+          0.8125
+        ],
+        [
+          13.009637399984058,
+          0.828125
+        ],
+        [
+          13.509944499994162,
+          0.828125
+        ],
+        [
+          14.010212900000624,
+          0.84375
+        ],
+        [
+          14.51060789998155,
+          0.84375
+        ],
+        [
+          15.011312799993902,
+          0.890625
+        ],
+        [
+          15.511512500001118,
+          0.890625
+        ],
+        [
+          16.01185810001334,
+          0.90625
+        ],
+        [
+          16.51242539996747,
+          0.9375
+        ],
+        [
+          17.01289660000475,
+          0.953125
+        ],
+        [
+          17.513177999993786,
+          0.96875
+        ],
+        [
+          18.013651799992658,
+          1.0
+        ],
+        [
+          18.514150300004985,
+          1.046875
+        ],
+        [
+          19.014670600008685,
+          1.078125
+        ],
+        [
+          19.515228600008413,
+          1.109375
+        ],
+        [
+          20.015596900018863,
+          1.109375
+        ],
+        [
+          20.516109300020617,
+          1.109375
+        ],
+        [
+          21.016276200010907,
+          1.125
+        ],
+        [
+          21.516758400015533,
+          1.15625
+        ],
+        [
+          22.017093700007536,
+          1.15625
+        ],
+        [
+          22.517334999982268,
+          1.171875
+        ],
+        [
+          23.017721500014886,
+          1.171875
+        ],
+        [
+          23.51818909996655,
+          1.1875
+        ],
+        [
+          24.018313799984753,
+          1.234375
+        ],
+        [
+          24.518614700005855,
+          1.265625
+        ],
+        [
+          25.019110799999908,
+          1.296875
+        ]
+      ]
+    },
+    "new": {
+      "command": [
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\tree\\build\\workers\\audio-backend\\portable\\simant-canonical.exe",
+        "--assets",
+        "D:\\Prog\\simant_recon\\build\\workers\\audio-backend\\cpu-new-controlled\\a",
+        "--seed",
+        "0",
+        "--smoke-ms",
+        "25000",
+        "--input-script",
+        "D:\\Prog\\simant_recon\\portable\\tests\\runtime\\full-game-vga.txt"
+      ],
+      "code": 0,
+      "wall_seconds": 25.521327099995688,
+      "cpu_seconds": 1.109375,
+      "play_one_core_percent": 2.4017202619157105,
+      "samples": [
+        [
+          4.399975296109915e-06,
+          0.0
+        ],
+        [
+          0.5002985000028275,
+          0.375
+        ],
+        [
+          1.0008109000045806,
+          0.375
+        ],
+        [
+          1.501168399991002,
+          0.421875
+        ],
+        [
+          2.001529600005597,
+          0.4375
+        ],
+        [
+          2.502000999986194,
+          0.453125
+        ],
+        [
+          3.0024980999878608,
+          0.484375
+        ],
+        [
+          3.5029786999803036,
+          0.484375
+        ],
+        [
+          4.003342300013173,
+          0.5
+        ],
+        [
+          4.503700900007971,
+          0.5
+        ],
+        [
+          5.003980699984822,
+          0.515625
+        ],
+        [
+          5.5043816000106744,
+          0.515625
+        ],
+        [
+          6.004480200004764,
+          0.5625
+        ],
+        [
+          6.504988999979105,
+          0.59375
+        ],
+        [
+          7.0052502999897115,
+          0.609375
+        ],
+        [
+          7.505765400012024,
+          0.625
+        ],
+        [
+          8.005993600003421,
+          0.640625
+        ],
+        [
+          8.506481599994004,
+          0.65625
+        ],
+        [
+          9.006991199974436,
+          0.671875
+        ],
+        [
+          9.50749899999937,
+          0.671875
+        ],
+        [
+          10.007993699982762,
+          0.6875
+        ],
+        [
+          10.508492599998135,
+          0.71875
+        ],
+        [
+          11.008710599970073,
+          0.71875
+        ],
+        [
+          11.508994999981951,
+          0.75
+        ],
+        [
+          12.009497999970336,
+          0.765625
+        ],
+        [
+          12.509819199971389,
+          0.765625
+        ],
+        [
+          13.009984400006942,
+          0.765625
+        ],
+        [
+          13.510503299999982,
+          0.796875
+        ],
+        [
+          14.010921599983703,
+          0.796875
+        ],
+        [
+          14.511498600011691,
+          0.828125
+        ],
+        [
+          15.011990599974524,
+          0.84375
+        ],
+        [
+          15.512492800015025,
+          0.84375
+        ],
+        [
+          16.01298900000984,
+          0.84375
+        ],
+        [
+          16.513491299992893,
+          0.84375
+        ],
+        [
+          17.013997800007928,
+          0.84375
+        ],
+        [
+          17.51448499999242,
+          0.859375
+        ],
+        [
+          18.01482819998637,
+          0.875
+        ],
+        [
+          18.515365400002338,
+          0.890625
+        ],
+        [
+          19.015904499974567,
+          0.921875
+        ],
+        [
+          19.516327199991792,
+          0.9375
+        ],
+        [
+          20.01646030001575,
+          0.953125
+        ],
+        [
+          20.516837599978317,
+          0.953125
+        ],
+        [
+          21.017337400000542,
+          0.953125
+        ],
+        [
+          21.517875600024126,
+          0.96875
+        ],
+        [
+          22.01835879997816,
+          0.96875
+        ],
+        [
+          22.51886630000081,
+          0.96875
+        ],
+        [
+          23.019437799986918,
+          1.0
+        ],
+        [
+          23.51993259997107,
+          1.046875
+        ],
+        [
+          24.020347599987872,
+          1.0625
+        ],
+        [
+          24.52086180000333,
+          1.078125
+        ],
+        [
+          25.02100499998778,
+          1.078125
+        ]
+      ]
+    },
+    "non_audio_build_inputs_equal": true,
+    "build_input_differences": [
+      "portable/audio/native_renderer.cpp",
+      "portable/audio/native_renderer.h",
+      "portable/platform/sdl3/whole_audio_provider.c",
+      "portable/platform/sdl3/whole_audio_startup.c",
+      "portable/platform.json",
+      "portable/whole_program/platform/audio.h",
+      "portable/whole_program/platform/audio_native.c",
+      "portable/whole_program/platform/audio_native.h",
+      "portable/whole_program/platform/whole_audio_provider.c",
+      "portable/whole_program/platform/whole_audio_provider.h"
+    ],
+    "pacing": {
+      "old": {
+        "audio_pumps": 50637,
+        "audio_rendered_frames": 1200000,
+        "game_paused": 0,
+        "outer_loops": 86,
+        "audio_block_frames": 480,
+        "audio_queue_calls": 2500,
+        "audio_queued_frames": 1200000,
+        "audio_underruns": 0,
+        "audio_missing_bytes": 0,
+        "audio_requests": 2469,
+        "audio_pending_frames": 0,
+        "audio_queue_frames": 16800,
+        "audio_submission_ns": 2593200
+      },
+      "new": {
+        "audio_pumps": 54516,
+        "audio_rendered_frames": 1200000,
+        "game_paused": 0,
+        "outer_loops": 86,
+        "audio_block_frames": 480,
+        "audio_queue_calls": 2500,
+        "audio_queued_frames": 1200000,
+        "audio_underruns": 0,
+        "audio_missing_bytes": 0,
+        "audio_requests": 2472,
+        "audio_pending_frames": 0,
+        "audio_queue_frames": 15360,
+        "audio_submission_ns": 2928800
+      }
+    },
+    "queue_latency_ms": {
+      "old": 350.0,
+      "new": 320.0
+    },
+    "limitation": "Single bounded pair, no physical end-to-end or ear test; nominal four-period priming is smaller than actual startup/catch-up queue."
+  },
+  "live_drift_since_isolated_build": [
+    "portable/whole_program/application.c",
+    "portable/whole_program/platform/directory.c",
+    "portable/whole_program/platform/dos_io.c",
+    "portable/whole_program/platform/sdl3/diagnostics.c",
+    "portable/whole_program/platform/whole_audio_provider.c"
+  ],
+  "limitations": [
+    "Diagnostics suite cannot create desktop per-user files outside writable workspace; failed, not waived.",
+    "Concurrent desktop edits prevent claiming that the accepted snapshot is the latest live integration.",
+    "Old native raw OUT independence is deliberately replaced by full source payload/position/volume content plus independent renderer controls.",
+    "No shipped looping voice, physical analogue/CPU-IRQ equivalence or ear test is claimed."
+  ],
+  "reconstruction_gate": {
+    "command": "python tools/validate.py",
+    "isolated": true,
+    "code": 0,
+    "validation": "PASS",
+    "progress_sha256": "4ea14c1710fd5dfe20640b94db26acb397d2f59fbe61fd5d23e3b99c23d6e38a",
+    "verdicts": {
+      "code": {
+        "verdict": "NOT EQUAL",
+        "detail": "1638 of 1644 game functions exact; 6 not exact",
+        "proves": "each exact function's bytes, fixups and relocations, compiled from the current source by the pinned tools in its whole module",
+        "excludes": "where the linker places the module; functions listed as not exact"
+      },
+      "data": {
+        "verdict": "NOT EQUAL",
+        "detail": "113900 initialised bytes exact; 73 storage units of our own; uninitialised far data sizes unverified for 14928 of 19408 bytes; 113 bytes unresolved",
+        "proves": "the bytes and relocations of every accepted initialised data placement",
+        "excludes": "owning file, type and size of data without an accepted placement; meaning of opaque bytes"
+      },
+      "layout": {
+        "verdict": "NOT REPRODUCED",
+        "detail": "the working DOS build orders data its own way; no link from this source reproduces the original placement",
+        "proves": "nothing yet beyond the per-module placements checked under code and data",
+        "excludes": "segment order, communal placement, overlay structure, relocation table order"
+      },
+      "whole_executable": {
+        "verdict": "NOT BUILT",
+        "detail": "the 1991 RTLink/Plus release is missing; its 17001-byte overlay manager is not reproduced",
+        "proves": "nothing",
+        "excludes": "everything about the image as a file"
+      },
+      "not_rebuilt_from_source": [
+        "90 members of the pinned Microsoft C 6.00 runtime libraries (12339 code bytes, 2021 data bytes), linked from those libraries as the original was",
+        "the linker's overlay manager and vector table"
+      ]
+    }
+  },
+  "isolated_repository_audit": {
+    "schema": "simant-repository-guard-report-v1",
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "issue_count": 0,
+      "live_blockers": 9,
+      "retained_file_roles": {}
+    }
+  },
+  "live_repository_audit": {
+    "schema": "simant-repository-guard-report-v1",
+    "passed": true,
+    "issues": [],
+    "summary": {
+      "issue_count": 0,
+      "live_blockers": 9,
+      "retained_file_roles": {
+        "inventory/workflow": 466,
+        "Pinned DOS acceptance scenarios and emulated-time input scripts": 33,
+        "Reviewed proof, toolchain facts or explicit unresolved investigation": 426,
+        "Shared C headers of the canonical source, pinned in the C compiler profiles (layout/toolchain.json include_files) and included where each module defined the declarations": 21,
+        "Locked historical metadata/current proof and architecture policy": 6,
+        "Pinned BSD-licensed OPL emulator and redistribution provenance": 2,
+        "Parse-only C frontend declarations; never native runtime includes": 14,
+        "Pinned GCC LTO pre-existing declaration mismatch signatures consumed by portable/build.py": 1,
+        "Pinned native BIOS font resources": 8,
+        "Reviewed canonical DOS cross-owner storage contracts consumed by portable/build.py": 1,
+        "Current native differential/runtime fixtures": 160,
+        "Permanent filesystem/handle service controls": 14,
+        "Permanent acceptance/negative controls": 53,
+        "Reconstruction workflow and diagnostics (CLI or imported helper)": 52
+      }
+    }
+  }
+}

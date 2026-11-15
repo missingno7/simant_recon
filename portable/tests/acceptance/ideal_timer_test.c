@@ -19,7 +19,7 @@ int main(void) {
     assert(device_baseline_main(1,NULL)==0);
     PortableWholeAudioProvider p;
     assert(portable_whole_audio_provider_init(&p));
-    PortableWholeAudioHost host={&p,configure,start,stop,out,in,enable};
+    PortableWholeAudioHost host={&p,configure,start,stop,opl_event,enable_samples,enable,NULL};
     assert(portable_whole_audio_bind(&host));
     memset(snd_sample_channel_records,0,sizeof(snd_sample_channel_records));
     p.timer_observer=observe;writes=0;

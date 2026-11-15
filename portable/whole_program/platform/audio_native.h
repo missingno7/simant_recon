@@ -6,9 +6,10 @@ typedef struct PortableWholeAudioHost {
     void (*configure_timer)(void *, uint16_t, uint16_t, unsigned);
     void (*start_timer)(void *);
     void (*stop_timer)(void *);
-    void (*out8)(void *, uint16_t, uint8_t);
-    uint8_t (*in8)(void *, uint16_t);
+    void (*opl_register)(void *, uint8_t, uint8_t);
+    void (*sample_enable)(void *, int);
     void (*enable_interrupts)(void *);
+    void (*synchronize)(void *);
 } PortableWholeAudioHost;
 int portable_whole_audio_bind(const PortableWholeAudioHost *host);
 void portable_whole_audio_unbind(void);

@@ -3,7 +3,8 @@
 Coordinates are fast PIT periods (slow IRQ=16, fast/rejected IRQ=1). S observes
 completed voice setup (not the audible start); P observes each contribution at the
 two-channel mix instruction. Payloads are decoded resource bytes, never replay
-inputs. Raw OUT streams remain independently retained.
+inputs. DOS raw OUT is independently retained; native OUT is a source-event
+projection for historical gameplay diagnostics, not an independent DAC.
 """
 import hashlib
 import json
@@ -244,7 +245,8 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
                        if e['entry'] <= entries and e['kind'] == 'dsp_command' and e['command'] == 16
                        and not e.get('incomplete')]
                 if dac != [v for tick, v in captures[label]['mixed']]:
-                    raise ValueError('Observed channel contributions do not reproduce actual DAC bytes')
+                    raise ValueError('Observed channel contributions do not reproduce '+
+                                     ('actual DOS DAC bytes' if label=='dos' else 'native source-emission diagnostics'))
         except (OSError, ValueError) as error:
             errors[label] = str(error)
     if playback and playback_tolerance_ns is not None:
@@ -253,7 +255,8 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
     result = dict(contract='audio-content-v1', tick_tolerance=tolerance,
                   tick_units='fast PIT periods (214/1193181.667 seconds); slow IRQ=16',
                   status='AUDIO_INCOMPLETE', first_difference=None, capture_errors=errors,
-                  replay_complete=bool(replay_complete), entries_compared=0)
+                  replay_complete=bool(replay_complete), entries_compared=0,
+                  emission_observation=dict(dos='actual DAC bytes',native='decoded payload/position/attenuation at source emission; OUT projection is diagnostic'))
     differences = []
     maximum = dict(opl=0, start=0, stop=0, output=0, progress=0)
     setup_drift=0

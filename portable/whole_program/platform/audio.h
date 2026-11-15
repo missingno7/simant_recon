@@ -13,9 +13,9 @@ void dos_audio_host_out8(uint16_t port, uint8_t value);
 void dos_audio_host_out16(uint16_t port, uint16_t value);
 uint8_t dos_audio_host_in8(uint16_t port);
 
-/* Host BIOS/memory capabilities consumed by the converted legacy device
- * predicates. Providers must report the queried host state; they must not
- * claim a device is present when the query is unavailable. Far pointers are
+/* Host BIOS/memory capabilities consumed by converted legacy device
+ * predicates. The native mode-6 adapter exposes a fixed source capability
+ * profile, not a physical ISA card. Other profiles fail explicitly. Far pointers are
  * supplied as the original real-mode segment:offset pair for provenance and
  * mapping by the selected host. */
 uint16_t dos_audio_host_bios_int1a_8100(void);

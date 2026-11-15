@@ -48,6 +48,8 @@ static void *previous_log_data;
 static int debug_mode, capture_pending;
 static unsigned capture_number;
 static uint64_t start_ns;
+static volatile LONG storage_warning;
+static int storage_warning_shown;
 /* One producer (the application input thread). Crash writer reads only published
  * slots; it never takes a lock that could have been held by the faulting thread. */
 static struct { volatile LONG serial; char text[LINE_CAP]; } recent[RECENT];
@@ -57,8 +59,9 @@ static const char *const boundaries[] = {"startup", "dos_game_main", "applicatio
 static void write_text(HANDLE file, const char *text)
 {
     DWORD written;
-    if (file != INVALID_HANDLE_VALUE)
-        WriteFile(file, text, (DWORD)strlen(text), &written, NULL);
+    if (file != INVALID_HANDLE_VALUE &&
+        (!WriteFile(file, text, (DWORD)strlen(text), &written, NULL) || written != strlen(text)))
+        InterlockedExchange(&storage_warning, 1);
 }
 static void write_format(HANDLE file, const char *format, ...)
 {
@@ -241,13 +244,14 @@ void simant_diagnostics_init(int debug, const char *root_override)
     debug_mode = debug;
     if (root_override) {
         if (!make_session(root_override)) goto unavailable;
-    } else if (!base || !child(root,base,"diagnostics") || !make_session(root)) {
+    } else {
         pref = SDL_GetPrefPath("SimAnt","SDL3");
-        if (!pref || !make_session(pref)) { SDL_free(pref); goto unavailable; }
+        if (!pref || !child(root,pref,"diagnostics") || !make_session(root)) { SDL_free(pref); goto unavailable; }
         SDL_free(pref);
     }
     GetModuleFileNameA(NULL,executable,sizeof(executable));
     log_file = create_file("session.log");
+    if (log_file == INVALID_HANDLE_VALUE) InterlockedExchange(&storage_warning, 1);
     write_format(log_file,"SimAnt SDL3 diagnostics\r\nbuild_revision=%s\r\ncommand_line=%s\r\nexecutable=%s\r\ndebug=%d\r\n",
         SIMANT_BUILD_REVISION,GetCommandLineA(),executable,debug);
     /* The final executable's hash cannot be embedded into itself. The builder
@@ -283,6 +287,7 @@ void simant_diagnostics_init(int debug, const char *root_override)
     return;
 unavailable:
     directory[0]=0;
+    InterlockedExchange(&storage_warning, 1);
     fprintf(stderr,"SimAnt diagnostics directory could not be created: %s\n",SDL_GetError());
 }
 void simant_diagnostics_launch(const char *assets, uint32_t seed)
@@ -352,7 +357,7 @@ int simant_diagnostics_event(void *unused, const SDL_Event *event)
         snprintf(line,sizeof(line),"%llu resize@%04X %d %d",(unsigned long long)ms,(unsigned)(uint16_t)window,
             (int)event->window.data1/native_windows_scale(),(int)event->window.data2/native_windows_scale());
     else if (event->type==SDL_EVENT_QUIT)
-        snprintf(line,sizeof(line),"%llu exit",(unsigned long long)ms);
+        snprintf(line,sizeof(line),"%llu quit",(unsigned long long)ms);
     if (line[0]) {
         sequence=InterlockedCompareExchange(&input_count,0,0);
         InterlockedExchange(&recent[sequence%RECENT].serial,0);
@@ -374,6 +379,13 @@ void simant_diagnostics_capture(Host *host, long loops)
     int width,height,okay=0;
     FILE *file;
     unsigned i;
+    if (!storage_warning_shown && InterlockedCompareExchange(&storage_warning,0,0)) {
+        storage_warning_shown=1;
+        const char *message="SimAnt could not write its diagnostic log. Check the diagnostics directory permissions and free disk space.";
+        fprintf(stderr,"%s\n",message);
+        if (SDL_GetCurrentVideoDriver() && strcmp(SDL_GetCurrentVideoDriver(),"dummy"))
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING,"SimAnt diagnostics",message,host_sdl_window(host));
+    }
     if (!capture_pending || !directory[0]) return;
     capture_pending=0;
     if (!host_get_logical_size(host,&width,&height) || !host_presented_palette(host,&palette)) return;

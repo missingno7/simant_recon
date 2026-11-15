@@ -99,7 +99,7 @@ def main():
         print(f'{path.stem}/{target}: {audio["status"]} first={audio["first_difference"]} {result["seconds"]:.2f}s',flush=True)
         return result
     with ThreadPoolExecutor(max_workers=a.jobs) as pool:results=list(pool.map(work,jobs))
-    receipt=dict(contract='audio-playback-v1',wall_seconds=time.perf_counter()-started,observer_build_seconds=build_seconds,
+    receipt=dict(contract='audio-playback-v1',native_emission='source decoded payload, position and attenuation; projected historical OUT; independent renderer/WAV controls',wall_seconds=time.perf_counter()-started,observer_build_seconds=build_seconds,
         lanes=results,configuration_sha256=sha(ROOT/'assets/SIMANT.CFG'))
     (a.out/'playback-results.json').write_text(json.dumps(receipt,indent=2)+'\n')
     return int(any(r['status']!='AUDIO_EQUAL' or r['state']!='STATE_EQUAL' or r['frames']!='FRAME_EQUAL' or r['raw_audio']!='AUDIO_COMMANDS_EQUAL' for r in results))

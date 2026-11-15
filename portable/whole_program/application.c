@@ -9,7 +9,9 @@
 #include "platform/native_video_profile.h"
 #include "platform/handles.h"
 #include "platform/dos_io.h"
+#include "platform/desktop_files.h"
 #include "platform/seed_source.h"
+#include "platform/m1b73_event_enqueue.h"
 #include "platform/sdl3/m1b73_application_input.h"
 #include "platform/sdl3/host_modes.h"
 #include "platform/sdl3/diagnostics.h"
@@ -32,13 +34,14 @@
 #include <SDL3/SDL.h>
 
 extern void dos_game_main(int16_t argc, char **argv);
+extern int16_t GamePaused;
 
 typedef struct ReplayKey {
     uint64_t milliseconds;
     SDL_Keycode key;
     int down;
     HostEvent pointer;
-    int checkpoint, quit;
+    int checkpoint, quit, quit_request;
     int close, resize_w, resize_h; /* close@ID, resize@ID W H */
     int native_w, native_h;        /* size@ID W H: the native client, as the user sizes it */
     int wheel_x, wheel_y, wheel;   /* wheel@ID X Y STEPS */
@@ -67,12 +70,16 @@ typedef struct Application {
     SDL_Keymod replay_modifiers;
     int test_input;
     int replay_tick_units;
+    int replay_host_units;
+    uint64_t started_wall_ns;
     uint32_t started_bios_ticks;
     int headless_unpaced;
     uint64_t presentations, omitted_presentations;
     uint64_t idle_calls;
     uint64_t presentation_checks, presentation_work_ns;
     uint64_t last_submission_ns, minimum_submission_gap_ns;
+    uint64_t launch_wall_ns;
+    long last_quit_iteration;
 } Application;
 static Application app;
 static void write_pacing_stats(uint64_t checkpoint);
@@ -90,9 +97,12 @@ void portable_native_performance(FILE *f)
     fprintf(f, "\"minimum_submission_gap_ns\":%llu,",
         (unsigned long long)app.minimum_submission_gap_ns);
     fprintf(f, "\"game_speed\":%d,", (int)GameSpeed.words[0]);
+    fprintf(f, "\"game_paused\":%d,\"outer_loops\":%ld,", (int)GamePaused, (long)main_iteration_count);
 }
 static int exit_status;
 static const char *exit_reason = "source main returned";
+static int interactive_errors = 1;
+static int application_event(void *context, const SDL_Event *event);
 extern void __real_exit(int status) __attribute__((noreturn));
 /* Observe all CRT exit calls, including canonical Punt paths, before atexit.
  * Linker wrapping changes no game decision or status. */
@@ -152,6 +162,9 @@ static void fail(const char *where)
 {
     exit_reason = where;
     fprintf(stderr, "SimAnt native boundary failed: %s\n", where);
+    simant_diagnostics_note("error", where);
+    if (interactive_errors)
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SimAnt could not continue", where, app.host ? host_sdl_window(app.host) : NULL);
     exit(70);
 }
 static void runtime_child(char *out, size_t capacity,
@@ -185,6 +198,10 @@ static void load_replay(const char *path)
         if (!strncmp(line, "# clock: bios-ticks", 19)) {
             if (app.replay_count) fail("replay clock directive after input");
             app.replay_tick_units = 1;
+        }
+        if (!strncmp(line, "# clock: host-ms", 16)) {
+            if (app.replay_count || app.replay_tick_units) fail("replay clock directive after input");
+            app.replay_host_units = 1;
         }
         if (line[0] == '#' || line[0] == '\n' || line[0] == '\r') continue;
         if (sscanf(line, "%llu %15s", &milliseconds, operation) != 2) {
@@ -265,6 +282,7 @@ static void load_replay(const char *path)
                 fail("wheel replay syntax");
         } else if (!strcmp(operation, "checkpoint")) entry->checkpoint = 1;
         else if (!strcmp(operation, "exit")) entry->quit = 1;
+        else if (!strcmp(operation, "quit")) entry->quit_request = 1;
         else fail("input replay operation");
         if (entry->pointer.kind) {
             if (x < INT16_MIN || x > INT16_MAX || y < INT16_MIN || y > INT16_MAX)
@@ -282,7 +300,7 @@ static void load_replay(const char *path)
 static void replay_input(uint64_t now)
 {
     simant_diagnostics_progress("replay_input", app.replay_next, (long)main_iteration_count);
-    uint64_t elapsed = app.replay_tick_units ?
+    uint64_t elapsed = app.replay_host_units ? (SDL_GetTicksNS() - app.started_wall_ns) / 1000000u : app.replay_tick_units ?
         (uint32_t)(sim_timing_tick_count(&app.bios_clock) - app.started_bios_ticks) :
         (now - app.started_ns) / 1000000u;
     while (app.replay_next < app.replay_count &&
@@ -298,6 +316,13 @@ static void replay_input(uint64_t now)
             continue;
         }
         if (entry->quit) { exit_reason = "input replay exit"; exit(0); }
+        if (entry->quit_request) {
+            event.type = SDL_EVENT_QUIT;
+            event.common.timestamp = HOST_REPLAY_EVENT_TIMESTAMP;
+            if (!SDL_PushEvent(&event)) fail("SDL quit request replay enqueue");
+            ++app.replay_next;
+            continue;
+        }
         if (entry->menu) {
             if (!native_menu_command(entry->menu)) fail("replay menu command");
             fprintf(stderr, "Replay menu command %zu: %llu ms %04X\n", app.replay_next,
@@ -500,6 +525,7 @@ static void cleanup(void)
     if (portable_whole_audio_timer_armed()) snd_restore_bios_timer(0);
     portable_sdl3_whole_audio_unbind_source_services();
     portable_sdl3_whole_audio_close(&app.audio);
+    native_windows_shutdown();
     sim_native_video_startup_unbind();
     portable_source_graphics_resources_destroy(&app.resources);
     sim_graphics_destroy(&app.graphics);
@@ -511,8 +537,26 @@ static void cleanup(void)
 static void request_quit(void *context)
 {
     (void)context;
+    if (main_iteration_count) {
+        if (app.last_quit_iteration == main_iteration_count) return;
+        app.last_quit_iteration = main_iteration_count;
+        /* The OS close button is another File > Quit input. Never call
+         * MenuQuit recursively from a hardware poll or mutate its dirty flag. */
+        portable_m1b73_event_enqueue_four_word_command((int16_t)0xfd08u, 0, 0, 0, 0);
+        simant_diagnostics_note("close_request", "queued File > Quit; finish current game dialog first");
+        return;
+    }
     exit_reason = "window closed";
     exit(0); /* Native window close; atexit releases borrowed bindings first. */
+}
+static int application_event(void *context, const SDL_Event *event)
+{
+    if (event->type == SDL_EVENT_QUIT && main_iteration_count) {
+        simant_diagnostics_event(context, event);
+        request_quit(context);
+        return 1; /* A request is not a disconnected BIOS keyboard. */
+    }
+    return simant_diagnostics_event(context, event);
 }
 static int source_timer_active;
 static int advance_audio_devices(void *context)
@@ -665,6 +709,12 @@ static void idle(void *context)
                 } else {
                     if (portable_m1b73_sdl_application_input_present(&a->input) !=
                             PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
+                    if (!a->presentations) {
+                        char elapsed[64];
+                        snprintf(elapsed, sizeof(elapsed), "%.3f", (SDL_GetTicksNS() - a->launch_wall_ns) / 1000000.0);
+                        simant_diagnostics_note("first_frame_ms_from_main", elapsed);
+                        fprintf(stderr, "First source frame presented: %s ms from main\n", elapsed);
+                    }
                     ++a->presentations;
                     if (physical && a->last_submission_ns) {
                         uint64_t gap = present_now - a->last_submission_ns;
@@ -705,8 +755,10 @@ static void idle(void *context)
 
 int main(int argc, char **argv)
 {
+    app.launch_wall_ns = SDL_GetTicksNS();
     char runtime_assets[MAX_PATH];
     char runtime_fonts[MAX_PATH];
+    char user_volume[2048], file_error[3072];
     const char *assets = runtime_assets, *fonts = runtime_fonts;
     int source_argc = 1, i;
     int headless = 0;
@@ -721,10 +773,13 @@ int main(int argc, char **argv)
     unsigned hosted_count = 0;
     int window_scale = 2; /* --scale N: one scale for every window */
     const char *diagnostics_root = NULL;
+    const char *user_root = NULL;
+    int in_place = 0;
     setvbuf(stderr, NULL, _IONBF, 0);
     SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX);
     /* Establish crash capture before resource paths, SDL startup or game code. */
     for (i = 1; i < argc; ++i) {
+        if (!strcmp(argv[i], "--headless")) interactive_errors = 0;
         if (!strcmp(argv[i], "--debug")) debug = 1;
         else if (!strncmp(argv[i], "--diagnostics-dir=", 18)) diagnostics_root = argv[i] + 18;
     }
@@ -805,7 +860,9 @@ int main(int argc, char **argv)
             if (!_fullpath(replay_path, argv[++i], sizeof(replay_path)))
                 fail("input replay path");
         }
-        else if (!strcmp(argv[i], "--assets") && i + 1 < argc) assets = argv[++i];
+        else if (!strcmp(argv[i], "--portable")) in_place = 1;
+        else if (!strcmp(argv[i], "--user-dir") && i + 1 < argc) user_root = argv[++i];
+        else if (!strcmp(argv[i], "--assets") && i + 1 < argc) { assets = argv[++i]; in_place = 1; }
         else if (!strcmp(argv[i], "--bios-fonts") && i + 1 < argc) fonts = argv[++i];
         else if (!strcmp(argv[i], "--seed") && i + 1 < argc) {
             app.seed = (uint32_t)strtoul(argv[++i], NULL, 0);
@@ -828,6 +885,10 @@ int main(int argc, char **argv)
      * its existing path. */
     app.headless_unpaced = headless && virtual_quantum_ns && !smoke_ms && !app.test_input;
     if (!explicit_seed) app.seed = 0; /* 046C:0000 RAM policy, not BIOS time. */
+    if (!simant_desktop_files(assets, in_place, user_root, user_volume, sizeof(user_volume),
+                             file_error, sizeof(file_error))) fail(file_error);
+    simant_diagnostics_note("resource_source", assets);
+    assets = user_volume;
     simant_diagnostics_launch(assets, app.seed);
     if (test_crash == 1) simant_diagnostics_test_crash();
     if (test_crash == 2) simant_diagnostics_test_thread_crash();
@@ -840,7 +901,7 @@ int main(int argc, char **argv)
     app.host = host_create("SimAnt", 1);
     if (!app.host) { fprintf(stderr, "%s\n", host_error()); exit_status = 70; exit_reason = "SDL host startup"; return 70; }
     if (!host_set_window_scale(app.host, window_scale)) fail("window scale");
-    host_set_event_observer(simant_diagnostics_event, NULL);
+    host_set_event_observer(application_event, NULL);
     fprintf(stderr, "Native video driver: %s\n", SDL_GetCurrentVideoDriver());
     if (replay_path[0]) load_replay(replay_path);
     if (sim_graphics_init(&app.graphics) != SIM_GRAPHICS_OK) fail("framebuffer");
@@ -875,6 +936,7 @@ int main(int argc, char **argv)
         fail("source audio services");
     if (dos_files_set_root(assets) < 0) fail("asset directory");
     app.started_ns = host_time_ns();
+    app.started_wall_ns = SDL_GetTicksNS();
     app.started_bios_ticks = sim_timing_tick_count(&app.bios_clock);
     simant_diagnostics_start(app.started_ns);
     if (smoke_ms) app.smoke_deadline_ns = app.started_ns + smoke_ms * 1000000u;

@@ -1,4 +1,7 @@
 #define WIN32_LEAN_AND_MEAN
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0602 /* Dynamic historical DST conversion; SDL3 targets newer Windows. */
+#endif
 #include <windows.h>
 
 #include "directory.h"
@@ -194,11 +197,12 @@ static int attributes_match(const WIN32_FIND_DATAA *data, uint16_t mask)
 static int pack_timestamp(const FILETIME *utc, uint16_t *dos_date,
                           uint16_t *dos_time)
 {
-    FILETIME local;
-    SYSTEMTIME st;
+    SYSTEMTIME utc_time, st;
     unsigned year;
-    if (!FileTimeToLocalFileTime(utc, &local) ||
-        !FileTimeToSystemTime(&local, &st))
+    /* FileTimeToLocalFileTime applies today's DST bias, so a summer save
+     * appears an hour early in winter. Use the timestamp's own transition. */
+    if (!FileTimeToSystemTime(utc, &utc_time) ||
+        !SystemTimeToTzSpecificLocalTimeEx(NULL, &utc_time, &st))
         return 0;
     year = st.wYear;
     if (year < 1980) {

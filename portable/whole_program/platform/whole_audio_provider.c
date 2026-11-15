@@ -1,10 +1,11 @@
-/* Readable hardware ISR projection of src/sound/sample_timer.asm. No private voice
- * copy: completion clears the same snd field consumed by canonical m295C. */
+/* Logical ISR projection of src/sound/sample_timer.asm. Completion clears the
+ * canonical snd field consumed by m295C; observed[] only caches event delivery.
+ * PCM and FM synthesis cannot update this source state or the PIT schedule. */
 #include "whole_audio_provider.h"
 #include "audio_native.h"
 #include "audio_state.h"
 #include "audio.h"
-#include "portable/audio/isa_devices.h"
+#include "portable/audio/native_renderer.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,12 +19,41 @@ int portable_whole_audio_isr_active(void) {
     return active_provider && active_provider->in_render;
 }
 int portable_whole_audio_provider_init(PortableWholeAudioProvider *p) {
-    memset(p,0,sizeof(*p));active_provider=p;p->mix_divider=16;p->devices=sim_isa_audio_create();
-    return p->devices!=NULL;
+    memset(p,0,sizeof(*p));active_provider=p;p->mix_divider=16;
+    return 1;
 }
 void portable_whole_audio_provider_close(PortableWholeAudioProvider *p) {
     if(active_provider==p) active_provider=NULL;
-    sim_isa_audio_destroy(p->devices);memset(p,0,sizeof(*p));
+    sim_audio_destroy(p->renderer);memset(p,0,sizeof(*p));
+}
+void portable_whole_audio_provider_set_rendering(PortableWholeAudioProvider *p,int enabled) {
+    if(enabled && !p->renderer) {
+        p->renderer=sim_audio_create(portable_canonical_volume_tables);
+        sim_audio_enable(p->renderer,p->time_ns,p->sample_enabled);
+        portable_whole_audio_provider_sync_samples(p,1);
+    } else if(!enabled && p->renderer) { sim_audio_destroy(p->renderer);p->renderer=NULL; }
+}
+void portable_whole_audio_provider_opl(PortableWholeAudioProvider *p,uint8_t reg,uint8_t value) {
+    if(p->renderer) sim_audio_opl(p->renderer,p->time_ns,reg,value);
+}
+void portable_whole_audio_provider_sample_enable(PortableWholeAudioProvider *p,int enabled) {
+    p->sample_enabled=enabled;
+    if(p->renderer) sim_audio_enable(p->renderer,p->time_ns,enabled);
+}
+void portable_whole_audio_provider_sync_samples(PortableWholeAudioProvider *p,int restart) {
+    if(!p->renderer) return;
+    for(unsigned ch=0;ch<p->channels;++ch) {
+        PortableWholeAudioRuntimeSample *c=&snd_sample_channel_records[ch],*old=&p->observed[ch];
+        if(c->snd && c->snd->data && *c->snd->data) {
+            if(restart || c->snd!=old->snd || c->step!=old->step || c->end!=old->end ||
+               c->start!=old->start || c->flags!=old->flags || (c->pos==0 && old->pos!=0)) {
+                SimAudioVoice v={(uint16_t)c->snd->object,c->snd->len,c->step,c->end,c->start,c->pos,
+                    c->frac,c->flags,(uint16_t)(c->voltab-snd_volume_table_offset)>>8,(uint8_t *)*c->snd->data};
+                sim_audio_voice_start(p->renderer,p->time_ns,ch,&v);
+            }
+        } else if(old->snd) sim_audio_voice_stop(p->renderer,p->time_ns,ch);
+        *old=*c;
+    }
 }
 void portable_whole_audio_provider_configure(PortableWholeAudioProvider *p,uint16_t divisor,uint16_t chain,unsigned channels) {
     p->divisor=divisor;p->chain=chain;p->channels=channels;
@@ -48,6 +78,7 @@ static int pit_output_low(const PortableWholeAudioProvider *p) {
     return remaining && remaining*2<=period;
 }
 void portable_whole_audio_provider_start(PortableWholeAudioProvider *p) {
+    portable_whole_audio_provider_sync_samples(p,1);
     /* m03CC reloads PIT0 and reinstalls the fast ISR on every sample start. */
     if(pit_output_low(p)) p->pending_irq=1;
     p->fast=1;p->armed=1;p->chain_remaining=1;
@@ -70,7 +101,7 @@ static void sequencer(void) {
 }
 static void interrupt(PortableWholeAudioProvider *p) {
     unsigned contributions[4]={128,128,128,128};
-    unsigned ch,sum=0;int active=0,skip=0;
+    unsigned ch;int active=0,skip=0;
     if(!p->fast) { sequencer();chain_timer(p);return; }
     for(ch=0;ch<p->channels;++ch) {
         PortableWholeAudioRuntimeSample *c=&snd_sample_channel_records[ch];
@@ -84,21 +115,30 @@ static void interrupt(PortableWholeAudioProvider *p) {
                 else c->snd=NULL;
                 skip=1;break; // L00C5 skips output and later channels only
             }
-            unsigned row=(uint16_t)(c->voltab-snd_volume_table_offset)>>8;
-            if(row>7) { fprintf(stderr,"Unsupported canonical volume table row %u\n",row);abort(); }
-            sample=portable_canonical_volume_tables[row*256+((uint8_t *)*c->snd->data)[c->pos]];
+            /* Payload/attenuation observation is optional. Production logical
+             * IRQ work only advances source state; the renderer mixes voices. */
+            if(portable_test_audio_mix) {
+                unsigned row=(uint16_t)(c->voltab-snd_volume_table_offset)>>8;
+                if(row>7) { fprintf(stderr,"Unsupported canonical volume table row %u\n",row);abort(); }
+                sample=portable_canonical_volume_tables[row*256+((uint8_t *)*c->snd->data)[c->pos]];
+            }
         }
-        contributions[ch]=sample;sum+=sample;
+        contributions[ch]=sample;
     }
     if(!skip) {
         if(portable_test_audio_mix && p->channels==2) portable_test_audio_mix(contributions[0],contributions[1]);
-        uint8_t mixed=(uint8_t)(sum/p->channels);
-        if(snd_sample_output_routine==snd_sb_output_pointer) {
-            while(dos_audio_host_in8((uint16_t)snd_sb_dsp_write_port)&0x80) {}
-            dos_audio_host_out8((uint16_t)snd_sb_dsp_write_port,0x10);
-            while(dos_audio_host_in8((uint16_t)snd_sb_dsp_write_port)&0x80) {}
-            dos_audio_host_out8((uint16_t)snd_sb_dsp_write_port,mixed);
-        } else { fprintf(stderr,"Unsupported canonical audio output selector (native device profile is Sound Blaster)\n");exit(70); }
+        if(snd_sample_output_routine!=snd_sb_output_pointer) { fprintf(stderr,"Unsupported canonical audio output selector (native profile is mode 6)\n");exit(70); }
+    }
+    if(p->renderer) {
+        uint16_t positions[4]={0};uint8_t volumes[4]={0};unsigned mask=0;
+        portable_whole_audio_provider_sync_samples(p,0);
+        for(ch=0;ch<p->channels;++ch) {
+            PortableWholeAudioRuntimeSample *c=&snd_sample_channel_records[ch];
+            positions[ch]=c->pos;volumes[ch]=(uint16_t)(c->voltab-snd_volume_table_offset)>>8;
+            if(c->snd && c->snd->data && *c->snd->data) mask|=1u<<ch;
+        }
+        sim_audio_positions(p->renderer,p->time_ns,p->channels,positions,volumes,mask);
+        if(!skip) sim_audio_commit(p->renderer,p->time_ns);
     }
     if(--p->mix_divider==0) { p->mix_divider=16;sequencer(); }
     /* STD marks at least one live sample. Original L0148 switches to slow
@@ -130,7 +170,11 @@ void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,in
     uint64_t target=(p->frame_cursor/48000)*UINT64_C(1000000000)+
                     (p->frame_cursor%48000)*UINT64_C(1000000000)/48000;
     portable_whole_audio_provider_advance(p,target);
-    p->in_render=1;sim_isa_audio_render(p->devices,stereo,target);p->in_render=0;
+    portable_whole_audio_provider_render(p,stereo,1,p->frame_cursor);
+}
+void portable_whole_audio_provider_render(PortableWholeAudioProvider *p,int16_t *pcm,size_t count,uint64_t first) {
+    if(p->renderer) sim_audio_render(p->renderer,pcm,count,first);
+    else memset(pcm,0,count*2*sizeof(*pcm));
 }
 void portable_whole_audio_provider_advance(PortableWholeAudioProvider *p,uint64_t target) {
     if(target<p->time_ns) return;

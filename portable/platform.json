@@ -1,6 +1,7 @@
 {
   "schema": "canonical-native-platform-files-v1",
   "services": [
+    "portable/whole_program/platform/desktop_files.c",
     "portable/whole_program/platform/sdl3/diagnostics.c",
     "portable/whole_program/platform/font_blit.c",
     "portable/whole_program/window_refs.c",
@@ -74,7 +75,7 @@
     "portable/whole_program/algorithms/line16b5.c",
     "portable/platform/memory.c",
     "portable/whole_program/platform/audio_native.c",
-    "portable/audio/isa_devices.cpp",
+    "portable/audio/native_renderer.cpp",
     "portable/audio/ymfm/ymfm_opl.cpp",
     "portable/audio/ymfm/ymfm_adpcm.cpp",
     "portable/audio/ymfm/ymfm_pcm.cpp",
@@ -87,6 +88,7 @@
     "portable/whole_program/platform/sdl3/modern_game_view.c"
   ],
   "headers": [
+    "portable/whole_program/platform/desktop_files.h",
     "portable/whole_program/platform/sdl3/diagnostics.h",
     "portable/whole_program/platform/bios_fonts.h",
     "portable/whole_program/types/resource_wire.h",
@@ -176,7 +178,7 @@
     "portable/whole_program/window_source_globals.h",
     "portable/whole_program/window_source_rects.h",
     "portable/whole_program/platform/audio_native.h",
-    "portable/audio/isa_devices.h",
+    "portable/audio/native_renderer.h",
     "portable/audio/ymfm/ymfm.h",
     "portable/audio/ymfm/ymfm_fm.h",
     "portable/audio/ymfm/ymfm_fm.ipp",
@@ -279,6 +281,16 @@
     }
   ],
   "source_inventory": "src/program.json",
+  "native_desktop_policy": {
+    "storage": "Default private DOS C: volume under SDL_GetPrefPath(SimAnt, SDL3)/games/<resource-path-id>; immutable shipped resources and initial CFG copied without overwriting existing user files. --portable and explicit --assets mount in place. Diagnostics default to the per-user diagnostics subdirectory; --user-dir and --diagnostics-dir override their respective roots.",
+    "resource_domain": "Ten immutable English VGA resources verified by SHA-256 in desktop_files.c; six CFG words bounded before the original parser. Custom resource sets and other editions require separate support.",
+    "focus": "Continue machine reads, simulation and audio when unfocused/minimized. Release held physical input on application focus loss; never change GamePaused or the clock rule.",
+    "close": "After main_iteration_count becomes nonzero, OS main-window close queues the original FD08 File > Quit command; original Save/Discard/Cancel governs. Finish an existing modal before deferred Quit. Before gameplay, close exits directly.",
+    "presentation": "Root high-pixel-density SDL window; integer nearest scaling at >=1x, aspect-fit linear scaling below 1x. Alt+Enter toggles borderless desktop fullscreen. Pointer input uses SDL's same renderer transform.",
+    "keyboard": "US physical positions; SDL text/IME composition ignored. OS reserved chords filtered from DOS input; plain Alt and F10 retained.",
+    "regression": "portable/tests/desktop/run.py; portable/tests/desktop/windowed.py",
+    "hardware_limits": "Physical mixed-DPI multi-monitor transitions, actual IME/global-shortcut routing and audible focus/restore continuity need an interactive hardware playtest; scripted SDL controls do not prove them."
+  },
   "input_time_delivery": {
     "service": "portable/whole_program/platform/sdl3/input_time_host.c:portable_input_time_host_refresh_clock",
     "contract": "One virtual machine clock in ordinary play and unpaced --deterministic runs. Each listed guest-facing clock/input poll with IF set charges exactly Q=1 ms (or explicit --poll-ns); computation, internal/nested refresh, drawing and host conditions charge none. Timer/audio work derives from machine time. Ordinary reads wait for the fixed host epoch using an event-wakeable high-resolution Windows timer (SDL 3.4 sub-ms timeout truncation must not busy-poll); GameSpeed 3 bypasses wall pacing but retains Q. The pending Q deadline bounds presentation/audio service latency. Physical presentation uses host display-refresh deadlines, including during machine catch-up. PCM submission uses device-duration blocks with four silent priming periods; the consumer callback only counts stream starvation and never advances guest time. Single-screen unchanged planes/palette skip RGB upload; raster/cursor exclusion and hosted-window refresh remain intact.",
@@ -382,26 +394,26 @@
   "native_audio_boundary": {
     "source_mode": 6,
     "source_driver": "src/sound/sample_timer.asm",
-    "devices": "OPL3 in OPL2 compatibility mode; SB DSP direct unsigned 8-bit DAC",
+    "devices": "Native voice events and direct OPL2 register events; no virtual ISA card or DSP DAC stream",
     "synthesis": "ymfm BSD-3-Clause, pinned portable/audio/ymfm/provenance.json",
-    "trace": "SIMANT_AUDIO_TRACE existing directory; io-sb_dsp/io-opl DOS OUT format",
+    "trace": "Acceptance-only source-event OUT projection; source S/P/X and B/D/N/F/H remain authoritative; PCM tests and WAV comparison cover the renderer",
     "limitations": [
-      "Generic SB DMA and device IRQs are unimplemented and fail closed; canonical mode 6 uses PIT IRQ0 and direct DAC command 10h.",
-      "Ideal-v1 uses actual logical-clock ISR and device scheduling on both sides. Complete sound-off/sound-on state, frame and raw OUT lanes plus playback pass; CPU instruction placement and analogue waveform equality remain outside the contract.",
+      "Only source mode 6 and sound-off are supported. The fixed startup capability adapter answers canonical mode-6 probe/reset/readiness calls; other controls and DMA fail explicitly.",
+      "Logical PIT/ISR and source playback timestamps remain native-clock-v1. YMFM and sample mixing run only for physical playback; unpaced/headless observations require no PCM. CPU instruction placement and analogue waveform equality remain outside the contract.",
       "Other audio modes are unsupported; source startup time and full timer-chain/menu/save ABI equivalence are not claimed."
     ],
     "source_selection": "Canonical CFG selection retained; platform no longer forces /s1. Explicit /s6 or /s0 accepted.",
-    "validation_and_limits": "Mode 6 follows canonical C and the readable sample_timer ASM projection. Both gameplay sound variants and playback use independent timelines. Raw OUT commands, metadata, decoded/emitted bytes and ordered music events compare exactly; only playback sample timestamps have a 1 ns bound. Generic DMA, other hardware profiles and full BIOS/input INT08 chaining remain unsupported or unproved.",
+    "validation_and_limits": "Canonical C plus the existing logical sample_timer ASM projection decides song progress, positions, loops and completion. A render-only event queue consumes direct OPL register writes, copied decoded payloads, positions, attenuation and emission instants. Historical native OUT is an observer projection; source content and independent renderer tests are the playback proof.",
     "classification": "TRUE_PLATFORM_BOUNDARY; unsupported hardware profiles fail explicitly, no semantic exception or ordinary source modification",
     "step_acceptance": {
       "contract": "ideal-v1 / audio-playback-v1",
       "entry_point": "portable/tests/acceptance/run.py",
       "recording": "Read-only state/frame/OUT/content and actual ISR observations. No per-site clock answers, chronological replay streams, foreground call-boundary schedules or per-event IRQ register inputs.",
       "execution": "Ordinary ideal clock unpaced, tick recipes, immutable assets/save and fixed executable load/DGROUP/environment profile. Providers answer and schedule on their own timeline.",
-      "commands": "Both 18-lane gameplay variants require equal state, exact frames and per-entry raw OUT order. All 22 playback lanes additionally require exact ordered song/note events, sample metadata, payload and emitted bytes; sample timestamps have a 1 ns bound.",
+      "commands": "Both 18-lane gameplay variants retain exact historical command projections. All 22 playback lanes retain source song/note order, full sample metadata/payload and per-voice position/attenuation bytes with a 1 ns sample timestamp bound. Renderer controls separately verify PCM.",
       "negative_control": "Independent read vectors, actual ISR fast/slow/restart/stop, forced-IF, omitted slow notification, early/reload-edge, internal-refresh, fixed profile/observer mutations, complete content/order/byte and unsupported-profile negatives.",
       "limits": "No shipped looping voices were observed; synthetic loop/wrap tests remain. Physical CPU/IRQ interleaving, analogue waveforms, other hardware and arbitrary malformed resources remain outside this bounded proof.",
-      "evidence": "evidence/canonical/native-ideal-clock/tape-retirement.md",
+      "evidence": "evidence/canonical/native-audio-backend/README.md",
       "regression": "portable/tests/acceptance/run.py; test_audio_bindings.py; test_audio_content.py; test_audio_playback.py; test_audio_commands.py; test_timeline_contract.py; run_virtual_audio_tests.py; ideal_rule_check.py; ideal_internal_refresh_check.py",
       "historical_evidence": "evidence/canonical/native-audio-schedule/README.md and foreground-census.json remain challengeable history, with retired reference identities retained in to_delete."
     }

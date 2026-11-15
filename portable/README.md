@@ -87,9 +87,9 @@ data, configuration or saves. The original startup needs an `INSTALL.EXE` file
 to open; the launcher creates an empty probe only when absent and preserves any
 existing installer. Prefer a short folder path for the original file dialogs.
 
-Every Windows launch creates `diagnostics/simant-YYYYMMDD-HHMMSS-PID/` beside
-the executable, falling back to `SDL_GetPrefPath("SimAnt", "SDL3")` for an
-unwritable installation. `--diagnostics-dir=PATH` chooses another root.
+Every Windows launch creates `diagnostics/simant-YYYYMMDD-HHMMSS-PID/` under
+`SDL_GetPrefPath("SimAnt", "SDL3")` (normally `%APPDATA%/SimAnt/SDL3/`).
+`--diagnostics-dir=PATH` chooses another root.
 `session.log` includes the build revision and final executable SHA from the
 build-time `simant-build-id.txt` receipt, command line, asset directory,
 `SIMANT.CFG`, seed and exit status/reason. Keep the receipt beside the executable.
@@ -161,6 +161,88 @@ main. The platform application owns SDL lifecycle, presentation, input injection
 for tests and host resources; startup dialogs and the simulation remain in game
 source. See [runtime checks](tests/runtime/README.md) for fresh writable resource
 copies and the Save/Load trace requirements.
+
+## Desktop policy
+
+Ordinary executable launches stage the supported English VGA resources and initial
+`SIMANT.CFG` into `%APPDATA%/SimAnt/SDL3/games/<installation-id>/`. The private
+DOS C: volume holds saves and configuration; the installation and original asset
+folder are read-only inputs. Existing user files are preserved. The installation
+ID is a stable hash of the absolute resource-folder path: moving an installation
+selects another volume. Copy existing `.ANT` saves into that volume to import them.
+`session.log` records both resource source and active volume. `--user-dir PATH`
+overrides the per-user base for game volumes; diagnostics have their own override.
+
+`--portable` explicitly mounts adjacent resources in place. `--assets PATH` also
+selects in-place storage, for existing portable setups and disposable test copies.
+These modes write saves into that folder and need writable game files. The packaged
+`.cmd` launchers are legacy portable launchers: they also create the documented
+installer probe and redirected launcher log beside the executable. Direct executable
+launches require neither of those installation-folder writes. Diagnostic logs use
+the per-user location in all modes unless explicitly overridden.
+
+Before entering the game, startup checks the ten immutable resource files against
+the supported shipped set's SHA-256 identities and bounds the original CFG parser's
+six words. Missing, unreadable, modified or corrupt resources stop with a named
+error (a message box in windowed mode, stderr/status 70 headless). Other editions
+or custom resource sets are not supported by this preflight. Resource staging
+reports permission and disk-space failures. Runtime save errors still use the
+game's own error dialog and dirty-state policy; short host writes are completed
+or returned as an error, never accepted as a complete save. No partial-write
+atomicity or recovery of an overwritten old save is claimed.
+File-selector timestamps use the file date's daylight-saving rule, rather than
+the current day's bias.
+
+Focus loss and minimisation do **not** pause, mute or reset the machine clock:
+simulation and sound continue, as on a DOS machine with no focus concept. Restore
+does not alter game state. SDL releases physical keyboard keys on focus loss; the
+host also releases a held pointer button when focus leaves the application, so a
+lost mouse-up cannot leave tracking stuck. This is an input-release policy, not
+an auto-pause setting. Fast retains the source's timing waits; Ultra bypasses host
+pacing, retains every machine quantum, and can consume a core. Audio playback and
+display refresh never set the simulation rate. Ultra's machine audio can run ahead
+of physical playback; it does not promise wall-tempo sound.
+
+Close and Alt+F4 on the main window enter the game's File > Quit path once gameplay
+has begun, including its Save/Discard/Cancel prompt. A current game modal must be
+finished before the queued Quit is handled; repeated closes do not dismiss it.
+Before gameplay, close exits directly. Hosted child close boxes retain the game's
+logical-window close policy. A crash produces the diagnostic report/dump, with no
+attempt to save potentially damaged game state.
+
+The classic 640x480 screen keeps its aspect ratio. At 1x or larger it uses nearest
+integer scaling with black margins; below 1x it fits the entire image with linear
+filtering. SDL maps mouse coordinates through the same transform after resize,
+maximise, fullscreen and display/pixel-density changes. **Alt+Enter** toggles
+borderless desktop fullscreen on the main window. `--windows` remains supported:
+its child windows and modern map retain their separate presentation/input policy.
+
+Keys use US **physical positions**, independent of the OS layout: for example the
+US Y position produces `y` on a German layout, and US Shift+2 produces `@`.
+IME composition and Unicode text are not game input. Use US key positions when
+entering filenames; only the original DOS character set is supported. Plain Alt
+and F10 retain their DOS key meaning (the hosted native menu also has Windows menu
+navigation); Alt+Tab, Alt+F4, Alt+Space, Ctrl+Escape and Windows-key chords are not
+forwarded into the DOS keyboard. Global shortcut delivery remains OS-owned.
+
+```powershell
+python portable/tests/desktop/run.py --build build/current/portable --out build/workers/NAME/desktop
+```
+
+This runs real and dummy SDL presentation/mouse/keyboard checks plus read-only
+distribution, per-user file preservation, corrupt/missing resource, unwritable
+destination and injected disk-full/short-write controls. A real multi-monitor,
+mixed-DPI and IME desktop still requires a hardware playtest; injected SDL checks
+do not establish those physical-environment results.
+
+`portable/tests/desktop/windowed.py --build BUILD --out FRESH` measures the real
+window at title/play/pause/modal/Fast/Ultra and in hosted mode, then joins every
+child. Its input recipe uses `# clock: host-ms`: timestamps schedule external
+SDL inputs by elapsed host time so prompt responses remain reliable at Ultra.
+The default script clock remains machine milliseconds; `bios-ticks` is unchanged.
+`quit` injects an ordinary SDL quit request (and can be cancelled by the game),
+whereas the existing test-only `exit` ends a run directly. No script-clock choice
+changes the machine read rule.
 
 `canonical_native_abi/` contains bounded type/ABI conversions: fixed-width words,
 near/far pointer spelling, owner views, callbacks and packed wire/native layouts.

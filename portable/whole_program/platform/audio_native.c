@@ -8,13 +8,13 @@
 #include <stdatomic.h>
 extern void portable_test_audio_write(uint16_t,uint8_t) __attribute__((weak));
 static PortableWholeAudioHost host;
-static int armed, interrupts = 1;
+static int armed, interrupts = 1, reset_high, reset_response;
 static _Noreturn void unavailable(const char *service) {
     fprintf(stderr,"Unimplemented audio hardware service: %s\n",service); exit(70);
 }
 int portable_whole_audio_bind(const PortableWholeAudioHost *h) {
-    if(!h || !h->configure_timer || !h->out8 || !h->in8 || host.out8) return 0;
-    host=*h; interrupts=1; return 1;
+    if(!h || !h->configure_timer || !h->opl_register || !h->sample_enable || host.opl_register) return 0;
+    host=*h; interrupts=1;reset_high=reset_response=0; return 1;
 }
 void portable_whole_audio_unbind(void) { memset(&host,0,sizeof(host)); armed=0; }
 int portable_whole_audio_timer_armed(void) { return armed; }
@@ -24,16 +24,31 @@ int portable_whole_audio_interrupts_enabled(void) { return interrupts; }
 void dos_audio_host_interrupt_disable(void) { atomic_signal_fence(memory_order_seq_cst); interrupts=0; }
 void dos_audio_host_interrupt_enable(void) {
     interrupts=1;atomic_signal_fence(memory_order_seq_cst);
+    if(host.synchronize) host.synchronize(host.context);
     if(host.enable_interrupts) host.enable_interrupts(host.context);
 }
+/* The unchanged mode-6 startup still calls its canonical reset/probe leaves.
+ * This fixed capability adapter has no DSP command stream or audio clock.
+ * Playback uses native events below; other hardware remains unsupported. */
 void dos_audio_host_out8(uint16_t port,uint8_t value) {
-    if(!host.out8) unavailable("OUT before host binding");
+    if(!host.sample_enable) unavailable("OUT before host binding");
+    if(host.synchronize) host.synchronize(host.context);
     if(portable_test_audio_write) portable_test_audio_write(port,value);
-    host.out8(host.context,port,value);
+    if(port==0x226) {
+        if(reset_high && !value) { reset_response=1;host.sample_enable(host.context,0); }
+        reset_high=value!=0;
+    } else if(port==0x22c && (value==0xd1 || value==0xd3)) host.sample_enable(host.context,value==0xd1);
+    else if(port>=0x210 && port<=0x26f && (port&15)==6) { /* absent probe base */ }
+    else unavailable("unsupported native audio port/control (no DSP/DMA)");
 }
 uint8_t dos_audio_host_in8(uint16_t port) {
-    if(!host.in8) unavailable("IN before host binding");
-    return host.in8(host.context,port);
+    if(!host.sample_enable) unavailable("IN before host binding");
+    if(host.synchronize) host.synchronize(host.context);
+    if(port==0x22c || port==0x388) return 0;
+    if(port==0x22e) return reset_response?0x80:0;
+    if(port==0x22a) { uint8_t v=reset_response?0xaa:0xff;reset_response=0;return v; }
+    if(port>=0x210 && port<=0x26f) return 0xff;
+    unavailable("unsupported native audio capability query");
 }
 void dos_audio_host_out16(uint16_t port,uint16_t value) { (void)port;(void)value;unavailable("OUT word"); }
 uint16_t dos_audio_host_bios_int1a_8100(void) { unavailable("Tandy BIOS INT1A"); }
@@ -59,13 +74,13 @@ void snd_restore_bios_timer(int16_t divisor) {
     if(armed && host.stop_timer) host.stop_timer(host.context);
     armed=0;interrupts=1;
 }
-/* m283E_0020 emits index, 10 status reads, data, 40 status reads. Preserve
- * the complete guest I/O order; no host register-to-note approximation. */
+/* m283E_0020's hardware leaf: register/value intent, without ISA latch/delays.
+ * Historical OUT projection exists only for read-only acceptance diagnostics. */
 void snd_opl_write_regs(uint8_t reg,uint8_t value) {
-    unsigned i;dos_audio_host_out8(0x388,reg);
-    for(i=0;i<10;++i) dos_audio_host_in8(0x388);
-    dos_audio_host_out8(0x389,value);
-    for(i=0;i<40;++i) dos_audio_host_in8(0x388);
+    if(!host.opl_register) unavailable("OPL before host binding");
+    if(host.synchronize) host.synchronize(host.context);
+    if(portable_test_audio_write) { portable_test_audio_write(0x388,reg);portable_test_audio_write(0x389,value); }
+    host.opl_register(host.context,reg,value);
 }
 void snd_opl_write(uint8_t reg,uint8_t value) {
     snd_opl_write_regs(reg,value);

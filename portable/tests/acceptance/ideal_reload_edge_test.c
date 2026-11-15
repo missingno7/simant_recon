@@ -10,7 +10,7 @@ static void observe_edge(void *ctx,uint64_t ns,unsigned event,uint32_t d,uint16_
 int main(void) {
     PortableWholeAudioProvider p;
     assert(portable_whole_audio_provider_init(&p));
-    PortableWholeAudioHost host={&p,configure,start,stop,out,in,enable};
+    PortableWholeAudioHost host={&p,configure,start,stop,opl_event,enable_samples,enable,NULL};
     assert(portable_whole_audio_bind(&host));
     p.timer_observer=observe_edge;
     snd_select_two_channel_timer(214,306);snd_start_sample_timer();

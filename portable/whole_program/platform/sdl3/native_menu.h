@@ -7,6 +7,7 @@
  * (g_6054), as Win16 SimAnt's InitMenu. Returns 0 where the video driver has
  * no native window (headless). */
 int native_menu_init(SDL_Window *root);
+void native_menu_shutdown(void);
 /* (Re)build after the game loads or replaces its menu; 1 while a bar exists. */
 int native_menu_sync(void);
 /* Game event pump: post selected commands as the DOS pull-down does. */

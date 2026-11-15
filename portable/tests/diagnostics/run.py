@@ -54,6 +54,7 @@ def main():
     def run(*extra):
         previous = set(diagnostic_root.glob('simant-*'))
         command = [str(exe), '--headless', '--seed', '17',
+                   '--user-dir', str(out / 'user'),
                    f'--diagnostics-dir={diagnostic_root}', *extra]
         child = subprocess.run(command, cwd=ROOT, capture_output=True, timeout=30)
         sessions = set(diagnostic_root.glob('simant-*')) - previous

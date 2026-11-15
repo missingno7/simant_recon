@@ -161,6 +161,7 @@ int native_windows_init(Host *host, SDL_Window *root)
 void native_windows_shutdown(void)
 {
     unsigned i;
+    native_menu_shutdown();
     sim_window_hosting_set_pump(NULL);
     sim_window_hosting_own_map_cursor(0);
     modern_game_view_shutdown();

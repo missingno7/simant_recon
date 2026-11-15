@@ -126,8 +126,17 @@ int native_menu_sync(void)
     build();
     return 1;
 }
+void native_menu_shutdown(void)
+{
+    if (m.hwnd && m.original) SetWindowLongPtr(m.hwnd, GWLP_WNDPROC, (LONG_PTR)m.original);
+    if (m.hwnd && m.bar) SetMenu(m.hwnd, NULL);
+    if (m.bar) DestroyMenu(m.bar);
+    memset(&m, 0, sizeof(m));
+    command_count = 0;
+}
 
 #else
 int native_menu_init(SDL_Window *root) { (void)root; return 0; }
 int native_menu_sync(void) { return 0; }
+void native_menu_shutdown(void) { command_count = 0; }
 #endif

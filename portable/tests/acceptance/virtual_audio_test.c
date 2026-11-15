@@ -39,7 +39,7 @@ static Result exercise(uint64_t quantum,unsigned polls) {
         CHECK(portable_sdl3_whole_audio_pump(&a)==PORTABLE_SDL3_WHOLE_AUDIO_OK);
     }
     CHECK(a.provider.frame_cursor==4800 && a.provider.time_ns==100000000);
-    CHECK(!a.output.stream); /* Unpaced mode has no physical playback device. */
+    CHECK(!a.output.stream && !a.provider.renderer && !a.rendered_frames); /* Unpaced mode has no physical playback device. */
     CHECK(sequencer_calls>0);
     dos_audio_host_in8(0x388);uint64_t bus=a.bus_ns;
     CHECK(bus>=100000000);
@@ -68,7 +68,7 @@ int main(void) {
     snd_requested_driver_mode=6;
     host_virtual_clock_poll();
     CHECK(portable_sdl3_whole_audio_pump(&silent)==PORTABLE_SDL3_WHOLE_AUDIO_OK &&
-          silent.rendered_frames==48);
+          silent.rendered_frames==0 && !silent.provider.renderer);
     portable_sdl3_whole_audio_close(&silent);
     Result small=exercise(1000000,100),large=exercise(100000000,1);
     CHECK(small.frames==large.frames && small.time==large.time && small.irq==large.irq &&
