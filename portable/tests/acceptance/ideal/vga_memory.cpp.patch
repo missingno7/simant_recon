@@ -1,0 +1,26 @@
+--- src/hardware/vga_memory.cpp
++++ src/hardware/vga_memory.cpp
+@@ -25,6 +25,7 @@
+ #include "logging.h"
+ #include "mem.h"
+ #include "vga.h"
++extern void IdealVideoWrite(unsigned kind);
+ #include "paging.h"
+ #include "pic.h"
+ #include "inout.h"
+@@ -600,6 +601,7 @@
+ 			return (T)readHandler8(map(a));
+ 	}
+ 	template <typename T=uint8_t> static INLINE void do_write(const PhysPt a,const T v) {
++        if (PAGING_GetPhysicalAddress(a)>=0xA0000 && PAGING_GetPhysicalAddress(a)<0xB0000) IdealVideoWrite(0);
+ 		if (sizeof(T) == 4) /* split 32-bit to two 16-bit */
+ 			{ do_write<uint16_t>(a,uint16_t(v)); do_write<uint16_t>(a+2,uint16_t(v >> (T)16u)); }
+ 		else if (sizeof(T) == 2) /* split 16-bit to two 8-bit */
+@@ -648,6 +650,7 @@
+ 	}
+ 
+ 	template <typename T=uint8_t> static INLINE void do_write(const PhysPt a,const T v) {
++        if (PAGING_GetPhysicalAddress(a)>=0xA0000 && PAGING_GetPhysicalAddress(a)<0xB0000) IdealVideoWrite(0);
+ 		if (sizeof(T) == 4) /* split 32-bit to two 16-bit */
+ 			{ do_write<uint16_t>(a,uint16_t(v)); do_write<uint16_t>(a+2,uint16_t(v >> (T)16u)); }
+ 		else if (sizeof(T) == 2) /* split 16-bit to two 8-bit */

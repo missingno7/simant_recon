@@ -12,8 +12,8 @@ def run(out):
         if r.returncode!=expected:raise RuntimeError(str(results[-1]))
     pit=ROOT/'portable/whole_program/platform/pit_clock.c';golden=ROOT/'portable/tests/idle_yield/rule.c'
     execute(base+['-c',str(pit),'-o',str(out/'pit.o')])
-    execute(base+['-Dportable_input_time_read_quantum=dos_clock_read_quantum','-c',str(golden),'-o',str(out/'golden.o')])
-    (out/'dos.cpp').write_text('#include "native_clock_v1.h"\nextern "C" uint64_t dos_clock_read_quantum(const char*s,uint64_t q){return DosClockReadQuantum(s,q);}\n')
+    execute(base+['-Dportable_input_time_read_quantum=dos_clock_read_quantum','-Dportable_input_time_display_charge=dos_clock_display_charge','-Dportable_input_time_display_frame=dos_clock_display_frame','-c',str(golden),'-o',str(out/'golden.o')])
+    (out/'dos.cpp').write_text('#include "native_clock_v1.h"\nextern "C" uint64_t dos_clock_read_quantum(const char*s,uint64_t q){return DosClockReadQuantum(s,q);}\nextern "C" uint64_t dos_clock_display_charge(uint64_t n,uint64_t q,int w){return DosClockDisplayCharge(n,q,w);}\nextern "C" uint64_t dos_clock_display_frame(uint64_t n){return DosClockDisplayFrame(n);}\n')
     execute([cxx,'-I'+str(HERE/'ideal'),'-c',str(out/'dos.cpp'),'-o',str(out/'dos.o')])
     execute([cxx,str(out/'golden.o'),str(out/'dos.o'),str(out/'pit.o'),'-o',str(out/'dos.exe')]);execute([str(out/'dos.exe')])
     execute(base+[str(ROOT/'portable/whole_program/platform/input_time.c'),str(pit),str(golden),'-o',str(out/'native.exe')]);execute([str(out/'native.exe')])

@@ -8,6 +8,7 @@ output = open(os.environ['SIMANT_TRACE_OUT'], 'w', encoding='utf-8')
 active = []
 calls = []
 presented = 0
+last_present_stamp = 0
 
 
 def emit(event, **fields):
@@ -77,11 +78,8 @@ class Present(gdb.Breakpoint):
         try:
             busy = word('gfx_cursor_draw_lock') & 255
             cursor_busy = word('cursor_update_lock')
-            now = int(gdb.newest_frame().older().read_var('now'))
-            previous = word('app.last_present')
-            if busy or cursor_busy or now - previous < 16666667:
-                emit('unsafe-presentation', busy=busy, cursor_busy=cursor_busy,
-                     interval_ns=now - previous)
+            if busy or cursor_busy:
+                emit('unsafe-presentation', busy=busy, cursor_busy=cursor_busy)
             if not active or not (word('mouse_button_state') & 1):
                 return False
             framebuffer = gdb.parse_and_eval('app.graphics.framebuffer')
@@ -94,6 +92,24 @@ class Present(gdb.Breakpoint):
                     track['active_clip_presentations'] += 1
                 if digest not in track['frames']:
                     track['frames'].append(digest)
+        except Exception as error:
+            emit('trace-error', error=str(error))
+        return False
+
+class PresentationTime(gdb.Breakpoint):
+    def stop(self):
+        global last_present_stamp
+        try:
+            # Observe the committed stamp with a hardware watchpoint. The
+            # caller's submission local can be optimized out, and virtual
+            # `now` cannot be subtracted from a physical host timestamp.
+            now = word('app.last_present')
+            required = (word('app.host->refresh_ns') if word('machine_clock') and
+                        not word('clock_unpaced') else 16683217)
+            if last_present_stamp and now - last_present_stamp < required:
+                emit('unsafe-presentation', interval_ns=now-last_present_stamp,
+                     minimum_ns=required)
+            last_present_stamp=now
         except Exception as error:
             emit('trace-error', error=str(error))
         return False
@@ -146,6 +162,8 @@ def exited(event):
 
 gdb.events.stop.connect(stopped)
 gdb.events.exited.connect(exited)
+PresentationTime('app.last_present', type=gdb.BP_WATCHPOINT,
+                 wp_class=gdb.WP_WRITE, internal=True)
 Track('win_track_move', 'window')
 Track('win_track_resize', 'resize')
 Track('ProcCasteEvent', 'triangle')

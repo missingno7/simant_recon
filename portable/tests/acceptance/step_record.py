@@ -113,7 +113,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     if playback:manifest['audio_playback']='audio-playback-v1'
     if sound_off:
         manifest['variant']=variant
-        manifest['clock_admission']='direct-bda-v2'
+        manifest['clock_admission']=boundary.get('clock_revision')
         manifest['sound_configuration']=execution['sound_configuration']
     (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(f'{scenario["id"]} {target}: {len(rows)}/{count} steps, {elapsed:.3f}s ({elapsed/max(1,len(rows)):.4f}s/step)',flush=True)

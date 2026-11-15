@@ -486,6 +486,7 @@ PortableInputTimeStatus portable_input_time_host_refresh_service(
                                                 PORTABLE_INPUT_TIME_OK;
     if (portable_machine_clock_active()) {
         uint64_t charge = portable_input_time_read_quantum(service, portable_machine_clock_quantum());
+        charge = portable_machine_clock_read_charge(charge);
         portable_machine_clock_advance(charge);
         if (portable_test_charged_read)
             portable_test_charged_read(charge ? service : NULL, __builtin_return_address(0), host_time_ns(),

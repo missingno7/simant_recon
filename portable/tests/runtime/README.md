@@ -74,6 +74,11 @@ resumed outer progress, every replay event and the smoke exit. Use
 `--deterministic --out build/workers/NAME/edge-clock` for a separate virtual
 clock control. Host observations are clamped to the visible screen before
 recording; the source mouse driver then applies its tighter INT33 limits.
+It checks scroll steps per virtual game second against the shared 59.940476 Hz
+grid and retains wall duration separately. Each held edge needs multiple safe
+refresh opportunities and at least one actual scanout; unchanged scanouts may
+be reused. Debugger speed and unchanged-frame upload suppression cannot change
+the pacing verdict.
 
 The drag regression observes the real title, resize and caste triangle handlers
 under GDB. Each must return and present multiple distinct frames while the button

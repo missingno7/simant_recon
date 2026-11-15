@@ -25,6 +25,14 @@ static uint16_t ideal_ss=0,ideal_sp=0;
 static uint64_t ideal_ns=0,ideal_target_ns=0,ideal_quantum_ns=1000000;
 static uint64_t ideal_instructions=0,ideal_reads=0,ideal_moves=0,ideal_stall=0;
 static uint64_t ideal_pit_reads=0,ideal_vga_reads=0;
+static bool ideal_video_written=false;
+static uint64_t ideal_video_write_ns=0,ideal_video_writes=0,ideal_palette_writes=0;
+void IdealVideoWrite(unsigned kind) {
+    if(!IdealActive) return;
+    ideal_video_written=true;
+    ideal_video_write_ns=(uint64_t)((double)PIC_FullIndex()*1000000.0+0.5);
+    if(kind) ++ideal_palette_writes;else ++ideal_video_writes;
+}
 static uint32_t ideal_queue_capacity=0,ideal_queue_write=0,ideal_queue_read=0;
 static size_t ideal_input_next=0;
 static FILE *ideal_log=NULL;
@@ -70,6 +78,7 @@ static void IdealStats() {
         (unsigned long long)ideal_pit_reads,(unsigned long long)ideal_vga_reads,(unsigned long long)compact_sound_isrs);
     fprintf(ideal_log,"SLICES count=%llu min=%lld max=%lld\n",IdealSlices,IdealSliceMin,IdealSliceMax);
     fflush(ideal_log);
+    fprintf(ideal_log,"VIDEO aperture=%llu palette=%llu\n",(unsigned long long)ideal_video_writes,(unsigned long long)ideal_palette_writes);
 }
 static void IdealInit() {
     ideal_ready=true;
@@ -188,6 +197,8 @@ static bool IdealBefore(uint32_t pc) {
     if(!entry_if || !compact_timers.empty()) return false;
     uint64_t charge=DosClockReadQuantum(service,ideal_quantum_ns);
     if(!charge) return false;
+    if(ideal_video_written && DosClockDisplayFrame(ideal_video_write_ns)!=DosClockDisplayFrame(ideal_ns)) ideal_video_written=false;
+    charge=DosClockDisplayCharge(ideal_ns,charge,ideal_video_written);
     if(site.mode=='M') {
         uint32_t stack=SegPhys(ss)+reg_sp;
         ideal_scopes.push_back({mem_readw(stack)+16u*mem_readw(stack+2),SegValue(ss),(uint16_t)(reg_sp+4)});

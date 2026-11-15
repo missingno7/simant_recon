@@ -1,5 +1,6 @@
 #include "portable/whole_program/platform/sdl3/input_time_host.h"
 #include "portable/whole_program/platform/sdl3/host_modes.h"
+#include "portable/whole_program/platform/graphics_vga.h"
 #include <SDL3/SDL.h>
 #include <assert.h>
 #include <stdio.h>
@@ -25,6 +26,34 @@ void native_windows_root_pointer(float *x, float *y) { (void)x; (void)y; }
 static PortableInputTimeHost input;
 static uint64_t injected_ns, handled_ns;
 static unsigned received;
+static void display_writes(void)
+{
+    static SimVga card;
+    portable_machine_clock_configure(1,1000000);
+    sim_vga_reset(&card);
+    assert(portable_machine_clock_read_charge(1000000)==1000000);
+    sim_vga_out(&card,0x3c4,2);
+    sim_vga_out(&card,0x3c5,0); /* Masked/unchanged stores still count. */
+    assert(portable_machine_clock_read_charge(1000000)==1000000);
+    sim_vga_write(&card,65535,0);
+    assert(portable_machine_clock_read_charge(0)==0); /* Internal read retains it. */
+    assert(portable_machine_clock_read_charge(1000000)==16683218);
+    portable_machine_clock_advance(16683218);
+    card.written=0; /* Presentation cannot affect the machine latch. */
+    assert(portable_machine_clock_read_charge(1000000)==1000000);
+    sim_vga_store_color(&card,0,0,0);
+    card.written=0;
+    assert(portable_machine_clock_read_charge(1000000)==16683217);
+    portable_machine_clock_advance(16683216);
+    assert(portable_machine_clock_read_charge(1000000)==1);
+    portable_machine_clock_advance(1);
+    assert(portable_machine_clock_read_charge(1000000)==1000000);
+    portable_machine_video_write();
+    portable_machine_clock_advance(20000000); /* Boundary expires an older write. */
+    assert(portable_machine_clock_read_charge(1000000)==1000000);
+    portable_machine_clock_configure(1,1000000);
+    assert(portable_machine_clock_read_charge(1000000)==1000000);
+}
 static int observe(void *unused, const HostEvent *event)
 {
     (void)unused;
@@ -75,6 +104,7 @@ int main(int argc, char **argv)
     int spin = argc > 1 && !strcmp(argv[1], "--spin");
     int windowed = argc > 1 && !strcmp(argv[1], "--windowed");
     uint64_t started, cpu_started;
+    display_writes();
     if (!windowed) assert(SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "dummy"));
     host = host_create_dimensions("idle poll fixture", 1, 640, 480);
     assert(host);

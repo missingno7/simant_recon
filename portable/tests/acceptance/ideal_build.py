@@ -99,7 +99,7 @@ def build(out):
         raise ValueError('Observer source changed during build; rebuild before recording')
     inputs.update(own_inputs)
     inputs.update({str(p):sha(p) for p in obj.glob('*.obj')})
-    receipt=dict(schema='simant-ideal-observer-build-v1',contract='ideal-v1',clock_revision='native-clock-v1-irq-v3',executable=str(out/'dosbox-x.exe'),sha256=sha(out/'dosbox-x.exe'),inputs=inputs,
+    receipt=dict(schema='simant-ideal-observer-build-v1',contract='ideal-v1',clock_revision='native-clock-v1-display-v4',executable=str(out/'dosbox-x.exe'),sha256=sha(out/'dosbox-x.exe'),inputs=inputs,
         compiled_units=sorted(jobs),seconds=time.perf_counter()-started,
         scope='ideal-v1 program-read clock, real guest instructions/PIC/IRQs, tick-script input, observation-only state/frame/audio outputs')
     (out/'observer-build.json').write_text(json.dumps(receipt,indent=2)+'\n')

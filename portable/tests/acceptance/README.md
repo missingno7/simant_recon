@@ -7,13 +7,16 @@ The helpers, event-code/byte scope and eleven-holder allowlist are unchanged.
 Both observers require both rules in ideal mode; raw observations are retained.
 Sound selection changes only configuration and the variant's hardware assertions.
 Sound-on identity references are under build/reference/sound-on-identity-v1;
-existing sound-off-identity references remain valid. Prior raw-only sound-on
-references require fresh recording with the eight additional scalar views.
+sound-off references are under build/reference/sound-off-identity. Both sets,
+including playback, require `native-clock-v1-display-v4`. Earlier captures were
+retired with workspace.py and retain their identities in ignored to_delete;
+the checker rejects their older clock revision. The state-view rules are unchanged.
 
 The sound-off gameplay lane uses the shipped `SIMANT.CFG` selector
 `Sound Mode: 0` in identical disposable copies on DOS and native. Run the
 ideal-v1 recorder/checker with `--sound-off`. References are stored separately
-under `build/reference/sound-off-identity/<scenario>/<exe-sha>-ideal-v1-sound-off`.
+under `build/reference/sound-off-identity/<scenario>/<target>` (the recorder also
+accepts its default executable-hash directory spelling).
 The scripts are unchanged. No original asset is edited and no game sound
 decision is replaced. Checks require zero initialized/requested sound mode,
 PIT divisor65536 at every DOS entry, no sound ISR and no device writes.
@@ -98,8 +101,8 @@ python portable/tests/acceptance/step_record.py --sound-off --build build/curren
 python -m portable.tests.acceptance.playback_check --record --build build/current/portable --observer build/workers/NAME/observer/observer-build.json --out build/workers/NAME/recording
 ```
 
-The recorder supports ideal-v1 only. Existing sound-off-identity and
-sound-on-identity-v1 references remain hash-pinned and unmodified. Recording
+The recorder supports ideal-v1 only. The replacement sound-off-identity and
+sound-on-identity-v1 references are hash-pinned. Recording
 validates the effective US keyboard environment, immutable executable, saved
 input, schema, observer and independent instruction bindings. Old versions must
 be moved with `python tools/workspace.py PATH...` before recording again.

@@ -1,0 +1,18 @@
+--- src/hardware/vga_attr.cpp
++++ src/hardware/vga_attr.cpp
+@@ -21,6 +21,7 @@
+ #include "inout.h"
+ #include "logging.h"
+ #include "vga.h"
++extern void IdealVideoWrite(unsigned kind);
+ 
+ /* do not issue CPU-side I/O here -- this code emulates functions that the GDC itself carries out, not on the CPU */
+ #include "cpu_io_is_forbidden.h"
+@@ -195,6 +196,7 @@
+ 	if (vga.dosboxig.vga_reg_lockout)
+ 		return;
+ 
++	if (vga.internal.attrindex && (vga.attr.index<16 || vga.attr.index==0x11)) IdealVideoWrite(1);
+ 	if (!vga.internal.attrindex) {
+ 		/* Render on Demand problem:
+ 		 *

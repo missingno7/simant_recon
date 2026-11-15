@@ -123,7 +123,8 @@ int main(int argc,char **argv) {
 ''')
             run=subprocess.run(['C:/msys64/mingw64/bin/gcc.exe','-std=c11','-ffunction-sections','-fdata-sections',
                 '-I'+str(build/'include'),'-I'+str(ROOT),'-I'+str(build),'-I'+str(ROOT/'portable/whole_program'),
-                '-I'+str(sdk/'include'),str(source),'-Wl,--gc-sections','-L'+str(sdk/'lib'),'-lSDL3','-o',str(exe)],
+                '-I'+str(sdk/'include'),str(source),str(ROOT/'portable/whole_program/platform/input_time.c'),
+                '-Wl,--gc-sections','-L'+str(sdk/'lib'),'-lSDL3','-o',str(exe)],
                 capture_output=True,text=True,timeout=30)
             self.assertEqual(run.returncode,0,run.stdout+run.stderr)
             shutil.copyfile(sdk/'bin/SDL3.dll',out/'SDL3.dll')

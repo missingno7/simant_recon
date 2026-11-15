@@ -1,6 +1,7 @@
 #include "palette_host.h"
 
 #include <string.h>
+extern void portable_machine_video_write(void) __attribute__((weak));
 
 /* DOSBox-X v2026.08.31 US BIOS mode 12h leaves DAC slots 16..63 at these
  * six-bit RGB values after the game's palette setup writes slots 0..15; the
@@ -58,6 +59,7 @@ static int attribute_write(void *context, const uint8_t bytes[17])
 {
     SimSdlPaletteHost *palette = context;
     if (palette == NULL || bytes == NULL) return 0;
+    if (portable_machine_video_write) portable_machine_video_write();
     memcpy(palette->attribute, bytes, 17);
     palette->attribute_written = 1;
     project(palette);
@@ -71,6 +73,7 @@ static int dac_write(void *context, uint16_t first, uint16_t count,
     unsigned i;
     if (palette == NULL || bytes == NULL || first > 256u || count > 256u - first)
         return 0;
+    if (count && portable_machine_video_write) portable_machine_video_write();
     for (i = 0; i < count; ++i) {
         unsigned channel;
         for (channel = 0; channel < 3; ++channel)

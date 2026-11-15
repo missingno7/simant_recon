@@ -40,6 +40,7 @@ def main():
     ap.add_argument('--dos-report',type=Path,default=ROOT/'build/current/dos/build-report.json')
     ap.add_argument('--binding-root',type=Path,default=ROOT/'build/workers/dos-clock/binding-v2')
     ap.add_argument('--jobs',type=int,choices=range(1,5),default=3)
+    ap.add_argument('--scratch-root',type=Path,help='Short disposable native asset directory')
     ap.add_argument('--timeout',type=int,default=600)
     ap.add_argument('--timing-tolerance-ns',type=float,help='Explicit absolute playback timing bound; zero requires exact timestamps')
     a=ap.parse_args();a.out=a.out.resolve();a.out.mkdir(parents=True,exist_ok=False)
@@ -82,8 +83,8 @@ def main():
         from portable.tests.acceptance.audio_playback import validate_reference
         validate_reference(ref,manifest)
         out.parent.mkdir(parents=True,exist_ok=True)
-        command=[sys.executable,'-c','from pathlib import Path; import sys; from portable.tests.acceptance.ideal_check import lane; lane(*map(Path,sys.argv[1:6]),prepared=Path(sys.argv[6]),timeout=int(sys.argv[7]),playback=True,playback_tolerance_ns=float(sys.argv[8]) if sys.argv[8]!="None" else None)',
-            str(path),str(ref),str(a.build),str(exe),str(out),str(prepared),str(a.timeout),str(a.timing_tolerance_ns)]
+        command=[sys.executable,'-c','from pathlib import Path; import sys; from portable.tests.acceptance.ideal_check import lane; lane(*map(Path,sys.argv[1:6]),prepared=Path(sys.argv[6]),timeout=int(sys.argv[7]),playback=True,playback_tolerance_ns=float(sys.argv[8]) if sys.argv[8]!="None" else None,scratch_root=Path(sys.argv[9]) if sys.argv[9]!="None" else None)',
+            str(path),str(ref),str(a.build),str(exe),str(out),str(prepared),str(a.timeout),str(a.timing_tolerance_ns),str(a.scratch_root.resolve()) if a.scratch_root else 'None']
         with out.with_suffix('.log').open('w') as log:
             run=subprocess.run(command,cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,timeout=a.timeout+180)
         if run.returncode:raise RuntimeError('Playback process failed: '+str(out.with_suffix('.log')))

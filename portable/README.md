@@ -14,6 +14,7 @@ python portable/tests/native_simulation/run.py --native-build build/current/port
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow vga
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow save
 python portable/tests/runtime/run_load.py --report build/current/portable/report.json
+python portable/tests/runtime/run_edge.py --report build/current/portable/report.json
 python portable/tests/audio/run.py
 python -m portable.tests.acceptance.run
 ```
@@ -30,6 +31,15 @@ diagnostics; see the [acceptance contract](tests/acceptance/README.md) and
 The only execution inputs are tick recipes, game assets/save and a fixed machine
 profile. Retired service, clock, ISR, device-answer and per-event register tapes
 are preserved in ignored `to_delete/`; historical reports remain evidence.
+
+`run_edge.py` is a required port suite: Quick Game edge holds must stay within
+61 scroll steps per game second, release must return to the outer loop, and
+the seed-0 human replay must exit normally. Gate registration needed: run
+`python portable/tests/runtime/run_edge.py --report build/current/portable/report.json`
+once after the fresh native build; its default output is `build/current/edge`
+and a nonzero exit is a failure. Also retain the deterministic control using
+`--deterministic --out FRESH_PATH`. The shared virtual 59.940476 Hz display
+grid applies in both modes; physical presentation does not set game time.
 
 The sound-off check runs unpaced, opens no playback device and renders no PCM.
 Headless deterministic runs omit derived screen conversion/upload while keeping
@@ -200,7 +210,9 @@ host also releases a held pointer button when focus leaves the application, so a
 lost mouse-up cannot leave tracking stuck. This is an input-release policy, not
 an auto-pause setting. Fast retains the source's timing waits; Ultra bypasses host
 pacing, retains every machine quantum, and can consume a core. Audio playback and
-display refresh never set the simulation rate. Ultra's machine audio can run ahead
+physical display refresh never set the simulation rate. A virtual VGA write
+charges the next shared machine refresh boundary; a source pass can cross more
+than one boundary when it polls between drawing operations. Ultra's machine audio can run ahead
 of physical playback; it does not promise wall-tempo sound.
 
 Close and Alt+F4 on the main window enter the game's File > Quit path once gameplay

@@ -48,6 +48,8 @@ int host_presented_palette(const Host *host, HostPalette *palette)
     return 1;
 }
 static uint64_t virtual_ns, virtual_quantum, pace_origin_ns;
+static uint64_t video_write_ns;
+static int video_written;
 static int clock_unpaced, machine_clock;
 static uint64_t pace_calls, wait_calls, wait_events, wait_ns, wait_short;
 static uint64_t poll_calls, poll_events;
@@ -91,6 +93,7 @@ void host_pacing_performance(FILE *f)
 void host_virtual_clock_configure(uint64_t quantum_ns)
 {
     virtual_ns = 0;
+    video_written = 0;
     virtual_quantum = quantum_ns;
     clock_unpaced = quantum_ns != 0;
     machine_clock = 0;
@@ -109,6 +112,16 @@ uint64_t portable_machine_clock_quantum(void) { return virtual_quantum; }
 int host_virtual_clock_enabled(void) { return clock_unpaced; }
 void host_virtual_clock_poll(void) { if (!machine_clock) virtual_ns += virtual_quantum; }
 void portable_machine_clock_advance(uint64_t nanoseconds) { virtual_ns += nanoseconds; }
+void portable_machine_video_write(void)
+{
+    if (machine_clock) { video_written = 1; video_write_ns = virtual_ns; }
+}
+uint64_t portable_machine_clock_read_charge(uint64_t quantum_ns)
+{
+    if (video_written && portable_input_time_display_frame(video_write_ns) !=
+            portable_input_time_display_frame(virtual_ns)) video_written = 0;
+    return portable_input_time_display_charge(virtual_ns, quantum_ns, video_written);
+}
 int portable_machine_clock_pace(void)
 {
     uint64_t now, target;

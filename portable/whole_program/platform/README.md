@@ -35,18 +35,49 @@ value is an input to the advance rule.
 The independently implementable rule is:
 
 1. At entry to each **game-initiated** read in the table below, with guest IF set,
-   advance machine time by Q. Writes consume no time. A query made by an IRQ or
+   advance machine time by Q, except for the display rule below. Writes consume no time. A query made by an IRQ or
    an internal provider callback is not another game-initiated read.
 2. Process all elapsed hardware timer instants in timestamp order, then sample
    the requested service. Retain fractional phases across reads. With IF clear,
    the existing interrupt guard defers delivery and the read charges no time.
-3. Return the sample. Repeated reads use exactly the same Q as changed reads.
+3. Return the sample. Repeated reads use the same rule as changed reads.
    There is no per-site history and no repeat-dependent jump. With default Q,
    a canonical 18.2 Hz deadline loop needs at most 55 reads per tick. This fixed
    small-step choice avoids a jump between the multiple reads in WaitedEnough,
    is cheap to implement in a DOS recorder, and supplies a positive minimum
    step even in Fast/Ultra loops. Native spelling is only a dispatch key; a DOS
    recorder can intercept the corresponding guest boundary directly.
+
+**Display rule (`native-clock-v1-display-v4`).** The emulated mode-12h display
+has a fixed grid from machine time zero: edge k is k * 420000 / 25175000
+seconds = k * 16800000000 / 1007 ns (59.940476190476 Hz). At integer-ns
+resolution its boundary is ceil(k * 16800000000 / 1007). At an admitted read,
+if a video write occurred since the last boundary, replace Q by the distance
+to the next strictly later grid boundary. This can be less than Q; do not add
+Q first or clamp the distance to Q. Otherwise charge Q as before. A boundary
+retires earlier writes, even when a clean Q crosses it; a write at a boundary
+belongs to the new interval. Consecutive draws never reset the grid. Keep the
+rational phase, rather than repeatedly adding a rounded frame duration.
+
+A video write is any CPU store to physical A0000h..AFFFFh, including unchanged
+bytes, masked stores and offscreen bytes; native planar/pixel stores are the
+same boundary. DAC data (3C9h) and attribute palette/overscan data (3C0h data
+phase, indices 00h..0Fh/11h) also count: they can redraw the visible display
+without touching its planes. Attribute index/select, DAC index, VGA sequencer,
+graphics-controller and other register writes do not count. Neither do aperture
+reads, status reads, host conversion/upload, exposure repaints or SDL overlays.
+Batch palette APIs contain no charged reads and mark once. No pixel comparison
+or knowledge of the caller, GameSpeed, source loop or window is involved.
+
+IF-clear, IRQ-origin and nested reads still cost zero and cannot consume a
+pending draw. Writes within these scopes are tracked at their machine instant.
+All elapsed PIT/IRQ/audio work through the selected endpoint runs in order before
+the read samples or admits input; no IRQ is skipped by a frame advance. Pacing
+waits against the same fixed host epoch at the selected endpoint, including
+input wake/retry and catch-up semantics. Deterministic mode and Ultra bypass
+only that wall wait. Physical display refresh never feeds this virtual grid.
+The next read after a draw can advance almost 16.684 ms; audio is generated
+through that endpoint, rather than through a host frame or buffer deadline.
 
 | Guest read | Native boundary spelling |
 | --- | --- |
@@ -77,9 +108,11 @@ that never reaches BIOS does not charge a hardware poll. Internal event drains,
 presentation, mouse-show writes and countdown writes do not charge Q.
 
 The pure implementation is `input_time.c:portable_input_time_read_quantum`.
+Its display-frame/charge helpers select the rational endpoint; the host owns
+an independent last-video-write latch, never cleared by presentation.
 `portable/tests/idle_yield/rule.c` is a standalone golden-vector fixture (no SDL,
 wall clock or game assets); its synthetic PIT has a 10 ms chained tick and a
-200 us sound IRQ. It is the shared test-vector source for a later DOS recorder.
+200 us sound IRQ. Both independent DOS/native implementations run this fixture.
 The executable polling fixture additionally checks real rational PIT tick values,
 a spinning negative control, and SDL keyboard/mouse wake latency.
 
@@ -116,7 +149,8 @@ In ordinary play, each admitted read is paced against a fixed host epoch before
 it returns. Event waits wake for input and leave events for the sole ingestion
 path; delivery does not change Q or the pending read's tick. Reads catch up after
 host delays without skipping virtual quanta or ticks. Audio and presentation are
-serviced at every Q, with Q bounded to 1 ms. GameSpeed 3 bypasses wall pacing,
+serviced at every charged endpoint (Q <= 1 ms, or the next virtual display
+edge after a video write). GameSpeed 3 bypasses wall pacing,
 retaining the same machine read rule, so computation is not capped by a frame
 or tick wait. Its virtual audio timeline can consequently run ahead of physical
 playback; there is no claim of wall-tempo preservation for that mode.
@@ -134,8 +168,7 @@ Windows message readiness and an SDL event-watch signal (including events pushed
 from other threads). SDL 3.4.16's Windows backend truncates sub-millisecond
 timeouts: requesting a 1 ms SDL wait after its setup work can repeatedly poll
 with a zero timeout. The native wait blocks to the pending read's exact host
-deadline. That deadline is at most Q away, so it also services presentation and
-audio sooner than their next device-buffer/refresh deadlines. Input wakes drain
+deadline. That deadline is at most one virtual display interval away. Input wakes drain
 through the existing owner and retry the same pending read; they never add Q.
 Physical presentation opportunities use the current display interval and host
 time, preventing catch-up reads from submitting bursts. Deterministic/tape

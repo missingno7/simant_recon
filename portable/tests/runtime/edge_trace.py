@@ -58,6 +58,14 @@ class Present(gdb.Breakpoint):
             emit('trace-error', error=str(error))
         return False
 
+class Opportunity(gdb.Breakpoint):
+    def stop(self):
+        if active_scrolls:
+            emit('refresh-opportunity', elapsed_ns=word('virtual_ns') - word('app.started_ns'),
+                 mouse=[word('mouse_x_pixels'),word('mouse_y_pixels')],
+                 scroll_loop=True)
+        return False
+
 
 class ScrollReturned(gdb.FinishBreakpoint):
     def __init__(self, frame, key):
@@ -66,9 +74,10 @@ class ScrollReturned(gdb.FinishBreakpoint):
 
     def stop(self):
         active_scrolls.discard(self.key)
-        steps, started = scroll_steps.pop(self.key, (0, time.monotonic()))
+        steps, started, machine_started = scroll_steps.pop(self.key, (0, time.monotonic(), word('virtual_ns')))
         emit('scroll-return', mouse=[word('mouse_x_pixels'), word('mouse_y_pixels')],
-             steps=steps, held_seconds=time.monotonic() - started,
+             steps=steps, held_seconds=(word('virtual_ns') - machine_started) / 1e9,
+             wall_seconds=time.monotonic() - started,
              outer_loops=word('main_iteration_count'), replay_next=word('app.replay_next'))
         return False
 
@@ -82,13 +91,13 @@ class Scroll(gdb.Breakpoint):
                 return False
             key = int(frame.read_register('rsp'))
             if key in active_scrolls:
-                steps, started = scroll_steps[key]
-                scroll_steps[key] = (steps + 1, started)
+                steps, started, machine_started = scroll_steps[key]
+                scroll_steps[key] = (steps + 1, started, machine_started)
                 return False
             x, y = word('mouse_x_pixels'), word('mouse_y_pixels')
             if x <= 1 or x >= 636 or y < 1 or y >= 476:
                 active_scrolls.add(key)
-                scroll_steps[key] = (1, time.monotonic())
+                scroll_steps[key] = (1, time.monotonic(), word('virtual_ns'))
                 scrolls += 1
                 emit('scroll-entry', mouse=[x, y], replay_next=word('app.replay_next'))
                 ScrollReturned(frame, key)
@@ -110,4 +119,10 @@ def exited(event):
 gdb.events.stop.connect(stopped)
 gdb.events.exited.connect(exited)
 Present('portable_m1b73_sdl_application_input_present', internal=True)
+# The application may reuse unchanged scanout instead of uploading it. Bind
+# the opportunity by its unique source statement, not a hand-maintained line.
+from pathlib import Path
+source=Path(os.environ['SIMANT_PROJECT']) / 'portable/whole_program/application.c'
+line=next(i for i,s in enumerate(source.read_text().splitlines(),1) if '++a->presentation_checks;' in s)
+Opportunity(str(source)+':'+str(line+1), internal=True)
 Scroll('edit_scroll_and_redraw', internal=True)

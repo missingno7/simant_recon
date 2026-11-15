@@ -293,7 +293,7 @@
   },
   "input_time_delivery": {
     "service": "portable/whole_program/platform/sdl3/input_time_host.c:portable_input_time_host_refresh_clock",
-    "contract": "One virtual machine clock in ordinary play and unpaced --deterministic runs. Each listed guest-facing clock/input poll with IF set charges exactly Q=1 ms (or explicit --poll-ns); computation, internal/nested refresh, drawing and host conditions charge none. Timer/audio work derives from machine time. Ordinary reads wait for the fixed host epoch using an event-wakeable high-resolution Windows timer (SDL 3.4 sub-ms timeout truncation must not busy-poll); GameSpeed 3 bypasses wall pacing but retains Q. The pending Q deadline bounds presentation/audio service latency. Physical presentation uses host display-refresh deadlines, including during machine catch-up. PCM submission uses device-duration blocks, a four-period presentation target and a five-period bound; catch-up gates and oldest-prefix drops never feed source timing; the consumer callback only counts stream starvation and never advances guest time. Single-screen unchanged planes/palette skip RGB upload; raster/cursor exclusion and hosted-window refresh remain intact.",
+    "contract": "Shared native-clock-v1-display-v4: admitted IF-enabled clock/input reads charge Q=1 ms unless a video write since the last fixed mode-12h boundary selects the next grid boundary instead. Grid k*16800000000/1007 ns, rounded upward at endpoints; no drift, no wall/display/GameSpeed input. Aperture stores and DAC/attribute palette data count, register selection does not. Nested/IRQ/IF-clear reads remain free. Process all elapsed PIT/IRQ/audio work before input/sample; paced reads wait on the fixed host epoch, deterministic and Ultra bypass wall waits only. See platform README for the full rule.",
     "evidence": "evidence/canonical/native-edge-scroll/README.md",
     "regression": "portable/tests/runtime/run_edge.py",
     "scope": "Quick Game edge holds and release, exact seed-0 human freeze replay; logo/customer-dialog mouse and key release; title, resize and caste triangle tracking presentation. Arbitrary pure-memory waits and CPU/PIC interrupt interleaving equivalence remain unproved.",
@@ -304,12 +304,14 @@
     "mouse_interval_regression": "portable/tests/mouse_services/run.py; portable/tests/input_irq/run.py",
     "clock_model": "portable/whole_program/platform/README.md#ideal-machine-clock-native-clock-v1",
     "clock_regression": "portable/tests/idle_yield/run.py",
-    "clock_limits": "Direct0000:0417 modifier reads charge Q on both sides. Allocator-derived yard animation IDs use a reviewed per-holder identity pattern with raw diagnostics, not prescribed allocation values. DMA, AdLib latch/status-only drivers and GameSpeed3 wall-tempo remain separate limits. The native slow-mode timer fix is retained.",
+    "clock_limits": "Direct0000:0417 modifier reads use the shared read/display rule on both sides. Allocator-derived yard animation IDs use a reviewed per-holder identity pattern with raw diagnostics, not prescribed allocation values. DMA, AdLib latch/status-only drivers and GameSpeed3 wall-tempo remain separate limits. The native slow-mode timer fix is retained.",
     "ideal_contract": "portable/tests/acceptance/ideal/README.md",
     "ideal_regression": "portable/tests/acceptance/ideal_rule_check.py; portable/tests/acceptance/ideal_check.py",
-    "timer_transition": "Timestamped progress/reload/old-INT08/restore notifications split every Q. Fast214/306 first1; slow3424/19 first(remaining>>4)+1; rational fractions survive Q partitioning. ISA bus/status/reset is synchronous at device time, with no local I/O charge.",
-    "sound_off_gameplay": "Shipped Sound Mode: 0, unchanged BIOS-tick scripts; keyboard-context-v1 and owner-approved anim-id-pattern-v1 for11 audited yard ID holders. Per-entry raw ID diagnostics retained; eight original instruction-bound scalar holders extend prior coverage. Current lane verdicts and costs: evidence/canonical/native-ideal-clock/identity-results.json. No retirement in this round.",
-    "sound_off_evidence": "evidence/canonical/native-ideal-clock/animation-identity.md"
+    "timer_transition": "Timestamped progress/reload/old-INT08/restore notifications split every charged advance. Fast214/306 first1; slow3424/19 first(remaining>>4)+1; rational fractions survive Q partitioning. ISA bus/status/reset is synchronous at device time, with no local I/O charge.",
+    "sound_off_gameplay": "Shipped Sound Mode: 0, unchanged BIOS-tick scripts and shared ideal-state-v2 observers. Both executable reference sets were re-recorded for native-clock-v1-display-v4; prior identities are retained with workspace.py in to_delete. Current verification: evidence/canonical/native-ideal-clock/display-refresh.json.",
+    "sound_off_evidence": "evidence/canonical/native-ideal-clock/animation-identity.md",
+    "display_clock_revision": "native-clock-v1-display-v4",
+    "display_evidence": "evidence/canonical/native-ideal-clock/display-refresh.json"
   },
   "native_input_interrupts": {
     "authority": "src/platform/input_timer.asm",

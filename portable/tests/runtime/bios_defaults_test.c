@@ -3,10 +3,13 @@
 #include <stdio.h>
 #include <string.h>
 
+static SimGraphicsPaletteServices palette_services;
+static unsigned video_writes;
+void portable_machine_video_write(void) { ++video_writes; }
 SimGraphicsStatus sim_graphics_source_palette_bind(
     const SimGraphicsPaletteServices *services)
 {
-    (void)services;
+    palette_services=*services;
     return SIM_GRAPHICS_OK;
 }
 
@@ -26,6 +29,15 @@ static int check_palette(const char *path)
     }
     if (!sim_sdl_palette_init(&palette, SIM_NATIVE_VIDEO_VGA_PROFILE_8))
         return 2;
+    if (video_writes || !sim_sdl_palette_bind(&palette)) return 2;
+    {
+        uint8_t attributes[17]={0},rgb[3]={0};
+        if (!palette_services.set_attribute_palette(palette_services.context,attributes) || video_writes!=1) return 2;
+        if (!palette_services.set_dac_range(palette_services.context,0,0,rgb) || video_writes!=1) return 2;
+        if (!palette_services.set_dac_range(palette_services.context,0,1,rgb) || video_writes!=2) return 2;
+        /* Reinitialise before the independent captured-default comparison. */
+        if (!sim_sdl_palette_init(&palette, SIM_NATIVE_VIDEO_VGA_PROFILE_8)) return 2;
+    }
     for (i = 0; i < 256u; ++i) {
         unsigned channel;
         int should_be_known = i >= 16u;

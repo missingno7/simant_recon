@@ -1,0 +1,18 @@
+--- src/hardware/vga_dac.cpp
++++ src/hardware/vga_dac.cpp
+@@ -21,6 +21,7 @@
+ #include "logging.h"
+ #include "render.h"
+ #include "vga.h"
++extern void IdealVideoWrite(unsigned kind);
+ 
+ extern bool vga_enable_3C6_ramdac;
+ extern bool vga_8bit_dac;
+@@ -305,6 +306,7 @@
+     if (vga.dosboxig.vga_dac_lockout)
+         return;
+ 
++    IdealVideoWrite(1);
+     (void)iolen;//UNUSED
+     (void)port;//UNUSED
+     vga.dac.hidac_counter=0;

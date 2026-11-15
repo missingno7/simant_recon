@@ -21,7 +21,8 @@ def main():
     commands = [base + common + [str(HERE/'rule.c'), '-o', str(out/'rule.exe')],
                 base + ['-I'+str(sdk/'include')] + common +
                 [str(ROOT/'portable/whole_program/platform/sdl3'/f) for f in ('input_time_host.c', 'host.c')] +
-                [str(HERE/'poll.c'), '-L'+str(sdk/'lib'), '-lSDL3', '-o', str(out/'poll.exe')],
+                [str(ROOT/'portable/whole_program/platform/graphics_vga.c'),
+                 str(HERE/'poll.c'), '-L'+str(sdk/'lib'), '-lSDL3', '-o', str(out/'poll.exe')],
                 base + ['-I'+str(sdk/'include'), str(HERE/'audio_buffer.c'),
                     str(ROOT/'portable/platform/sdl3/audio.c'), '-L'+str(sdk/'lib'),
                     '-lSDL3', '-o', str(out/'audio-buffer.exe')]]

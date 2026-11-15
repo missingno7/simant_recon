@@ -46,6 +46,7 @@ uint64_t host_time_ns(void)
 int host_virtual_clock_enabled(void) { return virtual_mode; }
 int portable_machine_clock_active(void) { return 0; }
 uint64_t portable_machine_clock_quantum(void) { assert(0 && "fixture has an external clock"); return 0; }
+uint64_t portable_machine_clock_read_charge(uint64_t q) { (void)q; assert(0 && "fixture has an external clock"); return 0; }
 void portable_machine_clock_advance(uint64_t ns) { (void)ns; assert(0 && "fixture clock is externally advanced"); }
 void host_wait_ms(uint32_t ms) { (void)ms; assert(0 && "test unexpectedly blocked"); }
 int host_poll_event(Host *h, HostEvent *e)

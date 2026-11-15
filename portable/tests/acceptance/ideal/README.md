@@ -6,12 +6,28 @@ table independently for DOS. `ideal_rule_check.py` runs the unchanged shared
 golden vectors on both implementations and an actual source-ISR regression with
 an omitted-notification negative control. The nominal crystal is 14,318,180/12 Hz.
 
-Each admitted foreground read advances exactly Q, default 1 ms, with entry IF
+Each admitted foreground read advances Q, default 1 ms, with entry IF
 set. The adapter's own CLI does not change entry IF. IRQ, nested provider and
 enqueue-stamp reads made during delivery charge nothing. Computation and I/O
 instructions consume no time. There is no instruction skipping, return-value
 substitution or CPU-cycle fallback. Instructions still execute to complete each
 handler and the requested service. CPU slice size changes batching only.
+
+Clock revision `native-clock-v1-display-v4` additionally implements the exact
+display rule in the [platform specification](../../../whole_program/platform/README.md#ideal-machine-clock-native-clock-v1).
+Both independent implementations run the shared read and rational display
+vectors in `portable/tests/idle_yield/rule.c`, including the sub-Q edge, a read
+at an edge, zero-cost internal reads, a long epoch and 1007 frames without drift.
+The DOSBox-X generic and fast planar memory handlers qualify physical
+A0000h..AFFFFh before mapping; byte/word/dword and REP stores all reach those
+handlers. DAC 3C9h data and attribute 3C0h palette/overscan data phases notify
+the same write latch. Register selection and other ports do not notify it.
+The recorder retains the write timestamp on frozen PIC time, expires writes
+across the fixed grid, and reports aperture/palette write counts in `.ideal`.
+The complete transaction processes every real PIT/PIC/guest IRQ through its
+new endpoint. Installed emulator sources remain read-only; the additional
+three patched TUs are source-pinned and rebuilt with the observer. All three
+upper-layer reference sets must be freshly recorded with this revision.
 
 BIOS modifier reads include the C source's direct byte reads through
 BIOS_KEYBOARD_FLAGS_FARPTR (physical0000:0417), as well as INT16 AH02/12.
@@ -125,7 +141,8 @@ the same rational instant to nearest nanosecond on both observers.
 Pre-repair sound-on captures are rejected by the current checker and preserved
 in ignored to_delete with their reference identities. The shared identity-view sound-on references live under
 build/reference/sound-on-identity-v1. Earlier raw-only sound-on-clock-v3 captures
-are preserved as retired historical controls. Existing sound-off-identity captures have the same
-view census, qualified bytes and rule receipts and remain valid. Raw .hash,
+are preserved as retired historical controls. Both sound variants were recorded
+again for `native-clock-v1-display-v4`, retaining the same view census,
+qualified bytes and rule receipts. Raw .hash,
 full dumps and .anim-ids are retained for every variant; missing rule sidecars
 or metadata fail validation. The complete replacement set is the upper-layer regression; see the parent README.

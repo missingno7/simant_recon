@@ -6,6 +6,23 @@
 
 static PortableInputTime *active_input_time;
 
+uint64_t portable_input_time_display_frame(uint64_t now_ns)
+{
+    /* Split before multiplication: no overflow at ordinary uint64 epochs. */
+    return (now_ns / UINT64_C(16800000000)) * 1007 +
+        (now_ns % UINT64_C(16800000000)) * 1007 / UINT64_C(16800000000);
+}
+
+uint64_t portable_input_time_display_charge(uint64_t now_ns, uint64_t quantum_ns, int written)
+{
+    uint64_t frame, endpoint;
+    if (!quantum_ns || !written) return quantum_ns;
+    frame = portable_input_time_display_frame(now_ns) + 1;
+    endpoint = (frame / 1007) * UINT64_C(16800000000) +
+        ((frame % 1007) * UINT64_C(16800000000) + 1006) / 1007;
+    return endpoint - now_ns;
+}
+
 uint64_t portable_input_time_read_quantum(const char *service, uint64_t quantum_ns)
 {
     static const char *const reads[] = {

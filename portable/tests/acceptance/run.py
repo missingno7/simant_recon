@@ -9,7 +9,7 @@ import time
 ROOT=Path(__file__).resolve().parents[3]
 
 
-def run(build,out,jobs=3):
+def run(build,out,jobs=3,scratch_root=None):
     sys.path.insert(0,str(ROOT/'tools'))
     from workspace import prepare_output
     out=prepare_output(out.resolve(),ROOT/'build/current/tests/acceptance',ROOT)
@@ -21,6 +21,7 @@ def run(build,out,jobs=3):
         destination=out/name
         command=[sys.executable,'-m','portable.tests.acceptance.'+module,
                  '--build',str(build.resolve()),'--out',str(destination),'--jobs',str(jobs),*options]
+        if scratch_root is not None:command+=['--scratch-root',str(scratch_root.resolve())]
         lane_start=time.perf_counter()
         # Each child joins its bounded lane pool before returning. A failure
         # still leaves the other independent sound variant's evidence visible.
@@ -47,8 +48,9 @@ def main():
     parser.add_argument('--build',type=Path,default=ROOT/'build/current/portable')
     parser.add_argument('--out',type=Path,default=ROOT/'build/current/tests/acceptance')
     parser.add_argument('--jobs',type=int,choices=range(1,5),default=3)
+    parser.add_argument('--scratch-root',type=Path,help='Short disposable asset directory for all three lanes')
     args=parser.parse_args()
-    return int(not run(args.build,args.out,args.jobs)['passed'])
+    return int(not run(args.build,args.out,args.jobs,args.scratch_root)['passed'])
 
 
 if __name__=='__main__':raise SystemExit(main())

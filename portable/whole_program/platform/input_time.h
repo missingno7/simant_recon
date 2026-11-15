@@ -81,6 +81,11 @@ void kbd_install_ctrl_break_vector(const uint16_t *new_vector_words);
 /* Pure ideal-machine read rule. Only listed guest-facing reads consume time;
  * internal refresh/presentation callbacks and computation consume none. */
 uint64_t portable_input_time_read_quantum(const char *service, uint64_t quantum_ns);
+/* Mode-12h grid: ceil(k * 16800000000 / 1007) ns, k >= 0. */
+uint64_t portable_input_time_display_frame(uint64_t now_ns);
+uint64_t portable_input_time_display_charge(uint64_t now_ns, uint64_t quantum_ns, int written);
+void portable_machine_video_write(void);
+uint64_t portable_machine_clock_read_charge(uint64_t quantum_ns);
 void portable_machine_clock_configure(int unpaced, uint64_t quantum_ns);
 int portable_machine_clock_active(void);
 uint64_t portable_machine_clock_quantum(void);

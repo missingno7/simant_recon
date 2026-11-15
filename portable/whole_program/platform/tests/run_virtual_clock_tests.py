@@ -16,7 +16,8 @@ def main():
     exe=out/'virtual-clock.exe'
     command=['C:/msys64/mingw64/bin/gcc.exe','-std=c11','-Wall','-Wextra','-Werror','-O0','-g',
              '-I'+str(ROOT),'-I'+str(sdk/'include'),str(ROOT/'portable/whole_program/platform/sdl3/host.c'),
-             str(ROOT/'portable/whole_program/platform/pit_clock.c'),str(Path(__file__).with_name('virtual_clock_test.c')),
+             str(ROOT/'portable/whole_program/platform/pit_clock.c'),
+             str(ROOT/'portable/whole_program/platform/input_time.c'),str(Path(__file__).with_name('virtual_clock_test.c')),
              '-L'+str(sdk/'lib'),'-lSDL3','-o',str(exe)]
     subprocess.run(command,check=True,timeout=60)
     env=dict(os.environ,PATH=str(sdk/'bin')+os.pathsep+os.environ.get('PATH',''))

@@ -12,7 +12,7 @@ def main():
     sdk=args.sdk.resolve();cc='C:/msys64/mingw64/bin/gcc.exe'
     files=['portable/tests/acceptance/virtual_audio_test.c','portable/platform/sdl3/audio.c',
            'portable/platform/sdl3/whole_audio_provider.c','portable/platform/sdl3/whole_audio_startup.c',
-           'portable/whole_program/platform/sdl3/host.c','portable/whole_program/platform/whole_audio_provider.c',
+           'portable/whole_program/platform/sdl3/host.c','portable/whole_program/platform/input_time.c','portable/whole_program/platform/whole_audio_provider.c',
            'portable/whole_program/platform/audio_native.c','portable/audio/native_renderer.cpp',
            'portable/audio/ymfm/ymfm_opl.cpp','portable/audio/ymfm/ymfm_adpcm.cpp','portable/audio/ymfm/ymfm_pcm.cpp']
     objects=[];commands=[]

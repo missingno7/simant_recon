@@ -10,6 +10,8 @@ int native_windows_filter_root(SDL_Event *e){(void)e;return 0;}
 int native_windows_pointer(float *x,float *y){(void)x;(void)y;return 0;}
 void native_windows_root_pointer(float *x,float *y){(void)x;(void)y;}
 static unsigned calls,isr;
+static int guest_if=1;
+static int interrupts_enabled(void){return guest_if;}
 int portable_whole_audio_isr_active(void){return isr;}
 static int refresh(void *ctx,SimTimingClock *clock){(void)ctx;(void)clock;++calls;return 1;}
 int main(void){
@@ -33,6 +35,18 @@ int main(void){
  CHECK(host_time_ns()==2000000 && calls==2 && input.key_count==1);
  isr=1;CHECK(portable_input_time_host_refresh_service(&input,"TickCount")==PORTABLE_INPUT_TIME_OK);
  CHECK(host_time_ns()==2000000 && calls==2);isr=0;
+ portable_machine_video_write();
+ portable_input_time_host_set_interrupt_guard(&input,interrupts_enabled);
+ guest_if=0;
+ CHECK(portable_input_time_host_refresh_service(&input,"TickCount")==PORTABLE_INPUT_TIME_OK);
+ CHECK(host_time_ns()==2000000 && calls==2);
+ guest_if=1;isr=1;
+ CHECK(portable_input_time_host_refresh_service(&input,"TickCount")==PORTABLE_INPUT_TIME_OK);
+ CHECK(host_time_ns()==2000000 && calls==2);isr=0;
+ CHECK(portable_input_time_host_refresh_service(&input,"mouse_show_cursor")==PORTABLE_INPUT_TIME_OK);
+ CHECK(host_time_ns()==2000000 && calls==2);
+ CHECK(portable_input_time_host_refresh_service(&input,"TickCount")==PORTABLE_INPUT_TIME_OK);
+ CHECK(host_time_ns()==16683218 && calls==3);
  (void)e;portable_input_time_host_shutdown(&input);host_destroy(host);
  puts("PASS: internal writes and ISR reads cannot admit input or charge time; next foreground read does");return 0;
 }

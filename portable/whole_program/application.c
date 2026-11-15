@@ -662,28 +662,14 @@ static void idle(void *context)
     /* Polling yields after a draw, including held-input tracking. clip_active_list_offset is
      * the current clip list, which those loops retain until release; it is
      * not a frame-in-progress flag. Raster/cursor exclusion is gfx_cursor_draw_lock. */
-    /* DOS speed in held-edge scrolling and Fast/Ultra simulation is bounded
-     * only by the machine: those source loops redraw without a timer wait.
-     * The display shows one refresh of VGA memory at a time (mode 12h:
-     * 25.175 MHz / (800 x 525) = 59.94 Hz), so a loop that has stored to VGA
-     * since the last presented refresh waits for the next one here, at the
-     * platform boundary, instead of producing invisible frames at host speed. */
+    /* The shared machine clock charges drawing at its virtual VGA grid.
+     * Physical submission below has its own host display opportunities. */
     if (a->display_active && (gfx_cursor_draw_lock & 255u) == 0 && sim_sdl_palette_view(&a->palette)) {
         const int physical = portable_machine_clock_active() && !host_virtual_clock_enabled();
         const uint64_t refresh_ns = physical ? host_display_refresh_ns(a->host) : 16683217;
         /* Catch-up machine reads retain every quantum, but cannot submit a
          * burst of physical frames after a slow host draw or filesystem call. */
         uint64_t present_now = physical ? SDL_GetTicksNS() : now;
-        /* Wait in short slices: audio is rendered only up to host time, so
-         * the device keeps the same feed cadence while the source waits. */
-        while (!portable_machine_clock_active() && a->graphics.vga.written && a->last_present && !host_virtual_clock_enabled() &&
-               now - a->last_present < refresh_ns) {
-            uint64_t remaining = refresh_ns - (now - a->last_present);
-            SDL_DelayPrecise(remaining < 1000000u ? remaining : 1000000u);
-            if (a->audio.active && portable_sdl3_whole_audio_pump(&a->audio) !=
-                    PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
-            now = host_time_ns();
-        }
         if (!physical) present_now = now;
         if (present_now - a->last_present >= refresh_ns) {
             uint64_t work_started = SDL_GetTicksNS();

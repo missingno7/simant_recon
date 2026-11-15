@@ -84,7 +84,9 @@ static void observe(void)
         g.ready = 1;
         g.sync = 0;
         invalidate_world();
-    } else if (v.origin_x != g.origin_x || v.origin_y != g.origin_y) {
+    } else if (!g.pumping && (v.origin_x != g.origin_x || v.origin_y != g.origin_y)) {
+        /* A charged read inside our own canonical redraw can present again.
+         * That scroll already follows the target; do not apply it twice. */
         g.target.center_x += (double)(v.origin_x - g.origin_x) * MODERN_TILE_SIZE;
         g.target.center_y += (double)(v.origin_y - g.origin_y) * MODERN_TILE_SIZE;
     }

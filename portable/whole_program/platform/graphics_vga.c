@@ -1,6 +1,9 @@
 #include "graphics_vga.h"
 #include <string.h>
 
+/* Isolated card fixtures have no application clock. */
+extern void portable_machine_video_write(void) __attribute__((weak));
+
 void sim_vga_reset(SimVga *vga)
 {
     /* A mode set clears the card; the presentation router is not card state. */
@@ -98,6 +101,7 @@ void sim_vga_write(SimVga *vga, uint16_t offset, uint8_t value)
     SimVgaSpan spans[8];
     unsigned plane, mode = vga->mode & 3, n;
     uint8_t rotated = rotate(value, vga->data_rotate);
+    if (portable_machine_video_write) portable_machine_video_write();
     if (!(vga->map_mask & 15u)) return;
     vga->written = 1;
     n = spans_of(vga, offset, spans);
@@ -154,6 +158,7 @@ void sim_vga_store_color(SimVga *vga, uint16_t offset, unsigned bit, uint8_t col
     SimVgaSpan spans[8];
     unsigned i, plane, n = spans_of(vga, offset, spans);
     uint8_t mask = (uint8_t)(0x80u >> (bit & 7));
+    if (portable_machine_video_write) portable_machine_video_write();
     vga->written = 1;
     for (i = 0; i < n; ++i) {
         if (!(spans[i].mask & mask)) continue;

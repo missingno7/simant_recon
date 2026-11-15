@@ -31,7 +31,8 @@ def run_case(args, build, executable, gdb, out, case):
     if args.deterministic:
         command.append('--deterministic')
     process = subprocess.Popen(command, cwd=args.project,
-                               env=dict(os.environ, SIMANT_TRACE_OUT=str(target / 'events.jsonl')),
+                               env=dict(os.environ, SIMANT_TRACE_OUT=str(target / 'events.jsonl'),
+                                        SIMANT_PROJECT=str(args.project)),
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     timed_out = False
     try:
@@ -50,6 +51,7 @@ def run_case(args, build, executable, gdb, out, case):
     events = [json.loads(line) for line in event_path.read_text().splitlines()] if event_path.exists() else []
     frames = [event for event in events if event['event'] == 'present']
     scroll_frames = [event for event in frames if event['scroll_loop']]
+    opportunities = [event for event in events if event['event'] == 'refresh-opportunity']
     returns = [event for event in events if event['event'] == 'scroll-return']
     exits = [event for event in events if event['event'] == 'inferior-exit']
     loops = re.findall(r'outer game loop count=(\d+);', log)
@@ -68,15 +70,16 @@ def run_case(args, build, executable, gdb, out, case):
     }
     if case == 'edges':
         positions = ([0, 200], [636, 200], [240, 0], [374, 476])
-        checks['frames_at_each_held_screen_edge'] = all(
-            sum(event['mouse'] == position for event in scroll_frames) >= 2 for position in positions)
+        checks['refreshes_at_each_held_screen_edge'] = all(
+            sum(event['mouse'] == position for event in opportunities) >= 2 and
+            sum(event['mouse'] == position for event in scroll_frames) >= 1 for position in positions)
         checks['scroll_returns_after_moving_away'] = sum(
             event['mouse'] == [240, 200] for event in returns) >= 4
         before = [event['outer_loops'] for event in frames if event['elapsed_ns'] < 20000000000]
         after = [event['outer_loops'] for event in frames if event['elapsed_ns'] > 34500000000]
         checks['outer_loop_resumes_after_holds'] = bool(before and after) and max(after) > max(before)
-        # The DOS loop has no timer wait; native presentation paces each
-        # redraw to one 59.94 Hz VGA refresh instead of host speed.
+        # The source loop has no timer wait. The shared ideal-machine clock
+        # charges redraws on its 59.94 Hz grid, independently of wall time.
         held = [event for event in returns if event.get('held_seconds', 0) > 1]
         checks['scroll_steps_paced_by_VGA_refresh'] = len(held) >= 4 and all(
             event['steps'] <= 61 * event['held_seconds'] + 2 for event in held)

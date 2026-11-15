@@ -33,6 +33,27 @@ int main(void)
     }
     assert(portable_input_time_read_quantum("TickCount", 1) == 1);
     assert(portable_input_time_read_quantum("internal_callback", 1000000) == 0);
+    {
+        static const struct { uint64_t ns, q; int written; uint64_t charge; } display[] = {
+            {0,1000000,0,1000000}, {0,1000000,1,16683218},
+            {1000000,1000000,1,15683218}, {16683217,1000000,1,1},
+            {16683218,1000000,1,16683217}, {33366435,1000000,1,16683218},
+            {16683218,1000000,0,1000000}, {1000000,1,1,15683218},
+            {1000000,0,1,0}, {16800000000ULL,1000000,1,16683218},
+            {16800000000000000ULL,1000000,1,16683218}
+        };
+        for (i=0;i<sizeof(display)/sizeof(display[0]);++i) {
+            uint64_t delta=portable_input_time_display_charge(display[i].ns,display[i].q,display[i].written);
+            assert(delta==display[i].charge);
+        }
+        /* Rounded endpoints are the first integer ns at or after the exact
+         * rational edge; no drift after a full 1007-frame period. */
+        assert(portable_input_time_display_frame(16683217)==0);
+        assert(portable_input_time_display_frame(16683218)==1);
+        ns=0;
+        for(i=0;i<1007;++i) ns+=portable_input_time_display_charge(ns,1000000,1);
+        assert(ns==16800000000ULL);
+    }
     sim_timing_set_tick_count_enabled(&clock, 0);
     assert(sim_timing_advance_nanoseconds(&clock, 100000000) == SIM_TIMING_OK);
     assert(sim_timing_tick_count(&clock) == 1);
