@@ -17,11 +17,13 @@
      if (GCC_UNLIKELY(!pic_queue.free_entry)) {
          LOG(LOG_PIC,LOG_ERROR)("Event queue full");
          return;
-@@ -729,7 +732,34 @@
+@@ -729,7 +732,38 @@
  //#define DEBUG_CPU_CYCLE_OVERRUN
  //#define DEBUG_PIC_IRQCHECK_VS_IRR
  
 +extern bool IdealDispatchAllowed();
++extern void IdealBeforeIRQDispatch();
++extern void IdealAfterIRQDispatch();
 +unsigned long long IdealSlices=0;
 +long long IdealSliceMin=0,IdealSliceMax=0;
 +static void IdealCPUBudget() {
@@ -44,7 +46,9 @@
 +            entry->next=pic_queue.free_entry;pic_queue.free_entry=entry;
 +        }
 +        InEventService=false;
++        IdealBeforeIRQDispatch();
 +        if(PIC_IRQCheck) PIC_runIRQs();
++        IdealAfterIRQDispatch();
 +        IdealCPUBudget();
 +        return true;
 +    }

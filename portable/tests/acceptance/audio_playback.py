@@ -11,9 +11,12 @@ FAST_NS = 214 * 12 * 1_000_000_000 / 14_318_180
 
 def instrument_provider_unit(text):
     """Observe the provider's event time in a TEST COPY, without advancing it."""
-    for old in ('p->time_ns=p->irq_ns;', 'p->time_ns=target;'):
+    # DOS serializes PIC time to nearest nanosecond. The provider retains a
+    # floor plus a crystal remainder; round that observed instant identically.
+    for old,stamp in [('p->time_ns=p->irq_ns;', 'p->time_ns+(p->irq_fraction>=7159090)'),
+                      ('p->time_ns=target;', 'p->time_ns')]:
         if text.count(old)!=1:raise ValueError('Provider event-time site changed')
-        text=text.replace(old,old+'portable_test_audio_game_time(p->time_ns);')
+        text=text.replace(old,old+'portable_test_audio_game_time('+stamp+');')
     return 'extern void portable_test_audio_game_time(unsigned long long);\n'+text
 
 

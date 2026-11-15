@@ -34,14 +34,33 @@ static void IdealCheckpoint() {
         (unsigned long long)ideal_ns,(uint32_t)(mem_readd(0x46c)-0x1800b0u/2u),PIT0_GetAssignedCounter());
 }
 struct IdealScopeV2 {uint32_t return_pc;uint16_t ss,sp;};
-static std::vector<IdealScopeV2> ideal_scopes;
+static std::vector<IdealScopeV2> ideal_scopes,ideal_internal_scopes;
 static bool IdealAtOrigin(uint32_t pc) {
     return pc==ideal_pc && SegValue(ss)==ideal_ss && reg_sp==ideal_sp;
 }
 /* A CPU slice may end inside an ISR. It must not dispatch another equal-time
  * event until that complete guest handler returns to this transaction's PC. */
+static bool ideal_async_busy=false;
+static uint32_t ideal_async_pc=0,ideal_dispatch_pc=0;
+static uint16_t ideal_async_ss=0,ideal_async_sp=0,ideal_dispatch_ss=0,ideal_dispatch_sp=0;
+static bool IdealAtAsyncOrigin() {
+    return SegPhys(cs)+reg_eip==ideal_async_pc && SegValue(ss)==ideal_async_ss && reg_sp==ideal_async_sp;
+}
 bool IdealDispatchAllowed() {
-    return (ideal_busy && IdealAtOrigin(SegPhys(cs)+reg_eip)) || CompactHeld();
+    if(compact_holding) return CompactHeld();
+    if(ideal_async_busy) return IdealAtAsyncOrigin();
+    if(ideal_busy) return IdealAtOrigin(SegPhys(cs)+reg_eip);
+    return true; /* pending zero-time reload edges also obey guest STI */
+}
+void IdealBeforeIRQDispatch() {
+    ideal_dispatch_pc=SegPhys(cs)+reg_eip;ideal_dispatch_ss=SegValue(ss);ideal_dispatch_sp=reg_sp;
+}
+void IdealAfterIRQDispatch() {
+    if(!ideal_busy && !compact_holding && !ideal_async_busy &&
+       (ideal_dispatch_pc!=SegPhys(cs)+reg_eip || ideal_dispatch_ss!=SegValue(ss) || ideal_dispatch_sp!=reg_sp)) {
+        ideal_async_busy=true;ideal_async_pc=ideal_dispatch_pc;
+        ideal_async_ss=ideal_dispatch_ss;ideal_async_sp=ideal_dispatch_sp;
+    }
 }
 static void IdealStats() {
     if(!ideal_log) return;
@@ -87,8 +106,16 @@ static void IdealAdmitInputs() {
 }
 static bool IdealBefore(uint32_t pc) {
     ++ideal_instructions;
+    static uint32_t traced_bios=0;
+    if(ideal_log && IdealActive && traced_bios!=mem_readd(0x46c)) {
+        traced_bios=mem_readd(0x46c);
+        fprintf(ideal_log,"T %.6f %u %X\n",(double)PIC_FullIndex()*1000000.0,traced_bios,pc);
+    }
     if(!compact_file) return false;
     if(!ideal_ready) IdealInit();
+    if(ideal_async_busy && IdealAtAsyncOrigin()) ideal_async_busy=false;
+    while(!ideal_internal_scopes.empty() && ideal_internal_scopes.back().return_pc==pc &&
+        ideal_internal_scopes.back().ss==SegValue(ss) && ideal_internal_scopes.back().sp==reg_sp) ideal_internal_scopes.pop_back();
     while(!ideal_scopes.empty() && ideal_scopes.back().return_pc==pc &&
         ideal_scopes.back().ss==SegValue(ss) && ideal_scopes.back().sp==reg_sp) ideal_scopes.pop_back();
     ideal_yield=false;
@@ -135,6 +162,12 @@ static bool IdealBefore(uint32_t pc) {
         ideal_sites.erase(found);return false;
     }
     if(!IdealActive) return false;
+    if(site.mode=='I') {
+        uint32_t stack=SegPhys(ss)+reg_sp;
+        ideal_internal_scopes.push_back({mem_readw(stack)+16u*mem_readw(stack+2),SegValue(ss),(uint16_t)(reg_sp+4)});
+        return false;
+    }
+    if(ideal_async_busy || !ideal_internal_scopes.empty()) return false;
     FillFlags();
     bool entry_if=(reg_flags&FLAG_IF)!=0;
     const char *service=site.service.c_str();
@@ -161,7 +194,9 @@ static bool IdealBefore(uint32_t pc) {
     }
     ideal_pc=pc;ideal_ss=SegValue(ss);ideal_sp=reg_sp;
     ideal_target_ns=ideal_ns+charge;ideal_busy=true;++ideal_reads;
-    fprintf(ideal_log,"R %llu %llu %X %s\n",(unsigned long long)ideal_reads,(unsigned long long)ideal_target_ns,pc,service);
+    uint32_t trace_stack=SegPhys(ss)+reg_sp;
+    uint32_t trace_caller=mem_readw(trace_stack)+16u*mem_readw(trace_stack+2);
+    fprintf(ideal_log,"R %llu %llu %X %s %X %X:%X\n",(unsigned long long)ideal_reads,(unsigned long long)ideal_target_ns,pc,service,trace_caller,SegValue(ss),reg_sp);
     IdealMove((double)ideal_target_ns/1000000.0);++ideal_moves;
     ideal_yield=true;return true;
 }

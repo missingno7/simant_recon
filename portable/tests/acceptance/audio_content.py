@@ -152,7 +152,7 @@ def read_content(path, entries=None):
                     active[ch]['stop'] = dict(coordinate, reason='replaced')
                 voice = dict(start=coordinate, channel=ch, object=obj, rate=rate, volume=volume,
                              end=end, loop=loop, flags=flags, size=size,
-                             payload_sha256=hashlib.sha256(payload).hexdigest(), output=[])
+                             payload_sha256=hashlib.sha256(payload).hexdigest(), output=[], output_ns=[])
                 result['voices'].append(voice)
                 active[ch] = voice
             elif tag == 'X':
@@ -181,6 +181,7 @@ def read_content(path, entries=None):
                     if active[ch] is None or active[ch]['object'] != obj:
                         raise ValueError(f'Channel output lacks its sample start at line {number}')
                     active[ch]['output'].append((position, value, tick, step + 1))
+                    if version==2:active[ch]['output_ns'].append(time_ns)
             elif tag in ('C', 'Q'):
                 hashes = tuple(int(x, 16) for x in data)
                 if not hashes or any(x > 0xffffffff for x in hashes):
@@ -217,7 +218,7 @@ def opl_channel(register):
 
 
 def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete=True, out=None,
-                    raw_dos_path=None, raw_native_path=None, progress_names=None, playback=False):
+                    raw_dos_path=None, raw_native_path=None, progress_names=None, playback=False, playback_tolerance_ns=None):
     """Full-run, ordered content verdict; no cross-device interleaving test.
 
     The tolerance is in fast PIT periods, NOT simulation entries or host time.
@@ -246,6 +247,9 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
                     raise ValueError('Observed channel contributions do not reproduce actual DAC bytes')
         except (OSError, ValueError) as error:
             errors[label] = str(error)
+    if playback and playback_tolerance_ns is not None:
+        from .audio_playback import FAST_NS
+        tolerance=playback_tolerance_ns/FAST_NS
     result = dict(contract='audio-content-v1', tick_tolerance=tolerance,
                   tick_units='fast PIT periods (214/1193181.667 seconds); slow IRQ=16',
                   status='AUDIO_INCOMPLETE', first_difference=None, capture_errors=errors,
@@ -253,6 +257,16 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
     differences = []
     maximum = dict(opl=0, start=0, stop=0, output=0, progress=0)
     setup_drift=0
+    maximum_ns=dict(start=0,stop=0,output=0)
+    def sample_drift(x,y,index,key):
+        if playback:
+            from .audio_playback import FAST_NS
+            ns=abs(x['output_ns'][index]-y['output_ns'][index])
+            maximum_ns[key]=max(maximum_ns[key],ns)
+            bound=playback_tolerance_ns if playback_tolerance_ns is not None else tolerance*FAST_NS
+            return ns/FAST_NS,ns>bound
+        drift=abs(x['output'][index][2]-y['output'][index][2])
+        return drift,drift>tolerance
 
     def difference(kind, a, b, **detail):
         entry = min([x.get('entry', entries) for x in (a, b) if x] or [entries])
@@ -300,8 +314,8 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
             elif x['output'] and y['output']:
                 for key, at in [('start',0),('stop',-1)]:
                     u,v=x['output'][at],y['output'][at]
-                    drift=abs(u[2]-v[2]);maximum[key]=max(maximum[key],drift)
-                    if drift>tolerance:
+                    drift,exceeds=sample_drift(x,y,at,key);maximum[key]=max(maximum[key],drift)
+                    if exceeds:
                         difference('SAMPLE_'+key.upper()+'_PLACEMENT',dict(entry=u[3],tick=u[2]),
                                    dict(entry=v[3],tick=v[2]),index=i,ticks=drift)
             for j, (u, v) in enumerate(zip(x['output'], y['output'])):
@@ -309,9 +323,9 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
                     difference('SAMPLE_OUTPUT_BYTE', dict(entry=u[3], tick=u[2]), dict(entry=v[3], tick=v[2]),
                                index=i, output_index=j, bytes=[u[:2], v[:2]], object=x['object'])
                     break
-                drift = abs(u[2] - v[2])
+                drift,exceeds=sample_drift(x,y,j,'output')
                 maximum['output'] = max(maximum['output'], drift)
-                if drift > tolerance:
+                if exceeds:
                     difference('SAMPLE_OUTPUT_PLACEMENT', dict(entry=u[3], tick=u[2]), dict(entry=v[3], tick=v[2]),
                                index=i, output_index=j, ticks=drift)
                     break
@@ -323,10 +337,12 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
         progress = compare_progress(a, b, entries, tolerance, progress_names)
         if playback:
             from .audio_playback import compare_events,FAST_NS
-            events=compare_events(a,b,tolerance*FAST_NS)
+            events=compare_events(a,b,playback_tolerance_ns if playback_tolerance_ns is not None else tolerance*FAST_NS)
             differences.extend(events['differences'])
             result['playback_events']=events
             result['contract']='audio-playback-v1'
+            result['maximum_sample_ns']=maximum_ns
+            result['timing_tolerance_ns']=playback_tolerance_ns if playback_tolerance_ns is not None else tolerance*FAST_NS
             result['tick_units']='absolute game nanoseconds / (214*12e9/14318180); no IRQ-count time'
         else: differences.extend(progress['differences'])
         maximum['progress'] = progress['max_tick_distance']

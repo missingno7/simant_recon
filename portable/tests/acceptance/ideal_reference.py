@@ -58,6 +58,8 @@ def validate(directory,scenario):
         if pin['path'].startswith('assets/') or pin['path'].endswith('build-report.json'):
             if sha(path)!=pin['sha256']:raise ValueError('Changed reference input: '+pin['path'])
     recipe=json.loads(scenario.read_text())
+    if manifest.get('variant')!='sound-off' and (manifest.get('clock_admission')!='native-clock-v1-irq-v3' or data.get('clock_revision')!='native-clock-v1-irq-v3'):
+        raise ValueError('Pre-fix sound-on reference: re-record with native-clock-v1-irq-v3; old captures remain negative controls')
     if manifest.get('variant')=='sound-off':
         if manifest.get('clock_admission')!='direct-bda-v2' or not data.get('modifier_byte_reads'):
             raise ValueError('Pre-fix sound-off reference omits direct BIOS modifier-byte admission; use build/reference/sound-off')

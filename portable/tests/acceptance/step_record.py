@@ -120,6 +120,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
                   frames=boundary['frames'])
     if ideal:
         manifest['files'].update({p.relative_to(directory).as_posix():sha(p) for p in [directory/'machine-profile.json',capture/'observer.txt.ideal']})
+    if ideal and not sound_off:manifest['clock_admission']=boundary.get('clock_revision')
     if playback:manifest['audio_playback']='audio-playback-v1'
     if sound_off:
         manifest['variant']=variant

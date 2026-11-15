@@ -6,6 +6,8 @@
 #include <string.h>
 
 static PortableInputTimeHost *active_host_binding;
+/* Observation only: called once for each admitted read, before device delivery. */
+extern void portable_test_charged_read(const char *, void *, uint64_t, uint32_t, uint32_t) __attribute__((weak));
 extern int portable_whole_audio_isr_active(void) __attribute__((weak));
 
 static int delivery_enabled(const PortableInputTimeHost *binding)
@@ -494,7 +496,8 @@ PortableInputTimeStatus portable_input_time_host_refresh_service(
     /* DOS IRQ input/time can change while a source modal/tracking loop runs.
      * Every platform query yields here. Never enter a callback recursively or
      * deliver host interrupts while the existing source IF flag is clear. */
-    if (binding->ingesting || !delivery_enabled(binding))
+    if (binding->ingesting || !delivery_enabled(binding) ||
+        (portable_whole_audio_isr_active && portable_whole_audio_isr_active()))
         return PORTABLE_INPUT_TIME_OK;
     if (portable_test_before_poll) portable_test_before_poll();
     /* The application callback polls retained events after advancing clocks
@@ -508,9 +511,18 @@ PortableInputTimeStatus portable_input_time_host_refresh_service(
      * host timeline or run an application idle callback inside a sampled read. */
     if (portable_test_refresh_mode && portable_test_refresh_mode()==1)
         return PORTABLE_INPUT_TIME_OK;
-    if (portable_machine_clock_active())
-        portable_machine_clock_advance(portable_input_time_read_quantum(
-            service, portable_machine_clock_quantum()));
+    if (portable_machine_clock_active()) {
+        uint64_t charge = portable_input_time_read_quantum(service, portable_machine_clock_quantum());
+        portable_machine_clock_advance(charge);
+        if (portable_test_charged_read)
+            portable_test_charged_read(charge ? service : NULL, __builtin_return_address(0), host_time_ns(),
+                sim_timing_tick_count(binding->bios_clock), sim_timing_tick_count(binding->clock));
+        /* A foreground sound reload can chain BIOS at zero machine cost.
+         * Only the next admitted read may inject newly due scripted/host input;
+         * a cursor-show/write refresh must not deliver it before source locals
+         * (for example StillDown's cached button word) are sampled. */
+        if (!charge) return PORTABLE_INPUT_TIME_OK;
+    }
     now = host_time_ns();
     /* Legacy isolated fixtures retain their explicit externally advanced clock.
      * Production play and unpaced replay use the identical read rule above. */

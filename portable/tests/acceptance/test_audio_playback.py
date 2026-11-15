@@ -12,12 +12,12 @@ class PlaybackControls(unittest.TestCase):
             'F 1 1 0 0 300 0','D 1 1 0 0 300 10001','X 1 1 0 0 300 0',
             'C 1 2 1 1 300 1234','E 1 2 1 1 300']
 
-    def compare(self,left,right,tolerance=0):
+    def compare(self,left,right,tolerance=0,ns=None):
         with tempfile.TemporaryDirectory() as d:
             a,b=[Path(d)/n for n in ('dos','native')]
             for p,rows in ((a,left),(b,right)):
                 p.write_text('SIMANT_AUDIO_CONTENT 2\n'+'\n'.join(rows)+'\n')
-            return compare_content(a,b,1,tolerance=tolerance,playback=True)
+            return compare_content(a,b,1,tolerance=tolerance,playback=True,playback_tolerance_ns=ns)
 
     def test_absolute_game_time_ignores_irq_count_and_raw_opl(self):
         a=self.rows();b=[]
@@ -52,6 +52,21 @@ class PlaybackControls(unittest.TestCase):
         self.assertEqual(self.compare(a,b[:-1])['status'],'AUDIO_INCOMPLETE')
         b=a.copy();b[1]=b[1].replace(' 100 25',' 99 25')
         self.assertEqual(self.compare(a,b)['status'],'AUDIO_INCOMPLETE')
+
+    def test_nanosecond_bound_uses_integer_sample_time(self):
+        a=[]
+        for row in self.rows():
+            f=row.split();f[5]=str(int(f[5])+495_000_000_000);a.append(' '.join(f))
+        for delta,expected in [(0,'AUDIO_EQUAL'),(1,'AUDIO_EQUAL'),(2,'AUDIO_DIFFERENCE')]:
+            b=[]
+            for row in a:
+                f=row.split()
+                if f[0]=='P':f[5]=str(int(f[5])+delta)
+                b.append(' '.join(f))
+            result=self.compare(a,b,ns=1)
+            self.assertEqual(result['status'],expected)
+            self.assertEqual(result['maximum_sample_ns']['output'],delta)
+        self.assertEqual(self.compare(a,b,ns=0)['status'],'AUDIO_DIFFERENCE')
 
     def test_loop_metadata_and_wrapped_emissions(self):
         a=['S 0 0 0 0 100 0 14 256 0 2 1 128 4 80828486',

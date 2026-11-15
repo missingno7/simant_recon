@@ -243,6 +243,7 @@ def main():
             for name,service in [('TickCount','TickCount'),('timer_bios_tick_count','host_ticks'),('input_event_count','input_event_count'),('kbd_scan_state','kbd_scan_state'),('kbd_scroll_lock_state','kbd_scroll_lock_state'),('mouse_refresh_cursor','mouse_refresh_cursor'),('mouse_initialize_driver','portable_input_time_host_get_input_state')]:
                 clock.append(f'{"M" if name=="mouse_initialize_driver" else "R"} {base+addresses[name]:X} {service}')
             clock.append(f'E {base+addresses["input_enqueue_event"]:X} host_ticks')
+            clock.append(f'I {base+addresses["mouse_event_callback"]:X} internal_mouse_callback')
             from portable.tests.acceptance.modifier_reads import bind as bind_modifiers
             modifier_reads=bind_modifiers(args.original,exe,base)
             for read in modifier_reads:
@@ -279,6 +280,7 @@ def main():
             raise ValueError('Captured BIOS INT16 callback differs from its bound vector/CB_INT16 opcode')
         manifest['audio_content']=content
         if ideal:
+            manifest['clock_revision']=json.loads(args.compact_observer.read_text()).get('clock_revision')
             manifest['modifier_byte_reads']=modifier_reads
             manifest['audio_playback']=playback
         manifest['sound_timer']=sound_timer

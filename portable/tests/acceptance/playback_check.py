@@ -33,7 +33,7 @@ def main():
     ap.add_argument('scenario',type=Path,nargs='*')
     ap.add_argument('--build',type=Path,default=ROOT/'build/current/portable')
     ap.add_argument('--out',type=Path,required=True)
-    ap.add_argument('--reference-root',type=Path,default=ROOT/'build/reference/audio-playback-v1')
+    ap.add_argument('--reference-root',type=Path,default=ROOT/'build/reference/sound-on-clock-v3')
     ap.add_argument('--record',action='store_true')
     ap.add_argument('--observer',type=Path)
     ap.add_argument('--native-observer',type=Path,help='Pinned existing observer-build.json, useful while another worker builds the runtime')
@@ -41,8 +41,10 @@ def main():
     ap.add_argument('--binding-root',type=Path,default=ROOT/'build/workers/dos-clock/binding-v2')
     ap.add_argument('--jobs',type=int,choices=range(1,5),default=3)
     ap.add_argument('--timeout',type=int,default=600)
+    ap.add_argument('--timing-tolerance-ns',type=float,help='Explicit absolute playback timing bound; zero requires exact timestamps')
     a=ap.parse_args();a.out=a.out.resolve();a.out.mkdir(parents=True,exist_ok=False)
     a.build=a.build.resolve();a.reference_root=a.reference_root.resolve()
+    if a.timing_tolerance_ns is not None and a.timing_tolerance_ns<0:ap.error('Timing tolerance must be nonnegative')
     if (a.build/'runtime-assets/SIMANT.CFG').read_bytes()!=(ROOT/'assets/SIMANT.CFG').read_bytes():raise ValueError('Changed shipped configuration')
     if (ROOT/'assets/SIMANT.CFG').read_text().splitlines()[-1]!='Sound Mode: 6':raise ValueError('Playback requires shipped mode 6')
     corpus=sorted((ROOT/'dos/scenarios').glob('*.json'))+sorted((ROOT/'dos/scenarios/audio-playback').glob('*.json'))
@@ -79,8 +81,8 @@ def main():
         from portable.tests.acceptance.audio_playback import validate_reference
         validate_reference(ref,manifest)
         out.parent.mkdir(parents=True,exist_ok=True)
-        command=[sys.executable,'-c','from pathlib import Path; import sys; from portable.tests.acceptance.ideal_check import lane; lane(*map(Path,sys.argv[1:6]),prepared=Path(sys.argv[6]),timeout=int(sys.argv[7]),playback=True)',
-            str(path),str(ref),str(a.build),str(exe),str(out),str(prepared),str(a.timeout)]
+        command=[sys.executable,'-c','from pathlib import Path; import sys; from portable.tests.acceptance.ideal_check import lane; lane(*map(Path,sys.argv[1:6]),prepared=Path(sys.argv[6]),timeout=int(sys.argv[7]),playback=True,playback_tolerance_ns=float(sys.argv[8]) if sys.argv[8]!="None" else None)',
+            str(path),str(ref),str(a.build),str(exe),str(out),str(prepared),str(a.timeout),str(a.timing_tolerance_ns)]
         with out.with_suffix('.log').open('w') as log:
             run=subprocess.run(command,cwd=ROOT,stdout=log,stderr=subprocess.STDOUT,timeout=a.timeout+180)
         if run.returncode:raise RuntimeError('Playback process failed: '+str(out.with_suffix('.log')))

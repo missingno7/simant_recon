@@ -23,6 +23,23 @@ def run(out):
         obj=out/f'{i}.o';objects.append(str(obj))
         execute([cc,'-std=c++17' if name.endswith('.cpp') else '-std=c11','-I'+str(ROOT),'-c',str(ROOT/name),'-o',str(obj)])
     execute([cc,*objects,'-static','-lstdc++','-o',str(out/'timer.exe')]);execute([str(out/'timer.exe')])
+    reload_object=out/'reload.o'
+    execute(base+['-c',str(ROOT/'portable/tests/acceptance/ideal_reload_edge_test.c'),'-o',str(reload_object)])
+    reload_objects=[str(reload_object),*objects[1:]]
+    execute([cc,*reload_objects,'-static','-lstdc++','-o',str(out/'reload.exe')]);execute([str(out/'reload.exe')])
+    reload_provider=(ROOT/files[1]).read_text()
+    edge='if(!audio_timer_replay() && pit_output_low(p)) p->pending_irq=1;'
+    if reload_provider.count(edge)!=1:raise ValueError('Reload edge binding differs')
+    (out/'no-reload-edge.c').write_text(reload_provider.replace(edge,''))
+    execute(base+['-I'+str(ROOT/'portable/whole_program/platform'),'-c',str(out/'no-reload-edge.c'),'-o',str(out/'no-reload-edge.o')])
+    no_edge=[str(reload_object),str(out/'no-reload-edge.o'),*objects[2:]]
+    execute([cc,*no_edge,'-static','-lstdc++','-o',str(out/'no-reload-edge.exe')]);execute([str(out/'no-reload-edge.exe')],1)
+    fractional='(p->irq_ns<target || (p->irq_ns==target && !p->irq_fraction))'
+    if reload_provider.count(fractional)!=1:raise ValueError('Rational endpoint binding differs')
+    (out/'early-edge.c').write_text(reload_provider.replace(fractional,'p->irq_ns<=target'))
+    execute(base+['-I'+str(ROOT/'portable/whole_program/platform'),'-c',str(out/'early-edge.c'),'-o',str(out/'early-edge.o')])
+    early=[str(reload_object),str(out/'early-edge.o'),*objects[2:]]
+    execute([cc,*early,'-static','-lstdc++','-o',str(out/'early-edge.exe')]);execute([str(out/'early-edge.exe')],1)
     # Same ISR with only its slow reprogram notification removed. The expected
     # source semantics remain unchanged; this must fail the positive fixture.
     provider=(ROOT/files[1]).read_text();needle='timer_event(p,1);return;'

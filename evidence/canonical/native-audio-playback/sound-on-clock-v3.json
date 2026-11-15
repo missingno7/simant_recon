@@ -1,0 +1,927 @@
+{
+  "status": "done",
+  "scope": "Sound-on native-clock-v1 parity and playback; raw state mismatches remain explicit",
+  "clock_revision": "native-clock-v1-irq-v3",
+  "audio_tolerance_ns": 1,
+  "playback": [
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 873,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "f8f34b8d63741a64928da09befa2cd813af3e986e5c735f2f317b22bded17cea",
+      "result_sha256": "cd7c20e761c0f39c830e0b334ea8cbc1835ca68c07d7134ef07b8861bb8bf953",
+      "content_result_sha256": "3e3e18116799be3b9826661d54b9f190cb9ae2a23c872ade859fa22cf80534a1"
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 873,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "5cde464ef164e201b3a333abe21242732fa388ce7262d24023e5c95f95d14929",
+      "result_sha256": "659533d63ce0d57aa43cc4e14dc537191cc2e3575a6c70368a103bc7c73313cf",
+      "content_result_sha256": "3e3e18116799be3b9826661d54b9f190cb9ae2a23c872ade859fa22cf80534a1"
+    },
+    {
+      "scenario": "audio-controls",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 512,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 512,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "446aa38e6abf5d5cd1fdaae24333611582601f5f985b1a7da6d434aa3e83ea5f",
+      "result_sha256": "cb624d67c5ddca129e8c1c3877009115fadfc002d3e7e64355a998b2a63b94d1",
+      "content_result_sha256": "f9b35a2bd7f67837b64cb00475351dcf3b1158fac7d45f8482ce0c9c7f4df204"
+    },
+    {
+      "scenario": "audio-controls",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 512,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 512,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "98aac3b506f9e0a0c69252ea00b3c6100fbe651a45faf6080caa9f69bc1dbee5",
+      "result_sha256": "9fe56d69cd0f097d6d85eadd6348b98147d873b315b54b6bb61b5a32d06f5648",
+      "content_result_sha256": "f9b35a2bd7f67837b64cb00475351dcf3b1158fac7d45f8482ce0c9c7f4df204"
+    },
+    {
+      "scenario": "audio-restart",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 512,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 512,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "0bc7f67678c6dc8f97dd5eaf385f15edd13e1b6d9a41d3b69089f5efa7f1a5d3",
+      "result_sha256": "d149294be0ae7372199b568618cc221845d69afe07e7927ff1018a01a5fa1e9a",
+      "content_result_sha256": "723b7e39a1b59f94f3bafbfb282b5eb5879668d322304e25fcb2ea009ae2fd02"
+    },
+    {
+      "scenario": "audio-restart",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 512,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 512,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "73477f9cc558e0688c7d4a7bd3dd5f67eb30b8e2c42d984b7f8e6a8afd3e62cd",
+      "result_sha256": "bee587bec5de34ec899d3b345463683c9147fa2e09423fd9f2e4fb886b9c38ec",
+      "content_result_sha256": "723b7e39a1b59f94f3bafbfb282b5eb5879668d322304e25fcb2ea009ae2fd02"
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 996,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "93732b72d3124957e12b39f4da3c55668c68cf97660f0a6b710fc1f031661f98",
+      "result_sha256": "bc47bbddfe9c5c45d644ef90cff014f593948e65e334922b2ea68c535e92897f",
+      "content_result_sha256": "1410ec68095bc9d73deedc4e3732912ef5462b936adb029f87c850fd4b1cd278"
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 996,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "3db5b2e6b32eeb9119684346761a34caae6e6bd37c40bd3fe049cb50250678a4",
+      "result_sha256": "0fcb193e1fdc50f31a2e4fef4dc3e6c4ac5e1cdbdfd06d562cb4bf797305b4db",
+      "content_result_sha256": "1410ec68095bc9d73deedc4e3732912ef5462b936adb029f87c850fd4b1cd278"
+    },
+    {
+      "scenario": "full-game",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 821,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "a6fdeedb9d78ec047778aee7817823f32e4e97791fe86875245603fd539d0842",
+      "result_sha256": "40cfc93c0837f1fc5b3a90c44a5aa167b8939a08a6cb306163452b7594305343",
+      "content_result_sha256": "cec2944f28ff37613e033e0146bcd18f27ea3fd144e1116a64bca8a1e4cc3117"
+    },
+    {
+      "scenario": "full-game",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 821,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "baf0792d8cb1085df9f3e9de5233ca84b7897385497311fdb9c2bb8153043fe1",
+      "result_sha256": "6997b347cd7e0be053251ffe09e88c6170f0151b9d1f7231e489a2d61ab25248",
+      "content_result_sha256": "cec2944f28ff37613e033e0146bcd18f27ea3fd144e1116a64bca8a1e4cc3117"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 2000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1735,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "c97e01931a34cd95d41756d97d2b2e6ce360bc128d54f375138b90d0fa4acb89",
+      "result_sha256": "fcd55b3273262bf58cd4728ec864e28aa63e9af32fcc339e3965b74f4d4bc020",
+      "content_result_sha256": "e3797f36f521fd7e4db847172e7f35036cb1965f1b4eae43b92bdf911ecdbf68"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 2000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1735,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "cd993b1dd0d47e15515b31bd3847aec432cee4db2db2fa987e341679dd70af51",
+      "result_sha256": "f11dc6083230e290489fa92f6f3c9d454222d36734b9b764ca53f3cb1aba316c",
+      "content_result_sha256": "e3797f36f521fd7e4db847172e7f35036cb1965f1b4eae43b92bdf911ecdbf68"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 886,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "8768f02a518e495582f15c82bf0f22acf86107fd27eeb1539500ac66b84fe18a",
+      "result_sha256": "520f403c886db929c05745fba2f433fe40bba6a0c7868fb79e34eefeb82ca3c0",
+      "content_result_sha256": "5a01963677a08c142295a626554a2b96d54634ac3dcde45a20009d925b0e345b"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 1000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 886,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "be72cc31ca4b6ae969c0e66ed353fd421dbf5f9e91f25840eb2ce0aebd2b29d3",
+      "result_sha256": "97b3b7c8aa7a4fec8b13cbda2d6504f4f65f053ee079cc7bd09ff3efdf9af697",
+      "content_result_sha256": "5a01963677a08c142295a626554a2b96d54634ac3dcde45a20009d925b0e345b"
+    },
+    {
+      "scenario": "long-run",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 3000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 2984,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "6dd8d1374fe11a2242c266d12944dff4488ea50cfd3cc32bacf42737f863e269",
+      "result_sha256": "e9144454e132a17cfff61edd480cb97bca0ad078696a753d4c82e36df7250cd8",
+      "content_result_sha256": "83ee49f224d2d0ff91fe6e630e6222a096dd40e3216d13b3c74bda690d9c1fd1"
+    },
+    {
+      "scenario": "long-run",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 3000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 2984,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "e51e56bcc0e134f4c10a37a41534c1a399443198378ec14a6babd92d9fb857c2",
+      "result_sha256": "64272f5873ac06b5d9d4a69452833535fc1733c79cb837daaf87199d0ae488dc",
+      "content_result_sha256": "83ee49f224d2d0ff91fe6e630e6222a096dd40e3216d13b3c74bda690d9c1fd1"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 64,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 64,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "e949c1ef7929959303dd2d83bf2003da76cbce21411b036393c0b92430c088da",
+      "result_sha256": "7c35a984beb4ba70c28f9183b1f9090c2c58f06fb00ab0fef09e4d6066c954f7",
+      "content_result_sha256": "e6e37136a3b20eb6d83774c71fad4169f47e6bdd2f5f81fc1113b0fd68457823"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 0
+      },
+      "maximum_event_ns": 0,
+      "entries": 64,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 64,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "039381ecbd37fa166218df7a088b70e5ce7234f106a7ad8369e5223001cae746",
+      "result_sha256": "80ec06ccfeb8371b677df8d7de5aae835d2d93c4325ec6c25dd019bb208a8838",
+      "content_result_sha256": "e6e37136a3b20eb6d83774c71fad4169f47e6bdd2f5f81fc1113b0fd68457823"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 2000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 2000,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "3d8fb4e96bab3d1411b04f532393b429ca2fb690402d85a78af80bab1487d2d2",
+      "result_sha256": "f2d7ee2af392cfd658465df0dd85209e6e726b6740bfb9914543971576e78778",
+      "content_result_sha256": "69ccc99370de2bb42adb75eb5742d81fa9d98a6bbeaaecd71523d9cadf26cfd4"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 2000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_EQUAL",
+      "equal_entries": 2000,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "d54e1ad5ec547db741b2ab12c136519b05d154a82ae3c26801df62e8d198d02c",
+      "result_sha256": "e3654be2e2c9303fda83acb0c817db845f98f742d2acc33c1b46910ebeacdbfe",
+      "content_result_sha256": "69ccc99370de2bb42adb75eb5742d81fa9d98a6bbeaaecd71523d9cadf26cfd4"
+    },
+    {
+      "scenario": "random-17",
+      "target": "canonical",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 2000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1840,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "dd44c23dc55599c0752860d23eabc272d6dc46fb03c27e1593d3aee7b49c4d2d",
+      "result_sha256": "1733ac2b087cb4041f6f4945ca41dbc730bfd4729f519a793a3eaada372c6b4b",
+      "content_result_sha256": "10b58487208c65ecf1a2ccd6b04b4d235efe93b9d803e54a0548dacced005a3d"
+    },
+    {
+      "scenario": "random-17",
+      "target": "original",
+      "audio": "AUDIO_EQUAL",
+      "timing_tolerance_ns": 1.0,
+      "maximum_sample_ns": {
+        "start": 0,
+        "stop": 0,
+        "output": 1
+      },
+      "maximum_event_ns": 0,
+      "entries": 2000,
+      "clock": "CLOCK_EQUAL",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1840,
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL",
+      "reference_manifest_sha256": "de4c49ec34617a2f3e7d10b13517b26cc468f749c9e1f0311eea3644f2777dd8",
+      "result_sha256": "32ca747ef854abef29ef7b5066d4cd7c9d7fc76455813fc654a4af5c0c7e6862",
+      "content_result_sha256": "10b58487208c65ecf1a2ccd6b04b4d235efe93b9d803e54a0548dacced005a3d"
+    }
+  ],
+  "gameplay": [
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 873,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 252,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 126080762,
+            "native_hash": 1397740692
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 873,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 252,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 558002810,
+            "native_hash": 3590504800
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 996,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 72,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2129001133,
+            "native_hash": 1541640411
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 996,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 72,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 630971785,
+            "native_hash": 989983675
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "full-game",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 821,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 179,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 3333658532,
+            "native_hash": 424874245
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "full-game",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 821,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 179,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2190244816,
+            "native_hash": 1010876053
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1735,
+      "entries": 2000,
+      "first_state_difference": {
+        "entry": 153,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 631586496,
+            "native_hash": 504240651
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1735,
+      "entries": 2000,
+      "first_state_difference": {
+        "entry": 153,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 746333836,
+            "native_hash": 3997599807
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 886,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 177,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 849851225,
+            "native_hash": 1936156951
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 886,
+      "entries": 1000,
+      "first_state_difference": {
+        "entry": 177,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2925590569,
+            "native_hash": 2772026283
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "long-run",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 2984,
+      "entries": 3000,
+      "first_state_difference": {
+        "entry": 624,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2560384020,
+            "native_hash": 795404287
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "long-run",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 2984,
+      "entries": 3000,
+      "first_state_difference": {
+        "entry": 624,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 1900495328,
+            "native_hash": 2469112227
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "equal_entries": 64,
+      "entries": 64,
+      "first_state_difference": null,
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "equal_entries": 64,
+      "entries": 64,
+      "first_state_difference": null,
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "canonical",
+      "state": "STATE_EQUAL",
+      "equal_entries": 2000,
+      "entries": 2000,
+      "first_state_difference": null,
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "quick-game",
+      "target": "original",
+      "state": "STATE_EQUAL",
+      "equal_entries": 2000,
+      "entries": 2000,
+      "first_state_difference": null,
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "random-17",
+      "target": "canonical",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1840,
+      "entries": 2000,
+      "first_state_difference": {
+        "entry": 244,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2372081996,
+            "native_hash": 3330016663
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    },
+    {
+      "scenario": "random-17",
+      "target": "original",
+      "state": "STATE_DIFFERENCE",
+      "equal_entries": 1840,
+      "entries": 2000,
+      "first_state_difference": {
+        "entry": 244,
+        "views": [
+          {
+            "name": "window_current_event",
+            "category": "game_state",
+            "reference_hash": 2355033864,
+            "native_hash": 1874656555
+          }
+        ]
+      },
+      "clock": "CLOCK_EQUAL",
+      "frames": "FRAME_EQUAL",
+      "raw_audio": "AUDIO_COMMANDS_EQUAL"
+    }
+  ],
+  "read_proofs": {
+    "final-canonical-reads-ant-commands.json": {
+      "status": "READS_EQUAL",
+      "reads": 193122,
+      "unbound_count": 0,
+      "dos_trace_sha256": "7c01486f02383d64fe6a2a8341316a647e01e2817cd5f3c52d12a845f4e92dfd",
+      "native_trace_sha256": "8066ab84ef5dc27b2357d7ed0689f8e5fec5e39c2c57ffe1a9d13603c9b950fe",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "f8f34b8d63741a64928da09befa2cd813af3e986e5c735f2f317b22bded17cea"
+    },
+    "final-canonical-reads-full-game.json": {
+      "status": "READS_EQUAL",
+      "reads": 181249,
+      "unbound_count": 0,
+      "dos_trace_sha256": "57b593663d1a3a46fc301abf94eda4386a00cc4ef706fd212f063fecba57f622",
+      "native_trace_sha256": "df62f13f7b8f640592b4b894cb1a0c94613f1d65d98123daf385db9ee8f0be60",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "a6fdeedb9d78ec047778aee7817823f32e4e97791fe86875245603fd539d0842"
+    },
+    "final-reads-ant-commands.json": {
+      "status": "READS_EQUAL",
+      "reads": 193122,
+      "unbound_count": 0,
+      "dos_trace_sha256": "f6a974d54fc10e1189dac7f085b113e1e97bc3943e83b4018c124aebe51cdf5a",
+      "native_trace_sha256": "8066ab84ef5dc27b2357d7ed0689f8e5fec5e39c2c57ffe1a9d13603c9b950fe",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "5cde464ef164e201b3a333abe21242732fa388ce7262d24023e5c95f95d14929"
+    },
+    "final-reads-audio-restart.json": {
+      "status": "READS_EQUAL",
+      "reads": 127353,
+      "unbound_count": 0,
+      "dos_trace_sha256": "89f2bd9b7580d42198c1963fd080718f5b88105f77b74294d9279a41d42a4e65",
+      "native_trace_sha256": "6db76522ec13f659ea778cf060634d8268f0940101b44c8aa353ffdca246b83e",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "73477f9cc558e0688c7d4a7bd3dd5f67eb30b8e2c42d984b7f8e6a8afd3e62cd"
+    },
+    "final-reads-experiment.json": {
+      "status": "READS_EQUAL",
+      "reads": 179268,
+      "unbound_count": 0,
+      "dos_trace_sha256": "e05e360360214afa17b22a9b4e504e18c0ea48f76b0cb745bcbfd99f34004326",
+      "native_trace_sha256": "289933b77ed2873dfb9a628252229c429270ce7f054ceb28019a6f4b4e5f5465",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "3db5b2e6b32eeb9119684346761a34caae6e6bd37c40bd3fe049cb50250678a4"
+    },
+    "final-reads-full-game.json": {
+      "status": "READS_EQUAL",
+      "reads": 181249,
+      "unbound_count": 0,
+      "dos_trace_sha256": "4dfedec4ecf4337db397bb7aace8335d1d486372c2a7b9f75218c10303f5de1b",
+      "native_trace_sha256": "df62f13f7b8f640592b4b894cb1a0c94613f1d65d98123daf385db9ee8f0be60",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "baf0792d8cb1085df9f3e9de5233ca84b7897385497311fdb9c2bb8153043fe1"
+    },
+    "final-reads-interactive-play.json": {
+      "status": "READS_EQUAL",
+      "reads": 299608,
+      "unbound_count": 0,
+      "dos_trace_sha256": "19da3218ad0835d08bd483238a2a288aa89ef0cc6910d7e0801b0079f8506dc0",
+      "native_trace_sha256": "cb2c9add5b1de56015f74ba7785479dba3d1751501d28e84c462c816abb3885c",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "cd993b1dd0d47e15515b31bd3847aec432cee4db2db2fa987e341679dd70af51"
+    },
+    "final-reads-new-game-save.json": {
+      "status": "READS_EQUAL",
+      "reads": 46766,
+      "unbound_count": 0,
+      "dos_trace_sha256": "2fe4fbc68fd4b67a1f8166280e9a8cc490e6539e488d359f8c57c821eb2c9616",
+      "native_trace_sha256": "de1c8eeb615b11da3f25393b07804c479707d1471dfdec5b962bce90c88e9f65",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "039381ecbd37fa166218df7a088b70e5ce7234f106a7ad8369e5223001cae746"
+    },
+    "final-reads-random-17.json": {
+      "status": "READS_EQUAL",
+      "reads": 347907,
+      "unbound_count": 0,
+      "dos_trace_sha256": "21e103cb1f12e7e2423504a3b216a62396841fed0af44125d20e8fdf18689421",
+      "native_trace_sha256": "787a2eb08511c16910ee96022eeb46a4aee01e15d97a673d4f5ac65806b4b36a",
+      "native_executable_sha256": "bc729db11e43f3357dc02ed6d72f61bed999c9bfb55d13b4cdad22f01ea7a6e9",
+      "reference_manifest_sha256": "de4c49ec34617a2f3e7d10b13517b26cc468f749c9e1f0311eea3644f2777dd8"
+    }
+  },
+  "raw_state_differing_fields": [
+    "window_current_event",
+    "yard_rain_anim_indices"
+  ],
+  "sound_off_lanes": 18,
+  "tape_unchanged": true,
+  "gate": {
+    "code": 0,
+    "seconds": 602.0162222000072,
+    "scope": "Isolated current-file snapshot; generated progress and all compiler scratch stay inside sound-on/gate-final"
+  },
+  "receipts": {
+    "emulator-final/observer-build.json": "d25ba5d0f50a44e310bcbc3530459cc306a86e57a0c7943952f040d5e99b2887",
+    "native-final/report.json": "45b981fd76ec5e2b2312e3557cdd913d8e0442093c428f931a84efd2b227a7db",
+    "playback-final/playback-results.json": "790aaa7cb28d7baa4502f2be40418e3b58bf816480a70a372b8ce45982fdce11",
+    "gameplay-final/summary.json": "860b217fe93cc82bb80fad3ac1752012c5079f528673a45ba45630e401a59685",
+    "gameplay-final/timings.json": "2cb36c6727900c87dc721dbd1644d3879815cd4d6cc5b00580a4046f180caeb6",
+    "gate-final-result.json": "7fc510e67febf38e15477f0e048b4feec36d51c8d9f6a917cbef77d5e7f35196",
+    "gate-final-status.log": "f128f7dcc59f3244450346e93041f699fdac79a26bcbd3c46d6a04561645415b",
+    "verified-suite-results.json": "9068a58833a1a15e7a4800fa9a17788ef4e18ec5c29da3f73c89439fcf33b171",
+    "acceptance-result.json": "a5e84fc56bd6ce6f4ed2cc56fa4c9de64073d2ca30de2076baebd8d27d88da4c",
+    "rule-final/report.json": "7092078495d1a002e4753ba16ea3d7279ade5702662449dfc60ec5a5da685e84",
+    "pit-edge-final/report.json": "c810b365b62c0da562480d51412cd35cdaf6a3a762f1a124c901523c460d674d",
+    "internal-final/report.json": "308c3d21253d38b4514378534640bb8ccd3f89a39d1727585681b975747fcb7d",
+    "budget-results.json": "52e023b773735b44afdd0be5bc511db04a5dcd6162d9bc278a942f5bdb8bd02d",
+    "tape-comparison.json": "4bc24ed888d89f330ed276194c1abd6b463440e792fe8d4a7731481d1dc82a88",
+    "zero-control.json": "26b2e1e48e4dd983b7bfa9570a981acd6224eb84bea41cb388fef30a33fb860a",
+    "dos-three-way.json": "e0b09d80ddd90addbd9befaa819cd3dfb58eef08807036709569b5da8f2b4659",
+    "process-inventory.json": "394bf614046f70bc3dd50b31d330cbab9665db4fc95a66dcf011bfe206bc1717",
+    "stale-reference-control.json": "8eed3f32f98dc2d83baf8ce7d495208d24657e001988b6e56dce3286669df573"
+  },
+  "native_executable_sha256": "c78722e3f230d20be99e627d4bcbb2fefa22c65a50823570ee5cfcaf4146dcf5",
+  "recorder_sha256": "9809a2eed44054f12069b7d1a03464a496df137ccf0334704c9dc1f5885c056c",
+  "playback_native_observer_sha256": "703d837a3cf0916ea419b6a59eb4090729b39e309ef3fb4809411dc5796a7799"
+}

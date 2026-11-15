@@ -55,6 +55,16 @@ logical clock of progress, reprogramming and actual old-INT08 calls. An advance
 is split at these instants; nanosecond/crystal remainders survive partitioning.
 PCM frame boundaries cannot postpone the final IRQ in a Q.
 
+Mode-3 scheduled events establish their rising-edge phase explicitly before
+any guest handler runs. In the pinned PIT implementation, two rounded half
+periods can exceed one full period, leaving OUT low at a scheduled rising edge.
+A same-time reload then raised a duplicate IRQ. The ideal patch establishes
+start=now and cycle_base=0 at that edge, without an epsilon or suppressed IRQ.
+`ideal_pit_edge_check.py` compiles the actual patched PIT class/event and rejects
+the old arithmetic with a same-instant slow reload negative control. Native's
+rational edge scheduler already has this phase. This recorder repair requires
+fresh sound-on references; sound-off and legacy tape references are retained.
+
 DOS counter latch, low/high-byte read state, mode3 reload and wrap are implemented
 by the pinned timer.cpp on frozen PIC time. Native's shipped mode6 path does not
 read PIT ports. AdLib-only PIT-latch waiting remains explicitly unsupported;
@@ -99,3 +109,17 @@ as diagnostics and eight additional instruction-bound scalar views. Recordings
 are under build/reference/sound-off-identity. Current lane results and measured
 costs are in evidence/canonical/native-ideal-clock/identity-results.json.
 No clock rule, source ID value or frame comparison changes. Nothing is retired.
+
+Sound-on clock revision `native-clock-v1-irq-v3` also admits pending zero-time
+reload IRQs through the real PIC/guest STI without waiting for another Q.
+The recorder retains the full initiating PC/SS:SP until that IRQ returns, so
+slice boundaries cannot create nesting or charged ISR reads. Mouse driver
+callbacks carry a separate far-return scope; their cursor/internal reads cost
+zero even when the guest handler restores IF. Standalone native cursor writes
+cannot run input admission; the next charged read delivers newly due input.
+The native rational IRQ due test includes its sub-nanosecond remainder, so an
+edge cannot run before an integer-nanosecond endpoint. Playback timestamps round
+the same rational instant to nearest nanosecond on both observers.
+Pre-repair sound-on captures remain negative controls and are rejected by the
+current checker. Fresh references live under build/reference/sound-on-clock-v3;
+all sound-off and legacy tape references remain unchanged.

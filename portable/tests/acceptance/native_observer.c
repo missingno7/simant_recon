@@ -502,3 +502,23 @@ __attribute__((no_instrument_function)) void __cyg_profile_func_exit(void *funct
 #ifdef SIMANT_TEST_AUDIO_CONTENT
 #include "native_audio_content.inc"
 #endif
+
+/* Complete admitted-read trace. Addresses are resolved from this executable,
+ * never fed back into the run. No tracing file is opened unless requested. */
+void portable_test_charged_read(const char *service, void *caller, uint64_t ns, uint32_t bios, uint32_t game) {
+  static FILE *trace;
+  static unsigned initialized;
+  static uint64_t reads;
+  if (!initialized++) {
+    const char *path=getenv("SIMANT_TEST_READ_TRACE");
+    if (path && !(trace=fopen(path,"w"))) abort();
+    if (trace) fprintf(trace,"IMAGE %p\n",GetModuleHandleA(NULL));
+  }
+  if (!trace) return;
+  void *stack[12];
+  unsigned n=CaptureStackBackTrace(0,12,stack,NULL);
+  fprintf(trace,"%c %" PRIu64 " %" PRIu64 " %p %s",service?'R':'Z',service?++reads:reads,ns,caller,service?service:"internal");
+  fprintf(trace," %u %u",bios,game);
+  for (unsigned i=0;i<n;++i) fprintf(trace," %p",stack[i]);
+  fputc('\n',trace);
+}

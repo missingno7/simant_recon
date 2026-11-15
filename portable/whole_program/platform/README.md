@@ -91,9 +91,23 @@ the old INT08 every 306 interrupts, with first remaining1. Its inactive-sample
 branch programs divisor3424, chain19 and first remaining `(remaining>>4)+1`.
 The provider reports reprogramming and actual old-INT08 calls at their device
 timestamps. Logical clocks retain fractional phases; Q splits at these instants,
-including IRQs after the last complete PCM frame. Sound sample
+including IRQs after the last complete PCM frame. The exact rational edge
+(including its sub-nanosecond remainder) must be at or before an endpoint. During source-timer
+ownership, a mode-3 reload while OUT is low creates a pending rising edge; the
+adapter's STI delivers it at that same machine instant, with no extra Q. A
+reload at an already high edge cannot create another edge. Internal cursor
+writes/refreshes do not admit newly due input; admission waits for the next
+charged read, including when a foreground reload chained BIOS at zero cost.
+Mouse driver callbacks and complete IRQ bodies remain internal even when their
+own code restores IF. Sound sample
 IRQ/mixer/sequencer work and ISA device timestamps derive from the same machine
-time; SDL only consumes output PCM. Bus accesses consume zero time; direct-DAC
+time; SDL only consumes output PCM. A scheduled mode-3 PIT event is the rising
+edge: its output phase is high at that instant. Reprogramming at the same edge cannot manufacture a second
+low-to-high transition by rounding two half-periods differently from one full
+period. The DOS recorder explicitly establishes that edge phase; native's
+rational provider schedules the next edge from the same phase. Reloads at other
+phases still retain real output/PIC transitions; the rule does not suppress
+arbitrary reload IRQs. Bus accesses consume zero time; direct-DAC
 busy and reset acknowledgement are synchronous, as in the DOS ideal recorder.
 Unsupported MPU/AdLib-only
 hardware waits remain unsupported as before.

@@ -32,7 +32,7 @@ def native_script(source,destination):
         lines.append(' '.join(row))
     destination.write_text('\n'.join(lines)+'\n')
 
-def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,scratch_root=None,dump_entry=None,playback=False):
+def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,scratch_root=None,dump_entry=None,playback=False,trace_reads=False,playback_tolerance_ns=None):
     lane_started=time.perf_counter();timings={};mark=lane_started
     def elapsed(name):
         nonlocal mark
@@ -83,6 +83,7 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
     env.update(SIMANT_TEST_IDEAL='1',SIMANT_TEST_IDEAL_DGROUP=str(profile['irq09_dgroup']),
         SIMANT_TEST_STEP_CONFIG=str(config),SIMANT_TEST_FRAME_CONFIG=str(frames),
         SIMANT_TEST_AUDIO_COMMANDS=str(out/'audio-commands.txt'),SIMANT_TEST_AUDIO_CONTENT=str(out/'audio-content.txt'))
+    if trace_reads:env['SIMANT_TEST_READ_TRACE']=str(out/'charged-reads.txt')
     if playback:
         env['SIMANT_TEST_PLAYBACK']='1'
     if dump_entry:
@@ -192,7 +193,7 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
         result['audio']=compare_commands(reference/'capture/observer.txt.audio',out/'audio-commands.txt',out,entries=stop,replay_complete=complete)
         result['audio_content_diagnostic']=compare_content(reference/'capture/observer.txt.content',out/'audio-content.txt',stop,
             tolerance=16,replay_complete=complete,out=out,raw_dos_path=reference/'capture/observer.txt.audio',raw_native_path=out/'audio-commands.txt',
-            progress_names=[i['name'] for i in items if i['category']=='audio'],playback=playback)
+            progress_names=[i['name'] for i in items if i['category']=='audio'],playback=playback,playback_tolerance_ns=playback_tolerance_ns)
     elapsed('frame_comparison')
     result['timings']=timings
     result['observer']=observer
@@ -209,14 +210,16 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
 def main():
     ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('scenario',type=Path,nargs='*')
     ap.add_argument('--build',type=Path,default=ROOT/'build/current/portable');ap.add_argument('--out',type=Path,required=True)
-    ap.add_argument('--reference-root',type=Path,default=ROOT/'build/reference');ap.add_argument('--timeout',type=int,default=600)
+    ap.add_argument('--reference-root',type=Path);ap.add_argument('--timeout',type=int,default=600)
+    ap.add_argument('--trace-reads',action='store_true',help='Record every charged service, machine time and native call stack')
     ap.add_argument('--steps',type=int);ap.add_argument('--jobs',type=int,default=1,choices=range(1,5))
     ap.add_argument('--scratch-root',type=Path,default=ROOT/'build/scratch/ideal',help='Short disposable asset directory')
     ap.add_argument('--dump-entry',type=int,help='Write full diagnostic state at this entry (all view hashes are always observed)')
     ap.add_argument('--sample-native',action='store_true',help='Optional 10 ms Windows native instruction-pointer profile')
     ap.add_argument('--sound-off',action='store_true',help='Select separately recorded Sound Mode: 0 references and keyboard-context-v1')
     a=ap.parse_args();a.build=a.build.resolve();a.out=a.out.resolve();a.out.mkdir(parents=True,exist_ok=False)
-    if a.sound_off and a.reference_root.resolve()==(ROOT/'build/reference').resolve():a.reference_root=a.reference_root/'sound-off-identity'
+    if a.reference_root is None:a.reference_root=ROOT/'build/reference'/('sound-off-identity' if a.sound_off else 'sound-on-clock-v3')
+    elif a.sound_off and a.reference_root.resolve()==(ROOT/'build/reference').resolve():a.reference_root=a.reference_root/'sound-off-identity'
     all_started=time.perf_counter();exe=test_build(a.build,a.out/'test-build');build_seconds=time.perf_counter()-all_started;jobs=[]
     prepare_started=time.perf_counter()
     state=schema(a.build,executable=exe)
@@ -232,6 +235,10 @@ def main():
         refs={}
         for manifest in (a.reference_root/path.stem).glob(('*-ideal-v1-sound-off' if a.sound_off else '*-ideal-v1')+'/manifest.json'):
             data=json.loads(manifest.read_text());refs[data['target']]=manifest.parent
+        if not refs:
+            for target in ('original','canonical'):
+                manifest=a.reference_root/path.stem/target/'manifest.json'
+                if manifest.is_file():refs[target]=manifest.parent
         if set(refs)!={'original','canonical'}:raise ValueError('Both ideal-v1 references required: '+str(path))
         jobs.extend((path.resolve(),reference,target) for target,reference in refs.items())
     # Resolve this executable once; every independent lane still validates its
@@ -239,8 +246,8 @@ def main():
     from concurrent.futures import ThreadPoolExecutor
     def work(job):
         path,reference,target=job;destination=a.out/path.stem/target
-        command=[sys.executable,'-c','from pathlib import Path; import sys; from portable.tests.acceptance.ideal_check import lane; lane(*[Path(p) for p in sys.argv[1:6]],timeout=int(sys.argv[6]),steps=int(sys.argv[7]) or None,prepared=Path(sys.argv[8]),scratch_root=Path(sys.argv[9]),dump_entry=int(sys.argv[10]) or None)',
-            str(path),str(reference),str(a.build),str(exe),str(destination),str(a.timeout),str(a.steps or 0),str(prepared),str(a.scratch_root.resolve()),str(a.dump_entry or 0)]
+        command=[sys.executable,'-c','from pathlib import Path; import sys; from portable.tests.acceptance.ideal_check import lane; lane(*[Path(p) for p in sys.argv[1:6]],timeout=int(sys.argv[6]),steps=int(sys.argv[7]) or None,prepared=Path(sys.argv[8]),scratch_root=Path(sys.argv[9]),dump_entry=int(sys.argv[10]) or None,trace_reads=bool(int(sys.argv[11])))',
+            str(path),str(reference),str(a.build),str(exe),str(destination),str(a.timeout),str(a.steps or 0),str(prepared),str(a.scratch_root.resolve()),str(a.dump_entry or 0),str(int(a.trace_reads))]
         destination.parent.mkdir(parents=True,exist_ok=True)
         log=destination.with_suffix('.log')
         with log.open('w') as output:run=subprocess.run(command,cwd=ROOT,stdout=output,stderr=subprocess.STDOUT,timeout=a.timeout+180)

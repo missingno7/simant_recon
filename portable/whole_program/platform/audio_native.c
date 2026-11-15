@@ -51,7 +51,7 @@ void snd_select_two_channel_timer(int16_t divisor,int16_t chain) { configure(div
 void snd_select_four_channel_timer(int16_t divisor,int16_t chain) { configure(divisor,chain,4); }
 void snd_start_sample_timer(void) {
     if(!host.start_timer) unavailable("PIT start");
-    host.start_timer(host.context);armed=1; interrupts=1;
+    host.start_timer(host.context);armed=1; dos_audio_host_interrupt_enable();
 }
 void snd_slow_sample_timer(void) { unavailable("manual ISR0422 transition"); }
 void snd_restore_bios_timer(int16_t divisor) {

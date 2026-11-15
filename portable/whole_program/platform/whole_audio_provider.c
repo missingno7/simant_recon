@@ -46,8 +46,18 @@ static void timer_event(PortableWholeAudioProvider *p,unsigned event) {
         p->fast?p->divisor:(uint32_t)p->divisor*16,
         p->fast?p->chain:p->chain>>4,p->chain_remaining);
 }
+/* Mode 3 is high for the first half and low for the second. A control/count
+ * reload forces OUT high; its rising edge remains pending while source IF is
+ * clear. irq_fraction locates the next edge exactly, without ns rounding. */
+static int pit_output_low(const PortableWholeAudioProvider *p) {
+    if(!p->armed || p->in_render) return 0;
+    uint64_t period=(uint64_t)p->divisor*(p->fast?1:16)*12*UINT64_C(1000000000);
+    uint64_t remaining=(p->irq_ns-p->time_ns)*UINT64_C(14318180)+p->irq_fraction;
+    return remaining && remaining*2<=period;
+}
 void portable_whole_audio_provider_start(PortableWholeAudioProvider *p) {
     /* m03CC reloads PIT0 and reinstalls the fast ISR on every sample start. */
+    if(!audio_timer_replay() && pit_output_low(p)) p->pending_irq=1;
     p->fast=1;p->armed=1;p->chain_remaining=1;
     ++p->timer_generation;
     p->irq_ns=p->time_ns;p->irq_fraction=0;next_interrupt(p,1);
@@ -128,7 +138,15 @@ void portable_whole_audio_provider_enable_interrupts(PortableWholeAudioProvider 
     /* PIC IRQ0 coalesces edges while IF is clear. Source callbacks cannot
      * reenter the private sequencer stack in this single-thread projection. */
     if(!audio_timer_replay() && p->armed && p->pending_irq && !p->in_render) {
-        p->pending_irq=0;p->in_render=1;interrupt(p,0);p->in_render=0;
+        unsigned generation=p->timer_generation;int was_fast=p->fast;
+        p->pending_irq=0;p->in_render=1;
+        if(portable_test_audio_tick) portable_test_audio_tick(p->fast?1:0);
+        interrupt(p,0);
+        if(generation==p->timer_generation && was_fast && !p->fast) {
+            p->irq_ns=p->time_ns;p->irq_fraction=0;next_interrupt(p,16);
+        }
+        if(portable_test_audio_progress) portable_test_audio_progress(0);
+        p->in_render=0;
     }
 }
 void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,int16_t stereo[2]) {
@@ -142,7 +160,7 @@ void portable_whole_audio_provider_render_frame(PortableWholeAudioProvider *p,in
 void portable_whole_audio_provider_advance(PortableWholeAudioProvider *p,uint64_t target) {
     if(target<p->time_ns) return;
     p->in_render=1;
-    while(!audio_timer_replay() && p->armed && p->irq_ns<=target) {
+    while(!audio_timer_replay() && p->armed && (p->irq_ns<target || (p->irq_ns==target && !p->irq_fraction))) {
         unsigned generation=p->timer_generation;
         p->time_ns=p->irq_ns;
         timer_event(p,0);
