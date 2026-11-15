@@ -100,8 +100,10 @@ State hashes, full checkpoint scanout and audio are compared after execution.
 Raw port/value audio is exact per entry. The older audio-content tolerance
 comparison remains a separately labelled diagnostic.
 
-The owner-approved sound-off variant uses shipped CFG Sound Mode: 0 and the
-keyboard-context-v1 plus anim-id-pattern-v1 observer rules in the parent README.
+Every ideal-v1 variant uses the same keyboard-context-v1 and anim-id-pattern-v1
+observer rules from ideal_observation.py and the parent README. Their proofs
+depend on source use of the words, independently of Sound Mode. The sound-off
+variant separately selects shipped CFG Sound Mode: 0 and checks zero audio work.
 All nine tick scripts stay unchanged. The earlier raw-state run found only
 allocator-derived rain IDs remaining. The owner's follow-up permits a per-entry
 sentinel/equality pattern for11 audited yard holders, with all raw words retained
@@ -121,5 +123,9 @@ The native rational IRQ due test includes its sub-nanosecond remainder, so an
 edge cannot run before an integer-nanosecond endpoint. Playback timestamps round
 the same rational instant to nearest nanosecond on both observers.
 Pre-repair sound-on captures remain negative controls and are rejected by the
-current checker. Fresh references live under build/reference/sound-on-clock-v3;
-all sound-off and legacy tape references remain unchanged.
+current checker. The shared identity-view sound-on references live under
+build/reference/sound-on-identity-v1. Earlier raw-only sound-on-clock-v3 captures
+remain historical controls. Existing sound-off-identity captures have the same
+view census, qualified bytes and rule receipts and remain valid. Raw .hash,
+full dumps and .anim-ids are retained for every variant; missing rule sidecars
+or metadata fail validation. Legacy tape machinery remains unchanged.

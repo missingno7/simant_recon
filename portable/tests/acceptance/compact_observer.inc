@@ -398,6 +398,9 @@ static void CompactInit() {
         if (p.kind=='O') { compact_keyboard_hook=p.address; continue; }
         compact_points.push_back(p);
     }
+#ifdef SIMANT_IDEAL_BUILD
+    if(getenv("SIMANT_IDEAL") && (!compact_context_fingerprints || !compact_identity_fingerprints || !compact_identity_raw)) abort();
+#endif
     fclose(spec);
     fputs(compact_playback?"SIMANT_AUDIO_CONTENT 2\n":"SIMANT_AUDIO_CONTENT 1\n",compact_content);
     for (size_t i=0;i<compact_points.size();++i) compact_point_index[compact_points[i].address].push_back(compact_points[i]);

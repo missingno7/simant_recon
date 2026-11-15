@@ -1,5 +1,15 @@
 # Step-based scenario observations
 
+Both keyboard-context-v1 and anim-id-pattern-v1 are part of the **shared ideal-v1
+state contract for every sound variant**. ideal_observation.py prepares the same
+1032-view schema, emits both recorder configurations and validates both receipts.
+The helpers, event-code/byte scope and eleven-holder allowlist are unchanged.
+Both observers require both rules in ideal mode; raw observations are retained.
+Sound selection changes only configuration and the variant's hardware assertions.
+Sound-on identity references are under build/reference/sound-on-identity-v1;
+existing sound-off-identity references remain valid. Prior raw-only sound-on
+references require fresh recording with the eight additional scalar views.
+
 The sound-off gameplay lane uses the shipped `SIMANT.CFG` selector
 `Sound Mode: 0` in identical disposable copies on DOS and native. Run the
 ideal-v1 recorder/checker with `--sound-off`. References are stored separately
@@ -13,7 +23,7 @@ window_current_event, its window_previous_event copy, and input_queue[7]. Only
 bytes08..0B (Event.h/v) are omitted, and only when the record's code isFAxx or
 one of the scan processor's F081..F087 commands. Every other byte and every
 mouse/object record compares fully. Raw hashes and snapshots stay intact.
-The explicit source/type census and proof pin are in sound_off.py; the bounded
+The explicit source/type census and proof pin are in event_context.py; the bounded
 HCEGANT640-wide proof is
 [`normal-words.md`](../../../evidence/canonical/native-input-irq/normal-words.md).
 `test_event_context.py` exhausts all codes/bytes in both C and C++, including
@@ -35,15 +45,16 @@ sets receive no rule. Earlier sound-off recordings remain under sound-off.
 
 The corrected recorder admits direct modifier-byte reads at0000:0417 as well as
 INT16 modifier queries. Pre-fix sound-off references are retained as controls;
-current checks refuse them. Sound-on audio verification and the legacy tape
-check remain available. The [sound-off findings](../../../evidence/canonical/native-ideal-clock/sound-off.md)
-report the earlier raw-word12/18 state and18/18 frame result. The current
-identity-pattern run passes18/18 state/frame lanes, with26128 state entries,
-152 checkpoints and eight added scalar views. See
-[identity-results.json](../../../evidence/canonical/native-ideal-clock/identity-results.json)
-and the [retirement proposal](../../../evidence/canonical/native-ideal-clock/tape-retirement-proposal.md).
-The measured new check takes483.47s wall with three workers. Nothing is retired;
-step_check remains the current upper-layer regression pending owner review.
+current checks refuse them. The latest [shared observation run](../../../evidence/canonical/native-ideal-clock/shared-observation.md)
+passes all 18 state/frame/raw-audio lanes in each sound mode and all 22 playback
+lanes with an explicit 1 ns sample-time bound. Each gameplay mode covers 26,128
+entries and 152 checkpoint frames. The three-command set took 246.14 s with
+three workers and cached references. See the
+[retirement proposal](../../../evidence/canonical/native-ideal-clock/tape-retirement-proposal.md)
+for coverage and limits. The earlier [sound-off findings](../../../evidence/canonical/native-ideal-clock/sound-off.md)
+and [identity results](../../../evidence/canonical/native-ideal-clock/identity-results.json)
+remain historical evidence. Nothing is retired; step_check remains the current
+upper-layer regression pending owner review.
 
 ```powershell
 python portable/tests/acceptance/step_record.py --sound-off --build BUILD --observer OBSERVER/observer-build.json
@@ -56,15 +67,16 @@ input and a constant per-executable machine profile. State is hashed at every
 DoAntSim entry, every existing checkpoint frame is compared without masks, and
 raw audio writes are compared exactly per entry. Audio-content comparison is a
 separate diagnostic. No clock/service/ISR/device/register tapes are replayed.
-Current ideal-v1 state differences prevent retirement; the v10 check below
-remains the upper-layer regression. Findings are in
+The final replacement proposal combines sound-off gameplay, sound-on gameplay
+and playback. The v10 check below remains the upper-layer regression until the
+owner authorizes retirement. Findings are in
 `evidence/canonical/native-ideal-clock/README.md` and
 `build/workers/ideal-check/RESULT.md`.
 
 ```powershell
 python portable/tests/acceptance/ideal_rule_check.py --out build/workers/NAME/ideal-rule
 python portable/tests/acceptance/build_observer.py --contract ideal-v1 --out build/workers/NAME/ideal-observer
-python portable/tests/acceptance/step_record.py --build build/current/portable --observer build/workers/NAME/ideal-observer/observer-build.json
+python -m portable.tests.acceptance.playback_check --record --build build/current/portable --observer build/workers/NAME/ideal-observer/observer-build.json --out build/workers/NAME/record-sound-on
 python portable/tests/acceptance/ideal_check.py --build build/current/portable --out build/workers/NAME/ideal-check --jobs 3
 ```
 
@@ -77,7 +89,7 @@ References use executable-SHA directories ending `-ideal-v1`; ordinary v10
 selection excludes them. Each profile binds relocated DGROUP and the actual DOS
 load/environment once. Raw foreground CH remains observed; only the documented
 keyboard-context-v1 projection above omits its Event.h/v copies in the
-sound-off lane. It is never supplied per event.
+ideal-v1 contract, independently of sound mode. It is never supplied per event.
 
 Recorder observations retain legacy sidecars for diagnosis. A sidecar is not an
 input: ideal_check provides only a script, immutable assets/save, the constant

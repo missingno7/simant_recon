@@ -67,7 +67,7 @@ def identity_views(state):
     for index,item in enumerate(state['items']):
         name=item['name']
         if name not in expected:continue
-        if policy[name].get('ideal_sound_off_observer')!=RULE or item['bytes']!=2*expected[name] or item['sentinel']:
+        if policy[name].get('ideal_observer')!=RULE or item['bytes']!=2*expected[name] or item['sentinel']:
             raise ValueError('Animation identity policy/layout changed: '+name)
         found[name]=dict(index=index,slots=expected[name],bytes=item['bytes'])
     if set(found)!=set(expected):raise ValueError('Missing animation identity holder')

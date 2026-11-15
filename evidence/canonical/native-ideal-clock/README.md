@@ -1,4 +1,15 @@
-# Shared ideal-machine integration,2026-11-14
+# Shared ideal-machine integration, 2026-11-15
+
+Status: **18/18 gameplay lanes equal in each sound mode; 22/22 playback lanes
+equal; tapes retained**. The latest [shared observation run](shared-observation.md)
+uses the same keyboard-context and animation-identity rules for every ideal-v1
+variant. All state, frames and raw audio pass. The combined cached check took
+246.14 s; sample timestamp tolerance remains 1 ns. See the
+[retirement proposal](tape-retirement-proposal.md) for the final replacement
+set and its coverage limits. No retirement or upper-test switch occurs here.
+The earlier clock repair remains documented in [sound-on-clock-v3.md](sound-on-clock-v3.md).
+
+## Retained earlier integration findings
 
 Status: **sound-off state/frame parity; tapes retained**. The latest owner-approved
 [identity-pattern run](identity-results.json) has18/18 state and18/18 frame lanes

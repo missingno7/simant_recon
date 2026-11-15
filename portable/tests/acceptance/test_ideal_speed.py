@@ -39,6 +39,9 @@ class BufferedObservation(unittest.TestCase):
 #include <stdint.h>
 #include <stdio.h>
 #include <inttypes.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>
 static uint8_t plain[]={1,2,3},event[16]={0,0,0,0,0,0,0,0,77,88,99,11,29,250,0,0};
 static uint8_t ids[]={37,0,255,255,37,0,132,3},sentinel[]={1,2,0,128,99,100};
 uint32_t portable_test_clock_read(char k,void *p,uint32_t v){return v;}
@@ -50,12 +53,16 @@ int16_t StillDown(void){return 0;}
 int16_t edit_scroll_and_redraw(int16_t x,int16_t y){return 0;}
 extern void __wrap_DoAntSim(void);
 int main(int argc,char **argv){
+ SetErrorMode(SEM_FAILCRITICALERRORS|SEM_NOGPFAULTERRORBOX);
+ _set_error_mode(_OUT_TO_STDERR);
+ const char *mode=argc>3?argv[3]:"both";
  FILE *f=fopen(argv[1],"w");
  fprintf(f,"unused\n%s/raw\n%s/result\n%s/state\n4 3\n",argv[2],argv[2],argv[2]);
  const uint8_t *data[]={plain,event,ids,sentinel};unsigned size[]={3,16,8,6};
  for(unsigned i=0;i<4;++i)fprintf(f,"1 %u %u 1\n%" PRId64 " %u\n",size[i],i==3,
    (int64_t)(uintptr_t)data[i]-(int64_t)(uintptr_t)portable_test_clock_read,size[i]);
- fputs("KEYBOARD_CONTEXT 1\n1 1\nIDENTITY_PATTERN 1\n2 4\n",f);fclose(f);
+ if(strcmp(mode,"no-keyboard"))fputs("KEYBOARD_CONTEXT 1\n1 1\n",f);
+ if(strcmp(mode,"no-identity"))fputs("IDENTITY_PATTERN 1\n2 4\n",f);fclose(f);
  for(unsigned i=0;i<4;++i)__wrap_DoAntSim();return 99;
 }
 ''')
@@ -86,6 +93,12 @@ int main(int argc,char **argv){
             result=json.loads((out/'result').read_text())
             self.assertEqual(result['profile']['observed_bytes'],3*(3+16+8+6))
             self.assertEqual(result['profile']['write_calls'],9)
+            # Rule omission cannot fall back to raw ideal observation in either
+            # variant. Removing the observer's shared guard makes these pass.
+            for missing in ('no-keyboard','no-identity'):
+                negative=subprocess.run([str(exe),str(config),str(out),missing],env=env,capture_output=True,timeout=10)
+                self.assertNotEqual(negative.returncode,0,missing)
+
 
 
 if __name__=='__main__': unittest.main()

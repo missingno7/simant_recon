@@ -4,7 +4,8 @@ from pathlib import Path
 import subprocess
 import tempfile
 import unittest
-from .sound_off import select_config,context_views
+from .sound_off import select_config
+from .event_context import context_views
 
 HERE=Path(__file__).resolve().parent
 class EventContext(unittest.TestCase):

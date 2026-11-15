@@ -33,7 +33,7 @@ def main():
     ap.add_argument('scenario',type=Path,nargs='*')
     ap.add_argument('--build',type=Path,default=ROOT/'build/current/portable')
     ap.add_argument('--out',type=Path,required=True)
-    ap.add_argument('--reference-root',type=Path,default=ROOT/'build/reference/sound-on-clock-v3')
+    ap.add_argument('--reference-root',type=Path,default=ROOT/'build/reference/sound-on-identity-v1')
     ap.add_argument('--record',action='store_true')
     ap.add_argument('--observer',type=Path)
     ap.add_argument('--native-observer',type=Path,help='Pinned existing observer-build.json, useful while another worker builds the runtime')
@@ -70,7 +70,8 @@ def main():
         if native_receipt['inputs'][str(a.build/'report.json')]!=sha(a.build/'report.json'):raise ValueError('Mixed native build/observer')
     else:exe=test_build(a.build,a.out/'test-build')
     build_seconds=time.perf_counter()-started
-    state=schema(a.build,executable=exe);syms=symbols_for(exe)
+    from portable.tests.acceptance.ideal_observation import prepare_schema
+    state=prepare_schema(schema(a.build,executable=exe));syms=symbols_for(exe)
     prepared=a.out/'native-views.json'
     prepared.write_text(json.dumps(dict(executable_sha256=sha(exe),sound_off=False,state=state,
         anchor=syms.addresses['portable_test_clock_read'],palette=syms.expression('app.palette')[0])))

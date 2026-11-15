@@ -230,11 +230,9 @@ def main():
                 for item in state['items']:
                     config.write(f'H {base+item[side]:X} {item["bytes"]} {int(item["sentinel"])}\n')
                     if item['category']=='audio':config.write(f'AUDIO {base+item[side]:X} {item["bytes"]}\n')
-                if args.sound_off:
-                    from sound_off import context_views
-                    for view in context_views(state).values():config.write(f'KEYBOARD_CONTEXT {view["index"]} {view["records"]}\n')
-                    from portable.tests.acceptance.animation_identity import identity_views
-                    for view in identity_views(state).values():config.write(f'IDENTITY_PATTERN {view["index"]} {view["slots"]}\n')
+                if ideal:
+                    from portable.tests.acceptance.ideal_observation import configuration
+                    config.write(configuration(state,grouped=False))
         command += ['--capture-observer',str(args.compact_observer.resolve()),'--observer-config',str(compact_spec)]
         if ideal:
             rule=out.with_suffix('.clock')

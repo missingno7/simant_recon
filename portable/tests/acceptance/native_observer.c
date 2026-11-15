@@ -249,6 +249,8 @@ static void load(void) {
       if(!identity_actual || !identity_raw) abort();
     }
   }
+  /* Both bounded rules belong to ideal-v1, independently of sound mode. */
+  if(ideal_mode && (!context_actual || !identity_actual || !identity_raw)) abort();
   fclose(config);
   if(ideal_mode) {
     if(host_time_ns) {

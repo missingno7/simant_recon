@@ -15,8 +15,9 @@ from portable.tests.acceptance.native_schema import symbols_for
 from portable.tests.acceptance.frame_check import compare_frames
 from portable.tests.acceptance.audio_commands import compare_commands,read_commands
 from portable.tests.acceptance.audio_content import compare_content
-from portable.tests.acceptance.sound_off import select_config,context_receipt,context_views
-from portable.tests.acceptance.animation_identity import extend_schema,identity_views
+from portable.tests.acceptance.sound_off import select_config
+from portable.tests.acceptance.ideal_observation import prepare_schema,configuration,context_views,identity_views
+
 
 def native_script(source,destination):
     lines=['# clock: bios-ticks']
@@ -47,8 +48,7 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
             raise ValueError('Prepared native observer identity differs')
         state=native['state'];anchor=native['anchor'];palette=native['palette']
     else:
-        state=schema(build,executable=exe)
-        if sound_off:state=extend_schema(state)
+        state=prepare_schema(schema(build,executable=exe))
         syms=symbols_for(exe);anchor=syms.addresses['portable_test_clock_read'];palette=syms.expression('app.palette')[0]
     state=bind_reference_policy(state,json.loads((reference/'schema.json').read_text()))
     elapsed('schema')
@@ -62,14 +62,8 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
         lines.append(f'{2 if item["category"]=="audio" else int(item["verdict"])} {item["bytes"]} {int(item["sentinel"])} {len(item["slices"])}')
         lines.extend(f'{at-anchor} {size}' for at,size in item['slices'])
     config.write_text('\n'.join(lines)+'\n')
-    if sound_off:
-        context=context_views(state)
-        with config.open('a') as target:
-            target.write(f'KEYBOARD_CONTEXT {len(context)}\n')
-            for view in context.values():target.write(f'{view["index"]} {view["records"]}\n')
-            identities=identity_views(state)
-            target.write(f'IDENTITY_PATTERN {len(identities)}\n')
-            for view in identities.values():target.write(f'{view["index"]} {view["slots"]}\n')
+    context=context_views(state);identities=identity_views(state)
+    with config.open('a') as target:target.write(configuration(state,grouped=True))
     checkpoints=[s for s in manifest['frames']['entries'] if s<=stop]
     frames=out/'frames.config';frames.write_text(str(out)+'\n'+f'{palette-anchor} {len(checkpoints)}\n'+' '.join(map(str,checkpoints))+'\n')
     script=out/'input.txt';native_script(script_path(scenario),script)
@@ -118,9 +112,8 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
     expected=read_hashes(reference/'capture/observer.txt.hash',count)
     actual=read_hashes(out/'native.hash',count) if (out/'native.hash').exists() else []
     raw_expected,raw_actual=expected,actual
-    if sound_off:
-        expected=read_hashes(reference/'capture/observer.txt.hash.ideal-state-v2',count)
-        actual=read_hashes(out/'native.hash.ideal-state-v2',count)
+    expected=read_hashes(reference/'capture/observer.txt.hash.ideal-state-v2',count)
+    actual=read_hashes(out/'native.hash.ideal-state-v2',count)
     if len(raw_expected)!=len(expected) or len(raw_actual)!=len(actual):
         raise ValueError('Raw/semantic observation coverage differs')
     first=None;separate={};equal=0;rows=[]
@@ -153,20 +146,20 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
     if len(native_clock)!=stop:result['state']='STATE_INCOMPLETE'
     simulated_seconds=(native_clock[-1]/1e9) if native_clock else 0
     result['rates']=dict(simulation_entries_per_second=len(actual)/seconds,simulated_seconds=simulated_seconds,simulated_to_wall=simulated_seconds/seconds)
+    result['event_context_rule']=manifest['event_context_rule']
+    result['animation_identity_rule']=manifest['animation_identity_rule']
+    result['raw_event_differences']={}
+    for entry,(left,right) in enumerate(zip(raw_expected[:stop],raw_actual),1):
+        for item,a,b,qualified_a,qualified_b in zip(items,left,right,expected[entry-1],actual[entry-1]):
+            if item['name'] not in context and item['name'] not in identities:
+                if a!=qualified_a or b!=qualified_b:raise ValueError('Observer rule changed an unlisted view')
+            elif item['name'] in context and a!=b:
+                result['raw_event_differences'].setdefault(item['name'],dict(entry=entry,raw_reference_hash=a,raw_native_hash=b,qualified_equal=qualified_a==qualified_b))
+    from portable.tests.acceptance.animation_identity import compare_raw
+    result['raw_animation_ids']=compare_raw(reference/'capture/observer.txt.anim-ids',out/'native.hash.anim-ids',identities,stop)
     if sound_off:
         result['variant']='sound-off'
-        result['event_context_rule']=manifest['event_context_rule']
-        result['animation_identity_rule']=manifest['animation_identity_rule']
         result['sound_configuration']=manifest['sound_configuration']
-        result['raw_event_differences']={}
-        for entry,(left,right) in enumerate(zip(raw_expected[:stop],raw_actual),1):
-            for item,a,b,qualified_a,qualified_b in zip(items,left,right,expected[entry-1],actual[entry-1]):
-                if item['name'] not in context and item['name'] not in identities:
-                    if a!=qualified_a or b!=qualified_b:raise ValueError('Observer rule changed an unlisted view')
-                elif item['name'] in context and a!=b:
-                    result['raw_event_differences'].setdefault(item['name'],dict(entry=entry,raw_reference_hash=a,raw_native_hash=b,qualified_equal=qualified_a==qualified_b))
-        from portable.tests.acceptance.animation_identity import compare_raw
-        result['raw_animation_ids']=compare_raw(reference/'capture/observer.txt.anim-ids',out/'native.hash.anim-ids',identities,stop)
         first_dos=split_frame(reference/'capture/observer.txt.frame.1',items)
         first_native=split_frame(out/'native.frame.1',items)
         globals_={}
@@ -216,14 +209,13 @@ def main():
     ap.add_argument('--scratch-root',type=Path,default=ROOT/'build/scratch/ideal',help='Short disposable asset directory')
     ap.add_argument('--dump-entry',type=int,help='Write full diagnostic state at this entry (all view hashes are always observed)')
     ap.add_argument('--sample-native',action='store_true',help='Optional 10 ms Windows native instruction-pointer profile')
-    ap.add_argument('--sound-off',action='store_true',help='Select separately recorded Sound Mode: 0 references and keyboard-context-v1')
+    ap.add_argument('--sound-off',action='store_true',help='Select separately recorded Sound Mode: 0 references')
     a=ap.parse_args();a.build=a.build.resolve();a.out=a.out.resolve();a.out.mkdir(parents=True,exist_ok=False)
-    if a.reference_root is None:a.reference_root=ROOT/'build/reference'/('sound-off-identity' if a.sound_off else 'sound-on-clock-v3')
+    if a.reference_root is None:a.reference_root=ROOT/'build/reference'/('sound-off-identity' if a.sound_off else 'sound-on-identity-v1')
     elif a.sound_off and a.reference_root.resolve()==(ROOT/'build/reference').resolve():a.reference_root=a.reference_root/'sound-off-identity'
     all_started=time.perf_counter();exe=test_build(a.build,a.out/'test-build');build_seconds=time.perf_counter()-all_started;jobs=[]
     prepare_started=time.perf_counter()
-    state=schema(a.build,executable=exe)
-    if a.sound_off:state=extend_schema(state)
+    state=prepare_schema(schema(a.build,executable=exe))
     syms=symbols_for(exe)
     prepared=a.out/'native-views.json'
     prepared.write_text(json.dumps(dict(executable_sha256=sha(exe),sound_off=a.sound_off,state=state,

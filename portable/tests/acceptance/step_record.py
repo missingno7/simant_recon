@@ -58,12 +58,9 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         raise ValueError('Incomplete or occupied reference directory: '+str(directory))
     directory.mkdir(parents=True)
     state=schema(build, report)
-    if sound_off:
-        from portable.tests.acceptance.sound_off import context_receipt
-        from portable.tests.acceptance.animation_identity import extend_schema,identity_receipt
-        state=extend_schema(state)
-        state['event_context_rule']=context_receipt(state)
-        state['animation_identity_rule']=identity_receipt(state)
+    if ideal:
+        from portable.tests.acceptance.ideal_observation import prepare_schema
+        state=prepare_schema(state)
     state_path=directory/'schema.json';state_path.write_text(json.dumps(state,indent=2)+'\n')
     scratch=scratch_root or ROOT/'build/scratch/steps'
     scratch.mkdir(parents=True,exist_ok=True)
@@ -120,17 +117,16 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
                   frames=boundary['frames'])
     if ideal:
         manifest['files'].update({p.relative_to(directory).as_posix():sha(p) for p in [directory/'machine-profile.json',capture/'observer.txt.ideal']})
+    if ideal:
+        from portable.tests.acceptance.ideal_observation import rules,SIDECARS
+        manifest.update(rules(state))
+        manifest['files'].update({'capture/'+name:sha(capture/name) for name in SIDECARS})
     if ideal and not sound_off:manifest['clock_admission']=boundary.get('clock_revision')
     if playback:manifest['audio_playback']='audio-playback-v1'
     if sound_off:
         manifest['variant']=variant
         manifest['clock_admission']='direct-bda-v2'
         manifest['sound_configuration']=execution['sound_configuration']
-        manifest['event_context_rule']=state['event_context_rule']
-        manifest['animation_identity_rule']=state['animation_identity_rule']
-        manifest['files']['capture/observer.txt.hash.keyboard-context-v1']=sha(capture/'observer.txt.hash.keyboard-context-v1')
-        for name in ('observer.txt.hash.ideal-state-v2','observer.txt.anim-ids'):
-            manifest['files']['capture/'+name]=sha(capture/name)
     (directory/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print(f'{scenario["id"]} {target}: {len(rows)}/{count} steps, {elapsed:.3f}s ({elapsed/max(1,len(rows)):.4f}s/step)',flush=True)
     if not manifest['complete']: raise RuntimeError('Recording ended before requested simulation entry; see '+str(directory/'record.log'))
