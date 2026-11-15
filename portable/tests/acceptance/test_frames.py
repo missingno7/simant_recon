@@ -101,6 +101,7 @@ int main(int argc,char **argv) {
             host=(ROOT/'portable/whole_program/platform/sdl3/host.c').as_posix()
             source.write_text('#define SIMANT_TEST_FRAMES\n#include "'+host+'"\n'+r'''
 static SimGraphicsDriver graphics, before;
+#include "portable/tests/enhanced/workspace_disabled.inc"
 int native_windows_translate(SDL_Event *e) { (void)e;return 0; }
 int native_windows_take_deferred(SDL_Event *e) { (void)e;return 0; }
 int native_windows_filter_root(SDL_Event *e) { (void)e;return 0; }

@@ -6,6 +6,7 @@
 #include "portable/whole_program/enhanced/assets.h"
 #include "portable/whole_program/enhanced/runtime.h"
 #include "portable/whole_program/platform/sdl3/native_windows.h"
+#include "portable/whole_program/platform/sdl3/native_workspace.h"
 #include "portable/whole_program/modern/world_view.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,6 +24,8 @@ static unsigned copies, submitted, duplicate_result, copy_errors,repairs;
 static int configured;
 static const char *mode;
 static unsigned balloon_peak,captured;
+static unsigned layout_operations,layout_roundtrips,layout_errors,native_layout_operations;
+static Workspace passive_layout;
 static void dump_assets(void) {
     const char *path=getenv("SIMANT_ENHANCED_DUMP_ASSETS");if(!path)return;
     FILE *out=fopen(path,"wb");if(!out)abort();uint8_t pixels[256];
@@ -127,6 +130,8 @@ void __wrap_portable_test_diagnostics(FILE *f)
     const EnhancedSnapshot *s=enhanced_snapshot();
     fprintf(f,",\"enhanced_generation\":%" PRIu64 ",\"enhanced_repaint_copies\":%u,\"enhanced_copy_errors\":%u,\"enhanced_repaint_renders\":%u",
         s?s->generation:0,copies,copy_errors,repairs);
+    fprintf(f,",\"enhanced_layout_operations\":%u,\"enhanced_layout_roundtrips\":%u,\"enhanced_layout_errors\":%u,\"enhanced_native_layout_operations\":%u",
+        layout_operations,layout_roundtrips,layout_errors,native_layout_operations);
 }
 #endif
 
@@ -135,6 +140,26 @@ void __wrap_enhanced_execute_next(void)
 {
     configure();
     const EnhancedSnapshot *f=enhanced_snapshot();
+    if(getenv("SIMANT_ENHANCED_LAYOUT_STRESS")&&f&&f->panels.game_type>=0) {
+        static int32_t last=-1;
+        if(last!=main_iteration_count){last=main_iteration_count;
+            if(!layout_operations)ws_preset(&passive_layout,0);
+            static EnhancedSnapshot before;before=*f;
+            if(native_workspace_active()) {
+                if(!native_workspace_operation(layout_operations))++layout_errors;
+                else ++native_layout_operations;
+                passive_layout=*native_workspace_layout();
+            } else ws_exercise(&passive_layout,layout_operations);
+            if(!ws_validate(&passive_layout)||memcmp(&before,enhanced_snapshot(),sizeof(before)))++layout_errors;
+            /* Validate the production serialization on private native storage. */
+            const char *path=getenv("SIMANT_ENHANCED_LAYOUT_ROUNDTRIP");FILE *file=path?fopen(path,"w+"):NULL;
+            if(file){Workspace restored;if(!ws_write(&passive_layout,file))++layout_errors;rewind(file);
+                if(!ws_read(&restored,file))++layout_errors;else {restored.revision=passive_layout.revision;if(memcmp(&restored,&passive_layout,sizeof(restored)))++layout_errors;}
+                fclose(file);++layout_roundtrips;
+            }else ++layout_errors;
+            ++layout_operations;
+        }
+    }
     if(f && f->world.overlays.balloon_count>balloon_peak)balloon_peak=f->world.overlays.balloon_count;
     const char *capture=getenv("SIMANT_ENHANCED_CAPTURE");
     if(capture && !captured && f && f->world.overlays.balloon_count && f->world.overlays.line_count)

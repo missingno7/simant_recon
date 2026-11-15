@@ -1,5 +1,6 @@
 #include "host_modes.h"
 #include "native_windows.h"
+#include "native_workspace.h"
 #include <SDL3/SDL.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -233,8 +234,8 @@ int host_set_logical_size(Host *host, int width, int height)
     texture = SDL_CreateTexture(host->renderer, SDL_PIXELFORMAT_RGBA32,
         SDL_TEXTUREACCESS_STREAMING, width, height);
     if (!texture || !SDL_SetTextureScaleMode(texture, SDL_SCALEMODE_NEAREST) ||
-        !SDL_SetWindowSize(host->window, width * host->window_scale,
-                           (height - host->crop_top) * host->window_scale) ||
+        (!native_workspace_active() && !SDL_SetWindowSize(host->window, width * host->window_scale,
+                           (height - host->crop_top) * host->window_scale)) ||
         !SDL_SetRenderLogicalPresentation(host->renderer, width, height - host->crop_top,
             host->integer_scaling ? SDL_LOGICAL_PRESENTATION_INTEGER_SCALE :
             SDL_LOGICAL_PRESENTATION_LETTERBOX)) {
@@ -329,6 +330,7 @@ int host_set_window_scale(Host *host, int scale)
 {
     if (!host || scale < 1 || scale > 8) return 0;
     host->window_scale = scale;
+    if (native_workspace_active()) return 1;
     return SDL_SetWindowSize(host->window, host->logical_width * scale,
                              (host->logical_height - host->crop_top) * scale);
 }
@@ -526,6 +528,7 @@ int host_get_input_state(Host *host, HostInputState *state)
     SDL_MouseButtonFlags buttons;
     if (host == NULL || state == NULL) return 0;
     if (virtual_quantum) { *state = host->replay_state; return 1; }
+    if (native_workspace_input(state)) return 1;
     buttons = SDL_GetMouseState(&window_x, &window_y);
     if (!native_windows_pointer(&logical_x, &logical_y)) {
         if (!SDL_RenderCoordinatesFromWindow(host->renderer, window_x, window_y,
@@ -552,6 +555,7 @@ int host_warp_pointer(Host *host, int16_t logical_x, int16_t logical_y)
         host->replay_state.y = logical_y;
         return 1;
     }
+    if (native_workspace_active()) return 1;
     if (host == NULL || !SDL_RenderCoordinatesToWindow(host->renderer,
             (float)logical_x, (float)(logical_y - host->crop_top), &window_x, &window_y))
         return 0;
@@ -596,6 +600,7 @@ int host_poll_event(Host *host, HostEvent *event)
     ++poll_calls;
     while (native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
         ++poll_events;
+        if (native_workspace_filter(&raw)) continue;
         if ((raw.type == SDL_EVENT_WINDOW_RESIZED || raw.type == SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED ||
              raw.type == SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED) &&
             raw.window.windowID == SDL_GetWindowID(host->window)) {
@@ -720,6 +725,10 @@ int host_present(Host *host, const uint8_t *pixels, size_t stride,
     int x,y;
     SDL_FRect crop;
     if (!host || !pixels || !palette || stride < (size_t)host->logical_width) return 0;
+    if (native_workspace_active()) {
+        host->presented_palette=*palette;host->frame_presented=1;
+        native_workspace_present(palette);return 1;
+    }
     crop.x = 0; crop.y = (float)host->crop_top;
     crop.w = (float)host->logical_width; crop.h = (float)(host->logical_height - host->crop_top);
     for (y=0;y<host->logical_height;y++) for (x=0;x<host->logical_width;x++) {

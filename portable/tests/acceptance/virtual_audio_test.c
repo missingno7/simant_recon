@@ -1,3 +1,4 @@
+#include "portable/tests/enhanced/workspace_disabled.inc"
 #include "portable/platform/sdl3/whole_audio_startup.h"
 #include "portable/whole_program/platform/audio_native.h"
 #include "portable/whole_program/platform/audio.h"

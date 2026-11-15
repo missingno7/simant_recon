@@ -185,7 +185,8 @@ def build_native(build,out,mutation=None):
     platform=json.loads((ROOT/'portable/platform.json').read_text())
     command=[report['core_link']['command'][0],'-fno-lto','-shared','-Wl,--export-all-symbols',
         *['-Wl,--wrap='+n for n in BOUNDARIES+platform['window_hosting_wraps']],str(HERE/'native_callbacks.c'),
-        '-Wl,@fixture-objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),'-static','-lstdc++',
+        '-Wl,@fixture-objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),'-static',
+        *[flag for flag in report['application_link']['command'] if flag.startswith('-l')],
         '-o',str(out/'native.dll')]
     run=subprocess.run(command,cwd=out,capture_output=True,text=True)
     (out/'link.txt').write_text(run.stdout+run.stderr)

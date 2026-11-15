@@ -33,6 +33,7 @@ class BiosKeys(unittest.TestCase):
 #include <string.h>
 #include "portable/whole_program/platform/sdl3/host.c"
 #include "portable/whole_program/platform/sdl3/input_time_host.c"
+#include "portable/tests/enhanced/workspace_disabled.inc"
 int native_windows_translate(SDL_Event *e){return 0;}
 int native_windows_take_deferred(SDL_Event *e){return 0;}
 int native_windows_filter_root(SDL_Event *e){return 0;}

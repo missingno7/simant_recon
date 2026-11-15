@@ -1,3 +1,4 @@
+#include "portable/tests/enhanced/workspace_disabled.inc"
 #include "portable/whole_program/platform/sdl3/host_modes.h"
 #include <math.h>
 #include <stdlib.h>

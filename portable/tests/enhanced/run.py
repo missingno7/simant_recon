@@ -8,13 +8,14 @@ def run_case(build,exe,out,name,script,smoke,mode=None):
     target=out/name;target.mkdir()
     scratch=ROOT/'build/scratch/enhanced';scratch.mkdir(parents=True,exist_ok=True)
     env={k:v for k,v in os.environ.items() if not k.startswith(('SIMANT_ENHANCED','SIMANT_TEST_'))}
+    env['SIMANT_ENHANCED_WORKSPACE']='0' # Retained hosted fixtures; workspace has its own suite.
     if mode:env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_TEST=mode)
     if mode=='hybrid':env['SIMANT_ENHANCED_WORLD']='0'
     with tempfile.TemporaryDirectory(prefix='a',dir=scratch) as folder:
         assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
         command=[str(exe),'--headless','--deterministic','--windows','--seed','0','--assets',str(assets),
                  '--input-script',str(script),'--smoke-ms',str(smoke),'--frame',str(target/'frame.bmp'),
-                 '--diagnostics-dir',str(target/'diagnostics')]
+                 '--diagnostics-dir='+str(target/'diagnostics')]
         process=subprocess.run(command,cwd=ROOT,env=env,capture_output=True,timeout=180)
     log=process.stdout.decode(errors='replace')+process.stderr.decode(errors='replace')
     (target/'run.log').write_text(log)

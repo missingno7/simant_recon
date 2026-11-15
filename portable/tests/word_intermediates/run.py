@@ -50,9 +50,11 @@ def link(report,out,mutation=False):
         objects=[str(obj) if p==row['object'] else p for p in objects]
     rsp=out/'objects.rsp';rsp.write_text(''.join('"'+Path(p).as_posix()+'"\n' for p in objects))
     dll=out/'words.dll'
-    args=[report['core_link']['command'][0],'-shared','-Wl,--export-all-symbols',
+    hosting=[flag for flag in report['application_link']['command']
+             if flag.startswith('-Wl,--wrap=') and flag!='-Wl,--wrap=exit']
+    args=[report['core_link']['command'][0],'-fno-lto','-shared','-Wl,--export-all-symbols',*hosting,
           '-Wl,@objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),
-          '-static','-lstdc++','-o',str(dll)]
+          '-static',*[flag for flag in report['application_link']['command'] if flag.startswith('-l')],'-o',str(dll)]
     command(args,out,'link.log')
     if any(sha(p)!=value for p,value in pins.items()):raise ValueError('production objects changed during test')
     return dll,dict(objects=pins,dll_sha256=sha(dll),mutation=mutation)

@@ -1,0 +1,6 @@
+/* Host-only device fixtures deliberately have no workspace/UI dependency. */
+#include "portable/whole_program/platform/sdl3/native_workspace.h"
+int native_workspace_active(void) { return 0; }
+int native_workspace_filter(const SDL_Event *event) { (void)event;return 0; }
+int native_workspace_input(HostInputState *state) { (void)state;return 0; }
+void native_workspace_present(const HostPalette *palette) { (void)palette; }

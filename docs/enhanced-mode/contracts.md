@@ -1,7 +1,9 @@
 # Presentation contracts (phases 0 and 1)
 
 The approved [design and complete component/action catalogs](../enhanced-mode.md)
-are the authority. This is an opt-in preview with a phase 1 native world, not the docking workspace.
+are the authority. These are the phase 0/1 contracts; the
+[phase 2 workspace](phase2.md) is the current Windows shell when `--windows`
+is enabled. Select `SIMANT_ENHANCED_WORKSPACE=0` for the retained host described here.
 Set `SIMANT_ENHANCED_CONTRACTS=1` to enable publication and semantic submissions.
 Classic without that variable does not publish or execute enhanced intents.
 
@@ -150,8 +152,9 @@ and byte diagnostics. An independent test projection observes all resident sourc
 window flags/geometry, object counts/selection flags and menu-state bytes even
 when enhanced publication is off. A repeated off/off lane distinguishes baseline
 variability from off/on differences. An offline SaveRec fingerprint
-mutation must fail the comparison. Missing observations fail. No enhanced layout
-exists yet, so layout-change coverage is deferred explicitly.
+mutation must fail the comparison. Missing observations fail. Native layout
+is exercised by the additional phase 2 stationary/repeat/layout-stress group;
+see [its exact coverage](phase2.md#verification-and-owner-registrations).
 
 The `contracts` group toggles only publication on the existing chooser-only
 host. The `native-world` group uses the same complete `--windows` arrangement in

@@ -1,3 +1,4 @@
+#include "portable/tests/enhanced/workspace_disabled.inc"
 #include "../sdl3/host_modes.h"
 #include "../sdl3/native_windows.h"
 #include "../pit_clock.h"

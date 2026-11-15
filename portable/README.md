@@ -3,11 +3,11 @@
 The approved [enhanced Windows design](../docs/enhanced-mode.md) and
 [phase 0 API/verification contracts](../docs/enhanced-mode/contracts.md) now live
 in the repository. `SIMANT_ENHANCED_CONTRACTS=1` enables copied semantic
-publications and the discrete action executor; it does not enable a new UI.
-The existing `--windows` hybrid still has strict phase 1 rebirth and phase 3
-activation-click expected failures. Inspectors in the approved mode are always
-live; native layouts and immutable art remain later phases. Register
-`portable/tests/enhanced/run.py` and `portable/tests/enhanced/invariance.py`
+publications and the discrete action executor. On Windows with `--windows`, it
+also selects the [phase 2 native workspace](../docs/enhanced-mode/phase2.md).
+The phase 1 rebirth regression is required PASS; the phase 3 activation fixture
+remains XFAIL on the retained comparison host. Inspectors are always live.
+Register `portable/tests/enhanced/run.py`, `invariance.py` and `workspace.py`
 after the fresh native build, using `--build BUILD --out FRESH_PATH` for each.
 
 `build.py` consumes the complete current `src/program.json` inventory. It
@@ -358,3 +358,19 @@ raw difference, including baseline variability; a nonzero result must be read
 as differences, not silently treated as full invariance. The capture runner
 checks source preconditions, compares independent asset decoding, and writes
 asset-derived PNGs only to ignored scratch.
+# Native workspace preview
+
+On Windows, `SIMANT_ENHANCED_CONTRACTS=1` with `--windows` selects the
+[phase 2 workspace](../docs/enhanced-mode/phase2.md): native dock/split/tab/float,
+presets/persistence and up to three live read-only world inspectors. Other panel
+families are named empty native panels. `SIMANT_ENHANCED_WORKSPACE=0` retains
+the phase 1 comparison host. Classic remains selected without enhanced contracts.
+
+F6 cycles regions, Ctrl+Tab cycles a tab group, and Shift+F10 opens panel layout
+commands. Layout > Reset Layout restores Play. The workspace document lives
+outside game saves; `SIMANT_WORKSPACE_LAYOUT=PATH` isolates it for tests.
+
+Run `python portable/tests/enhanced/workspace.py --build BUILD --out NEW_OUTPUT
+--screens NEW_SCREENS` after a fresh build. UI Automation roles/actions and full
+raw passive equality are checked separately and remain failures when unproved;
+see the phase guide for the exact boundaries and owner gate registrations.

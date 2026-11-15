@@ -7,7 +7,8 @@ UI choices are ours; the evidence labels distinguish observations from hypothese
 
 Phase 0 APIs, implemented routes, limitations and executable checks are documented in
 [the contract guide](enhanced-mode/contracts.md). The opt-in [phase 1 native world](enhanced-mode/phase1.md)
-uses immutable shipped assets and semantic snapshots. No docking workspace is implemented yet.
+uses immutable shipped assets and semantic snapshots. The [phase 2 native workspace preview](enhanced-mode/phase2.md)
+adds docking and passive inspector lifecycle; accessibility/runtime limits remain explicit.
 Investigation references under `build/workers/enhanced-design/` are ignored scratch,
 including every game-art screenshot and resource-derived inventory. Recipes and small
 text traces cited here are retained under `evidence/enhanced-mode/`; rerun recipes in

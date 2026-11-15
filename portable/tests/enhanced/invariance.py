@@ -19,7 +19,7 @@ def differences(left,right,items):
     return [dict(entry=n,views=[v['name'] for v,a,b in zip(items,x,y) if a!=b])
             for n,(x,y) in enumerate(zip(left,right),1) if x!=y]
 
-def observe(build,exe,state,out,mode,steps,hosted=False):
+def observe(build,exe,state,out,mode,steps,hosted=False,workspace=False):
     out.mkdir();items=state['items'];anchor=symbols_for(exe).addresses['portable_test_observer_anchor']
     config=out/'observer.config'
     lines=['unused',str(out/'native.hash'),str(out/'observer.json'),str(out/'native.frame'),f'{len(items)} {steps}']
@@ -40,13 +40,18 @@ def observe(build,exe,state,out,mode,steps,hosted=False):
         SIMANT_TEST_AUDIO_CONTENT=str(out/'content.txt'),SIMANT_TEST_DUMP_ENTRY='3')
     if mode!='off' or hosted:env['SIMANT_ENHANCED_CONTRACTS']='1'
     if hosted:env['SIMANT_ENHANCED_WORLD']='0' if mode=='off' else '1'
+    env['SIMANT_ENHANCED_WORKSPACE']='0'
+    if workspace:
+        env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_WORLD='1',SIMANT_ENHANCED_WORKSPACE='1',
+            SIMANT_WORKSPACE_LAYOUT=str(out/'workspace.txt'),SDL_AUDIODRIVER='dummy')
+        if mode=='stress':env.update(SIMANT_ENHANCED_LAYOUT_STRESS='1',SIMANT_ENHANCED_LAYOUT_ROUNDTRIP=str(out/'layout-roundtrip.txt'))
     if mode=='stress':env['SIMANT_ENHANCED_TEST']='stress'
     script=ROOT/'portable/tests/runtime/windows-quick.txt'
     scratch=ROOT/'build/scratch/enhanced';scratch.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='a',dir=scratch) as folder:
         assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
-        command=[str(exe),'--headless','--deterministic','--seed','0','--assets',str(assets),
-            '--input-script',str(script),'--diagnostics-dir',str(out/'diagnostics'),
+        command=[str(exe),*([] if workspace else ['--headless']),'--deterministic','--seed','0','--assets',str(assets),
+            '--input-script',str(script),'--diagnostics-dir='+str(out/'diagnostics'),
             '--smoke-ms','1000000']
         # Both use the exact same startup owner/pointer transform. Only the
         # world compositor is added in on/stress, as in the existing modern test.
@@ -74,10 +79,9 @@ def main():
             slices=[[address,size]],sentinel=False,provenance='Test-only copy at the existing acceptance step seam; window reference registry and canonical menu bytes.'))
     (out/'views.json').write_text(json.dumps(state,indent=2)+'\n')
     groups=[]
-    for hosted in (False,True):
-        name='native-world' if hosted else 'contracts'
-        lanes={mode:observe(build,exe,state,out/(name+'-'+mode),mode,a.steps,hosted) for mode in ('off','on','stress')}
-        lanes['repeat-off']=observe(build,exe,state,out/(name+'-repeat-off'),'off',a.steps,hosted)
+    for name,hosted,workspace in (('contracts',False,False),('native-world',True,False),('workspace',True,True)):
+        lanes={mode:observe(build,exe,state,out/(name+'-'+mode),mode,a.steps,hosted,workspace) for mode in ('off','on','stress')}
+        lanes['repeat-off']=observe(build,exe,state,out/(name+'-repeat-off'),'off',a.steps,hosted,workspace)
         for mode in ('repeat-off','on','stress'):
             diffs=differences(lanes['off'],lanes[mode],state['items'])
             semantic=differences(read_hashes(out/(name+'-off/native.hash.ideal-state-v2'),len(state['items'])),
@@ -97,6 +101,7 @@ def main():
                         off_prefix=left[field][:64].hex(),other_prefix=right[field][:64].hex()))
             observed=(mode=='repeat-off' or observation.get('enhanced_generation',0)>0) and observation.get('enhanced_copy_errors')==0
             if mode=='stress':observed=observed and observation.get('enhanced_repaint_copies',0)>0 and observation.get('enhanced_repaint_renders',0)>0
+            if workspace and mode=='stress':observed=observed and observation.get('enhanced_layout_operations',0)>=10 and observation.get('enhanced_native_layout_operations')==observation.get('enhanced_layout_operations') and observation.get('enhanced_layout_roundtrips')==observation.get('enhanced_layout_operations') and observation.get('enhanced_layout_errors')==0
             groups.append(dict(group=name,mode=mode,passed=not diffs and audio['status']=='AUDIO_COMMANDS_EQUAL' and clock_equal,
                 differing_entries=len(diffs),first_difference=diffs[0] if diffs else None,
                 all_differences=diffs,existing_projection_differences=semantic,audio=audio,clock_equal=clock_equal,
@@ -107,7 +112,7 @@ def main():
     detector_ok=bool(negative) and negative[0]['entry']==1 and negative[0]['views']==[state['items'][0]['name']]
     result=dict(passed=all(g['passed'] and g['observed'] for g in groups) and detector_ok,groups=groups,negative_control=detector_ok,
         entries=a.steps,views=len(state['items']),save_records=sum(i['name'].startswith('save:') for i in state['items']),
-        exclusions=state['excluded'],layout='Phase 1 uses the existing Game Window; no docking/layout-invariance claim.',
+        exclusions=state['excluded'],layout='Workspace stationary/repeated controls and real Win32 dock/split/tab/float/collapse/hide/reveal/preset/reset plus persistence roundtrips at source seams. UI input isolation and HWND keyboard checks are independently exercised by workspace.py. No masks added.',
         scope='Raw acceptance views, SaveRec projection, RNG, source UI/stack, clock and sound commands; unavailable private views stay explicit.')
     (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k not in ('groups','exclusions')},indent=2))

@@ -1,5 +1,10 @@
 # Phase 1: immutable native world
 
+This page describes the retained phase 1 host. Set
+`SIMANT_ENHANCED_WORKSPACE=0` when reproducing that arrangement. The current
+Windows shell is the [phase 2 native workspace](phase2.md); the immutable art,
+snapshot and pure drawing contracts below remain its foundation.
+
 Implementation organisation and native presentation are ours. Source semantics
 come from `src/ui/edit_view.c`, `src/ui/yard_window.c`, `src/graphics/anim.c`,
 `src/graphics/font_resources.c`, `src/graphics/balloons.c` and their converted

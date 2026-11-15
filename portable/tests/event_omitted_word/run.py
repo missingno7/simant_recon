@@ -57,7 +57,7 @@ def fixture(report,out,disabled=False):
     exe=out/'fixture.exe'
     hosting=[a for a in report['application_link']['command'] if a.startswith('-Wl,--wrap=') and a!='-Wl,--wrap=exit']
     command=[report['core_link']['command'][0],'-fno-lto','-g',str(HERE/'fixture.c'),'-Wl,@'+str(rsp),
-             *hosting,*['-Wl,--wrap='+n for n in WRAPS],'-static','-lstdc++',
+             *hosting,*['-Wl,--wrap='+n for n in WRAPS],'-static',*[flag for flag in report['application_link']['command'] if flag.startswith('-l')],
              str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),'-o',str(exe)]
     execute(command,out,out/'link.log')
     env=dict(os.environ);env['PATH']=str(Path(report['sdk']['path'])/'bin')+os.pathsep+env.get('PATH','')

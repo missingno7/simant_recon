@@ -1,3 +1,4 @@
+#include "portable/tests/enhanced/workspace_disabled.inc"
 #include "portable/whole_program/platform/sdl3/input_time_host.h"
 #include "portable/whole_program/platform/sdl3/host_modes.h"
 #include <SDL3/SDL.h>

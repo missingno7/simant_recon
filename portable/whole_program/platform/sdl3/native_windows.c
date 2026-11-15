@@ -6,6 +6,7 @@
 #include "host_modes.h"
 #include "modern_game_view.h"
 #include "native_menu.h"
+#include "native_workspace.h"
 
 #include <stdio.h>
 #ifdef _WIN32
@@ -159,7 +160,7 @@ int native_windows_init(Host *host, SDL_Window *root)
     sim_window_hosting_set_pump(pump);
     /* The overview indicator shows the modern Game Window's area. */
     if (sim_window_hosting_is_hosted(0) && !enhanced_contracts_enabled()) sim_window_hosting_own_map_cursor(1);
-    if (!native_menu_init(root))
+    if (!(sim_window_hosting_is_hosted(0) && native_workspace_init(root)) && !native_menu_init(root))
         fprintf(stderr, "Native menu bar unavailable (no native main window)\n");
     return 1;
 }
@@ -167,6 +168,7 @@ int native_windows_init(Host *host, SDL_Window *root)
 void native_windows_shutdown(void)
 {
     unsigned i;
+    native_workspace_shutdown();
     native_menu_shutdown();
     sim_window_hosting_set_pump(NULL);
     sim_window_hosting_own_map_cursor(0);
@@ -531,15 +533,22 @@ int native_windows_present(const HostPalette *palette)
     if (!n.active) return 1;
     /* Win16 InitMenu: the native bar replaces the game-drawn one; the main
      * window then starts below the game's menu bar rows. */
-    if (native_menu_sync() && !n.crop && menu_bar_rect.bottom > 0 &&
+    if (!native_workspace_active() && native_menu_sync() && !n.crop && menu_bar_rect.bottom > 0 &&
         host_set_top_crop(n.host, menu_bar_rect.bottom))
         n.crop = menu_bar_rect.bottom;
     has_indicator = sim_window_hosting_map_cursor_shown() && modern_game_view_overview(&indicator);
+    if (native_workspace_active()) native_workspace_present(palette);
     for (i = 0; i < n.count; ++i) {
         NativeWindow *w = &n.windows[i];
         SimHostedWindowView view;
         int raise, okay;
         if (!sim_window_hosting_view(i, &view)) continue;
+        /* Native panel visibility is independent of source logical lifetime.
+         * Lifecycle dialogs retain their compatibility host until phase 5. */
+        if (native_workspace_active() && (view.id==0 || view.id==0x100 ||
+            view.id==0x500 || view.id==0x1200 || view.id==0x1300 ||
+            view.id==0x1400 || view.id==0x1500 || view.id==0x1700 ||
+            view.id==0x1800 || view.id==0x1900 || view.id==0x1c00 || view.id==0x1d00)) continue;
         if (!view.open) {
             if (w->shown) { SDL_HideWindow(w->surface.window); w->shown = 0; }
             w->close_pending = w->raise_pending = 0;

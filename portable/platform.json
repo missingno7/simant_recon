@@ -91,7 +91,9 @@
     "portable/whole_program/enhanced/seams.c",
     "portable/whole_program/enhanced/assets.c",
     "portable/whole_program/enhanced/overlays.c",
-    "portable/whole_program/enhanced/world.c"
+    "portable/whole_program/enhanced/world.c",
+    "portable/whole_program/enhanced/workspace.c",
+    "portable/whole_program/platform/sdl3/native_workspace.c"
   ],
   "headers": [
     "portable/whole_program/platform/desktop_files.h",
@@ -204,7 +206,9 @@
     "portable/whole_program/enhanced/catalog.inc",
     "portable/whole_program/enhanced/assets.h",
     "portable/whole_program/enhanced/overlays.h",
-    "portable/whole_program/enhanced/world.h"
+    "portable/whole_program/enhanced/world.h",
+    "portable/whole_program/enhanced/workspace.h",
+    "portable/whole_program/platform/sdl3/native_workspace.h"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -489,5 +493,9 @@
     "regression": "portable/tests/enhanced/run.py",
     "invariance": "portable/tests/enhanced/invariance.py",
     "limits": "No enhanced UI. Gesture/wait-result adapters fail closed. Immutable assets, private link/graph selections and overlay pose hooks remain phase 1 work. Inspectors always live."
-  }
+  },
+  "native_resources": [
+    "portable/whole_program/platform/sdl3/workspace.rc",
+    "portable/whole_program/platform/sdl3/workspace.manifest"
+  ]
 }

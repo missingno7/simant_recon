@@ -47,7 +47,7 @@ def lane(report,out,row,control=False):
     hosting_wraps=[arg for arg in report['application_link']['command']
                    if arg.startswith('-Wl,--wrap=') and arg!='-Wl,--wrap=exit']
     command=[cc,'-fno-lto','-g',str(HERE/'fixture.c'),'-Wl,@objects.rsp',
-             *hosting_wraps,'-Wl,--wrap=SRand1','-Wl,--wrap=IsClear3x3','-static','-lstdc++',
+             *hosting_wraps,'-Wl,--wrap=SRand1','-Wl,--wrap=IsClear3x3','-static',*[flag for flag in report['application_link']['command'] if flag.startswith('-l')],
              str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),'-o',str(binary)]
     execute(command,out,'link.log')
     env=dict(os.environ);env['PATH']=str(Path(report['sdk']['path'])/'bin')+os.pathsep+env.get('PATH','')

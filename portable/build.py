@@ -87,6 +87,7 @@ def optimize_platform(source):
         'portable/whole_program/platform/sdl3/palette_host.c',
         'portable/whole_program/platform/sdl3/native_windows.c',
         'portable/whole_program/platform/sdl3/native_menu.c',
+        'portable/whole_program/platform/sdl3/native_workspace.c',
         'portable/whole_program/platform/sdl3/modern_game_view.c',
         'portable/whole_program/text_bitmap.c',
         'portable/whole_program/text_bitmap_bridge.c',
@@ -154,6 +155,7 @@ def main():
         paths.update(ROOT/u['source'] for u in canonical['modules'])
         paths.update((ROOT/'include').glob('*.h'))
         paths.update(PROJECT/rel for rel in PLATFORM['services']+PLATFORM['headers'])
+        paths.update(PROJECT/rel for rel in PLATFORM.get('native_resources', []))
         paths.update((PROJECT/'portable/canonical_native_abi').glob('*.py'))
         paths.update((PROJECT/'portable/canonical_native_abi/integer_fake_libc').rglob('*.h'))
         paths.add(PROJECT/'portable/tests/integer_semantics/requirements.txt')
@@ -442,6 +444,15 @@ def main():
               'working_directory':str(OUT),'object_inputs':objects,
               'response_file':str(response),'response_file_sha256':sha(response)}
         if link['passed']:
+            # Native common controls v6 and per-monitor DPI. Keep the resource
+            # separate from game objects and include it in all copied test links.
+            native_resource=OUT/'workspace-res.o'
+            resource_command=[str(Path(CC).with_name('windres.exe')),
+                '-I',str(PROJECT/'portable/whole_program/platform/sdl3'),
+                str(PROJECT/'portable/whole_program/platform/sdl3/workspace.rc'),str(native_resource)]
+            resource_run=subprocess.run(resource_command,cwd=OUT,capture_output=True,text=True)
+            (OUT/'native-resource.txt').write_text(resource_run.stdout+resource_run.stderr)
+            if resource_run.returncode:raise RuntimeError('Native manifest compilation failed')
             application=PROJECT/'portable/whole_program/application.c'
             # Link original objects directly so DWARF locations survive. A
             # relocatable aggregate can invalidate the debugger's argument views.
@@ -452,7 +463,7 @@ def main():
             # -fno-lto: link the fat objects' regular code. The declaration check above
             # keeps LTO's cross-TU type audit; --wrap only applies outside LTO.
             application_command=[CC,'-O2','-fno-lto','-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
-                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp','-Wl,--wrap=exit',*WINDOW_HOSTING_WRAPS,'-Wl,--export-all-symbols','-static','-lstdc++',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
+                '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),str(native_resource),'-Wl,@application-objects.rsp','-Wl,--wrap=exit',*WINDOW_HOSTING_WRAPS,'-Wl,--export-all-symbols','-static','-lstdc++','-lcomctl32','-lgdi32','-lshell32','-lole32',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
             app_run=subprocess.run(application_command,cwd=OUT,capture_output=True,text=True)
             (OUT/'application-link.txt').write_text(app_run.stdout+app_run.stderr)
             app_link={'passed':app_run.returncode==0,'command':application_command,'exit_code':app_run.returncode,

@@ -1344,7 +1344,9 @@
     }
   ],
   "role_roots": {
-    "portable/whole_program/platform/sdl3/test_observer.inc": "Output-only acceptance observations (state, frames, audio) included by sdl3/host.c; inert without output paths",
+    "portable/whole_program/platform/sdl3/workspace.rc": "Windows resource script linked by portable/build.py: embeds workspace.manifest into the native executable",
+    "portable/whole_program/platform/sdl3/workspace.manifest": "Application manifest: Common Controls v6 and per-monitor-v2 DPI awareness for the enhanced native workspace",
+    "portable/whole_program/platform/sdl3/test_observer.inc":"Output-only acceptance observations (state, frames, audio) included by sdl3/host.c; inert without output paths",
     "tools/": "Reconstruction workflow and diagnostics (CLI or imported helper)",
     "tests/": "Permanent acceptance/negative controls",
     "evidence/": "Reviewed proof, toolchain facts or explicit unresolved investigation",
