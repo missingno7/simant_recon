@@ -67,6 +67,8 @@ static uint64_t compact_step;
 static unsigned compact_phase;
 static FILE *compact_content=NULL;
 static uint64_t compact_audio_tick=0;
+static bool compact_playback=false;
+static uint32_t compact_song_number=0,compact_song_state=0;
 static uint32_t compact_channels=0,compact_volume=0;
 static unsigned compact_opl_index[2]={0,0};
 static bool compact_dac_argument=false;
@@ -75,6 +77,7 @@ static uint32_t CompactFar(uint32_t a) { return mem_readw(a)+16u*mem_readw(a+2);
 static void CompactContentHead(char tag) {
     fprintf(compact_content,"%c %llu %llu %llu %u",tag,(unsigned long long)compact_audio_tick,
         (unsigned long long)CompactOrdinal(),(unsigned long long)compact_step,compact_phase);
+    if(compact_playback) fprintf(compact_content," %llu",(unsigned long long)(PIC_FullIndex()*1000000.0+0.5));
 }
 static void CompactSampleBoundary(unsigned stop,unsigned ch) {
     if(ch>=2) abort();
@@ -305,7 +308,7 @@ static void CompactInit() {
     if (!compact_order) abort();
     compact_content=fopen((compact_output+".content").c_str(),"w");
     if(!compact_content) abort();
-    fputs("SIMANT_AUDIO_CONTENT 1\n",compact_content);
+
     compact_sound=fopen((compact_output+".sound").c_str(),"wb");
     if (!compact_sound) abort();
     compact_sound_calls=fopen((compact_output+".sound-calls").c_str(),"w");
@@ -340,6 +343,10 @@ static void CompactInit() {
                 if(!compact_context_fingerprints) abort();
             }
             continue;
+        }
+        if(!strncmp(line,"PLAYBACK ",9)) {
+            if(sscanf(line,"PLAYBACK %x %x",&compact_song_number,&compact_song_state)!=2) abort();
+            compact_playback=true;continue;
         }
         if(!strncmp(line,"AUDIO ",6)) {
             if(sscanf(line,"AUDIO %x %u",&v.address,&v.bytes)!=2) abort();
@@ -392,6 +399,7 @@ static void CompactInit() {
         compact_points.push_back(p);
     }
     fclose(spec);
+    fputs(compact_playback?"SIMANT_AUDIO_CONTENT 2\n":"SIMANT_AUDIO_CONTENT 1\n",compact_content);
     for (size_t i=0;i<compact_points.size();++i) compact_point_index[compact_points[i].address].push_back(compact_points[i]);
     if (!compact_views.empty()) {
         compact_fingerprints=fopen((compact_output+".hash").c_str(),"wb");
@@ -422,6 +430,19 @@ static void CompactInstruction(uint32_t pc) {
     for (size_t i=0;i<matched.size();++i) {
         const CompactPoint &p=matched[i];
         if (pc!=p.address) continue;
+        if(p.kind>='1' && p.kind<='5') {
+            uint32_t stack=SegPhys(ss)+reg_sp+4;
+            if(p.kind=='1') {
+                if(mem_readw(compact_song_state)==1) { CompactContentHead('B');fprintf(compact_content," %u\n",mem_readw(compact_song_number)); }
+            } else if(p.kind=='2') {
+                if(mem_readw(compact_song_state)) { CompactContentHead('D');fprintf(compact_content," %u\n",mem_readw(compact_song_number)); }
+            } else if(p.kind=='3') {
+                CompactContentHead('N');fprintf(compact_content," %u %u %u %u\n",mem_readw(stack),mem_readw(stack+2),mem_readw(stack+4),mem_readw(stack+6));
+            } else {
+                CompactContentHead(p.kind=='4'?'F':'H');fprintf(compact_content," %u\n",mem_readw(stack+(p.kind=='4'?2:0)));
+            }
+            continue;
+        }
         if(p.kind=='v' || p.kind=='w') {
             CompactSampleBoundary(p.kind=='w',mem_readw(SegPhys(ss)+reg_bp+p.after));continue;
         }

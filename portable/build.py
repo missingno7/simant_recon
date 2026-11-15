@@ -68,6 +68,30 @@ PLATFORM=json.loads((Path(__file__).parent/'platform.json').read_text())
 ABI_MODULES={'rng':rng,'audio':audio,'audio_shared_state_preword':audio_shared_state_preword,'fonts':fonts,'pointer_globals':pointer_globals,'varargs':varargs,'windows':windows,'window_loader':window_loader,'timer':timer,'startup_bundle':startup_bundle,'main_preflight':main_preflight,'findindex_native_guard':findindex_native_guard,'crt_abi':crt_abi,'spider_inline_source':spider_inline_source,'m1b73_queue_source':m1b73_queue_source,'m1b73_event_source':m1b73_event_source,'event_word_switch':event_word_switch,'file_select_host':file_select_host,'menu_s17_preword':menu_s17_preword,'list_text_handle':list_text_handle,'clip_stack_native':clip_stack_native,'cache_table_native':cache_table_native,'countdown_host':countdown_host,'window_parameters':window_parameters,'newgame_zoom_window_v1':newgame_zoom_window_v1,'s26_window_object_views_v1':s26_window_object_views_v1,'load_string_ant':load_string_ant}
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
+def optimize_platform(source):
+    """Only native presentation/device work; canonical TUs keep their flags.
+
+    These are separate native service objects, also linked as regular fat-object
+    code with -fno-lto. Optimizing the final link alone cannot optimize them.
+    """
+    return source.startswith(('portable/audio/', 'portable/render/',
+        'portable/platform/sdl3/', 'portable/whole_program/platform/graphics',
+        'portable/whole_program/platform/audio', 'portable/whole_program/modern/')) or source in {
+        'portable/whole_program/platform/whole_audio_provider.c',
+        'portable/whole_program/platform/font_blit.c',
+        'portable/whole_program/platform/ega_map_readback.c',
+        'portable/whole_program/platform/bios_fonts.c',
+        'portable/whole_program/platform/native_video_profile.c',
+        'portable/whole_program/platform/window_hosting.c',
+        'portable/whole_program/platform/sdl3/host.c',
+        'portable/whole_program/platform/sdl3/palette_host.c',
+        'portable/whole_program/platform/sdl3/native_windows.c',
+        'portable/whole_program/platform/sdl3/native_menu.c',
+        'portable/whole_program/platform/sdl3/modern_game_view.c',
+        'portable/whole_program/text_bitmap.c',
+        'portable/whole_program/text_bitmap_bridge.c',
+    }
+
 LTO_BASELINE=PROJECT/'portable/canonical_native_abi/lto-type-mismatch-baseline.json'
 LTO_DIAGNOSTIC=re.compile(
     r"^(?P<path>.*?):\d+:\d+: (?:warning|error): (?P<message>.*) "
@@ -376,6 +400,7 @@ def main():
                  '-DSIMANT_NATIVE_LITTLE_ENDIAN=1','-Werror=implicit-function-declaration','-Werror=implicit-int',
                  '-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),'-I',str(copyroot/'portable/whole_program'),
                  '-I',str(SDK/'include'),'-c',str(source),'-o',str(obj)]
+        if optimize_platform(row['source']):command.insert(1,'-O2')
         if source.suffix == '.cpp':
             command=[x for x in command if not x.startswith('-Werror=implicit-')]
         if row['source']=='portable/whole_program/platform/sdl3/diagnostics.c':
@@ -426,7 +451,7 @@ def main():
             # function names. Keep -g for offline source-line analysis as well.
             # -fno-lto: link the fat objects' regular code. The declaration check above
             # keeps LTO's cross-TU type audit; --wrap only applies outside LTO.
-            application_command=[CC,'-fno-lto','-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
+            application_command=[CC,'-O2','-fno-lto','-std=c11','-g','-fsigned-char','-fno-strict-aliasing','-I',str(OUT/'include'),'-I',str(copyroot),'-I',str(OUT),
                 '-I',str(copyroot/'portable/whole_program'),'-I',str(SDK/'include'),str(application),'-Wl,@application-objects.rsp','-Wl,--wrap=exit',*WINDOW_HOSTING_WRAPS,'-Wl,--export-all-symbols','-static','-lstdc++',str(SDK/'lib/libSDL3.dll.a'),'-o',str(OUT/'simant-canonical.exe')]
             app_run=subprocess.run(application_command,cwd=OUT,capture_output=True,text=True)
             (OUT/'application-link.txt').write_text(app_run.stdout+app_run.stderr)

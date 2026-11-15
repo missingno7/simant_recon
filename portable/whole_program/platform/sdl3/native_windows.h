@@ -3,6 +3,8 @@
 
 #include "portable/platform/host.h"
 #include <SDL3/SDL.h>
+#include <stdio.h>
+void native_windows_performance(FILE *file);
 
 /* Modern presentation: each hosted logical window (window_hosting.h) is an
  * owned, decorated SDL window showing its own planes at the global scale, and

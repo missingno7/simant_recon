@@ -87,9 +87,11 @@ def main():
     ap.add_argument('--dump-every',type=int,default=256)
     ap.add_argument('--cycles',type=int,default=10000)
     ap.add_argument('--sound-off',action='store_true')
+    ap.add_argument('--audio-playback',action='store_true',help='Absolute game-time/source playback observations, ideal-v1 only')
     args=ap.parse_args()
     ideal=json.loads(args.compact_observer.read_text()).get('contract')=='ideal-v1'
     if args.sound_off and not ideal:ap.error('--sound-off variant requires ideal-v1')
+    if args.audio_playback and (not ideal or args.sound_off):ap.error('--audio-playback requires sound-on ideal-v1')
     if not 1<=args.steps<=20000 or not 1<=args.host_seconds<=7200: ap.error('Bound steps to 1..20000 and host seconds to 1..7200')
     report=None if args.original else json.loads(args.build_report.read_text())
     scenario=json.loads(args.scenario.read_text())
@@ -126,10 +128,15 @@ def main():
         sys.path.insert(0,str(ROOT))
         from portable.tests.acceptance.audio_content import content_binding
         content=content_binding(memory,base,addresses)
+        playback=None
+        if args.audio_playback:
+            from portable.tests.acceptance.audio_playback import binding
+            playback=binding(memory,base,addresses)
         from sound_services import sound_binding
         foreground_sound=sound_binding(memory,base,addresses,target='original' if args.original else 'canonical',build_report=args.build_report)
         sound_ids={pc:identifier for kind,pc,identifier in foreground_sound['entries']}
         points=[(k,pc) for k,pc,arg in content['points']]+sound_timer['entries']+[('x',pc) for pc in sound_timer['completions']]+[(kind,pc) for kind,pc,identifier in foreground_sound['entries']]
+        if playback:points += [(k,pc) for k,pc,arg in playback['points']]
         for name,kind in [('TickCount','T'),('timer_bios_tick_count','B')]:
             start=base+addresses[name]
             ins=list(decoder.disasm(memory[start:start+32],start))
@@ -195,6 +202,7 @@ def main():
         compact_spec=out.with_suffix('.observer')
         sound_functions={row['id']:row for row in foreground_sound['functions']}
         specification=[f'Z {content["channels"]:X} {content["volume"]:X}\n']
+        if playback:specification.append(f'PLAYBACK {playback["song_number"]:X} {playback["song_state"]:X}\n')
         content_args={pc:arg for k,pc,arg in content["points"]}
         for kind,pc in points:
             if kind in ('m','v','w'):specification.append(f'{kind} {pc:X} {content_args[pc]:X}\n')
@@ -270,7 +278,9 @@ def main():
         if actual!=bios_entry or len(stub)!=6 or stub[:3]!=bytes.fromhex('fb fe 38') or stub[5]!=0xcf:
             raise ValueError('Captured BIOS INT16 callback differs from its bound vector/CB_INT16 opcode')
         manifest['audio_content']=content
-        if ideal:manifest['modifier_byte_reads']=modifier_reads
+        if ideal:
+            manifest['modifier_byte_reads']=modifier_reads
+            manifest['audio_playback']=playback
         manifest['sound_timer']=sound_timer
         manifest['foreground_sound']=foreground_sound
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),

@@ -23,6 +23,7 @@
 #include "state/main_loop_counter.h"
 #include "text_bitmap_bridge.h"
 #include "window_source_globals.h"
+#include "canonical_data_views.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,8 +70,12 @@ typedef struct Application {
     uint32_t started_bios_ticks;
     int headless_unpaced;
     uint64_t presentations, omitted_presentations;
+    uint64_t idle_calls;
+    uint64_t presentation_checks, presentation_work_ns;
+    uint64_t last_submission_ns, minimum_submission_gap_ns;
 } Application;
 static Application app;
+static void write_pacing_stats(uint64_t checkpoint);
 /* Read-only performance receipt for the acceptance observer. */
 void portable_native_performance(FILE *f)
 {
@@ -79,6 +84,12 @@ void portable_native_performance(FILE *f)
         (unsigned long long)app.audio.rendered_frames,
         (unsigned long long)app.audio.silent_advances, app.audio.output.stream != NULL,
         (unsigned long long)app.presentations, (unsigned long long)app.omitted_presentations);
+    fprintf(f, "\"presentation_checks\":%llu,\"presentation_work_ns\":%llu,\"display_refresh_ns\":%llu,",
+        (unsigned long long)app.presentation_checks, (unsigned long long)app.presentation_work_ns,
+        (unsigned long long)host_display_refresh_ns(app.host));
+    fprintf(f, "\"minimum_submission_gap_ns\":%llu,",
+        (unsigned long long)app.minimum_submission_gap_ns);
+    fprintf(f, "\"game_speed\":%d,", (int)GameSpeed.words[0]);
 }
 static int exit_status;
 static const char *exit_reason = "source main returned";
@@ -115,6 +126,26 @@ __attribute__((noinline)) void portable_native_checkpoint(uint64_t milliseconds)
     fprintf(stderr, "Native checkpoint %llu ms game_ticks=%u bios_ticks=%u outer_loops=%ld\n",
         (unsigned long long)milliseconds, sim_timing_tick_count(&app.game_clock),
         sim_timing_tick_count(&app.bios_clock), (long)main_iteration_count);
+    write_pacing_stats(milliseconds);
+}
+
+static void write_pacing_stats(uint64_t checkpoint)
+{
+    const char *base = getenv("SIMANT_PACING_STATS");
+    char path[1024];
+    if (!base) return;
+    if (checkpoint) snprintf(path, sizeof(path), "%s.%llu", base, (unsigned long long)checkpoint);
+    else snprintf(path, sizeof(path), "%s", base);
+    FILE *f = fopen(path, "w");
+    if (!f) return;
+    fputs("{", f);
+    portable_native_performance(f);
+    host_pacing_performance(f);
+    portable_sdl3_audio_performance(&app.audio.output, f);
+    native_windows_performance(f);
+    fprintf(f, "\"host_ns\":%llu,\"idle_calls\":%llu}\n", (unsigned long long)SDL_GetTicksNS(),
+        (unsigned long long)app.idle_calls);
+    fclose(f);
 }
 
 static void fail(const char *where)
@@ -462,6 +493,7 @@ static void cleanup(void)
 {
     if (app.cleaned) return;
     app.cleaned = 1;
+    write_pacing_stats(0);
     host_set_event_observer(NULL, NULL);
     free(app.replay);
     portable_m1b73_sdl_application_input_unbind(&app.input);
@@ -530,10 +562,10 @@ static void idle(void *context)
     static uint64_t last_scanout;
     static int scanout_width, scanout_height;
     Application *a = context;
-    extern int16_t GameSpeed;
+    ++a->idle_calls;
     /* Pacing affects only wall time. Fast/Ultra has no source pacing wait;
      * its hardware reads still consume exactly the same machine quanta. */
-    if (GameSpeed != 3)
+    if (GameSpeed.words[0] != 3)
         while (portable_machine_clock_pace()) drain_host_observations();
     uint64_t now = host_time_ns();
     simant_diagnostics_progress("application.idle", a->replay_next, (long)main_iteration_count);
@@ -593,7 +625,11 @@ static void idle(void *context)
      * since the last presented refresh waits for the next one here, at the
      * platform boundary, instead of producing invisible frames at host speed. */
     if (a->display_active && (gfx_cursor_draw_lock & 255u) == 0 && sim_sdl_palette_view(&a->palette)) {
-        const uint64_t refresh_ns = 16683217;
+        const int physical = portable_machine_clock_active() && !host_virtual_clock_enabled();
+        const uint64_t refresh_ns = physical ? host_display_refresh_ns(a->host) : 16683217;
+        /* Catch-up machine reads retain every quantum, but cannot submit a
+         * burst of physical frames after a slow host draw or filesystem call. */
+        uint64_t present_now = physical ? SDL_GetTicksNS() : now;
         /* Wait in short slices: audio is rendered only up to host time, so
          * the device keeps the same feed cadence while the source waits. */
         while (!portable_machine_clock_active() && a->graphics.vga.written && a->last_present && !host_virtual_clock_enabled() &&
@@ -604,13 +640,16 @@ static void idle(void *context)
                     PORTABLE_SDL3_WHOLE_AUDIO_OK) fail("ISA audio output");
             now = host_time_ns();
         }
-        if (now - a->last_present >= refresh_ns) {
+        if (!physical) present_now = now;
+        if (present_now - a->last_present >= refresh_ns) {
+            uint64_t work_started = SDL_GetTicksNS();
+            ++a->presentation_checks;
             const HostPalette *palette = sim_sdl_palette_view(&a->palette);
             /* Cursor IRQs may store the same pixels again. Avoid converting
              * and uploading an unchanged single-screen scanout. Hosted plane
              * sets have separate ownership and retain their existing refresh.
              * A one-second repaint also covers window-system exposure. */
-            if (!portable_machine_clock_active() || native_windows_active() || !last_scanout ||
+            if (!portable_machine_clock_active() || (!physical && native_windows_active()) || !last_scanout ||
                 now - last_scanout >= UINT64_C(1000000000) ||
                 scanout_width != a->graphics.framebuffer.width ||
                 scanout_height != a->graphics.framebuffer.height ||
@@ -627,15 +666,28 @@ static void idle(void *context)
                     if (portable_m1b73_sdl_application_input_present(&a->input) !=
                             PORTABLE_M1B73_APP_INPUT_OK) fail("indexed presentation");
                     ++a->presentations;
+                    if (physical && a->last_submission_ns) {
+                        uint64_t gap = present_now - a->last_submission_ns;
+                        if (!a->minimum_submission_gap_ns || gap < a->minimum_submission_gap_ns)
+                            a->minimum_submission_gap_ns = gap;
+                    }
+                    a->last_submission_ns = present_now;
                 }
                 memcpy(scanout_planes, a->graphics.vga.planes, sizeof(scanout_planes));
                 scanout_palette = *palette;
                 scanout_width = a->graphics.framebuffer.width;
                 scanout_height = a->graphics.framebuffer.height;
                 last_scanout = now;
+            } else if (physical && native_windows_active()) {
+                /* Hosted scanouts have their own plane/palette ownership. Keep
+                 * their opportunity and internal ingestion without re-uploading
+                 * an unchanged desktop through the full-screen conversion. */
+                if (portable_input_time_host_refresh_clock(&a->input.input_host) != PORTABLE_INPUT_TIME_OK ||
+                    !native_windows_present(palette)) fail("hosted presentation");
             }
             a->graphics.vga.written = 0;
-            a->last_present = now;
+            a->last_present = present_now;
+            a->presentation_work_ns += SDL_GetTicksNS() - work_started;
         }
     }
     if (a->smoke_deadline_ns && now >= a->smoke_deadline_ns) {

@@ -1,0 +1,3377 @@
+{
+  "contract": "audio-playback-v1",
+  "wall_seconds": 242.82436480000615,
+  "observer_build_seconds": 0.09591299999738112,
+  "lanes": [
+    {
+      "scenario": "ant-commands",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 77,
+        "dos": {
+          "entry": 77,
+          "tick": 149165.4351768767
+        },
+        "native": {
+          "entry": 77,
+          "tick": 149182.16202267108
+        },
+        "index": 0,
+        "ticks": 16.726845794386463,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 24.755787700007204,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 324.38568310718983,
+        "stop": 323.3856853584293,
+        "output": 324.38568310718983,
+        "progress": 0
+      },
+      "maximum_event_ns": 32000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2389,
+            "note_on": 1203,
+            "effect": 103,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            1,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            14,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "sample_starts": 85,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 118749,
+          "stops": {
+            "stopped": 83,
+            "run_end": 2
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2389,
+            "note_on": 1203,
+            "effect": 103,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            1,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            14,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "sample_starts": 85,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 118745,
+          "stops": {
+            "stopped": 83,
+            "run_end": 2
+          }
+        }
+      },
+      "reference_manifest_sha256": "062344c81cffcc3c75704057dc8131089eb17abc6f8384a74dada71c9181e92b",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "e6acff68ffacee690895eec0dd74fbc68623c3637ff2845abb88b48f1fc1e85a",
+      "diagnostic_result_sha256": "8fdb4ade2e491a0338358e38febfd7b6062b216e78697cbfef46aebb34754cb4",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 82566,
+        "0": 60749
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 29,
+        "0->1": 29
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "ant-commands",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 77,
+        "dos": {
+          "entry": 77,
+          "tick": 149165.4351768767
+        },
+        "native": {
+          "entry": 77,
+          "tick": 149182.16202267108
+        },
+        "index": 0,
+        "ticks": 16.726845794386463,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 23.850802099972498,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 324.38568310718983,
+        "stop": 323.3856853584293,
+        "output": 324.38568310718983,
+        "progress": 0
+      },
+      "maximum_event_ns": 32000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2389,
+            "note_on": 1203,
+            "effect": 103,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            1,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            14,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "sample_starts": 85,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 118749,
+          "stops": {
+            "stopped": 83,
+            "run_end": 2
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2389,
+            "note_on": 1203,
+            "effect": 103,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            1,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            14,
+            21,
+            23,
+            24,
+            36,
+            44,
+            47
+          ],
+          "sample_starts": 85,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 118745,
+          "stops": {
+            "stopped": 83,
+            "run_end": 2
+          }
+        }
+      },
+      "reference_manifest_sha256": "67707e3ad5e158228df1d3e10ead9a514474cbae60717b80aaf7f5d928f4fb9f",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "e6acff68ffacee690895eec0dd74fbc68623c3637ff2845abb88b48f1fc1e85a",
+      "diagnostic_result_sha256": "d22917330a10c4c4d98db660fb454fb437980f40a35e8e747695b91706420f5f",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 82566,
+        "0": 60749
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 29,
+        "0->1": 29
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "audio-controls",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 175,
+        "dos": {
+          "entry": 175,
+          "tick": 256802.68786379255
+        },
+        "native": {
+          "entry": 175,
+          "tick": 256819.41470958697
+        },
+        "index": 0,
+        "ticks": 16.726845794415567,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 12.226369699987117,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 44.60492211842211,
+        "stop": 44.60491654276848,
+        "output": 44.60492211842211,
+        "progress": 0
+      },
+      "maximum_event_ns": 8000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2260,
+            "note_on": 1134,
+            "effect": 12
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            18,
+            44,
+            47
+          ],
+          "samples": [
+            44,
+            47
+          ],
+          "sample_starts": 8,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 6428,
+          "stops": {
+            "stopped": 8
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2260,
+            "note_on": 1134,
+            "effect": 12
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            18,
+            44,
+            47
+          ],
+          "samples": [
+            44,
+            47
+          ],
+          "sample_starts": 8,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 6428,
+          "stops": {
+            "stopped": 8
+          }
+        }
+      },
+      "reference_manifest_sha256": "ab49936529e194356b395703fd5df0ef8df852b4357bbe72495ed93812cc6aa6",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "ba2f2404cb11f4a9ffa516cf74f281be27b8498724ba006df7296edef9f237e9",
+      "diagnostic_result_sha256": "da8e5750a0280e8570651c10ef8f56c2437735ecdd237f10b683a824925efe4b",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 6445,
+        "0": 33414
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 9,
+        "0->1": 8
+      },
+      "reference_entries": 512
+    },
+    {
+      "scenario": "audio-controls",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 175,
+        "dos": {
+          "entry": 175,
+          "tick": 256802.68786379255
+        },
+        "native": {
+          "entry": 175,
+          "tick": 256819.41470958697
+        },
+        "index": 0,
+        "ticks": 16.726845794415567,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 12.11490360001335,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 44.60492211842211,
+        "stop": 44.60491654276848,
+        "output": 44.60492211842211,
+        "progress": 0
+      },
+      "maximum_event_ns": 8000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2260,
+            "note_on": 1134,
+            "effect": 12
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            18,
+            44,
+            47
+          ],
+          "samples": [
+            44,
+            47
+          ],
+          "sample_starts": 8,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 6428,
+          "stops": {
+            "stopped": 8
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2260,
+            "note_on": 1134,
+            "effect": 12
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            18,
+            44,
+            47
+          ],
+          "samples": [
+            44,
+            47
+          ],
+          "sample_starts": 8,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 6428,
+          "stops": {
+            "stopped": 8
+          }
+        }
+      },
+      "reference_manifest_sha256": "c058c4739fcaa0e341b27a79d83f765f964eecc36365d9c9fed058f3ebdd2662",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "ba2f2404cb11f4a9ffa516cf74f281be27b8498724ba006df7296edef9f237e9",
+      "diagnostic_result_sha256": "eeb07dc2205dbf2a3699e5fb91e1920918e4437d232cfc0b663cc0b0da031f3b",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 6445,
+        "0": 33414
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 9,
+        "0->1": 8
+      },
+      "reference_entries": 512
+    },
+    {
+      "scenario": "audio-restart",
+      "target": "original",
+      "status": "AUDIO_EQUAL",
+      "first_difference": null,
+      "seconds": 14.057700800010934,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 0,
+        "stop": 0,
+        "output": 0,
+        "progress": 0.9957290787133388
+      },
+      "maximum_event_ns": 2000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2370,
+            "note_on": 1185,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2370,
+            "note_on": 1185,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        }
+      },
+      "reference_manifest_sha256": "43e2215b674a056156768f6bb1960ed515d517c4b3d781c76d783f87546e682c",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "a35ca368fc9e5a2176b247d3c7f635c62da48d1f99e2f358c62e015a06687372",
+      "diagnostic_result_sha256": "caae1b3d5e908361b2590ffc3cbbb77bfb0648f2b3215e207d0bf69965036cbf",
+      "dos_pit_divisors": [
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 1,
+        "0": 43000
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 1
+      },
+      "reference_entries": 512
+    },
+    {
+      "scenario": "audio-restart",
+      "target": "canonical",
+      "status": "AUDIO_EQUAL",
+      "first_difference": null,
+      "seconds": 14.021846200048458,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 0,
+        "stop": 0,
+        "output": 0,
+        "progress": 0.9957290787133388
+      },
+      "maximum_event_ns": 2000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2370,
+            "note_on": 1185,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2370,
+            "note_on": 1185,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        }
+      },
+      "reference_manifest_sha256": "9d4c7b3da0bb7b576d2218ba1aa5458a9d33a1363c5a4bc4d5b519d223ff7c15",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "a35ca368fc9e5a2176b247d3c7f635c62da48d1f99e2f358c62e015a06687372",
+      "diagnostic_result_sha256": "14c0bb658f190a4ffb9b879cfe49ff06f50e1a7d7a0a5e3f752477de68708142",
+      "dos_pit_divisors": [
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 1,
+        "0": 43000
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 1
+      },
+      "reference_entries": 512
+    },
+    {
+      "scenario": "experiment",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 103,
+        "dos": {
+          "entry": 103,
+          "tick": 171378.68639182995
+        },
+        "native": {
+          "entry": 103,
+          "tick": 171395.41323762434
+        },
+        "index": 0,
+        "ticks": 16.726845794386463,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 21.17271349998191,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 1120.6986682242714,
+        "stop": 1120.6986682242714,
+        "output": 1120.6986682242714,
+        "progress": 0
+      },
+      "maximum_event_ns": 57000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2376,
+            "note_on": 1191,
+            "effect": 63,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 57,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 64169,
+          "stops": {
+            "stopped": 56,
+            "run_end": 1
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2376,
+            "note_on": 1191,
+            "effect": 63,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 57,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 64159,
+          "stops": {
+            "stopped": 56,
+            "run_end": 1
+          }
+        }
+      },
+      "reference_manifest_sha256": "e047e9b4f0e47b83d3c9435fb0eb251f698a741e283d049fc9e887ab28c3a476",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "033cf519185fdde7cba48b0d7afab76aa798c68b89852a2f04e15bc6279111e0",
+      "diagnostic_result_sha256": "8d8cfccf5e0160d377c5c7fb8b2168efd1c18c45314328590f2d2c4a56bb1091",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 51273,
+        "0": 57835
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 49,
+        "0->1": 48
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "experiment",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 103,
+        "dos": {
+          "entry": 103,
+          "tick": 171378.68639182995
+        },
+        "native": {
+          "entry": 103,
+          "tick": 171395.41323762434
+        },
+        "index": 0,
+        "ticks": 16.726845794386463,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 21.121882800012827,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 1120.6986682242714,
+        "stop": 1120.6986682242714,
+        "output": 1120.6986682242714,
+        "progress": 0
+      },
+      "maximum_event_ns": 57000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2376,
+            "note_on": 1191,
+            "effect": 63,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 57,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 64169,
+          "stops": {
+            "stopped": 56,
+            "run_end": 1
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2376,
+            "note_on": 1191,
+            "effect": 63,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            29,
+            40,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 57,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 64159,
+          "stops": {
+            "stopped": 56,
+            "run_end": 1
+          }
+        }
+      },
+      "reference_manifest_sha256": "036b346dfdccc7a01c8069196287ef50a82e94e9ff3072e86347b8d1efee683e",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "033cf519185fdde7cba48b0d7afab76aa798c68b89852a2f04e15bc6279111e0",
+      "diagnostic_result_sha256": "b1ed5f6528258816a35c94c66955dcdedcb96e1988ec65e6d34456067b511b08",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 51273,
+        "0": 57835
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 49,
+        "0->1": 48
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "full-game",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 63,
+        "dos": {
+          "entry": 63,
+          "tick": 123952.50294946236
+        },
+        "native": {
+          "entry": 63,
+          "tick": 123969.22979525675
+        },
+        "index": 0,
+        "ticks": 16.726845794386463,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 22.12392510002246,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 776.0105195558863,
+        "stop": 775.0105162312975,
+        "output": 776.0105195558863,
+        "progress": 0
+      },
+      "maximum_event_ns": 19000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 4,
+            "note_off": 774,
+            "note_on": 389,
+            "effect": 56,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            20000,
+            20001
+          ],
+          "effects": [
+            13,
+            14,
+            18,
+            19,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "samples": [
+            13,
+            14,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "sample_starts": 50,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 99600,
+          "stops": {
+            "stopped": 49,
+            "run_end": 1
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 4,
+            "note_off": 774,
+            "note_on": 389,
+            "effect": 56,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            20000,
+            20001
+          ],
+          "effects": [
+            13,
+            14,
+            18,
+            19,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "samples": [
+            13,
+            14,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "sample_starts": 50,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 99622,
+          "stops": {
+            "stopped": 49,
+            "run_end": 1
+          }
+        }
+      },
+      "reference_manifest_sha256": "0146ce1380f2011e802bfb02becfbd189a32579dbe3f287e1c0b9bbfed1b69b3",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "3d170650976e72f93e68ca74cee189db9d2068042bb3185eb08ddb983e49faa6",
+      "diagnostic_result_sha256": "f26085930534c81dee443919243e8fcc3085ae5a859f31f65eacbc86aff8705d",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 93717,
+        "0": 55900
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 42,
+        "0->1": 42
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "full-game",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "SAMPLE_START_PLACEMENT",
+        "entry": 63,
+        "dos": {
+          "entry": 63,
+          "tick": 123952.50294946236
+        },
+        "native": {
+          "entry": 63,
+          "tick": 123969.22979525675
+        },
+        "index": 0,
+        "ticks": 16.726845794386463,
+        "layer": "sample-voice",
+        "nanoseconds": 3000000
+      },
+      "seconds": 22.065234699985012,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 776.0105195558863,
+        "stop": 775.0105162312975,
+        "output": 776.0105195558863,
+        "progress": 0
+      },
+      "maximum_event_ns": 19000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 4,
+            "note_off": 774,
+            "note_on": 389,
+            "effect": 56,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            20000,
+            20001
+          ],
+          "effects": [
+            13,
+            14,
+            18,
+            19,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "samples": [
+            13,
+            14,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "sample_starts": 50,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 99600,
+          "stops": {
+            "stopped": 49,
+            "run_end": 1
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 4,
+            "note_off": 774,
+            "note_on": 389,
+            "effect": 56,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            20000,
+            20001
+          ],
+          "effects": [
+            13,
+            14,
+            18,
+            19,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "samples": [
+            13,
+            14,
+            21,
+            23,
+            24,
+            28,
+            41,
+            44,
+            47,
+            49
+          ],
+          "sample_starts": 50,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 99622,
+          "stops": {
+            "stopped": 49,
+            "run_end": 1
+          }
+        }
+      },
+      "reference_manifest_sha256": "cd9d35fc41ee978ce9ba8367c9ef496046dad06dfc377331c22ec0db5a84c975",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "3d170650976e72f93e68ca74cee189db9d2068042bb3185eb08ddb983e49faa6",
+      "diagnostic_result_sha256": "ae57e3c5b145b94974b51cc140e7f2279fd9ba4a83fdbef54ef9f8b6c9851451",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 93717,
+        "0": 55900
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 42,
+        "0->1": 42
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 4869638,
+        "entry": 90,
+        "group": "channel:0",
+        "index": 52,
+        "dos": {
+          "tick": 150237.16202304862,
+          "service_ordinal": 56565,
+          "step": 89,
+          "phase": 0,
+          "entry": 90,
+          "time_ns": 26945396138,
+          "isr_tick": 128209,
+          "kind": "note_on",
+          "arguments": [
+            46,
+            72,
+            111,
+            0
+          ]
+        },
+        "native": {
+          "tick": 150264.31325101544,
+          "service_ordinal": 9777,
+          "step": 89,
+          "phase": 0,
+          "entry": 90,
+          "time_ns": 26950265776,
+          "isr_tick": 128193,
+          "kind": "note_on",
+          "arguments": [
+            46,
+            72,
+            111,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 39.54608649999136,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 1177.4548186212778,
+        "stop": 1176.5767428511754,
+        "output": 1177.4548186212778,
+        "progress": 5.575617515831254
+      },
+      "maximum_event_ns": 5000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 6,
+            "note_off": 685,
+            "note_on": 358,
+            "effect": 480,
+            "song_stop": 6
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            13,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            13,
+            14,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 446,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 500668,
+          "stops": {
+            "stopped": 444,
+            "run_end": 2
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 6,
+            "note_off": 685,
+            "note_on": 358,
+            "effect": 480,
+            "song_stop": 6
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            13,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            13,
+            14,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 446,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 502046,
+          "stops": {
+            "stopped": 444,
+            "run_end": 2
+          }
+        }
+      },
+      "reference_manifest_sha256": "51eb0baa01ec687f3518bfa551070a155ffac369f9a28608e2b190344df52a68",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "888da1098742dd5cbec1464d357ae41742fb3c13e68c4d040f64743ec3febd97",
+      "diagnostic_result_sha256": "ca14bfe70fc77dc1843f45765e38d4734b4df40311989c76637e2d85b38a26e0",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 292367,
+        "0": 84779
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 82,
+        "0->1": 82
+      },
+      "reference_entries": 2000
+    },
+    {
+      "scenario": "interactive-play",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 4869638,
+        "entry": 90,
+        "group": "channel:0",
+        "index": 52,
+        "dos": {
+          "tick": 150237.16202304862,
+          "service_ordinal": 56565,
+          "step": 89,
+          "phase": 0,
+          "entry": 90,
+          "time_ns": 26945396138,
+          "isr_tick": 128209,
+          "kind": "note_on",
+          "arguments": [
+            46,
+            72,
+            111,
+            0
+          ]
+        },
+        "native": {
+          "tick": 150264.31325101544,
+          "service_ordinal": 9777,
+          "step": 89,
+          "phase": 0,
+          "entry": 90,
+          "time_ns": 26950265776,
+          "isr_tick": 128193,
+          "kind": "note_on",
+          "arguments": [
+            46,
+            72,
+            111,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 39.80508210003609,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 1177.4548186212778,
+        "stop": 1176.5767428511754,
+        "output": 1177.4548186212778,
+        "progress": 5.575617515831254
+      },
+      "maximum_event_ns": 5000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 6,
+            "note_off": 685,
+            "note_on": 358,
+            "effect": 480,
+            "song_stop": 6
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            13,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            13,
+            14,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 446,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 500668,
+          "stops": {
+            "stopped": 444,
+            "run_end": 2
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 6,
+            "note_off": 685,
+            "note_on": 358,
+            "effect": 480,
+            "song_stop": 6
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            13,
+            14,
+            17,
+            18,
+            19,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            1,
+            13,
+            14,
+            21,
+            23,
+            24,
+            36,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 446,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 502046,
+          "stops": {
+            "stopped": 444,
+            "run_end": 2
+          }
+        }
+      },
+      "reference_manifest_sha256": "d69c137f1dd73fbfac96f29f863993dd0be777c92fcac7e72c9c1566ddda8bd8",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "d7166ff542e0d827a20722dcdc1f3cc1fae5df525ded80952fce204fa467d322",
+      "diagnostic_result_sha256": "2a57ea60f193d32237d5f84c18d7442b1e6516ce7542340db248795619888232",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 292367,
+        "0": 84779
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 82,
+        "0->1": 82
+      },
+      "reference_entries": 2000
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 3000000,
+        "entry": 127,
+        "group": "channel:0",
+        "index": 132,
+        "dos": {
+          "tick": 285755.85793613706,
+          "service_ordinal": 126262,
+          "step": 126,
+          "phase": 1,
+          "entry": 127,
+          "time_ns": 51251000000,
+          "isr_tick": 263697,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            0
+          ]
+        },
+        "native": {
+          "tick": 285739.13109034265,
+          "service_ordinal": 23313,
+          "step": 126,
+          "phase": 1,
+          "entry": 127,
+          "time_ns": 51248000000,
+          "isr_tick": 263665,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 20.718989899964072,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 45.60491986735724,
+        "stop": 45.60491986735724,
+        "output": 45.60491986735724,
+        "progress": 0.9147767206886783
+      },
+      "maximum_event_ns": 7000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 4,
+            "note_off": 1108,
+            "note_on": 563,
+            "effect": 25,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            18,
+            19,
+            41
+          ],
+          "samples": [
+            1,
+            41
+          ],
+          "sample_starts": 5,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 52326,
+          "stops": {
+            "stopped": 5
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 4,
+            "note_off": 1108,
+            "note_on": 563,
+            "effect": 25,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            18,
+            19,
+            41
+          ],
+          "samples": [
+            1,
+            41
+          ],
+          "sample_starts": 5,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 52326,
+          "stops": {
+            "stopped": 5
+          }
+        }
+      },
+      "reference_manifest_sha256": "a2e2482f50569f6bad0aa324228cff6ca0a12e69b7b87855778e90fa15637456",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "6d6fc892e252d896f70ea1a7340611a910192aacc168c0f949885feaed2dfd3f",
+      "diagnostic_result_sha256": "188de458a50d4223f22532dacbfdfb3ba36010b944f404515d5ea7cebbef4441",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 38891,
+        "0": 63896
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 4,
+        "0->1": 3
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "load-from-save",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 3000000,
+        "entry": 127,
+        "group": "channel:0",
+        "index": 132,
+        "dos": {
+          "tick": 285755.85793613706,
+          "service_ordinal": 126262,
+          "step": 126,
+          "phase": 1,
+          "entry": 127,
+          "time_ns": 51251000000,
+          "isr_tick": 263697,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            0
+          ]
+        },
+        "native": {
+          "tick": 285739.13109034265,
+          "service_ordinal": 23313,
+          "step": 126,
+          "phase": 1,
+          "entry": 127,
+          "time_ns": 51248000000,
+          "isr_tick": 263665,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 20.613078699971084,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 45.60491986735724,
+        "stop": 45.60491986735724,
+        "output": 45.60491986735724,
+        "progress": 0.9147767206886783
+      },
+      "maximum_event_ns": 7000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 4,
+            "note_off": 1108,
+            "note_on": 563,
+            "effect": 25,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            18,
+            19,
+            41
+          ],
+          "samples": [
+            1,
+            41
+          ],
+          "sample_starts": 5,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 52326,
+          "stops": {
+            "stopped": 5
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 4,
+            "note_off": 1108,
+            "note_on": 563,
+            "effect": 25,
+            "song_stop": 4
+          },
+          "songs": [
+            10001,
+            11013,
+            11016
+          ],
+          "effects": [
+            1,
+            18,
+            19,
+            41
+          ],
+          "samples": [
+            1,
+            41
+          ],
+          "sample_starts": 5,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 52326,
+          "stops": {
+            "stopped": 5
+          }
+        }
+      },
+      "reference_manifest_sha256": "d2d64743f33c868c92c97c7a5a343b9e1df4e54ebf43ef9a4a714929ed23ecef",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "6d6fc892e252d896f70ea1a7340611a910192aacc168c0f949885feaed2dfd3f",
+      "diagnostic_result_sha256": "3eea1ea0c83bc38ea4a4bc9232b16321dee12ab7dc6dac270fe667c20e0bf66b",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 38891,
+        "0": 63896
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 4,
+        "0->1": 3
+      },
+      "reference_entries": 1000
+    },
+    {
+      "scenario": "long-run",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 3000000,
+        "entry": 537,
+        "group": "channel:0",
+        "index": 306,
+        "dos": {
+          "tick": 556245.6812772586,
+          "service_ordinal": 219315,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99764000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "native": {
+          "tick": 556262.4081230529,
+          "service_ordinal": 39560,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99767000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 61.51791539997794,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 3842.598915194627,
+        "stop": 3842.5989151941612,
+        "output": 3842.598915194627,
+        "progress": 0
+      },
+      "maximum_event_ns": 268000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2464,
+            "note_on": 1277,
+            "effect": 254,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            32,
+            35,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            32,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 162,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 210694,
+          "stops": {
+            "stopped": 162
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2464,
+            "note_on": 1277,
+            "effect": 254,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            32,
+            35,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            32,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 162,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 210691,
+          "stops": {
+            "stopped": 162
+          }
+        }
+      },
+      "reference_manifest_sha256": "467f9f1be0694631b30c4030aa7640877e50f347f7a43de66bfddc9fa8cc0f8d",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "3d4c6e61a51d93224e689ebd8a3443a991d45ba0164b4ae3a400b57d7915b74c",
+      "diagnostic_result_sha256": "0ab41a2bcf72f9e84851eacc6e2f69b3acaac37e8f6b9514fcba6d5808d4078d",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 192005,
+        "0": 159317
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 160,
+        "0->1": 159
+      },
+      "reference_entries": 3000
+    },
+    {
+      "scenario": "long-run",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 3000000,
+        "entry": 537,
+        "group": "channel:0",
+        "index": 306,
+        "dos": {
+          "tick": 556245.6812772586,
+          "service_ordinal": 219315,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99764000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "native": {
+          "tick": 556262.4081230529,
+          "service_ordinal": 39560,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99767000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 61.60960480000358,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 3842.598915194627,
+        "stop": 3842.5989151941612,
+        "output": 3842.598915194627,
+        "progress": 0
+      },
+      "maximum_event_ns": 268000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2464,
+            "note_on": 1277,
+            "effect": 254,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            32,
+            35,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            32,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 162,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 210694,
+          "stops": {
+            "stopped": 162
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2464,
+            "note_on": 1277,
+            "effect": 254,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            32,
+            35,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            32,
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 162,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 210691,
+          "stops": {
+            "stopped": 162
+          }
+        }
+      },
+      "reference_manifest_sha256": "e2c05188c04e1afda4b20e3d93a5018beaed0302ce81c4f60eefc451c24d8288",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "3d4c6e61a51d93224e689ebd8a3443a991d45ba0164b4ae3a400b57d7915b74c",
+      "diagnostic_result_sha256": "1c0e163874098a94660cd60d862e013559f2ee24aee8907bab32a18c1f26dd17",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 192005,
+        "0": 159317
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 160,
+        "0->1": 159
+      },
+      "reference_entries": 3000
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "original",
+      "status": "AUDIO_EQUAL",
+      "first_difference": null,
+      "seconds": 5.123342000006232,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 0,
+        "stop": 0,
+        "output": 0,
+        "progress": 0
+      },
+      "maximum_event_ns": 1,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 810,
+            "note_on": 407
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 810,
+            "note_on": 407
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        }
+      },
+      "reference_manifest_sha256": "9450e1f3214e0d3266d3a71e13a7268f4e5719be4ee30216cbcfe8c87746e138",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "65f79a7cf9c3272b9a21b919f4dfb75306167487afd2e0f55351e739b32614be",
+      "diagnostic_result_sha256": "bfdfced33509afc3a6551f697d683ecde33acaa605fb9519d8fc1351c21d32e6",
+      "dos_pit_divisors": [
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 1,
+        "0": 14918
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 1
+      },
+      "reference_entries": 64
+    },
+    {
+      "scenario": "new-game-save",
+      "target": "canonical",
+      "status": "AUDIO_EQUAL",
+      "first_difference": null,
+      "seconds": 5.077139200002421,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 0,
+        "stop": 0,
+        "output": 0,
+        "progress": 0
+      },
+      "maximum_event_ns": 1,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 810,
+            "note_on": 407
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 810,
+            "note_on": 407
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [],
+          "samples": [],
+          "sample_starts": 0,
+          "looping_voices": 0,
+          "overlap": false,
+          "loop_wraps": 0,
+          "emitted_bytes": 0,
+          "stops": {}
+        }
+      },
+      "reference_manifest_sha256": "236f9103e0678979d41c0ba812645b913b92ce420488f22f7e2fd7a2268de2af",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "65f79a7cf9c3272b9a21b919f4dfb75306167487afd2e0f55351e739b32614be",
+      "diagnostic_result_sha256": "1cc81d628673b5e1b67d1ecea45c1767809e1d3734036fa701ff6f2cb3b6c93b",
+      "dos_pit_divisors": [
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 1,
+        "0": 14918
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 1
+      },
+      "reference_entries": 64
+    },
+    {
+      "scenario": "quick-game",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 3000000,
+        "entry": 537,
+        "group": "channel:0",
+        "index": 306,
+        "dos": {
+          "tick": 556245.6812772586,
+          "service_ordinal": 218974,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99764000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "native": {
+          "tick": 556262.4081230529,
+          "service_ordinal": 39494,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99767000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 44.240968300029635,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 5057.083045171341,
+        "stop": 5057.083045171341,
+        "output": 5057.083045171341,
+        "progress": 0
+      },
+      "maximum_event_ns": 717000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2383,
+            "note_on": 1196,
+            "effect": 228,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 217,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 286932,
+          "stops": {
+            "stopped": 216,
+            "run_end": 1
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2383,
+            "note_on": 1196,
+            "effect": 228,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 217,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 286930,
+          "stops": {
+            "stopped": 216,
+            "run_end": 1
+          }
+        }
+      },
+      "reference_manifest_sha256": "a139b79d506a02c9d7c3cd725c48893d8c555f399757f583cf4a2a863b3d5129",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "4b48283789f07d91d53df7f78c1624ce4ab8df6f0c0bd511e42f57adb409770d",
+      "diagnostic_result_sha256": "cff33839a8fd1c2348d069557f82c13e4f4e2417f9669f30bb9dd8e65d4a0859",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 163659,
+        "0": 109746
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 214,
+        "0->1": 213
+      },
+      "reference_entries": 2000
+    },
+    {
+      "scenario": "quick-game",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 3000000,
+        "entry": 537,
+        "group": "channel:0",
+        "index": 306,
+        "dos": {
+          "tick": 556245.6812772586,
+          "service_ordinal": 218974,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99764000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "native": {
+          "tick": 556262.4081230529,
+          "service_ordinal": 39494,
+          "step": 536,
+          "phase": 1,
+          "entry": 537,
+          "time_ns": 99767000000,
+          "isr_tick": 534193,
+          "kind": "note_on",
+          "arguments": [
+            17,
+            60,
+            126,
+            0
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 43.79883229994448,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 5057.083045171341,
+        "stop": 5057.083045171341,
+        "output": 5057.083045171341,
+        "progress": 0
+      },
+      "maximum_event_ns": 717000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2383,
+            "note_on": 1196,
+            "effect": 228,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 217,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 286932,
+          "stops": {
+            "stopped": 216,
+            "run_end": 1
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 1,
+            "note_off": 2383,
+            "note_on": 1196,
+            "effect": 228,
+            "song_stop": 1
+          },
+          "songs": [
+            10001
+          ],
+          "effects": [
+            17,
+            18,
+            41,
+            44,
+            47
+          ],
+          "samples": [
+            41,
+            44,
+            47
+          ],
+          "sample_starts": 217,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 286930,
+          "stops": {
+            "stopped": 216,
+            "run_end": 1
+          }
+        }
+      },
+      "reference_manifest_sha256": "33d411fb6b64f808dbe6af2ec52cc44e2edcfa749a4805eb61cb8b562e8836f7",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "4b48283789f07d91d53df7f78c1624ce4ab8df6f0c0bd511e42f57adb409770d",
+      "diagnostic_result_sha256": "5452757bf2657bfe48b38b3e201492bd1f769868e7a7d0f6d0e1e47989840fba",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 163659,
+        "0": 109746
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 214,
+        "0->1": 213
+      },
+      "reference_entries": 2000
+    },
+    {
+      "scenario": "random-17",
+      "target": "original",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 7000000,
+        "entry": 84,
+        "group": "channel:6",
+        "index": 40,
+        "dos": {
+          "tick": 143995.83982866042,
+          "service_ordinal": 53881,
+          "step": 83,
+          "phase": 1,
+          "entry": 84,
+          "time_ns": 25826000000,
+          "isr_tick": 121953,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            6
+          ]
+        },
+        "native": {
+          "tick": 144034.86913551402,
+          "service_ordinal": 9244,
+          "step": 83,
+          "phase": 1,
+          "entry": 84,
+          "time_ns": 25833000000,
+          "isr_tick": 121969,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            6
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 40.14334539999254,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 1969.1921862224117,
+        "stop": 1969.1921862224117,
+        "output": 1969.1921862224117,
+        "progress": 0
+      },
+      "maximum_event_ns": 7000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 19,
+            "note_off": 1084,
+            "note_on": 549,
+            "effect": 136,
+            "song_stop": 19
+          },
+          "songs": [
+            10001,
+            11005,
+            11013,
+            11016,
+            20008,
+            20010
+          ],
+          "effects": [
+            1,
+            15,
+            17,
+            18,
+            19,
+            28,
+            35,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "samples": [
+            1,
+            28,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "sample_starts": 106,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 157214,
+          "stops": {
+            "stopped": 106
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 19,
+            "note_off": 1086,
+            "note_on": 550,
+            "effect": 136,
+            "song_stop": 19
+          },
+          "songs": [
+            10001,
+            11005,
+            11013,
+            11016,
+            20008,
+            20010
+          ],
+          "effects": [
+            1,
+            15,
+            17,
+            18,
+            19,
+            28,
+            35,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "samples": [
+            1,
+            28,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "sample_starts": 106,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 157128,
+          "stops": {
+            "stopped": 106
+          }
+        }
+      },
+      "reference_manifest_sha256": "3db49be124bb7fe600afe9c87837303a3de515547bab132880c1495c222b90f7",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "f56b47013438a5d5bd64d26c1bf530534ae9e3b6c60ce6fe11ebe8cea2e02b8c",
+      "diagnostic_result_sha256": "5b3b282a47dedd4753ee5c636c9dbcb4e53658916ec95f5662a5f13b7d839498",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 140850,
+        "0": 110689
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 97,
+        "0->1": 96
+      },
+      "reference_entries": 2000
+    },
+    {
+      "scenario": "random-17",
+      "target": "canonical",
+      "status": "AUDIO_DIFFERENCE",
+      "first_difference": {
+        "kind": "PLAYBACK_PLACEMENT",
+        "nanoseconds": 7000000,
+        "entry": 84,
+        "group": "channel:6",
+        "index": 40,
+        "dos": {
+          "tick": 143995.83982866042,
+          "service_ordinal": 53881,
+          "step": 83,
+          "phase": 1,
+          "entry": 84,
+          "time_ns": 25826000000,
+          "isr_tick": 121953,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            6
+          ]
+        },
+        "native": {
+          "tick": 144034.86913551402,
+          "service_ordinal": 9244,
+          "step": 83,
+          "phase": 1,
+          "entry": 84,
+          "time_ns": 25833000000,
+          "isr_tick": 121969,
+          "kind": "note_on",
+          "arguments": [
+            19,
+            60,
+            126,
+            6
+          ]
+        },
+        "layer": "voice-dispatch"
+      },
+      "seconds": 40.272621499956585,
+      "no_tapes": true,
+      "code": 0,
+      "capture_errors": {},
+      "maximum_tick_distance": {
+        "opl": 0,
+        "start": 1969.1921862224117,
+        "stop": 1969.1921862224117,
+        "output": 1969.1921862224117,
+        "progress": 0
+      },
+      "maximum_event_ns": 7000000,
+      "coverage": {
+        "dos": {
+          "events": {
+            "song_start": 19,
+            "note_off": 1084,
+            "note_on": 549,
+            "effect": 136,
+            "song_stop": 19
+          },
+          "songs": [
+            10001,
+            11005,
+            11013,
+            11016,
+            20008,
+            20010
+          ],
+          "effects": [
+            1,
+            15,
+            17,
+            18,
+            19,
+            28,
+            35,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "samples": [
+            1,
+            28,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "sample_starts": 106,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 157214,
+          "stops": {
+            "stopped": 106
+          }
+        },
+        "native": {
+          "events": {
+            "song_start": 19,
+            "note_off": 1086,
+            "note_on": 550,
+            "effect": 136,
+            "song_stop": 19
+          },
+          "songs": [
+            10001,
+            11005,
+            11013,
+            11016,
+            20008,
+            20010
+          ],
+          "effects": [
+            1,
+            15,
+            17,
+            18,
+            19,
+            28,
+            35,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "samples": [
+            1,
+            28,
+            37,
+            41,
+            42,
+            44,
+            45,
+            47,
+            49
+          ],
+          "sample_starts": 106,
+          "looping_voices": 0,
+          "overlap": true,
+          "loop_wraps": 0,
+          "emitted_bytes": 157128,
+          "stops": {
+            "stopped": 106
+          }
+        }
+      },
+      "reference_manifest_sha256": "ccbe5091bd4c1200051045387c37207031b4b93e24d2c30e309c6d214335662c",
+      "native_executable_sha256": "2db5e58f1807d07c433219d507ffda1dd6fd8dcf3de609077377d526e00e18d0",
+      "content_result_sha256": "72abf842506247798461fd80c4127345d87f36348465b4cbcf420cdca4418d0f",
+      "diagnostic_result_sha256": "989462f96eab78365534be0dcad44d61930e4cf7cbdbe1e4e1809de1af49c725",
+      "attribution": "native timing/read-boundary defect; exact repair site unresolved; ordinary runtime changes excluded by task scope",
+      "dos_pit_divisors": [
+        214,
+        3424
+      ],
+      "dos_irq_kinds": {
+        "1": 140850,
+        "0": 110689
+      },
+      "dos_irq_kind_transitions": {
+        "1->0": 97,
+        "0->1": 96
+      },
+      "reference_entries": 2000
+    }
+  ],
+  "configuration_sha256": "55e111a6ccec71fef69c0e78e43f417665512d392d5dde2be11d23d2a58f1840",
+  "observer_controls": [
+    {
+      "target": "original",
+      "entries": 78,
+      "state_hash_bytes": 319488,
+      "state_equal": true,
+      "raw_commands_equal": true,
+      "raw_commands": 8835,
+      "sound_entries_equal": true,
+      "baseline_manifest_sha256": "b9b4a1062b928f340ac538566977f1b70b49548b3ec4447d7329d504d2a1ed19",
+      "playback_manifest_sha256": "062344c81cffcc3c75704057dc8131089eb17abc6f8384a74dada71c9181e92b"
+    },
+    {
+      "target": "canonical",
+      "entries": 78,
+      "state_hash_bytes": 319488,
+      "state_equal": true,
+      "raw_commands_equal": true,
+      "raw_commands": 8835,
+      "sound_entries_equal": true,
+      "baseline_manifest_sha256": "0595bf591c549a96a30eb1dad1a63336ee9a28208c3e09bd34e90c714afcdbe0",
+      "playback_manifest_sha256": "67707e3ad5e158228df1d3e10ead9a514474cbae60717b80aaf7f5d928f4fb9f"
+    }
+  ],
+  "dos_three_way": {
+    "wall_seconds": 29.73309450002853,
+    "lanes": [
+      {
+        "scenario": "ant-commands",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "audio-controls",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "audio-restart",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "experiment",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "full-game",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "interactive-play",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "load-from-save",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "long-run",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "new-game-save",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "quick-game",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      },
+      {
+        "scenario": "random-17",
+        "status": "AUDIO_EQUAL",
+        "first_difference": null
+      }
+    ]
+  },
+  "loop_coverage": {
+    "source": "src\\sound\\instruments.c",
+    "sha256": "0520c5c9b275212dbb1c13b06481ec32eb95c790b996214faf9bde3ba19980e7",
+    "descriptors": [
+      {
+        "name": "s_sinwave",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_square3",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_square4",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_agogo",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_alert1",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_alert2",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_bassass",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_beep1",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_beep2",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_beep3",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_birdcall",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_brasssyn",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_bugspray",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_burp",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_buzzing",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_cabasa",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_catmeow",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_catyowl",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_click",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_click2",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dig1",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dig2",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dig3",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dogfoot",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dogwhim1",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dogwhim2",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dogyap",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_doorslam",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dreamgui",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_drip1",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_drip2",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dropegg",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_dropfood",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_droprock",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_fooddrip",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_foodslop",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_foodunsl",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_humanfoo",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_kick",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_lawnmowr",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_lioncrun",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_lionroar",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_lionsnar",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_pop",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_rain",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_retch",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_shaker",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_slurp",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_slurplng",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_snare",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_spiderft",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_stick",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_tearing",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_tom",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_whap",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_whistle",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_keys",
+        "loop": "0",
+        "looped": "0"
+      },
+      {
+        "name": "s_ooohs",
+        "loop": "0",
+        "looped": "0"
+      }
+    ],
+    "conclusion": "No looped voice observed. All named shipped sample descriptors initialize looped=0; no source assignment to looped was found. This is not claimed as exercised looping coverage."
+  },
+  "status": "partial",
+  "counts": {
+    "AUDIO_EQUAL": 4,
+    "AUDIO_DIFFERENCE": 18,
+    "AUDIO_INCOMPLETE": 0
+  },
+  "source_pins": {
+    "portable\\tests\\acceptance\\__init__.py": "73312efe6dcd63f256c2cb5740d41e1ac8a87ae531cda5a6e44a0379cf8282c8",
+    "portable\\tests\\acceptance\\animation_identity.py": "45a62b1ff48430f6ee8a774426139d6068afa70090e596c8a1e264610762abc4",
+    "portable\\tests\\acceptance\\audio_commands.py": "f73b567012b4ecb0d2b2a96ec50911c50cbbd14448ee45181d60205016091424",
+    "portable\\tests\\acceptance\\audio_content.py": "88c2fc29fcd5f616e5b618217110240a58a3b94a9620901b075ed06878694a55",
+    "portable\\tests\\acceptance\\audio_playback.py": "e81d30f22cae7c7e6add0248bffdd64953b6888f32e0917657801f6d2da43bc0",
+    "portable\\tests\\acceptance\\audio_timer.py": "6bec263f50eaeba24f2e5477601f8ee2dbe3c576de9231b0d3cdd38751e7a989",
+    "portable\\tests\\acceptance\\build_observer.py": "fde3ea89c1476cb6e8ab953bd035616e1382686a3136e88df56c711850982628",
+    "portable\\tests\\acceptance\\canonical_dos_layout.py": "d2f9774de0b3124a99ddbd8cd92606f25699783bee61503cb818a62c94d04d62",
+    "portable\\tests\\acceptance\\capture_dos_steps.py": "d83204056aea4e992d09b263958645b3b3d6d5c0c146bfb1f53be6caa1776756",
+    "portable\\tests\\acceptance\\check_span_layout.py": "a50d0eb0806f79531cbc022a7d1a95178f7a5d0852327b6f1968a4172b49d6f9",
+    "portable\\tests\\acceptance\\compact_observer.inc": "1ef704a1d1007e334d41eea2f401ac5fd92f5fd47626eb62a307f8a543840885",
+    "portable\\tests\\acceptance\\device_services.py": "fb619e29d3c385061bc1fc6123cb4285fc562bf68c091fc79f27948bc9f01112",
+    "portable\\tests\\acceptance\\frame_check.py": "f506272e6b1ac006d8aa164c147c8e8092f1184d7ae6b67dc8058f1aa2418f1f",
+    "portable\\tests\\acceptance\\full_inputs.py": "4715464501334b5087906b0a4d704325e24a2fe6af323ec2ba54d61594b42470",
+    "portable\\tests\\acceptance\\ideal_build.py": "7c5ca58287e9a3f1759a753b5a3095e47e9d02e589429760a31d69138d781fc3",
+    "portable\\tests\\acceptance\\ideal_check.py": "fd59fdf1d4e26cfdaa4919414f4c9d4936bd967c5edb683502c003a78c406eb8",
+    "portable\\tests\\acceptance\\ideal_reference.py": "8ae20e0dffcbe2dc1aa391c164a8acf0c681428c224c448646519f21de9edf41",
+    "portable\\tests\\acceptance\\ideal_rule_check.py": "3b088222ab897debda628472c84dac9da9c64edcf708cfe399abb7ffd9fa0166",
+    "portable\\tests\\acceptance\\ideal_timer_test.c": "9f7573a2101af81197109450d0f75c377805277e66894d0a8417eef32b8d912f",
+    "portable\\tests\\acceptance\\inspect_ideal_dump.py": "54abb6dfbe7b9d718e139c6a633e98fa6fa5e9c6722116dc3e3e8d740495903d",
+    "portable\\tests\\acceptance\\key_bios_probe.py": "6d311ce641280b841836fddb48ea8c81b65f7e7bba7ea705dc5c42084d2e19bf",
+    "portable\\tests\\acceptance\\keyboard_environment.py": "8adc173f4d8258371d3d909532296b0c49e09dabedf6496c4b2d55591f6ebec6",
+    "portable\\tests\\acceptance\\modifier_reads.py": "1d318ea42253b9c07202f1e051c869cb20ffd28f6da18cc8e350b2d47ab941f1",
+    "portable\\tests\\acceptance\\native_audio_content.inc": "d7cebdefcb358abeb50286ee407106b191d9649bef78ec29979d12afe4b809c2",
+    "portable\\tests\\acceptance\\native_observer.c": "8905c35c24af03d04ca6c4ff7c7c8425aab6c662bd208af55d5ed180354413fc",
+    "portable\\tests\\acceptance\\native_sampling.py": "f7ffdeac0c5f0880cc0274e666fff2a744323999f39abe2f20f5bc6e7e0798c2",
+    "portable\\tests\\acceptance\\native_schema.py": "48bded073e927115e3872fd9e48f08948fdaa67ccf4c3bf3a4904385943b884c",
+    "portable\\tests\\acceptance\\playback_check.py": "3a63d1388dcf0e784a8c0d80ad9dd48d530a304146621e4e79153f2fe412a95f",
+    "portable\\tests\\acceptance\\run_virtual_audio_tests.py": "6f5c3078071b6da91ea65c10b7b79a08d98b737c30daae6155460b0a06b59674",
+    "portable\\tests\\acceptance\\sound_calls.py": "f58c65cb9345bb228313624a2ed265d34deac9deb8f09820aecd3c5c033c9a38",
+    "portable\\tests\\acceptance\\sound_off.py": "4e200bad7305269f402660727e879d6e2428fe15353d8b9743ddd8b05987b1bf",
+    "portable\\tests\\acceptance\\sound_services.py": "8379e97e88d1c45db9bb6bd5b60d9e9b44cc7a3b396bf310d55fe87b3e4f1aa7",
+    "portable\\tests\\acceptance\\state_schema.py": "03bef0d0f861db7c082027c35276805e30d4e141f73d04aad03a76f7373b59d0",
+    "portable\\tests\\acceptance\\step_check.py": "10d5d078471300b7647bf65dcf6ee9a97856346aa7eab27c7512823b455fbd3b",
+    "portable\\tests\\acceptance\\step_record.py": "927c945d1462b8f680ff4f36b684b3bbe1ab16e67fc1ba63e16959bb63a0a37f",
+    "portable\\tests\\acceptance\\step_repeat.py": "6f0bd2066f572fad460bcc34ed98b90bd02a2067aa545b95541c293ed39c2d0a",
+    "portable\\tests\\acceptance\\step_state.py": "3758e4925ee59569cdbd2feb59d0770eb5d35edb02d08e2afa44aaa330cffbde",
+    "portable\\tests\\acceptance\\test_animation_identity.py": "d1bd1946eafdfe937d13c89447ccc2bf0f6623c4af0b4961989d6d7552482658",
+    "portable\\tests\\acceptance\\test_audio_commands.py": "206f4ffb65b3439d277ea2bc2ea9b0d43531d910275a404ca18e2ba7e59e2414",
+    "portable\\tests\\acceptance\\test_audio_content.py": "e68492fc67e0c8bab63f8d1e8567f2ac82bc8e7191d24472cb682215521bf28b",
+    "portable\\tests\\acceptance\\test_audio_playback.py": "cf99d42ca5e49a5565a28553c7eb284521af93fdf38a1f3a1b3315a70a1fbfc8",
+    "portable\\tests\\acceptance\\test_audio_timer.py": "e57905d252afc42a7b8369b31ca5371d8b6e70481f9bd474d310932328df5bf4",
+    "portable\\tests\\acceptance\\test_event_context.py": "2e2b31b6cc7230b045662fbe63ca72a210cbe3b1b945d9836c7f8c39f63279fd",
+    "portable\\tests\\acceptance\\test_frames.py": "1fae32d68f1cfe8757452813aaeaa093662840b664b82cc29436a8b582619666",
+    "portable\\tests\\acceptance\\test_full_inputs.py": "e17f171c2e108d6fd285ec18b7f771d162887b6dc721ecd0e6d99b3da139eebc",
+    "portable\\tests\\acceptance\\test_ideal_speed.py": "f752af14100a9b55b2b0b2ebb66b61c518e0fc4a2de620f12f651b590d1434d6",
+    "portable\\tests\\acceptance\\test_key_bios.py": "bb68a082cc86ec6f731ccc05b1e3aeac3219dd16c46967877888c132c738aad6",
+    "portable\\tests\\acceptance\\test_native_acceptance.py": "dcb4dd95875b73a7a0329420ab0f2049e9216396fd7c71be4fa618c93ee71664",
+    "portable\\tests\\acceptance\\test_presentation_residue.py": "61575bc4da08ca45b2f39db4ff0adfb6122056dbaf08b04050f55a3d5e38aa48",
+    "portable\\tests\\acceptance\\test_sound_calls.py": "959e40714309e615f53ee774a76667c118ceb6f525ac23aa241b4935ca4a1104",
+    "portable\\tests\\acceptance\\test_sound_services.py": "a558e57c076a1bf6af86251244e29528009e1033e1594a24e18d1c1d85e09a13",
+    "portable\\tests\\acceptance\\test_yard_positions.py": "f53ceb75f04e159eb70342aedc9157bcb52c7823bb6e387b71fbf8cb11034f70",
+    "portable\\tests\\acceptance\\virtual_audio_test.c": "471748d76fbbecb2def275395221f43a7ba60cc2671e5060b5473dec9978ce31"
+  },
+  "scope": "Content and source playback events; raw OPL/DSP and internal progress are diagnostics only. No tape retired, no production/canonical edits by this task."
+}

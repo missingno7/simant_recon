@@ -13,7 +13,7 @@ except ImportError:
     from step_state import schema, read_hashes
 
 
-def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None, scratch_root=None, host_seconds=1200, sound_off=False):
+def record(scenario_path, target, build, observer, report, out=None, binding_dump=None, steps=None, cycles=None, scratch_root=None, host_seconds=1200, sound_off=False, playback=False):
     scenario = json.loads(scenario_path.read_text())
     exe = ROOT/'assets/SIMANT.EXE' if target=='original' else ROOT/json.loads(report.read_text())['link']['candidate_executable']['path']
     observer_build=json.loads(observer.read_text())
@@ -45,6 +45,8 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
             validate(directory,scenario_path)
         else:validate_reference(directory, scenario_path)
         manifest=json.loads((directory/'manifest.json').read_text())
+        if bool(manifest.get('audio_playback'))!=bool(playback):
+            raise ValueError('Reference playback observation contract differs: '+str(directory))
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
             boundary=json.loads((directory/'capture/boundary-manifest.json').read_text())
             if boundary['compact_observer'].get('order_contract')!=contract:
@@ -85,6 +87,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
          '--cycles',str(cycles or scenario.get('cycles',10000))]
     cmd+=['--original'] if target=='original' else ['--build-report',str(report)]
     if sound_off:cmd+=['--sound-off']
+    if playback:cmd+=['--audio-playback']
     start=time.perf_counter()
     with (directory/'record.log').open('w') as log:
         run=subprocess.run(cmd,stdout=log,stderr=subprocess.STDOUT,timeout=host_seconds+60)
@@ -117,6 +120,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
                   frames=boundary['frames'])
     if ideal:
         manifest['files'].update({p.relative_to(directory).as_posix():sha(p) for p in [directory/'machine-profile.json',capture/'observer.txt.ideal']})
+    if playback:manifest['audio_playback']='audio-playback-v1'
     if sound_off:
         manifest['variant']=variant
         manifest['clock_admission']='direct-bda-v2'

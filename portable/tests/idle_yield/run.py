@@ -21,12 +21,17 @@ def main():
     commands = [base + common + [str(HERE/'rule.c'), '-o', str(out/'rule.exe')],
                 base + ['-I'+str(sdk/'include')] + common +
                 [str(ROOT/'portable/whole_program/platform/sdl3'/f) for f in ('input_time_host.c', 'host.c')] +
-                [str(HERE/'poll.c'), '-L'+str(sdk/'lib'), '-lSDL3', '-o', str(out/'poll.exe')]]
+                [str(HERE/'poll.c'), '-L'+str(sdk/'lib'), '-lSDL3', '-o', str(out/'poll.exe')],
+                base + ['-I'+str(sdk/'include'), str(HERE/'audio_buffer.c'),
+                    str(ROOT/'portable/platform/sdl3/audio.c'), '-L'+str(sdk/'lib'),
+                    '-lSDL3', '-o', str(out/'audio-buffer.exe')]]
     env = dict(os.environ, PATH=str(sdk/'bin')+os.pathsep+os.environ.get('PATH',''))
     for command in commands:
         subprocess.run(command, check=True, timeout=60)
     results = []
-    for command in ([str(out/'rule.exe')], [str(out/'poll.exe')], [str(out/'poll.exe'), '--spin']):
+    for command in ([str(out/'rule.exe')], [str(out/'poll.exe')],
+                    [str(out/'poll.exe'), '--windowed'], [str(out/'poll.exe'), '--spin'],
+                    [str(out/'audio-buffer.exe')]):
         run = subprocess.run(command, env=env, capture_output=True, text=True, timeout=15)
         results.append(dict(command=command, code=run.returncode, stdout=run.stdout, stderr=run.stderr))
         print(run.stdout+run.stderr, end='', flush=True)

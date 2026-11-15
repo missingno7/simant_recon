@@ -1,7 +1,11 @@
 /* Read-only acceptance observations. All values come from live source state. */
 #include "../../whole_program/platform/audio_state.h"
 extern void portable_test_audio_content_head(FILE *, char, uint64_t);
+extern uint64_t host_time_ns(void);
 static FILE *content_file;
+static unsigned playback_mode;
+static uint64_t playback_irq_ns;
+void portable_test_audio_game_time(unsigned long long ns) { playback_irq_ns=ns; }
 static uint64_t content_tick;
 static unsigned content_opl_index[2],content_dac_argument;
 static unsigned content_voice_active[2];
@@ -10,13 +14,17 @@ static FILE *content_open(void) {
     const char *path=getenv("SIMANT_TEST_AUDIO_CONTENT");
     if (!path) return NULL;
     content_file=fopen(path,"w");if (!content_file) abort();
-    fputs("SIMANT_AUDIO_CONTENT 1\n",content_file);
+    playback_mode=getenv("SIMANT_TEST_PLAYBACK")!=NULL;
+    fputs(playback_mode?"SIMANT_AUDIO_CONTENT 2\n":"SIMANT_AUDIO_CONTENT 1\n",content_file);
   }
   return content_file;
 }
 static int content_head(char tag) {
   if (!content_open()) return 0;
-  portable_test_audio_content_head(content_file,tag,content_tick);return 1;
+  portable_test_audio_content_head(content_file,tag,content_tick);
+  if(playback_mode) fprintf(content_file," %llu",(unsigned long long)
+      (portable_whole_audio_isr_active()?playback_irq_ns:host_time_ns()));
+  return 1;
 }
 void portable_test_audio_tick(unsigned kind) { content_tick+=kind==0?16:1; }
 void portable_test_sample_boundary(unsigned stop,int ch) {
@@ -80,4 +88,14 @@ void portable_test_audio_progress(unsigned checkpoint) {
 void portable_test_audio_content_checkpoint(void) { portable_test_audio_progress(1); }
 void portable_test_audio_content_close(void) {
   if (content_head('E')) { fputc('\n',content_file);fclose(content_file);content_file=NULL; }
+}
+
+void portable_test_playback(unsigned kind,int a,int b,int c,int d) {
+  if(!getenv("SIMANT_TEST_PLAYBACK")) return;
+  if(kind<1 || kind>5) abort();
+  if(content_head(" BDNFH"[kind])) {
+    if(kind==3) fprintf(content_file," %u %u %u %u",(uint16_t)a,(uint16_t)b,(uint16_t)c,(uint16_t)d);
+    else fprintf(content_file," %u",(uint16_t)a);
+    fputc('\n',content_file);
+  }
 }

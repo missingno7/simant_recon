@@ -76,14 +76,18 @@ def instrument_sample_unit(text):
 
 def read_content(path, entries=None):
     """Reject incomplete/invalid captures; keep complete per-voice byte streams."""
-    result = dict(opl={}, voices=[], checkpoints={}, progress=[], controls=[], mixed=[])
+    result = dict(opl={}, voices=[], checkpoints={}, progress=[], controls=[], mixed=[], events=[])
     active = [None, None]
     ended = False
     previous = (0, 0)
     contribution = None
     with Path(path).open(encoding='ascii') as source:
-        if source.readline().strip() != 'SIMANT_AUDIO_CONTENT 1':
+        header=source.readline().strip()
+        version=2 if header=='SIMANT_AUDIO_CONTENT 2' else 1
+        if header not in ('SIMANT_AUDIO_CONTENT 1','SIMANT_AUDIO_CONTENT 2'):
             raise ValueError('Missing audio content header')
+        result['version']=version
+        previous_ns=0
         for number, line in enumerate(source, 2):
             fields = line.split()
             if len(fields) < 5 or ended:
@@ -97,6 +101,13 @@ def read_content(path, entries=None):
             coordinate = dict(tick=tick, service_ordinal=ordinal, step=step, phase=phase,
                               entry=step if tag == 'C' else step + 1)
             data = fields[5:]
+            if version==2:
+                from .audio_playback import FAST_NS
+                time_ns=int(data.pop(0))
+                if time_ns<previous_ns:raise ValueError('Playback game time goes backwards')
+                previous_ns=time_ns
+                coordinate.update(time_ns=time_ns,isr_tick=tick,tick=time_ns/FAST_NS)
+                tick=coordinate['tick']
             if tag == 'C' and (not step or phase!=1):
                 raise ValueError('Progress checkpoint is not a simulation entry')
             if tag == 'E':
@@ -106,7 +117,12 @@ def read_content(path, entries=None):
                 ended = True
             if entries is not None and (step > entries or step == entries and tag not in ('C', 'E')):
                 continue
-            if tag == 'O':
+            if tag in ('B','D','N','F','H') and version==2:
+                if len(data)!=(4 if tag=='N' else 1):raise ValueError('Malformed playback event')
+                values=list(map(int,data))
+                if any(not 0<=v<=65535 for v in values):raise ValueError('Invalid playback argument')
+                result['events'].append(dict(coordinate,kind={'B':'song_start','D':'song_stop','N':'note_on','F':'note_off','H':'effect'}[tag],arguments=values))
+            elif tag == 'O':
                 if len(data) != 3:
                     raise ValueError('Malformed OPL content')
                 bank, register, value = map(int, data)
@@ -201,7 +217,7 @@ def opl_channel(register):
 
 
 def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete=True, out=None,
-                    raw_dos_path=None, raw_native_path=None, progress_names=None):
+                    raw_dos_path=None, raw_native_path=None, progress_names=None, playback=False):
     """Full-run, ordered content verdict; no cross-device interleaving test.
 
     The tolerance is in fast PIT periods, NOT simulation entries or host time.
@@ -213,6 +229,7 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
     for label, path in [('dos', dos_path), ('native', native_path)]:
         try:
             captures[label] = read_content(path, entries)
+            if playback and captures[label]['version']!=2:raise ValueError('Playback requires absolute game time and source events')
             if progress_names is not None and any(len(r['hashes'])!=len(progress_names) for r in captures[label]['progress']):
                 raise ValueError('Progress vector does not match the pinned audio view census')
             raw_path = raw_dos_path if label == 'dos' else raw_native_path
@@ -243,7 +260,7 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
 
     if not errors:
         a, b = captures['dos'], captures['native']
-        for i in range(max(len(a['controls']), len(b['controls']))):
+        for i in range(0 if playback else max(len(a['controls']), len(b['controls']))):
             x = a['controls'][i] if i < len(a['controls']) else None
             y = b['controls'][i] if i < len(b['controls']) else None
             if x is None or y is None or (x['port'], x['value']) != (y['port'], y['value']):
@@ -252,7 +269,7 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
             if abs(x['tick'] - y['tick']) > tolerance:
                 difference('DEVICE_CONTROL_PLACEMENT', x, y, index=i)
                 break
-        for group in sorted(set(a['opl']) | set(b['opl'])):
+        for group in ([] if playback else sorted(set(a['opl']) | set(b['opl']))):
             left, right = a['opl'].get(group, []), b['opl'].get(group, [])
             for i in range(max(len(left), len(right))):
                 x, y = left[i] if i < len(left) else None, right[i] if i < len(right) else None
@@ -304,7 +321,14 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
                 difference('SAMPLE_OUTPUT_LENGTH', x['stop'], y['stop'], index=i,
                            counts=[len(x['output']), len(y['output'])], object=x['object'])
         progress = compare_progress(a, b, entries, tolerance, progress_names)
-        differences.extend(progress['differences'])
+        if playback:
+            from .audio_playback import compare_events,FAST_NS
+            events=compare_events(a,b,tolerance*FAST_NS)
+            differences.extend(events['differences'])
+            result['playback_events']=events
+            result['contract']='audio-playback-v1'
+            result['tick_units']='absolute game nanoseconds / (214*12e9/14318180); no IRQ-count time'
+        else: differences.extend(progress['differences'])
         maximum['progress'] = progress['max_tick_distance']
         complete = replay_complete and len(a['checkpoints']) == len(b['checkpoints']) == entries
         result.update(status='AUDIO_INCOMPLETE' if not complete else 'AUDIO_DIFFERENCE' if differences else 'AUDIO_EQUAL',
@@ -316,6 +340,9 @@ def compare_content(dos_path, native_path, entries, tolerance=1, replay_complete
     result['first_difference'] = min(differences, key=lambda d: d['entry']) if differences else None
     result['difference_count'] = len(differences)
     result['differences'] = differences
+    if playback:
+        for delta in differences:
+            delta.setdefault('layer','sample-mixer' if delta['kind'].startswith('SAMPLE_OUTPUT') else 'sample-voice')
     if progress_names is not None:
         result['progress_views'] = list(progress_names)
     if out is not None:

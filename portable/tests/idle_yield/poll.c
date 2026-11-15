@@ -73,8 +73,9 @@ int main(int argc, char **argv)
     uint32_t tick = 0, previous = 0, sequence[4] = {0};
     unsigned calls = 0, n = 1;
     int spin = argc > 1 && !strcmp(argv[1], "--spin");
+    int windowed = argc > 1 && !strcmp(argv[1], "--windowed");
     uint64_t started, cpu_started;
-    assert(SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "dummy"));
+    if (!windowed) assert(SDL_SetHint(SDL_HINT_VIDEO_DRIVER, "dummy"));
     host = host_create_dimensions("idle poll fixture", 1, 640, 480);
     assert(host);
     if (spin) host_virtual_clock_configure(0);
@@ -104,7 +105,7 @@ int main(int argc, char **argv)
         assert(cpu_ns()-cpu_started < 60000000); /* A busy delay fails this. */
     }
     printf("{\"mode\":\"%s\",\"calls\":%u,\"ticks\":[0,1,2,3],\"latency_ns\":%llu,\"wall_ns\":%llu,\"cpu_ns\":%llu}\n",
-        spin ? "spin" : "paced", calls, (unsigned long long)(handled_ns-injected_ns),
+        spin ? "spin" : windowed ? "windowed" : "paced", calls, (unsigned long long)(handled_ns-injected_ns),
         (unsigned long long)(SDL_GetTicksNS()-started), (unsigned long long)(cpu_ns()-cpu_started));
     portable_input_time_host_shutdown(&input);
     host_destroy(host);

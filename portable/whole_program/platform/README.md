@@ -99,7 +99,7 @@ Unsupported MPU/AdLib-only
 hardware waits remain unsupported as before.
 
 In ordinary play, each admitted read is paced against a fixed host epoch before
-it returns. SDL waits wake for input and leave events for the sole ingestion
+it returns. Event waits wake for input and leave events for the sole ingestion
 path; delivery does not change Q or the pending read's tick. Reads catch up after
 host delays without skipping virtual quanta or ticks. Audio and presentation are
 serviced at every Q, with Q bounded to 1 ms. GameSpeed 3 bypasses wall pacing,
@@ -108,8 +108,43 @@ or tick wait. Its virtual audio timeline can consequently run ahead of physical
 playback; there is no claim of wall-tempo preservation for that mode.
 `--deterministic` bypasses wall pacing in all speeds and discards presentation
 PCM, retaining the same ISR work. Unchanged single-screen scanouts are compared
-before RGB conversion/upload (including palette changes); hosted windows retain
-their existing refresh path. A one-second repaint covers exposure.
+before RGB conversion/upload (including palette changes). Hosted windows compare
+their own complete planes, palette, origin, geometry and overview indicator
+before conversion/upload. Unchanged ordinary hosted clients reuse the last
+presentation; exposure and resizing request a repaint. Modern map rendering
+continues to observe its live world and camera each refresh opportunity. A
+one-second repaint covers exposure for unchanged scanouts.
+
+On Windows the paced wait uses a high-resolution waitable timer together with
+Windows message readiness and an SDL event-watch signal (including events pushed
+from other threads). SDL 3.4.16's Windows backend truncates sub-millisecond
+timeouts: requesting a 1 ms SDL wait after its setup work can repeatedly poll
+with a zero timeout. The native wait blocks to the pending read's exact host
+deadline. That deadline is at most Q away, so it also services presentation and
+audio sooner than their next device-buffer/refresh deadlines. Input wakes drain
+through the existing owner and retry the same pending read; they never add Q.
+Physical presentation opportunities use the current display interval and host
+time, preventing catch-up reads from submitting bursts. Deterministic/tape
+presentation and the machine rule retain their own existing paths.
+
+PCM/ISR generation still runs only through the elapsed machine endpoint. SDL
+submission accumulates complete blocks matching the device buffer duration
+(converted to the 48 kHz input rate). Four silent device periods prime playback;
+consumption starts with the first generated block. This adds bounded playback
+latency without running any guest ISR ahead. A read-only SDL consumption callback
+counts positive additional-input requests conservatively as stream underruns;
+it never runs game work or supplies replacement samples. `SIMANT_PACING_STATS`
+names an optional exit JSON receipt with waits/durations, loop counts,
+presentations, device blocks, queued frames and underruns. These counters are
+never clock inputs.
+
+The native builder uses `-O2` for the explicit graphics/audio service targets
+selected by `optimize_platform()` in `portable/build.py`, including ISA devices,
+YMFM and native presentation, and for the native application. Every generated
+canonical translation unit retains its existing unoptimized compile flags.
+The declaration audit still uses LTO, and the application still links regular
+fat-object code with `-fno-lto`; device/rendering optimization must therefore be
+applied when compiling those native service objects, not only at final link.
 
 The civil epoch is 1992-01-01 12:00:00 plus machine time in both play and replay;
 BIOS ticks start at DOS noon, independently of the initially zero private clock.

@@ -6,6 +6,16 @@
 #include <string.h>
 #include <stdio.h>
 #include <inttypes.h>
+#ifdef _WIN32
+#include <windows.h>
+static HANDLE pace_timer, pace_event;
+static bool SDLCALL pacing_event(void *unused, SDL_Event *event)
+{
+    (void)unused;
+    if (event->type != SDL_EVENT_POLL_SENTINEL) SetEvent(pace_event);
+    return true;
+}
+#endif
 struct Host {
     SDL_Window *window;
     SDL_Renderer *renderer;
@@ -18,6 +28,7 @@ struct Host {
     HostInputState replay_state;
     HostPalette presented_palette;
     int frame_presented;
+    uint64_t refresh_ns;
 };
 #include "test_observer.inc"
 #include "input_time_host.h"
@@ -37,6 +48,45 @@ int host_presented_palette(const Host *host, HostPalette *palette)
 }
 static uint64_t virtual_ns, virtual_quantum, pace_origin_ns;
 static int clock_unpaced, machine_clock;
+static uint64_t pace_calls, wait_calls, wait_events, wait_ns, wait_short;
+static uint64_t poll_calls, poll_events;
+static uint64_t wait_max_ns;
+static uint64_t pace_immediate, lag_ns, lag_max_ns, blocked_ns;
+static uint64_t pace_elapsed_ns, pace_cpu_ns, queued_wakes;
+static uint64_t pacing_cpu(void)
+{
+#ifdef _WIN32
+    FILETIME created, exited, kernel, user;
+    ULARGE_INTEGER k, u;
+    if (!GetThreadTimes(GetCurrentThread(), &created, &exited, &kernel, &user)) return 0;
+    k.LowPart=kernel.dwLowDateTime; k.HighPart=kernel.dwHighDateTime;
+    u.LowPart=user.dwLowDateTime; u.HighPart=user.dwHighDateTime;
+    return (k.QuadPart+u.QuadPart)*100;
+#else
+    return 0;
+#endif
+}
+static int finish_pace(int result, uint64_t started, uint64_t cpu)
+{
+    pace_elapsed_ns += SDL_GetTicksNS() - started;
+    pace_cpu_ns += pacing_cpu() - cpu;
+    return result;
+}
+void host_pacing_performance(FILE *f)
+{
+    fprintf(f, "\"pace_calls\":%llu,\"wait_calls\":%llu,\"wait_events\":%llu,\"wait_ns\":%llu,\"wait_short\":%llu,\"poll_calls\":%llu,\"poll_events\":%llu,",
+        (unsigned long long)pace_calls, (unsigned long long)wait_calls,
+        (unsigned long long)wait_events, (unsigned long long)wait_ns,
+        (unsigned long long)wait_short, (unsigned long long)poll_calls,
+        (unsigned long long)poll_events);
+    fprintf(f, "\"wait_max_ns\":%llu,", (unsigned long long)wait_max_ns);
+    fprintf(f, "\"pace_immediate\":%llu,\"lag_ns\":%llu,\"lag_max_ns\":%llu,\"blocked_ns\":%llu,",
+        (unsigned long long)pace_immediate, (unsigned long long)lag_ns,
+        (unsigned long long)lag_max_ns, (unsigned long long)blocked_ns);
+    fprintf(f, "\"pace_elapsed_ns\":%llu,\"pace_cpu_ns\":%llu,\"queued_wakes\":%llu,",
+        (unsigned long long)pace_elapsed_ns, (unsigned long long)pace_cpu_ns,
+        (unsigned long long)queued_wakes);
+}
 void host_virtual_clock_configure(uint64_t quantum_ns)
 {
     virtual_ns = 0;
@@ -61,16 +111,53 @@ void portable_machine_clock_advance(uint64_t nanoseconds) { virtual_ns += nanose
 int portable_machine_clock_pace(void)
 {
     uint64_t now, target;
+    ++pace_calls;
     if (!machine_clock || clock_unpaced) return 0;
+    uint64_t pace_started = SDL_GetTicksNS(), cpu_started = pacing_cpu();
     target = pace_origin_ns + virtual_ns;
     now = SDL_GetTicksNS();
+    if (now >= target) {
+        uint64_t lag = now - target;
+        ++pace_immediate; lag_ns += lag;
+        if (lag > lag_max_ns) lag_max_ns = lag;
+    }
     while (now < target) {
-        /* NULL leaves the event queued for the sole ingestion path. Waking
-         * cannot change virtual time or the value of the pending read. */
-        if (SDL_WaitEventTimeout(NULL, 1)) return 1;
+        /* Keep the pending read's timestamp and leave input for its sole
+         * ingestion owner. SDL 3.4's Windows wait truncates the remaining
+         * sub-ms timeout to zero after pumping: a 1 ms SDL wait busy-polls.
+         * A high-resolution timer also wakes for Windows messages and pushed
+         * SDL events, without rounding the machine deadline to a later ms. */
+        uint64_t started = SDL_GetTicksNS();
+        int event;
+#ifdef _WIN32
+        if (pace_timer && pace_event) {
+            if (SDL_PollEvent(NULL)) { ++queued_wakes; return finish_pace(1, pace_started, cpu_started); }
+            now = SDL_GetTicksNS();
+            if (now >= target) break;
+            LARGE_INTEGER due;
+            due.QuadPart = -(LONGLONG)((target - now + 99) / 100);
+            if (!SetWaitableTimer(pace_timer, &due, 0, NULL, NULL, FALSE)) abort();
+            HANDLE handles[2] = {pace_timer, pace_event};
+            uint64_t block_started = SDL_GetTicksNS();
+            DWORD result = MsgWaitForMultipleObjectsEx(2, handles, INFINITE,
+                QS_ALLINPUT, MWMO_INPUTAVAILABLE);
+            blocked_ns += SDL_GetTicksNS() - block_started;
+            if (result == WAIT_FAILED) abort();
+            event = result != WAIT_OBJECT_0;
+        } else
+#endif
+        {
+            /* SDL backends without a native timer use a nonzero backend ms. */
+            event = SDL_WaitEventTimeout(NULL, 2);
+        }
+        uint64_t duration = SDL_GetTicksNS() - started;
+        ++wait_calls; wait_ns += duration;
+        if (duration > wait_max_ns) wait_max_ns = duration;
+        if (duration < 100000) ++wait_short;
+        if (event) { ++wait_events; return finish_pace(1, pace_started, cpu_started); }
         now = SDL_GetTicksNS();
     }
-    return 0;
+    return finish_pace(0, pace_started, cpu_started);
 }
 uint64_t host_virtual_dos_elapsed_ms(void) { return virtual_ns / 1000000u; }
 int host_virtual_dos_datetime(HostDosDateTime *value)
@@ -154,8 +241,17 @@ Host *host_create_dimensions(const char *title, int integer_scaling,
         return NULL;
     }
     if (!SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS)) return NULL;
+#ifdef _WIN32
+    pace_timer = CreateWaitableTimerExW(NULL, NULL, 0x2, TIMER_ALL_ACCESS);
+    if (!pace_timer) pace_timer = CreateWaitableTimerW(NULL, FALSE, NULL);
+    pace_event = CreateEventW(NULL, FALSE, FALSE, NULL);
+    if (!pace_timer || !pace_event || !SDL_AddEventWatch(pacing_event, NULL)) {
+        host_destroy(NULL);
+        return NULL;
+    }
+#endif
     host = calloc(1, sizeof(*host));
-    if (!host) { SDL_Quit(); return NULL; }
+    if (!host) { host_destroy(NULL); return NULL; }
     host->integer_scaling = integer_scaling != 0;
     host->window_scale = 1;
     if (!SDL_CreateWindowAndRenderer(title, width, height, SDL_WINDOW_RESIZABLE,
@@ -164,7 +260,14 @@ Host *host_create_dimensions(const char *title, int integer_scaling,
         host_destroy(host);
         return NULL;
     }
+    const SDL_DisplayMode *mode = SDL_GetCurrentDisplayMode(SDL_GetDisplayForWindow(host->window));
+    host->refresh_ns = mode && mode->refresh_rate > 0 ?
+        (uint64_t)(1000000000.0 / mode->refresh_rate + 0.5) : UINT64_C(16683217);
     return host;
+}
+uint64_t host_display_refresh_ns(Host *host)
+{
+    return host ? host->refresh_ns : UINT64_C(16683217);
 }
 
 Host *host_create(const char *title, int integer_scaling)
@@ -175,6 +278,12 @@ Host *host_create(const char *title, int integer_scaling)
 
 void host_destroy(Host *host)
 {
+#ifdef _WIN32
+    SDL_RemoveEventWatch(pacing_event, NULL);
+    if (pace_timer) CloseHandle(pace_timer);
+    if (pace_event) CloseHandle(pace_event);
+    pace_timer = pace_event = NULL;
+#endif
     if (host) {
         free(host->rgba);
         SDL_DestroyTexture(host->texture);
@@ -456,8 +565,16 @@ int host_poll_event(Host *host, HostEvent *event)
     SDL_Event raw;
     int hosted;
     if (!host || !event) return 0;
+    ++poll_calls;
     test_host=host;
     while (test_take_raw(&raw) || native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
+        ++poll_events;
+        if (raw.type == SDL_EVENT_WINDOW_DISPLAY_CHANGED &&
+            raw.window.windowID == SDL_GetWindowID(host->window)) {
+            const SDL_DisplayMode *mode = SDL_GetCurrentDisplayMode(SDL_GetDisplayForWindow(host->window));
+            if (mode && mode->refresh_rate > 0)
+                host->refresh_ns = (uint64_t)(1000000000.0 / mode->refresh_rate + 0.5);
+        }
         memset(event, 0, sizeof(*event));
         /* Modern mode: hosted windows convert to logical screen space. */
         hosted = native_windows_translate(&raw);

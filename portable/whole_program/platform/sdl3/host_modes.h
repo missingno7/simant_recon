@@ -3,6 +3,10 @@
 
 #include "../../../platform/host.h"
 #include <SDL3/SDL.h>
+#include <stdio.h>
+
+/* Read-only pacing diagnostics, excluded from clock decisions. */
+void host_pacing_performance(FILE *file);
 
 /* Presentation observers never advance game state. Returning nonzero reserves
  * an SDL event for a platform action (debug F12); ordinary runs leave it alone. */
@@ -29,6 +33,7 @@ int host_window_scale(const Host *host);
 int host_set_window_scale(Host *host, int scale);
 /* Rows above the main window's client (native menu bar replaces them). */
 int host_set_top_crop(Host *host, int rows);
+uint64_t host_display_refresh_ns(Host *host);
 
 /* Opt-in replay clock. Reads never advance time; the guarded application
  * poll advances one explicit quantum, independently of SDL/CPU wall time. */

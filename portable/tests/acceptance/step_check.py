@@ -31,7 +31,7 @@ def test_build(build, out):
     sound_contract=service_manifest()
     profiled=[r for r in report['canonical_TUs'] if r.get('compile') and (r['module'] in ('root:0250','root:1FD2','root:29F0') or r['source'].startswith('src/sound/'))]
     if not {'root:0250','root:1FD2','root:29F0'}<={r['module'] for r in profiled}:raise ValueError('Missing input or sound translation units')
-    inputs={str(p):sha(p) for p in [HERE/'animation_identity.h',HERE/'event_context_rule.h',HERE/'native_audio_content.inc',HERE/'audio_content.py',build/'simant-canonical.exe',build/'report.json',HERE/'step_check.py',HERE/'native_observer.c',HERE/'sound_services.py',ROOT/'evidence/canonical/native-audio-schedule/foreground-census.json',
+    inputs={str(p):sha(p) for p in [HERE/'animation_identity.h',HERE/'event_context_rule.h',HERE/'native_audio_content.inc',HERE/'audio_content.py',HERE/'audio_playback.py',build/'simant-canonical.exe',build/'report.json',HERE/'step_check.py',HERE/'native_observer.c',HERE/'sound_services.py',ROOT/'evidence/canonical/native-audio-schedule/foreground-census.json',
             ROOT/'portable/whole_program/platform/sdl3/host.c',
             ROOT/'portable/whole_program/platform/sdl3/test_observer.inc',ROOT/'portable/whole_program/platform/sdl3/audio_tape.inc',
             ROOT/'portable/whole_program/platform/sdl3/input_time_host.c',
@@ -39,6 +39,8 @@ def test_build(build, out):
             ROOT/'portable/whole_program/platform/m1b73_queue_runtime.c',
             ROOT/'portable/whole_program/platform/audio_native.c',ROOT/'portable/whole_program/platform/whole_audio_provider.c',ROOT/'portable/whole_program/platform/input_time.h',ROOT/'portable/whole_program/platform/input_time.c',ROOT/'portable/whole_program/platform/m1b73_main_input.c']}
     inputs.update({r['generated']:sha(Path(r['generated'])) for r in profiled})
+    application_source=ROOT/'portable/whole_program/application.c'
+    inputs[str(application_source)]=sha(application_source)
     exe=out/'simant-step.exe';receipt=out/'observer-build.json'
     if receipt.is_file() and exe.is_file():
         old=json.loads(receipt.read_text())
@@ -54,12 +56,23 @@ def test_build(build, out):
         command=host['compile']['command'][:]
         if filename=='/sdl3/host.c':command+=['-DSIMANT_TEST_FRAMES']
         if filename=='/audio_native.c':command+=['-finstrument-functions','-fno-ipa-icf']
+        if filename=='/whole_program/platform/whole_audio_provider.c':
+            from portable.tests.acceptance.audio_playback import instrument_provider_unit
+            observed=out/'provider-time-observed.c'
+            observed.write_text(instrument_provider_unit((ROOT/host['source']).read_text()))
+            command[command.index('-c')+1]=str(observed)
+            command+=['-I'+str((ROOT/host['source']).parent)]
         command[command.index('-o')+1]=str(obj)
         subprocess.run(command,check=True,capture_output=True,timeout=60)
         response=response.replace(Path(host['object']).as_posix(),obj.as_posix())
     for unit in profiled:
         obj=out/(Path(unit['generated']).stem+'.o')
         command=unit['compile']['command'][:]+['-finstrument-functions','-fno-ipa-icf']
+        if unit['source'] in ('src/sound/midi_player.c','src/sound/opl2_voices.c','src/sound/midi_voices.c'):
+            from portable.tests.acceptance.audio_playback import instrument_music_unit
+            observed=out/(Path(unit['generated']).stem+'-playback.c')
+            observed.write_text(instrument_music_unit(Path(unit['generated']).read_text(),unit['source']))
+            command[command.index('-c')+1]=str(observed)
         if unit['source']=='src/sound/sample_voices.c':
             from portable.tests.acceptance.audio_content import instrument_sample_unit
             observed=out/'sample-voices-observed.c'

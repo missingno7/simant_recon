@@ -33,6 +33,11 @@ typedef struct Surface {
     SDL_Texture *texture;
     uint8_t *indexed, *rgba;
     int width, height;             /* logical size */
+    SimVgaPlanes *last_planes;
+    HostPalette last_palette;
+    ModernRect last_indicator;
+    int valid, last_left, last_top, had_indicator, upload_changed;
+    uint64_t last_present_ns;
 } Surface;
 
 typedef struct NativeWindow {
@@ -73,6 +78,14 @@ static struct {
         uint64_t since;
     } deferred;
 } n;
+static uint64_t uploads, reused_uploads, upload_ns, hosted_presentations, reused_presentations;
+void native_windows_performance(FILE *f)
+{
+    fprintf(f, "\"hosted_uploads\":%llu,\"hosted_reused_uploads\":%llu,\"hosted_upload_ns\":%llu,\"hosted_presentations\":%llu,\"hosted_reused_presentations\":%llu,",
+        (unsigned long long)uploads, (unsigned long long)reused_uploads,
+        (unsigned long long)upload_ns, (unsigned long long)hosted_presentations,
+        (unsigned long long)reused_presentations);
+}
 
 int native_windows_active(void) { return n.active; }
 int native_windows_scale(void) { return n.scale ? n.scale : 1; }
@@ -84,6 +97,7 @@ static void destroy_surface(Surface *s)
     SDL_DestroyWindow(s->window);
     free(s->indexed);
     free(s->rgba);
+    free(s->last_planes);
     memset(s, 0, sizeof(*s));
 }
 
@@ -227,6 +241,7 @@ static int size_surface(Surface *s, int width, int height)
     s->rgba = malloc((size_t)width * (size_t)height * 4u);
     s->width = width;
     s->height = height;
+    s->valid = 0;
     return s->texture && s->indexed && s->rgba &&
            SDL_SetTextureScaleMode(s->texture, SDL_SCALEMODE_NEAREST);
 }
@@ -248,6 +263,19 @@ static int upload_surface(Surface *s, const SimVgaPlanes *planes, int left, int 
                           const HostPalette *palette, const ModernRect *indicator)
 {
     int x, y;
+    uint64_t started = SDL_GetTicksNS();
+    s->upload_changed = 0;
+    /* Cache the complete plane extent and every palette entry. Window origin,
+     * geometry, and the overview indicator are independent scanout inputs.
+     * The modern map still renders its own live world/camera each opportunity. */
+    if (s->valid && s->last_left == left && s->last_top == top &&
+        s->had_indicator == (indicator != NULL) &&
+        (!indicator || !memcmp(&s->last_indicator, indicator, sizeof(*indicator))) &&
+        !memcmp(&s->last_palette, palette, sizeof(*palette)) &&
+        !memcmp(s->last_planes, planes, sizeof(*planes))) {
+        ++reused_uploads; upload_ns += SDL_GetTicksNS() - started;
+        return 1;
+    }
     sim_vga_present_planes(planes, s->indexed, (size_t)s->width, left, top, s->width, s->height);
     if (indicator) invert_outline(s, indicator, left, top);
     for (y = 0; y < s->height; ++y)
@@ -257,7 +285,17 @@ static int upload_surface(Surface *s, const SimVgaPlanes *planes, int left, int 
             memcpy(out, palette->rgb[index], 3);
             out[3] = 255;
         }
-    return SDL_UpdateTexture(s->texture, NULL, s->rgba, s->width * 4);
+    if (!SDL_UpdateTexture(s->texture, NULL, s->rgba, s->width * 4)) return 0;
+    if (!s->last_planes) s->last_planes = malloc(sizeof(*planes));
+    if (!s->last_planes) return 0;
+    memcpy(s->last_planes, planes, sizeof(*planes));
+    s->last_palette = *palette;
+    s->last_left = left; s->last_top = top;
+    s->had_indicator = indicator != NULL;
+    if (indicator) s->last_indicator = *indicator;
+    s->valid = s->upload_changed = 1;
+    ++uploads; upload_ns += SDL_GetTicksNS() - started;
+    return 1;
 }
 
 /* Draw 1:1 at the global scale; a frame larger than the logical size (while
@@ -269,8 +307,15 @@ static int draw_surface(Surface *s, const SimVgaPlanes *planes, int left, int to
     target.x = target.y = 0;
     target.w = (float)(s->width * n.scale);
     target.h = (float)(s->height * n.scale);
-    return upload_surface(s, planes, left, top, palette, indicator) &&
-           SDL_SetRenderDrawColor(s->renderer, palette->rgb[7][0], palette->rgb[7][1],
+    if (!upload_surface(s, planes, left, top, palette, indicator)) return 0;
+    uint64_t now = SDL_GetTicksNS();
+    if (!s->upload_changed && now-s->last_present_ns < UINT64_C(1000000000)) {
+        ++reused_presentations;
+        return 1;
+    }
+    s->last_present_ns = now;
+    ++hosted_presentations;
+    return SDL_SetRenderDrawColor(s->renderer, palette->rgb[7][0], palette->rgb[7][1],
                                   palette->rgb[7][2], 255) &&
            SDL_RenderClear(s->renderer) &&
            SDL_RenderTexture(s->renderer, s->texture, NULL, &target) &&
@@ -480,7 +525,7 @@ int native_windows_present(const HostPalette *palette)
         w->view = view;
         if (w->surface.width <= 0) continue;
         if (w->modern)
-            okay = render_game_window(w, palette) && SDL_RenderPresent(w->surface.renderer);
+            { okay = render_game_window(w, palette) && SDL_RenderPresent(w->surface.renderer); ++hosted_presentations; }
         else
             okay = draw_surface(&w->surface, view.planes, view.left, view.top_y + w->strip, palette,
                                 view.id == 0x100 && has_indicator ? &indicator : NULL);
@@ -739,6 +784,14 @@ int native_windows_translate(SDL_Event *event)
     int kind, replaying = n.deferred.replaying;
     float cx, cy;
     if (!n.active) return 0;
+    if (event->type == SDL_EVENT_WINDOW_EXPOSED || event->type == SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED) {
+        for (unsigned i=0; i<n.count; ++i)
+            if (n.windows[i].surface.window && SDL_GetWindowID(n.windows[i].surface.window)==event->window.windowID)
+                n.windows[i].surface.last_present_ns = 0;
+        for (unsigned i=0; i<n.popup_count; ++i)
+            if (n.popups[i].surface.window && SDL_GetWindowID(n.popups[i].surface.window)==event->window.windowID)
+                n.popups[i].surface.last_present_ns = 0;
+    }
     n.deferred.replaying = 0;
     if (modern_navigation(event)) return -1;
     if (event->type == SDL_EVENT_MOUSE_MOTION) id = event->motion.windowID;

@@ -32,7 +32,7 @@ def native_script(source,destination):
         lines.append(' '.join(row))
     destination.write_text('\n'.join(lines)+'\n')
 
-def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,scratch_root=None,dump_entry=None):
+def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,scratch_root=None,dump_entry=None,playback=False):
     lane_started=time.perf_counter();timings={};mark=lane_started
     def elapsed(name):
         nonlocal mark
@@ -83,6 +83,8 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
     env.update(SIMANT_TEST_IDEAL='1',SIMANT_TEST_IDEAL_DGROUP=str(profile['irq09_dgroup']),
         SIMANT_TEST_STEP_CONFIG=str(config),SIMANT_TEST_FRAME_CONFIG=str(frames),
         SIMANT_TEST_AUDIO_COMMANDS=str(out/'audio-commands.txt'),SIMANT_TEST_AUDIO_CONTENT=str(out/'audio-content.txt'))
+    if playback:
+        env['SIMANT_TEST_PLAYBACK']='1'
     if dump_entry:
         if not 1<=dump_entry<=stop:raise ValueError('Dump entry outside observed prefix')
         env['SIMANT_TEST_DUMP_ENTRY']=str(dump_entry)
@@ -190,7 +192,7 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
         result['audio']=compare_commands(reference/'capture/observer.txt.audio',out/'audio-commands.txt',out,entries=stop,replay_complete=complete)
         result['audio_content_diagnostic']=compare_content(reference/'capture/observer.txt.content',out/'audio-content.txt',stop,
             tolerance=16,replay_complete=complete,out=out,raw_dos_path=reference/'capture/observer.txt.audio',raw_native_path=out/'audio-commands.txt',
-            progress_names=[i['name'] for i in items if i['category']=='audio'])
+            progress_names=[i['name'] for i in items if i['category']=='audio'],playback=playback)
     elapsed('frame_comparison')
     result['timings']=timings
     result['observer']=observer
