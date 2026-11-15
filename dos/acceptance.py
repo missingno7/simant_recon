@@ -1,6 +1,6 @@
 """Bounded original/canonical DOS saved-file and sound-output diagnostics.
 
-Step-based game-state checks use portable/tests/acceptance/step_check.py and
+Step-based game-state checks use portable/tests/acceptance/run.py and
 stored references. This explicit legacy runner remains for actual SaveGame
 files and hardware OUT command streams; it does not compare equal-time memory.
 """

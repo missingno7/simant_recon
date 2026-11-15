@@ -1,5 +1,7 @@
 # Audio content verification (v10)
 
+Current workflow: the owner-authorized [tape retirement](../native-ideal-clock/tape-retirement.md) replaces the legacy replay check with the complete ideal-clock sound-off, sound-on and playback regression. The dated findings below remain historical evidence.
+
 The current result is **18 complete state/frame-equal lanes, 9 AUDIO_EQUAL and
 9 AUDIO_DIFFERENCE**, with no incomplete audio captures. This is not an all-lane
 audio-equivalence claim. The [per-lane table](stream-triage.md),

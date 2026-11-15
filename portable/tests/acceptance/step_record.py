@@ -18,15 +18,14 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     exe = ROOT/'assets/SIMANT.EXE' if target=='original' else ROOT/json.loads(report.read_text())['link']['candidate_executable']['path']
     observer_build=json.loads(observer.read_text())
     ideal=observer_build.get('contract')=='ideal-v1'
-    contract='ideal-v1' if ideal else 'service-samples-v10'
+    if not ideal:raise ValueError('Recording requires the ideal-v1 observer')
+    contract='ideal-v1'
     variant='sound-off' if sound_off else 'sound-on'
     if sound_off and not ideal:raise ValueError('sound-off comparison variant requires ideal-v1')
-    reference_root=ROOT/'build/reference'/('sound-off-identity' if sound_off else '')
+    reference_root=ROOT/'build/reference'/('sound-off-identity' if sound_off else 'sound-on-identity-v1')
     directory = out or reference_root/scenario['id']/(sha(exe)+'-'+contract+('-sound-off' if sound_off else ''))
     script = ROOT/scenario['script']
     if ideal:script=ROOT/'dos/scenarios/ideal-v1'/script.name
-    if not ideal and observer_build.get('schema')!='simant-boundary-observer-build-v10':
-        raise ValueError('Checkpoint recording requires a v10 observer build')
     observer_source=Path(__file__).with_name('compact_observer.inc').resolve()
     if observer_build.get('inputs',{}).get(str(observer_source))!=sha(observer_source):
         raise ValueError('Compact observer source changed; rebuild the observer before recording')
@@ -36,21 +35,15 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
         if identity['saved_game_sha256']!=scenario['saved_game_sha256']:
             raise ValueError('Scenario saved game identity differs')
     if (directory/'manifest.json').is_file():
-        try:
-            from .step_check import validate_reference
-        except ImportError:
-            from step_check import validate_reference
-        if ideal:
-            from portable.tests.acceptance.ideal_reference import validate
-            validate(directory,scenario_path)
-        else:validate_reference(directory, scenario_path)
+        from portable.tests.acceptance.ideal_reference import validate
+        validate(directory,scenario_path)
         manifest=json.loads((directory/'manifest.json').read_text())
         if bool(manifest.get('audio_playback'))!=bool(playback):
             raise ValueError('Reference playback observation contract differs: '+str(directory))
         if all(manifest.get(k)==v for k,v in identity.items()) and (steps is None or manifest['steps']==steps):
             boundary=json.loads((directory/'capture/boundary-manifest.json').read_text())
             if boundary['compact_observer'].get('order_contract')!=contract:
-                raise ValueError('Reference needs atomic service/input coordinates; retire it with tools/workspace.py and record again: '+str(directory))
+                raise ValueError('Reference needs ideal-v1 observations; retire it with tools/workspace.py and record again: '+str(directory))
             print(scenario['id']+' '+target+': cached reference', flush=True)
             return directory
         raise ValueError('Reference identity changed; move the old reference with tools/workspace.py before recording: '+str(directory))
@@ -91,11 +84,6 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
     elapsed=time.perf_counter()-start
     capture=directory/'capture'
     rows=read_hashes(capture/'observer.txt.hash',len(state['items']))
-    try:
-        from .full_inputs import parse_trace
-    except ImportError:
-        from full_inputs import parse_trace
-    if not ideal:parse_trace(capture/'observer.txt',len(rows),require_quiet=True)
     boundary=json.loads((capture/'boundary-manifest.json').read_text())
     execution=json.loads((capture/'execution-report.json').read_text())
     if execution.get('keyboard_layout') != dict(language='us', layout='us'):
@@ -113,7 +101,7 @@ def record(scenario_path, target, build, observer, report, out=None, binding_dum
                   complete=run.returncode==0 and len(rows)==count,
                   boundary_manifest_sha256=sha(capture/'boundary-manifest.json'),
                   files={p.relative_to(directory).as_posix():sha(p) for p in
-                         [state_path,capture/'observer.txt',capture/'observer.txt.order',capture/'observer.txt.hash',capture/'observer.txt.timer',capture/'observer.txt.audio',capture/'observer.txt.sound',capture/'observer.txt.sound-calls',capture/'observer.txt.content',*capture.glob('observer.txt.frame.*'),*capture.glob('observer.txt.screen.*')]},
+                         [state_path,capture/'observer.txt',capture/'observer.txt.hash',capture/'observer.txt.audio',capture/'observer.txt.content',*capture.glob('observer.txt.frame.*'),*capture.glob('observer.txt.screen.*')]},
                   frames=boundary['frames'])
     if ideal:
         manifest['files'].update({p.relative_to(directory).as_posix():sha(p) for p in [directory/'machine-profile.json',capture/'observer.txt.ideal']})

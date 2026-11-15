@@ -1,5 +1,7 @@
 # Shared ideal-machine integration, 2026-11-15
 
+Current workflow: the owner-authorized [tape retirement](../native-ideal-clock/tape-retirement.md) replaces the legacy replay check with the complete ideal-clock sound-off, sound-on and playback regression. The dated findings below remain historical evidence.
+
 Status: **18/18 gameplay lanes equal in each sound mode; 22/22 playback lanes
 equal; tapes retained**. The latest [shared observation run](shared-observation.md)
 uses the same keyboard-context and animation-identity rules for every ideal-v1

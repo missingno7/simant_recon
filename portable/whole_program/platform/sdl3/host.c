@@ -557,7 +557,7 @@ int host_push_pointer_event(Host *host, const HostEvent *event)
         raw.button.x = x;
         raw.button.y = y;
     } else return 0;
-    return test_injecting ? test_queue_raw(&raw) : SDL_PushEvent(&raw);
+    return SDL_PushEvent(&raw);
 }
 
 int host_poll_event(Host *host, HostEvent *event)
@@ -566,8 +566,7 @@ int host_poll_event(Host *host, HostEvent *event)
     int hosted;
     if (!host || !event) return 0;
     ++poll_calls;
-    test_host=host;
-    while (test_take_raw(&raw) || native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
+    while (native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
         ++poll_events;
         if (raw.type == SDL_EVENT_WINDOW_DISPLAY_CHANGED &&
             raw.window.windowID == SDL_GetWindowID(host->window)) {
@@ -646,12 +645,6 @@ int host_poll_event(Host *host, HostEvent *event)
             }
             if (event->kind == HOST_EVENT_KEY_DOWN || event->kind == HOST_EVENT_KEY_UP)
                 host->replay_state.dos_modifiers = event->modifiers;
-        }
-        if (test_raw_sequence) {
-            if (test_raw_sequence!=test_inputs+1) abort();
-            ++test_inputs;
-            fprintf(stderr,"Observer admitted input %u pump=%" PRIu64 " reads=%" PRIu64 "\n",test_inputs,test_pumps,test_reads);
-            portable_test_input_delivered(test_inputs);
         }
         return 1;
     }

@@ -26,11 +26,9 @@ def main():
     commands.append(command);subprocess.run(command,check=True,timeout=60)
     env=dict(os.environ,PATH=str(sdk/'bin')+os.pathsep+os.environ.get('PATH',''))
     results=[]
-    env.pop('SIMANT_TEST_AUDIO_TIMER',None)
-    for options,setting in [([],{}),(['--tape'],{'SIMANT_TEST_AUDIO_TIMER':'schedule-control'})]:
-        run=subprocess.run([str(exe),*options],env=dict(env,**setting),capture_output=True,text=True,timeout=30)
-        results.append(dict(options=options,returncode=run.returncode,stdout=run.stdout,stderr=run.stderr))
-        print(run.stdout+run.stderr,end='')
+    run=subprocess.run([str(exe)],env=env,capture_output=True,text=True,timeout=30)
+    results.append(dict(returncode=run.returncode,stdout=run.stdout,stderr=run.stderr))
+    print(run.stdout+run.stderr,end='')
     code=int(any(r['returncode'] for r in results))
     (out/'report.json').write_text(json.dumps(dict(commands=commands,returncode=code,results=results),indent=2)+'\n')
     return code

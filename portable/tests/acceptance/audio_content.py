@@ -13,9 +13,9 @@ from pathlib import Path
 def content_binding(memory, base, addresses):
     from capstone import Cs, CS_ARCH_X86, CS_MODE_16
     try:
-        from .audio_timer import timer_binding
+        from .audio_bindings import timer_binding
     except ImportError:
-        from audio_timer import timer_binding
+        from audio_bindings import timer_binding
     decoder = Cs(CS_ARCH_X86, CS_MODE_16)
     timer_binding(memory, base, addresses)
     lo, hi = (base + addresses[n] for n in ('snd_timer_mix_two_channels', 'snd_timer_mix_four_channels'))

@@ -78,7 +78,6 @@ PortableInputTimeStatus portable_input_time_key_available(PortableInputTime *inp
     uint16_t bios_key = 0;
     if (input_time == NULL || bios_ax == NULL)
         return PORTABLE_INPUT_TIME_BAD_ARGUMENT;
-    if (portable_test_before_poll) portable_test_before_poll();
     if (input_time->pending_key != 0) {
         *bios_ax = (int16_t)input_time->pending_key;
     } else {
@@ -89,7 +88,6 @@ PortableInputTimeStatus portable_input_time_key_available(PortableInputTime *inp
         if (result < 0 || result > 1)
             return PORTABLE_INPUT_TIME_PROVIDER_FAILED;
         *bios_ax = result == 0 ? 0 : (int16_t)bios_key;
-        if (portable_test_input_sample) portable_test_input_sample(252, (uint16_t)*bios_ax);
     }
     if (input_time->clear_numlock_policy != 0) {
         if (input_time->services.clear_numlock_state == NULL)
@@ -108,7 +106,6 @@ PortableInputTimeStatus portable_input_time_read_char(PortableInputTime *input_t
     int result;
     if (input_time == NULL || character == NULL)
         return PORTABLE_INPUT_TIME_BAD_ARGUMENT;
-    if (portable_test_before_poll) portable_test_before_poll();
     if (input_time->pending_key != 0) {
         bios_key = input_time->pending_key;
         input_time->pending_key = input_time->second_pending_key;
@@ -122,7 +119,6 @@ PortableInputTimeStatus portable_input_time_read_char(PortableInputTime *input_t
                                                     &bios_key);
     if (result != 1)
         return PORTABLE_INPUT_TIME_PROVIDER_FAILED;
-    if (portable_test_input_sample) portable_test_input_sample(253, bios_key);
     ascii = (uint8_t)bios_key;
     if (ascii != 0) {
         *character = (ascii & 0x80u) != 0
@@ -207,7 +203,7 @@ uint32_t timer_bios_tick_count(void)
     uint32_t ticks;
     if (portable_input_time_read_ticks(require_active(), &ticks) != PORTABLE_INPUT_TIME_OK)
         abort();
-    return portable_test_observed_clock('B', __builtin_return_address(0), ticks);
+    return ticks;
 }
 
 int16_t input_return_zero(void)

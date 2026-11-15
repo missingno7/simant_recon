@@ -10,7 +10,7 @@ sys.path.insert(0,str(ROOT))
 from portable.tests.acceptance.state_schema import sha,differences
 from portable.tests.acceptance.step_state import schema,bind_reference_policy,read_hashes,split_frame
 from portable.tests.acceptance.ideal_reference import validate,script_path
-from portable.tests.acceptance.step_check import test_build
+from portable.tests.acceptance.native_build import build_observer
 from portable.tests.acceptance.native_schema import symbols_for
 from portable.tests.acceptance.frame_check import compare_frames
 from portable.tests.acceptance.audio_commands import compare_commands,read_commands
@@ -49,7 +49,7 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
         state=native['state'];anchor=native['anchor'];palette=native['palette']
     else:
         state=prepare_schema(schema(build,executable=exe))
-        syms=symbols_for(exe);anchor=syms.addresses['portable_test_clock_read'];palette=syms.expression('app.palette')[0]
+        syms=symbols_for(exe);anchor=syms.addresses['portable_test_observer_anchor'];palette=syms.expression('app.palette')[0]
     state=bind_reference_policy(state,json.loads((reference/'schema.json').read_text()))
     elapsed('schema')
     items=state['items'];count=len(items);stop=min(steps or manifest['steps'],manifest['steps'])
@@ -169,14 +169,18 @@ def lane(scenario,reference,build,exe,out,timeout=600,steps=None,prepared=None,s
         pit=[int(line.split()[4]) for line in (reference/'capture/observer.txt.ideal').read_text().splitlines() if line.startswith('S ')]
         if observer.get('audio_rendered_frames')!=0 or observer.get('physical_audio_open')!=0:
             raise ValueError('Sound-off deterministic run rendered audio or opened playback')
-        if observer.get('audio_timer_executions')!=0:raise ValueError('Sound-off native ran a sound ISR')
         if len(pit)!=manifest['steps'] or set(pit)!={65536}:raise ValueError('Sound-off PIT is not at BIOS rate')
-        from portable.tests.acceptance.audio_timer import timer_tape
-        timer=(reference/'capture/observer.txt.timer').read_text()
-        if timer.strip()!='E':raise ValueError('Sound-off DOS ran a sound ISR')
+        # Every observed ISR entry adds 1 or 16 positive fast periods. A zero
+        # content endpoint therefore proves exactly zero sound ISR entries,
+        # including in the retained captures made before explicit count stats.
+        from portable.tests.acceptance.audio_content import read_content
+        endpoint=read_content(reference/'capture/observer.txt.content')['end']
+        dos_periods=endpoint.get('isr_tick',endpoint['tick'])
+        if dos_periods!=0:raise ValueError('Sound-off DOS ran a sound ISR')
+        if observer.get('audio_content_isr_periods')!=0:raise ValueError('Sound-off native ran a sound ISR')
         writes={label:len(read_commands(path)[0]) for label,path in [('dos',reference/'capture/observer.txt.audio'),('native',out/'audio-commands.txt')]}
         if any(writes.values()):raise ValueError('Sound-off run emitted device commands')
-        result['sound_off_verification']=dict(game_globals=globals_,dos_pit_divisor=65536,dos_pit_entries=len(pit),sound_isrs=0,audio_writes=writes)
+        result['sound_off_verification']=dict(game_globals=globals_,dos_pit_divisor=65536,dos_pit_entries=len(pit),sound_isrs=0,isr_observation="Positive-period sum at complete content endpoint",audio_writes=writes)
     elapsed('state_comparison')
     result['frames']=compare_frames(reference,out,checkpoints,hash_first=True);result['frames']['complete']=complete
     if sound_off:
@@ -213,13 +217,13 @@ def main():
     a=ap.parse_args();a.build=a.build.resolve();a.out=a.out.resolve();a.out.mkdir(parents=True,exist_ok=False)
     if a.reference_root is None:a.reference_root=ROOT/'build/reference'/('sound-off-identity' if a.sound_off else 'sound-on-identity-v1')
     elif a.sound_off and a.reference_root.resolve()==(ROOT/'build/reference').resolve():a.reference_root=a.reference_root/'sound-off-identity'
-    all_started=time.perf_counter();exe=test_build(a.build,a.out/'test-build');build_seconds=time.perf_counter()-all_started;jobs=[]
+    all_started=time.perf_counter();exe=build_observer(a.build,a.out/'test-build');build_seconds=time.perf_counter()-all_started;jobs=[]
     prepare_started=time.perf_counter()
     state=prepare_schema(schema(a.build,executable=exe))
     syms=symbols_for(exe)
     prepared=a.out/'native-views.json'
     prepared.write_text(json.dumps(dict(executable_sha256=sha(exe),sound_off=a.sound_off,state=state,
-        anchor=syms.addresses['portable_test_clock_read'],palette=syms.expression('app.palette')[0])))
+        anchor=syms.addresses['portable_test_observer_anchor'],palette=syms.expression('app.palette')[0])))
     prepare_seconds=time.perf_counter()-prepare_started
     if a.sample_native:os.environ['SIMANT_IDEAL_SAMPLE']='1'
 

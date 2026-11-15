@@ -1,7 +1,7 @@
 #include <unordered_map>
 #include "event_context_rule.h"
 #include "animation_identity.h"
-/* DOSBox-X v6 observation and synthetic-input timing extension.
+/* Ideal-clock observation and tick-script physical input delivery.
  * State capture is read-only. Only script scheduling and foreground CPU budget
  * change: the real devices/PIC/interrupt code deliver while foreground waits. */
 #ifdef SIMANT_IDEAL_BUILD
@@ -58,15 +58,15 @@ static void CompactScreen(const std::string &path) {
     fwrite(&pixels[0],1,pixels.size(),f);if (fclose(f)) abort();
 }
 static std::string compact_output;
-static FILE *compact_fingerprints=NULL, *compact_order=NULL;
+static FILE *compact_fingerprints=NULL;
 static FILE *compact_context_fingerprints=NULL;
 static FILE *compact_identity_fingerprints=NULL,*compact_identity_raw=NULL;
-static FILE *compact_audio_timer=NULL, *compact_audio_commands=NULL;
+static FILE *compact_audio_commands=NULL;
 static uint64_t CompactOrdinal();
 static uint64_t compact_step;
 static unsigned compact_phase;
 static FILE *compact_content=NULL;
-static uint64_t compact_audio_tick=0;
+static uint64_t compact_audio_tick=0,compact_sound_isrs=0;
 static bool compact_playback=false;
 static uint32_t compact_song_number=0,compact_song_state=0;
 static uint32_t compact_channels=0,compact_volume=0;
@@ -118,26 +118,19 @@ static void CompactSampleMix(unsigned a,unsigned b) {
     }
 }
 static bool CompactAudioActive() { return compact_audio_commands!=NULL; }
-struct CompactTimerEntry { unsigned kind;uint16_t ss,sp; };
+struct CompactTimerEntry { uint16_t ss,sp; };
 static std::vector<CompactTimerEntry> compact_timers;
 static bool compact_key_visible=false;
 static std::vector<CompactPoint> compact_points;
 static std::unordered_map<uint32_t,std::vector<CompactPoint> > compact_point_index;
-static FILE *compact_sound=NULL,*compact_sound_calls=NULL;
-static unsigned compact_sound_guard_offset[256],compact_sound_guard_value[256];
-static std::vector<uint8_t> compact_sound_code[256];
-static uint32_t compact_sound_start[256];
-static bool compact_sound_bound[256],compact_sound_skipped[256];
 static FILE *compact_file = NULL;
 static uint64_t compact_pump = 0;
 
 static char compact_anchor='R';
-static uint32_t compact_return = 0, compact_countdown = 0;
+static uint32_t compact_return = 0;
 static uint32_t compact_keyboard_hook=0,compact_peek_return=0,compact_read_return=0;
-struct CompactStream { char kind; uint32_t caller,value; uint64_t count,total; };
-static std::vector<CompactStream> compact_streams;
 static uint64_t compact_queries=0;
-static uint64_t compact_reads=0,compact_hash=1469598103934665603ull;
+static uint64_t compact_reads=0;
 static uint64_t CompactOrdinal() { return compact_reads+compact_pump+compact_queries+2*compact_step-compact_phase; }
 static void CompactAudioWrite(uint32_t port,uint32_t value,uint32_t width,bool output) {
     if (!compact_audio_commands || !output || !DOSBOX_AcceptanceCpuInstructionActive) return;
@@ -254,28 +247,13 @@ bool CompactYield(void) {
     if (!compact_holding && compact_after==pc) compact_after=0;
     return false;
 }
-static void CompactBoundary(uint32_t after) {
-#ifdef SIMANT_IDEAL_BUILD
-    if (getenv("SIMANT_IDEAL")) return;
-#endif
-    if (!compact_holding) compact_after=after;
-}
-static void CompactFlush() {
-    for (size_t i=0;i<compact_streams.size();++i) {
-        CompactStream &s=compact_streams[i];
-        if (!s.count) continue;
-        fprintf(compact_file,"R %c %X %u %llu\n",s.kind,s.caller,s.value,(unsigned long long)s.count);
-        s.count=0;
-    }
-}
 static void CompactClose() {
     if (!compact_file) return;
 #ifdef SIMANT_IDEAL_BUILD
     IdealStats();
 #endif
-    CompactFlush();
+
     if(compact_content) { CompactContentHead('E');fputc('\n',compact_content);fclose(compact_content);compact_content=NULL; }
-    if (compact_audio_timer) { fputs("E\n",compact_audio_timer);fclose(compact_audio_timer);compact_audio_timer=NULL; }
     if (compact_audio_commands) {
         fprintf(compact_audio_commands,"E %llu %llu %u\n",(unsigned long long)CompactOrdinal(),(unsigned long long)compact_step,compact_phase);
         fclose(compact_audio_commands);compact_audio_commands=NULL;
@@ -287,12 +265,7 @@ static void CompactClose() {
     if (compact_context_fingerprints) { fclose(compact_context_fingerprints); compact_context_fingerprints=NULL; }
     if (compact_identity_fingerprints) { fclose(compact_identity_fingerprints); compact_identity_fingerprints=NULL; }
     if (compact_identity_raw) { fclose(compact_identity_raw); compact_identity_raw=NULL; }
-    if (compact_order) { fclose(compact_order); compact_order=NULL; }
-    if (compact_sound) { fclose(compact_sound); compact_sound=NULL; }
-    if (compact_sound_calls) {
-        fprintf(compact_sound_calls,"E %llu %llu %u\n",(unsigned long long)CompactOrdinal(),(unsigned long long)compact_step,compact_phase);
-        fclose(compact_sound_calls);compact_sound_calls=NULL;
-    }
+
 }
 static void CompactInit() {
     const char *path = getenv("SIMANT_CAPTURE_OBSERVER");
@@ -304,19 +277,11 @@ static void CompactInit() {
     compact_file = fopen(output,"wb");
     compact_output=output;
     if (!compact_file) abort();
-    compact_order=fopen((compact_output+".order").c_str(),"wb");
-    if (!compact_order) abort();
     compact_content=fopen((compact_output+".content").c_str(),"w");
     if(!compact_content) abort();
 
-    compact_sound=fopen((compact_output+".sound").c_str(),"wb");
-    if (!compact_sound) abort();
-    compact_sound_calls=fopen((compact_output+".sound-calls").c_str(),"w");
-    if (!compact_sound_calls) abort();
-    fputs("SIMANT_SOUND_CALLS 1\n",compact_sound_calls);
-    compact_audio_timer=fopen((compact_output+".timer").c_str(),"w");
     compact_audio_commands=fopen((compact_output+".audio").c_str(),"w");
-    if (!compact_audio_timer || !compact_audio_commands) abort();
+    if (!compact_audio_commands) abort();
     fputs("SIMANT_AUDIO_COMMANDS 1\n",compact_audio_commands);
     DOSBOX_AcceptanceIOWatchArmed=true;
     while (fgets(line,sizeof(line),spec)) {
@@ -369,21 +334,6 @@ static void CompactInit() {
         }
         CompactPoint p; p.after=0;
         if (sscanf(line,"%c %x %x",&p.kind,&p.address,&p.after)<2) abort();
-        if (p.kind=='s') {
-            char hex[1800];uint32_t start;
-            if (!p.after || p.after>255 || sscanf(line,"s %*x %*x %x %1799s",&start,hex)!=2 || strlen(hex)%2) abort();
-            compact_sound_start[p.after]=start;
-            unsigned offset,value;
-            if (sscanf(line,"s %*x %*x %*x %*s %x %x",&offset,&value)==2) {
-                if (!offset || offset>64 || value>65535) abort();
-                compact_sound_guard_offset[p.after]=offset;compact_sound_guard_value[p.after]=value;
-            }
-            for (size_t j=0;j<strlen(hex);j+=2) {
-                unsigned value;if (sscanf(hex+j,"%2x",&value)!=1) abort();
-                compact_sound_code[p.after].push_back((uint8_t)value);
-            }
-            if (compact_sound_code[p.after].empty()) abort();
-        }
         if (p.kind=='p') { compact_peek_return=p.address;continue; }
         if (p.kind=='q') { compact_read_return=p.address;continue; }
         if (p.kind=='F' && !p.address) {
@@ -394,7 +344,7 @@ static void CompactInit() {
             p.address=entry+1;p.after=entry+5;
             fprintf(compact_file,"B %X %u\n",p.address,(unsigned)mem_readw(entry+3));
         }
-        if (p.kind=='D') { compact_countdown=p.address; continue; }
+        if (p.kind=='D') continue; // Address-only countdown binding metadata.
         if (p.kind=='O') { compact_keyboard_hook=p.address; continue; }
         compact_points.push_back(p);
     }
@@ -409,13 +359,13 @@ static void CompactInit() {
         if (!compact_fingerprints) abort();
     }
     atexit(CompactClose);
-    fprintf(compact_file,"# simant-compact-observer-v9 per-site ordinal RLE\n");
+    fprintf(compact_file,"# simant-ideal-observations-v1\n");
     DOSBOX_AcceptanceExecArmed = true;
 }
 static void CompactInput(const AcceptanceEvent &event, double ms) {
     if (!compact_file || event.action > ACCEPT_MOUSE_BUTTON_UP) return;
     if (event.action==ACCEPT_KEY_DOWN) compact_repeat_name=event.key;
-    CompactFlush();
+
     fprintf(compact_file,"I %.6f %llu %llu %u %s\n",(double)event.at_ms,
         (unsigned long long)compact_pump,(unsigned long long)compact_step,
         compact_phase,event.description.c_str());
@@ -423,7 +373,7 @@ static void CompactInput(const AcceptanceEvent &event, double ms) {
 static void CompactInstruction(uint32_t pc) {
     if (!compact_file) return;
     if (compact_return && pc==compact_return) {
-        CompactFlush();compact_phase=0;compact_return=0;fputc(251,compact_order);CompactBoundary(pc);
+        compact_phase=0;compact_return=0;
         fprintf(compact_file,"E %.6f %llu %llu 0\n",PIC_FullIndex()-acceptance_start_time,
             (unsigned long long)compact_pump,(unsigned long long)compact_step);
     }
@@ -450,48 +400,16 @@ static void CompactInstruction(uint32_t pc) {
             CompactSampleBoundary(p.kind=='w',mem_readw(SegPhys(ss)+reg_bp+p.after));continue;
         }
         if(p.kind=='m') { CompactSampleMix(reg_dl,reg_al);continue; }
-        if (p.kind=='s') {
-            if (compact_timers.empty()) {
-                if (!p.after || p.after>255) abort();
-                if (!compact_sound_bound[p.after]) {
-                    bool equal=true;const bool old=DOSBOX_AcceptanceSuppressMemoryWatch;
-                    DOSBOX_AcceptanceSuppressMemoryWatch=true;
-                    for (size_t j=0;j<compact_sound_code[p.after].size();++j)
-                        if (mem_readb(compact_sound_start[p.after]+(uint32_t)j)!=compact_sound_code[p.after][j]) { equal=false;break; }
-                    DOSBOX_AcceptanceSuppressMemoryWatch=old;
-                    if (!equal) {
-                        if (!compact_sound_skipped[p.after]) fprintf(compact_file,"X sound_code_absent %u %X\n",p.after,pc);
-                        compact_sound_skipped[p.after]=true;continue;
-                    }
-                    compact_sound_bound[p.after]=true;
-                    fprintf(compact_file,"X sound_code_bound %u %X %llu\n",p.after,pc,(unsigned long long)CompactOrdinal());
-                }
-                if (compact_sound_guard_offset[p.after]) {
-                    const bool old=DOSBOX_AcceptanceSuppressMemoryWatch;DOSBOX_AcceptanceSuppressMemoryWatch=true;
-                    uint32_t stack=SegPhys(ss)+reg_sp;
-                    unsigned type=mem_readw(stack+compact_sound_guard_offset[p.after]);
-                    unsigned object=mem_readw(stack+compact_sound_guard_offset[p.after]-2);
-                    uint32_t caller=mem_readw(stack)+16u*mem_readw(stack+2);
-                    DOSBOX_AcceptanceSuppressMemoryWatch=old;
-                    fprintf(compact_sound_calls,"C %llu %llu %u %u %u %X\n",(unsigned long long)CompactOrdinal(),(unsigned long long)compact_step,compact_phase,object,type,caller);
-                    if (type!=compact_sound_guard_value[p.after]) continue;
-                }
-                CompactBoundary(pc);++compact_queries;fputc(245,compact_order);fputc(p.after,compact_sound);
-            }
-            continue;
-        }
         if (p.kind=='t' || p.kind=='u') {
-            compact_audio_tick+=p.kind=='t'?1:16;
-            CompactTimerEntry entry={p.kind=='t'?1u:0u,SegValue(ss),reg_sp};
+            ++compact_sound_isrs;compact_audio_tick+=p.kind=='t'?1:16;
+            CompactTimerEntry entry={SegValue(ss),reg_sp};
             compact_timers.push_back(entry);
-            fprintf(compact_audio_timer,"# entry %X %llu %u %u\n",pc,(unsigned long long)CompactOrdinal(),(unsigned)entry.ss,(unsigned)entry.sp);
             continue;
         }
         if (p.kind=='x') {
             if (!compact_timers.empty()) {
                 const CompactTimerEntry &entry=compact_timers.back();
                 if (entry.ss==SegValue(ss) && entry.sp==reg_sp) {
-                    fprintf(compact_audio_timer,"T %llu %u\n",(unsigned long long)CompactOrdinal(),p.after?2u:entry.kind);
                     compact_timers.pop_back();CompactProgress('Q');
                 }
             }
@@ -501,13 +419,10 @@ static void CompactInstruction(uint32_t pc) {
         if (p.kind=='A') {
             if (!reg_ax) { compact_key_visible=false;continue; }
             if (compact_key_visible || reg_ax<256) continue;
-            compact_key_visible=true;CompactFlush();
+            compact_key_visible=true;
             fprintf(compact_file,"A %.6f %llu %u %u\n",PIC_FullIndex()-acceptance_start_time,
                     (unsigned long long)compact_step,compact_phase,(unsigned)reg_ax);
-            for (size_t j=0;j<compact_streams.size();++j) {
-                const CompactStream &s=compact_streams[j];
-                fprintf(compact_file,"J %c %X %llu\n",s.kind,s.caller,(unsigned long long)s.total);
-            }
+
             continue;
         }
         /* Menus disable the game's scan processor, but BIOS INT 15h/AH=4Fh
@@ -518,42 +433,39 @@ static void CompactInstruction(uint32_t pc) {
             if (compact_holding && ((p.kind=='M' && compact_action>=ACCEPT_MOUSE_MOVE) ||
                 (p.kind!='M' && compact_action<=ACCEPT_KEY_UP && (reg_ax&255)!=0xe0)))
                 compact_delivered=true;
-            CompactFlush();
+
             fprintf(compact_file,"D %c %.6f %llu %llu %u %llu %u %u %u %u %c %llu\n",p.kind=='Y'?'K':p.kind,
                 PIC_FullIndex()-acceptance_start_time,(unsigned long long)compact_pump,
                 (unsigned long long)compact_step,compact_phase,(unsigned long long)compact_reads,
                 (unsigned)reg_ax,(unsigned)reg_bx,(unsigned)reg_cx,(unsigned)reg_dx,compact_anchor,(unsigned long long)compact_queries);
-            for (size_t j=0;j<compact_streams.size();++j) {
-                const CompactStream &s=compact_streams[j];
-                fprintf(compact_file,"J %c %X %llu\n",s.kind,s.caller,(unsigned long long)s.total);
-            }
+
             continue;
         }
         if (p.kind=='a' || p.kind=='b' || p.kind=='c' || p.kind=='d') {
-            CompactBoundary(p.after?p.after:pc);++compact_queries;fputc(p.kind=='a'?246:p.kind=='b'?247:p.kind=='c'?248:249,compact_order);continue;
+            ++compact_queries;continue;
         }
         if (p.kind=='F') {
             uint32_t stack=SegPhys(ss)+reg_sp;
             uint32_t caller=mem_readw(stack)+16u*mem_readw(stack+2);
             bool peek=caller==compact_peek_return && reg_ah==1;
             bool pop=caller==compact_read_return && reg_ah==0 && mem_readw(0x41a)!=mem_readw(0x41c);
-            if (peek || pop) { CompactBoundary(p.after);++compact_queries;fputc(peek?252:253,compact_order); }
+            if (peek || pop) { ++compact_queries; }
             continue;
         }
-        if (p.kind=='P' || p.kind=='W') { CompactBoundary(p.after?p.after:pc);++compact_pump;compact_anchor=p.kind=='P'?'Q':'W';fputc(p.kind=='P'?254:255,compact_order);continue; }
+        if (p.kind=='P' || p.kind=='W') { ++compact_pump;compact_anchor=p.kind=='P'?'Q':'W';continue; }
         if (p.kind=='S' || p.kind=='E') {
-            CompactBoundary(pc);CompactFlush();
+
             if (p.kind=='S') {
-                fputc(250,compact_order);
+
                 ++compact_step; compact_phase=1;
                 CompactProgress('C');
                 compact_return=mem_readw(SegPhys(ss)+reg_sp)+16u*mem_readw(SegPhys(ss)+reg_sp+2);
             }
             else compact_phase=0;
-            fprintf(compact_file,"%c %.6f %llu %llu %u %llu %llu %llu\n",p.kind,
+            fprintf(compact_file,"%c %.6f %llu %llu %u %llu %llu\n",p.kind,
                 PIC_FullIndex()-acceptance_start_time,
                 (unsigned long long)compact_pump,(unsigned long long)compact_step,
-                compact_phase,(unsigned long long)compact_reads,(unsigned long long)compact_hash,(unsigned long long)compact_queries);
+                compact_phase,(unsigned long long)compact_reads,(unsigned long long)compact_queries);
             if (p.kind=='S' && compact_fingerprints) {
 #ifdef SIMANT_IDEAL_BUILD
                 IdealCheckpoint();
@@ -610,34 +522,7 @@ static void CompactInstruction(uint32_t pc) {
             }
             continue;
         }
-        const bool old = DOSBOX_AcceptanceSuppressMemoryWatch;
-        DOSBOX_AcceptanceSuppressMemoryWatch = true;
-        uint32_t stack = SegPhys(ss) + reg_sp;
-        uint32_t caller = mem_readw(stack) + 16u * mem_readw(stack+2);
-        uint32_t value = (uint32_t)reg_ax | ((uint32_t)reg_dx<<16);
-        if (p.kind=='h') value=reg_ax;
-        if (p.kind=='j') value=reg_al;
-        if (p.kind=='C') { value=mem_readw(compact_countdown); caller=0; }
-        if (p.kind=='V') { value=mem_readw(0x46c); caller=0; }
-        DOSBOX_AcceptanceSuppressMemoryWatch = old;
-        CompactBoundary(p.after?p.after:pc);
-        ++compact_reads;
-        compact_anchor='R';
-        compact_hash=(compact_hash^((uint64_t)caller^((uint64_t)(unsigned char)p.kind<<32)^((uint64_t)value<<8)))*1099511628211ull;
-        size_t index=0;
-        while (index<compact_streams.size() && (compact_streams[index].kind!=p.kind || compact_streams[index].caller!=caller)) ++index;
-        if (index==compact_streams.size()) {
-            if (index>=245) abort();
-            CompactStream s={p.kind,caller,value,0,0};compact_streams.push_back(s);
-            fprintf(compact_file,"O %u %c %X\n",(unsigned)index,p.kind,caller);
-        }
-        const unsigned char site=(unsigned char)index;
-        if (fwrite(&site,1,1,compact_order)!=1) abort();
-        CompactStream &s=compact_streams[index];
-        if (s.count && s.value!=value) {
-            fprintf(compact_file,"R %c %X %u %llu\n",s.kind,s.caller,s.value,(unsigned long long)s.count);
-            s.count=0;
-        }
-        s.value=value;++s.count;++s.total;
+        // Count source-read observations without emitting answer/count tapes.
+        ++compact_reads;compact_anchor='R';
     }
 }

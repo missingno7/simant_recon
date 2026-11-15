@@ -1,4 +1,4 @@
-"""Production caller-word controls, plus the live entry-21 disabled control."""
+"""Production caller-word controls, plus an ideal-clock disabled control."""
 from pathlib import Path
 import argparse
 import hashlib
@@ -11,7 +11,8 @@ ROOT=Path(__file__).resolve().parents[3]
 HERE=Path(__file__).parent
 sys.path[:0]=[str(ROOT),str(ROOT/'portable')]
 from canonical_native_abi import m1b73_event_source as adapter
-from portable.tests.acceptance import step_check
+from portable.tests.acceptance.native_build import build_observer
+from portable.tests.acceptance.ideal_check import lane
 from portable.tests.acceptance.step_state import schema, split_frame
 
 WRAPS=['portable_m1b73_event_enqueue_four_word_command','kbd_read_key_code',
@@ -65,7 +66,7 @@ def fixture(report,out,disabled=False):
 
 def live_control(build,out):
     positive=out/'step-build'
-    exe=step_check.test_build(build,positive)
+    exe=build_observer(build,positive)
     receipt=json.loads((positive/'observer-build.json').read_text())
     report=json.loads((build/'report.json').read_text())
     service=next(r for r in report['native_services'] if r['source'].endswith('/m1b73_events.c'))
@@ -78,26 +79,21 @@ def live_control(build,out):
     # This C file uses a relative include in its original directory.
     command.extend(['-I',str(ROOT/'portable/whole_program/platform')])
     execute(command,out,out/'zero-service-compile.log')
-    response=(positive/'objects.rsp').read_text().replace((positive/'m1b73_events.o').as_posix(),obj.as_posix())
+    response=(positive/'objects.rsp').read_text().replace(Path(service['object']).as_posix(),obj.as_posix())
     rsp=out/'zero-objects.rsp';rsp.write_text(response)
     command=receipt['command'][:]
     command=[('-Wl,@'+str(rsp)) if a=='-Wl,@'+str(positive/'objects.rsp') else a for a in command]
     negative=positive/'zero-step.exe';command[command.index('-o')+1]=str(negative)
     execute(command,build,out/'zero-step-link.log')
     scenario=ROOT/'dos/scenarios/quick-game.json'
-    reference=next(p.parent for p in (ROOT/'build/reference/quick-game').glob('*/manifest.json')
-                   if json.loads(p.read_text())['target']=='canonical')
-    good=step_check.run_lane(scenario,reference,build,exe,out/'live-positive',max_steps=21,timeout=20)
-    bad=step_check.run_lane(scenario,reference,build,negative,out/'live-zero',max_steps=21,timeout=20)
-    assert good['status']=='REFERENCE_EQUAL',good
-    assert bad['first_differing_step']==21,bad
-    assert [r['name'] for r in bad['game_differences']]==['window_current_event'],bad
-    items=schema(build,executable=exe)['items']
-    good_event=split_frame(out/'live-positive/native.frame',items)['window_current_event']
-    bad_event=split_frame(out/'live-zero/native.frame',items)['window_current_event']
-    assert good_event[:10]+good_event[12:]==bad_event[:10]+bad_event[12:]
-    assert int.from_bytes(good_event[10:12],'little')==20 and bad_event[10:12]==b'\0\0'
-    return dict(positive=good,disabled=bad,positive_event_hex=good_event.hex(),disabled_event_hex=bad_event.hex())
+    reference=ROOT/'build/reference/sound-on-identity-v1/quick-game/canonical'
+    good=lane(scenario,reference,build,exe,out/'live-positive',steps=64,timeout=60,dump_entry=21)
+    bad=lane(scenario,reference,build,negative,out/'live-zero',steps=64,timeout=60,dump_entry=21)
+    assert good['state']=='STATE_EQUAL',good
+    assert bad['state']=='STATE_DIFFERENCE',bad
+    assert any(v['name']=='window_current_event' for v in bad['first_difference']['views']),bad
+    return dict(positive=good,disabled=bad)
+
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
@@ -117,9 +113,9 @@ def main():
     assert [r[0] for r in positive]==[r[0] for r in disabled]
     live=live_control(build,out)
     assert current_inputs()==report['input_pins'],'Build inputs changed during regression'
-    result=dict(passed=True,production=positive,disabled=disabled,entry21=live,
+    result=dict(passed=True,production=positive,disabled=disabled,ideal_clock=live,
                 build_report_sha256=hashlib.sha256((build/'report.json').read_bytes()).hexdigest())
     (out/'report.json').write_text(json.dumps(result,indent=2)+'\n')
-    print('PASS: seven production caller-context checks; disabled sites pass zero; live entry 21 positive equal / zero differs')
+    print('PASS: seven production caller-context checks; disabled sites pass zero; ideal-clock positive equal / zero differs')
 
 if __name__=='__main__':main()

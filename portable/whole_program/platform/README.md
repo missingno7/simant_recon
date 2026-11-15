@@ -171,13 +171,12 @@ can use those same tick thresholds. Replay timestamps printed by the legacy
 logger retain their `ms` label even for the explicitly directed tick script.
 Real input is admitted through the same ingestion path at a read boundary.
 
-DOS clock-tape mode remains a separate verification adapter: its existing
-refresh-mode guard returns before this rule, pacing, audio pumping and application
-idle. It retains captured values and service/IRQ ordering. The DOS implementation
-is now tracked in the [ideal-v1 recorder](../../tests/acceptance/ideal/README.md).
-It executes guest instructions and real PIC/IRQ handlers on frozen device time.
-The untaped corpus still has state differences, so the tapes remain necessary.
-Passing this clock fixture does not prove whole-game DOS/native equivalence.
+Both sides use the [ideal-v1 recorder contract](../../tests/acceptance/ideal/README.md).
+DOS executes every guest instruction and real PIC/IRQ handler on frozen logical
+time; native runs its ordinary read rule unpaced for checks. The complete
+sound-off, sound-on and playback set is the upper-layer regression. Clock,
+service, device-answer and per-event register replay adapters are retired.
+Passing bounded clock fixtures does not prove complete CPU/IRQ equivalence.
 
 ```powershell
 python portable/tests/idle_yield/run.py --out build/workers/NAME/idle-clock

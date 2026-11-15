@@ -136,8 +136,8 @@
       "role": "Refresh the port's pins on canonical sources after a reconstruction change"
     },
     {
-      "path": "portable/tests/acceptance/step_check.py",
-      "role": "Step check: native runs replaying each stored DOS reference's clock and input tapes, compared per simulation step"
+      "path": "portable/tests/acceptance/run.py",
+      "role": "Upper-layer regression: tape-free ideal-clock checks of native against the stored DOS references (sound-off and sound-on gameplay 18/18 lanes each, audio playback 22/22)"
     },
     {
       "path": "portable/tests/acceptance/capture_dos_steps.py",
@@ -1164,7 +1164,7 @@
       "consumers": [
         "all canonical native objects and the SDL3 application"
       ],
-      "reason": "The listed providers implement host memory/handles, files/directories, time/input, fonts, video and audio. application.c owns SDL setup, host event transport, presentation and the bounded replay hooks.",
+      "reason": "The listed providers implement host memory/handles, files/directories, time/input, fonts, video and audio. application.c owns SDL setup, host event transport, presentation, tick-script input and output-only test observations.",
       "blocker": "Service inventory is broad and explicit; preview limitations in portable/platform.json remain the acceptance boundary. No second ordinary game-state owner/model was found in the inspected architecture.",
       "deletion_condition": "Keep the manifest as the service inventory. Remove a provider only after proving no generated canonical TU, service object, application link, or isolated test consumes it."
     },
@@ -1344,7 +1344,7 @@
     }
   ],
   "role_roots": {
-    "portable/whole_program/platform/sdl3/test_observer.inc": "Option-gated step-check hooks included by sdl3/host.c (clock and input tape replay, state observer); inert without the test options",
+    "portable/whole_program/platform/sdl3/test_observer.inc": "Output-only acceptance observations (state, frames, audio) included by sdl3/host.c; inert without output paths",
     "tools/": "Reconstruction workflow and diagnostics (CLI or imported helper)",
     "tests/": "Permanent acceptance/negative controls",
     "evidence/": "Reviewed proof, toolchain facts or explicit unresolved investigation",

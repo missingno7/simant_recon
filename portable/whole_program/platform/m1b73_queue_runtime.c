@@ -295,9 +295,7 @@ int portable_m1b73_queue_runtime_scan_transition(
     /* Ordinary SDL uses zero context. In the supplied HCEGANT 640-wide domain,
      * both unfiltered coordinate readers reject zero and every DOS DGROUP
      * word: evidence/canonical/native-input-irq/normal-words.md. This does not
-     * prove the 320-wide domain. Tapes supply actual handler-entry words. */
-    if (portable_test_irq_context)
-        portable_test_irq_context(&cx, &dx);
+     * prove the 320-wide domain. Raw handler-entry words remain diagnostic. */
     /* ideal-v1's per-executable load profile supplies the wrapper's DGROUP,
      * constant for the entire run. No event coordinates/register tape. */
     if (getenv("SIMANT_TEST_IDEAL_DGROUP")) {

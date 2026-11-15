@@ -4451,7 +4451,7 @@
   },
   "midi_current_track": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "midi_event_data_lengths": {
     "category": "audio",
@@ -4463,7 +4463,7 @@
   },
   "midi_last_event_ticks": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "midi_loaded_song_number": {
     "category": "audio",
@@ -4475,7 +4475,7 @@
   },
   "midi_playback_state": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "midi_service_active": {
     "category": "audio",
@@ -4483,7 +4483,7 @@
   },
   "midi_service_countdown": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "midi_song_data_bytes": {
     "category": "audio",
@@ -4495,7 +4495,7 @@
   },
   "midi_tick_delay_scale": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "midi_track_count": {
     "category": "audio",
@@ -4503,11 +4503,11 @@
   },
   "midi_track_event_ticks": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "midi_track_status": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "midi_volume_scale": {
     "category": "audio",
@@ -4899,11 +4899,11 @@
   },
   "root:1B73::tick_count": {
     "category": "runtime",
-    "reason": "Clock provider storage; actual state-reaching read values are replayed from the original."
+    "reason": "Clock provider storage; DOS and native use independent instances of the shared program-read clock. Raw entry timestamps remain diagnostic."
   },
   "root:1B73::tick_count_on": {
     "category": "runtime",
-    "reason": "Clock provider storage; actual state-reaching read values are replayed from the original."
+    "reason": "Clock provider storage; DOS and native use independent instances of the shared program-read clock. Raw entry timestamps remain diagnostic."
   },
   "root:1C62::g_54F8": {
     "category": "game_state",
@@ -5271,7 +5271,7 @@
   },
   "snd_voice_slots": {
     "category": "audio",
-    "reason": "MIDI/voice playback progress, advanced by the sound timer ISR on IRQ0. Compared in the separate audio verdict (step_check audio=...), which does not stop the game-state comparison: game logic sees audio only through the device-status queries the tape replays (contract v6). Native does not yet run the sound timer on the tape clock (evidence/canonical/native-presentation-audit/README.md)."
+    "reason": "MIDI/voice playback progress advanced by actual logical-clock IRQ0. Retained as separate audio-progress observations; ideal gameplay checks raw OUT commands and playback checks the absolute timeline and complete content. State, frame and audio comparisons remain independent (evidence/canonical/native-ideal-clock/tape-retirement.md)."
   },
   "snd_volume_table_offset": {
     "category": "runtime",

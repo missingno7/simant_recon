@@ -64,10 +64,10 @@ void IdealAfterIRQDispatch() {
 }
 static void IdealStats() {
     if(!ideal_log) return;
-    fprintf(ideal_log,"STATS instructions=%llu reads=%llu moves=%llu ns=%llu pit_reads=%llu vga_reads=%llu\n",
+    fprintf(ideal_log,"STATS instructions=%llu reads=%llu moves=%llu ns=%llu pit_reads=%llu vga_reads=%llu sound_isrs=%llu\n",
         (unsigned long long)ideal_instructions,(unsigned long long)ideal_reads,
         (unsigned long long)ideal_moves,(unsigned long long)ideal_ns,
-        (unsigned long long)ideal_pit_reads,(unsigned long long)ideal_vga_reads);
+        (unsigned long long)ideal_pit_reads,(unsigned long long)ideal_vga_reads,(unsigned long long)compact_sound_isrs);
     fprintf(ideal_log,"SLICES count=%llu min=%lld max=%lld\n",IdealSlices,IdealSliceMin,IdealSliceMax);
     fflush(ideal_log);
 }

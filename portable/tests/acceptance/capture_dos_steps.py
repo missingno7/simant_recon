@@ -90,7 +90,7 @@ def main():
     ap.add_argument('--audio-playback',action='store_true',help='Absolute game-time/source playback observations, ideal-v1 only')
     args=ap.parse_args()
     ideal=json.loads(args.compact_observer.read_text()).get('contract')=='ideal-v1'
-    if args.sound_off and not ideal:ap.error('--sound-off variant requires ideal-v1')
+    if not ideal:ap.error('Recording requires the ideal-v1 observer')
     if args.audio_playback and (not ideal or args.sound_off):ap.error('--audio-playback requires sound-on ideal-v1')
     if not 1<=args.steps<=20000 or not 1<=args.host_seconds<=7200: ap.error('Bound steps to 1..20000 and host seconds to 1..7200')
     report=None if args.original else json.loads(args.build_report.read_text())
@@ -123,7 +123,7 @@ def main():
     if args.compact_observer:
         from capstone import Cs,CS_ARCH_X86,CS_MODE_16
         memory=reference.read_bytes(); decoder=Cs(CS_ARCH_X86,CS_MODE_16);decoder.detail=True
-        from audio_timer import timer_binding
+        from audio_bindings import timer_binding
         sound_timer=timer_binding(memory,base,addresses)
         sys.path.insert(0,str(ROOT))
         from portable.tests.acceptance.audio_content import content_binding
@@ -132,20 +132,13 @@ def main():
         if args.audio_playback:
             from portable.tests.acceptance.audio_playback import binding
             playback=binding(memory,base,addresses)
-        from sound_services import sound_binding
-        foreground_sound=sound_binding(memory,base,addresses,target='original' if args.original else 'canonical',build_report=args.build_report)
-        sound_ids={pc:identifier for kind,pc,identifier in foreground_sound['entries']}
-        points=[(k,pc) for k,pc,arg in content['points']]+sound_timer['entries']+[('x',pc) for pc in sound_timer['completions']]+[(kind,pc) for kind,pc,identifier in foreground_sound['entries']]
+        points=[(k,pc) for k,pc,arg in content['points']]+sound_timer['entries']+[('x',pc) for pc in sound_timer['completions']]
         if playback:points += [(k,pc) for k,pc,arg in playback['points']]
         for name,kind in [('TickCount','T'),('timer_bios_tick_count','B')]:
             start=base+addresses[name]
             ins=list(decoder.disasm(memory[start:start+32],start))
             ret=next(i.address for i in ins if i.mnemonic=='retf')
             points.append((kind,ret))
-        from device_services import SERVICES, return_points
-        for kind,(name,_) in SERVICES.items():
-            returns,_=return_points(memory,base+addresses[name])
-            points += [(kind,pc) for pc in returns]
         start=base+addresses['input_event_count']
         sample=next(decoder.disasm(memory[start:start+4],start))
         if sample.mnemonic!='mov' or not sample.op_str.startswith('ax, word ptr ['):raise ValueError('Queue count sample binding differs')
@@ -200,20 +193,11 @@ def main():
         # cached returns, entries or read-only binding metadata.
         after=sample_admission_points(memory,points,decoder)
         compact_spec=out.with_suffix('.observer')
-        sound_functions={row['id']:row for row in foreground_sound['functions']}
         specification=[f'Z {content["channels"]:X} {content["volume"]:X}\n']
         if playback:specification.append(f'PLAYBACK {playback["song_number"]:X} {playback["song_state"]:X}\n')
         content_args={pc:arg for k,pc,arg in content["points"]}
         for kind,pc in points:
             if kind in ('m','v','w'):specification.append(f'{kind} {pc:X} {content_args[pc]:X}\n')
-            elif kind=='s':
-                identifier=sound_ids[pc];function=sound_functions[identifier]
-                start=base+function['start'];signature=memory[start:start+function['size']].hex()
-                if len(signature)>=1800:raise ValueError('Foreground sound signature exceeds observer line bound')
-                row=next(row for row in foreground_sound['services'] if row['id']==identifier)
-                guard=row.get('entry_guard');suffix=''
-                if guard:suffix=f" {guard['dos']['byte_offset']:X} {guard['value']:X}"
-                specification.append(f's {pc:X} {identifier:X} {start:X} {signature}{suffix}\n')
             elif kind=='x':specification.append(f'x {pc:X} {int(pc==sound_timer["reentrant_iret"]):X}\n')
             else:specification.append(f'{kind} {pc:X} {after.get(pc,0):X}\n')
         compact_spec.write_text(str(out/'observer.txt')+'\n'+''.join(specification))
@@ -264,7 +248,7 @@ def main():
                   observation_script_sha256=sha(script),
                   execution_report_sha256=sha(out/'execution-report.json'),
                   installed_script_sha256=sha(out/'INPUT.SCR'),
-                  scope='Original input script; read-only step hashes, periodic frames, all per-site clock values and actual input positions.',
+                  scope='Tick-script inputs; read-only state/frame/audio and actual input/clock diagnostics.',
                   command=command,returncode=run.returncode,
                   snapshots={p.name:sha(p) for p in sorted(out.glob('exec-*.bin'))},
                   metadata={p.name:sha(p) for p in sorted(out.glob('exec-*.json'))})
@@ -282,11 +266,10 @@ def main():
             manifest['modifier_byte_reads']=modifier_reads
             manifest['audio_playback']=playback
         manifest['sound_timer']=sound_timer
-        manifest['foreground_sound']=foreground_sound
         manifest['bios_keyboard_sample']=dict(vector=actual,callback_pc=actual+1,stub_sha256=__import__('hashlib').sha256(stub).hexdigest(),
             peek_return=next(pc for kind,pc in points if kind=='p'),read_return=next(pc for kind,pc in points if kind=='q'))
         manifest['compact_observer']=dict(specification_sha256=sha(compact_spec),points=points,admission_after=after,pump_source='both',
-            order_sha256=sha(out/'observer.txt.order'),order_contract='ideal-v1' if ideal else 'service-samples-v10',
+            order_contract='ideal-v1',
             trace_sha256=sha(out/'observer.txt'),trace_bytes=(out/'observer.txt').stat().st_size,
             runner_receipt_sha256=sha(args.compact_observer))
         from frame_check import frame_manifest

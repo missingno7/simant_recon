@@ -59,7 +59,6 @@ int16_t kbd_scan_state(uint16_t scan_code)
         portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK)
         abort();
     int16_t value=(int16_t)(kbd_scan_code_state[scan_code] ^ UINT8_C(0x80));
-    if (portable_test_input_sample) portable_test_input_sample(248,(uint16_t)value);
     return value;
 }
 
@@ -69,6 +68,5 @@ int16_t kbd_scroll_lock_state(void)
     if (portable_input_time_host_refresh_clock(host) != PORTABLE_INPUT_TIME_OK)
         abort();
     int16_t value=(int16_t)(portable_input_time_host_keyboard_flags(host) & UINT8_C(0x10));
-    if (portable_test_input_sample) portable_test_input_sample(249,(uint16_t)value);
     return value;
 }

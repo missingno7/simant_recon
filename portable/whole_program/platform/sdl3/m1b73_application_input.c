@@ -462,7 +462,6 @@ PortableM1B73ApplicationInputStatus portable_m1b73_source_countdown_get(
 {
     uint32_t now, elapsed;
     uint64_t dec;
-    if (portable_test_before_poll) portable_test_before_poll();
     if (binding == NULL || remaining == NULL)
         return PORTABLE_M1B73_APP_INPUT_BAD_ARGUMENT;
     if (!binding->bound)
@@ -481,7 +480,7 @@ PortableM1B73ApplicationInputStatus portable_m1b73_source_countdown_get(
     dec = (uint64_t)elapsed * 5u;
     tmr_countdown = dec >= tmr_countdown ? 0 :
         (uint16_t)(tmr_countdown - (uint16_t)dec);
-    *remaining = (uint16_t)portable_test_observed_clock('C', NULL, tmr_countdown);
+    *remaining = tmr_countdown;
     return PORTABLE_M1B73_APP_INPUT_OK;
 }
 

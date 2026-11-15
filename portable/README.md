@@ -15,23 +15,21 @@ python portable/tests/runtime/run.py --report build/current/portable/report.json
 python portable/tests/runtime/run.py --report build/current/portable/report.json --flow save
 python portable/tests/runtime/run_load.py --report build/current/portable/report.json
 python portable/tests/audio/run.py
-python portable/tests/acceptance/step_check.py
+python -m portable.tests.acceptance.run
 ```
 
-An additional [tape-free ideal-v1 check](tests/acceptance/ideal/README.md) records
-DOS and runs native on the shared program-read clock. Pending the owner's
-retirement review, `step_check.py` remains the upper-layer regression; no tape machinery
-has been retired. Run `portable/tests/acceptance/ideal_check.py --build BUILD
---out FRESH_OUTPUT --jobs 3` against the stored `-ideal-v1` references.
-The owner-approved gameplay variant adds `--sound-off` on record and check:
-both executions read the shipped `SIMANT.CFG` no-sound selector, and the narrow
-keyboard-context rule preserves full mouse/object comparison. The audited yard
-ID identity-pattern view retains raw words as diagnostics and adds eight scalar
-holders. All18 sound-off state/frame lanes now pass. Audio is verified separately.
-See the [identity proof](../evidence/canonical/native-ideal-clock/animation-identity.md),
-[lane table](../evidence/canonical/native-ideal-clock/identity-results.json), and
-[retirement proposal](../evidence/canonical/native-ideal-clock/tape-retirement-proposal.md).
-No tape machinery is retired in this round.
+The upper-layer regression runs sound-off gameplay (18 lanes), sound-on
+gameplay (18 lanes), and playback (22 lanes) on the shared program-read clock.
+Every lane must have equal state, exact checkpoint frames and raw audio commands;
+playback also requires exact ordered music events, metadata, decoded and emitted
+bytes, with a 1 ns sample timestamp bound. Missing references fail the check.
+`tools/validate.py --upper-tests` reaches the same driver through the existing
+test bridge. The two narrow observation rules retain raw Event and animation-ID
+diagnostics; see the [acceptance contract](tests/acceptance/README.md) and
+[identity proof](../evidence/canonical/native-ideal-clock/animation-identity.md).
+The only execution inputs are tick recipes, game assets/save and a fixed machine
+profile. Retired service, clock, ISR, device-answer and per-event register tapes
+are preserved in ignored `to_delete/`; historical reports remain evidence.
 
 The sound-off check runs unpaced, opens no playback device and renders no PCM.
 Headless deterministic runs omit derived screen conversion/upload while keeping
@@ -137,6 +135,26 @@ oracle BIOS fonts, canonical text and cursor owners, DOS adjacency spans,
 cross-TU pointer widths and five 16-bit word intermediates (see git history and
 `evidence/canonical/behavior-attribution/`). The build is a candidate for a second
 manual playtest; full DOS/native behavior equivalence is not claimed.
+
+The independent source-clock, input, observer and presentation controls are:
+
+```powershell
+python -m unittest discover -s portable/tests/acceptance -t .
+python portable/tests/acceptance/run_virtual_audio_tests.py --sdk build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32
+python portable/whole_program/platform/tests/run_virtual_clock_tests.py --sdk build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32
+python portable/tests/acceptance/ideal_rule_check.py --out build/workers/NAME/clock-rules
+python -m portable.tests.acceptance.ideal_pit_edge_check --out build/workers/NAME/pit-edges
+python portable/tests/acceptance/ideal_internal_refresh_check.py --out build/workers/NAME/internal-refresh
+python portable/tests/idle_yield/run.py --out build/workers/NAME/idle-yield
+python portable/tests/input_irq/run.py --build build/current/portable --out build/workers/NAME/input-irq
+python portable/tests/mouse_services/run.py --build build/current/portable --out build/workers/NAME/mouse-services
+python portable/tests/runtime/run_windows.py --report build/current/portable/report.json --out build/workers/NAME/windows
+python portable/tests/runtime/run_modern.py --report build/current/portable/report.json --out build/workers/NAME/modern
+```
+
+Acceptance discovery includes the complete upper-layer regression. Explicit worker
+outputs must be fresh; replace `NAME` with a task directory. The three lanes can
+also be run separately as documented in the acceptance README.
 
 The application locates the adjacent resources and runs the converted original
 main. The platform application owns SDL lifecycle, presentation, input injection

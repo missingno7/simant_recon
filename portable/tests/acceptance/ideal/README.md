@@ -63,7 +63,7 @@ start=now and cycle_base=0 at that edge, without an epsilon or suppressed IRQ.
 `ideal_pit_edge_check.py` compiles the actual patched PIT class/event and rejects
 the old arithmetic with a same-instant slow reload negative control. Native's
 rational edge scheduler already has this phase. This recorder repair requires
-fresh sound-on references; sound-off and legacy tape references are retained.
+fresh sound-on references; both identity reference sets are retained.
 
 DOS counter latch, low/high-byte read state, mode3 reload and wrap are implemented
 by the pinned timer.cpp on frozen PIC time. Native's shipped mode6 path does not
@@ -93,8 +93,8 @@ profile must remain reported differences.
 `*.patch` are exact-context changes against `source-pins.json` in the installed
 DOSBox-X observation tree. The build recreates changed files in its output and
 rebuilds all113 consumers of the frozen inline PIC reader; installed files are
-read only. `compact_observer.inc` retains legacy observation sidecars for
-diagnosis, but ideal_check never reads them as native inputs. The only native
+read only. `compact_observer.inc` emits read-only state/frame/audio and input/clock diagnostics;
+obsolete replay sidecar writers are retired. The only native
 inputs are the tick script, immutable game assets/save and constant profile.
 State hashes, full checkpoint scanout and audio are compared after execution.
 Raw port/value audio is exact per entry. The older audio-content tolerance
@@ -110,7 +110,7 @@ sentinel/equality pattern for11 audited yard holders, with all raw words retaine
 as diagnostics and eight additional instruction-bound scalar views. Recordings
 are under build/reference/sound-off-identity. Current lane results and measured
 costs are in evidence/canonical/native-ideal-clock/identity-results.json.
-No clock rule, source ID value or frame comparison changes. Nothing is retired.
+The clock rule, source ID values and frame comparisons are unchanged by tape retirement.
 
 Sound-on clock revision `native-clock-v1-irq-v3` also admits pending zero-time
 reload IRQs through the real PIC/guest STI without waiting for another Q.
@@ -122,10 +122,10 @@ cannot run input admission; the next charged read delivers newly due input.
 The native rational IRQ due test includes its sub-nanosecond remainder, so an
 edge cannot run before an integer-nanosecond endpoint. Playback timestamps round
 the same rational instant to nearest nanosecond on both observers.
-Pre-repair sound-on captures remain negative controls and are rejected by the
-current checker. The shared identity-view sound-on references live under
+Pre-repair sound-on captures are rejected by the current checker and preserved
+in ignored to_delete with their reference identities. The shared identity-view sound-on references live under
 build/reference/sound-on-identity-v1. Earlier raw-only sound-on-clock-v3 captures
-remain historical controls. Existing sound-off-identity captures have the same
+are preserved as retired historical controls. Existing sound-off-identity captures have the same
 view census, qualified bytes and rule receipts and remain valid. Raw .hash,
 full dumps and .anim-ids are retained for every variant; missing rule sidecars
-or metadata fail validation. Legacy tape machinery remains unchanged.
+or metadata fail validation. The complete replacement set is the upper-layer regression; see the parent README.

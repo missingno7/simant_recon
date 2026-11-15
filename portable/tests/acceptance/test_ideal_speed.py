@@ -44,7 +44,7 @@ class BufferedObservation(unittest.TestCase):
 #include <windows.h>
 static uint8_t plain[]={1,2,3},event[16]={0,0,0,0,0,0,0,0,77,88,99,11,29,250,0,0};
 static uint8_t ids[]={37,0,255,255,37,0,132,3},sentinel[]={1,2,0,128,99,100};
-uint32_t portable_test_clock_read(char k,void *p,uint32_t v){return v;}
+extern void portable_test_observer_anchor(void);
 void portable_test_step_boundary(unsigned s,unsigned p){}
 void portable_test_diagnostics(FILE *f){fputs("\"fixture\":true",f);}
 void __real_DoAntSim(void){++plain[0];}
@@ -60,7 +60,7 @@ int main(int argc,char **argv){
  fprintf(f,"unused\n%s/raw\n%s/result\n%s/state\n4 3\n",argv[2],argv[2],argv[2]);
  const uint8_t *data[]={plain,event,ids,sentinel};unsigned size[]={3,16,8,6};
  for(unsigned i=0;i<4;++i)fprintf(f,"1 %u %u 1\n%" PRId64 " %u\n",size[i],i==3,
-   (int64_t)(uintptr_t)data[i]-(int64_t)(uintptr_t)portable_test_clock_read,size[i]);
+   (int64_t)(uintptr_t)data[i]-(int64_t)(uintptr_t)portable_test_observer_anchor,size[i]);
  if(strcmp(mode,"no-keyboard"))fputs("KEYBOARD_CONTEXT 1\n1 1\n",f);
  if(strcmp(mode,"no-identity"))fputs("IDENTITY_PATTERN 1\n2 4\n",f);fclose(f);
  for(unsigned i=0;i<4;++i)__wrap_DoAntSim();return 99;

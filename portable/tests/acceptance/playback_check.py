@@ -60,7 +60,7 @@ def main():
         with ThreadPoolExecutor(max_workers=a.jobs) as pool:references=list(pool.map(work,jobs))
         (a.out/'recording.json').write_text(json.dumps(dict(wall_seconds=time.perf_counter()-started,references=references),indent=2)+'\n')
         return 0
-    from portable.tests.acceptance.step_check import test_build
+    from portable.tests.acceptance.native_build import build_observer
     from portable.tests.acceptance.step_state import schema
     from portable.tests.acceptance.native_schema import symbols_for
     if a.native_observer:
@@ -68,13 +68,13 @@ def main():
         exe=a.native_observer.resolve().parent/'simant-step.exe'
         if sha(exe)!=native_receipt['executable_sha256']:raise ValueError('Changed observer executable')
         if native_receipt['inputs'][str(a.build/'report.json')]!=sha(a.build/'report.json'):raise ValueError('Mixed native build/observer')
-    else:exe=test_build(a.build,a.out/'test-build')
+    else:exe=build_observer(a.build,a.out/'test-build')
     build_seconds=time.perf_counter()-started
     from portable.tests.acceptance.ideal_observation import prepare_schema
     state=prepare_schema(schema(a.build,executable=exe));syms=symbols_for(exe)
     prepared=a.out/'native-views.json'
     prepared.write_text(json.dumps(dict(executable_sha256=sha(exe),sound_off=False,state=state,
-        anchor=syms.addresses['portable_test_clock_read'],palette=syms.expression('app.palette')[0])))
+        anchor=syms.addresses['portable_test_observer_anchor'],palette=syms.expression('app.palette')[0])))
     def work(job):
         path,target=job;ref=a.reference_root/path.stem/target;out=a.out/path.stem/target
         manifest=json.loads((ref/'manifest.json').read_text())
@@ -89,7 +89,7 @@ def main():
         if run.returncode:raise RuntimeError('Playback process failed: '+str(out.with_suffix('.log')))
         full=json.loads((out/'result.json').read_text());audio=full['audio_content_diagnostic']
         result=dict(scenario=path.stem,target=target,status=audio['status'],first_difference=audio['first_difference'],
-            seconds=full['timings']['lane_total'],no_tapes=full['no_tapes'],code=full['code'],
+            state=full['state'],frames=full['frames']['status'],raw_audio=full['audio']['status'],seconds=full['timings']['lane_total'],no_tapes=full['no_tapes'],code=full['code'],
             capture_errors=audio['capture_errors'],maximum_tick_distance=audio.get('maximum_tick_distance'),
             maximum_event_ns=audio.get('playback_events',{}).get('maximum_ns'),
             coverage={label:coverage(read_content(p,manifest['steps'])) for label,p in
@@ -102,7 +102,7 @@ def main():
     receipt=dict(contract='audio-playback-v1',wall_seconds=time.perf_counter()-started,observer_build_seconds=build_seconds,
         lanes=results,configuration_sha256=sha(ROOT/'assets/SIMANT.CFG'))
     (a.out/'playback-results.json').write_text(json.dumps(receipt,indent=2)+'\n')
-    return int(any(r['status']!='AUDIO_EQUAL' for r in results))
+    return int(any(r['status']!='AUDIO_EQUAL' or r['state']!='STATE_EQUAL' or r['frames']!='FRAME_EQUAL' or r['raw_audio']!='AUDIO_COMMANDS_EQUAL' for r in results))
 
 
 if __name__=='__main__':raise SystemExit(main())

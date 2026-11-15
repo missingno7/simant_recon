@@ -28,7 +28,7 @@ def run(out):
     reload_objects=[str(reload_object),*objects[1:]]
     execute([cc,*reload_objects,'-static','-lstdc++','-o',str(out/'reload.exe')]);execute([str(out/'reload.exe')])
     reload_provider=(ROOT/files[1]).read_text()
-    edge='if(!audio_timer_replay() && pit_output_low(p)) p->pending_irq=1;'
+    edge='if(pit_output_low(p)) p->pending_irq=1;'
     if reload_provider.count(edge)!=1:raise ValueError('Reload edge binding differs')
     (out/'no-reload-edge.c').write_text(reload_provider.replace(edge,''))
     execute(base+['-I'+str(ROOT/'portable/whole_program/platform'),'-c',str(out/'no-reload-edge.c'),'-o',str(out/'no-reload-edge.o')])
@@ -48,6 +48,13 @@ def run(out):
     execute(base+['-I'+str(ROOT/'portable/whole_program/platform'),'-c',str(out/'negative.c'),'-o',str(out/'negative.o')])
     negative=objects[:];negative[1]=str(out/'negative.o')
     execute([cc,*negative,'-static','-lstdc++','-o',str(out/'negative.exe')]);execute([str(out/'negative.exe')],1)
+    # The real CLI/STI fixture must detect delivery while guest IF is clear.
+    guard='if(portable_whole_audio_interrupts_enabled()) {'
+    if provider.count(guard)!=1:raise ValueError('IF delivery binding differs')
+    (out/'forced-if.c').write_text(provider.replace(guard,'if(1) {'))
+    execute(base+['-I'+str(ROOT/'portable/whole_program/platform'),'-c',str(out/'forced-if.c'),'-o',str(out/'forced-if.o')])
+    forced=objects[:];forced[1]=str(out/'forced-if.o')
+    execute([cc,*forced,'-static','-lstdc++','-o',str(out/'forced-if.exe')]);execute([str(out/'forced-if.exe')],1)
     (out/'report.json').write_text(json.dumps(dict(status='PASS',results=results),indent=2)+'\n')
     print('PASS: shared DOS/native golden vectors, timer transition, negative control',flush=True)
 if __name__=='__main__':

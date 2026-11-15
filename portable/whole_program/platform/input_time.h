@@ -78,26 +78,6 @@ int16_t kbd_read_key_code(void);
 void kbd_restore_ctrl_break_vector(void);
 void kbd_install_ctrl_break_vector(const uint16_t *new_vector_words);
 
-/* Test-only input observations. Inactive unless explicitly enabled by the
- * acceptance driver; declarations live in this pinned input-service interface. */
-#ifdef SIMANT_TEST_OBSERVER_IMPLEMENTATION
-#define SIMANT_OBSERVER_WEAK
-#else
-#define SIMANT_OBSERVER_WEAK __attribute__((weak))
-#endif
-uint32_t portable_test_clock_read(char kind, void *pc, uint32_t fallback) SIMANT_OBSERVER_WEAK;
-void portable_test_pump(void) SIMANT_OBSERVER_WEAK;
-void portable_test_window_pump(void) SIMANT_OBSERVER_WEAK;
-void portable_test_before_poll(void) SIMANT_OBSERVER_WEAK;
-int portable_test_refresh_mode(void) SIMANT_OBSERVER_WEAK;
-void portable_test_input_sample(unsigned kind, unsigned value) SIMANT_OBSERVER_WEAK;
-void portable_test_irq_context(uint16_t *cx, uint16_t *dx) SIMANT_OBSERVER_WEAK;
-void portable_test_replay_error(const char *message) __attribute__((weak));
-int portable_test_clock_is_stateful(void) __attribute__((weak));
-#undef SIMANT_OBSERVER_WEAK
-uint64_t portable_test_pump_ordinal(void);
-unsigned portable_test_input_count(void);
-void portable_test_input_delivered(unsigned sequence);
 /* Pure ideal-machine read rule. Only listed guest-facing reads consume time;
  * internal refresh/presentation callbacks and computation consume none. */
 uint64_t portable_input_time_read_quantum(const char *service, uint64_t quantum_ns);
@@ -106,13 +86,5 @@ int portable_machine_clock_active(void);
 uint64_t portable_machine_clock_quantum(void);
 void portable_machine_clock_advance(uint64_t nanoseconds);
 int portable_machine_clock_pace(void);
-static inline uint32_t portable_test_observed_clock(char kind,void *pc,uint32_t fallback)
-{
-#ifdef SIMANT_TEST_OBSERVER_IMPLEMENTATION
-    return portable_test_clock_read(kind,pc,fallback);
-#else
-    return portable_test_clock_read ? portable_test_clock_read(kind,pc,fallback) : fallback;
-#endif
-}
 
 #endif

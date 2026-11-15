@@ -7,6 +7,7 @@ static unsigned playback_mode;
 static uint64_t playback_irq_ns;
 void portable_test_audio_game_time(unsigned long long ns) { playback_irq_ns=ns; }
 static uint64_t content_tick;
+uint64_t portable_test_audio_isr_periods(void) { return content_tick; }
 static unsigned content_opl_index[2],content_dac_argument;
 static unsigned content_voice_active[2];
 static FILE *content_open(void) {
@@ -74,7 +75,7 @@ void portable_test_audio_progress(unsigned checkpoint) {
     if(v->verdict!=2) continue;
     uint32_t h=2166136261u;
     for(unsigned j=0;j<v->count;++j) {
-      const uint8_t *p=(const uint8_t *)((uintptr_t)portable_test_clock_read+v->slices[j].delta);
+      const uint8_t *p=(const uint8_t *)((uintptr_t)portable_test_observer_anchor+v->slices[j].delta);
       for(unsigned k=0;k<v->slices[j].bytes;++k) h=(h^p[k])*16777619u;
     }
     if(n==256) abort();hashes[n]=h;changed|=content_hashes[n]!=h;++n;

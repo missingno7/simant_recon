@@ -15,16 +15,6 @@ def fixture():
 
 
 class Frames(unittest.TestCase):
-    def test_frame_layer_is_independent_of_state(self):
-        from .step_check import attribute_frames
-        equal=dict(status='FRAME_EQUAL',replay_complete=True)
-        diff=dict(status='FRAME_DIFFERENCE',replay_complete=True)
-        gap=dict(status='FRAME_EQUAL',replay_complete=False)
-        self.assertEqual(attribute_frames(diff,diff),'PORT_INTRODUCED')
-        self.assertEqual(attribute_frames(diff,equal),'RECONSTRUCTION_INTRODUCED')
-        self.assertEqual(attribute_frames(equal,equal),'ORIGINAL_EQUAL_ALL')
-        self.assertEqual(attribute_frames(equal,gap),'UNATTRIBUTED')
-
     def test_actual_dos_scanout_addressing(self):
         from .state_schema import ROOT
         text=(ROOT/'portable/tests/acceptance/compact_observer.inc').read_text()

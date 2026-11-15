@@ -33,6 +33,26 @@ def machine_profile(capture,executable,original):
     (capture.parent/'machine-profile.json').write_text(json.dumps(profile,indent=2)+'\n')
     return profile
 
+def validate_machine_profile(profile,executable_sha256,base,memory):
+    """Check fixed load/IRQ/environment words against the independent DOS dump."""
+    if profile.get('contract')!='ideal-v1' or profile.get('executable_sha256')!=executable_sha256:
+        raise ValueError('Mixed executable/profile')
+    if profile.get('load_segment')!=base//16 or profile.get('psp_segment')!=base//16-16:
+        raise ValueError('Machine load profile differs')
+    at=profile['dgroup_instruction'];segment=profile['irq09_dgroup']
+    if type(segment) is not int or not 0<segment<=65535 or memory[at:at+3]!=b'\xba'+segment.to_bytes(2,'little'):
+        raise ValueError('Machine DGROUP instruction differs')
+    psp=profile['psp_segment']*16
+    if memory[psp:psp+2]!=b'\xcd\x20':raise ValueError('Machine PSP differs')
+    environment=int.from_bytes(memory[psp+0x2c:psp+0x2e],'little')
+    if environment!=profile['environment_segment']:raise ValueError('Machine environment segment differs')
+    start=environment*16;end=memory.find(b'\0\0',start,start+32768)
+    if end<start or [s.decode('latin1') for s in memory[start:end].split(b'\0')]!=profile['dos_environment']:
+        raise ValueError('Machine environment differs')
+    if (profile['civil_origin'],profile['bios_origin'],profile['ram_seed'])!=('1992-01-01T12:00:00',0x1800b0//2,0):
+        raise ValueError('Machine clock/seed profile differs')
+
+
 def validate(directory,scenario):
     manifest=json.loads((directory/'manifest.json').read_text())
     if manifest.get('input_contract')!='ideal-v1' or not manifest.get('complete'):raise ValueError('Incomplete/non-ideal reference')
@@ -51,7 +71,10 @@ def validate(directory,scenario):
     if manifest['frames']!=frame_manifest(capture,manifest['steps'],manifest['frames']['interval'],script_path(scenario).read_text()):
         raise ValueError('Changed frame coverage')
     profile=json.loads((directory/'machine-profile.json').read_text())
-    if profile['executable_sha256']!=manifest['executable_sha256']:raise ValueError('Mixed executable/profile')
+    if 'machine-profile.json' not in manifest['files']:raise ValueError('Unpinned machine profile')
+    load_dump=capture/'exec-simstep.1.bin'
+    if data['snapshots'].get(load_dump.name)!=sha(load_dump):raise ValueError('Changed profile-binding dump')
+    validate_machine_profile(profile,manifest['executable_sha256'],data['runtime_base'],load_dump.read_bytes())
     execution=json.loads((capture/'execution-report.json').read_text())
     for pin in execution['inputs']:
         path=ROOT/pin['path']
@@ -62,7 +85,7 @@ def validate(directory,scenario):
         raise ValueError('Pre-fix sound-on reference: re-record with native-clock-v1-irq-v3; old captures remain negative controls')
     if manifest.get('variant')=='sound-off':
         if manifest.get('clock_admission')!='direct-bda-v2' or not data.get('modifier_byte_reads'):
-            raise ValueError('Pre-fix sound-off reference omits direct BIOS modifier-byte admission; use build/reference/sound-off')
+            raise ValueError('Pre-fix sound-off reference omits direct BIOS modifier-byte admission; use build/reference/sound-off-identity')
         from .sound_off import configuration_receipt
         if manifest.get('sound_configuration')!=configuration_receipt((ROOT/'assets/SIMANT.CFG').read_bytes()):
             raise ValueError('Changed no-sound configuration policy')

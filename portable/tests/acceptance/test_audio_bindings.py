@@ -1,71 +1,19 @@
-"""Independent DOS ISR bindings and strict chronological replay prefixes."""
+"""Independent read-only DOS ISR bindings and instruction mutation controls."""
 import json
 import tempfile
 import unittest
 from pathlib import Path
 
-from .audio_timer import ENTRIES, timer_binding, timer_tape
+from .audio_bindings import ENTRIES, timer_binding
 from .capture_dos_steps import capture_addresses
 from .state_schema import ROOT, memory_base, sha
-
-
-class TimerTapeControls(unittest.TestCase):
-    def setUp(self):
-        self.tmp = tempfile.TemporaryDirectory()
-        self.addCleanup(self.tmp.cleanup)
-        self.source = Path(self.tmp.name) / 'capture.timer'
-        self.output = Path(self.tmp.name) / 'prefix.timer'
-
-    def tape(self, text, limit=3):
-        self.source.write_text(text, encoding='ascii')
-        return timer_tape(self.source, self.output, limit)
-
-    def test_prefix_keeps_equal_ordinal_order_and_excludes_limit(self):
-        count = self.tape('# entry 30000 0 4096 16\nT 0 1\n'
-                          'T 2 0\nT 2 1\nT 3 0\nT 9 1\nE\n')
-        self.assertEqual(count, 3)
-        self.assertEqual(self.output.read_text(), 'T 0 1\nT 2 0\nT 2 1\nE\n')
-
-    def test_zero_limit_and_empty_capture(self):
-        self.assertEqual(self.tape('T 0 0\nE\n', 0), 0)
-        self.assertEqual(self.output.read_text(), 'E\n')
-        self.assertEqual(self.tape('E\n'), 0)
-
-    def test_nested_busy_rejection_retains_completion_order(self):
-        count = self.tape('# entry 30000 0 4096 16\n'
-                          '# entry 30000 1 4096 32\nT 1 2\nT 2 1\nE\n')
-        self.assertEqual(count, 2)
-        self.assertEqual(self.output.read_text(), 'T 1 2\nT 2 1\nE\n')
-
-    def test_malformed_capture_never_writes_prefix(self):
-        malformed = ('T 1 1\n', 'T 1 1\nE\nT 2 0\n', 'E 1\n',
-                     'T 1 3\nE\n', 'T -1 0\nE\n', 'T 1 1 extra\nE\n',
-                     'T 2 0\nT 1 1\nE\n', '# unknown\nE\n',
-                     '# entry 0 0 1 1\nT 0 0\nE\n',
-                     '# entry 30000 0 65536 1\nT 0 0\nE\n',
-                     '# entry 30000 2 1 1\nT 1 0\nE\n',
-                     '# entry 30000 2 1 1\nE\n',
-                     '# entry 30000 2 1 1\n# entry 30000 2 1 1\nT 2 0\nE\n',
-                     'T 18446744073709551616 1\nE\n',
-                     'T 0 0\nT 9 3\nE\n')
-        for text in malformed:
-            with self.subTest(text=text):
-                self.output.write_text('unchanged')
-                with self.assertRaises(ValueError):
-                    self.tape(text)
-                self.assertEqual(self.output.read_text(), 'unchanged')
-
-    def test_invalid_limit(self):
-        for limit in (-1, True, 1.5, 1 << 64):
-            with self.subTest(limit=limit), self.assertRaises(ValueError):
-                self.tape('E\n', limit)
 
 
 class TimerBindingControls(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.frames = {}
-        for manifest in sorted((ROOT / 'build/reference/experiment').glob('*/manifest.json')):
+        for manifest in sorted((ROOT / 'build/reference/sound-on-identity-v1/experiment').glob('*/manifest.json')):
             spec = json.loads(manifest.read_text())
             target = spec.get('target')
             if target not in ('original', 'canonical') or target in cls.frames:

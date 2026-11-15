@@ -1,115 +1,16 @@
-"""Relink the pinned DOSBox observer with compact capture and boundary-timed script delivery.
-
-Uses installed unchanged emulator objects; replaces dosbox.cpp, the normal CPU core, and the keyboard repeat scheduler. All outputs
-and compiler/linker auxiliary files are in the explicit scratch directory.
-"""
-import argparse, hashlib, json, re, subprocess
+"""Build the pinned ideal-v1 DOS observer in a fresh output directory."""
+import argparse
 from pathlib import Path
 
-HERE=Path(__file__).resolve().parent
-ROOT=HERE.parents[2]
-SOURCE=Path('C:/tools/dosbox-x-2026.08.31-simant-acceptance-observation-src')
-
-def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
-
 def main():
-    ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--out',type=Path,required=True)
-    ap.add_argument('--contract',choices=('service-samples-v10','ideal-v1'),default='service-samples-v10')
-    a=ap.parse_args()
-    if a.contract=='ideal-v1':
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--out',type=Path,required=True)
+    parser.add_argument('--contract',choices=('ideal-v1',),default='ideal-v1')
+    args=parser.parse_args()
+    try:
+        from .ideal_build import build
+    except ImportError:
         from ideal_build import build
-        return build(a.out)
-    out=a.out.resolve();out.mkdir(parents=True,exist_ok=True)
-    obj=SOURCE/'obj/dosbox-x/x64/Release SDL2'
-    logs=obj/'dosbox-x.tlog'
-    source=SOURCE/'src/dosbox.cpp'; text=source.read_text()
-    text=text.replace('void DOSBOX_AcceptanceRecordIO(uint32_t port, uint32_t value,',
-        'static bool CompactAudioActive();\nstatic void CompactAudioWrite(uint32_t,uint32_t,uint32_t,bool);\nvoid DOSBOX_AcceptanceRecordIO(uint32_t port, uint32_t value,',1)
-    text=text.replace('uint32_t width, bool output) {', 'uint32_t width, bool output) {\n    CompactAudioWrite(port,value,width,output);',1)
-    text=text.replace('DOSBOX_AcceptanceIOWatchArmed = any_open;', 'DOSBOX_AcceptanceIOWatchArmed = any_open || CompactAudioActive();')
-    marker='void DOSBOX_AcceptanceOnInstruction(void) {'
-    text=text.replace(marker,'#include "compact_observer.inc"\n'+marker+'\n    if (!CompactHeld()) CompactInstruction(SegPhys(cs)+reg_eip);',1)
-    text=text.replace('DOSBOX_AcceptanceExecArmed = still_armed;','DOSBOX_AcceptanceExecArmed = still_armed || compact_file != NULL;',1)
-    text=text.replace('switch (event.action) {','CompactInput(event,emulated_ms);\n    switch (event.action) {',1)
-    # Start after the acceptance scheduler has established its epoch.
-    pos=text.index('static void AcceptanceRunEvent(Bitu event_index) {')
-    text=text[:pos]+text[pos:].replace('if (event_index >= acceptance_events.size()) return;',
-        'static bool compact_initialized=false;\n    if (!compact_initialized) { compact_initialized=true; CompactInit(); }\n    if (event_index >= acceptance_events.size()) return;',1)
-    pos=text.index('static void AcceptanceRunEvent(Bitu event_index) {')
-    tail=text[pos:]
-    tail=tail.replace('const AcceptanceEvent &event =',
-        'if (CompactDefer(event_index)) return;\n    const AcceptanceEvent &event =',1)
-    text=text[:pos]+tail
-    patched=out/'dosbox.cpp';patched.write_text(text)
-    compact_source=(HERE/'compact_observer.inc').read_bytes()
-    (out/'compact_observer.inc').write_bytes(compact_source)
-    (out/'event_context_rule.h').write_bytes((HERE/'event_context_rule.h').read_bytes())
-    (out/'animation_identity.h').write_bytes((HERE/'animation_identity.h').read_bytes())
-    clines=(logs/'CL.command.1.tlog').read_text(encoding='utf-16').splitlines()
-    core_source=SOURCE/'src/cpu/core_normal.cpp'
-    core=core_source.read_text().replace('#include "acceptance.h"',
-        '#include "acceptance.h"\nextern bool CompactYield(void);')
-    core=core.replace('DOSBOX_AcceptanceOnInstruction();',
-        'DOSBOX_AcceptanceOnInstruction();\n        if (CompactYield()) return CBRET_NONE;',1)
-    (out/'core_normal.cpp').write_text(core)
-    keyboard_source=SOURCE/'src/hardware/keyboard.cpp'
-    keyboard=keyboard_source.read_text(encoding='utf-8')
-    marker='static void KEYBOARD_TickHandler(void) {'
-    keyboard=keyboard.replace(marker,'''extern bool CompactDeferRepeat(unsigned key);
-bool CompactRepeatReady(unsigned key) {
-    return keyb.active && keyb.scanning && !keyb.reset &&
-        (unsigned)keyb.repeat.key==key && !keyb.repeat.wait;
-}
-void CompactDeliverRepeat(unsigned key) { KEYBOARD_AddKey((KBD_KEYS)key,true); }
-'''+marker,1)
-    keyboard=keyboard.replace('if (!keyb.repeat.wait) KEYBOARD_AddKey(keyb.repeat.key,true);',
-        'if (!keyb.repeat.wait && !CompactDeferRepeat((unsigned)keyb.repeat.key)) KEYBOARD_AddKey(keyb.repeat.key,true);',1)
-    (out/'keyboard.cpp').write_text(keyboard,encoding='utf-8')
-    mouse_source=SOURCE/'src/ints/mouse.cpp'
-    mouse=mouse_source.read_text(encoding='utf-8')
-    mouse+='''
-/* Acceptance v7: copy driver state only; no INT33 calls or cursor mutation. */
-void CompactMouseFrame(uint32_t words[8], uint16_t masks[32]) {
-    words[0]=mouse.hidden;words[1]=(uint32_t)(int32_t)POS_X;words[2]=(uint32_t)(int32_t)POS_Y;
-    words[3]=(uint32_t)(int32_t)mouse.hotx;words[4]=(uint32_t)(int32_t)mouse.hoty;
-    words[5]=mouse.inhibit_draw;words[6]=mouse.background;words[7]=mouse.page;
-    for (unsigned i=0;i<16;++i) { masks[i]=mouse.screenMask[i];masks[16+i]=mouse.cursorMask[i]; }
-}
-'''
-    (out/'mouse.cpp').write_text(mouse,encoding='utf-8')
-    for stem in ('dosbox','core_normal','keyboard','mouse'):
-        compile_args=next(clines[i+1] for i,l in enumerate(clines[:-1])
-            if l.upper().endswith('OBSERVATION-SRC\\SRC\\'+('CPU\\' if stem=='core_normal' else 'HARDWARE\\' if stem=='keyboard' else 'INTS\\' if stem=='mouse' else '')+stem.upper()+'.CPP'))
-        compile_args=re.sub(r'/Fo"[^"]*"',lambda m:'/Fo"'+str(out/(stem+'.obj'))+'"',compile_args,flags=re.I)
-        compile_args=re.sub(r'/Fd"[^"]*"',lambda m:'/Fd"'+str(out/'compiler.pdb')+'"',compile_args,flags=re.I)
-        compile_args=compile_args[:compile_args.upper().rfind(' C:\\TOOLS\\')]+ ' "'+str(out/(stem+'.cpp'))+'"'
-        # core_normal includes implementation headers relative to src/cpu.
-        compile_args+=' /I"'+str(SOURCE/'src/cpu')+'" /I"'+str(SOURCE/'src/ints')+'"'
-        (out/(stem+'.rsp')).write_text(compile_args)
-    link=(logs/'link.command.1.tlog').read_text(encoding='utf-16').splitlines()
-    start=max(i for i,l in enumerate(link) if l.startswith('^'))
-    link='\n'.join(link[start+1:])
-    for option,filename in [('OUT','dosbox-x.exe'),('PDB','dosbox-x.pdb'),('IMPLIB','dosbox-x.lib'),('LTCGOUT','dosbox-x.iobj')]:
-        link=re.sub('/'+option+r':"[^"]*"',lambda m:'/'+option+':"'+str(out/filename)+'"',link,flags=re.I)
-    link=re.sub(r'/NATVIS:\S+','',link,flags=re.I)
-    link=re.sub(r'"[^"\n]*\\DOSBOX\.OBJ"',lambda m:'"'+str(out/'dosbox.obj')+'"',link,flags=re.I)
-    link=re.sub(r'"[^"\n]*\\CORE_NORMAL\.OBJ"',lambda m:'"'+str(out/'core_normal.obj')+'"',link,flags=re.I)
-    link=re.sub(r'"[^"\n]*\\KEYBOARD\.OBJ"',lambda m:'"'+str(out/'keyboard.obj')+'"',link,flags=re.I)
-    link=re.sub(r'"[^"\n]*\\MOUSE\.OBJ"',lambda m:'"'+str(out/'mouse.obj')+'"',link,flags=re.I)
-    (out/'link.rsp').write_text(link)
-    vc=Path('C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat')
-    (out/'build.cmd').write_text('@echo off\ncall "'+str(vc)+'"\n'+''.join('cl @'+n+'.rsp\nif errorlevel 1 exit /b 1\n' for n in ('dosbox','core_normal','keyboard','mouse'))+'link @link.rsp\n')
-    run=subprocess.run(['cmd','/c',str(out/'build.cmd')],cwd=out,capture_output=True,text=True,timeout=600)
-    (out/'build.log').write_text(run.stdout+run.stderr)
-    if run.returncode: raise RuntimeError((run.stdout+run.stderr)[-5000:])
-    if (HERE/'compact_observer.inc').read_bytes()!=compact_source:
-        raise RuntimeError('Observer source changed during build; rebuild before recording')
-    inputs=[source,core_source,SOURCE/'src/hardware/pic.cpp',SOURCE/'src/ints/mouse.cpp',SOURCE/'src/hardware/keyboard.cpp',SOURCE/'src/cpu/callback.cpp',SOURCE/'src/ints/bios_keyboard.cpp',HERE/'compact_observer.inc',HERE/'build_observer.py']+sorted(obj.glob('*.obj'))
-    receipt=dict(schema='simant-boundary-observer-build-v10',executable=str(out/'dosbox-x.exe'),
-        sha256=sha(out/'dosbox-x.exe'),inputs={str(p):sha(p) for p in inputs},
-        patched_source_sha256=sha(patched),core_source_sha256=sha(out/'core_normal.cpp'),keyboard_source_sha256=sha(out/'keyboard.cpp'),mouse_source_sha256=sha(out/'mouse.cpp'),compiler_response_sha256={n:sha(out/(n+'.rsp')) for n in ('dosbox','core_normal','keyboard','mouse')},linker_response_sha256=sha(out/'link.rsp'),
-        scope='service-samples-v10: read-only state observations; synthetic transitions held at completed service boundaries through real PIC/IRQ delivery; no guest code or result mutation.')
-    (out/'observer-build.json').write_text(json.dumps(receipt,indent=2)+'\n')
-    print(json.dumps({k:v for k,v in receipt.items() if k!='inputs'},indent=2))
-if __name__=='__main__': main()
+    return build(args.out)
+
+if __name__=='__main__':main()

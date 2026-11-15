@@ -44,6 +44,9 @@ uint64_t host_time_ns(void)
 }
 /* The fixture drives wall-clock (non-virtual) host mode. */
 int host_virtual_clock_enabled(void) { return virtual_mode; }
+int portable_machine_clock_active(void) { return 0; }
+uint64_t portable_machine_clock_quantum(void) { assert(0 && "fixture has an external clock"); return 0; }
+void portable_machine_clock_advance(uint64_t ns) { (void)ns; assert(0 && "fixture clock is externally advanced"); }
 void host_wait_ms(uint32_t ms) { (void)ms; assert(0 && "test unexpectedly blocked"); }
 int host_poll_event(Host *h, HostEvent *e)
 {
@@ -420,10 +423,11 @@ static void test_service_delivery(void)
     assert(kbd_scroll_lock_state() == 0 && pending_head == 1 && refresh_calls == 1);
     assert(kbd_scan_code_state[0x1e] == 0); /* The flag query delivered IRQ09 held state. */
     add_key(HOST_EVENT_KEY_UP, 0x1e61, 0);
+    /* The external-clock fixture has no wall-time admission throttle. IF
+     * alone holds the pending transition; the next enabled query delivers it. */
+    delivery_if = 0;
     assert(kbd_scroll_lock_state() == 0 && pending_head == 1 && refresh_calls == 1);
-    wall_ns = 999999;
-    assert(kbd_scroll_lock_state() == 0 && pending_head == 1 && refresh_calls == 1);
-    wall_ns = 1000000;
+    delivery_if = 1;
     assert(kbd_scroll_lock_state() == 0 && pending_head == 2 && refresh_calls == 2);
     assert(kbd_scan_code_state[0x1e] == 0x80);
     virtual_mode = 1;
