@@ -1,30 +1,25 @@
 #ifndef SIMANT_WORKSPACE_H
 #define SIMANT_WORKSPACE_H
 #include <stdio.h>
-/* Host-only layout. IDs describe native instances, never logical windows. */
-enum { WS_NODES=48, WS_PANELS=24, WS_TABS=24, WS_FLOATS=8 };
-enum { WS_LEFT,WS_RIGHT,WS_TOP,WS_BOTTOM,WS_STACK };
-typedef struct WsNode {
-    int kind,axis,ratio,a,b; /* 0 unused, 1 tabs, 2 split; axis 0 horizontal */
-    int count,active,collapsed,panels[WS_TABS];
-} WsNode;
-typedef struct WsPanel { int plane,x,y,zoom,home; } WsPanel;
-typedef struct WsFloat { int root,x,y,w,h; char monitor[64]; } WsFloat;
-typedef struct Workspace {
-    int root; WsNode nodes[WS_NODES]; WsPanel panels[WS_PANELS];
-    WsFloat floats[WS_FLOATS]; unsigned revision;
-} Workspace;
+/* Host state only. Each record is one ordinary titled window, never a tab. */
+enum { WS_PANELS=64 };
+enum { WS_FLOAT=-1, WS_LEFT, WS_RIGHT, WS_TOP, WS_BOTTOM };
+enum { WS_GAME, WS_BLACK, WS_RED, WS_RESERVED, WS_ANT, WS_YARD_CONTROL,
+       WS_MAP, WS_YARD, WS_BEHAVIOR, WS_CASTE, WS_HISTORY, WS_INFO, WS_STATUS };
+typedef struct WsPanel {
+    int x,y,w,h,edge,offset,visible; /* frame bounds/work-area relative, DIP */
+    int camera_x,camera_y,zoom;
+    char monitor[64];
+} WsPanel;
+typedef struct Workspace { WsPanel panels[WS_PANELS]; unsigned revision; } Workspace;
 const char *ws_name(int panel);
-void ws_preset(Workspace *,int preset); /* Play, Colony, Research, Minimal */
-int ws_group(const Workspace *,int panel);
-int ws_move(Workspace *,int panel,int target,int edge,int outer);
-int ws_float(Workspace *,int panel,int x,int y,int w,int h);
-int ws_hide(Workspace *,int panel);
-int ws_reveal(Workspace *,int panel);
-int ws_collapse(Workspace *,int group);
-void ws_prompt(Workspace *,int active);
+int ws_resizable(int panel);
+int ws_closable(int panel);
+void ws_reset(Workspace *);
+int ws_attach(Workspace *,int panel,int edge,int offset);
+int ws_detach(Workspace *,int panel);
 int ws_validate(const Workspace *);
 int ws_write(const Workspace *,FILE *);
-int ws_read(Workspace *,FILE *); /* transactional, rejects unknown schema/IDs/cycles */
-void ws_exercise(Workspace *,unsigned step); /* same operations for passive probes */
+int ws_read(Workspace *,FILE *); /* transactional; v1 split layouts are rejected */
+void ws_exercise(Workspace *,unsigned step); /* actual passive operations */
 #endif

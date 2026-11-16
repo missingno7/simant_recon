@@ -1,107 +1,221 @@
-/* Runs against the normal shipped startup. Test callbacks mutate host state only. */
+/* Source-seam test: real native windows and ordinary messages, no game calls. */
 #include "portable/whole_program/platform/sdl3/native_workspace.h"
+#include "portable/whole_program/platform/sdl3/native_menu.h"
+#include "portable/whole_program/platform/sdl3/native_windows.h"
 #include "portable/whole_program/enhanced/snapshot.h"
+#include "portable/whole_program/enhanced/actions.h"
 #include <windows.h>
+#include <windowsx.h>
 #include <commctrl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 extern int32_t main_iteration_count;
 extern void __real_enhanced_execute_next(void);
-static int completed;
-static int modal_tested;
-static int failures,checks;
-#define CHECK(c) do {++checks;if(!(c)){++failures;fprintf(stderr,"WORKSPACE_CHECK failed: %s at %d\n",#c,__LINE__);}}while(0)
-static HWND find_class(HWND parent,const char *cls){HWND h=NULL;char name[120];while((h=FindWindowExA(parent,h,NULL,NULL))){GetClassNameA(h,name,sizeof(name));if(!strcmp(name,cls))return h;HWND child=find_class(h,cls);if(child)return child;}return NULL;}
-static HWND root(void){HWND h=NULL;while((h=FindWindowExA(NULL,h,NULL,"SimAnt - Native Workspace Preview"))){DWORD pid;GetWindowThreadProcessId(h,&pid);if(pid==GetCurrentProcessId())return h;}return NULL;}
-static HWND group_named(HWND main,const char *name){HWND h=NULL;while((h=FindWindowExA(main,h,"SimAntWorkspaceGroup",NULL))){char title[80];GetWindowTextA(h,title,sizeof(title));if(!strcmp(title,name))return h;}return NULL;}
-static void inspectors(Workspace *w){ws_preset(w,0);int ids[]={4,5,6,7,11};for(int i=0;i<5;++i)ws_hide(w,ids[i]);
-    ws_reveal(w,1);ws_move(w,1,0,WS_RIGHT,0);ws_reveal(w,2);ws_move(w,2,1,WS_RIGHT,0);w->panels[1].plane=1;w->panels[2].plane=2;
-    w->nodes[w->root].ratio=334;
-}
-static void scene(int id,HWND main) {
-    Workspace w=*native_workspace_layout();
-    ws_preset(&w,0);
-    if(id==1)inspectors(&w);
-    if(id==2){ws_reveal(&w,1);ws_move(&w,1,0,WS_STACK,0);ws_reveal(&w,2);ws_move(&w,2,0,WS_STACK,0);}
-    if(id==3){
-        RECT bounds;GetWindowRect(main,&bounds);MONITORINFO monitor={.cbSize=sizeof(monitor)};
-        GetMonitorInfo(MonitorFromWindow(main,MONITOR_DEFAULTTONEAREST),&monitor);
-        typedef UINT (WINAPI *DpiReader)(HWND);DpiReader read=(DpiReader)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");
-        UINT dpi=read?read(main):96;
-        ws_reveal(&w,1);ws_float(&w,1,MulDiv(bounds.left-monitor.rcWork.left,96,dpi)+80,
-            MulDiv(bounds.top-monitor.rcWork.top,96,dpi)+80,500,380);
+static int phase, checks, failures,activation_iteration,activation_ready;
+#define CHECK(c) do{++checks;if(!(c)){++failures;fprintf(stderr,"WORKSPACE_CHECK %d: %s\n",__LINE__,#c);}}while(0)
+static HWND named(const char * name) {
+    HWND h = NULL;
+    while ((h = FindWindowExA(NULL, h, NULL, name))) {
+        DWORD pid;
+        GetWindowThreadProcessId(h, & pid);
+        if (pid == GetCurrentProcessId()) return h;
     }
-    CHECK(native_workspace_apply(&w));
-    if(id==5)SetWindowPos(main,NULL,30,30,740,520,SWP_NOZORDER|SWP_NOACTIVATE);
-    if(id==6||id==7){int dpi=id==6?144:192;RECT r={20,20,20+1120*dpi/96,20+760*dpi/96};SendMessage(main,WM_DPICHANGED,MAKELONG(dpi,dpi),(LPARAM)&r);}
-    RedrawWindow(main,NULL,NULL,RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);
+    return NULL;
 }
-extern void __real_enhanced_source_poll(void);
-void __wrap_enhanced_source_poll(void) {
-    __real_enhanced_source_poll();
-    const EnhancedSnapshot *s=enhanced_snapshot();
-    if(!getenv("SIMANT_WORKSPACE_MODAL_TEST")||modal_tested||!completed||!s||!s->dialogs.modal||s->dialogs.owner!=0x1a00)return;
-    modal_tested=1;static EnhancedSnapshot before;before=*s;int prior=failures;
-    for(int i=0;i<10;++i)CHECK(native_workspace_operation(i));
-    const Workspace *w=native_workspace_layout();int g=ws_group(w,22);CHECK(g>=0);
-    if(g>=0){CHECK(!w->nodes[g].collapsed);CHECK(w->nodes[g].panels[w->nodes[g].active]==22);
-        Workspace attempt=*w;CHECK(!ws_hide(&attempt,22));CHECK(!ws_collapse(&attempt,g));}
-    CHECK(!memcmp(&before,enhanced_snapshot(),sizeof(before)));
-    fprintf(stderr,"WORKSPACE_MODAL {\"passed\":%s,\"owner\":%d,\"generation\":%llu}\n",failures==prior?"true":"false",s->dialogs.owner,(unsigned long long)s->generation);
+static HWND main_window(void) {
+    HWND h = NULL;
+    while ((h = FindWindowExA(NULL, h, NULL, "SimAnt"))) {
+        DWORD pid;
+        GetWindowThreadProcessId(h, & pid);
+        if (pid == GetCurrentProcessId() && GetMenu(h)) return h;
+    }
+    return NULL;
 }
 static void exercise(HWND main) {
-    Workspace old=*native_workspace_layout();
-    for(unsigned i=0;i<10;++i)CHECK(native_workspace_operation(i));
-    CHECK(native_workspace_apply(&old));
-    HWND group=group_named(main,"World");CHECK(group!=NULL);HWND canvas=GetDlgItem(group,4);SetFocus(canvas);
-    SendMessage(canvas,WM_KEYDOWN,VK_F6,0);CHECK(GetFocus()!=canvas);
-    SendMessage(main,WM_COMMAND,102,0);CHECK(ws_group(native_workspace_layout(),1)>=0);
-    int g=ws_group(native_workspace_layout(),0);HWND world_group=group_named(main,"World");
-    if(world_group){HWND tab=GetDlgItem(world_group,1);CHECK(tab!=NULL);}
-    SendMessage(main,WM_COMMAND,413,0); /* Reset Layout */
-    CHECK(ws_group(native_workspace_layout(),1)<0);
-    (void)g;
-    Workspace keyboard=*native_workspace_layout();ws_reveal(&keyboard,1);ws_move(&keyboard,1,0,WS_STACK,0);
-    CHECK(native_workspace_apply(&keyboard));
-    int group_id=ws_group(native_workspace_layout(),1),active=native_workspace_layout()->nodes[group_id].active;
-    HWND inspector=group_named(main,"Inspector 1");CHECK(inspector!=NULL);
-    SetFocus(GetDlgItem(inspector,4));
-    BYTE keys[256],modified[256];GetKeyboardState(keys);memcpy(modified,keys,sizeof(keys));modified[VK_CONTROL]=0x80;SetKeyboardState(modified);
-    SendMessage(GetDlgItem(inspector,4),WM_KEYDOWN,VK_TAB,0);SetKeyboardState(keys);
-    CHECK(native_workspace_layout()->nodes[group_id].active!=active);
-    HWND splitter=find_class(main,TRACKBAR_CLASSA);CHECK(splitter!=NULL);
-    Workspace before_split=*native_workspace_layout();SendMessage(splitter,WM_KEYDOWN,VK_RIGHT,0);
-    CHECK(memcmp(before_split.nodes,native_workspace_layout()->nodes,sizeof(before_split.nodes))!=0);
-    keyboard=*native_workspace_layout();ws_float(&keyboard,1,90000,-90000,480,320);CHECK(native_workspace_apply(&keyboard));
-    HWND tool=NULL;while((tool=FindWindowExA(NULL,tool,"SimAntWorkspaceFloat",NULL)))if(GetWindow(tool,GW_OWNER)==main&&IsWindowVisible(tool))break;
-    CHECK(tool!=NULL);if(tool){RECT bounds;GetWindowRect(tool,&bounds);MONITORINFO monitor={.cbSize=sizeof(monitor)};GetMonitorInfo(MonitorFromWindow(tool,MONITOR_DEFAULTTONEAREST),&monitor);
-        CHECK(bounds.left>=monitor.rcWork.left&&bounds.top>=monitor.rcWork.top&&bounds.right<=monitor.rcWork.right&&bounds.bottom<=monitor.rcWork.bottom);
-        SendMessage(tool,WM_CLOSE,0,0);CHECK(ws_group(native_workspace_layout(),1)<0);}
-    CHECK(native_workspace_apply(&old));
-    const char *path=getenv("SIMANT_WORKSPACE_LAYOUT");FILE *file=fopen(path,"r");Workspace disk;
-    CHECK(file!=NULL);if(file){CHECK(ws_read(&disk,file));fclose(file);disk.revision=old.revision;CHECK(!memcmp(&old,&disk,sizeof(old)));}
+    Workspace old = * native_workspace_layout();
+    static EnhancedSnapshot before;
+    before = * enhanced_snapshot();
+    for (unsigned i = 0; i < 16; ++ i) CHECK(native_workspace_operation(i));
+    CHECK(native_workspace_apply(& old));
+    HWND game = named("SimAnt - Game"), ant = named("Map / Ant Control Panel"), yard = named("Yard Control Panel");
+    CHECK(game && ant && yard);
+    typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");RECT mr,gr;GetClientRect(named("Map"),&mr);GetClientRect(game,&gr);fprintf(stderr,"NATIVE_DPI main=%u game=%u map=%u map_client=%ld,%ld game_client=%ld,%ld\n",dpi?dpi(main):0,dpi?dpi(game):0,dpi?dpi(named("Map")):0,mr.right,mr.bottom,gr.right,gr.bottom);
+    if (! game || ! ant || ! yard) return;
+    CHECK(GetWindow(game, GW_OWNER) == main && GetWindow(ant, GW_OWNER) == main);
+    CHECK((GetWindowLongPtr(game, GWL_STYLE) & (WS_THICKFRAME | WS_MAXIMIZEBOX)) == (WS_THICKFRAME | WS_MAXIMIZEBOX));
+    CHECK(! (GetWindowLongPtr(game, GWL_STYLE) & WS_MINIMIZEBOX));
+    CHECK(! (GetWindowLongPtr(ant, GWL_STYLE) & (WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX)));
+    RECT prior;
+    GetWindowRect(ant, & prior);
+    SendMessage(ant, WM_ENTERSIZEMOVE, 0, 0);
+    RECT client;
+    GetClientRect(main, & client);
+    MapWindowPoints(main, NULL, (POINT *) & client, 2);
+    RECT r = {
+        client.left + 2, client.top + 2, client.left + prior.right - prior.left + 2, client.top + prior.bottom - prior.top + 2
+    };
+    SendMessage(ant, WM_MOVING, WMSZ_TOPLEFT, (LPARAM) & r);
+    SetWindowPos(ant, NULL, r.left, r.top, r.right - r.left, r.bottom - r.top, SWP_NOZORDER | SWP_NOACTIVATE);
+    SendMessage(ant, WM_EXITSIZEMOVE, 0, 0);
+    CHECK(native_workspace_layout()->panels [WS_ANT].edge == WS_TOP || native_workspace_layout()->panels [WS_ANT].edge == WS_LEFT);
+    SendMessage(ant, WM_SYSCOMMAND, 0xe204, 0);
+    CHECK(native_workspace_layout()->panels [WS_ANT].edge == WS_FLOAT);
+    SendMessage(main,WM_COMMAND,0xe103,0);CHECK(IsWindowVisible(named("SimAnt - Red Nest")));SendMessage(named("SimAnt - Red Nest"),WM_CLOSE,0,0);CHECK(!IsWindowVisible(named("SimAnt - Red Nest")));
+    int z = native_workspace_layout()->panels [WS_GAME].zoom;
+    POINT at = {
+        80, 80
+    };
+    ClientToScreen(game, & at);
+    SendMessage(game, WM_MOUSEWHEEL, MAKEWPARAM(0, WHEEL_DELTA), MAKELPARAM(at.x, at.y));
+    CHECK(native_workspace_layout()->panels [WS_GAME].zoom > z);
+    SetFocus(game);
+    SendMessage(game, WM_KEYDOWN, VK_F6, 0);
+    CHECK(GetFocus() != game);
+    CHECK(native_workspace_apply(& old));
+    const char * path = getenv("SIMANT_WORKSPACE_LAYOUT");
+    FILE * f = fopen(path, "r");
+    Workspace disk;
+    CHECK(f != NULL);
+    if (f) {
+        CHECK(ws_read(& disk, f));
+        fclose(f);
+        disk.revision = old.revision;
+        CHECK(! memcmp(& disk, & old, sizeof (old)));
+    }
+    CHECK(! memcmp(& before, enhanced_snapshot(), sizeof (before)));
+}
+static void scene(int id, HWND main) {
+    Workspace w = * native_workspace_layout();
+    w.panels [WS_ANT].x = 24;
+    w.panels [WS_ANT].y = 72;
+    w.panels [WS_YARD_CONTROL].x = 24;
+    w.panels [WS_YARD_CONTROL].y = 1200;
+    w.panels [WS_GAME].x = 24;
+    w.panels [WS_GAME].y = 300;
+    w.panels [WS_GAME].w = 460;
+    w.panels [WS_GAME].h = 350;
+    w.panels [WS_MAP].x = 510;
+    w.panels [WS_MAP].y = 300;
+    w.panels [WS_BEHAVIOR].x = 24;
+    w.panels [WS_BEHAVIOR].y = 660;
+    w.panels [WS_CASTE].x = 284;
+    w.panels [WS_CASTE].y = 660;
+    w.panels [WS_BLACK].visible = 1;
+    w.panels [WS_BLACK].x = 24;
+    w.panels [WS_BLACK].y = 880;
+    w.panels [WS_BLACK].w = 460;
+    w.panels [WS_BLACK].h = 300;
+    w.panels[WS_RED]=w.panels[WS_BLACK];w.panels[WS_RED].x=510;w.panels[WS_RED].visible=1;
+    typedef UINT(WINAPI *Dpi)(HWND);Dpi get=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int dpi=get?get(main):96;
+    SetWindowPos(main,NULL,12,12,MulDiv(1100,dpi,96),MulDiv(1400,dpi,96),SWP_NOZORDER|SWP_NOACTIVATE);
+    if (id == 1) {
+        ws_attach(& w, WS_ANT, WS_TOP, 0);
+        ws_attach(& w, WS_YARD_CONTROL, WS_BOTTOM, 0);
+        ws_attach(& w, WS_MAP, WS_RIGHT, 240);
+    }
+    if (id == 5) w.panels [WS_GAME].zoom = 300;
+    if (id == 6) w.panels [WS_GAME].zoom = 50;
+    CHECK(native_workspace_apply(& w));
+    if(id==3||id==4){HWND target=named(id==3?"Map / Ant Control Panel":"Yard Control Panel");SetWindowPos(target,HWND_TOP,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);}
+    RedrawWindow(main, NULL, NULL, RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_UPDATENOW);
+}
+static VOID CALLBACK menu_capture(HWND h, UINT message, UINT_PTR id, DWORD time) {
+    (void) message;
+    (void) time;
+    KillTimer(h, id);
+    const char * path = getenv("SIMANT_WORKSPACE_CAPTURE");
+    if (path) CHECK(native_workspace_capture(path));
+    PostMessage(h, WM_CANCELMODE, 0, 0);
+    EndMenu();
 }
 void __wrap_enhanced_execute_next(void) {
+    const EnhancedSnapshot * s = enhanced_snapshot();
+    if (! s || s->panels.game_type < 0) {
+        __real_enhanced_execute_next();
+        return;
+    }
+    static int restored;
+    if(!restored&&getenv("SIMANT_WORKSPACE_EXPECT_LAYOUT")){
+        restored=1;Workspace expected;FILE *file=fopen(getenv("SIMANT_WORKSPACE_EXPECT_LAYOUT"),"r");int okay=file&&ws_read(&expected,file);if(file)fclose(file);
+        if(okay){const Workspace *actual=native_workspace_layout();for(int p=0;p<WS_PANELS;++p){const WsPanel *a=&actual->panels[p],*e=&expected.panels[p];if(memcmp(a,e,7*sizeof(int))||a->zoom!=e->zoom||strcmp(a->monitor,e->monitor))okay=0;}}
+        CHECK(okay);fprintf(stderr,"WORKSPACE_RESTORE {\"passed\":%s}\n",okay?"true":"false");
+    }
+    if (! phase && main_iteration_count > 20) {
+        phase = 1;
+        CHECK(enhanced_submit_event(0xfd26, 0, 0, 0) == ENHANCED_QUEUED);
+        CHECK(enhanced_submit_event(0xfd41, 0, 0, 0) == ENHANCED_QUEUED);
+    }
+    if (phase == 1 && main_iteration_count > 45 && s->world.plane == 1 && s->panels.paused && ! s->dialogs.modal) {
+        phase = 2;
+        HWND main = main_window();
+        CHECK(main != NULL);
+        CHECK(native_workspace_active());
+        if (! main) {
+            __real_enhanced_execute_next();
+            return;
+        }
+        static EnhancedSnapshot before;
+        before = * s;
+        exercise(main);
+        int id = atoi(getenv("SIMANT_WORKSPACE_SCENE") ? getenv("SIMANT_WORKSPACE_SCENE") : "0");
+        scene(id, main);
+        CHECK(GetMenuItemCount(GetMenu(main)) == 5);
+        const char * path = getenv("SIMANT_WORKSPACE_CAPTURE");
+        if (id == 2) {
+            SetTimer(main, 1, 100, menu_capture);
+            RECT r;
+            GetWindowRect(main, & r);
+            TrackPopupMenu(GetSubMenu(GetMenu(main), 3), TPM_LEFTALIGN | TPM_LEFTBUTTON, r.left + 240, r.top + 50, 0, main, NULL);
+        }
+        else {
+            HWND ant = named("Map / Ant Control Panel");
+            if (id == 7) {
+                RECT r;
+                GetWindowRect(ant, & r);
+                RECT m;
+                GetClientRect(main, & m);
+                MapWindowPoints(main, NULL, (POINT *) & m, 2);
+                OffsetRect(& r, m.left - r.left + 2, m.top - r.top + 2);
+                SendMessage(ant, WM_ENTERSIZEMOVE, 0, 0);
+                SendMessage(ant, WM_MOVING, WMSZ_TOP, (LPARAM) & r);
+                CHECK(IsWindowVisible(named("Edge attachment preview")));
+            }
+            if (id == 8) {
+                HWND tip = FindWindowExA(NULL, NULL, TOOLTIPS_CLASSA, NULL);
+                while (tip && GetWindow(tip, GW_OWNER) != ant) tip = FindWindowExA(NULL, tip, TOOLTIPS_CLASSA, NULL);
+                CHECK(tip != NULL);
+                if (tip) {
+                    CHECK(SendMessage(tip,TTM_GETTOOLCOUNT,0,0)>0);
+                    HWND button=GetDlgItem(ant,11);RECT bounds;GetWindowRect(button,&bounds);SetForegroundWindow(ant);SetFocus(button);SetCursorPos((bounds.left+bounds.right)/2,(bounds.top+bounds.bottom)/2);
+                    SendMessage(button,WM_MOUSEHOVER,0,MAKELPARAM((bounds.right-bounds.left)/2,(bounds.bottom-bounds.top)/2));UpdateWindow(tip);
+                    fprintf(stderr,"TOOLTIP_STATUS count=%lld visible=%d\n",(long long)SendMessage(tip,TTM_GETTOOLCOUNT,0,0),IsWindowVisible(tip));
+                    CHECK(IsWindowVisible(tip));
+                }
+            }
+            if (path) {
+                CHECK(native_workspace_capture(path));
+                if (id == 3 || id == 4) {
+                    HWND target = named(id == 3 ? "Map / Ant Control Panel" : "Yard Control Panel");
+                    RECT r;
+                    GetWindowRect(target, & r);
+                    RECT origin;
+                    GetWindowRect(main, & origin);
+                    OffsetRect(& r, - origin.left, - origin.top);
+                    fprintf(stderr, "WORKSPACE_CROP %ld %ld %ld %ld\n", r.left, r.top, r.right, r.bottom);
+                }
+            }
+            if (id == 7) SendMessage(ant, WM_EXITSIZEMOVE, 0, 0);
+        }
+        CHECK(! memcmp(& before, enhanced_snapshot(), sizeof (before)));
+        fprintf(stderr, "WORKSPACE_UI {\"passed\":%s,\"checks\":%d,\"failures\":%d,\"scene\":%d,\"generation\":%llu}\n", failures ? "false" : "true", checks, failures, id, (unsigned long long) s->generation);
+        if(getenv("SIMANT_WORKSPACE_ACTIVATION")){
+            activation_ready=s->panels.caste.automatic==1&&s->logical_order[0]!=0x1300;CHECK(activation_ready);
+            HostEvent down={.kind=HOST_EVENT_MOUSE_DOWN,.button=SDL_BUTTON_LEFT,.x=28,.y=29},up=down;up.kind=HOST_EVENT_MOUSE_UP;
+            CHECK(native_windows_push_pointer(0x1300,&down));CHECK(native_windows_push_pointer(0x1300,&up));activation_iteration=main_iteration_count;
+        }
+
+    }
+    if(phase==2&&activation_iteration&&main_iteration_count>activation_iteration+4){phase=3;const EnhancedActionLedger *l=enhanced_action_ledger();int okay=activation_ready&&s->panels.caste.automatic==0&&l->last_event==0x1305&&l->prepared==1&&l->flush_completed==1;CHECK(okay);fprintf(stderr,"WORKSPACE_ACTIVATION {\"passed\":%s,\"manual\":%d,\"delivered\":%llu}\n",okay?"true":"false",s->panels.caste.automatic==0,(unsigned long long)l->delivered);}
     __real_enhanced_execute_next();
-    const EnhancedSnapshot *snapshot=enhanced_snapshot();
-    if(completed||!snapshot||snapshot->panels.game_type<0||main_iteration_count<24)return;
-    completed=1;HWND main=root();CHECK(main!=NULL);CHECK(native_workspace_active());
-    typedef UINT (WINAPI *DpiReader)(HWND);DpiReader dpi=(DpiReader)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");
-    fprintf(stderr,"WORKSPACE_ENV {\"physical_window_dpi\":%u,\"source_iteration\":%ld}\n",dpi?dpi(main):0,(long)main_iteration_count);
-    static EnhancedSnapshot before;before=*snapshot;
-    fprintf(stderr,"WORKSPACE_WORLD origin=%d,%d player=%d,%d plane=%d\n",snapshot->world.origin.x,snapshot->world.origin.y,snapshot->world.player_x,snapshot->world.player_y,snapshot->world.plane);
-    exercise(main);
-    const char *number=getenv("SIMANT_WORKSPACE_SCENE");int id=number?atoi(number):0;scene(id,main);
-    POINT cursor;GetCursorPos(&cursor);
-    if(id==4){HWND group=group_named(main,"World");HWND tab=GetDlgItem(group,1);RECT r;GetWindowRect(tab,&r);SetCursorPos(r.left+20,r.top+10);
-        SendMessage(tab,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(20,10));SetCursorPos(r.left+80,r.top+70);SendMessage(tab,WM_MOUSEMOVE,MK_LBUTTON,MAKELPARAM(80,70));}
-    const char *capture=getenv("SIMANT_WORKSPACE_CAPTURE");if(capture)CHECK(native_workspace_capture(capture));
-    CHECK(!memcmp(&before,enhanced_snapshot(),sizeof(before)));
-    const char *ready=getenv("SIMANT_WORKSPACE_READY");if(ready){FILE *f=fopen(ready,"w");if(f){fprintf(f,"%lu\n",GetCurrentProcessId());fclose(f);}
-        UINT64 end=GetTickCount64()+15000;
-        while(GetTickCount64()<end&&GetFileAttributesA(ready)!=INVALID_FILE_ATTRIBUTES){MSG msg;while(PeekMessage(&msg,NULL,0,0,PM_REMOVE)){TranslateMessage(&msg);DispatchMessage(&msg);}Sleep(20);}}
-    if(id==4){SendMessage(main,WM_KEYDOWN,VK_ESCAPE,0);SetCursorPos(cursor.x,cursor.y);}
-    CHECK(!memcmp(&before,enhanced_snapshot(),sizeof(before)));
-    fprintf(stderr,"WORKSPACE_UI {\"passed\":%s,\"checks\":%d,\"failures\":%d,\"scene\":%d,\"generation\":%llu}\n",failures?"false":"true",checks,failures,id,(unsigned long long)snapshot->generation);
 }

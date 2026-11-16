@@ -47,7 +47,7 @@ def observe(build,exe,state,out,mode,steps,hosted=False,workspace=False):
         if mode=='stress':env.update(SIMANT_ENHANCED_LAYOUT_STRESS='1',SIMANT_ENHANCED_LAYOUT_ROUNDTRIP=str(out/'layout-roundtrip.txt'))
     if mode=='stress':env['SIMANT_ENHANCED_TEST']='stress'
     script=ROOT/'portable/tests/runtime/windows-quick.txt'
-    scratch=ROOT/'build/scratch/enhanced';scratch.mkdir(parents=True,exist_ok=True)
+    scratch=ROOT/'build/workers/enhanced-build-a/temporary';scratch.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='a',dir=scratch) as folder:
         assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
         command=[str(exe),*([] if workspace else ['--headless']),'--deterministic','--seed','0','--assets',str(assets),
@@ -112,7 +112,7 @@ def main():
     detector_ok=bool(negative) and negative[0]['entry']==1 and negative[0]['views']==[state['items'][0]['name']]
     result=dict(passed=all(g['passed'] and g['observed'] for g in groups) and detector_ok,groups=groups,negative_control=detector_ok,
         entries=a.steps,views=len(state['items']),save_records=sum(i['name'].startswith('save:') for i in state['items']),
-        exclusions=state['excluded'],layout='Workspace stationary/repeated controls and real Win32 dock/split/tab/float/collapse/hide/reveal/preset/reset plus persistence roundtrips at source seams. UI input isolation and HWND keyboard checks are independently exercised by workspace.py. No masks added.',
+        exclusions=state['excluded'],layout='Workspace stationary/repeated controls and real Win32 edge attach/detach/move/resize/zoom/reset plus persistence roundtrips at source seams. UI input isolation and HWND keyboard checks are independently exercised by workspace.py. No masks added.',
         scope='Raw acceptance views, SaveRec projection, RNG, source UI/stack, clock and sound commands; unavailable private views stay explicit.')
     (out/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k not in ('groups','exclusions')},indent=2))

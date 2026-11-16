@@ -4,3 +4,8 @@ int native_workspace_active(void) { return 0; }
 int native_workspace_filter(const SDL_Event *event) { (void)event;return 0; }
 int native_workspace_input(HostInputState *state) { (void)state;return 0; }
 void native_workspace_present(const HostPalette *palette) { (void)palette; }
+
+void native_workspace_manage_window(SDL_Window *window,int logical,int width,int height){(void)window;(void)logical;(void)width;(void)height;}
+int native_workspace_shortcut(unsigned message,uintptr_t key){(void)message;(void)key;return 0;}
+
+void native_workspace_reveal_game(void){}

@@ -3,6 +3,7 @@
 #include "native_windows.h"
 #include "portable/whole_program/enhanced/actions.h"
 #include "../window_hosting.h"
+#include "portable/whole_program/window_runtime_owner.h"
 #include "host_modes.h"
 #include "modern_game_view.h"
 #include "native_menu.h"
@@ -236,8 +237,10 @@ static void logical_to_client(const NativeWindow *w, int lx, int ly, int *cx, in
         *cy = (int)(area.y + vy);
         return;
     }
-    *cx = (lx - w->view.left) * n.scale;
-    *cy = (ly - w->view.top_y - w->strip) * n.scale;
+    int width=w->surface.width*n.scale,height=w->surface.height*n.scale;
+    if(native_workspace_active())SDL_GetWindowSize(w->surface.window,&width,&height);
+    *cx = (lx-w->view.left)*width/(w->surface.width?w->surface.width:1);
+    *cy = (ly-w->view.top_y-w->strip)*height/(w->surface.height?w->surface.height:1);
 }
 
 /* ---- presentation ---- */
@@ -320,6 +323,7 @@ static int draw_surface(Surface *s, const SimVgaPlanes *planes, int left, int to
     target.x = target.y = 0;
     target.w = (float)(s->width * n.scale);
     target.h = (float)(s->height * n.scale);
+    if(native_workspace_active()){int w,h;SDL_GetWindowSize(s->window,&w,&h);target.w=w;target.h=h;}
     if (!upload_surface(s, planes, left, top, palette, indicator)) return 0;
     uint64_t now = SDL_GetTicksNS();
     if (!s->upload_changed && now-s->last_present_ns < UINT64_C(1000000000)) {
@@ -348,6 +352,7 @@ static int render_game_window(NativeWindow *w, const HostPalette *palette)
     target.x = target.y = 0;
     target.w = (float)(s->width * n.scale);
     target.h = (float)(s->height * n.scale);
+    if(native_workspace_active()){int w,h;SDL_GetWindowSize(s->window,&w,&h);target.w=w;target.h=h;}
     if (!upload_surface(s, w->view.planes, w->view.left, w->view.top_y + w->strip, palette, NULL))
         return 0;
     /* Client beyond the logical window continues the control column's background. */
@@ -372,6 +377,7 @@ static int render_yard_window(NativeWindow *w,const HostPalette *palette)
         memcpy(out,palette->rgb[s->indexed[(size_t)y*s->width+x]&15],3);out[3]=255;
     }
     SDL_FRect target={0,0,(float)(s->width*n.scale),(float)(s->height*n.scale)};
+    if(native_workspace_active()){int width,height;SDL_GetWindowSize(s->window,&width,&height);target.w=width;target.h=height;}
     return SDL_UpdateTexture(s->texture,NULL,s->rgba,s->width*4) &&
         SDL_SetRenderDrawColor(s->renderer,0,0,0,255) && SDL_RenderClear(s->renderer) &&
         SDL_RenderTexture(s->renderer,s->texture,NULL,&target) && SDL_RenderPresent(s->renderer);
@@ -545,10 +551,17 @@ int native_windows_present(const HostPalette *palette)
         if (!sim_window_hosting_view(i, &view)) continue;
         /* Native panel visibility is independent of source logical lifetime.
          * Lifecycle dialogs retain their compatibility host until phase 5. */
-        if (native_workspace_active() && (view.id==0 || view.id==0x100 ||
-            view.id==0x500 || view.id==0x1200 || view.id==0x1300 ||
-            view.id==0x1400 || view.id==0x1500 || view.id==0x1700 ||
-            view.id==0x1800 || view.id==0x1900 || view.id==0x1c00 || view.id==0x1d00)) continue;
+        if (native_workspace_active() && view.id==0) continue;
+        if(native_workspace_active()&&(view.id==0x100||view.id==0x1900)){
+            /* Only the source viewport remains; command rows live in the panels. */
+            const SimWindowRefEntry *e=&sim_window_ref_registry.entries[(uint16_t)view.id>>8];
+            if(e->bound&&e->view.count>2){const uint8_t *b=(const uint8_t *)e->view.object_table[2];
+                view.left=sim_window_wire_read_i16(b,0);view.top_y=sim_window_wire_read_i16(b,2)-18;
+                view.right=sim_window_wire_read_i16(b,4);view.bottom=sim_window_wire_read_i16(b,6);
+                view.drag_top=view.top_y;view.drag_bottom=view.top_y+18;
+            }
+            if(view.id==0x100)snprintf(view.title,sizeof(view.title),"Map");
+        }
         if (!view.open) {
             if (w->shown) { SDL_HideWindow(w->surface.window); w->shown = 0; }
             w->close_pending = w->raise_pending = 0;
@@ -558,12 +571,13 @@ int native_windows_present(const HostPalette *palette)
         }
         /* Win16 win_Open: BringWindowToTop; the logical top is the native top. */
         raise = !w->shown || (view.top && !w->view.top);
-        if (!w->shown && w->surface.window && view.anchored) place(w, &view, w->strip);
+        if (!native_workspace_active() && !w->shown && w->surface.window && view.anchored) place(w, &view, w->strip);
         if (!ensure_window(w, &view)) {
             fprintf(stderr, "Native window %04X: %s\n", (unsigned)(uint16_t)view.id, SDL_GetError());
             return 0;
         }
         w->view = view;
+        native_workspace_manage_window(w->surface.window,view.id,w->surface.width,w->surface.height);
         if (w->surface.width <= 0) continue;
         if (w->modern)
             { okay = render_game_window(w, palette) && SDL_RenderPresent(w->surface.renderer); ++hosted_presentations; }
@@ -649,8 +663,10 @@ static int to_logical(const Origin *o, float cx, float cy, float *x, float *y, i
         if (!inside) modern_game_view_clamp_logical(x, y);
         native_windows_root_pointer(x, y);
     } else {
-        *x = (float)o->left + cx / (float)n.scale;
-        *y = (float)o->top + cy / (float)n.scale;
+        float xs=n.scale,ys=n.scale;
+        if(native_workspace_active()&&o->window){int width,height;SDL_GetWindowSize(o->window->surface.window,&width,&height);xs=(float)width/o->window->surface.width;ys=(float)height/o->window->surface.height;}
+        *x = (float)o->left + cx / xs;
+        *y = (float)o->top + cy / ys;
     }
     clamp_logical(x, y);
     if (pointer && o->window && o->window->view.id == 0) {
@@ -826,7 +842,7 @@ static int modern_navigation(SDL_Event *event)
 static struct ClosedRelease {
     int valid;
     SDL_WindowID window;
-    float client_x,client_y,logical_x,logical_y;
+    float client_x,client_y,logical_x,logical_y,scale_x,scale_y;
 } closed_release[8];
 
 int native_windows_translate(SDL_Event *event)
@@ -855,8 +871,8 @@ int native_windows_translate(SDL_Event *event)
         if (origin_of(event->window.windowID, &o) <= 0 || o.window == NULL) return 0;
         if (event->type == SDL_EVENT_WINDOW_CLOSE_REQUESTED)
             native_windows_request_close(o.window->view.id);
-        else if (event->window.data1 != o.window->surface.width * n.scale ||
-                 event->window.data2 != o.window->surface.height * n.scale)
+        else if (!native_workspace_active() && (event->window.data1 != o.window->surface.width * n.scale ||
+                 event->window.data2 != o.window->surface.height * n.scale))
             /* Win16 WM_SIZE: the record follows the native client (the
              * Game Window's canonical size stops at the logical screen). */
             native_windows_request_resize(o.window->view.id, event->window.data1 / n.scale,
@@ -891,8 +907,8 @@ int native_windows_translate(SDL_Event *event)
         struct ClosedRelease *r=&closed_release[event->button.button];
         Origin old;
         if(r->valid && r->window==id && origin_of(id,&old)<0) {
-            event->button.x=r->logical_x+(event->button.x-r->client_x)/(float)n.scale;
-            event->button.y=r->logical_y+(event->button.y-r->client_y)/(float)n.scale;
+            event->button.x=r->logical_x+(event->button.x-r->client_x)*r->scale_x;
+            event->button.y=r->logical_y+(event->button.y-r->client_y)*r->scale_y;
             clamp_logical(&event->button.x,&event->button.y);
             r->valid=0;
             return 1;
@@ -930,6 +946,10 @@ int native_windows_translate(SDL_Event *event)
     if (o.window) {
         NativeWindow *w = o.window, *modal = modal_top();
         SDL_FRect area;
+        if(event->type==SDL_EVENT_MOUSE_BUTTON_DOWN&&event->button.button==SDL_BUTTON_LEFT&&!modal&&enhanced_contracts_enabled()){
+            float lx,ly;to_logical(&o,cx,cy,&lx,&ly,0);
+            if(enhanced_submit_hit(w->view.id,(int)lx,(int)ly)){w->eaten_button=event->button.button;return -1;}
+        }
         if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN && !w->view.top) {
             /* Win16 WM_MOUSEACTIVATE: raise and eat; with a modal window on
              * top the click is ignored and the modal window comes forward. */
@@ -964,8 +984,11 @@ int native_windows_translate(SDL_Event *event)
             modern_game_view_hold(0, 0, 0);
     }
     to_logical(&o, cx, cy, &event->button.x, &event->button.y, 0);
-    if(enhanced_contracts_enabled() && sim_window_hosting_is_hosted(0) && event->type==SDL_EVENT_MOUSE_BUTTON_DOWN && event->button.button<8)
-        closed_release[event->button.button]=(struct ClosedRelease){1,id,cx,cy,event->button.x,event->button.y};
+    if(enhanced_contracts_enabled() && sim_window_hosting_is_hosted(0) && event->type==SDL_EVENT_MOUSE_BUTTON_DOWN && event->button.button<8) {
+        float xs=1.0f/n.scale,ys=1.0f/n.scale;
+        if(native_workspace_active()&&o.window){int width,height;SDL_GetWindowSize(o.window->surface.window,&width,&height);if(width&&height){xs=(float)o.window->surface.width/width;ys=(float)o.window->surface.height/height;}}
+        closed_release[event->button.button]=(struct ClosedRelease){1,id,cx,cy,event->button.x,event->button.y,xs,ys};
+    }
     return 1;
 }
 
@@ -1070,6 +1093,7 @@ int native_windows_push_pointer(int16_t id, const HostEvent *event)
     if (w == NULL || w->surface.window == NULL || event == NULL) return 0;
     x = (float)(event->x * n.scale);
     y = (float)(event->y * n.scale);
+    if(native_workspace_active()){int width,height;SDL_GetWindowSize(w->surface.window,&width,&height);x=(float)event->x*width/w->surface.width;y=(float)event->y*height/w->surface.height;}
     if (event->kind == HOST_EVENT_MOUSE_MOVE) {
         raw.type = SDL_EVENT_MOUSE_MOTION;
         raw.motion.windowID = SDL_GetWindowID(w->surface.window);
@@ -1123,4 +1147,19 @@ int native_windows_event_origin(SDL_WindowID window, int16_t *id, int16_t *left,
     *left = (int16_t)o.left;
     *top = (int16_t)o.top;
     return 1;
+}
+
+int native_windows_capture_client(void *window,void *output){
+#ifdef _WIN32
+    for(unsigned i=0;i<n.count;++i){NativeWindow *w=&n.windows[i];Surface *s=&w->surface;if(!w->shown||!s->rgba)continue;
+        HWND h=SDL_GetPointerProperty(SDL_GetWindowProperties(s->window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);if(h!=(HWND)window)continue;
+        RECT frame,client;GetWindowRect(h,&frame);GetClientRect(h,&client);POINT origin={0,0};ClientToScreen(h,&origin);
+        uint32_t *pixels=malloc((size_t)s->width*s->height*4);if(!pixels)return 0;for(int j=0;j<s->width*s->height;++j){const uint8_t *c=s->rgba+j*4;pixels[j]=c[0]*65536u+c[1]*256u+c[2];}
+        BITMAPINFO info={.bmiHeader={.biSize=sizeof(BITMAPINFOHEADER),.biWidth=s->width,.biHeight=-s->height,.biPlanes=1,.biBitCount=32,.biCompression=BI_RGB}};
+        SetStretchBltMode((HDC)output,COLORONCOLOR);StretchDIBits((HDC)output,origin.x-frame.left,origin.y-frame.top,client.right,client.bottom,0,0,s->width,s->height,pixels,&info,DIB_RGB_COLORS,SRCCOPY);free(pixels);return 1;
+    }
+#else
+    (void)window;(void)output;
+#endif
+    return 0;
 }

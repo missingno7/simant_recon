@@ -20,6 +20,7 @@ typedef struct EnhancedIntent {
     int16_t parameter;
     uint64_t serial; /* caller-monotonic; duplicate submissions are refused */
     uint64_t generation, task_token;
+    int16_t source_event, h, v, modifiers; /* audited alternate source path; canonical coordinates */
     unsigned sample_count;
     EnhancedGestureSample samples[64];
 } EnhancedIntent;
@@ -41,6 +42,12 @@ typedef struct EnhancedActionLedger {
  * and wait-result adapters fail closed until their per-action proof exists. */
 EnhancedActionResult enhanced_submit(const EnhancedIntent *intent);
 const EnhancedActionLedger *enhanced_action_ledger(void);
+/* Shared native panel/menu/keyboard route. Only enumerated catalog events pass. */
+int enhanced_event_binding(unsigned event,const char **id,int *parameter);
+EnhancedActionResult enhanced_submit_event(unsigned event,int h,int v,int modifiers);
+EnhancedActionResult enhanced_submit_pan(int dx,int dy);
+int enhanced_submit_hit(int owner,int h,int v);
+
 
 /* Engine-side only. Called once before outer DoEvent, never a nested wait. */
 void enhanced_execute_next(void);

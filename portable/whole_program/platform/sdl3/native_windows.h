@@ -38,6 +38,8 @@ int native_windows_request_close(int16_t id);
 int native_windows_request_resize(int16_t id, int width, int height);
 /* Saves each shown hosted window as <base_path>.<ID>.bmp (smoke captures). */
 int native_windows_save_frames(const char *base_path);
+/* GDI capture of the last presented retained SDL client; native handles opaque. */
+int native_windows_capture_client(void *window,void *dc);
 /* Test/replay input at window-local logical client coordinates of window `id`. */
 int native_windows_push_pointer(int16_t id, const HostEvent *event);
 /* Test/replay wheel steps at a client point, and a native client size (both

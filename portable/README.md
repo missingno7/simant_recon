@@ -353,24 +353,20 @@ python portable/tests/enhanced/invariance.py --build BUILD --out FRESH_INVARIANC
 python portable/tests/enhanced/capture.py --build BUILD --out FRESH_CAPTURES --regressions FRESH_REGRESSIONS
 ```
 
-The first requires rebirth PASS and activation XFAIL. The second retains every
+The first requires rebirth PASS and activation PASS. The second retains every
 raw difference, including baseline variability; a nonzero result must be read
 as differences, not silently treated as full invariance. The capture runner
 checks source preconditions, compares independent asset decoding, and writes
 asset-derived PNGs only to ignored scratch.
-# Native workspace preview
+# Enhanced ordinary windows
 
-On Windows, `SIMANT_ENHANCED_CONTRACTS=1` with `--windows` selects the
-[phase 2 workspace](../docs/enhanced-mode/phase2.md): native dock/split/tab/float,
-presets/persistence and up to three live read-only world inspectors. Other panel
-families are named empty native panels. `SIMANT_ENHANCED_WORKSPACE=0` retains
-the phase 1 comparison host. Classic remains selected without enhanced contracts.
-
-F6 cycles regions, Ctrl+Tab cycles a tab group, and Shift+F10 opens panel layout
-commands. Layout > Reset Layout restores Play. The workspace document lives
-outside game saves; `SIMANT_WORKSPACE_LAYOUT=PATH` isolates it for tests.
-
-Run `python portable/tests/enhanced/workspace.py --build BUILD --out NEW_OUTPUT
---screens NEW_SCREENS` after a fresh build. UI Automation roles/actions and full
-raw passive equality are checked separately and remain failures when unproved;
-see the phase guide for the exact boundaries and owner gate registrations.
+`SIMANT_ENHANCED_CONTRACTS=1 --windows` selects the approved ordinary-window
+host on Windows: full game menus, two picture control panels, phase 1 worlds,
+caption dragging and simple edge attachment. F6 cycles windows; Alt+Space provides
+Move/Attach/Detach. The primary pans through source action N03; wheel zoom is
+passive. Window > Reset window layout resets placement. Layout is separate from
+saves; `SIMANT_WORKSPACE_LAYOUT=PATH` isolates persistence. See
+[implementation, B/C compatibility clients and tests](../docs/enhanced-mode/phase2.md).
+`SIMANT_ENHANCED_WORKSPACE=0` retains the phase 1 comparison host. Both enhanced
+regressions are required PASS. Full raw invariance and action receipts retain
+all differences and missing preconditions; they are not silently passing gates.

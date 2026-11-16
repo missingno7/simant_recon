@@ -143,7 +143,7 @@ void __wrap_enhanced_execute_next(void)
     if(getenv("SIMANT_ENHANCED_LAYOUT_STRESS")&&f&&f->panels.game_type>=0) {
         static int32_t last=-1;
         if(last!=main_iteration_count){last=main_iteration_count;
-            if(!layout_operations)ws_preset(&passive_layout,0);
+            if(!layout_operations)ws_reset(&passive_layout);
             static EnhancedSnapshot before;before=*f;
             if(native_workspace_active()) {
                 if(!native_workspace_operation(layout_operations))++layout_errors;

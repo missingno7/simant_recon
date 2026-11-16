@@ -15,4 +15,9 @@ int native_workspace_operation(unsigned step);
 int native_workspace_capture(const char *path);
 const Workspace *native_workspace_layout(void);
 int native_workspace_apply(const Workspace *layout);
+/* Attach the retained step B/C client to the same ordinary-window policy. */
+void native_workspace_manage_window(SDL_Window *window,int logical,int width,int height);
+int native_workspace_shortcut(unsigned message,uintptr_t key);
+void native_workspace_reveal_game(void);
+
 #endif

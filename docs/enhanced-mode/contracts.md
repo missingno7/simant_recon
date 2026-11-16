@@ -1,4 +1,4 @@
-# Presentation contracts (phases 0 and 1)
+# Enhanced presentation contracts
 
 The approved [design and complete component/action catalogs](../enhanced-mode.md)
 are the authority. These are the phase 0/1 contracts; the
@@ -50,8 +50,7 @@ Snapshot field provenance:
 
 Unavailable fields are integration work for phases 1/5. They are not proof that
 an opaque private source state is absent or a prompt accepts arbitrary Return,
-Escape, Close or timeout. No native layout manager, file picker or controller
-support is implemented by these contracts.
+Escape, Close or timeout. The ordinary native window host is described in [build A](phase2.md). Native file-picker and controller bridges remain unavailable.
 
 ## Semantic action queue and execution
 
@@ -65,7 +64,7 @@ The complete approved catalog is registered in `catalog.inc`, including L/E/T/H/
 classifications and canonical entries. The L classification remains a candidate:
 phase 0 uses the established original event route for S06 instead of assuming a
 direct SetPause contract. H returns `ENHANCED_HOST_ONLY` without source execution;
-unproved routes return `ENHANCED_NEEDS_ADAPTER`. U never becomes a guessed action.
+unproved routes return `ENHANCED_NEEDS_ADAPTER`. The original percent-looking N08 glyph now retains the audited 010E event; its semantic name remains unsettled and no new gameplay meaning is invented.
 
 Currently executable discrete routes (integer parameter domains):
 
@@ -82,6 +81,29 @@ Currently executable discrete routes (integer parameter domains):
 | A02 / B02 | 0..2: preset 1..3 | 1206..08 / 1306..08; same owner preparation |
 | A04 / B04 | 0: toggle units | 120F / 130F; same owner preparation |
 | I03 | 0..9: source series button order | 1503..150C; OpenHistoryWindow |
+
+Build A adds the exact alternate event routes used by relocated controls and the
+full game menu. `enhanced_event_binding`/`enhanced_submit_event` validate a fixed
+catalog whitelist: session S01/S03/S04/S05/S14, N07/N08/N09/N10, P11, Y02/Y03/Y04/
+Y05, E01, I04/I05 and K01/K02, as well as the discrete actions above. These are
+original event entries, not independently implemented handlers or completed native
+dialog/task bridges. Waits and result input still use the source compatibility path.
+Map plane 0106..08, world plane 0008..0A and menu FD26..28 stay distinct. Yard 1907..
+0A and FD21..24 also stay distinct. UI callbacks only retain intent data.
+
+The additional `source_event`, `h`, `v` and `modifiers` fields retain an audited
+source alternative and canonical pointer coordinates where needed, never HWNDs or
+native client geometry. P11's native meter request uses percentage h and v=-1;
+the executor converts it through the source 0011/0012 meter rectangle after owner
+preparation, preserving integer quantization. The original coordinate form remains
+available to compatibility controls. Other gesture/task schemas remain unavailable.
+
+`enhanced_submit_pan(dx,dy)` admits bounded N03 deltas. At the outer source seam,
+its L route calls the complete existing `edit_scroll_and_redraw` operation without
+an unnecessary owner raise or a new game event code. This is the same operation
+reached by source Ctrl-arrow/edge navigation; its original clamp and XOR stepping
+are retained. A primary drag commits one delta on release. Zoom, attachment,
+window moves/resizes and extra-plane camera movement never call that operation.
 
 The source owner preparation is deliberately explicit in the transcript: it can
 draw, consume RNG, invoke hooks and flush. Same action and initial canonical
@@ -154,7 +176,7 @@ when enhanced publication is off. A repeated off/off lane distinguishes baseline
 variability from off/on differences. An offline SaveRec fingerprint
 mutation must fail the comparison. Missing observations fail. Native layout
 is exercised by the additional phase 2 stationary/repeat/layout-stress group;
-see [its exact coverage](phase2.md#verification-and-owner-registrations).
+see [its exact coverage and owner registrations](phase2.md).
 
 The `contracts` group toggles only publication on the existing chooser-only
 host. The `native-world` group uses the same complete `--windows` arrangement in
@@ -175,7 +197,7 @@ logical order, SaveRec and RNG comparisons remain separate reported results.
 The strict raw harness returns nonzero while those differences exist.
 
 Gate registrations requested: run both new runners once after the fresh native
-build, retain their result.json, and include the strict expected-failure status.
+build, retain their result.json, and include the required PASS status for both rebirth and first activation.
 The owner runs `python tools/validate.py --upper-tests`; phase 0 does not edit
 the gate or repository tooling. Existing port suites and the complete 58-lane
 upper-layer regression remain independent requirements.
