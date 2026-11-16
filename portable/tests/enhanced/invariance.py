@@ -47,7 +47,7 @@ def observe(build,exe,state,out,mode,steps,hosted=False,workspace=False):
         if mode=='stress':env.update(SIMANT_ENHANCED_LAYOUT_STRESS='1',SIMANT_ENHANCED_LAYOUT_ROUNDTRIP=str(out/'layout-roundtrip.txt'))
     if mode=='stress':env['SIMANT_ENHANCED_TEST']='stress'
     script=ROOT/'portable/tests/runtime/windows-quick.txt'
-    scratch=ROOT/'build/workers/enhanced-build-a/temporary';scratch.mkdir(parents=True,exist_ok=True)
+    scratch=ROOT/'build/workers/enhanced-build-b/temporary';scratch.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='a',dir=scratch) as folder:
         assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
         command=[str(exe),*([] if workspace else ['--headless']),'--deterministic','--seed','0','--assets',str(assets),

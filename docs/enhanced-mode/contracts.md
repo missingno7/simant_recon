@@ -31,6 +31,8 @@ outer pump admits semantic intents even when idle. They publish before and after
 the outer invocation and never execute new intents in recursive invocations.
 The existing `f_1B28_0069` event-poll hook also publishes at a source modal owner
 or the established animation/picture/save-confirmation owners 1A00/1E00/2100.
+Build B also publishes at leased command and wrapped queen-placement waits,
+and after completed original world/triangle tracker draws.
 Those are synchronous source wait/poll boundaries after preceding operations;
 they do not invoke drawing or advance a second simulation. Ordinary tracker polls
 do not publish incomplete world edits. `EnhancedSeam` records the producer.
@@ -43,14 +45,15 @@ Snapshot field provenance:
 | World | MapA/B/R, LifeA/B/R, PherMap*, MapPlane/MapPnt/editTileRect, terrain/layer, player and spider coordinates. Array order remains `[x][y]`. No copied VGA, sprite bank, cache or art. The completed source draw publishes picture IDs/poses, leg/palp endpoints, the selected balloon/text and rectangle operations. No composite bytes are copied. |
 | Overview/yard | MapMode/transform, YardMode, YMapPnt/CurYardPnt, YMapPopB/R, queen/colony counts and placement mode. Red population uses the existing proven 32+160-byte semantic span, copying its two named owners. No native recount or isometric conversion. Completed source animation sets publish selected picture IDs, positions, priorities and removals; opaque handle tokens resolve through the existing passive provider API. |
 | Panels | Auto/Manual, exact TriLevel words, preset and units selection, population vectors, health/warning values, source options/speed/tool/pause. OptionStates uses the existing six-word semantic span; byte-defined words use memcpy. No conversion or normalization. |
-| Cards/help | Current card and previous ring, observed modal owner. Private draw-produced link tables and immutable text/style catalog are marked unavailable; empty arrays never mean successfully decoded content. No DisplayCard/DoWinHelp call during reading. |
-| History/status | All ten 64-sample source series in documented data order, ring start/count, last OverallScore and copied edit status. No CalcScore. Draw-private graph selection and eight score metrics are explicitly unavailable. Label remapping remains the action catalog's `(g&1)*5+(g>>1)`. |
+| Cards/help | Current card/previous ring and private picture/text link tables, copied by an appended read-only observer in the converted TU. Independently owned CARD/TEXT/STYL/title resources. No DisplayCard/DoWinHelp during reading. General help replacement remains step C. |
+| History/status | All ten 64-sample series, ring start/count, private graph selections/colors and OverallScore. Eight score percentages observed from the original formatted field output after the real font_PrintStr. No second CalcScore or guessed formula. Quick Game empire fields remain N.A. |
 | Dialogs | Current front owner/flags, bounded copied Obj type/flags/rect/bitmap/text from resident native window reference views. No locking or resource loads; nonresident views stay unavailable. Text has truncation flags. This is an observation, not a guessed wait schema. `request_schema_available=0` blocks result injection. The token tracks observed owner/modal transitions, not yet every same-owner nested request. |
 | Logical state | Full source stack copied independently of panel focus/layout. Native data never reopens a logical window. |
 
-Unavailable fields are integration work for phases 1/5. They are not proof that
+Remaining unavailable task schemas are integration work for step C. They are not proof that
 an opaque private source state is absent or a prompt accepts arbitrary Return,
-Escape, Close or timeout. The ordinary native window host is described in [build A](phase2.md). Native file-picker and controller bridges remain unavailable.
+Escape, Close or timeout. The host/content are described in [builds A/B](phase2.md)
+and [build B](build-b.md). Native file-picker and general controller bridges remain unavailable.
 
 ## Semantic action queue and execution
 
@@ -87,22 +90,23 @@ full game menu. `enhanced_event_binding`/`enhanced_submit_event` validate a fixe
 catalog whitelist: session S01/S03/S04/S05/S14, N07/N08/N09/N10, P11, Y02/Y03/Y04/
 Y05, E01, I04/I05 and K01/K02, as well as the discrete actions above. These are
 original event entries, not independently implemented handlers or completed native
-dialog/task bridges. Waits and result input still use the source compatibility path.
-Map plane 0106..08, world plane 0008..0A and menu FD26..28 stay distinct. Yard 1907..
-0A and FD21..24 also stay distinct. UI callbacks only retain intent data.
+dialog/task bridges. Step C waits/results still use compatibility clients; live
+trackers use the build B adapter. Map-plane 0106..08 remains distinct from world
+0008..0A. Native menus use the shared relocated routes documented in [build B](build-b.md),
+while original Yard/House transitions remain distinct. UI callbacks only retain intent data.
 
 The additional `source_event`, `h`, `v` and `modifiers` fields retain an audited
 source alternative and canonical pointer coordinates where needed, never HWNDs or
 native client geometry. P11's native meter request uses percentage h and v=-1;
 the executor converts it through the source 0011/0012 meter rectangle after owner
 preparation, preserving integer quantization. The original coordinate form remains
-available to compatibility controls. Other gesture/task schemas remain unavailable.
+available to compatibility controls. Buffered gestures/general task schemas remain unavailable.
 
 `enhanced_submit_pan(dx,dy)` admits bounded N03 deltas. At the outer source seam,
 its L route calls the complete existing `edit_scroll_and_redraw` operation without
 an unnecessary owner raise or a new game event code. This is the same operation
 reached by source Ctrl-arrow/edge navigation; its original clamp and XOR stepping
-are retained. A primary drag commits one delta on release. Zoom, attachment,
+are retained. A middle drag commits one delta on release. Zoom, attachment,
 window moves/resizes and extra-plane camera movement never call that operation.
 
 The source owner preparation is deliberately explicit in the transcript: it can
@@ -116,7 +120,7 @@ selection/feedback/double-click classification and the original handler.
 No bare ProcModeEvent/ProcCasteEvent call skips those effects.
 
 At the outer source seam the executor defers if gameplay is unavailable, a modal
-is active, a game tool owns interaction, a pending lifecycle menu command exists,
+is active, a pending lifecycle menu command exists,
 or the source ring has no room. Menu routes read the existing source disabled
 bit. One intent executes per outer invocation. An object route finishes all owner
 preparation/queue flushing before enqueueing the retained event once. The source
@@ -131,12 +135,17 @@ effects still execute normally. The ledger separates submissions, preparations,
 completed flushes, deliveries and rejected deliveries. Delivery is not a promise
 of gameplay success: the original action may reject an absent target.
 
-The following remain fail-closed rather than receiving approximate adapters:
-N03 pan and all tile/held/brush/allocation gesture transactions; card-link IDs;
-nested context/proximity results; source lifecycle/file/dialog result bridges;
-unknown compatibility actions. A nonempty sample transcript or task token is
-refused today. The design's complete per-action source entry, prerequisites,
-effects and retained driving rules are the contracts for that later work.
+Build B adds live pointer transactions for world tools/brushes, Map, Yard,
+triangles and Info links. See [the detailed source ownership rules](build-b.md).
+GetMousePos/StillDown/myButton and the source dispatcher own tracking and effects.
+Labelled allocation choices choose original reachable triangle pixels; they
+never assign game levels. The narrow PlaceQueenInYard adapter queues only its
+original viewport click at that existing source wait. Context menus retain
+their original clients and take mouse ownership until their real release.
+
+Nonempty buffered sample transcripts, arbitrary task tokens, native lifecycle/
+file/dialog result bridges and unknown compatibility actions remain fail-closed.
+Original context/proximity dialogs remain compatibility clients for step C.
 
 ## Executable verification
 
@@ -156,9 +165,9 @@ compares actual rendered occupied cells against ground-only rendering while both
 source banks are null. Phase 1 expects entity imagery. One inactive Caste-panel
 click must produce exactly one Manual handler event and leave Auto disabled;
 phase 3 owns that fix. The phase 1 rebirth regression is a required PASS, with a hybrid negative control
-and equality of the complete semantic world at that wait. Only the phase 3
-activation regression remains XFAIL; XPASS still fails that registration. A missing
-precondition, timeout, crash or missing observation is an error, never XFAIL.
+and equality of the complete semantic world at that wait. Build A repaired first
+activation; the registration now requires both regressions PASS. A missing
+precondition, timeout, crash or missing observation is an error.
 The two-click positive control and semantic B01 executor must pass today,
 including one post-flush delivery and rejection of duplicate serials.
 

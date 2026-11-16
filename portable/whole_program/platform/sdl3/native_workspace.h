@@ -12,6 +12,8 @@ int native_workspace_filter(const SDL_Event *);
 /* A fixed neutral pointer while native layout owns physical input. */
 int native_workspace_input(HostInputState *);
 int native_workspace_operation(unsigned step);
+int native_workspace_popup_paint(void *window,void *dc,int frame);
+int native_workspace_content_paint(void *window,void *dc,int frame);
 int native_workspace_capture(const char *path);
 const Workspace *native_workspace_layout(void);
 int native_workspace_apply(const Workspace *layout);

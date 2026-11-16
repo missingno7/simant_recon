@@ -209,7 +209,11 @@
     "portable/whole_program/enhanced/overlays.h",
     "portable/whole_program/enhanced/world.h",
     "portable/whole_program/enhanced/workspace.h",
-    "portable/whole_program/platform/sdl3/native_workspace.h"
+    "portable/whole_program/platform/sdl3/native_workspace.h",
+    "portable/whole_program/enhanced/card_observer.inc",
+    "portable/whole_program/enhanced/history_observer.inc",
+    "portable/whole_program/platform/sdl3/native_content.inc",
+    "portable/whole_program/enhanced/map_observer.inc"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -236,7 +240,9 @@
     "anim_bitmap_to_buffer",
     "MakeBalloon",
     "hanim_RemoveAnimSet",
-    "hanim_RenderAnimSet"
+    "hanim_RenderAnimSet",
+    "font_PrintStr",
+    "PlaceQueenInYard"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",
@@ -487,13 +493,13 @@
     "status": "partial-triage"
   },
   "enhanced_mode_contracts": {
-    "status": "phase-0-opt-in",
+    "status": "build-b-native-content-opt-in",
     "enable": "SIMANT_ENHANCED_CONTRACTS=1",
     "design": "docs/enhanced-mode.md",
     "contracts": "docs/enhanced-mode/contracts.md",
     "regression": "portable/tests/enhanced/run.py",
     "invariance": "portable/tests/enhanced/invariance.py",
-    "limits": "No enhanced UI. Gesture/wait-result adapters fail closed. Immutable assets, private link/graph selections and overlay pose hooks remain phase 1 work. Inspectors always live."
+    "limits": "Ordinary Windows host, immutable art, native content, discrete actions and live original trackers. General task-result injection and native lifecycle/file/help dialogs remain unavailable. Bounded action/passive receipts are separate from original-executable acceptance. Inspectors always live."
   },
   "native_resources": [
     "portable/whole_program/platform/sdl3/workspace.rc",

@@ -1,6 +1,7 @@
 #ifndef SIMANT_ENHANCED_ACTIONS_H
 #define SIMANT_ENHANCED_ACTIONS_H
 #include <stdint.h>
+#include "portable/platform/host.h"
 
 typedef struct EnhancedActionContract {
     const char *id;
@@ -38,14 +39,28 @@ typedef struct EnhancedActionLedger {
 } EnhancedActionLedger;
 
 /* UI callback surface: copy into durable native queue only. No game calls.
- * Supported discrete actions require sample_count=task_token=0. All gesture
- * and wait-result adapters fail closed until their per-action proof exists. */
+ * Discrete and live original tracker routes retain source event ownership.
+ * Buffered sample transcripts and general task-result injection remain unavailable. */
 EnhancedActionResult enhanced_submit(const EnhancedIntent *intent);
 const EnhancedActionLedger *enhanced_action_ledger(void);
 /* Shared native panel/menu/keyboard route. Only enumerated catalog events pass. */
 int enhanced_event_binding(unsigned event,const char **id,int *parameter);
 EnhancedActionResult enhanced_submit_event(unsigned event,int h,int v,int modifiers);
 EnhancedActionResult enhanced_submit_pan(int dx,int dy);
+int enhanced_allocation_values(int owner,int axis,uint8_t values[101]);
+/* Engine-only completed editor draw; copies the source-reachable value set. */
+void enhanced_allocation_catalog_refresh(void);
+EnhancedActionResult enhanced_submit_allocation(int owner,int axis,int percent);
+EnhancedActionResult enhanced_submit_pointer(unsigned event,int x,int y,int modifiers);
+void enhanced_pointer_external_release(void);
+void enhanced_pointer_update(int x,int y,int down);
+void enhanced_pointer_poll(void);
+int enhanced_transaction_wait(void);
+int enhanced_queen_wait(void);
+int enhanced_pointer_tracking(int owner);
+int enhanced_submit_wait_dismiss(void);
+void enhanced_execute_wait_dismiss(void);
+int enhanced_pointer_input(HostInputState *state);
 int enhanced_submit_hit(int owner,int h,int v);
 
 

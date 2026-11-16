@@ -121,7 +121,12 @@ static void pump(void)
     unsigned i;
     /* An explicit semantic action owns source front/flush through DoEvent.
      * Keep legacy queued window operations pending until its tail completes. */
-    if (enhanced_action_lease_active()) return;
+    if (enhanced_action_lease_active()) {
+        /* A source-owned nested wait must still accept its real Close action. */
+        if(enhanced_transaction_wait())for(i=0;i<n.count;++i){NativeWindow *w=&n.windows[i];if(w->close_pending&&w->view.open&&w->view.id==sim_window_hosting_top()){
+            w->close_pending=0;sim_window_hosting_close(w->view.id);
+        }}return;
+    }
     native_menu_pump();
     for (i = 0; i < n.count; ++i) {
         NativeWindow *w = &n.windows[i];
@@ -579,7 +584,9 @@ int native_windows_present(const HostPalette *palette)
         w->view = view;
         native_workspace_manage_window(w->surface.window,view.id,w->surface.width,w->surface.height);
         if (w->surface.width <= 0) continue;
-        if (w->modern)
+        void *native_handle=SDL_GetPointerProperty(SDL_GetWindowProperties(w->surface.window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);
+        if(native_workspace_content_paint(native_handle,NULL,0))okay=1;
+        else if (w->modern)
             { okay = render_game_window(w, palette) && SDL_RenderPresent(w->surface.renderer); ++hosted_presentations; }
         else if(enhanced_world_enabled() && view.id==0x1900)
             okay=render_yard_window(w,palette);
@@ -597,7 +604,8 @@ int native_windows_present(const HostPalette *palette)
     for (i = 0; i < n.popup_count; ++i) {
         NativePopup *p = &n.popups[i];
         if (p->surface.window == NULL) continue;
-        if (!draw_surface(&p->surface, p->view.planes, p->view.left, p->view.top, palette, NULL)) {
+        void *popup_handle=SDL_GetPointerProperty(SDL_GetWindowProperties(p->surface.window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);
+        if (!native_workspace_popup_paint(popup_handle,NULL,0) && !draw_surface(&p->surface, p->view.planes, p->view.left, p->view.top, palette, NULL)) {
             fprintf(stderr, "Native popup present: %s\n", SDL_GetError());
             return 0;
         }

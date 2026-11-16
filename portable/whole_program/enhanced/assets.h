@@ -9,6 +9,8 @@ int enhanced_assets_load(const char *verified_root);
 const char *enhanced_assets_error(void);
 void enhanced_assets_free(void);
 const EnhancedArt *enhanced_art(int id);
+/* Immutable decompressed resources, independent of the game's resource cache. */
+const uint8_t *enhanced_resource(int id,int kind,size_t *size);
 int enhanced_asset_cell(int terrain, unsigned ground, unsigned life, uint8_t pixels[256]);
 int enhanced_font_width(const char *text);
 int enhanced_font_height(void);

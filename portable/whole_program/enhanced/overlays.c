@@ -1,5 +1,6 @@
 #include "overlays.h"
 #include "runtime.h"
+#include "actions.h"
 #include "portable/whole_program/platform/handles.h"
 #include "portable/whole_program/algorithms/line16b5.h"
 #include "portable/whole_program/window_source_rects.h"
@@ -25,7 +26,10 @@ static void text_copy(char *out,size_t n,const char *in) {
 }
 void enhanced_overlay_push(void) { ++depth; }
 void enhanced_overlay_pop(void) {
-    if(active && depth==draw_depth) {selected=staging;active=0;spider_target=0;}
+    if(active && depth==draw_depth) {
+        selected=staging;active=0;spider_target=0;
+        if(enhanced_pointer_tracking(0)||enhanced_pointer_tracking(0x100))enhanced_publish(ENHANCED_TRACKER_DRAW);
+    }
     if(depth)--depth;
 }
 extern void __real_clip_intersect_rect_list(struct Rect *);
@@ -104,7 +108,13 @@ extern void __real_hanim_RenderAnimSet(Handle);
 void __wrap_hanim_RenderAnimSet(Handle h)
 {
     __real_hanim_RenderAnimSet(h);
-    if(!enhanced_contracts_enabled() || h!=yardAnimHandle)return;
+    if(!enhanced_contracts_enabled())return;
+    extern Handle modeAnimHandle,casteAnimHandle;
+    if((modeAnimHandle&&h==modeAnimHandle)||(casteAnimHandle&&h==casteAnimHandle))enhanced_allocation_catalog_refresh();
+    if((h==modeAnimHandle&&enhanced_pointer_tracking(0x1200)) || (h==casteAnimHandle&&enhanced_pointer_tracking(0x1300))){
+        enhanced_publish(ENHANCED_TRACKER_DRAW);return;
+    }
+    if(h!=yardAnimHandle)return;
     size_t size;
     const uint8_t *bytes;
     if(!sim_handles_global_resolve_payload(h,&bytes,&size))abort();

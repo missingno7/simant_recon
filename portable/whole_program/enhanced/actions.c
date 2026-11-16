@@ -5,6 +5,8 @@
 #include "portable/whole_program/platform/m1b73_event_enqueue.h"
 #include "portable/whole_program/platform/m1b73_timer_view.h"
 #include <string.h>
+#include "portable/platform/host.h"
+#include "portable/whole_program/enhanced/snapshot.h"
 static const EnhancedActionContract contracts [] = {
 #define ACTION(id, route, entry) {id, route, entry},
 #include "catalog.inc"
@@ -27,6 +29,14 @@ static struct {
 }
 queue [QUEUE_SIZE];
 static unsigned head, count, executing, lease;
+static uint64_t dismiss_token;static int dismiss_owner;
+static struct { int event,x,y,down,active,armed,double_pending,button,external; } pointer;
+static int queen_wait,queen_click;
+extern void __real_PlaceQueenInYard(void);
+void __wrap_PlaceQueenInYard(void){
+    ++queen_wait;__real_PlaceQueenInYard();--queen_wait;queen_click=0;
+}
+int enhanced_queen_wait(void){return queen_wait!=0;}
 static EnhancedActionLedger ledger;
 static uint64_t highest_serial;
 extern int16_t edit_scroll_and_redraw(int16_t, int16_t);
@@ -308,7 +318,13 @@ EnhancedActionResult enhanced_submit(const EnhancedIntent * intent) {
     if (c->route == 'H') return ENHANCED_HOST_ONLY;
     if (intent->sample_count || intent->task_token) return ENHANCED_NEEDS_ADAPTER;
     int16_t event, owner;
-    if (! strcmp(intent->id, "N03")) {
+    if ((intent->parameter == -2 || intent->parameter == -3) && (intent->source_event==4 || intent->source_event==0x102 || intent->source_event==0x1902 || intent->source_event==0x120d || intent->source_event==0x130d || intent->source_event==0x502 || intent->source_event==0x150e)) {
+        event=intent->source_event;owner=event&0xff00;
+        const char *expected=event==4?"P01":event==0x102?"N04":event==0x1902?"Y01":event==0x120d?"A03":event==0x130d?"B03":event==0x150e?"I04":"I01";
+        if(strcmp(intent->id,expected))return ENHANCED_BAD_PARAMETER;
+        if(intent->parameter==-3 && ((event!=0x120d&&event!=0x130d)||intent->h<0||intent->h>100||intent->v<0||intent->v>2))return ENHANCED_BAD_PARAMETER;
+    }
+    else if (! strcmp(intent->id, "N03")) {
         if (intent->h < - 128 || intent->h > 128 || intent->v < - 64 || intent->v > 64 || (! intent->h && ! intent->v)) return ENHANCED_BAD_PARAMETER;
         event = 0;
         owner = INT16_MIN;
@@ -341,8 +357,147 @@ static int menu_enabled(int16_t event) {
     for (unsigned i = 0; i <= item; ++ i) if (! items [i]) return 0;
     return((uint8_t) items [item] [0] & 0x80) == 0;
 }
+/* Source projection runs after owner preparation: world pixels, overview cells,
+ * source-object offsets, or History graph fractions in thousandths. */
+static void enhanced_pointer_coordinates(int x,int y,int *h,int *v) {
+    unsigned event=pointer.event,slot=event>>8,index=event&255;
+    const SimWindowRefEntry *entry=&sim_window_ref_registry.entries[slot];
+    int left=0,top=0;
+    if(entry->bound && index<entry->view.count) {
+        const uint8_t *b=(const uint8_t *)entry->view.object_table[index];
+        left=sim_window_wire_read_i16(b,0);top=sim_window_wire_read_i16(b,2);
+    }
+    extern EnhancedPoint MapPnt;extern EnhancedRect editTileRect,map_viewport_rect;
+    extern int16_t mapXsize,mapYsize,multiplier;
+    if(event==4){*h=x-MapPnt.x*16+editTileRect.left;*v=y-MapPnt.y*16+editTileRect.top;}
+    else if(event==0x102){*h=map_viewport_rect.left+x*mapXsize+mapXsize/2;*v=map_viewport_rect.top+y*mapYsize+mapYsize/2;}
+    else if(event==0x1902){*h=map_viewport_rect.left+x;*v=map_viewport_rect.top+y;}
+    else if(event==0x150e){const uint8_t *b=(const uint8_t *)entry->view.object_table[index];*h=left+(sim_window_wire_read_i16(b,4)-left)*x/1000;*v=top+(sim_window_wire_read_i16(b,6)-top)*y/1000;}
+    else {*h=left+x;*v=top+y;}
+}
+/* Device seam; source StillDown/GetMousePos continue to own their trackers. */
+extern void portable_m1b73_semantic_pointer(int,int,int);
+int enhanced_submit_wait_dismiss(void){
+    const EnhancedSnapshot *s=enhanced_snapshot();
+    if(!s || !(s->dialogs.flags&1) || (s->dialogs.owner!=0x1400 && s->dialogs.owner!=0x1700))return 0;
+    dismiss_token=s->dialogs.task_token;dismiss_owner=s->dialogs.owner;return 1;
+}
+void enhanced_execute_wait_dismiss(void){
+    if(queen_wait&&queen_click&&clip_window_z_order[0]==0x1900){
+        int h,v;enhanced_pointer_coordinates(pointer.x,pointer.y,&h,&v);
+        enhanced_pointer_poll();
+        if(portable_m1b73_try_enqueue_command(0x1902,0,0x200,h,v)){queen_click=0;++ledger.delivered;}
+    }
+    if(!dismiss_token)return;
+    const EnhancedSnapshot *s=enhanced_snapshot();
+    if(!s || s->dialogs.task_token!=dismiss_token || s->dialogs.owner!=dismiss_owner){dismiss_token=0;return;}
+    if(portable_m1b73_try_enqueue_command((int16_t)0xff00,0,0x200,0,479))dismiss_token=0;
+}
+int enhanced_pointer_tracking(int owner){return pointer.armed && (pointer.event&0xff00)==owner && clip_window_z_order[0]==owner;}
+int enhanced_transaction_wait(void){return lease && !pointer.armed;}
+void enhanced_pointer_poll(void) {
+    if(!pointer.armed)return;
+    if(pointer.external){if(!lease)pointer.armed=pointer.active=0;return;}
+    if(clip_window_z_order[0]!=(pointer.event&0xff00)){
+        if(!lease&&!pointer.down){
+            if(!pointer.external){extern int16_t mouse_x_pixels,mouse_y_pixels;portable_m1b73_semantic_pointer(mouse_x_pixels,mouse_y_pixels,0);}
+            pointer.armed=pointer.active=0;
+        }
+        return;
+    }
+    int h,v;enhanced_pointer_coordinates(pointer.x,pointer.y,&h,&v);
+    portable_m1b73_semantic_pointer(h,v,pointer.down);
+    if(pointer.double_pending && portable_m1b73_try_enqueue_command(pointer.event,0,pointer.double_pending,h,v)){
+        pointer.double_pending=0;++ledger.delivered;
+    }
+    if(!lease&&!pointer.down)pointer.armed=pointer.active=0;
+}
+int enhanced_pointer_input(HostInputState *s){
+    if(!pointer.armed || pointer.external || clip_window_z_order[0]!=(pointer.event&0xff00))return 0;
+    int h,v;enhanced_pointer_coordinates(pointer.x,pointer.y,&h,&v);
+    memset(s,0,sizeof(*s));s->x=h;s->y=v;s->left_button_down=(pointer.down&1)!=0;return 1;
+}
+void enhanced_pointer_external_release(void){if(pointer.armed && clip_window_z_order[0]!=(pointer.event&0xff00)){pointer.down=0;pointer.external=1;}}
+void enhanced_pointer_update(int x,int y,int down){pointer.x=x;pointer.y=y;pointer.down=down?pointer.button:0;}
+EnhancedActionResult enhanced_submit_pointer(unsigned event,int x,int y,int modifiers){
+    if(queen_wait&&clip_window_z_order[0]==0x1900&&event==0x1902){
+        if(queen_click)return ENHANCED_QUEUE_FULL;
+        pointer.event=event;pointer.button=1;pointer.external=0;pointer.armed=pointer.active=1;
+        enhanced_pointer_update(x,y,1);queen_click=1;++highest_serial;++ledger.submitted;return ENHANCED_QUEUED;
+    }
+    if(pointer.active){
+        if(pointer.armed && pointer.event==(int)event && (modifiers&0x6000) && !pointer.double_pending){
+            pointer.button=(modifiers&0x4800)?2:1;enhanced_pointer_update(x,y,1);pointer.double_pending=modifiers;++highest_serial;++ledger.submitted;return ENHANCED_QUEUED;
+        }
+        return ENHANCED_QUEUE_FULL;
+    }
+    const char *id=event==4?"P01":event==0x102?"N04":event==0x1902?"Y01":event==0x120d?"A03":event==0x130d?"B03":event==0x502?"I01":event==0x150e?"I04":NULL;
+    if(!id)return ENHANCED_NEEDS_ADAPTER;
+    EnhancedIntent i={.parameter=-2,.source_event=event,.h=x,.v=y,.modifiers=modifiers,.serial=highest_serial+1};
+    memcpy(i.id,id,4);
+    EnhancedActionResult result=enhanced_submit(&i);
+    if(result==ENHANCED_QUEUED){pointer.external=0;pointer.event=event;pointer.button=(modifiers&0x4800)?2:1;pointer.active=1;enhanced_pointer_update(x,y,1);}
+    return result;
+}
+typedef struct NativeTriLevel {uint16_t frac,mid,weight;} NativeTriLevel;
+typedef struct NativeTriVerts {int16_t ax,ay,lx,ly,rx,ry;} NativeTriVerts;
+extern NativeTriVerts modeVerts,casteVerts;
+extern int16_t IsPointInIsoTri(EnhancedPoint *,EnhancedRect *);
+extern void BoundPointToTri(EnhancedPoint *,EnhancedRect *);
+extern void GetTriLatDist(NativeTriLevel *,NativeTriVerts *,EnhancedPoint *);
+/* Labelled percentages choose an original reachable triangle pixel. The
+ * canonical conversion is evaluated into local words only; the actual update,
+ * preset save and IdealCaste release tail still run through Proc*Event. */
+static int allocation_point(int owner,int axis,int percent,int *h,int *v){
+    extern uint8_t modeLevels[],casteLevels[];
+    const SimWindowRefEntry *e=&sim_window_ref_registry.entries[(unsigned)owner>>8];
+    if(!e->bound||e->view.count<=13||axis<0||axis>2||percent<0||percent>100)return 0;
+    EnhancedRect r;memcpy(&r,e->view.object_table[13],8);NativeTriLevel current;memcpy(&current,owner==0x1200?modeLevels:casteLevels,6);
+    uint32_t best=UINT32_MAX;int found=0;
+    for(int y=r.top;y<r.bottom;++y)for(int x=r.left;x<r.right;++x){
+        EnhancedPoint pt={(int16_t)x,(int16_t)y};if(!IsPointInIsoTri(&pt,&r))continue;
+        BoundPointToTri(&pt,&r);NativeTriLevel level;GetTriLatDist(&level,owner==0x1200?&modeVerts:&casteVerts,&pt);
+        const uint16_t *a=(const uint16_t *)&level,*b=(const uint16_t *)&current;
+        if((a[axis]*100u+0x3fff)/65535!=percent)continue;
+        uint32_t distance=0;for(int i=0;i<3;++i)distance+=a[i]>b[i]?a[i]-b[i]:b[i]-a[i];
+        if(distance<best){best=distance;*h=pt.x;*v=pt.y;found=1;}
+    }
+    return found;
+}
+EnhancedActionResult enhanced_submit_allocation(int owner,int axis,int percent){
+    if((owner!=0x1200&&owner!=0x1300)||axis<0||axis>2||percent<0||percent>100)return ENHANCED_BAD_PARAMETER;
+    EnhancedIntent i={.parameter=-3,.source_event=owner+13,.h=percent,.v=axis,.serial=highest_serial+1};
+    memcpy(i.id,owner==0x1200?"A03":"B03",4);return enhanced_submit(&i);
+}
+static uint8_t allocation_values[2][3][101];
+static int allocation_shape[2][2],allocation_ready[2];
+int enhanced_allocation_values(int owner,int axis,uint8_t values[101]){
+    int which=owner==0x1200?0:owner==0x1300?1:-1;
+    if(which<0||axis<0||axis>2||!allocation_ready[which])return 0;
+    memcpy(values,allocation_values[which][axis],101);return 1;
+}
+void enhanced_allocation_catalog_refresh(void){
+    extern uint16_t triWidth,triHeight;
+    for(int owner=0;owner<2;++owner){
+        const SimWindowRefEntry *e=&sim_window_ref_registry.entries[owner?0x13:0x12];
+        if(!e->bound||e->view.count<=13)continue;
+        EnhancedRect r;memcpy(&r,e->view.object_table[13],8);int w=r.right-r.left,h=r.bottom-r.top;
+        if(w<3||h<3||w!=triWidth||h!=triHeight)continue;
+        if(allocation_ready[owner]&&allocation_shape[owner][0]==w&&allocation_shape[owner][1]==h)continue;
+        NativeTriVerts vertices={(int16_t)(r.left+w/2),r.top,r.left,r.bottom,r.right,r.bottom};
+        memset(allocation_values[owner],0,sizeof(allocation_values[owner]));
+        for(int y=r.top;y<r.bottom;++y)for(int x=r.left;x<r.right;++x){
+            EnhancedPoint p={(int16_t)x,(int16_t)y};if(!IsPointInIsoTri(&p,&r))continue;
+            BoundPointToTri(&p,&r);NativeTriLevel levels;GetTriLatDist(&levels,&vertices,&p);
+            const uint16_t values[]={levels.frac,levels.mid,levels.weight};
+            for(int i=0;i<3;++i)allocation_values[owner][i][(values[i]*100u+0x3fff)/65535]=1;
+        }
+        allocation_shape[owner][0]=w;allocation_shape[owner][1]=h;allocation_ready[owner]=1;
+    }
+}
 void enhanced_execute_next(void) {
-    if (! enhanced_contracts_enabled() || ! count || executing || CurGameType < 0 || CurGameTool != - 1 || ui_pending_menu_item || (enhanced_window_flags(clip_window_z_order [0]) & 0x40)) return;
+    if(enhanced_contracts_enabled()&&CurGameType>=0)enhanced_allocation_catalog_refresh();
+    if (! enhanced_contracts_enabled() || ! count || executing || CurGameType < 0 || ui_pending_menu_item || (enhanced_window_flags(clip_window_z_order [0]) & 0x40)) return;
     PortableM1B73TimerQueueView ring;
     if (! portable_m1b73_get_source_timer_queue_view(& ring) || ! ring.capacity || * ring.capacity < 2 || * ring.count < 0 || * ring.count >= * ring.capacity - 1) return;
     int16_t event = queue [head].event, owner = queue [head].owner;
@@ -367,6 +522,7 @@ void enhanced_execute_next(void) {
             head = (head + 1) % QUEUE_SIZE;
             -- count;
             ++ ledger.rejected;
+            if(queue[(head+QUEUE_SIZE-1)%QUEUE_SIZE].intent.parameter==-2)pointer.active=0;
             executing = lease = 0;
             return;
         }
@@ -390,15 +546,28 @@ void enhanced_execute_next(void) {
             h = sim_window_wire_read_i16(b, 0);
         }
     }
+    if(intent->parameter==-3 && !allocation_point(owner,intent->v,intent->h,&h,&v)){
+        ++ledger.rejected;executing=lease=0;return;
+    }
     if (! event) {
         edit_scroll_and_redraw(intent->h, intent->v);
         ++ ledger.delivered;
         lease = 0;
     }
-    else if (portable_m1b73_try_enqueue_command(event, 0, intent->modifiers, h, v)) ++ ledger.delivered;
     else {
-        ++ ledger.rejected;
-        lease = 0;
+        if(intent->parameter==-2) {
+            pointer.event=event;
+            if(event==4){
+                extern EnhancedPoint MapPnt;extern EnhancedRect editTileRect;
+                int tx=intent->h/16,ty=intent->v/16,w=(editTileRect.right-editTileRect.left)/16,h=(editTileRect.bottom-editTileRect.top)/16;
+                if(tx<MapPnt.x||tx>=MapPnt.x+w||ty<MapPnt.y||ty>=MapPnt.y+h)edit_scroll_and_redraw(tx-w/2-MapPnt.x,ty-h/2-MapPnt.y);
+            }
+            pointer.armed=1;pointer.active=1;
+            enhanced_pointer_coordinates(intent->h,intent->v,&h,&v);
+            enhanced_pointer_poll();
+        }
+        if (portable_m1b73_try_enqueue_command(event, 0, intent->modifiers, h, v)) ++ ledger.delivered;
+        else {++ledger.rejected;lease=0;}
     }
     executing = 0;
 }
@@ -409,10 +578,14 @@ int enhanced_action_lease_active(void) {
     return lease != 0;
 }
 void enhanced_action_finish(void) {
+    if(pointer.armed&&!pointer.down){
+        if(!pointer.external)enhanced_pointer_poll();
+        pointer.active=pointer.armed=pointer.double_pending=0;
+    }
     lease = 0;
 }
-/* Retained step B discrete clients use the same semantic FIFO on the first
- * activation click. Unimplemented held editors retain their compatibility path. */
+/* Discrete source objects retain their original first-click FIFO route. Live
+ * canvas trackers use enhanced_submit_pointer instead of this hit lookup. */
 int enhanced_submit_hit(int owner, int h, int v) {
     if (! enhanced_contracts_enabled() || (enhanced_window_flags(clip_window_z_order [0]) & 0x40)) return 0;
     unsigned slot = (unsigned) owner >> 8;

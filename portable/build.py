@@ -315,6 +315,13 @@ def main():
             errors.append({'source':rel,'stage':'register return ABI','error':str(exc)})
         dest=OUT/(unit['module'].replace(':','_').replace('@','_')+'.c')
         text=prefix+'#pragma pack(push,2)\n'+text+'\n#pragma pack(pop)\n'
+        # Read-only presentation accessors live beside private source state.
+        # No canonical statement or declaration is replaced by this adapter.
+        observer={'src/ui/info_cards.c':'card','src/ui/history_window.c':'history','src/ui/map_window.c':'map'}.get(rel)
+        if observer:
+            observer_path='portable/whole_program/enhanced/'+observer+'_observer.inc'
+            text+='\n#include <string.h>\n#include "portable/whole_program/window_runtime_owner.h"\n'+(ROOT/observer_path).read_text()
+            row['presentation_observer']={'source':observer_path,'sha256':sha(ROOT/observer_path),'access':'read only'}
         dest.write_text(text,encoding='latin1')
         row.update(generated=str(dest),status='WHOLE_CANONICAL_TU_CONVERTED');
         if rel=='src/memory/ralloc.c':

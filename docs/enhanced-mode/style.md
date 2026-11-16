@@ -1,6 +1,6 @@
 # Enhanced style draft: ordinary SimAnt windows
 
-Owner review draft, 2026-11-15. This records the latest clarification: **undocked
+Approved target, 2026-11-16; implementation notes in [build B](build-b.md). **Undocked
 enhanced mode stays close to Windows 3.1 SimAnt**. Keep its window families,
 titles, natural client sizes, triangles, graphs, cards, menus and command meanings.
 Improve text/art rendering and DPI handling. Smooth scrolling and zoom belong to
@@ -10,7 +10,8 @@ windows; do not turn the other windows into redesigned inspectors.
 Review images and the per-window evidence/relocation tables are in
 [`build/workers/enhanced-style/mockups/README.md`](../../build/workers/enhanced-style/mockups/README.md).
 These ignored images require local game assets. They are static targets, not an
-implemented frontend or proof of action equivalence.
+runtime capture or proof of action equivalence. Actual build B readbacks live in
+`build/workers/enhanced-build-b/screens/` with their own receipts.
 
 ## Palette and rendering
 
@@ -80,7 +81,9 @@ transaction. Persist each window's attachment edge/offset and floating bounds
 in DPI-independent units; recover title strips onto a visible monitor. Store
 layout separately from game saves.
 
-World clients have no scroll bars: drag or middle-drag pans; wheel zooms around
+World clients have no scroll bars: middle-drag pans; left input retains original
+world gestures, held tools and double-clicks. Extra read-only world views also
+allow left-drag pan. Wheel zooms around
 the pointer; Shift+wheel pans; Ctrl+Plus/Minus and Ctrl+0 zoom/reset. These are
 world-only bindings; text fields keep native editing. Preserve original source
 navigation/action contracts and modal waits; passive layout never changes game
@@ -93,5 +96,5 @@ from source logical lifetime. Replace the tab/split tree, dock compass, collapse
 Move Panel buttons and Play/Colony/Research/Minimal presets with the attachment
 model above. Restore the full File/Window/View/Options/Speed menu and its source
 enabled/check state. The review uses the source label **Unpause** because the
-captured game is paused. No phase 2 code is changed by this draft; its raw
-invariance, accessibility and physical-DPI limitations remain open.
+captured game is paused. Builds A/B implement that model; their exact test
+receipts retain the raw invariance, accessibility and physical-DPI limitations.

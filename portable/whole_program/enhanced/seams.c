@@ -49,6 +49,7 @@ void enhanced_source_poll(void)
 {
     if (!enhanced_contracts_enabled()) return;
     int16_t top=clip_window_z_order[0];
-    if ((enhanced_window_flags(top)&0x40) || top==0x1a00 || top==0x1e00 || top==0x2100)
+    if ((enhanced_window_flags(top)&0x40) || top==0x1a00 || top==0x1e00 || top==0x2100 || enhanced_transaction_wait() || enhanced_queen_wait() || enhanced_pointer_tracking(0x1500))
         enhanced_publish(ENHANCED_MODAL_POLL);
+    enhanced_execute_wait_dismiss();
 }

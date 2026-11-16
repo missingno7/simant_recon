@@ -380,3 +380,16 @@ void input_remove_hooks(void)
     provider->event_pump_active = 0;
     *s->cursor_initialized = 0;
 }
+
+/* Native semantic tracker device: no hit-box command is generated a second time.
+ * The durable executor has already queued the original object transaction. */
+void portable_m1b73_semantic_pointer(int x,int y,int down) {
+    PortableM1B73MouseProvider *p=require_mouse();
+    if(x<0)x=0;
+    if(y<0)y=0;
+    if(x>*p->screen_width-4)x=*p->screen_width-4;
+    if(y>*p->screen_height-4)y=*p->screen_height-4;
+    p->driver_buttons=(uint8_t)down;
+    if(*p->state->x==x && *p->state->y==y && (*p->state->button_state&3)==down)return;
+    if(portable_m1b73_mouse_callback(p,0,(uint8_t)down,(int16_t)x,(int16_t)y)!=PORTABLE_M1B73_MOUSE_OK)abort();
+}

@@ -25,6 +25,17 @@ class EnhancedMode(unittest.TestCase):
                                  cwd=ROOT, capture_output=True, text=True, timeout=1200)
             self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
 
+    @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
+    def test_enhanced_native_content(self):
+        """Native content windows (Map, Yard family, Behavior/Caste, History, Info, Status): portable/tests/enhanced/content.py."""
+        parent = ROOT / 'build/scratch'
+        parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='enc-', dir=parent) as scratch:
+            run = subprocess.run([sys.executable, str(ROOT / 'portable/tests/enhanced/content.py'),
+                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r')],
+                                 cwd=ROOT, capture_output=True, text=True, timeout=1200)
+            self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
+
 
 if __name__ == '__main__':
     unittest.main()

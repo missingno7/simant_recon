@@ -9,3 +9,6 @@ void native_workspace_manage_window(SDL_Window *window,int logical,int width,int
 int native_workspace_shortcut(unsigned message,uintptr_t key){(void)message;(void)key;return 0;}
 
 void native_workspace_reveal_game(void){}
+int enhanced_pointer_input(HostInputState *state){(void)state;return 0;}
+void enhanced_pointer_poll(void){}
+void enhanced_pointer_external_release(void){}

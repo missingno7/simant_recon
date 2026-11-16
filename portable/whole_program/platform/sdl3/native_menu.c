@@ -25,6 +25,16 @@ int native_menu_command(int code)
 {
     if ((code & 0xff00) != 0xfd00 || command_count == COMMAND_QUEUE) return 0;
     if(enhanced_contracts_enabled()){
+          /* Shared commands use the original relocated control transaction,
+           * including owner preparation. Yard menu routes alone omit that
+           * preparation and can retain a different animation selection. */
+          static const struct { int menu,control; } shared[]={
+              {0xfd26,8},{0xfd27,9},{0xfd28,10},{0xfd41,15},
+              {0xfd13,0x10f},{0xfd14,0x111},{0xfd15,0x113},
+              {0xfd16,0x115},{0xfd17,0x114},{0xfd23,0x1909},{0xfd24,0x190a}
+          };
+          for(unsigned i=0;i<sizeof(shared)/sizeof(shared[0]);++i)
+              if(code==shared[i].menu){code=shared[i].control;break;}
         int okay=enhanced_submit_event((unsigned)code,0,0,0)==ENHANCED_QUEUED;
         if(okay&&code==0xfd11)native_workspace_reveal_game();return okay;
     }

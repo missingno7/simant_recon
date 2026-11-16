@@ -1,4 +1,4 @@
-# Enhanced native windows: build A
+# Enhanced native windows: builds A and B
 
 This replaces the phase 2 split/tab workspace preview with the approved simple
 window model. Enable `SIMANT_ENHANCED_CONTRACTS=1` and `--windows` on Windows.
@@ -8,9 +8,10 @@ no HWND and also uses that comparison host. Classic remains unchanged.
 `enhanced/workspace.{h,c}` stores ordinary window records, without tree/group/tab
 nodes. `platform/sdl3/native_workspace.c` creates three owned world HWNDs and the
 two fixed control-panel HWNDs. It also applies ownership, fixed frame capability,
-DPI, movement and attachment policy to retained content/dialog SDL HWNDs. Those
-clients keep their current presentation for steps B/C. Map and Yard command rows
-are cropped out; only their source viewport remains. The overview caption is Map.
+DPI, movement and attachment policy to content/dialog SDL HWNDs. Build B replaces
+the game-content paints and controls as described in [its guide](build-b.md).
+Step C dialogs retain their compatibility presentation. Map and Yard command rows
+live only in the control panels. The overview caption is Map.
 Status and other source tasks retain the source close policy and accepted outcomes.
 No minimize buttons are added to game children. Only world views resize/maximize.
 
@@ -45,15 +46,16 @@ prepares/flushes the action's source owner before delivery. Map/Yard preparation
 uses their original transitions before opening the required owner. Primary pan
 uses the catalog's complete `edit_scroll_and_redraw` logic entry at an outer
 source seam; native callbacks never call it. Its source XOR stepping/clamping is
-retained. Primary dragging previews smooth host movement and commits the delta
-on release. Extra-plane drags and all wheel zoom are passive host operations.
+retained. Middle dragging previews smooth host movement and commits the delta
+on release. Left input retains original world actions, held tools and double-clicks.
+Extra-plane middle drags and all wheel zoom are passive host operations.
 Worlds use immutable phase 1 art/snapshots, without source cache dependencies.
 
 The first activation click in retained discrete content controls also submits
 through the durable FIFO. Auto/Manual, allocation sets, units/help and History
-series therefore finish the owner flush before one delivery. Held triangle/card/
-world tool transactions remain their existing compatibility path for B/C; this
-is not a claim that phase 0's unavailable gesture/task-result adapters are complete.
+series therefore finish the owner flush before one delivery. Build B's live
+pointer adapter drives original triangle/card/world trackers and Yard waits.
+Buffered gesture transcripts and general task-result injection remain unavailable.
 
 `%LOCALAPPDATA%\SimAnt\windows-v2.txt` stores DIP floating bounds, monitor identity,
 edge/offset, host visibility and world camera/zoom. `SIMANT_WORKSPACE_LAYOUT=PATH`
@@ -70,6 +72,7 @@ python portable/tests/enhanced/workspace.py --build BUILD --out FRESH_UI --scree
 python portable/tests/enhanced/action_equivalence.py --build BUILD --out FRESH_ACTIONS
 python portable/tests/enhanced/run.py --build BUILD --out FRESH_REGRESSIONS
 python portable/tests/enhanced/invariance.py --build BUILD --out FRESH_PASSIVE
+python portable/tests/enhanced/content.py --build BUILD --out FRESH_CONTENT --screens FRESH_SCREENS
 ```
 
 `run.py` now requires both regressions PASS; activation is no longer XFAIL.
@@ -83,8 +86,10 @@ including repeat-off controls and real native attach/detach/move/resize/zoom/res
 plus serialized roundtrips. No new masks are used. A nonzero report remains a
 failure/difference, even if SaveRec/RNG and bounded gameplay projections agree.
 
-Final build A is partial. The [task receipt](../../build/workers/enhanced-build-a/RESULT.md)
+Historical build A is partial. The [task receipt](../../build/workers/enhanced-build-a/RESULT.md)
 records missing world/editor clients in the docked readback, tooltip placement at
 the frame corner, outstanding world-tool gestures, incomplete action outcomes and
 strict raw-state differences. Passing HWND/model checks does not certify those
-pixels. Neither visual defect is established as capture-only.
+pixels. Neither visual defect was established as capture-only. Build B repairs
+those content and tooltip paths; [its receipt](../../build/workers/enhanced-build-b/RESULT.md)
+records the final checks and any remaining differences separately.

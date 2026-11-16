@@ -1,3 +1,4 @@
+#include "portable/whole_program/enhanced/actions.h"
 #include "host_modes.h"
 #include "native_windows.h"
 #include "native_workspace.h"
@@ -527,6 +528,7 @@ int host_get_input_state(Host *host, HostInputState *state)
     float window_x, window_y, logical_x, logical_y;
     SDL_MouseButtonFlags buttons;
     if (host == NULL || state == NULL) return 0;
+    if (enhanced_pointer_input(state)) return 1;
     if (virtual_quantum) { *state = host->replay_state; return 1; }
     if (native_workspace_input(state)) return 1;
     buttons = SDL_GetMouseState(&window_x, &window_y);
@@ -600,6 +602,8 @@ int host_poll_event(Host *host, HostEvent *event)
     ++poll_calls;
     while (native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
         ++poll_events;
+        if(raw.type==SDL_EVENT_MOUSE_BUTTON_UP)enhanced_pointer_external_release();
+        enhanced_pointer_poll();
         if (native_workspace_filter(&raw)) continue;
         if ((raw.type == SDL_EVENT_WINDOW_RESIZED || raw.type == SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED ||
              raw.type == SDL_EVENT_WINDOW_DISPLAY_SCALE_CHANGED) &&
@@ -716,6 +720,7 @@ int host_poll_event(Host *host, HostEvent *event)
         }
         return 1;
     }
+    enhanced_pointer_poll();
     return 0;
 }
 

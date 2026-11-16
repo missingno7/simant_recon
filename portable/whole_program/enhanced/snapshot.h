@@ -51,6 +51,7 @@ typedef struct EnhancedWorldSnapshot {
 
 typedef struct EnhancedOverviewSnapshot {
     int16_t map_mode, yard_mode;
+    int16_t foot_here,foot_x,foot_y,boy_here,boy_direction,mower_x,mower_y;
     EnhancedYardActors actors;
     char message[300],human_balloon[300];
     EnhancedRect tiles;
@@ -58,16 +59,21 @@ typedef struct EnhancedOverviewSnapshot {
     EnhancedPoint yard_selection, current_patch;
     uint8_t population_black[12][16], population_red[12][16];
     int16_t stored_queens, placement_auto, colonies_black, colonies_red;
+    uint8_t terrain_colors[144],house_colors[208],life_colors[48],nest_colors[40];
+    uint8_t map_cells[128*64],map_cells_available;
+    int16_t spider_direction,map_frozen;
 } EnhancedOverviewSnapshot;
 
 typedef struct EnhancedAllocationSnapshot {
     int16_t automatic, preset, percent;
     uint16_t frac, mid, weight;
     int16_t population[6];
+    EnhancedRect triangle;
+    EnhancedPoint knob;
 } EnhancedAllocationSnapshot;
 typedef struct EnhancedPanelsSnapshot {
     EnhancedAllocationSnapshot behavior, caste;
-    int16_t game_type, tool, paused, speed, options[6];
+    int16_t game_type, tool, experiment_tool, paused, speed, options[6];
     int16_t health_yellow, health_black, health_red, warning_yellow, warning_black;
     int16_t population_black, population_red;
 } EnhancedPanelsSnapshot;
@@ -78,6 +84,8 @@ typedef struct EnhancedCardsSnapshot {
      * Unavailable means unavailable, never an empty successfully decoded card. */
     uint8_t content_available, links_available;
     int16_t help_owner;
+    unsigned link_count;
+    struct { EnhancedRect rect; int16_t target; char label[40]; } links[128];
 } EnhancedCardsSnapshot;
 
 typedef struct EnhancedHistorySnapshot {
@@ -87,6 +95,7 @@ typedef struct EnhancedHistorySnapshot {
     uint8_t score_metrics_available, selection_available;
     char status[160];
     uint8_t status_truncated;
+    int16_t score_metrics[8], shown[4], colors[10];
 } EnhancedHistorySnapshot;
 
 typedef struct EnhancedObjectSnapshot {
@@ -110,7 +119,7 @@ typedef struct EnhancedDialogsSnapshot {
 } EnhancedDialogsSnapshot;
 
 typedef enum EnhancedSeam {
-    ENHANCED_OUTER_BEFORE, ENHANCED_OUTER_AFTER, ENHANCED_MODAL_POLL
+    ENHANCED_OUTER_BEFORE, ENHANCED_OUTER_AFTER, ENHANCED_MODAL_POLL, ENHANCED_TRACKER_DRAW
 } EnhancedSeam;
 typedef struct EnhancedSnapshot {
     uint64_t generation;

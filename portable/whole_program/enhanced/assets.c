@@ -7,6 +7,8 @@
 static uint8_t terrain[2][32768], life[2][24576];
 static EnhancedArt art[256];
 static unsigned art_count;
+static struct { int id,kind; size_t size; uint8_t *data; } resources[2048];
+static unsigned resource_count;
 static uint8_t *font;
 static size_t font_size;
 static int ready;
@@ -77,7 +79,7 @@ static int database(const char *root,const char *stem,unsigned *found)
     for (unsigned i=0;i<le(ndx);++i) {
         const uint8_t *r=ndx+20+i*8; unsigned id=le(r+4),kind=r[6],flags=r[7];
         size_t off=14+(size_t)le32(r),n; const uint8_t *p; uint8_t *decoded=NULL;
-        if (kind!=2 && !(found && kind==9 && (id==9 || id==10 || id==13 || id==14))) continue;
+        if (kind!=2 && kind!=10 && kind!=17 && kind!=19 && kind!=21 && !(found && kind==9 && (id==9 || id==10 || id==13 || id==14))) continue;
         if (off+10>ds || (n=le(dat+off+6))>ds-off-10) goto done;
         p=dat+off+10;
         if ((flags&1) && !(flags&4) && n) {
@@ -88,7 +90,13 @@ static int database(const char *root,const char *stem,unsigned *found)
             decoded=malloc(n+2); if (!decoded) goto done;
             decoded[0]=decoded[1]=255; memcpy(decoded+2,p,n); p=decoded; n+=2;
         }
-        if (kind==9) {
+        if(kind==10 || kind==17 || kind==19 || kind==21) {
+            if(resource_count==2048){free(decoded);goto done;}
+            uint8_t *copy=malloc(n+1);if(!copy){free(decoded);goto done;}
+            memcpy(copy,p,n);copy[n]=0;
+            resources[resource_count].id=id;resources[resource_count].kind=kind;
+            resources[resource_count].size=n;resources[resource_count++].data=copy;
+        } else if (kind==9) {
             size_t wanted=id<11?32768:24576;
             if (n!=wanted) { free(decoded); goto done; }
             if (id<11) { memcpy(terrain[10-id],p,n); *found|=1u<<(10-id); }
@@ -125,6 +133,14 @@ void enhanced_assets_free(void)
 {
     for (unsigned i=0;i<art_count;++i) free((void *)art[i].pixels);
     art_count=0;free(font);font=NULL;ready=0;
+    for(unsigned i=0;i<resource_count;++i)free(resources[i].data);
+    resource_count=0;
+}
+const uint8_t *enhanced_resource(int id,int kind,size_t *size) {
+    for(unsigned i=0;i<resource_count;++i)if(resources[i].id==id&&resources[i].kind==kind){
+        if(size)*size=resources[i].size;return resources[i].data;
+    }
+    if(size)*size=0;return NULL;
 }
 const EnhancedArt *enhanced_art(int id)
 {

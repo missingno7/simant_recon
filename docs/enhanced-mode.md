@@ -7,8 +7,9 @@ UI choices are ours; the evidence labels distinguish observations from hypothese
 
 Phase 0 APIs, implemented routes, limitations and executable checks are documented in
 [the contract guide](enhanced-mode/contracts.md). The opt-in [phase 1 native world](enhanced-mode/phase1.md)
-uses immutable shipped assets and semantic snapshots. The [ordinary native window host](enhanced-mode/phase2.md) implements build A;
-its B/C compatibility clients and verification limits remain explicit.
+uses immutable shipped assets and semantic snapshots. The [ordinary native window host](enhanced-mode/phase2.md)
+and [build B content](enhanced-mode/build-b.md) replace the game-window interiors.
+Step C dialogs/files/help still use compatibility clients; verification limits remain explicit.
 Investigation references under `build/workers/enhanced-design/` are ignored scratch,
 including every game-art screenshot and resource-derived inventory. Recipes and small
 text traces cited here are retained under `evidence/enhanced-mode/`; rerun recipes in
@@ -58,9 +59,9 @@ A first activation click retains one intent outside the source queue until its
 owner preparation/flush completes, then delivers it once.
 
 Step A implements the window model, game menu, two control panels and world views.
-Step B replaces Map, Yard, allocation, History, Info and Status interiors; step C
-replaces dialogs/files/help. During A these retain their existing clients in
-ordinary native windows. Neither presentation scaffolding nor a bounded passing
+Step B now supplies native Map, Yard/House/Strategic/Graphic, allocation, History,
+Info and Status interiors. Left clicks/drags deliver original game gestures;
+middle-drag pans. Step C still owns dialogs/files/help. Neither presentation scaffolding nor a bounded passing
 test establishes whole-game or original-executable equivalence.
 
 The following deconstruction and action census retain the historical evidence.

@@ -2,6 +2,7 @@
 #include "overlays.h"
 #include "portable/whole_program/window_runtime_owner.h"
 #include "canonical_data_views.h"
+#include "portable/whole_program/platform/handles.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -36,6 +37,29 @@ static unsigned current;
 static uint64_t generation, task_token;
 static int16_t last_owner = INT16_MIN;
 static uint16_t last_modal;
+static int16_t score_metrics[8];
+static int score_available;
+/* Observe completed source text output; ScoreDialog and CalcScore share a
+ * TU, so interposition on CalcScore would miss that call. No score is rerun. */
+extern void __real_font_PrintStr(int16_t,int16_t,char *);
+void __wrap_font_PrintStr(int16_t x,int16_t y,char *message){
+    __real_font_PrintStr(x,y,message);
+    if(!enhanced_contracts_enabled() || !message || clip_window_z_order[0]!=0x1800)return;
+    const SimWindowRefEntry *e=&sim_window_ref_registry.entries[0x18];
+    if(!e->bound||e->view.count<10)return;
+    int value=0;const char *p=message;while(*p==' ')++p;
+    if(*p<'0'||*p>'9')return;
+    while(*p>='0'&&*p<='9'){value=value*10+*p++-'0';if(value>100)return;}
+    if(*p!='%')return;
+    for(unsigned i=0;i<8;++i){const uint8_t *b=(const uint8_t *)e->view.object_table[2+i];
+        if(x>=sim_window_wire_read_i16(b,0)&&x<sim_window_wire_read_i16(b,4)&&y>=sim_window_wire_read_i16(b,2)&&y<sim_window_wire_read_i16(b,6)){
+            score_metrics[i]=(int16_t)value;score_available|=1<<i;break;
+        }
+    }
+}
+extern void enhanced_read_card_links(EnhancedCardsSnapshot *);
+extern void enhanced_read_history_selection(EnhancedHistorySnapshot *);
+extern EnhancedPoint mode_knob_center, caste_knob_center;
 
 int enhanced_contracts_enabled(void)
 {
@@ -111,6 +135,18 @@ extern char **BoyMsgs;
 
 static void overview_snapshot(EnhancedOverviewSnapshot *o)
 {
+    extern uint8_t CTab[144],HTab[208],LTab[48],CTabR[40];
+    memcpy(o->terrain_colors,CTab,sizeof(o->terrain_colors));
+    memcpy(o->house_colors,HTab,sizeof(o->house_colors));
+    memcpy(o->life_colors,LTab,sizeof(o->life_colors));
+    memcpy(o->nest_colors,CTabR,sizeof(o->nest_colors));
+    extern void **fd_50F6_10E2;extern int16_t SpidDir;
+    const uint8_t *cells;size_t size;unsigned extent=multiplier==64?4096:8192;
+    if(fd_50F6_10E2 && sim_handles_global_resolve_payload(fd_50F6_10E2,&cells,&size) && size>=extent){memcpy(o->map_cells,cells,extent);o->map_cells_available=1;}
+    extern int16_t enhanced_read_map_frozen(void);
+    o->map_frozen=enhanced_read_map_frozen();o->spider_direction=SpidDir;
+    extern int16_t FootHere,FootX,FootY,BoyHere,BoyDir,MowX,MowY;
+    o->foot_here=FootHere;o->foot_x=FootX;o->foot_y=FootY;o->boy_here=BoyHere;o->boy_direction=BoyDir;o->mower_x=MowX;o->mower_y=MowY;
     enhanced_yard_copy(o);
     text_copy(o->message,sizeof(o->message),mapMessage,SIZE_MAX);
     if(BoyMessOn && BoyMsgs) text_copy(o->human_balloon,sizeof(o->human_balloon),BoyMsgs[BoyMsgOffset],SIZE_MAX);
@@ -140,7 +176,11 @@ static void panels_snapshot(EnhancedPanelsSnapshot *p)
 {
     allocation(&p->behavior,ModeAuto,modeSet,g_1B62,modeLevels,ModePopB);
     allocation(&p->caste,word(CasteAuto),casteSet,g_1B64,casteLevels,CastePopB);
-    p->game_type=CurGameType; p->tool=CurGameTool; p->paused=GamePaused;
+    const SimWindowRefView *b=window_view(0x1200), *c=window_view(0x1300);
+    if(b && b->count>13)memcpy(&p->behavior.triangle,b->object_table[13],8);
+    if(c && c->count>13)memcpy(&p->caste.triangle,c->object_table[13],8);
+    p->behavior.knob=mode_knob_center;p->caste.knob=caste_knob_center;
+    p->game_type=CurGameType; p->tool=CurGameTool;extern int16_t CurExpTool;p->experiment_tool=CurExpTool; p->paused=GamePaused;
     p->speed=GameSpeed.words[0];
     /* Options are the existing proven six-word semantic span. */
     memcpy(p->options,OptionStates,sizeof(p->options));
@@ -155,6 +195,7 @@ static void cards_snapshot(EnhancedCardsSnapshot *c)
     memcpy(c->previous,g_2E04,sizeof(c->previous));
     int16_t top=clip_window_z_order[0];
     c->help_owner=(enhanced_window_flags(top)&0x40) ? top : INT16_MIN;
+    enhanced_read_card_links(c);
 }
 
 static void history_snapshot(EnhancedHistorySnapshot *h)
@@ -163,6 +204,9 @@ static void history_snapshot(EnhancedHistorySnapshot *h)
     for (unsigned i=0; i<10; ++i) memcpy(h->samples[i],data[i],sizeof(h->samples[i]));
     h->start=HistStart; h->count=word(HistCnt); h->last_overall_score=OverallScore;
     h->status_truncated=text_copy(h->status,sizeof(h->status),g_19C6,SIZE_MAX);
+    enhanced_read_history_selection(h);
+    h->score_metrics_available=(score_available&(CurGameType==2?255:15))==(CurGameType==2?255:15);
+    memcpy(h->score_metrics,score_metrics,sizeof(score_metrics));
 }
 
 static void dialogs_snapshot(EnhancedDialogsSnapshot *d)
