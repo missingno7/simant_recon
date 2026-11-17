@@ -554,9 +554,18 @@ int native_windows_present(const HostPalette *palette)
         SimHostedWindowView view;
         int raise, okay;
         if (!sim_window_hosting_view(i, &view)) continue;
+        const EnhancedSnapshot *published=enhanced_snapshot();
+        if(native_workspace_active()&&(!published||!published->panels.world_ready)&&(view.id==0x100||view.id==0x1900||view.id==0x500||view.id==0x1200||view.id==0x1300||view.id==0x1500||view.id==0x1800)){
+            if(w->shown){SDL_HideWindow(w->surface.window);w->shown=0;}continue;
+        }
         /* Native panel visibility is independent of source logical lifetime.
          * Lifecycle dialogs retain their compatibility host until phase 5. */
-        if (native_workspace_active() && view.id==0) continue;
+        if (native_workspace_active() && view.id==0 && enhanced_compatibility_owner()!=0) {
+            if(w->shown){SDL_HideWindow(w->surface.window);w->shown=0;}continue;
+        }
+        if(native_workspace_active() && view.id==enhanced_proximity_owner()){
+            if(w->shown){SDL_HideWindow(w->surface.window);w->shown=0;}continue;
+        }
         if(native_workspace_active()&&(view.id==0x100||view.id==0x1900)){
             /* Only the source viewport remains; command rows live in the panels. */
             const SimWindowRefEntry *e=&sim_window_ref_registry.entries[(uint16_t)view.id>>8];
@@ -583,9 +592,13 @@ int native_windows_present(const HostPalette *palette)
         }
         w->view = view;
         native_workspace_manage_window(w->surface.window,view.id,w->surface.width,w->surface.height);
+        if(native_workspace_active()&&!w->shown && view.id!=0x100 && view.id!=0x1900 && view.id!=0x500 && view.id!=0x1200 && view.id!=0x1300 && view.id!=0x1500 && view.id!=0x1800)
+            native_workspace_place_prompt(w->surface.window);
         if (w->surface.width <= 0) continue;
         void *native_handle=SDL_GetPointerProperty(SDL_GetWindowProperties(w->surface.window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);
-        if(native_workspace_content_paint(native_handle,NULL,0))okay=1;
+        if(enhanced_compatibility_owner()==view.id)
+            okay=draw_surface(&w->surface,view.planes,view.left,view.top_y+w->strip,palette,NULL);
+        else if(native_workspace_content_paint(native_handle,NULL,0))okay=1;
         else if (w->modern)
             { okay = render_game_window(w, palette) && SDL_RenderPresent(w->surface.renderer); ++hosted_presentations; }
         else if(enhanced_world_enabled() && view.id==0x1900)
@@ -597,7 +610,14 @@ int native_windows_present(const HostPalette *palette)
             fprintf(stderr, "Native window %04X present: %s\n", (unsigned)(uint16_t)view.id, SDL_GetError());
             return 0;
         }
-        if (!w->shown) { SDL_ShowWindow(w->surface.window); w->shown = 1; }
+        if (!w->shown) {
+            SDL_ShowWindow(w->surface.window); w->shown = 1;
+#ifdef _WIN32
+            /* Populate all child pixels on first show/reopen, before any input.
+             * Later refreshes retain change-only standard-control painting. */
+            if(native_workspace_active())RedrawWindow((HWND)native_handle,NULL,NULL,RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);
+#endif
+        }
         if (raise) SDL_RaiseWindow(w->surface.window);
     }
     if (!sync_popups()) return 0;

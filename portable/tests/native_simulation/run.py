@@ -183,7 +183,15 @@ def build_native(build,out,mutation=None):
     # objects' ordinary relocations, and hosting wrappers also need their real
     # canonical targets bound even when this fixture never opens a window.
     platform=json.loads((ROOT/'portable/platform.json').read_text())
+    # The presentation observer also wraps EditMessage. Keep every production
+    # object and put this fixture's callback at that wrapper's real boundary,
+    # rather than defining a second __wrap_EditMessage. GNU --wrap chains the
+    # explicit __real_EditMessage name before resolving the ordinary real alias.
+    message_observer=(['-D__wrap_EditMessage=__wrap___real_EditMessage',
+                       '-Wl,--wrap=__real_EditMessage']
+                      if 'EditMessage' in platform['window_hosting_wraps'] else [])
     command=[report['core_link']['command'][0],'-fno-lto','-shared','-Wl,--export-all-symbols',
+        *message_observer,
         *['-Wl,--wrap='+n for n in BOUNDARIES+platform['window_hosting_wraps']],str(HERE/'native_callbacks.c'),
         '-Wl,@fixture-objects.rsp',str(Path(report['sdk']['path'])/'lib/libSDL3.dll.a'),'-static',
         *[flag for flag in report['application_link']['command'] if flag.startswith('-l')],

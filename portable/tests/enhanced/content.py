@@ -4,7 +4,7 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[3]))
 from portable.tests.enhanced.common import ROOT,check_build
 from portable.tests.acceptance.state_schema import sha
-CASES=['undocked','docked','map','yard','house','strategic','graphic','behavior','caste','history','info','status','triangle-edit','values','map-centre','info-follow','queued-value-map','history-held']
+CASES=['undocked','docked','map','yard','house','strategic','graphic','behavior','caste','history','info','status','triangle-edit','values','map-centre','info-follow','queued-value-map','history-held','steady-controls','camera-follow','exchange-prompt','world-help','placement-edges']
 def run(cmd,**kwargs):
  p=subprocess.run(cmd,capture_output=True,text=True,timeout=120,**kwargs)
  if p.returncode:raise RuntimeError(p.stdout[-2000:]+p.stderr[-2000:])
@@ -13,10 +13,10 @@ def run(cmd,**kwargs):
 def main():
  ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--build',type=Path,required=True);ap.add_argument('--out',type=Path,required=True);ap.add_argument('--screens',type=Path);ap.add_argument('--cases');a=ap.parse_args();build=a.build.resolve();out=a.out.resolve();out.mkdir(parents=True,exist_ok=False);report=check_build(build);cc=report['application_link']['command'][0]
  source=Path(__file__).with_name('content_probe.c');obj=out/'content-probe.o';run([cc,'-std=c11','-O2','-g','-I'+str(ROOT),'-I'+str(ROOT/'build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/include'),'-c',str(source),'-o',str(obj)])
- exe=out/'simant-content.exe';command=report['application_link']['command'][:];command[command.index('-o')+1]=str(exe);command[1:1]=[str(obj),'-Wl,--wrap=enhanced_execute_next','-Wl,--wrap=enhanced_source_poll','-Wl,--wrap=enhanced_publish'];run(command,cwd=build)
+ exe=out/'simant-content.exe';command=report['application_link']['command'][:];command[command.index('-o')+1]=str(exe);command[1:1]=[str(obj),'-Wl,--wrap=enhanced_execute_next','-Wl,--wrap=enhanced_source_poll','-Wl,--wrap=enhanced_publish','-Wl,--wrap=native_workspace_present'];run(command,cwd=build)
  for name in ('SDL3.dll','simant-build-id.txt'):shutil.copyfile(build/name,out/name)
  shutil.copytree(build/'runtime-bios-fonts',out/'runtime-bios-fonts');results=[];cases=a.cases.split(',') if a.cases else CASES
- scratch=ROOT/'build/workers/enhanced-build-b/temporary';scratch.mkdir(parents=True,exist_ok=True)
+ scratch=ROOT/'build/workers/enhanced-menus/temporary';scratch.mkdir(parents=True,exist_ok=True)
  with tempfile.TemporaryDirectory(prefix='content',dir=scratch) as folder:
   assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
   for case in cases:

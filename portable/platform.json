@@ -213,7 +213,9 @@
     "portable/whole_program/enhanced/card_observer.inc",
     "portable/whole_program/enhanced/history_observer.inc",
     "portable/whole_program/platform/sdl3/native_content.inc",
-    "portable/whole_program/enhanced/map_observer.inc"
+    "portable/whole_program/enhanced/map_observer.inc",
+    "portable/whole_program/platform/sdl3/native_proximity.inc",
+    "portable/whole_program/enhanced/proximity_labels.inc"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -242,7 +244,17 @@
     "hanim_RemoveAnimSet",
     "hanim_RenderAnimSet",
     "font_PrintStr",
-    "PlaceQueenInYard"
+    "PlaceQueenInYard",
+    "win_DoProxMenu",
+    "ButtonHeldInit",
+    "win_GetProxEvent",
+    "AntMenu",
+    "dos_keyboard_modifiers",
+    "DoWinHelp",
+    "MagnifyMenu",
+    "ButtonHeld",
+    "EditMessage",
+    "NewGame"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",

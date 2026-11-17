@@ -3,6 +3,13 @@
 #include <SDL3/SDL.h>
 #include "portable/platform/host.h"
 #include "portable/whole_program/enhanced/workspace.h"
+#include "portable/whole_program/enhanced/snapshot.h"
+int native_workspace_proximity(const EnhancedDialogsSnapshot *menu);
+void native_workspace_anchor(int x,int y);
+void native_workspace_activate_point(int x,int y);
+void native_workspace_request_point(int *x,int *y);
+int native_workspace_proximity_modifiers(void);
+void native_workspace_place_prompt(SDL_Window *window);
 int native_workspace_init(SDL_Window *root);
 int native_workspace_active(void);
 void native_workspace_shutdown(void);
@@ -14,6 +21,8 @@ int native_workspace_input(HostInputState *);
 int native_workspace_operation(unsigned step);
 int native_workspace_popup_paint(void *window,void *dc,int frame);
 int native_workspace_content_paint(void *window,void *dc,int frame);
+/* Indexed shipped art, preserving its source mask over the destination DC. */
+int native_workspace_art_paint(void *dc,int id,int x,int y);
 int native_workspace_capture(const char *path);
 const Workspace *native_workspace_layout(void);
 int native_workspace_apply(const Workspace *layout);

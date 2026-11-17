@@ -819,6 +819,8 @@ int main(int argc, char **argv)
             if (window_scale < 1 || window_scale > 8) fail("--scale expects 1..8");
         }
         else if (!strncmp(argv[i], "--windows", 9) && (argv[i][9] == 0 || argv[i][9] == '=')) {
+            if (!argv[i][9] && !getenv("SIMANT_ENHANCED_CONTRACTS"))
+                _putenv("SIMANT_ENHANCED_CONTRACTS=1");
             /* --windows[=ID,ID...] (hex logical IDs). Default: every logical
              * window, dialogs included, is a native window as in Win16. */
             const char *list = argv[i][9] ? argv[i] + 10 : "";

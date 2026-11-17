@@ -7,6 +7,7 @@
 #include "portable/whole_program/enhanced/runtime.h"
 #include "portable/whole_program/window_runtime_owner.h"
 #include <windows.h>
+#include <commctrl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,9 +16,40 @@ extern void __real_enhanced_execute_next(void),__real_enhanced_source_poll(void)
 static int phase,started,checks,failures,captured;
 static EnhancedSnapshot before;
 static const char *test;
+static int watched,standard_paints,standard_erases,monitoring,camera_steps,camera_reached,camera_first,help_seen;
+static ULONGLONG steady_start;
+static POINT camera_start,prompt_point;
 #define CHECK(x) do{++checks;if(!(x)){++failures;fprintf(stderr,"CONTENT_FAIL %d: %s\n",__LINE__,#x);}}while(0)
 static HWND named(const char *name){HWND h=NULL;while((h=FindWindowExA(NULL,h,NULL,NULL))){DWORD pid;GetWindowThreadProcessId(h,&pid);if(pid!=GetCurrentProcessId())continue;char title[160];GetWindowTextA(h,title,sizeof(title));if((!strcmp(title,name)||(!strcmp(name,"Info")&&!strncmp(title,"Info - ",7)))&&(strcmp(name,"SimAnt")||GetMenu(h)))return h;}return NULL;}
 static int is(const char *s){return !strcmp(test,s);}
+static LRESULT CALLBACK watch_control(HWND h,UINT m,WPARAM w,LPARAM l,UINT_PTR id,DWORD_PTR data){
+    (void)id;(void)data;if(monitoring){standard_paints+=m==WM_PAINT;standard_erases+=m==WM_ERASEBKGND;}
+    return DefSubclassProc(h,m,w,l);
+}
+static BOOL CALLBACK watch_child(HWND h,LPARAM unused){
+    (void)unused;char cls[32];GetClassNameA(h,cls,sizeof(cls));
+    if(!lstrcmpiA(cls,"Button")&&(GetWindowLong(h,GWL_STYLE)&BS_TYPEMASK)==BS_OWNERDRAW)return TRUE;
+    if(!lstrcmpiA(cls,"Button")||!lstrcmpiA(cls,"ComboBox")||!lstrcmpiA(cls,"Edit")){++watched;SetWindowSubclass(h,watch_control,91,0);}
+    return TRUE;
+}
+static void begin_steady(void){
+    const Workspace *w=native_workspace_layout();(void)w;
+    const char *names[]={"Map / Ant Control Panel","Yard Control Panel","Behavior Control","Caste Control","History","Info"};
+    for(unsigned i=0;i<sizeof(names)/sizeof(names[0]);++i){HWND h=named(names[i]);if(h){RedrawWindow(h,NULL,NULL,RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);EnumChildWindows(h,watch_child,0);}}
+    SetFocus(named("SimAnt - Game"));steady_start=GetTickCount64();monitoring=1;
+}
+extern void __real_native_workspace_present(const HostPalette *);
+void __wrap_native_workspace_present(const HostPalette *p){
+    __real_native_workspace_present(p);
+    if(!test||!is("camera-follow")||phase<2)return;
+    const EnhancedSnapshot *s=enhanced_snapshot();if(s->world.origin.x==before.world.origin.x&&s->world.origin.y==before.world.origin.y)return;
+    RECT r;HWND game=named("SimAnt - Game");GetClientRect(game,&r);typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");
+    const WsPanel *v=&native_workspace_layout()->panels[WS_GAME];double z=v->zoom/100.0*(dpi?dpi(game):96)/96.;
+    int tx=s->world.origin.x*16+(s->world.hidden_viewport.right-s->world.hidden_viewport.left)/2-(int)(r.right/z)/2;
+    int ty=s->world.origin.y*16+(s->world.hidden_viewport.bottom-s->world.hidden_viewport.top)/2-(int)(r.bottom/z)/2;if(tx<0)tx=0;if(ty<0)ty=0;
+    if(!camera_first){camera_first=1;CHECK(abs(v->camera_x-camera_start.x)<abs(tx-camera_start.x));CHECK(v->camera_x!=s->world.origin.x*16);}
+    ++camera_steps;if(v->camera_x==tx&&v->camera_y==ty)camera_reached=1;
+}
 static BOOL CALLBACK capture_inventory(HWND h,LPARAM unused){
     (void)unused;DWORD pid;GetWindowThreadProcessId(h,&pid);if(pid!=GetCurrentProcessId())return TRUE;
     char title[160],cls[80];GetWindowTextA(h,title,sizeof(title));GetClassNameA(h,cls,sizeof(cls));if(strcmp(cls,"SimAntGameWindow")&&strcmp(cls,"SDL_app"))return TRUE;
@@ -37,9 +69,8 @@ static void allocation_domain(void){
         if((domain_checked&(1u<<owner))||r.right-r.left!=triWidth||r.bottom-r.top!=triHeight)continue;
         for(int y=r.top;y<r.bottom;++y)for(int x=r.left;x<r.right;++x){EnhancedPoint p={(int16_t)x,(int16_t)y};if(!IsPointInIsoTri(&p,&r))continue;BoundPointToTri(&p,&r);uint16_t level[3];GetTriLatDist(level,owner?&casteVerts:&modeVerts,&p);for(int i=0;i<3;++i)seen[i][(level[i]*100u+0x3fff)/65535]=1;}
         HWND window=named(owner?"Caste Control":"Behavior Control");
-        for(int i=0;i<3;++i){HWND combo=GetDlgItem(window,0xe520+i);int expected=0;for(int value=0;value<=100;++value)expected+=seen[i][value];CHECK(SendMessage(combo,CB_GETCOUNT,0,0)==expected);
-            for(int item=0;item<expected;++item){int value=SendMessage(combo,CB_GETITEMDATA,item,0);CHECK(value>=0&&value<=100&&seen[i][value]);if(value>=0&&value<=100)seen[i][value]=0;}
-            for(int value=0;value<=100;++value)CHECK(!seen[i][value]);
+        for(int i=0;i<3;++i){HWND edit=GetDlgItem(window,0xe520+i);char cls[32];GetClassNameA(edit,cls,sizeof(cls));CHECK(!lstrcmpiA(cls,"EDIT"));CHECK(!(GetWindowLong(edit,GWL_STYLE)&ES_READONLY));
+            unsigned char available[101];CHECK(enhanced_allocation_values(owner?0x1300:0x1200,i,available));CHECK(!memcmp(available,seen[i],101));
         }
         domain_checked|=1u<<owner;
     }
@@ -78,6 +109,13 @@ void __wrap_enhanced_publish(EnhancedSeam seam){
 }
 void __wrap_enhanced_source_poll(void){
     __real_enhanced_source_poll();const EnhancedSnapshot *s=enhanced_snapshot();
+    if(test&&is("world-help")&&phase==2&&enhanced_compatibility_owner()==0&&!help_seen){
+        HWND compatibility=named("SimAnt - Quick Game");
+        /* The source help is a visible hosted client while the native world
+         * remains available behind it. Escape returns through the source wait. */
+        CHECK(compatibility!=NULL&&IsWindowVisible(compatibility));help_seen=1;capture(NULL);
+        SDL_Event e={.type=SDL_EVENT_KEY_DOWN};e.key.scancode=SDL_SCANCODE_ESCAPE;e.key.down=1;SDL_PushEvent(&e);e.type=SDL_EVENT_KEY_UP;e.key.down=0;SDL_PushEvent(&e);
+    }
     if(test&&is("history-held")&&phase==2&&!captured&&enhanced_pointer_tracking(0x1500)){
         CHECK(s->dialogs.owner==0x1500);capture("History");HWND h=named("History");typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;SendMessage(h,WM_LBUTTONUP,0,MAKELPARAM(MulDiv(160,d,96),MulDiv(62,d,96)));return;
     }
@@ -91,6 +129,24 @@ void __wrap_enhanced_execute_next(void){
     if(is("values")&&phase>=2)allocation_domain();
     if(!phase&&main_iteration_count>20){phase=1;enhanced_submit_event(0xfd26,0,0,0);enhanced_submit_event(0xfd41,0,0,0);}
     if(phase==1&&main_iteration_count>75&&s->panels.paused&&!s->dialogs.modal){phase=2;started=main_iteration_count;before=*s;if(is("values"))allocation_domain();configure();
+        if(is("camera-follow")){
+            Workspace w=*native_workspace_layout();RECT r;GetClientRect(named("SimAnt - Game"),&r);
+            w.panels[WS_GAME].zoom=100;w.panels[WS_GAME].camera_x=s->world.origin.x*16+(s->world.hidden_viewport.right-s->world.hidden_viewport.left)/2-r.right/2;
+            w.panels[WS_GAME].camera_y=s->world.origin.y*16+(s->world.hidden_viewport.bottom-s->world.hidden_viewport.top)/2-r.bottom/2;
+            if(w.panels[WS_GAME].camera_x<0)w.panels[WS_GAME].camera_x=0;if(w.panels[WS_GAME].camera_y<0)w.panels[WS_GAME].camera_y=0;
+            camera_start=(POINT){w.panels[WS_GAME].camera_x,w.panels[WS_GAME].camera_y};native_workspace_apply(&w);enhanced_submit_pan(2,0);
+        }
+        if(is("steady-controls"))begin_steady();
+        if(is("exchange-prompt")){if(!GetCursorPos(&prompt_point)){RECT r;GetWindowRect(named("SimAnt"),&r);prompt_point=(POINT){(r.left+r.right)/2,(r.top+r.bottom)/2};}SendMessage(named("SimAnt - Game"),WM_KEYDOWN,'X',0);SendMessage(named("SimAnt - Game"),WM_KEYUP,'X',0);}
+        if(is("world-help"))enhanced_submit_event(6,0,0,0);
+        if(is("placement-edges")){
+            SDL_Window *probe=SDL_CreateWindow("Placement probe",300,90,SDL_WINDOW_HIDDEN);CHECK(probe!=NULL);
+            HWND h=SDL_GetPointerProperty(SDL_GetWindowProperties(probe),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);
+            MONITORINFO m={.cbSize=sizeof(m)};GetMonitorInfo(MonitorFromWindow(named("SimAnt"),MONITOR_DEFAULTTONEAREST),&m);
+            POINT corners[]={{m.rcWork.left+1,m.rcWork.top+1},{m.rcWork.right-1,m.rcWork.top+1},{m.rcWork.left+1,m.rcWork.bottom-1},{m.rcWork.right-1,m.rcWork.bottom-1}};
+            for(unsigned i=0;i<4;++i){native_workspace_anchor(corners[i].x,corners[i].y);native_workspace_place_prompt(probe);RECT r;GetWindowRect(h,&r);CHECK(r.left>=m.rcWork.left&&r.top>=m.rcWork.top&&r.right<=m.rcWork.right&&r.bottom<=m.rcWork.bottom);CHECK(abs(r.left-corners[i].x)<=r.right-r.left+8&&abs(r.top-corners[i].y)<=r.bottom-r.top+8);}
+            SDL_DestroyWindow(probe);
+        }
         if(is("history")||is("history-held")||is("undocked")||is("docked")){enhanced_submit_event(0x113,0,0,0);enhanced_submit_event(0x1503,0,0,0);enhanced_submit_event(0x1504,0,0,0);}
         if(is("info")||is("info-follow")||is("undocked")||is("docked"))enhanced_submit_event(0x115,0,0,0);
         if(is("yard"))enhanced_submit_event(0xfd21,0,0,0);
@@ -103,9 +159,9 @@ void __wrap_enhanced_execute_next(void){
             SendMessage(h,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(MulDiv(110,d,96),MulDiv(100,d,96)));
         }
         if(is("map-centre"))click(named("Map"),404,80,0);
-        if(is("values")||is("queued-value-map")){HWND combo=GetDlgItem(named("Caste Control"),0xe521);CHECK(combo!=NULL);if(combo){SendMessage(combo,CB_SETCURSEL,72,0);SendMessage(named("Caste Control"),WM_COMMAND,MAKEWPARAM(0xe521,CBN_SELCHANGE),(LPARAM)combo);}if(is("queued-value-map"))click(named("Map"),404,80,0);}
+        if(is("values")||is("queued-value-map")){HWND edit=GetDlgItem(named("Caste Control"),0xe521);CHECK(edit!=NULL);if(edit){SetFocus(edit);SetWindowTextA(edit,"72");SendMessage(edit,WM_KEYDOWN,VK_RETURN,0);}if(is("queued-value-map"))click(named("Map"),404,80,0);}
     }
-    if(phase==2&&main_iteration_count>started+12&&!s->dialogs.modal){phase=3;
+    if(phase==2&&main_iteration_count>started+12&&!s->dialogs.modal && (!is("camera-follow")||camera_reached) && (!is("steady-controls")||GetTickCount64()-steady_start>600)){phase=3;
         if(is("history-held")&&!captured){HWND h=named("History");typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;phase=2;SendMessage(h,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(MulDiv(160,d,96),MulDiv(62,d,96)));started=main_iteration_count;}
         if(is("info-follow")){CHECK(s->cards.links_available&&s->cards.link_count>1);if(s->cards.link_count>1){const EnhancedRect *r=&s->cards.links[1].rect;
             /* Top card picture links retain their exact native source geometry. */
@@ -115,6 +171,14 @@ void __wrap_enhanced_execute_next(void){
             click(named("Info"),(r->left+r->right)/2-left,(r->top+r->bottom)/2-top,0);started=main_iteration_count;return;}}
     }
     if(phase==3&&main_iteration_count>started+18&&!s->dialogs.modal){phase=4;
+        if(is("camera-follow")){CHECK(camera_steps>1);CHECK(camera_reached);}
+        if(is("steady-controls")){monitoring=0;CHECK(watched>=7);CHECK(standard_paints==0);CHECK(standard_erases==0);fprintf(stderr,"STEADY_CONTROLS watched=%d paints=%d erases=%d\n",watched,standard_paints,standard_erases);}
+        if(is("world-help")){CHECK(help_seen);CHECK(enhanced_compatibility_owner()<0);}
+        if(is("exchange-prompt")){
+            HWND prompt=named("SimAnt command prompt");CHECK(prompt&&IsWindowVisible(prompt));RECT r;GetWindowRect(prompt,&r);MONITORINFO m={.cbSize=sizeof(m)};GetMonitorInfo(MonitorFromPoint(prompt_point,MONITOR_DEFAULTTONEAREST),&m);
+            CHECK(r.left>=m.rcWork.left&&r.top>=m.rcWork.top&&r.right<=m.rcWork.right&&r.bottom<=m.rcWork.bottom);CHECK(abs(r.left-prompt_point.x)<=320&&abs(r.top-prompt_point.y)<=100);CHECK(s->panels.tool==10);
+            char message[160];GetWindowTextA(prompt,message,sizeof(message));CHECK(s->panels.prompt[0]!=0);
+        }
         if(is("map-centre"))CHECK(s->world.origin.x!=before.world.origin.x||s->world.origin.y!=before.world.origin.y);
         if(is("triangle-edit"))CHECK(captured);
         if(is("history-held"))CHECK(captured);

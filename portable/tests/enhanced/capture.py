@@ -15,7 +15,7 @@ def scenario(build,exe,out,name,script,ms,mode='native',scale=1):
     env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_TEST=mode)
     if name=='speech':env['SIMANT_ENHANCED_CAPTURE']=str(d/'selected.bmp')
     if name=='spider':env['SIMANT_ENHANCED_DUMP_ASSETS']=str(d/'catalog.bin')
-    scratch=ROOT/'build/scratch/enhanced';scratch.mkdir(parents=True,exist_ok=True)
+    scratch=ROOT/'build/workers/enhanced-menus/temporary';scratch.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='p1',dir=scratch) as folder:
         shutil.copytree(build/'runtime-assets',folder,dirs_exist_ok=True)
         cmd=[str(exe),'--headless','--deterministic','--windows','--scale='+str(scale),'--seed','0',

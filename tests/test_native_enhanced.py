@@ -36,6 +36,28 @@ class EnhancedMode(unittest.TestCase):
                                  cwd=ROOT, capture_output=True, text=True, timeout=1200)
             self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
 
+    @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
+    def test_enhanced_proximity_menus(self):
+        """Native ant/queen/spider/scent/tools/magnify menus deliver the source choice: portable/tests/enhanced/menus.py."""
+        parent = ROOT / 'build/scratch'
+        parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='enm-', dir=parent) as scratch:
+            run = subprocess.run([sys.executable, str(ROOT / 'portable/tests/enhanced/menus.py'),
+                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r')],
+                                 cwd=ROOT, capture_output=True, text=True, timeout=2400)
+            self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
+
+    @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
+    def test_enhanced_presentation(self):
+        """Start flow without world windows, transparent map icons, allocation windows complete on their first frame: portable/tests/enhanced/presentation.py."""
+        parent = ROOT / 'build/scratch'
+        parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='enp-', dir=parent) as scratch:
+            run = subprocess.run([sys.executable, str(ROOT / 'portable/tests/enhanced/presentation.py'),
+                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r')],
+                                 cwd=ROOT, capture_output=True, text=True, timeout=1800)
+            self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
+
 
 if __name__ == '__main__':
     unittest.main()

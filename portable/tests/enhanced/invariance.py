@@ -38,7 +38,7 @@ def observe(build,exe,state,out,mode,steps,hosted=False,workspace=False):
     env.update(SIMANT_TEST_IDEAL='1',SIMANT_TEST_IDEAL_DGROUP=str(profile['irq09_dgroup']),
         SIMANT_TEST_STEP_CONFIG=str(config),SIMANT_TEST_AUDIO_COMMANDS=str(out/'audio.txt'),
         SIMANT_TEST_AUDIO_CONTENT=str(out/'content.txt'),SIMANT_TEST_DUMP_ENTRY='3')
-    if mode!='off' or hosted:env['SIMANT_ENHANCED_CONTRACTS']='1'
+    env['SIMANT_ENHANCED_CONTRACTS']='1' if mode!='off' or hosted else '0'
     if hosted:env['SIMANT_ENHANCED_WORLD']='0' if mode=='off' else '1'
     env['SIMANT_ENHANCED_WORKSPACE']='0'
     if workspace:
@@ -47,7 +47,7 @@ def observe(build,exe,state,out,mode,steps,hosted=False,workspace=False):
         if mode=='stress':env.update(SIMANT_ENHANCED_LAYOUT_STRESS='1',SIMANT_ENHANCED_LAYOUT_ROUNDTRIP=str(out/'layout-roundtrip.txt'))
     if mode=='stress':env['SIMANT_ENHANCED_TEST']='stress'
     script=ROOT/'portable/tests/runtime/windows-quick.txt'
-    scratch=ROOT/'build/workers/enhanced-build-b/temporary';scratch.mkdir(parents=True,exist_ok=True)
+    scratch=ROOT/'build/workers/enhanced-menus/temporary';scratch.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='a',dir=scratch) as folder:
         assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
         command=[str(exe),*([] if workspace else ['--headless']),'--deterministic','--seed','0','--assets',str(assets),

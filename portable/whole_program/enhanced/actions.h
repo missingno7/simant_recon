@@ -57,6 +57,7 @@ void enhanced_pointer_update(int x,int y,int down);
 void enhanced_pointer_poll(void);
 int enhanced_transaction_wait(void);
 int enhanced_queen_wait(void);
+int enhanced_yard_wait(void);
 int enhanced_pointer_tracking(int owner);
 int enhanced_submit_wait_dismiss(void);
 void enhanced_execute_wait_dismiss(void);

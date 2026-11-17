@@ -1,10 +1,13 @@
 #include "runtime.h"
+#include "actions.h"
 #include "overlays.h"
 #include "portable/whole_program/window_runtime_owner.h"
 #include "canonical_data_views.h"
 #include "portable/whole_program/platform/handles.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include "proximity_labels.inc"
 
 /* Ordinary source owners. Byte-defined words are read by memcpy, rather
  * than declaring a contradictory scalar object in another translation unit. */
@@ -39,11 +42,18 @@ static int16_t last_owner = INT16_MIN;
 static uint16_t last_modal;
 static int16_t score_metrics[8];
 static int score_available;
+static char magnify_text[3][160];
 /* Observe completed source text output; ScoreDialog and CalcScore share a
  * TU, so interposition on CalcScore would miss that call. No score is rerun. */
 extern void __real_font_PrintStr(int16_t,int16_t,char *);
 void __wrap_font_PrintStr(int16_t x,int16_t y,char *message){
     __real_font_PrintStr(x,y,message);
+    if(enhanced_contracts_enabled() && message && clip_window_z_order[0]==0x1d00){
+        const SimWindowRefEntry *e=&sim_window_ref_registry.entries[0x1d];
+        if(e->bound&&e->view.count>=5)for(unsigned i=0;i<3;++i){const uint8_t *b=(const void *)e->view.object_table[i+2];
+            if(x>=sim_window_wire_read_i16(b,0)&&x<sim_window_wire_read_i16(b,4)&&y>=sim_window_wire_read_i16(b,2)&&y<sim_window_wire_read_i16(b,6))snprintf(magnify_text[i],sizeof(magnify_text[i]),"%s",message);
+        }
+    }
     if(!enhanced_contracts_enabled() || !message || clip_window_z_order[0]!=0x1800)return;
     const SimWindowRefEntry *e=&sim_window_ref_registry.entries[0x18];
     if(!e->bound||e->view.count<10)return;
@@ -179,6 +189,12 @@ static void panels_snapshot(EnhancedPanelsSnapshot *p)
     const SimWindowRefView *b=window_view(0x1200), *c=window_view(0x1300);
     if(b && b->count>13)memcpy(&p->behavior.triangle,b->object_table[13],8);
     if(c && c->count>13)memcpy(&p->caste.triangle,c->object_table[13],8);
+    const SimWindowRefView *views[]={b,c};EnhancedAllocationSnapshot *allocs[]={&p->behavior,&p->caste};
+    for(int a=0;a<2;++a)if(views[a]&&views[a]->count>8)for(int i=0;i<6;++i)
+        allocs[a]->control_flags[i]=(uint16_t)word((const uint8_t *)views[a]->object_table[i+3]+0x24);
+    p->world_ready=enhanced_game_ready();
+    extern uint8_t gfx_colour_translation[],g_1B46[],g_1B4A[];
+    for(int i=0;i<3;++i){p->behavior.bar_colors[i]=gfx_colour_translation[g_1B4A[i]&15];p->caste.bar_colors[i]=gfx_colour_translation[g_1B46[i]&15];}
     p->behavior.knob=mode_knob_center;p->caste.knob=caste_knob_center;
     p->game_type=CurGameType; p->tool=CurGameTool;extern int16_t CurExpTool;p->experiment_tool=CurExpTool; p->paused=GamePaused;
     p->speed=GameSpeed.words[0];
@@ -187,6 +203,8 @@ static void panels_snapshot(EnhancedPanelsSnapshot *p)
     p->health_yellow=MeHealth; p->health_black=HealthB; p->health_red=HealthR;
     p->warning_yellow=MeWarnHealth; p->warning_black=BlkWarnHealth;
     p->population_black=BpopT; p->population_red=RpopT;
+    /* editMessage is the proven alias of g_19C6 (semantic-spans.json). */
+    text_copy(p->prompt,sizeof(p->prompt),g_19C6,SIZE_MAX);p->yard_wait=enhanced_yard_wait();
 }
 
 static void cards_snapshot(EnhancedCardsSnapshot *c)
@@ -212,6 +230,7 @@ static void history_snapshot(EnhancedHistorySnapshot *h)
 static void dialogs_snapshot(EnhancedDialogsSnapshot *d)
 {
     d->owner=clip_window_z_order[0]; d->flags=enhanced_window_flags(d->owner);
+    extern int16_t lastProxObj;d->proximity_item=lastProxObj;
     d->modal=(d->flags&0x40)!=0;
     if (last_owner!=d->owner || last_modal!=d->modal) {
         ++task_token; last_owner=d->owner; last_modal=d->modal;
@@ -219,6 +238,9 @@ static void dialogs_snapshot(EnhancedDialogsSnapshot *d)
     d->task_token=task_token;
     const SimWindowRefView *v=window_view(d->owner);
     if (!v) return;
+    int menu_picture=-1;
+    if(v->count>1 && ((const uint8_t *)v->object_table[1])[0x21]==6 && v->object_sizes[1]>=0x2a)
+        menu_picture=word((const uint8_t *)v->object_table[1]+0x28);
     for (unsigned i=0; i<v->count && d->object_count<32; ++i) {
         const uint8_t *b=(const uint8_t *)v->object_table[i];
         size_t extent=v->object_sizes[i];
@@ -236,6 +258,8 @@ static void dialogs_snapshot(EnhancedDialogsSnapshot *d)
             limit=handle ? SIZE_MAX : extent-0x2e;
         }
         o->text_truncated=text_copy(o->text,sizeof(o->text),text,limit);
+        if(o->type==1 && i>=2){const char *label=proximity_label(menu_picture,i-2);if(label)text_copy(o->text,sizeof(o->text),label,SIZE_MAX);}
+        if(d->owner==0x1d00&&i>=2&&i<=4)snprintf(o->text,sizeof(o->text),"%s%s",i==3?"Behavior: ":i==4?"Carrying: ":"",magnify_text[i-2]);
     }
 }
 
@@ -246,6 +270,13 @@ void enhanced_publish(EnhancedSeam seam)
     memset(f,0,sizeof(*f));
     f->seam=seam;
     world_snapshot(&f->world); overview_snapshot(&f->overview);
+    /* A nested wait can interrupt temporary life removal or an incomplete
+     * overlay redraw. Keep the last published scene while the source owns
+     * that wait; current source prompt text still changes independently. */
+    if(seam==ENHANCED_MODAL_POLL && generation && frames[current].world.plane==f->world.plane){
+        char status[sizeof(f->world.status)];memcpy(status,f->world.status,sizeof(status));
+        f->world=frames[current].world;memcpy(f->world.status,status,sizeof(status));
+    }
     panels_snapshot(&f->panels); cards_snapshot(&f->cards);
     history_snapshot(&f->history); dialogs_snapshot(&f->dialogs);
     memcpy(f->logical_order,clip_window_z_order,sizeof(f->logical_order));

@@ -4,6 +4,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 sys.path.insert(0,str(ROOT))
 from portable.tests.acceptance.state_schema import sha
+from portable.tests.hidden_desktop import install
+install()
 
 def check_build(build):
     report=json.loads((build/'report.json').read_text())
@@ -25,7 +27,7 @@ def probe_link(build,out,observer=None):
     else:command=report['application_link']['command'][:]
     exe=out/'simant-enhanced-test.exe'
     command[command.index('-o')+1]=str(exe)
-    command[1:1]=[str(obj),'-Wl,--wrap=enhanced_execute_next','-Wl,--wrap=enhanced_world_enabled','-Wl,--wrap=modern_world_cell_pixels','-Wl,--wrap=ProcCasteEvent']
+    command[1:1]=[str(obj),'-Wl,--wrap=enhanced_execute_next','-Wl,--wrap=enhanced_source_poll','-Wl,--wrap=enhanced_world_enabled','-Wl,--wrap=modern_world_cell_pixels','-Wl,--wrap=ProcCasteEvent']
     if observer:command+=['-Wl,--wrap=portable_test_diagnostics','-Wl,--wrap=portable_test_step_boundary']
     result=subprocess.run(command,cwd=build,capture_output=True,text=True,timeout=120)
     (out/'link.log').write_text(result.stdout+result.stderr)

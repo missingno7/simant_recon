@@ -293,8 +293,15 @@ def main() -> int:
         groups = [("reconstruction tests", [n for n in names if n not in UPPER_LAYER_TESTS], True)]
         if a.upper_tests:
             groups.append(("upper-layer tests", [n for n in names if n in UPPER_LAYER_TESTS], False))
+        # Upper-layer tests open game windows.  They run on a private, non-interactive Windows
+        # desktop (portable/tests/hidden_desktop.py patches subprocess creation and fails closed;
+        # there is no fallback to the visible desktop), because the owner uses this PC meanwhile.
+        hidden = ("import sys; sys.path.insert(0, sys.argv.pop(1)); import hidden_desktop; "
+                  "hidden_desktop.install(); import unittest; unittest.main(module=None)")
         for label, selected, gating in groups:
-            t = subprocess.run([sys.executable, "-m", "unittest", "-q", *selected],
+            launch = ([sys.executable, "-c", hidden, str(ROOT / "portable" / "tests")] if not gating
+                      else [sys.executable, "-m", "unittest"])
+            t = subprocess.run([*launch, "-q", *selected],
                                capture_output=True, text=True, cwd=ROOT / "tests")
             print(label + ": " + (t.stderr.strip().splitlines()[-1] if t.stderr.strip() else t.stdout.strip()))
             if t.returncode:

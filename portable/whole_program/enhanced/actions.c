@@ -7,6 +7,7 @@
 #include <string.h>
 #include "portable/platform/host.h"
 #include "portable/whole_program/enhanced/snapshot.h"
+#include "portable/whole_program/platform/sdl3/native_workspace.h"
 static const EnhancedActionContract contracts [] = {
 #define ACTION(id, route, entry) {id, route, entry},
 #include "catalog.inc"
@@ -26,6 +27,7 @@ enum {
 static struct {
     EnhancedIntent intent;
     int16_t event, owner;
+    int screen_x,screen_y;
 }
 queue [QUEUE_SIZE];
 static unsigned head, count, executing, lease;
@@ -37,6 +39,15 @@ void __wrap_PlaceQueenInYard(void){
     ++queen_wait;__real_PlaceQueenInYard();--queen_wait;queen_click=0;
 }
 int enhanced_queen_wait(void){return queen_wait!=0;}
+static int special_transfer_wait;
+extern void __real_EditMessage(char *,int32_t,int16_t);
+extern char **WindPromptStrs;
+void __wrap_EditMessage(char *text,int32_t duration,int16_t mode){
+    __real_EditMessage(text,duration,mode);
+    if(WindPromptStrs&&text==WindPromptStrs[20])special_transfer_wait=1;
+    else if(!text&&duration==-2)special_transfer_wait=0;
+}
+int enhanced_yard_wait(void){return queen_wait||special_transfer_wait;}
 static EnhancedActionLedger ledger;
 static uint64_t highest_serial;
 extern int16_t edit_scroll_and_redraw(int16_t, int16_t);
@@ -343,6 +354,7 @@ EnhancedActionResult enhanced_submit(const EnhancedIntent * intent) {
     queue [tail].intent = * intent;
     queue [tail].event = event;
     queue [tail].owner = owner;
+    native_workspace_request_point(&queue[tail].screen_x,&queue[tail].screen_y);
     highest_serial = intent->serial;
     ++ ledger.submitted;
     ++ count;
@@ -383,7 +395,7 @@ int enhanced_submit_wait_dismiss(void){
     dismiss_token=s->dialogs.task_token;dismiss_owner=s->dialogs.owner;return 1;
 }
 void enhanced_execute_wait_dismiss(void){
-    if(queen_wait&&queen_click&&clip_window_z_order[0]==0x1900){
+    if(enhanced_yard_wait()&&queen_click&&clip_window_z_order[0]==0x1900){
         int h,v;enhanced_pointer_coordinates(pointer.x,pointer.y,&h,&v);
         enhanced_pointer_poll();
         if(portable_m1b73_try_enqueue_command(0x1902,0,0x200,h,v)){queen_click=0;++ledger.delivered;}
@@ -399,6 +411,10 @@ void enhanced_pointer_poll(void) {
     if(!pointer.armed)return;
     if(pointer.external){if(!lease)pointer.armed=pointer.active=0;return;}
     if(clip_window_z_order[0]!=(pointer.event&0xff00)){
+        /* A native menu/held inspector takes capture from the world HWND.
+         * Its release still belongs to the source device, even while another
+         * logical owner is front and the outer action lease remains live. */
+        if(!pointer.down){extern int16_t mouse_x_pixels,mouse_y_pixels;portable_m1b73_semantic_pointer(mouse_x_pixels,mouse_y_pixels,0);}
         if(!lease&&!pointer.down){
             if(!pointer.external){extern int16_t mouse_x_pixels,mouse_y_pixels;portable_m1b73_semantic_pointer(mouse_x_pixels,mouse_y_pixels,0);}
             pointer.armed=pointer.active=0;
@@ -420,7 +436,7 @@ int enhanced_pointer_input(HostInputState *s){
 void enhanced_pointer_external_release(void){if(pointer.armed && clip_window_z_order[0]!=(pointer.event&0xff00)){pointer.down=0;pointer.external=1;}}
 void enhanced_pointer_update(int x,int y,int down){pointer.x=x;pointer.y=y;pointer.down=down?pointer.button:0;}
 EnhancedActionResult enhanced_submit_pointer(unsigned event,int x,int y,int modifiers){
-    if(queen_wait&&clip_window_z_order[0]==0x1900&&event==0x1902){
+    if(enhanced_yard_wait()&&clip_window_z_order[0]==0x1900&&event==0x1902){
         if(queen_click)return ENHANCED_QUEUE_FULL;
         pointer.event=event;pointer.button=1;pointer.external=0;pointer.armed=pointer.active=1;
         enhanced_pointer_update(x,y,1);queen_click=1;++highest_serial;++ledger.submitted;return ENHANCED_QUEUED;
@@ -453,14 +469,14 @@ static int allocation_point(int owner,int axis,int percent,int *h,int *v){
     const SimWindowRefEntry *e=&sim_window_ref_registry.entries[(unsigned)owner>>8];
     if(!e->bound||e->view.count<=13||axis<0||axis>2||percent<0||percent>100)return 0;
     EnhancedRect r;memcpy(&r,e->view.object_table[13],8);NativeTriLevel current;memcpy(&current,owner==0x1200?modeLevels:casteLevels,6);
-    uint32_t best=UINT32_MAX;int found=0;
+    uint32_t best=UINT32_MAX,error=UINT32_MAX;int found=0;
     for(int y=r.top;y<r.bottom;++y)for(int x=r.left;x<r.right;++x){
         EnhancedPoint pt={(int16_t)x,(int16_t)y};if(!IsPointInIsoTri(&pt,&r))continue;
         BoundPointToTri(&pt,&r);NativeTriLevel level;GetTriLatDist(&level,owner==0x1200?&modeVerts:&casteVerts,&pt);
         const uint16_t *a=(const uint16_t *)&level,*b=(const uint16_t *)&current;
-        if((a[axis]*100u+0x3fff)/65535!=percent)continue;
+        int actual=(a[axis]*100u+0x3fff)/65535;unsigned delta=actual>percent?actual-percent:percent-actual;
         uint32_t distance=0;for(int i=0;i<3;++i)distance+=a[i]>b[i]?a[i]-b[i]:b[i]-a[i];
-        if(distance<best){best=distance;*h=pt.x;*v=pt.y;found=1;}
+        if(delta<error||(delta==error&&distance<best)){error=delta;best=distance;*h=pt.x;*v=pt.y;found=1;}
     }
     return found;
 }
@@ -504,6 +520,7 @@ void enhanced_execute_next(void) {
     if (event && owner == INT16_MIN && ! menu_enabled(event)) return;
     executing = 1;
     lease = 1;
+    native_workspace_activate_point(queue[head].screen_x,queue[head].screen_y);
     if (owner != INT16_MIN) {
         /* Fixed per-action prelude, independent of native focus and geometry.
          * Always finish win_Open's flush, including when already front. */

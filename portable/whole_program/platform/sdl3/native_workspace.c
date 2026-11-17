@@ -30,7 +30,8 @@ typedef struct Native {
     HFONT font;
     int dpi, external, moving, candidate, pan, gesture, gx, gy,card_id,card_scroll,card_max;
     uint8_t keys[256];
-    uint8_t choices[3][101];
+    uint8_t edit_dirty[3],syncing;
+    UINT64 content_painted;
     unsigned link_count;
     struct { RECT rect; unsigned index; } links[128];
     RECT start;
@@ -136,7 +137,8 @@ static const Button buttons [] = {
     }
 };
 static struct {
-    int active, applying, saving, focus, ready, source_plane, source_x, source_y;
+    int active, applying, saving, focus, ready, source_plane, source_x, source_y,painting;
+    int follow, follow_x, follow_y; /* smooth camera target set by a source view move */
     HWND root, preview;
     SDL_WindowID sdl_id;
     int dpi,info_popup;
@@ -168,6 +170,11 @@ static RECT main_client(void) {
 }
 static HFONT make_font(int dpi) {
     return CreateFontW(- scale(13, dpi), 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Segoe UI");
+}
+static POINT native_cursor_point(void){
+    POINT p={0,0};
+    if(!GetCursorPos(&p)&&u.root){RECT r;GetWindowRect(u.root,&r);p=(POINT){(r.left+r.right)/2,(r.top+r.bottom)/2};}
+    return p;
 }
 static void color_fill(HDC dc, RECT r, COLORREF color) {
     HBRUSH b = CreateSolidBrush(color);
@@ -461,9 +468,11 @@ static void size_children(int p) {
 static void draw_indexed(HDC dc, RECT r, const uint8_t * indices, int w, int h) {
     uint32_t * rgb = malloc((size_t) w * h * 4);
     if (! rgb) return;
+    int masked=0;
     for (int i = 0; i < w * h; ++ i) {
         const uint8_t * c = u.palette.rgb [indices [i] & 15];
-        rgb [i] = indices [i] == 255 ? 0xf5f2e8u : (c [0] << 16) | (c [1] << 8) | c [2];
+        masked|=indices[i]==255;
+        rgb [i] = indices [i] == 255 ? 0 : (c [0] << 16) | (c [1] << 8) | c [2];
     }
     BITMAPINFO info = {
         .bmiHeader = {
@@ -471,8 +480,18 @@ static void draw_indexed(HDC dc, RECT r, const uint8_t * indices, int w, int h) 
         }
     };
     SetStretchBltMode(dc, COLORONCOLOR);
-    StretchDIBits(dc, r.left, r.top, r.right - r.left, r.bottom - r.top, 0, 0, w, h, rgb, & info, DIB_RGB_COLORS, SRCCOPY);
+    if(masked){
+        uint32_t *mask=malloc((size_t)w*h*4);if(!mask){free(rgb);return;}
+        for(int i=0;i<w*h;++i)mask[i]=indices[i]==255?0xffffff:0;
+        StretchDIBits(dc,r.left,r.top,r.right-r.left,r.bottom-r.top,0,0,w,h,mask,&info,DIB_RGB_COLORS,SRCAND);
+        free(mask);
+    }
+    StretchDIBits(dc, r.left, r.top, r.right - r.left, r.bottom - r.top, 0, 0, w, h, rgb, & info, DIB_RGB_COLORS, masked?SRCPAINT:SRCCOPY);
     free(rgb);
+}
+int native_workspace_art_paint(void *dc,int id,int x,int y){
+    const EnhancedArt *a=enhanced_art(id);if(!a)return 0;
+    draw_indexed((HDC)dc,(RECT){x,y,x+a->width,y+a->height},a->pixels,a->width,a->height);return 1;
 }
 static int selected(unsigned event, const EnhancedSnapshot * s) {
     if (! s) return 0;
@@ -547,10 +566,61 @@ static void meter(HDC dc, RECT r, int value, int warning, COLORREF c, const char
         SelectObject(dc, old);
     }
 }
+/* Native clients repaint periodically from the live snapshot. Painting through an
+ * off-screen bitmap makes each refresh reach the screen as one copy, so the
+ * background fill under the content is never visible (no flicker). */
+static void buffered(HDC target, RECT r, int p, void (* draw)(HDC, RECT, int)) {
+    int w = r.right - r.left, h = r.bottom - r.top;
+    HDC mem = w > 0 && h > 0 ? CreateCompatibleDC(target) : NULL;
+    HBITMAP bmp = mem ? CreateCompatibleBitmap(target, w, h) : NULL;
+    if (! bmp) {
+        if (mem) DeleteDC(mem);
+        draw(target, r, p);
+        return;
+    }
+    HGDIOBJ old = SelectObject(mem, bmp);
+    SetWindowOrgEx(mem, r.left, r.top, NULL);
+    draw(mem, r, p);
+    SetWindowOrgEx(mem, 0, 0, NULL);
+    BitBlt(target, r.left, r.top, w, h, mem, 0, 0, SRCCOPY);
+    SelectObject(mem, old);
+    DeleteObject(bmp);
+    DeleteDC(mem);
+}
+static void draw_button_direct(DRAWITEMSTRUCT * d, int p);
 static void draw_button(DRAWITEMSTRUCT * d, int p) {
+    RECT r = d->rcItem;
+    int w = r.right - r.left, h = r.bottom - r.top;
+    HDC mem = w > 0 && h > 0 ? CreateCompatibleDC(d->hDC) : NULL;
+    HBITMAP bmp = mem ? CreateCompatibleBitmap(d->hDC, w, h) : NULL;
+    if (! bmp) {
+        if (mem) DeleteDC(mem);
+        draw_button_direct(d, p);
+        return;
+    }
+    HGDIOBJ old = SelectObject(mem, bmp);
+    DRAWITEMSTRUCT item = * d;
+    item.hDC = mem;
+    item.rcItem = (RECT) { 0, 0, w, h };
+    draw_button_direct(& item, p);
+    BitBlt(d->hDC, r.left, r.top, w, h, mem, 0, 0, SRCCOPY);
+    SelectObject(mem, old);
+    DeleteObject(bmp);
+    DeleteDC(mem);
+}
+static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
     Native * n = & u.windows [p];
     const EnhancedSnapshot * s = enhanced_snapshot();
     RECT r = d->rcItem;
+    if(p==WS_BEHAVIOR||p==WS_CASTE){
+        const EnhancedAllocationSnapshot *a=s?(p==WS_BEHAVIOR?&s->panels.behavior:&s->panels.caste):NULL;
+        int slot=(int)d->CtlID-(p==WS_BEHAVIOR?0x1203:0x1303);
+        int on=(d->itemState&ODS_SELECTED)||(a&&slot>=0&&slot<6&&(a->control_flags[slot]&4));
+        color_fill(d->hDC,r,on?RUST:PAPER);DrawEdge(d->hDC,&r,on?EDGE_SUNKEN:EDGE_RAISED,BF_RECT);
+        SelectObject(d->hDC,n->font);SetTextColor(d->hDC,on?RGB(255,255,255):INK);SetBkMode(d->hDC,TRANSPARENT);
+        char label[80];GetWindowTextA(d->hwndItem,label,sizeof(label));DrawTextA(d->hDC,label,-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);
+        if(d->itemState&ODS_FOCUS){InflateRect(&r,-3,-3);DrawFocusRect(d->hDC,&r);}return;
+    }
     int on = selected(d->CtlID, s) || (d->itemState & ODS_SELECTED);
     color_fill(d->hDC, r, on ? RGB(219, 214, 197) : PAPER);
     DrawEdge(d->hDC, & r, on ? EDGE_SUNKEN : EDGE_RAISED, BF_RECT);
@@ -750,6 +820,7 @@ static void zoom(int p, int delta, POINT at) {
     v->camera_x += (int)(at.x / before - at.x / after);
     v->camera_y += (int)(at.y / before - at.y / after);
     v->zoom = now;
+    if (p == WS_GAME) u.follow = 0;
     if (v->camera_x < 0) v->camera_x = 0;
     if (v->camera_y < 0) v->camera_y = 0;
     if (v->camera_x > 2047) v->camera_x = 2047;
@@ -763,6 +834,7 @@ static void warning_command(int id, int percent) {
     enhanced_submit_event(id == 0xe310 ? 17 : 18, percent, -1, 0);
 }
 static void panel_command(int p, int id) {
+    POINT at=native_cursor_point();native_workspace_anchor(at.x,at.y);
     if (id == 0xe300) {
         int speed = SendMessage(GetDlgItem(u.windows [p].h, id), CB_GETCURSEL, 0, 0);
         if (speed >= 0 && speed < 4) enhanced_submit_event(0xfd43 + speed, 0, 0, 0);
@@ -786,6 +858,22 @@ static LRESULT CALLBACK child_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_
         if(msg==WM_MOUSELEAVE||msg==WM_LBUTTONDOWN||msg==WM_KEYDOWN)SendMessageA(parent->tooltip,TTM_TRACKACTIVATE,FALSE,(LPARAM)&tool);
     }
     int control = GetDlgCtrlID(h);
+    int allocation_panel=-1;for(int p=WS_BEHAVIOR;p<=WS_CASTE;++p)if(u.windows[p].h==GetParent(h))allocation_panel=p;
+    if(allocation_panel>=0){
+        if(msg==BM_GETCHECK&&control>=content_owner(allocation_panel)+3&&control<=content_owner(allocation_panel)+8){
+            const EnhancedSnapshot *s=enhanced_snapshot();const EnhancedAllocationSnapshot *a=s?(allocation_panel==WS_BEHAVIOR?&s->panels.behavior:&s->panels.caste):NULL;
+            return a&&(a->control_flags[control-content_owner(allocation_panel)-3]&4)?BST_CHECKED:BST_UNCHECKED;
+        }
+        if(control>=0xe520&&control<=0xe522){
+            if(msg==WM_GETDLGCODE)return DefSubclassProc(h,msg,wp,lp)|DLGC_WANTALLKEYS;
+            if(msg==WM_KEYDOWN&&(wp==VK_RETURN||wp==VK_ESCAPE)){
+                if(wp==VK_RETURN)content_edit_commit(allocation_panel,control-0xe520);
+                else {u.windows[allocation_panel].edit_dirty[control-0xe520]=0;content_sync(allocation_panel);}
+                SendMessage(h,EM_SETSEL,0,-1);return 0;
+            }
+            if(msg==WM_CHAR&&(wp==VK_RETURN||wp==VK_ESCAPE))return 0;
+        }
+    }
     if (control == 0xe310 || control == 0xe311) {
         if (msg == WM_GETDLGCODE) return DLGC_WANTARROWS;
         if (msg == WM_LBUTTONDOWN) {
@@ -894,7 +982,9 @@ static LRESULT CALLBACK managed_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UIN
     LRESULT result;
     int p=(int)data;
     if (common(h,p,msg,wp,lp,&result)) return result;
-    if(content_panel(p)){
+    if(content_panel(p) && enhanced_compatibility_owner()!=content_owner(p)){
+        if(msg==WM_DRAWITEM){draw_button((DRAWITEMSTRUCT *)lp,p);return TRUE;}
+        if(msg==WM_CTLCOLOREDIT){SetTextColor((HDC)wp,INK);SetBkColor((HDC)wp,RGB(255,255,255));return (LRESULT)GetStockObject(WHITE_BRUSH);}
         if(p==WS_INFO&&(msg==WM_MOUSEWHEEL||msg==WM_VSCROLL)){
             Native *n=&u.windows[p];int value=n->card_scroll;
             if(msg==WM_MOUSEWHEEL)value+=GET_WHEEL_DELTA_WPARAM(wp)>0?-32:32;
@@ -902,9 +992,15 @@ static LRESULT CALLBACK managed_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UIN
                 switch(LOWORD(wp)){case SB_LINEUP:value-=16;break;case SB_LINEDOWN:value+=16;break;case SB_PAGEUP:value-=128;break;case SB_PAGEDOWN:value+=128;break;case SB_THUMBTRACK:case SB_THUMBPOSITION:value=si.nTrackPos;break;}}
             if(value<0)value=0;if(value>n->card_max)value=n->card_max;n->card_scroll=value;InvalidateRect(h,NULL,FALSE);return 0;
         }
-        if(msg==WM_PAINT||msg==WM_PRINTCLIENT){PAINTSTRUCT paint;HDC dc=msg==WM_PAINT?BeginPaint(h,&paint):(HDC)wp;RECT r;GetClientRect(h,&r);content_draw(dc,r,p);if(msg==WM_PAINT)EndPaint(h,&paint);return 0;}
+        if(msg==WM_PAINT||msg==WM_PRINTCLIENT){PAINTSTRUCT paint;HDC dc=msg==WM_PAINT?BeginPaint(h,&paint):(HDC)wp;RECT r;GetClientRect(h,&r);if(msg==WM_PAINT)buffered(dc,r,p,content_draw);else content_draw(dc,r,p);if(msg==WM_PAINT){EndPaint(h,&paint);u.windows[p].content_painted=SDL_GetTicksNS();}return 0;}
         if(msg==WM_ERASEBKGND)return 1;
-        if(msg==WM_COMMAND && (HIWORD(wp)==BN_CLICKED||HIWORD(wp)==CBN_SELCHANGE)){content_command(p,LOWORD(wp));return 0;}
+        if(msg==WM_COMMAND&&LOWORD(wp)>=0xe520&&LOWORD(wp)<=0xe522){
+            int axis=LOWORD(wp)-0xe520;
+            if(HIWORD(wp)==EN_CHANGE&&!u.windows[p].syncing)u.windows[p].edit_dirty[axis]=1;
+            if(HIWORD(wp)==EN_KILLFOCUS)content_edit_commit(p,axis);
+            return 0;
+        }
+        if(msg==WM_COMMAND && HIWORD(wp)==BN_CLICKED){content_command(p,LOWORD(wp));return 0;}
         if(content_mouse(h,p,msg,wp,lp))return 0;
     }
     return DefSubclassProc(h,msg,wp,lp);
@@ -928,6 +1024,7 @@ static int forward_world_key(Native *n,UINT msg,WPARAM key){
         case VK_INSERT:scan=SDL_SCANCODE_INSERT;break;case VK_DELETE:scan=SDL_SCANCODE_DELETE;break;
     }
     if(scan==SDL_SCANCODE_UNKNOWN)return 0;
+    if(msg==WM_KEYDOWN && key!=VK_SHIFT && key!=VK_CONTROL && key!=VK_MENU){POINT at=native_cursor_point();native_workspace_activate_point(at.x,at.y);}
     if(msg==WM_KEYUP&&!n->keys[key])return 1;
     n->keys[key]=msg==WM_KEYDOWN;
     SDL_Event event={0};event.type=msg==WM_KEYDOWN?SDL_EVENT_KEY_DOWN:SDL_EVENT_KEY_UP;
@@ -974,7 +1071,8 @@ static LRESULT CALLBACK window_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp) {
         HDC dc = msg == WM_PAINT ? BeginPaint(h, & paint) : (HDC) wp;
         RECT r;
         GetClientRect(h, & r);
-        if (ws_resizable(p)) draw_world(dc, r, p);
+        if (msg == WM_PAINT) buffered(dc, r, p, ws_resizable(p) ? draw_world : draw_panel);
+        else if (ws_resizable(p)) draw_world(dc, r, p);
         else draw_panel(dc, r, p);
         if (msg == WM_PAINT) EndPaint(h, & paint);
         return 0;
@@ -1004,7 +1102,7 @@ static LRESULT CALLBACK window_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp) {
             int x=v->camera_x+(int)(GET_X_LPARAM(lp)/z),y=v->camera_y+(int)(GET_Y_LPARAM(lp)/z);
             if(msg==WM_LBUTTONDOWN||msg==WM_LBUTTONDBLCLK||msg==WM_RBUTTONDOWN||msg==WM_RBUTTONDBLCLK){
                 int mods=msg==WM_LBUTTONDBLCLK?0x2000:msg==WM_RBUTTONDBLCLK?0x4000:msg==WM_RBUTTONDOWN?0x800:0x200;
-                if(enhanced_submit_pointer(4,x,y,mods)==ENHANCED_QUEUED){n->gesture=1;n->gx=x;n->gy=y;SetCapture(h);SetFocus(h);}return 0;
+                POINT screen={GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};ClientToScreen(h,&screen);native_workspace_anchor(screen.x,screen.y);if(enhanced_submit_pointer(4,x,y,mods)==ENHANCED_QUEUED){n->gesture=1;n->gx=x;n->gy=y;SetCapture(h);SetFocus(h);}return 0;
             }
             if(n->gesture){if(msg==WM_CAPTURECHANGED){x=n->gx;y=n->gy;}n->gx=x;n->gy=y;int down=msg==WM_MOUSEMOVE;enhanced_pointer_update(x,y,down);if(!down){n->gesture=0;ReleaseCapture();}return 0;}
         }
@@ -1012,6 +1110,7 @@ static LRESULT CALLBACK window_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp) {
             const EnhancedSnapshot * s = enhanced_snapshot();
             if (p == WS_GAME && s && (s->dialogs.modal || s->panels.tool != - 1)) return 0;
             n->pan = 1;
+            if (p == WS_GAME) u.follow = 0;
             n->pointer = (POINT) {
                 GET_X_LPARAM(lp), GET_Y_LPARAM(lp)
             };
@@ -1070,13 +1169,19 @@ static void arrange(void) {
         if (! n->h) continue;
         RECT r = restored(p);
         SetWindowPos(n->h, HWND_TOP, r.left, r.top, r.right - r.left, r.bottom - r.top, SWP_NOACTIVATE | SWP_NOOWNERZORDER);
-        if (! n->external) ShowWindow(n->h, u.ready && u.layout.panels [p].visible ? SW_SHOWNOACTIVATE : SW_HIDE);
+        if (! n->external){
+            int show=u.ready&&u.layout.panels[p].visible,was=IsWindowVisible(n->h);
+            ShowWindow(n->h,show?SW_SHOWNOACTIVATE:SW_HIDE);
+            if(show&&!was)RedrawWindow(n->h,NULL,NULL,RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);
+        }
     }
     u.applying = 0;
 }
+#include "native_proximity.inc"
 static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_PTR id, DWORD_PTR data) {
     (void) id;
     (void) data;
+    if(proximity_message(msg,lp))return TRUE;
     if (native_workspace_shortcut(msg, wp)) return 0;
     if(msg==WM_LBUTTONDOWN && enhanced_submit_wait_dismiss())return 0;
     if (msg == WM_CLOSE && u.ready) {
@@ -1243,7 +1348,8 @@ static void fixed_client(Native *n,int width,int height){
 void native_workspace_manage_window(SDL_Window *window,int logical,int width,int height){
     if(!u.active)return;int p=panel_for_logical(logical);if(p<0)return;Native *n=&u.windows[p];
     if(content_panel(p))content_size(p,&width,&height);
-    if(n->h){fixed_client(n,width,height);if(content_panel(p)){SetWindowTextA(n->h,ws_name(p));content_sync(p);}return;}
+    /* Runs every frame: Info and Yard captions belong to content_sync, the rest change only when different. */
+    if(n->h){fixed_client(n,width,height);if(content_panel(p)){if(p!=WS_INFO&&p!=WS_YARD)sync_text(n->h,ws_name(p));content_sync(p);}return;}
     SDL_SetWindowBordered(window,true);
     HWND h=SDL_GetPointerProperty(SDL_GetWindowProperties(window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);if(!h)return;
     SetClassLongPtr(h,GCL_STYLE,GetClassLongPtr(h,GCL_STYLE)|CS_DBLCLKS);
@@ -1257,7 +1363,11 @@ void native_workspace_manage_window(SDL_Window *window,int logical,int width,int
 int native_workspace_content_paint(void *window,void *output,int frame){
     if(!u.active)return 0;
     for(int p=WS_MAP;p<=WS_STATUS;++p)if(u.windows[p].h==(HWND)window){
+        if(enhanced_compatibility_owner()==content_owner(p))return 0;
         content_sync(p);
+        /* The present path also visits these clients between WM_PAINT refreshes.
+         * Keep input polling cheap; readbacks and first show always draw now. */
+        if(!output&&IsWindowVisible((HWND)window)&&u.windows[p].content_painted&&SDL_GetTicksNS()-u.windows[p].content_painted<50000000)return 1;
         HDC dc=(HDC)output;int own=!dc;if(own)dc=GetDC((HWND)window);int saved=SaveDC(dc);
         if(frame){RECT r;GetWindowRect((HWND)window,&r);POINT at={0,0};ClientToScreen((HWND)window,&at);SetViewportOrgEx(dc,at.x-r.left,at.y-r.top,NULL);}
         RECT r;GetClientRect((HWND)window,&r);
@@ -1265,8 +1375,9 @@ int native_workspace_content_paint(void *window,void *output,int frame){
         for(HWND child=GetWindow((HWND)window,GW_CHILD);child;child=GetWindow(child,GW_HWNDNEXT))if(IsWindowVisible(child)){
             RECT cr;GetWindowRect(child,&cr);MapWindowPoints(NULL,(HWND)window,(POINT *)&cr,2);ExcludeClipRect(dc,cr.left,cr.top,cr.right,cr.bottom);
         }
-        content_draw(dc,r,p);RestoreDC(dc,saved);
-        if(own)ReleaseDC((HWND)window,dc);return 1;
+        /* Called every frame from the present loop (own DC): draw off-screen and copy once. */
+        if(own)buffered(dc,r,p,content_draw);else content_draw(dc,r,p);RestoreDC(dc,saved);
+        if(own){ReleaseDC((HWND)window,dc);u.windows[p].content_painted=SDL_GetTicksNS();}return 1;
     }return 0;
 }
 int native_workspace_popup_paint(void *window,void *output,int frame){
@@ -1277,10 +1388,13 @@ int native_workspace_popup_paint(void *window,void *output,int frame){
     size_t size;const uint8_t *bytes=enhanced_resource(u.info_popup,10,&size);if(!bytes)return 0;
     char *message=malloc(size+1);if(!message)return 0;size_t n=0;
     for(size_t i=0;i<size;++i)if(bytes[i])message[n++]=bytes[i]=='\r'?'\n':bytes[i];message[n]=0;
-    HDC dc=(HDC)output;int own=!dc;if(own)dc=GetDC((HWND)window);int saved=SaveDC(dc);
-    RECT r;GetClientRect((HWND)window,&r);if(frame){RECT wr;GetWindowRect((HWND)window,&wr);POINT pt={0,0};ClientToScreen((HWND)window,&pt);SetViewportOrgEx(dc,pt.x-wr.left,pt.y-wr.top,NULL);}
+    HDC dc=(HDC)output;int own=!dc;if(own)dc=GetDC((HWND)window);HDC screen=dc;HDC mem=NULL;HBITMAP bmp=NULL;HGDIOBJ old=NULL;
+    RECT r;GetClientRect((HWND)window,&r);RECT full=r;
+    /* Per-frame path: draw off-screen and copy once, so the paper fill is never visible. */
+    if(own&&r.right>0&&r.bottom>0&&(mem=CreateCompatibleDC(screen))!=NULL){if((bmp=CreateCompatibleBitmap(screen,r.right,r.bottom))!=NULL){old=SelectObject(mem,bmp);dc=mem;}else{DeleteDC(mem);mem=NULL;}}
+    int saved=SaveDC(dc);if(frame){RECT wr;GetWindowRect((HWND)window,&wr);POINT pt={0,0};ClientToScreen((HWND)window,&pt);SetViewportOrgEx(dc,pt.x-wr.left,pt.y-wr.top,NULL);}
     color_fill(dc,r,PAPER);FrameRect(dc,&r,GetStockObject(BLACK_BRUSH));InflateRect(&r,-8,-6);SelectObject(dc,u.windows[WS_INFO].font);wchar_t *wide=malloc((n+1)*sizeof(wchar_t));if(wide&&MultiByteToWideChar(10000,0,message,-1,wide,(int)n+1)){SetTextColor(dc,INK);SetBkMode(dc,TRANSPARENT);DrawTextW(dc,wide,-1,&r,DT_LEFT|DT_WORDBREAK|DT_NOPREFIX);}free(wide);
-    RestoreDC(dc,saved);if(own)ReleaseDC((HWND)window,dc);free(message);return 1;
+    RestoreDC(dc,saved);if(bmp){BitBlt(screen,0,0,full.right,full.bottom,mem,0,0,SRCCOPY);SelectObject(mem,old);DeleteObject(bmp);DeleteDC(mem);}if(own)ReleaseDC((HWND)window,screen);free(message);return 1;
 }
 void native_workspace_present(const HostPalette * palette) {
     if (! u.active) return;
@@ -1288,16 +1402,39 @@ void native_workspace_present(const HostPalette * palette) {
     for(int p=WS_MAP;p<=WS_STATUS;++p)if(u.windows[p].h)content_sync(p);
     native_menu_sync();
     const EnhancedSnapshot * s = enhanced_snapshot();
-    int ready = s && s->panels.game_type >= 0;
-    if (ready && ! u.ready) {
-        u.ready = 1;
+    int ready = s && s->panels.world_ready;
+    command_prompt_sync(s);
+    if (ready != u.ready) {
+        u.ready = ready;
         arrange();
     }
     if (s && ready) {
         WsPanel * v = & u.layout.panels [WS_GAME];
+        /* The game moved its view (AutoTrack, edge, Map click, pan release): keep the
+         * source viewport centred in the native view, which is usually larger and
+         * zoomed, and glide there instead of snapping its top-left corner. */
         if ((! u.source_plane || u.source_plane != s->world.plane || u.source_x != s->world.origin.x || u.source_y != s->world.origin.y) && ! u.windows [WS_GAME].pan) {
-            v->camera_x = s->world.origin.x * 16;
-            v->camera_y = s->world.origin.y * 16;
+            Native * g = & u.windows [WS_GAME];
+            RECT cr = { 0, 0, 0, 0 };
+            if (g->h) GetClientRect(g->h, & cr);
+            double z = v->zoom / 100.0 * (g->dpi ? g->dpi : 96) / 96.0;
+            const EnhancedRect * sv = & s->world.hidden_viewport;
+            int tx = s->world.origin.x * 16 + (sv->right - sv->left) / 2 - (int)(cr.right / z) / 2;
+            int ty = s->world.origin.y * 16 + (sv->bottom - sv->top) / 2 - (int)(cr.bottom / z) / 2;
+            if (tx < 0) tx = 0;
+            if (ty < 0) ty = 0;
+            int jump = ! u.source_plane || u.source_plane != s->world.plane || v->camera_x < 0 || v->camera_y < 0;
+            if (jump) { v->camera_x = tx; v->camera_y = ty; u.follow = 0; }
+            else { u.follow = 1; u.follow_x = tx; u.follow_y = ty; }
+        }
+        if (u.follow && ! u.windows [WS_GAME].pan) {
+            int dx = u.follow_x - v->camera_x, dy = u.follow_y - v->camera_y;
+            int sx = dx / 4, sy = dy / 4;
+            if (! sx && dx) sx = dx > 0 ? 1 : - 1;
+            if (! sy && dy) sy = dy > 0 ? 1 : - 1;
+            v->camera_x += sx;
+            v->camera_y += sy;
+            if (v->camera_x == u.follow_x && v->camera_y == u.follow_y) u.follow = 0;
         }
         u.source_plane = s->world.plane;
         u.source_x = s->world.origin.x;
@@ -1318,11 +1455,15 @@ void native_workspace_present(const HostPalette * palette) {
             if (p == WS_ANT) {
                 HWND combo = GetDlgItem(n->h, 0xe300);
                 EnableWindow(combo, okay);
-                if (GetFocus() != combo) SendMessage(combo, CB_SETCURSEL, s->panels.speed, 0);
+                if (GetFocus() != combo && SendMessage(combo, CB_GETCURSEL, 0, 0) != s->panels.speed) SendMessage(combo, CB_SETCURSEL, s->panels.speed, 0);
             }
         }
     }
     if(s){int modal=s->dialogs.modal,owner=modal?panel_for_logical(s->dialogs.owner):-1;
+        /* Compatibility dialogs can follow a proximity choice synchronously.
+         * Preserve its origin again before their native client takes focus. */
+        if(modal&&!source_modal_focus)proximity_preserve_focus();
+        source_modal_focus=modal;
         /* Transfer a held world gesture to its source-owned context/tracker
          * window without inventing a release. Its real SDL button-up ends it. */
         if(modal)for(int p=0;p<=WS_INFO;++p){Native *n=&u.windows[p];int source=ws_resizable(p)?0:content_owner(p);
@@ -1332,16 +1473,28 @@ void native_workspace_present(const HostPalette * palette) {
         if(modal&&owner>=0&&u.windows[owner].h&&u.modal_token!=s->dialogs.task_token){u.modal_token=s->dialogs.task_token;SetForegroundWindow(u.windows[owner].h);SetFocus(u.windows[owner].h);}
         if(!modal)u.modal_token=0;
     }
+    proximity_restore_focus(s);
     UINT64 now = SDL_GetTicksNS();
-    if (now - u.last_paint < 50000000) return;
-    u.last_paint = now;
+    if (u.painting || now - u.last_paint < 50000000) return;
+    u.painting=1;
+    /* Refresh live clients and the owner-drawn picture buttons and meters (both
+     * double-buffered). Standard child controls are left alone: content_sync and
+     * the panel loop above update them only when their value changes. */
     for (int p = 0; p <= WS_STATUS; ++ p) if (u.windows [p].h && IsWindowVisible(u.windows [p].h)) {
-        InvalidateRect(u.windows [p].h, NULL, FALSE);
-        RedrawWindow(u.windows [p].h, NULL, NULL, RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_UPDATENOW);
+        for (HWND c = GetWindow(u.windows [p].h, GW_CHILD); c; c = GetWindow(c, GW_HWNDNEXT)) {
+            char cls [16];
+            if (GetClassNameA(c, cls, sizeof (cls)) && ! lstrcmpiA(cls, "Button") && (GetWindowLong(c, GWL_STYLE) & BS_TYPEMASK) == BS_OWNERDRAW) InvalidateRect(c, NULL, FALSE);
+        }
+        RedrawWindow(u.windows [p].h, NULL, NULL, RDW_INVALIDATE | RDW_NOCHILDREN);
+        RedrawWindow(u.windows [p].h, NULL, NULL, RDW_UPDATENOW | RDW_ALLCHILDREN);
     }
+    /* Slow GDI work must not make the following source poll immediately due
+     * for another full refresh. Source time/input advances between paints. */
+    u.last_paint=SDL_GetTicksNS();u.painting=0;
 }
 int native_workspace_filter(const SDL_Event * e) {
     if (! u.active) return 0;
+    if(enhanced_compatibility_owner()>=0)return 0;
     if(e->type==SDL_EVENT_MOUSE_MOTION||e->type==SDL_EVENT_MOUSE_BUTTON_DOWN||e->type==SDL_EVENT_MOUSE_BUTTON_UP){
         SDL_WindowID id=e->type==SDL_EVENT_MOUSE_MOTION?e->motion.windowID:e->button.windowID;
         for(int p=WS_MAP;p<=WS_INFO;++p)if(u.windows[p].sdl&&SDL_GetWindowID(u.windows[p].sdl)==id && e->common.timestamp!=HOST_REPLAY_EVENT_TIMESTAMP)return 1;
@@ -1354,8 +1507,9 @@ int native_workspace_filter(const SDL_Event * e) {
 }
 int native_workspace_input(HostInputState * s) {
     if (! u.active) return 0;
+    if(enhanced_compatibility_owner()>=0)return 0;
     const EnhancedSnapshot *frame=enhanced_snapshot();
-    if(frame && frame->dialogs.modal && (frame->dialogs.owner!=0x1800))return 0;
+    if(frame && (frame->dialogs.modal || (frame->dialogs.owner!=0 && frame->dialogs.owner!=0x100 && frame->dialogs.owner!=0x1900 && frame->dialogs.owner!=0x500 && frame->dialogs.owner!=0x1200 && frame->dialogs.owner!=0x1300 && frame->dialogs.owner!=0x1500)) && (frame->dialogs.owner!=0x1800))return 0;
     memset(s, 0, sizeof (* s));
     s->x = 320;
     s->y = 240;
@@ -1394,7 +1548,7 @@ static BOOL CALLBACK capture_window(HWND h, LPARAM arg) {
     char title [120], cls [80];
     GetWindowTextA(h, title, sizeof (title));
     GetClassNameA(h, cls, sizeof (cls));
-    if (h != u.root && h != u.preview && strcmp(cls, "SimAntGameWindow") && strcmp(cls, "SDL_app") && strcmp(cls, TOOLTIPS_CLASSA) && strcmp(cls, "#32768")) return TRUE;
+    if (h != u.root && h != u.preview && strcmp(cls, "SimAntGameWindow") && strcmp(cls, "SDL_app") && strcmp(cls, TOOLTIPS_CLASSA) && strcmp(cls, "#32768") && strcmp(cls,"SimAntCommandPrompt")) return TRUE;
     c->windows [c->count ++] = h;
     UnionRect(& c->bounds, & c->bounds, & r);
     return TRUE;
@@ -1478,9 +1632,18 @@ void native_workspace_shutdown(void) {
         if (n->font) DeleteObject(n->font);
     }
     if (u.preview) DestroyWindow(u.preview);
+    if(command_prompt)DestroyWindow(command_prompt);command_prompt=NULL;command_tool=-1;
+    proximity_return_focus=NULL;
     memset(& u, 0, sizeof (u));
 }
 #else
+int native_workspace_art_paint(void *dc,int id,int x,int y){(void)dc;(void)id;(void)x;(void)y;return 0;}
+void native_workspace_activate_point(int x,int y){(void)x;(void)y;}
+void native_workspace_request_point(int *x,int *y){*x=*y=0;}
+int native_workspace_proximity_modifiers(void){return 0;}
+int native_workspace_proximity(const EnhancedDialogsSnapshot *menu){return menu?menu->owner+1:-1;}
+void native_workspace_anchor(int x,int y){(void)x;(void)y;}
+void native_workspace_place_prompt(SDL_Window *w){(void)w;}
 int native_workspace_popup_paint(void *w,void *d,int f){(void)w;(void)d;(void)f;return 0;}
 int native_workspace_content_paint(void *w,void *d,int f){(void)w;(void)d;(void)f;return 0;}
 int native_workspace_init(SDL_Window * root) {

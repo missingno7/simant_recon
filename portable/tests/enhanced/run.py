@@ -6,9 +6,10 @@ from portable.tests.enhanced.common import ROOT, check_build, probe_link
 
 def run_case(build,exe,out,name,script,smoke,mode=None):
     target=out/name;target.mkdir()
-    scratch=ROOT/'build/workers/enhanced-build-b/temporary';scratch.mkdir(parents=True,exist_ok=True)
+    scratch=ROOT/'build/workers/enhanced-menus/temporary';scratch.mkdir(parents=True,exist_ok=True)
     env={k:v for k,v in os.environ.items() if not k.startswith(('SIMANT_ENHANCED','SIMANT_TEST_'))}
     env['SIMANT_ENHANCED_WORKSPACE']='0' # Retained hosted fixtures; workspace has its own suite.
+    env['SIMANT_ENHANCED_CONTRACTS']='1' if mode else '0'
     if mode:env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_TEST=mode)
     if mode=='hybrid':env['SIMANT_ENHANCED_WORLD']='0'
     with tempfile.TemporaryDirectory(prefix='a',dir=scratch) as folder:

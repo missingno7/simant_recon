@@ -8,7 +8,7 @@ static void content_size(int p,int *w,int *h){
 static int content_owner(int p){static const int ids[]={0x100,0x1900,0x1200,0x1300,0x1500,0x500,0x1800};return content_panel(p)?ids[p-WS_MAP]:-1;}
 static RECT content_rect(int l,int t,int r,int b){return (RECT){l,t,r,b};}
 static void content_label(HDC dc,int x,int y,int w,int h,const char *s){text(dc,content_rect(x,y,x+w,y+h),s,DT_LEFT|DT_WORDBREAK|DT_NOPREFIX);}
-static void content_image(HDC dc,int id,int x,int y){const EnhancedArt *a=enhanced_art(id);if(a)draw_indexed(dc,content_rect(x,y,x+a->width,y+a->height),a->pixels,a->width,a->height);}
+static void content_image(HDC dc,int id,int x,int y){native_workspace_art_paint(dc,id,x,y);}
 static void content_line(HDC dc,int x,int y,int xx,int yy,COLORREF color,int width){HPEN pen=CreatePen(PS_SOLID,width,color);HGDIOBJ old=SelectObject(dc,pen);MoveToEx(dc,x,y,NULL);LineTo(dc,xx,yy);SelectObject(dc,old);DeleteObject(pen);}
 static void content_map(HDC dc,const EnhancedSnapshot *s){
     uint8_t cells[128*64];int mode=s->overview.map_mode,nest=mode==2||mode==3;
@@ -50,22 +50,38 @@ static void content_map(HDC dc,const EnhancedSnapshot *s){
     RECT view={x,y,x+w,y+h};FrameRect(dc,&view,GetStockObject(BLACK_BRUSH));InflateRect(&view,-1,-1);HBRUSH b=CreateSolidBrush(RGB(255,243,4));FrameRect(dc,&view,b);DeleteObject(b);
 }
 static const char *allocation_names[2][3]={{"Forage","Dig","Nurse"},{"Breeders","Workers","Soldiers"}};
+static void content_sync(int p);
+static COLORREF content_palette(unsigned index){const uint8_t *rgb=u.palette.rgb[index&15];return RGB(rgb[0],rgb[1],rgb[2]);}
 static const char *history_names[]={"Pop","Pop","Food","Food","Health","Health","S.Food","Eaten","Expired","Killed"};
 static void content_allocation(HDC dc,const EnhancedSnapshot *s,int p){
     const EnhancedAllocationSnapshot *a=p==WS_BEHAVIOR?&s->panels.behavior:&s->panels.caste;
+    RECT canvas={0,0,210,170};color_fill(dc,canvas,RGB(192,192,184));FrameRect(dc,&canvas,GetStockObject(BLACK_BRUSH));
+    /* Shipped 4600/4620 already contain Set labels beneath their hit objects.
+     * Hiding a source hit region does not erase that static decoration. */
+    for(int i=0;i<3;++i)if(!(a->control_flags[i+3]&1)){
+        RECT button={4,46+i*20,42,64+i*20};color_fill(dc,button,RGB(208,206,196));DrawEdge(dc,&button,EDGE_RAISED,BF_RECT);
+        char label[16];snprintf(label,sizeof(label),"Set %d",i+1);text(dc,button,label,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);
+    }
+    content_line(dc,112,42,180,132,EARTH,5);content_line(dc,44,133,178,133,EARTH,4);
     POINT tri[]={{110,42},{44,130},{176,130}};HGDIOBJ old=SelectObject(dc,GetStockObject(WHITE_BRUSH));Polygon(dc,tri,3);SelectObject(dc,old);
-    content_line(dc,110,42,44,130,RGB(255,214,0),2);content_line(dc,44,130,176,130,EARTH,2);
+    content_line(dc,110,42,44,130,RGB(255,243,4),3);
     int tw=a->triangle.right-a->triangle.left,th=a->triangle.bottom-a->triangle.top;
     int x=44+(a->knob.x-a->triangle.left)*132/(tw?tw:1),y=42+(a->knob.y-a->triangle.top)*88/(th?th:1);
-    HBRUSH brush=CreateSolidBrush(RGB(255,214,0));old=SelectObject(dc,brush);Ellipse(dc,x-4,y-4,x+5,y+5);SelectObject(dc,old);DeleteObject(brush);
+    content_image(dc,1400,x-7,y-7);
     const uint16_t levels[]={a->frac,a->mid,a->weight};
     int total=p==WS_BEHAVIOR?a->population[0]+a->population[1]+a->population[2]:a->population[0];
+    RECT panel={181,4,209,94};color_fill(dc,panel,RGB(255,255,255));FrameRect(dc,&panel,GetStockObject(BLACK_BRUSH));
     for(int i=0;i<3;++i){char label[80];long value=((uint32_t)levels[i]*(a->percent?100:total)+0x3fff)/65535;
         if(a->percent)snprintf(label,sizeof(label),"%s",allocation_names[p==WS_CASTE][i]);else snprintf(label,sizeof(label),"%s %ld",allocation_names[p==WS_CASTE][i],value);
-        content_label(dc,i==0?80:i==1?42:144,i==0?0:130,90,17,label);
-        RECT bar={183+i*8,6,188+i*8,66};color_fill(dc,bar,RGB(219,214,197));bar.top=bar.bottom-levels[i]*60/65535;color_fill(dc,bar,i==0?RGB(0,101,16):i==1?INK:EARTH);
+        int lx=i==0?78:i==1?40:142,ly=i==0?0:135;RECT box={lx,ly,lx+66,ly+35};
+        color_fill(dc,box,RGB(255,255,255));HBRUSH edge=CreateSolidBrush(content_palette(a->bar_colors[i]));FrameRect(dc,&box,edge);DeleteObject(edge);
+        content_label(dc,lx+2,ly+1,62,16,label);
+        content_label(dc,lx+50,ly+18,14,16,"%");
+        RECT bar={184+i*8,8,189+i*8,68};bar.top=bar.bottom-levels[i]*60/65535;
+        if(bar.top+1<bar.bottom){color_fill(dc,bar,content_palette(a->bar_colors[i]));FrameRect(dc,&bar,GetStockObject(BLACK_BRUSH));}
     }
-    content_label(dc,180,70,30,30,p==WS_BEHAVIOR?"FDN":"BWS");
+    HFONT small=CreateFontW(-11,0,0,0,FW_NORMAL,0,0,0,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,L"Segoe UI");
+    HGDIOBJ was=SelectObject(dc,small);text(dc,content_rect(181,72,209,90),p==WS_BEHAVIOR?"FDN":"BWS",DT_CENTER|DT_SINGLELINE|DT_NOPREFIX);SelectObject(dc,was);DeleteObject(small);
 }
 static void content_history(HDC dc,const EnhancedSnapshot *s){
     const EnhancedHistorySnapshot *h=&s->history;RECT graph={8,8,312,116};color_fill(dc,graph,RGB(255,255,255));FrameRect(dc,&graph,GetStockObject(GRAY_BRUSH));
@@ -163,7 +179,7 @@ static void content_draw(HDC dc,RECT client,int p){
     RestoreDC(dc,saved);DeleteObject(font);
 }
 static HWND content_button(int p,int id,const char *label,int x,int y,int w,int h){
-    int base=content_owner(p);DWORD style=((p==WS_BEHAVIOR||p==WS_CASTE)&&id>=base+4&&id<=base+8)||(p==WS_HISTORY&&id>=0x1503&&id<=0x150c)?BS_CHECKBOX|BS_PUSHLIKE:BS_PUSHBUTTON;
+    int base=content_owner(p);DWORD style=p==WS_BEHAVIOR||p==WS_CASTE?BS_OWNERDRAW:(p==WS_HISTORY&&id>=0x1503&&id<=0x150c)?BS_CHECKBOX|BS_PUSHLIKE:BS_PUSHBUTTON;
     Native *n=&u.windows[p];HWND b=CreateWindowExA(0,"BUTTON",label,WS_CHILD|WS_VISIBLE|WS_TABSTOP|style,scale(x,n->dpi),scale(y,n->dpi),scale(w,n->dpi),scale(h,n->dpi),n->h,(HMENU)(INT_PTR)id,GetModuleHandle(NULL),NULL);SendMessage(b,WM_SETFONT,(WPARAM)n->font,TRUE);SetWindowSubclass(b,child_proc,71,0);return b;
 }
 static void content_children(int p){
@@ -172,8 +188,8 @@ static void content_children(int p){
         content_button(p,base+4,"Auto",4,4,48,18);content_button(p,base+5,"Manual",4,24,48,18);
         for(int i=0;i<3;++i){char s[20];snprintf(s,sizeof(s),"Set %d",i+1);content_button(p,base+6+i,s,4,46+i*20,38,18);}
         for(int i=0;i<3;++i){char label[40];snprintf(label,sizeof(label),"%s percentage",allocation_names[p==WS_CASTE][i]);
-            HWND combo=CreateWindowExA(0,"COMBOBOX",label,WS_CHILD|WS_VISIBLE|WS_TABSTOP|CBS_DROPDOWN,scale(i==0?80:i==1?42:144,n->dpi),scale(i==0?18:147,n->dpi),scale(62,n->dpi),scale(220,n->dpi),n->h,(HMENU)(INT_PTR)(0xe520+i),GetModuleHandle(NULL),NULL);SendMessage(combo,WM_SETFONT,(WPARAM)n->font,TRUE);SetWindowSubclass(combo,child_proc,71,0);
-            COMBOBOXINFO info={.cbSize=sizeof(info)};GetComboBoxInfo(combo,&info);if(info.hwndItem){SendMessage(info.hwndItem,EM_SETREADONLY,TRUE,0);SetWindowSubclass(info.hwndItem,child_proc,71,0);}
+            HWND edit=CreateWindowExA(0,"EDIT","",WS_CHILD|WS_VISIBLE|WS_TABSTOP|WS_BORDER|ES_RIGHT|ES_AUTOHSCROLL,scale(i==0?80:i==1?42:144,n->dpi),scale(i==0?17:152,n->dpi),scale(44,n->dpi),scale(17,n->dpi),n->h,(HMENU)(INT_PTR)(0xe520+i),GetModuleHandle(NULL),NULL);
+            SendMessage(edit,WM_SETFONT,(WPARAM)n->font,TRUE);SendMessage(edit,EM_SETLIMITTEXT,12,0);SetWindowSubclass(edit,child_proc,71,0);
         }
         content_button(p,base+3,"Help",4,109,38,18);content_button(p,base+15,"% / #",4,130,34,18);
     }else if(p==WS_HISTORY){for(int i=0;i<10;++i)content_button(p,0x1503+i,history_names[i],52+(i/2)*49,126+(i&1)*26,47,22);}
@@ -188,8 +204,15 @@ static void content_link(unsigned index,int hold){const EnhancedSnapshot *s=enha
         enhanced_pointer_update(x,y,hold);if(hold)SetCapture(n->h);
     }
 }
+static void content_edit_commit(int p,int axis){
+    Native *n=&u.windows[p];if(!n->edit_dirty[axis])return;n->edit_dirty[axis]=0;
+    char input[64],*end;HWND edit=GetDlgItem(n->h,0xe520+axis);GetWindowTextA(edit,input,sizeof(input));
+    long value=strtol(input,&end,10);int valid=end!=input;while(*end==' '||*end=='\t')++end;
+    if(*end=='%'){++end;while(*end==' '||*end=='\t')++end;}valid&=*end==0;
+    if(valid){int percent=value<0?0:value>100?100:(int)value;enhanced_submit_allocation(content_owner(p),axis,percent);}
+    content_sync(p);
+}
 static int content_command(int p,int id){
-    if((p==WS_BEHAVIOR||p==WS_CASTE)&&id>=0xe520&&id<=0xe522){HWND combo=GetDlgItem(u.windows[p].h,id);int item=SendMessage(combo,CB_GETCURSEL,0,0),value=SendMessage(combo,CB_GETITEMDATA,item,0);enhanced_submit_allocation(content_owner(p),id-0xe520,value);return 1;}
 
     if(p==WS_INFO&&(id==0xe510||id==0xe511)){const EnhancedSnapshot *s=enhanced_snapshot();if(s)for(unsigned i=0;i<s->cards.link_count;++i)if(s->cards.links[i].target==(id==0xe510?1:128)){content_link(i,0);break;}return 1;}
     if(p==WS_STATUS&&id==0x180c){
@@ -219,25 +242,26 @@ static int content_mouse(HWND hwnd,int p,UINT msg,WPARAM wp,LPARAM lp){
     return 1;
 }
 
+/* content_sync runs every frame; these change a control only when its value differs,
+ * so unchanged controls are never repainted (each set would otherwise redraw it). */
+static void sync_check(HWND c,int on){if((SendMessage(c,BM_GETCHECK,0,0)==BST_CHECKED)!=!!on)SendMessage(c,BM_SETCHECK,on?BST_CHECKED:BST_UNCHECKED,0);}
+static void sync_shown(HWND c,int on){if(!(GetWindowLong(c,GWL_STYLE)&WS_VISIBLE)!=!on)ShowWindow(c,on?SW_SHOWNA:SW_HIDE);}
+static void sync_text(HWND c,const char *text){char current[160];GetWindowTextA(c,current,sizeof(current));if(strcmp(current,text))SetWindowTextA(c,text);}
 static void content_sync(int p){
     const EnhancedSnapshot *s=enhanced_snapshot();if(!s)return;Native *n=&u.windows[p];
+    n->syncing=1;
     if(p==WS_BEHAVIOR||p==WS_CASTE){const EnhancedAllocationSnapshot *a=p==WS_BEHAVIOR?&s->panels.behavior:&s->panels.caste;int base=content_owner(p);const uint16_t levels[]={a->frac,a->mid,a->weight};
-        SendMessage(GetDlgItem(n->h,base+4),BM_SETCHECK,a->automatic?BST_CHECKED:BST_UNCHECKED,0);SendMessage(GetDlgItem(n->h,base+5),BM_SETCHECK,a->automatic?BST_UNCHECKED:BST_CHECKED,0);
-        for(int i=0;i<3;++i){SendMessage(GetDlgItem(n->h,base+6+i),BM_SETCHECK,!a->automatic&&a->preset==i?BST_CHECKED:BST_UNCHECKED,0);ShowWindow(GetDlgItem(n->h,base+6+i),a->automatic?SW_HIDE:SW_SHOWNA);HWND combo=GetDlgItem(n->h,0xe520+i);uint8_t values[101];
-            if(enhanced_allocation_values(base,i,values)){
-                if(memcmp(values,n->choices[i],101)||!SendMessage(combo,CB_GETCOUNT,0,0)){
-                    memcpy(n->choices[i],values,101);SendMessage(combo,CB_RESETCONTENT,0,0);
-                    for(int v=0;v<=100;++v)if(values[v]){char label[16];snprintf(label,sizeof(label),"%d%%",v);int item=SendMessageA(combo,CB_ADDSTRING,0,(LPARAM)label);SendMessage(combo,CB_SETITEMDATA,item,v);}
-                }
-            }
-            if(GetFocus()!=combo&&!IsChild(combo,GetFocus())){char label[16];snprintf(label,sizeof(label),"%u%%",(levels[i]*100u+0x3fff)/65535);SetWindowTextA(combo,label);}}
+        for(int i=0;i<6;++i){HWND button=GetDlgItem(n->h,base+3+i);sync_shown(button,a->control_flags[i]&1);EnableWindow(button,(a->control_flags[i]&2)!=0);}
+        for(int i=0;i<3;++i)if(!n->edit_dirty[i]){char label[16];snprintf(label,sizeof(label),"%u",(levels[i]*100u+0x3fff)/65535);sync_text(GetDlgItem(n->h,0xe520+i),label);}
     }
-    if(p==WS_HISTORY){for(int i=0;i<10;++i){int on=0;for(int j=0;j<4;++j)on|=s->history.shown[j]==i;SendMessage(GetDlgItem(n->h,0x1503+i),BM_SETCHECK,on?BST_CHECKED:BST_UNCHECKED,0);}}
+    if(p==WS_HISTORY){for(int i=0;i<10;++i){int on=0;for(int j=0;j<4;++j)on|=s->history.shown[j]==i;sync_check(GetDlgItem(n->h,0x1503+i),on);}}
     if(p==WS_INFO){
         size_t size;const uint8_t *title=enhanced_resource(s->cards.card,19,&size);char caption[160]="Info";
         if(title&&size<120){snprintf(caption,sizeof(caption),"Info - %s",title);for(char *c=caption;*c;++c)if(*c=='_')*c=' ';}
-        char current[160];GetWindowTextA(n->h,current,sizeof(current));if(strcmp(current,caption))SetWindowTextA(n->h,caption);
-        SCROLLINFO si={.cbSize=sizeof(si),.fMask=SIF_RANGE|SIF_PAGE|SIF_POS,.nMin=0,.nMax=n->card_max+127,.nPage=128,.nPos=n->card_scroll};SetScrollInfo(n->h,SB_VERT,&si,TRUE);
+        sync_text(n->h,caption);
+        SCROLLINFO si={.cbSize=sizeof(si),.fMask=SIF_RANGE|SIF_PAGE|SIF_POS,.nMin=0,.nMax=n->card_max+127,.nPage=128,.nPos=n->card_scroll},was={.cbSize=sizeof(was),.fMask=SIF_RANGE|SIF_PAGE|SIF_POS};
+        if(!GetScrollInfo(n->h,SB_VERT,&was)||was.nMin!=si.nMin||was.nMax!=si.nMax||was.nPage!=si.nPage||was.nPos!=si.nPos)SetScrollInfo(n->h,SB_VERT,&si,TRUE);
         EnableWindow(GetDlgItem(n->h,0xe510),s->cards.previous[(s->cards.previous_index-1)&15]!=0);EnableWindow(GetDlgItem(n->h,0xe511),s->cards.card!=128);}
-    if(p==WS_YARD){static const char *title[]={"Yard","House","Strategic","Graphic"};SetWindowTextA(n->h,title[s->overview.yard_mode&3]);}
+    if(p==WS_YARD){static const char *title[]={"Yard","House","Strategic","Graphic"};sync_text(n->h,title[s->overview.yard_mode&3]);}
+    n->syncing=0;
 }

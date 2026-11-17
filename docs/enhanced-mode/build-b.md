@@ -1,10 +1,15 @@
 # Enhanced build B: native content
 
 Build B keeps the approved ordinary-window model and replaces the game-content
-interiors on Windows. Enable `SIMANT_ENHANCED_CONTRACTS=1`, then run the portable
-executable with `--windows`. Without the environment variable the faithful host
-is unchanged. `SIMANT_ENHANCED_WORKSPACE=0` retains the phase 1 comparison host.
+interiors on Windows. The subsequent [menu repair](menus.md) makes bare
+`--windows` enable enhanced mode, adds native proximity menus and makes source
+waits visible. `SIMANT_ENHANCED_CONTRACTS=0` explicitly selects the faithful host;
+`SIMANT_ENHANCED_WORKSPACE=0` retains the phase 1 comparison host. The build B
+receipts below describe their identified historical builds.
 The implementation and organisation are ours, not recovered historical code.
+The later [owner follow-up](presentation-followup.md) replaces the percentage
+lists described in this historical receipt with editable numeric fields,
+corrects first-show state, gates startup visibility and preserves icon masks.
 
 The [task receipt](../../build/workers/enhanced-build-b/RESULT.md) records the
 delivered build identity, final verification, limitations and owner screenshots.
@@ -144,8 +149,9 @@ knob animation index. The 943 registered gameplay-verdict views (including all
 do not establish raw equality. No exclusion was added; the receipt retains all
 704 existing omissions, exact field/entry counts and build identities.
 
-Step C still owns File/About/new/load/save/quit, general help/dialogs, and
-context/proximity presentation. These continue through compatibility clients.
+Step C still owns File/About/new/load/save/quit and general help/dialogs.
+The [menu repair](menus.md) supersedes the context/proximity presentation gap;
+remaining step C clients retain visible compatibility presentation and input.
 Buffered sample transcripts and arbitrary task-result tokens remain rejected.
 The Quick Game action matrix does not establish every Full Game mating,
 multi-queen Shift-repeat, malformed-resource, real-time input or hardware branch.

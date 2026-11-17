@@ -599,6 +599,7 @@ int host_poll_event(Host *host, HostEvent *event)
     SDL_Event raw;
     int hosted;
     if (!host || !event) return 0;
+    enhanced_pointer_poll();
     ++poll_calls;
     while (native_windows_take_deferred(&raw) || SDL_PollEvent(&raw)) {
         ++poll_events;

@@ -70,12 +70,17 @@ typedef struct EnhancedAllocationSnapshot {
     int16_t population[6];
     EnhancedRect triangle;
     EnhancedPoint knob;
+    uint16_t control_flags[6]; /* Source objects 3..8: visible/enabled/selected. */
+    uint8_t bar_colors[3]; /* Source DrawControlLevels colours after translation. */
 } EnhancedAllocationSnapshot;
 typedef struct EnhancedPanelsSnapshot {
     EnhancedAllocationSnapshot behavior, caste;
     int16_t game_type, tool, experiment_tool, paused, speed, options[6];
     int16_t health_yellow, health_black, health_red, warning_yellow, warning_black;
     int16_t population_black, population_red;
+    char prompt[160]; /* Existing EditMessage text; no drawing or recomputation. */
+    int16_t yard_wait;
+    uint8_t world_ready;
 } EnhancedPanelsSnapshot;
 
 typedef struct EnhancedCardsSnapshot {
@@ -111,6 +116,7 @@ typedef struct EnhancedDialogsSnapshot {
     uint64_t task_token; /* changes when observed owner/modal identity changes */
     int16_t owner; /* -32768 when no front window */
     uint16_t flags;
+    int16_t proximity_item; /* Source lastProxObj, not a native selection. */
     uint8_t modal, request_schema_available;
     unsigned object_count;
     EnhancedObjectSnapshot objects[32];

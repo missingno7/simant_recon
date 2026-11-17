@@ -36,7 +36,7 @@ def main():
  for n in ('SDL3.dll','simant-build-id.txt'):shutil.copyfile(build/n,out/n)
  shutil.copytree(build/'runtime-bios-fonts',out/'runtime-bios-fonts');state=schema(build,executable=exe);anchor=symbols_for(exe).addresses['action_observer_anchor'];items=state['items'];(out/'views.json').write_text(json.dumps(state,indent=2)+'\n');results=[];baseline_for_negative=None
  chosen={int(n,0) for n in a.events.split(',')} if a.events else None
- scratch=ROOT/'build/workers/enhanced-build-b/temporary';scratch.mkdir(parents=True,exist_ok=True)
+ scratch=ROOT/'build/workers/enhanced-menus/temporary';scratch.mkdir(parents=True,exist_ok=True)
  with tempfile.TemporaryDirectory(prefix='eq',dir=scratch) as folder:
   assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
   for panel,event in CONTROLS:
@@ -47,7 +47,7 @@ def main():
     for item in items:
      lines.append(str(len(item['slices'])));lines.extend(f'{address-anchor} {size}' for address,size in item['slices'])
     config.write_text('\n'.join(lines)+'\n');actual=MENUS.get(event,event) if mode=='menu' else event
-    env={k:v for k,v in os.environ.items() if not k.startswith(('SIMANT_ENHANCED','SIMANT_ACTION','SIMANT_WORKSPACE','SIMANT_TEST_'))};env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_WORKSPACE='1',SIMANT_WORKSPACE_LAYOUT=str(lane/'layout.txt'),SIMANT_ACTION_CONFIG=str(config),SIMANT_ACTION_EVENT=hex(actual),SIMANT_ACTION_PANEL=str(panel),SIMANT_ACTION_MODE=mode,SDL_AUDIODRIVER='dummy')
+    env={k:v for k,v in os.environ.items() if not k.startswith(('SIMANT_ENHANCED','SIMANT_ACTION','SIMANT_WORKSPACE','SIMANT_TEST_'))};env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_WORKSPACE='1',SIMANT_WORKSPACE_LAYOUT=str(lane/'layout.txt'),SIMANT_ACTION_CONFIG=str(config),SIMANT_ACTION_EVENT=hex(actual),SIMANT_ACTION_PANEL=str(panel),SIMANT_ACTION_MODE=mode,SDL_AUDIODRIVER='dummy',SIMANT_ENHANCED_PROXIMITY='0')
     cmd=[str(exe),'--deterministic','--windows','--seed','0','--assets',str(assets),'--input-script',str(ROOT/'portable/tests/runtime/windows-quick.txt'),'--smoke-ms','30000','--diagnostics-dir='+str(lane/'diagnostics')]
     with (lane/'run.log').open('w') as log:
      try:r=subprocess.run(cmd,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=45)
@@ -69,7 +69,13 @@ def main():
  negative=False
  if baseline_for_negative:
   first=next(v for v in items if v['name'].startswith('save:'));mutated=dict(baseline_for_negative);data=bytearray(mutated[first['name']]);data[0]^=1;mutated[first['name']]=bytes(data);negative=differing(baseline_for_negative,mutated,items)==[first['name']]
- result=dict(passed=bool(results) and all(r['passed'] for r in results) and negative,controls=results,views=len(items),save_records=sum(v['name'].startswith('save:') for v in items),negative_control=negative,
+ menu_result=None
+ if chosen is None:
+  menu_out=out/'proximity-menus'
+  with (out/'proximity-menus.log').open('w') as log:
+   menu_run=subprocess.run([sys.executable,str(Path(__file__).with_name('menus.py')),'--build',str(build),'--out',str(menu_out)],cwd=ROOT,stdout=log,stderr=subprocess.STDOUT)
+  menu_result=json.loads((menu_out/'result.json').read_text()) if (menu_out/'result.json').exists() else dict(passed=False,error='incomplete',code=menu_run.returncode)
+ result=dict(passed=bool(results) and all(r['passed'] for r in results) and negative and (menu_result is None or menu_result['passed']),proximity_menus=menu_result,controls=results,views=len(items),save_records=sum(v['name'].startswith('save:') for v in items),negative_control=negative,
   scope='Native current-source original event paths versus real native HWND controls and keyboard. This is not execution of the original DOS executable. All raw differences retained.',
   missing_coverage=['File/About lifecycle menu transactions remain the step C compatibility path; no original-executable action matrix is claimed.']);(out/'result.json').write_text(json.dumps(result,indent=2)+'\n');return int(not result['passed'])
 if __name__=='__main__':raise SystemExit(main())

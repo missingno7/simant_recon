@@ -79,7 +79,14 @@ static void gesture(unsigned n,int reference){
         if(!portable_m1b73_try_enqueue_command(event,0,mods,h,v))abort();
     }else{
         HWND h=named(owner==0x100?"Map":owner==0x1200?"Behavior Control":owner==0x1300?"Caste Control":owner==0x1900?"Yard":owner==0x1500?"History":"SimAnt - Game");if(!h)abort();
-        if(n==0xe505){Workspace w=*native_workspace_layout();w.panels[WS_GAME].zoom=300;native_workspace_apply(&w);x*=3;y*=3;}
+        if(n==0xe505){Workspace w=*native_workspace_layout();w.panels[WS_GAME].zoom=300;native_workspace_apply(&w);}
+        if(!owner){
+            /* Both lanes request the same source world point. The centred,
+             * gliding native camera need not share the DOS top-left origin. */
+            const EnhancedSnapshot *s=enhanced_snapshot();const WsPanel *v=&native_workspace_layout()->panels[WS_GAME];
+            x=(s->world.origin.x*16+x-v->camera_x)*v->zoom/100;
+            y=(s->world.origin.y*16+y-v->camera_y)*v->zoom/100;
+        }
         typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;x=MulDiv(x,d,96);y=MulDiv(y,d,96);
         SendMessage(h,n==0xe504?WM_LBUTTONDBLCLK:WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(x,y));if(!held_case(n)&&n!=0xe517)SendMessage(h,WM_LBUTTONUP,0,MAKELPARAM(x,y));
     }
@@ -102,6 +109,9 @@ int16_t __wrap_myButton(void){
             portable_m1b73_semantic_pointer(editTileRect.left+x,editTileRect.top+y,down);
         }else{
             HWND h=named("SimAnt - Game");typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;
+            const EnhancedSnapshot *s=enhanced_snapshot();const WsPanel *v=&native_workspace_layout()->panels[WS_GAME];
+            x=(s->world.origin.x*16+x-v->camera_x)*v->zoom/100;
+            y=(s->world.origin.y*16+y-v->camera_y)*v->zoom/100;
             SendMessage(h,down?WM_MOUSEMOVE:WM_LBUTTONUP,down?MK_LBUTTON:0,MAKELPARAM(MulDiv(x,d,96),MulDiv(y,d,96)));enhanced_pointer_poll();
         }
     }
@@ -142,6 +152,11 @@ static void original(unsigned event) {
     if (! portable_m1b73_try_enqueue_command((int16_t) event, 0, 0, h, v)) abort();
 }
 void __wrap_enhanced_source_poll(void) {
+    static ULONGLONG last_progress;
+    if(phase&&GetTickCount64()-last_progress>5000){
+        last_progress=GetTickCount64();const EnhancedSnapshot *frame=enhanced_snapshot();const EnhancedActionLedger *log=enhanced_action_ledger();
+        if(frame)fprintf(stderr,"ACTION_PROGRESS phase=%d iteration=%ld paused=%d owner=%04x modal=%d compatibility=%04x submitted=%llu delivered=%llu prepared=%llu\n",phase,(long)main_iteration_count,frame->panels.paused,(unsigned short)frame->dialogs.owner,frame->dialogs.modal,(unsigned short)enhanced_compatibility_owner(),(unsigned long long)log->submitted,(unsigned long long)log->delivered,(unsigned long long)log->prepared);
+    }
     if(phase==2&&number==0xe518&&enhanced_queen_wait()){
         extern int16_t QueenStorageB;extern EnhancedPoint CurYardPnt,g_2A42;extern EnhancedRect map_viewport_rect;
         static int previous;

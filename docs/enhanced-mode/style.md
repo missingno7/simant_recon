@@ -89,6 +89,22 @@ world-only bindings; text fields keep native editing. Preserve original source
 navigation/action contracts and modal waits; passive layout never changes game
 state. Smooth rendering must not add a second simulation/camera authority.
 
+Proximity menus use the same paper, brown selection and source labels as the
+native controls. Keep enabled and checked states from the source transaction.
+Anchor command menus and prompts beside the initiating pointer, clamped to that
+monitor's work area. Targeting prompts are nonactivating and click-through;
+menu cancellation and closing compatibility dialogs restore the originating
+keyboard focus. Retain the complete actor scene while a source wait is open.
+The implementation and current compatibility boundary are in
+[menus.md](menus.md).
+
+Behavior/Caste retain the source's white triangle, bevelled coloured edges,
+shipped knob, colour-framed labels and white bar panel. Use source bar colours
+and actual object visibility/check state. Percentage inputs are editable numeric
+fields, committed on Enter/focus loss and mapped to original triangle events;
+show their actual quantized results. Complete the initial parent/child paint
+before input. See [the owner follow-up](presentation-followup.md).
+
 ## What replaces phase 2
 
 Keep its immutable assets, coherent snapshots and separation of native layout

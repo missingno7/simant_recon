@@ -227,3 +227,19 @@ int __wrap_modern_world_cell_pixels(const ModernCell *cell,uint8_t pixels[256])
     }
     return result;
 }
+
+extern void __real_enhanced_source_poll(void);
+void __wrap_enhanced_source_poll(void){
+    __real_enhanced_source_poll();configure();
+    if(!mode||clip_window_z_order[0]!=0x1a00||edit_life_tiles_handle||edit_life_alt_tiles_handle)return;
+    if(strcmp(mode,"native")&&strcmp(mode,"hybrid")&&strcmp(mode,"stress"))return;
+    const EnhancedSnapshot *s=enhanced_snapshot();if(!s)return;
+    /* Retained complete scenes need not invalidate their cell cache during a
+     * modal wait. Exercise the actual production compositor afresh at that
+     * same live null-bank seam, without invalidating source or host caches. */
+    int plane=s->world.plane;
+    for(int x=0;x<(plane<2?128:64);++x)for(int y=0;y<64;++y){
+        ModernCell cell;enhanced_world_cell(&s->world,plane,x,y,&cell);
+        if(cell.life){uint8_t pixels[256];__wrap_modern_world_cell_pixels(&cell,pixels);return;}
+    }
+}

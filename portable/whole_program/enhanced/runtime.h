@@ -10,5 +10,9 @@ int enhanced_world_enabled(void);
 void enhanced_publish(EnhancedSeam seam);
 void enhanced_source_poll(void);
 uint16_t enhanced_window_flags(int16_t owner);
+/* Native device for the original proximity transaction, never a command handler. */
+int enhanced_proximity_owner(void);
+int enhanced_compatibility_owner(void);
+int enhanced_game_ready(void);
 
 #endif
