@@ -5,6 +5,7 @@
 #include "portable/whole_program/enhanced/workspace.h"
 #include "portable/whole_program/enhanced/snapshot.h"
 int native_workspace_proximity(const EnhancedDialogsSnapshot *menu);
+int native_workspace_minimap(const EnhancedRect *,const EnhancedRect *,EnhancedPoint *);
 void native_workspace_anchor(int x,int y);
 void native_workspace_activate_point(int x,int y);
 void native_workspace_request_point(int *x,int *y);

@@ -215,7 +215,8 @@
     "portable/whole_program/platform/sdl3/native_content.inc",
     "portable/whole_program/enhanced/map_observer.inc",
     "portable/whole_program/platform/sdl3/native_proximity.inc",
-    "portable/whole_program/enhanced/proximity_labels.inc"
+    "portable/whole_program/enhanced/proximity_labels.inc",
+    "portable/whole_program/platform/sdl3/native_minimap.inc"
   ],
   "window_hosting_wraps": [
     "clip_SetWin",
@@ -254,7 +255,14 @@
     "MagnifyMenu",
     "ButtonHeld",
     "EditMessage",
-    "NewGame"
+    "NewGame",
+    "OpenMiniMapWin",
+    "StillDown",
+    "AboutDialog",
+    "DialogAbortOrCont",
+    "processEdit",
+    "DoExpMenu",
+    "hotbox_pointer_hit_id"
   ],
   "ASM_data_recipes": [
     "canonical_mouse_data.c",

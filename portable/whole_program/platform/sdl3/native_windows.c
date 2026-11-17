@@ -563,7 +563,7 @@ int native_windows_present(const HostPalette *palette)
         if (native_workspace_active() && view.id==0 && enhanced_compatibility_owner()!=0) {
             if(w->shown){SDL_HideWindow(w->surface.window);w->shown=0;}continue;
         }
-        if(native_workspace_active() && view.id==enhanced_proximity_owner()){
+        if(native_workspace_active() && (view.id==enhanced_proximity_owner()||view.id==enhanced_minimap_owner()||(enhanced_experiment_menu_active()&&(view.flags&0x1040)==0x1040))){
             if(w->shown){SDL_HideWindow(w->surface.window);w->shown=0;}continue;
         }
         if(native_workspace_active()&&(view.id==0x100||view.id==0x1900)){
@@ -577,6 +577,9 @@ int native_windows_present(const HostPalette *palette)
             if(view.id==0x100)snprintf(view.title,sizeof(view.title),"Map");
         }
         if (!view.open) {
+#ifdef _WIN32
+            if(w->surface.window){HWND handle=SDL_GetPointerProperty(SDL_GetWindowProperties(w->surface.window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);if(handle&&GetCapture()==handle)ReleaseCapture();}
+#endif
             if (w->shown) { SDL_HideWindow(w->surface.window); w->shown = 0; }
             w->close_pending = w->raise_pending = 0;
             w->resize_w = w->resize_h = 0;
@@ -619,6 +622,15 @@ int native_windows_present(const HostPalette *palette)
 #endif
         }
         if (raise) SDL_RaiseWindow(w->surface.window);
+#ifdef _WIN32
+        /* A compatibility modal owns input just as a native content modal
+         * does. SDL's RaiseWindow need not give keyboard focus on a private
+         * desktop (and an old focused panel was just disabled). */
+        if(native_workspace_active()&&published&&published->dialogs.modal&&published->dialogs.owner==view.id&&GetFocus()!=(HWND)native_handle&&!IsChild((HWND)native_handle,GetFocus())){
+            SetForegroundWindow((HWND)native_handle);SetFocus((HWND)native_handle);
+        }
+        if(native_workspace_active()&&view.id==0x1700&&published&&published->dialogs.owner==view.id&&GetCapture()!=(HWND)native_handle)SetCapture((HWND)native_handle);
+#endif
     }
     if (!sync_popups()) return 0;
     for (i = 0; i < n.popup_count; ++i) {

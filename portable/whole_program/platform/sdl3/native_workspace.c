@@ -367,6 +367,7 @@ static void system_popup(HWND h, int p) {
 }
 int native_workspace_shortcut(unsigned msg, uintptr_t key) {
     if (! u.active || (msg != WM_KEYDOWN && msg != WM_SYSKEYDOWN)) return 0;
+    if(key==VK_ESCAPE&&enhanced_submit_wait_dismiss())return 1;
     HWND f = GetFocus();
     char cls [32] = {
         0
@@ -833,6 +834,7 @@ static void warning_command(int id, int percent) {
     if (percent > 100) percent = 100;
     enhanced_submit_event(id == 0xe310 ? 17 : 18, percent, -1, 0);
 }
+static int minimap_origin_down;
 static void panel_command(int p, int id) {
     POINT at=native_cursor_point();native_workspace_anchor(at.x,at.y);
     if (id == 0xe300) {
@@ -858,6 +860,10 @@ static LRESULT CALLBACK child_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_
         if(msg==WM_MOUSELEAVE||msg==WM_LBUTTONDOWN||msg==WM_KEYDOWN)SendMessageA(parent->tooltip,TTM_TRACKACTIVATE,FALSE,(LPARAM)&tool);
     }
     int control = GetDlgCtrlID(h);
+    if(parent&&control==5){
+        if(msg==WM_LBUTTONDOWN){minimap_origin_down=1;SetFocus(h);POINT at={GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};ClientToScreen(h,&at);native_workspace_anchor(at.x,at.y);enhanced_submit_event(5,0,0,0);return 0;}
+        if(msg==WM_LBUTTONUP){minimap_origin_down=0;return 0;}
+    }
     int allocation_panel=-1;for(int p=WS_BEHAVIOR;p<=WS_CASTE;++p)if(u.windows[p].h==GetParent(h))allocation_panel=p;
     if(allocation_panel>=0){
         if(msg==BM_GETCHECK&&control>=content_owner(allocation_panel)+3&&control<=content_owner(allocation_panel)+8){
@@ -1178,6 +1184,7 @@ static void arrange(void) {
     u.applying = 0;
 }
 #include "native_proximity.inc"
+#include "native_minimap.inc"
 static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_PTR id, DWORD_PTR data) {
     (void) id;
     (void) data;
@@ -1335,7 +1342,9 @@ static int panel_for_logical(int id) {
         case 0x1800 :
         return WS_STATUS;
     }
-    return id >= 0 && (id >> 8) < 45 ? 16 + (id >> 8) : - 1;
+    /* Compatibility owners are not workspace slots. Indexing 16+(id>>8)
+     * exceeded u.windows and corrupted adjacent state for modal windows. */
+    return -1;
 }
 static void fixed_client(Native *n,int width,int height){
     if(n->moving||width<1||height<1)return;
@@ -1345,8 +1354,22 @@ static void fixed_client(Native *n,int width,int height){
     RECT frame={0,0,w,h};AdjustWindowRectEx(&frame,(DWORD)GetWindowLongPtr(n->h,GWL_STYLE),FALSE,(DWORD)GetWindowLongPtr(n->h,GWL_EXSTYLE));
     SetWindowPos(n->h,NULL,0,0,frame.right-frame.left,frame.bottom-frame.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
 }
+static LRESULT CALLBACK compatibility_proc(HWND h,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR id,DWORD_PTR logical){
+    (void)id;
+    if(msg==WM_KEYDOWN&&wp==VK_ESCAPE&&enhanced_submit_wait_dismiss())return 0;
+    if(msg==WM_LBUTTONDOWN){RECT r;GetClientRect(h,&r);POINT p={GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};if(!PtInRect(&r,p)&&enhanced_submit_wait_dismiss())return 0;}
+    if(logical==0x1f00&&((msg==WM_KEYDOWN&&wp==VK_ESCAPE)||msg==WM_CLOSE||msg==WM_LBUTTONDOWN)){
+        if(enhanced_cancel_credits())return 0;
+    }
+    if(msg==WM_NCDESTROY)RemoveWindowSubclass(h,compatibility_proc,74);
+    return DefSubclassProc(h,msg,wp,lp);
+}
 void native_workspace_manage_window(SDL_Window *window,int logical,int width,int height){
-    if(!u.active)return;int p=panel_for_logical(logical);if(p<0)return;Native *n=&u.windows[p];
+    if(!u.active)return;int p=panel_for_logical(logical);if(p<0){
+        HWND h=SDL_GetPointerProperty(SDL_GetWindowProperties(window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);
+        if(h){SetWindowSubclass(h,compatibility_proc,74,(DWORD_PTR)logical);if(logical==0x1f00)sync_text(h,"About SimAnt - Esc or click closes");if(logical==0x1700)sync_text(h,"Population - Esc or click outside closes");}
+        return;
+    }Native *n=&u.windows[p];
     if(content_panel(p))content_size(p,&width,&height);
     /* Runs every frame: Info and Yard captions belong to content_sync, the rest change only when different. */
     if(n->h){fixed_client(n,width,height);if(content_panel(p)){if(p!=WS_INFO&&p!=WS_YARD)sync_text(n->h,ws_name(p));content_sync(p);}return;}
@@ -1548,7 +1571,7 @@ static BOOL CALLBACK capture_window(HWND h, LPARAM arg) {
     char title [120], cls [80];
     GetWindowTextA(h, title, sizeof (title));
     GetClassNameA(h, cls, sizeof (cls));
-    if (h != u.root && h != u.preview && strcmp(cls, "SimAntGameWindow") && strcmp(cls, "SDL_app") && strcmp(cls, TOOLTIPS_CLASSA) && strcmp(cls, "#32768") && strcmp(cls,"SimAntCommandPrompt")) return TRUE;
+    if (h != u.root && h != u.preview && strcmp(cls, "SimAntGameWindow") && strcmp(cls, "SDL_app") && strcmp(cls, TOOLTIPS_CLASSA) && strcmp(cls, "#32768") && strcmp(cls,"SimAntCommandPrompt") && strcmp(cls,"SimAntMinimapPopup")) return TRUE;
     c->windows [c->count ++] = h;
     UnionRect(& c->bounds, & c->bounds, & r);
     return TRUE;
@@ -1637,6 +1660,7 @@ void native_workspace_shutdown(void) {
     memset(& u, 0, sizeof (u));
 }
 #else
+int native_workspace_minimap(const EnhancedRect *r,const EnhancedRect *c,EnhancedPoint *p){(void)r;(void)c;(void)p;return 0;}
 int native_workspace_art_paint(void *dc,int id,int x,int y){(void)dc;(void)id;(void)x;(void)y;return 0;}
 void native_workspace_activate_point(int x,int y){(void)x;(void)y;}
 void native_workspace_request_point(int *x,int *y){*x=*y=0;}

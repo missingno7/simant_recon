@@ -32,6 +32,7 @@ static struct {
 queue [QUEUE_SIZE];
 static unsigned head, count, executing, lease;
 static uint64_t dismiss_token;static int dismiss_owner;
+static int cancel_target;
 static struct { int event,x,y,down,active,armed,double_pending,button,external; } pointer;
 static int queen_wait,queen_click;
 extern void __real_PlaceQueenInYard(void);
@@ -391,6 +392,8 @@ static void enhanced_pointer_coordinates(int x,int y,int *h,int *v) {
 extern void portable_m1b73_semantic_pointer(int,int,int);
 int enhanced_submit_wait_dismiss(void){
     const EnhancedSnapshot *s=enhanced_snapshot();
+    if(s&&!s->dialogs.modal&&(s->panels.tool==10||s->panels.tool==11)){cancel_target=s->panels.tool;return 1;}
+    if(s&&s->dialogs.owner==0x1f00&&enhanced_cancel_credits())return 1;
     if(!s || !(s->dialogs.flags&1) || (s->dialogs.owner!=0x1400 && s->dialogs.owner!=0x1700))return 0;
     dismiss_token=s->dialogs.task_token;dismiss_owner=s->dialogs.owner;return 1;
 }
@@ -429,6 +432,7 @@ void enhanced_pointer_poll(void) {
     if(!lease&&!pointer.down)pointer.armed=pointer.active=0;
 }
 int enhanced_pointer_input(HostInputState *s){
+    if(enhanced_experiment_input(s))return 1;
     if(!pointer.armed || pointer.external || clip_window_z_order[0]!=(pointer.event&0xff00))return 0;
     int h,v;enhanced_pointer_coordinates(pointer.x,pointer.y,&h,&v);
     memset(s,0,sizeof(*s));s->x=h;s->y=v;s->left_button_down=(pointer.down&1)!=0;return 1;
@@ -512,6 +516,13 @@ void enhanced_allocation_catalog_refresh(void){
     }
 }
 void enhanced_execute_next(void) {
+    if(cancel_target&&enhanced_contracts_enabled()){
+        /* Original completion entries restore SaveGamePaused themselves. No
+         * native assignment or synthetic Pause toggle changes that state. */
+        extern void EndLifeTransferMode(void),EndTargetMode(void);
+        int tool=cancel_target;cancel_target=0;
+        if(CurGameTool==tool){if(tool==10)EndLifeTransferMode();else EndTargetMode();}
+    }
     if(enhanced_contracts_enabled()&&CurGameType>=0)enhanced_allocation_catalog_refresh();
     if (! enhanced_contracts_enabled() || ! count || executing || CurGameType < 0 || ui_pending_menu_item || (enhanced_window_flags(clip_window_z_order [0]) & 0x40)) return;
     PortableM1B73TimerQueueView ring;

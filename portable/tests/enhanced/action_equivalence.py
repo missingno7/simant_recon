@@ -48,6 +48,7 @@ def main():
      lines.append(str(len(item['slices'])));lines.extend(f'{address-anchor} {size}' for address,size in item['slices'])
     config.write_text('\n'.join(lines)+'\n');actual=MENUS.get(event,event) if mode=='menu' else event
     env={k:v for k,v in os.environ.items() if not k.startswith(('SIMANT_ENHANCED','SIMANT_ACTION','SIMANT_WORKSPACE','SIMANT_TEST_'))};env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_WORKSPACE='1',SIMANT_WORKSPACE_LAYOUT=str(lane/'layout.txt'),SIMANT_ACTION_CONFIG=str(config),SIMANT_ACTION_EVENT=hex(actual),SIMANT_ACTION_PANEL=str(panel),SIMANT_ACTION_MODE=mode,SDL_AUDIODRIVER='dummy',SIMANT_ENHANCED_PROXIMITY='0')
+    env['SIMANT_ENHANCED_MINIMAP']='0' # Source-only fixture; native gestures have their own regression.
     cmd=[str(exe),'--deterministic','--windows','--seed','0','--assets',str(assets),'--input-script',str(ROOT/'portable/tests/runtime/windows-quick.txt'),'--smoke-ms','30000','--diagnostics-dir='+str(lane/'diagnostics')]
     with (lane/'run.log').open('w') as log:
      try:r=subprocess.run(cmd,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=45)

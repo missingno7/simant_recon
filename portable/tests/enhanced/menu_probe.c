@@ -26,7 +26,8 @@ static int modifiers;
 static int keyboard_cancel;
 static void click_world(int,int,int);
 #define CHECK(x) do{++checks;if(!(x)){++failures;fprintf(stderr,"MENU_FAIL %d %s\n",__LINE__,#x);}}while(0)
-static HWND named(const char *title){HWND h=NULL;while((h=FindWindowExA(NULL,h,NULL,title))){DWORD pid;GetWindowThreadProcessId(h,&pid);if(pid==GetCurrentProcessId())return h;}return NULL;}
+/* Closed source selectors share "SimAnt"; the native frame owns the menu bar. */
+static HWND named(const char *title){HWND h=NULL;while((h=FindWindowExA(NULL,h,NULL,title))){DWORD pid;GetWindowThreadProcessId(h,&pid);if(pid==GetCurrentProcessId()&&(!title||strcmp(title,"SimAnt")||GetMenu(h)))return h;}return NULL;}
 static void dump(int slot){
     const char *path=getenv("SIMANT_MENU_CONFIG");if(!path)return;
     FILE *in=fopen(path,"r");char base[2048],name[2100];unsigned count;if(!in||fscanf(in,"%2047s%u",base,&count)!=2)abort();
@@ -108,7 +109,7 @@ void __wrap_enhanced_source_poll(void){
 }
 void __wrap_enhanced_execute_next(void){
     const EnhancedSnapshot *s=enhanced_snapshot();if(!s||s->panels.game_type<0){__real_enhanced_execute_next();return;}
-    if(!kind){kind=getenv("SIMANT_MENU_KIND");choice=atoi(getenv("SIMANT_MENU_CHOICE"));modifiers=atoi(getenv("SIMANT_MENU_MODIFIERS"));keyboard_cancel=atoi(getenv("SIMANT_MENU_KEYBOARD_CANCEL"));original=!strcmp(getenv("SIMANT_MENU_MODE"),"original");root=named("SimAnt");CHECK(native_workspace_active());}
+    if(!kind){kind=getenv("SIMANT_MENU_KIND");choice=atoi(getenv("SIMANT_MENU_CHOICE"));modifiers=atoi(getenv("SIMANT_MENU_MODIFIERS"));keyboard_cancel=atoi(getenv("SIMANT_MENU_KEYBOARD_CANCEL"));original=!strcmp(getenv("SIMANT_MENU_MODE"),"original");root=named("SimAnt");CHECK(native_workspace_active());CHECK(root&&GetMenu(root)&&IsWindowVisible(root));}
     if(!phase&&main_iteration_count>25){phase=1;enhanced_submit_event(15,0,0,0);enhanced_submit_event(11,0,0,0);if(!strcmp(kind,"spider")){enhanced_submit_event(8,0,0,0);enhanced_submit_event(12,0,0,0);}}
     if(phase==1&&main_iteration_count>85&&s->panels.paused&&!s->dialogs.modal){
         if(!strcmp(kind,"spider")&&s->world.player_mode!=1){

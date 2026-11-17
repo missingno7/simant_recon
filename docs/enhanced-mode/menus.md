@@ -41,12 +41,13 @@ continue to come directly from the separate source menu resource.
 | 0800, unnested queen (P04/P10) | Dig Hole, Start Brood, Help; original eligibility checks and birth transaction. |
 | 2000, spider (P05/P07/P08/P10) | Chase, Hunt, Exchange, Help; Alt Hunt remains the source's alternate command. |
 | 0A00 / 0B00, Quick/Full Game Tools | Experimental choice, or the original nonselectable Full Game explanation; Escape/outside cancellation. |
+| 0900 / 0C00–1100, Experimental Tools | The same native presenter supplies original proximity hits for the root and source-opened submenu; `DoExpMenu` updates its substate and returns the tool. |
 | 1D00, Magnify (P09) | The same native popup presents the actual source-printed caste, behavior and carrying values. A read-only font-output tap copies them. Native completion ends the original held inspection; its original return value and cleanup remain. |
 
 The source proximity and Magnify clients are kept hidden while their native
 popup owns presentation. Unknown/unavailable menu presentation falls back to
 the visible compatibility client. The experimental cascading `DoExpMenu`
-(0900, 0C00–1100) retains its source presentation and mouse/keyboard tracker;
+(0900, 0C00–1100) retains its original tracker and uses native popup input;
 it is not a second implementation of experiment-tool selection.
 
 ## Placement and actor lifetime
@@ -92,15 +93,16 @@ content has explicit exceptions for source overlays and synchronous waits.
 |---|---|
 | Every `win_DoProxMenu` caller | Native popup above; original source loop and return. |
 | `MagnifyMenu` / `ButtonHeldEnd` | Native values popup; native completion/release; original inspector cleanup and life return. |
-| `DoExpMenu` and experiment submenus | Visible compatibility windows; original hover, Enter/Escape and release paths. |
+| `DoExpMenu` and experiment submenus | Shared native popups; original root/submenu state, acceptance and Escape return. |
+| `OpenMiniMapWin` (N10, 1400/1401) | Native minimap, camera indicator and visible instructions; click-then-click or held drag/release; Escape/outside cancel; original source centring and close. |
 | Map, YardArea, world tools/recruit, Behavior/Caste triangles, held History | Existing native clients and original live down/move/up trackers. |
 | `PlaceQueenInYard` | Native Yard, source prompt, original pending Yard event and Shift-repeat loop. |
 | `SpecialXfer` after Full Game death | Native Yard and prompt; its source message identifies the active wait, including rejection messages; source event-poll seam delivers Yard clicks without requiring the suspended outer executor. |
 | `DoWinHelp` for Game/Map/Yard/Behavior/Caste/History | Temporarily shows that window's existing source help client and routes source input. The argument is an object ID; its high byte identifies the owner. Native content cannot cover the help labels. |
 | Info definition held popup | Existing native TEXT popup, source held transaction and release. |
 | Status / `ScoreDialog` | Existing native Status and the source Continue object; no invented Escape result. |
-| Caste population, Mystery, advice/string/choice boxes | Visible compatibility clients; existing source click/Escape/held completion. |
-| About, scenario/new game, save/load/file selection, quit/discard, tutorial and general dialogs | Step C retains existing compatibility/native file presentation and original input. Newly shown source clients use the shared point/monitor placement. |
+| Caste population, Mystery, advice/string/choice boxes | Visible compatibility clients with explicit modal focus; Population additionally supports native Escape/outside dismissal through the source close event. |
+| About, scenario/new game, save/load/file selection, quit/discard, tutorial and general dialogs | Step C retains existing compatibility/native file presentation and original input. Newly shown source clients use the shared point/monitor placement. One About close request persists through the source credits sequence. |
 | Yellow/spider/ant-lion birth, death, eating/help animation dialogs | Visible compatibility clients, original key/click or timed/audio completion; native world scene retained. |
 | Source sound delays, `myDelay`, `DialogWait*` and held-release loops | Existing source timing/input services continue; no invented timeout or task-result token. |
 | Source window move/resize trackers | Ordinary native window move/size UI; faithful-host/source trackers remain available in comparison mode. |
@@ -172,3 +174,7 @@ Startup, icon masking and allocation first-show/editor regressions are in the
 [owner follow-up](presentation-followup.md).
 Comparisons are current canonical native source paths, not a new original DOS
 executable action matrix. Strict passive differences remain differences.
+
+The [MAP/modal follow-up](minimap-followup.md) adds N10's native minimap and
+the separate Experimental Tools tracker to the shared native presentation,
+with a census of live controls and recursive menus in all three game modes.

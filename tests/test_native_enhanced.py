@@ -58,6 +58,28 @@ class EnhancedMode(unittest.TestCase):
                                  cwd=ROOT, capture_output=True, text=True, timeout=1800)
             self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
 
+    @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
+    def test_enhanced_minimap(self):
+        """MAP button popup: click/drag/cancel and every edge reach the source loop (Quick Game; all modes take ~37 min)."""
+        parent = ROOT / 'build/scratch'
+        parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='enmm-', dir=parent) as scratch:
+            run = subprocess.run([sys.executable, str(ROOT / 'portable/tests/enhanced/minimap.py'),
+                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r'), '--modes', 'quick'],
+                                 cwd=ROOT, capture_output=True, text=True, timeout=1800)
+            self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
+
+    @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
+    def test_enhanced_control_sweep(self):
+        """Every panel control and menu item leaves the game visible and interactive (Quick Game; each mode takes ~75 min)."""
+        parent = ROOT / 'build/scratch'
+        parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='ens-', dir=parent) as scratch:
+            run = subprocess.run([sys.executable, str(ROOT / 'portable/tests/enhanced/sweep.py'),
+                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r'), '--modes', 'quick'],
+                                 cwd=ROOT, capture_output=True, text=True, timeout=7200)
+            self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
+
 
 if __name__ == '__main__':
     unittest.main()

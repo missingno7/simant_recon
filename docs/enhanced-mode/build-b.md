@@ -157,3 +157,8 @@ The Quick Game action matrix does not establish every Full Game mating,
 multi-queen Shift-repeat, malformed-resource, real-time input or hardware branch.
 Physical mixed-DPI, monitor hot-plug and screen-reader certification remain open.
 Neither screenshot readback nor a passing bounded suite is whole-game identity.
+
+The later [MAP/modal follow-up](minimap-followup.md) supersedes the transient
+minimap compatibility client and adds the live control/menu sweep. Its own
+RESULT.md identifies the final frozen build and exact verification outcomes;
+the historical round above is retained as historical evidence.
