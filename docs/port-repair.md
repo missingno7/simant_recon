@@ -151,3 +151,29 @@ DOS BIOS/device quirk is irrelevant to the SDL3 platform, malformed or custom
 resources reach an old out-of-bounds case, or an expression is unproven over its
 full theoretical type range with no supported gameplay difference. Record such
 findings briefly as unsupported-domain notes; do not open proof campaigns for them.
+
+## Frozen Map reference layout (2026-11-18)
+
+Normal Full/Experimental input to Map object 010E preserves DrawMapSpider's FF
+cache marks. The faithful 640 S00 converter now admits that wrapped-AL lookup
+through an explicit virtual DOS layout/load binding: raster segment 31AD, next
+callback offset 166A and reference load 0824. Video mode installation binds it;
+reset/unbind clears it. Original rotate/mask/duplicate operations remain. Other
+unsupported colours and 320 FF still fail before writing output.
+
+[Evidence, commands and scope](../evidence/enhanced-mode/map-frozen-dirty-cells.md)
+link the original replays and the focused runner
+`portable/whole_program/platform/tests/run_map_frozen_cache_tests.py`. Coverage
+includes complete locked-instruction buffers for loads 0824/082C/0924, every
+FF position and ordinary neighbour, all six ordinary transforms, both miniature
+profiles, source/cache/RNG controls, and bare/enhanced freeze/move/unfreeze in
+Full/Experimental. Enhanced sweep row 010E passes in both modes. Isolated
+original spider/foot instructions also produce clipped-edge cache fixtures;
+those controlled positions are not normal-play foot reachability evidence.
+
+The working canonical DOS link's raster segment 3075 produces a different
+30-pixel band at the retained Full checkpoint. A canonical-layout converter
+control matches its captures separately. That remains layout debt
+([T09](data-adjacency.md#t09--frozen-map-ff-reads-relocated-dispatch-data));
+this scenario has no three-way FRAME_EQUAL claim. New GUI claims concern complete
+native conversion buffers and interaction, not synchronized whole-game scanout.

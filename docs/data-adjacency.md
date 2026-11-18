@@ -208,6 +208,28 @@ FileSelect's classification at `S09:35F5:0A1D` and choice-dialog `f_1C62_0415` a
 
 After a real graphics-callback reset, a failed OpenIndex reaches `f_1FBD_0000` with font height zero. Its row loop at `root:1FBD:0093..0098` performs 65,536 byte stores, stride 79, starting at `55B3:5ABE`, and visits every 16-bit DGROUP offset. Store 15 leaves the 1,040-byte bitmap; store 18 leaves the whole 1,324-byte contribution. **Layout value:** this error prefix can overwrite every neighbouring data/stack location in that segment before any fatal cleanup is shown. **Evidence:** original instruction execution in [graphics-index-failure/review.md](../evidence/canonical/graphics-index-failure/review.md) and [receipt.json](../evidence/canonical/graphics-index-failure/receipt.json). Hardware/full startup and later error continuation are not executed; heights 1/8/13 are controls. This cannot prove that D01/D02 are later reached.
 
+### T09 — Frozen Map FF reads relocated dispatch data
+
+The 640 map table at `55B3:1F9E` has 25 four-byte rows, ending at 2001.
+The S00 `3126:0000/0137` packers and 640 profiles of `04D8/06A3` shift AL
+twice: FF wraps to FC. Four XLAT reads reach `55B3:209A..209D`, two bytes
+into `DispatchS00` at 2098. They consume slot 0's segment and slot 1's offset,
+beyond the intervening 320 table, attribute palette and capacity dwords.
+**Layout value:** relocating raster segment 31AD by observed load paragraph
+0824 yields `D1 39 6A 16`; ordinary frozen redraws display a persistent striped
+band. Loads 082C/0924 produce different buffers. The native boundary declares
+and binds the original reference layout; it never reads a host pointer.
+
+**Evidence:** [repair and original investigation](../evidence/enhanced-mode/map-frozen-dirty-cells.md),
+with ordinary original Full/Experimental replays, relocation sites, runtime
+read watches, guest video and complete original-instruction comparisons.
+The working canonical link has raster segment 3075 and bytes `99 38 6A 16` at
+load 0824; its 32-second Full frame differs by 30 pixels inside the band. This
+remains link-layout debt, with no masked three-way equality claim. The 320 FF
+crossing reaches `g_20FC`'s relocated segment and following phase masks;
+the canonical link has different neighbouring data. Native 320 FF remains
+unsupported pending separate instruction and display coverage.
+
 ## Input events
 
 ### E01 — Four-word enqueue calls inherit Event.v from the stack

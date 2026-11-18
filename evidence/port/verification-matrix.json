@@ -1,7 +1,7 @@
 {
  "schema": "simant-port-verification-matrix-v1",
- "updated": "2026-11-15",
- "source": "fe96aa8 plus the tape retirement",
+ "updated": "2026-11-18",
+ "source": "fe96aa8 plus the tape retirement; frozen-map repair over 61e888f",
  "levels": {
   "1": "implemented and compiling",
   "2": "passing isolated unit or differential tests",
@@ -128,6 +128,22 @@
    "known_divergence": "platform.json native-font-output-domain; presentation views audited (evidence/canonical/native-presentation-audit)",
    "first_open_question": "frames between checkpoints and other display modes",
    "next": "keep covered"
+  },
+  {
+   "id": "map-frozen-cache",
+   "name": "Frozen Map FF lookup and virtual DOS layout",
+   "domain": "Full/Experimental 010E freeze/move/unfreeze; logical 0..24 plus FF for four 640-table consumers; reference load 0824, isolated controls also 082C/0924; 320 FF excluded",
+   "level": {
+    "isolated": 2,
+    "integration": 3,
+    "scenario": 5
+   },
+   "original_dos": "Read-only map-cache investigation: ordinary mouse replays, runtime lookup watches, persistent striped guest-video band; 315 Full and 325 Experimental complete pack buffers. Locked original instructions additionally cover 28,800 FF cases and 400 ordinary cases, no destination masks.",
+   "canonical_dos": "Working link raster segment 3075 yields 99 38 6A 16 at load 0824; explicit converter control matches 315 captured buffers, including 10 FF buffers. Retained Full checkpoint differs from original by exactly 30 pixels in the band.",
+   "native": "Video boundary binds original raster 31AD, next callback offset 166A, load 0824. Focused bare/enhanced Full/Experimental freeze/move/unfreeze runs continue; complete intercepted conversion buffers match original instructions; source/cache/SRand/CRT RNG unchanged by conversion. Complete enhanced sweeps test 010E and subsequent Pause recovery.",
+   "known_divergence": "Canonical DOS band remains link-layout debt; no three-way FRAME_EQUAL or new synchronized whole-game scanout claim. 320 FF remains unsupported. Original-instruction foot/clipped-edge fixtures use controlled positions and explicit bitmap/allocator callbacks, not normal-play foot reachability.",
+   "first_open_question": "Reproduce original canonical link placement; separately establish ordinary 320 display semantics before extending FF there.",
+   "next": "Keep focused runner registered by supervisor; see evidence/enhanced-mode/map-frozen-dirty-cells.md, docs/data-adjacency.md T09 and worktree build/workers/map-cache-2/REPORT.md."
   },
   {
    "id": "input",

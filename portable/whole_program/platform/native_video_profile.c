@@ -1,5 +1,6 @@
 #include "native_video_profile.h"
 #include "graphics_bitmap_source.h"
+#include "graphics_s00_map_tables.h"
 
 #include <stdlib.h>
 
@@ -39,6 +40,7 @@ static void uninstall_services(void)
 
 SimNativeVideoStatus sim_native_video_startup_bind(SimGraphicsDriver *graphics)
 {
+    sim_s00_map_unbind_dos_layout();
     uninstall_services();
     s_binding.bound = 0;
     s_binding.graphics = NULL;
@@ -61,6 +63,7 @@ SimNativeVideoStatus sim_native_video_startup_bind(SimGraphicsDriver *graphics)
 
 void sim_native_video_startup_unbind(void)
 {
+    sim_s00_map_unbind_dos_layout();
     uninstall_services();
     if (s_binding.source_abi_bound) {
         sim_graphics_source_bitmap_unbind();
@@ -111,6 +114,7 @@ int16_t gfx_bios_has_tandy_signature(void)
 void gfx_reset_driver_callbacks(void)
 {
     (void)require_binding();
+    sim_s00_map_unbind_dos_layout();
     uninstall_services();
     /* The source resets its 25-entry table to the empty entry. The native
      * graphics owner exposes the same reset operation by unbinding its typed
@@ -144,6 +148,13 @@ static void install_source_mode(int16_t mode)
         abort();
     }
     s_binding.source_abi_bound = 1;
+    /* Select the declared original reference machine at the video boundary.
+     * Focused controls override it through sim_s00_map_bind_dos_layout. */
+    if (sim_s00_map_bind_dos_layout(&sim_s00_map_original_reference) !=
+        SIM_S00_MAP_TABLE_OK) {
+        s_binding.status = SIM_NATIVE_VIDEO_GRAPHICS_FAILURE;
+        abort();
+    }
     gfx_video_bios_ax(mode);
     graphics_status = sim_graphics_source_last_status();
     if (graphics_status != SIM_GRAPHICS_OK) {
