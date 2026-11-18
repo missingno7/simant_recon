@@ -58,13 +58,16 @@ static struct {
     WNDPROC original;
     HMENU bar;
     char labels[512][192]; unsigned label_count;
-    HMENU scales;
+    HMENU scales,looks;
     char ***built;                 /* g_6054 the bar was built from */
 } m;
 
+static void build(void);
+void native_menu_remeasure(void){if(m.hwnd&&g_6054)build();}
 static const int ui_scales[]={0,100,125,150,175,200,250,300};
 static void scale_checks(void){
     const Workspace *w=native_workspace_layout();if(!w||!m.scales)return;
+    if(m.looks)for(int i=0;i<2;++i)CheckMenuItem(m.looks,0xe420+i,MF_BYCOMMAND|(w->native_look==i?MF_CHECKED:MF_UNCHECKED));
     for(unsigned i=0;i<sizeof(ui_scales)/sizeof(ui_scales[0]);++i)CheckMenuItem(m.scales,0xe400+i,MF_BYCOMMAND|(w->ui_scale==ui_scales[i]?MF_CHECKED:MF_UNCHECKED));
 }
 static void themed_append(HMENU menu,UINT flags,UINT_PTR id,const char *text){
@@ -85,17 +88,17 @@ int native_menu_theme_message(void *owner,unsigned msg,intptr_t param){
     int dpi=native_workspace_ui_dpi(window);
     HFONT font=CreateFontA(-MulDiv(13,dpi,96),0,0,0,FW_NORMAL,0,0,0,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,"Tahoma");
     if(msg==WM_MEASUREITEM){MEASUREITEMSTRUCT *v=(void *)param;if(v->CtlType!=ODT_MENU){DeleteObject(font);return 0;}
-        HDC dc=GetDC(window);HGDIOBJ old=SelectObject(dc,font);SIZE size;const char *label=(const char *)v->itemData;
-        GetTextExtentPoint32A(dc,label,(int)strlen(label),&size);SelectObject(dc,old);ReleaseDC(window,dc);
-        v->itemWidth=size.cx+MulDiv(40,dpi,96);v->itemHeight=MulDiv(26,dpi,96);
+        HDC dc=GetDC(window);const char *label=(const char *)v->itemData;
+        char text[192];snprintf(text,sizeof(text),"%s",label);char *tab=strchr(text,'\t');if(tab)*tab++=0;
+        v->itemWidth=native_workspace_text_width(dc,text,dpi,2)+MulDiv(48,dpi,96)+(tab?native_workspace_text_width(dc,tab,dpi,2)+MulDiv(16,dpi,96):0);v->itemHeight=MulDiv(28,dpi,96);ReleaseDC(window,dc);
     }else if(msg==WM_DRAWITEM){DRAWITEMSTRUCT *v=(void *)param;if(v->CtlType!=ODT_MENU){DeleteObject(font);return 0;}
-        int active=v->itemState&ODS_SELECTED;COLORREF paper=RGB(245,242,232),ink=RGB(36,43,33),earth=RGB(85,44,4);
+        int active=v->itemState&ODS_SELECTED;COLORREF paper=native_workspace_classic()?RGB(192,192,192):RGB(245,242,232),ink=native_workspace_classic()?RGB(0,0,0):RGB(36,43,33),earth=native_workspace_classic()?RGB(0,170,255):RGB(85,44,4);int bar=(HMENU)v->hwndItem==m.bar;if(bar&&native_workspace_classic()){paper=RGB(64,64,64);ink=RGB(0,192,255);}
         HBRUSH brush=CreateSolidBrush(active?earth:paper);FillRect(v->hDC,&v->rcItem,brush);DeleteObject(brush);
         HGDIOBJ old=SelectObject(v->hDC,font);SetTextColor(v->hDC,v->itemState&ODS_DISABLED?RGB(129,124,105):active?paper:ink);SetBkMode(v->hDC,TRANSPARENT);
         RECT r=v->rcItem;r.left+=MulDiv(24,dpi,96);r.right-=MulDiv(12,dpi,96);
         const char *label=(const char *)v->itemData;char text[192];snprintf(text,sizeof(text),"%s",label);char *tab=strchr(text,'\t');
-        if(tab){*tab++=0;DrawTextA(v->hDC,tab,-1,&r,DT_SINGLELINE|DT_VCENTER|DT_RIGHT|DT_NOPREFIX);r.right-=MulDiv(60,dpi,96);}
-        DrawTextA(v->hDC,text,-1,&r,DT_SINGLELINE|DT_VCENTER);
+        if(tab){*tab++=0;native_workspace_text_draw(v->hDC,&r,tab,DT_SINGLELINE|DT_VCENTER|DT_RIGHT|DT_NOPREFIX,dpi,2,GetTextColor(v->hDC));r.right-=native_workspace_text_width(v->hDC,tab,dpi,2)+MulDiv(16,dpi,96);}
+        native_workspace_text_draw(v->hDC,&r,text,DT_SINGLELINE|DT_VCENTER,dpi,2,GetTextColor(v->hDC));
         MENUITEMINFOA submenu={.cbSize=sizeof(submenu),.fMask=MIIM_SUBMENU};
         if((HMENU)v->hwndItem!=m.bar&&GetMenuItemInfoA((HMENU)v->hwndItem,v->itemID,FALSE,&submenu)&&submenu.hSubMenu){
             int x=v->rcItem.right-MulDiv(8,dpi,96),y=(v->rcItem.top+v->rcItem.bottom)/2,t=MulDiv(3,dpi,96);POINT arrow[]={{x-t,y-t},{x+t,y},{x-t,y+t}};
@@ -147,6 +150,7 @@ static void refresh(HMENU popup, int menu)
 static LRESULT CALLBACK menu_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
     if(native_workspace_active()&&(msg==WM_MEASUREITEM||msg==WM_DRAWITEM)&&native_menu_theme_message(hwnd,msg,lparam))return TRUE;
+    if(msg==WM_COMMAND&&HIWORD(wparam)==0&&LOWORD(wparam)>=0xe420&&LOWORD(wparam)<=0xe421){native_workspace_set_look(LOWORD(wparam)-0xe420);scale_checks();return 0;}
     if(msg==WM_COMMAND&&HIWORD(wparam)==0&&LOWORD(wparam)>=0xe400&&LOWORD(wparam)<0xe408){
         native_workspace_set_ui_scale(ui_scales[LOWORD(wparam)-0xe400]);scale_checks();return 0;
     }
@@ -167,7 +171,7 @@ static void build(void)
     char **titles = g_6054[0];
     char text[192];
     int menu, k;
-    m.label_count=0;m.scales=NULL;
+    m.label_count=0;m.scales=m.looks=NULL;
     HMENU bar = CreateMenu();
     for (menu = 0; titles[menu] && menu < MENU_TITLES; ++menu) {
         char **items = g_6054[menu + 1];
@@ -189,7 +193,9 @@ static void build(void)
         if(menu==3&&native_workspace_active()){
             m.scales=CreatePopupMenu();const char *labels[]={"Auto (per-monitor DPI)","100%","125%","150%","175%","200%","250%","300%"};
             for(unsigned i=0;i<8;++i)themed_append(m.scales,MF_STRING,0xe400+i,labels[i]);
-            AppendMenuA(popup,MF_SEPARATOR,0,NULL);themed_append(popup,MF_POPUP,(UINT_PTR)m.scales,"UI Scale");scale_checks();
+            AppendMenuA(popup,MF_SEPARATOR,0,NULL);
+            m.looks=CreatePopupMenu();themed_append(m.looks,MF_STRING,0xe420,"Classic");themed_append(m.looks,MF_STRING,0xe421,"Native");themed_append(popup,MF_POPUP,(UINT_PTR)m.looks,"Look");
+            themed_append(popup,MF_POPUP,(UINT_PTR)m.scales,"UI Scale");scale_checks();
         }
         label(text, sizeof(text), titles[menu]);
         if(native_workspace_active()){char title[192];snprintf(title,sizeof(title),"&%s",text);snprintf(text,sizeof(text),"%s",title);}
@@ -235,6 +241,7 @@ void native_menu_shutdown(void)
 }
 
 #else
+void native_menu_remeasure(void){}
 void native_menu_theme_item(void *menu,unsigned p,const char *label){(void)menu;(void)p;(void)label;}
 int native_menu_theme_message(void *owner,unsigned m,intptr_t p){(void)owner;(void)m;(void)p;return 0;}
 int native_menu_init(SDL_Window *root) { (void)root; return 0; }

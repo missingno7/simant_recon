@@ -4,13 +4,13 @@ static struct {HWND h;int done,selected,held,entered,dpi;HFONT font;POINT point;
 static void minimap_draw(HDC dc,RECT client,int unused){
     (void)unused;color_fill(dc,client,PAPER);FrameRect(dc,&client,GetStockObject(BLACK_BRUSH));
     HGDIOBJ old=SelectObject(dc,mini.font);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,INK);
-    RECT title={scale(12,mini.dpi),scale(6,mini.dpi),client.right-scale(12,mini.dpi),scale(34,mini.dpi)};DrawTextA(dc,"Minimap - choose a position",-1,&title,DT_SINGLELINE|DT_VCENTER);
+    RECT title={scale(12,mini.dpi),scale(6,mini.dpi),client.right-scale(12,mini.dpi),scale(34,mini.dpi)};native_workspace_text_draw(dc,&title,"Minimap - choose a position",DT_SINGLELINE|DT_VCENTER,mini.dpi,2,INK);
     int saved=SaveDC(dc);SetGraphicsMode(dc,GM_ADVANCED);
     XFORM transform={(FLOAT)(mini.map.right-mini.map.left)/512,0,0,(FLOAT)(mini.map.bottom-mini.map.top)/256,(FLOAT)mini.map.left,(FLOAT)mini.map.top};
     SetWorldTransform(dc,&transform);content_map(dc,&mini.frame);RestoreDC(dc,saved);
     if(mini.entered){int arm=scale(8,mini.dpi);HPEN pen=CreatePen(PS_SOLID,1,RUST);HGDIOBJ previous=SelectObject(dc,pen);MoveToEx(dc,mini.point.x-arm,mini.point.y,NULL);LineTo(dc,mini.point.x+arm+1,mini.point.y);MoveToEx(dc,mini.point.x,mini.point.y-arm,NULL);LineTo(dc,mini.point.x,mini.point.y+arm+1);SelectObject(dc,previous);DeleteObject(pen);}
     RECT hint={scale(12,mini.dpi),mini.map.bottom+scale(8,mini.dpi),client.right-scale(12,mini.dpi),client.bottom-scale(6,mini.dpi)};
-    DrawTextA(dc,"Drag and release, or click a position.\nEsc or click outside to cancel.",-1,&hint,DT_LEFT|DT_WORDBREAK);SelectObject(dc,old);
+    native_workspace_text_draw(dc,&hint,"Drag and release, or click a position.\nEsc or click outside to cancel.",DT_LEFT|DT_WORDBREAK,mini.dpi,0,INK);SelectObject(dc,old);
 }
 static LRESULT CALLBACK minimap_proc(HWND h,UINT msg,WPARAM wp,LPARAM lp){
     if(msg==WM_ERASEBKGND)return 1;

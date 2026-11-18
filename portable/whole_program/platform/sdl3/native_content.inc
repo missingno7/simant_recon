@@ -54,7 +54,7 @@ static COLORREF content_palette(unsigned index){const uint8_t *rgb=u.palette.rgb
 static const char *history_names[]={"Pop","Pop","Food","Food","Health","Health","S.Food","Eaten","Expired","Killed"};
 static void content_allocation(HDC dc,const EnhancedSnapshot *s,int p){
     const EnhancedAllocationSnapshot *a=p==WS_BEHAVIOR?&s->panels.behavior:&s->panels.caste;
-    RECT canvas={0,0,210,170};color_fill(dc,canvas,RGB(192,192,184));FrameRect(dc,&canvas,GetStockObject(BLACK_BRUSH));
+    RECT canvas={0,0,210,170};color_fill(dc,canvas,native_workspace_classic()?RGB(192,192,192):RGB(192,192,184));FrameRect(dc,&canvas,GetStockObject(BLACK_BRUSH));
     /* Shipped 4600/4620 already contain Set labels beneath their hit objects.
      * Hiding a source hit region does not erase that static decoration. */
     for(int i=0;i<3;++i)if(!(a->control_flags[i+3]&1)){
@@ -167,7 +167,7 @@ static void content_yard(HDC dc,const EnhancedOverviewSnapshot *s){
     if(status[0]){int width=status_box.right+16;if(width>504)width=504;RECT r={(512-width)/2,4,(512+width)/2,4+status_height};color_fill(dc,r,PAPER);InflateRect(&r,-8,-4);text(dc,r,status,DT_CENTER|DT_WORDBREAK|DT_NOPREFIX);}
 }
 static void content_draw(HDC dc,RECT client,int p){
-    const EnhancedSnapshot *s=enhanced_snapshot();color_fill(dc,client,PAPER);if(!s)return;
+    const EnhancedSnapshot *s=enhanced_snapshot();u.text_dpi=96;color_fill(dc,client,PAPER);if(!s)return;
     int w,h;content_size(p,&w,&h);int saved=SaveDC(dc);SetMapMode(dc,MM_ANISOTROPIC);SetWindowExtEx(dc,w,h,NULL);SetViewportExtEx(dc,client.right,client.bottom,NULL);HFONT font=make_font(96);SelectObject(dc,font);
     if(p==WS_MAP)content_map(dc,s);
     else if(p==WS_YARD)content_yard(dc,&s->overview);
@@ -191,7 +191,7 @@ static void content_children(int p){
             SetPropA(edit,"SimAntLogicalX",(HANDLE)(INT_PTR)((i==0?80:i==1?42:144)+1));SetPropA(edit,"SimAntLogicalY",(HANDLE)(INT_PTR)((i==0?17:152)+1));SetPropA(edit,"SimAntLogicalW",(HANDLE)(INT_PTR)44);SetPropA(edit,"SimAntLogicalH",(HANDLE)(INT_PTR)17);
             SendMessage(edit,WM_SETFONT,(WPARAM)n->font,TRUE);SendMessage(edit,EM_SETLIMITTEXT,12,0);SetWindowSubclass(edit,child_proc,71,0);
         }
-        content_button(p,base+3,"Help",4,109,38,18);content_button(p,base+15,"% / #",4,130,34,18);
+        content_button(p,base+3,"Help",4,109,38,18);content_button(p,base+15,"% / #",4,130,38,18);
     }else if(p==WS_HISTORY){for(int i=0;i<10;++i)content_button(p,0x1503+i,history_names[i],52+(i/2)*49,126+(i&1)*26,47,22);}
     else if(p==WS_INFO){content_button(p,0xe510,"Previous",8,178,100,20);content_button(p,0xe511,"Top Card",112,178,100,20);}
     else if(p==WS_STATUS)content_button(p,0x180c,"Continue",60,160,200,22);

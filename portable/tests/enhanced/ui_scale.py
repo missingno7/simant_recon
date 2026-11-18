@@ -26,6 +26,6 @@ def main():
     except subprocess.TimeoutExpired:rc='timeout'
    found=re.findall(r'^UI_PERSIST_RESULT (.*)$',(out/(label+'.log')).read_text(),re.M);row=json.loads(found[-1]) if found else dict(passed=False);row.update(label=label,exit_code=rc);row['passed']&=rc==0;persistence.append(row)
  matches=re.findall(r'^UI_SCALE_RESULT (.*)$',(out/'run.log').read_text(),re.M);result=json.loads(matches[-1]) if matches else dict(passed=False,error='incomplete');result.update(exit_code=code,seconds=round(time.monotonic()-begin,2),probe_sha256=sha(source),executable_sha256=sha(exe));result['passed']&=code==0
- saved=(out/'layout.txt').read_text().splitlines();result['persisted']=saved[:2]==['SIMANT-WINDOWS 3','250'];result['persistence_lanes']=persistence;result['passed']&=result['persisted'] and all(r['passed'] for r in persistence)
+ saved=(out/'layout.txt').read_text().splitlines();result['persisted']=saved[:2]==['SIMANT-WINDOWS 4','250 0'];result['persistence_lanes']=persistence;result['passed']&=result['persisted'] and all(r['passed'] for r in persistence)
  (out/'result.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result));return int(not result['passed'])
 if __name__=='__main__':raise SystemExit(main())

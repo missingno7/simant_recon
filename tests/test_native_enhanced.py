@@ -81,6 +81,17 @@ class EnhancedMode(unittest.TestCase):
             self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
 
     @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
+    def test_enhanced_classic_look(self):
+        """Options > Look (Classic/Native): menu and caption fit, overflow placement, persistence: portable/tests/enhanced/classic.py."""
+        parent = ROOT / 'build/scratch'
+        parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='encl-', dir=parent) as scratch:
+            run = subprocess.run([sys.executable, str(ROOT / 'portable/tests/enhanced/classic.py'),
+                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r')],
+                                 cwd=ROOT, capture_output=True, text=True, timeout=1200)
+            self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
+
+    @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
     def test_enhanced_control_sweep(self):
         """Every panel control and menu item leaves the game visible and interactive (Quick Game; each mode takes ~75 min)."""
         parent = ROOT / 'build/scratch'

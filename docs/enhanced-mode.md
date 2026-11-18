@@ -21,6 +21,10 @@ source-driven numeric allocation editors and complete first-frame painting.
 The [MAP/modal follow-up](enhanced-mode/minimap-followup.md) supplies the native
 transient minimap, fast-click context input, Experimental submenus and a live
 control/menu sweep across Quick, Full and Experimental games.
+The [Classic / Native follow-up](enhanced-mode/classic-look.md) adds a live Look
+choice (Classic default), matching menu measurement after scale/DPI changes,
+full picture captions and reachable caption cascades on small work areas.
+
 The [UI scale and panel follow-up](enhanced-mode/ui-scale.md) makes fixed-client
 content authoritative for first open/reset, adds live Options > UI Scale and
 `--ui-scale`, and keeps the original panel artwork at its intended aspect ratio.

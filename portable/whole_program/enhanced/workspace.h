@@ -12,7 +12,8 @@ typedef struct WsPanel {
     char monitor[64];
 } WsPanel;
 typedef struct Workspace { WsPanel panels[WS_PANELS]; unsigned revision;
-    int ui_scale; /* 0 Auto, otherwise absolute UI percent; presentation only */ } Workspace;
+    int ui_scale; /* 0 Auto, otherwise absolute UI percent; presentation only */
+    int native_look; /* 0 Classic (default), 1 Native; presentation only */ } Workspace;
 const char *ws_name(int panel);
 int ws_resizable(int panel);
 int ws_closable(int panel);

@@ -44,7 +44,7 @@ static void matrix(void){
  int physical[]={96,120,144};
  for(int area=0;area<2;++area){work_width=area?2560:1920;work_height=area?1400:1040;
   for(int d=0;d<3;++d){native_workspace_set_ui_scale(0);
-   for(int p=0;p<WS_PANELS;++p){HWND h=named(ws_name(p));if(!h)continue;RECT r;GetWindowRect(h,&r);SendMessage(h,WM_DPICHANGED,MAKELONG(physical[d],physical[d]),(LPARAM)&r);}
+   for(int p=0;p<=WS_STATUS;++p){if(p==WS_RESERVED)continue;HWND h=named(ws_name(p));if(!h)continue;RECT r;GetWindowRect(h,&r);SendMessage(h,WM_DPICHANGED,MAKELONG(physical[d],physical[d]),(LPARAM)&r);}
    RECT rr;GetWindowRect(root,&rr);SendMessage(root,WM_DPICHANGED,MAKELONG(physical[d],physical[d]),(LPARAM)&rr);
    SendMessage(root,WM_COMMAND,0xe100,0);layout_checks(physical[d]);
    fprintf(stderr,"UI_RESET_MATRIX area=%dx%d dpi=%d\n",work_width,work_height,physical[d]);

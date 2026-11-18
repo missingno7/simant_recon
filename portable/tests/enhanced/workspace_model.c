@@ -52,6 +52,11 @@ int main(int argc, char * * argv) {
     const int percentages[]={0,100,125,150,175,200,250,300};
     for(unsigned i=0;i<8;++i){w.ui_scale=percentages[i];f=fopen(argv[1],"w+");assert(f&&ws_write(&w,f));rewind(f);assert(ws_read(&copy,f)&&copy.ui_scale==w.ui_scale);fclose(f);++checks;}
     bad=w;bad.ui_scale=130;assert(!ws_validate(&bad));++checks;
+    for(int look=0;look<2;++look){w.native_look=look;f=fopen(argv[1],"w+");assert(f&&ws_write(&w,f));rewind(f);assert(ws_read(&copy,f)&&copy.native_look==look);fclose(f);++checks;}
+    bad=w;bad.native_look=2;assert(!ws_validate(&bad));++checks;
+    f=fopen(argv[1],"w+");assert(f);fprintf(f,"SIMANT-WINDOWS 3\n200\n");
+    for(int i=0;i<WS_PANELS;++i){WsPanel *p=&w.panels[i];fprintf(f,"%d %d %d %d %d %d %d %d %d %d %s\n",p->x,p->y,p->w,p->h,p->edge,p->offset,p->visible,p->camera_x,p->camera_y,p->zoom,p->monitor[0]?p->monitor:"-");}
+    rewind(f);assert(ws_read(&copy,f)&&copy.ui_scale==200&&copy.native_look==0);fclose(f);++checks;
     /* Read existing v2 layouts as Auto without altering their frame data. */
     f=fopen(argv[1],"w+");assert(f);fprintf(f,"SIMANT-WINDOWS 2\n");
     for(int i=0;i<WS_PANELS;++i){WsPanel *p=&w.panels[i];fprintf(f,"%d %d %d %d %d %d %d %d %d %d %s\n",p->x,p->y,p->w,p->h,p->edge,p->offset,p->visible,p->camera_x,p->camera_y,p->zoom,p->monitor[0]?p->monitor:"-");}

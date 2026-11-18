@@ -13,6 +13,7 @@ int native_menu_init(SDL_Window *root);
 void native_menu_shutdown(void);
 /* (Re)build after the game loads or replaces its menu; 1 while a bar exists. */
 int native_menu_sync(void);
+void native_menu_remeasure(void);
 /* Game event pump: post selected commands as the DOS pull-down does. */
 void native_menu_pump(void);
 /* Queue a menu choice: code 0xFD01 + (menu << 4) + item. */

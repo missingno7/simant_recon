@@ -69,7 +69,7 @@ int ws_detach(Workspace * w, int p) {
     return 1;
 }
 int ws_validate(const Workspace * w) {
-    if(!ws_ui_scale_valid(w->ui_scale))return 0;
+    if(!ws_ui_scale_valid(w->ui_scale)||w->native_look<0||w->native_look>1)return 0;
     for (int i = 0; i < WS_PANELS; ++ i) {
         const WsPanel * p = & w->panels [i];
         if (p->x < - 100000 || p->x > 100000 || p->y < - 100000 || p->y > 100000 || p->w < 80 || p->w > 10000 || p->h < 60 || p->h > 10000 || p->edge < WS_FLOAT || p->edge > WS_BOTTOM || p->offset < 0 || p->offset > 10000 || p->visible < 0 || p->visible > 1 || p->zoom < 25 || p->zoom > 800 || p->camera_x < - 1 || p->camera_x > 2047 || p->camera_y < - 1 || p->camera_y > 1023 || ! memchr(p->monitor, 0, 64)) return 0;
@@ -78,7 +78,7 @@ int ws_validate(const Workspace * w) {
 }
 int ws_write(const Workspace * w, FILE * f) {
     if (! ws_validate(w)) return 0;
-    fprintf(f, "SIMANT-WINDOWS 3\n%d\n",w->ui_scale);
+    fprintf(f, "SIMANT-WINDOWS 4\n%d %d\n",w->ui_scale,w->native_look);
     for (int i = 0; i < WS_PANELS; ++ i) {
         const WsPanel * p = & w->panels [i];
         fprintf(f, "%d %d %d %d %d %d %d %d %d %d %s\n", p->x, p->y, p->w, p->h, p->edge, p->offset, p->visible, p->camera_x, p->camera_y, p->zoom, p->monitor [0] ? p->monitor : "-");
@@ -91,8 +91,9 @@ int ws_read(Workspace * w, FILE * f) {
     };
     char magic [32], tail;
     int version;
-    if (fscanf(f, "%31s%d", magic, & version) != 2 || strcmp(magic, "SIMANT-WINDOWS") || (version != 2 && version != 3)) return 0;
-    if(version==3 && fscanf(f,"%d",&c.ui_scale)!=1)return 0;
+    if (fscanf(f, "%31s%d", magic, & version) != 2 || strcmp(magic, "SIMANT-WINDOWS") || (version != 2 && version != 3 && version != 4)) return 0;
+    if(version>=3 && fscanf(f,"%d",&c.ui_scale)!=1)return 0;
+    if(version==4 && fscanf(f,"%d",&c.native_look)!=1)return 0;
     for (int i = 0; i < WS_PANELS; ++ i) {
         WsPanel * p = & c.panels [i];
         if (fscanf(f, "%d%d%d%d%d%d%d%d%d%d%63s", & p->x, & p->y, & p->w, & p->h, & p->edge, & p->offset, & p->visible, & p->camera_x, & p->camera_y, & p->zoom, p->monitor) != 11) return 0;

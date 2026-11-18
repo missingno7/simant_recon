@@ -28,14 +28,15 @@ int native_workspace_start_scale(const char *value){
 enum {
     ATTACH_LEFT = 0xe200, DETACH = 0xe204, RESET = 0xe100, SHOW_BLACK = 0xe102, SHOW_RED = 0xe103
 };
-#define PAPER RGB(245,242,232)
-#define INK RGB(36,43,33)
-#define EARTH RGB(146,113,56)
-#define RUST RGB(160,45,40)
+#define PAPER (native_workspace_classic()?RGB(192,192,192):RGB(245,242,232))
+#define INK (native_workspace_classic()?RGB(0,0,0):RGB(36,43,33))
+#define EARTH (native_workspace_classic()?RGB(96,96,96):RGB(146,113,56))
+#define RUST (native_workspace_classic()?RGB(255,0,0):RGB(160,45,40))
 typedef struct Native {
     HWND h, tooltip;
     SDL_Window *sdl;
     HFONT font;
+    unsigned opened;
     int dpi, monitor_dpi, client_w,client_h, external, moving, candidate, pan, gesture, gx, gy,card_id,card_scroll,card_max;
     uint8_t keys[256];
     uint8_t edit_dirty[3],syncing;
@@ -85,27 +86,27 @@ static const Button buttons [] = {
     }, {
         WS_ANT, 0x105, 8, 92, 52, 44, "Map: Yard"
     }, {
-        WS_ANT, 0x106, 68, 92, 60, 44, "Map: Surface (clear scent)"
+        WS_ANT, 0x106, 68, 92, 64, 44, "Map: Surface (clear scent)"
     }, {
-        WS_ANT, 0x107, 144, 92, 44, 44, "Map: Black Nest (clear scent)"
+        WS_ANT, 0x107, 140, 92, 64, 44, "Map: Black Nest (clear scent)"
     }, {
-        WS_ANT, 0x108, 188, 92, 44, 44, "Map: Red Nest (clear scent)"
+        WS_ANT, 0x108, 212, 92, 64, 44, "Map: Red Nest (clear scent)"
     }, {
-        WS_ANT, 0x109, 240, 92, 48, 44, "Map: Black Nest Scent"
+        WS_ANT, 0x109, 284, 92, 64, 44, "Map: Black Nest Scent"
     }, {
-        WS_ANT, 0x10a, 296, 92, 48, 44, "Map: Black Trail"
+        WS_ANT, 0x10a, 356, 92, 48, 44, "Map: Black Trail"
     }, {
-        WS_ANT, 0x10b, 352, 92, 40, 44, "Map: Alarm"
+        WS_ANT, 0x10b, 412, 92, 40, 44, "Map: Alarm"
     }, {
-        WS_ANT, 0x10c, 400, 92, 48, 44, "Map: Red Nest Scent"
+        WS_ANT, 0x10c, 460, 92, 64, 44, "Map: Red Nest Scent"
     }, {
-        WS_ANT, 0x10d, 456, 92, 48, 44, "Map: Red Trail"
+        WS_ANT, 0x10d, 532, 92, 48, 44, "Map: Red Trail"
     }, {
-        WS_ANT, 0x116, 512, 92, 40, 44, "Map Help"
+        WS_ANT, 0x116, 588, 92, 40, 44, "Map Help"
     }, {
-        WS_ANT, 0x117, 560, 92, 40, 44, "Map Tools"
+        WS_ANT, 0x117, 636, 92, 40, 44, "Map Tools"
     }, {
-        WS_ANT, 0x10e, 608, 92, 40, 44, "Original map background toggle (%)"
+        WS_ANT, 0x10e, 684, 92, 40, 44, "Original map background toggle (%)"
     }, {
         WS_ANT, 0x10f, 8, 144, 40, 36, "Behavior"
     }, {
@@ -149,6 +150,7 @@ static struct {
     int follow, follow_x, follow_y; /* smooth camera target set by a source view move */
     HWND root, preview;
     SDL_WindowID sdl_id;
+    unsigned opened;uint64_t shown;int text_dpi;
     int dpi,info_popup,status_continue_pending,root_width,root_height,scaling;
     Workspace layout;
     Native windows [WS_PANELS];
@@ -180,7 +182,7 @@ static int point_dpi(POINT at){
         if(!f||FAILED(f(MonitorFromPoint(at,MONITOR_DEFAULTTONEAREST),0,&x,&y)))x=dpi_of(u.root);FreeLibrary(lib);}
     else x=dpi_of(u.root);return (int)x;
 }
-int native_workspace_ui_dpi(void *window){if(window)return effective_dpi(dpi_of((HWND)window));POINT at;GetCursorPos(&at);return point_dpi(at);}
+int native_workspace_ui_dpi(void *window){if(window){if(window==u.root)return u.dpi;for(int p=0;p<WS_PANELS;++p)if(window==u.windows[p].h)return u.windows[p].dpi;return effective_dpi(dpi_of((HWND)window));}POINT at;GetCursorPos(&at);return point_dpi(at);}
 static int metric(int what,int dpi){
     typedef int(WINAPI *Metric)(int,UINT);Metric f=(Metric)GetProcAddress(GetModuleHandleA("user32.dll"),"GetSystemMetricsForDpi");
     return f?f(what,dpi):MulDiv(GetSystemMetrics(what),dpi,96);
@@ -501,7 +503,15 @@ static void size_children(int p) {
     Native * n = & u.windows [p];
     for (unsigned i = 0; i < sizeof (buttons) / sizeof (buttons [0]); ++ i) {
         const Button * b = & buttons [i];
-        if (b->panel == p) MoveWindow(GetDlgItem(n->h, b->event), scale(b->x, n->dpi), scale(b->y, n->dpi), scale(b->w, n->dpi), scale(b->h, n->dpi), TRUE);
+        if (b->panel == p){int x=b->x,y=b->y,w=b->w,h=b->h;
+            if(native_workspace_classic()&&p==WS_ANT){
+                if(b->y==92)x+=84;
+                if(b->event>=8&&b->event<=14)x+=4;
+                if(b->event==16){x=8;y=92;w=72;h=44;}
+                if(b->event==15)w=72;
+            }
+            MoveWindow(GetDlgItem(n->h,b->event),scale(x,n->dpi),scale(y,n->dpi),scale(w,n->dpi),scale(h,n->dpi),TRUE);
+        }
     }
     if (p == WS_ANT) {
         SendMessage(GetDlgItem(n->h, 0xe300), WM_SETFONT, (WPARAM) n->font, TRUE);
@@ -575,15 +585,15 @@ static int selected(unsigned event, const EnhancedSnapshot * s) {
     }
     return 0;
 }
-static void text(HDC dc, RECT r, const char * s, int flags) {
-    SetTextColor(dc, INK);
-    SetBkMode(dc, TRANSPARENT);
-    DrawTextA(dc, s, - 1, & r, flags);
+#include "native_classic.inc"
+static void text(HDC dc, RECT r, const char *s,int flags){
+    native_workspace_text_draw(dc,&r,s,flags,u.text_dpi?u.text_dpi:96,0,INK);
 }
 /* DOS bevel: a dark outline, light leading edge and earth shadow. */
 static void game_edge(HDC dc,RECT r,int down,int dpi){
-    HBRUSH dark=CreateSolidBrush(RGB(85,44,4));FrameRect(dc,&r,dark);DeleteObject(dark);
-    int t=scale(1,dpi);if(t<1)t=1;InflateRect(&r,-t,-t);
+    int t=scale(native_workspace_classic()?2:1,dpi);if(t<1)t=1;
+    HBRUSH dark=CreateSolidBrush(native_workspace_classic()?RGB(0,0,0):RGB(85,44,4));
+    for(int k=0;k<t;++k){FrameRect(dc,&r,dark);InflateRect(&r,-1,-1);}DeleteObject(dark);
     color_fill(dc,(RECT){r.left,r.top,r.right,r.top+t},down?EARTH:RGB(255,255,255));
     color_fill(dc,(RECT){r.left,r.top,r.left+t,r.bottom},down?EARTH:RGB(255,255,255));
     color_fill(dc,(RECT){r.left,r.bottom-t,r.right,r.bottom},down?RGB(255,255,255):EARTH);
@@ -664,27 +674,27 @@ static void draw_button(DRAWITEMSTRUCT * d, int p) {
     DeleteDC(mem);
 }
 static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
-    Native * n = & u.windows [p];
+    Native * n = & u.windows [p];u.text_dpi=n->dpi;
     const EnhancedSnapshot * s = enhanced_snapshot();
     RECT r = d->rcItem;
     if(p==WS_BEHAVIOR||p==WS_CASTE){
         const EnhancedAllocationSnapshot *a=s?(p==WS_BEHAVIOR?&s->panels.behavior:&s->panels.caste):NULL;
         int slot=(int)d->CtlID-(p==WS_BEHAVIOR?0x1203:0x1303);
         int on=(d->itemState&ODS_SELECTED)||(a&&slot>=0&&slot<6&&(a->control_flags[slot]&4));
-        color_fill(d->hDC,r,on?RUST:PAPER);game_edge(d->hDC,r,on,n->dpi);
+        color_fill(d->hDC,r,native_workspace_classic()?RGB(192,192,192):on?RUST:PAPER);game_edge(d->hDC,r,on,n->dpi);
         SelectObject(d->hDC,n->font);SetTextColor(d->hDC,on?RGB(255,255,255):INK);SetBkMode(d->hDC,TRANSPARENT);
-        char label[80];GetWindowTextA(d->hwndItem,label,sizeof(label));DrawTextA(d->hDC,label,-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);
+        char label[80];GetWindowTextA(d->hwndItem,label,sizeof(label));native_workspace_text_draw(d->hDC,&r,label,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX,n->dpi,1,native_workspace_classic()?INK:on?RGB(255,255,255):INK);
         if(d->itemState&ODS_FOCUS){InflateRect(&r,-3,-3);DrawFocusRect(d->hDC,&r);}return;
     }
     int on = selected(d->CtlID, s) || (d->itemState & ODS_SELECTED);
     if(p==WS_HISTORY&&s)for(int i=0;i<4;++i)on|=s->history.shown[i]==(int)d->CtlID-0x1503;
-    color_fill(d->hDC, r, on ? RGB(219, 214, 197) : RGB(232,226,206));
+    color_fill(d->hDC,r,native_workspace_classic()?RGB(192,192,192):on?RGB(219,214,197):RGB(232,226,206));
     game_edge(d->hDC,r,on,n->dpi);
     SelectObject(d->hDC, n->font);
     if (d->CtlID == 0xe310 || d->CtlID == 0xe311) {
         int black = d->CtlID == 0xe311;
         InflateRect(& r, - 2, - 1);
-        if (s) meter(d->hDC, r, black ? s->panels.health_black : s->panels.health_yellow, black ? s->panels.warning_black : s->panels.warning_yellow, black ? INK : EARTH, black ? "Black" : "Yellow");
+        if (s) meter(d->hDC, r, black ? s->panels.health_black : s->panels.health_yellow, black ? s->panels.warning_black : s->panels.warning_yellow, black ? INK : native_workspace_classic()?RGB(255,255,0):EARTH, black ? "Black" : "Yellow");
     }
     else {
         Picture tool = {
@@ -701,13 +711,11 @@ static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
                 pic = & tool;
             }
         }
-        const char *caption=NULL;
-        switch(d->CtlID){case 8:case 0x106:caption="Surface";break;case 9:case 0x107:caption="Black Nest";break;case 10:case 0x108:caption="Red Nest";break;
-        case 11:case 0x110:caption="Yellow";break;case 12:caption="Spider";break;case 13:caption="B. Queen";break;case 14:caption="R. Queen";break;
-        case 0x105:caption="Yard";break;case 0x109:case 0x10c:caption="Nest scent";break;case 0x10a:case 0x10d:caption="Trail";break;case 0x10b:caption="Alarm";break;
-        case 0x1907:caption="Patch";break;case 0x1908:caption="Yard";break;case 0xfd22:caption="House";break;case 0x1909:caption="Strategic";break;case 0x190a:caption="Graphic";break;case 0x190b:caption="Mate";break;case 0x1910:caption="Queen";break;}
+        const char *caption=native_workspace_button_caption(d->CtlID);
+        if(d->CtlID==0x190d||d->CtlID==0x190e)caption=NULL;
         RECT art_rect=r;
-        if(caption){art_rect.bottom-=scale(12,n->dpi);RECT label=r;label.top=art_rect.bottom;HFONT small=CreateFontA(-scale(10,n->dpi),0,0,0,FW_NORMAL,0,0,0,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,"Tahoma");HGDIOBJ old=SelectObject(d->hDC,small);text(d->hDC,label,caption,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);SelectObject(d->hDC,old);DeleteObject(small);}
+        if(caption){art_rect.bottom-=scale(14,n->dpi);RECT label=r;label.top=art_rect.bottom;label.left+=scale(3,n->dpi);label.right-=scale(3,n->dpi);
+            native_workspace_text_draw(d->hDC,&label,caption,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX,n->dpi,1,(d->CtlID==0x108||d->CtlID==10)&&native_workspace_classic()?RGB(192,0,0):INK);}
         const EnhancedArt * a = pic ? enhanced_art(pic->art) : NULL;
         if (a && pic->x >= 0 && pic->y >= 0 && pic->x + pic->w <= a->width && pic->y + pic->h <= a->height) {
             int factor=2;
@@ -733,7 +741,8 @@ static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
         else {
             char label [100];
             GetWindowTextA(d->hwndItem, label, sizeof (label));
-            text(d->hDC, r, label, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            const char *short_label=native_workspace_button_caption(d->CtlID);if(short_label)snprintf(label,sizeof(label),"%s",short_label);
+            native_workspace_text_draw(d->hDC,&r,label,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX,n->dpi,1,INK);
         }
     }
     if (d->itemState & ODS_DISABLED) {
@@ -755,12 +764,12 @@ static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
     }
 }
 static void draw_panel(HDC dc, RECT r, int p) {
-    Native * n = & u.windows [p];
+    Native * n = & u.windows [p];u.text_dpi=n->dpi;
     const EnhancedSnapshot * s = enhanced_snapshot();
-    color_fill(dc,r,RGB(219,214,197));
+    color_fill(dc,r,native_workspace_classic()?RGB(192,192,192):RGB(219,214,197));
     RECT rim=r;game_edge(dc,rim,0,n->dpi);
     if(p==WS_ANT){
-        RECT groups[]={{4,4,652,88},{4,88,652,140},{4,140,472,196},{654,4,940,140},{472,144,936,196}};
+        RECT groups[]={{4,4,652,88},{4,88,940,140},{4,140,472,196},{654,4,940,88},{472,144,936,196}};if(native_workspace_classic()){groups[0].left=88;groups[1].left=88;RECT strip={scale(4,n->dpi),scale(4,n->dpi),scale(84,n->dpi),scale(140,n->dpi)};game_edge(dc,strip,0,n->dpi);}
         for(unsigned i=0;i<sizeof(groups)/sizeof(groups[0]);++i){RECT box={scale(groups[i].left,n->dpi),scale(groups[i].top,n->dpi),scale(groups[i].right,n->dpi),scale(groups[i].bottom,n->dpi)};color_fill(dc,box,PAPER);game_edge(dc,box,1,n->dpi);}
     }else{
         RECT groups[]={{4,4,558,56},{4,56,352,86},{568,4,940,86},{472,86,936,130}};
@@ -1003,12 +1012,14 @@ static int common(HWND h, int p, UINT msg, WPARAM wp, LPARAM lp, LRESULT * resul
         RECT frame,client;GetWindowRect(h,&frame);GetClientRect(h,&client);POINT at={0,0};ClientToScreen(h,&at);
         int border=at.x-frame.left,top=at.y-frame.top;
         HDC dc=GetWindowDC(h);if(dc&&top>border){RECT r={border,border,frame.right-frame.left-border,top};
-            int active=u.focus==p;color_fill(dc,r,active?RGB(85,44,4):RGB(219,214,197));
+            int active=u.focus==p;
+            if(native_workspace_classic()){HBRUSH yellow=CreateSolidBrush(RGB(255,255,0));RECT edge={0,0,frame.right-frame.left,frame.bottom-frame.top};for(int k=0;k<scale(2,n->dpi);++k){FrameRect(dc,&edge,yellow);InflateRect(&edge,-1,-1);}DeleteObject(yellow);}
+            color_fill(dc,r,native_workspace_classic()?(active?RGB(0,170,255):RGB(255,255,255)):active?RGB(85,44,4):RGB(219,214,197));
             SelectObject(dc,n->font);SetTextColor(dc,active?PAPER:INK);SetBkMode(dc,TRANSPARENT);
             int button=scale(26,n->dpi),right=r.right;
             if(n->external?(GetWindowLongPtr(h,GWL_STYLE)&WS_SYSMENU)!=0:ws_closable(p)){RECT b={right-button,r.top,right,r.bottom};DrawTextW(dc,L"\x00d7",-1,&b,DT_CENTER|DT_VCENTER|DT_SINGLELINE);right-=button;}
             if(ws_resizable(p)){RECT b={right-button,r.top,right,r.bottom};DrawTextW(dc,IsZoomed(h)?L"\x25a3":L"\x25a1",-1,&b,DT_CENTER|DT_VCENTER|DT_SINGLELINE);right-=button;}
-            r.left+=scale(6,n->dpi);r.right=right;char title[160];GetWindowTextA(h,title,sizeof(title));DrawTextA(dc,title,-1,&r,DT_LEFT|DT_VCENTER|DT_SINGLELINE|DT_END_ELLIPSIS);
+            r.left+=scale(6,n->dpi);r.right=right;char title[160];GetWindowTextA(h,title,sizeof(title));native_workspace_text_draw(dc,&r,title,DT_LEFT|DT_VCENTER|DT_SINGLELINE|DT_END_ELLIPSIS,n->dpi,2,native_workspace_classic()?RGB(0,96,160):active?PAPER:INK);
         }if(dc)ReleaseDC(h,dc);return 1;
     }
     if(msg==WM_NCHITTEST){
@@ -1236,14 +1247,18 @@ static LRESULT CALLBACK window_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp) {
     if(ws_resizable(p)&&forward_world_key(n,msg,wp))return 0;
     return DefWindowProc(h, msg, wp, lp);
 }
+#include "native_placement.inc"
 static void arrange(void) {
     if (! u.active || u.applying) return;
     u.applying = 1;
+    RECT positions[WS_PANELS]={{0}};
+    for(int p=0;p<WS_PANELS;++p)if(u.windows[p].h){Native *n=&u.windows[p];if(!ws_resizable(p)&&n->client_w)fixed_client(n,n->client_w,n->client_h);positions[p]=restored(p);}
+    orderly(positions);
     for (int p = 0; p < WS_PANELS; ++ p) {
         Native * n = & u.windows [p];
         if (! n->h) continue;
         if(!ws_resizable(p)&&n->client_w)fixed_client(n,n->client_w,n->client_h);
-        RECT r = restored(p);
+        RECT r = positions[p];
         RECT now,client;GetWindowRect(n->h,&now);GetClientRect(n->h,&client);
         if(!EqualRect(&r,&now))SetWindowPos(n->h, HWND_TOP, r.left, r.top, r.right - r.left, r.bottom - r.top, SWP_NOACTIVATE | SWP_NOOWNERZORDER | (ws_resizable(p)?0:SWP_NOSIZE));
         if (! n->external){
@@ -1252,10 +1267,23 @@ static void arrange(void) {
             if(show&&!was)RedrawWindow(n->h,NULL,NULL,RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);
         }
     }
+    /* Match cascade paint order, including panels opened out of enum order. */
+    unsigned previous=0;
+    for(int pass=0;pass<WS_PANELS;++pass){int chosen=-1;unsigned next=~0u;
+        for(int p=0;p<WS_PANELS;++p)if(placement_visible(p)&&u.windows[p].opened>previous&&u.windows[p].opened<next){chosen=p;next=u.windows[p].opened;}
+        if(chosen<0)break;SetWindowPos(u.windows[chosen].h,HWND_TOP,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE|SWP_NOOWNERZORDER);previous=next;
+    }
     u.applying = 0;
 }
 #include "native_proximity.inc"
 #include "native_minimap.inc"
+int native_workspace_set_look(int value){
+    if(!u.active||value<0||value>1)return 0;if(value==u.layout.native_look)return 1;
+    u.layout.native_look=value;for(int p=0;p<WS_PANELS;++p){Native *n=&u.windows[p];if(!n->h)continue;
+        if(p==WS_ANT||p==WS_YARD_CONTROL)size_children(p);n->content_painted=0;
+        RedrawWindow(n->h,NULL,NULL,RDW_FRAME|RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);
+    }native_menu_remeasure();++u.layout.revision;save();arrange();return 1;
+}
 int native_workspace_set_ui_scale(int percent){
     if(!u.active||!ws_ui_scale_valid(percent))return 0;
     if(u.layout.ui_scale==percent)return 1;
@@ -1271,7 +1299,7 @@ int native_workspace_set_ui_scale(int percent){
     }
     u.applying=0;command_tool=-1;arrange();
     for(int p=0;p<WS_PANELS;++p)if(u.windows[p].h)RedrawWindow(u.windows[p].h,NULL,NULL,RDW_FRAME|RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);
-    ++u.layout.revision;save();DrawMenuBar(u.root);u.scaling=0;return 1;
+    ++u.layout.revision;save();native_menu_remeasure();u.scaling=0;return 1;
 }
 static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_PTR id, DWORD_PTR data) {
     (void) id;
@@ -1289,7 +1317,7 @@ static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_P
             Workspace next;
             ws_reset(& next);
             for (int p = 0; p < WS_PANELS; ++ p) next.panels [p].visible = u.layout.panels [p].visible;
-            next.ui_scale=u.layout.ui_scale;
+            next.ui_scale=u.layout.ui_scale;next.native_look=u.layout.native_look;
             u.layout = next;
             arrange();
             save();
@@ -1311,7 +1339,7 @@ static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_P
         return r;
     }
     if (msg == WM_DPICHANGED) {
-        u.dpi = effective_dpi(HIWORD(wp));
+        u.dpi = effective_dpi(HIWORD(wp));native_menu_remeasure();
         RECT * r = (RECT *) lp;
         SetWindowPos(h, NULL, r->left, r->top, r->right - r->left, r->bottom - r->top, SWP_NOZORDER | SWP_NOACTIVATE);
         arrange();
@@ -1567,6 +1595,9 @@ void native_workspace_present(const HostPalette * palette) {
         u.ready = ready;
         arrange();
     }
+    uint64_t shown=0;
+    for(int p=0;p<=WS_INFO;++p)if(placement_visible(p)){shown|=UINT64_C(1)<<p;if(!(u.shown&(UINT64_C(1)<<p)))u.windows[p].opened=++u.opened;}
+    if(shown&~u.shown){u.shown=shown;arrange();}else u.shown=shown;
     if (s && ready) {
         WsPanel * v = & u.layout.panels [WS_GAME];
         /* The game moved its view (AutoTrack, edge, Map click, pan release): keep the
@@ -1688,6 +1719,7 @@ int native_workspace_apply(const Workspace * w) {
     if (! u.active || ! ws_validate(w)) return 0;
     int old=u.layout.ui_scale;u.layout.ui_scale=old;
     if(old!=w->ui_scale)native_workspace_set_ui_scale(w->ui_scale);
+    if(u.layout.native_look!=w->native_look)native_workspace_set_look(w->native_look);
     u.layout = * w;
     arrange();
     save();
@@ -1798,6 +1830,11 @@ void native_workspace_shutdown(void) {
     memset(& u, 0, sizeof (u));
 }
 #else
+int native_workspace_classic(void){return 0;}
+int native_workspace_set_look(int value){(void)value;return 0;}
+int native_workspace_text_width(void *d,const char *s,int dpi,int role){(void)d;(void)s;(void)dpi;(void)role;return 0;}
+void native_workspace_text_draw(void *d,const void *r,const char *s,unsigned f,int dpi,int role,unsigned c){(void)d;(void)r;(void)s;(void)f;(void)dpi;(void)role;(void)c;}
+const char *native_workspace_button_caption(unsigned id){(void)id;return NULL;}
 int native_workspace_set_ui_scale(int percent){(void)percent;return 0;}
 int native_workspace_ui_dpi(void *window){(void)window;return 96;}
 int native_workspace_minimap(const EnhancedRect *r,const EnhancedRect *c,EnhancedPoint *p){(void)r;(void)c;(void)p;return 0;}

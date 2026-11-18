@@ -39,7 +39,7 @@ numeric health/population labels and warning triangles so color is redundant.
 
 ## Text, spacing and controls
 
-Use Tahoma at 13 DIP on Windows (10 DIP picture captions), with native
+In Native look use Tahoma at 13 DIP on Windows (10 DIP picture captions), with native
 text measurement, antialiasing and symbol fallback. Keep the original compact
 control forms; grow their labels for system text scaling rather than shrinking
 text. Space in 4 DIP increments, normally 8 DIP between controls and 8–12 DIP
@@ -141,3 +141,18 @@ kept in the ignored [capture directory](../../build/workers/enhanced-menus/scree
 The source capture scripts, native readback receipts and image hashes are
 recorded there. These comparisons establish the visual choices, not pixel
 identity with DOS. Docking and responsive rearrangement remain deferred.
+
+### Classic default, Native alternative
+
+[Classic look](classic-look.md) now applies the original bright identity to
+the native panels: yellow frames, white/cyan title bars, shipped FONT2 pixel
+captions, grey faces and chunky black/white bevels. MAP / PAUSE / SCENT form
+the Ant panel's vertical strip. Native remains available under Options > Look
+with the cream/earth palette and Tahoma. Both retain fixed native windows,
+original masks and source command transactions. No DOS desktop is painted.
+
+Menu widths are rebuilt when scale, DPI or look changes. Captions use their
+actual drawing font and adequate button widths/gaps. Overflow placement keeps
+draggable caption segments reachable instead of reducing fixed clients.
+The Classic/Native/original comparison sheets and individual 100%/200% window
+readbacks are linked from the capture README above.

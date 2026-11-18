@@ -35,7 +35,7 @@ static LRESULT CALLBACK command_prompt_proc(HWND h,UINT msg,WPARAM wp,LPARAM lp)
         PAINTSTRUCT ps;HDC dc=msg==WM_PAINT?BeginPaint(h,&ps):(HDC)wp;RECT r;GetClientRect(h,&r);
         color_fill(dc,r,PAPER);FrameRect(dc,&r,GetStockObject(BLACK_BRUSH));InflateRect(&r,-scale(8,prompt_dpi),-scale(6,prompt_dpi));
         HFONT font=make_font(prompt_dpi);HGDIOBJ old=SelectObject(dc,font);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,INK);
-        DrawTextA(dc,command_text,-1,&r,DT_LEFT|DT_WORDBREAK|DT_NOPREFIX);SelectObject(dc,old);DeleteObject(font);
+        native_workspace_text_draw(dc,&r,command_text,DT_LEFT|DT_WORDBREAK|DT_NOPREFIX,prompt_dpi,0,INK);SelectObject(dc,old);DeleteObject(font);
         if(msg==WM_PAINT)EndPaint(h,&ps);return 0;
     }
     return DefWindowProc(h,msg,wp,lp);
@@ -87,7 +87,7 @@ static int proximity_message(UINT msg,LPARAM lp){
         MEASUREITEMSTRUCT *m=(void *)lp;if(m->CtlType!=ODT_MENU)return 0;
         const EnhancedObjectSnapshot *o=(void *)m->itemData;
         HDC dc=GetDC(u.root);HGDIOBJ old=SelectObject(dc,proximity_font);SIZE size;
-        GetTextExtentPoint32A(dc,o->text,(int)strlen(o->text),&size);SelectObject(dc,old);ReleaseDC(u.root,dc);
+        size.cx=native_workspace_text_width(dc,o->text,proximity_dpi,0);SelectObject(dc,old);ReleaseDC(u.root,dc);
         m->itemWidth=size.cx+scale(48,proximity_dpi);m->itemHeight=scale(28,proximity_dpi);return 1;
     }
     if(msg==WM_DRAWITEM){
@@ -98,7 +98,7 @@ static int proximity_message(UINT msg,LPARAM lp){
         HGDIOBJ old=SelectObject(d->hDC,proximity_font);SetBkMode(d->hDC,TRANSPARENT);
         SetTextColor(d->hDC,disabled?RGB(129,124,105):selected?PAPER:INK);
         RECT r=d->rcItem;r.left+=scale(28,proximity_dpi);r.right-=scale(8,proximity_dpi);
-        DrawTextA(d->hDC,o->text,-1,&r,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);
+        native_workspace_text_draw(d->hDC,&r,o->text,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX,proximity_dpi,0,GetTextColor(d->hDC));
         if(d->itemState&ODS_CHECKED){r=d->rcItem;r.left+=scale(8,proximity_dpi);DrawTextW(d->hDC,L"\x2713",1,&r,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);}
         SelectObject(d->hDC,old);return 1;
     }

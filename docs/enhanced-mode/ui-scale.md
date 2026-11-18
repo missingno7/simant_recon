@@ -16,8 +16,9 @@ transform. World magnification combines the saved world zoom with UI scale:
 100 percent world zoom at 200 percent UI scale draws each world pixel twice
 as large. Windows' application frame chrome continues to follow Windows DPI.
 
-The layout file now writes `SIMANT-WINDOWS 3`, followed by the selected scale
-and the existing panel records. Version 2 layouts load as Auto; unsupported
+The layout file now writes `SIMANT-WINDOWS 4`, followed by the selected scale,
+look and the existing panel records. Version 2 layouts load as Auto/Classic;
+version 3 retains its scale and defaults to Classic. Unsupported
 versions and scale values are rejected. The existing layout filename is kept
 so an owner does not lose saved positions during migration. Reset preserves
 the selected scale.
@@ -63,7 +64,9 @@ surfaces. The control strips group view selection, commands, Map layers,
 inspectors and population/health separately. All content buttons use the same
 buffered owner-draw path, including the text buttons. Original picture art
 retains its aspect ratio and mask and uses nearest-pixel scaling; fonts use
-Tahoma at 13 logical pixels (10 for picture captions).
+Tahoma at 13 logical pixels (10 for picture captions) in Native look. The
+default [Classic look](classic-look.md) uses the shipped FONT2 for painted
+labels and captions, bright frames and a vertical MAP/PAUSE/SCENT strip.
 
 This is an enhanced presentation, not a claim of pixel equality with DOS.
 The ignored delivery evidence includes original guest captures and before /

@@ -197,8 +197,12 @@
  "canonical_storage_units": 73,
  "canonical_program_sha256": "7c3a742196df2588b693a5df370aefa04a9b31413ce7657abd04a21aaaa18c10",
  "whole_executable": "FUNCTIONAL_SOURCE_BUILD (dos/build.py links the canonical source; the original image layout is not reproduced; see docs/dos-closure.md)",
- "validation": "PASS",
- "failures": [],
+ "validation": "FAIL",
+ "failures": [
+  "architecture: {'code': 'file_without_active_role', 'path': 'portable/whole_program/platform/sdl3/native_classic.inc', 'detail': 'Register an actual consumer/proof role or retire the file.'}",
+  "architecture: {'code': 'file_without_active_role', 'path': 'portable/whole_program/platform/sdl3/native_placement.inc', 'detail': 'Register an actual consumer/proof role or retire the file.'}",
+  "reconstruction tests"
+ ],
  "verdicts": {
   "code": {
    "verdict": "NOT EQUAL",

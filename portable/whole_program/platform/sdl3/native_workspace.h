@@ -15,6 +15,13 @@ void native_workspace_place_prompt(SDL_Window *window);
 int native_workspace_start_scale(const char *value);
 int native_workspace_set_ui_scale(int percent);
 int native_workspace_ui_dpi(void *window);
+int native_workspace_classic(void);
+int native_workspace_set_look(int native_look);
+/* Shared menu/label typography: role 1 picture caption, 2 menu/title, 0 label.
+ * RECT/HDC remain opaque here; RGB is a Win32 COLORREF. */
+int native_workspace_text_width(void *dc,const char *text,int dpi,int role);
+void native_workspace_text_draw(void *dc,const void *rect,const char *text,unsigned flags,int dpi,int role,unsigned rgb);
+const char *native_workspace_button_caption(unsigned id);
 int native_workspace_init(SDL_Window *root);
 int native_workspace_active(void);
 void native_workspace_shutdown(void);
