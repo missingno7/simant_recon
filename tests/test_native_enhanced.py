@@ -93,13 +93,14 @@ class EnhancedMode(unittest.TestCase):
 
     @unittest.skipUnless((BUILD / 'report.json').is_file(), 'native build absent (python portable/build.py --out build/current/portable)')
     def test_enhanced_control_sweep(self):
-        """Every panel control and menu item leaves the game visible and interactive (Quick Game; each mode takes ~75 min)."""
+        """Every panel control and menu item leaves the game visible and interactive in Quick, Full and Experimental games (~10 min per mode)."""
         parent = ROOT / 'build/scratch'
         parent.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='ens-', dir=parent) as scratch:
             run = subprocess.run([sys.executable, str(ROOT / 'portable/tests/enhanced/sweep.py'),
-                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r'), '--modes', 'quick'],
-                                 cwd=ROOT, capture_output=True, text=True, timeout=7200)
+                                  '--build', str(BUILD), '--out', str(Path(scratch) / 'r'),
+                                  '--modes', 'quick,full,experimental'],
+                                 cwd=ROOT, capture_output=True, text=True, timeout=5400)
             self.assertEqual(run.returncode, 0, run.stdout[-4000:] + run.stderr[-4000:])
 
 

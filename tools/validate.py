@@ -51,6 +51,7 @@ UPPER_LAYER_TESTS = {
     "test_closure_graph", "test_dos_acceptance", "test_dos_diagnostic", "test_dos_linker",
     "test_instruction_word_sites", "test_native_acceptance", "test_native_register_returns",
     "test_native_word_expressions", "test_semantic_spans", "test_native_runtime_edge", "test_native_enhanced",
+    "test_native_map_frozen_cache",
 }
 
 
