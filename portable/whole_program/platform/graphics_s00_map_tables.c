@@ -8,6 +8,44 @@ extern void (*driver_callback_table[25])();
 #include <string.h>
 #include <stdlib.h>
 
+/* Proven symbolic targets of the two words read at g_1F9E + FC:
+ * DispatchS00[0].segment and DispatchS00[1].offset. The canonical value is
+ * the fresh working link documented in the map-cache investigation, not an
+ * alternative original oracle. No executable data or host pointer is read. */
+enum {
+    ORIGINAL_RASTER_SEGMENT = 0x31ad,
+    CANONICAL_RASTER_SEGMENT = 0x3075,
+    ORIGINAL_640_TABLE_OFFSET = 0x1f9e,
+    ORIGINAL_DISPATCH_OFFSET = 0x2098,
+    SMALL_FONT_CALLBACK_OFFSET = 0x166a,
+    REFERENCE_LOAD_PARAGRAPH = 0x0824
+};
+const SimS00MapDosLayout sim_s00_map_original_reference = {
+    ORIGINAL_RASTER_SEGMENT, SMALL_FONT_CALLBACK_OFFSET, REFERENCE_LOAD_PARAGRAPH
+};
+static SimS00MapDosLayout s_dos_layout;
+static int s_dos_layout_bound;
+
+void sim_s00_map_unbind_dos_layout(void)
+{
+    memset(&s_dos_layout, 0, sizeof(s_dos_layout));
+    s_dos_layout_bound = 0;
+}
+
+SimS00MapTableStatus sim_s00_map_bind_dos_layout(const SimS00MapDosLayout *layout)
+{
+    sim_s00_map_unbind_dos_layout();
+    if (layout == NULL)
+        return SIM_S00_MAP_TABLE_BAD_ARGUMENT;
+    if ((layout->raster_segment != ORIGINAL_RASTER_SEGMENT &&
+         layout->raster_segment != CANONICAL_RASTER_SEGMENT) ||
+        layout->next_callback_offset != SMALL_FONT_CALLBACK_OFFSET)
+        return SIM_S00_MAP_TABLE_UNSUPPORTED_LAYOUT;
+    s_dos_layout = *layout;
+    s_dos_layout_bound = 1;
+    return SIM_S00_MAP_TABLE_OK;
+}
+
 /* The original lookup rows are described here as visual dither tokens rather
  * than copied object bytes. A token selects the bit pattern contributed by a
  * source map color to one EGA plane. */
@@ -90,6 +128,43 @@ static uint8_t dither_byte(SimDitherToken token)
     }
 }
 
+static uint8_t lookup_byte(const SimDitherColor *table, uint8_t color,
+                           unsigned plane)
+{
+    if (color == 0xff) {
+        /* Two SHL AL,1 wrap FF to FC. Four XLATs increment BX, crossing
+         * two bytes into slot 0. MZ relocation adds the load paragraph to
+         * its segment word; the following callback offset is not relocated. */
+        uint8_t index = (uint8_t)(color << 1);
+        unsigned dispatch_byte;
+        uint16_t word;
+        index = (uint8_t)(index << 1);
+        /* The two admitted layouts have the same table/dispatch spacing. */
+        dispatch_byte = ORIGINAL_640_TABLE_OFFSET + index + plane -
+                        ORIGINAL_DISPATCH_OFFSET;
+        word = dispatch_byte < 4 ?
+            (uint16_t)(s_dos_layout.raster_segment + s_dos_layout.load_paragraph) :
+            s_dos_layout.next_callback_offset;
+        return (uint8_t)(word >> ((dispatch_byte & 1u) * 8u));
+    }
+    return dither_byte(table[color].plane[plane]);
+}
+
+static SimS00MapTableStatus check_colors(const uint8_t *source, size_t count,
+                                         int table_640)
+{
+    size_t i;
+    for (i = 0; i < count; ++i) {
+        if (source[i] < 25)
+            continue;
+        if (source[i] != 0xff || !table_640)
+            return SIM_S00_MAP_TABLE_UNSUPPORTED_COLOR;
+        if (!s_dos_layout_bound)
+            return SIM_S00_MAP_TABLE_LAYOUT_UNBOUND;
+    }
+    return SIM_S00_MAP_TABLE_OK;
+}
+
 static SimS00MapTableStatus check_spans(const uint8_t *source, size_t source_size,
                                         size_t need_source,
                                         uint8_t *destination, size_t destination_size,
@@ -114,16 +189,15 @@ static SimS00MapTableStatus expand_4lane(const uint8_t *source, size_t source_si
                                                output_size);
     if (status != SIM_S00_MAP_TABLE_OK)
         return status;
-    for (i = 0; i < source_pixels; ++i) {
-        if (source[i] >= 25)
-            return SIM_S00_MAP_TABLE_UNSUPPORTED_COLOR;
-    }
+    status = check_colors(source, source_pixels, 1);
+    if (status != SIM_S00_MAP_TABLE_OK)
+        return status;
     memset(destination, 0, output_size);
     for (i = 0; i < groups; ++i) {
         unsigned lane;
         for (lane = 0; lane < 4; ++lane) {
-            uint8_t first = dither_byte(table[source[2u * i]].plane[lane]);
-            uint8_t second = dither_byte(table[source[2u * i + 1u]].plane[lane]);
+            uint8_t first = lookup_byte(table, source[2u * i], lane);
+            uint8_t second = lookup_byte(table, source[2u * i + 1u], lane);
             uint8_t first_rotated = (uint8_t)((first << 1) | (first >> 7));
             uint8_t second_rotated = (uint8_t)((second << 1) | (second >> 7));
             size_t offset = (size_t)lane * groups + i;
@@ -152,10 +226,9 @@ static SimS00MapTableStatus expand_2bit(const uint8_t *source, size_t source_siz
                                                output_size);
     if (status != SIM_S00_MAP_TABLE_OK)
         return status;
-    for (i = 0; i < source_pixels; ++i) {
-        if (source[i] >= 25)
-            return SIM_S00_MAP_TABLE_UNSUPPORTED_COLOR;
-    }
+    status = check_colors(source, source_pixels, 0);
+    if (status != SIM_S00_MAP_TABLE_OK)
+        return status;
     memset(destination, 0, output_size);
     for (i = 0; i < groups; ++i) {
         size_t n;
@@ -235,17 +308,16 @@ static SimS00MapTableStatus expand_minimap(const uint8_t *source, size_t source_
                          destination, destination_size, output_size);
     if (status != SIM_S00_MAP_TABLE_OK)
         return status;
-    for (i = 0; i < source_pixels; ++i) {
-        if (source[i] >= 25)
-            return SIM_S00_MAP_TABLE_UNSUPPORTED_COLOR;
-    }
+    status = check_colors(source, source_pixels, profile == SIM_S00_MAP_TABLE_640);
+    if (status != SIM_S00_MAP_TABLE_OK)
+        return status;
     memset(destination, 0, output_size);
     for (i = 0; i < source_pixels; ++i) {
         size_t column = i / 8u;
         unsigned position = (unsigned)(i & 7u);
         unsigned plane;
         for (plane = 0; plane < 4; ++plane) {
-            uint8_t pattern = dither_byte(table[source[i]].plane[plane]);
+            uint8_t pattern = lookup_byte(table, source[i], plane);
             destination[(size_t)plane * columns + column] |=
                 (uint8_t)(pattern & bit_masks[position]);
         }

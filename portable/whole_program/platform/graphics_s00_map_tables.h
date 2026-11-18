@@ -16,13 +16,30 @@ typedef enum SimS00MapTableStatus {
     SIM_S00_MAP_TABLE_BAD_SPAN,
     SIM_S00_MAP_TABLE_UNSUPPORTED_COLOR,
     SIM_S00_MAP_TABLE_RENDERER_UNBOUND,
-    SIM_S00_MAP_TABLE_RENDERER_FAILED
+    SIM_S00_MAP_TABLE_RENDERER_FAILED,
+    SIM_S00_MAP_TABLE_LAYOUT_UNBOUND,
+    SIM_S00_MAP_TABLE_UNSUPPORTED_LAYOUT
 } SimS00MapTableStatus;
 
 typedef enum SimS00MapTableProfile {
     SIM_S00_MAP_TABLE_640 = 0,
     SIM_S00_MAP_TABLE_320 = 1
 } SimS00MapTableProfile;
+
+/* Virtual DOS address facts, never native callback addresses. The reference
+ * load is one observed machine, not a universal DOS allocation guarantee.
+ * The working canonical layout is admitted only for differential controls;
+ * its different raster segment remains link-layout debt. See
+ * evidence/enhanced-mode/map-frozen-dirty-cells.md. */
+typedef struct SimS00MapDosLayout {
+    uint16_t raster_segment;       /* image-relative DispatchS00 slot 0 segment */
+    uint16_t next_callback_offset; /* slot 1, gfx_planar_select_small_font */
+    uint16_t load_paragraph;
+} SimS00MapDosLayout;
+
+extern const SimS00MapDosLayout sim_s00_map_original_reference;
+SimS00MapTableStatus sim_s00_map_bind_dos_layout(const SimS00MapDosLayout *layout);
+void sim_s00_map_unbind_dos_layout(void);
 
 struct SimGraphicsDriver;
 typedef enum SimS00MapTableTransform {
@@ -35,8 +52,10 @@ typedef enum SimS00MapTableTransform {
 } SimS00MapTableTransform;
 
 /* Native byte-span equivalents of the six readable S00 m3126 transforms.
- * Source colors are limited to the indices 0..24 represented by the original
- * dither rules. Destinations are plane-major DOS planar buffers. */
+ * Source colors are 0..24, plus FF for 640-table consumers with an explicitly
+ * bound DOS layout. FF's wrapped-AL lookup crosses into relocated DispatchS00
+ * data. Other unsupported colors and 320 FF fail before any destination write.
+ * Destinations are plane-major DOS planar buffers. */
 SimS00MapTableStatus sim_s00_map_0000(const uint8_t *source, size_t source_size,
                                       uint8_t *destination, size_t destination_size);
 SimS00MapTableStatus sim_s00_map_0137(const uint8_t *source, size_t source_size,
