@@ -3,6 +3,7 @@
 #include "native_menu.h"
 #include "native_windows.h"
 #include "host_modes.h"
+#include "../m1b73_event_enqueue.h"
 #include "portable/whole_program/window_runtime_owner.h"
 #include "portable/whole_program/platform/window_hosting.h"
 #include "portable/whole_program/enhanced/runtime.h"
@@ -12,6 +13,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+static int initial_ui_scale=-1;
+int native_workspace_start_scale(const char *value){
+    char *end;long n;if(!value||!*value)return 0;
+    if(!strcmp(value,"auto")){initial_ui_scale=0;return 1;}
+    n=strtol(value,&end,10);if(*end||n<100||n>300||!ws_ui_scale_valid((int)n))return 0;
+    initial_ui_scale=(int)n;return 1;
+}
 #ifdef _WIN32
 #include <windows.h>
 #include <windowsx.h>
@@ -28,7 +36,7 @@ typedef struct Native {
     HWND h, tooltip;
     SDL_Window *sdl;
     HFONT font;
-    int dpi, external, moving, candidate, pan, gesture, gx, gy,card_id,card_scroll,card_max;
+    int dpi, monitor_dpi, client_w,client_h, external, moving, candidate, pan, gesture, gx, gy,card_id,card_scroll,card_max;
     uint8_t keys[256];
     uint8_t edit_dirty[3],syncing;
     UINT64 content_painted;
@@ -51,85 +59,85 @@ typedef struct Button {
 /* Distinct source contexts, including map plane commands that clear scent. */
 static const Button buttons [] = {
     {
-        WS_ANT, 5, 8, 8, 72, 36, "Map / Minimap"
+        WS_ANT, 5, 8, 8, 72, 44, "Map / Minimap"
     }, {
-        WS_ANT, 8, 88, 8, 72, 36, "Surface (world)"
+        WS_ANT, 8, 88, 8, 72, 44, "Surface (world)"
     }, {
-        WS_ANT, 9, 168, 8, 72, 36, "Black Nest (world)"
+        WS_ANT, 9, 168, 8, 72, 44, "Black Nest (world)"
     }, {
-        WS_ANT, 10, 248, 8, 72, 36, "Red Nest (world)"
+        WS_ANT, 10, 248, 8, 72, 44, "Red Nest (world)"
     }, {
-        WS_ANT, 11, 328, 8, 72, 36, "Go to Yellow Ant"
+        WS_ANT, 11, 328, 8, 72, 44, "Go to Yellow Ant"
     }, {
-        WS_ANT, 12, 408, 8, 72, 36, "Go to Spider"
+        WS_ANT, 12, 408, 8, 72, 44, "Go to Spider"
     }, {
-        WS_ANT, 13, 488, 8, 72, 36, "Go to Black Queen"
+        WS_ANT, 13, 488, 8, 72, 44, "Go to Black Queen"
     }, {
-        WS_ANT, 14, 568, 8, 72, 36, "Go to Red Queen"
+        WS_ANT, 14, 568, 8, 72, 44, "Go to Red Queen"
     }, {
-        WS_ANT, 15, 8, 52, 80, 30, "Pause / Unpause"
+        WS_ANT, 15, 8, 56, 80, 30, "Pause / Unpause"
     }, {
-        WS_ANT, 16, 204, 52, 80, 30, "World Scent"
+        WS_ANT, 16, 204, 56, 80, 30, "World Scent"
     }, {
-        WS_ANT, 7, 292, 52, 40, 30, "World Tools"
+        WS_ANT, 7, 292, 56, 40, 30, "World Tools"
     }, {
-        WS_ANT, 6, 340, 52, 40, 30, "World Help"
+        WS_ANT, 6, 340, 56, 40, 30, "World Help"
     }, {
-        WS_ANT, 0x105, 8, 92, 52, 36, "Map: Yard"
+        WS_ANT, 0x105, 8, 92, 52, 44, "Map: Yard"
     }, {
-        WS_ANT, 0x106, 68, 92, 60, 36, "Map: Surface (clear scent)"
+        WS_ANT, 0x106, 68, 92, 60, 44, "Map: Surface (clear scent)"
     }, {
-        WS_ANT, 0x107, 136, 92, 44, 36, "Map: Black Nest (clear scent)"
+        WS_ANT, 0x107, 144, 92, 44, 44, "Map: Black Nest (clear scent)"
     }, {
-        WS_ANT, 0x108, 188, 92, 44, 36, "Map: Red Nest (clear scent)"
+        WS_ANT, 0x108, 188, 92, 44, 44, "Map: Red Nest (clear scent)"
     }, {
-        WS_ANT, 0x109, 240, 92, 48, 36, "Map: Black Nest Scent"
+        WS_ANT, 0x109, 240, 92, 48, 44, "Map: Black Nest Scent"
     }, {
-        WS_ANT, 0x10a, 296, 92, 48, 36, "Map: Black Trail"
+        WS_ANT, 0x10a, 296, 92, 48, 44, "Map: Black Trail"
     }, {
-        WS_ANT, 0x10b, 352, 92, 40, 36, "Map: Alarm"
+        WS_ANT, 0x10b, 352, 92, 40, 44, "Map: Alarm"
     }, {
-        WS_ANT, 0x10c, 400, 92, 48, 36, "Map: Red Nest Scent"
+        WS_ANT, 0x10c, 400, 92, 48, 44, "Map: Red Nest Scent"
     }, {
-        WS_ANT, 0x10d, 456, 92, 48, 36, "Map: Red Trail"
+        WS_ANT, 0x10d, 456, 92, 48, 44, "Map: Red Trail"
     }, {
-        WS_ANT, 0x116, 512, 92, 40, 36, "Map Help"
+        WS_ANT, 0x116, 512, 92, 40, 44, "Map Help"
     }, {
-        WS_ANT, 0x117, 560, 92, 40, 36, "Map Tools"
+        WS_ANT, 0x117, 560, 92, 40, 44, "Map Tools"
     }, {
-        WS_ANT, 0x10e, 608, 92, 40, 36, "Original map background toggle (%)"
+        WS_ANT, 0x10e, 608, 92, 40, 44, "Original map background toggle (%)"
     }, {
-        WS_ANT, 0x10f, 8, 136, 40, 36, "Behavior"
+        WS_ANT, 0x10f, 8, 144, 40, 36, "Behavior"
     }, {
-        WS_ANT, 0x111, 56, 136, 40, 36, "Caste"
+        WS_ANT, 0x111, 56, 144, 40, 36, "Caste"
     }, {
-        WS_ANT, 0x113, 104, 136, 40, 36, "History"
+        WS_ANT, 0x113, 104, 144, 40, 36, "History"
     }, {
-        WS_ANT, 0x115, 152, 136, 40, 36, "Info"
+        WS_ANT, 0x115, 152, 144, 40, 36, "Info"
     }, {
-        WS_ANT, 0x114, 200, 136, 40, 36, "Status"
+        WS_ANT, 0x114, 200, 144, 40, 36, "Status"
     }, {
-        WS_ANT, 0x112, 248, 136, 40, 36, "Mystery"
+        WS_ANT, 0x112, 248, 144, 40, 36, "Mystery"
     }, {
-        WS_ANT, 0x118, 296, 136, 96, 36, "Population"
+        WS_ANT, 0x118, 296, 144, 124, 48, "Population"
     }, {
-        WS_ANT, 0x110, 400, 136, 40, 36, "Map to Yellow Ant"
+        WS_ANT, 0x110, 428, 144, 40, 36, "Map to Yellow Ant"
     }, {
-        WS_YARD_CONTROL, 0x1907, 8, 8, 64, 40, "Patch"
+        WS_YARD_CONTROL, 0x1907, 8, 8, 64, 44, "Patch"
     }, {
-        WS_YARD_CONTROL, 0x1908, 80, 8, 64, 40, "Yard / House"
+        WS_YARD_CONTROL, 0x1908, 80, 8, 64, 44, "Yard / House"
     }, {
-        WS_YARD_CONTROL, 0xfd22, 152, 8, 64, 40, "House"
+        WS_YARD_CONTROL, 0xfd22, 152, 8, 64, 44, "House"
     }, {
-        WS_YARD_CONTROL, 0x1909, 224, 8, 64, 40, "Strategic"
+        WS_YARD_CONTROL, 0x1909, 224, 8, 64, 44, "Strategic"
     }, {
-        WS_YARD_CONTROL, 0x190a, 296, 8, 64, 40, "Graphic"
+        WS_YARD_CONTROL, 0x190a, 296, 8, 64, 44, "Graphic"
     }, {
-        WS_YARD_CONTROL, 0x190b, 368, 8, 64, 40, "Mate (Full Game; requires breeders)"
+        WS_YARD_CONTROL, 0x190b, 368, 8, 64, 44, "Mate (Full Game; requires breeders)"
     }, {
-        WS_YARD_CONTROL, 0x1910, 440, 8, 64, 40, "Place Queen (requires a stored queen)"
+        WS_YARD_CONTROL, 0x1910, 440, 8, 64, 44, "Place Queen (requires a stored queen)"
     }, {
-        WS_YARD_CONTROL, 0x1911, 512, 8, 40, 40, "Yard Help"
+        WS_YARD_CONTROL, 0x1911, 512, 8, 40, 44, "Yard Help"
     }, {
         WS_YARD_CONTROL, 0x190d, 96, 56, 120, 28, "Automatic queen drop"
     }, {
@@ -141,7 +149,7 @@ static struct {
     int follow, follow_x, follow_y; /* smooth camera target set by a source view move */
     HWND root, preview;
     SDL_WindowID sdl_id;
-    int dpi,info_popup;
+    int dpi,info_popup,status_continue_pending,root_width,root_height,scaling;
     Workspace layout;
     Native windows [WS_PANELS];
     HostPalette palette;
@@ -153,6 +161,7 @@ static LRESULT CALLBACK managed_proc(HWND, UINT, WPARAM, LPARAM, UINT_PTR, DWORD
 static LRESULT CALLBACK root_proc(HWND, UINT, WPARAM, LPARAM, UINT_PTR, DWORD_PTR);
 static LRESULT CALLBACK child_proc(HWND, UINT, WPARAM, LPARAM, UINT_PTR, DWORD_PTR);
 static void arrange(void);
+static void fixed_client(Native *,int,int);
 static void save(void);
 static int scale(int v, int dpi) {
     return MulDiv(v, dpi, 96);
@@ -162,6 +171,35 @@ static int dpi_of(HWND h) {
     GetDpi f = (GetDpi) GetProcAddress(GetModuleHandleA("user32.dll"), "GetDpiForWindow");
     return f ? (int) f(h) : 96;
 }
+static HFONT make_font(int dpi);
+static int effective_dpi(int physical){return u.layout.ui_scale?MulDiv(u.layout.ui_scale,96,100):physical?physical:96;}
+static int point_dpi(POINT at){
+    if(u.layout.ui_scale)return effective_dpi(96);
+    HMODULE lib=LoadLibraryA("shcore.dll");UINT x=96,y=96;
+    if(lib){typedef HRESULT(WINAPI *GetDpi)(HMONITOR,int,UINT *,UINT *);GetDpi f=(GetDpi)GetProcAddress(lib,"GetDpiForMonitor");
+        if(!f||FAILED(f(MonitorFromPoint(at,MONITOR_DEFAULTTONEAREST),0,&x,&y)))x=dpi_of(u.root);FreeLibrary(lib);}
+    else x=dpi_of(u.root);return (int)x;
+}
+int native_workspace_ui_dpi(void *window){if(window)return effective_dpi(dpi_of((HWND)window));POINT at;GetCursorPos(&at);return point_dpi(at);}
+static int metric(int what,int dpi){
+    typedef int(WINAPI *Metric)(int,UINT);Metric f=(Metric)GetProcAddress(GetModuleHandleA("user32.dll"),"GetSystemMetricsForDpi");
+    return f?f(what,dpi):MulDiv(GetSystemMetrics(what),dpi,96);
+}
+static int caption_extra(Native *n){
+    DWORD ex=n->h?(DWORD)GetWindowLongPtr(n->h,GWL_EXSTYLE):WS_EX_TOOLWINDOW;
+    return scale(26,n->dpi)-metric(ex&WS_EX_TOOLWINDOW?SM_CYSMCAPTION:SM_CYCAPTION,n->h?dpi_of(n->h):n->monitor_dpi);
+}
+static void resize_fonts(int p){
+    Native *n=&u.windows[p];HFONT old=n->font;n->font=make_font(n->dpi);
+    for(HWND c=GetWindow(n->h,GW_CHILD);c;c=GetWindow(c,GW_HWNDNEXT)){
+        SendMessage(c,WM_SETFONT,(WPARAM)n->font,TRUE);
+        int w=(int)(INT_PTR)GetPropA(c,"SimAntLogicalW"),h=(int)(INT_PTR)GetPropA(c,"SimAntLogicalH");
+        if(w&&h){int x=(int)(INT_PTR)GetPropA(c,"SimAntLogicalX")-1,y=(int)(INT_PTR)GetPropA(c,"SimAntLogicalY")-1;
+            MoveWindow(c,scale(x,n->dpi),scale(y,n->dpi),scale(w,n->dpi),scale(h,n->dpi),TRUE);}
+    }
+    if(n->tooltip){SendMessage(n->tooltip,WM_SETFONT,(WPARAM)n->font,TRUE);SendMessage(n->tooltip,TTM_SETMAXTIPWIDTH,0,scale(340,n->dpi));}
+    if(old)DeleteObject(old);n->content_painted=0;
+}
 static RECT main_client(void) {
     RECT r;
     GetClientRect(u.root, & r);
@@ -169,7 +207,7 @@ static RECT main_client(void) {
     return r;
 }
 static HFONT make_font(int dpi) {
-    return CreateFontW(- scale(13, dpi), 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Segoe UI");
+    return CreateFontW(- scale(13, dpi), 0, 0, 0, FW_NORMAL, 0, 0, 0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, CLEARTYPE_QUALITY, DEFAULT_PITCH, L"Tahoma");
 }
 static POINT native_cursor_point(void){
     POINT p={0,0};
@@ -228,11 +266,8 @@ static RECT restored(int p) {
         m.rcWork.left + scale(v->x, dpi), m.rcWork.top + scale(v->y, dpi), 0, 0
     };
     int w = scale(v->w, dpi), h = scale(v->h, dpi);
-    if (n->external && n->h) {
-        RECT now;
-        GetWindowRect(n->h, & now);
-        w = now.right - now.left;
-        h = now.bottom - now.top;
+    if(!ws_resizable(p)&&n->client_w){
+        RECT frame,client;GetWindowRect(n->h,&frame);GetClientRect(n->h,&client);w=scale(n->client_w,dpi)+frame.right-frame.left-client.right;h=scale(n->client_h,dpi)+frame.bottom-frame.top-client.bottom;
     }
     /* Recover a caption without stretching a fixed client or losing saved bounds. */
     if (w <= m.rcWork.right - m.rcWork.left && r.left > m.rcWork.right - w) r.left = m.rcWork.right - w;
@@ -244,6 +279,12 @@ static RECT restored(int p) {
     r.right = r.left + w;
     r.bottom = r.top + h;
     return v->edge >= 0 ? attached(p, r, v->edge, v->offset) : r;
+}
+static void root_size(int width,int height){
+    MONITORINFO monitor={.cbSize=sizeof(monitor)};GetMonitorInfo(MonitorFromWindow(u.root,MONITOR_DEFAULTTONEAREST),&monitor);
+    int maxw=monitor.rcWork.right-monitor.rcWork.left-scale(16,u.dpi),maxh=monitor.rcWork.bottom-monitor.rcWork.top-scale(64,u.dpi);
+    if(width>maxw)width=maxw;if(height>maxh)height=maxh;if(width<320)width=320;if(height<240)height=240;
+    SDL_Window *window=SDL_GetWindowFromID(u.sdl_id);int w,h;SDL_GetWindowSize(window,&w,&h);if(w!=width||h!=height)SDL_SetWindowSize(window,width,height);
 }
 static void save(void) {
     if (u.saving || ! u.path [0]) return;
@@ -354,13 +395,14 @@ static void system_popup(HWND h, int p) {
     const char * names [] = {
         "Left", "Right", "Top", "Bottom"
     };
-    AppendMenuA(menu, MF_STRING, SC_MOVE, "Move");
-    for (int i = 0; i < 4; ++ i) AppendMenuA(attach, MF_STRING, ATTACH_LEFT + i, names [i]);
+    AppendMenuA(menu, MF_STRING, SC_MOVE, "Move");native_menu_theme_item(menu,0,"Move");
+    for (int i = 0; i < 4; ++ i){AppendMenuA(attach, MF_STRING, ATTACH_LEFT + i, names [i]);native_menu_theme_item(attach,i,names[i]);}
     AppendMenuA(menu, MF_POPUP, (UINT_PTR) attach, "Attach to Edge");
-    AppendMenuA(menu, MF_STRING, DETACH, "Detach");
+    AppendMenuA(menu, MF_STRING, DETACH, "Detach");native_menu_theme_item(menu,1,"Attach to Edge");native_menu_theme_item(menu,2,"Detach");
     RECT r;
     GetWindowRect(h, & r);
-    int id = TrackPopupMenu(menu, TPM_RETURNCMD | TPM_LEFTBUTTON, r.left + 8, r.top + 24, 0, h, NULL);
+    POINT at=native_cursor_point();
+    int id = TrackPopupMenu(menu, TPM_RETURNCMD | TPM_LEFTBUTTON, at.x+scale(8,u.windows[p].dpi),at.y+scale(8,u.windows[p].dpi),0,h,NULL);
     DestroyMenu(menu);
     if (id == SC_MOVE) SendMessage(h, WM_SYSCOMMAND, SC_MOVE, 0);
     else layout_command(p, id);
@@ -432,6 +474,7 @@ static const Picture * picture(int event) {
 static void panel_children(int p) {
     Native * n = & u.windows [p];
     n->tooltip = CreateWindowExA(WS_EX_TOPMOST, TOOLTIPS_CLASSA, NULL, WS_POPUP | TTS_ALWAYSTIP | TTS_NOPREFIX, 0, 0, 0, 0, n->h, NULL, GetModuleHandle(NULL), NULL);
+    SendMessage(n->tooltip,WM_SETFONT,(WPARAM)n->font,TRUE);
     SendMessage(n->tooltip, TTM_SETMAXTIPWIDTH, 0, scale(340, n->dpi));
     TOOLINFOA tracking={.cbSize=sizeof(tracking),.uFlags=TTF_TRACK|TTF_ABSOLUTE,.hwnd=n->h,.uId=0x7fff,.lpszText=""};
     SendMessageA(n->tooltip,TTM_ADDTOOLA,0,(LPARAM)&tracking);
@@ -463,8 +506,8 @@ static void size_children(int p) {
     if (p == WS_ANT) {
         SendMessage(GetDlgItem(n->h, 0xe300), WM_SETFONT, (WPARAM) n->font, TRUE);
     }
-    if (p == WS_ANT) MoveWindow(GetDlgItem(n->h, 0xe300), scale(96, n->dpi), scale(54, n->dpi), scale(100, n->dpi), scale(160, n->dpi), TRUE);
-    for (int i = 0; i < 2; ++ i) MoveWindow(GetDlgItem(n->h, 0xe310 + i), scale(480 + i * 152, n->dpi), scale(p == WS_ANT ? 142 : 90, n->dpi), scale(144, n->dpi), scale(32, n->dpi), TRUE);
+    if (p == WS_ANT) MoveWindow(GetDlgItem(n->h, 0xe300), scale(96, n->dpi), scale(58, n->dpi), scale(100, n->dpi), scale(160, n->dpi), TRUE);
+    for (int i = 0; i < 2; ++ i) MoveWindow(GetDlgItem(n->h, 0xe310 + i), scale(480 + i * 152, n->dpi), scale(p == WS_ANT ? 150 : 90, n->dpi), scale(144, n->dpi), scale(32, n->dpi), TRUE);
 }
 static void draw_indexed(HDC dc, RECT r, const uint8_t * indices, int w, int h) {
     uint32_t * rgb = malloc((size_t) w * h * 4);
@@ -537,9 +580,20 @@ static void text(HDC dc, RECT r, const char * s, int flags) {
     SetBkMode(dc, TRANSPARENT);
     DrawTextA(dc, s, - 1, & r, flags);
 }
+/* DOS bevel: a dark outline, light leading edge and earth shadow. */
+static void game_edge(HDC dc,RECT r,int down,int dpi){
+    HBRUSH dark=CreateSolidBrush(RGB(85,44,4));FrameRect(dc,&r,dark);DeleteObject(dark);
+    int t=scale(1,dpi);if(t<1)t=1;InflateRect(&r,-t,-t);
+    color_fill(dc,(RECT){r.left,r.top,r.right,r.top+t},down?EARTH:RGB(255,255,255));
+    color_fill(dc,(RECT){r.left,r.top,r.left+t,r.bottom},down?EARTH:RGB(255,255,255));
+    color_fill(dc,(RECT){r.left,r.bottom-t,r.right,r.bottom},down?RGB(255,255,255):EARTH);
+    color_fill(dc,(RECT){r.right-t,r.top,r.right,r.bottom},down?RGB(255,255,255):EARTH);
+    if(down){InflateRect(&r,-t,-t);HBRUSH gold=CreateSolidBrush(RGB(255,243,4));FrameRect(dc,&r,gold);DeleteObject(gold);}
+}
 static void meter(HDC dc, RECT r, int value, int warning, COLORREF c, const char * label) {
     char s [80];
     snprintf(s, sizeof (s), "%s  %d", label, value);
+    int marker=(r.bottom-r.top+5)/10;if(marker<1)marker=1;
     RECT t = r;
     t.bottom = t.top + (r.bottom - r.top) * 2 / 3;
     text(dc, t, s, DT_SINGLELINE | DT_LEFT);
@@ -555,11 +609,11 @@ static void meter(HDC dc, RECT r, int value, int warning, COLORREF c, const char
         int x = r.left + MulDiv(r.right - r.left, warning, 100);
         POINT triangle [] = {
             {
-                x - 3, r.top - 3
+                x - marker, r.top - marker
             }, {
-                x + 3, r.top - 3
+                x + marker, r.top - marker
             }, {
-                x, r.top + 2
+                x, r.top + marker-1
             }
         };
         HGDIOBJ old = SelectObject(dc, GetStockObject(BLACK_BRUSH));
@@ -617,14 +671,15 @@ static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
         const EnhancedAllocationSnapshot *a=s?(p==WS_BEHAVIOR?&s->panels.behavior:&s->panels.caste):NULL;
         int slot=(int)d->CtlID-(p==WS_BEHAVIOR?0x1203:0x1303);
         int on=(d->itemState&ODS_SELECTED)||(a&&slot>=0&&slot<6&&(a->control_flags[slot]&4));
-        color_fill(d->hDC,r,on?RUST:PAPER);DrawEdge(d->hDC,&r,on?EDGE_SUNKEN:EDGE_RAISED,BF_RECT);
+        color_fill(d->hDC,r,on?RUST:PAPER);game_edge(d->hDC,r,on,n->dpi);
         SelectObject(d->hDC,n->font);SetTextColor(d->hDC,on?RGB(255,255,255):INK);SetBkMode(d->hDC,TRANSPARENT);
         char label[80];GetWindowTextA(d->hwndItem,label,sizeof(label));DrawTextA(d->hDC,label,-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);
         if(d->itemState&ODS_FOCUS){InflateRect(&r,-3,-3);DrawFocusRect(d->hDC,&r);}return;
     }
     int on = selected(d->CtlID, s) || (d->itemState & ODS_SELECTED);
-    color_fill(d->hDC, r, on ? RGB(219, 214, 197) : PAPER);
-    DrawEdge(d->hDC, & r, on ? EDGE_SUNKEN : EDGE_RAISED, BF_RECT);
+    if(p==WS_HISTORY&&s)for(int i=0;i<4;++i)on|=s->history.shown[i]==(int)d->CtlID-0x1503;
+    color_fill(d->hDC, r, on ? RGB(219, 214, 197) : RGB(232,226,206));
+    game_edge(d->hDC,r,on,n->dpi);
     SelectObject(d->hDC, n->font);
     if (d->CtlID == 0xe310 || d->CtlID == 0xe311) {
         int black = d->CtlID == 0xe311;
@@ -646,19 +701,26 @@ static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
                 pic = & tool;
             }
         }
+        const char *caption=NULL;
+        switch(d->CtlID){case 8:case 0x106:caption="Surface";break;case 9:case 0x107:caption="Black Nest";break;case 10:case 0x108:caption="Red Nest";break;
+        case 11:case 0x110:caption="Yellow";break;case 12:caption="Spider";break;case 13:caption="B. Queen";break;case 14:caption="R. Queen";break;
+        case 0x105:caption="Yard";break;case 0x109:case 0x10c:caption="Nest scent";break;case 0x10a:case 0x10d:caption="Trail";break;case 0x10b:caption="Alarm";break;
+        case 0x1907:caption="Patch";break;case 0x1908:caption="Yard";break;case 0xfd22:caption="House";break;case 0x1909:caption="Strategic";break;case 0x190a:caption="Graphic";break;case 0x190b:caption="Mate";break;case 0x1910:caption="Queen";break;}
+        RECT art_rect=r;
+        if(caption){art_rect.bottom-=scale(12,n->dpi);RECT label=r;label.top=art_rect.bottom;HFONT small=CreateFontA(-scale(10,n->dpi),0,0,0,FW_NORMAL,0,0,0,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,"Tahoma");HGDIOBJ old=SelectObject(d->hDC,small);text(d->hDC,label,caption,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);SelectObject(d->hDC,old);DeleteObject(small);}
         const EnhancedArt * a = pic ? enhanced_art(pic->art) : NULL;
         if (a && pic->x >= 0 && pic->y >= 0 && pic->x + pic->w <= a->width && pic->y + pic->h <= a->height) {
-            int factor = scale(2, n->dpi), width = pic->w * factor, height = pic->h * factor;
-            while (factor > 1 && (width > r.right - 6 || height > r.bottom - 6)) {
-                -- factor;
-                width = pic->w * factor;
-                height = pic->h * factor;
-            }
+            int factor=2;
+            int available_w=MulDiv(art_rect.right-scale(6,n->dpi),96,n->dpi),available_h=MulDiv(art_rect.bottom-scale(4,n->dpi),96,n->dpi);
+            while(factor>1&&(pic->w*factor>available_w||pic->h*factor>available_h))--factor;
+            int width=scale(pic->w*factor,n->dpi),height=scale(pic->h*factor,n->dpi);
+            int maxw=art_rect.right-scale(6,n->dpi),maxh=art_rect.bottom-scale(4,n->dpi);
+            if(width>maxw){height=MulDiv(height,maxw,width);width=maxw;}if(height>maxh){width=MulDiv(width,maxh,height);height=maxh;}
             uint8_t * crop = malloc((size_t) pic->w * pic->h);
             if (crop) {
                 for (int y = 0; y < pic->h; ++ y) memcpy(crop + y * pic->w, a->pixels + (pic->y + y) * a->width + pic->x, pic->w);
                 RECT dst = {
-                    (r.right - width) / 2, (r.bottom - height) / 2, (r.right + width) / 2, (r.bottom + height) / 2
+                    (r.right - width) / 2, (art_rect.bottom - height) / 2, (r.right + width) / 2, (art_rect.bottom + height) / 2
                 };
                 draw_indexed(d->hDC, dst, crop, pic->w, pic->h);
                 free(crop);
@@ -695,10 +757,18 @@ static void draw_button_direct(DRAWITEMSTRUCT * d, int p) {
 static void draw_panel(HDC dc, RECT r, int p) {
     Native * n = & u.windows [p];
     const EnhancedSnapshot * s = enhanced_snapshot();
-    color_fill(dc, r, PAPER);
+    color_fill(dc,r,RGB(219,214,197));
+    RECT rim=r;game_edge(dc,rim,0,n->dpi);
+    if(p==WS_ANT){
+        RECT groups[]={{4,4,652,88},{4,88,652,140},{4,140,472,196},{654,4,940,140},{472,144,936,196}};
+        for(unsigned i=0;i<sizeof(groups)/sizeof(groups[0]);++i){RECT box={scale(groups[i].left,n->dpi),scale(groups[i].top,n->dpi),scale(groups[i].right,n->dpi),scale(groups[i].bottom,n->dpi)};color_fill(dc,box,PAPER);game_edge(dc,box,1,n->dpi);}
+    }else{
+        RECT groups[]={{4,4,558,56},{4,56,352,86},{568,4,940,86},{472,86,936,130}};
+        for(unsigned i=0;i<sizeof(groups)/sizeof(groups[0]);++i){RECT box={scale(groups[i].left,n->dpi),scale(groups[i].top,n->dpi),scale(groups[i].right,n->dpi),scale(groups[i].bottom,n->dpi)};color_fill(dc,box,PAPER);game_edge(dc,box,1,n->dpi);}
+    }
     SelectObject(dc, n->font);
     if (! s) return;
-    int y = p == WS_ANT ? 142 : 90;
+    int y = p == WS_ANT ? 150 : 90;
     RECT red = {
         scale(784, n->dpi), scale(y, n->dpi), scale(928, n->dpi), scale(y + 32, n->dpi)
     };
@@ -922,7 +992,12 @@ ordinary_key:
 static int common(HWND h, int p, UINT msg, WPARAM wp, LPARAM lp, LRESULT * result) {
     Native * n = & u.windows [p];
     * result = 0;
+    if(native_menu_theme_message(h,msg,lp)){*result=TRUE;return 1;}
     if (native_workspace_shortcut(msg, wp)) return 1;
+    if(msg==WM_NCCALCSIZE && wp && n->h){
+        *result=DefWindowProc(h,msg,wp,lp);
+        ((NCCALCSIZE_PARAMS *)lp)->rgrc[0].top+=caption_extra(n);return 1;
+    }
     if(msg==WM_NCPAINT||msg==WM_NCACTIVATE){
         *result=n->external?DefSubclassProc(h,msg,wp,lp):DefWindowProc(h,msg,wp,lp);
         RECT frame,client;GetWindowRect(h,&frame);GetClientRect(h,&client);POINT at={0,0};ClientToScreen(h,&at);
@@ -970,15 +1045,9 @@ static int common(HWND h, int p, UINT msg, WPARAM wp, LPARAM lp, LRESULT * resul
     if (msg == WM_MOVING) moving(p, * (RECT *) lp);
     if (msg == WM_EXITSIZEMOVE) end_move(p);
     if (msg == WM_DPICHANGED) {
-        n->dpi = HIWORD(wp);
-        HFONT old = n->font;
-        n->font = make_font(n->dpi);
-        if (old) DeleteObject(old);
-        if (! n->external) {
-            RECT * r = (RECT *) lp;
-            SetWindowPos(h, NULL, r->left, r->top, r->right - r->left, r->bottom - r->top, SWP_NOZORDER | SWP_NOACTIVATE);
-            if (p == WS_ANT || p == WS_YARD_CONTROL) size_children(p);
-        }
+        n->monitor_dpi=HIWORD(wp);n->dpi=effective_dpi(n->monitor_dpi);resize_fonts(p);
+        SetWindowPos(h,NULL,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
+        if (p==WS_ANT||p==WS_YARD_CONTROL)size_children(p);
         arrange();
     }
     return 0;
@@ -988,7 +1057,7 @@ static LRESULT CALLBACK managed_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UIN
     LRESULT result;
     int p=(int)data;
     if (common(h,p,msg,wp,lp,&result)) return result;
-    if(content_panel(p) && enhanced_compatibility_owner()!=content_owner(p)){
+    if(content_panel(p) && (p==WS_STATUS||enhanced_compatibility_owner()!=content_owner(p))){
         if(msg==WM_DRAWITEM){draw_button((DRAWITEMSTRUCT *)lp,p);return TRUE;}
         if(msg==WM_CTLCOLOREDIT){SetTextColor((HDC)wp,INK);SetBkColor((HDC)wp,RGB(255,255,255));return (LRESULT)GetStockObject(WHITE_BRUSH);}
         if(p==WS_INFO&&(msg==WM_MOUSEWHEEL||msg==WM_VSCROLL)){
@@ -1173,8 +1242,10 @@ static void arrange(void) {
     for (int p = 0; p < WS_PANELS; ++ p) {
         Native * n = & u.windows [p];
         if (! n->h) continue;
+        if(!ws_resizable(p)&&n->client_w)fixed_client(n,n->client_w,n->client_h);
         RECT r = restored(p);
-        SetWindowPos(n->h, HWND_TOP, r.left, r.top, r.right - r.left, r.bottom - r.top, SWP_NOACTIVATE | SWP_NOOWNERZORDER);
+        RECT now,client;GetWindowRect(n->h,&now);GetClientRect(n->h,&client);
+        if(!EqualRect(&r,&now))SetWindowPos(n->h, HWND_TOP, r.left, r.top, r.right - r.left, r.bottom - r.top, SWP_NOACTIVATE | SWP_NOOWNERZORDER | (ws_resizable(p)?0:SWP_NOSIZE));
         if (! n->external){
             int show=u.ready&&u.layout.panels[p].visible,was=IsWindowVisible(n->h);
             ShowWindow(n->h,show?SW_SHOWNOACTIVATE:SW_HIDE);
@@ -1185,6 +1256,23 @@ static void arrange(void) {
 }
 #include "native_proximity.inc"
 #include "native_minimap.inc"
+int native_workspace_set_ui_scale(int percent){
+    if(!u.active||!ws_ui_scale_valid(percent))return 0;
+    if(u.layout.ui_scale==percent)return 1;
+    /* Snapshot the old DIP bounds before switching units. */
+    for(int p=0;p<WS_PANELS;++p)if(u.windows[p].h)remember(p);
+    u.scaling=1;
+    u.layout.ui_scale=percent;u.dpi=effective_dpi(dpi_of(u.root));
+    u.applying=1;root_size(scale(u.root_width,u.dpi),scale(u.root_height,u.dpi));
+    for(int p=0;p<WS_PANELS;++p){Native *n=&u.windows[p];if(!n->h)continue;
+        n->dpi=effective_dpi(n->monitor_dpi);resize_fonts(p);
+        SetWindowPos(n->h,NULL,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
+        if(p==WS_ANT||p==WS_YARD_CONTROL)size_children(p);
+    }
+    u.applying=0;command_tool=-1;arrange();
+    for(int p=0;p<WS_PANELS;++p)if(u.windows[p].h)RedrawWindow(u.windows[p].h,NULL,NULL,RDW_FRAME|RDW_INVALIDATE|RDW_ALLCHILDREN|RDW_UPDATENOW);
+    ++u.layout.revision;save();DrawMenuBar(u.root);u.scaling=0;return 1;
+}
 static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_PTR id, DWORD_PTR data) {
     (void) id;
     (void) data;
@@ -1201,6 +1289,7 @@ static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_P
             Workspace next;
             ws_reset(& next);
             for (int p = 0; p < WS_PANELS; ++ p) next.panels [p].visible = u.layout.panels [p].visible;
+            next.ui_scale=u.layout.ui_scale;
             u.layout = next;
             arrange();
             save();
@@ -1217,11 +1306,12 @@ static LRESULT CALLBACK root_proc(HWND h, UINT msg, WPARAM wp, LPARAM lp, UINT_P
     }
     if (msg == WM_MOVE || msg == WM_SIZE) {
         LRESULT r = DefSubclassProc(h, msg, wp, lp);
+        if(msg==WM_SIZE&&wp!=SIZE_MINIMIZED&&!u.applying&&!u.scaling){RECT client;GetClientRect(h,&client);if(client.right>0&&client.bottom>0){u.root_width=MulDiv(client.right,96,u.dpi);u.root_height=MulDiv(client.bottom,96,u.dpi);}}
         arrange();
         return r;
     }
     if (msg == WM_DPICHANGED) {
-        u.dpi = HIWORD(wp);
+        u.dpi = effective_dpi(HIWORD(wp));
         RECT * r = (RECT *) lp;
         SetWindowPos(h, NULL, r->left, r->top, r->right - r->left, r->bottom - r->top, SWP_NOZORDER | SWP_NOACTIVATE);
         arrange();
@@ -1282,16 +1372,19 @@ int native_workspace_init(SDL_Window * root) {
             ws_reset(& u.layout);
         }
     }
+    if(initial_ui_scale>=0)u.layout.ui_scale=initial_ui_scale;
+    u.dpi=effective_dpi(dpi_of(h));
     u.active = 1;
     native_menu_init(root);
     SetWindowSubclass(h, root_proc, 29, 0);
     SetWindowTextA(h, "SimAnt");
-    SDL_SetWindowSize(root, scale(1040, u.dpi), scale(760, u.dpi));
+    u.root_width=1040;u.root_height=760;u.scaling=1;root_size(scale(u.root_width,u.dpi),scale(u.root_height,u.dpi));u.scaling=0;
     SetWindowPos(h, NULL, scale(8, u.dpi), scale(8, u.dpi), 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
     for (int p = 0; p <= WS_YARD_CONTROL; ++ p) {
         if (p == WS_RESERVED) continue;
         Native * n = & u.windows [p];
-        n->dpi = u.dpi;
+        n->monitor_dpi=dpi_of(h);n->dpi = u.dpi;
+        if(!ws_resizable(p))ws_fixed_content(p,&n->client_w,&n->client_h);
         n->font = make_font(n->dpi);
         DWORD style = WS_POPUP | WS_CAPTION | WS_CLIPCHILDREN;
         if (ws_resizable(p)) style |= WS_THICKFRAME | WS_SYSMENU | WS_MAXIMIZEBOX;
@@ -1307,12 +1400,14 @@ int native_workspace_init(SDL_Window * root) {
         n->h = CreateWindowExA((ws_resizable(p) ? 0 : WS_EX_TOOLWINDOW) | WS_EX_CONTROLPARENT, "SimAntGameWindow", ws_name(p), style, 0, 0, r.right - r.left, r.bottom - r.top, h, NULL, GetModuleHandle(NULL), (void *)(INT_PTR) p);
         SetWindowTextA(n->h, ws_name(p));
         system_entries(n->h);
+        SetWindowPos(n->h,NULL,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
         if (p == WS_ANT || p == WS_YARD_CONTROL) {
             panel_children(p);
             size_children(p);
         }
     }
     arrange();
+    if(initial_ui_scale>=0)save();
     return 1;
 }
 int native_workspace_active(void) {
@@ -1348,11 +1443,25 @@ static int panel_for_logical(int id) {
 }
 static void fixed_client(Native *n,int width,int height){
     if(n->moving||width<1||height<1)return;
-    RECT client;GetClientRect(n->h,&client);int w=MulDiv(width,n->dpi,96),h=MulDiv(height,n->dpi,96);
+    n->client_w=width;n->client_h=height;
+    RECT client;GetClientRect(n->h,&client);int w=scale(width,n->dpi),h=scale(height,n->dpi);
     if(client.right==w&&client.bottom==h)return;
-    if(n->sdl)SDL_SetWindowSize(n->sdl,w,h);
-    RECT frame={0,0,w,h};AdjustWindowRectEx(&frame,(DWORD)GetWindowLongPtr(n->h,GWL_STYLE),FALSE,(DWORD)GetWindowLongPtr(n->h,GWL_EXSTYLE));
-    SetWindowPos(n->h,NULL,0,0,frame.right-frame.left,frame.bottom-frame.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
+    if(n->sdl){
+        /* SDL also owns WM_WINDOWPOSCHANGING. Size through its API and
+         * compensate the native caption/scrollbar inset, including fractional
+         * DPI rounding. Stop as soon as the actual client is exact. */
+        int request_w=w,request_h=h+caption_extra(n);
+        for(int attempt=0;attempt<4;++attempt){
+            SDL_SetWindowSize(n->sdl,request_w,request_h);SDL_SyncWindow(n->sdl);
+            GetClientRect(n->h,&client);if(client.right==w&&client.bottom==h)break;
+            request_w+=w-client.right;request_h+=h-client.bottom;
+        }
+    }else{
+        RECT frame;GetWindowRect(n->h,&frame);
+        SetWindowPos(n->h,NULL,0,0,frame.right-frame.left+w-client.right,frame.bottom-frame.top+h-client.bottom,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
+    }
+
+
 }
 static LRESULT CALLBACK compatibility_proc(HWND h,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR id,DWORD_PTR logical){
     (void)id;
@@ -1367,7 +1476,13 @@ static LRESULT CALLBACK compatibility_proc(HWND h,UINT msg,WPARAM wp,LPARAM lp,U
 void native_workspace_manage_window(SDL_Window *window,int logical,int width,int height){
     if(!u.active)return;int p=panel_for_logical(logical);if(p<0){
         HWND h=SDL_GetPointerProperty(SDL_GetWindowProperties(window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);
-        if(h){SetWindowSubclass(h,compatibility_proc,74,(DWORD_PTR)logical);if(logical==0x1f00)sync_text(h,"About SimAnt - Esc or click closes");if(logical==0x1700)sync_text(h,"Population - Esc or click outside closes");}
+        if(h){
+            int d=point_dpi(prompt_anchor()),w=scale(width*2,d),he=scale(height*2,d);RECT r;GetClientRect(h,&r);
+            MONITORINFO m={.cbSize=sizeof(m)};GetMonitorInfo(MonitorFromPoint(prompt_anchor(),MONITOR_DEFAULTTONEAREST),&m);
+            int mw=m.rcWork.right-m.rcWork.left-16,mh=m.rcWork.bottom-m.rcWork.top-64;
+            if(w>mw){he=MulDiv(he,mw,w);w=mw;}if(he>mh){w=MulDiv(w,mh,he);he=mh;}
+            if(r.right!=w||r.bottom!=he)SDL_SetWindowSize(window,w,he);
+            SetWindowSubclass(h,compatibility_proc,74,(DWORD_PTR)logical);if(logical==0x1f00)sync_text(h,"About SimAnt - Esc or click closes");if(logical==0x1700)sync_text(h,"Population - Esc or click outside closes");}
         return;
     }Native *n=&u.windows[p];
     if(content_panel(p))content_size(p,&width,&height);
@@ -1376,17 +1491,17 @@ void native_workspace_manage_window(SDL_Window *window,int logical,int width,int
     SDL_SetWindowBordered(window,true);
     HWND h=SDL_GetPointerProperty(SDL_GetWindowProperties(window),SDL_PROP_WINDOW_WIN32_HWND_POINTER,NULL);if(!h)return;
     SetClassLongPtr(h,GCL_STYLE,GetClassLongPtr(h,GCL_STYLE)|CS_DBLCLKS);
-    n->h=h;n->sdl=window;n->external=1;n->dpi=dpi_of(h);n->font=make_font(n->dpi);SetWindowLongPtr(h,GWLP_HWNDPARENT,(LONG_PTR)u.root);
+    n->h=h;n->sdl=window;n->external=1;n->monitor_dpi=dpi_of(h);n->dpi=effective_dpi(n->monitor_dpi);n->font=make_font(n->dpi);SetWindowLongPtr(h,GWLP_HWNDPARENT,(LONG_PTR)u.root);
     LONG_PTR style=GetWindowLongPtr(h,GWL_STYLE)|WS_CLIPCHILDREN;style&=~(WS_THICKFRAME|WS_MINIMIZEBOX|WS_MAXIMIZEBOX);style|=WS_CAPTION;
     if(!(enhanced_window_flags((int16_t)logical)&4))style&=~WS_SYSMENU;else style|=WS_SYSMENU;
     SetWindowLongPtr(h,GWL_STYLE,style);SetWindowLongPtr(h,GWL_EXSTYLE,GetWindowLongPtr(h,GWL_EXSTYLE)|WS_EX_TOOLWINDOW);
     SetWindowPos(h,NULL,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
-    fixed_client(n,width,height);SetWindowSubclass(h,managed_proc,73,p);if(content_panel(p)){SetWindowTextA(h,ws_name(p));content_children(p);content_sync(p);}system_entries(h);arrange();
+    SetWindowSubclass(h,managed_proc,73,p);SetWindowPos(h,NULL,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);fixed_client(n,width,height);if(content_panel(p)){SetWindowTextA(h,ws_name(p));content_children(p);content_sync(p);}system_entries(h);arrange();
 }
 int native_workspace_content_paint(void *window,void *output,int frame){
     if(!u.active)return 0;
     for(int p=WS_MAP;p<=WS_STATUS;++p)if(u.windows[p].h==(HWND)window){
-        if(enhanced_compatibility_owner()==content_owner(p))return 0;
+        if(p!=WS_STATUS&&enhanced_compatibility_owner()==content_owner(p))return 0;
         content_sync(p);
         /* The present path also visits these clients between WM_PAINT refreshes.
          * Keep input polling cheap; readbacks and first show always draw now. */
@@ -1424,6 +1539,27 @@ void native_workspace_present(const HostPalette * palette) {
     u.palette = * palette;
     for(int p=WS_MAP;p<=WS_STATUS;++p)if(u.windows[p].h)content_sync(p);
     native_menu_sync();
+    /* A window can become visible inside source win_Open, before its source
+     * front/flush transaction returns. Retain an early Continue click until
+     * that same ScoreDialog owns the source queue; never lose first-frame input. */
+    if(u.status_continue_pending){
+        SimHostedWindowView view;int open=0;for(unsigned i=0;i<sim_window_hosting_count();++i)if(sim_window_hosting_view(i,&view)&&view.id==0x1800){open=view.open;break;}
+        if(!open)u.status_continue_pending=0;
+        else if(sim_window_hosting_top()==0x1800){
+            const SimWindowRefEntry *entry=&sim_window_ref_registry.entries[0x18];
+            if(entry->bound&&entry->view.count>12){const uint8_t *rect=entry->view.object_table[12];
+                /* A ScoreDialog click is a pointer transaction, including its
+                 * semantic position and current/previous window events. Use
+                 * the same hosted input path as the retained source client. */
+                int strip=view.drag_bottom>view.drag_top&&view.drag_top>=view.top_y&&view.drag_bottom<view.bottom?view.drag_bottom-view.top_y:0;
+                HostEvent down={.kind=HOST_EVENT_MOUSE_DOWN,.button=SDL_BUTTON_LEFT,
+                    .x=(sim_window_wire_read_i16(rect,0)+sim_window_wire_read_i16(rect,4))/2-view.left,
+                    .y=(sim_window_wire_read_i16(rect,2)+sim_window_wire_read_i16(rect,6))/2-view.top_y-strip},up=down;
+                up.kind=HOST_EVENT_MOUSE_UP;
+                if(native_windows_push_pointer(0x1800,&down)&&native_windows_push_pointer(0x1800,&up))u.status_continue_pending=0;
+            }
+        }
+    }
     const EnhancedSnapshot * s = enhanced_snapshot();
     int ready = s && s->panels.world_ready;
     command_prompt_sync(s);
@@ -1550,6 +1686,8 @@ const Workspace * native_workspace_layout(void) {
 }
 int native_workspace_apply(const Workspace * w) {
     if (! u.active || ! ws_validate(w)) return 0;
+    int old=u.layout.ui_scale;u.layout.ui_scale=old;
+    if(old!=w->ui_scale)native_workspace_set_ui_scale(w->ui_scale);
     u.layout = * w;
     arrange();
     save();
@@ -1660,6 +1798,8 @@ void native_workspace_shutdown(void) {
     memset(& u, 0, sizeof (u));
 }
 #else
+int native_workspace_set_ui_scale(int percent){(void)percent;return 0;}
+int native_workspace_ui_dpi(void *window){(void)window;return 96;}
 int native_workspace_minimap(const EnhancedRect *r,const EnhancedRect *c,EnhancedPoint *p){(void)r;(void)c;(void)p;return 0;}
 int native_workspace_art_paint(void *dc,int id,int x,int y){(void)dc;(void)id;(void)x;(void)y;return 0;}
 void native_workspace_activate_point(int x,int y){(void)x;(void)y;}

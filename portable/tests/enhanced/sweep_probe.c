@@ -3,6 +3,7 @@
 #include "portable/whole_program/enhanced/actions.h"
 #include "portable/whole_program/platform/sdl3/native_workspace.h"
 #include "portable/whole_program/platform/sdl3/native_windows.h"
+#include "portable/whole_program/platform/sdl3/host_modes.h"
 #include "portable/whole_program/window_runtime_owner.h"
 #include "portable/whole_program/platform/window_hosting.h"
 #include <windows.h>
@@ -10,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "portable/tests/enhanced/source_fingerprint.h"
 extern int32_t main_iteration_count;
 extern void __real_enhanced_execute_next(void),__real_enhanced_source_poll(void);
 static int phase,started,ticks,identifier,failed,observed,cancelled,ready_checks;
@@ -29,11 +31,27 @@ static const char *setup;
 static int spider_stage;
 static int expected_native_choice;
 static ULONGLONG action_started;
+static uint64_t last_world_click;
+static uint64_t before_source,after_source;static int changed,recovery_pause;
+static int session,session_row;static uint64_t preparation;static ULONGLONG preparation_started;
+static char command_line[2400];
+static int read_command(void){
+    if(!fgets(command_line,sizeof(command_line),stdin))return 0;
+    char *part[8],*p=command_line;for(int i=0;i<8;++i){part[i]=p;char *end=strchr(p,i==7?'\n':'\t');if(!end)return 0;*end=0;p=end+1;}
+    kind=part[0];setup=part[1];parent_name=part[2];identifier=strtol(part[3],NULL,0);point_x=atoi(part[4]);point_y=atoi(part[5]);outside_cancel=atoi(part[7]);
+    path_count=path_at=0;p=part[6];while(*p&&path_count<12){char *end;path[path_count++]=strtoul(p,&end,0);if(end==p||*end!=',')break;p=end+1;}
+    phase=ticks=failed=observed=cancelled=ready_checks=footer_prepared=legacy_selected=legacy_release_owner=target_cancel=spider_stage=held=changed=0;
+    ++session_row;before_source=after_source=0;action_started=0;presentation[0]=0;inspected=NULL;native_workspace_set_ui_scale(100);return 1;
+}
 static HWND named(const char *name){HWND h=NULL;while((h=FindWindowExA(NULL,h,NULL,NULL))){DWORD pid;GetWindowThreadProcessId(h,&pid);if(pid!=GetCurrentProcessId())continue;char title[200];GetWindowTextA(h,title,sizeof(title));if((!strcmp(title,name)||(!strcmp(name,"Info")&&!strncmp(title,"Info - ",7)))&&(strcmp(name,"SimAnt")||GetMenu(h)))return h;}return NULL;}
 static void quoted(const char *s){putc('"',stderr);for(;*s;++s){if(*s=='"'||*s=='\\')putc('\\',stderr);putc(*s>=32?*s:' ',stderr);}putc('"',stderr);}
 static void finish(const char *result){
-    fprintf(stderr,"SWEEP_RESULT {\"passed\":%s,\"result\":",failed?"false":"true");quoted(result);fprintf(stderr,",\"presentation\":");quoted(presentation);fprintf(stderr,",\"cancelled\":%s,\"ticks\":%d,\"elapsed_ms\":%llu,\"iteration\":%ld}\n",cancelled?"true":"false",ticks,action_started?(unsigned long long)(GetTickCount64()-action_started):0,(long)main_iteration_count);exit(failed?1:0);
+    int reuse=session&&!failed&&!changed;
+    fprintf(stderr,"SWEEP_RESULT {\"passed\":%s,\"result\":",failed?"false":"true");quoted(result);fprintf(stderr,",\"presentation\":");quoted(presentation);
+    fprintf(stderr,",\"cancelled\":%s,\"ticks\":%d,\"elapsed_ms\":%llu,\"iteration\":%ld,\"source_before\":\"%016llx\",\"source_after\":\"%016llx\",\"source_changed\":%s,\"reusable\":%s}\n",cancelled?"true":"false",ticks,action_started?(unsigned long long)(GetTickCount64()-action_started):0,(long)main_iteration_count,(unsigned long long)before_source,(unsigned long long)after_source,changed?"true":"false",reuse?"true":"false");fflush(stderr);
+    if(!reuse||!read_command())exit(failed?1:0);
 }
+
 static void row(HWND h,HWND parent,const char *setup){char name[200],label[200],cls[60];GetWindowTextA(parent,name,sizeof(name));GetWindowTextA(h,label,sizeof(label));GetClassNameA(h,cls,sizeof(cls));
     fprintf(stderr,"SWEEP_CONTROL {\"kind\":\"control\",\"parent\":");quoted(name);fprintf(stderr,",\"label\":");quoted(label);fprintf(stderr,",\"class\":");quoted(cls);fprintf(stderr,",\"id\":%d,\"visible\":%s,\"enabled\":%s,\"setup\":",GetDlgCtrlID(h),IsWindowVisible(h)?"true":"false",IsWindowEnabled(h)?"true":"false");quoted(setup);fprintf(stderr,"}\n");}
 static void menu_rows(HMENU menu,const char *prefix){
@@ -54,7 +72,7 @@ static void painted_controls(HWND h){
     if(id){gesture_row(h,id,"client hit",x,y,0);gesture_row(h,id,"client press-hold-release",x,y,1);}
     if(!strcmp(name,"SimAnt - Game")){
         const EnhancedSnapshot *s=enhanced_snapshot();const WsPanel *view=&native_workspace_layout()->panels[WS_GAME];
-        typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;
+        typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=native_workspace_ui_dpi(h);
         int x=MulDiv((s->world.player_x*16+8-view->camera_x)*view->zoom,d,9600),y=MulDiv((s->world.player_y*16+8-view->camera_y)*view->zoom,d,9600);
         if(s->world.player_plane==s->world.plane&&x>=0&&x<r.right&&y>=0&&y<r.bottom){gesture_row(h,4,"player click",x,y,0);gesture_row(h,4,"player command menu (hold)",x,y,1);}
         if(s->panels.game_type!=3&&s->world.spider_on){gesture_row(h,4,"spider command click",0,0,0);gesture_row(h,4,"spider command menu (hold)",0,0,1);}
@@ -121,7 +139,7 @@ int __wrap_native_workspace_proximity(const EnhancedDialogsSnapshot *menu){
 }
 static int waiting(void){const EnhancedSnapshot *s=enhanced_snapshot();return s&&(s->dialogs.modal||enhanced_proximity_owner()>=0||enhanced_minimap_owner()>=0||enhanced_yard_wait()||s->panels.tool==10||s->panels.tool==11||s->panels.tool==12);}
 static void CALLBACK tick(HWND h,UINT message,UINT_PTR id,DWORD now){
-    (void)h;(void)message;(void)id;(void)now;++ticks;
+    (void)h;(void)message;(void)now;if(!action_started||phase<2||phase>4||id!=timer)return;++ticks;
     if(GetTickCount64()-action_started>5000){failed=1;finish(waiting()?"uncancellable-presentation":"no-interactive-return");}
     if(legacy_release_owner&&ticks>=legacy_release_tick){HostEvent up={.kind=HOST_EVENT_MOUSE_UP,.button=1,.x=legacy_x,.y=legacy_y};native_windows_push_pointer(legacy_release_owner,&up);legacy_release_owner=0;}
     if(ticks==(identifier==4?8:2)&&held){PostMessage(target,WM_LBUTTONUP,0,MAKELPARAM(point_x,point_y));held=0;}
@@ -153,23 +171,38 @@ static void CALLBACK tick(HWND h,UINT message,UINT_PTR id,DWORD now){
 }
 static void click(HWND h){RECT r;GetClientRect(h,&r);PostMessage(h,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(r.right/2,r.bottom/2));PostMessage(h,WM_LBUTTONUP,0,MAKELPARAM(r.right/2,r.bottom/2));}
 void __wrap_enhanced_source_poll(void){__real_enhanced_source_poll();static ULONGLONG last;ULONGLONG now=GetTickCount64();if(phase&&now-last>5000){last=now;const EnhancedSnapshot *s=enhanced_snapshot();fprintf(stderr,"SWEEP_PROGRESS phase=%d ticks=%d iteration=%ld owner=%04x modal=%d tool=%d submitted=%llu delivered=%llu\n",phase,ticks,(long)main_iteration_count,(unsigned short)s->dialogs.owner,s->dialogs.modal,s->panels.tool,(unsigned long long)enhanced_action_ledger()->submitted,(unsigned long long)enhanced_action_ledger()->delivered);}}
+extern EnhancedActionResult __real_enhanced_submit_pointer(unsigned,int,int,int);
+EnhancedActionResult __wrap_enhanced_submit_pointer(unsigned event,int x,int y,int mods){EnhancedActionResult r=__real_enhanced_submit_pointer(event,x,y,mods);if(event==4&&r==ENHANCED_QUEUED)last_world_click=host_virtual_dos_elapsed_ms();if(identifier==4)fprintf(stderr,"SWEEP_SUBMIT phase=%d event=%u world=%d,%d mods=%x result=%d tracking=%d lease=%d\n",phase,event,x,y,mods,r,enhanced_pointer_tracking(0),enhanced_action_lease_active());return r;}
+static int camera_ready(const EnhancedSnapshot *s){
+    HWND game=named("SimAnt - Game");RECT r;GetClientRect(game,&r);const WsPanel *v=&native_workspace_layout()->panels[WS_GAME];double z=v->zoom/100.0*native_workspace_ui_dpi(game)/96.;
+    int x=s->world.origin.x*16+(s->world.hidden_viewport.right-s->world.hidden_viewport.left)/2-(int)(r.right/z)/2;
+    int y=s->world.origin.y*16+(s->world.hidden_viewport.bottom-s->world.hidden_viewport.top)/2-(int)(r.bottom/z)/2;
+    if(x<0)x=0;if(y<0)y=0;return v->camera_x==x&&v->camera_y==y;
+}
 void __wrap_enhanced_execute_next(void){
     const EnhancedSnapshot *s=enhanced_snapshot();if(!s||!s->panels.world_ready){__real_enhanced_execute_next();return;}
-    if(!kind){kind=getenv("SIMANT_SWEEP_KIND");setup=getenv("SIMANT_SWEEP_SETUP");parent_name=getenv("SIMANT_SWEEP_PARENT");identifier=strtol(getenv("SIMANT_SWEEP_ID"),NULL,0);point_x=atoi(getenv("SIMANT_SWEEP_X"));point_y=atoi(getenv("SIMANT_SWEEP_Y"));outside_cancel=atoi(getenv("SIMANT_SWEEP_OUTSIDE"));root=named("SimAnt");const char *p=getenv("SIMANT_SWEEP_PATH");while(p&&*p&&path_count<12){char *end;path[path_count++]=strtoul(p,&end,0);if(end==p||*end!=',')break;p=end+1;}}
-    if(!phase&&main_iteration_count>25){phase=1;started=main_iteration_count;
+    if(!kind){kind=getenv("SIMANT_SWEEP_KIND");setup=getenv("SIMANT_SWEEP_SETUP");parent_name=getenv("SIMANT_SWEEP_PARENT");identifier=strtol(getenv("SIMANT_SWEEP_ID"),NULL,0);point_x=atoi(getenv("SIMANT_SWEEP_X"));point_y=atoi(getenv("SIMANT_SWEEP_Y"));outside_cancel=atoi(getenv("SIMANT_SWEEP_OUTSIDE"));root=named("SimAnt");session=getenv("SIMANT_SWEEP_SESSION")!=NULL;const char *p=getenv("SIMANT_SWEEP_PATH");while(p&&*p&&path_count<12){char *end;path[path_count++]=strtoul(p,&end,0);if(end==p||*end!=',')break;p=end+1;}}
+    if(!phase&&main_iteration_count>2&&IsWindowVisible(named("SimAnt - Game"))){phase=1;started=main_iteration_count;preparation_started=GetTickCount64();
+        if(!s->panels.paused)enhanced_submit_event(15,0,0,0);
         if(!strcmp(setup,"spider")){enhanced_submit_event(8,0,0,0);enhanced_submit_event(12,0,0,0);}else enhanced_submit_event(11,0,0,0);
         const char *names[]={"Behavior Control","Caste Control","History","Info"};int events[]={0x10f,0x111,0x113,0x115};
         for(int i=0;i<4;++i){HWND w=named(names[i]);if(!w||!IsWindowVisible(w))enhanced_submit_event(events[i],0,0,0);}
         if(identifier>=0x1206&&identifier<=0x1208)enhanced_submit_event(0x1205,0,0,0);
         if(identifier>=0x1306&&identifier<=0x1308)enhanced_submit_event(0x1305,0,0,0);
+        preparation=enhanced_action_ledger()->submitted;
     }
-    if(phase==1&&main_iteration_count>started+20&&!s->dialogs.modal){
+    if(phase==1&&main_iteration_count>started+1&&enhanced_action_ledger()->delivered>=preparation&&!enhanced_action_lease_active()&&!s->dialogs.modal){
+        /* Allow the original six-tick double-click interval after setup or
+         * the preceding row; this read observes virtual time without advancing it. */
+        if(identifier==4&&last_world_click&&host_virtual_dos_elapsed_ms()<last_world_click+400){__real_enhanced_execute_next();return;}
+        if(identifier==4&&!camera_ready(s)){__real_enhanced_execute_next();return;}
         if(!strcmp(setup,"spider")){
-            HWND game=named("SimAnt - Game");const WsPanel *view=&native_workspace_layout()->panels[WS_GAME];typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(game):96;
+            HWND game=named("SimAnt - Game");const WsPanel *view=&native_workspace_layout()->panels[WS_GAME];typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=native_workspace_ui_dpi(game);
             point_x=MulDiv((s->world.spider_x-view->camera_x)*view->zoom,d,9600);point_y=MulDiv((s->world.spider_y-view->camera_y)*view->zoom,d,9600);
             if(!spider_stage){key(game,'X');spider_stage=1;started=main_iteration_count;__real_enhanced_execute_next();return;}
-            if(spider_stage==1){if(s->panels.tool!=10){failed=1;finish("spider-exchange-prompt-missing");}SendMessage(game,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(point_x,point_y));SendMessage(game,WM_LBUTTONUP,0,MAKELPARAM(point_x,point_y));spider_stage=2;started=main_iteration_count;__real_enhanced_execute_next();return;}
-            if(s->world.player_mode!=1){failed=1;finish("spider-exchange-not-completed");}
+            if(spider_stage==1){if(s->panels.tool!=10){if(main_iteration_count<=started+20){__real_enhanced_execute_next();return;}failed=1;finish("spider-exchange-prompt-missing");}SendMessage(game,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(point_x,point_y));SendMessage(game,WM_LBUTTONUP,0,MAKELPARAM(point_x,point_y));spider_stage=2;started=main_iteration_count;__real_enhanced_execute_next();return;}
+            if(spider_stage==2&&main_iteration_count<=started+20){__real_enhanced_execute_next();return;}
+            if(s->world.player_mode!=1||s->panels.tool!=-1){if(main_iteration_count<=started+20){__real_enhanced_execute_next();return;}failed=1;finish("spider-exchange-not-completed");}
         }
         if((identifier==0xe510||identifier==0xe511)&&!footer_prepared){
             HWND info=named("Info");RECT client;GetClientRect(info,&client);const SimWindowRefEntry *entry=&sim_window_ref_registry.entries[5];
@@ -177,11 +210,23 @@ void __wrap_enhanced_execute_next(void){
                 for(unsigned i=0;i<s->cards.link_count;++i)if(s->cards.links[i].target>1&&s->cards.links[i].target!=128&&!s->cards.links[i].label[0]){const EnhancedRect *hit=&s->cards.links[i].rect;int x=((hit->left+hit->right)/2-left)*client.right/320,y=((hit->top+hit->bottom)/2-top)*client.bottom/200;SendMessage(info,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(x,y));SendMessage(info,WM_LBUTTONUP,0,MAKELPARAM(x,y));break;}
             }footer_prepared=1;started=main_iteration_count;__real_enhanced_execute_next();return;
         }
-        if(!strcmp(kind,"inventory"))inventory();
+        if(!strcmp(kind,"inventory")){inventory();__real_enhanced_execute_next();return;}
         HWND parent=named(!strncmp(parent_name,"Info",4)?"Info":parent_name);int gesture=!strcmp(kind,"gesture")||!strcmp(kind,"hold");target=!strcmp(kind,"menu")?root:gesture?parent:parent?GetDlgItem(parent,identifier):NULL;
-        if(!target||!IsWindowVisible(target)||!IsWindowEnabled(target)){finish("unavailable");}
+        if(!target||!IsWindowVisible(target)||!IsWindowEnabled(target)){
+            /* Source Manual has returned, but change-only HWND setters run
+             * at the next presentation. Await the actual clickable target;
+             * an unfinished preparation must never count as covered. */
+            if(GetTickCount64()-preparation_started>5000){failed=1;finish("prepared-control-unavailable");}
+            __real_enhanced_execute_next();return;
+        }
+        if(identifier==4&&gesture){const WsPanel *v=&native_workspace_layout()->panels[WS_GAME];int d=native_workspace_ui_dpi(parent);
+            int x=!strcmp(setup,"spider")?s->world.spider_x:s->world.player_x*16+8,y=!strcmp(setup,"spider")?s->world.spider_y:s->world.player_y*16+8;
+            point_x=MulDiv((x-v->camera_x)*v->zoom,d,9600);point_y=MulDiv((y-v->camera_y)*v->zoom,d,9600);
+        }
+        if(identifier==4)fprintf(stderr,"SWEEP_WORLD mode=%d tool=%d plane=%d spider=%d,%d point=%d,%d camera=%d,%d\n",s->world.player_mode,s->panels.tool,s->world.plane,s->world.spider_x,s->world.spider_y,point_x,point_y,native_workspace_layout()->panels[WS_GAME].camera_x,native_workspace_layout()->panels[WS_GAME].camera_y);
+        before_source=source_fingerprint();
         phase=2;started=main_iteration_count;submitted=enhanced_action_ledger()->delivered;initial_pause=s->panels.paused;action_started=GetTickCount64();
-        timer=SetTimer(root,0,100,tick);if(!timer){failed=1;finish("timer-failed");}
+        timer=0xe750;if(!SetTimer(root,timer,100,tick)){failed=1;finish("timer-failed");}
         if(!strcmp(kind,"menu")){PostMessage(root,WM_COMMAND,identifier,0);}
         else if(gesture){PostMessage(target,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(point_x,point_y));held=!strcmp(kind,"hold");if(!held)PostMessage(target,WM_LBUTTONUP,0,MAKELPARAM(point_x,point_y));}
         else {char cls[40];GetClassNameA(target,cls,sizeof(cls));
@@ -190,7 +235,7 @@ void __wrap_enhanced_execute_next(void){
             else click(target);
         }
     }
-    if(phase==2&&ticks>=4&&!waiting()&&main_iteration_count>started){
+    if(phase==2&&ticks>=4&&!held&&!enhanced_action_lease_active()&&!waiting()&&main_iteration_count>started){
         if(target_cancel&&s->panels.paused!=initial_pause){failed=1;finish("cancel-changed-saved-pause");}
         if(path_count&&path[0]>=0x902&&path[0]<=0x909){
             unsigned tool=path[0]-0x902;extern char ExpSubStates[];
@@ -198,12 +243,19 @@ void __wrap_enhanced_execute_next(void){
             if(path_count>1&&(unsigned char)ExpSubStates[tool]!=(path[path_count-1]&255)-2){failed=1;finish("wrong-source-experiment-substate");}
         }
         HWND ant=named("Map / Ant Control Panel");if(ant&&IsWindowEnabled(ant)){
+            after_source=source_fingerprint();changed=before_source!=after_source;recovery_pause=s->panels.paused;
             cancelled=observed&&(!path_count||target_cancel);phase=3;started=main_iteration_count;submitted=enhanced_action_ledger()->delivered;
             click(GetDlgItem(ant,15));
         }
     }
-    if(phase==3&&main_iteration_count>started&&enhanced_action_ledger()->delivered>submitted&&!waiting()){
-        KillTimer(root,timer);++ready_checks;if(path_at!=path_count)failed=1;if(identifier==4&&s->panels.game_type!=3&&!observed)failed=1;finish(observed?(path_count?"visible-selected-interactive":"visible-cancelled-interactive"):"interactive");
+    if(phase==3&&main_iteration_count>started&&enhanced_action_ledger()->delivered>submitted&&enhanced_action_ledger()->last_event==15&&!enhanced_action_lease_active()&&!waiting()&&s->panels.paused!=recovery_pause){
+        ++ready_checks;if(path_at!=path_count)failed=1;if(identifier==4&&s->panels.game_type!=3&&!observed)failed=1;
+        click(GetDlgItem(named("Map / Ant Control Panel"),15));phase=4;started=main_iteration_count;submitted=enhanced_action_ledger()->delivered;
     }
+    if(phase==4&&main_iteration_count>started&&enhanced_action_ledger()->delivered>submitted&&enhanced_action_ledger()->last_event==15&&!enhanced_action_lease_active()&&!waiting()&&s->panels.paused==recovery_pause){
+        KillTimer(root,timer);
+        finish(observed?(path_count?"visible-selected-interactive":"visible-cancelled-interactive"):"interactive");
+    }
+
     __real_enhanced_execute_next();
 }

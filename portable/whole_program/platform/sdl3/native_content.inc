@@ -2,8 +2,7 @@
  * surfaces. These clients read semantic publications and immutable resources. */
 static int content_panel(int p){return p>=WS_MAP&&p<=WS_STATUS;}
 static void content_size(int p,int *w,int *h){
-    *w=p==WS_MAP||p==WS_YARD?512:p==WS_BEHAVIOR||p==WS_CASTE?210:p==WS_STATUS?318:320;
-    *h=p==WS_MAP?256:p==WS_YARD?226:p==WS_BEHAVIOR||p==WS_CASTE?170:p==WS_HISTORY?179:p==WS_INFO?200:186;
+    ws_fixed_content(p,w,h);
 }
 static int content_owner(int p){static const int ids[]={0x100,0x1900,0x1200,0x1300,0x1500,0x500,0x1800};return content_panel(p)?ids[p-WS_MAP]:-1;}
 static RECT content_rect(int l,int t,int r,int b){return (RECT){l,t,r,b};}
@@ -59,7 +58,7 @@ static void content_allocation(HDC dc,const EnhancedSnapshot *s,int p){
     /* Shipped 4600/4620 already contain Set labels beneath their hit objects.
      * Hiding a source hit region does not erase that static decoration. */
     for(int i=0;i<3;++i)if(!(a->control_flags[i+3]&1)){
-        RECT button={4,46+i*20,42,64+i*20};color_fill(dc,button,RGB(208,206,196));DrawEdge(dc,&button,EDGE_RAISED,BF_RECT);
+        RECT button={4,46+i*20,42,64+i*20};color_fill(dc,button,RGB(208,206,196));game_edge(dc,button,0,96);
         char label[16];snprintf(label,sizeof(label),"Set %d",i+1);text(dc,button,label,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);
     }
     content_line(dc,112,42,180,132,EARTH,5);content_line(dc,44,133,178,133,EARTH,4);
@@ -80,7 +79,7 @@ static void content_allocation(HDC dc,const EnhancedSnapshot *s,int p){
         RECT bar={184+i*8,8,189+i*8,68};bar.top=bar.bottom-levels[i]*60/65535;
         if(bar.top+1<bar.bottom){color_fill(dc,bar,content_palette(a->bar_colors[i]));FrameRect(dc,&bar,GetStockObject(BLACK_BRUSH));}
     }
-    HFONT small=CreateFontW(-11,0,0,0,FW_NORMAL,0,0,0,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,L"Segoe UI");
+    HFONT small=CreateFontW(-11,0,0,0,FW_NORMAL,0,0,0,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,L"Tahoma");
     HGDIOBJ was=SelectObject(dc,small);text(dc,content_rect(181,72,209,90),p==WS_BEHAVIOR?"FDN":"BWS",DT_CENTER|DT_SINGLELINE|DT_NOPREFIX);SelectObject(dc,was);DeleteObject(small);
 }
 static void content_history(HDC dc,const EnhancedSnapshot *s){
@@ -179,8 +178,8 @@ static void content_draw(HDC dc,RECT client,int p){
     RestoreDC(dc,saved);DeleteObject(font);
 }
 static HWND content_button(int p,int id,const char *label,int x,int y,int w,int h){
-    int base=content_owner(p);DWORD style=p==WS_BEHAVIOR||p==WS_CASTE?BS_OWNERDRAW:(p==WS_HISTORY&&id>=0x1503&&id<=0x150c)?BS_CHECKBOX|BS_PUSHLIKE:BS_PUSHBUTTON;
-    Native *n=&u.windows[p];HWND b=CreateWindowExA(0,"BUTTON",label,WS_CHILD|WS_VISIBLE|WS_TABSTOP|style,scale(x,n->dpi),scale(y,n->dpi),scale(w,n->dpi),scale(h,n->dpi),n->h,(HMENU)(INT_PTR)id,GetModuleHandle(NULL),NULL);SendMessage(b,WM_SETFONT,(WPARAM)n->font,TRUE);SetWindowSubclass(b,child_proc,71,0);return b;
+    int base=content_owner(p);DWORD style=BS_OWNERDRAW;
+    Native *n=&u.windows[p];HWND b=CreateWindowExA(0,"BUTTON",label,WS_CHILD|WS_VISIBLE|WS_TABSTOP|style,scale(x,n->dpi),scale(y,n->dpi),scale(w,n->dpi),scale(h,n->dpi),n->h,(HMENU)(INT_PTR)id,GetModuleHandle(NULL),NULL);SetPropA(b,"SimAntLogicalX",(HANDLE)(INT_PTR)(x+1));SetPropA(b,"SimAntLogicalY",(HANDLE)(INT_PTR)(y+1));SetPropA(b,"SimAntLogicalW",(HANDLE)(INT_PTR)w);SetPropA(b,"SimAntLogicalH",(HANDLE)(INT_PTR)h);SendMessage(b,WM_SETFONT,(WPARAM)n->font,TRUE);SetWindowSubclass(b,child_proc,71,0);return b;
 }
 static void content_children(int p){
     int base=content_owner(p);Native *n=&u.windows[p];
@@ -189,6 +188,7 @@ static void content_children(int p){
         for(int i=0;i<3;++i){char s[20];snprintf(s,sizeof(s),"Set %d",i+1);content_button(p,base+6+i,s,4,46+i*20,38,18);}
         for(int i=0;i<3;++i){char label[40];snprintf(label,sizeof(label),"%s percentage",allocation_names[p==WS_CASTE][i]);
             HWND edit=CreateWindowExA(0,"EDIT","",WS_CHILD|WS_VISIBLE|WS_TABSTOP|WS_BORDER|ES_RIGHT|ES_AUTOHSCROLL,scale(i==0?80:i==1?42:144,n->dpi),scale(i==0?17:152,n->dpi),scale(44,n->dpi),scale(17,n->dpi),n->h,(HMENU)(INT_PTR)(0xe520+i),GetModuleHandle(NULL),NULL);
+            SetPropA(edit,"SimAntLogicalX",(HANDLE)(INT_PTR)((i==0?80:i==1?42:144)+1));SetPropA(edit,"SimAntLogicalY",(HANDLE)(INT_PTR)((i==0?17:152)+1));SetPropA(edit,"SimAntLogicalW",(HANDLE)(INT_PTR)44);SetPropA(edit,"SimAntLogicalH",(HANDLE)(INT_PTR)17);
             SendMessage(edit,WM_SETFONT,(WPARAM)n->font,TRUE);SendMessage(edit,EM_SETLIMITTEXT,12,0);SetWindowSubclass(edit,child_proc,71,0);
         }
         content_button(p,base+3,"Help",4,109,38,18);content_button(p,base+15,"% / #",4,130,34,18);
@@ -216,11 +216,11 @@ static int content_command(int p,int id){
 
     if(p==WS_INFO&&(id==0xe510||id==0xe511)){const EnhancedSnapshot *s=enhanced_snapshot();if(s)for(unsigned i=0;i<s->cards.link_count;++i)if(s->cards.links[i].target==(id==0xe510?1:128)){content_link(i,0);break;}return 1;}
     if(p==WS_STATUS&&id==0x180c){
-        /* Existing source task; an ordinary click, never Escape or a fabricated result. */
-        const EnhancedSnapshot *s=enhanced_snapshot();if(s)for(unsigned i=0;i<s->dialogs.object_count;++i)if(s->dialogs.objects[i].id==id){
-            for(unsigned j=0;j<sim_window_hosting_count();++j){SimHostedWindowView v;if(sim_window_hosting_view(j,&v)&&v.id==0x1800){const EnhancedRect *r=&s->dialogs.objects[i].rect;int strip=v.drag_bottom>v.drag_top&&v.drag_top>=v.top_y&&v.drag_bottom<v.bottom?v.drag_bottom-v.top_y:0;HostEvent down={.kind=HOST_EVENT_MOUSE_DOWN,.button=1,.x=(r->left+r->right)/2-v.left,.y=(r->top+r->bottom)/2-v.top_y-strip},up=down;up.kind=HOST_EVENT_MOUSE_UP;native_windows_push_pointer(0x1800,&down);native_windows_push_pointer(0x1800,&up);break;}}
-        }return 1;
+        /* The source may still be completing win_Open when this first frame
+         * receives a click. Its own modal queue consumes the retained intent. */
+        u.status_continue_pending=1;return 1;
     }
+
     return enhanced_submit_event(id,0,0,0)==ENHANCED_QUEUED;
 }
 static POINT content_pointer(int p,LPARAM lp){int w,h;content_size(p,&w,&h);RECT r;GetClientRect(u.windows[p].h,&r);POINT pt={MulDiv(GET_X_LPARAM(lp),w,r.right?r.right:1),MulDiv(GET_Y_LPARAM(lp),h,r.bottom?r.bottom:1)};return pt;}
@@ -254,7 +254,7 @@ static void content_sync(int p){
         for(int i=0;i<6;++i){HWND button=GetDlgItem(n->h,base+3+i);sync_shown(button,a->control_flags[i]&1);EnableWindow(button,(a->control_flags[i]&2)!=0);}
         for(int i=0;i<3;++i)if(!n->edit_dirty[i]){char label[16];snprintf(label,sizeof(label),"%u",(levels[i]*100u+0x3fff)/65535);sync_text(GetDlgItem(n->h,0xe520+i),label);}
     }
-    if(p==WS_HISTORY){for(int i=0;i<10;++i){int on=0;for(int j=0;j<4;++j)on|=s->history.shown[j]==i;sync_check(GetDlgItem(n->h,0x1503+i),on);}}
+    /* History selection is painted directly from the four source slots. */
     if(p==WS_INFO){
         size_t size;const uint8_t *title=enhanced_resource(s->cards.card,19,&size);char caption[160]="Info";
         if(title&&size<120){snprintf(caption,sizeof(caption),"Info - %s",title);for(char *c=caption;*c;++c)if(*c=='_')*c=' ';}

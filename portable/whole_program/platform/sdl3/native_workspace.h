@@ -11,6 +11,10 @@ void native_workspace_activate_point(int x,int y);
 void native_workspace_request_point(int *x,int *y);
 int native_workspace_proximity_modifiers(void);
 void native_workspace_place_prompt(SDL_Window *window);
+/* -1 means use the persisted value. Explicit percentages are absolute, not DPI multipliers. */
+int native_workspace_start_scale(const char *value);
+int native_workspace_set_ui_scale(int percent);
+int native_workspace_ui_dpi(void *window);
 int native_workspace_init(SDL_Window *root);
 int native_workspace_active(void);
 void native_workspace_shutdown(void);

@@ -39,11 +39,11 @@ numeric health/population labels and warning triangles so color is redundant.
 
 ## Text, spacing and controls
 
-Use the platform UI font (Segoe UI on Windows), normally 12–14 DIP, with native
+Use Tahoma at 13 DIP on Windows (10 DIP picture captions), with native
 text measurement, antialiasing and symbol fallback. Keep the original compact
 control forms; grow their labels for system text scaling rather than shrinking
 text. Space in 4 DIP increments, normally 8 DIP between controls and 8–12 DIP
-inside frames. Native title strips are approximately 28 DIP. The review plates
+inside frames. Application title strips are 26 DIP. The outer Windows frame keeps OS chrome at its monitor DPI. The review plates
 use 125% content scale; they do not certify a physical DPI configuration.
 
 Buttons retain SimAnt's shallow rectangular bevel, shipped icon cues and original
@@ -114,3 +114,30 @@ model above. Restore the full File/Window/View/Options/Speed menu and its source
 enabled/check state. The review uses the source label **Unpause** because the
 captured game is paused. Builds A/B implement that model; their exact test
 receipts retain the raw invariance, accessibility and physical-DPI limitations.
+
+
+## Implemented panel comparison, 2026-11-18
+
+The follow-up uses actual original DOS guest captures, not the earlier static
+mockups. The original Surface and Yard views show hard light/dark bevels, yellow
+window outlines, compact labelled picture groups, white allocation value cells,
+and coloured health/population bars. The native treatment uses those cues with
+the existing earth/paper palette: framed world/map/inspector/health groups,
+shallow earth/white bevels, yellow selection borders, Tahoma text, readable
+picture captions and source-colour health bars. History, Info and Status buttons
+use the same drawing policy as the command panels. Allocation triangles, labels,
+bar colours, presets and source knob images retain their source state.
+
+Picture crops retain their source aspect and masks. The Map/Ant panel is now
+944 × 200 DIP so the population picture fits in full; the Yard panel is
+944 × 152 DIP. Integer art enlargement is used when it fits. Fractional UI steps
+use nearest-neighbour indexed expansion, without filtering the mask or blurring
+pixel art. Full-content sizing is independent of retained outer frame sizes.
+All first-show/reset bounds, fonts and hit regions use the same scale.
+
+See [UI scale](ui-scale.md) for sizes, placement and persistence. Original DOS,
+before/after native panels, 100%/200% layouts and the open UI Scale submenu are
+kept in the ignored [capture directory](../../build/workers/enhanced-menus/screens/README.md).
+The source capture scripts, native readback receipts and image hashes are
+recorded there. These comparisons establish the visual choices, not pixel
+identity with DOS. Docking and responsive rearrangement remain deferred.

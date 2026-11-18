@@ -21,6 +21,11 @@ source-driven numeric allocation editors and complete first-frame painting.
 The [MAP/modal follow-up](enhanced-mode/minimap-followup.md) supplies the native
 transient minimap, fast-click context input, Experimental submenus and a live
 control/menu sweep across Quick, Full and Experimental games.
+The [UI scale and panel follow-up](enhanced-mode/ui-scale.md) makes fixed-client
+content authoritative for first open/reset, adds live Options > UI Scale and
+`--ui-scale`, and keeps the original panel artwork at its intended aspect ratio.
+Its sweep/minimap sessions reuse startup while retaining source transactions,
+bounded cancellation checks and private-desktop auditing.
 Investigation references under `build/workers/enhanced-design/` are ignored scratch,
 including every game-art screenshot and resource-derived inventory. Recipes and small
 text traces cited here are retained under `evidence/enhanced-mode/`; rerun recipes in

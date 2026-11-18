@@ -49,6 +49,13 @@ int main(int argc, char * * argv) {
     assert(! ws_read(& copy, f));
     fclose(f);
     ++ checks;
+    const int percentages[]={0,100,125,150,175,200,250,300};
+    for(unsigned i=0;i<8;++i){w.ui_scale=percentages[i];f=fopen(argv[1],"w+");assert(f&&ws_write(&w,f));rewind(f);assert(ws_read(&copy,f)&&copy.ui_scale==w.ui_scale);fclose(f);++checks;}
+    bad=w;bad.ui_scale=130;assert(!ws_validate(&bad));++checks;
+    /* Read existing v2 layouts as Auto without altering their frame data. */
+    f=fopen(argv[1],"w+");assert(f);fprintf(f,"SIMANT-WINDOWS 2\n");
+    for(int i=0;i<WS_PANELS;++i){WsPanel *p=&w.panels[i];fprintf(f,"%d %d %d %d %d %d %d %d %d %d %s\n",p->x,p->y,p->w,p->h,p->edge,p->offset,p->visible,p->camera_x,p->camera_y,p->zoom,p->monitor[0]?p->monitor:"-");}
+    rewind(f);assert(ws_read(&copy,f)&&copy.ui_scale==0&&!memcmp(w.panels,copy.panels,sizeof(w.panels)));fclose(f);++checks;
     assert(ws_resizable(WS_GAME) && ! ws_resizable(WS_MAP) && ! ws_closable(WS_STATUS) && ! ws_closable(WS_ANT));
     printf("{\"passed\":true,\"checks\":%u,\"operations\":\"attach/detach/move/resize/zoom/reset/persistence/rejection\"}\n", checks);
     return 0;

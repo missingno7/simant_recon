@@ -1,15 +1,15 @@
 /* A native device for OpenMiniMapWin. No source map or centring state is
  * written here: selection is replayed by the seam as an original 1401 hit. */
-static struct {HWND h;int done,selected,held,entered;POINT point;RECT map,hit,origin;EnhancedSnapshot frame;} mini;
+static struct {HWND h;int done,selected,held,entered,dpi;HFONT font;POINT point;RECT map,hit,origin;EnhancedSnapshot frame;} mini;
 static void minimap_draw(HDC dc,RECT client,int unused){
     (void)unused;color_fill(dc,client,PAPER);FrameRect(dc,&client,GetStockObject(BLACK_BRUSH));
-    HGDIOBJ old=SelectObject(dc,u.windows[WS_ANT].font);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,INK);
-    RECT title={12,6,client.right-12,34};DrawTextA(dc,"Minimap - choose a position",-1,&title,DT_SINGLELINE|DT_VCENTER);
+    HGDIOBJ old=SelectObject(dc,mini.font);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,INK);
+    RECT title={scale(12,mini.dpi),scale(6,mini.dpi),client.right-scale(12,mini.dpi),scale(34,mini.dpi)};DrawTextA(dc,"Minimap - choose a position",-1,&title,DT_SINGLELINE|DT_VCENTER);
     int saved=SaveDC(dc);SetGraphicsMode(dc,GM_ADVANCED);
     XFORM transform={(FLOAT)(mini.map.right-mini.map.left)/512,0,0,(FLOAT)(mini.map.bottom-mini.map.top)/256,(FLOAT)mini.map.left,(FLOAT)mini.map.top};
     SetWorldTransform(dc,&transform);content_map(dc,&mini.frame);RestoreDC(dc,saved);
-    if(mini.entered){HPEN pen=CreatePen(PS_SOLID,1,RUST);HGDIOBJ previous=SelectObject(dc,pen);MoveToEx(dc,mini.point.x-8,mini.point.y,NULL);LineTo(dc,mini.point.x+9,mini.point.y);MoveToEx(dc,mini.point.x,mini.point.y-8,NULL);LineTo(dc,mini.point.x,mini.point.y+9);SelectObject(dc,previous);DeleteObject(pen);}
-    RECT hint={12,mini.map.bottom+8,client.right-12,client.bottom-6};
+    if(mini.entered){int arm=scale(8,mini.dpi);HPEN pen=CreatePen(PS_SOLID,1,RUST);HGDIOBJ previous=SelectObject(dc,pen);MoveToEx(dc,mini.point.x-arm,mini.point.y,NULL);LineTo(dc,mini.point.x+arm+1,mini.point.y);MoveToEx(dc,mini.point.x,mini.point.y-arm,NULL);LineTo(dc,mini.point.x,mini.point.y+arm+1);SelectObject(dc,previous);DeleteObject(pen);}
+    RECT hint={scale(12,mini.dpi),mini.map.bottom+scale(8,mini.dpi),client.right-scale(12,mini.dpi),client.bottom-scale(6,mini.dpi)};
     DrawTextA(dc,"Drag and release, or click a position.\nEsc or click outside to cancel.",-1,&hint,DT_LEFT|DT_WORDBREAK);SelectObject(dc,old);
 }
 static LRESULT CALLBACK minimap_proc(HWND h,UINT msg,WPARAM wp,LPARAM lp){
@@ -42,7 +42,7 @@ int native_workspace_minimap(const EnhancedRect *source,const EnhancedRect *curs
     if(sw<=0||sh<=0)return 0;
     WNDCLASSEXA cls={.cbSize=sizeof(cls),.lpfnWndProc=minimap_proc,.hInstance=GetModuleHandle(NULL),.hCursor=LoadCursor(NULL,IDC_CROSS),.lpszClassName="SimAntMinimapPopup"};RegisterClassExA(&cls);
     HWND button=GetDlgItem(u.windows[WS_ANT].h,5);RECT anchor;GetWindowRect(button,&anchor);
-    POINT at=prompt_anchor();int width=scale(536,u.dpi),height=scale(350,u.dpi);
+    POINT at=prompt_anchor();mini.dpi=point_dpi(at);mini.font=make_font(mini.dpi);int width=scale(536,mini.dpi),height=scale(350,mini.dpi);
     MONITORINFO monitor={.cbSize=sizeof(monitor)};GetMonitorInfo(MonitorFromPoint(at,MONITOR_DEFAULTTONEAREST),&monitor);
     if(width>monitor.rcWork.right-monitor.rcWork.left)width=monitor.rcWork.right-monitor.rcWork.left;
     if(height>monitor.rcWork.bottom-monitor.rcWork.top)height=monitor.rcWork.bottom-monitor.rcWork.top;
@@ -53,7 +53,7 @@ int native_workspace_minimap(const EnhancedRect *source,const EnhancedRect *curs
     mini.hit=mini.map;
     if(mini.frame.world.plane==2||mini.frame.world.plane==3){int span=mini.map.right-mini.map.left;mini.hit.left=mini.map.left+(span+3)/4;mini.hit.right=mini.map.left+(span*3+3)/4;}
     mini.h=CreateWindowExA(WS_EX_TOOLWINDOW|WS_EX_TOPMOST,cls.lpszClassName,"Minimap - Esc cancels",WS_POPUP|WS_BORDER,bounds.left,bounds.top,width,height,u.root,NULL,cls.hInstance,NULL);
-    if(!mini.h)return 0;
+    if(!mini.h){DeleteObject(mini.font);return 0;}
     mini.origin=anchor;MapWindowPoints(NULL,mini.h,(POINT *)&mini.origin,2);
     mini.held=minimap_origin_down;minimap_origin_down=0;
     if(GetCapture())ReleaseCapture();ShowWindow(mini.h,SW_SHOW);SetForegroundWindow(mini.h);SetFocus(mini.h);SetCapture(mini.h);UpdateWindow(mini.h);
@@ -69,5 +69,5 @@ int native_workspace_minimap(const EnhancedRect *source,const EnhancedRect *curs
         point->x=source->left+(int64_t)(mini.point.x-mini.map.left)*sw/(mini.map.right-mini.map.left);
         point->y=source->top+(int64_t)(mini.point.y-mini.map.top)*sh/(mini.map.bottom-mini.map.top);
     }
-    if(GetCapture()==mini.h)ReleaseCapture();DestroyWindow(mini.h);mini.h=NULL;return mini.selected;
+    if(GetCapture()==mini.h)ReleaseCapture();DestroyWindow(mini.h);DeleteObject(mini.font);mini.h=NULL;return mini.selected;
 }

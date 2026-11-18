@@ -11,6 +11,10 @@ The later [owner follow-up](presentation-followup.md) replaces the percentage
 lists described in this historical receipt with editable numeric fields,
 corrects first-show state, gates startup visibility and preserves icon masks.
 
+The [UI-scale follow-up](ui-scale.md) supersedes the historical fixed-frame sizing
+and font details below. Fixed clients now derive their full size from content,
+including after Reset; live/persisted scaling applies to native content and menus.
+
 The [task receipt](../../build/workers/enhanced-build-b/RESULT.md) records the
 delivered build identity, final verification, limitations and owner screenshots.
 Ignored captures require local verified game assets. The tracked evidence is

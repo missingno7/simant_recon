@@ -81,7 +81,7 @@ int __wrap_native_workspace_proximity(const EnhancedDialogsSnapshot *menu){
     CHECK(text>0||owner==0xb00);CHECK(choice<0||(unsigned)choice<text);
     CHECK(!strcmp(kind,"spider")?waiting_world.overlays.art_count>0&&waiting_world.overlays.line_count>0:marker_count(&waiting_world)>0);
     SetWindowSubclass(root,watch_menu,97,0);live_menu=NULL;
-    UINT_PTR timer=SetTimer(root,0,120,menu_timer);CHECK(timer!=0);timer_step=0;
+    UINT_PTR timer=0xe753;CHECK(SetTimer(root,timer,120,menu_timer)!=0);timer_step=0;
     BYTE was[256],keys[256];GetKeyboardState(was);memcpy(keys,was,sizeof(keys));keys[VK_SHIFT]=(modifiers&2)?0x80:0;keys[VK_MENU]=(modifiers&8)?0x80:0;SetKeyboardState(keys);
     int result=__real_native_workspace_proximity(menu);SetKeyboardState(was);KillTimer(root,timer);RemoveWindowSubclass(root,watch_menu,97);seen=1;
     fprintf(stderr,"MENU_NATIVE_RETURN %04x\n",result);CHECK(result==owner+(choice<0?1:choice+2));return result;
@@ -90,7 +90,7 @@ void __wrap_YellowCommand(int16_t cmd){if(phase==3)command=cmd;__real_YellowComm
 static void click_world(int worldx,int worldy,int down){
     lastworldx=worldx;lastworldy=worldy;
     HWND game=named("SimAnt - Game");CHECK(game!=NULL);const Workspace *w=native_workspace_layout();
-    const WsPanel *v=&w->panels[WS_GAME];typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");double z=v->zoom/100.0*(dpi?dpi(game):96)/96.;
+    const WsPanel *v=&w->panels[WS_GAME];typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");double z=v->zoom/100.0*native_workspace_ui_dpi(game)/96.;
     int x=(worldx-v->camera_x)*z,y=(worldy-v->camera_y)*z;RECT cr;GetClientRect(game,&cr);CHECK(x>=0&&x<cr.right&&y>=0&&y<cr.bottom);
     clicked=(POINT){x,y};ClientToScreen(game,&clicked);
     SendMessage(game,down?WM_LBUTTONDOWN:WM_LBUTTONUP,down?MK_LBUTTON:0,MAKELPARAM(x,y));
@@ -121,13 +121,13 @@ void __wrap_enhanced_execute_next(void){
         if(!strcmp(kind,"spider")&&s->world.player_mode!=1){CHECK(0);exit(2);}
         Workspace w=*native_workspace_layout();RECT cr;GetClientRect(named("SimAnt - Game"),&cr);
         int x=!strcmp(kind,"spider")?s->world.spider_x:s->world.player_x*16+8,y=!strcmp(kind,"spider")?s->world.spider_y:s->world.player_y*16+8;
-        w.panels[WS_GAME].zoom=100;w.panels[WS_GAME].camera_x=x-cr.right/2;w.panels[WS_GAME].camera_y=y-cr.bottom/2;if(w.panels[WS_GAME].camera_x<0)w.panels[WS_GAME].camera_x=0;if(w.panels[WS_GAME].camera_y<0)w.panels[WS_GAME].camera_y=0;
+        w.panels[WS_GAME].zoom=100;double z=native_workspace_ui_dpi(named("SimAnt - Game"))/96.;w.panels[WS_GAME].camera_x=x-(int)(cr.right/z)/2;w.panels[WS_GAME].camera_y=y-(int)(cr.bottom/z)/2;if(w.panels[WS_GAME].camera_x<0)w.panels[WS_GAME].camera_x=0;if(w.panels[WS_GAME].camera_y<0)w.panels[WS_GAME].camera_y=0;
         CHECK(native_workspace_apply(&w));phase=3;started=main_iteration_count;dump(0);
         if(modifiers){SDL_Event e={.type=SDL_EVENT_KEY_DOWN};e.key.scancode=modifiers==2?SDL_SCANCODE_LSHIFT:SDL_SCANCODE_LALT;e.key.down=1;e.key.mod=modifiers==2?SDL_KMOD_LSHIFT:SDL_KMOD_LALT;SDL_PushEvent(&e);}
         if(!strcmp(kind,"scent")||!strcmp(kind,"tools")||!strcmp(kind,"full-tools")){HWND b=GetDlgItem(named("Map / Ant Control Panel"),!strcmp(kind,"scent")?16:7);CHECK(b!=NULL);POINT at={500,350};clicked=at;native_workspace_anchor(at.x,at.y);enhanced_submit_event(!strcmp(kind,"scent")?16:7,0,0,0);}
         else if(!strcmp(kind,"magnify")){
             int found=0;for(int xx=0;xx<64&&!found;++xx)for(int yy=2;yy<64;++yy){unsigned life=s->world.life_black[xx][yy];if(life&&life<254){x=xx*16+8;y=yy*16+8;found=1;break;}}
-            CHECK(found);w=*native_workspace_layout();w.panels[WS_GAME].camera_x=x-cr.right/2;w.panels[WS_GAME].camera_y=y-cr.bottom/2;if(w.panels[WS_GAME].camera_x<0)w.panels[WS_GAME].camera_x=0;if(w.panels[WS_GAME].camera_y<0)w.panels[WS_GAME].camera_y=0;native_workspace_apply(&w);click_world(x,y,1);
+            CHECK(found);w=*native_workspace_layout();w.panels[WS_GAME].camera_x=x-(int)(cr.right/z)/2;w.panels[WS_GAME].camera_y=y-(int)(cr.bottom/z)/2;if(w.panels[WS_GAME].camera_x<0)w.panels[WS_GAME].camera_x=0;if(w.panels[WS_GAME].camera_y<0)w.panels[WS_GAME].camera_y=0;native_workspace_apply(&w);click_world(x,y,1);
         }
         else click_world(x,y,1);
     }

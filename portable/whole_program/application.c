@@ -16,6 +16,7 @@
 #include "platform/sdl3/host_modes.h"
 #include "platform/sdl3/diagnostics.h"
 #include "platform/sdl3/native_windows.h"
+#include "platform/sdl3/native_workspace.h"
 #include "platform/sdl3/native_menu.h"
 #include "platform/window_hosting.h"
 #include "portable/whole_program/platform/graphics_resources.h"
@@ -814,6 +815,10 @@ int main(int argc, char **argv)
         else if (!strcmp(argv[i], "--test-input")) app.test_input = 1;
         else if (!strcmp(argv[i], "--test-input-crash")) app.test_input = 2;
         else if (!strcmp(argv[i], "--headless")) headless = 1;
+        else if (!strcmp(argv[i], "--ui-scale") || !strncmp(argv[i],"--ui-scale=",11)) {
+            const char *value=argv[i][10]=='='?argv[i]+11:i+1<argc?argv[++i]:"";
+            if(!native_workspace_start_scale(value))fail("--ui-scale expects auto, 100, 125, 150, 175, 200, 250 or 300");
+        }
         else if (!strncmp(argv[i], "--scale=", 8)) {
             window_scale = atoi(argv[i] + 8);
             if (window_scale < 1 || window_scale > 8) fail("--scale expects 1..8");

@@ -11,10 +11,13 @@ typedef struct WsPanel {
     int camera_x,camera_y,zoom;
     char monitor[64];
 } WsPanel;
-typedef struct Workspace { WsPanel panels[WS_PANELS]; unsigned revision; } Workspace;
+typedef struct Workspace { WsPanel panels[WS_PANELS]; unsigned revision;
+    int ui_scale; /* 0 Auto, otherwise absolute UI percent; presentation only */ } Workspace;
 const char *ws_name(int panel);
 int ws_resizable(int panel);
 int ws_closable(int panel);
+int ws_ui_scale_valid(int percent);
+void ws_fixed_content(int panel,int *width,int *height);
 void ws_reset(Workspace *);
 int ws_attach(Workspace *,int panel,int edge,int offset);
 int ws_detach(Workspace *,int panel);

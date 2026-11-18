@@ -11,7 +11,7 @@ def run(cmd,**kwargs):
  return p
 
 def main():
- ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--build',type=Path,required=True);ap.add_argument('--out',type=Path,required=True);ap.add_argument('--screens',type=Path);ap.add_argument('--cases');a=ap.parse_args();build=a.build.resolve();out=a.out.resolve();out.mkdir(parents=True,exist_ok=False);report=check_build(build);cc=report['application_link']['command'][0]
+ ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--build',type=Path,required=True);ap.add_argument('--out',type=Path,required=True);ap.add_argument('--screens',type=Path);ap.add_argument('--cases');ap.add_argument('--ui-scale',default='auto');a=ap.parse_args();build=a.build.resolve();out=a.out.resolve();out.mkdir(parents=True,exist_ok=False);report=check_build(build);cc=report['application_link']['command'][0]
  source=Path(__file__).with_name('content_probe.c');obj=out/'content-probe.o';run([cc,'-std=c11','-O2','-g','-I'+str(ROOT),'-I'+str(ROOT/'build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/include'),'-c',str(source),'-o',str(obj)])
  exe=out/'simant-content.exe';command=report['application_link']['command'][:];command[command.index('-o')+1]=str(exe);command[1:1]=[str(obj),'-Wl,--wrap=enhanced_execute_next','-Wl,--wrap=enhanced_source_poll','-Wl,--wrap=enhanced_publish','-Wl,--wrap=native_workspace_present'];run(command,cwd=build)
  for name in ('SDL3.dll','simant-build-id.txt'):shutil.copyfile(build/name,out/name)
@@ -21,7 +21,7 @@ def main():
   assets=Path(folder);shutil.copytree(build/'runtime-assets',assets,dirs_exist_ok=True)
   for case in cases:
    lane=out/case;lane.mkdir();env={k:v for k,v in os.environ.items() if not k.startswith(('SIMANT_ENHANCED','SIMANT_WORKSPACE','SIMANT_CONTENT','SIMANT_TEST_'))};env.update(SIMANT_ENHANCED_CONTRACTS='1',SIMANT_ENHANCED_WORKSPACE='1',SIMANT_WORKSPACE_LAYOUT=str(lane/'layout.txt'),SIMANT_CONTENT_CASE=case,SIMANT_CONTENT_CAPTURE=str(lane/'frame.bmp'),SDL_AUDIODRIVER='dummy')
-   cmd=[str(exe),'--deterministic','--windows','--seed','0','--assets',str(assets),'--input-script',str(ROOT/'portable/tests/runtime/windows-quick.txt'),'--smoke-ms','30000','--diagnostics-dir='+str(lane/'diagnostics')]
+   cmd=[str(exe),'--deterministic','--windows','--ui-scale',a.ui_scale,'--seed','0','--assets',str(assets),'--input-script',str(ROOT/'portable/tests/runtime/windows-quick.txt'),'--smoke-ms','30000','--diagnostics-dir='+str(lane/'diagnostics')]
    with (lane/'run.log').open('w') as log:
     try:p=subprocess.run(cmd,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=90);code=p.returncode
     except subprocess.TimeoutExpired:code='timeout'

@@ -103,3 +103,27 @@ The exact registrations, every swept item/result, retained preflight failures,
 private-desktop audits, build identity and delivery command are recorded in
 `build/workers/enhanced-menus/RESULT.md`. Strict passive differences are reported
 as differences; no acceptance reference, omission or mask is added.
+
+
+## Shared test sessions and scale
+
+The later [UI scale follow-up](ui-scale.md) scales this popup's map, camera
+rectangle, labels, margins and pointer crosshair on the cursor's monitor.
+`minimap.py` now links one probe and starts one game per mode for the whole
+plane/case plan. Each case still sends the actual MAP button messages, observes
+the original `CenterEdit` call or cancellation, compares the camera rectangle
+against Map, checks retained actors/placement and verifies source-loop recovery.
+Plane preparation waits for actual delivery and transaction completion. The
+post-action check requires subsequent source iterations, rather than repeating
+a blind startup delay for every selection. Each row and readback is retained.
+
+The sweep reuses an interactive session when the tested source transaction left
+its conservative state fingerprint unchanged. It checks every SaveRec byte,
+source command/settings state, all eight Experimental substates and RNG. A
+changed row starts a new disposable game. The real Pause recovery pair still
+proves native input delivery and simulation-loop progress; its deliberate
+advancement becomes the next reused baseline. It is outside the action-effect
+fingerprint. Source preparation uses delivery/lease fences; body exchange keeps
+its source settling interval. The five-second presentation deadline and the
+persistent hidden-prompt negative control remain active. These are scheduling
+changes, not new invariance masks or relaxed action/state comparisons.

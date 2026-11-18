@@ -13,9 +13,11 @@ extern void __real_enhanced_execute_next(void),__real_enhanced_source_poll(void)
 extern int __real_native_workspace_minimap(const EnhancedRect *,const EnhancedRect *,EnhancedPoint *);
 extern void __real_CenterEdit(int16_t,int16_t);
 static int phase,started,checks,failures,seen,moves,chosen_x,chosen_y,timer_ticks;
-static int expected_x,expected_y,plane;
+static int expected_x,expected_y,plane;static uint64_t preparation;
 static HWND root;
 static const char *test;
+static FILE *plan;static char case_name[80],capture_path[2400];
+static int next_case(void){if(!plan)return 0;if(fscanf(plan,"%79s %d %2399s",case_name,&plane,capture_path)!=3)return 0;test=case_name;phase=checks=failures=seen=moves=timer_ticks=0;return 1;}
 static EnhancedWorldSnapshot waiting;
 static EnhancedRect source_rect;
 #define CHECK(x) do{++checks;if(!(x)){++failures;fprintf(stderr,"MINIMAP_FAIL %d %s\n",__LINE__,#x);}}while(0)
@@ -39,7 +41,7 @@ static void CALLBACK tick(HWND window,UINT msg,UINT_PTR id,DWORD now){
     MONITORINFO monitor={.cbSize=sizeof(monitor)};POINT at={button.left+8,button.top+8};GetMonitorInfo(MonitorFromPoint(at,MONITOR_DEFAULTTONEAREST),&monitor);
     CHECK(IsWindowVisible(h)&&IsWindowEnabled(h));CHECK(GetFocus()==h);CHECK(c.right>=500&&c.bottom>=300);
     CHECK(r.left>=monitor.rcWork.left&&r.top>=monitor.rcWork.top&&r.right<=monitor.rcWork.right&&r.bottom<=monitor.rcWork.bottom);
-    int left=button.left+16,top=button.top+16;
+    int gap=MulDiv(8,native_workspace_ui_dpi(h),96);int left=button.left+8+gap,top=button.top+8+gap;
     if(left+r.right-r.left>monitor.rcWork.right)left=monitor.rcWork.right-(r.right-r.left);
     if(top+r.bottom-r.top>monitor.rcWork.bottom)top=monitor.rcWork.bottom-(r.bottom-r.top);
     if(left<monitor.rcWork.left)left=monitor.rcWork.left;if(top<monitor.rcWork.top)top=monitor.rcWork.top;
@@ -53,7 +55,7 @@ static void CALLBACK tick(HWND window,UINT msg,UINT_PTR id,DWORD now){
     CHECK(abs(small.right-map.left-MulDiv(large.right,map.right-map.left,overview_client.right))<=2);
     CHECK(abs(small.top-map.top-MulDiv(large.top,map.bottom-map.top,overview_client.bottom))<=2);
     CHECK(abs(small.bottom-map.top-MulDiv(large.bottom,map.bottom-map.top,overview_client.bottom))<=2);
-    const char *capture=getenv("SIMANT_MINIMAP_CAPTURE");if(capture)CHECK(native_workspace_capture(capture));
+    const char *capture=plan?capture_path:getenv("SIMANT_MINIMAP_CAPTURE");if(capture)CHECK(native_workspace_capture(capture));
     fprintf(stderr,"MINIMAP_OPEN {\"left\":%ld,\"top\":%ld,\"width\":%ld,\"height\":%ld,\"player\":%d,\"spider\":%d}\n",r.left,r.top,c.right,c.bottom,waiting.player_mode,waiting.spider_on);
     if(!strcmp(test,"escape")){PostMessage(h,WM_KEYDOWN,VK_ESCAPE,0);return;}
     if(!strcmp(test,"outside")){PostMessage(h,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(-2,-2));PostMessage(h,WM_LBUTTONUP,0,MAKELPARAM(-2,-2));return;}
@@ -74,25 +76,25 @@ static void CALLBACK tick(HWND window,UINT msg,UINT_PTR id,DWORD now){
     PostMessage(h,WM_LBUTTONUP,0,MAKELPARAM(x,y));
 }
 int __wrap_native_workspace_minimap(const EnhancedRect *r,const EnhancedRect *c,EnhancedPoint *p){
-    source_rect=*r;waiting=enhanced_snapshot()->world;UINT_PTR timer=SetTimer(root,0,100,tick);CHECK(timer!=0);
+    source_rect=*r;waiting=enhanced_snapshot()->world;UINT_PTR timer=0xe751;CHECK(SetTimer(root,timer,100,tick)!=0);
     int result=__real_native_workspace_minimap(r,c,p);KillTimer(root,timer);++seen;CHECK(result==!cancel());return result;
 }
 void __wrap_CenterEdit(int16_t x,int16_t y){if(phase==2){++moves;chosen_x=x;chosen_y=y;}__real_CenterEdit(x,y);}
 void __wrap_enhanced_source_poll(void){__real_enhanced_source_poll();}
 void __wrap_enhanced_execute_next(void){
     const EnhancedSnapshot *s=enhanced_snapshot();if(!s||!s->panels.world_ready){__real_enhanced_execute_next();return;}
-    if(!test){test=getenv("SIMANT_MINIMAP_CASE");plane=atoi(getenv("SIMANT_MINIMAP_PLANE"));root=named("SimAnt");CHECK(native_workspace_active());}
-    if(!phase&&main_iteration_count>25){phase=1;enhanced_submit_event(7+plane,0,0,0);started=main_iteration_count;}
-    if(phase==1&&main_iteration_count>started+20&&!s->dialogs.modal){
+    if(!test){test=getenv("SIMANT_MINIMAP_CASE");plane=atoi(getenv("SIMANT_MINIMAP_PLANE"));root=named("SimAnt");CHECK(native_workspace_active());const char *file=getenv("SIMANT_MINIMAP_PLAN");if(file){plan=fopen(file,"r");CHECK(plan);CHECK(next_case());}}
+    if(!phase&&main_iteration_count>2&&IsWindowVisible(named("SimAnt - Game"))){phase=1;enhanced_submit_event(7+plane,0,0,0);preparation=enhanced_action_ledger()->submitted;started=main_iteration_count;}
+    if(phase==1&&main_iteration_count>started&&enhanced_action_ledger()->delivered>=preparation&&!enhanced_action_lease_active()&&!s->dialogs.modal){
         CHECK(s->world.plane==plane);
         phase=2;started=main_iteration_count;HWND b=GetDlgItem(named("Map / Ant Control Panel"),5);CHECK(b&&IsWindowEnabled(b));
         SendMessage(b,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(8,8));
         if(strncmp(test,"drag",4))SendMessage(b,WM_LBUTTONUP,0,MAKELPARAM(8,8));
     }
-    if(phase==2&&seen&&main_iteration_count>started+10&&!s->dialogs.modal){
+    if(phase==2&&seen&&main_iteration_count>started+1&&!s->dialogs.modal){
         CHECK(IsWindowEnabled(named("Map / Ant Control Panel")));CHECK(moves==!cancel());
         if(!cancel()){CHECK(chosen_x==expected_x);CHECK(chosen_y==expected_y);}
-        fprintf(stderr,"MINIMAP_RESULT {\"passed\":%s,\"checks\":%d,\"failures\":%d,\"seen\":%d,\"moves\":%d,\"x\":%d,\"y\":%d,\"simulation_advanced\":true}\n",failures?"false":"true",checks,failures,seen,moves,chosen_x,chosen_y);exit(failures?1:0);
+        fprintf(stderr,"MINIMAP_RESULT {\"passed\":%s,\"checks\":%d,\"failures\":%d,\"seen\":%d,\"moves\":%d,\"x\":%d,\"y\":%d,\"simulation_advanced\":true}\n",failures?"false":"true",checks,failures,seen,moves,chosen_x,chosen_y);fflush(stderr);if(failures||!next_case())exit(failures?1:0);
     }
     __real_enhanced_execute_next();
 }

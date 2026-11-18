@@ -44,7 +44,7 @@ void __wrap_native_workspace_present(const HostPalette *p){
     if(!test||!is("camera-follow")||phase<2)return;
     const EnhancedSnapshot *s=enhanced_snapshot();if(s->world.origin.x==before.world.origin.x&&s->world.origin.y==before.world.origin.y)return;
     RECT r;HWND game=named("SimAnt - Game");GetClientRect(game,&r);typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");
-    const WsPanel *v=&native_workspace_layout()->panels[WS_GAME];double z=v->zoom/100.0*(dpi?dpi(game):96)/96.;
+    const WsPanel *v=&native_workspace_layout()->panels[WS_GAME];double z=v->zoom/100.0*native_workspace_ui_dpi(game)/96.;
     int tx=s->world.origin.x*16+(s->world.hidden_viewport.right-s->world.hidden_viewport.left)/2-(int)(r.right/z)/2;
     int ty=s->world.origin.y*16+(s->world.hidden_viewport.bottom-s->world.hidden_viewport.top)/2-(int)(r.bottom/z)/2;if(tx<0)tx=0;if(ty<0)ty=0;
     if(!camera_first){camera_first=1;CHECK(abs(v->camera_x-camera_start.x)<abs(tx-camera_start.x));CHECK(v->camera_x!=s->world.origin.x*16);}
@@ -55,7 +55,7 @@ static BOOL CALLBACK capture_inventory(HWND h,LPARAM unused){
     char title[160],cls[80];GetWindowTextA(h,title,sizeof(title));GetClassNameA(h,cls,sizeof(cls));if(strcmp(cls,"SimAntGameWindow")&&strcmp(cls,"SDL_app"))return TRUE;
     RECT r;GetWindowRect(h,&r);fprintf(stderr,"CAPTURE_WINDOW title=%s class=%s visible=%d iconic=%d owner=%p rect=%ld,%ld,%ld,%ld style=%llx\n",title,cls,IsWindowVisible(h),IsIconic(h),(void *)GetWindow(h,GW_OWNER),r.left,r.top,r.right,r.bottom,(unsigned long long)GetWindowLongPtr(h,GWL_STYLE));return TRUE;
 }
-static void click(HWND h,int x,int y,int double_click){CHECK(h!=NULL);if(!h)return;typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;x=MulDiv(x,d,96);y=MulDiv(y,d,96);SendMessage(h,double_click?WM_LBUTTONDBLCLK:WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(x,y));SendMessage(h,WM_LBUTTONUP,0,MAKELPARAM(x,y));}
+static void click(HWND h,int x,int y,int double_click){CHECK(h!=NULL);if(!h)return;typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=native_workspace_ui_dpi(h);x=MulDiv(x,d,96);y=MulDiv(y,d,96);SendMessage(h,double_click?WM_LBUTTONDBLCLK:WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(x,y));SendMessage(h,WM_LBUTTONUP,0,MAKELPARAM(x,y));}
 static unsigned domain_checked;
 static void allocation_domain(void){
     typedef struct {int16_t ax,ay,lx,ly,rx,ry;} Verts;
@@ -117,7 +117,7 @@ void __wrap_enhanced_source_poll(void){
         SDL_Event e={.type=SDL_EVENT_KEY_DOWN};e.key.scancode=SDL_SCANCODE_ESCAPE;e.key.down=1;SDL_PushEvent(&e);e.type=SDL_EVENT_KEY_UP;e.key.down=0;SDL_PushEvent(&e);
     }
     if(test&&is("history-held")&&phase==2&&!captured&&enhanced_pointer_tracking(0x1500)){
-        CHECK(s->dialogs.owner==0x1500);capture("History");HWND h=named("History");typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;SendMessage(h,WM_LBUTTONUP,0,MAKELPARAM(MulDiv(160,d,96),MulDiv(62,d,96)));return;
+        CHECK(s->dialogs.owner==0x1500);capture("History");HWND h=named("History");typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=native_workspace_ui_dpi(h);SendMessage(h,WM_LBUTTONUP,0,MAKELPARAM(MulDiv(160,d,96),MulDiv(62,d,96)));return;
     }
     if(!test||!is("status")||phase<2||!s||s->dialogs.owner!=0x1800||!s->dialogs.modal)return;
     /* ScoreDialog has assigned fields before its first event poll. */
@@ -155,14 +155,14 @@ void __wrap_enhanced_execute_next(void){
         if(is("graphic"))enhanced_submit_event(0xfd24,0,0,0);
         if(is("status"))enhanced_submit_event(0x114,0,0,0);
         if(is("triangle-edit")){
-            HWND h=named("Behavior Control");CHECK(h!=NULL);typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;
+            HWND h=named("Behavior Control");CHECK(h!=NULL);typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=native_workspace_ui_dpi(h);
             SendMessage(h,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(MulDiv(110,d,96),MulDiv(100,d,96)));
         }
         if(is("map-centre"))click(named("Map"),404,80,0);
         if(is("values")||is("queued-value-map")){HWND edit=GetDlgItem(named("Caste Control"),0xe521);CHECK(edit!=NULL);if(edit){SetFocus(edit);SetWindowTextA(edit,"72");SendMessage(edit,WM_KEYDOWN,VK_RETURN,0);}if(is("queued-value-map"))click(named("Map"),404,80,0);}
     }
     if(phase==2&&main_iteration_count>started+12&&!s->dialogs.modal && (!is("camera-follow")||camera_reached) && (!is("steady-controls")||GetTickCount64()-steady_start>600)){phase=3;
-        if(is("history-held")&&!captured){HWND h=named("History");typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=dpi?dpi(h):96;phase=2;SendMessage(h,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(MulDiv(160,d,96),MulDiv(62,d,96)));started=main_iteration_count;}
+        if(is("history-held")&&!captured){HWND h=named("History");typedef UINT(WINAPI *Dpi)(HWND);Dpi dpi=(Dpi)GetProcAddress(GetModuleHandleA("user32.dll"),"GetDpiForWindow");int d=native_workspace_ui_dpi(h);phase=2;SendMessage(h,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(MulDiv(160,d,96),MulDiv(62,d,96)));started=main_iteration_count;}
         if(is("info-follow")){CHECK(s->cards.links_available&&s->cards.link_count>1);if(s->cards.link_count>1){const EnhancedRect *r=&s->cards.links[1].rect;
             /* Top card picture links retain their exact native source geometry. */
             const SimWindowRefEntry *entry=&sim_window_ref_registry.entries[5];const uint8_t *wire=(const uint8_t *)entry->view.object_table[2];

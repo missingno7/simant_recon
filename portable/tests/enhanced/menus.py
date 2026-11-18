@@ -8,7 +8,7 @@ from portable.tests.acceptance.step_state import schema,split_frame
 from portable.tests.acceptance.native_schema import symbols_for
 
 def main():
-    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--build',type=Path,required=True);ap.add_argument('--out',type=Path,required=True);ap.add_argument('--cases',default='ant:-2,ant:-1,ant:0,ant:1,ant-shift:1,ant:2,ant:3,ant:4,ant-keyboard:4,ant:5,scent:-1,scent:0,scent:1,scent:2,scent:3,scent:4,scent:5,tools:-1,tools:0,full-tools:-1,spider:-1,spider:0,spider:1,spider-alt:1,spider:2,spider:3,queen:-1,queen:0,queen:1,queen:2,magnify:-1');a=ap.parse_args();build=a.build.resolve();out=a.out.resolve();out.mkdir(parents=True,exist_ok=False);report=check_build(build);cc=report['application_link']['command'][0]
+    ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--build',type=Path,required=True);ap.add_argument('--out',type=Path,required=True);ap.add_argument('--ui-scale',default='auto');ap.add_argument('--cases',default='ant:-2,ant:-1,ant:0,ant:1,ant-shift:1,ant:2,ant:3,ant:4,ant-keyboard:4,ant:5,scent:-1,scent:0,scent:1,scent:2,scent:3,scent:4,scent:5,tools:-1,tools:0,full-tools:-1,spider:-1,spider:0,spider:1,spider-alt:1,spider:2,spider:3,queen:-1,queen:0,queen:1,queen:2,magnify:-1');a=ap.parse_args();build=a.build.resolve();out=a.out.resolve();out.mkdir(parents=True,exist_ok=False);report=check_build(build);cc=report['application_link']['command'][0]
     source=Path(__file__).with_name('menu_probe.c');obj=out/'menu-probe.o';subprocess.run([cc,'-std=c11','-O2','-g','-I'+str(ROOT),'-I'+str(ROOT/'build/deps/sdl3-sdk/SDL3-3.4.16/x86_64-w64-mingw32/include'),'-c',str(source),'-o',str(obj)],check=True,capture_output=True)
     exe=out/'simant-menus.exe';link=report['application_link']['command'][:];link[link.index('-o')+1]=str(exe);link[1:1]=[str(obj),*['-Wl,--wrap='+n for n in ('enhanced_execute_next','enhanced_source_poll','native_workspace_proximity','native_workspace_manage_window','YellowCommand')]];p=subprocess.run(link,cwd=build,capture_output=True,text=True);(out/'link.log').write_text(p.stdout+p.stderr);p.check_returncode()
     for name in ('SDL3.dll','simant-build-id.txt'):shutil.copyfile(build/name,out/name)
@@ -24,7 +24,7 @@ def main():
                 if mode=='original':env['SIMANT_ENHANCED_PROXIMITY']='0'
                 script=ROOT/'portable/tests/runtime/windows-quick.txt'
                 if kind in ('queen','full-tools'):script=lane/'input.txt';script.write_text((ROOT/'portable/tests/runtime/windows-quick.txt').read_text().replace('207 58','133 126'))
-                cmd=[str(exe),'--deterministic','--windows','--seed','0','--assets',str(assets),'--input-script',str(script),'--smoke-ms','40000','--diagnostics-dir='+str(lane/'diagnostics')]
+                cmd=[str(exe),'--deterministic','--windows','--ui-scale',a.ui_scale,'--seed','0','--assets',str(assets),'--input-script',str(script),'--smoke-ms','40000','--diagnostics-dir='+str(lane/'diagnostics')]
                 with (lane/'run.log').open('w') as log:
                     try:p=subprocess.run(cmd,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=55);code=p.returncode
                     except subprocess.TimeoutExpired:code='timeout'
